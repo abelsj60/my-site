@@ -1,0 +1,34 @@
+import React, { Component } from 'react';
+
+var notFoundStyle = {
+  flex: '1',
+  display: 'flex'
+}
+
+var messageStyle = {
+  flex: '1',
+  backgroundColor: 'deepskyblue'
+}
+
+var hedStyle = {
+  padding: '25px'
+}
+
+class NotFound extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div style={notFoundStyle}>
+        <div style={messageStyle}>
+          <h1 style={hedStyle}>Uh oh. Not found!</h1>
+        </div>
+      </div>
+    )
+  }
+
+}
+
+export default NotFound;
