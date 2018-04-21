@@ -30,8 +30,8 @@ class App extends Component {
 
   render() {
     return (
-      <div id='AppPageDiv' style={pageStyle}>
-        <div id='AppContainerDiv' style={sectionStyles}>
+      <div id='APageDiv' style={pageStyle}>
+        <div id='ASectionDiv' style={sectionStyles}>
           <SiteHeader />
           <Switch>
             <Route path='/topics' component={Topics} />
