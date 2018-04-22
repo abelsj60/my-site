@@ -24,19 +24,23 @@ class ParTest extends Component {
     super(props);
     this.state = {
       xScale: 6,
-      yScale: 6
+      yScale: 6,
+      isTransparent: true
     };
 
     this.handleScroll = this.handleScroll.bind(this);
     this.parThis = this.parThis.bind(this);
+    this.setTransparency = this.setTransparency.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.parThis);
+    window.addEventListener('scroll', this.setTransparency);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.parThis);
+    window.removeEventListener('scroll', this.setTransparency);
   }
 
   handleScroll(event) {
@@ -47,11 +51,27 @@ class ParTest extends Component {
     var scrollTop = window.pageYOffset;
     var oldPercent = (scrollTop - 0) / (4000 - 0);
     var numberForScale = 6 / (((7 - 1) * oldPercent) + 1);
-    console.log('oldPercent:', oldPercent);
-    console.log('numberForScale:', numberForScale);
+    // console.log('scrollTop:', scrollTop);
+    // console.log('oldPercent:', oldPercent);
+    // console.log('numberForScale:', numberForScale);
 
     this.setState({ xScale: numberForScale })
     this.setState({ yScale: numberForScale })
+  }
+
+  setTransparency(event) {
+    var scrollTop = window.pageYOffset;
+    console.log('scrollTop:', scrollTop);
+    console.log('state:', this.state.isTransparent);
+
+    if(scrollTop > 7) {
+      // console.log('true if, scrollTop is:', scrollTop);
+      this.setState({ isTransparent: false });
+    } else {
+      // console.log('false if, scrollTop is now:', scrollTop);
+      this.setState({ isTransparent: true });
+    }
+
   }
 
   render() {
@@ -65,8 +85,8 @@ class ParTest extends Component {
     return (
       <div>
         <div id='PTOuterDiv' style={wrapperStyle} >
-          <SiteHeader />
           <div id='PTInnerDiv' >
+            <SiteHeader isTransparent={this.state.isTransparent} />
             <div id='PTTopImg' style={topImgStyle} >
               <img src={background} alt='b' />
             </div>
@@ -75,7 +95,7 @@ class ParTest extends Component {
             </div>
           </div>
         </div>
-        <div id='PTScrollerDiv' style={scrollerStyle} ref={element => this.scrollerRef = element} onScroll={this.parThis} >
+        <div id='PTScrollerDiv' style={scrollerStyle} ref={element => this.scrollerRef = element} onScroll={this.parThis} onScroll={this.setTransparency} >
         </div>
       </div>
     )
