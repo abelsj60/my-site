@@ -9,7 +9,7 @@ class SiteHeader extends Component {
 
   render() {
     var siteHeaderStyle = {
-      zIndex: '1',
+      zIndex: '2',
       position: 'fixed',
       width: '100%',
       display: 'flex',
@@ -20,7 +20,7 @@ class SiteHeader extends Component {
     };
 
     return (
-      <div style={siteHeaderStyle}>
+      <div id='header' style={siteHeaderStyle}>
         <Logo />
         <Nav />
       </div>
