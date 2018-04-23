@@ -4,23 +4,19 @@ var background = '/test/magician-clean.png';
 var background2 = '/test/beaker-magic-2.png';
 
 var setBackground = function(chapter) {
-  if(chapter === '') {
+  if(chapter !== '') {
     return {
       flex: '1',
       display: 'flex',
       flexDirection: 'column',
-      backgroundImage: `url(${background})`,
-      backgroundSize: 'contain',
-      backgroundRepeat: 'no-repeat',
-      backgroundColor: 'red',
-      backgroundPosition: 'center'
+      border: '1px solid red',
     }
-  } else {
-    return {
-      flex: '1',
-      display: 'flex',
-      flexDirection: 'column'
-    }
+  // } else {
+  //   return {
+  //     flex: '1',
+  //     display: 'flex',
+  //     flexDirection: 'column'
+  //   }
   }
 };
 
@@ -93,8 +89,8 @@ class ChPreview extends Component {
 
   render() {
     return (
-      <div style={setBackground(this.props.chNumber)}>
-        <div style={spacerStyle}>
+      <div id='chpTop' style={setBackground(this.props.chNumber)}>
+        <div id='chpSpacer' style={spacerStyle}>
         </div>
         <h3 style={hedStyle}>{setTopic(this.props.chNumber)}</h3>
         <p style={pStyle}>{this.props.chNumber}</p>

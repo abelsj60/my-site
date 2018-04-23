@@ -4,8 +4,8 @@ import SiteHeader from './SiteHeader.jsx';
 import Footer from './Footer.jsx';
 import Topics from './Topics.jsx';
 
-var background = '/test/pngtree-magskyline.jpg';
-var background2 = '/test/beaker-magic-2.png';
+var background = '/test/howls-background-dl.jpg';
+var background2 = '/test/dreaming-boy-co-2.png';
 
 var wrapperStyle = {
   width: '100%',
@@ -26,6 +26,11 @@ var topImgStyle = {
   zIndex: '1'
 };
 
+var footerDivStyle = {
+  flex: '1',
+  height: '39px'
+};
+
 class ParTest extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +39,7 @@ class ParTest extends Component {
       yScale: 6,
       scrollPos: 0,
       isTransparent: true,
-      navStatus: false
+      topicStatus: false,
     };
 
     this.handleScroll = this.handleScroll.bind(this);
@@ -61,8 +66,8 @@ class ParTest extends Component {
 
   parThis(event) {
     var scrollTop = window.pageYOffset;
-    var oldPercent = (scrollTop - 0) / (4000 - 0);
-    var numberForScale = 6 / (((7 - 1) * oldPercent) + 1);
+    var oldPercent = (scrollTop - 0) / (3221 - 0);
+    var numberForScale = 6 / (((6 - 1) * oldPercent) + 1);
     // console.log('scrollTop:', scrollTop);
     // console.log('oldPercent:', oldPercent);
     // console.log('numberForScale:', numberForScale);
@@ -88,15 +93,19 @@ class ParTest extends Component {
 
   revealText(event) {
     var scrollTop = window.pageYOffset;
-    console.log('revealText', scrollTop);
-    // console.log('revealText', this.state.navStatus);
+    // console.log('revealText', scrollTop);
+    // console.log('revealText', this.state.topicStatus);
+    // console.log('event:', event);
 
-    if(scrollTop >= 2300) {
-      // console.log('true revealText')
-      this.setState({ navStatus: true });
-    } else if (scrollTop < 2500) {
+    if(scrollTop <= 2300) {
       // console.log('false revealText')
-      this.setState({ navStatus: false });
+      if(scrollTop === 2300) {
+        console.log('firing revealText')
+      }
+      this.setState({ topicStatus: false });
+    } else if (scrollTop > 2300) {
+      // console.log('true revealText')
+      this.setState({ topicStatus: true });
     }
   }
 
@@ -104,6 +113,8 @@ class ParTest extends Component {
     var btmImgStyle = {
       position: 'absolute',
       transform: 'scale(' + this.state.xScale + ',' + this.state.yScale + ')',
+      width: '100%',
+      margin: 'auto',
       top: '0',
       right: '0',
       zIndex: '1'
@@ -111,15 +122,24 @@ class ParTest extends Component {
 
     var t2Style = {
       position: 'fixed',
+      flexDirection: 'column',
       width: '100%',
       height: '100%',
+      display: 'flex'
+    }
+
+    var fD2Style = {
+      flex: '1 1 100%',
       display: 'flex',
-      alignItems: 'center',
       flexDirection: 'column',
       justifyContent: 'center',
-      color: this.state.navStatus ? 'white' : 'transparent',
-      transition: 'color .5s'
+      color: this.state.topicStatus ? 'white' : 'transparent',
+      transition: 'color .5s',
+      pointerEvents: 'none',
+      alignItems: 'center'
     }
+
+    // console.log('topicStatus is:', this.state.topicStatus);
 
     return (
       <div>
@@ -130,11 +150,19 @@ class ParTest extends Component {
             <img style={btmImgStyle} src={background2} alt='b2' />
           </div>
         </div>
-        <div id='fDiv2' style={t2Style}>
-          <h1>TEST AGAIN!</h1>
-          <p>More text!</p>
+        <div id='fixedDiv2' style={t2Style}>
+          <div id='fixedDiv2Topics' style={fD2Style} >
+          {
+            this.state.topicStatus && <Topics topicStatus={this.state.topicStatus} />
+          }
+          </div>
+          <div id='footerDiv' style={footerDivStyle}>
+          {
+            this.state.topicStatus && <Footer topicStatus={this.state.topicStatus} />
+          }
+          </div>
         </div>
-        <div id='PTScroller' style={scrollerStyle} ref={element => this.scrollerRef = element} onScroll={this.parThis} onScroll={this.setTransparency} >
+        <div id='PTScroller' style={scrollerStyle} ref={element => this.scrollerRef = element}>
         </div>
       </div>
     )
