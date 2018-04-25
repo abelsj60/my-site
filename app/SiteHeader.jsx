@@ -72,8 +72,8 @@ class SiteHeader extends Component {
           </div>
         </div>
         <div id='RightContainer' style={navContainer}>
-            <div id='pitch'>
-              <Link style={linkStyle} to={'/chapter'} id='MyStory'>My story</Link>
+            <div id='MyStory'>
+              <Link style={linkStyle} to={'/chapter'}>My story</Link>
             </div>
             <div id='SomeProjects'>
               <Link style={linkStyle} to={'/projects'}>Some projects</Link>
