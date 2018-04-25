@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 var chapterStyle = {
   flex: '1',
   display: 'flex',
-  paddingTop: '52px'
+  marginTop: '52px'
 };
 
 var storyStyle = {
@@ -36,12 +36,12 @@ class Chapter extends Component {
     // var chapter = match.params.num;
 
     return (
-      <div style={chapterStyle}>
-        <div style={storyStyle}>
+      <div id='ChapterContainer' style={chapterStyle}>
+        <div id='Story' style={storyStyle}>
           <h1 style={hedStyle}>Chapter Test</h1>
           <p style={pStyle}>This is my story</p>
         </div>
-        <div style={pictureStyle}>
+        <div id='Picture' style={pictureStyle}>
         </div>
       </div>
     )

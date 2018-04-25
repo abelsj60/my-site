@@ -183,9 +183,9 @@ class ParTest extends Component {
     // console.log('topicStatus is:', this.state.topicStatus);
 
     return (
-      <div id='contnrForPT'>
-        <div id='PTOuterWrapper' style={wrapperStyle} >
-          <div id='PTInnerContent' style={topContentStyle}>
+      <div id='HomeContainer'>
+        <div id='HomeWrapper' style={wrapperStyle} >
+          <div id='PermanentContent' style={topContentStyle}>
             <SiteHeader isTransparent={this.state.isTransparent} />
             <img style={topImgStyle} src={background} alt='b' />
             <img style={btmImgStyle} src={background2} alt='b2' />
@@ -193,20 +193,20 @@ class ParTest extends Component {
         </div>
         {
           this.state.topicStatus &&
-          <div id='prntForBtm' style={t3Style}>
-            <div id='ptrStatus' style={ptrBlockStyle2(this.state.topicMenu)}>
-              <div id='fixedDiv2' style={t2Style}>
-                <div id='fixedDiv2Topics' style={fD2Style} >
+          <div id='TemporaryContent' style={t3Style}>
+            <div id='PointerControl' style={ptrBlockStyle2(this.state.topicMenu)}>
+              <div id='ContentContainer' style={t2Style}>
+                <div id='TopicsContainer' style={fD2Style} >
                   <Topics topicStatus={this.state.topicStatus} topicMenu={this.state.topicMenu} />
                 </div>
               </div>
-              <div id='footerDiv' style={footerDivStyle}>
+              <div id='FooterContainer' style={footerDivStyle}>
                 <Footer topicStatus={this.state.topicStatus} />
               </div>
             </div>
           </div>
         }
-        <div id='PTScroller' style={scrollerStyle}>
+        <div id='Scroller' style={scrollerStyle}>
         </div>
       </div>
     )

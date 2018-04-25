@@ -25,9 +25,9 @@ var setTopic = function(chapter) {
   if(chapter === 'One') {
     return 'Some projects';
   } else if (chapter === 'Two') {
-    return 'The pitch';
+    return 'My story';
   } else {
-    return 'Alexa Stories';
+    return 'Alexa adventures';
   }
 };
 
@@ -65,8 +65,8 @@ class ChPreview extends Component {
 
   render() {
     return (
-      <div id='chpTop' style={setBackground(this.props.chNumber)}>
-        <div id='chpSpacer' style={spacerStyle}>
+      <div id='TopicContent' style={setBackground(this.props.chNumber)}>
+        <div id='Spacer' style={spacerStyle}>
         </div>
         <h3 style={hedStyle}>{setTopic(this.props.chNumber)}</h3>
         <p style={pStyle}>{this.props.chNumber}</p>

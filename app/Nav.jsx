@@ -18,7 +18,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <div style={navStyle}>
+      <div id='Motto' style={navStyle}>
         <p style={hedStyle}><em>Magical stories and other adventures</em></p>
       </div>
     )

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 var projectStyle = {
   flex: '1',
   backgroundColor: 'papayawhip',
-  paddingTop: '52px'
+  marginTop: '52px'
 }
 
 var hedStyle = {
@@ -17,7 +17,7 @@ class Projects extends Component {
 
   render() {
     return (
-      <div style={projectStyle}>
+      <div id='Projects' style={projectStyle}>
         <h1 style={hedStyle}>Projects</h1>
       </div>
     )

@@ -62,24 +62,24 @@ class SiteHeader extends Component {
     }
 
     return (
-      <div id='header' style={headerOuter}>
-        <div id='leftContainer' style={nameLogoStyle}>
-          <div id='name' style={nameStyle}>
+      <div id='Header' style={headerOuter}>
+        <div id='LeftContainer' style={nameLogoStyle}>
+          <div id='Name' style={nameStyle}>
             <Logo />
           </div>
-          <div id='summary' style={sumStyle}>
+          <div id='Motto' style={sumStyle}>
             <Nav />
           </div>
         </div>
-        <div id='rightContainer' style={navContainer}>
+        <div id='RightContainer' style={navContainer}>
             <div id='pitch'>
-              <Link style={linkStyle} to={'/chapter'} id='pitch'>The pitch</Link>
+              <Link style={linkStyle} to={'/chapter'} id='MyStory'>My story</Link>
             </div>
-            <div id='projects'>
+            <div id='SomeProjects'>
               <Link style={linkStyle} to={'/projects'}>Some projects</Link>
             </div>
-            <div id='soon'>
-              <Link style={linkStyle} to={'/alexa'}>Alexa stories</Link>
+            <div id='AlexaAdventures'>
+              <Link style={linkStyle} to={'/alexa'}>Alexa adventures</Link>
             </div>
         </div>
       </div>

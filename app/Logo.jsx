@@ -23,7 +23,7 @@ class Logo extends Component {
 
   render() {
     return (
-      <div style={logoStyle}>
+      <div id='Name' style={logoStyle}>
         <Link style={linkStyle} to={'/'}><p style={hedStyle}><strong>JAMES ABELS</strong></p></Link>
       </div>
     )

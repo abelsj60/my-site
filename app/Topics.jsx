@@ -86,7 +86,7 @@ class Topics extends Component {
     }
 
     return (
-      <div id='tTop' style={homeStyle2(this.props.topicStatus, this.state.tOpacity)}>
+      <div id='Topics' style={homeStyle2(this.props.topicStatus, this.state.tOpacity)}>
         {
           chapters.map((chapter, index) =>
             (

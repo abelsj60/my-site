@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 var soonStyle = {
   flex: '1',
   backgroundColor: 'papayawhip',
-  paddingTop: '52px'
+  marginTop: '52px'
 }
 
 var hedStyle = {

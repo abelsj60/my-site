@@ -70,14 +70,14 @@ class Footer extends Component {
   render() {
 
     return (
-      <div style={footerStyle(this.props.topicStatus, this.state.fOpacity)}>
-        <div style={itemStyleOne}>
+      <div id='FooterContainer' style={footerStyle(this.props.topicStatus, this.state.fOpacity)}>
+        <div id='Email' style={itemStyleOne}>
           <p style={pStyle}>Email</p>
         </div>
-        <div style={itemStyleTwo}>
-        <Link to={'/jnl'} style={linkStyle}> <p style={pStyle}>Journalism and Law</p></Link>
-      </div>
-        <div style={itemStyleTwo}>
+        <div id='JnL' style={itemStyleTwo}>
+          <Link to={'/jnl'} style={linkStyle}> <p style={pStyle}>Journalism and Law</p></Link>
+        </div>
+        <div id='Copyright' style={itemStyleTwo}>
           <p style={pStyle}>James Abels. All rights reserved. 2018.</p>
         </div>
       </div>

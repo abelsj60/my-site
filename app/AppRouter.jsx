@@ -31,8 +31,8 @@ class App extends Component {
 
   render() {
     return (
-      <div id='APageDiv' style={pageStyle}>
-        <div id='ASectionDiv' style={sectionStyles}>
+      <div id='PageContainer' style={pageStyle}>
+        <div id='RouterContainer' style={sectionStyles}>
           <SiteHeader />
           <Switch>
             <Route exact path='/chapter' component={Chapter} />
