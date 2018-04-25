@@ -18,7 +18,7 @@ class AlexaStories extends Component {
   render() {
     return (
       <div style={soonStyle}>
-        <h1 style={hedStyle}>Projects</h1>
+        <h1 style={hedStyle}>Alexa Adventures</h1>
       </div>
     )
   }

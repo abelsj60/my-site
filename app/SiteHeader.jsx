@@ -9,77 +9,34 @@ class SiteHeader extends Component {
   }
 
   render() {
-    var headerOuter = {
-      flex: '1',
-      zIndex: '2',
-      position: 'fixed',
-      width: '100%',
-      height: '52px',
-      color: this.props.isTransparent ? 'white' : 'white',
-      backgroundColor: this.props.isTransparent ? 'transparent' : 'dodgerblue',
-      transition: 'background-color .7s, color .7s',
-      display: 'flex'
-    }
 
-    var navContainer = {
-      display: 'flex',
-      flex: '1',
-      justifyContent: 'space-between',
-      paddingTop: '15px',
-      paddingRight: '25px'
-    }
-
-    var navItemsInnerStyle = {
-      display: 'flex',
-      flex: '1',
-      justifyContent: 'space-between',
-      paddingTop: '10px'
-    }
-
-    var nameStyle = {
-      flex: '1'
-    };
-
-    var sumStyle = {
-      flex: '6'
-    }
-
-    var navSpacerStyle = {
-      flexGrow: '1'
-    }
-
-    var nameLogoStyle = {
-      flex: '4',
-      display: 'flex'
-    }
-
-    var headerSpacerStyle = {
-      flexGrow: '1'
-    }
-
-    var linkStyle = {
-      color: 'white'
+    var setHeaderClass = function(transparency) {
+      if(transparency) {
+        return 'transparent'
+      } else {
+        return 'opaque'
+      }
     }
 
     return (
-      <div id='Header' style={headerOuter}>
-        <div id='LeftContainer' style={nameLogoStyle}>
-          <div id='Name' style={nameStyle}>
+      <div id='Header' className={setHeaderClass(this.props.isTransparent)}>
+        <div id='LeftContainer'>
+          <div id='Name'>
             <Logo />
           </div>
-          <div id='Motto' style={sumStyle}>
+          <div id='Motto'>
             <Nav />
           </div>
         </div>
-        <div id='RightContainer' style={navContainer}>
+        <div id='RightContainer'>
             <div id='MyStory'>
-              <Link style={linkStyle} to={'/chapter'}>My story</Link>
+              <Link className='link' to={'/chapter'}>My story</Link>
             </div>
             <div id='SomeProjects'>
-              <Link style={linkStyle} to={'/projects'}>Some projects</Link>
+              <Link className='link' to={'/projects'}>Some projects</Link>
             </div>
             <div id='AlexaAdventures'>
-              <Link style={linkStyle} to={'/alexa'}>Alexa adventures</Link>
+              <Link className='link' to={'/alexa'}>Alexa adventures</Link>
             </div>
         </div>
       </div>

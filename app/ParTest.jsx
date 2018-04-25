@@ -6,30 +6,6 @@ import Topics from './Topics.jsx';
 var background = '/test/howls-background-dl.jpg';
 var background2 = '/test/dreaming-boy-co-2.png';
 
-var wrapperStyle = {
-  width: '100%',
-  position: 'fixed',
-  zIndex: '0'
-};
-
-var topContentStyle = {
-  zIndex: '1'
-};
-
-var scrollerStyle = {
-  height: '4000px'
-};
-
-var topImgStyle = {
-  position: 'relative',
-  zIndex: '1'
-};
-
-var footerDivStyle = {
-  flex: '1',
-  height: '39px'
-};
-
 class ParTest extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +18,6 @@ class ParTest extends Component {
       topicMenu: false
     };
 
-    this.handleScroll = this.handleScroll.bind(this);
     this.parThis = this.parThis.bind(this);
     this.setTransparency = this.setTransparency.bind(this);
     this.revealText = this.revealText.bind(this);
@@ -64,17 +39,10 @@ class ParTest extends Component {
     window.addEventListener('scroll', this.setTopicMenu);
   }
 
-  handleScroll(event) {
-    console.log(event);
-  }
-
   parThis(event) {
     var scrollTop = window.pageYOffset;
     var oldPercent = (scrollTop - 0) / (3221 - 0);
     var numberForScale = 6 / (((6 - 1) * oldPercent) + 1);
-    // console.log('scrollTop:', scrollTop);
-    // console.log('oldPercent:', oldPercent);
-    // console.log('numberForScale:', numberForScale);
 
     this.setState({ xScale: numberForScale })
     this.setState({ yScale: numberForScale })
@@ -82,14 +50,10 @@ class ParTest extends Component {
 
   setTransparency(event) {
     var scrollTop = window.pageYOffset;
-    // console.log('scrollTop:', scrollTop);
-    // console.log('state:', this.state.isTransparent);
 
     if(scrollTop >= 7) {
-      // console.log('true if, scrollTop is:', scrollTop);
       this.setState({ isTransparent: false });
     } else {
-      // console.log('false if, scrollTop is now:', scrollTop);
       this.setState({ isTransparent: true });
     }
 
@@ -97,18 +61,12 @@ class ParTest extends Component {
 
   revealText(event) {
     var scrollTop = window.pageYOffset;
-    // console.log('revealText', scrollTop);
-    // console.log('revealText', this.state.topicStatus);
-    // console.log('event:', event);
 
     if(scrollTop <= 2300) {
-      // console.log('false revealText')
       if(scrollTop === 2300) {
-        console.log('firing revealText')
       }
       this.setState({ topicStatus: false });
     } else if (scrollTop > 2300) {
-      // console.log('true revealText')
       this.setState({ topicStatus: true });
     }
   }
@@ -117,7 +75,7 @@ class ParTest extends Component {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop < 3221) {
-      console.log('setTopicMenu: false');
+      // console.log('setTopicMenu: false');
       this.setState( {topicMenu: false} );
     } else {
       console.log('setTopicMenu: true');
@@ -126,87 +84,44 @@ class ParTest extends Component {
   }
 
   render() {
-    var btmImgStyle = {
-      position: 'absolute',
-      transform: 'scale(' + this.state.xScale + ',' + this.state.yScale + ')',
-      width: '100%',
-      margin: 'auto',
-      top: '0',
-      right: '0',
-      zIndex: '1'
+
+    var setScale = function(xScale, yScale) {
+      return { transform: 'scale(' + xScale + ',' + yScale + ')' }
     }
 
-    var t2Style = {
-      flex: '1 1 100%',
-      flexDirection: 'column',
-      display: 'flex'
-    }
-
-    var t3Style = {
-      position: 'fixed',
-      width: '100%',
-      height: '93.3%',
-      top: '52px',
-      bottom: '39px'
-    }
-
-    var fD2Style = {
-      flex: '1 1 100%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      color: this.state.topicStatus ? 'white' : 'transparent',
-      transition: 'color .5s',
-      alignItems: 'center'
-    }
-
-    var ptrBlockStyle2 = function(topicMenu){
-      if(!topicMenu) {
-        return {
-          pointerEvents: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          width: '100%',
-          height: '100%'
-        }
+    var setPointerEvents = function(topic) {
+      if(!topic) {
+        return 'block';
       } else {
-        return {
-          pointerEvents: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-          width: '100%',
-          height: '100%'
-        }
+        return 'allow';
       }
     }
 
-    // console.log('topicStatus is:', this.state.topicStatus);
-
     return (
       <div id='HomeContainer'>
-        <div id='HomeWrapper' style={wrapperStyle} >
-          <div id='PermanentContent' style={topContentStyle}>
+        <div id='HomeWrapper'>
+          <div id='PermanentContent'>
             <SiteHeader isTransparent={this.state.isTransparent} />
-            <img style={topImgStyle} src={background} alt='b' />
-            <img style={btmImgStyle} src={background2} alt='b2' />
+            <img id='StaticImage' src={background} alt='b' />
+            <img id='ScalingImage' style={setScale(this.state.xScale, this.state.yScale)} src={background2} alt='b2' />
           </div>
         </div>
         {
           this.state.topicStatus &&
-          <div id='TemporaryContent' style={t3Style}>
-            <div id='PointerControl' style={ptrBlockStyle2(this.state.topicMenu)}>
-              <div id='ContentContainer' style={t2Style}>
-                <div id='TopicsContainer' style={fD2Style} >
+          <div id='TemporaryContent'>
+            <div id='PointerControl' className={setPointerEvents(this.state.topicMenu)}>
+              <div id='ContentContainer'>
+                <div id='TopicsContainer'>
                   <Topics topicStatus={this.state.topicStatus} topicMenu={this.state.topicMenu} />
                 </div>
               </div>
-              <div id='FooterContainer' style={footerDivStyle}>
+              <div id='FooterContainer'>
                 <Footer topicStatus={this.state.topicStatus} />
               </div>
             </div>
           </div>
         }
-        <div id='Scroller' style={scrollerStyle}>
+        <div id='Scroller'>
         </div>
       </div>
     )

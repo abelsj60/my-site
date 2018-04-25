@@ -1,39 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-var footerStyle = function(topicStatus, opacity) {
-  if(!topicStatus) {
-    return {
-      display: 'flex',
-      backgroundColor: 'black',
-      color: 'white'
-    }
-  } else {
-    return {
-      display: 'flex',
-      backgroundColor: 'black',
-      color: 'white',
-      opacity: opacity
-    }
-  }
-};
-
-var linkStyle = {
-  color: 'white'
-}
-
-const itemStyleOne = {
-  flex: '3'
-};
-
-const itemStyleTwo = {
-  flex: '1'
-};
-
-const pStyle = {
-  padding: '10px'
-};
-
 class Footer extends Component {
   constructor(props) {
     super(props)
@@ -61,7 +28,7 @@ class Footer extends Component {
       var oldPercent = (scrollTop - 2400) / (3221 - 2400);
       var numForOpacity = ((1 - 0) * oldPercent) + 0;
       // console.log('oldPercent:', oldPercent);
-      // console.log('numForOpacity:', numForOpacity);
+      console.log('numForOpacity:', numForOpacity);
       this.setState({ fOpacity: numForOpacity });
       // console.log('Footer setOpacity:', this.state);
     }
@@ -69,16 +36,24 @@ class Footer extends Component {
 
   render() {
 
+    var setFooterOpacity = function(topic, opacity) {
+      if(topic && opacity >= 0) {
+        return { opacity: opacity };
+      } else {
+        return;
+      }
+    }
+
     return (
-      <div id='FooterContainer' style={footerStyle(this.props.topicStatus, this.state.fOpacity)}>
-        <div id='Email' style={itemStyleOne}>
-          <p style={pStyle}>Email</p>
+      <div id='Footer' style={ setFooterOpacity(this.props.topicStatus, this.state.fOpacity) }>
+        <div id='FooterEmail'>
+          <p className='pForFooter'>Email</p>
         </div>
-        <div id='JnL' style={itemStyleTwo}>
-          <Link to={'/jnl'} style={linkStyle}> <p style={pStyle}>Journalism and Law</p></Link>
+        <div id='JnL'>
+          <Link className='link' to={'/jnl'}><p className='pForFooter'>Journalism and Law</p></Link>
         </div>
-        <div id='Copyright' style={itemStyleTwo}>
-          <p style={pStyle}>James Abels. All rights reserved. 2018.</p>
+        <div id='Copyright'>
+          <p className='pForFooter'>James Abels. All rights reserved. 2018.</p>
         </div>
       </div>
     )

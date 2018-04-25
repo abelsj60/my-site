@@ -1,16 +1,5 @@
 import React, { Component } from 'react';
 
-var navStyle = {
-  flex: '1'
-};
-
-var hedStyle ={
-  paddingTop: '15px',
-  paddingBottom: '10px',
-  paddingLeft: '25px',
-  textAlign: 'left',
-}
-
 class Nav extends Component {
   constructor(props) {
     super(props)
@@ -18,8 +7,8 @@ class Nav extends Component {
 
   render() {
     return (
-      <div id='Motto' style={navStyle}>
-        <p style={hedStyle}><em>Magical stories and other adventures</em></p>
+      <div id='MottoAndLink'>
+        <p className='pForHeader'><em>Magical stories and other adventures</em></p>
       </div>
     )
   }

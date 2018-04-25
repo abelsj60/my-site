@@ -6,7 +6,7 @@ var background = '/test/pngtree-magskyline.jpg';
 var chapters = ['One', 'Two', 'Three'];
 var chapterBackgrounds = ['silver', 'deepskyblue', 'mediumspringgreen', 'darksalmon'];
 
-var homeStyle2 = function(topicStatus, opacity) {
+var homeStyle = function(topicStatus, opacity) {
   if(!topicStatus) {
     return {
       flex: '1',
@@ -76,17 +76,8 @@ class Topics extends Component {
 
   render() {
 
-    // this.props.topicMenu
-
-    var ptrStyle = {
-      pointerEvents: 'none',
-      display: 'fixed',
-      width: '100%',
-      height: '100%'
-    }
-
     return (
-      <div id='Topics' style={homeStyle2(this.props.topicStatus, this.state.tOpacity)}>
+      <div id='Topics' style={homeStyle(this.props.topicStatus, this.state.tOpacity)}>
         {
           chapters.map((chapter, index) =>
             (
