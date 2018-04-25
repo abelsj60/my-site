@@ -6,7 +6,6 @@ import Home from './Home.jsx';
 import AppRouter from './AppRouter.jsx';
 import Footer from './Footer.jsx';
 import ParTest from './ParTest.jsx';
-import ParTestImg from './ParTestImg.jsx';
 
 // Double div seems to lmt hight of page to viewport
 

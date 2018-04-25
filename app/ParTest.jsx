@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ParTestImg from './ParTestImg.jsx';
 import SiteHeader from './SiteHeader.jsx';
 import Footer from './Footer.jsx';
 import Topics from './Topics.jsx';
@@ -15,7 +14,7 @@ var wrapperStyle = {
 
 var topContentStyle = {
   zIndex: '1'
-}
+};
 
 var scrollerStyle = {
   height: '4000px'

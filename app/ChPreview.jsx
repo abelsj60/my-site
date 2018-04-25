@@ -23,11 +23,11 @@ var setBackground = function(chapter) {
 
 var setTopic = function(chapter) {
   if(chapter === 'One') {
-    return 'The pitch';
-  } else if (chapter === 'Two') {
     return 'Some projects';
+  } else if (chapter === 'Two') {
+    return 'The pitch';
   } else {
-    return 'Coming soon';
+    return 'Alexa Stories';
   }
 };
 

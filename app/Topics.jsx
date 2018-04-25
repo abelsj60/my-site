@@ -32,6 +32,16 @@ var styleWColor = function(num) {
   }
 };
 
+var setSection = function(chapter) {
+  if(chapter === 'One') {
+    return '/projects';
+  } else if(chapter === 'Two') {
+    return '/chapter';
+  } else {
+    return '/alexa'
+  }
+}
+
 class Topics extends Component {
   constructor(props) {
     super(props)
@@ -80,7 +90,7 @@ class Topics extends Component {
         {
           chapters.map((chapter, index) =>
             (
-              <Link to={'/chapter'} key={index} style={styleWColor(index, this.props.topicStatus)}>
+              <Link to={setSection(chapter)} key={index} style={styleWColor(index, this.props.topicStatus)}>
                 <ChPreview chNumber={chapter} background={background} />
               </Link>
             )
