@@ -146,8 +146,9 @@ class ParTest extends Component {
     var t3Style = {
       position: 'fixed',
       width: '100%',
-      height: '100%',
-      paddingTop: '52px'
+      height: '93.3%',
+      top: '52px',
+      bottom: '39px'
     }
 
     var fD2Style = {
