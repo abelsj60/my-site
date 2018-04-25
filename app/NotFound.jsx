@@ -23,7 +23,7 @@ class NotFound extends Component {
   render() {
     return (
       <div id='NotFoundContainer' style={notFoundStyle}>
-        <div id='Header' style={messageStyle}>
+        <div id='Hed' style={messageStyle}>
           <h1 style={hedStyle}>Uh oh. Not found!</h1>
         </div>
       </div>
