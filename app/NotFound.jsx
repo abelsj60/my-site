@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 
 var notFoundStyle = {
   flex: '1',
-  display: 'flex'
+  display: 'flex',
+  paddingTop: '52px'
 }
 
 var messageStyle = {
   flex: '1',
-  backgroundColor: 'deepskyblue'
+  backgroundColor: 'papayawhip'
 }
 
 var hedStyle = {

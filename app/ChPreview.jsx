@@ -10,6 +10,7 @@ var setBackground = function(chapter) {
       display: 'flex',
       flexDirection: 'column',
       border: '1px solid red',
+      pointerEvents: 'none'
     }
   // } else {
   //   return {
@@ -32,16 +33,6 @@ var setTopic = function(chapter) {
 
 // Create, Build, Amaze
 
-// var sumStyle = {
-//   flex: '1',
-//   display: 'flex',
-//   flexDirection: 'column',
-//   backgroundImage: `url(${background})`,
-//   backgroundSize: 'contain',
-//   backgroundRepeat: 'no-repeat',
-//   backgroundColor: 'black'
-// };
-
 var spacerStyle = {
   flexGrow: '1'
 };
@@ -53,34 +44,19 @@ var hedStyle = {
 
 var pStyle = {
   paddingLeft: '25px',
-  paddingRight: '25px'
-};
-
-var aStyle = {
-  paddingLeft: '25px',
   paddingRight: '25px',
   paddingBottom: '25px'
 };
 
-var imgStyle = {
-  transform: 'scale(2)'
-}
+// var aStyle = {
+//   paddingLeft: '25px',
+//   paddingRight: '25px',
+//   paddingBottom: '25px'
+// };
 
-var imgDiv = {
-  overflow: 'hidden'
-}
-
-var imageShow = function(chapter) {
-  if (chapter === 'Two') {
-    return <img style={imgStyle} src={background2} alt='test2' />
-  }
-};
-
-// {imageShow(this.props.chNumber)}
-
-var textStyle = {
-  flex: '1'
-}
+// var textStyle = {
+//   flex: '1'
+// }
 
 class ChPreview extends Component {
   constructor(props) {
@@ -94,7 +70,6 @@ class ChPreview extends Component {
         </div>
         <h3 style={hedStyle}>{setTopic(this.props.chNumber)}</h3>
         <p style={pStyle}>{this.props.chNumber}</p>
-        <a style={aStyle} href='#'>Select</a>
       </div>
     )
   }
@@ -102,24 +77,3 @@ class ChPreview extends Component {
 }
 
 export default ChPreview;
-
-// <div style={setBackground(this.props.chNumber)}>
-//   <div style={spacerStyle}>
-//     {imageShow(this.props.chNumber)}
-//   </div>
-//   <h3 style={hedStyle}>{setTopic(this.props.chNumber)}</h3>
-//   <p style={pStyle}>{this.props.chNumber}</p>
-//   <a style={aStyle} href='#'>Select</a>
-// </div>
-
-
-// return {
-//   flex: '1',
-//   display: 'flex',
-//   flexDirection: 'column',
-//   backgroundImage: `url(${background})`,
-//   backgroundSize: 'contain',
-//   backgroundRepeat: 'no-repeat',
-//   backgroundColor: 'red',
-//   backgroundPosition: 'center'
-// }

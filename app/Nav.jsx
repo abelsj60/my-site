@@ -5,8 +5,10 @@ var navStyle = {
 };
 
 var hedStyle ={
+  paddingTop: '15px',
   paddingBottom: '10px',
-  textAlign: 'center'
+  paddingLeft: '25px',
+  textAlign: 'left',
 }
 
 class Nav extends Component {

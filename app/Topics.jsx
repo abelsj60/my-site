@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChPreview from './ChPreview.jsx';
+import { Link } from 'react-router-dom';
 
 var background = '/test/pngtree-magskyline.jpg';
 var chapters = ['One', 'Two', 'Three'];
@@ -9,16 +10,15 @@ var homeStyle2 = function(topicStatus, opacity) {
   if(!topicStatus) {
     return {
       flex: '1',
-      display: 'flex',
-      marginTop: '63px'
+      display: 'flex'
     }
   } else {
     return {
       flex: '1',
       display: 'flex',
-      marginTop: '63px',
       width: '100%',
-      opacity: opacity
+      opacity: opacity,
+      zIndex: '1'
     }
   }
 }
@@ -66,14 +66,23 @@ class Topics extends Component {
 
   render() {
 
+    // this.props.topicMenu
+
+    var ptrStyle = {
+      pointerEvents: 'none',
+      display: 'fixed',
+      width: '100%',
+      height: '100%'
+    }
+
     return (
       <div id='tTop' style={homeStyle2(this.props.topicStatus, this.state.tOpacity)}>
         {
           chapters.map((chapter, index) =>
             (
-              <div id='tSection' key={index} style={styleWColor(index, this.props.topicStatus)}>
+              <Link to={'/chapter'} key={index} style={styleWColor(index, this.props.topicStatus)}>
                 <ChPreview chNumber={chapter} background={background} />
-              </div>
+              </Link>
             )
           )
         }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 var projectStyle = {
   flex: '1',
-  backgroundColor: 'deepskyblue'
+  backgroundColor: 'papayawhip',
+  paddingTop: '52px'
 }
 
 var hedStyle = {

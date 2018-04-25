@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 var chapterStyle = {
   flex: '1',
-  display: 'flex'
+  display: 'flex',
+  paddingTop: '52px'
 };
 
 var storyStyle = {
@@ -12,7 +13,7 @@ var storyStyle = {
 
 var pictureStyle = {
   flex: '3',
-  backgroundColor: 'deepskyblue'
+  backgroundColor: 'papayawhip'
 };
 
 var hedStyle = {

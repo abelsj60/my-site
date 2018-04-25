@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 var logoStyle = {
   flex: '1'
 };
 
 var hedStyle = {
-  paddingTop: '10px',
+  paddingTop: '15px',
   paddingBottom: '5px',
-  textAlign: 'center'
-}
+  paddingLeft: '25px',
+  textAlign: 'left'
+};
+
+var linkStyle = {
+  color: 'white'
+};
 
 class Logo extends Component {
   constructor(props) {
@@ -18,7 +24,7 @@ class Logo extends Component {
   render() {
     return (
       <div style={logoStyle}>
-        <p style={hedStyle}><strong>JAMES ABELS</strong></p>
+        <Link style={linkStyle} to={'/'}><p style={hedStyle}><strong>JAMES ABELS</strong></p></Link>
       </div>
     )
   }

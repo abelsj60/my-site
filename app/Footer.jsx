@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 var footerStyle = function(topicStatus, opacity) {
   if(!topicStatus) {
@@ -16,6 +17,10 @@ var footerStyle = function(topicStatus, opacity) {
     }
   }
 };
+
+var linkStyle = {
+  color: 'white'
+}
 
 const itemStyleOne = {
   flex: '3'
@@ -70,7 +75,7 @@ class Footer extends Component {
           <p style={pStyle}>Email</p>
         </div>
         <div style={itemStyleTwo}>
-        <p style={pStyle}>Journalism and Law</p>
+        <Link to={'/jnl'} style={linkStyle}> <p style={pStyle}>Journalism and Law</p></Link>
       </div>
         <div style={itemStyleTwo}>
           <p style={pStyle}>James Abels. All rights reserved. 2018.</p>

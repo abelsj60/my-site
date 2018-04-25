@@ -34,7 +34,6 @@ class App extends Component {
         <div id='ASectionDiv' style={sectionStyles}>
           <SiteHeader />
           <Switch>
-            <Route path='/topics' component={Topics} />
             <Route exact path='/chapter' component={Chapter} />
             <Route exact path='/chapter/:num' component={Chapter} />
             <Route path='/projects' component={Projects} />

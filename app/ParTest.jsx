@@ -40,24 +40,29 @@ class ParTest extends Component {
       scrollPos: 0,
       isTransparent: true,
       topicStatus: false,
+      topicMenu: false
     };
 
     this.handleScroll = this.handleScroll.bind(this);
     this.parThis = this.parThis.bind(this);
     this.setTransparency = this.setTransparency.bind(this);
     this.revealText = this.revealText.bind(this);
+    this.setTopicMenu = this.setTopicMenu.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.parThis);
     window.addEventListener('scroll', this.setTransparency);
     window.addEventListener('scroll', this.revealText);
+    window.addEventListener('scroll', this.setTopicMenu);
+    this.revealText();
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.parThis);
     window.removeEventListener('scroll', this.setTransparency);
     window.addEventListener('scroll', this.revealText);
+    window.addEventListener('scroll', this.setTopicMenu);
   }
 
   handleScroll(event) {
@@ -109,6 +114,18 @@ class ParTest extends Component {
     }
   }
 
+  setTopicMenu(event) {
+    var scrollTop = window.pageYOffset;
+
+    if(scrollTop < 3221) {
+      console.log('setTopicMenu: false');
+      this.setState( {topicMenu: false} );
+    } else {
+      console.log('setTopicMenu: true');
+      this.setState( {topicMenu: true} )
+    }
+  }
+
   render() {
     var btmImgStyle = {
       position: 'absolute',
@@ -121,11 +138,16 @@ class ParTest extends Component {
     }
 
     var t2Style = {
-      position: 'fixed',
+      flex: '1 1 100%',
       flexDirection: 'column',
+      display: 'flex'
+    }
+
+    var t3Style = {
+      position: 'fixed',
       width: '100%',
       height: '100%',
-      display: 'flex'
+      paddingTop: '52px'
     }
 
     var fD2Style = {
@@ -135,14 +157,33 @@ class ParTest extends Component {
       justifyContent: 'center',
       color: this.state.topicStatus ? 'white' : 'transparent',
       transition: 'color .5s',
-      pointerEvents: 'none',
       alignItems: 'center'
+    }
+
+    var ptrBlockStyle2 = function(topicMenu){
+      if(!topicMenu) {
+        return {
+          pointerEvents: 'none',
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          height: '100%'
+        }
+      } else {
+        return {
+          pointerEvents: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          height: '100%'
+        }
+      }
     }
 
     // console.log('topicStatus is:', this.state.topicStatus);
 
     return (
-      <div>
+      <div id='contnrForPT'>
         <div id='PTOuterWrapper' style={wrapperStyle} >
           <div id='PTInnerContent' style={topContentStyle}>
             <SiteHeader isTransparent={this.state.isTransparent} />
@@ -150,19 +191,22 @@ class ParTest extends Component {
             <img style={btmImgStyle} src={background2} alt='b2' />
           </div>
         </div>
-        <div id='fixedDiv2' style={t2Style}>
-          <div id='fixedDiv2Topics' style={fD2Style} >
-          {
-            this.state.topicStatus && <Topics topicStatus={this.state.topicStatus} />
-          }
+        {
+          this.state.topicStatus &&
+          <div id='prntForBtm' style={t3Style}>
+            <div id='ptrStatus' style={ptrBlockStyle2(this.state.topicMenu)}>
+              <div id='fixedDiv2' style={t2Style}>
+                <div id='fixedDiv2Topics' style={fD2Style} >
+                  <Topics topicStatus={this.state.topicStatus} topicMenu={this.state.topicMenu} />
+                </div>
+              </div>
+              <div id='footerDiv' style={footerDivStyle}>
+                <Footer topicStatus={this.state.topicStatus} />
+              </div>
+            </div>
           </div>
-          <div id='footerDiv' style={footerDivStyle}>
-          {
-            this.state.topicStatus && <Footer topicStatus={this.state.topicStatus} />
-          }
-          </div>
-        </div>
-        <div id='PTScroller' style={scrollerStyle} ref={element => this.scrollerRef = element}>
+        }
+        <div id='PTScroller' style={scrollerStyle}>
         </div>
       </div>
     )
