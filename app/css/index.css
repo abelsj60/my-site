@@ -1,20 +1,10 @@
 /*
 
-CSS For App, Home, Header, & Footer
+CSS For Home, Header, Topics, ChPreview, & Footer
 
 */
 
-#PageContainer {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-#RouterContainer {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+@import 'more.css';
 
 #Header.transparent {
   flex: 1;
@@ -139,7 +129,48 @@ CSS For App, Home, Header, & Footer
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+}
+
+#Topics.home {
+  flex: 1;
+  display: flex;
+}
+
+#Topics.notHome {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  z-index: 1;
+}
+
+#TopicContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  pointer-events: none;
+}
+
+#Spacer {
+  flex-grow: 1;
+}
+
+.h3ForChPreview {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.pForChPreview {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+}
+
+.topicLink {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0,0,0,.25);
 }
 
 #FooterContainer {

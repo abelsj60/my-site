@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
 
-var soonStyle = {
-  flex: '1',
-  backgroundColor: 'papayawhip',
-  marginTop: '52px'
-}
-
-var hedStyle = {
-  padding: '25px'
-}
-
 class AlexaStories extends Component {
   constructor(props) {
     super(props)
@@ -17,8 +7,8 @@ class AlexaStories extends Component {
 
   render() {
     return (
-      <div style={soonStyle}>
-        <h1 style={hedStyle}>Alexa Adventures</h1>
+      <div id='Alexa'>
+        <h1 id='h1ForAlexa'>Adventures</h1>
       </div>
     )
   }

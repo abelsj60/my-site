@@ -6,42 +6,6 @@ var background = '/test/pngtree-magskyline.jpg';
 var chapters = ['One', 'Two', 'Three'];
 var chapterBackgrounds = ['silver', 'deepskyblue', 'mediumspringgreen', 'darksalmon'];
 
-var homeStyle = function(topicStatus, opacity) {
-  if(!topicStatus) {
-    return {
-      flex: '1',
-      display: 'flex'
-    }
-  } else {
-    return {
-      flex: '1',
-      display: 'flex',
-      width: '100%',
-      opacity: opacity,
-      zIndex: '1'
-    }
-  }
-}
-
-var styleWColor = function(num) {
-  return {
-    flex: '1',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: 'rgba(0,0,0,.25)'
-  }
-};
-
-var setSection = function(chapter) {
-  if(chapter === 'One') {
-    return '/projects';
-  } else if(chapter === 'Two') {
-    return '/chapter';
-  } else {
-    return '/alexa'
-  }
-}
-
 class Topics extends Component {
   constructor(props) {
     super(props)
@@ -76,13 +40,39 @@ class Topics extends Component {
 
   render() {
 
+    var setSection = function(chapter) {
+      if(chapter === 'One') {
+        return '/projects';
+      } else if(chapter === 'Two') {
+        return '/chapter';
+      } else {
+        return '/alexa'
+      }
+    }
+
+    var setTopicsClass = function(home) {
+      if(!home) {
+        return 'notHome';
+      } else {
+        return 'home';
+      }
+    }
+
+    var setOpacity = function(topic, opacity) {
+      if(topic && opacity >= 0) {
+        return { opacity: opacity };
+      } else {
+        return;
+      }
+    }
+
     return (
-      <div id='Topics' style={homeStyle(this.props.topicStatus, this.state.tOpacity)}>
+      <div id='Topics' className={setTopicsClass(this.props.topicStatus)} style={setOpacity(this.props.topicStatus, this.state.tOpacity)}>
         {
           chapters.map((chapter, index) =>
             (
-              <Link to={setSection(chapter)} key={index} style={styleWColor(index, this.props.topicStatus)}>
-                <ChPreview chNumber={chapter} background={background} />
+              <Link to={setSection(chapter)} key={index} className='topicLink'>
+                <ChPreview chNumber={chapter} />
               </Link>
             )
           )

@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
 
-var projectStyle = {
-  flex: '1',
-  backgroundColor: 'papayawhip',
-  marginTop: '52px'
-}
-
-var hedStyle = {
-  padding: '25px'
-}
-
 class Projects extends Component {
   constructor(props) {
     super(props)
@@ -17,8 +7,8 @@ class Projects extends Component {
 
   render() {
     return (
-      <div id='Projects' style={projectStyle}>
-        <h1 style={hedStyle}>Projects</h1>
+      <div id='Projects'>
+        <h1 id='h1ForProjects'>Projects</h1>
       </div>
     )
   }

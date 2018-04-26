@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
 
-var jAndLStyle = {
-  flex: '1',
-  backgroundColor: 'papayawhip',
-  marginTop: '52px'
-}
-
-var hedStyle = {
-  padding: '25px'
-}
-
 class JandL extends Component {
   constructor(props) {
     super(props)
@@ -17,8 +7,8 @@ class JandL extends Component {
 
   render() {
     return (
-      <div id='JnL' style={jAndLStyle}>
-        <h1 style={hedStyle}>Journalism and Law</h1>
+      <div id='JnL'>
+        <h1 id='h1ForJnL'>Journalism and Law</h1>
       </div>
     )
   }

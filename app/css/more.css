@@ -1,0 +1,78 @@
+/*
+
+CSS For AppRouter, AlexaStories, Chapter, JandL, Projects
+
+*/
+
+#PageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#RouterContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#ChapterContainer {
+  flex: 1;
+  display: flex;
+  margin-top: 52px;
+}
+
+#Story {
+  flex: 1;
+  background-color: silver;
+}
+
+#h1ForChapter {
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+#pForChapter {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+}
+
+#Picture {
+  flex: 3;
+  background-color: papayawhip;
+}
+
+#Projects {
+  flex: 1;
+  background-color: papayawhip;
+  margin-top: 52px;
+}
+
+#h1ForProjects {
+  padding: 25px;
+}
+
+#Alexa {
+  flex: 1;
+  background-color: papayawhip;
+  margin-top: 52px;
+}
+
+#h1ForAlexa {
+  padding: 26px;
+}
+
+#h1ForJnL {
+  padding: 25px;
+}
+
+#NotFound {
+  flex: 1;
+  background-color: papayawhip;
+  margin-top: 52px;
+}
+
+#h1ForNotFound {
+  padding: 25px;
+}

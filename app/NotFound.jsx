@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 
-var notFoundStyle = {
-  flex: '1',
-  display: 'flex',
-  marginTop: '52px'
-}
-
 var messageStyle = {
   flex: '1',
   backgroundColor: 'papayawhip'
@@ -22,10 +16,8 @@ class NotFound extends Component {
 
   render() {
     return (
-      <div id='NotFoundContainer' style={notFoundStyle}>
-        <div id='Hed' style={messageStyle}>
-          <h1 style={hedStyle}>Uh oh. Not found!</h1>
-        </div>
+      <div id='NotFound'>
+        <h1 id='h1ForNotFound'>Uh oh. Not found!</h1>
       </div>
     )
   }

@@ -75,10 +75,8 @@ class ParTest extends Component {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop < 3221) {
-      // console.log('setTopicMenu: false');
       this.setState( {topicMenu: false} );
     } else {
-      console.log('setTopicMenu: true');
       this.setState( {topicMenu: true} )
     }
   }
@@ -87,7 +85,7 @@ class ParTest extends Component {
 
     var setScale = function(xScale, yScale) {
       return { transform: 'scale(' + xScale + ',' + yScale + ')' }
-    }
+    };
 
     var setPointerEvents = function(topic) {
       if(!topic) {
@@ -95,7 +93,7 @@ class ParTest extends Component {
       } else {
         return 'allow';
       }
-    }
+    };
 
     return (
       <div id='HomeContainer'>

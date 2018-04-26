@@ -24,13 +24,10 @@ class Footer extends Component {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop >= 2400) {
-      // console.log('scrollTop:', scrollTop);
       var oldPercent = (scrollTop - 2400) / (3221 - 2400);
       var numForOpacity = ((1 - 0) * oldPercent) + 0;
-      // console.log('oldPercent:', oldPercent);
       console.log('numForOpacity:', numForOpacity);
       this.setState({ fOpacity: numForOpacity });
-      // console.log('Footer setOpacity:', this.state);
     }
   }
 
@@ -45,7 +42,7 @@ class Footer extends Component {
     }
 
     return (
-      <div id='Footer' style={ setFooterOpacity(this.props.topicStatus, this.state.fOpacity) }>
+      <div id='Footer' style={setFooterOpacity(this.props.topicStatus, this.state.fOpacity)}>
         <div id='FooterEmail'>
           <p className='pForFooter'>Email</p>
         </div>
