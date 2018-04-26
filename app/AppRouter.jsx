@@ -8,7 +8,6 @@ import NotFound from './NotFound.jsx';
 import Projects from './Projects.jsx';
 import JandL from './JandL.jsx';
 import Topics from './Topics.jsx';
-import ParTest from './ParTest.jsx';
 import Chapter from './Chapter.jsx';
 import AlexaStories from './AlexaStories.jsx'
 

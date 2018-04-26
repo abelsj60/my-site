@@ -5,7 +5,6 @@ import SiteHeader from './SiteHeader.jsx';
 import Home from './Home.jsx';
 import AppRouter from './AppRouter.jsx';
 import Footer from './Footer.jsx';
-import ParTest from './ParTest.jsx';
 
 // Double div seems to lmt hight of page to viewport
 
@@ -18,7 +17,7 @@ class App extends Component {
     return (
       <div id='AppContainer'>
         <Switch>
-          <Route exact path='/' component={ParTest} />
+          <Route exact path='/' component={Home} />
           <Route component={AppRouter} />
         </Switch>
       </div>
