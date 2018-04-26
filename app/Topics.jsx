@@ -9,7 +9,6 @@ var chapterBackgrounds = ['silver', 'deepskyblue', 'mediumspringgreen', 'darksal
 class Topics extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       tOpacity: 0
     }
