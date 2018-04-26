@@ -26,7 +26,6 @@ class Footer extends Component {
     if(scrollTop >= 2400) {
       var oldPercent = (scrollTop - 2400) / (3221 - 2400);
       var numForOpacity = ((1 - 0) * oldPercent) + 0;
-      console.log('numForOpacity:', numForOpacity);
       this.setState({ fOpacity: numForOpacity });
     }
   }

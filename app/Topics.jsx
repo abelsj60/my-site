@@ -29,11 +29,8 @@ class Topics extends Component {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop >= 2400) {
-      // console.log('scrollTop:', scrollTop);
       var oldPercent = (scrollTop - 2400) / (3221 - 2400);
       var numForOpacity = ((1 - 0) * oldPercent) + 0;
-      // console.log('oldPercent:', oldPercent);
-      // console.log('numForOpacity:', numForOpacity);
       this.setState({ tOpacity: numForOpacity });
     }
   }
