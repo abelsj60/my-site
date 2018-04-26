@@ -19,7 +19,7 @@ class SiteHeader extends Component {
     }
 
     return (
-      <div id='Header' className={setHeaderClass(this.props.isTransparent)}>
+      <div id='Header' className={setHeaderClass(this.props.hTransparency)}>
         <div id='LeftContainer'>
           <div id='Name'>
             <Logo />
