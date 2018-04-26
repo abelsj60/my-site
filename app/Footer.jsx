@@ -41,11 +41,11 @@ class Footer extends Component {
     }
 
     return (
-      <div id='Footer' style={setFooterOpacity(this.props.topicStatus, this.state.fOpacity)}>
+      <div id='Footer' style={setFooterOpacity(this.props.topicsShown, this.state.fOpacity)}>
         <div id='FooterEmail'>
           <p className='pForFooter'>Email</p>
         </div>
-        <div id='JnL'>
+        <div id='JnLFooter'>
           <Link className='link' to={'/jnl'}><p className='pForFooter'>Journalism and Law</p></Link>
         </div>
         <div id='Copyright'>

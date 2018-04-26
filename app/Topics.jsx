@@ -64,7 +64,7 @@ class Topics extends Component {
     }
 
     return (
-      <div id='Topics' className={setTopicsClass(this.props.topicStatus)} style={setOpacity(this.props.topicStatus, this.state.tOpacity)}>
+      <div id='Topics' className={setTopicsClass(this.props.topicsShown)} style={setOpacity(this.props.topicsShown, this.state.tOpacity)}>
         {
           chapters.map((chapter, index) =>
             (

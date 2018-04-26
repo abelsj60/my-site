@@ -14,29 +14,29 @@ class Home extends Component {
       yScale: 6,
       scrollPos: 0,
       isTransparent: true,
-      topicStatus: false,
-      topicMenu: false
+      topicsShown: false,
+      clickTopic: false
     };
 
     this.parThis = this.parThis.bind(this);
     this.setTransparency = this.setTransparency.bind(this);
-    this.revealText = this.revealText.bind(this);
-    this.setTopicMenu = this.setTopicMenu.bind(this);
+    this.showTopics = this.showTopics.bind(this);
+    this.togglePointer = this.togglePointer.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.parThis);
     window.addEventListener('scroll', this.setTransparency);
-    window.addEventListener('scroll', this.revealText);
-    window.addEventListener('scroll', this.setTopicMenu);
-    this.revealText();
+    window.addEventListener('scroll', this.showTopics);
+    window.addEventListener('scroll', this.togglePointer);
+    this.showTopics();
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.parThis);
     window.removeEventListener('scroll', this.setTransparency);
-    window.addEventListener('scroll', this.revealText);
-    window.addEventListener('scroll', this.setTopicMenu);
+    window.addEventListener('scroll', this.showTopics);
+    window.addEventListener('scroll', this.togglePointer);
   }
 
   parThis(event) {
@@ -59,25 +59,27 @@ class Home extends Component {
 
   }
 
-  revealText(event) {
+  // Bring topics onto screen
+  showTopics(event) {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop <= 2300) {
       if(scrollTop === 2300) {
       }
-      this.setState({ topicStatus: false });
+      this.setState({ topicsShown: false });
     } else if (scrollTop > 2300) {
-      this.setState({ topicStatus: true });
+      this.setState({ topicsShown: true });
     }
   }
 
-  setTopicMenu(event) {
+  // Select a topic when scrolling's complete
+  togglePointer(event) {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop < 3221) {
-      this.setState( {topicMenu: false} );
+      this.setState( {clickTopic: false} );
     } else {
-      this.setState( {topicMenu: true} )
+      this.setState( {clickTopic: true} )
     }
   }
 
@@ -105,16 +107,16 @@ class Home extends Component {
           </div>
         </div>
         {
-          this.state.topicStatus &&
+          this.state.topicsShown &&
           <div id='TemporaryContent'>
-            <div id='PointerControl' className={setPointerEvents(this.state.topicMenu)}>
+            <div id='PointerControl' className={setPointerEvents(this.state.clickTopic)}>
               <div id='ContentContainer'>
                 <div id='TopicsContainer'>
-                  <Topics topicStatus={this.state.topicStatus} topicMenu={this.state.topicMenu} />
+                  <Topics topicsShown={this.state.topicsShown} />
                 </div>
               </div>
               <div id='FooterContainer'>
-                <Footer topicStatus={this.state.topicStatus} />
+                <Footer topicsShown={this.state.topicsShown} />
               </div>
             </div>
           </div>

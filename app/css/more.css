@@ -63,6 +63,12 @@ CSS For AppRouter, AlexaStories, Chapter, JandL, Projects
   padding: 26px;
 }
 
+#JnL {
+  flex: 1;
+  background-color: papayawhip;
+  margin-top: 52px;
+}
+
 #h1ForJnL {
   padding: 25px;
 }
