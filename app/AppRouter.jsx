@@ -9,19 +9,8 @@ import Projects from './Projects.jsx';
 import JandL from './JandL.jsx';
 import Topics from './Topics.jsx';
 import Chapter from './Chapter.jsx';
-import AlexaStories from './AlexaStories.jsx'
-
-const pageStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  height: '100vh'
-};
-
-const sectionStyles = {
-  flex: '1',
-  display: 'flex',
-  flexDirection: 'column'
-};
+import AlexaStories from './AlexaStories.jsx';
+import ChControl from './ChControl.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +28,20 @@ class App extends Component {
                 <Redirect to='/chapter/1' />
               )
             } />
-            <Route exact path='/chapter/:num' component={Chapter} />
+
+            <Route path='/chapter/:num' render={({match}) =>
+              {
+                var goHere = match.params.num;
+                if(goHere <= 4) {
+                  return (
+                    <Chapter urlChNum={match.params.num}/>
+                  )
+                } else {
+                  return (
+                    <Redirect to={'/chapter/1'} />
+                )}
+              }
+            } />
             <Route path='/projects' component={Projects} />
             <Route path='/jnl' component={JandL} />
             <Route path='/alexa' component={AlexaStories} />
@@ -54,3 +56,14 @@ class App extends Component {
 }
 
 export default App;
+
+// <Route path='/chapter/:num' render={ () => {
+//   // console.log(this.props);
+//   var chapterReq = this.props.match.params.num;
+//   if(chapterReq > 4) {
+//     chapterReq = 1;
+//   }
+//   return (
+//     <Redirect to={'/chapter/:' + chapterReq} />
+//   )}
+// } />

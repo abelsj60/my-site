@@ -10,7 +10,8 @@ class Chapter extends Component {
   }
 
   render() {
-    var urlChNum = this.props.match.params.num;
+    var urlChNum = this.props.urlChNum;
+
     var pickContent = function(number, chText) {
       if(number === '1') {
         return chText['1'];
