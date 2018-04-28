@@ -46,8 +46,6 @@ class Home extends Component {
     var oldPercent = (scrollTop - 0) / (3221 - 0);
     var numberForScale = 6 / (((6 - 1) * oldPercent) + 1);
 
-    this.setState({ xScale: numberForScale })
-    this.setState({ yScale: numberForScale })
     this.setState({ iScale: numberForScale })
   }
 
@@ -83,14 +81,13 @@ class Home extends Component {
       var numForOpacity = ((1 - 0) * oldPercent) + 0;
       this.setState({ opacity: numForOpacity });
     }
-    // console.log(this.state.opacity);
   }
 
   // Select a topic when scrolling's complete
   togglePointer(event) {
     var scrollTop = window.pageYOffset;
 
-    if(scrollTop < 3221) {
+    if(scrollTop < 3220) {
       this.setState( {topicClicking: false} );
     } else {
       this.setState( {topicClicking: true} )

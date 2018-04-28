@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Nav from './Nav.jsx';
 import Logo from './Logo.jsx';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 class SiteHeader extends Component {
   constructor(props) {
@@ -30,13 +30,13 @@ class SiteHeader extends Component {
         </div>
         <div id='RightContainer'>
             <div id='MyStory'>
-              <Link className='link' to={'/chapter'}>My story</Link>
+              <NavLink className='link' activeClassName='NavLinkActive' to={'/chapter'}>My story</NavLink>
             </div>
             <div id='SomeProjects'>
-              <Link className='link' to={'/projects'}>Some projects</Link>
+              <NavLink className='link' activeClassName='NavLinkActive' to={'/projects'}>Some projects</NavLink>
             </div>
             <div id='AlexaAdventures'>
-              <Link className='link' to={'/alexa'}>Alexa adventures</Link>
+              <NavLink className='link' activeClassName='NavLinkActive' to={'/alexa'}>Alexa adventures</NavLink>
             </div>
         </div>
       </div>

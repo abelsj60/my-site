@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Header } from 'semantic-ui-react';
 import SiteHeader from './SiteHeader.jsx';
 import Home from './Home.jsx';
@@ -34,7 +34,11 @@ class App extends Component {
         <div id='RouterContainer'>
           <SiteHeader />
           <Switch>
-            <Route exact path='/chapter' component={Chapter} />
+            <Route exact path='/chapter' render={ () =>
+              (
+                <Redirect to='/chapter/1' />
+              )
+            } />
             <Route exact path='/chapter/:num' component={Chapter} />
             <Route path='/projects' component={Projects} />
             <Route path='/jnl' component={JandL} />

@@ -15,7 +15,7 @@ class Topics extends Component {
       if(chapter === 'One') {
         return '/projects';
       } else if(chapter === 'Two') {
-        return '/chapter';
+        return '/chapter/1';
       } else {
         return '/alexa'
       }

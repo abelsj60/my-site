@@ -12,7 +12,7 @@ class ChPreview extends Component {
 
   render() {
 
-    var setTopic = function(chapter) {
+    var setTopicHead = function(chapter) {
       if(chapter === 'One') {
         return 'Some projects';
       } else if (chapter === 'Two') {
@@ -22,18 +22,28 @@ class ChPreview extends Component {
       }
     };
 
+    var setTopicBlurb = function(chapter) {
+      if(chapter === 'One') {
+        return 'Unconventional software and more';
+      } else if(chapter === 'Two') {
+        return 'Adventures in storytelling and magic';
+      } else {
+        return 'Amazing tales of delight (coming soon)';
+      }
+    }
+
     return (
       <div id='TopicContent'>
         <div id='Spacer'>
         </div>
         <h3 className='h3ForChPreview'>
           {
-            setTopic(this.props.chNumber)
+            setTopicHead(this.props.chNumber)
           }
         </h3>
         <p className='pForChPreview'>
           {
-            this.props.chNumber
+            setTopicBlurb(this.props.chNumber)
           }
         </p>
       </div>

@@ -1,6 +1,6 @@
 /*
 
-CSS For AppRouter, AlexaStories, Chapter, JandL, Projects
+CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 
 */
 
@@ -28,18 +28,22 @@ CSS For AppRouter, AlexaStories, Chapter, JandL, Projects
 }
 
 #h1ForChapter {
-  padding-top: 25px;
-  padding-left: 25px;
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  flex: 1;
 }
 
 #pForChapter {
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-bottom: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  flex: 6;
+  white-space: pre-wrap;
 }
 
 #Picture {
-  flex: 3;
+  flex: 2;
   background-color: papayawhip;
 }
 
@@ -81,4 +85,41 @@ CSS For AppRouter, AlexaStories, Chapter, JandL, Projects
 
 #h1ForNotFound {
   padding: 25px;
+}
+
+#chNavContainer {
+  display: flex;
+  flex: 1;
+}
+
+#ChapterNavItems {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.pForChapterNav {
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+.linkForNav {
+  flex: 1;
+  justify-content: space-evenly;
+  border: 1px solid red;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.linkForNav.active {
+  background-color: red;
+  color: white;
+}
+
+.linkForNav:hover {
+  background-color: red;
+  color: white;
 }
