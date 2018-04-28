@@ -10,7 +10,6 @@ import JandL from './JandL.jsx';
 import Topics from './Topics.jsx';
 import Chapter from './Chapter.jsx';
 import AlexaStories from './AlexaStories.jsx';
-import ChControl from './ChControl.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +27,6 @@ class App extends Component {
                 <Redirect to='/chapter/1' />
               )
             } />
-
             <Route path='/chapter/:num' render={({match}) =>
               {
                 var goHere = match.params.num;
