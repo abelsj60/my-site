@@ -54,14 +54,3 @@ class App extends Component {
 }
 
 export default App;
-
-// <Route path='/chapter/:num' render={ () => {
-//   // console.log(this.props);
-//   var chapterReq = this.props.match.params.num;
-//   if(chapterReq > 4) {
-//     chapterReq = 1;
-//   }
-//   return (
-//     <Redirect to={'/chapter/:' + chapterReq} />
-//   )}
-// } />
