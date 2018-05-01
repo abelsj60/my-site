@@ -110,7 +110,6 @@ class Projects extends Component {
 
   render() {
     var urlName = this.props.match.params.name;
-    console.log(urlName);
 
     var setActiveItem = function(mappedWith, urlItem) {
       if(mappedWith === urlItem) {
