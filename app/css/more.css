@@ -31,14 +31,12 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   margin-top: 25px;
   margin-left: 25px;
   margin-right: 25px;
-  flex: 1;
 }
 
 #pForChapter {
   margin-left: 25px;
   margin-right: 25px;
   margin-bottom: 25px;
-  flex: 6;
   white-space: pre-wrap;
 }
 
@@ -47,10 +45,77 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   background-color: papayawhip;
 }
 
-#Projects {
+#PictureContainer {
   flex: 1;
   background-color: papayawhip;
   margin-top: 52px;
+  display: flex;
+}
+
+.BoxForProject {
+  display: flex;
+  flex-direction: column;
+}
+
+#ProjectBox {
+  flex: 1;
+  margin-right: 15px;
+}
+
+#ProjectHolder {
+  flex: 1;
+  margin: 15px;
+  border: .5px solid blue;
+}
+
+#ThumbnailBox {
+  flex: 1;
+  margin-right: 15px;
+}
+
+#PictureBox {
+  flex: 4;
+}
+
+.FrameForProject {
+  flex: 1;
+  border: .5px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+#ProjectItems {
+  flex: 1;
+  margin: 15px;
+  border: .5px solid blue;
+}
+
+#MasterBox {
+  flex: 1;
+  display: flex;
+  margin: 25px;
+
+}
+
+.ThumbPics {
+  display: flex;
+  flex-direction: column;
+}
+
+.ThumbPic {
+  flex: 1;
+  margin: 15px;
+  border: .5px solid blue;
+}
+
+.h3ForProject {
+  text-align: center;
+}
+
+#PicHolder {
+  flex: 1;
+  margin: 15px;
+  border: .5px solid blue;
 }
 
 #h1ForProjects {
@@ -93,7 +158,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 }
 
 #ChapterNavItems {
-  flex: 1;
   display: flex;
   justify-content: center;
   margin-top: 25px;
@@ -107,11 +171,30 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 }
 
 .linkForNav {
+  color: white;
   flex: 1;
   justify-content: space-evenly;
   border: 1px solid red;
   padding-top: 3px;
   padding-bottom: 3px;
+}
+
+#projectLinks.inactive {
+  margin: 25px;
+  color: black;
+}
+
+#projectLinks.inactive:hover {
+  color: blue;
+}
+
+#projectLinks.active {
+  margin: 25px;
+  color: blue;
+}
+
+.imgThumbs {
+  width: 100%
 }
 
 .linkForNav.active {
@@ -123,3 +206,4 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   background-color: red;
   color: white;
 }
+

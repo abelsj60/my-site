@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ChNav from './ChNav.jsx';
+import ItemNav from './ItemNav.jsx';
 import chText from './helpers/siteText.js';
 
 var chapters = [1,2,3,4];
@@ -10,7 +10,7 @@ class Chapter extends Component {
   }
 
   render() {
-    var urlChNum = this.props.urlChNum;
+    var urlNum = this.props.urlNum;
 
     var pickContent = function(number, chText) {
       if(number === '1') {
@@ -31,13 +31,13 @@ class Chapter extends Component {
           {
             chapters.map((chNum,index) =>
               (
-                <ChNav key={chNum} chapter={chNum} urlChNum={urlChNum} />
+                <ItemNav key={chNum} item={chNum} urlNum={urlNum} />
               )
             )
           }
           </div>
-          <h1 id='h1ForChapter'>{pickContent(urlChNum, chText).title}</h1>
-          <p id='pForChapter'>{pickContent(urlChNum, chText).text}</p>
+          <h1 id='h1ForChapter'>{pickContent(urlNum, chText).title}</h1>
+          <p id='pForChapter'>{pickContent(urlNum, chText).text}</p>
         </div>
         <div id='Picture'>
         </div>

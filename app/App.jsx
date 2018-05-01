@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Header } from 'semantic-ui-react';
+// import { Header } from 'semantic-ui-react';
 import SiteHeader from './SiteHeader.jsx';
 import Home from './Home.jsx';
 import AppRouter from './AppRouter.jsx';

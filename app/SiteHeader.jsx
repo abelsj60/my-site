@@ -3,6 +3,18 @@ import Nav from './Nav.jsx';
 import Logo from './Logo.jsx';
 import { Link, NavLink } from 'react-router-dom';
 
+var headerItems = ['My story', 'Some projects', 'Alexa adventures'];
+
+var setPath = function(item) {
+  if(item === 'My story') {
+    return '/chapter';
+  } else if(item === 'Some projects') {
+    return '/project';
+  } else if(item === 'Alexa adventures') {
+    return '/alexa';
+  }
+};
+
 class SiteHeader extends Component {
   constructor(props) {
     super(props)
@@ -28,16 +40,16 @@ class SiteHeader extends Component {
             <Nav />
           </div>
         </div>
-        <div id='RightContainer'>
-            <div id='MyStory'>
-              <NavLink className='link' activeClassName='NavLinkActive' to={'/chapter'}>My story</NavLink>
-            </div>
-            <div id='SomeProjects'>
-              <NavLink className='link' activeClassName='NavLinkActive' to={'/projects'}>Some projects</NavLink>
-            </div>
-            <div id='AlexaAdventures'>
-              <NavLink className='link' activeClassName='NavLinkActive' to={'/alexa'}>Alexa adventures</NavLink>
-            </div>
+        <div id= 'RightContainer'>
+
+          {
+            headerItems.map(item => (
+              <div key={item} id={item}>
+                <NavLink className='link' activeClassName='NavLinkActive' to={setPath(item)}>{item}</NavLink>
+              </div>
+            ))
+          }
+
         </div>
       </div>
     )

@@ -13,7 +13,7 @@ class Topics extends Component {
 
     var setSection = function(topic) {
       if(topic === 'One') {
-        return '/projects';
+        return '/project';
       } else if(topic === 'Two') {
         return '/chapter/1';
       } else {
@@ -35,7 +35,7 @@ class Topics extends Component {
           topics.map((topic, index) =>
             (
               <Link to={setSection(topic)} key={index} className='topicLink'>
-                <ChPreview />
+                <ChPreview chNumber={topic} />
               </Link>
             )
           )

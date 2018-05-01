@@ -55,6 +55,10 @@ CSS For Home, Header, Topics, ChPreview, & Footer
   color: white;
 }
 
+.link:hover {
+  color: red;
+}
+
 #NameAndLink {
   flex: 1;
 }
@@ -83,7 +87,7 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 #StaticImage {
   position: relative;
   z-index: 1;
-  width: 100%;
+  height: 100%;
 }
 
 #ScalingImage {
@@ -207,4 +211,8 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 
 .NavLinkActive {
   color: red;
+}
+
+.headerLink {
+  color: white;
 }

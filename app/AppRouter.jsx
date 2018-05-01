@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Header } from 'semantic-ui-react';
+// import { Header } from 'semantic-ui-react';
 import SiteHeader from './SiteHeader.jsx';
 import Home from './Home.jsx';
 import Footer from './Footer.jsx';
@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   render() {
-    return (
+  return (
       <div id='PageContainer'>
         <div id='RouterContainer'>
           <SiteHeader />
@@ -32,7 +32,7 @@ class App extends Component {
                 var goHere = match.params.num;
                 if(goHere <= 4) {
                   return (
-                    <Chapter urlChNum={match.params.num}/>
+                    <Chapter urlNum={goHere} />
                   )
                 } else {
                   return (
@@ -40,7 +40,15 @@ class App extends Component {
                 )}
               }
             } />
-            <Route path='/projects' component={Projects} />
+
+            <Route exact path='/project' render={ () =>
+              (
+                <Redirect to='/project/arrow/1' component={Projects} />
+              )
+            } />
+
+            <Route path='/project/:name/:thumbnail' component={Projects} />
+
             <Route path='/jnl' component={JandL} />
             <Route path='/alexa' component={AlexaStories} />
             <Route component={NotFound} />
@@ -54,3 +62,12 @@ class App extends Component {
 }
 
 export default App;
+
+// <Route exact path='/projects' render={ () =>
+//   (
+//     <Redirect to='/arrow/1' component={Projects} />
+//   )
+// } />
+
+
+// <Route exact path='/:project' component={Projects} />
