@@ -131,9 +131,11 @@ class Projects extends Component {
                   projectData.map((project, index) => (
                     <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)}>
                       <p id='projectLinks' className={setActiveItem(project.name, urlName)}>
+
                         {
                           project.name.slice(0, 1).toUpperCase() + project.name.slice(1)
                         }
+
                       </p>
                     </Link>
                   ))
@@ -164,10 +166,12 @@ class Projects extends Component {
           </div>
           <div id='PictureBox'className='BoxForProject'>
             <h3 id='h3ForPicture' className='h3ForProject'>
+
               {
                 this.state.projName.slice(0, 1).toUpperCase() + this.state.projName.slice(1) + ' ' + this.state.projCaption
               }
-            </h3>
+
+              </h3>
             <div id='PictureFrame' className='FrameForProject'>
               <div id='PicHolder' style={{overflow: 'hidden'}}>
                 <img style={{width: '100%'}} src=

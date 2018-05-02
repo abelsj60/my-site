@@ -62,12 +62,3 @@ class App extends Component {
 }
 
 export default App;
-
-// <Route exact path='/projects' render={ () =>
-//   (
-//     <Redirect to='/arrow/1' component={Projects} />
-//   )
-// } />
-
-
-// <Route exact path='/:project' component={Projects} />
