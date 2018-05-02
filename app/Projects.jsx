@@ -22,8 +22,7 @@ var projectData = [
     thumbnails:
       [
         null,
-        'https://picsum.photos/199/175/?random', 'https://picsum.photos/200/175/?random', 'https://picsum.photos/201/175/?random',
-        'https://picsum.photos/200/176/?random'
+        'https://picsum.photos/199/175/?random', 'https://picsum.photos/200/175/?random', 'https://picsum.photos/201/175/?random'
       ],
     full:
       [
@@ -120,75 +119,51 @@ class Projects extends Component {
     }
 
     return (
-      <div id='PictureContainer'>
-        <div id='MasterBox'>
-          <div id='ProjectBox' className='BoxForProject'>
-            <h3 id='h3ForProjects' className='h3ForProject'>Projects</h3>
-            <div id='ProjectFrame' className='FrameForProject' >
-              <div id='ProjectHolder'>
+      <div id='ProjectContainer'>
+        <div id='ProjectNav' className='BoxForProject'>
 
-                {
-                  projectData.map((project, index) => (
-                    <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)}>
-                      <p id='projectLinks' className={setActiveItem(project.name, urlName)}>
+          {
+            projectData.map((project, index) => (
+              <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)}>
+                <p id='projectLinks' className={setActiveItem(project.name, urlName)}>
 
-                        {
-                          project.name.slice(0, 1).toUpperCase() + project.name.slice(1)
-                        }
+                  {
+                    project.name.slice(0, 1).toUpperCase() + project.name.slice(1)
+                  }
 
-                      </p>
-                    </Link>
-                  ))
-                }
+                </p>
+              </Link>
+            ))
+          }
 
-              </div>
-            </div>
-          </div>
-          <div id='ThumbnailBox' className='BoxForProject'>
-            <h3 id='h3ForThumbnails' className='h3ForProject'>Thumbnails</h3>
-            <div id='ThumbnailFrame' className='FrameForProject'>
-              <div style={{overflow: 'hidden'}} id='ThumbsHolder' className='ThumbPics'>
+        </div>
+        <div id='ProjectContent' className='BoxForProject'>
+          <div id='Thumbnails' className='FrameForProject'>
 
               {
                 this.state.projThumbs.map((thumbnail, index) => (
                   thumbnail &&
-                    <div key={index} style={{overflow: 'hidden'}} id='Thumb1Holder' className='ThumbPic'>
-                      <Link to={'/project/' + this.state.projName + '/' + index} className='projectLink' onClick={() => this.updatePicIndex(null, index)}>
-                        <img className='imgThumbs' src={thumbnail} alt={'thumbnail ' + index} />
-                      </Link>
-                    </div>
+                    <Link to={'/project/' + this.state.projName + '/' + index} className='projectLink' onClick={() => this.updatePicIndex(null, index)}>
+                      <img className='imgThumbs' src={thumbnail} alt={'thumbnail ' + index} />
+                    </Link>
                   )
                 )
               }
 
-              </div>
-            </div>
           </div>
-          <div id='PictureBox'className='BoxForProject'>
-            <h3 id='h3ForPicture' className='h3ForProject'>
+          <div id='MainPicture' style={{overflow: 'hidden'}}>
+            <img style={{width: '100%'}} src=
 
-              {
-                this.state.projName.slice(0, 1).toUpperCase() + this.state.projName.slice(1) + ' ' + this.state.projCaption
-              }
+            {
+              this.state.projImgs[this.state.picIndex - 1]
+            }
 
-              </h3>
-            <div id='PictureFrame' className='FrameForProject'>
-              <div id='PicHolder' style={{overflow: 'hidden'}}>
-                <img style={{width: '100%'}} src=
-
-                {
-                  this.state.projImgs[this.state.picIndex - 1]
-                }
-
-                alt='mainPic' />
-              </div>
-            </div>
+            alt='mainPic' />
           </div>
         </div>
       </div>
     )
   }
-
 }
 
 export default Projects;
