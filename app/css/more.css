@@ -60,6 +60,7 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 #ProjectNav {
   flex: 1;
   display: flex;
+  margin: 15px;
 }
 
 #ThumbnailBox {
@@ -68,19 +69,16 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 }
 
 #ProjectContent {
-  flex: 9;
+  flex: 1;
   display: flex;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 25px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }
 
 #Thumbnails {
-  flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-right: 15px;
+  justify-content: center;
 }
 
 #MasterBox {
@@ -100,7 +98,8 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 }
 
 #MainPicture {
-  flex: 6;
+  margin-bottom: 15px;
+  flex: 1;
 }
 
 #h1ForProjects {
@@ -165,8 +164,8 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 }
 
 #projectLinks.inactive {
-  margin: 25px;
   color: black;
+  margin-right: 15px;
 }
 
 #projectLinks.inactive:hover {
@@ -174,12 +173,16 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 }
 
 #projectLinks.active {
-  margin: 25px;
   color: blue;
+  margin-right: 15px;
+}
+
+.projectLink {
+  margin-right: 15px;
 }
 
 .imgThumbs {
-  width: 100%
+  height: 75px;
 }
 
 .linkForNav.active {
@@ -198,4 +201,20 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 
 #rightDiv {
 
+}
+
+#ProjectElements {
+  display: flex;
+  flex-direction: column;
+}
+
+#Caption {
+  flex: 1;
+  display: flex;
+  margin-left: 15px;
+}
+
+#CapAndContent {
+  flex: 28;
+  display: flex;
 }

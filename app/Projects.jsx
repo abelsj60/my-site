@@ -137,28 +137,39 @@ class Projects extends Component {
           }
 
         </div>
-        <div id='ProjectContent' className='BoxForProject'>
-          <div id='Thumbnails' className='FrameForProject'>
-
+        <div id='CapAndContent'>
+          <div id='Caption'>
+            <p>
               {
-                this.state.projThumbs.map((thumbnail, index) => (
-                  thumbnail &&
-                    <Link to={'/project/' + this.state.projName + '/' + index} className='projectLink' onClick={() => this.updatePicIndex(null, index)}>
-                      <img className='imgThumbs' src={thumbnail} alt={'thumbnail ' + index} />
-                    </Link>
-                  )
-                )
+                this.state.projName.slice(0, 1).toUpperCase() + this.state.projName.slice(1) + ' ' + this.state.projCaption
               }
-
+            </p>
           </div>
-          <div id='MainPicture' style={{overflow: 'hidden'}}>
-            <img style={{width: '100%'}} src=
+          <div id='ProjectContent' className='BoxForProject'>
+            <div id='ProjectElements'>
+              <div id='MainPicture' style={{overflow: 'hidden'}}>
+                <img src=
 
-            {
-              this.state.projImgs[this.state.picIndex - 1]
-            }
+                {
+                  this.state.projImgs[this.state.picIndex - 1]
+                }
 
-            alt='mainPic' />
+                alt='mainPic' />
+              </div>
+              <div id='Thumbnails' className='FrameForProject'>
+
+                {
+                  this.state.projThumbs.map((thumbnail, index) => (
+                    thumbnail &&
+                      <Link to={'/project/' + this.state.projName + '/' + index} className='projectLink' onClick={() => this.updatePicIndex(null, index)}>
+                        <img className='imgThumbs' src={thumbnail} alt={'thumbnail ' + index} />
+                      </Link>
+                    )
+                  )
+                }
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
