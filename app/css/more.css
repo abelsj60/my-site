@@ -40,6 +40,10 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   white-space: pre-wrap;
 }
 
+#pForCaption {
+  white-space: pre-wrap;
+}
+
 #Picture {
   flex: 2;
   background-color: papayawhip;
@@ -53,57 +57,22 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   flex-direction: column;
 }
 
-.BoxForProject {
-
-}
-
 #ProjectNav {
   flex: 1;
   display: flex;
-  margin: 15px;
-}
-
-#ThumbnailBox {
-  flex: 1;
-  margin-right: 15px;
+  margin-bottom: 15px;
+  height: 40px;
 }
 
 #ProjectContent {
   flex: 1;
   display: flex;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-bottom: 15px;
-}
-
-#Thumbnails {
-  display: flex;
-  justify-content: center;
-}
-
-#MasterBox {
-  flex: 1;
-  display: flex;
   margin: 25px;
-  flex-direction: column;
-}
-
-.ThumbPics {
-  display: flex;
-  flex-direction: column;
-}
-
-.h3ForProject {
-  text-align: center;
 }
 
 #MainPicture {
   margin-bottom: 15px;
   flex: 1;
-}
-
-#h1ForProjects {
-  padding: 25px;
 }
 
 #Alexa {
@@ -143,64 +112,53 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 
 #ChapterNavItems {
   display: flex;
-  justify-content: center;
   margin-top: 25px;
   margin-left: 25px;
   margin-right: 25px;
+  height: 40px;
 }
 
 .pForChapterNav {
   white-space: pre-wrap;
   text-align: center;
-}
-
-.linkForNav {
-  color: white;
   flex: 1;
-  justify-content: space-evenly;
-  border: 1px solid red;
-  padding-top: 3px;
-  padding-bottom: 3px;
 }
 
-#projectLinks.inactive {
+.linkForNav.active {
+  flex: 1;
+  background-color: red;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.linkForNav.inactive {
+  flex: 1;
   color: black;
-  margin-right: 15px;
+  border: .5px solid red;
+  display: flex;
+  align-items: center;
 }
 
-#projectLinks.inactive:hover {
-  color: blue;
+
+.linkForNav.inactive:hover {
+  background-color: red;
+  color: white;
 }
 
-#projectLinks.active {
-  color: blue;
-  margin-right: 15px;
+.projectLinks.active {
+  text-align: center;
+  flex: 1;
 }
 
-.projectLink {
-  margin-right: 15px;
+.projectLinks.inactive {
+  text-align: center;
+  flex: 1;
 }
 
 .imgThumbs {
   height: 75px;
-}
-
-.linkForNav.active {
-  background-color: red;
-  color: white;
-}
-
-.linkForNav:hover {
-  background-color: red;
-  color: white;
-}
-
-#leftDiv {
-
-}
-
-#rightDiv {
-
+  margin-right: 10px;
 }
 
 #ProjectElements {
@@ -210,11 +168,13 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 
 #Caption {
   flex: 1;
-  display: flex;
-  margin-left: 15px;
 }
 
 #CapAndContent {
-  flex: 28;
   display: flex;
+}
+
+#CapAndNav {
+  flex: 1;
+  margin: 25px;
 }

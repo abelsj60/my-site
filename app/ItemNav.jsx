@@ -8,10 +8,12 @@ class ItemNav extends Component {
 
   render() {
 
-    var setActiveItem = function(mappedWith, urlItem) {
-      urlItem = parseInt(urlItem);
+    var setActiveItem = function(mappedWith, urlParam) {
+      if(parseInt(urlParam)) {
+        urlParam = parseInt(urlParam);
+      }
 
-      if(mappedWith === urlItem) {
+      if(mappedWith === urlParam) {
         return 'active';
       } else {
         return 'inactive';
@@ -19,7 +21,7 @@ class ItemNav extends Component {
     }
 
     return (
-        <Link className={'linkForNav ' + setActiveItem(this.props.item, this.props.urlNum)} to={'/chapter/' + this.props.item}>
+        <Link className={'linkForNav ' + setActiveItem(this.props.item, this.props.param)} to={this.props.route + this.props.item}>
           <p className='pForChapterNav'>{this.props.item}</p>
         </Link>
     )

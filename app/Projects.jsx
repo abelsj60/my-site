@@ -118,32 +118,66 @@ class Projects extends Component {
       }
     }
 
+    var prepName = function(name) {
+      if(name === 'tmmnews') {
+        return name.slice(0, 3).toUpperCase() + name.slice(3);
+      } else {
+        return name.slice(0, 1).toUpperCase() + name.slice(1);
+      }
+    }
+
     return (
       <div id='ProjectContainer'>
-        <div id='ProjectNav' className='BoxForProject'>
-
-          {
-            projectData.map((project, index) => (
-              <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)}>
-                <p id='projectLinks' className={setActiveItem(project.name, urlName)}>
-
-                  {
-                    project.name.slice(0, 1).toUpperCase() + project.name.slice(1)
-                  }
-
-                </p>
-              </Link>
-            ))
-          }
-
-        </div>
         <div id='CapAndContent'>
-          <div id='Caption'>
-            <p>
+          <div id='CapAndNav'>
+            <div id='ProjectNav' className='BoxForProject'>
+
               {
-                this.state.projName.slice(0, 1).toUpperCase() + this.state.projName.slice(1) + ' ' + this.state.projCaption
+                projectData.map((project, index) => (
+
+                  <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)} className={'linkForNav ' + setActiveItem(project.name, urlName)} >
+                    <p className={'projectLinks ' + setActiveItem(project.name, urlName)}>
+
+                      {
+                        prepName(project.name)
+                      }
+
+                    </p>
+                  </Link>
+                ))
               }
-            </p>
+
+            </div>
+            <div id='Caption'>
+              <p id='pForCaption'><strong>Project </strong></p>
+              <p>
+
+                {
+                  prepName(this.state.projName)
+                }
+
+              </p>
+              <p id='pForCaption'><strong>Type </strong></p>
+              <p>
+              Answer
+              </p>
+              <p id='pForCaption'><strong>What I did </strong></p>
+              <p>
+              Answer
+              </p>
+              <p id='pForCaption'><strong>Key technologies </strong></p>
+              <p>
+              Answer
+              </p>
+              <p id='pForCaption'><strong>Description </strong></p>
+              <p>
+              Answer
+              </p>
+              <p id='pForCaption'><strong>What you're looking at</strong></p>
+              <p>
+              Answer
+              </p>
+            </div>
           </div>
           <div id='ProjectContent' className='BoxForProject'>
             <div id='ProjectElements'>
@@ -161,7 +195,7 @@ class Projects extends Component {
                 {
                   this.state.projThumbs.map((thumbnail, index) => (
                     thumbnail &&
-                      <Link to={'/project/' + this.state.projName + '/' + index} className='projectLink' onClick={() => this.updatePicIndex(null, index)}>
+                      <Link key={index} to={'/project/' + this.state.projName + '/' + index} className='projectLink' onClick={() => this.updatePicIndex(null, index)}>
                         <img className='imgThumbs' src={thumbnail} alt={'thumbnail ' + index} />
                       </Link>
                     )

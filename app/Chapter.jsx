@@ -3,6 +3,7 @@ import ItemNav from './ItemNav.jsx';
 import chText from './helpers/siteText.js';
 
 var chapters = [1,2,3,4];
+var route = '/chapter/';
 
 class Chapter extends Component {
   constructor(props) {
@@ -29,9 +30,9 @@ class Chapter extends Component {
         <div id='Story'>
           <div id='ChapterNavItems'>
           {
-            chapters.map((chNum,index) =>
+            chapters.map((chNum, index) =>
               (
-                <ItemNav key={chNum} item={chNum} urlNum={urlNum} />
+                <ItemNav key={chNum} item={chNum} param={urlNum} route={route} />
               )
             )
           }
