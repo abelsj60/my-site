@@ -31,7 +31,7 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 }
 
 #LeftContainer {
-  flex: 4;
+  flex: 2;
   display: flex;
 }
 
@@ -184,18 +184,31 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 
 #FooterContainer {
   flex: 1;
-  height: 39px;
+  height: 54px;
+  background-color: black;
 }
 
 #Scroller {
   height: 4000px;
 }
 
+#Footer.home {
+  display: flex;
+  color: white;
+  justify-content: flex-end;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
 #Footer {
   display: flex;
-  background-color: black;
   color: white;
+  justify-content: flex-end;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: black;
 }
+
 
 #Email {
   flex: 3;
@@ -206,7 +219,7 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 }
 
 .pForFooter {
-  padding: 10px;
+  margin-right: 10px;
 }
 
 .NavLinkActive {

@@ -54,7 +54,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   background-color: papayawhip;
   margin-top: 52px;
   display: flex;
-  flex-direction: column;
 }
 
 #ProjectNav {
@@ -172,9 +171,90 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 
 #CapAndContent {
   display: flex;
+  flex: 1;
 }
 
 #CapAndNav {
   flex: 1;
   margin: 25px;
 }
+
+#AlexaContainer {
+  flex: 1;
+  display: flex;
+  margin-top: 52px;
+}
+
+#Description {
+  flex: 1;
+  padding-top: 125px;
+  padding-left: 200px;
+  padding-right: 35px;
+  padding-bottom: 25px;
+  text-align: right;
+  background-color: papayawhip;
+}
+
+#AlexaPic {
+  flex: 1;
+}
+
+#AlexaImg {
+  height: 100%;
+}
+
+#JnLContainer {
+  flex: 1;
+  display: flex;
+  margin-top: 52px;
+  background-color: papayawhip;
+}
+
+
+#List {
+  margin: 25px;
+  flex: 1;
+}
+
+#PDFStory {
+  flex: 1.5;
+  background-color: white;
+  text-align: center;
+  overflow: auto;
+}
+
+.ReactTable {
+  border: none;
+}
+
+.ReactTable .rt-thead.-header {
+  box-shadow: none;
+}
+
+.ReactTable .rt-tbody .rt-tr-group {
+  border: none;
+}
+
+.ReactTable .rt-tbody .rt-td {
+  border: none;
+}
+
+.ReactTable .rt-thead .rt-th, .ReactTable .rt-thead .rt-td {
+  border: none;
+}
+
+.ReactTable .rt-thead .rt-th, .ReactTable .rt-thead .rt-td {
+  text-align: left;
+}
+
+.my-column-header-group {
+  text-align: left;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.ReactTable .-pagination {
+  box-shadow: none;
+  border-top: 1px solid rgba(0,0,0,0.1)
+}
+

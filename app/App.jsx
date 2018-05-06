@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <div id='AppContainer'>
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' component={Home} home={true}/>
           <Route component={AppRouter} />
         </Switch>
       </div>

@@ -10,6 +10,7 @@ import JandL from './JandL.jsx';
 import Topics from './Topics.jsx';
 import Chapter from './Chapter.jsx';
 import AlexaStories from './AlexaStories.jsx';
+import storyData from './helpers/storyData.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -25,8 +26,8 @@ class App extends Component {
             <Route exact path='/chapter' render={ () =>
               (
                 <Redirect to='/chapter/1' />
-              )
-            } />
+              )}
+            />
             <Route path='/chapter/:num' render={({match}) =>
               {
                 var goHere = match.params.num;
@@ -36,21 +37,34 @@ class App extends Component {
                   )
                 } else {
                   return (
-                    <Redirect to={'/chapter/1'} />
+                    <Route component={NotFound} />
                 )}
               }
             } />
-
             <Route exact path='/project' render={ () =>
               (
                 <Redirect to='/project/arrow/1' component={Projects} />
-              )
-            } />
-
+              )}
+            />
             <Route path='/project/:name/:thumbnail' component={Projects} />
-
-            <Route path='/jnl' component={JandL} />
             <Route path='/alexa' component={AlexaStories} />
+            <Route exact path='/jnl' render={ () =>
+              (
+                <Redirect to='/jnl/forbes/1' component={JandL} />
+              )}
+            />
+            <Route path='/jnl/:publication/:id' render={({match}) =>
+              {
+                var publication = match.params.publication;
+                var id = match.params.id;
+
+                if(storyData[publication][id - 1]) {
+                  return <JandL publication={publication} id={id} />
+                } else {
+                  return <Route component={NotFound} />
+                }}
+              }
+            />
             <Route component={NotFound} />
           </Switch>
         </div>

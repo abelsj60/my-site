@@ -108,6 +108,12 @@ class Home extends Component {
       }
     };
 
+    var setHome = function(home) {
+      if(home) {
+        return 'home';
+      }
+    }
+
     return (
       <div id='HomeContainer'>
         <div id='HomeWrapper'>
@@ -126,8 +132,8 @@ class Home extends Component {
                   <Topics topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
                 </div>
               </div>
-              <div id='FooterContainer'>
-                <Footer topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
+              <div id='FooterContainer' className={setHome(this.props.home)} style={{opacity: this.state.opacity}}>
+                <Footer topicsShown={this.state.topicsShown} />
               </div>
             </div>
           </div>
@@ -141,3 +147,6 @@ class Home extends Component {
 }
 
 export default Home;
+
+// Changed CSS in react-table on -header value
+// box-shadow:0 2px 15px 0 rgba(0,0,0,0.15)

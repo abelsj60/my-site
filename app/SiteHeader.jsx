@@ -3,7 +3,7 @@ import Nav from './Nav.jsx';
 import Logo from './Logo.jsx';
 import { Link, NavLink } from 'react-router-dom';
 
-var headerItems = ['My story', 'Some projects', 'Alexa adventures'];
+var headerItems = ['My story', 'Some projects', 'Journalism & Law', 'Alexa adventures'];
 
 var setPath = function(item) {
   if(item === 'My story') {
@@ -12,7 +12,8 @@ var setPath = function(item) {
     return '/project';
   } else if(item === 'Alexa adventures') {
     return '/alexa';
-  }
+  } else if(item === 'Journalism & Law')
+    return '/jnl';
 };
 
 class SiteHeader extends Component {
