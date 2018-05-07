@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 var projectData = [
   {
@@ -195,8 +195,15 @@ class Projects extends Component {
                 {
                   this.state.projThumbs.map((thumbnail, index) => (
                     thumbnail &&
-                      <Link key={index} to={'/project/' + this.state.projName + '/' + index} className='projectLink' onClick={() => this.updatePicIndex(null, index)}>
-                        <img className='imgThumbs' src={thumbnail} alt={'thumbnail ' + index} />
+                      <Link
+                        key={index}
+                        to={'/project/' + this.state.projName + '/' + index}
+                        className='projectLink'
+                        onClick={() =>
+                          this.updatePicIndex(null, index)}>
+                          <img
+                            className='imgThumbs' src={thumbnail}
+                            alt={'thumbnail ' + index} />
                       </Link>
                     )
                   )

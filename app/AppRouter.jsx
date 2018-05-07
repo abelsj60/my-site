@@ -55,7 +55,7 @@ class App extends Component {
             />
             <Route path='/jnl/:publication/:id' render={({match}) =>
               {
-                var publication = match.params.publication;
+                var publication = match.params.publication.toLowerCase();
                 var id = match.params.id;
 
                 if(storyData[publication][id - 1]) {
