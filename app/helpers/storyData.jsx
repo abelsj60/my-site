@@ -24,7 +24,7 @@ const storyData = {
   'blouin-news': [
     '/test/clips/BN-AHugeTechVsStartupBattleSimmers-JErikAbels.pdf',
     '/test/clips/BN-CanAppleBeOutAppled-JErikAbels.pdf',
-    '/test/clips/BN-CommodityBeckonsNew TVServicesFromComcastAndMicrosoft-JErikAbels.pdf'
+    '/test/clips/BN-CommodityBeckonsNewTVServicesFromComcastAndMicrosoft-JErikAbels.pdf'
   ],
   'slate': [
     '/test/clips/TheBigMoney-AdventuresInStateBailouts-JErikAbels.pdf'

@@ -11,97 +11,97 @@ var tableData =[
   {
     headline: 'Can Apple Be Out-Appled?',
     publication: 'Blouin News',
-    stIndex: '1'
+    stIndex: '2'
   },
   {
     headline: 'On Innovation: The Bone Doctor\'s Knees, The Clean Air Catalyst, and Cracking the College Code',
     publication: 'Seton Hall Magazine',
-    stIndex: '2'
+    stIndex: '3'
   },
   {
     headline: 'Commodity Beckons New TV Services From Comcast, Microsoft...',
     publication: 'Blouin News',
-    stIndex: '2'
+    stIndex: '3'
   },
   {
     headline: 'A Huge Tech Vs. Start-up Battle Simmers',
     publication: 'Blouin News',
-    stIndex: '0'
+    stIndex: '1'
   },
   {
     headline: 'Giving Physics A Good Name',
     publication: 'Seton Hall Magazine',
-    stIndex: '1'
+    stIndex: '2'
   },
   {
     headline: 'Breaking news online',
     publication: 'Seton Hall Magazine',
-    stIndex: '0'
+    stIndex: '1'
   },
   {
     headline: 'Adventures in State Bailouts',
     publication: 'The Big Money (Slate)',
-    stIndex: '0'
+    stIndex: '1'
   },
   {
     headline: 'All Things Considered Digitally',
     publication: 'Forbes',
-    stIndex: '0'
+    stIndex: '1'
   },
   {
     headline: 'Boxee Wants To Kill Your Television',
     publication: 'Forbes',
-    stIndex: '1'
+    stIndex: '2'
   },
   {
     headline: 'Charting an East/West Passage (to "ambicultural"-ism)',
     publication: 'The Darden Report (UVA)',
-    stIndex: '0'
+    stIndex: '1'
   },
   {
     headline: 'Electronic Arts standing firm on USD 26 offer for Take-Two',
     publication: 'FT.com',
-    stIndex: '0'
+    stIndex: '1'
   },
   {
     headline: 'GodTube',
     publication: 'Forbes',
-    stIndex: '3'
+    stIndex: '2'
   },
   {
     headline: 'How To Get Readers To Really Want You',
     publication: 'Forbes',
-    stIndex: '10'
+    stIndex: '11'
   },
   {
     headline: 'Is The Wine Trade Recession-Proof?',
     publication: 'The Darden Report (UVA)',
-    stIndex: '1'
+    stIndex: '2'
   },
   {
     headline: 'Live, From The Internet',
     publication: 'Forbes',
-    stIndex: '4'
+    stIndex: '5'
   },
   {
     headline: 'Owning The News',
     publication: 'Forbes',
-    stIndex: '2'
+    stIndex: '3'
   },
   {
     headline: 'Putting Newspapers On Trial',
     publication: 'Forbes',
-    stIndex: '7'
+    stIndex: '8'
   },
   {
     headline: 'Rupert Murdoch: Big Man On Campus',
     publication: 'Forbes',
-    stIndex: '5'
+    stIndex: '6'
   },
   {
     headline: 'Slowing Fast Company',
     publication: 'Forbes',
-    stIndex: '8'
+    stIndex: '9'
   }
 ];
 
@@ -109,32 +109,15 @@ class JandL extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cPDF: null
+      cPDF: storyData[this.props.publication][this.props.id]
     }
 
-    this.getInitialStory = this.getInitialStory.bind(this);
     this.getUpdatedStory = this.getUpdatedStory.bind(this);
   }
 
-  componentDidMount() {
-    var cStory = this.getInitialStory();
-
-    this.setState(
-      {
-        cPDF: cStory
-      }
-    )
-  }
-
-  getInitialStory() {
-    var publication = this.props.publication.toLowerCase();
-    var storyIndex = this.props.id;
-
-    return storyData[publication][storyIndex - 1];
-  }
-
   getUpdatedStory(event, row) {
-    var index = row.original.stIndex;
+    var index = parseInt(row.original.stIndex) - 1;
+    var routeIndex = row.original.stIndex;
     var publication = row.original.publication
       .replace(/\s/g, '-')
       .replace(/\.com/g, '')
@@ -143,16 +126,13 @@ class JandL extends Component {
       .replace(/\)/g, '')
       .toLowerCase();
 
-    console.log('pub:', publication);
-    console.log('check:', storyData[publication][index]);
-
     this.setState(
       {
         cPDF: storyData[publication][index]
       }
     )
 
-    this.props.history.push(`/jnl/${publication}/${index}`);
+    this.props.history.push(`/jnl/${publication}/${routeIndex}`);
   }
 
   render() {
@@ -192,18 +172,17 @@ class JandL extends Component {
               return {
                 onClick: (e) => {
                   this.getUpdatedStory(e, row);
-                  }
                 }
-              }
+              }}
             }
           />
         </div>
         <div id='PDFStory'>
           {
-            this.state.cPDF &&
             <PDF
               file={this.state.cPDF}
               scale={1.3}
+              key={this.state.cPDF}
             />
           }
         </div>
@@ -214,85 +193,3 @@ class JandL extends Component {
 }
 
 export default withRouter(JandL);
-
-// (e, handleOriginal) => {
-//   console.log("A Td Element was clicked!");
-//   console.log("it produced this event:", e);
-//   console.log("It was in this column:", column);
-//   console.log("It was in this row:", rowInfo);
-//   console.log("It was in this table instance:", instance);
-// }
-
-// getTdProps={(state, rowInfo, column, instance) => {
-//   return {
-//     onClick: () => this.getUpdatedStory(null, rowInfo.row.publication, rowInfo.index)
-//     }
-//   }
-// }
-
-
-// rowInfo.row.publication, rowInfo.index
-
-
-// getTdProps={(state, rowInfo, column, instance) => {
-//   return {
-//     onClick: (e) => {
-//       console.log("A Td Element was clicked!");
-//       console.log("it produced this event:", e);
-//       console.log("It was in this column:", column);
-//       console.log("It was in this row:", rowInfo);
-//       console.log("It was in this table instance:", instance);
-//       }
-//     }
-//   }
-// }
-
-
-// ,
-//         Cell: row => (
-//           <Link
-//             key={row.index}
-//             to={getUpdatedStory(row, row.original.publication, row.original.stIndex, row.original.headline)}
-//             className='projectLink'>{row.original.headline}
-//           </Link>
-//         )
-
- // console.log(publication);
-    // headline = headline
-    //   .replace(/\s/g, '')
-    //   .slice(0,11);
-      // console.log('hed:', headline);
-
-    // console.log('test:', storyData[publication]
-    //   .findIndex(element => {
-    //     console.log('inStoryIdx:', element, headline);
-    //     // console.log('test:', element.includes(headline));
-    //     return element.includes(headline);
-    //   }));
-
-    // var storyIndex = storyData[publication]
-    //   .findIndex(element => {
-    //     return element.includes(headline);
-    //   });
-
-    // console.log('pub:', publication, headline, storyIndex);
-    // console.log('pub:', publication);
-    // console.log('row:', row);
-    // index = parseInt(index) + 1
-    // return '/jnl/' + publication + '/' + index;
-
-                      // console.log("A Td Element was clicked!");
-                  // console.log("It was in this row:", row);
-                  // console.log('it was this pub:', row.original.publication);
-                  // console.log('It was this hed:', row.original.headline);
-                  // console.log('It was this stIndex:', row.original.stIndex);
-
-
-  // getUpdatedStory(event, publication, index) {
-  //   var publication = this.props.publication;
-  //   var storyIndex = this.props.id;
-  //   // this.props.history.push('/jnl/' + publication + '/' + index);
-
-  //   return storyData[publication][storyIndex - 1];
-
-  // }
