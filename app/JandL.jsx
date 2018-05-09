@@ -3,9 +3,7 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import PDF from 'react-pdf-js-infinite';
 import storyData from './helpers/storyData.jsx';
-import Table from 'rc-table';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 
 var tableData =[
   {
@@ -66,7 +64,7 @@ var tableData =[
   {
     headline: 'GodTube',
     publication: 'Forbes',
-    stIndex: '2'
+    stIndex: '4'
   },
   {
     headline: 'How To Get Readers To Really Want You',
@@ -91,7 +89,7 @@ var tableData =[
   {
     headline: 'Putting Newspapers On Trial',
     publication: 'Forbes',
-    stIndex: '8'
+    stIndex: '7'
   },
   {
     headline: 'Rupert Murdoch: Big Man On Campus',
@@ -102,6 +100,16 @@ var tableData =[
     headline: 'Slowing Fast Company',
     publication: 'Forbes',
     stIndex: '9'
+  },
+  {
+    headline: 'The Paperless Town',
+    publication: 'Forbes',
+    stIndex: '8'
+  },
+  {
+    headline: 'Strapped Local Sations Look to Web for Cash',
+    publication: 'Forbes',
+    stIndex: '10'
   }
 ];
 
@@ -109,15 +117,30 @@ class JandL extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cPDF: storyData[this.props.publication][this.props.id]
+      cPDF: storyData[this.props.publication][this.props.id],
+      stIndex: '',
+      pub: ''
     }
 
     this.getUpdatedStory = this.getUpdatedStory.bind(this);
   }
 
+  componentDidMount() {
+    var publicationForState = this.props.publication
+      .replace(/-/g, ' ');
+    var stIndexForState = this.props.id + 1;
+
+      this.setState({
+        stIndex: stIndexForState.toString(),
+        pub: publicationForState
+      })
+  }
+
   getUpdatedStory(event, row) {
     var index = parseInt(row.original.stIndex) - 1;
     var routeIndex = row.original.stIndex;
+
+    // prep publication to access pdf file
     var publication = row.original.publication
       .replace(/\s/g, '-')
       .replace(/\.com/g, '')
@@ -128,11 +151,20 @@ class JandL extends Component {
 
     this.setState(
       {
-        cPDF: storyData[publication][index]
+        cPDF: storyData[publication][index],
+        stIndex: row.original.stIndex,
+
+        // prep for state to set selected row (ln 215)
+        pub: row.original.publication
+          .replace(/\.com/g, '')
+          .replace(/ \(UVA\)/g, '')
+          .replace(/The Big Money \(/g, '')
+          .replace(/\)/g, '')
+          .toLowerCase()
       }
     )
 
-    this.props.history.push(`/jnl/${publication}/${routeIndex}`);
+    this.props.history.push(`/jnl/${publication}/${row.original.stIndex}`);
   }
 
   render() {
@@ -167,11 +199,27 @@ class JandL extends Component {
             showPageSizeOptions={false}
             showPageJump={false}
             sortable={false}
-            className='-highlight'
-            getTdProps={(state, row) => {
+            className={'-highlight'}
+            getTdProps={(state, rowInfo) => {
               return {
-                onClick: (e) => {
-                  this.getUpdatedStory(e, row);
+                onClick: (e, handleOriginal) => {
+                  this.getUpdatedStory(e, rowInfo);
+
+                  if(handleOriginal) {
+                    handleOriginal();
+                  }
+                },
+                style: {
+                  // prep to compare row to row on state
+                  color: rowInfo &&
+                  rowInfo.original.publication
+                    .replace(/-/g, ' ')
+                    .replace(/\.com/g, '')
+                    .replace(/ \(UVA\)/g, '')
+                    .replace(/The Big Money \(/g, '')
+                    .replace(/\)/g, '')
+                    .toLowerCase() === this.state.pub ?
+                      rowInfo.original.stIndex === this.state.stIndex ? 'red' : 'black' : 'black'
                 }
               }}
             }

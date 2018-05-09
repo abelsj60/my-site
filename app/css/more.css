@@ -214,6 +214,8 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 #List {
   margin: 25px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 #PDFStory {
@@ -225,6 +227,7 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 
 .ReactTable {
   border: none;
+  flex: 1;
 }
 
 .ReactTable .rt-thead.-header {
@@ -258,3 +261,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   border-top: 1px solid rgba(0,0,0,0.1)
 }
 
+.rt-td .active {
+  color: red;
+}
