@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SiteHeader from './SiteHeader.jsx';
 import Footer from './Footer.jsx';
 import Topics from './Topics.jsx';
+import { Link } from 'react-router-dom';
 
 var background = '/test/howls-background-dl.jpg';
 var background2 = '/test/dreaming-boy-co-2.png';
@@ -127,15 +128,23 @@ class Home extends Component {
           this.state.topicsShown &&
           <div id='TemporaryContent'>
             <div id='PointerControl' className={setPointerEvents(this.state.topicClicking)}>
-              <div id='ContentContainer'>
-                <div id='TopicsContainer'>
-                  <Topics topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
-                </div>
-              </div>
-              <div id='FooterContainer' className={setHome(this.props.home)} style={{opacity: this.state.opacity}}>
-                <Footer topicsShown={this.state.topicsShown} />
+              <Topics topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
+              <div id='Alexa Link' style={{opacity: this.state.opacity}}>
+                <Link to='/alexa' className='topicLink'>
+                  <div id='TopicContent'>
+                    <div id='Spacer'>
+                    </div>
+                    <h3 className='h3ForChPreview'>
+                      Alexa
+                    </h3>
+                    <p className='pForChPreview'>
+                      Illustrated adventures
+                    </p>
+                  </div>
+                </Link>
               </div>
             </div>
+            <Footer topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
           </div>
         }
         <div id='Scroller'>
@@ -149,4 +158,4 @@ class Home extends Component {
 export default Home;
 
 // Changed CSS in react-table on -header value
-// box-shadow:0 2px 15px 0 rgba(0,0,0,0.15)
+// box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15)

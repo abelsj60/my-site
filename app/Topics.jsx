@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ChPreview from './ChPreview.jsx';
 import { Link } from 'react-router-dom';
 
-var topics = ['One', 'Two', 'Three', 'Four'];
+var topics = ['One', 'Two', 'Three'];
 
 class Topics extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Topics extends Component {
       }
     }
 
-    var setTopicsClass = function(home) {
+    var setHome = function(home) {
       if(!home) {
         return 'notHome';
       } else {
@@ -32,7 +32,7 @@ class Topics extends Component {
     }
 
     return (
-      <div id='Topics' className={setTopicsClass(this.props.topicsShown)} style={{opacity: this.props.opacity}}>
+      <div id='Topics' className={setHome(this.props.topicsShown)} style={{opacity: this.props.opacity}}>
         {
           topics.map((topic, index) =>
             (
