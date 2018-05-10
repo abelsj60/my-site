@@ -128,88 +128,86 @@ class Projects extends Component {
 
     return (
       <div id='ProjectContainer'>
-        <div id='CapAndContent'>
-          <div id='CapAndNav'>
-            <div id='ProjectNav' className='BoxForProject'>
+        <div id='CapAndNav'>
+          <div id='ProjectNav' className='BoxForProject'>
+
+            {
+              projectData.map((project, index) => (
+
+                <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)} className={'linkForNav ' + setActiveItem(project.name, urlName)} >
+                  <p className={'projectLinks ' + setActiveItem(project.name, urlName)}>
+
+                    {
+                      prepName(project.name)
+                    }
+
+                  </p>
+                </Link>
+              ))
+            }
+
+          </div>
+          <div id='Caption'>
+            <p id='pForCaption'><strong>Project </strong></p>
+            <p>
 
               {
-                projectData.map((project, index) => (
-
-                  <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)} className={'linkForNav ' + setActiveItem(project.name, urlName)} >
-                    <p className={'projectLinks ' + setActiveItem(project.name, urlName)}>
-
-                      {
-                        prepName(project.name)
-                      }
-
-                    </p>
-                  </Link>
-                ))
+                prepName(this.state.projName)
               }
 
-            </div>
-            <div id='Caption'>
-              <p id='pForCaption'><strong>Project </strong></p>
-              <p>
-
-                {
-                  prepName(this.state.projName)
-                }
-
-              </p>
-              <p id='pForCaption'><strong>Type </strong></p>
-              <p>
-              Answer
-              </p>
-              <p id='pForCaption'><strong>What I did </strong></p>
-              <p>
-              Answer
-              </p>
-              <p id='pForCaption'><strong>Key technologies </strong></p>
-              <p>
-              Answer
-              </p>
-              <p id='pForCaption'><strong>Description </strong></p>
-              <p>
-              Answer
-              </p>
-              <p id='pForCaption'><strong>What you're looking at</strong></p>
-              <p>
-              Answer
-              </p>
-            </div>
+            </p>
+            <p id='pForCaption'><strong>Type </strong></p>
+            <p>
+            Answer
+            </p>
+            <p id='pForCaption'><strong>What I did </strong></p>
+            <p>
+            Answer
+            </p>
+            <p id='pForCaption'><strong>Key technologies </strong></p>
+            <p>
+            Answer
+            </p>
+            <p id='pForCaption'><strong>Description </strong></p>
+            <p>
+            Answer
+            </p>
+            <p id='pForCaption'><strong>What you're looking at</strong></p>
+            <p>
+            Answer
+            </p>
           </div>
-          <div id='ProjectContent' className='BoxForProject'>
-            <div id='ProjectElements'>
-              <div id='MainPicture' style={{overflow: 'hidden'}}>
-                <img src=
+        </div>
+        <div id='ProjectContent' className='BoxForProject'>
+          <div id='ProjectElements'>
+            <div id='MainPicture' style={{overflow: 'hidden'}}>
+              <img src=
 
-                {
-                  this.state.projImgs[this.state.picIndex - 1]
-                }
+              {
+                this.state.projImgs[this.state.picIndex - 1]
+              }
 
-                alt='mainPic' />
-              </div>
-              <div id='Thumbnails' className='FrameForProject'>
+              alt='mainPic' />
+            </div>
+            <div id='Thumbnails' className='FrameForProject'>
 
-                {
-                  this.state.projThumbs.map((thumbnail, index) => (
-                    thumbnail &&
-                      <Link
-                        key={index}
-                        to={'/project/' + this.state.projName + '/' + index}
-                        className='projectLink'
-                        onClick={() =>
-                          this.updatePicIndex(null, index)}>
-                          <img
-                            className='imgThumbs' src={thumbnail}
-                            alt={'thumbnail ' + index} />
-                      </Link>
-                    )
+              {
+                this.state.projThumbs.map((thumbnail, index) => (
+                  thumbnail &&
+                    <Link
+                      key={index}
+                      to={'/project/' + this.state.projName + '/' + index}
+                      className='projectLink'
+                      onClick={() =>
+                        this.updatePicIndex(null, index)}>
+                        <img
+                          className='imgThumbs' src={thumbnail}
+                          alt={'thumbnail ' + index} />
+                    </Link>
                   )
-                }
+                )
+              }
 
-              </div>
             </div>
           </div>
         </div>

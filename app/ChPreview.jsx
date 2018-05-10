@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-var background = '/test/magician-clean.png';
-var background2 = '/test/beaker-magic-2.png';
-
 // Create, Build, Amaze
 
 class ChPreview extends Component {
@@ -12,12 +9,14 @@ class ChPreview extends Component {
 
   render() {
 
-    var setTopicHead = function(chapter) {
+    var setTopicHed = function(chapter) {
       if(chapter === 'One') {
         return 'Some projects';
-      } else if (chapter === 'Two') {
+      } else if(chapter === 'Two') {
         return 'My story';
-      } else {
+      } else if(chapter === 'Three' ){
+        return 'Journalism & Law';
+      } else if(chapter === 'Four') {
         return 'Alexa adventures';
       }
     };
@@ -27,7 +26,9 @@ class ChPreview extends Component {
         return 'Unconventional software and more';
       } else if(chapter === 'Two') {
         return 'Adventures in storytelling and magic';
-      } else {
+      } else if(chapter === 'Three') {
+        return 'Slick stories, sleek words'
+      } else if(chapter === 'Four') {
         return 'Amazing tales of delight (coming soon)';
       }
     }
@@ -38,7 +39,7 @@ class ChPreview extends Component {
         </div>
         <h3 className='h3ForChPreview'>
           {
-            setTopicHead(this.props.chNumber)
+            setTopicHed(this.props.chNumber)
           }
         </h3>
         <p className='pForChPreview'>

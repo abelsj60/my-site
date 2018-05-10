@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ChPreview from './ChPreview.jsx';
 import { Link } from 'react-router-dom';
 
-var topics = ['One', 'Two', 'Three'];
+var topics = ['One', 'Two', 'Three', 'Four'];
 
 class Topics extends Component {
   constructor(props) {
@@ -15,8 +15,10 @@ class Topics extends Component {
       if(topic === 'One') {
         return '/project';
       } else if(topic === 'Two') {
-        return '/chapter/1';
-      } else {
+        return '/chapter';
+      } else if(topic === 'Three') {
+        return '/jnl'
+      } else if(topic === 'Four') {
         return '/alexa'
       }
     }

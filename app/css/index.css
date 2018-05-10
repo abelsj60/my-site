@@ -7,10 +7,7 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 @import 'more.css';
 
 #Header.transparent {
-  flex: 1;
-  z-index: 2;
-  position: fixed;
-  width: 100%;
+  z-index: 1;
   height: 52px;
   color: white;
   background-color: transparent;
@@ -19,10 +16,7 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 }
 
 #Header.opaque {
-  flex: 1;
-  z-index: 2;
-  position: fixed;
-  width: 100%;
+  z-index: 1;
   height: 52px;
   color: white;
   background-color: dodgerblue;
@@ -77,26 +71,22 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 #HomeWrapper {
   width: 100%;
   position: fixed;
-  z-index: 0;
 }
 
 #PermanentContent {
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 #StaticImage {
-  position: relative;
-  z-index: 1;
-  height: 100%;
+  position: fixed;
+  width: 100%;
 }
 
 #ScalingImage {
   position: absolute;
   width: 100%;
-  margin: auto;
-  top: 0;
   right: 0;
-  z-index: 1;
 }
 
 #TemporaryContent {

@@ -19,7 +19,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 #ChapterContainer {
   flex: 1;
   display: flex;
-  margin-top: 52px;
 }
 
 #Story {
@@ -52,7 +51,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 #ProjectContainer {
   flex: 1;
   background-color: papayawhip;
-  margin-top: 52px;
   display: flex;
 }
 
@@ -169,11 +167,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   flex: 1;
 }
 
-#CapAndContent {
-  display: flex;
-  flex: 1;
-}
-
 #CapAndNav {
   flex: 1;
   margin: 25px;
@@ -182,7 +175,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 #AlexaContainer {
   flex: 1;
   display: flex;
-  margin-top: 52px;
 }
 
 #Description {
@@ -206,7 +198,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 #JnLContainer {
   flex: 1;
   display: flex;
-  margin-top: 52px;
   background-color: papayawhip;
 }
 
