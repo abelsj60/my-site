@@ -5,6 +5,18 @@ import chText from './helpers/siteText.js';
 var chapters = [1,2,3,4];
 var route = '/chapter/';
 
+var pickContent = function(num) {
+  if(num === '1') {
+    return chText['1'];
+  } else if(num === '2') {
+    return chText['2'];
+  } else if(num === '3') {
+    return chText['3'];
+  } else {
+    return chText['4'];
+  }
+}
+
 class Chapter extends Component {
   constructor(props) {
     super(props)
@@ -12,18 +24,7 @@ class Chapter extends Component {
 
   render() {
     var urlNum = this.props.urlNum;
-
-    var pickContent = function(number, chText) {
-      if(number === '1') {
-        return chText['1'];
-      } else if(number === '2') {
-        return chText['2'];
-      } else if(number === '3') {
-        return chText['3'];
-      } else {
-        return chText['4'];
-      }
-    }
+    var chapter = pickContent(urlNum);
 
     return (
       <div id='ChapterContainer'>
@@ -33,12 +34,11 @@ class Chapter extends Component {
             chapters.map((chNum, index) =>
               (
                 <ItemNav key={chNum} item={chNum} param={urlNum} route={route} />
-              )
-            )
+              ))
           }
           </div>
-          <h1 id='h1ForChapter'>{pickContent(urlNum, chText).title}</h1>
-          <p id='pForChapter'>{pickContent(urlNum, chText).text}</p>
+            <h1 id='h1ForChapter'>{chapter.title}</h1>
+            <p id='pForChapter'>{chapter.text}</p>
         </div>
         <div id='Picture'>
         </div>

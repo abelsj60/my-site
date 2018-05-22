@@ -30,10 +30,10 @@ class App extends Component {
             />
             <Route path='/chapter/:num' render={({match}) =>
               {
-                var goHere = match.params.num;
-                if(goHere <= 4) {
+                var chNum = match.params.num;
+                if(chNum <= 4) {
                   return (
-                    <Chapter urlNum={goHere} />
+                    <Chapter urlNum={chNum} />
                   )
                 } else {
                   return (

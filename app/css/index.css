@@ -7,7 +7,7 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 @import 'more.css';
 
 #Header.transparent {
-  z-index: 1;
+  z-index: 2;
   height: 52px;
   color: white;
   background-color: transparent;
@@ -16,10 +16,10 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 }
 
 #Header.opaque {
-  z-index: 1;
+  z-index: 2;
   height: 52px;
-  color: white;
-  background-color: dodgerblue;
+  color: black;
+  background-color: white;
   transition: background-color .7s, color .7s;
   display: flex;
 }
@@ -53,6 +53,26 @@ CSS For Home, Header, Topics, ChPreview, & Footer
   color: red;
 }
 
+.link.header.transparent {
+  color: white;
+  transition: color .7s;
+}
+
+.link.header.opaque {
+  color: black;
+  transition: color .7s;
+}
+
+.link.header:hover {
+  color: dodgerblue;
+  transition: color 0s;
+}
+
+.link.header.active {
+  color: black;
+  text-decoration: underline;
+}
+
 #NameAndLink {
   flex: 1;
 }
@@ -68,6 +88,11 @@ CSS For Home, Header, Topics, ChPreview, & Footer
   text-align: left;
 }
 
+#HomeContainer {
+  /* overflow: auto; */
+  background: url('/test/howls-background-dl.jpg') no-repeat fixed center top;
+}
+
 #HomeWrapper {
   width: 100%;
   position: fixed;
@@ -76,17 +101,23 @@ CSS For Home, Header, Topics, ChPreview, & Footer
 #PermanentContent {
   display: flex;
   flex-direction: column;
+  /* overflow: hidden; */
 }
 
 #StaticImage {
-  position: fixed;
-  width: 100%;
+  /* position: fixed; */
+  /* width: 100%; */
+  object-fit: cover;
+  /* object-position: center; */
+  /* height: auto; */
 }
 
 #ScalingImage {
-  position: absolute;
+  /* position: fixed; */
   width: 100%;
-  right: 0;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
 }
 
 #TemporaryContent {
@@ -123,16 +154,9 @@ CSS For Home, Header, Topics, ChPreview, & Footer
   display: flex;
 }
 
-#Topics.home {
+#Topics {
   flex: 1;
   display: flex;
-}
-
-#Topics.notHome {
-  flex: 1;
-  display: flex;
-  width: 100%;
-  z-index: 1;
 }
 
 #TopicContent {

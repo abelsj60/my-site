@@ -133,14 +133,11 @@ class Projects extends Component {
 
             {
               projectData.map((project, index) => (
-
                 <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)} className={'linkForNav ' + setActiveItem(project.name, urlName)} >
                   <p className={'projectLinks ' + setActiveItem(project.name, urlName)}>
-
                     {
                       prepName(project.name)
                     }
-
                   </p>
                 </Link>
               ))

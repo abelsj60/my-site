@@ -3,6 +3,7 @@ import SiteHeader from './SiteHeader.jsx';
 import Footer from './Footer.jsx';
 import Topics from './Topics.jsx';
 import { Link } from 'react-router-dom';
+import ChPreview from './ChPreview.jsx';
 
 var background = '/test/howls-background-dl.jpg';
 var background2 = '/test/dreaming-boy-co-2.png';
@@ -66,8 +67,6 @@ class Home extends Component {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop <= 2300) {
-      if(scrollTop === 2300) {
-      }
       this.setState({ topicsShown: false });
     } else if (scrollTop > 2300) {
       this.setState({ topicsShown: true });
@@ -120,7 +119,10 @@ class Home extends Component {
         <div id='HomeWrapper'>
           <div id='PermanentContent'>
             <SiteHeader hTransparency={this.state.hTransparency} />
-            <img id='StaticImage' src={background} alt='b' />
+           {
+            /* Shifted this image to a div background. I t looks less clean to me, but is easier to style:
+            <img id='StaticImage' src={background} alt='b' className='responsive' /> */
+            }
             <img id='ScalingImage' style={setScale(this.state.iScale)} src={background2} alt='b2' />
           </div>
         </div>
@@ -131,16 +133,7 @@ class Home extends Component {
               <Topics topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
               <div id='Alexa Link' style={{opacity: this.state.opacity}}>
                 <Link to='/alexa' className='topicLink'>
-                  <div id='TopicContent'>
-                    <div id='Spacer'>
-                    </div>
-                    <h3 className='h3ForChPreview'>
-                      Alexa
-                    </h3>
-                    <p className='pForChPreview'>
-                      Illustrated adventures
-                    </p>
-                  </div>
+                  <ChPreview chNumber='Four' />
                 </Link>
               </div>
             </div>
@@ -157,5 +150,6 @@ class Home extends Component {
 
 export default Home;
 
+// Note:
 // Changed CSS in react-table on -header value
 // box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15)

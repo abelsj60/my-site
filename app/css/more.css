@@ -180,19 +180,15 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 #Description {
   flex: 1;
   padding-top: 125px;
-  padding-left: 200px;
-  padding-right: 35px;
+  padding-left: 50px;
+  padding-right: 175px;
   padding-bottom: 25px;
-  text-align: right;
+  text-align: left;
   background-color: papayawhip;
 }
 
 #AlexaPic {
-  flex: 1;
-}
-
-#AlexaImg {
-  height: 100%;
+  display: flex;
 }
 
 #JnLContainer {
@@ -252,6 +248,6 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   border-top: 1px solid rgba(0,0,0,0.1)
 }
 
-.rt-td .active {
-  color: red;
-}
+/* .rt-td .active {
+  color: dodgerblue;
+} */

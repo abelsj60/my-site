@@ -9,44 +9,38 @@ class ChPreview extends Component {
 
   render() {
 
-    var setTopicHed = function(chapter) {
-      if(chapter === 'One') {
-        return 'Some projects';
-      } else if(chapter === 'Two') {
-        return 'My story';
-      } else if(chapter === 'Three' ){
-        return 'Journalism & Law';
-      } else if(chapter === 'Four') {
-        return 'Alexa adventures';
-      }
+    var chapterData = {
+      'One':
+        {
+          hed: 'Some projects',
+          blurb: 'Unconventional software and more'
+        },
+      'Two':
+        {
+          hed: 'My story',
+          blurb: 'Adventures in storytelling and magic'
+        },
+      'Three':
+        {
+          hed: 'Journalism & Law',
+          blurb: 'Slick stories, sleek words'
+        },
+      'Four':
+        {
+          hed: 'Alexa adventures',
+          blurb: 'Amazing tales of delight (coming soon)'
+        }
     };
 
-    var setTopicBlurb = function(chapter) {
-      if(chapter === 'One') {
-        return 'Unconventional software and more';
-      } else if(chapter === 'Two') {
-        return 'Adventures in storytelling and magic';
-      } else if(chapter === 'Three') {
-        return 'Slick stories, sleek words'
-      } else if(chapter === 'Four') {
-        return 'Amazing tales of delight (coming soon)';
-      }
-    }
+    var chapter = chapterData[this.props.chNumber];
+    var chapterHed = chapter.hed;
+    var chapterBlurb = chapter.blurb;
 
     return (
       <div id='TopicContent'>
-        <div id='Spacer'>
-        </div>
-        <h3 className='h3ForChPreview'>
-          {
-            setTopicHed(this.props.chNumber)
-          }
-        </h3>
-        <p className='pForChPreview'>
-          {
-            setTopicBlurb(this.props.chNumber)
-          }
-        </p>
+        <div id='Spacer'></div>
+        <h3 className='h3ForChPreview'>{chapterHed}</h3>
+        <p className='pForChPreview'>{chapterBlurb}</p>
       </div>
     )
   }

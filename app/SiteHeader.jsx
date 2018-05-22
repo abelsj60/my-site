@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import Nav from './Nav.jsx';
 import Logo from './Logo.jsx';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 
-var headerItems = ['My story', 'Some projects', 'Journalism & Law', 'Alexa adventures'];
+var siteSections = ['My story', 'Some projects', 'Journalism & Law', 'Alexa adventures'];
 
-var setPath = function(item) {
-  if(item === 'My story') {
-    return '/chapter';
-  } else if(item === 'Some projects') {
-    return '/project';
-  } else if(item === 'Alexa adventures') {
-    return '/alexa';
-  } else if(item === 'Journalism & Law')
-    return '/jnl';
+var controlHeader = function(nextPath, currentPath) {
+  if(nextPath === 'My story') {
+    return ['/chapter', setActivePath('/chapter', currentPath)];
+  } else if(nextPath === 'Some projects') {
+    return ['/project', setActivePath('/project', currentPath)];
+  } else if(nextPath === 'Alexa adventures') {
+    return ['/alexa', setActivePath('/alexa', currentPath)];
+  } else if(nextPath === 'Journalism & Law')
+    return ['/jnl', setActivePath('/jnl', currentPath)];
 };
+
+var setActivePath = function(nextPath, currentPath) {
+  return currentPath.includes(nextPath) ? 'active' : 'inactive'
+}
 
 class SiteHeader extends Component {
   constructor(props) {
@@ -22,6 +26,7 @@ class SiteHeader extends Component {
   }
 
   render() {
+    var urlParam = this.props.location.pathname;
 
     var setHeaderClass = function(transparency) {
       if(transparency) {
@@ -35,7 +40,7 @@ class SiteHeader extends Component {
       <div id='Header' className={setHeaderClass(this.props.hTransparency)}>
         <div id='LeftContainer'>
           <div id='Name'>
-            <Logo />
+          <Logo hTransparency={this.props.hTransparency} setHeaderClass={setHeaderClass} />
           </div>
           <div id='Motto'>
             <Nav />
@@ -44,9 +49,9 @@ class SiteHeader extends Component {
         <div id= 'RightContainer'>
 
           {
-            headerItems.map(item => (
+            siteSections.map(item => (
               <div key={item} id={item}>
-                <NavLink className='link' activeClassName='NavLinkActive' to={setPath(item)}>{item}</NavLink>
+                <Link className={'link header ' + setHeaderClass(this.props.hTransparency) + ' ' + controlHeader(item, urlParam)[1]} to={controlHeader(item, urlParam)[0]}>{item}</Link>
               </div>
             ))
           }
@@ -58,4 +63,4 @@ class SiteHeader extends Component {
 
 }
 
-export default SiteHeader;
+export default withRouter(SiteHeader);

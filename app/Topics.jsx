@@ -11,32 +11,19 @@ class Topics extends Component {
 
   render() {
 
-    var setSection = function(topic) {
-      if(topic === 'One') {
-        return '/project';
-      } else if(topic === 'Two') {
-        return '/chapter';
-      } else if(topic === 'Three') {
-        return '/jnl'
-      } else if(topic === 'Four') {
-        return '/alexa'
-      }
-    }
-
-    var setHome = function(home) {
-      if(!home) {
-        return 'notHome';
-      } else {
-        return 'home';
-      }
-    }
+    var nextPath = {
+      'One': '/project',
+      'Two': '/chapter',
+      'Three': '/jnl',
+      'Four': '/alexa'
+    };
 
     return (
-      <div id='Topics' className={setHome(this.props.topicsShown)} style={{opacity: this.props.opacity}}>
+      <div id='Topics' style={{opacity: this.props.opacity}}>
         {
           topics.map((topic, index) =>
             (
-              <Link to={setSection(topic)} key={index} className='topicLink'>
+              <Link to={nextPath[topic]} key={index} className='topicLink'>
                 <ChPreview chNumber={topic} />
               </Link>
             )

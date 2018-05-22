@@ -9,7 +9,7 @@ class Logo extends Component {
   render() {
     return (
       <div id='NameAndLink'>
-        <Link className='link' to={'/'}><p className='pForHeader'><strong>JAMES ABELS</strong></p></Link>
+        <Link className={'link header ' + this.props.setHeaderClass(this.props.hTransparency)} to={'/'}><p className='pForHeader'><strong>JAMES ABELS</strong></p></Link>
       </div>
     )
   }
