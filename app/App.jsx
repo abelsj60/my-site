@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 // import { Header } from 'semantic-ui-react';
-import SiteHeader from './SiteHeader.jsx';
 import Home from './Home.jsx';
 import AppRouter from './AppRouter.jsx';
 import Footer from './Footer.jsx';
@@ -15,12 +14,12 @@ class App extends Component {
 
   render() {
     return (
-      <div id='AppContainer'>
+      <section className='appContainer'>
         <Switch>
-          <Route exact path='/' component={Home} home={true}/>
+          <Route exact path='/' component={Home}/>
           <Route component={AppRouter} />
         </Switch>
-      </div>
+      </section>
     )
   }
 

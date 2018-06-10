@@ -1,127 +1,60 @@
-/*
+/* INTERNAL PAGE CSS */
 
-CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
+/* Page containers */
 
-*/
-
-#PageContainer {
+.page {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-#RouterContainer {
+.router {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-#ChapterContainer {
-  flex: 1;
-  display: flex;
-}
-
-#Story {
+.left {
   flex: 1;
   background-color: silver;
 }
 
-#h1ForChapter {
-  margin-top: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
-}
-
-#pForChapter {
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 25px;
-  white-space: pre-wrap;
-}
-
-#pForCaption {
-  white-space: pre-wrap;
-}
-
-#Picture {
+.right {
   flex: 2;
-  background-color: papayawhip;
-}
-
-#ProjectContainer {
-  flex: 1;
-  background-color: papayawhip;
-  display: flex;
-}
-
-#ProjectNav {
-  flex: 1;
-  display: flex;
-  margin-bottom: 15px;
-  height: 40px;
-}
-
-#ProjectContent {
-  flex: 1;
   display: flex;
   margin: 25px;
+  flex-direction: column;
 }
 
-#MainPicture {
-  margin-bottom: 15px;
+/* Presentation elements, generic */
+
+.internal-page {
   flex: 1;
-}
-
-#Alexa {
-  flex: 1;
-  background-color: papayawhip;
-  margin-top: 52px;
-}
-
-#h1ForAlexa {
-  padding: 26px;
-}
-
-#JnL {
-  flex: 1;
-  background-color: papayawhip;
-  margin-top: 52px;
-}
-
-#h1ForJnL {
-  padding: 25px;
-}
-
-#NotFound {
-  flex: 1;
-  background-color: papayawhip;
-  margin-top: 52px;
-}
-
-#h1ForNotFound {
-  padding: 25px;
-}
-
-#chNavContainer {
   display: flex;
-  flex: 1;
+  background-color: papayawhip;
 }
 
-#ChapterNavItems {
+.internal-page h1, p {
+  margin-left: 25px;
+  margin-right: 25px;
+  white-space: pre-wrap;
+}
+
+.internal-page nav {
   display: flex;
   margin-top: 25px;
   margin-left: 25px;
   margin-right: 25px;
+  margin-bottom: 15px;
   height: 40px;
 }
 
-.pForChapterNav {
-  white-space: pre-wrap;
+.internal-page a p {
   text-align: center;
   flex: 1;
 }
 
-.linkForNav.active {
+.internal-page a.active {
   flex: 1;
   background-color: red;
   color: white;
@@ -129,92 +62,58 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   align-items: center;
 }
 
-.linkForNav.inactive {
+.internal-page a.inactive {
   flex: 1;
   color: black;
   border: .5px solid red;
   display: flex;
+  background-color: silver;
   align-items: center;
 }
 
-
-.linkForNav.inactive:hover {
+.internal-page a.inactive:hover {
   background-color: red;
   color: white;
 }
 
-.projectLinks.active {
-  text-align: center;
-  flex: 1;
+.stories h1 {
+  margin: 25px;
 }
 
-.projectLinks.inactive {
-  text-align: center;
-  flex: 1;
+/* Presentation elements, specific */
+
+.project-description {
+  font-weight: bold;
 }
 
-.imgThumbs {
+.project-image {
+  overflow: auto;
+  margin-bottom: 15px;
+}
+
+.project-image img {
+  width: 100%
+}
+
+.thumbnail {
   height: 75px;
   margin-right: 10px;
 }
 
-#ProjectElements {
-  display: flex;
-  flex-direction: column;
-}
-
-#Caption {
-  flex: 1;
-}
-
-#CapAndNav {
-  flex: 1;
-  margin: 25px;
-}
-
-#AlexaContainer {
-  flex: 1;
-  display: flex;
-}
-
-#Description {
-  flex: 1;
-  padding-top: 125px;
-  padding-left: 50px;
-  padding-right: 175px;
-  padding-bottom: 25px;
-  text-align: left;
-  background-color: papayawhip;
-}
-
-#AlexaPic {
-  display: flex;
-}
-
-#JnLContainer {
-  flex: 1;
-  display: flex;
-  background-color: papayawhip;
-}
-
-
-#List {
-  margin: 25px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-#PDFStory {
-  flex: 1.5;
-  background-color: white;
-  text-align: center;
+.pdf {
   overflow: auto;
 }
+
+.notFound {
+  margin-top: 25px;
+}
+
+/* React table */
 
 .ReactTable {
   border: none;
   flex: 1;
+  margin: 25px;
 }
 
 .ReactTable .rt-thead.-header {
@@ -251,3 +150,36 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 /* .rt-td .active {
   color: dodgerblue;
 } */
+
+
+
+/* Other / Alexa */
+
+#AlexaContainer {
+  flex: 1;
+  display: flex;
+}
+
+#Description {
+  flex: 1;
+  padding-top: 125px;
+  padding-left: 50px;
+  padding-right: 175px;
+  padding-bottom: 25px;
+  text-align: left;
+  background-color: papayawhip;
+}
+
+#AlexaPic {
+  display: flex;
+}
+
+#h1ForAlexa {
+  padding: 26px;
+}
+
+#Alexa {
+  flex: 1;
+  background-color: papayawhip;
+  margin-top: 52px;
+}

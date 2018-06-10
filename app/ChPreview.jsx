@@ -37,11 +37,11 @@ class ChPreview extends Component {
     var chapterBlurb = chapter.blurb;
 
     return (
-      <div id='TopicContent'>
+      <section>
         <div id='Spacer'></div>
-        <h3 className='h3ForChPreview'>{chapterHed}</h3>
-        <p className='pForChPreview'>{chapterBlurb}</p>
-      </div>
+        <h3>{chapterHed}</h3>
+        <p>{chapterBlurb}</p>
+      </section>
     )
   }
 

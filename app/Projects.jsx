@@ -127,14 +127,13 @@ class Projects extends Component {
     }
 
     return (
-      <div id='ProjectContainer'>
-        <div id='CapAndNav'>
-          <div id='ProjectNav' className='BoxForProject'>
-
+      <main className='projects internal-page'>
+        <section className='left projects'>
+          <nav>
             {
               projectData.map((project, index) => (
-                <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)} className={'linkForNav ' + setActiveItem(project.name, urlName)} >
-                  <p className={'projectLinks ' + setActiveItem(project.name, urlName)}>
+                <Link key={index} to={'/project/' + project.name + '/1'} onClick={() => this.updateState(null, project)} className={setActiveItem(project.name, urlName)} >
+                  <p>
                     {
                       prepName(project.name)
                     }
@@ -142,73 +141,49 @@ class Projects extends Component {
                 </Link>
               ))
             }
-
-          </div>
-          <div id='Caption'>
-            <p id='pForCaption'><strong>Project </strong></p>
-            <p>
-
-              {
-                prepName(this.state.projName)
-              }
-
-            </p>
-            <p id='pForCaption'><strong>Type </strong></p>
-            <p>
-            Answer
-            </p>
-            <p id='pForCaption'><strong>What I did </strong></p>
-            <p>
-            Answer
-            </p>
-            <p id='pForCaption'><strong>Key technologies </strong></p>
-            <p>
-            Answer
-            </p>
-            <p id='pForCaption'><strong>Description </strong></p>
-            <p>
-            Answer
-            </p>
-            <p id='pForCaption'><strong>What you're looking at</strong></p>
-            <p>
-            Answer
-            </p>
-          </div>
-        </div>
-        <div id='ProjectContent' className='BoxForProject'>
-          <div id='ProjectElements'>
-            <div id='MainPicture' style={{overflow: 'hidden'}}>
+          </nav>
+          <section className='project-text'>
+            <p className='project-description'>Project</p>
+            <p>{prepName(this.state.projName)}</p>
+            <p className='project-description'>Type</p>
+            <p>Answer</p>
+            <p className='project-description'>What I did</p>
+            <p>Answer</p>
+            <p className='project-description'>Key technologies</p>
+            <p>Answer</p>
+            <p className='project-description'>Description</p>
+            <p>Answer</p>
+            <p className='project-description'>What you're looking at</p>
+            <p>Answer</p>
+          </section>
+        </section>
+        <section className='right images'>
+            <section className='project-image'>
               <img src=
-
               {
                 this.state.projImgs[this.state.picIndex - 1]
               }
-
               alt='mainPic' />
-            </div>
-            <div id='Thumbnails' className='FrameForProject'>
-
+            </section>
+            <section className='project-thumbnails'>
               {
                 this.state.projThumbs.map((thumbnail, index) => (
                   thumbnail &&
                     <Link
                       key={index}
                       to={'/project/' + this.state.projName + '/' + index}
-                      className='projectLink'
                       onClick={() =>
                         this.updatePicIndex(null, index)}>
                         <img
-                          className='imgThumbs' src={thumbnail}
+                          className='thumbnail' src={thumbnail}
                           alt={'thumbnail ' + index} />
                     </Link>
                   )
                 )
               }
-
-            </div>
-          </div>
-        </div>
-      </div>
+            </section>
+          </section>
+      </main>
     )
   }
 }

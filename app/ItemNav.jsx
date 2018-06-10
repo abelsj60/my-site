@@ -21,8 +21,8 @@ class ItemNav extends Component {
     }
 
     return (
-        <Link className={'linkForNav ' + setActiveItem(this.props.item, this.props.param)} to={this.props.route + this.props.item}>
-          <p className='pForChapterNav'>{this.props.item}</p>
+        <Link className={setActiveItem(this.props.item, this.props.param)} to={this.props.route + this.props.item}>
+          <p>{this.props.item}</p>
         </Link>
     )
   }

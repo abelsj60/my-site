@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SiteHeader from './SiteHeader.jsx';
+import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Topics from './Topics.jsx';
 import { Link } from 'react-router-dom';
@@ -14,9 +14,9 @@ class Home extends Component {
     this.state = {
       iScale: 6,
       opacity: 0,
-      hTransparency: true,
-      topicsShown: false,
-      topicClicking: false
+      isTransparent: true,
+      showTopics: false,
+      allowClicks: false
     };
 
     this.scaleImage = this.scaleImage.bind(this);
@@ -55,9 +55,9 @@ class Home extends Component {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop >= 7) {
-      this.setState({ hTransparency: false });
+      this.setState({ isTransparent: false });
     } else {
-      this.setState({ hTransparency: true });
+      this.setState({ isTransparent: true });
     }
 
   }
@@ -67,9 +67,9 @@ class Home extends Component {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop <= 2300) {
-      this.setState({ topicsShown: false });
+      this.setState({ showTopics: false });
     } else if (scrollTop > 2300) {
-      this.setState({ topicsShown: true });
+      this.setState({ showTopics: true });
     }
   }
 
@@ -88,61 +88,44 @@ class Home extends Component {
     var scrollTop = window.pageYOffset;
 
     if(scrollTop < 3220) {
-      this.setState( {topicClicking: false} );
+      this.setState( {allowClicks: false} );
     } else {
-      this.setState( {topicClicking: true} )
+      this.setState( {allowClicks: true} )
     }
   }
 
   render() {
 
+    var state = this.state;
+
     var setScale = function(scale) {
       return { transform: 'scale(' + scale + ',' + scale + ')' }
     };
 
-    var setPointerEvents = function(topic) {
-      if(!topic) {
+    var setPointer = function(boolean) {
+      if(!boolean) {
         return 'block';
       } else {
         return 'allow';
       }
     };
 
-    var setHome = function(home) {
-      if(home) {
-        return 'home';
-      }
-    }
-
     return (
-      <div id='HomeContainer'>
-        <div id='HomeWrapper'>
-          <div id='PermanentContent'>
-            <SiteHeader hTransparency={this.state.hTransparency} />
-           {
-            /* Shifted this image to a div background. I t looks less clean to me, but is easier to style:
-            <img id='StaticImage' src={background} alt='b' className='responsive' /> */
-            }
-            <img id='ScalingImage' style={setScale(this.state.iScale)} src={background2} alt='b2' />
-          </div>
-        </div>
+      <main className='homeContainer'>
+        <section className='homeWrapper'>
+          <Header isTransparent={state.isTransparent} />
+          <img className='scroll-image' style={setScale(state.iScale)} src={background2} alt='b2' />
+        </section>
         {
-          this.state.topicsShown &&
-          <div id='TemporaryContent'>
-            <div id='PointerControl' className={setPointerEvents(this.state.topicClicking)}>
-              <Topics topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
-              <div id='Alexa Link' style={{opacity: this.state.opacity}}>
-                <Link to='/alexa' className='topicLink'>
-                  <ChPreview chNumber='Four' />
-                </Link>
-              </div>
-            </div>
-            <Footer topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
-          </div>
+          this.state.showTopics &&
+          <section className={'temp-content '+ setPointer(state.allowClicks)}>
+            <Topics opacity={state.opacity} />
+            <Footer opacity={state.opacity} />
+          </section>
         }
-        <div id='Scroller'>
-        </div>
-      </div>
+        <section className='scroller'>
+        </section>
+      </main>
     )
   }
 
@@ -153,3 +136,10 @@ export default Home;
 // Note:
 // Changed CSS in react-table on -header value
 // box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15)
+
+// Old:
+
+// {
+//   /* Shifted this image to a div background. It looks less clean to me, but is easier to style:
+//   <img id='StaticImage' src={background} alt='b' className='responsive' /> */
+// }

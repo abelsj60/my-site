@@ -58,6 +58,8 @@ class JandL extends Component {
       }
     )
 
+    // ~ja History works, but there is no reload?
+
     this.props.history.push(`/jnl/${publication}/${row.original.stIndex}`);
   }
 
@@ -78,13 +80,11 @@ class JandL extends Component {
     ];
 
     return (
-      <div id='JnLContainer'>
-        <div id='List'>
+      <main className='jnl internal-page'>
+        <section className='left stories'>
           <h1>The Story</h1>
-          <div>
           <p>I was writing about digital media and technology for Forbes three years after I came to New York to be a professional writer. Here's some of my work.</p>
           <p></p>
-          </div>
           <ReactTable
             data={tableData}
             columns={columns}
@@ -98,7 +98,6 @@ class JandL extends Component {
               return {
                 onClick: (e, handleOriginal) => {
                   this.getUpdatedStory(e, rowInfo);
-
                   if(handleOriginal) {
                     handleOriginal();
                   }
@@ -118,17 +117,17 @@ class JandL extends Component {
               }}
             }
           />
-        </div>
-        <div id='PDFStory'>
+        </section>
+        <section className='right pdf'>
           {
             <PDF
               file={this.state.cPDF}
-              scale={1.3}
+              scale={1.5}
               key={this.state.cPDF}
             />
           }
-        </div>
-      </div>
+        </section>
+      </main>
     )
   }
 

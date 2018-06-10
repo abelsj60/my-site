@@ -27,22 +27,22 @@ class Chapter extends Component {
     var chapter = pickContent(urlNum);
 
     return (
-      <div id='ChapterContainer'>
-        <div id='Story'>
-          <div id='ChapterNavItems'>
+      <main className='chapter internal-page'>
+        <section className='left chapter'>
+          <nav>
           {
             chapters.map((chNum, index) =>
               (
                 <ItemNav key={chNum} item={chNum} param={urlNum} route={route} />
               ))
           }
-          </div>
-            <h1 id='h1ForChapter'>{chapter.title}</h1>
-            <p id='pForChapter'>{chapter.text}</p>
-        </div>
-        <div id='Picture'>
-        </div>
-      </div>
+          </nav>
+          <h1>{chapter.title}</h1>
+          <p className='chapter-text'>{chapter.text}</p>
+        </section>
+        <section className='right illustration'>
+        </section>
+      </main>
     )
   }
 
