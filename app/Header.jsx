@@ -7,49 +7,53 @@ const navLinks = [
   'Journalism & Law' /*,
   'Alexa adventures' */
 ];
-const setPath = function(linkText) {
-  const nextPath =
+
+function idLinkPath(linkText) {
+  const linkPath =
     linkText === 'My projects'
       ? '/projects'
       : linkText === 'My story' ? '/chapter' : '/jnl';
-  return nextPath;
-};
-const setActiveLink = function(currentPath, linkText) {
-  const nextPath = setPath(linkText);
-  return currentPath.includes(nextPath) ? 'active' : 'inactive';
-};
+  return linkPath;
+}
+
+function setActiveLink(currentPath, linkText) {
+  const linkPath = idLinkPath(linkText);
+  return currentPath.includes(linkPath) ? 'active' : 'inactive';
+}
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      headerMenuIsOpen: false
+      openHeaderMenu: false
     };
 
     this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ headerMenuIsOpen: false });
+    this.setState({ openHeaderMenu: false });
   }
 
   toggleHeaderMenu() {
-    this.setState({ headerMenuIsOpen: !this.state.headerMenuIsOpen });
+    this.setState({ openHeaderMenu: !this.state.openHeaderMenu });
   }
 
   render() {
     const currentPath = this.props.location.pathname;
-    const makeHeaderOpaque = function(transparency) {
+
+    function makeHeaderOpaque(transparency) {
       return !transparency ? ' opaque' : '';
-    };
-    const setHeaderMenuToOpen = function(headerMenuState) {
+    }
+
+    function setHeaderMenuToOpen(headerMenuState) {
       return headerMenuState ? ' header-menu-open' : '';
-    };
+    }
 
     return (
       <header className={makeHeaderOpaque(this.props.isTransparent)}>
-        <section className={setHeaderMenuToOpen(this.state.headerMenuIsOpen)}>
+        <section className={setHeaderMenuToOpen(this.state.openHeaderMenu)}>
           <Link className={makeHeaderOpaque(this.props.isTransparent)} to={'/'}>
             <strong>JAMES ABELS</strong>
           </Link>
@@ -59,12 +63,12 @@ class Header extends Component {
         </section>
         <div
           className={
-            'nav-icon' + setHeaderMenuToOpen(this.state.headerMenuIsOpen)
+            'nav-icon' + setHeaderMenuToOpen(this.state.openHeaderMenu)
           }
           onClick={() => this.toggleHeaderMenu()}
         />
         {
-          <nav className={setHeaderMenuToOpen(this.state.headerMenuIsOpen)}>
+          <nav className={setHeaderMenuToOpen(this.state.openHeaderMenu)}>
             {navLinks.map((linkText, index) => (
               <Link
                 key={index}
@@ -72,7 +76,7 @@ class Header extends Component {
                   setActiveLink(currentPath, linkText) +
                   makeHeaderOpaque(this.props.isTransparent)
                 }
-                to={setPath(linkText)}
+                to={idLinkPath(linkText)}
               >
                 {linkText}
               </Link>
