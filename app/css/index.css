@@ -1,11 +1,8 @@
-@import 'more.css';
-
 /* HOME PAGE CSS */
 
 /* Page containers */
 
 .homeContainer {
-  /* overflow: auto; */
   background: url('/test/howls-background-dl.jpg') no-repeat fixed center top;
 }
 
@@ -26,15 +23,23 @@ header {
   height: 52px;
   color: white;
   background-color: transparent;
-  transition: background-color .7s, color .7s;
+  transition: background-color 0.7s, color 0.7s;
   display: flex;
-  padding-top: 16px;
   position: relative;
+  align-items: center;
 }
 
 header.opaque {
   color: black;
   background-color: white;
+}
+
+header section {
+  flex: 1;
+}
+
+header p {
+  display: inline;
 }
 
 header nav {
@@ -43,9 +48,8 @@ header nav {
 
 header a {
   color: white;
-  transition: color .7s;
+  transition: color 0.7s;
   margin-left: 15px;
-  /* margin-right: 15px; */
 }
 
 header a.opaque {
@@ -60,22 +64,11 @@ header a:hover {
 
 header a.opaque:hover {
   color: black;
-  text-decoration: underline;
-  transition: color 0s;
 }
 
 header a.active {
   color: black;
   text-decoration: underline;
-}
-
-header section {
-  flex: 1;
-}
-
-header p {
-  padding-left: 20px;
-  display: inline;
 }
 
 footer {
@@ -92,6 +85,19 @@ footer p {
 }
 
 /* Presentation elements, specific */
+
+.nav-icon {
+  height: 17px;
+  width: 17px;
+  background: url('/test/sign-white-closed.png') no-repeat center;
+  display: none;
+  margin-right: 15px;
+  order: 2;
+}
+
+header.opaque .nav-icon {
+  background: url('/test/sign-black-closed.png') no-repeat center;
+}
 
 .scroll-image {
   /* position: fixed; */
@@ -120,11 +126,14 @@ footer p {
   display: flex;
 }
 
+/* ! Use justify-content: space-between instead of flex-grow? */
+
 .topics .spacer {
   flex-grow: 1;
 }
 
-.topics a, h3 p {
+.topics a,
+h3 p {
   padding-left: 25px;
   padding-right: 25px;
 }
@@ -139,21 +148,34 @@ footer p {
   display: flex;
   flex-direction: column;
   color: white;
-  background-color: rgba(0,0,0,.25);
-  border: .5px solid red;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 0.5px solid red;
 }
 
 .topics a:hover {
-  background-color: rgba(255,0,0,.3);
+  background-color: rgba(255, 0, 0, 0.3);
   color: white;
 }
 
 /* UNUSED */
 
-#StaticImage {
-  /* position: fixed; */
-  /* width: 100%; */
-  /* object-fit: cover; */
-  /* object-position: center; */
-  /* height: auto; */
+/* #StaticImage {
+  position: fixed;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  height: auto;
+} */
+
+@import 'more.css';
+@import 'responsive.css';
+
+.box {
+  height: 150px;
+  width: 50px;
+  background-color: red;
+}
+
+.box {
+  height: 200px;
 }

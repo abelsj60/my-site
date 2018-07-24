@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Topics from './Topics.jsx';
-import { Link } from 'react-router-dom';
-import ChPreview from './ChPreview.jsx';
 
-var background = '/test/howls-background-dl.jpg';
-var background2 = '/test/dreaming-boy-co-2.png';
+const background = '/test/howls-background-dl.jpg';
+const background2 = '/test/dreaming-boy-co-2.png';
 
 class Home extends Component {
   constructor(props) {
@@ -32,7 +30,7 @@ class Home extends Component {
     window.addEventListener('scroll', this.showTopics);
     window.addEventListener('scroll', this.togglePointer);
     window.addEventListener('scroll', this.setOpacity);
-    this.showTopics();
+    // this.showTopics();
   }
 
   componentWillUnmount() {
@@ -44,29 +42,28 @@ class Home extends Component {
   }
 
   scaleImage(event) {
-    var scrollTop = window.pageYOffset;
-    var oldPercent = (scrollTop - 0) / (3221 - 0);
-    var numberForScale = 6 / (((6 - 1) * oldPercent) + 1);
+    const scrollTop = window.pageYOffset;
+    const oldPercent = (scrollTop - 0) / (3221 - 0);
+    const numberForScale = 6 / ((6 - 1) * oldPercent + 1);
 
-    this.setState({ iScale: numberForScale })
+    this.setState({ iScale: numberForScale });
   }
 
   toggleHeader(event) {
-    var scrollTop = window.pageYOffset;
+    const scrollTop = window.pageYOffset;
 
-    if(scrollTop >= 7) {
+    if (scrollTop >= 7) {
       this.setState({ isTransparent: false });
     } else {
       this.setState({ isTransparent: true });
     }
-
   }
 
   // Bring topics onto screen
   showTopics(event) {
-    var scrollTop = window.pageYOffset;
+    const scrollTop = window.pageYOffset;
 
-    if(scrollTop <= 2300) {
+    if (scrollTop <= 2300) {
       this.setState({ showTopics: false });
     } else if (scrollTop > 2300) {
       this.setState({ showTopics: true });
@@ -74,36 +71,35 @@ class Home extends Component {
   }
 
   setOpacity(event) {
-    var scrollTop = window.pageYOffset;
+    const scrollTop = window.pageYOffset;
 
-    if(scrollTop >= 2400) {
-      var oldPercent = (scrollTop - 2400) / (3221 - 2400);
-      var numForOpacity = ((1 - 0) * oldPercent) + 0;
+    if (scrollTop >= 2400) {
+      const oldPercent = (scrollTop - 2400) / (3221 - 2400);
+      const numForOpacity = (1 - 0) * oldPercent + 0;
       this.setState({ opacity: numForOpacity });
     }
   }
 
   // Select a topic when scrolling's complete
   togglePointer(event) {
-    var scrollTop = window.pageYOffset;
+    const scrollTop = window.pageYOffset;
 
-    if(scrollTop < 3220) {
-      this.setState( {allowClicks: false} );
+    if (scrollTop < 3220) {
+      this.setState({ allowClicks: false });
     } else {
-      this.setState( {allowClicks: true} )
+      this.setState({ allowClicks: true });
     }
   }
 
   render() {
+    const state = this.state;
 
-    var state = this.state;
-
-    var setScale = function(scale) {
-      return { transform: 'scale(' + scale + ',' + scale + ')' }
+    const setScale = function(scale) {
+      return { transform: 'scale(' + scale + ',' + scale + ')' };
     };
 
-    var setPointer = function(boolean) {
-      if(!boolean) {
+    const setPointer = function(boolean) {
+      if (!boolean) {
         return 'block';
       } else {
         return 'allow';
@@ -111,24 +107,26 @@ class Home extends Component {
     };
 
     return (
-      <main className='homeContainer'>
-        <section className='homeWrapper'>
+      <main className="homeContainer">
+        <section className="homeWrapper">
           <Header isTransparent={state.isTransparent} />
-          <img className='scroll-image' style={setScale(state.iScale)} src={background2} alt='b2' />
+          <img
+            className="scroll-image"
+            style={setScale(state.iScale)}
+            src={background2}
+            alt="b2"
+          />
         </section>
-        {
-          this.state.showTopics &&
-          <section className={'temp-content '+ setPointer(state.allowClicks)}>
+        {this.state.showTopics && (
+          <section className={'temp-content ' + setPointer(state.allowClicks)}>
             <Topics opacity={state.opacity} />
             <Footer opacity={state.opacity} />
           </section>
-        }
-        <section className='scroller'>
-        </section>
+        )}
+        <section className="scroller" />
       </main>
-    )
+    );
   }
-
 }
 
 export default Home;

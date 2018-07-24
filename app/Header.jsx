@@ -1,56 +1,87 @@
 import React, { Component } from 'react';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-var navBar = ['My story', 'Some projects', 'Journalism & Law' /*, 'Alexa adventures' */ ];
-
-var controlHeader = function(nextPath, currentPath) {
-  if(nextPath === 'My story') {
-    return ['/chapter', setActivePath('/chapter', currentPath)];
-  } else if(nextPath === 'Some projects') {
-    return ['/project', setActivePath('/project', currentPath)];
-  // } else if(nextPath === 'Alexa adventures') {
-  //   return ['/alexa', setActivePath('/alexa', currentPath)];
-  } else if(nextPath === 'Journalism & Law')
-    return ['/jnl', setActivePath('/jnl', currentPath)];
+const navLinks = [
+  'My projects',
+  'My story',
+  'Journalism & Law' /*,
+  'Alexa adventures' */
+];
+const setPath = function(linkText) {
+  const nextPath =
+    linkText === 'My projects'
+      ? '/projects'
+      : linkText === 'My story' ? '/chapter' : '/jnl';
+  return nextPath;
 };
-
-var setActivePath = function(nextPath, currentPath) {
-  return currentPath.includes(nextPath) ? 'active' : 'inactive'
-}
+const setActiveLink = function(currentPath, linkText) {
+  const nextPath = setPath(linkText);
+  return currentPath.includes(nextPath) ? 'active' : 'inactive';
+};
 
 class Header extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+
+    this.state = {
+      headerMenuIsOpen: false
+    };
+
+    this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ headerMenuIsOpen: false });
+  }
+
+  toggleHeaderMenu() {
+    this.setState({ headerMenuIsOpen: !this.state.headerMenuIsOpen });
   }
 
   render() {
-    var urlParam = this.props.location.pathname;
-
-    var setHeaderClass = function(transparency) {
-      if(transparency) {
-        return 'transparent'
-      } else {
-        return 'opaque'
-      }
-    }
+    const currentPath = this.props.location.pathname;
+    const makeHeaderOpaque = function(transparency) {
+      return !transparency ? ' opaque' : '';
+    };
+    const setHeaderMenuToOpen = function(headerMenuState) {
+      return headerMenuState ? ' header-menu-open' : '';
+    };
 
     return (
-      <header className={setHeaderClass(this.props.isTransparent)}>
-        <section className='info'>
-          <Link className={setHeaderClass(this.props.isTransparent)} to={'/'}><strong>JAMES ABELS</strong></Link>
-          <p><em>Magical stories and other adventures</em></p>
+      <header className={makeHeaderOpaque(this.props.isTransparent)}>
+        <section className={setHeaderMenuToOpen(this.state.headerMenuIsOpen)}>
+          <Link className={makeHeaderOpaque(this.props.isTransparent)} to={'/'}>
+            <strong>JAMES ABELS</strong>
+          </Link>
+          <p className={makeHeaderOpaque(this.props.isTransparent)}>
+            <em>Magical stories and other adventures</em>
+          </p>
         </section>
-        <nav>
-          {
-            navBar.map(item => (
-              <Link key={item} className={setHeaderClass(this.props.isTransparent) + ' ' + controlHeader(item, urlParam)[1]} to={controlHeader(item, urlParam)[0]}>{item}</Link>
-            ))
+        <div
+          className={
+            'nav-icon' + setHeaderMenuToOpen(this.state.headerMenuIsOpen)
           }
-        </nav>
+          onClick={() => this.toggleHeaderMenu()}
+        />
+        {
+          <nav className={setHeaderMenuToOpen(this.state.headerMenuIsOpen)}>
+            {navLinks.map((linkText, index) => (
+              <Link
+                key={index}
+                className={
+                  setActiveLink(currentPath, linkText) +
+                  makeHeaderOpaque(this.props.isTransparent)
+                }
+                to={setPath(linkText)}
+              >
+                {linkText}
+              </Link>
+            ))}
+          </nav>
+        }
       </header>
-    )
+    );
   }
-
 }
 
 export default withRouter(Header);
