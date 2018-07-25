@@ -4,8 +4,6 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './Home.jsx';
 import AppRouter from './AppRouter.jsx';
 
-// Double div seems to lmt hight of page to viewport
-
 class App extends Component {
   constructor(props) {
     super(props);

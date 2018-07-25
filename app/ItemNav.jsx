@@ -7,7 +7,7 @@ class ItemNav extends Component {
   }
 
   render() {
-    const setActiveItem = function(mappedWith, urlParam) {
+    function setActiveItem(mappedWith, urlParam) {
       if (parseInt(urlParam)) {
         urlParam = parseInt(urlParam);
       }
@@ -17,7 +17,7 @@ class ItemNav extends Component {
       } else {
         return 'inactive';
       }
-    };
+    }
 
     return (
       <Link

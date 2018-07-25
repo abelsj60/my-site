@@ -8,12 +8,6 @@
   height: 100vh;
 }
 
-/* .router {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-} */
-
 .left {
   flex: 1;
   background-color: silver;
@@ -27,7 +21,7 @@
   overflow: hidden;
 }
 
-.right.illustration {
+.illustration {
   margin: 0;
 }
 
@@ -45,7 +39,8 @@
 }
 
 .internal-page h1,
-p {
+.internal-page p,
+.chapter p {
   margin-left: 25px;
   margin-right: 25px;
   white-space: pre-wrap;
@@ -92,6 +87,10 @@ p {
 }
 
 /* Presentation elements, specific */
+
+.app-bar-text {
+  display: none;
+}
 
 .project-description {
   font-weight: bold;
@@ -162,6 +161,17 @@ p {
 
 /* .rt-td .active {
   color: dodgerblue;
+} */
+
+/* App bar */
+
+/* .chapter nav {
+  display: flex;
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 15px;
+  height: 40px;
 } */
 
 /* Other / Alexa */

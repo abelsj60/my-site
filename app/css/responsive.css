@@ -2,20 +2,113 @@
 
 @media only screen and (max-width: 900px) {
   .internal-page {
-    flex-direction: column;
-    /* flex: 0; */
+    flex-direction: column !important;
+    position: relative;
   }
 
-  .chapter-title {
-    display: none;
-  }
-
-  .chapter-text {
-    display: none;
+  .narrow nav {
+    display: none !important;
   }
 
   .left {
-    flex: 0;
+    flex: 0 !important;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    position: absolute;
+    height: 100%;
+  }
+
+  .narrow h1 {
+    margin: 0px;
+    flex: 0 !important;
+    padding: 25px;
+  }
+
+  .app-bar {
+    flex: 1 !important;
+    display: flex;
+  }
+
+  .app-bar p {
+    /* margin-left: 25px;
+    margin-right: 25px; */
+    white-space: pre-wrap;
+  }
+
+  .app-bar-text {
+    margin-left: 1px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .chapter-text {
+    margin-left: 25px;
+    margin-bottom: 0px;
+  }
+
+  .app-bar nav {
+    display: flex;
+    height: 35px;
+  }
+
+  .app-bar a p {
+    text-align: center;
+    flex: 1;
+    margin: 15px;
+  }
+
+  .app-bar a.active {
+    flex: 1;
+    background-color: red;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+
+  .app-bar a.inactive {
+    flex: 1;
+    color: white;
+    display: flex;
+    background-color: black;
+    align-items: center;
+  }
+
+  .app-bar a.inactive:hover {
+    background-color: red;
+    color: white;
+  }
+
+  .app-bar-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .borderline {
+    width: 1px;
+    border: 0.2px solid red;
+  }
+
+  .chapter-text-icon {
+    background: url('/test/chapter-icon.png') no-repeat center !important;
+    width: 45px;
+  }
+
+  .story-text-icon {
+    background: url('/test/story-icon.png') no-repeat center !important;
+    /* flex: 1; */
+    width: 45px;
+    /* border-left: 0.5px solid red; */
+  }
+
+  footer {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    height: 51px !important;
+  }
+
+  .copyright {
+    display: none !important;
   }
 }
 

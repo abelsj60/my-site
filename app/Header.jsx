@@ -1,25 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-
-const navLinks = [
-  'My projects',
-  'My story',
-  'Journalism & Law' /*,
-  'Alexa adventures' */
-];
-
-function idLinkPath(linkText) {
-  const linkPath =
-    linkText === 'My projects'
-      ? '/projects'
-      : linkText === 'My story' ? '/chapter' : '/jnl';
-  return linkPath;
-}
-
-function setActiveLink(currentPath, linkText) {
-  const linkPath = idLinkPath(linkText);
-  return currentPath.includes(linkPath) ? 'active' : 'inactive';
-}
+import helpers from './helpers/helpers.js';
 
 class Header extends Component {
   constructor(props) {
@@ -42,41 +23,44 @@ class Header extends Component {
 
   render() {
     const currentPath = this.props.location.pathname;
-
-    function makeHeaderOpaque(transparency) {
-      return !transparency ? ' opaque' : '';
-    }
-
-    function setHeaderMenuToOpen(headerMenuState) {
-      return headerMenuState ? ' header-menu-open' : '';
-    }
+    const navLinks = [
+      'My projects',
+      'My story',
+      'Journalism & Law' /*,
+      'Alexa adventures' */
+    ];
 
     return (
-      <header className={makeHeaderOpaque(this.props.isTransparent)}>
-        <section className={setHeaderMenuToOpen(this.state.openHeaderMenu)}>
-          <Link className={makeHeaderOpaque(this.props.isTransparent)} to={'/'}>
+      <header className={helpers.setHeaderCss(this.props.isTransparent)}>
+        <section
+          className={helpers.setHeaderMenuCss(this.state.openHeaderMenu)}
+        >
+          <Link
+            className={helpers.setHeaderCss(this.props.isTransparent)}
+            to={'/'}
+          >
             <strong>JAMES ABELS</strong>
           </Link>
-          <p className={makeHeaderOpaque(this.props.isTransparent)}>
+          <p className={helpers.setHeaderCss(this.props.isTransparent)}>
             <em>Magical stories and other adventures</em>
           </p>
         </section>
         <div
           className={
-            'nav-icon' + setHeaderMenuToOpen(this.state.openHeaderMenu)
+            'nav-icon' + helpers.setHeaderMenuCss(this.state.openHeaderMenu)
           }
           onClick={() => this.toggleHeaderMenu()}
         />
         {
-          <nav className={setHeaderMenuToOpen(this.state.openHeaderMenu)}>
+          <nav className={helpers.setHeaderMenuCss(this.state.openHeaderMenu)}>
             {navLinks.map((linkText, index) => (
               <Link
                 key={index}
                 className={
-                  setActiveLink(currentPath, linkText) +
-                  makeHeaderOpaque(this.props.isTransparent)
+                  helpers.setActiveLink(currentPath, linkText) +
+                  helpers.setHeaderCss(this.props.isTransparent)
                 }
-                to={idLinkPath(linkText)}
+                to={helpers.idLinkPath(linkText)}
               >
                 {linkText}
               </Link>
