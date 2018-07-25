@@ -32,12 +32,12 @@ class Footer extends Component {
           <div className="borderline" />
           <div className="app-bar-container">
             <div className="story-text-icon" />
-            <p className="app-bar-text">Text</p>
+            <p className="app-bar-text">Tale</p>
           </div>
           <div className="borderline" />
           <div className="app-bar-container">
             <div className="story-text-icon" />
-            <p className="app-bar-text">About</p>
+            <p className="app-bar-text">Bonus</p>
           </div>
         </section>
         <p className="copyright">James Abels. All rights reserved. 2018.</p>
