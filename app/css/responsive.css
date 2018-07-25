@@ -1,0 +1,158 @@
+/* INTERNAL PAGE CSS */
+
+@media only screen and (max-width: 900px) {
+  .internal-page {
+    flex-direction: column !important;
+    position: relative;
+  }
+
+  .narrow nav {
+    display: none !important;
+  }
+
+  .left {
+    flex: 0 !important;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    position: absolute;
+    height: 100%;
+  }
+
+  .narrow h1 {
+    margin: 0px;
+    flex: 0 !important;
+    padding: 25px;
+  }
+
+  .app-bar {
+    flex: 1 !important;
+    display: flex;
+  }
+
+  .app-bar p {
+    /* margin-left: 25px;
+    margin-right: 25px; */
+    white-space: pre-wrap;
+  }
+
+  .app-bar-text {
+    margin-left: 1px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .chapter-text {
+    margin-left: 25px;
+    margin-bottom: 0px;
+  }
+
+  .app-bar nav {
+    display: flex;
+    height: 35px;
+  }
+
+  .app-bar a p {
+    text-align: center;
+    flex: 1;
+    margin: 15px;
+  }
+
+  .app-bar a.active {
+    flex: 1;
+    background-color: red;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+
+  .app-bar a.inactive {
+    flex: 1;
+    color: white;
+    display: flex;
+    background-color: black;
+    align-items: center;
+  }
+
+  .app-bar a.inactive:hover {
+    background-color: red;
+    color: white;
+  }
+
+  .app-bar-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .borderline {
+    width: 1px;
+    border: 0.2px solid red;
+  }
+
+  .chapter-text-icon {
+    background: url('/test/chapter-icon.png') no-repeat center !important;
+    width: 45px;
+  }
+
+  .story-text-icon {
+    background: url('/test/story-icon.png') no-repeat center !important;
+    /* flex: 1; */
+    width: 45px;
+    /* border-left: 0.5px solid red; */
+  }
+
+  footer {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    height: 51px !important;
+  }
+
+  .copyright {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 658px) {
+  header section.header-menu-open {
+    display: none;
+  }
+
+  header nav {
+    display: none !important;
+  }
+
+  header nav.header-menu-open {
+    display: flex !important;
+    justify-content: center !important;
+    flex-grow: 1 !important;
+    margin-right: 0 !important;
+  }
+
+  .nav-icon {
+    display: inline-block !important;
+  }
+
+  .nav-icon:hover {
+    background: url('/test/sign-white-open.png') no-repeat center !important;
+  }
+
+  .nav-icon.header-menu-open {
+    background: url('/test/sign-white-open.png') no-repeat center !important;
+  }
+
+  .nav-icon.header-menu-open:hover {
+    background: url('/test/sign-white-closed.png') no-repeat center !important;
+  }
+
+  header.opaque .nav-icon:hover {
+    background: url('/test/sign-black-open.png') no-repeat center !important;
+  }
+
+  header.opaque .nav-icon.header-menu-open {
+    background: url('/test/sign-black-open.png') no-repeat center !important;
+  }
+
+  header.opaque .nav-icon.header-menu-open:hover {
+    background: url('/test/sign-black-closed.png') no-repeat center !important;
+  }
+}

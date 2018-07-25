@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import SiteHeader from './SiteHeader.jsx';
+import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Topics from './Topics.jsx';
 
-var background = '/test/howls-background-dl.jpg';
-var background2 = '/test/dreaming-boy-co-2.png';
+const background = '/test/howls-background-dl.jpg';
+const background2 = '/test/dreaming-boy-co-2.png';
 
 class Home extends Component {
   constructor(props) {
@@ -12,9 +12,9 @@ class Home extends Component {
     this.state = {
       iScale: 6,
       opacity: 0,
-      hTransparency: true,
-      topicsShown: false,
-      topicClicking: false
+      isTransparent: true,
+      showTopics: false,
+      allowClicks: false
     };
 
     this.scaleImage = this.scaleImage.bind(this);
@@ -30,7 +30,7 @@ class Home extends Component {
     window.addEventListener('scroll', this.showTopics);
     window.addEventListener('scroll', this.togglePointer);
     window.addEventListener('scroll', this.setOpacity);
-    this.showTopics();
+    // this.showTopics();
   }
 
   componentWillUnmount() {
@@ -42,111 +42,102 @@ class Home extends Component {
   }
 
   scaleImage(event) {
-    var scrollTop = window.pageYOffset;
-    var oldPercent = (scrollTop - 0) / (3221 - 0);
-    var numberForScale = 6 / (((6 - 1) * oldPercent) + 1);
+    const scrollTop = window.pageYOffset;
+    const oldPercent = (scrollTop - 0) / (3221 - 0);
+    const numberForScale = 6 / ((6 - 1) * oldPercent + 1);
 
-    this.setState({ iScale: numberForScale })
+    this.setState({ iScale: numberForScale });
   }
 
   toggleHeader(event) {
-    var scrollTop = window.pageYOffset;
+    const scrollTop = window.pageYOffset;
 
-    if(scrollTop >= 7) {
-      this.setState({ hTransparency: false });
+    if (scrollTop >= 7) {
+      this.setState({ isTransparent: false });
     } else {
-      this.setState({ hTransparency: true });
+      this.setState({ isTransparent: true });
     }
-
   }
 
   // Bring topics onto screen
   showTopics(event) {
-    var scrollTop = window.pageYOffset;
+    const scrollTop = window.pageYOffset;
 
-    if(scrollTop <= 2300) {
-      if(scrollTop === 2300) {
-      }
-      this.setState({ topicsShown: false });
+    if (scrollTop <= 2300) {
+      this.setState({ showTopics: false });
     } else if (scrollTop > 2300) {
-      this.setState({ topicsShown: true });
+      this.setState({ showTopics: true });
     }
   }
 
   setOpacity(event) {
-    var scrollTop = window.pageYOffset;
+    const scrollTop = window.pageYOffset;
 
-    if(scrollTop >= 2400) {
-      var oldPercent = (scrollTop - 2400) / (3221 - 2400);
-      var numForOpacity = ((1 - 0) * oldPercent) + 0;
+    if (scrollTop >= 2400) {
+      const oldPercent = (scrollTop - 2400) / (3221 - 2400);
+      const numForOpacity = (1 - 0) * oldPercent + 0;
       this.setState({ opacity: numForOpacity });
     }
   }
 
   // Select a topic when scrolling's complete
   togglePointer(event) {
-    var scrollTop = window.pageYOffset;
+    const scrollTop = window.pageYOffset;
 
-    if(scrollTop < 3220) {
-      this.setState( {topicClicking: false} );
+    if (scrollTop < 3220) {
+      this.setState({ allowClicks: false });
     } else {
-      this.setState( {topicClicking: true} )
+      this.setState({ allowClicks: true });
     }
   }
 
   render() {
+    const state = this.state;
 
-    var setScale = function(scale) {
-      return { transform: 'scale(' + scale + ',' + scale + ')' }
+    const setScale = function(scale) {
+      return { transform: 'scale(' + scale + ',' + scale + ')' };
     };
 
-    var setPointerEvents = function(topic) {
-      if(!topic) {
+    const setPointer = function(boolean) {
+      if (!boolean) {
         return 'block';
       } else {
         return 'allow';
       }
     };
 
-    var setHome = function(home) {
-      if(home) {
-        return 'home';
-      }
-    }
-
     return (
-      <div id='HomeContainer'>
-        <div id='HomeWrapper'>
-          <div id='PermanentContent'>
-            <SiteHeader hTransparency={this.state.hTransparency} />
-            <img id='StaticImage' src={background} alt='b' />
-            <img id='ScalingImage' style={setScale(this.state.iScale)} src={background2} alt='b2' />
-          </div>
-        </div>
-        {
-          this.state.topicsShown &&
-          <div id='TemporaryContent'>
-            <div id='PointerControl' className={setPointerEvents(this.state.topicClicking)}>
-              <div id='ContentContainer'>
-                <div id='TopicsContainer'>
-                  <Topics topicsShown={this.state.topicsShown} opacity={this.state.opacity} />
-                </div>
-              </div>
-              <div id='FooterContainer' className={setHome(this.props.home)} style={{opacity: this.state.opacity}}>
-                <Footer topicsShown={this.state.topicsShown} />
-              </div>
-            </div>
-          </div>
-        }
-        <div id='Scroller'>
-        </div>
-      </div>
-    )
+      <main className="homeContainer">
+        <section className="homeWrapper">
+          <Header isTransparent={state.isTransparent} />
+          <img
+            className="scroll-image"
+            style={setScale(state.iScale)}
+            src={background2}
+            alt="b2"
+          />
+        </section>
+        {this.state.showTopics && (
+          <section className={'temp-content ' + setPointer(state.allowClicks)}>
+            <Topics opacity={state.opacity} />
+            <Footer opacity={state.opacity} />
+          </section>
+        )}
+        <section className="scroller" />
+      </main>
+    );
   }
-
 }
 
 export default Home;
 
+// Note:
 // Changed CSS in react-table on -header value
-// box-shadow:0 2px 15px 0 rgba(0,0,0,0.15)
+// box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15)
+
+// Old:
+
+// {
+//   /* Shifted this image to a div background. It looks less clean to me, but is easier to style:
+//   <img id='StaticImage' src={background} alt='b' className='responsive' /> */
+// }

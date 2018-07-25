@@ -16,9 +16,11 @@ class NotFound extends Component {
 
   render() {
     return (
-      <div id='NotFound'>
-        <h1 id='h1ForNotFound'>Uh oh. Not found!</h1>
-      </div>
+      <main className='left'>
+        <section className='notFound'>
+          <h1>Uh oh. Not found!</h1>
+        </section>
+      </main>
     )
   }
 

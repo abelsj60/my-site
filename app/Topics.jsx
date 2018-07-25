@@ -1,49 +1,53 @@
 import React, { Component } from 'react';
-import ChPreview from './ChPreview.jsx';
 import { Link } from 'react-router-dom';
 
-var topics = ['One', 'Two', 'Three'];
+// Create, Build, Amaze
+
+const topics = ['One', 'Two', 'Three'];
+const chapterData = {
+  One: {
+    hed: 'Some projects',
+    blurb: 'Unconventional software and more'
+  },
+  Two: {
+    hed: 'My story',
+    blurb: 'Adventures in storytelling and magic'
+  },
+  Three: {
+    hed: 'Journalism & Law',
+    blurb: 'Slick stories, sleek words'
+  },
+  Four: {
+    hed: 'Alexa adventures',
+    blurb: 'Amazing tales of delight (coming soon)'
+  }
+};
 
 class Topics extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-
-    var setSection = function(topic) {
-      if(topic === 'One') {
-        return '/project';
-      } else if(topic === 'Two') {
-        return '/chapter/1';
-      } else {
-        return '/alexa'
-      }
-    }
-
-    var setTopicsClass = function(home) {
-      if(!home) {
-        return 'notHome';
-      } else {
-        return 'home';
-      }
-    }
+    const nextPath = {
+      One: '/projects',
+      Two: '/chapter',
+      Three: '/jnl' /*,
+      Four: '/alexa' */
+    };
 
     return (
-      <div id='Topics' className={setTopicsClass(this.props.topicsShown)} style={{opacity: this.props.opacity}}>
-        {
-          topics.map((topic, index) =>
-            (
-              <Link to={setSection(topic)} key={index} className='topicLink'>
-                <ChPreview chNumber={topic} />
-              </Link>
-            )
-          )
-        }
-      </div>
-    )
+      <section className="topics" style={{ opacity: this.props.opacity }}>
+        {topics.map((topic, index) => (
+          <Link to={nextPath[topic]} key={index}>
+            <section className="spacer" />
+            <h3>{chapterData[topic].hed}</h3>
+            <p>{chapterData[topic].blurb}</p>
+          </Link>
+        ))}
+      </section>
+    );
   }
-
 }
 
 export default Topics;

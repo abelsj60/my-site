@@ -1,231 +1,186 @@
-/*
+/* HOME PAGE CSS */
 
-CSS For Home, Header, Topics, ChPreview, & Footer
+/* Page containers */
 
-*/
-
-@import 'more.css';
-
-#Header.transparent {
-  flex: 1;
-  z-index: 2;
-  position: fixed;
-  width: 100%;
-  height: 52px;
-  color: white;
-  background-color: transparent;
-  transition: background-color .7s, color .7s;
-  display: flex;
+.homeContainer {
+  background: url('/test/howls-background-dl.jpg') no-repeat fixed center top;
 }
 
-#Header.opaque {
-  flex: 1;
-  z-index: 2;
-  position: fixed;
-  width: 100%;
-  height: 52px;
-  color: white;
-  background-color: dodgerblue;
-  transition: background-color .7s, color .7s;
-  display: flex;
-}
-
-#LeftContainer {
-  flex: 2;
-  display: flex;
-}
-
-#Name {
-  flex: 1;
-}
-
-#Motto {
-  flex: 6;
-}
-
-#RightContainer {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  padding-top: 15px;
-  padding-right: 25px;
-}
-
-.link {
-  color: white;
-}
-
-.link:hover {
-  color: red;
-}
-
-#NameAndLink {
-  flex: 1;
-}
-
-#MottoAndLink {
-  flex: 1;
-}
-
-.pForHeader {
-  padding-top: 15px;
-  padding-bottom: 10px;
-  padding-left: 25px;
-  text-align: left;
-}
-
-#HomeWrapper {
+.homeWrapper {
   width: 100%;
   position: fixed;
   z-index: 0;
 }
 
-#PermanentContent {
-  z-index: 1;
+.scroller {
+  height: 4000px;
 }
 
-#StaticImage {
+/* Presentation elements, general */
+
+header {
+  z-index: 2;
+  height: 52px;
+  color: white;
+  background-color: transparent;
+  transition: background-color 0.7s, color 0.7s;
+  display: flex;
   position: relative;
-  z-index: 1;
-  height: 100%;
+  align-items: center;
 }
 
-#ScalingImage {
-  position: absolute;
+header.opaque {
+  color: black;
+  background-color: white;
+}
+
+header section {
+  flex: 1;
+}
+
+header p {
+  display: inline;
+}
+
+header nav {
+  margin-right: 15px;
+}
+
+header a {
+  color: white;
+  transition: color 0.7s;
+  margin-left: 15px;
+}
+
+header a.opaque {
+  color: black;
+}
+
+header a:hover {
+  color: white;
+  text-decoration: underline;
+  transition: color 0s;
+}
+
+header a.opaque:hover {
+  color: black;
+}
+
+header a.active {
+  color: black;
+  text-decoration: underline;
+}
+
+footer {
+  display: flex;
+  color: white;
+  justify-content: flex-end;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: black;
+  align-items: center;
+}
+
+footer p {
+  margin-right: 15px;
+}
+
+footer nav {
+  display: none;
+}
+
+/* Presentation elements, specific */
+
+.nav-icon {
+  height: 17px;
+  width: 17px;
+  background: url('/test/sign-white-closed.png') no-repeat center;
+  display: none;
+  margin-right: 15px;
+  order: 2;
+}
+
+header.opaque .nav-icon {
+  background: url('/test/sign-black-closed.png') no-repeat center;
+}
+
+.scroll-image {
+  /* position: fixed; */
   width: 100%;
-  margin: auto;
-  top: 0;
-  right: 0;
+  min-height: 100vh;
   z-index: 1;
+  object-fit: cover;
 }
 
-#TemporaryContent {
+.temp-content {
   position: fixed;
   width: 100%;
   height: 93.3%;
   top: 52px;
-}
-
-#PointerControl.block {
+  display: flex;
+  flex-direction: column;
   pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
 }
 
-#PointerControl.allow {
+.temp-content.allow {
   pointer-events: all;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
 }
 
-#ContentContainer {
-  flex: 1 1 100%;
-  flex-direction: column;
-  display: flex;
-}
-
-#TopicsContainer {
-  flex: 1 1 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#Topics.home {
+.topics {
   flex: 1;
   display: flex;
 }
 
-#Topics.notHome {
-  flex: 1;
-  display: flex;
-  width: 100%;
-  z-index: 1;
-}
+/* ! Use justify-content: space-between instead of flex-grow? */
 
-#TopicContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border: .5px solid red;
-}
-
-#Spacer {
+.topics .spacer {
   flex-grow: 1;
 }
 
-.h3ForChPreview {
+.topics a,
+h3 p {
   padding-left: 25px;
   padding-right: 25px;
 }
 
-.pForChPreview {
-  padding-left: 25px;
-  padding-right: 25px;
+.topics a p {
+  margin: 0px;
   padding-bottom: 25px;
 }
 
-.topicLink {
+.topics a {
   flex: 1;
   display: flex;
   flex-direction: column;
   color: white;
-  background-color: rgba(0,0,0,.25);
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 0.5px solid red;
 }
 
-.topicLink:hover {
-  background-color: rgba(255,0,0,.3);
+.topics a:hover {
+  background-color: rgba(255, 0, 0, 0.3);
   color: white;
 }
 
-#FooterContainer {
-  flex: 1;
-  height: 54px;
-  background-color: black;
+/* UNUSED */
+
+/* #StaticImage {
+  position: fixed;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  height: auto;
+} */
+
+@import 'more.css';
+@import 'responsive.css';
+
+.box {
+  height: 150px;
+  width: 50px;
+  background-color: red;
 }
 
-#Scroller {
-  height: 4000px;
-}
-
-#Footer.home {
-  display: flex;
-  color: white;
-  justify-content: flex-end;
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-#Footer {
-  display: flex;
-  color: white;
-  justify-content: flex-end;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  background-color: black;
-}
-
-
-#Email {
-  flex: 3;
-}
-
-#JnLFooter {
-  flex: 1;
-}
-
-.pForFooter {
-  margin-right: 10px;
-}
-
-.NavLinkActive {
-  color: red;
-}
-
-.headerLink {
-  color: white;
+.box {
+  height: 200px;
 }

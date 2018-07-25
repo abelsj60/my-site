@@ -1,233 +1,129 @@
-/*
+/* INTERNAL PAGE CSS */
 
-CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
+/* Page containers */
 
-*/
-
-#PageContainer {
+.page {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-#RouterContainer {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-#ChapterContainer {
-  flex: 1;
-  display: flex;
-  margin-top: 52px;
-}
-
-#Story {
+.left {
   flex: 1;
   background-color: silver;
 }
 
-#h1ForChapter {
+.right {
+  flex: 2;
+  display: flex;
+  margin: 25px;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.illustration {
+  margin: 0;
+}
+
+.story-picture {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Presentation elements, generic */
+
+.internal-page {
+  flex: 1;
+  display: flex;
+  background-color: papayawhip;
+}
+
+.internal-page h1,
+.internal-page p,
+.chapter p {
+  margin-left: 25px;
+  margin-right: 25px;
+  white-space: pre-wrap;
+}
+
+.internal-page nav {
+  display: flex;
   margin-top: 25px;
   margin-left: 25px;
   margin-right: 25px;
-}
-
-#pForChapter {
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 25px;
-  white-space: pre-wrap;
-}
-
-#pForCaption {
-  white-space: pre-wrap;
-}
-
-#Picture {
-  flex: 2;
-  background-color: papayawhip;
-}
-
-#ProjectContainer {
-  flex: 1;
-  background-color: papayawhip;
-  margin-top: 52px;
-  display: flex;
-}
-
-#ProjectNav {
-  flex: 1;
-  display: flex;
   margin-bottom: 15px;
   height: 40px;
 }
 
-#ProjectContent {
+.internal-page a p {
+  text-align: center;
   flex: 1;
+}
+
+.internal-page a.active {
+  flex: 1;
+  background-color: red;
+  color: white;
   display: flex;
+  align-items: center;
+}
+
+.internal-page a.inactive {
+  flex: 1;
+  color: black;
+  border: 0.5px solid red;
+  display: flex;
+  background-color: silver;
+  align-items: center;
+}
+
+.internal-page a.inactive:hover {
+  background-color: red;
+  color: white;
+}
+
+.stories h1 {
   margin: 25px;
 }
 
-#MainPicture {
+/* Presentation elements, specific */
+
+.app-bar-text {
+  display: none;
+}
+
+.project-description {
+  font-weight: bold;
+}
+
+.project-image {
+  overflow: hidden;
   margin-bottom: 15px;
-  flex: 1;
 }
 
-#Alexa {
-  flex: 1;
-  background-color: papayawhip;
-  margin-top: 52px;
+.project-image img {
+  width: 100%;
 }
 
-#h1ForAlexa {
-  padding: 26px;
-}
-
-#JnL {
-  flex: 1;
-  background-color: papayawhip;
-  margin-top: 52px;
-}
-
-#h1ForJnL {
-  padding: 25px;
-}
-
-#NotFound {
-  flex: 1;
-  background-color: papayawhip;
-  margin-top: 52px;
-}
-
-#h1ForNotFound {
-  padding: 25px;
-}
-
-#chNavContainer {
-  display: flex;
-  flex: 1;
-}
-
-#ChapterNavItems {
-  display: flex;
-  margin-top: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
-  height: 40px;
-}
-
-.pForChapterNav {
-  white-space: pre-wrap;
-  text-align: center;
-  flex: 1;
-}
-
-.linkForNav.active {
-  flex: 1;
-  background-color: red;
-  color: white;
-  display: flex;
-  align-items: center;
-}
-
-.linkForNav.inactive {
-  flex: 1;
-  color: black;
-  border: .5px solid red;
-  display: flex;
-  align-items: center;
-}
-
-
-.linkForNav.inactive:hover {
-  background-color: red;
-  color: white;
-}
-
-.projectLinks.active {
-  text-align: center;
-  flex: 1;
-}
-
-.projectLinks.inactive {
-  text-align: center;
-  flex: 1;
-}
-
-.imgThumbs {
+.thumbnail {
   height: 75px;
   margin-right: 10px;
 }
 
-#ProjectElements {
-  display: flex;
-  flex-direction: column;
-}
-
-#Caption {
-  flex: 1;
-}
-
-#CapAndContent {
-  display: flex;
-  flex: 1;
-}
-
-#CapAndNav {
-  flex: 1;
-  margin: 25px;
-}
-
-#AlexaContainer {
-  flex: 1;
-  display: flex;
-  margin-top: 52px;
-}
-
-#Description {
-  flex: 1;
-  padding-top: 125px;
-  padding-left: 200px;
-  padding-right: 35px;
-  padding-bottom: 25px;
-  text-align: right;
-  background-color: papayawhip;
-}
-
-#AlexaPic {
-  flex: 1;
-}
-
-#AlexaImg {
-  height: 100%;
-}
-
-#JnLContainer {
-  flex: 1;
-  display: flex;
-  margin-top: 52px;
-  background-color: papayawhip;
-}
-
-
-#List {
-  margin: 25px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-#PDFStory {
-  flex: 1.5;
-  background-color: white;
-  text-align: center;
+.pdf {
   overflow: auto;
 }
+
+.notFound {
+  margin-top: 25px;
+}
+
+/* React table */
 
 .ReactTable {
   border: none;
   flex: 1;
+  margin: 25px;
 }
 
 .ReactTable .rt-thead.-header {
@@ -242,11 +138,13 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
   border: none;
 }
 
-.ReactTable .rt-thead .rt-th, .ReactTable .rt-thead .rt-td {
+.ReactTable .rt-thead .rt-th,
+.ReactTable .rt-thead .rt-td {
   border: none;
 }
 
-.ReactTable .rt-thead .rt-th, .ReactTable .rt-thead .rt-td {
+.ReactTable .rt-thead .rt-th,
+.ReactTable .rt-thead .rt-td {
   text-align: left;
 }
 
@@ -258,9 +156,51 @@ CSS For AppRouter, AlexaStories, Chapter, ChNav, JandL, Projects
 
 .ReactTable .-pagination {
   box-shadow: none;
-  border-top: 1px solid rgba(0,0,0,0.1)
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.rt-td .active {
-  color: red;
+/* .rt-td .active {
+  color: dodgerblue;
+} */
+
+/* App bar */
+
+/* .chapter nav {
+  display: flex;
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 15px;
+  height: 40px;
+} */
+
+/* Other / Alexa */
+
+#AlexaContainer {
+  flex: 1;
+  display: flex;
+}
+
+#Description {
+  flex: 1;
+  padding-top: 125px;
+  padding-left: 50px;
+  padding-right: 175px;
+  padding-bottom: 25px;
+  text-align: left;
+  background-color: papayawhip;
+}
+
+#AlexaPic {
+  display: flex;
+}
+
+#h1ForAlexa {
+  padding: 26px;
+}
+
+#Alexa {
+  flex: 1;
+  background-color: papayawhip;
+  margin-top: 52px;
 }

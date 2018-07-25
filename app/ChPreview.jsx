@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-var background = '/test/magician-clean.png';
-var background2 = '/test/beaker-magic-2.png';
-
 // Create, Build, Amaze
 
 class ChPreview extends Component {
@@ -12,41 +9,39 @@ class ChPreview extends Component {
 
   render() {
 
-    var setTopicHead = function(chapter) {
-      if(chapter === 'One') {
-        return 'Some projects';
-      } else if (chapter === 'Two') {
-        return 'My story';
-      } else {
-        return 'Alexa adventures';
-      }
+    var chapterData = {
+      'One':
+        {
+          hed: 'Some projects',
+          blurb: 'Unconventional software and more'
+        },
+      'Two':
+        {
+          hed: 'My story',
+          blurb: 'Adventures in storytelling and magic'
+        },
+      'Three':
+        {
+          hed: 'Journalism & Law',
+          blurb: 'Slick stories, sleek words'
+        },
+      'Four':
+        {
+          hed: 'Alexa adventures',
+          blurb: 'Amazing tales of delight (coming soon)'
+        }
     };
 
-    var setTopicBlurb = function(chapter) {
-      if(chapter === 'One') {
-        return 'Unconventional software and more';
-      } else if(chapter === 'Two') {
-        return 'Adventures in storytelling and magic';
-      } else {
-        return 'Amazing tales of delight (coming soon)';
-      }
-    }
+    var chapter = chapterData[this.props.chNumber];
+    var chapterHed = chapter.hed;
+    var chapterBlurb = chapter.blurb;
 
     return (
-      <div id='TopicContent'>
-        <div id='Spacer'>
-        </div>
-        <h3 className='h3ForChPreview'>
-          {
-            setTopicHead(this.props.chNumber)
-          }
-        </h3>
-        <p className='pForChPreview'>
-          {
-            setTopicBlurb(this.props.chNumber)
-          }
-        </p>
-      </div>
+      <section>
+        <div id='Spacer'></div>
+        <h3>{chapterHed}</h3>
+        <p>{chapterBlurb}</p>
+      </section>
     )
   }
 

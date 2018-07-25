@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 // import { Header } from 'semantic-ui-react';
-import SiteHeader from './SiteHeader.jsx';
 import Home from './Home.jsx';
 import AppRouter from './AppRouter.jsx';
-import Footer from './Footer.jsx';
-
-// Double div seems to lmt hight of page to viewport
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
     return (
-      <div id='AppContainer'>
+      <section className="appContainer">
         <Switch>
-          <Route exact path='/' component={Home} home={true}/>
+          <Route exact path="/" component={Home} />
           <Route component={AppRouter} />
         </Switch>
-      </div>
-    )
+      </section>
+    );
   }
-
 }
 
 export default App;
