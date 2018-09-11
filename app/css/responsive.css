@@ -1,7 +1,7 @@
 /* INTERNAL PAGE CSS */
 
 @media only screen and (max-width: 900px) {
-  .internal-page {
+  .main-content {
     flex-direction: column !important;
     position: relative;
   }

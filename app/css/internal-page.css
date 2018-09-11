@@ -1,0 +1,69 @@
+/* INTERNAL PAGE CSS */
+
+/* Page containers */
+
+.inner-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  background-color: papayawhip;
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: silver;
+}
+
+.right {
+  flex: 2;
+}
+
+.main-content h1,
+.main-content p,
+.chapter p {
+  margin-left: 25px;
+  margin-right: 25px;
+  white-space: pre-wrap;
+}
+
+.main-content nav {
+  display: flex;
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 15px;
+  height: 40px;
+}
+
+.main-content a p {
+  text-align: center;
+  flex: 1;
+}
+
+.main-content a.active {
+  flex: 1;
+  background-color: red;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.main-content a.inactive {
+  flex: 1;
+  color: black;
+  border: 0.5px solid red;
+  display: flex;
+  background-color: silver;
+  align-items: center;
+}
+
+.main-content a.inactive:hover {
+  background-color: red;
+  color: white;
+}

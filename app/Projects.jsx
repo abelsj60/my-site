@@ -106,7 +106,6 @@ class Projects extends Component {
 
   render() {
     const urlName = this.props.match.params.name;
-
     const setActiveItem = function(mappedWith, urlItem) {
       if (mappedWith === urlItem) {
         return 'active';
@@ -114,7 +113,6 @@ class Projects extends Component {
         return 'inactive';
       }
     };
-
     const prepName = function(name) {
       if (name === 'tmmnews') {
         return name.slice(0, 3).toUpperCase() + name.slice(3);
@@ -124,8 +122,8 @@ class Projects extends Component {
     };
 
     return (
-      <main className="projects internal-page">
-        <section className="left projects">
+      <main id="my-projects" className="">
+        <section id="project-info" className="left">
           <nav>
             {projectData.map((project, index) => (
               <Link
@@ -139,21 +137,21 @@ class Projects extends Component {
             ))}
           </nav>
           <section className="project-text">
-            <p className="project-description">Project</p>
+            <p className="project-text">Project</p>
             <p>{prepName(this.state.projName)}</p>
-            <p className="project-description">Type</p>
+            <p className="project-text">Type</p>
             <p>Answer</p>
-            <p className="project-description">What I did</p>
+            <p className="project-text">What I did</p>
             <p>Answer</p>
-            <p className="project-description">Key technologies</p>
+            <p className="project-text">Key technologies</p>
             <p>Answer</p>
-            <p className="project-description">Description</p>
+            <p className="project-text">Description</p>
             <p>Answer</p>
-            <p className="project-description">What you're looking at</p>
+            <p className="project-text">What you're looking at</p>
             <p>Answer</p>
           </section>
         </section>
-        <section className="right images">
+        <section id="project-images" className="right">
           <section className="project-image">
             <img
               src={this.state.projImgs[this.state.picIndex - 1]}

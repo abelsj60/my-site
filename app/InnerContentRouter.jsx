@@ -10,14 +10,14 @@ import Chapter from './Chapter.jsx';
 import AlexaStories from './AlexaStories.jsx';
 import storyData from './helpers/storyData.jsx';
 
-class InnerContentRouter extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <section className="page">
+      <section className="inner-page">
         <Header />
         <Switch>
           <Route
@@ -94,4 +94,4 @@ class InnerContentRouter extends Component {
   }
 }
 
-export default InnerContentRouter;
+export default App;

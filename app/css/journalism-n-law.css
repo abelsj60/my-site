@@ -1,0 +1,12 @@
+/* INTERNAL PAGE CSS */
+
+/* Journalism and law rules */
+
+#pdf {
+  overflow: auto;
+  margin: 25px;
+}
+
+#clips h1 {
+  margin: 25px;
+}

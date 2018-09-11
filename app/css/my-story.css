@@ -1,0 +1,15 @@
+/* INTERNAL PAGE CSS */
+
+/* My story rules */
+
+#story-media {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  overflow: hidden;
+}
+
+#story-media img {
+  height: 100%;
+  object-fit: cover;
+}

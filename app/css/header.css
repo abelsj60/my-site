@@ -1,0 +1,67 @@
+/* HEADER CSS */
+
+header {
+  z-index: 2;
+  height: 52px;
+  color: white;
+  background-color: transparent;
+  transition: background-color 0.7s, color 0.7s;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+header.opaque {
+  color: black;
+  background-color: white;
+}
+
+header section {
+  flex: 1;
+}
+
+header p {
+  display: inline;
+}
+
+header nav {
+  margin-right: 15px;
+}
+
+header a {
+  color: white;
+  transition: color 0.7s;
+  margin-left: 15px;
+}
+
+header a.opaque {
+  color: black;
+}
+
+header a:hover {
+  color: white;
+  text-decoration: underline;
+  transition: color 0s;
+}
+
+header a.opaque:hover {
+  color: black;
+}
+
+header a.active {
+  color: black;
+  text-decoration: underline;
+}
+
+.nav-icon {
+  height: 17px;
+  width: 17px;
+  background: url('/test/sign-white-closed.png') no-repeat center;
+  display: none;
+  margin-right: 15px;
+  order: 2;
+}
+
+header.opaque .nav-icon {
+  background: url('/test/sign-black-closed.png') no-repeat center;
+}

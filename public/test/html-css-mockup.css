@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <div id="app">
+      <section id="content-container">
+        <section id="inner-page">
+          <header>
+            <h1>Header</h1>
+          </header>
+          <section id="main-content">
+            <section id="left" class="narrow-background">
+              <nav id="left-nav" class="t">Menu</nav>
+              <h1 id="left-headline" class="t">Left headline</h1>
+              <p id="left-text" class="t">Hi!</p>
+            </section>
+            <section id="right">
+              <h1 id="right-headline" class="t">Right hed</h1>
+            </section>
+          </section>
+          <footer>
+            <h1>Footer</h1>
+          </footer>
+        </section>
+      </section>
+    </div>
+  </body>
+
+</html>
+
+/* */
+
+#inner-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#main-content {
+  display: flex;
+}
+
+#left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+#right {
+  flex: 2;
+  background-image: url('https://placeimg.com/640/480/any');
+  height: 100%;
+  color: white;
+}
+
+#left-headline {
+}
+
+#left-text {
+  flex: 1;
+}
+
+#left-nav {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.t {
+  margin: 10px;
+}
+
+header {
+  background-color: rgba(0, 255, 0, 0.5);
+  padding: 25px;
+}
+
+header h1 {
+  margin: 0px;
+}
+
+footer {
+  background-color: rgba(0, 0, 255, 0.5);
+  padding: 25px;
+}
+
+footer h1 {
+  margin: 0px;
+}
+
+@media only screen and (max-width: 900px) {
+  #left {
+    flex: 0;
+    z-index: 0;
+    color: white;
+  }
+
+  #left-nav {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  #main-content {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  #right-headline {
+    display: none;
+  }
+}

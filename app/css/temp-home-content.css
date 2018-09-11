@@ -1,0 +1,51 @@
+/* HOME PAGE CSS */
+
+/* Temp-content rules (after scroll) */
+
+.temp-home-content {
+  position: fixed;
+  width: 100%;
+  height: 93.3%;
+  top: 52px;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.temp-home-content.allow {
+  pointer-events: all;
+}
+
+.topics {
+  flex: 1;
+  display: flex;
+}
+
+.topics .spacer {
+  flex-grow: 1;
+}
+
+.topics a,
+h3 p {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.topics a p {
+  margin: 0px;
+  padding-bottom: 25px;
+}
+
+.topics a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 0.5px solid red;
+}
+
+.topics a:hover {
+  background-color: rgba(255, 0, 0, 0.3);
+  color: white;
+}

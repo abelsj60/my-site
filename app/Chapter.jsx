@@ -15,8 +15,8 @@ class Chapter extends Component {
     const picture = helpers.pickPicture(chapterNumber);
 
     return (
-      <main className="chapter internal-page narrow">
-        <section className="left chapter">
+      <main id="my-story" className="narrow">
+        <section id="chapter" className="left">
           <nav>
             {chapters.map((num, index) => (
               <ItemNav
@@ -30,9 +30,8 @@ class Chapter extends Component {
           <h1 className="chapter-title narrow">{chapter.title}</h1>
           <p className="chapter-text narrow">{chapter.text}</p>
         </section>
-        <section className="right illustration">
+        <section id="story-media" className="right">
           <img
-            className="story-picture"
             src={picture}
             alt="fantasy illustration"
           />

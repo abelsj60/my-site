@@ -1,7 +1,5 @@
 /* HOME PAGE CSS */
 
-/* Page containers */
-
 .home {
   background: url('/test/howls-background-dl.jpg') no-repeat fixed center top;
 }
@@ -16,94 +14,6 @@
   height: 4000px;
 }
 
-/* Presentation elements, general */
-
-header {
-  z-index: 2;
-  height: 52px;
-  color: white;
-  background-color: transparent;
-  transition: background-color 0.7s, color 0.7s;
-  display: flex;
-  position: relative;
-  align-items: center;
-}
-
-header.opaque {
-  color: black;
-  background-color: white;
-}
-
-header section {
-  flex: 1;
-}
-
-header p {
-  display: inline;
-}
-
-header nav {
-  margin-right: 15px;
-}
-
-header a {
-  color: white;
-  transition: color 0.7s;
-  margin-left: 15px;
-}
-
-header a.opaque {
-  color: black;
-}
-
-header a:hover {
-  color: white;
-  text-decoration: underline;
-  transition: color 0s;
-}
-
-header a.opaque:hover {
-  color: black;
-}
-
-header a.active {
-  color: black;
-  text-decoration: underline;
-}
-
-footer {
-  display: flex;
-  color: white;
-  justify-content: flex-end;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  background-color: black;
-  align-items: center;
-}
-
-footer p {
-  margin-right: 15px;
-}
-
-footer nav {
-  display: none;
-}
-
-/* Presentation elements, specific */
-
-.nav-icon {
-  height: 17px;
-  width: 17px;
-  background: url('/test/sign-white-closed.png') no-repeat center;
-  display: none;
-  margin-right: 15px;
-  order: 2;
-}
-
-header.opaque .nav-icon {
-  background: url('/test/sign-black-closed.png') no-repeat center;
-}
-
 .scrolling-image {
   /* position: fixed; */
   width: 100%;
@@ -112,75 +22,15 @@ header.opaque .nav-icon {
   object-fit: cover;
 }
 
-.temp-home-content {
-  position: fixed;
-  width: 100%;
-  height: 93.3%;
-  top: 52px;
-  display: flex;
-  flex-direction: column;
-  pointer-events: none;
-}
-
-.temp-home-content.allow {
-  pointer-events: all;
-}
-
-.topics {
-  flex: 1;
-  display: flex;
-}
-
-/* ! Use justify-content: space-between instead of flex-grow? */
-
-.topics .spacer {
-  flex-grow: 1;
-}
-
-.topics a,
-h3 p {
-  padding-left: 25px;
-  padding-right: 25px;
-}
-
-.topics a p {
-  margin: 0px;
-  padding-bottom: 25px;
-}
-
-.topics a {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.25);
-  border: 0.5px solid red;
-}
-
-.topics a:hover {
-  background-color: rgba(255, 0, 0, 0.3);
-  color: white;
-}
-
-/* UNUSED */
-
-/* #StaticImage {
-  position: fixed;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  height: auto;
-} */
-
+@import 'header.css';
 @import 'more.css';
+@import 'header.css';
+@import 'footer.css';
 @import 'responsive.css';
-
-.box {
-  height: 150px;
-  width: 50px;
-  background-color: red;
-}
-
-.box {
-  height: 200px;
-}
+@import 'temp-home-content.css';
+@import 'inner-page.css';
+@import 'my-projects.css';
+@import 'my-story.css';
+@import 'journalism-n-law.css';
+@import 'alexa.css';
+@import 'react-table.css';

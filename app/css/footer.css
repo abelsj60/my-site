@@ -1,0 +1,25 @@
+/* HOME PAGE CSS */
+
+/* Footer rules */
+
+footer {
+  display: flex;
+  color: white;
+  justify-content: flex-end;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: black;
+  align-items: center;
+}
+
+footer p {
+  margin-right: 15px;
+}
+
+footer nav {
+  display: none;
+}
+
+.app-bar-text {
+  display: none;
+}

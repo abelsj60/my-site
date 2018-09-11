@@ -1,0 +1,27 @@
+/* INTERNAL PAGE CSS */
+
+/* My projects rules */
+
+#project-images {
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+}
+
+.project-text {
+  font-weight: bold;
+}
+
+.project-image {
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.project-image img {
+  width: 100%;
+}
+
+.thumbnail {
+  height: 75px;
+  margin-right: 10px;
+}

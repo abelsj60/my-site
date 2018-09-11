@@ -80,8 +80,8 @@ class JandL extends Component {
     ];
 
     return (
-      <main className='jnl internal-page'>
-        <section className='left stories'>
+      <main id="journalism-and-law" className="">
+        <section id="clips" className='left'>
           <h1>The Story</h1>
           <p>I was writing about digital media and technology for Forbes three years after I came to New York to be a professional writer. Here's some of my work.</p>
           <p></p>
@@ -118,7 +118,7 @@ class JandL extends Component {
             }
           />
         </section>
-        <section className='right pdf'>
+        <section id="pdf" className='right'>
           {
             <PDF
               file={this.state.cPDF}

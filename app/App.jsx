@@ -11,12 +11,10 @@ class App extends Component {
 
   render() {
     return (
-      <section className="content-container">
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route component={InnerContentRouter} />
-        </Switch>
-      </section>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route component={InnerContentRouter} />
+      </Switch>
     );
   }
 }
