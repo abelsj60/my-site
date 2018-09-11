@@ -2,11 +2,11 @@
 
 /* Page containers */
 
-.homeContainer {
+.home {
   background: url('/test/howls-background-dl.jpg') no-repeat fixed center top;
 }
 
-.homeWrapper {
+.wrapper {
   width: 100%;
   position: fixed;
   z-index: 0;
@@ -104,7 +104,7 @@ header.opaque .nav-icon {
   background: url('/test/sign-black-closed.png') no-repeat center;
 }
 
-.scroll-image {
+.scrolling-image {
   /* position: fixed; */
   width: 100%;
   min-height: 100vh;
@@ -112,7 +112,7 @@ header.opaque .nav-icon {
   object-fit: cover;
 }
 
-.temp-content {
+.temp-home-content {
   position: fixed;
   width: 100%;
   height: 93.3%;
@@ -122,7 +122,7 @@ header.opaque .nav-icon {
   pointer-events: none;
 }
 
-.temp-content.allow {
+.temp-home-content.allow {
   pointer-events: all;
 }
 

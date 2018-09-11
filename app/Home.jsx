@@ -3,7 +3,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Topics from './Topics.jsx';
 
-const background = '/test/howls-background-dl.jpg';
+// const background = '/test/howls-background-dl.jpg';
 const background2 = '/test/dreaming-boy-co-2.png';
 
 class Home extends Component {
@@ -41,7 +41,7 @@ class Home extends Component {
     window.addEventListener('scroll', this.setOpacity);
   }
 
-  scaleImage(event) {
+  scaleImage() {
     const scrollTop = window.pageYOffset;
     const oldPercent = (scrollTop - 0) / (3221 - 0);
     const numberForScale = 6 / ((6 - 1) * oldPercent + 1);
@@ -49,7 +49,7 @@ class Home extends Component {
     this.setState({ iScale: numberForScale });
   }
 
-  toggleHeader(event) {
+  toggleHeader() {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop >= 7) {
@@ -60,7 +60,7 @@ class Home extends Component {
   }
 
   // Bring topics onto screen
-  showTopics(event) {
+  showTopics() {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop <= 2300) {
@@ -70,7 +70,7 @@ class Home extends Component {
     }
   }
 
-  setOpacity(event) {
+  setOpacity() {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop >= 2400) {
@@ -81,7 +81,7 @@ class Home extends Component {
   }
 
   // Select a topic when scrolling's complete
-  togglePointer(event) {
+  togglePointer() {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop < 3220) {
@@ -107,18 +107,20 @@ class Home extends Component {
     };
 
     return (
-      <main className="homeContainer">
-        <section className="homeWrapper">
+      <main className="home">
+        <section className="wrapper">
           <Header isTransparent={state.isTransparent} />
           <img
-            className="scroll-image"
+            className="scrolling-image"
             style={setScale(state.iScale)}
             src={background2}
             alt="b2"
           />
         </section>
         {this.state.showTopics && (
-          <section className={'temp-content ' + setPointer(state.allowClicks)}>
+          <section
+            className={'temp-home-content ' + setPointer(state.allowClicks)}
+          >
             <Topics opacity={state.opacity} />
             <Footer opacity={state.opacity} />
           </section>

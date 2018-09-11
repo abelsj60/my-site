@@ -10,7 +10,7 @@ import Chapter from './Chapter.jsx';
 import AlexaStories from './AlexaStories.jsx';
 import storyData from './helpers/storyData.jsx';
 
-class App extends Component {
+class InnerContentRouter extends Component {
   constructor(props) {
     super(props);
   }
@@ -94,4 +94,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default InnerContentRouter;
