@@ -107,7 +107,7 @@ class Home extends Component {
     };
 
     return (
-      <main className="home">
+      <section className="home">
         <section className="wrapper">
           <Header isTransparent={state.isTransparent} />
           <img
@@ -126,7 +126,7 @@ class Home extends Component {
           </section>
         )}
         <section className="scroller" />
-      </main>
+      </section>
     );
   }
 }

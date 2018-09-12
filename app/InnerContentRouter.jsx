@@ -18,6 +18,7 @@ class App extends Component {
   render() {
     return (
       <section className="inner-page">
+        <section className="">
         <Header />
         <Switch>
           <Route
@@ -88,6 +89,7 @@ class App extends Component {
           />
           <Route component={NotFound} />
         </Switch>
+        </section>
         <Footer />
       </section>
     );
