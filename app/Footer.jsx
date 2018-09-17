@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ItemNav from './ItemNav.jsx';
 import { withRouter } from 'react-router-dom';
-// import helpers from './helpers/helpers.js';
 
 class Footer extends Component {
   constructor(props) {
@@ -15,31 +14,23 @@ class Footer extends Component {
 
     return (
       <footer style={{ opacity: this.props.opacity }}>
-        <section className="app-bar">
-          <div className="app-bar-container">
-            <div className="chapter-text-icon" />
-            <nav>
-              {chapters.map((num, index) => (
-                <ItemNav
-                  key={index}
-                  item={num}
-                  param={chapterNumber}
-                  route={route}
-                />
-              ))}
-            </nav>
-          </div>
-          <div className="borderline" />
-          <div className="app-bar-container">
-            <div className="story-text-icon" />
-            <p className="app-bar-text">Tale</p>
-          </div>
-          <div className="borderline" />
-          <div className="app-bar-container">
-            <div className="story-text-icon" />
-            <p className="app-bar-text">Bonus</p>
-          </div>
-        </section>
+        <div className="chapter-text-icon" />
+        <nav>
+          {chapters.map((num, index) => (
+            <ItemNav
+              key={index}
+              item={num}
+              param={chapterNumber}
+              route={route}
+            />
+          ))}
+        </nav>
+        <div className="borderline" />
+        <div className="story-text-icon" />
+        <p className="app-bar-text">Tale</p>
+        <div className="borderline" />
+        <div className="story-text-icon" />
+        <p className="app-bar-text">Bonus</p>
         <p className="copyright">James Abels. All rights reserved. 2018.</p>
       </footer>
     );

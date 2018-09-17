@@ -136,20 +136,19 @@ class Projects extends Component {
               </Link>
             ))}
           </nav>
-          <section className="project-text">
-            <p className="project-text">Project</p>
-            <p>{prepName(this.state.projName)}</p>
-            <p className="project-text">Type</p>
-            <p>Answer</p>
-            <p className="project-text">What I did</p>
-            <p>Answer</p>
-            <p className="project-text">Key technologies</p>
-            <p>Answer</p>
-            <p className="project-text">Description</p>
-            <p>Answer</p>
-            <p className="project-text">What you're looking at</p>
-            <p>Answer</p>
-          </section>
+          <h1>Project details</h1>
+          <p className="project-text">Project</p>
+          <p>{prepName(this.state.projName)}</p>
+          <p className="project-text">Type</p>
+          <p>Answer</p>
+          <p className="project-text">What I did</p>
+          <p>Answer</p>
+          <p className="project-text">Key technologies</p>
+          <p>Answer</p>
+          <p className="project-text">Description</p>
+          <p>Answer</p>
+          <p className="project-text">What you're looking at</p>
+          <p>Answer</p>
         </section>
         <section id="project-images" className="right">
           <section className="project-image">

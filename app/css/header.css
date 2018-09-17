@@ -7,7 +7,6 @@ header {
   background-color: transparent;
   transition: background-color 0.7s, color 0.7s;
   display: flex;
-  position: relative;
   align-items: center;
 }
 

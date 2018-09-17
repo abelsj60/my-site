@@ -1,7 +1,5 @@
 /* INTERNAL PAGE CSS */
 
-/* Page containers */
-
 .inner-page {
   display: flex;
   flex-direction: column;
@@ -9,30 +7,31 @@
 }
 
 main {
+  flex: 1;
   display: flex;
-  background-color: papayawhip;
+  /* background-color: papayawhip; */
 }
 
 .left {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: silver;
+  /* background-color: silver; */
 }
 
 .right {
   flex: 2;
 }
 
-main h1,
-main p,
+.left h1,
+.left p,
 .chapter p {
   margin-left: 25px;
   margin-right: 25px;
   white-space: pre-wrap;
 }
 
-main nav {
+.left nav {
   display: flex;
   margin-top: 25px;
   margin-left: 25px;
@@ -41,12 +40,12 @@ main nav {
   height: 40px;
 }
 
-main a p {
+.left a p {
   text-align: center;
   flex: 1;
 }
 
-main a.active {
+.left a.active {
   flex: 1;
   background-color: red;
   color: white;
@@ -54,16 +53,42 @@ main a.active {
   align-items: center;
 }
 
-main a.inactive {
+.left a.inactive {
   flex: 1;
   color: black;
   border: 0.5px solid red;
   display: flex;
-  background-color: silver;
+  /* background-color: silver; */
   align-items: center;
 }
 
-main a.inactive:hover {
+.left a.inactive:hover {
   background-color: red;
   color: white;
+}
+
+@media only screen and (max-width: 900px) {
+  main {
+    flex-direction: column;
+    position: relative;
+  }
+
+  .left {
+    /* flex: 0; */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .left nav {
+    display: none;
+  }
+
+  .left h1 {
+    margin: 0px;
+    flex: 0;
+    padding: 25px;
+  }
 }

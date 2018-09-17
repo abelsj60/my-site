@@ -1,5 +1,9 @@
 /* HOME PAGE CSS */
 
+body {
+  font-family: lato;
+}
+
 .home {
   background: url('/test/howls-background-dl.jpg') no-repeat fixed center top;
 }
@@ -8,6 +12,10 @@
   width: 100%;
   position: fixed;
   z-index: 0;
+}
+
+.wrapper header {
+  position: relative;
 }
 
 .scroller {
@@ -22,9 +30,10 @@
   object-fit: cover;
 }
 
+@import 'css-reset.css';
+/* @import 'app-view.css'; */
 @import 'header.css';
-@import 'more.css';
-@import 'header.css';
+/* @import 'more.css'; */
 @import 'footer.css';
 @import 'responsive.css';
 @import 'temp-home-content.css';
@@ -34,3 +43,5 @@
 @import 'journalism-n-law.css';
 @import 'alexa.css';
 @import 'react-table.css';
+
+/* https://learn.shayhowe.com/html-css/positioning-content/ */

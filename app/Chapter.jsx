@@ -15,7 +15,7 @@ class Chapter extends Component {
     const picture = helpers.pickPicture(chapterNumber);
 
     return (
-      <main id="my-story" className="narrow">
+      <main id="my-story">
         <section id="chapter" className="left">
           <nav>
             {chapters.map((num, index) => (
@@ -27,14 +27,11 @@ class Chapter extends Component {
               />
             ))}
           </nav>
-          <h1 className="chapter-title narrow">{chapter.title}</h1>
-          <p className="chapter-text narrow">{chapter.text}</p>
+          <h1 className="chapter-title">{chapter.title}</h1>
+          <p className="chapter-text">{chapter.text}</p>
         </section>
         <section id="story-media" className="right">
-          <img
-            src={picture}
-            alt="fantasy illustration"
-          />
+          <img src={picture} alt="fantasy illustration" />
         </section>
       </main>
     );

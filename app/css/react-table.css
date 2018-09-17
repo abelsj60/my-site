@@ -1,4 +1,6 @@
-/* REACT TABLE CSS */
+/* MY REACT TABLE CSS */
+
+/* Media query turning off .ReactTable via { display: none } can be found in node_modules/react-table/react-table.css */
 
 .ReactTable {
   border: none;

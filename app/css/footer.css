@@ -1,15 +1,12 @@
-/* HOME PAGE CSS */
-
 /* Footer rules */
 
 footer {
   display: flex;
-  color: white;
   justify-content: flex-end;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  background-color: black;
   align-items: center;
+  color: white;
+  height: 48px;
+  background-color: black;
 }
 
 footer p {
@@ -22,4 +19,32 @@ footer nav {
 
 .app-bar-text {
   display: none;
+}
+
+@media only screen and (max-width: 900px) {
+  footer {
+    /* display: flex; */
+  }
+
+  .borderline {
+    width: 1px;
+    border: 0.2px solid red;
+  }
+
+  footer p {
+    white-space: prewrap;
+    margin-left: 1px;
+    display: flex;
+    align-items: center;
+  }
+
+  footer nav {
+    display: flex;
+    align-items: center;
+    height: 35px;
+  }
+
+  .copyright {
+    display: none;
+  }
 }
