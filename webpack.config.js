@@ -1,5 +1,3 @@
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 module.exports = {
   entry: './app/index.js', // assumes your entry point is the index.js in the root of your project folder
   output: {
@@ -17,19 +15,6 @@ module.exports = {
           presets: ['react', 'env'] // if you aren't using 'babel-preset-env', then omit the 'env'
         }
       },
-      /* {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              // you can specify a publicPath here
-              // by default it use publicPath in webpackOptions.output
-            }
-          },
-          'css-loader'
-        ]
-      }, */
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
@@ -48,12 +33,5 @@ module.exports = {
         ]
       }
     ]
-  } /*,
-  plugins: [
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: '[name].css'
-    })
-  ] */
+  }
 };
