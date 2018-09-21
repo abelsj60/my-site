@@ -78,6 +78,11 @@ class JandL extends Component {
 
     return (
       <main id="journalism-and-law" className="">
+        <blockquote>
+          I was writing about digital media and technology for Forbes three
+          years after I came to New York to be a professional writer. Here's
+          some of my work.
+        </blockquote>
         <section id="clips" className="left">
           <h1>The Story</h1>
           <p>
@@ -124,7 +129,7 @@ class JandL extends Component {
           />
         </section>
         <section id="pdf" className="right">
-          {<PDF file={this.state.cPDF} scale={1.5} key={this.state.cPDF} />}
+          <PDF file={this.state.cPDF} scale={1.5} key={this.state.cPDF} />
         </section>
       </main>
     );

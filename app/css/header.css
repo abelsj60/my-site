@@ -22,6 +22,7 @@ header section {
 header p {
   display: inline;
   margin-left: 15px;
+  font-size: 1.3rem;
 }
 
 header nav {
@@ -64,4 +65,49 @@ header a.active {
 
 header.opaque .nav-icon {
   background: url('/test/sign-black-closed.png') no-repeat center;
+}
+
+@media only screen and (max-width: 730px) {
+  header section.header-menu-open {
+    display: none;
+  }
+
+  header nav {
+    display: none !important;
+  }
+
+  header nav.header-menu-open {
+    display: flex !important;
+    justify-content: center !important;
+    flex-grow: 1 !important;
+    margin-right: 0 !important;
+  }
+
+  .nav-icon {
+    display: inline-block !important;
+  }
+
+  .nav-icon:hover {
+    background: url('/test/sign-white-open.png') no-repeat center !important;
+  }
+
+  .nav-icon.header-menu-open {
+    background: url('/test/sign-white-open.png') no-repeat center !important;
+  }
+
+  .nav-icon.header-menu-open:hover {
+    background: url('/test/sign-white-closed.png') no-repeat center !important;
+  }
+
+  header.opaque .nav-icon:hover {
+    background: url('/test/sign-black-open.png') no-repeat center !important;
+  }
+
+  header.opaque .nav-icon.header-menu-open {
+    background: url('/test/sign-black-open.png') no-repeat center !important;
+  }
+
+  header.opaque .nav-icon.header-menu-open:hover {
+    background: url('/test/sign-black-closed.png') no-repeat center !important;
+  }
 }

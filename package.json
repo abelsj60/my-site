@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@kennethormandy/react-fittext": "^0.3.0",
     "body-parser": "^1.18.3",
     "copy-webpack-plugin": "^4.5.2",
     "exenv": "^1.2.2",

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import FitText from '@kennethormandy/react-fittext';
 
 const projectData = [
   {
@@ -123,6 +124,7 @@ class Projects extends Component {
 
     return (
       <main id="my-projects" className="">
+        <blockquote>{prepName(this.state.projName)}</blockquote>
         <section id="project-info" className="left">
           <nav>
             {projectData.map((project, index) => (

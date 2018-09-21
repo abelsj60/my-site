@@ -1,7 +1,12 @@
 /* HOME PAGE CSS */
 
-body {
+html {
   font-family: lato;
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.5rem;
 }
 
 .home {

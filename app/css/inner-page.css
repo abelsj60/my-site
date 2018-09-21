@@ -1,4 +1,4 @@
-/* INTERNAL PAGE CSS */
+/* Intenal page CSS */
 
 .inner-page {
   display: flex;
@@ -6,10 +6,21 @@
   height: 100vh;
 }
 
+p {
+}
+
 main {
   flex: 1;
   display: flex;
   /* background-color: papayawhip; */
+}
+
+#quote-container {
+  display: none;
+}
+
+blockquote {
+  display: none;
 }
 
 .left {
@@ -74,7 +85,6 @@ main {
   }
 
   .left {
-    /* flex: 0; */
     position: absolute;
     height: 100%;
     width: 100%;
@@ -90,5 +100,30 @@ main {
     margin: 0px;
     flex: 0;
     padding: 25px;
+  }
+
+  #quote-container {
+    display: block;
+    flex: 1;
+  }
+
+  blockquote {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: normal;
+    background-color: whitesmoke;
+    color: darkgrey;
+
+    /* height: auto;
+    flex: 1;
+    font-size: 2em;
+    font-style: italic;
+    line-height: 2vw; */
   }
 }
