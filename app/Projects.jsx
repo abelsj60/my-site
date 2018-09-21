@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import FitText from '@kennethormandy/react-fittext';
+import ReactFitText from 'react-fittext';
 
 const projectData = [
   {
@@ -124,7 +124,9 @@ class Projects extends Component {
 
     return (
       <main id="my-projects" className="">
-        <blockquote>{prepName(this.state.projName)}</blockquote>
+        <ReactFitText compressor={1} minFontSize={48}>
+          <blockquote>{prepName(this.state.projName)}</blockquote>
+        </ReactFitText>
         <section id="project-info" className="left">
           <nav>
             {projectData.map((project, index) => (
@@ -178,6 +180,7 @@ class Projects extends Component {
             )}
           </section>
         </section>
+        <blockquote>{prepName(this.state.projCaption)}</blockquote>
       </main>
     );
   }

@@ -12,6 +12,7 @@ p {
 main {
   flex: 1;
   display: flex;
+  line-height: normal;
   /* background-color: papayawhip; */
 }
 
@@ -108,22 +109,25 @@ blockquote {
   }
 
   blockquote {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    min-height: 85px;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    line-height: normal;
-    background-color: whitesmoke;
-    color: darkgrey;
+    background-color: deepskyblue;
+    color: white;
+  }
 
-    /* height: auto;
-    flex: 1;
-    font-size: 2em;
-    font-style: italic;
-    line-height: 2vw; */
+  blockquote:first-child {
+    margin-top: 15px;
+  }
+
+  blockquote:last-child {
+    margin-bottom: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 2rem;
   }
 }

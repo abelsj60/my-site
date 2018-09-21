@@ -43,7 +43,7 @@ class Footer extends Component {
         <span className="app-bar-spacer" />
         <section className="app-bar-button">
           <img src="" alt="" className="app-bar-icon" />
-          <p className="app-bar-text">Details</p>
+          <p className="app-bar-text">Contact</p>
         </section>
         <span className="app-bar-spacer" />
         <p className="copyright">James Abels. All rights reserved. 2018.</p>
