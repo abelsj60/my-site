@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import ReactFitText from 'react-fittext';
+import MultiProjectNav from './MultiProjectNav.jsx';
+import SingleProjectNav from './SingleProjectNav.jsx';
+import BlockQuote from './BlockQuote.jsx';
 
 const projectData = [
   {
@@ -16,7 +18,7 @@ const projectData = [
       'https://picsum.photos/874/569/?random',
       'https://picsum.photos/875/569/?random'
     ],
-    caption: 'customizes interactive video for every viewer'
+    caption: 'Customized video interactivity'
   },
   {
     name: 'slingshot',
@@ -31,8 +33,7 @@ const projectData = [
       'https://picsum.photos/877/569/?random',
       'https://picsum.photos/878/569/?random'
     ],
-    caption:
-      'perfectly choreographs live software presentations around the world'
+    caption: 'Perfect software demos'
   },
   {
     name: 'tmmnews',
@@ -47,7 +48,7 @@ const projectData = [
       'https://picsum.photos/880/569/?random',
       'https://picsum.photos/881/569/?random'
     ],
-    caption: 'is a bespoke video news site for episodic content'
+    caption: 'Bespoke video news'
   }
 ];
 
@@ -105,54 +106,29 @@ class Projects extends Component {
     }
   }
 
-  render() {
-    const urlName = this.props.match.params.name;
-    const setActiveItem = function(mappedWith, urlItem) {
-      if (mappedWith === urlItem) {
-        return 'active';
-      } else {
-        return 'inactive';
-      }
-    };
-    const prepName = function(name) {
-      if (name === 'tmmnews') {
-        return name.slice(0, 3).toUpperCase() + name.slice(3);
-      } else {
-        return name.slice(0, 1).toUpperCase() + name.slice(1);
-      }
-    };
+  prepName(name) {
+    if (name === 'tmmnews') {
+      return name.slice(0, 3).toUpperCase() + name.slice(3);
+    } else {
+      return name.slice(0, 1).toUpperCase() + name.slice(1);
+    }
+  }
 
+  render() {
     return (
       <main id="my-projects" className="">
         <ReactFitText compressor={1} minFontSize={48}>
-          <blockquote>{prepName(this.state.projName)}</blockquote>
+          <BlockQuote text={this.prepName(this.state.projName)} />
         </ReactFitText>
         <section id="project-info" className="left">
-          <nav>
-            {projectData.map((project, index) => (
-              <Link
-                key={index}
-                to={'/projects/' + project.name + '/1'}
-                onClick={() => this.updateState(null, project)}
-                className={setActiveItem(project.name, urlName)}
-              >
-                <p>{prepName(project.name)}</p>
-              </Link>
-            ))}
+          <nav id="desktop-project-nav">
+            <MultiProjectNav
+              projectData={projectData}
+              prepName={this.prepName}
+              projName={this.state.projName}
+              updatePicIndex={this.updatePicIndex}
+            />
           </nav>
-          <h1>Project details</h1>
-          <p className="project-text">Project</p>
-          <p>{prepName(this.state.projName)}</p>
-          <p className="project-text">Type</p>
-          <p>Answer</p>
-          <p className="project-text">What I did</p>
-          <p>Answer</p>
-          <p className="project-text">Key technologies</p>
-          <p>Answer</p>
-          <p className="project-text">Description</p>
-          <p>Answer</p>
-          <p className="project-text">What you're looking at</p>
-          <p>Answer</p>
         </section>
         <section id="project-images" className="right">
           <section className="project-image">
@@ -161,26 +137,19 @@ class Projects extends Component {
               alt="mainPic"
             />
           </section>
-          <section className="project-thumbnails">
-            {this.state.projThumbs.map(
-              (thumbnail, index) =>
-                thumbnail && (
-                  <Link
-                    key={index}
-                    to={'/projects/' + this.state.projName + '/' + index}
-                    onClick={() => this.updatePicIndex(null, index)}
-                  >
-                    <img
-                      className="thumbnail"
-                      src={thumbnail}
-                      alt={'thumbnail ' + index}
-                    />
-                  </Link>
-                )
-            )}
+          <section id="thumbnails-main" className="project-thumbnails">
+            <SingleProjectNav
+              thumbnails={this.state.projThumbs}
+              projName={this.props.projName}
+              updatePicIndex={this.updatePicIndex}
+            />
           </section>
+          <BlockQuote
+            elementId="new-block"
+            text={this.prepName(this.state.projCaption)}
+          />
         </section>
-        <blockquote>{prepName(this.state.projCaption)}</blockquote>
+        <BlockQuote text={this.prepName(this.state.projCaption)} />
       </main>
     );
   }
