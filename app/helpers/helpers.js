@@ -26,9 +26,11 @@ function pickPicture(num) {
 
 function idLinkPath(linkText) {
   const linkPath =
-    linkText === 'My projects'
+    linkText === 'Projects'
       ? '/projects'
-      : linkText === 'My story' ? '/chapter' : '/jnl';
+      : linkText === 'The story'
+        ? '/chapter'
+        : '/jnl';
   return linkPath;
 }
 

@@ -56,57 +56,19 @@ class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      projName: '',
-      projThumbs: [],
-      projImgs: '',
-      projCaption: '',
-      picIndex: null
+      name: '',
+      thumbnails: [],
+      images: '',
+      caption: '',
+      pictureIndex: null
     };
 
-    this.getProjData = this.getProjData.bind(this);
     this.updateState = this.updateState.bind(this);
-    this.updatePicIndex = this.updatePicIndex.bind(this);
   }
 
-  componentDidMount() {
-    const { params } = this.props.match;
-    const pIndex = params.thumbnail;
-    const pData = this.getProjData(null, params.name);
+  get projectName() {
+    const name = this.state.name;
 
-    this.setState({
-      projName: pData.name,
-      projThumbs: pData.thumbnails,
-      projImgs: pData.full,
-      projCaption: pData.caption,
-      picIndex: pIndex
-    });
-  }
-
-  updateState(event, project) {
-    this.setState({
-      projName: project.name,
-      projThumbs: project.thumbnails,
-      projImgs: project.full,
-      projCaption: project.caption,
-      picIndex: 1
-    });
-  }
-
-  updatePicIndex(event, index) {
-    this.setState({ picIndex: index });
-  }
-
-  getProjData(event, project) {
-    if (project === 'arrow') {
-      return projectData[0];
-    } else if (project === 'slingshot') {
-      return projectData[1];
-    } else if (project === 'tmmnews') {
-      return projectData[2];
-    }
-  }
-
-  prepName(name) {
     if (name === 'tmmnews') {
       return name.slice(0, 3).toUpperCase() + name.slice(3);
     } else {
@@ -114,42 +76,70 @@ class Projects extends Component {
     }
   }
 
+  componentDidMount() {
+    const stateData = projectData.filter(
+      project => project.name === this.props.match.params.name
+    )[0];
+
+    this.setState({
+      name: stateData.name,
+      thumbnails: stateData.thumbnails,
+      images: stateData.full,
+      caption: stateData.caption,
+      pictureIndex: this.props.match.params.thumbnail
+    });
+  }
+
+  updateState(unused, project, index) {
+    // ~ja ? Is this necssary? Can't I just setState?
+
+    this.setState({
+      name: project.name,
+      thumbnails: project.thumbnails,
+      images: project.full,
+      caption: project.caption,
+      pictureIndex: index
+    });
+  }
+
   render() {
     return (
       <main id="my-projects" className="">
-        <ReactFitText compressor={1} minFontSize={48}>
-          <BlockQuote text={this.prepName(this.state.projName)} />
-        </ReactFitText>
-        <section id="project-info" className="left">
-          <nav id="desktop-project-nav">
-            <MultiProjectNav
-              projectData={projectData}
-              prepName={this.prepName}
-              projName={this.state.projName}
-              updatePicIndex={this.updatePicIndex}
-            />
-          </nav>
-        </section>
-        <section id="project-images" className="right">
-          <section className="project-image">
-            <img
-              src={this.state.projImgs[this.state.picIndex - 1]}
-              alt="mainPic"
-            />
-          </section>
-          <section id="thumbnails-main" className="project-thumbnails">
-            <SingleProjectNav
-              thumbnails={this.state.projThumbs}
-              projName={this.props.projName}
-              updatePicIndex={this.updatePicIndex}
-            />
-          </section>
-          <BlockQuote
-            elementId="new-block"
-            text={this.prepName(this.state.projCaption)}
+        <section id="desktop-nav" className="left">
+          <MultiProjectNav
+            projectData={projectData.filter(
+              project => project.name !== this.state.name
+            )}
+            name={this.state.name}
+            updateState={this.updateState}
           />
         </section>
-        <BlockQuote text={this.prepName(this.state.projCaption)} />
+        <section id="project-images" className="right">
+          <ReactFitText compressor={1} minFontSize={48}>
+            <BlockQuote text={this.projectName} />
+          </ReactFitText>
+          <section id="images-container">
+            <section className="project-image">
+              <img
+                src={this.state.images[this.state.pictureIndex - 1]}
+                alt="mainPic"
+              />
+            </section>
+            <section id="thumbnails-main" className="project-thumbnails">
+              {this.state.name && (
+                <SingleProjectNav
+                  project={
+                    projectData.filter(
+                      project => project.name === this.state.name
+                    )[0]
+                  }
+                  updateState={this.updateState}
+                />
+              )}
+            </section>
+          </section>
+          <BlockQuote elementId="new-block" text={this.state.caption} />
+        </section>
       </main>
     );
   }

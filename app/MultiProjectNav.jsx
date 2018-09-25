@@ -4,22 +4,33 @@ import SingleProjectNav from './SingleProjectNav.jsx';
 class MultiProjectNav extends Component {
   constructor(props) {
     super(props);
+
+    this.prepName = this.prepName.bind(this);
+  }
+
+  prepName(name) {
+    // ~ja Needed b/c we're listing ALL projects, not just the active one
+
+    if (name === 'tmmnews') {
+      return name.slice(0, 3).toUpperCase() + name.slice(3);
+    } else {
+      return name.slice(0, 1).toUpperCase() + name.slice(1);
+    }
   }
 
   render() {
     return this.props.projectData.map((project, index) => (
-      <div id="main-nav-group" key={index}>
+      <section id="nav-group" key={index}>
         <h1>
-          {this.props.prepName(project.name)} | {project.caption}
+          {this.prepName(project.name)} | {project.caption}
         </h1>
-        <section className="project-thumbnails">
+        <nav className="project-thumbnails">
           <SingleProjectNav
-            thumbnails={project.thumbnails}
-            projName={project.name}
-            updatePicIndex={this.props.updatePicIndex}
+            project={project}
+            updateState={this.props.updateState}
           />
-        </section>
-      </div>
+        </nav>
+      </section>
     ));
   }
 }

@@ -24,9 +24,9 @@ class Header extends Component {
   render() {
     const currentPath = this.props.location.pathname;
     const navLinks = [
-      'My projects',
-      'My story',
-      'Journalism & Law' /*,
+      'Projects',
+      'The story',
+      'Journalism' /*,
       'Alexa adventures' */
     ];
 

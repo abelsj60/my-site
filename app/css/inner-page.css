@@ -9,123 +9,48 @@
 main {
   flex: 1;
   display: flex;
-  line-height: normal;
   background-color: whitesmoke;
-  /* background-color: papayawhip; */
-}
-
-#quote-container {
-  display: none;
-}
-
-blockquote {
-  display: none;
+  flex-direction: column;
 }
 
 .left {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  /* background-color: silver; */
+  display: none;
 }
 
 .right {
   flex: 2;
-}
-
-.left h1,
-.left p,
-.chapter p {
-  margin-left: 25px;
-  margin-right: 25px;
-  white-space: pre-wrap;
-}
-
-.left nav {
   display: flex;
-  margin-top: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
+  flex-direction: column;
+}
+
+#quote-container {
+  display: block;
+  flex: 1;
+}
+
+blockquote {
+  margin-left: 10px;
+  margin-right: 10px;
+  min-height: 85px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: deepskyblue;
+  color: white;
+}
+
+blockquote:first-child {
+  margin-top: 15px;
+}
+
+blockquote:last-child {
   margin-bottom: 15px;
-  height: 40px;
+  font-size: 2rem;
 }
 
-.left a p {
-  text-align: center;
-  flex: 1;
-}
-
-.left a.active {
-  flex: 1;
-  background-color: red;
-  color: white;
-  display: flex;
-  align-items: center;
-}
-
-.left a.inactive {
-  flex: 1;
-  color: black;
-  border: 0.5px solid red;
-  display: flex;
-  /* background-color: silver; */
-  align-items: center;
-}
-
-.left a.inactive:hover {
-  background-color: red;
-  color: white;
-}
-
-@media only screen and (max-width: 758px) {
-  main {
-    flex-direction: column;
-    position: relative;
-  }
-
-  .left {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-
-  .left nav {
-    display: none;
-  }
-
-  .left h1 {
-    margin: 0px;
-    flex: 0;
-    padding: 25px;
-  }
-
-  #quote-container {
-    display: block;
-    flex: 1;
-  }
-
-  blockquote {
-    margin-left: 10px;
-    margin-right: 10px;
-    min-height: 85px;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: deepskyblue;
-    color: white;
-  }
-
-  blockquote:first-child {
-    margin-top: 15px;
-  }
-
-  blockquote:last-child {
-    margin-bottom: 15px;
-    padding-left: 40px;
-    padding-right: 40px;
-    font-size: 2rem;
-  }
+@media only screen and (min-width: 876px) {
+  /* .right {
+    flex: none;
+  } */
 }

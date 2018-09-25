@@ -7,13 +7,15 @@ class SingleProjectNav extends Component {
   }
 
   render() {
-    return this.props.thumbnails.map(
+    return this.props.project.thumbnails.map(
       (thumbnail, index) =>
         thumbnail && (
           <Link
             key={index}
-            to={'/projects/' + this.props.projName + '/' + index}
-            onClick={() => this.props.updatePicIndex(null, index)}
+            to={'/projects/' + this.props.project.name + '/' + index}
+            onClick={() =>
+              this.props.updateState(null, this.props.project, index)
+            }
           >
             <img
               className="thumbnail"
