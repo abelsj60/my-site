@@ -1,19 +1,88 @@
 /* My story rules */
 
-#story-media {
+#chapter {
+  /* Need display: flex to show content in .left container; it's otherwise set to none */
+
   display: flex;
   flex-direction: column;
-  margin: 0px;
-  overflow: hidden;
+  position: absolute;
+  top: 52px;
+  bottom: 48px;
+  padding: 25px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#chapter nav {
+  display: none;
+}
+
+#chapter h1 {
+  font-size: 3rem;
+  line-height: normal;
+  margin-bottom: 25px;
+}
+
+.chapter-text {
+  font-size: 1.75rem;
+  line-height: normal;
+  white-space: pre-wrap;
+}
+
+#story-media {
+  justify-content: center;
 }
 
 #story-media img {
-  height: 100%;
   object-fit: cover;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (min-width: 849px) {
+  #my-story {
+    flex-direction: row;
+  }
+
   #chapter {
-    display: none;
+    flex: 1;
+    position: unset;
+    background-color: unset;
+    color: black;
+  }
+
+  #chapter nav {
+    display: flex;
+    margin-bottom: 20px;
+    min-height: 40px;
+  }
+
+  #chapter nav a p {
+    flex: 1;
+    text-align: center;
+  }
+
+  #chapter a.active {
+    flex: 1;
+    color: deepskyblue;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+  }
+
+  #chapter a.inactive {
+    flex: 1;
+    color: whitesmoke;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+  }
+
+  #chapter nav a.inactive:hover {
+    color: deepskyblue;
+    background-color: antiquewhite;
+  }
+
+  #story-media img {
+    flex: 1;
+    max-width: 100%;
   }
 }

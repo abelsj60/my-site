@@ -45,7 +45,7 @@
   max-width: 100%;
 }
 
-@media only screen and (min-width: 564px) {
+@media only screen and (min-width: 536px) {
   #images-container {
     flex-direction: row-reverse;
   }
@@ -63,11 +63,15 @@
   }
 
   #thumbnails-main a:last-child {
+    /*
+    ~ja Needed too offset this mobile rule:
+    .project-thumbnails a:not(:last-child)
+    */
     margin-right: 5px;
   }
 }
 
-@media only screen and (min-width: 876px) {
+@media only screen and (min-width: 849px) {
   .left {
     display: flex;
   }
@@ -94,7 +98,7 @@
   }
 
   #nav-group h1:not(:last-child) {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   #images-container {
@@ -110,6 +114,16 @@
   }
 
   #nav-group nav {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1265px) {
+  #thumbnails-main {
+    flex-direction: row;
+  }
+
+  #images-container {
     max-width: 100%;
   }
 }

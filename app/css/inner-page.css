@@ -49,7 +49,7 @@ blockquote:last-child {
   font-size: 2rem;
 }
 
-@media only screen and (min-width: 876px) {
+@media only screen and (min-width: 849px) {
   /* .right {
     flex: none;
   } */
