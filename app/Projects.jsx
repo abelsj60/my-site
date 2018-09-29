@@ -55,20 +55,9 @@ const projectData = [
 class Projects extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: '',
-      thumbnails: [],
-      images: '',
-      caption: '',
-      pictureIndex: null
-    };
-
-    this.updateState = this.updateState.bind(this);
   }
 
-  get projectName() {
-    const name = this.state.name;
-
+  formatProjectName(name) {
     if (name === 'tmmnews') {
       return name.slice(0, 3).toUpperCase() + name.slice(3);
     } else {
@@ -76,69 +65,44 @@ class Projects extends Component {
     }
   }
 
-  componentDidMount() {
-    const stateData = projectData.filter(
+  render() {
+    const filteredProjectData = projectData.filter(
       project => project.name === this.props.match.params.name
     )[0];
+    const projectName = filteredProjectData.name;
+    const formattedProjectName = this.formatProjectName(
+      filteredProjectData.name
+    );
+    const projectCaption = filteredProjectData.caption;
+    const fullSizeProjectImages = filteredProjectData.full;
+    const indexForFullSizeProjectImages = this.props.match.params.thumbnail;
 
-    this.setState({
-      name: stateData.name,
-      thumbnails: stateData.thumbnails,
-      images: stateData.full,
-      caption: stateData.caption,
-      pictureIndex: this.props.match.params.thumbnail
-    });
-  }
-
-  updateState(unused, project, index) {
-    // ~ja ? Is this necssary? Can't I just setState?
-
-    this.setState({
-      name: project.name,
-      thumbnails: project.thumbnails,
-      images: project.full,
-      caption: project.caption,
-      pictureIndex: index
-    });
-  }
-
-  render() {
     return (
       <main id="my-projects" className="">
         <section id="desktop-nav" className="left">
           <MultiProjectNav
             projectData={projectData.filter(
-              project => project.name !== this.state.name
+              project => project.name !== projectName
             )}
-            name={this.state.name}
-            updateState={this.updateState}
+            formatProjectName={this.formatProjectName}
           />
         </section>
         <section id="project-images" className="right">
           <ReactFitText compressor={1} minFontSize={48}>
-            <BlockQuote text={this.projectName} />
+            <BlockQuote text={formattedProjectName} />
           </ReactFitText>
           <section id="images-container">
             <section className="project-image">
               <img
-                src={this.state.images[this.state.pictureIndex - 1]}
+                src={fullSizeProjectImages[indexForFullSizeProjectImages - 1]}
                 alt="mainPic"
               />
             </section>
             <section id="thumbnails-main" className="project-thumbnails">
-              {this.state.name && (
-                <SingleProjectNav
-                  project={
-                    projectData.filter(
-                      project => project.name === this.state.name
-                    )[0]
-                  }
-                  updateState={this.updateState}
-                />
-              )}
+              {<SingleProjectNav project={filteredProjectData} />}
             </section>
           </section>
-          <BlockQuote elementId="new-block" text={this.state.caption} />
+          <BlockQuote elementId="new-block" text={projectCaption} />
         </section>
       </main>
     );

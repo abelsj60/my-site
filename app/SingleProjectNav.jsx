@@ -13,9 +13,6 @@ class SingleProjectNav extends Component {
           <Link
             key={index}
             to={'/projects/' + this.props.project.name + '/' + index}
-            onClick={() =>
-              this.props.updateState(null, this.props.project, index)
-            }
           >
             <img
               className="thumbnail"
