@@ -1,8 +1,45 @@
 /* Full Page Index Menu rule */
 
 #full-page-index-menu {
-  position: absolute;
-  top: 52px;
-  bottom: 48px;
-  background-color: white;
+  align-items: center;
+}
+
+#full-page-index-menu nav {
+  overflow: auto;
+  margin: 25px;
+}
+
+#full-page-index-menu nav a.active {
+  color: yellow;
+}
+
+#full-page-index-menu nav a.active:hover {
+  color: black;
+}
+
+#full-page-index-menu nav a.inactive {
+  color: black;
+}
+
+#full-page-index-menu nav a.inactive:hover {
+  color: cornflowerblue;
+}
+
+#source,
+#story-chapter {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+#hed {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+#story-title {
+  font-size: 4rem;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 25px;
 }

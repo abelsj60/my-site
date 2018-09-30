@@ -1,25 +1,25 @@
-import chText from './siteText.js';
+import chapterText from './siteText.js';
 
 function pickContent(num) {
-  if (num === '1') {
-    return chText['1'];
-  } else if (num === '2') {
-    return chText['2'];
-  } else if (num === '3') {
-    return chText['3'];
+  if (parseInt(num) === 1) {
+    return chapterText[0];
+  } else if (parseInt(num) === 2) {
+    return chapterText[1];
+  } else if (parseInt(num) === 3) {
+    return chapterText[2];
   } else {
-    return chText['4'];
+    return chapterText[3];
   }
 }
 
 function pickPicture(num) {
-  if (num === '1') {
+  if (parseInt(num) === 1) {
     return '/test/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
-  } else if (num === '2') {
+  } else if (parseInt(num) === 2) {
     return '/test/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
-  } else if (num === '3') {
+  } else if (parseInt(num) === 3) {
     return '/test/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
-  } else if (num === '4') {
+  } else {
     return '/test/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
   }
 }

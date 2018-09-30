@@ -23,21 +23,11 @@ class AppBarMenu extends Component {
         : 'Clips';
   }
 
-  handleClick() {
-    console.log('HI!');
-    return <FullPageIndexMenu />;
-  }
-
   render() {
     return (
       <Fragment>
         <span className="app-bar-spacer" />
-        <section
-          className="app-bar-button"
-          onClick={() => {
-            this.handleClick();
-          }}
-        >
+        <section className="app-bar-button">
           <img src="" alt="" className="app-bar-icon" />
           <p className="app-bar-text">{this.selectMenuText()}</p>
         </section>
