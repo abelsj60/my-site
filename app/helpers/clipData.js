@@ -1,3 +1,5 @@
+import allThingsConsidered from '../../public/clips/all-things-considered';
+
 export default [
   {
     headline: 'Can Apple Be Out-Appled?',
@@ -5,12 +7,22 @@ export default [
     stIndex: '2'
   },
   {
-    headline: 'On Innovation: The Bone Doctor\'s Knees, The Clean Air Catalyst, and Cracking the College Code',
+    headline: "On Innovation: The Bone Doctor's Knees",
     publication: 'Seton Hall Magazine',
     stIndex: '3'
   },
   {
-    headline: 'Commodity Beckons New TV Services From Comcast, Microsoft...',
+    headline: 'On Innovation: The Clean Air Catalyst',
+    publication: 'Seton Hall Magazine',
+    stIndex: '4'
+  },
+  {
+    headline: 'On Innovation: Cracking the College Code',
+    publication: 'Seton Hall Magazine',
+    stIndex: '5'
+  },
+  {
+    headline: 'Commodity Beckons New TV Services From Comcast...',
     publication: 'Blouin News',
     stIndex: '3'
   },
@@ -37,6 +49,8 @@ export default [
   {
     headline: 'All Things Considered Digitally',
     publication: 'Forbes',
+    byline: 'James Erik Abels, 11.10.08, 6:15 PM ET',
+    text: allThingsConsidered,
     stIndex: '1'
   },
   {

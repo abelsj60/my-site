@@ -1,52 +1,32 @@
 import React, { Component } from 'react';
-// import ItemNav from './ItemNav.jsx';
 import { withRouter } from 'react-router-dom';
+import AppBarMenu from './AppBarMenu.jsx';
 
 class Footer extends Component {
   constructor(props) {
     super(props);
   }
 
-  render() {
-    // const chapters = [1, 2, 3, 4];
-    // const route = '/chapter/';
-    // const chapterNumber = this.props.location.pathname.split('/')[2];
-
-    function setFooterText(props) {
-      const siteSection = props.location.pathname.split('/')[1];
-
-      if (siteSection === 'projects') {
-        return 'Projects';
-      } else if (siteSection === 'chapter') {
-        return 'Chapters';
-      } else if (siteSection === 'jnl') {
-        return 'Clips';
-      }
+  get isAnInnerPage() {
+    {
+      /* ~ja Home is .length 1 (i.e., '/'), anything more is an inner page */
     }
 
+    return this.props.location.pathname.length > 1;
+  }
+
+  get footerType() {
+    return this.isAnInnerPage ? 'inner-page-footer' : '';
+  }
+
+  render() {
     return (
-      <footer style={{ opacity: this.props.opacity }}>
-        <span className="app-bar-spacer" />
-        <section className="app-bar-button">
-          <img src="" alt="" className="app-bar-icon" />
-          <p className="app-bar-text">{setFooterText(this.props)}</p>
-        </section>
-        <span className="app-bar-spacer" />
-        <div className="borderline" />
-        <span className="app-bar-spacer" />
-        <section className="app-bar-button">
-          <img src="" alt="" className="app-bar-icon" />
-          <p className="app-bar-text">Text</p>
-        </section>
-        <span className="app-bar-spacer" />
-        <div className="borderline" />
-        <span className="app-bar-spacer" />
-        <section className="app-bar-button">
-          <img src="" alt="" className="app-bar-icon" />
-          <p className="app-bar-text">Contact</p>
-        </section>
-        <span className="app-bar-spacer" />
-        <p className="copyright">James Abels. All rights reserved. 2018.</p>
+      <footer
+        className={this.footerType}
+        style={{ opacity: this.props.opacity }}
+      >
+        {this.isAnInnerPage && <AppBarMenu />}
+        <p className={'copyright'}>James Abels. All rights reserved. 2018.</p>
       </footer>
     );
   }

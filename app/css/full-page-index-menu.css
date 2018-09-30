@@ -1,0 +1,8 @@
+/* Full Page Index Menu rule */
+
+#full-page-index-menu {
+  position: absolute;
+  top: 52px;
+  bottom: 48px;
+  background-color: white;
+}

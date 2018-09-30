@@ -76,7 +76,11 @@ footer nav {
     height: 35px;
   }
 
-  .copyright {
+  .jnl {
+    display: none;
+  }
+
+  .inner-page-footer .copyright {
     display: none;
   }
 }
