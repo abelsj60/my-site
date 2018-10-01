@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import FullPageIndexMenu from './FullPageIndexMenu.jsx';
+// import IndexMenu from './IndexMenu.jsx';
 
 class AppBarMenu extends Component {
   constructor(props) {

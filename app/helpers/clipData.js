@@ -7,22 +7,22 @@ export default [
     stIndex: '2'
   },
   {
-    headline: "On Innovation: The Bone Doctor's Knees",
+    headline: "The Bone Doctor's Knees",
     publication: 'Seton Hall Magazine',
     stIndex: '3'
   },
   {
-    headline: 'On Innovation: The Clean Air Catalyst',
+    headline: 'The Clean Air Catalyst',
     publication: 'Seton Hall Magazine',
     stIndex: '4'
   },
   {
-    headline: 'On Innovation: Cracking the College Code',
+    headline: 'Cracking the College Code',
     publication: 'Seton Hall Magazine',
     stIndex: '5'
   },
   {
-    headline: 'Commodity Beckons New TV Services From Comcast...',
+    headline: 'Commodity Beckons New TV Services...',
     publication: 'Blouin News',
     stIndex: '3'
   },
@@ -59,12 +59,12 @@ export default [
     stIndex: '2'
   },
   {
-    headline: 'Charting an East/West Passage (to "ambicultural"-ism)',
+    headline: 'Charting an East/West Passage...',
     publication: 'The Darden Report (UVA)',
     stIndex: '1'
   },
   {
-    headline: 'Electronic Arts standing firm on USD 26 offer for Take-Two',
+    headline: 'EA standing firm on USD 26 offer for Take-Two',
     publication: 'FT.com',
     stIndex: '1'
   },

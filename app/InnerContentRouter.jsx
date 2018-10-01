@@ -7,7 +7,7 @@ import Projects from './Projects.jsx';
 import JandL from './JandL.jsx';
 import Chapter from './Chapter.jsx';
 import AlexaStories from './AlexaStories.jsx';
-import FullPageIndexMenu from './FullPageIndexMenu.jsx';
+import IndexMenu from './IndexMenu.jsx';
 import storyData from './helpers/storyData.jsx';
 
 class App extends Component {
@@ -24,6 +24,15 @@ class App extends Component {
             exact
             path="/chapter"
             render={() => <Redirect to="/chapter/1" />}
+          />
+          <Route
+            exact
+            path="/chapter/index"
+            render={() => {
+              const section = 'chapter';
+
+              return <IndexMenu section={section} />;
+            }}
           />
           <Route
             path="/chapter/:num"
@@ -90,7 +99,7 @@ class App extends Component {
             exact
             path="/index"
             render={() => {
-              return <Redirect to={'/index/jnl'} />;
+              return <Redirect to={'/index/projects'} />;
             }}
           />
           <Route
@@ -98,7 +107,7 @@ class App extends Component {
             render={({ match }) => {
               const section = match.params.section.toLowerCase();
 
-              return <FullPageIndexMenu section={section} />;
+              return <IndexMenu section={section} />;
             }}
           />
           <Route component={NotFound} />

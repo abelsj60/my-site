@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import ClipNav from './ClipNav.jsx';
 import StoryNav from './StoryNav.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
-import clipData from './helpers/clipData.js';
-import projectData from './helpers/projectData.js';
-import storyData from './helpers//siteText.js';
+import clipData from './helpers/clipData';
+import projectData from './helpers/projectData';
+import storyData from './helpers/siteText';
 // import { withRouter } from 'react-router-dom';
 
-class FullPageIndexMenu extends Component {
+class IndexMenu extends Component {
   constructor(props) {
     super(props);
 
@@ -39,11 +39,11 @@ class FullPageIndexMenu extends Component {
 
   render() {
     return (
-      <main id="full-page-index-menu">
-        <nav>{this.navData}</nav>
+      <main id="index">
+        <nav className={this.props.section + '-index'}>{this.navData}</nav>
       </main>
     );
   }
 }
 
-export default FullPageIndexMenu;
+export default IndexMenu;
