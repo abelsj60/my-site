@@ -36,9 +36,7 @@ function idLinkPath(linkText) {
 
 function setActiveLink(currentPath, linkText) {
   const linkPath = idLinkPath(linkText);
-  return currentPath.includes(linkPath) && !currentPath.includes('index')
-    ? 'active'
-    : 'inactive';
+  return currentPath.includes(linkPath) ? 'active' : 'inactive';
 }
 
 function setHeaderCss(isTransparent) {

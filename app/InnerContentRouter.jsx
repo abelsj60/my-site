@@ -25,7 +25,7 @@ class App extends Component {
             path="/chapter"
             render={() => <Redirect to="/chapter/1" />}
           />
-          <Route
+          {/* <Route
             exact
             path="/chapter/index"
             render={() => {
@@ -33,7 +33,7 @@ class App extends Component {
 
               return <IndexMenu section={section} />;
             }}
-          />
+          /> */}
           <Route
             path="/chapter/:num"
             render={({ match }) => {

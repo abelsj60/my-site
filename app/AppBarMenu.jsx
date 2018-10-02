@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import Button from './Button.jsx';
 // import IndexMenu from './IndexMenu.jsx';
 
@@ -8,12 +9,40 @@ class AppBarMenu extends Component {
     super(props);
   }
 
+  get isProjects() {
+    return this.props.location.pathname.includes('projects');
+  }
+
+  get isStory() {
+    return this.props.location.pathname.includes('chapter');
+  }
+
   get isJNL() {
     return this.props.location.pathname.includes('jnl');
   }
 
+  get isIndex() {
+    return this.props.location.pathname.split('/')[1].includes('index');
+  }
+
+  get linkPath() {
+    if (this.isIndex) {
+      return '/' + this.props.history.location.pathname.split('/')[2];
+    }
+
+    return this.isProjects
+      ? '/index/projects'
+      : this.isStory
+        ? '/index/chapter'
+        : '/index/jnl';
+  }
+
+  get siteSection() {
+    return this.props.location.pathname.split('/')[1];
+  }
+
   get indexLabel() {
-    let section = this.props.location.pathname.split('/')[1];
+    let section = this.siteSection;
 
     if (section === 'jnl') {
       section = 'clips';
@@ -25,7 +54,7 @@ class AppBarMenu extends Component {
   get buttonLabels() {
     return [
       this.indexLabel,
-      this.isJNL ? 'About' : 'Details',
+      this.isJNL ? 'About' : this.isProjects ? 'Details' : 'Text',
       this.isJNL ? null : 'About'
     ];
   }
@@ -35,7 +64,9 @@ class AppBarMenu extends Component {
       (label, index) =>
         label && (
           <Fragment key={index}>
-            <p id="app-bar-button">{label}</p>
+            <Link id="app-bar-button" to={this.linkPath}>
+              <p>{label}</p>
+            </Link>
             {label !== 'About' ? <div id="button-border" /> : null}
           </Fragment>
         )
