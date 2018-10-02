@@ -43,7 +43,7 @@ export default [
   },
   {
     headline: 'Adventures in State Bailouts',
-    publication: 'The Big Money (Slate)',
+    publication: 'The Big Money / Slate',
     stIndex: '1'
   },
   {
