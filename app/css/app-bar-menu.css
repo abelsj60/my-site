@@ -10,6 +10,10 @@
   color: white;
 }
 
+#app-bar-button p {
+  margin: 0;
+}
+
 #button-border {
   background-color: red;
   width: 1px;
