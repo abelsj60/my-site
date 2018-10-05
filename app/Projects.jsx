@@ -20,7 +20,7 @@ class Projects extends Component {
 
   render() {
     const filteredProjectData = projectData.filter(
-      project => project.name === this.props.match.params.name
+      project => project.name === this.props.projectName
     )[0];
     const projectName = filteredProjectData.name;
     const formattedProjectName = this.formatProjectName(
@@ -28,7 +28,7 @@ class Projects extends Component {
     );
     const projectCaption = filteredProjectData.caption;
     const fullSizeProjectImages = filteredProjectData.full;
-    const indexForFullSizeProjectImages = this.props.match.params.thumbnail;
+    const indexForFullSizeProjectImages = this.props.projectImageIndex;
 
     return (
       <main id="my-projects" className="">

@@ -12,6 +12,12 @@ class AppBarMenu extends Component {
 
   get linkPath() {
     if (this.location === 'index') {
+      if (this.props.location.pathname.split('/')[2] === 'chapter') {
+        return '/chapter';
+      } else if (this.props.location.pathname.split('/')[2] === 'projects') {
+        return '/projects';
+      }
+
       return this.props.location.pathname;
     }
 
@@ -32,19 +38,80 @@ class AppBarMenu extends Component {
     }
 
     if (location === 'index') {
-      const fullLocation = this.props.location.pathname;
+      location = 'back';
+      // const fullLocation = this.props.location.pathname;
 
-      location = fullLocation.includes('projects')
-        ? 'Back to project'
-        : fullLocation.includes('chapter')
-          ? 'Back to chapter'
-          : 'Back to clip';
+      // location = fullLocation.includes('projects')
+      //   ? 'Back to project'
+      //   : fullLocation.includes('chapter')
+      //     ? 'Back to chapter'
+      //     : 'Back to clip';
     }
 
     return location[0].toUpperCase() + location.slice(1);
   }
 
   get buttons() {
+    /*
+      Need local state on Projects, Chapter, jnl
+      Router just goes path='/chapter'...
+      But, what about URL update?
+
+      --1--
+
+      state = { chapterNumber: param.num || state.num || 1 }
+
+      state = { chapterNumber: 1 }
+
+      get chapterNumber() {
+        // Cause infinite loop w/o 2nd if?
+        if (this.props.param.num) {
+          if (this.props.param.num !== this.state.chapterNumber) {
+            this.setState({chapterNumber: this.props.param.num});
+          }
+        }
+
+        return this.state.chapterNum
+      }
+
+      --2--
+
+      state = {chapterNumber: 1}
+
+      get ChapterNumber() {
+        return this.props.param.num || this.state.num
+      }
+
+      componentDidUpdate(oldProps) {
+        const newProps = this.props;
+
+        if (newProps.param.num) {
+          if (oldProps.param.num !== newProps.param.num) {
+            this.setState( {chapterNumber: newProps.param.num} )
+          }
+        }
+
+        // Downside? Will re-render?
+        // Don't store on state? Store on seperate variable?
+      }
+    */
+
+    /* In onClick for Text (Chapter)
+      1. Find #chapter by id
+      2. Add a style of display: none to element
+      3. Override style on responsive view of 849px
+    */
+
+    /* In onClick for Details (Projects)
+      1. Add a div to .right
+      2. Style the div to be position absolute w/top of 58px and bottom of 42px
+      3. Keep it display: none by default
+      4. OnClick will make it display: block/flex
+      5. Override style on repsonsive view of 849px
+      6. Add button (thumbnail in line?) to +849 px w/wrap on?
+      7. OnClick, this button will turn on/off details div
+    */
+
     const buttons = [
       {
         label: this.indexLabel,
@@ -72,23 +139,9 @@ class AppBarMenu extends Component {
   render() {
     return this.buttons.map((button, index) => (
       <Fragment key={index}>
-        {index === 0 &&
-        (this.location === 'index' || this.location === 'about') ? (
-            <Link
-              id="app-bar-button"
-              to={button.linkPath}
-              onClick={event => {
-                event.preventDefault();
-                button.onClick();
-              }}
-            >
-              <p>{button.label}</p>
-            </Link>
-          ) : (
-            <Link id="app-bar-button" to={button.linkPath}>
-              <p>{button.label}</p>
-            </Link>
-          )}
+        <Link id="app-bar-button" to={button.linkPath}>
+          <p>{button.label}</p>
+        </Link>
         {button.label !== 'About' ? <div id="button-border" /> : null}
       </Fragment>
     ));

@@ -2,38 +2,44 @@ import React, { Component } from 'react';
 import ItemNav from './ItemNav.jsx';
 import helpers from './helpers/helpers.js';
 
+const ShowChapter = props => (
+  <main id="my-story">
+    <section id="chapter" className="left">
+      <nav>
+        {[1, 2, 3, 4].map((num, index) => (
+          <ItemNav
+            key={index}
+            item={num}
+            param={props.chapterNumber}
+            route="/chapter/"
+          />
+        ))}
+      </nav>
+      <h1 className="chapter-title">{props.chapter.title}</h1>
+      <p className="chapter-text">{props.chapter.text}</p>
+    </section>
+    <section id="story-media" className="right">
+      <img src={props.picture} alt="fantasy illustration" />
+    </section>
+  </main>
+);
+
 class Chapter extends Component {
   constructor(props) {
     super(props);
   }
 
-  render() {
-    const chapters = [1, 2, 3, 4];
-    const route = '/chapter/';
-    const chapterNumber = this.props.chapterNumber;
-    const chapter = helpers.pickContent(chapterNumber);
-    const picture = helpers.pickPicture(chapterNumber);
+  get chapterNumber() {
+    return this.props.chapterNumber;
+  }
 
+  render() {
     return (
-      <main id="my-story">
-        <section id="chapter" className="left">
-          <nav>
-            {chapters.map((num, index) => (
-              <ItemNav
-                key={index}
-                item={num}
-                param={chapterNumber}
-                route={route}
-              />
-            ))}
-          </nav>
-          <h1 className="chapter-title">{chapter.title}</h1>
-          <p className="chapter-text">{chapter.text}</p>
-        </section>
-        <section id="story-media" className="right">
-          <img src={picture} alt="fantasy illustration" />
-        </section>
-      </main>
+      <ShowChapter
+        chapterNumber={this.chapterNumber}
+        chapter={helpers.pickContent(this.chapterNumber)}
+        picture={helpers.pickPicture(this.chapterNumber)}
+      />
     );
   }
 }
