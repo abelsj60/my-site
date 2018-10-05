@@ -21,17 +21,21 @@ class App extends Component {
     // console.log('Number test: ', this.validateNumber(location[2], 5));
     // console.log('Length test: ', location.length === 2);
 
+    // ~ja Technically, we don't need the location checks/ternaries in state
+    // b/c the location of each number type is different in each section of
+    // the site, but explicitly checking seems like a better practice
+
     this.state = {
       chapter:
-        location[1] === 'chapter' || location[2] === 'chapter'
+        location[1] === 'chapter'
           ? this.validateNumber(location[2], 4) || 1
           : 1,
       projectName:
-        location[1] === 'projects' || location[2] === 'projects'
+        location[1] === 'projects'
           ? this.validateProjectName(location[2]) || 'arrow'
           : 'arrow',
       projectImageIndex:
-        location[1] === 'projects' || location[2] === 'projects'
+        location[1] === 'projects'
           ? this.validateNumber(location[3], 3) || 1
           : 1,
       clip: undefined
@@ -39,15 +43,10 @@ class App extends Component {
   }
 
   validateProjectName(name) {
-    const projects = ['arrow', 'slingshot', 'tmmnews'];
-    return projects.includes(name) ? name : undefined;
+    return ['arrow', 'slingshot', 'tmmnews'].includes(name) ? name : undefined;
   }
 
   validateNumber(number, max) {
-    // ~ja Number is 1 through 4, or undefined (for when url is '/chapter')
-
-    // ~ja ! Make dynamic by swapping max for dataStructure
-
     return parseInt(number) > 0 && parseInt(number) <= max
       ? parseInt(number)
       : undefined;
@@ -174,40 +173,41 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    // ~ja Must compare original props to state to see a difference
-    // (can't just look at state, as it's already been set)
+    // ~ja Must compare props to state to see a difference
+    // Location checks used in 186 - 195 as good practice
 
     const location = this.props.location.pathname.split('/');
 
-    if (location[1] === 'chapter') {
-      const chapterNumber = this.validateNumber(parseInt(location[2]), 4);
-      const updateChapterNumber = chapterNumber
-        ? chapterNumber !== this.state.chapter
+    const chapterNumber =
+      location[1] === 'chapter'
+        ? this.validateNumber(parseInt(location[2]), 4)
         : undefined;
-
-      if (updateChapterNumber) {
-        this.setState({ chapter: chapterNumber });
-      }
-    }
-
-    if (location[1] === 'projects') {
-      const projectName = this.validateProjectName(location[2]);
-      const projectImageIndex = this.validateNumber(location[3], 3);
-      const updateProjectName = projectName
-        ? projectName !== this.state.projectName
+    const projectName =
+      location[1] === 'projects'
+        ? this.validateProjectName(location[2])
         : undefined;
-      const updateProjectImageIndex = projectImageIndex
-        ? projectImageIndex !== this.state.projectImageIndex
+    const projectImageIndex =
+      location[1] === 'projects'
+        ? this.validateNumber(location[3], 3)
         : undefined;
+    const updateChapterNumber = chapterNumber
+      ? chapterNumber !== this.state.chapter
+      : undefined;
+    const updateProjectName = projectName
+      ? projectName !== this.state.projectName
+      : undefined;
+    const updateProjectImageIndex = projectImageIndex
+      ? projectImageIndex !== this.state.projectImageIndex
+      : undefined;
 
-      if (updateProjectName || updateProjectImageIndex) {
-        this.setState({
-          projectName: updateProjectName ? projectName : this.state.projectName,
-          projectImageIndex: updateProjectImageIndex
-            ? projectImageIndex
-            : this.state.projectImageIndex
-        });
-      }
+    if (updateChapterNumber || updateProjectName || updateProjectImageIndex) {
+      this.setState({
+        chapter: updateChapterNumber ? chapterNumber : this.state.chapter,
+        projectName: updateProjectName ? projectName : this.state.projectName,
+        projectImageIndex: updateProjectImageIndex
+          ? projectImageIndex
+          : this.state.projectImageIndex
+      });
     }
 
     console.log('State in cDU: ', this.state);
