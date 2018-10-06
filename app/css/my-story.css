@@ -17,6 +17,10 @@
   display: none;
 }
 
+.no-story-text {
+  display: none !important;
+}
+
 #chapter h1 {
   font-size: 3rem;
   line-height: normal;

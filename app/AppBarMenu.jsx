@@ -55,6 +55,8 @@ class AppBarMenu extends Component {
 
   get buttons() {
     /*
+      REVIEW THIS, GET ABOUT BUTTON WORKING, TEXT/DETAILS BUTTONS
+
       Need local state on Projects, Chapter, jnl
       Router just goes path='/chapter'...
       But, what about URL update?
@@ -117,12 +119,12 @@ class AppBarMenu extends Component {
     const buttons = [
       {
         label: this.indexLabel,
-        linkPath: this.linkPath,
-        onClick: null
+        linkPath: this.linkPath
       },
       {
         label: this.location === 'projects' ? 'Details' : 'Text',
-        linkPath: this.props.location.pathname
+        linkPath: this.props.location.pathname,
+        onClick: () => this.props.storyTextStatus()
       },
       { label: 'About', linkPath: '/about' }
     ];
@@ -139,9 +141,19 @@ class AppBarMenu extends Component {
   }
 
   render() {
+    console.log('buttons:', this.buttons);
     return this.buttons.map((button, index) => (
       <Fragment key={index}>
-        <Link id="app-bar-button" to={button.linkPath}>
+        <Link
+          id="app-bar-button"
+          to={button.linkPath}
+          onClick={() => {
+            console.log('In button');
+            console.log('onclick:', button.onClick());
+            console.log('The func:', this.props.storyTextStatus);
+            button.onClick();
+          }}
+        >
           <p>{button.label}</p>
         </Link>
         {button.label !== 'About' ? <div id="button-border" /> : null}

@@ -25,7 +25,13 @@ class Footer extends Component {
         className={this.footerType}
         style={{ opacity: this.props.opacity }}
       >
-        {this.isAnInnerPage && <AppBarMenu />}
+        {this.isAnInnerPage && (
+          <AppBarMenu
+            storyTextStatus={this.props.storyTextStatus}
+            storyText={this.props.storyText}
+            projectDetails={this.props.projectDetails}
+          />
+        )}
         <p className={'copyright'}>James Abels. All rights reserved. 2018.</p>
       </footer>
     );

@@ -48,8 +48,17 @@ class App extends Component {
         location[1] === 'jnl'
           ? this.validateHeadline(location[2], location[3]) ||
             'all-things-considered-digitally'
-          : 'all-things-considered-digitally'
+          : 'all-things-considered-digitally',
+      storyText: true,
+      projectDetails: false
     };
+
+    this.storyTextStatus = this.storyTextStatus.bind(this);
+  }
+
+  storyTextStatus() {
+    this.setState({ storyText: !this.state.storyText });
+    return 'Run!';
   }
 
   validatePublication(publication) {
@@ -116,6 +125,7 @@ class App extends Component {
 
   render() {
     console.log('State in Render: ', this.state);
+    console.log('storyTextStatus In ICR', this.storyTextStatus);
     return (
       <section className="inner-page">
         <Header />
@@ -140,7 +150,12 @@ class App extends Component {
             path="/chapter/:num"
             render={() => {
               if (this.state.chapter) {
-                return <Chapter chapterNumber={this.state.chapter} />;
+                return (
+                  <Chapter
+                    chapterNumber={this.state.chapter}
+                    storyText={this.state.storyText}
+                  />
+                );
               } else {
                 return <NotFound />;
               }
@@ -231,7 +246,11 @@ class App extends Component {
           />
           <Route component={NotFound} />
         </Switch>
-        <Footer />
+        <Footer
+          storyTextStatus={this.storyTextStatus}
+          storyText={this.state.storyText}
+          projectDetails={this.state.projectDetails}
+        />
       </section>
     );
   }

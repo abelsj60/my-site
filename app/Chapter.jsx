@@ -4,7 +4,7 @@ import helpers from './helpers/helpers.js';
 
 const ShowChapter = props => (
   <main id="my-story">
-    <section id="chapter" className="left">
+    <section id="chapter" className={`left${props.storyText}`}>
       <nav>
         {[1, 2, 3, 4].map((num, index) => (
           <ItemNav
@@ -29,16 +29,17 @@ class Chapter extends Component {
     super(props);
   }
 
-  get chapterNumber() {
-    return this.props.chapterNumber;
+  storyTextStatus(state) {
+    return !state ? ' no-story-text' : '';
   }
 
   render() {
     return (
       <ShowChapter
-        chapterNumber={this.chapterNumber}
-        chapter={helpers.pickContent(this.chapterNumber)}
-        picture={helpers.pickPicture(this.chapterNumber)}
+        chapterNumber={this.props.chapterNumber}
+        chapter={helpers.pickContent(this.props.chapterNumber)}
+        picture={helpers.pickPicture(this.props.chapterNumber)}
+        storyText={this.storyTextStatus(this.props.storyText)}
       />
     );
   }
