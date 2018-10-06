@@ -16,6 +16,8 @@ class AppBarMenu extends Component {
         return '/chapter';
       } else if (this.props.location.pathname.split('/')[2] === 'projects') {
         return '/projects';
+      } else if (this.props.location.pathname.split('/')[2] === 'jnl') {
+        return '/jnl';
       }
 
       return this.props.location.pathname;
@@ -116,7 +118,7 @@ class AppBarMenu extends Component {
       {
         label: this.indexLabel,
         linkPath: this.linkPath,
-        onClick: this.props.history.goBack.bind(this)
+        onClick: null
       },
       {
         label: this.location === 'projects' ? 'Details' : 'Text',
