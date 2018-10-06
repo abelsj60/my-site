@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import NotFound from './NotFound.jsx';
+import Chapter from './Chapter.jsx';
 import Projects from './Projects.jsx';
 import JandL from './JandL.jsx';
-import Chapter from './Chapter.jsx';
-import AlexaStories from './AlexaStories.jsx';
 import IndexMenu from './IndexMenu.jsx';
-import storyData from './helpers/storyData.jsx';
+import NotFound from './NotFound.jsx';
+import clipData from './helpers/clipData.js';
+// import storyData from './helpers/storyData.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -25,6 +25,8 @@ class App extends Component {
     // b/c the location of each number type is different in each section of
     // the site, but explicitly checking seems like a better practice
 
+    // ~ja ! Note, state is not update when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render. Do do something other than relying on state; setState w/func? Call earlier? build param differently?
+
     this.state = {
       chapter:
         location[1] === 'chapter'
@@ -38,8 +40,43 @@ class App extends Component {
         location[1] === 'projects'
           ? this.validateNumber(location[3], 3) || 1
           : 1,
-      clip: undefined
+      publication:
+        location[1] === 'jnl'
+          ? this.validatePublication(location[2]) || 'forbes'
+          : 'forbes',
+      headline:
+        location[1] === 'jnl'
+          ? this.validateHeadline(location[3]) ||
+            'all-things-considered-digitally'
+          : 'all-things-considered-digitally'
     };
+  }
+
+  validatePublication(publication) {
+    console.log('validatePub: ', publication);
+    return [
+      'blouinnews',
+      'forbes',
+      'ft',
+      'setonhallmagazine',
+      'slate',
+      'universityofvirginia'
+    ].includes(publication)
+      ? publication
+      : undefined;
+  }
+
+  validateHeadline(headline) {
+    console.log('validateHeadline: ', headline);
+    const theClip = clipData.find(clip => {
+      return clip.headline
+        .replace(/\s+/g, '-')
+        .toLowerCase()
+        .includes(headline);
+    });
+
+    console.log('theClip:', theClip);
+    return theClip ? headline : undefined;
   }
 
   validateProjectName(name) {
@@ -72,7 +109,7 @@ class App extends Component {
           <Route
             exact
             path="/chapter"
-            render={() => <Redirect to={'/chapter/' + this.state.chapter} />}
+            render={() => <Redirect to={`/chapter/${this.state.chapter}`} />}
           />
           <Route
             path="/chapter/:num"
@@ -121,33 +158,36 @@ class App extends Component {
               }
             }}
           />
-          <Route path="/alexa" component={AlexaStories} />
           <Route
             exact
             path="/jnl"
-            render={() => <Redirect to="/jnl/forbes/1" component={JandL} />}
+            render={() => (
+              <Redirect
+                to={`/jnl/${this.state.publication}/${this.state.headline}`}
+              />
+            )}
           />
           <Route
             exact
-            path="/jnl/:name"
-            render={({ match }) => {
-              const publication = match.params.name;
+            path="/jnl/:publication"
+            render={() => {
               return (
-                <Redirect to={'/jnl/' + publication + '/1'} component={JandL} />
+                <Redirect
+                  to={`/jnl/${this.state.publication}/${this.state.headline}`}
+                />
               );
             }}
           />
           <Route
-            path="/jnl/:publication/:id"
-            render={({ match }) => {
-              const publication = match.params.publication.toLowerCase();
-              const id = parseInt(match.params.id) - 1;
-
-              if (storyData[publication][id]) {
-                return <JandL publication={publication} id={id} />;
-              } else {
-                return <Route component={NotFound} />;
-              }
+            path="/jnl/:publication/:headline"
+            render={() => {
+              console.log('HERE!');
+              return (
+                <JandL
+                  publication={this.state.publication}
+                  headline={this.state.headline}
+                />
+              );
             }}
           />
           <Route
