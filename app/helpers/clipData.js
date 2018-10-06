@@ -51,7 +51,7 @@ export default [
   },
   {
     headline: 'Adventures in State Bailouts',
-    publication: 'The Big Money / Slate',
+    publication: 'Slate',
     stIndex: '1',
     text: clip.slateAdventuresInStateBailouts
   },
@@ -70,7 +70,7 @@ export default [
   },
   {
     headline: 'Charting an East/West Passage...',
-    publication: 'The Darden Report (UVA)',
+    publication: 'The Darden Report',
     stIndex: '1',
     text: clip.uvaChartingAnEastWestPassage
   },
@@ -94,7 +94,7 @@ export default [
   },
   {
     headline: 'Is The Wine Trade Recession-Proof?',
-    publication: 'The Darden Report (UVA)',
+    publication: 'The Darden Report',
     stIndex: '2',
     text: clip.uvaIsTheWineTradeRecessionProof
   },

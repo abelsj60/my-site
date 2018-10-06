@@ -27,7 +27,14 @@ class ClipNav extends Component {
         className={this.setActiveItem(index, this.props.activeItem)}
         to={`/jnl/${clip.publication
           .replace(/\s+/g, '')
-          .toLowerCase()}/${clip.headline.replace(/\s+/g, '-').toLowerCase()}`}
+          .toLowerCase()}/${clip.headline
+          .replace(/\s+/g, '-')
+          .replace(/'+/g, '')
+          .replace(/\./g, '')
+          .replace(/,+/g, '')
+          .replace(/:/g, '')
+          .replace(/\//g, '-')
+          .toLowerCase()}`}
       >
         <p id="source">{clip.publication}</p>
         <p id="hed">{clip.headline}</p>

@@ -9,23 +9,31 @@ class JandL extends Component {
   }
 
   render() {
-    // const clipIndex = clipData.indexOf(
-    //   clip => clip.headline === this.props.headline
-    // );
-
     const theClip = clipData.find(clip => {
       return clip.headline
         .replace(/\s+/g, '-')
+        .replace(/'+/g, '')
+        .replace(/\./g, '')
+        .replace(/,+/g, '')
+        .replace(/:/g, '')
+        .replace(/\//g, '-')
         .toLowerCase()
         .includes(this.props.headline);
     });
     const publication = theClip.publication;
     const headline = theClip.headline;
     const text = theClip.text;
-
-    const clipIndex = clipData.indexOf(
-      clip => clip.headline === theClip.headline
-    );
+    const clipIndex = clipData.findIndex(clip => {
+      return clip.headline
+        .replace(/\s+/g, '-')
+        .replace(/'+/g, '')
+        .replace(/\./g, '')
+        .replace(/,+/g, '')
+        .replace(/:/g, '')
+        .replace(/\//g, '-')
+        .toLowerCase()
+        .includes(this.props.headline);
+    });
 
     return (
       <main id="journalism" className="">
@@ -47,16 +55,5 @@ class JandL extends Component {
     );
   }
 }
-
-/*
-
-filteredData = clipData.filter(clip => clip.headline === this.props.headline)
-
-publication = filteredData.publication;
-headline = filteredData.headline;
-byline = filteredData.byline
-text = filteredData.text
-
-*/
 
 export default withRouter(JandL);

@@ -17,7 +17,7 @@ class App extends Component {
     const location = this.props.location.pathname.split('/');
 
     console.log('Constructor');
-    console.log('Location in Constructor:', location);
+    // console.log('Location in Constructor:', location);
     // console.log('Number test: ', this.validateNumber(location[2], 5));
     // console.log('Length test: ', location.length === 2);
 
@@ -25,7 +25,7 @@ class App extends Component {
     // b/c the location of each number type is different in each section of
     // the site, but explicitly checking seems like a better practice
 
-    // ~ja ! Note, state is not update when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render. Do do something other than relying on state; setState w/func? Call earlier? build param differently?
+    // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the log and the completion of setState is reconciliation). Do do something other than relying on state; setState w/func? Call earlier? build param differently?
 
     this.state = {
       chapter:
@@ -46,37 +46,62 @@ class App extends Component {
           : 'forbes',
       headline:
         location[1] === 'jnl'
-          ? this.validateHeadline(location[3]) ||
+          ? this.validateHeadline(location[2], location[3]) ||
             'all-things-considered-digitally'
           : 'all-things-considered-digitally'
     };
   }
 
   validatePublication(publication) {
-    console.log('validatePub: ', publication);
     return [
       'blouinnews',
       'forbes',
       'ft',
       'setonhallmagazine',
       'slate',
-      'universityofvirginia'
+      'thedardenreport'
     ].includes(publication)
       ? publication
       : undefined;
   }
 
-  validateHeadline(headline) {
-    console.log('validateHeadline: ', headline);
-    const theClip = clipData.find(clip => {
-      return clip.headline
-        .replace(/\s+/g, '-')
-        .toLowerCase()
-        .includes(headline);
-    });
+  validateHeadline(publication, headline) {
+    const thePublication = !headline
+      ? this.validatePublication(publication)
+      : undefined;
 
-    console.log('theClip:', theClip);
-    return theClip ? headline : undefined;
+    if (headline) {
+      const theClip = clipData.find(clip => {
+        return clip.headline
+          .replace(/\s+/g, '-')
+          .replace(/\./g, '')
+          .replace(/'+/g, '')
+          .replace(/,+/g, '')
+          .replace(/\//g, '-')
+          .toLowerCase()
+          .includes(headline);
+      });
+
+      return theClip ? headline : undefined;
+    }
+
+    if (thePublication) {
+      return clipData
+        .filter(clip => {
+          return (
+            clip.publication.replace(/\s+/g, '').toLowerCase() ===
+            thePublication
+          );
+        })[0]
+        .headline.replace(/\s+/g, '-')
+        .replace(/\./g, '')
+        .replace(/'+/g, '')
+        .replace(/,+/g, '')
+        .replace(/\//g, '-')
+        .toLowerCase();
+    }
+
+    return undefined;
   }
 
   validateProjectName(name) {
@@ -181,7 +206,6 @@ class App extends Component {
           <Route
             path="/jnl/:publication/:headline"
             render={() => {
-              console.log('HERE!');
               return (
                 <JandL
                   publication={this.state.publication}
@@ -230,6 +254,12 @@ class App extends Component {
       location[1] === 'projects'
         ? this.validateNumber(location[3], 3)
         : undefined;
+    const publication =
+      location[1] === 'jnl' ? this.validatePublication(location[2]) : undefined;
+    const headline =
+      location[1] === 'jnl'
+        ? this.validateHeadline(location[2], location[3])
+        : undefined;
     const updateChapterNumber = chapterNumber
       ? chapterNumber !== this.state.chapter
       : undefined;
@@ -239,14 +269,28 @@ class App extends Component {
     const updateProjectImageIndex = projectImageIndex
       ? projectImageIndex !== this.state.projectImageIndex
       : undefined;
+    const updatePublication = publication
+      ? publication !== this.state.publication
+      : undefined;
+    const updateHeadline = headline
+      ? headline !== this.state.headline
+      : undefined;
 
-    if (updateChapterNumber || updateProjectName || updateProjectImageIndex) {
+    if (
+      updateChapterNumber ||
+      updateProjectName ||
+      updateProjectImageIndex ||
+      updatePublication ||
+      updateHeadline
+    ) {
       this.setState({
         chapter: updateChapterNumber ? chapterNumber : this.state.chapter,
         projectName: updateProjectName ? projectName : this.state.projectName,
         projectImageIndex: updateProjectImageIndex
           ? projectImageIndex
-          : this.state.projectImageIndex
+          : this.state.projectImageIndex,
+        publication: updatePublication ? publication : this.state.publication,
+        headline: updateHeadline ? headline : this.state.headline
       });
     }
 
