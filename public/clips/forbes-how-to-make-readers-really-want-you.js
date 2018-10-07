@@ -5,8 +5,6 @@ export default (
     <p>
       Forget Anna Wintour, famed editrix of Vogue. Just like New York's Fashion
       Week, which ended last Friday, she's so over. The big ideas for keeping
-    </p>
-    <p>
       Vogue hot are coming from the business department down the hall--and it is
       betting big on the appeal of Web television.
     </p>

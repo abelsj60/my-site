@@ -4,9 +4,9 @@ export default (
   <Fragment>
     <p>
       Some 63.2 million television viewers tuned into the presidential debate
-      Tuesday night. News Corp.'s MySpace broadcast it as
+      Tuesday night. News Corp.'s MySpace broadcast it as well. The results were
+      somewhat different.
     </p>
-    <p>well. The results were somewhat different.</p>
     <p>
       "We think with over 100,000 views, which we've gotten every time, it's
       pretty good considering it's on every television network," says Lee

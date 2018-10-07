@@ -4,10 +4,8 @@ export default (
   <Fragment>
     <p>
       Sam Zell was sued in Federal Court in California yesterday by a group of
-      current and former Tribune Company employees. They did a lot more than
-    </p>
-    <p>
-      go after the billionaire they say ruined their company--you could make the
+      current and former Tribune Company employees. They did a lot more than go
+      after the billionaire they say ruined their company--you could make the
       case that they've put the fast-changing newspaper business on trial, too.
     </p>
     <p>

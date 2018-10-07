@@ -29,8 +29,8 @@ class ClipNav extends Component {
           .replace(/\s+/g, '')
           .toLowerCase()}/${clip.headline
           .replace(/\s+/g, '-')
-          .replace(/'+/g, '')
           .replace(/\./g, '')
+          .replace(/'+/g, '')
           .replace(/,+/g, '')
           .replace(/:/g, '')
           .replace(/\//g, '-')

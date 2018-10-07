@@ -9,7 +9,17 @@ import IndexMenu from './IndexMenu.jsx';
 import About from './About.jsx';
 import NotFound from './NotFound.jsx';
 import clipData from './helpers/clipData.js';
-// import storyData from './helpers/storyData.jsx';
+
+/*
+  1. Hold state between /home and rest of app
+  2. Add content to NotFound, About, Details (needs data structure, too)
+  3. Swap chapter names for numbers in state/urls
+  4. Use setState() instead of links in most nav locations?
+  5. Refactor js
+  6. Refactor CSS
+  7. Layout, design
+  8. Browser testing, polyfills, etc
+*/
 
 class App extends Component {
   constructor(props) {
@@ -64,7 +74,7 @@ class App extends Component {
 
   toggleDetails() {
     this.setState({ projectDetails: !this.state.projectDetails });
-    return 'Switched toggleDetails!';
+    return 'Switched details!';
   }
 
   validatePublication(publication) {
@@ -92,6 +102,7 @@ class App extends Component {
           .replace(/\./g, '')
           .replace(/'+/g, '')
           .replace(/,+/g, '')
+          .replace(/:/g, '')
           .replace(/\//g, '-')
           .toLowerCase()
           .includes(headline);
@@ -109,9 +120,11 @@ class App extends Component {
           );
         })[0]
         .headline.replace(/\s+/g, '-')
+        .replace(/\s+/g, '-')
         .replace(/\./g, '')
         .replace(/'+/g, '')
         .replace(/,+/g, '')
+        .replace(/:/g, '')
         .replace(/\//g, '-')
         .toLowerCase();
     }
