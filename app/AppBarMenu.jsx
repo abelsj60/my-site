@@ -37,6 +37,12 @@ class AppBarMenu extends Component {
       return 'Back';
     }
 
+    if (this.location.includes('about')) {
+      // ~ja ? If we come directly to 'about', where does back go? Come back...
+
+      return 'Back';
+    }
+
     return 'Index';
   }
 

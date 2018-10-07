@@ -50,6 +50,7 @@ body {
 @import 'alexa.css';
 @import 'index-menu.css';
 @import 'react-table.css';
+@import 'about.css';
 @import 'not-found.css';
 
 /* https://learn.shayhowe.com/html-css/positioning-content/ */

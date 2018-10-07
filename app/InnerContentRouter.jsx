@@ -6,6 +6,7 @@ import Chapter from './Chapter.jsx';
 import Projects from './Projects.jsx';
 import JandL from './JandL.jsx';
 import IndexMenu from './IndexMenu.jsx';
+import About from './About.jsx';
 import NotFound from './NotFound.jsx';
 import clipData from './helpers/clipData.js';
 // import storyData from './helpers/storyData.jsx';
@@ -16,18 +17,13 @@ class App extends Component {
 
     // LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
-    const location = this.props.location.pathname.split('/');
-
-    console.log('Constructor');
-    // console.log('Location in Constructor:', location);
-    // console.log('Number test: ', this.validateNumber(location[2], 5));
-    // console.log('Length test: ', location.length === 2);
-
     // ~ja Technically, we don't need the location checks/ternaries in state
     // b/c the location of each number type is different in each section of
     // the site, but explicitly checking seems like a better practice
 
     // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the log and the completion of setState is reconciliation). Do do something other than relying on state; setState w/func? Call earlier? build param differently?
+
+    const location = this.props.location.pathname.split('/');
 
     this.state = {
       chapter:
@@ -254,7 +250,13 @@ class App extends Component {
               return <IndexMenu section={section} />;
             }}
           />
-          <Route component={NotFound} />
+          <Route
+            path="/about"
+            render={() => {
+              return <About />;
+            }}
+          />
+          ;<Route component={NotFound} />
         </Switch>
         <Footer
           toggleText={this.toggleText}
