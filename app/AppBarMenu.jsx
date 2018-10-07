@@ -97,7 +97,9 @@ class AppBarMenu extends Component {
         >
           <p>{button.label}</p>
         </Link>
-        {button.label !== 'About' ? <div id="button-border" /> : null}
+        {button.label === 'About' || button.label === 'Back' ? null : (
+          <div id="button-border" />
+        )}
       </Fragment>
     ));
   }
