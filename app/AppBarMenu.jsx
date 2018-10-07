@@ -7,6 +7,10 @@ class AppBarMenu extends Component {
   }
 
   get location() {
+    console.log(
+      'Location in ABM: ',
+      this.props.location.pathname.split('/')[1]
+    );
     return this.props.location.pathname.split('/')[1];
   }
 
@@ -124,7 +128,14 @@ class AppBarMenu extends Component {
       {
         label: this.location === 'projects' ? 'Details' : 'Text',
         linkPath: this.props.location.pathname,
-        onClick: () => this.props.storyTextStatus()
+        handleClick: () => {
+          if (this.location === 'chapter') {
+            this.props.toggleText();
+          } else if (this.location === 'projects') {
+            console.log('In hC!');
+            this.props.toggleDetails();
+          }
+        }
       },
       { label: 'About', linkPath: '/about' }
     ];
@@ -141,17 +152,17 @@ class AppBarMenu extends Component {
   }
 
   render() {
-    console.log('buttons:', this.buttons);
     return this.buttons.map((button, index) => (
       <Fragment key={index}>
         <Link
           id="app-bar-button"
           to={button.linkPath}
-          onClick={() => {
-            console.log('In button');
-            console.log('onclick:', button.onClick());
-            console.log('The func:', this.props.storyTextStatus);
-            button.onClick();
+          onClick={event => {
+            console.log('hC in oC:', button.handleClick);
+            if (button.handleClick) {
+              button.handleClick(event);
+              event.preventDefault();
+            }
           }}
         >
           <p>{button.label}</p>

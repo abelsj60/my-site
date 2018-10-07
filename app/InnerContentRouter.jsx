@@ -14,6 +14,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    // LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
     const location = this.props.location.pathname.split('/');
 
     console.log('Constructor');
@@ -53,12 +55,20 @@ class App extends Component {
       projectDetails: false
     };
 
-    this.storyTextStatus = this.storyTextStatus.bind(this);
+    this.toggleText = this.toggleText.bind(this);
+    this.toggleDetails = this.toggleDetails.bind(this);
   }
 
-  storyTextStatus() {
+  toggleText() {
+    // Expl: https://stackoverflow.com/a/29101393/9215718
+
     this.setState({ storyText: !this.state.storyText });
-    return 'Run!';
+    return 'Switched text!';
+  }
+
+  toggleDetails() {
+    this.setState({ projectDetails: !this.state.projectDetails });
+    return 'Switched toggleDetails!';
   }
 
   validatePublication(publication) {
@@ -125,7 +135,6 @@ class App extends Component {
 
   render() {
     console.log('State in Render: ', this.state);
-    console.log('storyTextStatus In ICR', this.storyTextStatus);
     return (
       <section className="inner-page">
         <Header />
@@ -191,6 +200,7 @@ class App extends Component {
                   <Projects
                     projectName={this.state.projectName}
                     projectImageIndex={this.state.projectImageIndex}
+                    projectDetails={this.state.projectDetails}
                   />
                 );
               } else {
@@ -247,9 +257,10 @@ class App extends Component {
           <Route component={NotFound} />
         </Switch>
         <Footer
-          storyTextStatus={this.storyTextStatus}
+          toggleText={this.toggleText}
           storyText={this.state.storyText}
           projectDetails={this.state.projectDetails}
+          toggleDetails={this.toggleDetails}
         />
       </section>
     );

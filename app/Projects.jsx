@@ -3,6 +3,7 @@ import ReactFitText from 'react-fittext';
 import MultiProjectNav from './MultiProjectNav.jsx';
 import SingleProjectNav from './SingleProjectNav.jsx';
 import BlockQuote from './BlockQuote.jsx';
+import ProjectDetails from './ProjectDetails.jsx';
 import projectData from './helpers/projectData.js';
 
 class Projects extends Component {
@@ -16,6 +17,10 @@ class Projects extends Component {
     } else {
       return name.slice(0, 1).toUpperCase() + name.slice(1);
     }
+  }
+
+  toggleDetailsClass(state) {
+    return !state ? '' : 'show-details';
   }
 
   render() {
@@ -32,6 +37,11 @@ class Projects extends Component {
 
     return (
       <main id="my-projects" className="">
+        <ProjectDetails
+          formatProjectName={this.formatProjectName}
+          projectName={projectName}
+          detailsClass={this.toggleDetailsClass(this.props.projectDetails)}
+        />
         <section id="desktop-nav" className="left">
           <MultiProjectNav
             projectData={projectData.filter(

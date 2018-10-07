@@ -27,9 +27,10 @@ class Footer extends Component {
       >
         {this.isAnInnerPage && (
           <AppBarMenu
-            storyTextStatus={this.props.storyTextStatus}
             storyText={this.props.storyText}
+            toggleText={this.props.toggleText}
             projectDetails={this.props.projectDetails}
+            toggleDetails={this.props.toggleDetails}
           />
         )}
         <p className={'copyright'}>James Abels. All rights reserved. 2018.</p>
