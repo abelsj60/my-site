@@ -91,13 +91,13 @@ class OuterRouter extends Component {
 
       headline = defaultClip.length
         ? defaultClip[0].headline
-          .replace(/\s+/g, '-')
-          .replace(/\./g, '')
-          .replace(/'+/g, '')
-          .replace(/,+/g, '')
-          .replace(/:/g, '')
-          .replace(/\//g, '-')
-          .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/\./g, '')
+            .replace(/'+/g, '')
+            .replace(/,+/g, '')
+            .replace(/:/g, '')
+            .replace(/\//g, '-')
+            .toLowerCase()
         : undefined;
     }
 
@@ -126,9 +126,9 @@ class OuterRouter extends Component {
 
     return chapterTitle.length
       ? chapterTitle[0].title
-        .replace(/,+/g, '')
-        .replace(/\s+/g, '-')
-        .toLowerCase()
+          .replace(/,+/g, '')
+          .replace(/\s+/g, '-')
+          .toLowerCase()
       : undefined;
   }
 
