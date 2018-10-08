@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import ItemNav from './ItemNav.jsx';
-import helpers from './helpers/helpers.js';
+import siteText from './helpers/siteText.js';
+// import helpers from './helpers/helpers.js';
 
 const ShowChapter = props => (
   <main id="my-story">
     <section id="chapter" className={`left ${props.textClass}`}>
       <nav>
-        {[1, 2, 3, 4].map((num, index) => (
+        {siteText.map((chapter, index) => (
           <ItemNav
             key={index}
-            item={num}
-            param={props.chapterNumber}
+            item={index + 1}
+            chapterTitle={chapter.title
+              .replace(/,+/g, '')
+              .replace(/\s+/g, '-')
+              .toLowerCase()}
+            param={props.chapterTitle}
             route="/chapter/"
           />
         ))}
@@ -19,7 +24,7 @@ const ShowChapter = props => (
       <p className="chapter-text">{props.chapter.text}</p>
     </section>
     <section id="story-media" className="right">
-      <img src={props.picture} alt="fantasy illustration" />
+      <img src={props.illustration} alt="fantasy illustration" />
     </section>
   </main>
 );
@@ -36,9 +41,25 @@ class Chapter extends Component {
   render() {
     return (
       <ShowChapter
-        chapterNumber={this.props.chapterNumber}
-        chapter={helpers.pickContent(this.props.chapterNumber)}
-        picture={helpers.pickPicture(this.props.chapterNumber)}
+        chapterTitle={this.props.chapterTitle}
+        chapter={
+          siteText.filter(
+            chapter =>
+              chapter.title
+                .replace(/,+/g, '')
+                .replace(/\s+/g, '-')
+                .toLowerCase() === this.props.chapterTitle
+          )[0]
+        }
+        illustration={
+          siteText.filter(
+            chapter =>
+              chapter.title
+                .replace(/,+/g, '')
+                .replace(/\s+/g, '-')
+                .toLowerCase() === this.props.chapterTitle
+          )[0].illustration
+        }
         textClass={this.toggleTextClass(this.props.storyText)}
       />
     );

@@ -15,9 +15,10 @@ import NotFound from './NotFound.jsx';
   3. Swap chapter names for numbers in state/urls
   4. Use setState() instead of links in most nav locations?
   5. Refactor js
-  6. Refactor CSS
-  7. Layout, design
-  8. Browser testing, polyfills, etc
+  6. Clean up data structures
+  7. Refactor CSS
+  8. Layout, design
+  9. Browser testing, polyfills, etc
 */
 
 class InnerRouter extends Component {
@@ -36,8 +37,6 @@ class InnerRouter extends Component {
   }
 
   render() {
-    console.log('State in Render: ', this.props.state);
-
     return (
       <section className="inner-page">
         <Header />
@@ -57,16 +56,16 @@ class InnerRouter extends Component {
             exact
             path="/chapter"
             render={() => (
-              <Redirect to={`/chapter/${this.props.state.chapter}`} />
+              <Redirect to={`/chapter/${this.props.state.chapterTitle}`} />
             )}
           />
           <Route
-            path="/chapter/:num"
+            path="/chapter/:title"
             render={() => {
-              if (this.props.state.chapter) {
+              if (this.props.state.chapterTitle) {
                 return (
                   <Chapter
-                    chapterNumber={this.props.state.chapter}
+                    chapterTitle={this.props.state.chapterTitle}
                     storyText={this.props.state.storyText}
                   />
                 );

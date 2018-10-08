@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './Home.jsx';
 import InnerRouter from './InnerRouter.jsx';
 import clipData from './helpers/clipData';
+import siteText from './helpers/siteText';
 
 class OuterRouter extends Component {
   constructor(props) {
@@ -12,10 +13,11 @@ class OuterRouter extends Component {
     const location = this.props.location.pathname.split('/');
 
     this.state = {
-      chapter:
+      chapterTitle:
         location[1] === 'chapter'
-          ? this.validateNumber(location[2], 4) || 1
-          : 1,
+          ? this.validateChapter(location[2]) ||
+            'the-boy-and-the-beginnings-of-magic'
+          : 'the-boy-and-the-beginnings-of-magic',
       projectName:
         location[1] === 'projects'
           ? this.validateProjectName(location[2]) || 'arrow'
@@ -67,13 +69,28 @@ class OuterRouter extends Component {
   }
 
   validateHeadline(publication, headline) {
-    const thePublication = !headline
-      ? this.validatePublication(publication)
-      : undefined;
+    const headlineIsValid = clipData.find(clip => {
+      return clip.headline
+        .replace(/\s+/g, '-')
+        .replace(/\./g, '')
+        .replace(/'+/g, '')
+        .replace(/,+/g, '')
+        .replace(/:/g, '')
+        .replace(/\//g, '-')
+        .toLowerCase()
+        .includes(headline);
+    });
 
-    if (headline) {
-      const theClip = clipData.find(clip => {
-        return clip.headline
+    if (!headline && !headlineIsValid) {
+      const defaultClip = clipData.filter(clip => {
+        return (
+          clip.publication.replace(/\s+/g, '').toLowerCase() ===
+          this.validatePublication(publication)
+        );
+      });
+
+      headline = defaultClip.length
+        ? defaultClip[0].headline
           .replace(/\s+/g, '-')
           .replace(/\./g, '')
           .replace(/'+/g, '')
@@ -81,33 +98,10 @@ class OuterRouter extends Component {
           .replace(/:/g, '')
           .replace(/\//g, '-')
           .toLowerCase()
-          .includes(headline);
-      });
-
-      return theClip ? headline : undefined;
+        : undefined;
     }
 
-    if (thePublication) {
-      return clipData
-        .filter(clip => {
-          return (
-            clip.publication.replace(/\s+/g, '').toLowerCase() ===
-            thePublication
-          );
-        })[0]
-        .headline.replace(/\s+/g, '-')
-        .replace(/\s+/g, '-')
-        .replace(/\./g, '')
-        .replace(/'+/g, '')
-        .replace(/,+/g, '')
-        .replace(/:/g, '')
-        .replace(/\//g, '-')
-        .toLowerCase();
-    }
-
-    // ~ja No headline, publication invalid
-
-    return undefined;
+    return headline;
   }
 
   validateProjectName(name) {
@@ -117,6 +111,24 @@ class OuterRouter extends Component {
   validateNumber(number, max) {
     return parseInt(number) > 0 && parseInt(number) <= max
       ? parseInt(number)
+      : undefined;
+  }
+
+  validateChapter(title) {
+    const chapterTitle = siteText.filter(chapter => {
+      return (
+        chapter.title
+          .replace(/,+/g, '')
+          .replace(/\s+/g, '-')
+          .toLowerCase() === title
+      );
+    });
+
+    return chapterTitle.length
+      ? chapterTitle[0].title
+        .replace(/,+/g, '')
+        .replace(/\s+/g, '-')
+        .toLowerCase()
       : undefined;
   }
 
@@ -130,10 +142,6 @@ class OuterRouter extends Component {
               state={this.state}
               toggleText={this.toggleText}
               toggleDetails={this.toggleDetails}
-              validateProjectName={this.validateProjectName}
-              validateNumber={this.validateNumber}
-              validatePublication={this.validatePublication}
-              validateHeadline={this.validateHeadline}
               location={location}
             />
           )}
@@ -148,10 +156,8 @@ class OuterRouter extends Component {
 
     const location = this.props.location.pathname.split('/');
 
-    const chapterNumber =
-      location[1] === 'chapter'
-        ? this.validateNumber(parseInt(location[2]), 4)
-        : undefined;
+    const chapterTitle =
+      location[1] === 'chapter' ? this.validateChapter(location[2]) : undefined;
     const projectName =
       location[1] === 'projects'
         ? this.validateProjectName(location[2])
@@ -166,8 +172,8 @@ class OuterRouter extends Component {
       location[1] === 'jnl'
         ? this.validateHeadline(location[2], location[3])
         : undefined;
-    const updateChapterNumber = chapterNumber
-      ? chapterNumber !== this.state.chapter
+    const updateChapterTitle = chapterTitle
+      ? chapterTitle !== this.state.chapterTitle
       : undefined;
     const updateProjectName = projectName
       ? projectName !== this.state.projectName
@@ -183,14 +189,16 @@ class OuterRouter extends Component {
       : undefined;
 
     if (
-      updateChapterNumber ||
+      updateChapterTitle ||
       updateProjectName ||
       updateProjectImageIndex ||
       updatePublication ||
       updateHeadline
     ) {
       this.setState({
-        chapter: updateChapterNumber ? chapterNumber : this.state.chapter,
+        chapterTitle: updateChapterTitle
+          ? chapterTitle
+          : this.state.chapterTitle,
         projectName: updateProjectName ? projectName : this.state.projectName,
         projectImageIndex: updateProjectImageIndex
           ? projectImageIndex
