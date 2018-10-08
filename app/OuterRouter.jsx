@@ -27,11 +27,11 @@ class OuterRouter extends Component {
           ? this.validateProjectThumbnail(location[3], 3) || 1
           : 1,
       publication:
-        location[1] === 'jnl'
+        location[1] === 'journalism'
           ? this.validatePublication(location[2]) || 'forbes'
           : 'forbes',
       headline:
-        location[1] === 'jnl'
+        location[1] === 'journalism'
           ? this.validateHeadline(location[2], location[3]) ||
             'all-things-considered-digitally'
           : 'all-things-considered-digitally',
@@ -167,9 +167,9 @@ class OuterRouter extends Component {
         ? this.validateProjectThumbnail(location[3], 3)
         : undefined;
     const publication =
-      location[1] === 'jnl' ? this.validatePublication(location[2]) : undefined;
+      location[1] === 'journalism' ? this.validatePublication(location[2]) : undefined;
     const headline =
-      location[1] === 'jnl'
+      location[1] === 'journalism'
         ? this.validateHeadline(location[2], location[3])
         : undefined;
     const updateChapterTitle = chapterTitle

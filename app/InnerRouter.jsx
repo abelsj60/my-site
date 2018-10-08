@@ -4,7 +4,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Chapter from './Chapter.jsx';
 import Projects from './Projects.jsx';
-import JandL from './JandL.jsx';
+import Journalism from './Journalism.jsx';
 import IndexMenu from './IndexMenu.jsx';
 import About from './About.jsx';
 import NotFound from './NotFound.jsx';
@@ -119,10 +119,10 @@ class InnerRouter extends Component {
           />
           <Route
             exact
-            path="/jnl"
+            path="/journalism"
             render={() => (
               <Redirect
-                to={`/jnl/${this.props.state.publication}/${
+                to={`/journalism/${this.props.state.publication}/${
                   this.props.state.headline
                 }`}
               />
@@ -130,11 +130,11 @@ class InnerRouter extends Component {
           />
           <Route
             exact
-            path="/jnl/:publication"
+            path="/journalism/:publication"
             render={() => {
               return (
                 <Redirect
-                  to={`/jnl/${this.props.state.publication}/${
+                  to={`/journalism/${this.props.state.publication}/${
                     this.props.state.headline
                   }`}
                 />
@@ -142,10 +142,10 @@ class InnerRouter extends Component {
             }}
           />
           <Route
-            path="/jnl/:publication/:headline"
+            path="/journalism/:publication/:headline"
             render={() => {
               return (
-                <JandL
+                <Journalism
                   publication={this.props.state.publication}
                   headline={this.props.state.headline}
                 />

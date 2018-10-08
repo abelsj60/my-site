@@ -6,7 +6,7 @@ import 'react-table/react-table.css';
 import storyData from './helpers/storyData.jsx';
 import tableData from './helpers/clipData';
 
-class JandL extends Component {
+class Journalism extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,7 +57,9 @@ class JandL extends Component {
 
     // ~ja History works, but there is no reload?
 
-    this.props.history.push(`/jnl/${publication}/${row.original.stIndex}`);
+    this.props.history.push(
+      `/journalism/${publication}/${row.original.stIndex}`
+    );
   }
 
   render() {
@@ -136,4 +138,4 @@ class JandL extends Component {
   }
 }
 
-export default withRouter(JandL);
+export default withRouter(Journalism);

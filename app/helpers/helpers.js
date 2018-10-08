@@ -30,7 +30,7 @@ function idLinkPath(linkText) {
       ? '/projects'
       : linkText === 'The story'
         ? '/chapter'
-        : '/jnl';
+        : '/journalism';
   return linkPath;
 }
 

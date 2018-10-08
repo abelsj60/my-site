@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import ClipNav from './ClipNav.jsx';
 import clipData from './helpers/clipData.js';
 
-class JandL extends Component {
+class Journalism extends Component {
   constructor(props) {
     super(props);
   }
@@ -56,4 +56,4 @@ class JandL extends Component {
   }
 }
 
-export default withRouter(JandL);
+export default withRouter(Journalism);
