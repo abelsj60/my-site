@@ -4,7 +4,7 @@ import StoryNav from './StoryNav.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
 import clipData from './helpers/clipData';
 import projectData from './helpers/projectData';
-import storyData from './helpers/siteText';
+import siteText from './helpers/siteText';
 // import { withRouter } from 'react-router-dom';
 
 class IndexMenu extends Component {
@@ -31,7 +31,7 @@ class IndexMenu extends Component {
         formatProjectName={this.formatProjectName}
       />
     ) : section === 'chapter' ? (
-      <StoryNav storyData={storyData} item={null} />
+      <StoryNav storyData={siteText} item={null} />
     ) : (
       <ClipNav clipData={clipData} item={null} />
     );

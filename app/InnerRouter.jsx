@@ -12,13 +12,15 @@ import NotFound from './NotFound.jsx';
 /*
   x 1. Hold state between /home and rest of app
   2. Add content to NotFound, About, Details (needs data structure, too)
-  3. Swap chapter names for numbers in state/urls
-  4. Use setState() instead of links in most nav locations?
-  5. Refactor js
-  6. Clean up data structures
-  7. Refactor CSS
-  8. Layout, design
-  9. Browser testing, polyfills, etc
+  3. Need to access details on projects pages
+  x 4. Swap chapter names for numbers in state/urls
+  5. Use setState() instead of links in most nav locations?
+  6. Refactor js
+  7. Clean up data structures
+  8. Refactor CSS
+  9. Layout, design
+  10. Browser testing, polyfills, etc
+  11. Make state defaults dynamic via reference
 */
 
 class InnerRouter extends Component {
@@ -66,7 +68,7 @@ class InnerRouter extends Component {
                 return (
                   <Chapter
                     chapterTitle={this.props.state.chapterTitle}
-                    storyText={this.props.state.storyText}
+                    showStoryText={this.props.state.showStoryText}
                   />
                 );
               } else {
@@ -107,7 +109,7 @@ class InnerRouter extends Component {
                   <Projects
                     projectName={this.props.state.projectName}
                     projectImageIndex={this.props.state.projectImageIndex}
-                    projectDetails={this.props.state.projectDetails}
+                    showProjectDetails={this.props.state.showProjectDetails}
                   />
                 );
               } else {
@@ -174,8 +176,8 @@ class InnerRouter extends Component {
           ;<Route component={NotFound} />
         </Switch>
         <Footer
-          storyText={this.props.state.storyText}
-          projectDetails={this.props.state.projectDetails}
+          showStoryText={this.props.state.showStoryText}
+          showProjectDetails={this.props.state.showProjectDetails}
           toggleText={this.props.toggleText}
           toggleDetails={this.props.toggleDetails}
         />

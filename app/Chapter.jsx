@@ -60,7 +60,7 @@ class Chapter extends Component {
                 .toLowerCase() === this.props.chapterTitle
           )[0].illustration
         }
-        textClass={this.toggleTextClass(this.props.storyText)}
+        textClass={this.toggleTextClass(this.props.showStoryText)}
       />
     );
   }

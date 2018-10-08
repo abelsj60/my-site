@@ -24,7 +24,7 @@ class OuterRouter extends Component {
           : 'arrow',
       projectImageIndex:
         location[1] === 'projects'
-          ? this.validateNumber(location[3], 3) || 1
+          ? this.validateProjectThumbnail(location[3], 3) || 1
           : 1,
       publication:
         location[1] === 'jnl'
@@ -35,8 +35,8 @@ class OuterRouter extends Component {
           ? this.validateHeadline(location[2], location[3]) ||
             'all-things-considered-digitally'
           : 'all-things-considered-digitally',
-      storyText: true,
-      projectDetails: false
+      showStoryText: true,
+      showProjectDetails: false
     };
 
     this.toggleText = this.toggleText.bind(this);
@@ -46,12 +46,12 @@ class OuterRouter extends Component {
   toggleText() {
     // Expl: https://stackoverflow.com/a/29101393/9215718
 
-    this.setState({ storyText: !this.state.storyText });
+    this.setState({ showStoryText: !this.state.showStoryText });
     return 'Switched text!';
   }
 
   toggleDetails() {
-    this.setState({ projectDetails: !this.state.projectDetails });
+    this.setState({ showProjectDetails: !this.state.showProjectDetails });
     return 'Switched details!';
   }
 
@@ -108,7 +108,7 @@ class OuterRouter extends Component {
     return ['arrow', 'slingshot', 'tmmnews'].includes(name) ? name : undefined;
   }
 
-  validateNumber(number, max) {
+  validateProjectThumbnail(number, max) {
     return parseInt(number) > 0 && parseInt(number) <= max
       ? parseInt(number)
       : undefined;
@@ -164,7 +164,7 @@ class OuterRouter extends Component {
         : undefined;
     const projectImageIndex =
       location[1] === 'projects'
-        ? this.validateNumber(location[3], 3)
+        ? this.validateProjectThumbnail(location[3], 3)
         : undefined;
     const publication =
       location[1] === 'jnl' ? this.validatePublication(location[2]) : undefined;

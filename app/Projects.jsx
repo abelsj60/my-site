@@ -40,7 +40,7 @@ class Projects extends Component {
         <ProjectDetails
           formatProjectName={this.formatProjectName}
           projectName={projectName}
-          detailsClass={this.toggleDetailsClass(this.props.projectDetails)}
+          detailsClass={this.toggleDetailsClass(this.props.showProjectDetails)}
         />
         <section id="desktop-nav" className="left">
           <MultiProjectNav

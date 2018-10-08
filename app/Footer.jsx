@@ -27,9 +27,9 @@ class Footer extends Component {
       >
         {this.isAnInnerPage && (
           <AppBarMenu
-            storyText={this.props.storyText}
+            showStoryText={this.props.showStoryText}
             toggleText={this.props.toggleText}
-            projectDetails={this.props.projectDetails}
+            showProjectDetails={this.props.showProjectDetails}
             toggleDetails={this.props.toggleDetails}
           />
         )}

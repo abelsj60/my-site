@@ -23,7 +23,10 @@ class StoryNav extends Component {
       <Link
         key={index}
         className={setActiveItem(index, this.props.item)}
-        to={'/chapter/' + (index + 1)}
+        to={`/chapter/${story.title
+          .replace(/,+/g, '')
+          .replace(/\s+/g, '-')
+          .toLowerCase()}`}
       >
         <h1 id="story-chapter">Chapter {index + 1}</h1>
         <p id="story-title">{story.title}</p>
