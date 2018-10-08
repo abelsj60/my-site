@@ -15,14 +15,14 @@ class Footer extends Component {
     return this.props.location.pathname.length > 1;
   }
 
-  get footerType() {
-    return this.isAnInnerPage ? 'inner-page-footer' : '';
+  get footerClass() {
+    return this.isAnInnerPage ? 'inner-page-footer' : 'home-page-footer';
   }
 
   render() {
     return (
       <footer
-        className={this.footerType}
+        className={this.footerClass}
         style={{ opacity: this.props.opacity }}
       >
         {this.isAnInnerPage && (

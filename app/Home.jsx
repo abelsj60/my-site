@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import Topics from './Topics.jsx';
+import GiantHomePageNav from './GiantHomePageNav.jsx';
 
 // const background = '/test/howls-background-dl.jpg';
 const background2 = '/test/dreaming-boy-co-2.png';
@@ -13,13 +13,13 @@ class Home extends Component {
       iScale: 6,
       opacity: 0,
       isTransparent: true,
-      showTopics: false,
+      showGiantNav: false,
       allowClicks: false
     };
 
     this.scaleImage = this.scaleImage.bind(this);
     this.toggleHeader = this.toggleHeader.bind(this);
-    this.showTopics = this.showTopics.bind(this);
+    this.showGiantNav = this.showGiantNav.bind(this);
     this.togglePointer = this.togglePointer.bind(this);
     this.setOpacity = this.setOpacity.bind(this);
   }
@@ -27,16 +27,16 @@ class Home extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.scaleImage);
     window.addEventListener('scroll', this.toggleHeader);
-    window.addEventListener('scroll', this.showTopics);
+    window.addEventListener('scroll', this.showGiantNav);
     window.addEventListener('scroll', this.togglePointer);
     window.addEventListener('scroll', this.setOpacity);
-    // this.showTopics();
+    // this.showGiantNav();
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.scaleImage);
     window.removeEventListener('scroll', this.toggleHeader);
-    window.addEventListener('scroll', this.showTopics);
+    window.addEventListener('scroll', this.showGiantNav);
     window.addEventListener('scroll', this.togglePointer);
     window.addEventListener('scroll', this.setOpacity);
   }
@@ -60,13 +60,13 @@ class Home extends Component {
   }
 
   // Bring topics onto screen
-  showTopics() {
+  showGiantNav() {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop <= 2300) {
-      this.setState({ showTopics: false });
+      this.setState({ showGiantNav: false });
     } else if (scrollTop > 2300) {
-      this.setState({ showTopics: true });
+      this.setState({ showGiantNav: true });
     }
   }
 
@@ -91,38 +91,38 @@ class Home extends Component {
     }
   }
 
+  setScale(scale) {
+    return { transform: 'scale(' + scale + ',' + scale + ')' };
+  }
+
+  setPointer(boolean) {
+    if (!boolean) {
+      return 'block';
+    } else {
+      return 'allow';
+    }
+  }
+
   render() {
-    const state = this.state;
-
-    const setScale = function(scale) {
-      return { transform: 'scale(' + scale + ',' + scale + ')' };
-    };
-
-    const setPointer = function(boolean) {
-      if (!boolean) {
-        return 'block';
-      } else {
-        return 'allow';
-      }
-    };
-
     return (
       <section className="home">
         <section className="wrapper">
-          <Header isTransparent={state.isTransparent} />
+          <Header isTransparent={this.state.isTransparent} />
           <img
             className="scrolling-image"
-            style={setScale(state.iScale)}
+            style={this.setScale(this.state.iScale)}
             src={background2}
             alt="b2"
           />
         </section>
-        {this.state.showTopics && (
+        {this.state.showGiantNav && (
           <section
-            className={'temp-home-content ' + setPointer(state.allowClicks)}
+            className={
+              'temp-home-content ' + this.setPointer(this.state.allowClicks)
+            }
           >
-            <Topics opacity={state.opacity} />
-            <Footer opacity={state.opacity} />
+            <GiantHomePageNav opacity={this.state.opacity} />
+            <Footer opacity={this.state.opacity} />
           </section>
         )}
         <section className="scroller" />
@@ -132,14 +132,3 @@ class Home extends Component {
 }
 
 export default Home;
-
-// Note:
-// Changed CSS in react-table on -header value
-// box-shadow: 0 2px 15px 0 rgba(0,0,0,0.15)
-
-// Old:
-
-// {
-//   /* Shifted this image to a div background. It looks less clean to me, but is easier to style:
-//   <img id='StaticImage' src={background} alt='b' className='responsive' /> */
-// }

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 // Create, Build, Amaze
 
-const topics = ['One', 'Two', 'Three'];
 const chapterData = {
   One: {
     hed: 'Some projects',
@@ -16,14 +15,10 @@ const chapterData = {
   Three: {
     hed: 'Journalism & Law',
     blurb: 'Slick stories, sleek words'
-  },
-  Four: {
-    hed: 'Alexa adventures',
-    blurb: 'Amazing tales of delight (coming soon)'
   }
 };
 
-class Topics extends Component {
+class GiantHomePageNav extends Component {
   constructor(props) {
     super(props);
   }
@@ -32,13 +27,12 @@ class Topics extends Component {
     const nextPath = {
       One: '/projects',
       Two: '/chapter',
-      Three: '/jnl' /*,
-      Four: '/alexa' */
+      Three: '/jnl'
     };
 
     return (
       <section className="topics" style={{ opacity: this.props.opacity }}>
-        {topics.map((topic, index) => (
+        {['One', 'Two', 'Three'].map((topic, index) => (
           <Link to={nextPath[topic]} key={index}>
             <section className="spacer" />
             <h3>{chapterData[topic].hed}</h3>
@@ -50,4 +44,4 @@ class Topics extends Component {
   }
 }
 
-export default Topics;
+export default GiantHomePageNav;

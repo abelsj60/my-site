@@ -7,41 +7,36 @@ class AppBarMenu extends Component {
   }
 
   get location() {
-    return this.props.location.pathname.split('/')[1];
+    return this.props.location.pathname.split('/');
   }
 
   get linkPath() {
-    if (this.location === 'index') {
-      if (this.props.location.pathname.split('/')[2] === 'chapter') {
+    if (this.location[1] === 'index') {
+      if (this.location[2] === 'chapter') {
         return '/chapter';
-      } else if (this.props.location.pathname.split('/')[2] === 'projects') {
+      } else if (this.location[2] === 'projects') {
         return '/projects';
-      } else if (this.props.location.pathname.split('/')[2] === 'jnl') {
+      } else if (this.location[2] === 'jnl') {
         return '/jnl';
       }
 
       return this.props.location.pathname;
     }
 
-    return this.location === 'projects'
+    return this.location[1] === 'projects'
       ? '/index/projects'
-      : this.location === 'chapter'
+      : this.location[1] === 'chapter'
         ? '/index/chapter'
-        : this.location === 'jnl'
+        : this.location[1] === 'jnl'
           ? '/index/jnl'
           : '/about';
   }
 
   get indexLabel() {
-    if (this.location.includes('index')) {
-      return 'Back';
+    if (this.location[1].includes('index')) {
+      return 'Return';
     }
-
-    if (this.location.includes('about')) {
-      // ~ja ? If we come directly to 'about', where does back go? Come back...
-
-      return 'Back';
-    }
+    // ~ja ? If we come directly to 'about', where does back go? Come back...
 
     return 'Index';
   }
@@ -53,12 +48,21 @@ class AppBarMenu extends Component {
         linkPath: this.linkPath
       },
       {
-        label: this.location === 'projects' ? 'Details' : 'Text',
+        label:
+          this.location[1] === 'projects' || this.location[2] === 'projects'
+            ? 'Details'
+            : 'Text',
         linkPath: this.props.location.pathname,
         handleClick: () => {
-          if (this.location === 'chapter') {
+          if (
+            this.location[1] === 'chapter' ||
+            this.location[2] === 'chapter'
+          ) {
             this.props.toggleText();
-          } else if (this.location === 'projects') {
+          } else if (
+            this.location[1] === 'projects' ||
+            this.location[2] === 'projects'
+          ) {
             this.props.toggleDetails();
           }
         }
@@ -66,14 +70,14 @@ class AppBarMenu extends Component {
       { label: 'About', linkPath: '/about' }
     ];
 
-    if (this.location === 'jnl' || this.location === 'index') {
+    if (this.location[1] === 'jnl' || this.location[2] === 'jnl') {
       buttons.splice(1, 1);
     }
 
-    if (this.location === 'about') {
-      buttons.splice(1, 2);
-      buttons[0].handleClick = () => {
-        if (this.location === 'about') {
+    if (this.location[1] === 'about') {
+      // buttons.splice(1, 2);
+      buttons[2].handleClick = () => {
+        if (this.location[1] === 'about') {
           this.props.history.goBack();
         }
       };
