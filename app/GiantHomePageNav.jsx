@@ -28,7 +28,7 @@ class GiantHomePageNav extends Component {
       ? '/projects'
       : topic === 'two'
         ? '/chapter'
-        : '/jnl';
+        : '/journalism';
   }
 
   render() {

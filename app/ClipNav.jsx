@@ -25,7 +25,7 @@ class ClipNav extends Component {
       <Link
         key={index}
         className={this.setActiveItem(index, this.props.activeItem)}
-        to={`/jnl/${clip.publication
+        to={`/journalism/${clip.publication
           .replace(/\s+/g, '')
           .toLowerCase()}/${clip.headline
           .replace(/\s+/g, '-')

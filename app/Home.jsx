@@ -34,9 +34,9 @@ class Home extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.scaleGiantImage);
     window.removeEventListener('scroll', this.toggleHeaderTransparency);
-    window.addEventListener('scroll', this.showGiantNav);
-    window.addEventListener('scroll', this.togglePointer);
-    window.addEventListener('scroll', this.setTempElementOpacity);
+    window.removeEventListener('scroll', this.showGiantNav);
+    window.removeEventListener('scroll', this.togglePointer);
+    window.removeEventListener('scroll', this.setTempElementOpacity);
   }
 
   scaleGiantImage() {
