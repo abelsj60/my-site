@@ -23,7 +23,7 @@ class Footer extends Component {
     return (
       <footer
         className={this.footerClass}
-        style={{ opacity: this.props.opacity }}
+        style={{ opacity: this.props.tempElementOpacity }}
       >
         {this.isAnInnerPage && (
           <AppBarMenu

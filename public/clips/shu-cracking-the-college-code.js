@@ -65,8 +65,8 @@ export default (
       says the program’s first run ended with an unexpected surprise. He wasn’t
       sure if all the teens would finish their software. But they did, on their
       own or in a small group, building 12 apps. “A lot of them weren’t
-      satisfied by what they created,”
+      satisfied by what they created,” he adds.
     </p>
-    <p>he adds.That’s just fine. Now they know how to do better.</p>
+    <p>That’s just fine. Now they know how to do better.</p>
   </Fragment>
 );

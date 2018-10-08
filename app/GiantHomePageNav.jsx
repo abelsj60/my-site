@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 // Create, Build, Amaze
 
 const chapterData = {
-  One: {
-    hed: 'Some projects',
-    blurb: 'Unconventional software and more'
+  one: {
+    hed: 'Projects',
+    blurb: 'Unconventional software'
   },
-  Two: {
-    hed: 'My story',
-    blurb: 'Adventures in storytelling and magic'
+  two: {
+    hed: 'The story',
+    blurb: 'Adventures in storytelling'
   },
-  Three: {
-    hed: 'Journalism & Law',
+  three: {
+    hed: 'Journalism',
     blurb: 'Slick stories, sleek words'
   }
 };
@@ -23,17 +23,22 @@ class GiantHomePageNav extends Component {
     super(props);
   }
 
-  render() {
-    const nextPath = {
-      One: '/projects',
-      Two: '/chapter',
-      Three: '/jnl'
-    };
+  getLinkPath(topic) {
+    return topic === 'one'
+      ? '/projects'
+      : topic === 'two'
+        ? '/chapter'
+        : '/jnl';
+  }
 
+  render() {
     return (
-      <section className="topics" style={{ opacity: this.props.opacity }}>
-        {['One', 'Two', 'Three'].map((topic, index) => (
-          <Link to={nextPath[topic]} key={index}>
+      <section
+        className="topics"
+        style={{ opacity: this.props.tempElementOpacity }}
+      >
+        {['one', 'two', 'three'].map((topic, index) => (
+          <Link to={this.getLinkPath(topic)} key={index}>
             <section className="spacer" />
             <h3>{chapterData[topic].hed}</h3>
             <p>{chapterData[topic].blurb}</p>

@@ -26,17 +26,17 @@ class Header extends Component {
     const navLinks = ['Projects', 'The story', 'Journalism'];
 
     return (
-      <header className={helpers.setHeaderCss(this.props.isTransparent)}>
+      <header className={helpers.setHeaderCss(this.props.headerIsTransparent)}>
         <section
           className={helpers.setHeaderMenuCss(this.state.openHeaderMenu)}
         >
           <Link
-            className={helpers.setHeaderCss(this.props.isTransparent)}
+            className={helpers.setHeaderCss(this.props.headerIsTransparent)}
             to={'/'}
           >
             <strong>JAMES ABELS</strong>
           </Link>
-          <p className={helpers.setHeaderCss(this.props.isTransparent)}>
+          <p className={helpers.setHeaderCss(this.props.headerIsTransparent)}>
             <em>Magical stories and other adventures</em>
           </p>
         </section>
@@ -53,7 +53,7 @@ class Header extends Component {
                 key={index}
                 className={
                   helpers.setActiveLink(currentPath, linkText) +
-                  helpers.setHeaderCss(this.props.isTransparent)
+                  helpers.setHeaderCss(this.props.headerIsTransparent)
                 }
                 to={helpers.idLinkPath(linkText)}
               >

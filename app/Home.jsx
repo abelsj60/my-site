@@ -3,59 +3,57 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import GiantHomePageNav from './GiantHomePageNav.jsx';
 
-// const background = '/test/howls-background-dl.jpg';
-const background2 = '/test/dreaming-boy-co-2.png';
+const background = '/test/dreaming-boy-co-2.png';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      iScale: 6,
-      opacity: 0,
-      isTransparent: true,
-      showGiantNav: false,
-      allowClicks: false
+      giantImageScale: 6,
+      tempElementOpacity: 0,
+      headerIsTransparent: true,
+      giantHeaderNavIsVisible: false,
+      allowClicksOnTempElements: false
     };
 
-    this.scaleImage = this.scaleImage.bind(this);
-    this.toggleHeader = this.toggleHeader.bind(this);
+    this.scaleGiantImage = this.scaleGiantImage.bind(this);
+    this.toggleHeaderTransparency = this.toggleHeaderTransparency.bind(this);
     this.showGiantNav = this.showGiantNav.bind(this);
     this.togglePointer = this.togglePointer.bind(this);
-    this.setOpacity = this.setOpacity.bind(this);
+    this.setTempElementOpacity = this.setTempElementOpacity.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.scaleImage);
-    window.addEventListener('scroll', this.toggleHeader);
+    window.addEventListener('scroll', this.scaleGiantImage);
+    window.addEventListener('scroll', this.toggleHeaderTransparency);
     window.addEventListener('scroll', this.showGiantNav);
     window.addEventListener('scroll', this.togglePointer);
-    window.addEventListener('scroll', this.setOpacity);
-    // this.showGiantNav();
+    window.addEventListener('scroll', this.setTempElementOpacity);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.scaleImage);
-    window.removeEventListener('scroll', this.toggleHeader);
+    window.removeEventListener('scroll', this.scaleGiantImage);
+    window.removeEventListener('scroll', this.toggleHeaderTransparency);
     window.addEventListener('scroll', this.showGiantNav);
     window.addEventListener('scroll', this.togglePointer);
-    window.addEventListener('scroll', this.setOpacity);
+    window.addEventListener('scroll', this.setTempElementOpacity);
   }
 
-  scaleImage() {
+  scaleGiantImage() {
     const scrollTop = window.pageYOffset;
     const oldPercent = (scrollTop - 0) / (3221 - 0);
     const numberForScale = 6 / ((6 - 1) * oldPercent + 1);
 
-    this.setState({ iScale: numberForScale });
+    this.setState({ giantImageScale: numberForScale });
   }
 
-  toggleHeader() {
+  toggleHeaderTransparency() {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop >= 7) {
-      this.setState({ isTransparent: false });
+      this.setState({ headerIsTransparent: false });
     } else {
-      this.setState({ isTransparent: true });
+      this.setState({ headerIsTransparent: true });
     }
   }
 
@@ -64,19 +62,19 @@ class Home extends Component {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop <= 2300) {
-      this.setState({ showGiantNav: false });
+      this.setState({ giantHeaderNavIsVisible: false });
     } else if (scrollTop > 2300) {
-      this.setState({ showGiantNav: true });
+      this.setState({ giantHeaderNavIsVisible: true });
     }
   }
 
-  setOpacity() {
+  setTempElementOpacity() {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop >= 2400) {
       const oldPercent = (scrollTop - 2400) / (3221 - 2400);
       const numForOpacity = (1 - 0) * oldPercent + 0;
-      this.setState({ opacity: numForOpacity });
+      this.setState({ tempElementOpacity: numForOpacity });
     }
   }
 
@@ -85,17 +83,13 @@ class Home extends Component {
     const scrollTop = window.pageYOffset;
 
     if (scrollTop < 3220) {
-      this.setState({ allowClicks: false });
+      this.setState({ allowClicksOnTempElements: false });
     } else {
-      this.setState({ allowClicks: true });
+      this.setState({ allowClicksOnTempElements: true });
     }
   }
 
-  setScale(scale) {
-    return { transform: 'scale(' + scale + ',' + scale + ')' };
-  }
-
-  setPointer(boolean) {
+  setPointerClass(boolean) {
     if (!boolean) {
       return 'block';
     } else {
@@ -103,26 +97,34 @@ class Home extends Component {
     }
   }
 
+  setGiantImageScale(scale) {
+    // ~ja ? Needed?
+
+    return { transform: 'scale(' + scale + ',' + scale + ')' };
+  }
+
   render() {
     return (
       <section className="home">
         <section className="wrapper">
-          <Header isTransparent={this.state.isTransparent} />
+          <Header headerIsTransparent={this.state.headerIsTransparent} />
           <img
             className="scrolling-image"
-            style={this.setScale(this.state.iScale)}
-            src={background2}
+            style={this.setGiantImageScale(this.state.giantImageScale)}
+            src={background}
             alt="b2"
           />
         </section>
-        {this.state.showGiantNav && (
+        {this.state.giantHeaderNavIsVisible && (
           <section
-            className={
-              'temp-home-content ' + this.setPointer(this.state.allowClicks)
-            }
+            className={`temp-home-content ${this.setPointerClass(
+              this.state.allowClicksOnTempElements
+            )}`}
           >
-            <GiantHomePageNav opacity={this.state.opacity} />
-            <Footer opacity={this.state.opacity} />
+            <GiantHomePageNav
+              tempElementOpacity={this.state.tempElementOpacity}
+            />
+            <Footer tempElementOpacity={this.state.tempElementOpacity} />
           </section>
         )}
         <section className="scroller" />
