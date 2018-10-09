@@ -3,8 +3,8 @@ import { withRouter } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home.jsx';
 import InnerRouter from './InnerRouter.jsx';
-import clipData from './helpers/clipData';
-import siteText from './helpers/siteText';
+import articleData from './data/articleData';
+import storyData from './data/storyData';
 
 class OuterRouter extends Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class OuterRouter extends Component {
   }
 
   validateHeadline(publication, headline) {
-    const headlineIsValid = clipData.find(clip => {
+    const headlineIsValid = articleData.find(clip => {
       return clip.headline
         .replace(/\s+/g, '-')
         .replace(/\./g, '')
@@ -82,7 +82,7 @@ class OuterRouter extends Component {
     });
 
     if (!headline && !headlineIsValid) {
-      const defaultClip = clipData.filter(clip => {
+      const defaultClip = articleData.filter(clip => {
         return (
           clip.publication.replace(/\s+/g, '').toLowerCase() ===
           this.validatePublication(publication)
@@ -91,13 +91,13 @@ class OuterRouter extends Component {
 
       headline = defaultClip.length
         ? defaultClip[0].headline
-            .replace(/\s+/g, '-')
-            .replace(/\./g, '')
-            .replace(/'+/g, '')
-            .replace(/,+/g, '')
-            .replace(/:/g, '')
-            .replace(/\//g, '-')
-            .toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/\./g, '')
+          .replace(/'+/g, '')
+          .replace(/,+/g, '')
+          .replace(/:/g, '')
+          .replace(/\//g, '-')
+          .toLowerCase()
         : undefined;
     }
 
@@ -115,7 +115,7 @@ class OuterRouter extends Component {
   }
 
   validateChapter(title) {
-    const chapterTitle = siteText.filter(chapter => {
+    const chapterTitle = storyData.filter(chapter => {
       return (
         chapter.title
           .replace(/,+/g, '')
@@ -126,9 +126,9 @@ class OuterRouter extends Component {
 
     return chapterTitle.length
       ? chapterTitle[0].title
-          .replace(/,+/g, '')
-          .replace(/\s+/g, '-')
-          .toLowerCase()
+        .replace(/,+/g, '')
+        .replace(/\s+/g, '-')
+        .toLowerCase()
       : undefined;
   }
 

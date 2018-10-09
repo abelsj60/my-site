@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ItemNav from './ItemNav.jsx';
-import siteText from './helpers/siteText.js';
+import storyData from './data/storyData';
 // import helpers from './helpers/helpers.js';
 
 const ShowChapter = props => (
   <main id="my-story">
     <section id="chapter" className={`left ${props.textClass}`}>
       <nav>
-        {siteText.map((chapter, index) => (
+        {storyData.map((chapter, index) => (
           <ItemNav
             key={index}
             item={index + 1}
@@ -43,7 +43,7 @@ class Chapter extends Component {
       <ShowChapter
         chapterTitle={this.props.chapterTitle}
         chapter={
-          siteText.filter(
+          storyData.filter(
             chapter =>
               chapter.title
                 .replace(/,+/g, '')
@@ -52,7 +52,7 @@ class Chapter extends Component {
           )[0]
         }
         illustration={
-          siteText.filter(
+          storyData.filter(
             chapter =>
               chapter.title
                 .replace(/,+/g, '')

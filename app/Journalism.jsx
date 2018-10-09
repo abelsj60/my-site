@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import ClipNav from './ClipNav.jsx';
-import clipData from './helpers/clipData.js';
+import articleData from './data/articleData';
 
 class Journalism extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Journalism extends Component {
   }
 
   render() {
-    const theClip = clipData.find(clip => {
+    const theClip = articleData.find(clip => {
       return clip.headline
         .replace(/\s+/g, '-')
         .replace(/'+/g, '')
@@ -23,7 +23,7 @@ class Journalism extends Component {
     const publication = theClip.publication;
     const headline = theClip.headline;
     const text = theClip.text;
-    const clipIndex = clipData.findIndex(clip => {
+    const clipIndex = articleData.findIndex(clip => {
       return clip.headline
         .replace(/\s+/g, '-')
         .replace(/'+/g, '')

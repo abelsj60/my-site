@@ -3,7 +3,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import GiantHomePageNav from './GiantHomePageNav.jsx';
 
-const background = '/test/dreaming-boy-co-2.png';
+const background = '/dreaming-boy-co-2.png';
 
 class Home extends Component {
   constructor(props) {

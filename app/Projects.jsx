@@ -4,7 +4,7 @@ import MultiProjectNav from './MultiProjectNav.jsx';
 import SingleProjectNav from './SingleProjectNav.jsx';
 import BlockQuote from './BlockQuote.jsx';
 import ProjectDetails from './ProjectDetails.jsx';
-import projectData from './helpers/projectData.js';
+import projectData from './data/projectData';
 
 class Projects extends Component {
   constructor(props) {

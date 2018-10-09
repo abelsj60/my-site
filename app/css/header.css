@@ -57,14 +57,14 @@ header a.active {
 .nav-icon {
   height: 17px;
   width: 17px;
-  background: url('/test/sign-white-closed.png') no-repeat center;
+  background: url('/sign-white-closed.png') no-repeat center;
   display: none;
   margin-right: 15px;
   order: 2;
 }
 
 header.opaque .nav-icon {
-  background: url('/test/sign-black-closed.png') no-repeat center;
+  background: url('/sign-black-closed.png') no-repeat center;
 }
 
 @media only screen and (max-width: 730px) {
@@ -88,26 +88,26 @@ header.opaque .nav-icon {
   }
 
   .nav-icon:hover {
-    background: url('/test/sign-white-open.png') no-repeat center !important;
+    background: url('/sign-white-open.png') no-repeat center !important;
   }
 
   .nav-icon.header-menu-open {
-    background: url('/test/sign-white-open.png') no-repeat center !important;
+    background: url('/sign-white-open.png') no-repeat center !important;
   }
 
   .nav-icon.header-menu-open:hover {
-    background: url('/test/sign-white-closed.png') no-repeat center !important;
+    background: url('/sign-white-closed.png') no-repeat center !important;
   }
 
   header.opaque .nav-icon:hover {
-    background: url('/test/sign-black-open.png') no-repeat center !important;
+    background: url('/sign-black-open.png') no-repeat center !important;
   }
 
   header.opaque .nav-icon.header-menu-open {
-    background: url('/test/sign-black-open.png') no-repeat center !important;
+    background: url('/sign-black-open.png') no-repeat center !important;
   }
 
   header.opaque .nav-icon.header-menu-open:hover {
-    background: url('/test/sign-black-closed.png') no-repeat center !important;
+    background: url('/sign-black-closed.png') no-repeat center !important;
   }
 }

@@ -57,7 +57,7 @@ footer nav {
   }
 
   .app-bar-icon {
-    background: url(/test/print-white-17.png) no-repeat;
+    background: url(/print-white-17.png) no-repeat;
     display: block;
     flex: 0 1 25px;
     height: 17px;

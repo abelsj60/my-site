@@ -1,26 +1,26 @@
-import chapterText from './siteText.js';
+import storyData from '../data/storyData.js';
 
 function pickContent(num) {
   if (parseInt(num) === 1) {
-    return chapterText[0];
+    return storyData[0];
   } else if (parseInt(num) === 2) {
-    return chapterText[1];
+    return storyData[1];
   } else if (parseInt(num) === 3) {
-    return chapterText[2];
+    return storyData[2];
   } else {
-    return chapterText[3];
+    return storyData[3];
   }
 }
 
 function pickPicture(num) {
   if (parseInt(num) === 1) {
-    return '/test/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
+    return '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
   } else if (parseInt(num) === 2) {
-    return '/test/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
+    return '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
   } else if (parseInt(num) === 3) {
-    return '/test/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
+    return '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
   } else {
-    return '/test/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
+    return '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg';
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import clipData from './helpers/clipData.js';
+import articleData from './data/articleData.js';
 
 class ClipNav extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class ClipNav extends Component {
   }
 
   render() {
-    return clipData.map((clip, index) => (
+    return articleData.map((clip, index) => (
       <Link
         key={index}
         className={this.setActiveItem(index, this.props.activeItem)}
