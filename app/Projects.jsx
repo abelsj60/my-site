@@ -11,61 +11,56 @@ class Projects extends Component {
     super(props);
   }
 
+  get projectData() {
+    return projectData.filter(
+      project => project.name === this.props.projectName
+    )[0];
+  }
+
   formatProjectName(name) {
     if (name === 'tmmnews') {
       return name.slice(0, 3).toUpperCase() + name.slice(3);
-    } else {
-      return name.slice(0, 1).toUpperCase() + name.slice(1);
     }
-  }
 
-  toggleDetailsClass(state) {
-    return !state ? '' : 'show-details';
+    return name.slice(0, 1).toUpperCase() + name.slice(1);
   }
 
   render() {
-    const filteredProjectData = projectData.filter(
-      project => project.name === this.props.projectName
-    )[0];
-    const projectName = filteredProjectData.name;
-    const formattedProjectName = this.formatProjectName(
-      filteredProjectData.name
-    );
-    const projectCaption = filteredProjectData.caption;
-    const fullSizeProjectImages = filteredProjectData.full;
-    const indexForFullSizeProjectImages = this.props.projectImageIndex;
-
     return (
       <main id="my-projects" className="">
         <ProjectDetails
-          formatProjectName={this.formatProjectName}
-          projectName={projectName}
-          detailsClass={this.toggleDetailsClass(this.props.showProjectDetails)}
+          projectName={this.formatProjectName(this.projectData.name)}
+          toggleDetails={this.props.toggleDetails}
+          showProjectDetails={this.props.showProjectDetails}
         />
         <section id="desktop-nav" className="left">
           <MultiProjectNav
-            projectData={projectData.filter(
-              project => project.name !== projectName
-            )}
+            projectData={projectData}
             formatProjectName={this.formatProjectName}
           />
         </section>
         <section id="project-images" className="right">
           <ReactFitText compressor={1} minFontSize={48}>
-            <BlockQuote text={formattedProjectName} />
+            <BlockQuote text={this.formatProjectName(this.projectData.name)} />
           </ReactFitText>
           <section id="images-container">
             <section className="project-image">
               <img
-                src={fullSizeProjectImages[indexForFullSizeProjectImages - 1]}
+                src={this.projectData.full[this.props.projectImageIndex - 1]}
                 alt="mainPic"
               />
             </section>
             <section id="thumbnails-main" className="project-thumbnails">
-              {<SingleProjectNav project={filteredProjectData} />}
+              <SingleProjectNav project={this.projectData} />
+            </section>
+            <section
+              className="details-button"
+              onClick={() => this.props.toggleDetails()}
+            >
+              <p>Details</p>
             </section>
           </section>
-          <BlockQuote elementId="new-block" text={projectCaption} />
+          <BlockQuote elementId="new-block" text={this.projectData.caption} />
         </section>
       </main>
     );

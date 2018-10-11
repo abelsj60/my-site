@@ -5,10 +5,18 @@ class ProjectDetails extends Component {
     super(props);
   }
 
+  toggleDetailsClass(state) {
+    return !state ? '' : 'show-details';
+  }
+
   render() {
     return (
-      <section className={`project-details ${this.props.detailsClass}`}>
-        <h1> {this.props.formatProjectName(this.props.projectName)} </h1>
+      <section
+        className={`project-details ${this.toggleDetailsClass(
+          this.props.showProjectDetails
+        )}`}
+      >
+        <h1> {this.props.projectName} </h1>
         <p className="project-description">Project</p>
         <p className="project-description">Type</p>
         <p>Answer</p>
@@ -20,6 +28,12 @@ class ProjectDetails extends Component {
         <p>Answer</p>
         <p className="project-description">What you're looking at</p>
         <p>Answer</p>
+        <section
+          id="close-details-from-inside"
+          onClick={() => this.props.toggleDetails()}
+        >
+          <p>Close</p>
+        </section>
       </section>
     );
   }

@@ -34,7 +34,7 @@ class AppBarMenu extends Component {
 
   get indexLabel() {
     if (this.location[1].includes('index')) {
-      return 'Return';
+      return 'Close';
     }
     // ~ja ? If we come directly to 'about', where does back go? Come back...
 
@@ -70,7 +70,10 @@ class AppBarMenu extends Component {
       { label: 'About', linkPath: '/about' }
     ];
 
-    if (this.location[1] === 'journalism' || this.location[2] === 'journalism') {
+    if (
+      this.location[1] === 'journalism' ||
+      this.location[2] === 'journalism'
+    ) {
       buttons.splice(1, 1);
     }
 

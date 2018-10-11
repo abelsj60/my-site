@@ -11,8 +11,9 @@ class SingleProjectNav extends Component {
       (thumbnail, index) =>
         thumbnail && (
           <Link
+            id="main-thumbnail"
             key={index}
-            to={'/projects/' + this.props.project.name + '/' + index}
+            to={`/projects/${this.props.project.name}/${index}`}
           >
             <img
               className="thumbnail"

@@ -4,6 +4,23 @@
   display: flex;
 }
 
+#project-images {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  max-width: 776.67px;
+}
+
+blockquote {
+  margin: 0;
+}
+
+.details-button {
+  background-color: blue;
+  color: white;
+}
+
 .project-details {
   display: none;
 }
@@ -16,7 +33,12 @@
   top: 52px;
   bottom: 48px;
   padding: 25px;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+#close-details-from-inside {
+  display: none;
 }
 
 #images-container {
@@ -24,17 +46,18 @@
   flex-direction: column;
   margin-top: 15px;
   margin-bottom: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 .project-image {
   line-height: 0;
-  margin-bottom: 5px;
 }
 
 .project-image img {
   max-width: 100%;
+}
+
+#thumbnails-main {
+  margin-top: 5px;
 }
 
 .project-thumbnails {
@@ -60,7 +83,11 @@
   max-width: 100%;
 }
 
-@media only screen and (min-width: 536px) {
+.details-button {
+  display: none;
+}
+
+@media only screen and (min-width: 498px) {
   #images-container {
     flex-direction: row-reverse;
   }
@@ -70,7 +97,9 @@
   }
 
   #thumbnails-main {
+    margin-top: 0px;
     flex-direction: column;
+    /* justify-content: space-between; */
   }
 
   #thumbnails-main a:not(:last-child) {
@@ -86,9 +115,25 @@
   }
 }
 
-@media only screen and (min-width: 849px) {
-  .project-details.show-details {
+@media only screen and (min-width: 789px) {
+  .project-details {
     display: none;
+  }
+
+  .project-details.show-details {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 52px;
+    bottom: 48px;
+    padding: 25px;
+    background-color: whitesmoke;
+    color: black;
+  }
+
+  #close-details-from-inside {
+    display: block;
   }
 
   .left {
@@ -126,6 +171,10 @@
     align-self: center;
   }
 
+  #thumbnails-main {
+    display: none;
+  }
+
   #thumbnails-main a,
   #thumbnails-main a:last-child {
     margin-right: 0px;
@@ -135,9 +184,23 @@
   #nav-group nav {
     max-width: 100%;
   }
+
+  .details-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: 100px;
+    min-width: 100px;
+    margin-left: 5px;
+    text-align: center;
+  }
+
+  .details-button p {
+    flex: 1;
+  }
 }
 
-@media only screen and (min-width: 1265px) {
+@media only screen and (min-width: 1172px) {
   #thumbnails-main {
     flex-direction: row;
   }

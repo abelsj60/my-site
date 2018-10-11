@@ -12,15 +12,18 @@ import NotFound from './NotFound.jsx';
 /*
   x 1. Hold state between /home and rest of app
   2. Add content to NotFound, About, Details (needs data structure, too)
-  3. Need to access details on projects pages
+  x 3. Need to access details on projects pages
   x 4. Swap chapter names for numbers in state/urls
-  5. Use setState() instead of links in most nav locations?
-  6. Refactor js
-  7. Clean up data structures
-  8. Refactor CSS
-  9. Layout, design
-  10. Browser testing, polyfills, etc
-  11. Make state defaults dynamic via reference
+  5. Refactor js
+  6. Refactor CSS
+  7. Edit story
+  8. Get real project data
+  9. Use setState() instead of links in most nav locations?
+  10. x Clean up data structures
+  11. Layout, design
+  12. Browser testing, polyfills, etc
+  x 13. Make state defaults dynamic via reference
+  14. Home scroll events, tighten
 */
 
 class InnerRouter extends Component {
@@ -63,18 +66,12 @@ class InnerRouter extends Component {
           />
           <Route
             path="/chapter/:title"
-            render={() => {
-              if (this.props.state.chapterTitle) {
-                return (
-                  <Chapter
-                    chapterTitle={this.props.state.chapterTitle}
-                    showStoryText={this.props.state.showStoryText}
-                  />
-                );
-              } else {
-                return <NotFound />;
-              }
-            }}
+            render={() => (
+              <Chapter
+                chapterTitle={this.props.state.chapterTitle}
+                showStoryText={this.props.state.showStoryText}
+              />
+            )}
           />
           <Route
             exact
@@ -100,22 +97,14 @@ class InnerRouter extends Component {
           />
           <Route
             path="/projects/:name/:projectImageIndex"
-            render={() => {
-              if (
-                this.props.state.projectName &&
-                this.props.state.projectImageIndex
-              ) {
-                return (
-                  <Projects
-                    projectName={this.props.state.projectName}
-                    projectImageIndex={this.props.state.projectImageIndex}
-                    showProjectDetails={this.props.state.showProjectDetails}
-                  />
-                );
-              } else {
-                return <NotFound />;
-              }
-            }}
+            render={() => (
+              <Projects
+                projectName={this.props.state.projectName}
+                projectImageIndex={this.props.state.projectImageIndex}
+                toggleDetails={this.props.toggleDetails}
+                showProjectDetails={this.props.state.showProjectDetails}
+              />
+            )}
           />
           <Route
             exact
@@ -143,14 +132,12 @@ class InnerRouter extends Component {
           />
           <Route
             path="/journalism/:publication/:headline"
-            render={() => {
-              return (
-                <Journalism
-                  publication={this.props.state.publication}
-                  headline={this.props.state.headline}
-                />
-              );
-            }}
+            render={() => (
+              <Journalism
+                publication={this.props.state.publication}
+                headline={this.props.state.headline}
+              />
+            )}
           />
           <Route
             exact
@@ -163,7 +150,6 @@ class InnerRouter extends Component {
             path="/index/:section"
             render={({ match }) => {
               const section = match.params.section.toLowerCase();
-
               return <IndexMenu section={section} />;
             }}
           />
@@ -173,7 +159,7 @@ class InnerRouter extends Component {
               return <About />;
             }}
           />
-          ;<Route component={NotFound} />
+          <Route component={NotFound} />
         </Switch>
         <Footer
           showStoryText={this.props.state.showStoryText}

@@ -41,11 +41,11 @@ blockquote {
 }
 
 blockquote:first-child {
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 
 blockquote:last-child {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   font-size: 2rem;
 }
 

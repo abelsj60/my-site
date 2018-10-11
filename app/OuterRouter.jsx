@@ -5,6 +5,7 @@ import Home from './Home.jsx';
 import InnerRouter from './InnerRouter.jsx';
 import articleData from './data/articleData';
 import storyData from './data/storyData';
+import projectData from './data/projectData';
 
 class OuterRouter extends Component {
   constructor(props) {
@@ -16,25 +17,48 @@ class OuterRouter extends Component {
       chapterTitle:
         location[1] === 'chapter'
           ? this.validateChapter(location[2]) ||
-            'the-boy-and-the-beginnings-of-magic'
-          : 'the-boy-and-the-beginnings-of-magic',
+            storyData[0].title
+              .replace(/,+/g, '')
+              .replace(/\s+/g, '-')
+              .toLowerCase()
+          : storyData[0].title
+            .replace(/,+/g, '')
+            .replace(/\s+/g, '-')
+            .toLowerCase(),
       projectName:
         location[1] === 'projects'
-          ? this.validateProjectName(location[2]) || 'arrow'
-          : 'arrow',
+          ? this.validateProjectName(location[2]) || projectData[0].name
+          : projectData[0].name,
       projectImageIndex:
         location[1] === 'projects'
           ? this.validateProjectThumbnail(location[3], 3) || 1
           : 1,
       publication:
         location[1] === 'journalism'
-          ? this.validatePublication(location[2]) || 'forbes'
-          : 'forbes',
+          ? this.validatePublication(location[2]) ||
+            articleData[0].publication.toLowerCase()
+          : articleData[0].publication.toLowerCase(),
       headline:
         location[1] === 'journalism'
           ? this.validateHeadline(location[2], location[3]) ||
-            'all-things-considered-digitally'
-          : 'all-things-considered-digitally',
+            articleData[0].headline
+              .toLowerCase()
+              .replace(/\s+/g, '-')
+              .replace(/\./g, '')
+              .replace(/'+/g, '')
+              .replace(/,+/g, '')
+              .replace(/:/g, '')
+              .replace(/\//g, '-')
+              .toLowerCase()
+          : articleData[0].headline
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/\./g, '')
+            .replace(/'+/g, '')
+            .replace(/,+/g, '')
+            .replace(/:/g, '')
+            .replace(/\//g, '-')
+            .toLowerCase(),
       showStoryText: true,
       showProjectDetails: false
     };
@@ -56,14 +80,12 @@ class OuterRouter extends Component {
   }
 
   validatePublication(publication) {
-    return [
-      'blouinnews',
-      'forbes',
-      'ft',
-      'setonhallmagazine',
-      'slate',
-      'thedardenreport'
-    ].includes(publication)
+    return articleData.find(clip =>
+      clip.publication
+        .replace(/\s+/g, '')
+        .toLowerCase()
+        .includes(publication)
+    )
       ? publication
       : undefined;
   }
@@ -105,7 +127,9 @@ class OuterRouter extends Component {
   }
 
   validateProjectName(name) {
-    return ['arrow', 'slingshot', 'tmmnews'].includes(name) ? name : undefined;
+    return projectData.find(project => project.name.includes(name))
+      ? name
+      : undefined;
   }
 
   validateProjectThumbnail(number, max) {
