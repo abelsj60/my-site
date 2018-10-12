@@ -12,7 +12,14 @@ export default [
       'https://picsum.photos/874/569/?random',
       'https://picsum.photos/875/569/?random'
     ],
-    caption: 'Customized video interactivity'
+    caption: 'Customized video interactivity',
+    details: {
+      name: 'aA',
+      type: 'bB',
+      contribution: 'cC',
+      technologies: 'dD',
+      description: 'eE'
+    }
   },
   {
     name: 'slingshot',
@@ -27,7 +34,14 @@ export default [
       'https://picsum.photos/877/569/?random',
       'https://picsum.photos/878/569/?random'
     ],
-    caption: 'Perfect software demos'
+    caption: 'Perfect software demos',
+    details: {
+      name: '',
+      type: '',
+      contribution: '',
+      technologies: '',
+      description: ''
+    }
   },
   {
     name: 'tmmnews',
@@ -42,6 +56,13 @@ export default [
       'https://picsum.photos/880/569/?random',
       'https://picsum.photos/881/569/?random'
     ],
-    caption: 'Bespoke video news'
+    caption: 'Bespoke video news',
+    details: {
+      name: '',
+      type: '',
+      contribution: '',
+      technologies: '',
+      description: ''
+    }
   }
 ];

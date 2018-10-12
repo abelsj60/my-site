@@ -39,6 +39,7 @@ blockquote {
 
 #close-details-from-inside {
   display: none;
+  color: red;
 }
 
 #images-container {

@@ -31,6 +31,7 @@ class Projects extends Component {
         <ProjectDetails
           projectName={this.formatProjectName(this.projectData.name)}
           toggleDetails={this.props.toggleDetails}
+          projectData={this.projectData}
           showProjectDetails={this.props.showProjectDetails}
         />
         <section id="desktop-nav" className="left">

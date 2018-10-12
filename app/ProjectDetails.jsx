@@ -10,6 +10,9 @@ class ProjectDetails extends Component {
   }
 
   render() {
+    const projectData = this.props.projectData.details;
+    console.log(projectData);
+
     return (
       <section
         className={`project-details ${this.toggleDetailsClass(
@@ -17,22 +20,19 @@ class ProjectDetails extends Component {
         )}`}
       >
         <h1> {this.props.projectName} </h1>
-        <p className="project-description">Project</p>
         <p className="project-description">Type</p>
-        <p>Answer</p>
+        <p>{projectData.type}</p>
         <p className="project-description">What I did</p>
-        <p>Answer</p>
+        <p>{projectData.contribution}</p>
         <p className="project-description">Key technologies</p>
-        <p>Answer</p>
+        <p>{projectData.technologies}</p>
         <p className="project-description">Description</p>
-        <p>Answer</p>
-        <p className="project-description">What you're looking at</p>
-        <p>Answer</p>
+        <p>{projectData.description}</p>
         <section
           id="close-details-from-inside"
           onClick={() => this.props.toggleDetails()}
         >
-          <p>Close</p>
+          <p>CLOSE</p>
         </section>
       </section>
     );
