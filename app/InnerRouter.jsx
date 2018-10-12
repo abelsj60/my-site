@@ -15,9 +15,9 @@ import NotFound from './NotFound.jsx';
   x 3. Need to access details on projects pages
   x 4. Swap chapter names for numbers in state/urls
   5. Refactor js
-  6. Refactor CSS
-  7. Edit story
-  8. Get real project data
+  6. Edit story
+  7. Get real project data
+  8. Refactor CSS
   9. Use setState() instead of links in most nav locations?
   10. x Clean up data structures
   11. Layout, design

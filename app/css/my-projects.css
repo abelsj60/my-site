@@ -136,7 +136,7 @@ blockquote {
     display: block;
   }
 
-  .left {
+  #desktop-nav {
     display: flex;
   }
 
