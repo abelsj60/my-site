@@ -14,6 +14,8 @@
 #project-title {
   font-size: 2.5rem;
   margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: lightgrey dotted 0.5px;
 }
 
 #project-description {
@@ -107,7 +109,7 @@
   #project-image-nav {
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: 31.5px;
+    margin-top: 31px;
     padding-bottom: 0px;
     border-bottom: none;
   }
@@ -138,9 +140,15 @@
 @media only screen and (min-width: 1147px) {
   #project-image-nav {
     flex-direction: row;
+    max-height: 161.75px;
   }
 
   #project-image-nav a:nth-child(-n + 2) {
     margin-right: 5px;
+    margin-bottom: 0;
+  }
+
+  #big-image-nav-container {
+    display: flex;
   }
 }

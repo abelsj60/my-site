@@ -29,8 +29,8 @@ class ProjectsBackup extends Component {
     return (
       <main id="my-projects" className="">
         <h1 id="project-title">{this.projectData.details.name}</h1>
-        <p id="project-description">{this.projectData.details.type}</p>
         <section id="project-content-container">
+          <p id="project-description">{this.projectData.details.type}</p>
           <section id="project-discussion">
             <h2>
               {this.projectDescriptionKeys[2][0].toUpperCase() +
