@@ -12,8 +12,8 @@ class Footer extends Component {
   }
 
   get innerPage() {
-    // ~ja Home is .length 1 (i.e., '/')
-    return this.location.length > 2;
+    // ~ja ? Will this work in deployment?
+    return this.location[1] !== '';
   }
 
   get indexPage() {
@@ -24,7 +24,7 @@ class Footer extends Component {
     return this.location[1] === 'about';
   }
 
-  get footerClass() {
+  setFooterClass() {
     return this.innerPage ? 'inner-page-footer' : 'home-page-footer';
   }
 
@@ -33,9 +33,11 @@ class Footer extends Component {
   }
 
   render() {
+    console.log(this.showAppBar());
+    console.log(!this.showAppBar());
     return (
       <footer
-        className={this.footerClass}
+        className={this.setFooterClass()}
         style={{ opacity: this.props.tempElementOpacity }}
       >
         {this.showAppBar() && (
@@ -44,7 +46,9 @@ class Footer extends Component {
             toggleDetails={this.props.toggleDetails}
           />
         )}
-        <p className={'copyright'}>James Abels. All rights reserved. 2018.</p>
+        {!this.showAppBar() && (
+          <p className={'copyright'}>James Abels. All rights reserved. 2018.</p>
+        )}
       </footer>
     );
   }
