@@ -12,13 +12,19 @@ export default [
       'https://picsum.photos/874/569/?random',
       'https://picsum.photos/875/569/?random'
     ],
-    caption: 'Customized video interactivity',
     details: {
-      name: 'aA',
-      type: 'bB',
-      contribution: 'cC',
-      technologies: 'dD',
-      description: 'eE'
+      name: 'Arrow',
+      type: 'Easily deliver custom interactive video',
+      contribution:
+        "As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.",
+      technologies: 'PHP, AWS, FFmpeg',
+      captions: [
+        'Arrow caption one',
+        'Arrow caption two',
+        'Arrow caption three'
+      ],
+      description:
+        'Arrow packages Internet video just-in-time for delivery, making it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.'
     }
   },
   {
@@ -34,13 +40,19 @@ export default [
       'https://picsum.photos/877/569/?random',
       'https://picsum.photos/878/569/?random'
     ],
-    caption: 'Perfect software demos',
     details: {
-      name: '',
-      type: '',
-      contribution: '',
-      technologies: '',
-      description: ''
+      name: 'Slingshot',
+      type: 'Perfect software demos worldwide',
+      captions: [
+        'Slingshot caption one',
+        'Slingshot caption two',
+        'Slingshot caption three'
+      ],
+      contribution:
+        'Founder, oversaw platform development, managed dev team, prioritized features',
+      technologies: 'PHP, WebSockets, PubNub, AWS',
+      description:
+        'Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible.'
     }
   },
   {
@@ -56,13 +68,19 @@ export default [
       'https://picsum.photos/880/569/?random',
       'https://picsum.photos/881/569/?random'
     ],
-    caption: 'Bespoke video news',
     details: {
-      name: '',
-      type: '',
-      contribution: '',
-      technologies: '',
-      description: ''
+      name: 'TMMnews',
+      type: 'Bespoke video news site',
+      contribution:
+        'News anchor, oversaw platform development, managed dev team, prioritized features',
+      technologies: 'WordPress, Javascript, HTML, CSS',
+      captions: [
+        'TMMnews caption one',
+        'TMMnews caption two',
+        'TMMnews caption three'
+      ],
+      description:
+        'TMM news is a custom WordPress theme that builds programmatically assembles news shows from individual video segments'
     }
   }
 ];

@@ -4,6 +4,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Chapter from './Chapter.jsx';
 import Projects from './Projects.jsx';
+import ProjectsBackup from './Projects-backup.jsx';
 import Journalism from './Journalism.jsx';
 import IndexMenu from './IndexMenu.jsx';
 import About from './About.jsx';
@@ -11,7 +12,7 @@ import NotFound from './NotFound.jsx';
 
 /*
   x 1. Hold state between /home and rest of app
-  2. Add content to NotFound, About, Details (needs data structure, too)
+  2. Add content to NotFound, About, Details (x needs data structure, too)
   x 3. Need to access details on projects pages
   x 4. Swap chapter names for numbers in state/urls
   5. Refactor js
@@ -46,6 +47,18 @@ class InnerRouter extends Component {
       <section className="inner-page">
         <Header />
         <Switch>
+          <Route
+            exact
+            path="/test"
+            render={() => (
+              <ProjectsBackup
+                projectName={this.props.state.projectName}
+                projectImageIndex={this.props.state.projectImageIndex}
+                toggleDetails={this.props.toggleDetails}
+                showProjectDetails={this.props.state.showProjectDetails}
+              />
+            )}
+          />
           {/*
             <Route
               exact

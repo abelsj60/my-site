@@ -1,212 +1,146 @@
 /* My projects rules */
 
 #my-projects {
-  display: flex;
+  padding: 25px;
+  line-height: normal;
+}
+
+#my-projects h2 {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 7px;
+}
+
+#project-title {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+#project-description {
+  font-size: 1.7rem;
+  margin-bottom: 15px;
+}
+
+#project-content-container {
+  overflow: auto;
+}
+
+#project-discussion p {
+  font-size: 1.7rem;
+  margin-bottom: 10px;
 }
 
 #project-images {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  max-width: 776.67px;
-}
-
-blockquote {
-  margin: 0;
-}
-
-.details-button {
-  background-color: blue;
-  color: white;
-}
-
-.project-details {
-  display: none;
-}
-
-.project-details.show-details {
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 52px;
-  bottom: 48px;
-  padding: 25px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-}
-
-#close-details-from-inside {
-  display: none;
-  color: red;
-}
-
-#images-container {
   display: flex;
   flex-direction: column;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  padding: 10px;
+  border: lightgrey dotted 0.5px;
 }
 
-.project-image {
-  line-height: 0;
+#project-image-selection {
+  display: flex;
 }
 
-.project-image img {
+#project-image-selection h2 {
+  font-size: 1.7rem;
+}
+
+#project-image-nav {
+  display: flex;
+  padding-bottom: 7px;
+  border-bottom: lightgrey dotted 0.5px;
+}
+
+#project-image-nav img {
   max-width: 100%;
+  vertical-align: bottom;
 }
 
-#thumbnails-main {
-  margin-top: 5px;
-}
-
-.project-thumbnails {
-  display: flex;
-  min-width: 0;
-  max-width: 65%;
-  line-height: 0;
-}
-
-.project-thumbnails a {
-  display: flex;
-  align-items: flex-start;
-  min-width: 0;
-}
-
-.project-thumbnails a:not(:last-child) {
+#project-image-nav a:nth-child(-n + 2) {
   margin-right: 5px;
 }
 
-.project-thumbnails img {
+#project-image-selection-nav {
+  font-size: 1.7rem;
+  flex: 2;
+  display: flex;
+}
+
+#project-image-selection-nav p {
   flex: 1;
-  min-width: 0;
+  background-color: red;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#project-image-caption p:first-child {
+  flex: 1;
+}
+
+#project-image-caption {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.7rem;
+}
+
+#project-image-caption p {
+  flex: 3;
+}
+
+#project-image-main-pic {
+  flex: 1;
   max-width: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
 }
 
-.details-button {
-  display: none;
-}
-
-@media only screen and (min-width: 498px) {
-  #images-container {
+@media only screen and (min-width: 672px) {
+  #project-images {
     flex-direction: row-reverse;
+    justify-content: flex-end;
   }
 
-  .project-image {
-    margin-bottom: 0px;
-  }
-
-  #thumbnails-main {
-    margin-top: 0px;
+  #project-image-nav {
     flex-direction: column;
-    /* justify-content: space-between; */
+    justify-content: flex-start;
+    margin-top: 31.5px;
+    padding-bottom: 0px;
+    border-bottom: none;
   }
 
-  #thumbnails-main a:not(:last-child) {
+  #project-image-nav a:nth-child(-n + 2) {
+    margin-right: 0;
     margin-bottom: 5px;
   }
 
-  #thumbnails-main a:last-child {
-    /*
-    ~ja Needed too offset this mobile rule:
-    .project-thumbnails a:not(:last-child)
-    */
+  #project-image-nav img {
+    max-width: 100%;
+  }
+
+  #project-image-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #project-image-caption {
+    margin-top: 0;
+  }
+
+  #project-image-main-pic {
     margin-right: 5px;
   }
 }
 
-@media only screen and (min-width: 789px) {
-  .project-details {
-    display: none;
-  }
-
-  .project-details.show-details {
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 52px;
-    bottom: 48px;
-    padding: 25px;
-    background-color: whitesmoke;
-    color: black;
-  }
-
-  #close-details-from-inside {
-    display: block;
-  }
-
-  #desktop-nav {
-    display: flex;
-  }
-
-  #my-projects {
+@media only screen and (min-width: 1147px) {
+  #project-image-nav {
     flex-direction: row;
   }
 
-  #desktop-nav {
-    flex: 1;
-    min-width: 0;
-    flex-direction: column;
-  }
-
-  #nav-group {
-    min-width: 0;
-    margin-top: 15px;
-    margin-left: 10px;
-    margin-right: 25px;
-  }
-
-  #nav-group h1 {
-    margin: 0;
-  }
-
-  #nav-group h1:not(:last-child) {
-    margin-bottom: 10px;
-  }
-
-  #images-container {
-    flex-direction: row;
-    max-width: 824.67px;
-    align-self: center;
-  }
-
-  #thumbnails-main {
-    display: none;
-  }
-
-  #thumbnails-main a,
-  #thumbnails-main a:last-child {
-    margin-right: 0px;
-    margin-left: 5px;
-  }
-
-  #nav-group nav {
-    max-width: 100%;
-  }
-
-  .details-button {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    height: 100px;
-    min-width: 100px;
-    margin-left: 5px;
-    text-align: center;
-  }
-
-  .details-button p {
-    flex: 1;
-  }
-}
-
-@media only screen and (min-width: 1172px) {
-  #thumbnails-main {
-    flex-direction: row;
-  }
-
-  #images-container {
-    max-width: 100%;
+  #project-image-nav a:nth-child(-n + 2) {
+    margin-right: 5px;
   }
 }

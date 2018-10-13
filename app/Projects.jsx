@@ -61,7 +61,12 @@ class Projects extends Component {
               <p>Details</p>
             </section>
           </section>
-          <BlockQuote elementId="new-block" text={this.projectData.caption} />
+          <BlockQuote
+            elementId="new-block"
+            text={this.projectData.details.captions.filter(
+              (caption, index) => index === this.props.projectImageIndex - 1
+            )}
+          />
         </section>
       </main>
     );

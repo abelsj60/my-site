@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 
 class ProjectDetails extends Component {
   constructor(props) {
@@ -9,10 +9,15 @@ class ProjectDetails extends Component {
     return !state ? '' : 'show-details';
   }
 
-  render() {
-    const projectData = this.props.projectData.details;
-    console.log(projectData);
+  get projectDescriptions() {
+    return this.props.projectData.details;
+  }
 
+  get projectDescriptionKeys() {
+    return Object.keys(this.projectDescriptions);
+  }
+
+  render() {
     return (
       <section
         className={`project-details ${this.toggleDetailsClass(
@@ -20,14 +25,19 @@ class ProjectDetails extends Component {
         )}`}
       >
         <h1> {this.props.projectName} </h1>
-        <p className="project-description">Type</p>
-        <p>{projectData.type}</p>
-        <p className="project-description">What I did</p>
-        <p>{projectData.contribution}</p>
-        <p className="project-description">Key technologies</p>
-        <p>{projectData.technologies}</p>
-        <p className="project-description">Description</p>
-        <p>{projectData.description}</p>
+        {this.projectDescriptionKeys.map((key, index) => {
+          if (!Array.isArray(this.projectDescriptions[key])) {
+            return (
+              <Fragment key={index}>
+                <h3 className="project-description">
+                  {key[0].toUpperCase() + key.slice(1)}
+                </h3>
+                <p>{this.projectDescriptions[key]}</p>
+              </Fragment>
+            );
+          }
+        })}
+
         <section
           id="close-details-from-inside"
           onClick={() => this.props.toggleDetails()}
