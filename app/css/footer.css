@@ -80,7 +80,7 @@ footer nav {
     display: none;
   }
 
-  /* .inner-page-footer .copyright {
+  .inner-page-footer .copyright.hide {
     display: none;
-  } */
+  }
 }

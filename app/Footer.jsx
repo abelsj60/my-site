@@ -46,9 +46,9 @@ class Footer extends Component {
             toggleDetails={this.props.toggleDetails}
           />
         )}
-        {!this.showAppBar() && (
-          <p className={'copyright'}>James Abels. All rights reserved. 2018.</p>
-        )}
+        <p className={`copyright ${!this.showAppBar() ? 'show' : 'hide'}`}>
+          James Abels. All rights reserved. 2018.
+        </p>
       </footer>
     );
   }
