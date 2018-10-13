@@ -7,39 +7,48 @@ class ClipNav extends Component {
     super(props);
   }
 
-  setActiveItem(mappedWith, urlParam) {
-    if (parseInt(urlParam)) {
-      // ~ja What's the point of this?
-      urlParam = parseInt(urlParam);
-    }
-
-    if (mappedWith === urlParam) {
+  setActiveItem(headline, headlineOnState) {
+    if (headline === headlineOnState) {
       return 'active';
     } else {
       return 'inactive';
     }
   }
 
+  formatPublication(publication) {
+    return publication.replace(/\s+/g, '').toLowerCase();
+  }
+
+  formatHeadline(headline) {
+    return headline
+      .replace(/\s+/g, '-')
+      .replace(/\./g, '')
+      .replace(/'+/g, '')
+      .replace(/,+/g, '')
+      .replace(/:/g, '')
+      .replace(/\//g, '-')
+      .toLowerCase()
+      .toLowerCase();
+  }
+
   render() {
-    return articleData.map((clip, index) => (
-      <Link
-        key={index}
-        className={this.setActiveItem(index, this.props.activeItem)}
-        to={`/journalism/${clip.publication
-          .replace(/\s+/g, '')
-          .toLowerCase()}/${clip.headline
-          .replace(/\s+/g, '-')
-          .replace(/\./g, '')
-          .replace(/'+/g, '')
-          .replace(/,+/g, '')
-          .replace(/:/g, '')
-          .replace(/\//g, '-')
-          .toLowerCase()}`}
-      >
-        <p id="source">{clip.publication}</p>
-        <p id="hed">{clip.headline}</p>
-      </Link>
-    ));
+    return articleData.map((clip, index) => {
+      return (
+        <Link
+          key={index}
+          className={this.setActiveItem(
+            this.formatHeadline(clip.headline),
+            this.props.state.headline
+          )}
+          to={`/journalism/${this.formatPublication(
+            clip.publication
+          )}/${this.formatHeadline(clip.headline)}`}
+        >
+          <p id="source">{clip.publication}</p>
+          <p id="hed">{clip.headline}</p>
+        </Link>
+      );
+    });
   }
 }
 

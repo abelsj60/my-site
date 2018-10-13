@@ -4,7 +4,6 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Chapter from './Chapter.jsx';
 import Projects from './Projects.jsx';
-import ProjectsBackup from './Projects-backup.jsx';
 import Journalism from './Journalism.jsx';
 import IndexMenu from './IndexMenu.jsx';
 import About from './About.jsx';
@@ -72,13 +71,20 @@ class InnerRouter extends Component {
           */}
           <Route
             exact
-            path="/chapter"
-            render={() => (
-              <Redirect to={`/chapter/${this.props.state.chapterTitle}`} />
-            )}
+            path="/about"
+            render={() => {
+              if (this.props.location.pathname.split('/').length > 2) {
+                return (
+                  <Redirect to={`/about/${this.props.state.chapterTitle}`} />
+                );
+              } else {
+                return <About />;
+              }
+            }}
           />
           <Route
-            path="/chapter/:title"
+            exact
+            path="/about/:title"
             render={() => (
               <Chapter
                 chapterTitle={this.props.state.chapterTitle}
@@ -145,12 +151,7 @@ class InnerRouter extends Component {
           />
           <Route
             path="/journalism/:publication/:headline"
-            render={() => (
-              <Journalism
-                publication={this.props.state.publication}
-                headline={this.props.state.headline}
-              />
-            )}
+            render={() => <Journalism state={this.props.state} />}
           />
           <Route
             exact
@@ -162,8 +163,12 @@ class InnerRouter extends Component {
           <Route
             path="/index/:section"
             render={({ match }) => {
-              const section = match.params.section.toLowerCase();
-              return <IndexMenu section={section} />;
+              return (
+                <IndexMenu
+                  section={match.params.section.toLowerCase()}
+                  state={this.props.state}
+                />
+              );
             }}
           />
           <Route

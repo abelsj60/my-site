@@ -22,8 +22,9 @@ class Header extends Component {
   }
 
   render() {
+    console.log(this.props.location.pathname);
     const currentPath = this.props.location.pathname;
-    const navLinks = ['Projects', 'The story', 'Journalism'];
+    const navLinks = ['Projects', 'About', 'Journalism'];
 
     return (
       <header className={helpers.setHeaderCss(this.props.headerIsTransparent)}>

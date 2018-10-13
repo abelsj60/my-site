@@ -1,38 +1,50 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, Component } from 'react';
+import { withRouter, Link } from 'react-router-dom';
 
 class StoryNav extends Component {
   constructor(props) {
     super(props);
   }
 
-  render() {
-    function setActiveItem(mappedWith, urlParam) {
-      if (parseInt(urlParam)) {
-        urlParam = parseInt(urlParam);
-      }
+  setActiveItem(chapter, currentChapterTitle) {
+    const chapterTitle = chapter.title
+      .replace(/,+/g, '')
+      .replace(/\s+/g, '-')
+      .toLowerCase();
 
-      if (mappedWith === urlParam) {
-        return 'active';
-      } else {
-        return 'inactive';
-      }
+    if (chapterTitle === currentChapterTitle) {
+      return 'active';
+    } else {
+      return 'inactive';
     }
+  }
 
-    return this.props.storyData.map((story, index) => (
-      <Link
-        key={index}
-        className={setActiveItem(index, this.props.item)}
-        to={`/chapter/${story.title
-          .replace(/,+/g, '')
-          .replace(/\s+/g, '-')
-          .toLowerCase()}`}
-      >
-        <h1 id="story-chapter">Chapter {index + 1}</h1>
-        <p id="story-title">{story.title}</p>
-      </Link>
-    ));
+  render() {
+    return (
+      <Fragment>
+        {this.props.storyData.map((chapter, index) => (
+          <Link
+            key={index}
+            className={this.setActiveItem(
+              chapter,
+              this.props.state.chapterTitle
+            )}
+            to={`/about/${chapter.title
+              .replace(/,+/g, '')
+              .replace(/\s+/g, '-')
+              .toLowerCase()}`}
+          >
+            <h1 id="story-chapter">Chapter {index + 1}</h1>
+            <p id="story-title">{chapter.title}</p>
+          </Link>
+        ))}
+        <Link to="/about">
+          <h1 id="story-chapter">Back to</h1>
+          <p id="story-title">About</p>
+        </Link>
+      </Fragment>
+    );
   }
 }
 
-export default StoryNav;
+export default withRouter(StoryNav);

@@ -28,8 +28,8 @@ function idLinkPath(linkText) {
   const linkPath =
     linkText === 'Projects'
       ? '/projects'
-      : linkText === 'The story'
-        ? '/chapter'
+      : linkText === 'About'
+        ? '/about'
         : '/journalism';
   return linkPath;
 }

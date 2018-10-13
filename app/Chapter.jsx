@@ -16,7 +16,7 @@ const ShowChapter = props => (
               .replace(/\s+/g, '-')
               .toLowerCase()}
             param={props.chapterTitle}
-            route="/chapter/"
+            route="/about/"
           />
         ))}
       </nav>

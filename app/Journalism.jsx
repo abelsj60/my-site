@@ -8,39 +8,38 @@ class Journalism extends Component {
     super(props);
   }
 
+  formatPublicationForUrl(publication) {
+    return publication.replace(/\s+/g, '').toLowerCase();
+  }
+
+  formatHeadlineForUrl(headline) {
+    return headline
+      .replace(/\s+/g, '-')
+      .replace(/\./g, '')
+      .replace(/'+/g, '')
+      .replace(/,+/g, '')
+      .replace(/:/g, '')
+      .replace(/\//g, '-')
+      .toLowerCase()
+      .toLowerCase();
+  }
+
   render() {
     const theClip = articleData.find(clip => {
-      return clip.headline
-        .replace(/\s+/g, '-')
-        .replace(/'+/g, '')
-        .replace(/\./g, '')
-        .replace(/,+/g, '')
-        .replace(/:/g, '')
-        .replace(/\//g, '-')
-        .toLowerCase()
-        .includes(this.props.headline);
+      return this.formatHeadlineForUrl(clip.headline).includes(
+        this.props.state.headline
+      );
     });
     const publication = theClip.publication;
     const headline = theClip.headline;
     const text = theClip.text;
-    const clipIndex = articleData.findIndex(clip => {
-      return clip.headline
-        .replace(/\s+/g, '-')
-        .replace(/'+/g, '')
-        .replace(/\./g, '')
-        .replace(/,+/g, '')
-        .replace(/:/g, '')
-        .replace(/\//g, '-')
-        .toLowerCase()
-        .includes(this.props.headline);
-    });
 
     return (
       <main id="journalism" className="">
         <section id="clips" className="left">
           <h1>My stories</h1>
           <nav>
-            <ClipNav activeItem={clipIndex} />
+            <ClipNav state={this.props.state} />
           </nav>
         </section>
         <section id="story" className="right">

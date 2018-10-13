@@ -63,6 +63,22 @@
   flex-direction: row;
 }
 
+.project-thumbnails a {
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.project-thumbnails a:not(:last-child) {
+  margin-right: 5px;
+}
+
+.project-thumbnails img {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+}
+
 #index #nav-group:not(:last-child) {
   margin-bottom: 20px;
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ClipNav from './ClipNav.jsx';
 import StoryNav from './StoryNav.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
-import articleData from './data/articleData';
 import projectData from './data/projectData';
 import storyData from './data/storyData';
 
@@ -30,9 +29,9 @@ class IndexMenu extends Component {
         formatProjectName={this.formatProjectName}
       />
     ) : section === 'chapter' ? (
-      <StoryNav storyData={storyData} item={null} />
+      <StoryNav storyData={storyData} state={this.props.state} item={null} />
     ) : (
-      <ClipNav articleData={articleData} item={null} />
+      <ClipNav state={this.props.state} item={null} />
     );
   }
 

@@ -13,7 +13,7 @@ class AppBarMenu extends Component {
   get linkPath() {
     if (this.location[1] === 'index') {
       if (this.location[2] === 'chapter') {
-        return '/chapter';
+        return '/about/';
       } else if (this.location[2] === 'projects') {
         return '/projects';
       } else if (this.location[2] === 'journalism') {
@@ -25,11 +25,13 @@ class AppBarMenu extends Component {
 
     return this.location[1] === 'projects'
       ? '/index/projects'
-      : this.location[1] === 'chapter'
-        ? '/index/chapter'
-        : this.location[1] === 'journalism'
-          ? '/index/journalism'
-          : '/about';
+      : this.location[1] === 'about' && this.location.length < 3
+        ? '/about/'
+        : this.location[1] === 'about' && this.location.length > 2
+          ? '/index/chapter'
+          : this.location[1] === 'journalism'
+            ? '/index/journalism'
+            : '/about';
   }
 
   get indexLabel() {
@@ -47,43 +49,23 @@ class AppBarMenu extends Component {
         label: this.indexLabel,
         linkPath: this.linkPath
       },
-      {
-        label:
-          this.location[1] === 'projects' || this.location[2] === 'projects'
-            ? 'Details'
-            : 'Text',
-        linkPath: this.props.location.pathname,
-        handleClick: () => {
-          if (
-            this.location[1] === 'chapter' ||
-            this.location[2] === 'chapter'
-          ) {
-            this.props.toggleText();
-          } else if (
-            this.location[1] === 'projects' ||
-            this.location[2] === 'projects'
-          ) {
-            this.props.toggleDetails();
-          }
-        }
-      },
-      { label: 'About', linkPath: '/about' }
+      { label: 'Contact', linkPath: this.props.location.pathname }
     ];
 
-    if (
-      this.location[1] === 'journalism' ||
-      this.location[2] === 'journalism'
-    ) {
-      buttons.splice(1, 1);
+    if (this.location[1] === 'about') {
+      buttons.splice(1, 0, {
+        label: this.location.length > 2 ? 'Index' : 'The story',
+        linkPath: this.linkPath
+      });
+      buttons.splice(0, 1);
     }
 
-    if (this.location[1] === 'about') {
-      // buttons.splice(1, 2);
-      buttons[2].handleClick = () => {
-        if (this.location[1] === 'about') {
-          this.props.history.goBack();
-        }
-      };
+    if (this.location[1] === 'about' || this.location[2] === 'chapter') {
+      buttons.splice(1, 0, {
+        label: 'Text',
+        linkPath: this.props.location.pathname,
+        handleClick: () => this.props.toggleText()
+      });
     }
 
     return buttons;
@@ -104,9 +86,7 @@ class AppBarMenu extends Component {
         >
           <p>{button.label}</p>
         </Link>
-        {button.label === 'About' || button.label === 'Back' ? null : (
-          <div id="button-border" />
-        )}
+        {button.label === 'Contact' ? null : <div id="button-border" />}
       </Fragment>
     ));
   }

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import ReactFitText from 'react-fittext';
-import MultiProjectNav from './MultiProjectNav.jsx';
 import SingleProjectNav from './SingleProjectNav.jsx';
-import BlockQuote from './BlockQuote.jsx';
-import ProjectDetails from './ProjectDetails.jsx';
 import projectData from './data/projectData';
 
 class Projects extends Component {
@@ -17,56 +13,47 @@ class Projects extends Component {
     )[0];
   }
 
-  formatProjectName(name) {
-    if (name === 'tmmnews') {
-      return name.slice(0, 3).toUpperCase() + name.slice(3);
-    }
+  get projectDescriptions() {
+    return this.projectData.details;
+  }
 
-    return name.slice(0, 1).toUpperCase() + name.slice(1);
+  get projectDescriptionKeys() {
+    return Object.keys(this.projectDescriptions);
   }
 
   render() {
     return (
       <main id="my-projects" className="">
-        <ProjectDetails
-          projectName={this.formatProjectName(this.projectData.name)}
-          toggleDetails={this.props.toggleDetails}
-          projectData={this.projectData}
-          showProjectDetails={this.props.showProjectDetails}
-        />
-        <section id="desktop-nav" className="left">
-          <MultiProjectNav
-            projectData={projectData}
-            formatProjectName={this.formatProjectName}
-          />
-        </section>
-        <section id="project-images" className="right">
-          <ReactFitText compressor={1} minFontSize={48}>
-            <BlockQuote text={this.formatProjectName(this.projectData.name)} />
-          </ReactFitText>
-          <section id="images-container">
-            <section className="project-image">
+        <h1 id="project-title">{this.projectData.details.name}</h1>
+        <section id="project-content-container">
+          <p id="project-description">{this.projectData.details.type}</p>
+          <section id="project-discussion">
+            <h2>
+              {this.projectDescriptionKeys[2][0].toUpperCase() +
+                this.projectDescriptionKeys[2].slice(1)}
+            </h2>
+            <p>{this.projectDescriptions.contribution}</p>
+            <h2>
+              {this.projectDescriptionKeys[5][0].toUpperCase() +
+                this.projectDescriptionKeys[5].slice(1)}
+            </h2>
+            <p>{this.projectDescriptions.description}</p>
+          </section>
+          <section id="project-images">
+            <section id="project-image-nav">
+              <SingleProjectNav project={this.projectData} />
+            </section>
+            <section id="project-image-container">
+              <p id="project-image-caption">
+                {this.projectDescriptions.captions[0]}
+              </p>
               <img
+                id="project-image-main-pic"
                 src={this.projectData.full[this.props.projectImageIndex - 1]}
                 alt="mainPic"
               />
             </section>
-            <section id="thumbnails-main" className="project-thumbnails">
-              <SingleProjectNav project={this.projectData} />
-            </section>
-            <section
-              className="details-button"
-              onClick={() => this.props.toggleDetails()}
-            >
-              <p>Details</p>
-            </section>
           </section>
-          <BlockQuote
-            elementId="new-block"
-            text={this.projectData.details.captions.filter(
-              (caption, index) => index === this.props.projectImageIndex - 1
-            )}
-          />
         </section>
       </main>
     );

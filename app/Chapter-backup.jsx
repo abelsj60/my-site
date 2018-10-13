@@ -9,7 +9,7 @@ class Chapter extends Component {
 
   render() {
     const chapters = [1, 2, 3, 4];
-    const route = '/chapter/';
+    const route = '/about/';
     const chapterNumber = this.props.chapterNumber;
     const chapter = helpers.pickContent(chapterNumber);
     const picture = helpers.pickPicture(chapterNumber);
