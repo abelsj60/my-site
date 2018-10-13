@@ -7,16 +7,29 @@ class Footer extends Component {
     super(props);
   }
 
-  get isAnInnerPage() {
-    {
-      /* ~ja Home is .length 1 (i.e., '/'), anything more is an inner page */
-    }
+  get location() {
+    return this.props.location.pathname.split('/');
+  }
 
-    return this.props.location.pathname.length > 1;
+  get innerPage() {
+    // ~ja Home is .length 1 (i.e., '/')
+    return this.location.length > 2;
+  }
+
+  get indexPage() {
+    return this.location[1] === 'index';
+  }
+
+  get aboutPage() {
+    return this.location[1] === 'about';
   }
 
   get footerClass() {
-    return this.isAnInnerPage ? 'inner-page-footer' : 'home-page-footer';
+    return this.innerPage ? 'inner-page-footer' : 'home-page-footer';
+  }
+
+  showAppBar() {
+    return this.innerPage && !this.indexPage && !this.aboutPage;
   }
 
   render() {
@@ -25,7 +38,7 @@ class Footer extends Component {
         className={this.footerClass}
         style={{ opacity: this.props.tempElementOpacity }}
       >
-        {this.isAnInnerPage && (
+        {this.showAppBar() && (
           <AppBarMenu
             toggleText={this.props.toggleText}
             toggleDetails={this.props.toggleDetails}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ClipNav from './ClipNav.jsx';
 import StoryNav from './StoryNav.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
@@ -20,25 +21,41 @@ class IndexMenu extends Component {
     }
   }
 
-  get navData() {
-    const section = this.props.section;
+  get section() {
+    console.log(this.props.section);
+    return this.props.section;
+  }
 
-    return section === 'projects' ? (
-      <MultiProjectNav
-        projectData={projectData}
-        formatProjectName={this.formatProjectName}
-      />
-    ) : section === 'chapter' ? (
-      <StoryNav storyData={storyData} state={this.props.state} item={null} />
-    ) : (
-      <ClipNav state={this.props.state} item={null} />
-    );
+  get projectPage() {
+    return this.section === 'projects';
+  }
+
+  get storyPage() {
+    return this.section === 'chapter';
   }
 
   render() {
     return (
       <main id="index">
-        <nav className={this.props.section + '-index'}>{this.navData}</nav>
+        <Link id="close-button" to={`/${this.section}`}>
+          <p>(Close)</p>
+        </Link>
+        <nav className={this.props.section + '-index'}>
+          {this.projectPage ? (
+            <MultiProjectNav
+              projectData={projectData}
+              formatProjectName={this.formatProjectName}
+            />
+          ) : this.storyPage ? (
+            <StoryNav
+              storyData={storyData}
+              state={this.props.state}
+              item={null}
+            />
+          ) : (
+            <ClipNav state={this.props.state} item={null} />
+          )}
+        </nav>
       </main>
     );
   }
