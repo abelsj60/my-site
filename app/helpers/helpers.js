@@ -25,13 +25,13 @@ function pickPicture(num) {
 }
 
 function idLinkPath(linkText) {
-  const linkPath =
-    linkText === 'Projects'
-      ? '/projects'
-      : linkText === 'About'
-        ? '/about'
+  return linkText === 'Projects'
+    ? '/projects'
+    : linkText === 'About'
+      ? '/about'
+      : linkText === 'The story'
+        ? '/chapter'
         : '/journalism';
-  return linkPath;
 }
 
 function setActiveLink(currentPath, linkText) {

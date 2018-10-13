@@ -18,7 +18,7 @@ class ItemNav extends Component {
     return (
       <Link
         className={this.idActiveItem(this.props.chapterTitle, this.props.param)}
-        to={`${this.props.route}${this.props.chapterTitle}`}
+        to={`${this.props.route}/${this.props.chapterTitle}`}
       >
         <p>{this.props.item}</p>
       </Link>

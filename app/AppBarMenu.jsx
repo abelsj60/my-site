@@ -13,7 +13,7 @@ class AppBarMenu extends Component {
   get linkPath() {
     if (this.location[1] === 'index') {
       if (this.location[2] === 'chapter') {
-        return '/about/';
+        return '/chapter';
       } else if (this.location[2] === 'projects') {
         return '/projects';
       } else if (this.location[2] === 'journalism') {
@@ -25,13 +25,9 @@ class AppBarMenu extends Component {
 
     return this.location[1] === 'projects'
       ? '/index/projects'
-      : this.location[1] === 'about' && this.location.length < 3
-        ? '/about/'
-        : this.location[1] === 'about' && this.location.length > 2
-          ? '/index/chapter'
-          : this.location[1] === 'journalism'
-            ? '/index/journalism'
-            : '/about';
+      : this.location[1] === 'chapter'
+        ? '/index/chapter'
+        : '/index/journalism';
   }
 
   get indexLabel() {
@@ -60,7 +56,7 @@ class AppBarMenu extends Component {
       buttons.splice(0, 1);
     }
 
-    if (this.location[1] === 'about' || this.location[2] === 'chapter') {
+    if (this.location[1] === 'chapter') {
       buttons.splice(1, 0, {
         label: 'Text',
         linkPath: this.props.location.pathname,

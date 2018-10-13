@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
 class StoryNav extends Component {
@@ -20,30 +20,19 @@ class StoryNav extends Component {
   }
 
   render() {
-    return (
-      <Fragment>
-        {this.props.storyData.map((chapter, index) => (
-          <Link
-            key={index}
-            className={this.setActiveItem(
-              chapter,
-              this.props.state.chapterTitle
-            )}
-            to={`/about/${chapter.title
-              .replace(/,+/g, '')
-              .replace(/\s+/g, '-')
-              .toLowerCase()}`}
-          >
-            <h1 id="story-chapter">Chapter {index + 1}</h1>
-            <p id="story-title">{chapter.title}</p>
-          </Link>
-        ))}
-        <Link to="/about">
-          <h1 id="story-chapter">Back to</h1>
-          <p id="story-title">About</p>
-        </Link>
-      </Fragment>
-    );
+    return this.props.storyData.map((chapter, index) => (
+      <Link
+        key={index}
+        className={this.setActiveItem(chapter, this.props.state.chapterTitle)}
+        to={`/chapter/${chapter.title
+          .replace(/,+/g, '')
+          .replace(/\s+/g, '-')
+          .toLowerCase()}`}
+      >
+        <h1 id="story-chapter">Chapter {index + 1}</h1>
+        <p id="story-title">{chapter.title}</p>
+      </Link>
+    ));
   }
 }
 

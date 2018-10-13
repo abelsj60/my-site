@@ -181,9 +181,7 @@ class OuterRouter extends Component {
     const location = this.props.location.pathname.split('/');
 
     const chapterTitle =
-      location[1] === 'about' && location.length > 2
-        ? this.validateChapter(location[2])
-        : undefined;
+      location[1] === 'chapter' ? this.validateChapter(location[2]) : undefined;
     const projectName =
       location[1] === 'projects'
         ? this.validateProjectName(location[2])

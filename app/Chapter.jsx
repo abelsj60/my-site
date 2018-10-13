@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ItemNav from './ItemNav.jsx';
 import storyData from './data/storyData';
-// import helpers from './helpers/helpers.js';
 
 const ShowChapter = props => (
   <main id="my-story">
@@ -16,7 +15,7 @@ const ShowChapter = props => (
               .replace(/\s+/g, '-')
               .toLowerCase()}
             param={props.chapterTitle}
-            route="/about/"
+            route="/chapter"
           />
         ))}
       </nav>

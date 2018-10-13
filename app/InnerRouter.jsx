@@ -58,33 +58,28 @@ class InnerRouter extends Component {
               />
             )}
           />
-          {/*
-            <Route
-              exact
-              path="/chapter/index"
-              render={() => {
-                const section = 'chapter';
 
-                return <IndexMenu section={section} />;
-            }}
-            />
-          */}
-          <Route
+          {/* <Route
             exact
-            path="/about"
+            path="/chapter/index"
             render={() => {
-              if (this.props.location.pathname.split('/').length > 2) {
-                return (
-                  <Redirect to={`/about/${this.props.state.chapterTitle}`} />
-                );
-              } else {
-                return <About />;
-              }
+              const section = 'chapter';
+
+              return <IndexMenu section={section} />;
             }}
-          />
+          /> */}
+
           <Route
             exact
-            path="/about/:title"
+            path="/chapter"
+            render={() => (
+              <Redirect to={`/chapter/${this.props.state.chapterTitle}`} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/chapter/:title"
             render={() => (
               <Chapter
                 chapterTitle={this.props.state.chapterTitle}
@@ -92,6 +87,7 @@ class InnerRouter extends Component {
               />
             )}
           />
+
           <Route
             exact
             path="/projects"
@@ -103,6 +99,7 @@ class InnerRouter extends Component {
               />
             )}
           />
+
           <Route
             exact
             path="/projects/:name"
@@ -114,6 +111,7 @@ class InnerRouter extends Component {
               />
             )}
           />
+
           <Route
             path="/projects/:name/:projectImageIndex"
             render={() => (
@@ -125,6 +123,7 @@ class InnerRouter extends Component {
               />
             )}
           />
+
           <Route
             exact
             path="/journalism"
@@ -136,30 +135,30 @@ class InnerRouter extends Component {
               />
             )}
           />
+
           <Route
             exact
             path="/journalism/:publication"
-            render={() => {
-              return (
-                <Redirect
-                  to={`/journalism/${this.props.state.publication}/${
-                    this.props.state.headline
-                  }`}
-                />
-              );
-            }}
+            render={() => (
+              <Redirect
+                to={`/journalism/${this.props.state.publication}/${
+                  this.props.state.headline
+                }`}
+              />
+            )}
           />
+
           <Route
             path="/journalism/:publication/:headline"
             render={() => <Journalism state={this.props.state} />}
           />
+
           <Route
             exact
             path="/index"
-            render={() => {
-              return <Redirect to={'/index/projects'} />;
-            }}
+            render={() => <Redirect to={'/index/projects'} />}
           />
+
           <Route
             path="/index/:section"
             render={({ match }) => {
@@ -171,12 +170,9 @@ class InnerRouter extends Component {
               );
             }}
           />
-          <Route
-            path="/about"
-            render={() => {
-              return <About />;
-            }}
-          />
+
+          <Route path="/about" render={() => <About />} />
+
           <Route component={NotFound} />
         </Switch>
         <Footer
