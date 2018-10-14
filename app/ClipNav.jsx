@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import articleData from './data/articleData.js';
+import { normalize } from './helpers/utils.js';
 
 class ClipNav extends Component {
   constructor(props) {
@@ -15,34 +16,18 @@ class ClipNav extends Component {
     }
   }
 
-  formatPublication(publication) {
-    return publication.replace(/\s+/g, '').toLowerCase();
-  }
-
-  formatHeadline(headline) {
-    return headline
-      .replace(/\s+/g, '-')
-      .replace(/\./g, '')
-      .replace(/'+/g, '')
-      .replace(/,+/g, '')
-      .replace(/:/g, '')
-      .replace(/\//g, '-')
-      .toLowerCase()
-      .toLowerCase();
-  }
-
   render() {
     return articleData.map((clip, index) => {
       return (
         <Link
           key={index}
           className={this.setActiveItem(
-            this.formatHeadline(clip.headline),
+            normalize(clip.headline),
             this.props.state.headline
           )}
-          to={`/journalism/${this.formatPublication(
-            clip.publication
-          )}/${this.formatHeadline(clip.headline)}`}
+          to={`/journalism/${normalize(clip.publication)}/${normalize(
+            clip.headline
+          )}`}
         >
           <p id="source">{clip.publication}</p>
           <p id="hed">{clip.headline}</p>

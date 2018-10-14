@@ -19,10 +19,6 @@ body {
   z-index: 0;
 }
 
-.wrapper header {
-  position: relative;
-}
-
 .scroller {
   height: 4000px;
 }

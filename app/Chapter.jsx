@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ItemNav from './ItemNav.jsx';
 import storyData from './data/storyData';
+import { normalize } from './helpers/utils.js';
 
 const ShowChapter = props => (
   <main id="my-story">
@@ -10,10 +11,7 @@ const ShowChapter = props => (
           <ItemNav
             key={index}
             item={index + 1}
-            chapterTitle={chapter.title
-              .replace(/,+/g, '')
-              .replace(/\s+/g, '-')
-              .toLowerCase()}
+            chapterTitle={normalize(chapter.title)}
             param={props.chapterTitle}
             route="/chapter"
           />
@@ -43,20 +41,12 @@ class Chapter extends Component {
         chapterTitle={this.props.chapterTitle}
         chapter={
           storyData.filter(
-            chapter =>
-              chapter.title
-                .replace(/,+/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase() === this.props.chapterTitle
+            chapter => normalize(chapter.title) === this.props.chapterTitle
           )[0]
         }
         illustration={
           storyData.filter(
-            chapter =>
-              chapter.title
-                .replace(/,+/g, '')
-                .replace(/\s+/g, '-')
-                .toLowerCase() === this.props.chapterTitle
+            chapter => normalize(chapter.title) === this.props.chapterTitle
           )[0].illustration
         }
         textClass={this.toggleTextClass(this.props.showStoryText)}

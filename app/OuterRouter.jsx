@@ -3,9 +3,10 @@ import { withRouter } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home.jsx';
 import InnerRouter from './InnerRouter.jsx';
-import articleData from './data/articleData';
-import storyData from './data/storyData';
-import projectData from './data/projectData';
+import articleData from './data/articleData.js';
+import storyData from './data/storyData.js';
+import projectData from './data/projectData.js';
+import { normalize } from './helpers/utils.js';
 
 class OuterRouter extends Component {
   constructor(props) {
@@ -16,15 +17,8 @@ class OuterRouter extends Component {
     this.state = {
       chapterTitle:
         location[1] === 'chapter'
-          ? this.validateChapter(location[2]) ||
-            storyData[0].title
-              .replace(/,+/g, '')
-              .replace(/\s+/g, '-')
-              .toLowerCase()
-          : storyData[0].title
-            .replace(/,+/g, '')
-            .replace(/\s+/g, '-')
-            .toLowerCase(),
+          ? this.validateChapter(location[2]) || normalize(storyData[0].title)
+          : normalize(storyData[0].title),
       projectName:
         location[1] === 'projects'
           ? this.validateProjectName(location[2]) || projectData[0].name
@@ -41,24 +35,8 @@ class OuterRouter extends Component {
       headline:
         location[1] === 'journalism'
           ? this.validateHeadline(location[2], location[3]) ||
-            articleData[0].headline
-              .toLowerCase()
-              .replace(/\s+/g, '-')
-              .replace(/\./g, '')
-              .replace(/'+/g, '')
-              .replace(/,+/g, '')
-              .replace(/:/g, '')
-              .replace(/\//g, '-')
-              .toLowerCase()
-          : articleData[0].headline
-            .toLowerCase()
-            .replace(/\s+/g, '-')
-            .replace(/\./g, '')
-            .replace(/'+/g, '')
-            .replace(/,+/g, '')
-            .replace(/:/g, '')
-            .replace(/\//g, '-')
-            .toLowerCase(),
+            normalize(articleData[0].headline)
+          : normalize(articleData[0].headline),
       showStoryText: true,
       showProjectDetails: false
     };
@@ -81,10 +59,7 @@ class OuterRouter extends Component {
 
   validatePublication(publication) {
     return articleData.find(clip =>
-      clip.publication
-        .replace(/\s+/g, '')
-        .toLowerCase()
-        .includes(publication)
+      normalize(clip.publication).includes(publication)
     )
       ? publication
       : undefined;
@@ -92,34 +67,18 @@ class OuterRouter extends Component {
 
   validateHeadline(publication, headline) {
     const headlineIsValid = articleData.find(clip => {
-      return clip.headline
-        .replace(/\s+/g, '-')
-        .replace(/\./g, '')
-        .replace(/'+/g, '')
-        .replace(/,+/g, '')
-        .replace(/:/g, '')
-        .replace(/\//g, '-')
-        .toLowerCase()
-        .includes(headline);
+      return normalize(clip.headline).includes(headline);
     });
 
     if (!headline && !headlineIsValid) {
       const defaultClip = articleData.filter(clip => {
         return (
-          clip.publication.replace(/\s+/g, '').toLowerCase() ===
-          this.validatePublication(publication)
+          normalize(clip.publication) === this.validatePublication(publication)
         );
       });
 
       headline = defaultClip.length
-        ? defaultClip[0].headline
-          .replace(/\s+/g, '-')
-          .replace(/\./g, '')
-          .replace(/'+/g, '')
-          .replace(/,+/g, '')
-          .replace(/:/g, '')
-          .replace(/\//g, '-')
-          .toLowerCase()
+        ? normalize(defaultClip[0].headline)
         : undefined;
     }
 
@@ -140,20 +99,10 @@ class OuterRouter extends Component {
 
   validateChapter(title) {
     const chapterTitle = storyData.filter(chapter => {
-      return (
-        chapter.title
-          .replace(/,+/g, '')
-          .replace(/\s+/g, '-')
-          .toLowerCase() === title
-      );
+      return normalize(chapter.title) === title;
     });
 
-    return chapterTitle.length
-      ? chapterTitle[0].title
-        .replace(/,+/g, '')
-        .replace(/\s+/g, '-')
-        .toLowerCase()
-      : undefined;
+    return chapterTitle.length ? normalize(chapterTitle[0].title) : undefined;
   }
 
   render() {
@@ -161,12 +110,11 @@ class OuterRouter extends Component {
       <Switch>
         <Route exact path="/" render={() => <Home />} />
         <Route
-          render={({ location }) => (
+          render={() => (
             <InnerRouter
               state={this.state}
               toggleText={this.toggleText}
               toggleDetails={this.toggleDetails}
-              location={location}
             />
           )}
         />

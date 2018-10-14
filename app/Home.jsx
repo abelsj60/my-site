@@ -124,7 +124,10 @@ class Home extends Component {
             <GiantHomePageNav
               tempElementOpacity={this.state.tempElementOpacity}
             />
-            <Footer tempElementOpacity={this.state.tempElementOpacity} />
+            <Footer
+              tempElementOpacity={this.state.tempElementOpacity}
+              fullHeaderMenu={this.props.fullHeaderMenu}
+            />
           </section>
         )}
         <section className="scroller" />

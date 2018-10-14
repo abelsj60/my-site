@@ -1,68 +1,106 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import helpers from './helpers/helpers.js';
+import headerData from './data/headerData.js';
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      openHeaderMenu: false
+      openMenu: false
     };
 
     this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ openHeaderMenu: false });
+  get location() {
+    return this.props.location.pathname.split('/');
+  }
+
+  get headerIsTransparent() {
+    return this.props.headerIsTransparent;
+  }
+
+  get menuIsOpen() {
+    return this.state.openMenu;
+  }
+
+  setHeaderCss(transparencyStatus) {
+    return !transparencyStatus ? ' opaque' : '';
+  }
+
+  setMenuCss(menuStatus) {
+    return menuStatus ? 'header-menu-open' : '';
+  }
+
+  setRoute(link) {
+    return link === 'The story'
+      ? '/chapter'
+      : link === 'Projects'
+        ? '/projects'
+        : link === 'Journalism'
+          ? '/journalism'
+          : '/about';
+  }
+
+  setActiveLink(link) {
+    if (link === 'The story') {
+      link = 'chapter';
+    }
+
+    return this.location[1] === link.toLowerCase() ? 'active' : 'inactive';
   }
 
   toggleHeaderMenu() {
-    this.setState({ openHeaderMenu: !this.state.openHeaderMenu });
+    console.log('HERE!');
+    this.setState({ openMenu: !this.menuIsOpen });
+    return 'Toggled header menu!';
   }
 
   render() {
-    const currentPath = this.props.location.pathname;
-    const navLinks = ['The story', 'Projects', 'Journalism', 'About'];
-
     return (
-      <header className={helpers.setHeaderCss(this.props.headerIsTransparent)}>
-        <section
-          className={helpers.setHeaderMenuCss(this.state.openHeaderMenu)}
-        >
+      <Fragment>
+        <header className={this.setHeaderCss(this.headerIsTransparent)}>
           <Link
-            className={helpers.setHeaderCss(this.props.headerIsTransparent)}
+            id="site-name"
+            className={
+              this.setMenuCss(this.menuIsOpen) +
+              this.setHeaderCss(this.headerIsTransparent)
+            }
             to={'/'}
           >
-            <strong>JAMES ABELS</strong>
+            James Abels
           </Link>
-          <p className={helpers.setHeaderCss(this.props.headerIsTransparent)}>
-            <em>Magical stories and other adventures</em>
+          <p
+            id="site-motto"
+            className={
+              this.setMenuCss(this.menuIsOpen) +
+              this.setHeaderCss(this.headerIsTransparent)
+            }
+          >
+            Magical stories and other adventures
           </p>
-        </section>
-        <div
-          className={
-            'nav-icon' + helpers.setHeaderMenuCss(this.state.openHeaderMenu)
-          }
-          onClick={() => this.toggleHeaderMenu()}
-        />
-        {
-          <nav className={helpers.setHeaderMenuCss(this.state.openHeaderMenu)}>
-            {navLinks.map((linkText, index) => (
+          <nav className={this.setMenuCss(this.menuIsOpen)}>
+            {headerData.map((link, index) => (
               <Link
                 key={index}
-                className={
-                  helpers.setActiveLink(currentPath, linkText) +
-                  helpers.setHeaderCss(this.props.headerIsTransparent)
-                }
-                to={helpers.idLinkPath(linkText)}
+                className={`${this.setActiveLink(link)}
+                ${this.setHeaderCss(this.headerIsTransparent)}`}
+                to={this.setRoute(link)}
               >
-                {linkText}
+                {link}
               </Link>
             ))}
           </nav>
-        }
-      </header>
+          <div
+            id="nav-icon"
+            className={`${this.setHeaderCss(
+              this.headerIsTransparent
+            )} ${this.setMenuCss(this.menuIsOpen)}`}
+            onClick={() => this.toggleHeaderMenu()}
+          />
+        </header>
+      </Fragment>
     );
   }
 }

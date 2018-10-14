@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { normalize } from './helpers/utils.js';
 
 class StoryNav extends Component {
   constructor(props) {
@@ -7,10 +8,7 @@ class StoryNav extends Component {
   }
 
   setActiveItem(chapter, currentChapterTitle) {
-    const chapterTitle = chapter.title
-      .replace(/,+/g, '')
-      .replace(/\s+/g, '-')
-      .toLowerCase();
+    const chapterTitle = normalize(chapter.title);
 
     if (chapterTitle === currentChapterTitle) {
       return 'active';
@@ -24,10 +22,7 @@ class StoryNav extends Component {
       <Link
         key={index}
         className={this.setActiveItem(chapter, this.props.state.chapterTitle)}
-        to={`/chapter/${chapter.title
-          .replace(/,+/g, '')
-          .replace(/\s+/g, '-')
-          .toLowerCase()}`}
+        to={`/chapter/${normalize(chapter.title)}`}
       >
         <h1 id="story-chapter">Chapter {index + 1}</h1>
         <p id="story-title">{chapter.title}</p>

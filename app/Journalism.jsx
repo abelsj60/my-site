@@ -2,33 +2,16 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import ClipNav from './ClipNav.jsx';
 import articleData from './data/articleData';
+import { normalize } from './helpers/utils.js';
 
 class Journalism extends Component {
   constructor(props) {
     super(props);
   }
 
-  formatPublicationForUrl(publication) {
-    return publication.replace(/\s+/g, '').toLowerCase();
-  }
-
-  formatHeadlineForUrl(headline) {
-    return headline
-      .replace(/\s+/g, '-')
-      .replace(/\./g, '')
-      .replace(/'+/g, '')
-      .replace(/,+/g, '')
-      .replace(/:/g, '')
-      .replace(/\//g, '-')
-      .toLowerCase()
-      .toLowerCase();
-  }
-
   render() {
     const theClip = articleData.find(clip => {
-      return this.formatHeadlineForUrl(clip.headline).includes(
-        this.props.state.headline
-      );
+      return normalize(clip.headline).includes(this.props.state.headline);
     });
     const publication = theClip.publication;
     const headline = theClip.headline;
