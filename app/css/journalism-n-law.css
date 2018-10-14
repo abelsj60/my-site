@@ -1,0 +1,95 @@
+/* Journalism and law rules */
+
+#story {
+  margin: 25px;
+}
+
+#story h3 {
+  font-style: italic;
+}
+
+#hed p {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+#publication {
+  font-size: 2rem;
+  margin-bottom: 4px;
+}
+
+#story-text-container {
+  overflow: auto;
+  line-height: normal;
+}
+
+#story-text-container p {
+  margin-bottom: 15px;
+}
+
+#story-headline {
+  margin-bottom: 10px;
+  font-size: 3rem;
+}
+
+#story-text {
+  font-size: 1.75rem;
+}
+
+@media only screen and (min-width: 849px) {
+  #clips {
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+    padding: 25px;
+    min-width: 324px;
+    max-width: 327px;
+    background-color: cornflowerblue;
+  }
+
+  #clips nav {
+    overflow: auto;
+  }
+
+  #clips nav a.active {
+    color: yellow;
+  }
+
+  #clips nav a.active:hover {
+    color: black;
+  }
+
+  #clips nav a.inactive {
+    color: white;
+  }
+
+  #clips nav a.inactive:hover {
+    color: navy;
+  }
+
+  #clips h1 {
+    color: black;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  #story {
+    margin-left: 0;
+    min-width: 400px;
+  }
+
+  #journalism {
+    flex-direction: row;
+    line-height: normal;
+  }
+
+  #source {
+    font-size: 1.5rem;
+    font-style: italic;
+  }
+
+  #hed {
+    font-size: 1.75rem;
+    margin-bottom: 10px;
+  }
+}

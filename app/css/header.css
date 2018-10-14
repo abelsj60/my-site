@@ -1,0 +1,147 @@
+/* HEADER CSS */
+
+header {
+  z-index: 2;
+  position: relative;
+  height: 52px;
+  color: white;
+  background-color: transparent;
+  transition: background-color 0.7s, color 0.7s;
+  display: flex;
+  align-items: center;
+}
+
+header.opaque {
+  color: black;
+  background-color: white;
+}
+
+header a {
+  color: white;
+  transition: color 0.7s;
+  margin-left: 15px;
+}
+
+header a.opaque {
+  color: black;
+}
+
+#site-name,
+#site-motto {
+  margin-left: 15px;
+}
+
+#site-name.header-menu-open,
+#site-motto.header-menu-open {
+  display: none;
+}
+
+#site-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#site-motto {
+  flex: 1;
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+header nav {
+  display: none;
+}
+
+header nav.header-menu-open {
+  display: flex;
+  flex: 1;
+}
+
+header a {
+  color: white;
+  transition: color 0.7s;
+  margin-left: 15px;
+}
+
+header a.opaque {
+  color: black;
+}
+
+header a:hover {
+  color: white;
+  text-decoration: underline;
+  transition: color 0s;
+}
+
+header a.opaque:hover {
+  color: black;
+}
+
+header a.active {
+  color: black;
+  text-decoration: underline;
+}
+
+#nav-icon {
+  height: 17px;
+  width: 17px;
+  background: url('/sign-white-closed.png') no-repeat center;
+  transition: background 0.7s;
+  margin-right: 15px;
+}
+
+#nav-icon.opaque {
+  background: url('/sign-black-closed.png') no-repeat center;
+}
+
+#nav-icon:hover {
+  background: url('/sign-white-open.png') no-repeat center;
+  transition: background 0.7s;
+}
+
+#nav-icon.opaque:hover {
+  background: url('/sign-black-open.png') no-repeat center;
+}
+
+#nav-icon.header-menu-open {
+  background: url('/sign-white-open.png') no-repeat center;
+  transition: background 0.7s;
+}
+
+#nav-icon.opaque.header-menu-open {
+  background: url('/sign-black-open.png') no-repeat center;
+}
+
+#nav-icon.header-menu-open:hover {
+  background: url('/sign-white-closed.png') no-repeat center;
+  transition: background 0.7s;
+}
+
+#nav-icon.opaque.header-menu-open:hover {
+  background: url('/sign-black-closed.png') no-repeat center;
+}
+
+#full-screen-nav-menu {
+  display: none;
+}
+
+#full-screen-nav-menu.header-menu-open {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  top: 52px;
+  bottom: 48px;
+  background-color: whitesmoke;
+  z-index: 3;
+}
+
+@media only screen and (min-width: 705px) {
+  #nav-icon {
+    display: none;
+  }
+
+  header nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+  }
+}

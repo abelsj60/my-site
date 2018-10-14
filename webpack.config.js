@@ -17,66 +17,20 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|jp(e*)g)$/,
-        use:
-        [
+        use: [
           {
             loader: 'url-loader',
-            options:
-              {
+            options: {
               limit: 250000,
               fallback: 'file-loader',
               name: '[path][name]-[hash:8].[ext]'
-              }
+            }
           }
         ]
-      },
-      {
-        test: /\.svg$/,
-        loader: 'url-loader',
-        query:
-        {
-          mimetype: 'svg+xml',
-          name: './app/semantic/themes/default/assets/fonts/icons.svg'
-        }
-      },
-      {
-        test: /\.woff$/,
-        loader: 'url-loader',
-        query:
-        {
-          mimetype:'application/font-woff',name:'./app/semantic/themes/default/assets/fonts/icons.woff'
-        }
-      },
-      {
-        test:/\.woff2$/,
-        loader: 'url-loader',
-        query:
-          {
-          mimetype:'application/font-woff2',name:'./app/semantic/themes/default/assets/fonts/icons.woff2'
-          }
-      },
-      {
-        test: /\.[ot]tf$/,
-        loader: 'url-loader',
-        query:
-        {
-          mimetype:'application/octet-stream',name:'./app/semantic/themes/default/assets/fonts/icons.ttf'
-        }
-      },
-      {
-        test: /\.eot$/,
-        loader: 'url-loader',
-        query:
-        {
-          mimetype:'application/vnd.ms-fontobject',name:'./app/semantic/themes/default/assets/fonts/icons.eot'
-        }
       }
     ]
   }

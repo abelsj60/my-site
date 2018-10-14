@@ -1,43 +1,56 @@
 import React, { Component } from 'react';
 import ItemNav from './ItemNav.jsx';
-import helpers from './helpers/helpers.js';
+import storyData from './data/storyData';
+import { normalize } from './helpers/utils.js';
+
+const ShowChapter = props => (
+  <main id="my-story">
+    <section id="chapter" className={`left ${props.textClass}`}>
+      <nav>
+        {storyData.map((chapter, index) => (
+          <ItemNav
+            key={index}
+            item={index + 1}
+            chapterTitle={normalize(chapter.title)}
+            param={props.chapterTitle}
+            route="/chapter"
+          />
+        ))}
+      </nav>
+      <h1 className="chapter-title">{props.chapter.title}</h1>
+      <p className="chapter-text">{props.chapter.text}</p>
+    </section>
+    <section id="story-media" className="right">
+      <img src={props.illustration} alt="fantasy illustration" />
+    </section>
+  </main>
+);
 
 class Chapter extends Component {
   constructor(props) {
     super(props);
   }
 
-  render() {
-    const chapters = [1, 2, 3, 4];
-    const route = '/chapter/';
-    const chapterNumber = this.props.chapterNumber;
-    const chapter = helpers.pickContent(chapterNumber);
-    const picture = helpers.pickPicture(chapterNumber);
+  toggleTextClass(state) {
+    return !state ? 'no-text' : '';
+  }
 
+  render() {
     return (
-      <main className="chapter internal-page narrow">
-        <section className="left chapter">
-          <nav>
-            {chapters.map((num, index) => (
-              <ItemNav
-                key={index}
-                item={num}
-                param={chapterNumber}
-                route={route}
-              />
-            ))}
-          </nav>
-          <h1 className="chapter-title narrow">{chapter.title}</h1>
-          <p className="chapter-text narrow">{chapter.text}</p>
-        </section>
-        <section className="right illustration">
-          <img
-            className="story-picture"
-            src={picture}
-            alt="fantasy illustration"
-          />
-        </section>
-      </main>
+      <ShowChapter
+        chapterTitle={this.props.chapterTitle}
+        chapter={
+          storyData.filter(
+            chapter => normalize(chapter.title) === this.props.chapterTitle
+          )[0]
+        }
+        illustration={
+          storyData.filter(
+            chapter => normalize(chapter.title) === this.props.chapterTitle
+          )[0].illustration
+        }
+        textClass={this.toggleTextClass(this.props.showStoryText)}
+      />
     );
   }
 }

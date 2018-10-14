@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import 'semantic-ui-css/semantic.min.css';
-import App from './App.jsx';
 import './css/index.css';
+import OuterRouter from './OuterRouter.jsx';
 
-ReactDOM.render((
+ReactDOM.render(
   <Router>
-    <App />
-  </Router>
-  ),
+    <OuterRouter />
+  </Router>,
   document.getElementById('app')
 );

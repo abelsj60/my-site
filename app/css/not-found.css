@@ -1,0 +1,24 @@
+#not-found {
+  display: flex;
+  height: 100%;
+  padding: 25px;
+}
+
+#not-found .content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#not-found h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.not-found-image-box {
+  flex: 1;
+  margin-top: 15px;
+  /* height: 400px;
+  width: 400px; */
+  background-color: cornflowerblue;
+}

@@ -1,0 +1,31 @@
+/* App bar rules */
+
+#app-bar-button {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  margin: 0;
+  color: white;
+}
+
+#app-bar-button p {
+  margin: 0;
+}
+
+#button-border {
+  background-color: red;
+  width: 1px;
+  height: 48px;
+}
+
+@media only screen and (min-width: 850px) {
+  #app-bar-button {
+    display: none;
+  }
+
+  #button-border {
+    display: none;
+  }
+}

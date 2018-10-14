@@ -19,19 +19,19 @@ app.get('/bundle.js.map', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../bundle.js.map'));
 });
 
-app.get('*', function (req, res, next) {
+app.get('*', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-app.listen(PORT, function () {
-  console.log("Heyo");
-  console.log("Dayo?");
+app.listen(PORT, function() {
+  console.log('Heyo');
+  console.log('Dayo?');
   console.log(`No! Heyo! We're running on port ${PORT}`);
 });
 

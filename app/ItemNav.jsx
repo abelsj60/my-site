@@ -6,23 +6,19 @@ class ItemNav extends Component {
     super(props);
   }
 
-  render() {
-    function setActiveItem(mappedWith, urlParam) {
-      if (parseInt(urlParam)) {
-        urlParam = parseInt(urlParam);
-      }
-
-      if (mappedWith === urlParam) {
-        return 'active';
-      } else {
-        return 'inactive';
-      }
+  idActiveItem(chapter, param) {
+    if (chapter === param) {
+      return 'active';
+    } else {
+      return 'inactive';
     }
+  }
 
+  render() {
     return (
       <Link
-        className={setActiveItem(this.props.item, this.props.param)}
-        to={this.props.route + this.props.item}
+        className={this.idActiveItem(this.props.chapterTitle, this.props.param)}
+        to={`${this.props.route}/${this.props.chapterTitle}`}
       >
         <p>{this.props.item}</p>
       </Link>

@@ -1,46 +1,84 @@
 import React, { Component } from 'react';
-import ItemNav from './ItemNav.jsx';
 import { withRouter } from 'react-router-dom';
-// import helpers from './helpers/helpers.js';
+import AppBarMenu from './AppBarMenu.jsx';
 
 class Footer extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      contactInfo: false
+    };
+
+    this.toggleContactInfo = this.toggleContactInfo.bind(this);
+  }
+
+  get location() {
+    return this.props.location.pathname.split('/');
+  }
+
+  get innerPage() {
+    // ~ja ? Will this work in deployment?
+    return this.location[1] !== '';
+  }
+
+  get indexPage() {
+    return this.location[1] === 'index';
+  }
+
+  get aboutPage() {
+    return this.location[1] === 'about';
+  }
+
+  setFooterClass() {
+    return this.innerPage ? 'inner-page-footer' : 'home-page-footer';
+  }
+
+  showAppBar() {
+    return this.innerPage && !this.indexPage && !this.aboutPage;
+  }
+
+  setContactClass() {
+    return this.showAppBar() ? 'hide' : 'show';
+  }
+
+  toggleContactInfo() {
+    this.setState({ contactInfo: !this.state.contactInfo });
+    return 'Toggled contact info!';
   }
 
   render() {
-    const chapters = [1, 2, 3, 4];
-    const route = '/chapter/';
-    const chapterNumber = this.props.location.pathname.split('/')[2];
-
     return (
-      <footer style={{ opacity: this.props.opacity }}>
-        <section className="app-bar">
-          <div className="app-bar-container">
-            <div className="chapter-text-icon" />
-            <nav>
-              {chapters.map((num, index) => (
-                <ItemNav
-                  key={index}
-                  item={num}
-                  param={chapterNumber}
-                  route={route}
-                />
-              ))}
-            </nav>
+      <footer className={this.setFooterClass()}>
+        <div
+          id="contact-container"
+          className={this.state.contactInfo ? 'show' : 'hide'}
+        >
+          <div id="contact-content">
+            <p>917-854-7848</p>
+            <p>abelsj60_AT_gmail.com</p>
           </div>
-          <div className="borderline" />
-          <div className="app-bar-container">
-            <div className="story-text-icon" />
-            <p className="app-bar-text">Text</p>
-          </div>
-          <div className="borderline" />
-          <div className="app-bar-container">
-            <div className="story-text-icon" />
-            <p className="app-bar-text">About</p>
-          </div>
-        </section>
-        <p className="copyright">James Abels. All rights reserved. 2018.</p>
+        </div>
+        <p
+          className={`contact-info ${this.setContactClass()}`}
+          onClick={event => {
+            this.toggleContactInfo();
+            event.preventDefault();
+          }}
+        >
+          Contact
+        </p>
+        <p className={`contact-info ${this.setContactClass()}`}>|</p>
+        <p className={`copyright ${this.setContactClass()}`}>
+          James Abels. All rights reserved. 2018.
+        </p>
+        {this.showAppBar() && (
+          <AppBarMenu
+            toggleText={this.props.toggleText}
+            toggleDetails={this.props.toggleDetails}
+            toggleContactInfo={this.toggleContactInfo}
+          />
+        )}
       </footer>
     );
   }
