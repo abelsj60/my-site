@@ -45,7 +45,11 @@ class AppBarMenu extends Component {
         label: this.indexLabel,
         linkPath: this.linkPath
       },
-      { label: 'Contact', linkPath: this.props.location.pathname }
+      {
+        label: 'Contact',
+        linkPath: this.props.location.pathname,
+        handleClick: () => this.props.toggleContactInfo()
+      }
     ];
 
     if (this.location[1] === 'about') {

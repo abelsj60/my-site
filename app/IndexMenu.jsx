@@ -38,7 +38,7 @@ class IndexMenu extends Component {
     return (
       <main id="index">
         <Link id="close-button" to={`/${this.section}`}>
-          <p>(Close)</p>
+          <p>(X) Close</p>
         </Link>
         <nav className={this.props.section + '-index'}>
           {this.projectPage ? (
