@@ -17,8 +17,8 @@ class Header extends Component {
     return this.props.location.pathname.split('/');
   }
 
-  get headerIsTransparent() {
-    return this.props.headerIsTransparent;
+  get magicTransparency() {
+    return this.props.magicTransparency;
   }
 
   get menuIsOpen() {
@@ -60,12 +60,12 @@ class Header extends Component {
   render() {
     return (
       <Fragment>
-        <header className={this.setHeaderCss(this.headerIsTransparent)}>
+        <header className={this.setHeaderCss(this.magicTransparency)}>
           <Link
             id="site-name"
             className={
               this.setMenuCss(this.menuIsOpen) +
-              this.setHeaderCss(this.headerIsTransparent)
+              this.setHeaderCss(this.magicTransparency)
             }
             to={'/'}
           >
@@ -75,7 +75,7 @@ class Header extends Component {
             id="site-motto"
             className={
               this.setMenuCss(this.menuIsOpen) +
-              this.setHeaderCss(this.headerIsTransparent)
+              this.setHeaderCss(this.magicTransparency)
             }
           >
             Magical stories and other adventures
@@ -85,7 +85,7 @@ class Header extends Component {
               <Link
                 key={index}
                 className={`${this.setActiveLink(link)}
-                ${this.setHeaderCss(this.headerIsTransparent)}`}
+                ${this.setHeaderCss(this.magicTransparency)}`}
                 to={this.setRoute(link)}
               >
                 {link}
@@ -95,7 +95,7 @@ class Header extends Component {
           <div
             id="nav-icon"
             className={`${this.setHeaderCss(
-              this.headerIsTransparent
+              this.magicTransparency
             )} ${this.setMenuCss(this.menuIsOpen)}`}
             onClick={() => this.toggleHeaderMenu()}
           />

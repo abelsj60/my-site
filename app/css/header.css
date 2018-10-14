@@ -85,6 +85,7 @@ header a.active {
   height: 17px;
   width: 17px;
   background: url('/sign-white-closed.png') no-repeat center;
+  transition: background 0.7s;
   margin-right: 15px;
 }
 
@@ -94,6 +95,7 @@ header a.active {
 
 #nav-icon:hover {
   background: url('/sign-white-open.png') no-repeat center;
+  transition: background 0.7s;
 }
 
 #nav-icon.opaque:hover {
@@ -102,6 +104,7 @@ header a.active {
 
 #nav-icon.header-menu-open {
   background: url('/sign-white-open.png') no-repeat center;
+  transition: background 0.7s;
 }
 
 #nav-icon.opaque.header-menu-open {
@@ -110,6 +113,7 @@ header a.active {
 
 #nav-icon.header-menu-open:hover {
   background: url('/sign-white-closed.png') no-repeat center;
+  transition: background 0.7s;
 }
 
 #nav-icon.opaque.header-menu-open:hover {

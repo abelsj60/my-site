@@ -1,137 +1,131 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import GiantHomePageNav from './GiantHomePageNav.jsx';
-
-const background = '/dreaming-boy-co-2.png';
+import MagicNav from './MagicNav.jsx';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      giantImageScale: 6,
-      tempElementOpacity: 0,
-      headerIsTransparent: true,
-      giantHeaderNavIsVisible: false,
-      allowClicksOnTempElements: false
+      magicScale: {
+        transform: 'scale(6, 6)'
+      },
+      magicOpacity: { opacity: 0 },
+      magicTransparency: true,
+      magicContent: false,
+      magicClicks: 'block'
     };
 
-    this.scaleGiantImage = this.scaleGiantImage.bind(this);
-    this.toggleHeaderTransparency = this.toggleHeaderTransparency.bind(this);
-    this.showGiantNav = this.showGiantNav.bind(this);
-    this.togglePointer = this.togglePointer.bind(this);
-    this.setTempElementOpacity = this.setTempElementOpacity.bind(this);
+    this.toggleTransparency = this.toggleTransparency.bind(this);
+    this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
+    this.setMagicScale = this.setMagicScale.bind(this);
+    this.toggleMagicNav = this.toggleMagicNav.bind(this);
+    this.setMagicOpacity = this.setMagicOpacity.bind(this);
+  }
+
+  get imagePath() {
+    return '/dreaming-boy-co-2.png';
+  }
+
+  get scrollTop() {
+    return window.pageYOffset;
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.scaleGiantImage);
-    window.addEventListener('scroll', this.toggleHeaderTransparency);
-    window.addEventListener('scroll', this.showGiantNav);
-    window.addEventListener('scroll', this.togglePointer);
-    window.addEventListener('scroll', this.setTempElementOpacity);
+    window.addEventListener('scroll', this.toggleTransparency);
+    window.addEventListener('scroll', this.toggleMagicPointer);
+    window.addEventListener('scroll', this.setMagicScale);
+    window.addEventListener('scroll', this.toggleMagicNav);
+    window.addEventListener('scroll', this.setMagicOpacity);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.scaleGiantImage);
-    window.removeEventListener('scroll', this.toggleHeaderTransparency);
-    window.removeEventListener('scroll', this.showGiantNav);
-    window.removeEventListener('scroll', this.togglePointer);
-    window.removeEventListener('scroll', this.setTempElementOpacity);
+    window.removeEventListener('scroll', this.toggleTransparency);
+    window.removeEventListener('scroll', this.toggleMagicPointer);
+    window.removeEventListener('scroll', this.setMagicScale);
+    window.removeEventListener('scroll', this.toggleMagicNav);
+    window.removeEventListener('scroll', this.setMagicOpacity);
   }
 
-  scaleGiantImage() {
-    const scrollTop = window.pageYOffset;
-    const oldPercent = (scrollTop - 0) / (3221 - 0);
-    const numberForScale = 6 / ((6 - 1) * oldPercent + 1);
+  setMagicScale() {
+    const oldPercent = (this.scrollTop - 0) / (3221 - 0);
+    const newPercent = 6 / ((6 - 1) * oldPercent + 1);
+    const newScale = newPercent < 1 ? 1 : newPercent;
 
-    this.setState({ giantImageScale: numberForScale });
+    if (newPercent < 1) {
+      console.log('Adjust scaling equation!', newPercent);
+    }
+
+    this.setState({
+      magicScale: {
+        transform: 'scale(' + newScale + ', ' + newScale + ')'
+      }
+    });
   }
 
-  toggleHeaderTransparency() {
-    const scrollTop = window.pageYOffset;
-
-    if (scrollTop >= 7) {
-      this.setState({ headerIsTransparent: false });
+  toggleTransparency() {
+    if (this.scrollTop >= 7) {
+      this.setState({ magicTransparency: false });
     } else {
-      this.setState({ headerIsTransparent: true });
+      this.setState({ magicTransparency: true });
     }
   }
 
   // Bring topics onto screen
-  showGiantNav() {
-    const scrollTop = window.pageYOffset;
+  toggleMagicNav() {
+    if (this.scrollTop <= 2300) {
+      this.setState({ magicContent: false });
+    }
 
-    if (scrollTop <= 2300) {
-      this.setState({ giantHeaderNavIsVisible: false });
-    } else if (scrollTop > 2300) {
-      this.setState({ giantHeaderNavIsVisible: true });
+    if (this.scrollTop > 2300) {
+      this.setState({ magicContent: true });
     }
   }
 
-  setTempElementOpacity() {
-    const scrollTop = window.pageYOffset;
+  setMagicOpacity() {
+    if (this.scrollTop >= 2400) {
+      const oldPercent = (this.scrollTop - 2400) / (3221 - 2400);
+      const opacityValue = (1 - 0) * oldPercent + 0;
 
-    if (scrollTop >= 2400) {
-      const oldPercent = (scrollTop - 2400) / (3221 - 2400);
-      const numForOpacity = (1 - 0) * oldPercent + 0;
-      this.setState({ tempElementOpacity: numForOpacity });
+      this.setState({ magicOpacity: { opacity: opacityValue } });
     }
   }
 
   // Select a topic when scrolling's complete
-  togglePointer() {
-    const scrollTop = window.pageYOffset;
-
-    if (scrollTop < 3220) {
-      this.setState({ allowClicksOnTempElements: false });
-    } else {
-      this.setState({ allowClicksOnTempElements: true });
+  toggleMagicPointer() {
+    if (this.scrollTop < 3220) {
+      this.setState({ magicClicks: 'block' });
     }
-  }
 
-  setPointerClass(boolean) {
-    if (!boolean) {
-      return 'block';
-    } else {
-      return 'allow';
+    if (this.scrollTop > 3220) {
+      this.setState({ magicClicks: 'allow' });
     }
-  }
-
-  setGiantImageScale(scale) {
-    // ~ja ? Needed?
-
-    return { transform: 'scale(' + scale + ',' + scale + ')' };
   }
 
   render() {
     return (
-      <section className="home">
-        <section className="wrapper">
-          <Header headerIsTransparent={this.state.headerIsTransparent} />
+      <Fragment>
+        <section id="home-wrapper">
+          <Header magicTransparency={this.state.magicTransparency} />
           <img
-            className="scrolling-image"
-            style={this.setGiantImageScale(this.state.giantImageScale)}
-            src={background}
+            id="magic-image"
+            style={this.state.magicScale}
+            src={this.imagePath}
             alt="b2"
           />
         </section>
-        {this.state.giantHeaderNavIsVisible && (
+        {this.state.magicContent && (
           <section
-            className={`temp-home-content ${this.setPointerClass(
-              this.state.allowClicksOnTempElements
-            )}`}
+            id="magic-content"
+            className={this.state.magicClicks}
+            style={this.state.magicOpacity}
           >
-            <GiantHomePageNav
-              tempElementOpacity={this.state.tempElementOpacity}
-            />
-            <Footer
-              tempElementOpacity={this.state.tempElementOpacity}
-              fullHeaderMenu={this.props.fullHeaderMenu}
-            />
+            <MagicNav />
+            <Footer />
           </section>
         )}
-        <section className="scroller" />
-      </section>
+        <section id="magic-scroller" />
+      </Fragment>
     );
   }
 }

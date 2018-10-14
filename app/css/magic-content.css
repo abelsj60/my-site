@@ -1,0 +1,56 @@
+/* HOME PAGE CSS */
+
+/* Temp-content rules (after scroll) */
+
+#magic-content {
+  position: fixed;
+  flex: 1;
+  top: 52px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: none;
+}
+
+#magic-content.allow {
+  pointer-events: all;
+}
+
+#magic-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+#magic-nav a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+}
+
+#magic-nav a:nth-child(-n + 2) {
+  border-bottom: 0.5px solid red;
+}
+
+#magic-nav a:hover {
+  background-color: rgba(255, 0, 0, 0.3);
+  color: white;
+}
+
+@media only screen and (min-width: 666px) {
+  #magic-nav {
+    flex-direction: row;
+  }
+
+  #magic-nav a:nth-child(-n + 2) {
+    border-bottom: none;
+    border-right: 0.5px solid red;
+  }
+}

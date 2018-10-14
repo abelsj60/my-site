@@ -38,21 +38,18 @@ class Footer extends Component {
     return this.innerPage && !this.indexPage && !this.aboutPage;
   }
 
+  setContactClass() {
+    return this.showAppBar() ? 'hide' : 'show';
+  }
+
   toggleContactInfo() {
     this.setState({ contactInfo: !this.state.contactInfo });
     return 'Toggled contact info!';
   }
 
-  setContactClass() {
-    return this.showAppBar() ? 'hide' : 'show';
-  }
-
   render() {
     return (
-      <footer
-        className={this.setFooterClass()}
-        style={{ opacity: this.props.tempElementOpacity }}
-      >
+      <footer className={this.setFooterClass()}>
         <div
           id="contact-container"
           className={this.state.contactInfo ? 'show' : 'hide'}
@@ -62,13 +59,6 @@ class Footer extends Component {
             <p>abelsj60_AT_gmail.com</p>
           </div>
         </div>
-        {this.showAppBar() && (
-          <AppBarMenu
-            toggleText={this.props.toggleText}
-            toggleDetails={this.props.toggleDetails}
-            toggleContactInfo={this.toggleContactInfo}
-          />
-        )}
         <p
           className={`contact-info ${this.setContactClass()}`}
           onClick={event => {
@@ -82,6 +72,13 @@ class Footer extends Component {
         <p className={`copyright ${this.setContactClass()}`}>
           James Abels. All rights reserved. 2018.
         </p>
+        {this.showAppBar() && (
+          <AppBarMenu
+            toggleText={this.props.toggleText}
+            toggleDetails={this.props.toggleDetails}
+            toggleContactInfo={this.toggleContactInfo}
+          />
+        )}
       </footer>
     );
   }
