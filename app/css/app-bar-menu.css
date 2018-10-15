@@ -1,16 +1,19 @@
 /* App bar rules */
 
-#app-bar-button {
+#app-bar-menu {
+  flex: 1;
+  display: flex;
+}
+
+#app-bar-menu a {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
-  margin: 0;
   color: white;
 }
 
-#app-bar-button p {
+#app-bar-menu p {
   margin: 0;
 }
 
@@ -20,12 +23,8 @@
   height: 48px;
 }
 
-@media only screen and (min-width: 850px) {
-  #app-bar-button {
-    display: none;
-  }
-
-  #button-border {
+@media only screen and (min-width: 849px) {
+  #app-bar-menu {
     display: none;
   }
 }
