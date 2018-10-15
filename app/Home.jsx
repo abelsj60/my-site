@@ -15,10 +15,10 @@ class Home extends Component {
       magicClicks: 'block'
     };
 
-    this.toggleTransparency = this.toggleTransparency.bind(this);
-    this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
     this.setMagicScale = this.setMagicScale.bind(this);
     this.setMagicOpacity = this.setMagicOpacity.bind(this);
+    this.toggleTransparency = this.toggleTransparency.bind(this);
+    this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
   }
 
   get imagePath() {
@@ -33,7 +33,6 @@ class Home extends Component {
     window.addEventListener('scroll', this.toggleTransparency);
     window.addEventListener('scroll', this.toggleMagicPointer);
     window.addEventListener('scroll', this.setMagicScale);
-    window.addEventListener('scroll', this.toggleMagicContent);
     window.addEventListener('scroll', this.setMagicOpacity);
   }
 
@@ -41,7 +40,6 @@ class Home extends Component {
     window.removeEventListener('scroll', this.toggleTransparency);
     window.removeEventListener('scroll', this.toggleMagicPointer);
     window.removeEventListener('scroll', this.setMagicScale);
-    window.removeEventListener('scroll', this.toggleMagicContent);
     window.removeEventListener('scroll', this.setMagicOpacity);
   }
 
