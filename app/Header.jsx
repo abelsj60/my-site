@@ -1,6 +1,7 @@
-import React, { Fragment, Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import headerData from './data/headerData.js';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import HeaderText from './HeaderText.jsx';
+import HeaderNav from './HeaderNav.jsx';
 
 class Header extends Component {
   constructor(props) {
@@ -10,25 +11,24 @@ class Header extends Component {
       menuCss: ''
     };
 
-    this.openHeaderMenu = this.openHeaderMenu.bind(this);
+    this.getCssForActiveLink = this.getCssForActiveLink.bind(this);
   }
 
   get location() {
     return this.props.location.pathname.split('/');
   }
 
-  makeHeaderOpaque() {
-    // console.log('opaque');
+  getCssForOpaqueHeader() {
     return this.props.headerIsTransparent ? '' : ' opaque';
   }
 
-  openHeaderMenu() {
+  getCssForOpenHeaderMenu() {
     this.setState({
-      menuCss: this.state.menuCss === '' ? 'header-menu-open' : ''
+      menuCss: this.state.menuCss === '' ? ' menu-open' : ''
     });
   }
 
-  setActiveLink(section) {
+  getCssForActiveLink(section) {
     if (section === 'The story') {
       section = 'chapter';
     }
@@ -38,42 +38,13 @@ class Header extends Component {
 
   render() {
     return (
-      <Fragment>
-        <header className={this.makeHeaderOpaque()}>
-          <Link
-            id="site-name"
-            className={this.state.menuCss + this.makeHeaderOpaque()}
-            to={'/'}
-          >
-            James Abels
-          </Link>
-          <p
-            id="site-motto"
-            className={this.state.menuCss + this.makeHeaderOpaque()}
-          >
-            Magical stories and other adventures
-          </p>
-          <nav className={this.state.menuCss}>
-            {headerData.map((section, index) => (
-              <Link
-                key={index}
-                className={`${this.setActiveLink(section.name)}
-                ${this.makeHeaderOpaque()}`}
-                to={section.path}
-              >
-                {section.name}
-              </Link>
-            ))}
-          </nav>
-          <div
-            id="nav-icon"
-            className={`${this.makeHeaderOpaque(this.magicTransparency)} ${
-              this.state.menuCss
-            }`}
-            onClick={() => this.openHeaderMenu()}
-          />
-        </header>
-      </Fragment>
+      <header
+        className={`${this.getCssForOpaqueHeader()}${this.state.menuCss}`}
+      >
+        <HeaderText />
+        <HeaderNav getCssForActiveLink={this.getCssForActiveLink} />
+        <section id="nav-icon" onClick={() => this.getCssForOpenHeaderMenu()} />
+      </header>
     );
   }
 }
