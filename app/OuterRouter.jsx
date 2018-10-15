@@ -12,6 +12,9 @@ class OuterRouter extends Component {
   constructor(props) {
     super(props);
 
+    // ~ja Hold component state here when controlled by AppBar
+    // Can't pass state to AppBar from Chapter in this model w/o Redux
+
     const location = this.props.location.pathname.split('/');
 
     this.state = {
@@ -37,24 +40,19 @@ class OuterRouter extends Component {
           ? this.validateHeadline(location[2], location[3]) ||
             normalize(articleData[0].headline)
           : normalize(articleData[0].headline),
-      showStoryText: true,
-      showProjectDetails: false
+      showStoryText: 'show-text'
     };
 
     this.toggleText = this.toggleText.bind(this);
-    this.toggleDetails = this.toggleDetails.bind(this);
   }
 
   toggleText() {
     // Expl: https://stackoverflow.com/a/29101393/9215718
 
-    this.setState({ showStoryText: !this.state.showStoryText });
-    return 'Switched text!';
-  }
-
-  toggleDetails() {
-    this.setState({ showProjectDetails: !this.state.showProjectDetails });
-    return 'Switched details!';
+    this.setState({
+      showStoryText:
+        this.state.showStoryText === 'show-text' ? 'no-text' : 'show-text'
+    });
   }
 
   validatePublication(publication) {
@@ -111,11 +109,7 @@ class OuterRouter extends Component {
         <Route exact path="/" render={() => <Home />} />
         <Route
           render={() => (
-            <InnerRouter
-              state={this.state}
-              toggleText={this.toggleText}
-              toggleDetails={this.toggleDetails}
-            />
+            <InnerRouter state={this.state} toggleText={this.toggleText} />
           )}
         />
       </Switch>

@@ -12,7 +12,7 @@ class About extends Component {
           <h1>About</h1>
           <div className="about-image-box">
             <div className="about-pic" />
-            <div className="about-descript">
+            <div className="about-description">
               <h1>James Abels</h1>
               <p>Short story</p>
             </div>

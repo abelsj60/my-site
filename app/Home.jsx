@@ -30,17 +30,17 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.toggleTransparency);
-    window.addEventListener('scroll', this.toggleMagicPointer);
     window.addEventListener('scroll', this.setMagicScale);
     window.addEventListener('scroll', this.setMagicOpacity);
+    window.addEventListener('scroll', this.toggleTransparency);
+    window.addEventListener('scroll', this.toggleMagicPointer);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.toggleTransparency);
-    window.removeEventListener('scroll', this.toggleMagicPointer);
     window.removeEventListener('scroll', this.setMagicScale);
     window.removeEventListener('scroll', this.setMagicOpacity);
+    window.removeEventListener('scroll', this.toggleTransparency);
+    window.removeEventListener('scroll', this.toggleMagicPointer);
   }
 
   setMagicScale() {
@@ -84,21 +84,21 @@ class Home extends Component {
   }
 
   toggleTransparency() {
-    if (this.scrollTop >= 7 && this.state.headerIsTransparent) {
+    if (this.state.headerIsTransparent && this.scrollTop >= 7) {
       this.setState({ headerIsTransparent: false });
     }
 
-    if (this.scrollTop < 7 && !this.state.headerIsTransparent) {
+    if (!this.state.headerIsTransparent && this.scrollTop < 7) {
       this.setState({ headerIsTransparent: true });
     }
   }
 
   toggleMagicPointer() {
-    if (this.scrollTop > 3220 && this.state.magicClicks === 'block') {
+    if (this.state.magicClicks === 'block' && this.scrollTop > 3220) {
       this.setState({ magicClicks: 'allow' });
     }
 
-    if (this.scrollTop < 3220 && this.state.magicClicks === 'allow') {
+    if (this.state.magicClicks === 'allow' && this.scrollTop < 3220) {
       this.setState({ magicClicks: 'block' });
     }
   }

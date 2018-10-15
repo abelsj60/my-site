@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ClipNav from './ClipNav.jsx';
+import ArticleNav from './ArticleNav.jsx';
 import StoryNav from './StoryNav.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
 import projectData from './data/projectData';
@@ -53,7 +53,7 @@ class IndexMenu extends Component {
               item={null}
             />
           ) : (
-            <ClipNav state={this.props.state} item={null} />
+            <ArticleNav state={this.props.state} item={null} />
           )}
         </nav>
       </main>

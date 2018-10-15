@@ -32,11 +32,6 @@ export default [
     text: clip.forbesOwningTheNews
   },
   {
-    headline: 'Owning The News',
-    publication: 'Forbes',
-    text: clip.forbesOwningTheNews
-  },
-  {
     headline: 'Rupert Murdoch: Big Man On Campus',
     publication: 'Forbes',
     text: clip.forbesRupertMurdochBigManOnCsampus

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import ClipNav from './ClipNav.jsx';
+import ArticleNav from './ArticleNav.jsx';
 import articleData from './data/articleData';
 import { normalize } from './helpers/utils.js';
 
@@ -22,7 +22,7 @@ class Journalism extends Component {
         <section id="clips" className="left">
           <h1>My stories</h1>
           <nav>
-            <ClipNav state={this.props.state} />
+            <ArticleNav state={this.props.state} />
           </nav>
         </section>
         <section id="story" className="right">
