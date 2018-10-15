@@ -43,7 +43,7 @@ class AppBarMenu extends Component {
       {
         label: 'Contact',
         linkPath: this.props.location.pathname,
-        handleClick: () => this.props.toggleContactInfo()
+        handleClick: () => this.props.toggleBusinessCard()
       }
     ];
 
@@ -59,23 +59,26 @@ class AppBarMenu extends Component {
   }
 
   render() {
-    return this.buttons.map((button, index) => (
-      <Fragment key={index}>
-        <Link
-          id="app-bar-button"
-          to={button.linkPath}
-          onClick={event => {
-            if (button.handleClick) {
-              button.handleClick(event);
-              event.preventDefault();
-            }
-          }}
-        >
-          <p>{button.label}</p>
-        </Link>
-        {button.label === 'Contact' ? null : <div id="button-border" />}
-      </Fragment>
-    ));
+    return (
+      <section id="app-bar-menu">
+        {this.buttons.map((button, index) => (
+          <Fragment key={index}>
+            <Link
+              to={button.linkPath}
+              onClick={event => {
+                if (button.handleClick) {
+                  button.handleClick(event);
+                  event.preventDefault();
+                }
+              }}
+            >
+              <p>{button.label}</p>
+            </Link>
+            {button.label === 'Contact' ? null : <div id="button-border" />}
+          </Fragment>
+        ))}
+      </section>
+    );
   }
 }
 

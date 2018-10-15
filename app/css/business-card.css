@@ -1,0 +1,40 @@
+#business-card-holder.hide {
+  display: none;
+}
+
+#business-card-holder.show {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 52px;
+  bottom: 48px;
+  width: 100%;
+  background-color: rgba(0, 0, 255, 0.6);
+}
+
+.home-page-footer #business-card-holder.show {
+  top: 0px;
+}
+
+#business-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  width: 350px;
+  align-self: center;
+  background-color: black;
+  font-size: 1.7rem;
+  line-height: 2.5rem;
+}
+
+#business-card p {
+  margin-left: 85px;
+}
+
+@media only screen and (min-width: 500px) {
+  #business-card {
+    height: 300px;
+    width: 450px;
+  }
+}

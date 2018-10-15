@@ -31,6 +31,7 @@ body {
 @import 'css-reset.css';
 @import 'header.css';
 @import 'footer.css';
+@import 'business-card.css';
 @import 'app-bar-menu.css';
 @import 'magic-content.css';
 @import 'inner-page.css';

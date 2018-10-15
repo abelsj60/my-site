@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import AppBarMenu from './AppBarMenu.jsx';
+import BusinessCard from './BusinessCard.jsx';
+import FooterText from './FooterText.jsx';
 
 class Footer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      contactInfo: 'hide'
+      businessCard: 'hide'
     };
 
-    this.toggleContactInfo = this.toggleContactInfo.bind(this);
+    this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
+    this.addCssToHideFooterTextForAppBar = this.addCssToHideFooterTextForAppBar.bind(
+      this
+    );
   }
 
   get location() {
     return this.props.location.pathname.split('/');
   }
 
-  locateFooter() {
+  addCssThatLocatesFooter() {
     return this.location[1] !== '' ? 'inner-page-footer' : 'home-page-footer';
   }
 
@@ -29,45 +34,29 @@ class Footer extends Component {
     );
   }
 
-  getCssToHideFooterTextForAppBar() {
-    return this.addAppBarToPage() ? 'hide' : 'show';
+  addCssToHideFooterTextForAppBar() {
+    return this.addAppBarToPage() ? 'app-bar-active' : '';
   }
 
-  toggleContactInfo() {
+  toggleBusinessCard() {
     this.setState({
-      contactInfo: this.state.contactInfo === 'hide' ? 'show' : 'hide'
+      businessCard: this.state.businessCard === 'hide' ? 'show' : 'hide'
     });
   }
 
   render() {
     return (
-      <footer className={this.locateFooter()}>
-        <div id="contact-container" className={this.state.contactInfo}>
-          <div id="contact-content">
-            <p>917-854-7848</p>
-            <p>abelsj60_AT_gmail.com</p>
-          </div>
-        </div>
-        <p
-          className={`contact-info ${this.getCssToHideFooterTextForAppBar()}`}
-          onClick={event => {
-            this.toggleContactInfo();
-            event.preventDefault();
-          }}
-        >
-          Contact
-        </p>
-        <p className={`contact-info ${this.getCssToHideFooterTextForAppBar()}`}>
-          |
-        </p>
-        <p className={`copyright ${this.getCssToHideFooterTextForAppBar()}`}>
-          James Abels. All rights reserved. 2018.
-        </p>
+      <footer id={this.addCssThatLocatesFooter()}>
+        <BusinessCard businessCard={this.state.businessCard} />
+        <FooterText
+          cssToHideFooterTextForAppBar={this.addCssToHideFooterTextForAppBar()}
+          toggleBusinessCard={this.toggleBusinessCard}
+        />
         {this.addAppBarToPage() && (
           <AppBarMenu
             toggleText={this.props.toggleText}
             toggleDetails={this.props.toggleDetails}
-            toggleContactInfo={this.toggleContactInfo}
+            toggleBusinessCard={this.toggleBusinessCard}
           />
         )}
       </footer>
