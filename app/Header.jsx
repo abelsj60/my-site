@@ -7,97 +7,70 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      openMenu: false
+      menuCss: ''
     };
 
-    this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
+    this.openHeaderMenu = this.openHeaderMenu.bind(this);
   }
 
   get location() {
     return this.props.location.pathname.split('/');
   }
 
-  get magicTransparency() {
-    return this.props.magicTransparency;
+  makeHeaderOpaque() {
+    // console.log('opaque');
+    return this.props.headerIsTransparent ? '' : ' opaque';
   }
 
-  get menuIsOpen() {
-    return this.state.openMenu;
+  openHeaderMenu() {
+    this.setState({
+      menuCss: this.state.menuCss === '' ? 'header-menu-open' : ''
+    });
   }
 
-  setHeaderCss(transparencyStatus) {
-    return !transparencyStatus ? ' opaque' : '';
-  }
-
-  setMenuCss(menuStatus) {
-    return menuStatus ? 'header-menu-open' : '';
-  }
-
-  setRoute(link) {
-    return link === 'The story'
-      ? '/chapter'
-      : link === 'Projects'
-        ? '/projects'
-        : link === 'Journalism'
-          ? '/journalism'
-          : '/about';
-  }
-
-  setActiveLink(link) {
-    if (link === 'The story') {
-      link = 'chapter';
+  setActiveLink(section) {
+    if (section === 'The story') {
+      section = 'chapter';
     }
 
-    return this.location[1] === link.toLowerCase() ? 'active' : 'inactive';
-  }
-
-  toggleHeaderMenu() {
-    console.log('HERE!');
-    this.setState({ openMenu: !this.menuIsOpen });
-    return 'Toggled header menu!';
+    return this.location[1] === section.toLowerCase() ? 'active' : 'inactive';
   }
 
   render() {
     return (
       <Fragment>
-        <header className={this.setHeaderCss(this.magicTransparency)}>
+        <header className={this.makeHeaderOpaque()}>
           <Link
             id="site-name"
-            className={
-              this.setMenuCss(this.menuIsOpen) +
-              this.setHeaderCss(this.magicTransparency)
-            }
+            className={this.state.menuCss + this.makeHeaderOpaque()}
             to={'/'}
           >
             James Abels
           </Link>
           <p
             id="site-motto"
-            className={
-              this.setMenuCss(this.menuIsOpen) +
-              this.setHeaderCss(this.magicTransparency)
-            }
+            className={this.state.menuCss + this.makeHeaderOpaque()}
           >
             Magical stories and other adventures
           </p>
-          <nav className={this.setMenuCss(this.menuIsOpen)}>
-            {headerData.map((link, index) => (
+          <nav className={this.state.menuCss}>
+            {headerData.map((section, index) => (
               <Link
                 key={index}
-                className={`${this.setActiveLink(link)}
-                ${this.setHeaderCss(this.magicTransparency)}`}
-                to={this.setRoute(link)}
+                className={`${this.setActiveLink(section.name)}
+                ${this.makeHeaderOpaque()}`}
+                to={section.path}
               >
-                {link}
+                {section.name}
               </Link>
             ))}
           </nav>
           <div
             id="nav-icon"
-            className={`${this.setHeaderCss(
-              this.magicTransparency
-            )} ${this.setMenuCss(this.menuIsOpen)}`}
-            onClick={() => this.toggleHeaderMenu()}
+            className={`${this.makeHeaderOpaque(this.magicTransparency)} ${
+              this.state.menuCss
+            }`}
+            onClick={() => this.openHeaderMenu()}
           />
         </header>
       </Fragment>

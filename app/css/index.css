@@ -24,6 +24,8 @@ body {
   min-height: 100vh;
   z-index: 1;
   object-fit: cover;
+  position: relative;
+  bottom: 52px;
 }
 
 @import 'css-reset.css';
