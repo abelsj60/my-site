@@ -5,7 +5,7 @@ import Footer from './Footer.jsx';
 import Chapter from './Chapter.jsx';
 import Projects from './Projects.jsx';
 import Journalism from './Journalism.jsx';
-import IndexMenu from './IndexMenu.jsx';
+import FullScreenSiteMenu from './FullScreenSiteMenu.jsx';
 import About from './About.jsx';
 import NotFound from './NotFound.jsx';
 
@@ -61,11 +61,11 @@ class InnerRouter extends Component {
 
           {/* <Route
             exact
-            path="/chapter/index"
+            path="/chapter/menu"
             render={() => {
               const section = 'chapter';
 
-              return <IndexMenu section={section} />;
+              return <FullScreenSiteMenu section={section} />;
             }}
           /> */}
 
@@ -155,15 +155,15 @@ class InnerRouter extends Component {
 
           <Route
             exact
-            path="/index"
-            render={() => <Redirect to={'/index/projects'} />}
+            path="/menu"
+            render={() => <Redirect to={'/menu/projects'} />}
           />
 
           <Route
-            path="/index/:section"
+            path="/menu/:section"
             render={({ match }) => {
               return (
-                <IndexMenu
+                <FullScreenSiteMenu
                   section={match.params.section.toLowerCase()}
                   state={this.props.state}
                 />

@@ -19,23 +19,25 @@ class ArticleNav extends Component {
   }
 
   render() {
-    return articleData.map((clip, index) => {
-      return (
-        <Link
-          key={index}
-          className={this.setActiveItem(
-            normalize(clip.headline),
-            this.props.state.headline
-          )}
-          to={`/journalism/${normalize(clip.publication)}/${normalize(
-            clip.headline
-          )}`}
-        >
-          <p id="source">{clip.publication}</p>
-          <p id="hed">{clip.headline}</p>
-        </Link>
-      );
-    });
+    return (
+      <section id="clip-list">
+        {articleData.map((clip, index) => (
+          <Link
+            key={index}
+            className={this.setActiveItem(
+              normalize(clip.headline),
+              this.props.state.headline
+            )}
+            to={`/journalism/${normalize(clip.publication)}/${normalize(
+              clip.headline
+            )}`}
+          >
+            <p id="source">{clip.publication}</p>
+            <p id="hed">{clip.headline}</p>
+          </Link>
+        ))}
+      </section>
+    );
   }
 }
 

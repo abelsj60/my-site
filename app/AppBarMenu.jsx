@@ -11,7 +11,7 @@ class AppBarMenu extends Component {
   }
 
   get linkPath() {
-    if (this.location[1] === 'index') {
+    if (this.location[1] === 'menu') {
       if (this.location[2] === 'chapter') {
         return '/chapter';
       } else if (this.location[2] === 'projects') {
@@ -24,14 +24,14 @@ class AppBarMenu extends Component {
     }
 
     return this.location[1] === 'projects'
-      ? '/index/projects'
+      ? '/menu/projects'
       : this.location[1] === 'chapter'
-        ? '/index/chapter'
-        : '/index/journalism';
+        ? '/menu/chapter'
+        : '/menu/journalism';
   }
 
   get indexLabel() {
-    return 'List';
+    return 'Menu';
   }
 
   get buttons() {

@@ -29,7 +29,7 @@ class Footer extends Component {
   addAppBarToPage() {
     return (
       this.location[1] !== '' &&
-      this.location[1] !== 'index' &&
+      this.location[1] !== 'menu' &&
       this.location[1] !== 'about'
     );
   }

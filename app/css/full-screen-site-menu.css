@@ -1,6 +1,6 @@
 /* Full Page Index Menu rule */
 
-#index {
+#full-screen-site-menu {
   align-items: center;
 }
 
@@ -11,7 +11,7 @@
   color: red;
 }
 
-#index nav {
+#full-screen-site-menu #contents-list {
   overflow: auto;
   margin: 25px;
   flex: 1;
@@ -19,34 +19,30 @@
   flex-direction: column; */
 }
 
-/* #index nav a {
-  flex: 1;
-} */
-
-#index nav a.active {
+#full-screen-site-menu #contents-list a.active {
   color: yellow;
 }
 
-#index nav a.active:hover {
+#full-screen-site-menu #contents-list a.active:hover {
   color: black;
 }
 
-#index nav a.inactive {
+#full-screen-site-menu #contents-list a.inactive {
   color: black;
 }
 
-#index nav a.inactive:hover {
+#full-screen-site-menu #contents-list a.inactive:hover {
   color: cornflowerblue;
 }
 
-#index #source,
-#index #story-chapter {
+#full-screen-site-menu #source,
+#full-screen-site-menu #story-chapter {
   font-size: 1.75rem;
   font-style: italic;
   margin-bottom: 5px;
 }
 
-#index #hed {
+#full-screen-site-menu #hed {
   font-size: 5rem;
   margin-bottom: 25px;
 }
@@ -63,7 +59,7 @@
   max-width: 563px;
 }
 
-#index .project-thumbnails {
+#full-screen-site-menu .project-thumbnails {
   margin: 0;
   max-width: 100%;
   display: flex;
@@ -86,17 +82,17 @@
   max-width: 100%;
 }
 
-#index #nav-group:not(:last-child) {
+#full-screen-site-menu #nav-group:not(:last-child) {
   margin-bottom: 20px;
 }
 
-#index h1 {
+#full-screen-site-menu h1 {
   font-size: 1.75rem;
   margin-bottom: 10px;
 }
 
 @media only screen and (min-width: 615px) {
-  #index #nav-group {
+  #full-screen-site-menu #nav-group {
     margin: 0;
   }
 }
