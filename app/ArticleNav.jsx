@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import articleData from './data/articleData.js';
 import { normalize } from './helpers/utils.js';
 
-class ClipNav extends Component {
+class ArticleNav extends Component {
   constructor(props) {
     super(props);
   }
 
-  setActiveItem(headline, headlineOnState) {
-    if (headline === headlineOnState) {
+  setActiveItem(headline, currentHeadline) {
+    console.log(headline, currentHeadline);
+
+    if (headline === currentHeadline) {
       return 'active';
     } else {
       return 'inactive';
@@ -37,4 +39,4 @@ class ClipNav extends Component {
   }
 }
 
-export default ClipNav;
+export default ArticleNav;

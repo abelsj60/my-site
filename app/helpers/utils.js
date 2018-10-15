@@ -6,6 +6,7 @@ function normalize(value) {
     .replace(/,+/g, '')
     .replace(/:/g, '')
     .replace(/\//g, '-')
+    .replace(/\?/g, '')
     .toLowerCase();
 }
 

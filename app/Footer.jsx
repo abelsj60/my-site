@@ -7,7 +7,7 @@ class Footer extends Component {
     super(props);
 
     this.state = {
-      contactInfo: false
+      contactInfo: 'hide'
     };
 
     this.toggleContactInfo = this.toggleContactInfo.bind(this);
@@ -17,50 +17,39 @@ class Footer extends Component {
     return this.props.location.pathname.split('/');
   }
 
-  get innerPage() {
-    // ~ja ? Will this work in deployment?
-    return this.location[1] !== '';
+  locateFooter() {
+    return this.location[1] !== '' ? 'inner-page-footer' : 'home-page-footer';
   }
 
-  get indexPage() {
-    return this.location[1] === 'index';
+  addAppBarToPage() {
+    return (
+      this.location[1] !== '' &&
+      this.location[1] !== 'index' &&
+      this.location[1] !== 'about'
+    );
   }
 
-  get aboutPage() {
-    return this.location[1] === 'about';
-  }
-
-  setFooterClass() {
-    return this.innerPage ? 'inner-page-footer' : 'home-page-footer';
-  }
-
-  showAppBar() {
-    return this.innerPage && !this.indexPage && !this.aboutPage;
-  }
-
-  setContactClass() {
-    return this.showAppBar() ? 'hide' : 'show';
+  getCssToHideFooterTextForAppBar() {
+    return this.addAppBarToPage() ? 'hide' : 'show';
   }
 
   toggleContactInfo() {
-    this.setState({ contactInfo: !this.state.contactInfo });
-    return 'Toggled contact info!';
+    this.setState({
+      contactInfo: this.state.contactInfo === 'hide' ? 'show' : 'hide'
+    });
   }
 
   render() {
     return (
-      <footer className={this.setFooterClass()}>
-        <div
-          id="contact-container"
-          className={this.state.contactInfo ? 'show' : 'hide'}
-        >
+      <footer className={this.locateFooter()}>
+        <div id="contact-container" className={this.state.contactInfo}>
           <div id="contact-content">
             <p>917-854-7848</p>
             <p>abelsj60_AT_gmail.com</p>
           </div>
         </div>
         <p
-          className={`contact-info ${this.setContactClass()}`}
+          className={`contact-info ${this.getCssToHideFooterTextForAppBar()}`}
           onClick={event => {
             this.toggleContactInfo();
             event.preventDefault();
@@ -68,11 +57,13 @@ class Footer extends Component {
         >
           Contact
         </p>
-        <p className={`contact-info ${this.setContactClass()}`}>|</p>
-        <p className={`copyright ${this.setContactClass()}`}>
+        <p className={`contact-info ${this.getCssToHideFooterTextForAppBar()}`}>
+          |
+        </p>
+        <p className={`copyright ${this.getCssToHideFooterTextForAppBar()}`}>
           James Abels. All rights reserved. 2018.
         </p>
-        {this.showAppBar() && (
+        {this.addAppBarToPage() && (
           <AppBarMenu
             toggleText={this.props.toggleText}
             toggleDetails={this.props.toggleDetails}

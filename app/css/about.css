@@ -16,7 +16,6 @@
 }
 
 .about-image-box {
-  /* display: flex; */
   flex: 1;
   margin-top: 15px;
   background-color: cornflowerblue;
@@ -26,18 +25,18 @@
   display: none;
 }
 
-.about-descript {
+.about-description {
   flex: 1.5;
 }
 
-.about-descript h1 {
+.about-description h1 {
   font-size: 3rem;
   font-weight: bold;
   margin-top: 25px;
   margin-left: 25px;
 }
 
-.about-descript p {
+.about-description p {
   margin-top: 15px;
   margin-left: 25px;
 }

@@ -24,21 +24,21 @@ body {
   min-height: 100vh;
   z-index: 1;
   object-fit: cover;
+  position: relative;
+  bottom: 52px;
 }
 
 @import 'css-reset.css';
 @import 'header.css';
 @import 'footer.css';
 @import 'app-bar-menu.css';
-@import 'responsive.css';
 @import 'magic-content.css';
 @import 'inner-page.css';
 @import 'my-projects.css';
 @import 'my-story.css';
-@import 'journalism-n-law.css';
+@import 'journalism.css';
 @import 'alexa.css';
 @import 'index-menu.css';
-@import 'react-table.css';
 @import 'about.css';
 @import 'not-found.css';
 

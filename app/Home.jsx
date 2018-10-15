@@ -7,20 +7,18 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      headerIsTransparent: true,
       magicScale: {
-        transform: 'scale(6, 6)'
+        transform: 'scale(6)'
       },
       magicOpacity: { opacity: 0 },
-      magicTransparency: true,
-      magicContent: false,
       magicClicks: 'block'
     };
 
+    this.setMagicScale = this.setMagicScale.bind(this);
+    this.setMagicOpacity = this.setMagicOpacity.bind(this);
     this.toggleTransparency = this.toggleTransparency.bind(this);
     this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
-    this.setMagicScale = this.setMagicScale.bind(this);
-    this.toggleMagicNav = this.toggleMagicNav.bind(this);
-    this.setMagicOpacity = this.setMagicOpacity.bind(this);
   }
 
   get imagePath() {
@@ -32,73 +30,76 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    window.addEventListener('scroll', this.setMagicScale);
+    window.addEventListener('scroll', this.setMagicOpacity);
     window.addEventListener('scroll', this.toggleTransparency);
     window.addEventListener('scroll', this.toggleMagicPointer);
-    window.addEventListener('scroll', this.setMagicScale);
-    window.addEventListener('scroll', this.toggleMagicNav);
-    window.addEventListener('scroll', this.setMagicOpacity);
   }
 
   componentWillUnmount() {
+    window.removeEventListener('scroll', this.setMagicScale);
+    window.removeEventListener('scroll', this.setMagicOpacity);
     window.removeEventListener('scroll', this.toggleTransparency);
     window.removeEventListener('scroll', this.toggleMagicPointer);
-    window.removeEventListener('scroll', this.setMagicScale);
-    window.removeEventListener('scroll', this.toggleMagicNav);
-    window.removeEventListener('scroll', this.setMagicOpacity);
   }
 
   setMagicScale() {
-    const oldPercent = (this.scrollTop - 0) / (3221 - 0);
-    const newPercent = 6 / ((6 - 1) * oldPercent + 1);
-    const newScale = newPercent < 1 ? 1 : newPercent;
-
-    if (newPercent < 1) {
-      console.log('Adjust scaling equation!', newPercent);
-    }
+    const oldScale = this.scrollTop / 3221;
+    const newScale = 6 / ((6 - 1) * oldScale + 1);
+    const newScaleToString = newScale + '';
+    const finalScale = newScale >= 1 ? newScaleToString.slice(0, 4) : 1;
 
     this.setState({
       magicScale: {
-        transform: 'scale(' + newScale + ', ' + newScale + ')'
+        transform: 'scale(' + finalScale + ')'
       }
     });
   }
 
-  toggleTransparency() {
-    if (this.scrollTop >= 7) {
-      this.setState({ magicTransparency: false });
-    } else {
-      this.setState({ magicTransparency: true });
-    }
-  }
-
-  // Bring topics onto screen
-  toggleMagicNav() {
-    if (this.scrollTop <= 2300) {
-      this.setState({ magicContent: false });
-    }
-
-    if (this.scrollTop > 2300) {
-      this.setState({ magicContent: true });
-    }
-  }
-
   setMagicOpacity() {
-    if (this.scrollTop >= 2400) {
-      const oldPercent = (this.scrollTop - 2400) / (3221 - 2400);
-      const opacityValue = (1 - 0) * oldPercent + 0;
+    let finalOpacity;
+    const opacityValue = (this.scrollTop - 580) / (3221 - 580);
+    const opacityToString = opacityValue + '';
+    const opacityFailSafe = this.scrollTop < 15 && this.state.opacity !== 0;
 
-      this.setState({ magicOpacity: { opacity: opacityValue } });
+    if (opacityValue > 0 && opacityValue <= 1) {
+      finalOpacity = opacityToString.slice(1, 4);
+    } else if (opacityValue >= 1) {
+      finalOpacity = 1;
+    } else if (opacityFailSafe) {
+      finalOpacity = 0;
+    }
+
+    if (typeof finalOpacity !== 'string') {
+      finalOpacity = finalOpacity + '';
+    }
+
+    if (finalOpacity || opacityFailSafe) {
+      this.setState({
+        magicOpacity: {
+          opacity: finalOpacity
+        }
+      });
     }
   }
 
-  // Select a topic when scrolling's complete
-  toggleMagicPointer() {
-    if (this.scrollTop < 3220) {
-      this.setState({ magicClicks: 'block' });
+  toggleTransparency() {
+    if (this.state.headerIsTransparent && this.scrollTop >= 7) {
+      this.setState({ headerIsTransparent: false });
     }
 
-    if (this.scrollTop > 3220) {
+    if (!this.state.headerIsTransparent && this.scrollTop < 7) {
+      this.setState({ headerIsTransparent: true });
+    }
+  }
+
+  toggleMagicPointer() {
+    if (this.state.magicClicks === 'block' && this.scrollTop > 3220) {
       this.setState({ magicClicks: 'allow' });
+    }
+
+    if (this.state.magicClicks === 'allow' && this.scrollTop < 3220) {
+      this.setState({ magicClicks: 'block' });
     }
   }
 
@@ -106,24 +107,22 @@ class Home extends Component {
     return (
       <Fragment>
         <section id="home-wrapper">
-          <Header magicTransparency={this.state.magicTransparency} />
+          <Header headerIsTransparent={this.state.headerIsTransparent} />
           <img
             id="magic-image"
             style={this.state.magicScale}
             src={this.imagePath}
-            alt="b2"
+            alt="a fantastic imaginary world"
           />
         </section>
-        {this.state.magicContent && (
-          <section
-            id="magic-content"
-            className={this.state.magicClicks}
-            style={this.state.magicOpacity}
-          >
-            <MagicNav />
-            <Footer />
-          </section>
-        )}
+        <section
+          id="magic-content"
+          className={this.state.magicClicks}
+          style={this.state.magicOpacity}
+        >
+          <MagicNav />
+          <Footer />
+        </section>
         <section id="magic-scroller" />
       </Fragment>
     );

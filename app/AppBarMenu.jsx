@@ -31,12 +31,7 @@ class AppBarMenu extends Component {
   }
 
   get indexLabel() {
-    if (this.location[1].includes('index')) {
-      return 'Close';
-    }
-    // ~ja ? If we come directly to 'about', where does back go? Come back...
-
-    return 'Index';
+    return 'List';
   }
 
   get buttons() {
@@ -51,14 +46,6 @@ class AppBarMenu extends Component {
         handleClick: () => this.props.toggleContactInfo()
       }
     ];
-
-    if (this.location[1] === 'about') {
-      buttons.splice(1, 0, {
-        label: this.location.length > 2 ? 'Index' : 'The story',
-        linkPath: this.linkPath
-      });
-      buttons.splice(0, 1);
-    }
 
     if (this.location[1] === 'chapter') {
       buttons.splice(1, 0, {

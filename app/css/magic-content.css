@@ -1,7 +1,5 @@
 /* HOME PAGE CSS */
 
-/* Temp-content rules (after scroll) */
-
 #magic-content {
   position: fixed;
   flex: 1;
@@ -19,9 +17,13 @@
 
 #magic-nav {
   flex: 1;
-  display: flex;
-  flex-direction: column;
   background-color: rgba(0, 0, 0, 0.25);
+  display: block;
+  overflow: auto;
+}
+
+#magic-nav-content {
+  padding-bottom: 25px;
 }
 
 #magic-nav a {
@@ -32,7 +34,7 @@
   color: white;
   padding-left: 25px;
   padding-right: 25px;
-  padding-bottom: 25px;
+  min-height: 100%;
 }
 
 #magic-nav a:nth-child(-n + 2) {
@@ -46,7 +48,8 @@
 
 @media only screen and (min-width: 666px) {
   #magic-nav {
-    flex-direction: row;
+    flex: 1;
+    display: flex;
   }
 
   #magic-nav a:nth-child(-n + 2) {
