@@ -43,7 +43,7 @@ class Header extends Component {
       >
         <HeaderText />
         <HeaderNav getCssForActiveLink={this.getCssForActiveLink} />
-        <section id="nav-icon" onClick={() => this.getCssForOpenHeaderMenu()} />
+        <div id="nav-icon" onClick={() => this.getCssForOpenHeaderMenu()} />
       </header>
     );
   }
