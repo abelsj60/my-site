@@ -9,8 +9,6 @@ class DesktopArticleList extends Component {
   }
 
   setActiveItem(headline, currentHeadline) {
-    console.log(headline, currentHeadline);
-
     if (headline === currentHeadline) {
       return 'active';
     } else {

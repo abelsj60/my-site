@@ -16,7 +16,6 @@ class OuterRouter extends Component {
     // Can't pass state to AppBar from Chapter in this model w/o Redux
 
     const location = this.props.location.pathname.split('/');
-    console.log(location);
 
     this.state = {
       chapterTitle:
