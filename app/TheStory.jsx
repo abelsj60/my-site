@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import DesktopStoryNav from './DestopStoryNav.jsx';
 import StoryNav from './StoryNav.jsx';
 import Chapter from './Chapter.jsx';
 import storyData from './data/storyData';
