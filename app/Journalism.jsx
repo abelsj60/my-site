@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import ArticleNav from './ArticleNav.jsx';
+import DesktopArticleNav from './DesktopArticleNav.jsx';
+import Article from './Article.jsx';
 import articleData from './data/articleData';
 import { normalize } from './helpers/utils.js';
 
@@ -9,30 +10,17 @@ class Journalism extends Component {
     super(props);
   }
 
-  render() {
-    const theClip = articleData.find(clip => {
-      return normalize(clip.headline).includes(this.props.state.headline);
-    });
-    const publication = theClip.publication;
-    const headline = theClip.headline;
-    const text = theClip.text;
+  get article() {
+    return articleData.find(clip =>
+      normalize(clip.headline).includes(this.props.state.headline)
+    );
+  }
 
+  render() {
     return (
       <main id="journalism" className="">
-        <section id="clips" className="left">
-          <h1>My stories</h1>
-          <nav>
-            <ArticleNav state={this.props.state} />
-          </nav>
-        </section>
-        <section id="story" className="right">
-          <h3 id="publication">{publication}</h3>
-          <h1 id="story-headline">{headline}</h1>
-          <section id="story-text-container">
-            <p id="byline">by James Erik Abels</p>
-            <section id="story-text">{text}</section>
-          </section>
-        </section>
+        <DesktopArticleNav state={this.props.state} />
+        <Article article={this.article} />
       </main>
     );
   }

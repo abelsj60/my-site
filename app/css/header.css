@@ -16,23 +16,13 @@ header.opaque {
   background-color: white;
 }
 
-header a {
-  color: white;
-  transition: color 0.7s;
-  margin-left: 15px;
-}
-
-header a.opaque {
-  color: black;
-}
-
 #site-name,
 #site-motto {
   margin-left: 15px;
 }
 
-#site-name.header-menu-open,
-#site-motto.header-menu-open {
+header.menu-open #site-name,
+header.menu-open #site-motto {
   display: none;
 }
 
@@ -51,7 +41,7 @@ header nav {
   display: none;
 }
 
-header nav.header-menu-open {
+header.menu-open nav {
   display: flex;
   flex: 1;
 }
@@ -62,7 +52,7 @@ header a {
   margin-left: 15px;
 }
 
-header a.opaque {
+header.opaque a {
   color: black;
 }
 
@@ -72,7 +62,7 @@ header a:hover {
   transition: color 0s;
 }
 
-header a.opaque:hover {
+header.opaque a:hover {
   color: black;
 }
 
@@ -89,7 +79,7 @@ header a.active {
   margin-right: 15px;
 }
 
-#nav-icon.opaque {
+header.opaque #nav-icon {
   background: url('/sign-black-closed.png') no-repeat center;
 }
 
@@ -98,25 +88,25 @@ header a.active {
   transition: background 0.7s;
 }
 
-#nav-icon.opaque:hover {
+header.opaque #nav-icon:hover {
   background: url('/sign-black-open.png') no-repeat center;
 }
 
-#nav-icon.header-menu-open {
+header.menu-open #nav-icon {
   background: url('/sign-white-open.png') no-repeat center;
   transition: background 0.7s;
 }
 
-#nav-icon.opaque.header-menu-open {
+header.opaque.menu-open #nav-icon {
   background: url('/sign-black-open.png') no-repeat center;
 }
 
-#nav-icon.header-menu-open:hover {
+header.menu-open #nav-icon:hover {
   background: url('/sign-white-closed.png') no-repeat center;
   transition: background 0.7s;
 }
 
-#nav-icon.opaque.header-menu-open:hover {
+header.opaque.menu-open #nav-icon:hover {
   background: url('/sign-black-closed.png') no-repeat center;
 }
 
@@ -124,7 +114,7 @@ header a.active {
   display: none;
 }
 
-#full-screen-nav-menu.header-menu-open {
+header.menu-open #full-screen-nav-menu {
   display: flex;
   position: absolute;
   width: 100%;

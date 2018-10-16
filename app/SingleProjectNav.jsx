@@ -7,21 +7,20 @@ class SingleProjectNav extends Component {
   }
 
   render() {
-    return this.props.project.thumbnails.map(
-      (thumbnail, index) =>
-        thumbnail && (
-          <Link
-            id="main-thumbnail"
-            key={index}
-            to={`/projects/${this.props.project.name}/${index}`}
-          >
-            <img
-              className="thumbnail"
-              src={thumbnail}
-              alt={'thumbnail ' + index}
-            />
-          </Link>
-        )
+    return (
+      <section className="project-thumbnails">
+        {this.props.project.thumbnails.map(
+          (thumbnail, index) =>
+            thumbnail && (
+              <Link
+                key={index}
+                to={`/projects/${this.props.project.name}/${index + 1}`}
+              >
+                <img src={thumbnail} alt={`Thumbnail ${index + 1}`} />
+              </Link>
+            )
+        )}
+      </section>
     );
   }
 }

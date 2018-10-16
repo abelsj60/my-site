@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import Chapter from './Chapter.jsx';
+import TheStory from './TheStory.jsx';
 import Projects from './Projects.jsx';
 import Journalism from './Journalism.jsx';
-import IndexMenu from './IndexMenu.jsx';
+import SiteMenu from './SiteMenu.jsx';
 import About from './About.jsx';
 import NotFound from './NotFound.jsx';
 
@@ -52,7 +52,7 @@ class InnerRouter extends Component {
             render={() => (
               <ProjectsBackup
                 projectName={this.props.state.projectName}
-                projectImageIndex={this.props.state.projectImageIndex}
+                projectThumbnail={this.props.state.projectThumbnail}
                 toggleDetails={this.props.toggleDetails}
                 showProjectDetails={this.props.state.showProjectDetails}
               />
@@ -61,11 +61,11 @@ class InnerRouter extends Component {
 
           {/* <Route
             exact
-            path="/chapter/index"
+            path="/chapter/menu"
             render={() => {
               const section = 'chapter';
 
-              return <IndexMenu section={section} />;
+              return <SiteMenu section={section} />;
             }}
           /> */}
 
@@ -81,9 +81,10 @@ class InnerRouter extends Component {
             exact
             path="/chapter/:title"
             render={() => (
-              <Chapter
+              <TheStory
                 chapterTitle={this.props.state.chapterTitle}
-                showStoryText={this.props.state.showStoryText}
+                storyText={this.props.state.storyText}
+                state={this.props.state}
               />
             )}
           />
@@ -94,7 +95,7 @@ class InnerRouter extends Component {
             render={() => (
               <Redirect
                 to={`/projects/${this.props.state.projectName}/${
-                  this.props.state.projectImageIndex
+                  this.props.state.projectThumbnail
                 }`}
               />
             )}
@@ -106,18 +107,18 @@ class InnerRouter extends Component {
             render={() => (
               <Redirect
                 to={`/projects/${this.props.state.projectName}/${
-                  this.props.state.projectImageIndex
+                  this.props.state.projectThumbnail
                 }`}
               />
             )}
           />
 
           <Route
-            path="/projects/:name/:projectImageIndex"
+            path="/projects/:name/:projectThumbnail"
             render={() => (
               <Projects
                 projectName={this.props.state.projectName}
-                projectImageIndex={this.props.state.projectImageIndex}
+                projectThumbnail={this.props.state.projectThumbnail}
                 toggleDetails={this.props.toggleDetails}
                 showProjectDetails={this.props.state.showProjectDetails}
               />
@@ -155,15 +156,15 @@ class InnerRouter extends Component {
 
           <Route
             exact
-            path="/index"
-            render={() => <Redirect to={'/index/projects'} />}
+            path="/menu"
+            render={() => <Redirect to={'/menu/projects'} />}
           />
 
           <Route
-            path="/index/:section"
+            path="/menu/:section"
             render={({ match }) => {
               return (
-                <IndexMenu
+                <SiteMenu
                   section={match.params.section.toLowerCase()}
                   state={this.props.state}
                 />
@@ -176,7 +177,7 @@ class InnerRouter extends Component {
           <Route component={NotFound} />
         </Switch>
         <Footer
-          showStoryText={this.props.state.showStoryText}
+          storyText={this.props.state.storyText}
           showProjectDetails={this.props.state.showProjectDetails}
           toggleText={this.props.toggleText}
           toggleDetails={this.props.toggleDetails}

@@ -1,10 +1,10 @@
 /* Journalism and law rules */
 
-#story {
+#article {
   margin: 25px;
 }
 
-#story h3 {
+#article h3 {
   font-style: italic;
 }
 
@@ -13,31 +13,31 @@
   margin-bottom: 15px;
 }
 
-#publication {
+#article h3 {
   font-size: 2rem;
   margin-bottom: 4px;
 }
 
-#story-text-container {
+#article-container {
   overflow: auto;
   line-height: normal;
 }
 
-#story-text-container p {
+#article-container p {
   margin-bottom: 15px;
 }
 
-#story-headline {
+#article h1 {
   margin-bottom: 10px;
   font-size: 3rem;
 }
 
-#story-text {
+#text {
   font-size: 1.75rem;
 }
 
 @media only screen and (min-width: 849px) {
-  #clips {
+  #desktop-article-navigation {
     display: flex;
     flex-direction: column;
     margin: 25px;
@@ -47,33 +47,33 @@
     background-color: cornflowerblue;
   }
 
-  #clips nav {
-    overflow: auto;
-  }
-
-  #clips nav a.active {
+  #desktop-article-navigation a.active {
     color: yellow;
   }
 
-  #clips nav a.active:hover {
+  #desktop-article-navigation a.active:hover {
     color: black;
   }
 
-  #clips nav a.inactive {
+  #desktop-article-navigation a.inactive {
     color: white;
   }
 
-  #clips nav a.inactive:hover {
+  #desktop-article-navigation a.inactive:hover {
     color: navy;
   }
 
-  #clips h1 {
+  #desktop-article-navigation #article-list {
+    overflow: auto;
+  }
+
+  #desktop-article-navigation h1 {
     color: black;
     font-size: 2rem;
     margin-bottom: 10px;
   }
 
-  #story {
+  #article {
     margin-left: 0;
     min-width: 400px;
   }

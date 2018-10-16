@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import AppBarMenu from './AppBarMenu.jsx';
+import AppBar from './AppBar.jsx';
 import BusinessCard from './BusinessCard.jsx';
 import FooterText from './FooterText.jsx';
 
@@ -27,11 +27,7 @@ class Footer extends Component {
   }
 
   addAppBarToPage() {
-    return (
-      this.location[1] !== '' &&
-      this.location[1] !== 'index' &&
-      this.location[1] !== 'about'
-    );
+    return this.location[1] !== '' && this.location[1] !== 'about';
   }
 
   addCssToHideFooterTextForAppBar() {
@@ -53,7 +49,7 @@ class Footer extends Component {
           toggleBusinessCard={this.toggleBusinessCard}
         />
         {this.addAppBarToPage() && (
-          <AppBarMenu
+          <AppBar
             toggleText={this.props.toggleText}
             toggleDetails={this.props.toggleDetails}
             toggleBusinessCard={this.toggleBusinessCard}

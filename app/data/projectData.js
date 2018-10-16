@@ -2,7 +2,6 @@ export default [
   {
     name: 'arrow',
     thumbnails: [
-      null,
       'https://picsum.photos/196/175/?random',
       'https://picsum.photos/197/175/?random',
       'https://picsum.photos/198/175/?random'
@@ -30,7 +29,6 @@ export default [
   {
     name: 'slingshot',
     thumbnails: [
-      null,
       'https://picsum.photos/199/175/?random',
       'https://picsum.photos/200/175/?random',
       'https://picsum.photos/201/175/?random'
@@ -58,7 +56,6 @@ export default [
   {
     name: 'tmmnews',
     thumbnails: [
-      null,
       'https://picsum.photos/202/175/?random',
       'https://picsum.photos/203/175/?random',
       'https://picsum.photos/204/175/?random'

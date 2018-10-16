@@ -1,6 +1,6 @@
 /* Full Page Index Menu rule */
 
-#index {
+#site-menu {
   align-items: center;
 }
 
@@ -11,47 +11,43 @@
   color: red;
 }
 
-#index nav {
+#site-menu .chapter-index,
+#site-menu .journalism-index,
+#site-menu .projects-index {
   overflow: auto;
   margin: 25px;
   flex: 1;
-  /* display: flex;
-  flex-direction: column; */
 }
 
-/* #index nav a {
-  flex: 1;
-} */
-
-#index nav a.active {
-  color: yellow;
+#site-menu .chapter-index a.active {
+  color: blue;
 }
 
-#index nav a.active:hover {
+#site-menu .chapter-index a.active:hover {
   color: black;
 }
 
-#index nav a.inactive {
+#site-menu .chapter-index a.inactive {
   color: black;
 }
 
-#index nav a.inactive:hover {
+#site-menu .chapter-index a.inactive:hover {
   color: cornflowerblue;
 }
 
-#index #source,
-#index #story-chapter {
+#site-menu #source,
+#site-menu .chapter-index {
   font-size: 1.75rem;
   font-style: italic;
   margin-bottom: 5px;
 }
 
-#index #hed {
+#site-menu #hed {
   font-size: 5rem;
   margin-bottom: 25px;
 }
 
-#story-title {
+.chapter-index p {
   font-size: 5rem;
   margin-top: 0;
   margin-left: 0;
@@ -63,7 +59,7 @@
   max-width: 563px;
 }
 
-#index .project-thumbnails {
+#site-menu .project-thumbnails {
   margin: 0;
   max-width: 100%;
   display: flex;
@@ -86,17 +82,11 @@
   max-width: 100%;
 }
 
-#index #nav-group:not(:last-child) {
+#site-menu .project-thumbnails:nth-child(-n + 2) {
   margin-bottom: 20px;
 }
 
-#index h1 {
+#site-menu h1 {
   font-size: 1.75rem;
   margin-bottom: 10px;
-}
-
-@media only screen and (min-width: 615px) {
-  #index #nav-group {
-    margin: 0;
-  }
 }

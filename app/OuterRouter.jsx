@@ -26,7 +26,7 @@ class OuterRouter extends Component {
         location[1] === 'projects'
           ? this.validateProjectName(location[2]) || projectData[0].name
           : projectData[0].name,
-      projectImageIndex:
+      projectThumbnail:
         location[1] === 'projects'
           ? this.validateProjectThumbnail(location[3], 3) || 1
           : 1,
@@ -40,7 +40,7 @@ class OuterRouter extends Component {
           ? this.validateHeadline(location[2], location[3]) ||
             normalize(articleData[0].headline)
           : normalize(articleData[0].headline),
-      showStoryText: 'show-text'
+      storyText: 'show-text'
     };
 
     this.toggleText = this.toggleText.bind(this);
@@ -50,8 +50,7 @@ class OuterRouter extends Component {
     // Expl: https://stackoverflow.com/a/29101393/9215718
 
     this.setState({
-      showStoryText:
-        this.state.showStoryText === 'show-text' ? 'no-text' : 'show-text'
+      storyText: this.state.storyText === 'show-text' ? 'no-text' : 'show-text'
     });
   }
 
@@ -90,7 +89,7 @@ class OuterRouter extends Component {
   }
 
   validateProjectThumbnail(number, max) {
-    return parseInt(number) > 0 && parseInt(number) <= max
+    return parseInt(number) >= 0 && parseInt(number) <= max
       ? parseInt(number)
       : undefined;
   }
@@ -128,7 +127,7 @@ class OuterRouter extends Component {
       location[1] === 'projects'
         ? this.validateProjectName(location[2])
         : undefined;
-    const projectImageIndex =
+    const projectThumbnail =
       location[1] === 'projects'
         ? this.validateProjectThumbnail(location[3], 3)
         : undefined;
@@ -146,8 +145,8 @@ class OuterRouter extends Component {
     const updateProjectName = projectName
       ? projectName !== this.state.projectName
       : undefined;
-    const updateProjectImageIndex = projectImageIndex
-      ? projectImageIndex !== this.state.projectImageIndex
+    const updateprojectThumbnail = projectThumbnail
+      ? projectThumbnail !== this.state.projectThumbnail
       : undefined;
     const updatePublication = publication
       ? publication !== this.state.publication
@@ -159,7 +158,7 @@ class OuterRouter extends Component {
     if (
       updateChapterTitle ||
       updateProjectName ||
-      updateProjectImageIndex ||
+      updateprojectThumbnail ||
       updatePublication ||
       updateHeadline
     ) {
@@ -168,9 +167,9 @@ class OuterRouter extends Component {
           ? chapterTitle
           : this.state.chapterTitle,
         projectName: updateProjectName ? projectName : this.state.projectName,
-        projectImageIndex: updateProjectImageIndex
-          ? projectImageIndex
-          : this.state.projectImageIndex,
+        projectThumbnail: updateprojectThumbnail
+          ? projectThumbnail
+          : this.state.projectThumbnail,
         publication: updatePublication ? publication : this.state.publication,
         headline: updateHeadline ? headline : this.state.headline
       });
