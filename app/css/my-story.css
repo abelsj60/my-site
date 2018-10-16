@@ -40,6 +40,7 @@
 
 #illustration img {
   object-fit: cover;
+  overflow: hidden;
 }
 
 @media only screen and (min-width: 849px) {
