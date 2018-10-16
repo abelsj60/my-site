@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import DesktopClipList from './DesktopClipList.jsx';
+import DesktopArticleNav from './DesktopArticleNav.jsx';
 import Article from './Article.jsx';
 import articleData from './data/articleData';
 import { normalize } from './helpers/utils.js';
@@ -19,7 +19,7 @@ class Journalism extends Component {
   render() {
     return (
       <main id="journalism" className="">
-        <DesktopClipList state={this.props.state} />
+        <DesktopArticleNav state={this.props.state} />
         <Article article={this.article} />
       </main>
     );

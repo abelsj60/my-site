@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import articleData from './data/articleData.js';
 import { normalize } from './helpers/utils.js';
 
-class ArticleNav extends Component {
+class DesktopArticleList extends Component {
   constructor(props) {
     super(props);
   }
@@ -20,20 +20,20 @@ class ArticleNav extends Component {
 
   render() {
     return (
-      <section id="clip-list">
-        {articleData.map((clip, index) => (
+      <section id="article-list">
+        {articleData.map((article, index) => (
           <Link
             key={index}
             className={this.setActiveItem(
-              normalize(clip.headline),
+              normalize(article.headline),
               this.props.state.headline
             )}
-            to={`/journalism/${normalize(clip.publication)}/${normalize(
-              clip.headline
+            to={`/journalism/${normalize(article.publication)}/${normalize(
+              article.headline
             )}`}
           >
-            <p id="source">{clip.publication}</p>
-            <p id="hed">{clip.headline}</p>
+            <p id="source">{article.publication}</p>
+            <p id="hed">{article.headline}</p>
           </Link>
         ))}
       </section>
@@ -41,4 +41,4 @@ class ArticleNav extends Component {
   }
 }
 
-export default ArticleNav;
+export default DesktopArticleList;

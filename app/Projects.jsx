@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import SingleProjectNav from './SingleProjectNav.jsx';
+import ProjectImageContainer from './ProjectImageContainer.jsx';
+import ProjectDescription from './ProjectDescription.jsx';
 import projectData from './data/projectData';
 
 class Projects extends Component {
@@ -17,42 +19,37 @@ class Projects extends Component {
     return this.projectData.details;
   }
 
-  get projectDescriptionKeys() {
+  get projectKeys() {
     return Object.keys(this.projectDescriptions);
   }
 
   render() {
     return (
       <main id="my-projects" className="">
-        <h1 id="project-title">{this.projectData.details.name}</h1>
-        <section id="project-content-container">
-          <p id="project-description">{this.projectData.details.type}</p>
-          <section id="project-discussion">
-            <h2>
-              {this.projectDescriptionKeys[2][0].toUpperCase() +
-                this.projectDescriptionKeys[2].slice(1)}
-            </h2>
-            <p>{this.projectDescriptions.contribution}</p>
-            <h2>
-              {this.projectDescriptionKeys[5][0].toUpperCase() +
-                this.projectDescriptionKeys[5].slice(1)}
-            </h2>
-            <p>{this.projectDescriptions.description}</p>
-          </section>
+        <h1>{this.projectData.details.name}</h1>
+        <section id="content-container">
+          <ProjectDescription
+            contributionLabel={
+              this.projectKeys[2][0].toUpperCase() +
+              this.projectKeys[2].slice(1)
+            }
+            descriptionLabel={
+              this.projectKeys[5][0].toUpperCase() +
+              this.projectKeys[5].slice(1)
+            }
+            projectKeys={this.projectKeys}
+            type={this.projectDescriptions.type}
+            description={this.projectDescriptions.description}
+            contribution={this.projectDescriptions.contribution}
+          />
           <section id="project-images">
-            <section id="project-image-nav">
-              <SingleProjectNav project={this.projectData} />
-            </section>
-            <section id="project-image-container">
-              <p id="project-image-caption">
-                {this.projectDescriptions.captions[0]}
-              </p>
-              <img
-                id="project-image-main-pic"
-                src={this.projectData.full[this.props.projectImageIndex - 1]}
-                alt="mainPic"
-              />
-            </section>
+            <SingleProjectNav project={this.projectData} />
+            <ProjectImageContainer
+              caption={this.projectDescriptions.captions[0]}
+              fullSizeImage={
+                this.projectData.full[this.props.projectThumbnail - 1]
+              }
+            />
           </section>
         </section>
       </main>

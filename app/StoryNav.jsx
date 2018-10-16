@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import storyData from './data/storyData';
 import { normalize } from './helpers/utils.js';
 
 class StoryNav extends Component {
@@ -7,7 +8,11 @@ class StoryNav extends Component {
     super(props);
   }
 
-  setActiveItem(chapter, currentChapterTitle) {
+  get location() {
+    return this.props.location.pathname.split('/');
+  }
+
+  setActiveChapter(chapter, currentChapterTitle) {
     const chapterTitle = normalize(chapter.title);
 
     if (chapterTitle === currentChapterTitle) {
@@ -18,14 +23,21 @@ class StoryNav extends Component {
   }
 
   render() {
-    return this.props.storyData.map((chapter, index) => (
+    return storyData.map((chapter, index) => (
       <Link
         key={index}
-        className={this.setActiveItem(chapter, this.props.state.chapterTitle)}
+        className={this.setActiveChapter(
+          chapter,
+          this.props.state.chapterTitle
+        )}
         to={`/chapter/${normalize(chapter.title)}`}
       >
-        <h1 id="story-chapter">Chapter {index + 1}</h1>
-        <p id="story-title">{chapter.title}</p>
+        {this.location[1] === 'menu' && (
+          <h1 id="story-chapter">Chapter {index + 1}</h1>
+        )}
+        <p id="story-title">
+          {this.location[1] === 'chapter' ? index + 1 : chapter.title}
+        </p>
       </Link>
     ));
   }

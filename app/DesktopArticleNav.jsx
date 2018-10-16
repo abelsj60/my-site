@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import ArticleNav from './ArticleNav.jsx';
 
-class DesktopClipList extends Component {
+class DesktopArticleNav extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <section id="desktop-clip-navigation" className="left">
+      <section id="desktop-article-navigation" className="left">
         <h1>My stories</h1>
         <ArticleNav state={this.props.state} />
       </section>
@@ -16,4 +16,4 @@ class DesktopClipList extends Component {
   }
 }
 
-export default DesktopClipList;
+export default DesktopArticleNav;

@@ -37,7 +37,7 @@
 }
 
 @media only screen and (min-width: 849px) {
-  #desktop-clip-navigation {
+  #desktop-article-navigation {
     display: flex;
     flex-direction: column;
     margin: 25px;
@@ -47,27 +47,27 @@
     background-color: cornflowerblue;
   }
 
-  #desktop-clip-navigation a.active {
+  #desktop-article-navigation a.active {
     color: yellow;
   }
 
-  #desktop-clip-navigation a.active:hover {
+  #desktop-article-navigation a.active:hover {
     color: black;
   }
 
-  #desktop-clip-navigation a.inactive {
+  #desktop-article-navigation a.inactive {
     color: white;
   }
 
-  #desktop-clip-navigation a.inactive:hover {
+  #desktop-article-navigation a.inactive:hover {
     color: navy;
   }
 
-  #desktop-clip-navigation #clip-list {
+  #desktop-article-navigation #article-list {
     overflow: auto;
   }
 
-  #desktop-clip-navigation h1 {
+  #desktop-article-navigation h1 {
     color: black;
     font-size: 2rem;
     margin-bottom: 10px;

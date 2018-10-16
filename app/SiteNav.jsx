@@ -5,7 +5,7 @@ import MultiProjectNav from './MultiProjectNav.jsx';
 import projectData from './data/projectData';
 import storyData from './data/storyData';
 
-class SectionList extends Component {
+class SiteNav extends Component {
   constructor(props) {
     super(props);
   }
@@ -48,4 +48,4 @@ class SectionList extends Component {
   }
 }
 
-export default SectionList;
+export default SiteNav;
