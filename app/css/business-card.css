@@ -1,10 +1,10 @@
 /* BUSINESS CARD CSS */
 
-#business-card.hide {
+#business-card.inactive {
   display: none;
 }
 
-#business-card.show {
+#business-card.active {
   display: flex;
   justify-content: center;
   position: absolute;
@@ -14,7 +14,7 @@
   background-color: rgba(0, 0, 255, 0.6);
 }
 
-#home-page-footer #business-card.show {
+#home-page-footer #business-card.active {
   top: 0px;
   bottom: 48px;
 }
@@ -43,7 +43,7 @@
 }
 
 @media only screen and (min-width: 849px) {
-  #business-card.show {
+  #business-card.active {
     bottom: 48px;
   }
 }

@@ -5,7 +5,8 @@ import Footer from './Footer.jsx';
 import TheStory from './TheStory.jsx';
 import Projects from './Projects.jsx';
 import Journalism from './Journalism.jsx';
-import SiteMenu from './SiteMenu.jsx';
+import Menu from './Menu.jsx';
+import Toys from './Toys.jsx';
 import About from './About.jsx';
 import NotFound from './NotFound.jsx';
 
@@ -65,7 +66,7 @@ class InnerRouter extends Component {
             render={() => {
               const section = 'chapter';
 
-              return <SiteMenu section={section} />;
+              return <Menu section={section} />;
             }}
           /> */}
 
@@ -164,13 +165,15 @@ class InnerRouter extends Component {
             path="/menu/:section"
             render={({ match }) => {
               return (
-                <SiteMenu
+                <Menu
                   section={match.params.section.toLowerCase()}
                   state={this.props.state}
                 />
               );
             }}
           />
+
+          <Route path="/toys" render={() => <Toys />} />
 
           <Route path="/about" render={() => <About />} />
 

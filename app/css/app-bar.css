@@ -18,9 +18,9 @@
   color: red;
 }
 
-#app-bar-menu a:active {
-  background-color: white;
-  color: black;
+#app-bar-menu a.active {
+  background-color: yellow;
+  color: red;
 }
 
 #app-bar-menu p {

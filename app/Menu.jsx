@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import SiteNav from './SiteNav.jsx';
+import SectionMenu from './SectionMenu.jsx';
 
-class SiteMenu extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
   }
@@ -13,10 +13,10 @@ class SiteMenu extends Component {
         <Link id="close-button" to={`/${this.props.section}`}>
           <p>(X) Close</p>
         </Link>
-        <SiteNav section={this.props.section} state={this.props.state} />
+        <SectionMenu section={this.props.section} state={this.props.state} />
       </main>
     );
   }
 }
 
-export default SiteMenu;
+export default Menu;

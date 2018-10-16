@@ -9,25 +9,33 @@ class Footer extends Component {
     super(props);
 
     this.state = {
-      businessCard: 'hide'
+      businessCard: 'inactive',
+      menu: 'inactive',
+      text: 'inactive',
+      contact: 'inactive'
     };
 
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
     this.addCssToHideFooterTextForAppBar = this.addCssToHideFooterTextForAppBar.bind(
       this
     );
+    this.makeButtonActive = this.makeButtonActive.bind(this);
   }
 
   get location() {
     return this.props.location.pathname.split('/');
   }
 
-  addCssThatLocatesFooter() {
+  addCssToLocateFooter() {
     return this.location[1] !== '' ? 'inner-page-footer' : 'home-page-footer';
   }
 
   addAppBarToPage() {
-    return this.location[1] !== '' && this.location[1] !== 'about';
+    return (
+      this.location[1] !== '' &&
+      this.location[1] !== 'about' &&
+      this.location[1] !== 'toys'
+    );
   }
 
   addCssToHideFooterTextForAppBar() {
@@ -36,13 +44,20 @@ class Footer extends Component {
 
   toggleBusinessCard() {
     this.setState({
-      businessCard: this.state.businessCard === 'hide' ? 'show' : 'hide'
+      businessCard: this.state.contact === 'inactive' ? 'active' : 'inactive'
+    });
+  }
+
+  makeButtonActive(buttonLabel) {
+    this.setState({
+      [buttonLabel]:
+        this.state[buttonLabel] === 'inactive' ? 'active' : 'inactive'
     });
   }
 
   render() {
     return (
-      <footer id={this.addCssThatLocatesFooter()}>
+      <footer id={this.addCssToLocateFooter()}>
         <BusinessCard businessCard={this.state.businessCard} />
         <FooterText
           cssToHideFooterTextForAppBar={this.addCssToHideFooterTextForAppBar()}
@@ -52,7 +67,9 @@ class Footer extends Component {
           <AppBar
             toggleText={this.props.toggleText}
             toggleDetails={this.props.toggleDetails}
+            makeButtonActive={this.makeButtonActive}
             toggleBusinessCard={this.toggleBusinessCard}
+            state={this.state}
           />
         )}
       </footer>

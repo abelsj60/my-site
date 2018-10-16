@@ -4,41 +4,33 @@ import { withRouter, Link } from 'react-router-dom';
 class AppBar extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      menu: 'inactive',
+      text: 'inactive',
+      contact: 'inactive'
+    };
   }
 
   get location() {
-    return this.props.location.pathname.split('/');
+    return this.props.location.pathname.toLowerCase().split('/');
   }
 
-  get linkPathForMenuPages() {
-    if (this.location[2] === 'chapter') {
-      return '/chapter';
-    } else if (this.location[2] === 'projects') {
-      return '/projects';
-    } else if (this.location[2] === 'journalism') {
-      return '/journalism';
-    }
-
-    return this.props.location.pathname;
+  get linkPathFromMenu() {
+    return '/' + this.location[2];
   }
 
-  get linkPath() {
-    if (this.location[1] === 'menu') {
-      return this.linkPathForMenuPages;
-    }
-
-    return this.location[1] === 'projects'
-      ? '/menu/projects'
-      : this.location[1] === 'chapter'
-        ? '/menu/chapter'
-        : '/menu/journalism';
+  get linkPathToMenu() {
+    return '/menu/' + this.location[1];
   }
 
   get buttons() {
     const buttons = [
       {
-        label: this.location[1] !== 'menu' ? 'Menu' : 'Close',
-        linkPath: this.linkPath
+        label: 'Menu',
+        linkPath: this.location.includes('menu')
+          ? this.linkPathFromMenu
+          : this.linkPathToMenu
       },
       {
         label: 'Contact',
@@ -47,7 +39,7 @@ class AppBar extends Component {
       }
     ];
 
-    if (this.location[1] === 'chapter' || this.location[2] === 'chapter') {
+    if (this.location.includes('chapter')) {
       buttons.splice(1, 0, {
         label: 'Text',
         linkPath: this.props.location.pathname,
@@ -65,8 +57,10 @@ class AppBar extends Component {
           <Fragment key={index}>
             <Link
               to={button.linkPath}
+              className={this.props.state[button.label.toLowerCase()]}
               onClick={event => {
                 if (button.handleClick) {
+                  this.props.makeButtonActive(button.label.toLowerCase());
                   button.handleClick(event);
                   event.preventDefault();
                 }

@@ -5,7 +5,7 @@ import MultiProjectNav from './MultiProjectNav.jsx';
 import projectData from './data/projectData';
 import storyData from './data/storyData';
 
-class SiteNav extends Component {
+class SectionMenu extends Component {
   constructor(props) {
     super(props);
   }
@@ -41,11 +41,11 @@ class SiteNav extends Component {
         ) : this.storyPage ? (
           <ChapterNav storyData={storyData} state={this.props.state} />
         ) : (
-          <ArticleNav state={this.props.state} item={null} />
+          <ArticleNav state={this.props.state} />
         )}
       </section>
     );
   }
 }
 
-export default SiteNav;
+export default SectionMenu;
