@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
-class AppBarMenu extends Component {
+class AppBar extends Component {
   constructor(props) {
     super(props);
   }
@@ -10,17 +10,21 @@ class AppBarMenu extends Component {
     return this.props.location.pathname.split('/');
   }
 
+  get linkPathForMenuPages() {
+    if (this.location[2] === 'chapter') {
+      return '/chapter';
+    } else if (this.location[2] === 'projects') {
+      return '/projects';
+    } else if (this.location[2] === 'journalism') {
+      return '/journalism';
+    }
+
+    return this.props.location.pathname;
+  }
+
   get linkPath() {
     if (this.location[1] === 'menu') {
-      if (this.location[2] === 'chapter') {
-        return '/chapter';
-      } else if (this.location[2] === 'projects') {
-        return '/projects';
-      } else if (this.location[2] === 'journalism') {
-        return '/journalism';
-      }
-
-      return this.props.location.pathname;
+      return this.linkPathForMenuPages;
     }
 
     return this.location[1] === 'projects'
@@ -30,14 +34,10 @@ class AppBarMenu extends Component {
         : '/menu/journalism';
   }
 
-  get indexLabel() {
-    return 'Menu';
-  }
-
   get buttons() {
     const buttons = [
       {
-        label: this.indexLabel,
+        label: this.location[1] !== 'menu' ? 'Menu' : 'Close',
         linkPath: this.linkPath
       },
       {
@@ -82,4 +82,4 @@ class AppBarMenu extends Component {
   }
 }
 
-export default withRouter(AppBarMenu);
+export default withRouter(AppBar);
