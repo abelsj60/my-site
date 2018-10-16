@@ -109,7 +109,6 @@ class Home extends Component {
         <section id="home-wrapper">
           <Header headerIsTransparent={this.state.headerIsTransparent} />
           <img
-            id="magic-image"
             style={this.state.magicScale}
             src={this.imagePath}
             alt="a fantastic imaginary world"

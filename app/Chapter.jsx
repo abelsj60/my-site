@@ -10,8 +10,8 @@ class Chapter extends Component {
 
     return (
       <Fragment>
-        <h1 className="title">{chapter.title}</h1>
-        <p className="text">{chapter.text}</p>
+        <h1>{chapter.title}</h1>
+        <p>{chapter.text}</p>
       </Fragment>
     );
   }

@@ -5,8 +5,12 @@ footer {
   justify-content: flex-end;
   align-items: center;
   color: white;
-  height: 48px;
+  height: 80px;
   background-color: black;
+}
+
+#home-page-footer {
+  height: 48px;
 }
 
 #footer-text {
@@ -26,13 +30,11 @@ footer {
 }
 
 @media only screen and (min-width: 849px) {
+  footer {
+    height: 48px;
+  }
+
   #footer-text.app-bar-active {
     display: flex;
   }
-}
-
-@media only screen and (max-width: 849px) {
-  /* footer {
-    padding-bottom: 16px;
-  } */
 }

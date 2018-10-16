@@ -63,7 +63,7 @@
     color: navy;
   }
 
-  #desktop-article-navigation #article-list {
+  #desktop-article-navigation section {
     overflow: auto;
   }
 

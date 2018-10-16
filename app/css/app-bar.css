@@ -13,14 +13,24 @@
   color: white;
 }
 
+#app-bar-menu a:hover {
+  background-color: yellow;
+  color: red;
+}
+
+#app-bar-menu a:active {
+  background-color: white;
+  color: black;
+}
+
 #app-bar-menu p {
   margin: 0;
 }
 
 #button-border {
-  background-color: red;
+  border-right: red dotted 0.5px;
   width: 1px;
-  height: 48px;
+  height: 80px;
 }
 
 @media only screen and (min-width: 849px) {

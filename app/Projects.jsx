@@ -27,7 +27,7 @@ class Projects extends Component {
     return (
       <main id="my-projects" className="">
         <h1>{this.projectData.details.name}</h1>
-        <section id="content-container">
+        <section id="project-container">
           <ProjectDescription
             contributionLabel={
               this.projectKeys[2][0].toUpperCase() +

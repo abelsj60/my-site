@@ -14,7 +14,7 @@ class MagicNav extends Component {
       <section id="magic-nav">
         {magicData.map((section, index) => (
           <Link to={section.link} key={index}>
-            <section id="magic-nav-content">
+            <section>
               <h3>{section.hed}</h3>
               <p>{section.blurb}</p>
             </section>

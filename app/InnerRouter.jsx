@@ -11,19 +11,19 @@ import NotFound from './NotFound.jsx';
 
 /*
   x 1. Hold state between /home and rest of app
-  2. Add content to NotFound, About, Details (x needs data structure, too)
+  x 2. Add content to NotFound, About, Details (x needs data structure, too)
   x 3. Need to access details on projects pages
   x 4. Swap chapter names for numbers in state/urls
-  5. Refactor js
+  x 5. Refactor js
   6. Edit story
-  7. Get real project data
-  8. Refactor CSS
+  x 7. Get real project data
+  x 8. Refactor CSS
   9. Use setState() instead of links in most nav locations?
   10. x Clean up data structures
   11. Layout, design
   12. Browser testing, polyfills, etc
   x 13. Make state defaults dynamic via reference
-  14. Home scroll events, tighten
+  x 14. Home scroll events, tighten
 */
 
 class InnerRouter extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ArticleNav from './ArticleNav.jsx';
-import StoryNav from './StoryNav.jsx';
+import ChapterNav from './ChapterNav.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
 import projectData from './data/projectData';
 import storyData from './data/storyData';
@@ -39,7 +39,7 @@ class SiteNav extends Component {
             formatProjectName={this.formatProjectName}
           />
         ) : this.storyPage ? (
-          <StoryNav storyData={storyData} state={this.props.state} />
+          <ChapterNav storyData={storyData} state={this.props.state} />
         ) : (
           <ArticleNav state={this.props.state} item={null} />
         )}

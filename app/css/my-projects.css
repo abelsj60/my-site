@@ -12,24 +12,24 @@
   border-bottom: lightgrey dotted 0.5px;
 }
 
-#my-projects h2 {
+#project-container {
+  overflow: auto;
+}
+
+#project-container #type {
+  font-size: 1.7rem;
+  margin-bottom: 15px;
+}
+
+#project-container h2 {
   font-size: 1.5rem;
   font-style: italic;
   margin-bottom: 7px;
 }
 
-#my-projects p {
+#project-container p {
   font-size: 1.7rem;
   margin-bottom: 10px;
-}
-
-#my-projects #type {
-  font-size: 1.7rem;
-  margin-bottom: 15px;
-}
-
-#my-projects #content-container {
-  overflow: auto;
 }
 
 #project-images {

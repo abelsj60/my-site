@@ -47,7 +47,7 @@ class AppBar extends Component {
       }
     ];
 
-    if (this.location[1] === 'chapter') {
+    if (this.location[1] === 'chapter' || this.location[2] === 'chapter') {
       buttons.splice(1, 0, {
         label: 'Text',
         linkPath: this.props.location.pathname,

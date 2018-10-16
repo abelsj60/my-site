@@ -18,7 +18,7 @@ class DesktopArticleList extends Component {
 
   render() {
     return (
-      <section id="article-list">
+      <section>
         {articleData.map((article, index) => (
           <Link
             key={index}
