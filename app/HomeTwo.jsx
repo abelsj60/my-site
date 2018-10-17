@@ -3,10 +3,11 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import MagicNav from './MagicNav.jsx';
 
-class Home extends Component {
+class HomeTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      headerIsTransparent: true,
       magicScale: {
         transform: 'scale(6)'
       },
@@ -16,6 +17,7 @@ class Home extends Component {
 
     this.setMagicScale = this.setMagicScale.bind(this);
     this.setMagicOpacity = this.setMagicOpacity.bind(this);
+    this.toggleTransparency = this.toggleTransparency.bind(this);
     this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
   }
 
@@ -30,12 +32,14 @@ class Home extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.setMagicScale);
     window.addEventListener('scroll', this.setMagicOpacity);
+    window.addEventListener('scroll', this.toggleTransparency);
     window.addEventListener('scroll', this.toggleMagicPointer);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.setMagicScale);
     window.removeEventListener('scroll', this.setMagicOpacity);
+    window.removeEventListener('scroll', this.toggleTransparency);
     window.removeEventListener('scroll', this.toggleMagicPointer);
   }
 
@@ -79,6 +83,16 @@ class Home extends Component {
     }
   }
 
+  toggleTransparency() {
+    if (this.state.headerIsTransparent && this.scrollTop >= 7) {
+      this.setState({ headerIsTransparent: false });
+    }
+
+    if (!this.state.headerIsTransparent && this.scrollTop < 7) {
+      this.setState({ headerIsTransparent: true });
+    }
+  }
+
   toggleMagicPointer() {
     if (this.state.magicClicks === 'block' && this.scrollTop > 3220) {
       this.setState({ magicClicks: 'allow' });
@@ -89,15 +103,11 @@ class Home extends Component {
     }
   }
 
-  get location() {
-    return this.props.location.pathname.split('/');
-  }
-
   render() {
     return (
       <Fragment>
         <section id="home-wrapper">
-          <Header home={this.location[1] === ''} />
+          <Header headerIsTransparent={this.state.headerIsTransparent} />
           <img
             id="magic-image"
             style={this.state.magicScale}
@@ -119,4 +129,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default HomeTwo;

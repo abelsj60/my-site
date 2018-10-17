@@ -8,42 +8,70 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      menuCss: ''
+      menu: '',
+      visibility: this.props.home ? 'transparent' : 'opaque'
     };
 
-    this.getCssForActiveLink = this.getCssForActiveLink.bind(this);
+    this.addCssToActiveLink = this.addCssToActiveLink.bind(this);
+    this.toggleTransparency = this.toggleTransparency.bind(this);
   }
 
-  get location() {
-    return this.props.location.pathname.split('/');
+  componentDidMount() {
+    if (this.props.home) {
+      window.addEventListener('scroll', this.toggleTransparency);
+    }
   }
 
-  getCssForOpaqueHeader() {
-    return this.props.headerIsTransparent ? '' : ' opaque';
+  componentWillUnmount() {
+    if (this.props.home) {
+      window.removeEventListener('scroll', this.toggleTransparency);
+    }
   }
 
-  getCssForOpenHeaderMenu() {
-    this.setState({
-      menuCss: this.state.menuCss === '' ? ' menu-open' : ''
-    });
+  addCssWhenHeaderIsHome() {
+    return this.props.home ? ' home-page' : '';
   }
 
-  getCssForActiveLink(section) {
+  addCssToActiveLink(section) {
     if (section === 'The story') {
       section = 'chapter';
     }
 
-    return this.location[1] === section.toLowerCase() ? 'active' : 'inactive';
+    return this.props.location.pathname.includes(section.toLowerCase())
+      ? 'active'
+      : '';
+  }
+
+  toggleHeaderMenu() {
+    this.setState({
+      menu: this.state.menu === '' ? ' menu-open' : ''
+    });
+  }
+
+  toggleTransparency() {
+    // ~ja Called via event listeners, not component!
+
+    const scrollTop = window.pageYOffset;
+
+    if (this.state.visibility === 'transparent' && scrollTop >= 7) {
+      this.setState({ visibility: 'opaque' });
+    }
+
+    if (this.state.visibility === 'opaque' && scrollTop < 7) {
+      this.setState({ visibility: 'transparent' });
+    }
   }
 
   render() {
     return (
       <header
-        className={`${this.getCssForOpaqueHeader()}${this.state.menuCss}`}
+        className={`${this.state.visibility}${
+          this.state.menu
+        }${this.addCssWhenHeaderIsHome()}`}
       >
         <HeaderText />
-        <HeaderNav getCssForActiveLink={this.getCssForActiveLink} />
-        <section id="nav-icon" onClick={() => this.getCssForOpenHeaderMenu()} />
+        <HeaderNav addCssToActiveLink={this.addCssToActiveLink} />
+        <section id="nav-icon" onClick={() => this.toggleHeaderMenu()} />
       </header>
     );
   }

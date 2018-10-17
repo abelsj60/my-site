@@ -1,18 +1,12 @@
 /* HOME PAGE CSS */
 
-html {
-  font-family: lato;
-  font-size: 62.5%;
-}
-
-body {
-  font-size: 1.5rem;
-}
-
-#home-wrapper {
-  position: fixed;
-  z-index: 0;
+#app {
   background: url('/howls-background-dl.jpg') no-repeat fixed center top;
+}
+
+header.home-page {
+  position: fixed;
+  width: 100%;
 }
 
 #magic-scroller {
@@ -28,7 +22,6 @@ body {
   bottom: 52px;
 }
 
-@import 'home-two.css';
 @import 'css-reset.css';
 @import 'header.css';
 @import 'footer.css';

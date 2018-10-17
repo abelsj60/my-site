@@ -105,7 +105,11 @@ class OuterRouter extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" render={() => <Home />} />
+        <Route
+          exact
+          path="/"
+          render={({ location }) => <Home location={location} />}
+        />
         <Route
           render={() => (
             <InnerRouter state={this.state} toggleText={this.toggleText} />

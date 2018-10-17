@@ -39,12 +39,16 @@ class InnerRouter extends Component {
     // ~ja E.g., No collisions
 
     // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the log and the completion of setState is reconciliation). Do do something other than relying on state; setState w/func? Call earlier? build param differently?
+
+    this.state = {
+      headerIsTransparent: true
+    };
   }
 
   render() {
     return (
       <section className="inner-page">
-        <Header />
+        <Header headerIsTransparent={this.state.headerIsTransparent} />
         <Switch>
           <Route
             exact
