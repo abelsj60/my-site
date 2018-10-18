@@ -59,7 +59,7 @@ class Home extends Component {
         >
           <MagicNav />
         </section>
-        <section id="magic-scroller" />
+        {/* <section id="magic-scroller" /> */}
       </Fragment>
     );
   }

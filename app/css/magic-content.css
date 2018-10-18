@@ -1,14 +1,12 @@
 /* HOME PAGE CSS */
 
 #magic-content {
-  position: fixed;
   flex: 1;
-  top: 52px;
-  bottom: 48px;
   display: flex;
   flex-direction: column;
   width: 100%;
   pointer-events: all;
+  z-index: 2;
 }
 
 #magic-content.block {

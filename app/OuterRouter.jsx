@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
 import InnerRouter from './InnerRouter.jsx';
+import MagicScroller from './MagicScroller.jsx';
 import articleData from './data/articleData.js';
 import storyData from './data/storyData.js';
 import projectData from './data/projectData.js';
@@ -162,7 +163,12 @@ class OuterRouter extends Component {
   }
 
   render() {
-    return <InnerRouter state={this.state} toggleText={this.toggleText} />;
+    return (
+      <Fragment>
+        <InnerRouter state={this.state} toggleText={this.toggleText} />
+        <MagicScroller location={this.props.location} />
+      </Fragment>
+    );
   }
 
   componentDidUpdate() {
@@ -208,6 +214,8 @@ class OuterRouter extends Component {
       location[1] === '' &&
       this.scrollTop < 3220 &&
       this.state.magicClicks === '';
+    const updateMagicClicksWhenNavigatingInward =
+      location[1] !== '' && this.state.magicClicks === 'block';
 
     if (
       updateChapterTitle ||
@@ -215,7 +223,8 @@ class OuterRouter extends Component {
       updateprojectThumbnail ||
       updatePublication ||
       updateHeadline ||
-      updateMagicClicksWhenNavigatingHome
+      updateMagicClicksWhenNavigatingHome ||
+      updateMagicClicksWhenNavigatingInward
     ) {
       this.setState({
         chapterTitle: updateChapterTitle
@@ -229,7 +238,9 @@ class OuterRouter extends Component {
         headline: updateHeadline ? headline : this.state.headline,
         magicClicks: updateMagicClicksWhenNavigatingHome
           ? 'block'
-          : this.state.magicClicks
+          : updateMagicClicksWhenNavigatingInward
+            ? ''
+            : this.state.magicClicks
       });
     }
 
