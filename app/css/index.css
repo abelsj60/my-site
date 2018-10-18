@@ -9,10 +9,25 @@ body {
   font-size: 1.5rem;
 }
 
-#home-wrapper {
-  position: fixed;
-  z-index: 0;
+#page-control.home {
   background: url('/howls-background-dl.jpg') no-repeat fixed center top;
+}
+
+#page-control.inner {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#home-page-header {
+  position: fixed;
+  width: 100%;
+}
+
+#home-page-footer {
+  position: fixed;
+  top: 718px;
+  width: 100%;
 }
 
 #magic-scroller {
@@ -22,13 +37,12 @@ body {
 #magic-image {
   width: 100%;
   min-height: 100vh;
-  z-index: 1;
+  /* z-index: 1; */
   object-fit: cover;
-  position: relative;
-  bottom: 52px;
+  position: fixed;
+  top: 52px;
 }
 
-@import 'home-two.css';
 @import 'css-reset.css';
 @import 'header.css';
 @import 'footer.css';

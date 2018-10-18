@@ -9,31 +9,31 @@ class Header extends Component {
 
     this.state = {
       menu: '',
-      visibility: this.props.home ? 'transparent' : 'opaque'
+      visibility:
+        this.props.location.pathname.split('/')[1] === ''
+          ? 'transparent'
+          : 'opaque'
+      /* location: this.props.location.pathname.split('/')[1] */
     };
 
     this.addCssToActiveLink = this.addCssToActiveLink.bind(this);
     this.toggleTransparency = this.toggleTransparency.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.home) {
-      window.addEventListener('scroll', this.toggleTransparency);
-    }
+  get location() {
+    return this.props.location.pathname.split('/');
   }
 
-  componentWillUnmount() {
-    if (this.props.home) {
-      window.removeEventListener('scroll', this.toggleTransparency);
-    }
+  get scrollTop() {
+    return window.pageYOffset;
   }
 
   addCssWhenHeaderIsHome() {
-    return this.props.home ? ' home-page' : '';
+    return this.location[1] === '' ? 'home-page-header' : '';
   }
 
   addCssToActiveLink(section) {
-    if (section === 'The story') {
+    if (section.toLowerCase() === 'the story') {
       section = 'chapter';
     }
 
@@ -62,12 +62,31 @@ class Header extends Component {
     }
   }
 
+  componentDidUpdate() {
+    window.addEventListener('scroll', this.toggleTransparency);
+
+    // if (this.state.location !== this.location[1]) {
+    //   this.setState({ location: this.location[1] });
+    // }
+
+    if (this.location[1] !== '' && this.state.visibility === 'transparent') {
+      this.setState({ visibility: 'opaque' });
+    }
+
+    if (
+      this.location[1] === '' &&
+      this.scrollTop < 7 &&
+      this.state.visibility === 'opaque'
+    ) {
+      this.setState({ visibility: 'transparent' });
+    }
+  }
+
   render() {
     return (
       <header
-        className={`${this.state.visibility}${
-          this.state.menu
-        }${this.addCssWhenHeaderIsHome()}`}
+        id={this.addCssWhenHeaderIsHome()}
+        className={`${this.state.visibility}${this.state.menu}`}
       >
         <HeaderText />
         <HeaderNav addCssToActiveLink={this.addCssToActiveLink} />

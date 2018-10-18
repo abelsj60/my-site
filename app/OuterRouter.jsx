@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
-import Home from './Home.jsx';
 import InnerRouter from './InnerRouter.jsx';
 import articleData from './data/articleData.js';
 import storyData from './data/storyData.js';
@@ -40,10 +39,19 @@ class OuterRouter extends Component {
           ? this.validateHeadline(location[2], location[3]) ||
             normalize(articleData[0].headline)
           : normalize(articleData[0].headline),
-      storyText: 'show-text'
+      storyText: 'show-text',
+      magicOpacity: { opacity: 0 },
+      magicClicks:
+        this.props.location.pathname.split('/')[1] === '' ? 'block' : ''
     };
 
     this.toggleText = this.toggleText.bind(this);
+    this.setMagicOpacity = this.setMagicOpacity.bind(this);
+    this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
+  }
+
+  get scrollTop() {
+    return window.pageYOffset;
   }
 
   toggleText() {
@@ -102,21 +110,59 @@ class OuterRouter extends Component {
     return chapterTitle.length ? normalize(chapterTitle[0].title) : undefined;
   }
 
+  setMagicOpacity() {
+    let finalOpacity;
+    const opacityValue = (this.scrollTop - 580) / (3221 - 580);
+    const opacityToString = opacityValue + '';
+    const opacityFailSafe =
+      this.scrollTop < 15 && this.state.magicOpacity.opacity !== 0;
+
+    if (opacityValue > 0 && opacityValue <= 1) {
+      finalOpacity = opacityToString.slice(1, 4);
+    } else if (opacityValue >= 1) {
+      finalOpacity = 1;
+    } else if (opacityFailSafe) {
+      finalOpacity = 0;
+    }
+
+    if (typeof finalOpacity !== 'string') {
+      finalOpacity = finalOpacity + '';
+    }
+
+    if (finalOpacity || opacityFailSafe) {
+      this.setState({
+        magicOpacity: {
+          opacity: finalOpacity
+        }
+      });
+    }
+  }
+
+  toggleMagicPointer() {
+    if (
+      this.props.location.pathname.split('/')[1] === '' &&
+      this.state.magicClicks === 'block' &&
+      this.scrollTop > 3220
+    ) {
+      this.setState({ magicClicks: '' });
+    }
+
+    if (
+      this.props.location.pathname.split('/')[1] === '' &&
+      this.state.magicClicks === '' &&
+      this.scrollTop < 3220
+    ) {
+      this.setState({ magicClicks: 'block' });
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.setMagicOpacity);
+    window.addEventListener('scroll', this.toggleMagicPointer);
+  }
+
   render() {
-    return (
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={({ location }) => <Home location={location} />}
-        />
-        <Route
-          render={() => (
-            <InnerRouter state={this.state} toggleText={this.toggleText} />
-          )}
-        />
-      </Switch>
-    );
+    return <InnerRouter state={this.state} toggleText={this.toggleText} />;
   }
 
   componentDidUpdate() {
@@ -158,13 +204,18 @@ class OuterRouter extends Component {
     const updateHeadline = headline
       ? headline !== this.state.headline
       : undefined;
+    const updateMagicClicksWhenNavigatingHome =
+      location[1] === '' &&
+      this.scrollTop < 3220 &&
+      this.state.magicClicks === '';
 
     if (
       updateChapterTitle ||
       updateProjectName ||
       updateprojectThumbnail ||
       updatePublication ||
-      updateHeadline
+      updateHeadline ||
+      updateMagicClicksWhenNavigatingHome
     ) {
       this.setState({
         chapterTitle: updateChapterTitle
@@ -175,12 +226,15 @@ class OuterRouter extends Component {
           ? projectThumbnail
           : this.state.projectThumbnail,
         publication: updatePublication ? publication : this.state.publication,
-        headline: updateHeadline ? headline : this.state.headline
+        headline: updateHeadline ? headline : this.state.headline,
+        magicClicks: updateMagicClicksWhenNavigatingHome
+          ? 'block'
+          : this.state.magicClicks
       });
     }
 
     console.log('State in cDU: ', this.state);
-    console.log('---');
+    console.log('--', Date.now());
   }
 }
 
