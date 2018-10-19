@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
-import Router from './Router.jsx';
+import Page from './Page.jsx';
 import MagicScroller from './MagicScroller.jsx';
 import articleData from './data/articleData.js';
 import storyData from './data/storyData.js';
@@ -164,7 +164,7 @@ class AppState extends Component {
   render() {
     return (
       <Fragment>
-        <Router state={this.state} toggleText={this.toggleText} />
+        <Page state={this.state} toggleText={this.toggleText} />
         <MagicScroller location={this.props.location} />
       </Fragment>
     );
