@@ -7,6 +7,15 @@ footer {
   color: white;
   height: 48px;
   background-color: black;
+  pointer-events: all;
+}
+
+footer.block {
+  pointer-events: none;
+}
+
+#home-page-footer {
+  z-index: 2;
 }
 
 #footer-text {

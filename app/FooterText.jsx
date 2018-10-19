@@ -7,10 +7,7 @@ class FooterText extends Component {
 
   render() {
     return (
-      <section
-        id="footer-text"
-        className={this.props.cssToHideFooterTextForAppBar}
-      >
+      <section id="footer-text" className={this.props.cssToHideTextForAppBar}>
         <p
           onClick={event => {
             this.props.toggleBusinessCard();
