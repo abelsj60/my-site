@@ -4,12 +4,6 @@ import { withRouter, Link } from 'react-router-dom';
 class AppBar extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      menu: 'inactive',
-      text: 'inactive',
-      contact: 'inactive'
-    };
   }
 
   get location() {
@@ -30,7 +24,8 @@ class AppBar extends Component {
         label: 'Menu',
         linkPath: this.location.includes('menu')
           ? this.linkPathFromMenu
-          : this.linkPathToMenu
+          : this.linkPathToMenu,
+        handleClick: () => undefined
       },
       {
         label: 'Contact',
@@ -60,9 +55,9 @@ class AppBar extends Component {
               className={this.props.state[button.label.toLowerCase()]}
               onClick={event => {
                 if (button.handleClick) {
-                  this.props.makeButtonActive(button.label.toLowerCase());
                   button.handleClick(event);
-                  event.preventDefault();
+                  this.props.makeButtonActive(button.label.toLowerCase());
+                  if (button.label !== 'Menu') event.preventDefault();
                 }
               }}
             >

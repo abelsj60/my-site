@@ -7,7 +7,7 @@ class BusinessCard extends Component {
 
   render() {
     return (
-      <section id="business-card" className={this.props.businessCard}>
+      <section id="business-card" className={this.props.contact}>
         <section>
           <p>917-854-7848</p>
           <p>abelsj60_AT_gmail.com</p>

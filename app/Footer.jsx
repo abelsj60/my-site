@@ -9,13 +9,13 @@ class Footer extends Component {
     super(props);
 
     this.state = {
-      businessCard: 'inactive',
+      contact: 'inactive',
       menu: 'inactive',
-      text: 'inactive',
-      contact: 'inactive'
+      text: 'inactive'
     };
 
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
+    this.makeButtonActive = this.makeButtonActive.bind(this);
     this.addCssToHideTextForAppBar = this.addCssToHideTextForAppBar.bind(this);
   }
 
@@ -40,12 +40,14 @@ class Footer extends Component {
   }
 
   toggleBusinessCard() {
+    console.log('Fired!');
     this.setState({
-      businessCard: this.state.contact === 'inactive' ? 'active' : 'inactive'
+      contact: this.state.contact === 'inactive' ? 'active' : 'inactive'
     });
   }
 
   makeButtonActive(buttonLabel) {
+    console.log('Make button active!');
     this.setState({
       [buttonLabel]:
         this.state[buttonLabel] === 'inactive' ? 'active' : 'inactive'
@@ -59,7 +61,7 @@ class Footer extends Component {
         className={this.props.magicClicks}
         style={this.location[1] === '' ? this.props.magicOpacity : null}
       >
-        <BusinessCard businessCard={this.state.businessCard} />
+        <BusinessCard contact={this.state.contact} />
         <FooterText
           cssToHideTextForAppBar={this.addCssToHideTextForAppBar()}
           toggleBusinessCard={this.toggleBusinessCard}
@@ -68,6 +70,7 @@ class Footer extends Component {
           <AppBar
             toggleText={this.props.toggleText}
             toggleBusinessCard={this.toggleBusinessCard}
+            makeButtonActive={this.makeButtonActive}
             state={this.state}
           />
         )}
