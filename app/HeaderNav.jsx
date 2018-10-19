@@ -13,7 +13,7 @@ class HeaderNav extends Component {
         {headerData.map((section, index) => (
           <Link
             key={index}
-            className={this.props.getCssForActiveLink(section.name)}
+            className={this.props.addCssToActiveLink(section.name)}
             to={section.path}
           >
             {section.name}

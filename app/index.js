@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './css/index.css';
-import OuterRouter from './OuterRouter.jsx';
+import AppState from './AppState.jsx';
 
 ReactDOM.render(
   <Router>
-    <OuterRouter />
+    <AppState />
   </Router>,
   document.getElementById('app')
 );

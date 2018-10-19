@@ -16,10 +16,7 @@ class Footer extends Component {
     };
 
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
-    this.addCssToHideFooterTextForAppBar = this.addCssToHideFooterTextForAppBar.bind(
-      this
-    );
-    this.makeButtonActive = this.makeButtonActive.bind(this);
+    this.addCssToHideTextForAppBar = this.addCssToHideTextForAppBar.bind(this);
   }
 
   get location() {
@@ -38,7 +35,7 @@ class Footer extends Component {
     );
   }
 
-  addCssToHideFooterTextForAppBar() {
+  addCssToHideTextForAppBar() {
     return this.addAppBarToPage() ? 'app-bar-active' : '';
   }
 
@@ -57,17 +54,19 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer id={this.addCssToLocateFooter()}>
+      <footer
+        id={this.addCssThatLocatesFooter()}
+        className={this.props.magicClicks}
+        style={this.location[1] === '' ? this.props.magicOpacity : null}
+      >
         <BusinessCard businessCard={this.state.businessCard} />
         <FooterText
-          cssToHideFooterTextForAppBar={this.addCssToHideFooterTextForAppBar()}
+          cssToHideTextForAppBar={this.addCssToHideTextForAppBar()}
           toggleBusinessCard={this.toggleBusinessCard}
         />
         {this.addAppBarToPage() && (
           <AppBar
             toggleText={this.props.toggleText}
-            toggleDetails={this.props.toggleDetails}
-            makeButtonActive={this.makeButtonActive}
             toggleBusinessCard={this.toggleBusinessCard}
             state={this.state}
           />

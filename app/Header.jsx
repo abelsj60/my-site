@@ -8,42 +8,89 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      menuCss: ''
+      menu: '',
+      visibility:
+        this.props.location.pathname.split('/')[1] === ''
+          ? 'transparent'
+          : 'opaque'
+      /* location: this.props.location.pathname.split('/')[1] */
     };
 
-    this.getCssForActiveLink = this.getCssForActiveLink.bind(this);
+    this.addCssToActiveLink = this.addCssToActiveLink.bind(this);
+    this.toggleTransparency = this.toggleTransparency.bind(this);
   }
 
   get location() {
     return this.props.location.pathname.split('/');
   }
 
-  getCssForOpaqueHeader() {
-    return this.props.headerIsTransparent ? '' : ' opaque';
+  get scrollTop() {
+    return window.pageYOffset;
   }
 
-  getCssForOpenHeaderMenu() {
-    this.setState({
-      menuCss: this.state.menuCss === '' ? ' menu-open' : ''
-    });
+  addCssWhenHeaderIsHome() {
+    return this.location[1] === '' ? 'home-page-header' : '';
   }
 
-  getCssForActiveLink(section) {
-    if (section === 'The story') {
+  addCssToActiveLink(section) {
+    if (section.toLowerCase() === 'the story') {
       section = 'chapter';
     }
 
-    return this.location[1] === section.toLowerCase() ? 'active' : 'inactive';
+    return this.props.location.pathname.includes(section.toLowerCase())
+      ? 'active'
+      : '';
+  }
+
+  toggleHeaderMenu() {
+    this.setState({
+      menu: this.state.menu === '' ? ' menu-open' : ''
+    });
+  }
+
+  toggleTransparency() {
+    // ~ja Called via event listeners, not component!
+
+    const scrollTop = window.pageYOffset;
+
+    if (this.state.visibility === 'transparent' && scrollTop >= 7) {
+      this.setState({ visibility: 'opaque' });
+    }
+
+    if (this.state.visibility === 'opaque' && scrollTop < 7) {
+      this.setState({ visibility: 'transparent' });
+    }
+  }
+
+  componentDidUpdate() {
+    window.addEventListener('scroll', this.toggleTransparency);
+
+    // if (this.state.location !== this.location[1]) {
+    //   this.setState({ location: this.location[1] });
+    // }
+
+    if (this.location[1] !== '' && this.state.visibility === 'transparent') {
+      this.setState({ visibility: 'opaque' });
+    }
+
+    if (
+      this.location[1] === '' &&
+      this.scrollTop < 7 &&
+      this.state.visibility === 'opaque'
+    ) {
+      this.setState({ visibility: 'transparent' });
+    }
   }
 
   render() {
     return (
       <header
-        className={`${this.getCssForOpaqueHeader()}${this.state.menuCss}`}
+        id={this.addCssWhenHeaderIsHome()}
+        className={`${this.state.visibility}${this.state.menu}`}
       >
         <HeaderText />
-        <HeaderNav getCssForActiveLink={this.getCssForActiveLink} />
-        <div id="nav-icon" onClick={() => this.getCssForOpenHeaderMenu()} />
+        <HeaderNav addCssToActiveLink={this.addCssToActiveLink} />
+        <section id="nav-icon" onClick={() => this.toggleHeaderMenu()} />
       </header>
     );
   }

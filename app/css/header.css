@@ -125,6 +125,11 @@ header.menu-open #full-screen-nav-menu {
 }
 
 @media only screen and (min-width: 705px) {
+  header.menu-open #site-name,
+  header.menu-open #site-motto {
+    display: block;
+  }
+
   #nav-icon {
     display: none;
   }

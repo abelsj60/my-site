@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
+import Home from './Home.jsx';
 import TheStory from './TheStory.jsx';
 import Projects from './Projects.jsx';
 import Journalism from './Journalism.jsx';
@@ -27,7 +28,7 @@ import NotFound from './NotFound.jsx';
   x 14. Home scroll events, tighten
 */
 
-class InnerRouter extends Component {
+class Router extends Component {
   constructor(props) {
     super(props);
 
@@ -40,13 +41,30 @@ class InnerRouter extends Component {
     // ~ja E.g., No collisions
 
     // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the log and the completion of setState is reconciliation). Do do something other than relying on state; setState w/func? Call earlier? build param differently?
+
+    // ~ja ? Inconsistent: Use CSS attribute in one, className in other
+  }
+
+  addCssForPageControl() {
+    return this.props.location.pathname.split('/')[1] === '' ? 'home' : 'inner';
   }
 
   render() {
     return (
-      <section className="inner-page">
+      <section id="page" className={this.addCssForPageControl()}>
         <Header />
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                magicOpacity={this.props.state.magicOpacity}
+                magicClicks={this.props.state.magicClicks}
+              />
+            )}
+          />
+
           <Route
             exact
             path="/test"
@@ -181,13 +199,13 @@ class InnerRouter extends Component {
         </Switch>
         <Footer
           storyText={this.props.state.storyText}
-          showProjectDetails={this.props.state.showProjectDetails}
           toggleText={this.props.toggleText}
-          toggleDetails={this.props.toggleDetails}
+          magicOpacity={this.props.state.magicOpacity}
+          magicClicks={this.props.state.magicClicks}
         />
       </section>
     );
   }
 }
 
-export default InnerRouter;
+export default withRouter(Router);

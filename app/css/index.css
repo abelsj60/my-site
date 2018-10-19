@@ -1,4 +1,4 @@
-/* HOME PAGE CSS */
+/* APP PAGE CSS */
 
 html {
   font-family: lato;
@@ -9,28 +9,20 @@ body {
   font-size: 1.5rem;
 }
 
-#home-wrapper {
-  position: fixed;
-  z-index: 0;
+#page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#page.home {
   background: url('/howls-background-dl.jpg') no-repeat fixed center top;
-}
-
-#magic-scroller {
-  height: 4000px;
-}
-
-#home-wrapper img {
   width: 100%;
-  min-height: 100vh;
-  z-index: 1;
-  object-fit: cover;
-  position: relative;
-  bottom: 52px;
+  position: fixed;
 }
 
 @import 'css-reset.css';
 @import 'header.css';
-@import 'footer.css';
 @import 'business-card.css';
 @import 'app-bar.css';
 @import 'magic-content.css';
@@ -38,10 +30,12 @@ body {
 @import 'my-projects.css';
 @import 'my-story.css';
 @import 'journalism.css';
-@import 'alexa.css';
 @import 'site-menu.css';
 @import 'toys.css';
 @import 'about.css';
 @import 'not-found.css';
+@import 'footer.css';
 
-/* https://learn.shayhowe.com/html-css/positioning-content/ */
+/*
+  https://learn.shayhowe.com/html-css/positioning-content/
+*/
