@@ -10,7 +10,7 @@ class MagicScroller extends Component {
   }
 
   render() {
-    return this.abracadabra && <section id="magic-scroller" />;
+    return this.abracadabra && <section id="abracadabra" />;
   }
 }
 
