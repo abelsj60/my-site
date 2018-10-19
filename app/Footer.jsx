@@ -55,7 +55,7 @@ class Footer extends Component {
   render() {
     return (
       <footer
-        id={this.addCssThatLocatesFooter()}
+        id={this.addCssToLocateFooter()}
         className={this.props.magicClicks}
         style={this.location[1] === '' ? this.props.magicOpacity : null}
       >
