@@ -40,14 +40,12 @@ class Footer extends Component {
   }
 
   toggleBusinessCard() {
-    console.log('Fired!');
     this.setState({
       contact: this.state.contact === 'inactive' ? 'active' : 'inactive'
     });
   }
 
   makeButtonActive(buttonLabel) {
-    console.log('Make button active!');
     this.setState({
       [buttonLabel]:
         this.state[buttonLabel] === 'inactive' ? 'active' : 'inactive'

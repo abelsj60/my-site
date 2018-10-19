@@ -15,7 +15,7 @@
 
 #app-bar-menu a:hover {
   background-color: yellow;
-  color: red;
+  color: black;
 }
 
 #app-bar-menu a.active {

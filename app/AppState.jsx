@@ -209,11 +209,11 @@ class AppState extends Component {
     const updateHeadline = headline
       ? headline !== this.state.headline
       : undefined;
-    const updateMagicClicksWhenNavigatingHome =
+    const updateMagicClicksWhenGoingHome =
       location[1] === '' &&
       this.scrollTop < 3220 &&
       this.state.magicClicks === '';
-    const updateMagicClicksWhenNavigatingInward =
+    const updateMagicClicksWhenLeavingHome =
       location[1] !== '' && this.state.magicClicks === 'block';
 
     if (
@@ -222,8 +222,8 @@ class AppState extends Component {
       updateprojectThumbnail ||
       updatePublication ||
       updateHeadline ||
-      updateMagicClicksWhenNavigatingHome ||
-      updateMagicClicksWhenNavigatingInward
+      updateMagicClicksWhenGoingHome ||
+      updateMagicClicksWhenLeavingHome
     ) {
       this.setState({
         chapterTitle: updateChapterTitle
@@ -235,9 +235,9 @@ class AppState extends Component {
           : this.state.projectThumbnail,
         publication: updatePublication ? publication : this.state.publication,
         headline: updateHeadline ? headline : this.state.headline,
-        magicClicks: updateMagicClicksWhenNavigatingHome
+        magicClicks: updateMagicClicksWhenGoingHome
           ? 'block'
-          : updateMagicClicksWhenNavigatingInward
+          : updateMagicClicksWhenLeavingHome
             ? ''
             : this.state.magicClicks
       });

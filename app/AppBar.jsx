@@ -21,14 +21,14 @@ class AppBar extends Component {
   get buttons() {
     const buttons = [
       {
-        label: 'Menu',
+        label: 'menu',
         linkPath: this.location.includes('menu')
           ? this.linkPathFromMenu
           : this.linkPathToMenu,
         handleClick: () => undefined
       },
       {
-        label: 'Contact',
+        label: 'contact',
         linkPath: this.props.location.pathname,
         handleClick: () => this.props.toggleBusinessCard()
       }
@@ -36,7 +36,7 @@ class AppBar extends Component {
 
     if (this.location.includes('chapter')) {
       buttons.splice(1, 0, {
-        label: 'Text',
+        label: 'text',
         linkPath: this.props.location.pathname,
         handleClick: () => this.props.toggleText()
       });
@@ -52,18 +52,16 @@ class AppBar extends Component {
           <Fragment key={index}>
             <Link
               to={button.linkPath}
-              className={this.props.state[button.label.toLowerCase()]}
+              className={this.props.state[button.label]}
               onClick={event => {
-                if (button.handleClick) {
-                  button.handleClick(event);
-                  this.props.makeButtonActive(button.label.toLowerCase());
-                  if (button.label !== 'Menu') event.preventDefault();
-                }
+                button.handleClick();
+                this.props.makeButtonActive(button.label);
+                if (button.label !== 'menu') event.preventDefault();
               }}
             >
-              <p>{button.label}</p>
+              <p>{button.label[0].toUpperCase() + button.label.slice(1)}</p>
             </Link>
-            {button.label === 'Contact' ? null : <div id="button-border" />}
+            {button.label === 'contact' ? null : <div id="button-border" />}
           </Fragment>
         ))}
       </section>
