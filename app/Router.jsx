@@ -27,7 +27,7 @@ import NotFound from './NotFound.jsx';
   14. Home scroll events, tighten
 */
 
-class InnerRouter extends Component {
+class Router extends Component {
   constructor(props) {
     super(props);
 
@@ -50,7 +50,7 @@ class InnerRouter extends Component {
 
   render() {
     return (
-      <section id="page-control" className={this.addCssForPageControl()}>
+      <section id="page" className={this.addCssForPageControl()}>
         <Header />
         <Switch>
           <Route
@@ -205,4 +205,4 @@ class InnerRouter extends Component {
   }
 }
 
-export default withRouter(InnerRouter);
+export default withRouter(Router);

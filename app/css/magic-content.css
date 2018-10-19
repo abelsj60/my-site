@@ -1,5 +1,14 @@
 /* HOME PAGE CSS */
 
+#magic-image {
+  width: 100%;
+  min-height: 100vh;
+  /* z-index: 1; */
+  object-fit: cover;
+  position: fixed;
+  top: 52px;
+}
+
 #magic-content {
   flex: 1;
   display: flex;
@@ -42,6 +51,10 @@
 #magic-nav a:hover {
   background-color: rgba(255, 0, 0, 0.3);
   color: white;
+}
+
+#magic-scroller {
+  height: 4000px;
 }
 
 @media only screen and (min-width: 666px) {

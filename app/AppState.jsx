@@ -1,14 +1,13 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
-import { Switch, Route } from 'react-router-dom';
-import InnerRouter from './InnerRouter.jsx';
+import Router from './Router.jsx';
 import MagicScroller from './MagicScroller.jsx';
 import articleData from './data/articleData.js';
 import storyData from './data/storyData.js';
 import projectData from './data/projectData.js';
 import { normalize } from './helpers/utils.js';
 
-class OuterRouter extends Component {
+class AppState extends Component {
   constructor(props) {
     super(props);
 
@@ -165,7 +164,7 @@ class OuterRouter extends Component {
   render() {
     return (
       <Fragment>
-        <InnerRouter state={this.state} toggleText={this.toggleText} />
+        <Router state={this.state} toggleText={this.toggleText} />
         <MagicScroller location={this.props.location} />
       </Fragment>
     );
@@ -249,4 +248,4 @@ class OuterRouter extends Component {
   }
 }
 
-export default withRouter(OuterRouter);
+export default withRouter(AppState);
