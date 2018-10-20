@@ -208,7 +208,7 @@ class StateManagement extends Component {
     const updateProjectName = projectName
       ? projectName !== this.state.projectName
       : undefined;
-    const updateprojectThumbnail = projectThumbnail
+    const updateProjectThumbnail = projectThumbnail
       ? projectThumbnail !== this.state.projectThumbnail
       : undefined;
     const updatePublication = publication
@@ -227,7 +227,7 @@ class StateManagement extends Component {
     if (
       updateChapterTitle ||
       updateProjectName ||
-      updateprojectThumbnail ||
+      updateProjectThumbnail ||
       updatePublication ||
       updateHeadline ||
       updateMagicClicksWhenGoingHome ||
@@ -238,7 +238,7 @@ class StateManagement extends Component {
           ? chapterTitle
           : this.state.chapterTitle,
         projectName: updateProjectName ? projectName : this.state.projectName,
-        projectThumbnail: updateprojectThumbnail
+        projectThumbnail: updateProjectThumbnail
           ? projectThumbnail
           : this.state.projectThumbnail,
         publication: updatePublication ? publication : this.state.publication,
