@@ -173,7 +173,7 @@ class StateManagement extends Component {
     return (
       <Fragment>
         <Page state={this.state} toggleText={this.toggleText} />
-        <MagicScroller location={this.props.location} />
+        <MagicScroller />
       </Fragment>
     );
   }

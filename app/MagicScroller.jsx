@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { getPath } from './helpers/utils.js';
 
 class MagicScroller extends Component {
@@ -15,4 +16,4 @@ class MagicScroller extends Component {
   }
 }
 
-export default MagicScroller;
+export default withRouter(MagicScroller);
