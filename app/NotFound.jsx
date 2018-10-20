@@ -8,10 +8,8 @@ class NotFound extends Component {
   render() {
     return (
       <main id="not-found" className="left">
-        <section className="content-container">
-          <h1>Uh oh. Not found!</h1>
-          <div className="not-found-image-box" />
-        </section>
+        <h1>Uh oh. Not found!</h1>
+        <section id="image-box" />
       </main>
     );
   }

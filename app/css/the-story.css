@@ -7,7 +7,7 @@
   flex-direction: column;
   position: absolute;
   top: 52px;
-  bottom: 48px;
+  bottom: 80px;
   padding: 25px;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
@@ -27,7 +27,7 @@
   margin-bottom: 25px;
 }
 
-#chapter .text {
+#chapter p {
   font-size: 1.75rem;
   line-height: normal;
   white-space: pre-wrap;
@@ -51,6 +51,7 @@
   #chapter {
     flex: 1;
     position: unset;
+    bottom: 48px;
     background-color: unset;
     color: black;
   }

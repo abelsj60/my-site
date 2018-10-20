@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { getPath } from './helpers/utils.js';
 
 class AppBar extends Component {
   constructor(props) {
@@ -7,50 +8,37 @@ class AppBar extends Component {
   }
 
   get location() {
-    return this.props.location.pathname.split('/');
+    return getPath(this.props).split('/');
   }
 
-  get linkPathForMenuPages() {
-    if (this.location[2] === 'chapter') {
-      return '/chapter';
-    } else if (this.location[2] === 'projects') {
-      return '/projects';
-    } else if (this.location[2] === 'journalism') {
-      return '/journalism';
-    }
-
-    return this.props.location.pathname;
+  get linkPathFromMenu() {
+    return '/' + this.location[2];
   }
 
-  get linkPath() {
-    if (this.location[1] === 'menu') {
-      return this.linkPathForMenuPages;
-    }
-
-    return this.location[1] === 'projects'
-      ? '/menu/projects'
-      : this.location[1] === 'chapter'
-        ? '/menu/chapter'
-        : '/menu/journalism';
+  get linkPathToMenu() {
+    return '/menu/' + this.location[1];
   }
 
   get buttons() {
     const buttons = [
       {
-        label: this.location[1] !== 'menu' ? 'Menu' : 'Close',
-        linkPath: this.linkPath
+        label: 'menu',
+        linkPath: this.location.includes('menu')
+          ? this.linkPathFromMenu
+          : this.linkPathToMenu,
+        handleClick: () => undefined
       },
       {
-        label: 'Contact',
-        linkPath: this.props.location.pathname,
+        label: 'contact',
+        linkPath: getPath(this.props),
         handleClick: () => this.props.toggleBusinessCard()
       }
     ];
 
-    if (this.location[1] === 'chapter') {
+    if (this.location.includes('chapter')) {
       buttons.splice(1, 0, {
-        label: 'Text',
-        linkPath: this.props.location.pathname,
+        label: 'text',
+        linkPath: getPath(this.props),
         handleClick: () => this.props.toggleText()
       });
     }
@@ -65,16 +53,16 @@ class AppBar extends Component {
           <Fragment key={index}>
             <Link
               to={button.linkPath}
+              className={this.props.footerState[button.label]}
               onClick={event => {
-                if (button.handleClick) {
-                  button.handleClick(event);
-                  event.preventDefault();
-                }
+                button.handleClick();
+                this.props.makeButtonActive(button.label);
+                if (button.label !== 'menu') event.preventDefault();
               }}
             >
-              <p>{button.label}</p>
+              <p>{button.label[0].toUpperCase() + button.label.slice(1)}</p>
             </Link>
-            {button.label === 'Contact' ? null : <div id="button-border" />}
+            {button.label === 'contact' ? null : <div id="button-border" />}
           </Fragment>
         ))}
       </section>

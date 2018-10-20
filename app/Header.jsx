@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import HeaderText from './HeaderText.jsx';
 import HeaderNav from './HeaderNav.jsx';
+import HeaderNavIcon from './HeaderNavIcon.jsx';
+import { getPath } from './helpers/utils.js';
 
 class Header extends Component {
   constructor(props) {
@@ -10,18 +12,14 @@ class Header extends Component {
     this.state = {
       menu: '',
       visibility:
-        this.props.location.pathname.split('/')[1] === ''
-          ? 'transparent'
-          : 'opaque'
-      /* location: this.props.location.pathname.split('/')[1] */
+        getPath(this.props).split('/')[1] === '' ? 'transparent' : 'opaque'
     };
 
-    this.addCssToActiveLink = this.addCssToActiveLink.bind(this);
     this.toggleTransparency = this.toggleTransparency.bind(this);
   }
 
   get location() {
-    return this.props.location.pathname.split('/');
+    return getPath(this.props).split('/');
   }
 
   get scrollTop() {
@@ -30,16 +28,6 @@ class Header extends Component {
 
   addCssWhenHeaderIsHome() {
     return this.location[1] === '' ? 'home-page-header' : '';
-  }
-
-  addCssToActiveLink(section) {
-    if (section.toLowerCase() === 'the story') {
-      section = 'chapter';
-    }
-
-    return this.props.location.pathname.includes(section.toLowerCase())
-      ? 'active'
-      : '';
   }
 
   toggleHeaderMenu() {
@@ -62,13 +50,11 @@ class Header extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     window.addEventListener('scroll', this.toggleTransparency);
+  }
 
-    // if (this.state.location !== this.location[1]) {
-    //   this.setState({ location: this.location[1] });
-    // }
-
+  componentDidUpdate() {
     if (this.location[1] !== '' && this.state.visibility === 'transparent') {
       this.setState({ visibility: 'opaque' });
     }
@@ -89,8 +75,8 @@ class Header extends Component {
         className={`${this.state.visibility}${this.state.menu}`}
       >
         <HeaderText />
-        <HeaderNav addCssToActiveLink={this.addCssToActiveLink} />
-        <section id="nav-icon" onClick={() => this.toggleHeaderMenu()} />
+        <HeaderNav />
+        <HeaderNavIcon toggleTransparency={this.toggleTransparency} />
       </header>
     );
   }

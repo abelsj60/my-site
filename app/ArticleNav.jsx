@@ -8,8 +8,8 @@ class DesktopArticleList extends Component {
     super(props);
   }
 
-  setActiveItem(headline, currentHeadline) {
-    if (headline === currentHeadline) {
+  setActiveItem(headline, headlineOnState) {
+    if (headline === headlineOnState) {
       return 'active';
     } else {
       return 'inactive';
@@ -18,7 +18,7 @@ class DesktopArticleList extends Component {
 
   render() {
     return (
-      <section id="article-list">
+      <section>
         {articleData.map((article, index) => (
           <Link
             key={index}

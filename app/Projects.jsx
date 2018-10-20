@@ -11,7 +11,7 @@ class Projects extends Component {
 
   get projectData() {
     return projectData.filter(
-      project => project.name === this.props.projectName
+      project => project.name === this.props.state.projectName
     )[0];
   }
 
@@ -27,28 +27,17 @@ class Projects extends Component {
     return (
       <main id="my-projects" className="">
         <h1>{this.projectData.details.name}</h1>
-        <section id="content-container">
+        <section id="project-container">
           <ProjectDescription
-            contributionLabel={
-              this.projectKeys[2][0].toUpperCase() +
-              this.projectKeys[2].slice(1)
-            }
-            descriptionLabel={
-              this.projectKeys[5][0].toUpperCase() +
-              this.projectKeys[5].slice(1)
-            }
             projectKeys={this.projectKeys}
-            type={this.projectDescriptions.type}
-            description={this.projectDescriptions.description}
-            contribution={this.projectDescriptions.contribution}
+            projectDescriptions={this.projectDescriptions}
           />
           <section id="project-images">
-            <SingleProjectNav project={this.projectData} />
+            <SingleProjectNav projectData={this.projectData} />
             <ProjectImageContainer
-              caption={this.projectDescriptions.captions[0]}
-              fullSizeImage={
-                this.projectData.full[this.props.projectThumbnail - 1]
-              }
+              projectDescriptions={this.projectDescriptions}
+              projectData={this.projectData}
+              state={this.props.state}
             />
           </section>
         </section>

@@ -1,15 +1,15 @@
-#not-found {
+#toys {
   display: flex;
   height: 100%;
   padding: 25px;
 }
 
-#not-found h1 {
+#toys h1 {
   font-size: 3rem;
   font-weight: bold;
 }
 
-#image-box {
+#toys-box {
   flex: 1;
   margin-top: 15px;
   background-color: cornflowerblue;

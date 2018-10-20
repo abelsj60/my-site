@@ -1,22 +1,25 @@
-#business-card-holder.hide {
+/* BUSINESS CARD CSS */
+
+#business-card.inactive {
   display: none;
 }
 
-#business-card-holder.show {
+#business-card.active {
   display: flex;
   justify-content: center;
   position: absolute;
   top: 52px;
-  bottom: 48px;
+  bottom: 80px;
   width: 100%;
   background-color: rgba(0, 0, 255, 0.6);
 }
 
-.home-page-footer #business-card-holder.show {
+#home-page-footer #business-card.active {
   top: 0px;
+  bottom: 48px;
 }
 
-#business-card {
+#business-card section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,8 +36,14 @@
 }
 
 @media only screen and (min-width: 500px) {
-  #business-card {
+  #business-card section {
     height: 300px;
     width: 450px;
+  }
+}
+
+@media only screen and (min-width: 849px) {
+  #business-card.active {
+    bottom: 48px;
   }
 }

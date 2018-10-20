@@ -11,25 +11,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use('/api', require('./api'));
 
-app.get('/bundle.js', function(req, res, next) {
+app.get('/bundle.js', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../bundle.js'));
 });
 
-app.get('/bundle.js.map', function(req, res, next) {
+app.get('/bundle.js.map', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../bundle.js.map'));
 });
 
-app.get('*', function(req, res, next) {
+app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, () => {
   console.log('Heyo');
   console.log('Dayo?');
   console.log(`No! Heyo! We're running on port ${PORT}`);

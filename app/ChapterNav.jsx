@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import storyData from './data/storyData';
-import { normalize } from './helpers/utils.js';
+import { getPath, normalize } from './helpers/utils.js';
 
-class StoryNav extends Component {
+class ChapterNav extends Component {
   constructor(props) {
     super(props);
   }
 
   get location() {
-    return this.props.location.pathname.split('/');
+    return getPath(this.props).split('/');
   }
 
   setActiveChapter(chapter, currentChapterTitle) {
@@ -35,12 +35,10 @@ class StoryNav extends Component {
         {this.location[1] === 'menu' && (
           <h1 id="story-chapter">Chapter {index + 1}</h1>
         )}
-        <p id="story-title">
-          {this.location[1] === 'chapter' ? index + 1 : chapter.title}
-        </p>
+        <p>{this.location[1] === 'chapter' ? index + 1 : chapter.title}</p>
       </Link>
     ));
   }
 }
 
-export default withRouter(StoryNav);
+export default withRouter(ChapterNav);

@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import SingleProjectNav from './SingleProjectNav.jsx';
+import projectData from './data/projectData';
 
 class MultiProjectNav extends Component {
   constructor(props) {
     super(props);
   }
 
+  formatProjectName(name) {
+    if (name === 'tmmnews') {
+      return name.slice(0, 3).toUpperCase() + name.slice(3);
+    } else {
+      return name.slice(0, 1).toUpperCase() + name.slice(1);
+    }
+  }
+
   render() {
-    return this.props.projectData.map((project, index) => (
+    return projectData.map((project, index) => (
       <section id="nav-group" key={index}>
         <h1>
-          {this.props.formatProjectName(project.name)} | {project.details.type}
+          {this.formatProjectName(project.name)} | {project.details.type}
         </h1>
-        <SingleProjectNav project={project} />
+        <SingleProjectNav projectData={project} />
       </section>
     ));
   }
