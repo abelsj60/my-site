@@ -15,6 +15,7 @@ class Header extends Component {
         getPath(this.props).split('/')[1] === '' ? 'transparent' : 'opaque'
     };
 
+    this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
     this.toggleTransparency = this.toggleTransparency.bind(this);
   }
 
@@ -76,7 +77,7 @@ class Header extends Component {
       >
         <HeaderText />
         <HeaderNav />
-        <HeaderNavIcon toggleTransparency={this.toggleTransparency} />
+        <HeaderNavIcon toggleHeaderMenu={this.toggleHeaderMenu} />
       </header>
     );
   }
