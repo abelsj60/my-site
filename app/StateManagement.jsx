@@ -169,15 +169,6 @@ class StateManagement extends Component {
     window.addEventListener('scroll', this.toggleMagicPointer);
   }
 
-  render() {
-    return (
-      <Fragment>
-        <Page state={this.state} toggleText={this.toggleText} />
-        <MagicScroller />
-      </Fragment>
-    );
-  }
-
   componentDidUpdate() {
     // ~ja Must compare props to state to see a difference
     // Location checks used to prevent collisions
@@ -253,6 +244,15 @@ class StateManagement extends Component {
 
     // console.log('State in cDU: ', this.state);
     // console.log('--', Date.now());
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <Page state={this.state} toggleText={this.toggleText} />
+        <MagicScroller />
+      </Fragment>
+    );
   }
 }
 
