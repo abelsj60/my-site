@@ -11,14 +11,14 @@ class TheStory extends Component {
 
   get chapter() {
     return storyData.filter(
-      chapter => normalize(chapter.title) === this.props.chapterTitle
+      chapter => normalize(chapter.title) === this.props.state.chapterTitle
     )[0];
   }
 
   render() {
     return (
       <main id="the-story">
-        <section id="chapter" className={`left ${this.props.storyText}`}>
+        <section id="chapter" className={`left ${this.props.state.storyText}`}>
           <section id="desktop-story-nav">
             <ChapterNav state={this.props.state} />
           </section>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getPath } from './helpers/utils.js';
 
 class MagicScroller extends Component {
   constructor(props) {
@@ -6,7 +7,7 @@ class MagicScroller extends Component {
   }
 
   get abracadabra() {
-    return this.props.location.pathname.split('/')[1] === '';
+    return getPath(this.props).split('/')[1] === '';
   }
 
   render() {

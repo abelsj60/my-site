@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import headerData from './data/headerData.js';
 
 class HeaderNav extends Component {
   constructor(props) {
     super(props);
+  }
+
+  addCssToActiveLink(section) {
+    if (section.toLowerCase() === 'the story') {
+      section = 'chapter';
+    }
+
+    return this.props.location.pathname
+      .toLowerCase()
+      .includes(section.toLowerCase())
+      ? 'active'
+      : '';
   }
 
   render() {
@@ -13,7 +25,7 @@ class HeaderNav extends Component {
         {headerData.map((section, index) => (
           <Link
             key={index}
-            className={this.props.addCssToActiveLink(section.name)}
+            className={this.addCssToActiveLink(section.name)}
             to={section.path}
           >
             {section.name}
@@ -24,4 +36,4 @@ class HeaderNav extends Component {
   }
 }
 
-export default HeaderNav;
+export default withRouter(HeaderNav);

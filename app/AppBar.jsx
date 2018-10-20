@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { getPath } from './helpers/utils.js';
 
 class AppBar extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class AppBar extends Component {
   }
 
   get location() {
-    return this.props.location.pathname.toLowerCase().split('/');
+    return getPath(this.props).split('/');
   }
 
   get linkPathFromMenu() {
@@ -29,7 +30,7 @@ class AppBar extends Component {
       },
       {
         label: 'contact',
-        linkPath: this.props.location.pathname,
+        linkPath: getPath(this.props),
         handleClick: () => this.props.toggleBusinessCard()
       }
     ];
@@ -37,7 +38,7 @@ class AppBar extends Component {
     if (this.location.includes('chapter')) {
       buttons.splice(1, 0, {
         label: 'text',
-        linkPath: this.props.location.pathname,
+        linkPath: getPath(this.props),
         handleClick: () => this.props.toggleText()
       });
     }
@@ -52,7 +53,7 @@ class AppBar extends Component {
           <Fragment key={index}>
             <Link
               to={button.linkPath}
-              className={this.props.state[button.label]}
+              className={this.props.footerState[button.label]}
               onClick={event => {
                 button.handleClick();
                 this.props.makeButtonActive(button.label);

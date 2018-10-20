@@ -8,8 +8,8 @@ class DesktopArticleList extends Component {
     super(props);
   }
 
-  setActiveItem(headline, currentHeadline) {
-    if (headline === currentHeadline) {
+  setActiveItem(headline, headlineOnState) {
+    if (headline === headlineOnState) {
       return 'active';
     } else {
       return 'inactive';

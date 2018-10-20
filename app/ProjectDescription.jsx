@@ -8,11 +8,17 @@ class ProjectDescription extends Component {
   render() {
     return (
       <Fragment>
-        <p id="type">{this.props.type}</p>
-        <h2>{this.props.contributionLabel}</h2>
-        <p>{this.props.contribution}</p>
-        <h2>{this.props.descriptionLabel}</h2>
-        <p>{this.props.description}</p>
+        <p id="type">{this.props.projectDescriptions.type}</p>
+        <h2>
+          {this.props.projectKeys[2][0].toUpperCase() +
+            this.props.projectKeys[2].slice(1)}
+        </h2>
+        <p>{this.props.projectDescriptions.contribution}</p>
+        <h2>
+          {this.props.projectKeys[5][0].toUpperCase() +
+            this.props.projectKeys[5].slice(1)}
+        </h2>
+        <p>{this.props.projectDescriptions.description}</p>
       </Fragment>
     );
   }

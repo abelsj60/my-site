@@ -5,16 +5,25 @@ import MagicScroller from './MagicScroller.jsx';
 import articleData from './data/articleData.js';
 import storyData from './data/storyData.js';
 import projectData from './data/projectData.js';
-import { normalize } from './helpers/utils.js';
+import { getPath, normalize } from './helpers/utils.js';
 
-class AppState extends Component {
+class StateManagement extends Component {
   constructor(props) {
     super(props);
 
-    // ~ja Hold component state here when controlled by AppBar
-    // Can't pass state to AppBar from Chapter in this model w/o Redux
+    const location = getPath(this.props).split('/');
 
-    const location = this.props.location.pathname.split('/');
+    // LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+    // ~ja Technically, we don't need the location checks/ternaries in state
+    // b/c the location of each number type is different in each section of
+    // the site, but explicitly checking seems like a better practice
+
+    // ~ja E.g., No collisions
+
+    // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the log and the completion of setState is Reconciliation). Do do something other than relying on state; setState w/func? Call earlier? build param differently?
+
+    // ~ja ? Inconsistent: Use CSS attribute in one, className in other
 
     this.state = {
       chapterTitle:
@@ -41,8 +50,7 @@ class AppState extends Component {
           : normalize(articleData[0].headline),
       storyText: 'show-text',
       magicOpacity: { opacity: 0 },
-      magicClicks:
-        this.props.location.pathname.split('/')[1] === '' ? 'block' : ''
+      magicClicks: getPath(this.props).split('/')[1] === '' ? 'block' : ''
     };
 
     this.toggleText = this.toggleText.bind(this);
@@ -140,7 +148,7 @@ class AppState extends Component {
 
   toggleMagicPointer() {
     if (
-      this.props.location.pathname.split('/')[1] === '' &&
+      getPath(this.props).split('/')[1] === '' &&
       this.state.magicClicks === 'block' &&
       this.scrollTop > 3220
     ) {
@@ -148,7 +156,7 @@ class AppState extends Component {
     }
 
     if (
-      this.props.location.pathname.split('/')[1] === '' &&
+      getPath(this.props).split('/')[1] === '' &&
       this.state.magicClicks === '' &&
       this.scrollTop < 3220
     ) {
@@ -174,7 +182,7 @@ class AppState extends Component {
     // ~ja Must compare props to state to see a difference
     // Location checks used to prevent collisions
 
-    const location = this.props.location.pathname.split('/');
+    const location = getPath(this.props).split('/');
 
     const chapterTitle =
       location[1] === 'chapter' ? this.validateChapter(location[2]) : undefined;
@@ -243,9 +251,9 @@ class AppState extends Component {
       });
     }
 
-    console.log('State in cDU: ', this.state);
-    console.log('--', Date.now());
+    // console.log('State in cDU: ', this.state);
+    // console.log('--', Date.now());
   }
 }
 
-export default withRouter(AppState);
+export default withRouter(StateManagement);

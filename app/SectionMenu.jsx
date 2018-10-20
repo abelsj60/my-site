@@ -1,45 +1,37 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import ArticleNav from './ArticleNav.jsx';
 import ChapterNav from './ChapterNav.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
-import projectData from './data/projectData';
-import storyData from './data/storyData';
+import { getPath } from './helpers/utils.js';
 
 class SectionMenu extends Component {
   constructor(props) {
     super(props);
   }
 
-  get section() {
-    return this.props.section;
+  get location() {
+    return getPath(this.props).split('/');
   }
 
   get projectPage() {
-    return this.section === 'projects';
+    return this.location[2].toLowerCase() === 'projects';
   }
 
   get storyPage() {
-    return this.section === 'chapter';
-  }
-
-  formatProjectName(name) {
-    if (name === 'tmmnews') {
-      return name.slice(0, 3).toUpperCase() + name.slice(3);
-    } else {
-      return name.slice(0, 1).toUpperCase() + name.slice(1);
-    }
+    return this.location[2].toLowerCase() === 'chapter';
   }
 
   render() {
     return (
-      <section id="contents-list" className={this.props.section + '-index'}>
+      <section
+        id="contents-list"
+        className={`${this.location[2].toLowerCase()}-menu`}
+      >
         {this.projectPage ? (
-          <MultiProjectNav
-            projectData={projectData}
-            formatProjectName={this.formatProjectName}
-          />
+          <MultiProjectNav />
         ) : this.storyPage ? (
-          <ChapterNav storyData={storyData} state={this.props.state} />
+          <ChapterNav state={this.props.state} />
         ) : (
           <ArticleNav state={this.props.state} />
         )}
@@ -48,4 +40,4 @@ class SectionMenu extends Component {
   }
 }
 
-export default SectionMenu;
+export default withRouter(SectionMenu);

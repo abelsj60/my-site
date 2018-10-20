@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import AppBar from './AppBar.jsx';
 import BusinessCard from './BusinessCard.jsx';
 import FooterText from './FooterText.jsx';
+import { getPath } from './helpers/utils.js';
 
 class Footer extends Component {
   constructor(props) {
@@ -14,13 +15,13 @@ class Footer extends Component {
       text: 'inactive'
     };
 
+    this.addAppBarToPage = this.addAppBarToPage.bind(this);
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
     this.makeButtonActive = this.makeButtonActive.bind(this);
-    this.addCssToHideTextForAppBar = this.addCssToHideTextForAppBar.bind(this);
   }
 
   get location() {
-    return this.props.location.pathname.split('/');
+    return getPath(this.props).split('/');
   }
 
   addCssToLocateFooter() {
@@ -33,10 +34,6 @@ class Footer extends Component {
       this.location[1] !== 'about' &&
       this.location[1] !== 'toys'
     );
-  }
-
-  addCssToHideTextForAppBar() {
-    return this.addAppBarToPage() ? 'app-bar-active' : '';
   }
 
   toggleBusinessCard() {
@@ -56,20 +53,21 @@ class Footer extends Component {
     return (
       <footer
         id={this.addCssToLocateFooter()}
-        className={this.props.magicClicks}
-        style={this.location[1] === '' ? this.props.magicOpacity : null}
+        className={this.props.state.magicClicks}
+        style={this.location[1] === '' ? this.props.state.magicOpacity : null}
       >
-        <BusinessCard contact={this.state.contact} />
+        <BusinessCard state={this.state} />
         <FooterText
-          cssToHideTextForAppBar={this.addCssToHideTextForAppBar()}
+          addAppBarToPage={this.addAppBarToPage}
           toggleBusinessCard={this.toggleBusinessCard}
         />
         {this.addAppBarToPage() && (
           <AppBar
+            state={this.props.state}
+            footerState={this.state}
+            makeButtonActive={this.makeButtonActive}
             toggleText={this.props.toggleText}
             toggleBusinessCard={this.toggleBusinessCard}
-            makeButtonActive={this.makeButtonActive}
-            state={this.state}
           />
         )}
       </footer>

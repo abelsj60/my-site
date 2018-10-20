@@ -9,12 +9,12 @@ class SingleProjectNav extends Component {
   render() {
     return (
       <section className="project-thumbnails">
-        {this.props.project.thumbnails.map(
+        {this.props.projectData.thumbnails.map(
           (thumbnail, index) =>
             thumbnail && (
               <Link
                 key={index}
-                to={`/projects/${this.props.project.name}/${index + 1}`}
+                to={`/projects/${this.props.projectData.name}/${index + 1}`}
               >
                 <img src={thumbnail} alt={`Thumbnail ${index + 1}`} />
               </Link>

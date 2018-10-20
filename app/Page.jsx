@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import Header from './Header.jsx';
 import Main from './Main.jsx';
 import Footer from './Footer.jsx';
+import { getPath } from './helpers/utils.js';
 
 class Page extends Component {
   constructor(props) {
@@ -10,20 +11,15 @@ class Page extends Component {
   }
 
   addCssForPageControl() {
-    return this.props.location.pathname.split('/')[1] === '' ? 'home' : 'inner';
+    return getPath(this.props).split('/')[1] === '' ? 'home' : 'inner';
   }
 
   render() {
     return (
       <section id="page" className={this.addCssForPageControl()}>
         <Header />
-        <Main state={this.props.state} toggleText={this.toggleText} />
-        <Footer
-          toggleText={this.props.toggleText}
-          storyText={this.props.state.storyText}
-          magicClicks={this.props.state.magicClicks}
-          magicOpacity={this.props.state.magicOpacity}
-        />
+        <Main state={this.props.state} />
+        <Footer state={this.props.state} toggleText={this.props.toggleText} />
       </section>
     );
   }

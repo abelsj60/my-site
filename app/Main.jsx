@@ -33,18 +33,6 @@ import NotFound from './NotFound.jsx';
 class Main extends Component {
   constructor(props) {
     super(props);
-
-    // LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
-
-    // ~ja Technically, we don't need the location checks/ternaries in state
-    // b/c the location of each number type is different in each section of
-    // the site, but explicitly checking seems like a better practice
-
-    // ~ja E.g., No collisions
-
-    // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the log and the completion of setState is reconciliation). Do do something other than relying on state; setState w/func? Call earlier? build param differently?
-
-    // ~ja ? Inconsistent: Use CSS attribute in one, className in other
   }
 
   render() {
@@ -53,25 +41,7 @@ class Main extends Component {
         <Route
           exact
           path="/"
-          render={() => (
-            <Home
-              magicOpacity={this.props.state.magicOpacity}
-              magicClicks={this.props.state.magicClicks}
-            />
-          )}
-        />
-
-        <Route
-          exact
-          path="/test"
-          render={() => (
-            <ProjectsBackup
-              projectName={this.props.state.projectName}
-              projectThumbnail={this.props.state.projectThumbnail}
-              toggleDetails={this.props.toggleDetails}
-              showProjectDetails={this.props.state.showProjectDetails}
-            />
-          )}
+          render={() => <Home state={this.props.state} />}
         />
 
         {/* <Route
@@ -95,13 +65,7 @@ class Main extends Component {
         <Route
           exact
           path="/chapter/:title"
-          render={() => (
-            <TheStory
-              chapterTitle={this.props.state.chapterTitle}
-              storyText={this.props.state.storyText}
-              state={this.props.state}
-            />
-          )}
+          render={() => <TheStory state={this.props.state} />}
         />
 
         <Route
@@ -130,14 +94,7 @@ class Main extends Component {
 
         <Route
           path="/projects/:name/:projectThumbnail"
-          render={() => (
-            <Projects
-              projectName={this.props.state.projectName}
-              projectThumbnail={this.props.state.projectThumbnail}
-              toggleDetails={this.props.toggleDetails}
-              showProjectDetails={this.props.state.showProjectDetails}
-            />
-          )}
+          render={() => <Projects state={this.props.state} />}
         />
 
         <Route
@@ -188,9 +145,7 @@ class Main extends Component {
         />
 
         <Route path="/toys" render={() => <Toys />} />
-
         <Route path="/about" render={() => <About />} />
-
         <Route component={NotFound} />
       </Switch>
     );

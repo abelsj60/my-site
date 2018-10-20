@@ -5,9 +5,13 @@ class FooterText extends Component {
     super(props);
   }
 
+  addCssToHideTextForAppBar() {
+    return this.props.addAppBarToPage() ? 'app-bar-active' : '';
+  }
+
   render() {
     return (
-      <section id="footer-text" className={this.props.cssToHideTextForAppBar}>
+      <section id="footer-text" className={this.addCssToHideTextForAppBar()}>
         <p
           onClick={event => {
             this.props.toggleBusinessCard();

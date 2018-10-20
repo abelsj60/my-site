@@ -10,6 +10,11 @@ function normalize(value) {
     .toLowerCase();
 }
 
+function getPath(props) {
+  return props.location.pathname.toLowerCase();
+}
+
 module.exports = {
-  normalize
+  normalize,
+  getPath
 };

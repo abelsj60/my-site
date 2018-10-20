@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import MagicNav from './MagicNav.jsx';
+import { getPath } from './helpers/utils.js';
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Home extends Component {
   }
 
   get location() {
-    return this.props.location.pathname.split('/');
+    return getPath(this.props).split('/');
   }
 
   componentDidMount() {
@@ -54,12 +55,11 @@ class Home extends Component {
         />
         <section
           id="magic-content"
-          className={this.props.magicClicks}
-          style={this.props.magicOpacity}
+          className={this.props.state.magicClicks}
+          style={this.props.state.magicOpacity}
         >
           <MagicNav />
         </section>
-        {/* <section id="magic-scroller" /> */}
       </Fragment>
     );
   }

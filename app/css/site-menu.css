@@ -11,32 +11,36 @@
   color: red;
 }
 
-#site-menu .chapter-index,
-#site-menu .journalism-index,
-#site-menu .projects-index {
+#site-menu .chapter-menu,
+#site-menu .journalism-menu,
+#site-menu .projects-menu {
   overflow: auto;
   margin: 25px;
   flex: 1;
 }
 
-#site-menu .chapter-index a.active {
+#site-menu .chapter-menu a.active,
+#site-menu .journalism-menu a.active {
   color: blue;
 }
 
-#site-menu .chapter-index a.active:hover {
+#site-menu .chapter-menu a.active:hover,
+#site-menu .journalism-menu a.active:hover {
   color: black;
 }
 
-#site-menu .chapter-index a.inactive {
+#site-menu .chapter-menu a.inactive,
+#site-menu .journalism-menu a.inactive {
   color: black;
 }
 
-#site-menu .chapter-index a.inactive:hover {
+#site-menu .chapter-menu a.inactive:hover,
+#site-menu .journalism-menu a.inactive:hover {
   color: cornflowerblue;
 }
 
 #site-menu #source,
-#site-menu .chapter-index {
+#site-menu .chapter-menu {
   font-size: 1.75rem;
   font-style: italic;
   margin-bottom: 5px;
@@ -47,7 +51,7 @@
   margin-bottom: 25px;
 }
 
-.chapter-index p {
+.chapter-menu p {
   font-size: 5rem;
   margin-top: 0;
   margin-left: 0;
@@ -55,7 +59,7 @@
   margin-bottom: 25px;
 }
 
-.projects-index {
+.projects-menu {
   max-width: 563px;
 }
 
