@@ -7,6 +7,12 @@ class MultiProjectNav extends Component {
     super(props);
   }
 
+  get inactiveProjects() {
+    return projectData.filter(
+      project => project.name !== this.props.currentProject.name
+    );
+  }
+
   formatProjectName(name) {
     if (name === 'tmmnews') {
       return name.slice(0, 3).toUpperCase() + name.slice(3);
@@ -16,7 +22,7 @@ class MultiProjectNav extends Component {
   }
 
   render() {
-    return projectData.map((project, index) => (
+    return this.inactiveProjects.map((project, index) => (
       <section id="nav-group" key={index}>
         <h1>
           {this.formatProjectName(project.name)} | {project.details.type}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
+import MultiProjectNav from './MultiProjectNav.jsx';
 import projectData from './data/projectData';
 
 class Projects extends Component {
@@ -26,19 +27,27 @@ class Projects extends Component {
   render() {
     return (
       <main id="my-projects" className="">
-        <h1>{this.projectData.details.name}</h1>
-        <section id="project-container">
-          <ProjectDescription
-            projectKeys={this.projectKeys}
-            projectDescriptions={this.projectDescriptions}
-          />
-          <section id="project-images">
-            <SingleProjectNav projectData={this.projectData} />
-            <ProjectImageContainer
+        <section id="desktop-project-nav" className="left">
+          <div id="content">
+            <h1>Select a project</h1>
+            <MultiProjectNav currentProject={this.projectData} />
+          </div>
+        </section>
+        <section className="right">
+          <h1>{this.projectData.details.name}</h1>
+          <section id="project-container">
+            <ProjectDescription
+              projectKeys={this.projectKeys}
               projectDescriptions={this.projectDescriptions}
-              projectData={this.projectData}
-              state={this.props.state}
             />
+            <section id="project-images">
+              <SingleProjectNav projectData={this.projectData} />
+              <ProjectImageContainer
+                projectDescriptions={this.projectDescriptions}
+                projectData={this.projectData}
+                state={this.props.state}
+              />
+            </section>
           </section>
         </section>
       </main>

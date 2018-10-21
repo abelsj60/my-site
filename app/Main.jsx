@@ -28,6 +28,9 @@ import NotFound from './NotFound.jsx';
   x 14. Home scroll events, tighten
 
   Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
+
+  Rendering:
+  https://robots.thoughtbot.com/react-rendering-misconception
 */
 
 class Main extends Component {
