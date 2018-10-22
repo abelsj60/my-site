@@ -7,7 +7,13 @@ class HeaderNavIcon extends Component {
 
   render() {
     return (
-      <section id="nav-icon" onClick={() => this.props.toggleHeaderMenu()} />
+      <section
+        id="nav-icon"
+        onClick={() => {
+          this.props.toggleHeaderMenu();
+          this.props.closeHeaderMenu();
+        }}
+      />
     );
   }
 }

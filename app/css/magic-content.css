@@ -5,6 +5,7 @@
   min-height: 100vh;
   /* z-index: 1; */
   /* top: 52px; */
+  bottom: 48px;
   object-fit: cover;
   position: fixed;
 }

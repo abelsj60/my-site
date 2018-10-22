@@ -32,7 +32,6 @@ header.menu-open #site-motto {
 }
 
 #site-motto {
-  flex: 1;
   font-size: 1.3rem;
   font-style: italic;
 }
@@ -52,6 +51,12 @@ header a {
   margin-left: 15px;
 }
 
+#inner-page-header,
+#inner-page-header a,
+#inner-page-header #nav-icon {
+  transition: none;
+}
+
 header.opaque a {
   color: black;
 }
@@ -59,7 +64,6 @@ header.opaque a {
 header a:hover {
   color: white;
   text-decoration: underline;
-  transition: color 0s;
 }
 
 header.opaque a:hover {
@@ -76,6 +80,7 @@ header a.active {
   width: 17px;
   background: url('/sign-white-closed.png') no-repeat center;
   transition: background 0.7s;
+  margin-left: auto;
   margin-right: 15px;
 }
 
@@ -137,6 +142,7 @@ header.menu-open #full-screen-nav-menu {
   header nav {
     display: flex;
     justify-content: flex-end;
+    margin-left: auto;
     margin-right: 15px;
   }
 }
