@@ -15,15 +15,13 @@ footer.block {
 }
 
 #home-page-footer {
+  height: 55px;
   z-index: 2;
-}
-
-#home-page-footer {
-  height: 48px;
 }
 
 #footer-text {
   display: flex;
+  font-size: 1.3rem;
 }
 
 #footer-text p:first-child:hover {
@@ -40,7 +38,7 @@ footer.block {
 
 @media only screen and (min-width: 849px) {
   footer {
-    height: 48px;
+    height: 55px;
   }
 
   #footer-text.app-bar-active {

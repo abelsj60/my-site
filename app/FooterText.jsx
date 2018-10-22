@@ -5,6 +5,10 @@ class FooterText extends Component {
     super(props);
   }
 
+  getCopyrightYear() {
+    return new Date().getFullYear();
+  }
+
   addCssToHideTextForAppBar() {
     return this.props.addAppBarToPage() ? 'app-bar-active' : '';
   }
@@ -21,7 +25,7 @@ class FooterText extends Component {
           Contact
         </p>
         <p>|</p>
-        <p>James Abels. All rights reserved. 2018.</p>
+        <p>{`James Abels. All rights reserved. ${this.getCopyrightYear()}.`}</p>
       </section>
     );
   }

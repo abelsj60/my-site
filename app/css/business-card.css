@@ -16,7 +16,7 @@
 
 #home-page-footer #business-card.active {
   top: 52px;
-  bottom: 48px;
+  bottom: 55px;
 }
 
 #business-card section {
@@ -44,6 +44,6 @@
 
 @media only screen and (min-width: 849px) {
   #business-card.active {
-    bottom: 48px;
+    bottom: 55px;
   }
 }
