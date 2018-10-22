@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { getPath } from './helpers/utils.js';
 
 class FooterText extends Component {
   constructor(props) {
     super(props);
+  }
+
+  get location() {
+    return getPath(this.props).split('/');
   }
 
   getCopyrightYear() {
@@ -10,7 +16,7 @@ class FooterText extends Component {
   }
 
   addCssToHideTextForAppBar() {
-    return this.props.addAppBarToPage() ? 'app-bar-active' : '';
+    return this.location[1] !== '' ? 'app-bar-active' : '';
   }
 
   render() {
@@ -31,4 +37,4 @@ class FooterText extends Component {
   }
 }
 
-export default FooterText;
+export default withRouter(FooterText);

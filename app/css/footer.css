@@ -36,6 +36,10 @@ footer.block {
   margin-right: 15px;
 }
 
+#footer-text p:first-child {
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 849px) {
   footer {
     height: 55px;

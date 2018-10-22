@@ -11,11 +11,9 @@ class Footer extends Component {
 
     this.state = {
       contact: 'inactive',
-      menu: 'inactive',
-      text: 'inactive'
+      menu: 'inactive'
     };
 
-    this.addAppBarToPage = this.addAppBarToPage.bind(this);
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
     this.makeButtonActive = this.makeButtonActive.bind(this);
   }
@@ -24,7 +22,7 @@ class Footer extends Component {
     return getPath(this.props).split('/');
   }
 
-  addCssToLocateFooter() {
+  addCssThatLocatesFooter() {
     return this.location[1] !== '' ? 'inner-page-footer' : 'home-page-footer';
   }
 
@@ -48,15 +46,12 @@ class Footer extends Component {
   render() {
     return (
       <footer
-        id={this.addCssToLocateFooter()}
+        id={this.addCssThatLocatesFooter()}
         className={this.props.state.magicClicks}
         style={this.location[1] === '' ? this.props.state.magicOpacity : null}
       >
         <BusinessCard state={this.state} />
-        <FooterText
-          addAppBarToPage={this.addAppBarToPage}
-          toggleBusinessCard={this.toggleBusinessCard}
-        />
+        <FooterText toggleBusinessCard={this.toggleBusinessCard} />
         {this.addAppBarToPage() && (
           <AppBar
             state={this.props.state}
