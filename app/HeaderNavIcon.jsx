@@ -11,7 +11,7 @@ class HeaderNavIcon extends Component {
         id="nav-icon"
         onClick={() => {
           this.props.toggleHeaderMenu();
-          this.props.closeHeaderMenu();
+          this.props.closeHeaderMenuViaSetTimeout();
         }}
       />
     );

@@ -29,11 +29,7 @@ class Footer extends Component {
   }
 
   addAppBarToPage() {
-    return (
-      this.location[1] !== '' &&
-      this.location[1] !== 'about' &&
-      this.location[1] !== 'toys'
-    );
+    return this.location[1] !== '';
   }
 
   toggleBusinessCard() {

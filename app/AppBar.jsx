@@ -43,6 +43,10 @@ class AppBar extends Component {
       });
     }
 
+    if (this.location.includes('toys') || this.location.includes('about') ) {
+      buttons.splice(0, 1);
+    }
+
     return buttons;
   }
 

@@ -17,7 +17,9 @@ class Header extends Component {
 
     this.timeoutId = 0;
 
-    this.closeHeaderMenu = this.closeHeaderMenu.bind(this);
+    this.closeHeaderMenuViaSetTimeout = this.closeHeaderMenuViaSetTimeout.bind(
+      this
+    );
     this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
     this.toggleTransparency = this.toggleTransparency.bind(this);
   }
@@ -54,9 +56,9 @@ class Header extends Component {
     }
   }
 
-  closeHeaderMenu() {
+  closeHeaderMenuViaSetTimeout() {
     if (this.state.menu === '') {
-      this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4500);
+      this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4000);
     }
 
     if (this.timeoutId && this.state.menu !== '') {
@@ -86,7 +88,7 @@ class Header extends Component {
       if (this.timeoutId) {
         clearTimeout(this.timeoutId);
         this.timeoutId = 0;
-        this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4500);
+        this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4000);
       }
     }
   }
@@ -101,7 +103,7 @@ class Header extends Component {
         <HeaderNav />
         <HeaderNavIcon
           toggleHeaderMenu={this.toggleHeaderMenu}
-          closeHeaderMenu={this.closeHeaderMenu}
+          closeHeaderMenuViaSetTimeout={this.closeHeaderMenuViaSetTimeout}
         />
       </header>
     );
