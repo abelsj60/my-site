@@ -11,12 +11,12 @@ class Footer extends Component {
 
     this.state = {
       contact: 'inactive',
-      menu: getPath(this.props).includes('menu') ? 'active' : 'inactive',
+      menu: 'inactive',
       text: 'inactive'
     };
 
     this.toggleStoryText = this.toggleStoryText.bind(this);
-    this.toggleButtonState = this.toggleButtonState.bind(this);
+    this.toggleButtonOnAndOff = this.toggleButtonOnAndOff.bind(this);
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
   }
 
@@ -32,7 +32,7 @@ class Footer extends Component {
     return this.location[1] !== '';
   }
 
-  toggleButtonState(buttonLabel) {
+  toggleButtonOnAndOff(buttonLabel) {
     this.setState({
       [buttonLabel]:
         this.state[buttonLabel] === 'inactive' ? 'active' : 'inactive'
@@ -41,11 +41,11 @@ class Footer extends Component {
 
   toggleStoryText() {
     this.props.toggleText();
-    this.toggleButtonState('text');
+    this.toggleButtonOnAndOff('text');
   }
 
   toggleBusinessCard() {
-    this.toggleButtonState('contact');
+    this.toggleButtonOnAndOff('contact');
   }
 
   componentDidUpdate(prevProps) {
@@ -57,28 +57,30 @@ class Footer extends Component {
           : prevPath.split('/')[1];
 
       if (this.location[1] !== '' && prevSiteSection === '') {
-        prevSiteSection = 'Do not reset';
+        /*
+          ~ja Without this conditional, the prevSiteSection, a string will
+          match and the businessCard won't shut off:
+            '' -businessCard on
+            '/chapter' - businessCard on b/c prevSiteSection matched
+            '/chapter/title' - buisnessCard stays on b/c we match 'chapter'
+
+          This is b/c we use redirects to navigate via Links.
+        */
+
+        prevSiteSection = 'Close businessCard when leaving home';
       }
 
       if (
         this.state.contact === 'active' &&
         !this.location.includes(prevSiteSection)
       ) {
-        this.toggleButtonState('contact');
+        this.toggleButtonOnAndOff('contact');
       }
-    }
-
-    if (this.state.menu === 'active' && this.location[1] !== 'menu') {
-      this.toggleButtonState('menu');
-    }
-
-    if (this.state.menu === 'inactive' && this.location[1] === 'menu') {
-      this.toggleButtonState('menu');
     }
 
     if (this.state.text === 'active' && !this.location.includes('chapter')) {
       this.props.toggleText();
-      this.toggleButtonState('text');
+      this.toggleButtonOnAndOff('text');
     }
   }
 

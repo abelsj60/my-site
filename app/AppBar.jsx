@@ -50,6 +50,18 @@ class AppBar extends Component {
     return buttons;
   }
 
+  addCssForButtonOnAndOff(button) {
+    // ~ja Menu button will always be active on Menu, and nowhere else
+
+    const menu = this.location[1] === 'menu';
+
+    if (menu && button.label === 'menu') {
+      return 'active';
+    }
+
+    return this.props.footerState[button.label];
+  }
+
   render() {
     return (
       <section id="app-bar-menu">
@@ -57,7 +69,7 @@ class AppBar extends Component {
           <Fragment key={index}>
             <Link
               to={button.linkPath}
-              className={`${this.props.footerState[button.label]}`}
+              className={`${this.addCssForButtonOnAndOff(button)}`}
               onClick={event => {
                 button.handleClick();
                 if (button.label !== 'menu') event.preventDefault();
