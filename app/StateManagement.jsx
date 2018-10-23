@@ -16,14 +16,12 @@ class StateManagement extends Component {
     // LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
     // ~ja Technically, we don't need the location checks/ternaries in state
-    // b/c the location of each number type is different in each section of
-    // the site, but explicitly checking seems like a better practice
+    // b/c the type of each route element is different for each section of
+    // the site, but explicitly checking seems like a better practice.
 
     // ~ja E.g., No collisions
 
-    // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the log and the completion of setState is Reconciliation). Do do something other than relying on state; setState w/func? Call earlier? build param differently?
-
-    // ~ja ? Inconsistent: Use CSS attribute in one, className in other
+    // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the console.log and the completion of setState is Reconciliation).
 
     this.state = {
       chapterTitle:
@@ -66,7 +64,8 @@ class StateManagement extends Component {
     // Expl: https://stackoverflow.com/a/29101393/9215718
 
     this.setState({
-      storyText: this.state.storyText === 'show-text' ? 'no-text' : 'show-text'
+      storyText:
+        this.state.storyText === 'show-text' ? 'hide-text' : 'show-text'
     });
   }
 
