@@ -14,10 +14,11 @@ class MagicNav extends Component {
       <section id="magic-nav">
         {magicData.map((section, index) => (
           <Link to={section.link} key={index}>
-            <section>
+            <section id="magic-nav-content">
               <h3>{section.hed}</h3>
               <p>{section.blurb}</p>
             </section>
+            <section id="second-hint">{`${index !== 2 ? '⥣ ⥥' : '⥣'}`}</section>
           </Link>
         ))}
       </section>

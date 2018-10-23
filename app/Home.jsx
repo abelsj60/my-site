@@ -53,6 +53,7 @@ class Home extends Component {
           src={this.imagePath}
           alt="a fantastic imaginary world"
         />
+        <section id="first-hint">⥥</section>
         <section
           id="magic-content"
           className={this.props.state.magicClicks}
