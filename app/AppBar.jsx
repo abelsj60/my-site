@@ -62,8 +62,32 @@ class AppBar extends Component {
     return this.props.footerState[button.label];
   }
 
+  prepMenuLabel(siteSection) {
+    if (siteSection === 'chapter') {
+      return 'Chapters';
+    }
+
+    if (siteSection === 'projects') {
+      return 'Projects';
+    }
+
+    if (siteSection === 'journalism') {
+      return 'Clips';
+    }
+  }
+
   prepButtonLabel(button) {
-    return button.label[0].toUpperCase() + button.label.slice(1);
+    const siteSection = this.location.find(element => {
+      return (
+        element === 'chapter' ||
+        element === 'projects' ||
+        element === 'journalism'
+      );
+    });
+
+    return button.label === 'menu'
+      ? this.prepMenuLabel(siteSection)
+      : button.label[0].toUpperCase() + button.label.slice(1);
   }
 
   render() {
