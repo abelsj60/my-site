@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import AppBar from './AppBar.jsx';
 import BusinessCard from './BusinessCard.jsx';
 import FooterText from './FooterText.jsx';
-import { getPath } from './helpers/utils.js';
+import { splitPath } from './helpers/utils.js';
 
 class Footer extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Footer extends Component {
   }
 
   get location() {
-    return getPath(this.props).split('/');
+    return splitPath(this.props);
   }
 
   addCssThatLocatesFooter() {
@@ -50,7 +50,7 @@ class Footer extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.state.contact === 'active') {
-      const prevPath = getPath(prevProps);
+      const prevPath = splitPath(prevProps);
       let prevSection =
         prevPath.split('/')[1] === 'menu'
           ? prevPath.split('/')[2]

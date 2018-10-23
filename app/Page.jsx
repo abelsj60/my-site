@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import Header from './Header.jsx';
 import Main from './Main.jsx';
 import Footer from './Footer.jsx';
-import { getPath } from './helpers/utils.js';
+import { splitPath } from './helpers/utils.js';
 
 class Page extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Page extends Component {
   }
 
   addCssForPageControl() {
-    return getPath(this.props).split('/')[1] === '' ? 'home' : 'inner';
+    return splitPath(this.props)[1] === '' ? 'home' : 'inner';
   }
 
   render() {

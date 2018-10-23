@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import storyData from './data/storyData';
-import { getPath, normalize } from './helpers/utils.js';
+import { splitPath, normalize } from './helpers/utils.js';
 
 class ChapterNav extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class ChapterNav extends Component {
   }
 
   get location() {
-    return getPath(this.props).split('/');
+    return splitPath(this.props);
   }
 
   setActiveChapter(chapter, currentChapterTitle) {

@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { getPath } from './helpers/utils.js';
+import { getPath, splitPath } from './helpers/utils.js';
 
 class AppBar extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class AppBar extends Component {
   }
 
   get location() {
-    return getPath(this.props).split('/');
+    return splitPath(this.props);
   }
 
   get linkToMenu() {

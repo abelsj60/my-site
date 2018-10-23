@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import ArticleNav from './ArticleNav.jsx';
 import ChapterNav from './ChapterNav.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
-import { getPath } from './helpers/utils.js';
+import { splitPath } from './helpers/utils.js';
 
 class SectionMenu extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class SectionMenu extends Component {
   }
 
   get location() {
-    return getPath(this.props).split('/');
+    return splitPath(this.props);
   }
 
   get projectPage() {

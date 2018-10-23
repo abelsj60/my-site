@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import MagicNav from './MagicNav.jsx';
-import { getPath } from './helpers/utils.js';
+import { splitPath } from './helpers/utils.js';
 
 class Home extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class Home extends Component {
   }
 
   get location() {
-    return getPath(this.props).split('/');
+    return splitPath(this.props);
   }
 
   componentDidMount() {

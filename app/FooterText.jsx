@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { getPath } from './helpers/utils.js';
+import { splitPath } from './helpers/utils.js';
 
 class FooterText extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class FooterText extends Component {
   }
 
   get location() {
-    return getPath(this.props).split('/');
+    return splitPath(this.props);
   }
 
   getCopyrightYear() {

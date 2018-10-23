@@ -5,13 +5,13 @@ import MagicScroller from './MagicScroller.jsx';
 import articleData from './data/articleData.js';
 import storyData from './data/storyData.js';
 import projectData from './data/projectData.js';
-import { getPath, normalize } from './helpers/utils.js';
+import { splitPath, normalize } from './helpers/utils.js';
 
 class StateManagement extends Component {
   constructor(props) {
     super(props);
 
-    const location = getPath(this.props).split('/');
+    const location = splitPath(this.props);
 
     // LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
@@ -48,7 +48,7 @@ class StateManagement extends Component {
           : normalize(articleData[0].headline),
       storyText: 'show-text',
       magicOpacity: { opacity: 0 },
-      magicClicks: getPath(this.props).split('/')[1] === '' ? 'block' : ''
+      magicClicks: splitPath(this.props)[1] === '' ? 'block' : ''
     };
 
     this.toggleText = this.toggleText.bind(this);
@@ -147,7 +147,7 @@ class StateManagement extends Component {
 
   toggleMagicPointer() {
     if (
-      getPath(this.props).split('/')[1] === '' &&
+      splitPath(this.props)[1] === '' &&
       this.state.magicClicks === 'block' &&
       this.scrollTop > 3220
     ) {
@@ -155,7 +155,7 @@ class StateManagement extends Component {
     }
 
     if (
-      getPath(this.props).split('/')[1] === '' &&
+      splitPath(this.props)[1] === '' &&
       this.state.magicClicks === '' &&
       this.scrollTop < 3220
     ) {
@@ -172,7 +172,7 @@ class StateManagement extends Component {
     // ~ja Must compare props to state to see a difference
     // Location checks used to prevent collisions
 
-    const location = getPath(this.props).split('/');
+    const location = splitPath(this.props);
 
     const chapterTitle =
       location[1] === 'chapter' ? this.validateChapter(location[2]) : undefined;

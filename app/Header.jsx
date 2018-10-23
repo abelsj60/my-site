@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import HeaderText from './HeaderText.jsx';
 import HeaderNav from './HeaderNav.jsx';
 import HeaderNavIcon from './HeaderNavIcon.jsx';
-import { getPath } from './helpers/utils.js';
+import { splitPath } from './helpers/utils.js';
 
 class Header extends Component {
   constructor(props) {
@@ -11,8 +11,7 @@ class Header extends Component {
 
     this.state = {
       menu: '',
-      visibility:
-        getPath(this.props).split('/')[1] === '' ? 'transparent' : 'opaque'
+      visibility: splitPath(this.props)[1] === '' ? 'transparent' : 'opaque'
     };
 
     this.timeoutId = 0;
@@ -25,7 +24,7 @@ class Header extends Component {
   }
 
   get location() {
-    return getPath(this.props).split('/');
+    return splitPath(this.props);
   }
 
   get scrollTop() {
@@ -84,7 +83,7 @@ class Header extends Component {
       this.setState({ visibility: 'transparent' });
     }
 
-    if (this.location[1] !== getPath(prevProps).split('/')[1]) {
+    if (this.location[1] !== splitPath(prevProps)[1]) {
       if (this.timeoutId) {
         clearTimeout(this.timeoutId);
         this.timeoutId = 0;
