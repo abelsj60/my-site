@@ -92,7 +92,10 @@ class Footer extends Component {
         style={this.location[1] === '' ? this.props.state.magicOpacity : null}
       >
         <BusinessCard state={this.state} />
-        <FooterText toggleBusinessCard={this.toggleBusinessCard} />
+        <FooterText
+          footerState={this.state}
+          toggleBusinessCard={this.toggleBusinessCard}
+        />
         {this.addAppBarToPage() && (
           <AppBar
             state={this.props.state}

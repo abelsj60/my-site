@@ -28,6 +28,10 @@ footer.block {
   color: yellow;
 }
 
+#footer-text p.active {
+  color: yellow;
+}
+
 #footer-text.app-bar-active {
   display: none;
 }
