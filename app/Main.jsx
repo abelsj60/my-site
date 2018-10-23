@@ -18,7 +18,7 @@ import NotFound from './NotFound.jsx';
   6. Edit story
   x 7. Get real project data
   x 8. Refactor CSS
-  9. Use setState() instead of links in most nav locations?
+  xx 9. Use setState() instead of links in most nav locations?
     https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
     https://tylermcginnis.com/react-router-programmatically-navigate/
   10. x Clean up data structures
@@ -46,16 +46,6 @@ class Main extends Component {
           path="/"
           render={() => <Home state={this.props.state} />}
         />
-
-        {/* <Route
-            exact
-            path="/chapter/menu"
-            render={() => {
-              const section = 'chapter';
-
-              return <Menu section={section} />;
-            }}
-          /> */}
 
         <Route
           exact

@@ -12,7 +12,7 @@ class Footer extends Component {
     this.state = {
       contact: 'inactive',
       menu: 'inactive',
-      text: 'inactive'
+      explore: 'inactive'
     };
 
     this.toggleStoryText = this.toggleStoryText.bind(this);
@@ -41,7 +41,7 @@ class Footer extends Component {
 
   toggleStoryText() {
     this.props.toggleText();
-    this.toggleButtonOnAndOff('text');
+    this.toggleButtonOnAndOff('explore');
   }
 
   toggleBusinessCard() {
@@ -51,36 +51,36 @@ class Footer extends Component {
   componentDidUpdate(prevProps) {
     if (this.state.contact === 'active') {
       const prevPath = getPath(prevProps);
-      let prevSiteSection =
+      let prevSection =
         prevPath.split('/')[1] === 'menu'
           ? prevPath.split('/')[2]
           : prevPath.split('/')[1];
 
-      if (this.location[1] !== '' && prevSiteSection === '') {
+      if (this.location[1] !== '' && prevSection === '') {
         /*
-          ~ja Without this conditional, the prevSiteSection, a string will
+          ~ja Without this conditional, the prevSection, a string will
           match and the businessCard won't shut off:
             '' -businessCard on
-            '/chapter' - businessCard on b/c prevSiteSection matched
+            '/chapter' - businessCard on b/c prevSection matched
             '/chapter/title' - buisnessCard stays on b/c we match 'chapter'
 
           This is b/c we use redirects to navigate via Links.
         */
 
-        prevSiteSection = 'Close businessCard when leaving home';
+        prevSection = 'Close businessCard when leaving home';
       }
 
       if (
         this.state.contact === 'active' &&
-        !this.location.includes(prevSiteSection)
+        !this.location.includes(prevSection)
       ) {
         this.toggleButtonOnAndOff('contact');
       }
     }
 
-    if (this.state.text === 'active' && !this.location.includes('chapter')) {
+    if (this.state.explore === 'active' && !this.location.includes('chapter')) {
       this.props.toggleText();
-      this.toggleButtonOnAndOff('text');
+      this.toggleButtonOnAndOff('explore');
     }
   }
 

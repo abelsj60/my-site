@@ -11,12 +11,12 @@ class AppBar extends Component {
     return getPath(this.props).split('/');
   }
 
-  get linkPathFromMenu() {
-    return '/' + this.location[2];
+  get linkToMenu() {
+    return '/menu/' + this.location[1];
   }
 
-  get linkPathToMenu() {
-    return '/menu/' + this.location[1];
+  get linkToLeaveMenu() {
+    return '/' + this.location[2];
   }
 
   get buttons() {
@@ -24,8 +24,8 @@ class AppBar extends Component {
       {
         label: 'menu',
         linkPath: this.location.includes('menu')
-          ? this.linkPathFromMenu
-          : this.linkPathToMenu,
+          ? this.linkToLeaveMenu
+          : this.linkToMenu,
         handleClick: () => null
       },
       {
@@ -37,7 +37,7 @@ class AppBar extends Component {
 
     if (this.location.includes('chapter')) {
       buttons.splice(1, 0, {
-        label: 'text',
+        label: 'explore',
         linkPath: getPath(this.props),
         handleClick: () => this.props.toggleStoryText()
       });
@@ -62,6 +62,10 @@ class AppBar extends Component {
     return this.props.footerState[button.label];
   }
 
+  prepButtonLabel(button) {
+    return button.label[0].toUpperCase() + button.label.slice(1);
+  }
+
   render() {
     return (
       <section id="app-bar-menu">
@@ -75,7 +79,7 @@ class AppBar extends Component {
                 if (button.label !== 'menu') event.preventDefault();
               }}
             >
-              <p>{button.label[0].toUpperCase() + button.label.slice(1)}</p>
+              <p>{this.prepButtonLabel(button)}</p>
             </Link>
             {button.label === 'contact' ? null : <div id="button-border" />}
           </Fragment>
