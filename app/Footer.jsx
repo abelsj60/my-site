@@ -11,11 +11,13 @@ class Footer extends Component {
 
     this.state = {
       contact: 'inactive',
-      menu: 'inactive'
+      menu: getPath(this.props).includes('menu') ? 'active' : 'inactive',
+      text: 'inactive'
     };
 
+    this.toggleStoryText = this.toggleStoryText.bind(this);
+    this.toggleButtonState = this.toggleButtonState.bind(this);
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
-    this.makeButtonActive = this.makeButtonActive.bind(this);
   }
 
   get location() {
@@ -30,17 +32,54 @@ class Footer extends Component {
     return this.location[1] !== '';
   }
 
-  toggleBusinessCard() {
-    this.setState({
-      contact: this.state.contact === 'inactive' ? 'active' : 'inactive'
-    });
-  }
-
-  makeButtonActive(buttonLabel) {
+  toggleButtonState(buttonLabel) {
     this.setState({
       [buttonLabel]:
         this.state[buttonLabel] === 'inactive' ? 'active' : 'inactive'
     });
+  }
+
+  toggleStoryText() {
+    this.props.toggleText();
+    this.toggleButtonState('text');
+  }
+
+  toggleBusinessCard() {
+    this.toggleButtonState('contact');
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.contact === 'active') {
+      const prevPath = getPath(prevProps);
+      let prevSiteSection =
+        prevPath.split('/')[1] === 'menu'
+          ? prevPath.split('/')[2]
+          : prevPath.split('/')[1];
+
+      if (this.location[1] !== '' && prevSiteSection === '') {
+        prevSiteSection = 'Do not reset';
+      }
+
+      if (
+        this.state.contact === 'active' &&
+        !this.location.includes(prevSiteSection)
+      ) {
+        this.toggleButtonState('contact');
+      }
+    }
+
+    if (this.state.menu === 'active' && this.location[1] !== 'menu') {
+      this.toggleButtonState('menu');
+    }
+
+    if (this.state.menu === 'inactive' && this.location[1] === 'menu') {
+      this.toggleButtonState('menu');
+    }
+
+    if (this.state.text === 'active' && !this.location.includes('chapter')) {
+      this.props.toggleText();
+      this.toggleButtonState('text');
+    }
   }
 
   render() {
@@ -56,8 +95,7 @@ class Footer extends Component {
           <AppBar
             state={this.props.state}
             footerState={this.state}
-            makeButtonActive={this.makeButtonActive}
-            toggleText={this.props.toggleText}
+            toggleStoryText={this.toggleStoryText}
             toggleBusinessCard={this.toggleBusinessCard}
           />
         )}
