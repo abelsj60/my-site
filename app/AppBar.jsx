@@ -26,7 +26,7 @@ class AppBar extends Component {
         linkPath: this.location.includes('menu')
           ? this.linkPathFromMenu
           : this.linkPathToMenu,
-        handleClick: () => undefined
+        handleClick: () => null
       },
       {
         label: 'contact',
@@ -39,11 +39,11 @@ class AppBar extends Component {
       buttons.splice(1, 0, {
         label: 'text',
         linkPath: getPath(this.props),
-        handleClick: () => this.props.toggleText()
+        handleClick: () => this.props.toggleStoryText()
       });
     }
 
-    if (this.location.includes('toys') || this.location.includes('about') ) {
+    if (this.location.includes('toys') || this.location.includes('about')) {
       buttons.splice(0, 1);
     }
 
@@ -57,10 +57,9 @@ class AppBar extends Component {
           <Fragment key={index}>
             <Link
               to={button.linkPath}
-              className={this.props.footerState[button.label]}
+              className={`${this.props.footerState[button.label]}`}
               onClick={event => {
                 button.handleClick();
-                this.props.makeButtonActive(button.label);
                 if (button.label !== 'menu') event.preventDefault();
               }}
             >
