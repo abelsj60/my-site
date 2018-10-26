@@ -17,7 +17,7 @@ class Page extends Component {
   render() {
     return (
       <section id="page" className={this.addCssForPageControl()}>
-        <Header />
+        <Header state={this.props.state} toggleMenu={this.props.toggleMenu} />
         <Main state={this.props.state} toggleMenu={this.props.toggleMenu} />
         <Footer
           state={this.props.state}

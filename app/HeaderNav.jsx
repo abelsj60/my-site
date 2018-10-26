@@ -19,6 +19,12 @@ class HeaderNav extends Component {
       : '';
   }
 
+  deactiveMenuButton() {
+    if (this.props.state.menu === 'active') {
+      this.props.toggleMenu();
+    }
+  }
+
   render() {
     return (
       <nav>
@@ -27,6 +33,7 @@ class HeaderNav extends Component {
             key={index}
             className={this.addCssToActiveLink(section.name)}
             to={section.path}
+            onClick={() => this.deactiveMenuButton()}
           >
             {section.name}
           </Link>
