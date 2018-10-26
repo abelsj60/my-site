@@ -1,0 +1,28 @@
+/* Legal CSS */
+
+#legal {
+  display: none;
+}
+
+#legal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 52px;
+  bottom: 80px;
+  width: 100%;
+  background-color: whitesmoke;
+  color: black;
+}
+
+#home-page-footer #legal.active {
+  top: 52px;
+  bottom: 55px;
+}
+
+@media only screen and (min-width: 849px) {
+  #legal.active {
+    bottom: 55px;
+  }
+}

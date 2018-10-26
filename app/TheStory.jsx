@@ -18,7 +18,7 @@ class TheStory extends Component {
   render() {
     return (
       <main id="the-story">
-        <section id="chapter" className={`left ${this.props.state.storyText}`}>
+        <section id="chapter" className={`left ${this.props.state.explore}`}>
           <section id="desktop-story-nav">
             <ChapterNav state={this.props.state} />
           </section>

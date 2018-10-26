@@ -15,7 +15,11 @@ class Menu extends Component {
   render() {
     return (
       <main id="site-menu">
-        <Link id="close-button" to={`/${this.location[2].toLowerCase()}`}>
+        <Link
+          id="close-button"
+          onClick={() => this.props.toggleMenu()}
+          to={`/${this.location[2].toLowerCase()}`}
+        >
           <p>(X) Close</p>
         </Link>
         <SectionMenu state={this.props.state} />

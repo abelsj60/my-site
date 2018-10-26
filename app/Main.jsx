@@ -7,30 +7,23 @@ import Journalism from './Journalism.jsx';
 import About from './About.jsx';
 import Toys from './Toys.jsx';
 import Menu from './Menu.jsx';
+import Legal from './Legal.jsx';
 import NotFound from './NotFound.jsx';
 
 /*
-  x 1. Hold state between /home and rest of app
-  x 2. Add content to NotFound, About, Details (x needs data structure, too)
-  x 3. Need to access details on projects pages
-  x 4. Swap chapter names for numbers in state/urls
-  x 5. Refactor js
-  6. Edit story
-  x 7. Get real project data
-  x 8. Refactor CSS
-  xx 9. Use setState() instead of links in most nav locations?
+
+  1. Use setState() instead of links in most nav locations?
     https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
     https://tylermcginnis.com/react-router-programmatically-navigate/
-  10. x Clean up data structures
-  11. Layout, design
-  12. Browser testing, polyfills, etc
-  x 13. Make state defaults dynamic via reference
-  x 14. Home scroll events, tighten
 
-  Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
+  2. Layout, design
+  3. Browser testing, polyfills, etc
 
-  Rendering:
+  --Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
+
+  --Rendering:
   https://robots.thoughtbot.com/react-rendering-misconception
+
 */
 
 class Main extends Component {
@@ -130,8 +123,9 @@ class Main extends Component {
           render={({ match }) => {
             return (
               <Menu
-                section={match.params.section.toLowerCase()}
                 state={this.props.state}
+                toggleMenu={this.props.toggleMenu}
+                section={match.params.section.toLowerCase()}
               />
             );
           }}
