@@ -11,99 +11,97 @@ class AppBar extends Component {
     return splitPath(this.props);
   }
 
-  get linkToMenu() {
-    return '/menu/' + this.location[1];
-  }
-
-  get linkToLeaveMenu() {
-    return '/' + this.location[2];
-  }
-
   get buttons() {
-    const buttons = [
+    return [
       {
         label: 'menu',
         linkPath: this.location.includes('menu')
-          ? this.linkToLeaveMenu
-          : this.linkToMenu,
-        handleClick: () => null
+          ? '/' + this.location[2]
+          : '/menu/' + this.location[1],
+        css: this.props.state.menu,
+        handleClick: () => this.props.toggleMenu()
+      },
+      {
+        label: 'explore',
+        linkPath: getPath(this.props),
+        css: this.props.state.explore === 'active' ? 'inactive' : 'active',
+        handleClick: () => this.props.toggleText()
+      },
+      {
+        label: 'legal',
+        linkPath: getPath(this.props),
+        css: this.props.state.legal,
+        handleClick: () => this.props.toggleLegal()
       },
       {
         label: 'contact',
         linkPath: getPath(this.props),
+        css: this.props.footerState.contact,
         handleClick: () => this.props.toggleBusinessCard()
       }
     ];
+  }
 
+  pickButtons(labels) {
+    return this.buttons.filter(button =>
+      labels.find(label => button.label === label)
+    );
+  }
+
+  getButtonsForDisplay() {
     if (this.location.includes('chapter')) {
-      buttons.splice(1, 0, {
-        label: 'explore',
-        linkPath: getPath(this.props),
-        handleClick: () => this.props.toggleStoryText()
-      });
-    }
-
-    if (this.location.includes('toys') || this.location.includes('about')) {
-      buttons.splice(0, 1);
-    }
-
-    return buttons;
-  }
-
-  addCssForButtonOnAndOff(button) {
-    // ~ja Menu button will always be active on Menu, and nowhere else
-
-    const menu = this.location[1] === 'menu';
-
-    if (menu && button.label === 'menu') {
-      return 'active';
-    }
-
-    return this.props.footerState[button.label];
-  }
-
-  prepMenuLabel(siteSection) {
-    if (siteSection === 'chapter') {
-      return 'Chapters';
-    }
-
-    if (siteSection === 'projects') {
-      return 'Projects';
-    }
-
-    if (siteSection === 'journalism') {
-      return 'Clips';
+      return this.pickButtons(['menu', 'explore', 'contact']);
+    } else if (
+      this.location.includes('projects') ||
+      this.location.includes('journalism')
+    ) {
+      return this.pickButtons(['menu', 'contact']);
+    } else if (
+      this.location.includes('toys') ||
+      this.location.includes('about')
+    ) {
+      return this.pickButtons(['contact', 'legal']);
     }
   }
 
-  prepButtonLabel(button) {
-    const siteSection = this.location.find(element => {
-      return (
-        element === 'chapter' ||
-        element === 'projects' ||
-        element === 'journalism'
-      );
-    });
+  getLabelForMenu(section) {
+    if (section === 'chapter') {
+      return 'chapters';
+    } else if (section === 'projects') {
+      return 'projects';
+    } else if (section === 'journalism') {
+      return 'clips';
+    }
+  }
 
-    return button.label === 'menu'
-      ? this.prepMenuLabel(siteSection)
-      : button.label[0].toUpperCase() + button.label.slice(1);
+  formatButtonLabel(button) {
+    const menuLabel =
+      button.label === 'menu'
+        ? this.location[1] !== 'menu'
+          ? this.getLabelForMenu(this.location[1])
+          : this.getLabelForMenu(this.location[2])
+        : undefined;
+    const label = menuLabel ? menuLabel : button.label;
+
+    return label[0].toUpperCase() + label.slice(1);
   }
 
   render() {
     return (
       <section id="app-bar-menu">
-        {this.buttons.map((button, index) => (
+        {this.getButtonsForDisplay().map((button, index) => (
           <Fragment key={index}>
             <Link
               to={button.linkPath}
-              className={`${this.addCssForButtonOnAndOff(button)}`}
+              className={button.css}
               onClick={event => {
                 button.handleClick();
-                if (button.label !== 'menu') event.preventDefault();
+                if (button.label !== 'menu') {
+                  event.preventDefault();
+                }
               }}
             >
-              <p>{this.prepButtonLabel(button)}</p>
+              <p>{this.formatButtonLabel(button)}</p>
             </Link>
             {button.label === 'contact' ? null : <div id="button-border" />}
           </Fragment>

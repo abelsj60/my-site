@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { splitPath } from './helpers/utils.js';
+import { Link } from 'react-router-dom';
+import { getPath } from './helpers/utils.js';
 
 class FooterText extends Component {
   constructor(props) {
@@ -33,8 +35,12 @@ class FooterText extends Component {
         >
           Contact
         </p>
-        <p>|</p>
-        <p>{`James Abels. All rights reserved. ${this.getCopyrightYear()}.`}</p>
+        <p
+          className={this.props.state.legal}
+          onClick={() => this.props.toggleLegal()}
+        >
+          Legal
+        </p>
       </section>
     );
   }

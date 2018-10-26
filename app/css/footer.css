@@ -24,12 +24,17 @@ footer.block {
   font-size: 1.3rem;
 }
 
-#footer-text p:first-child:hover {
+#footer-text p:hover,
+#footer-text a:hover {
   color: yellow;
 }
 
 #footer-text p.active {
   color: yellow;
+}
+
+#footer-text a {
+  color: white;
 }
 
 #footer-text.app-bar-active {
@@ -40,7 +45,7 @@ footer.block {
   margin-right: 15px;
 }
 
-#footer-text p:first-child {
+#footer-text p {
   cursor: pointer;
 }
 

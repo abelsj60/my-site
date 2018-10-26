@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import AppBar from './AppBar.jsx';
 import BusinessCard from './BusinessCard.jsx';
 import FooterText from './FooterText.jsx';
+import Legal from './Legal.jsx';
 import { splitPath } from './helpers/utils.js';
 
 class Footer extends Component {
@@ -10,18 +11,18 @@ class Footer extends Component {
     super(props);
 
     this.state = {
-      contact: 'inactive',
-      menu: 'inactive',
-      explore: 'inactive'
+      contact: 'inactive'
     };
 
-    this.toggleStoryText = this.toggleStoryText.bind(this);
-    this.toggleButtonOnAndOff = this.toggleButtonOnAndOff.bind(this);
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
   }
 
   get location() {
     return splitPath(this.props);
+  }
+
+  get copyrightYear() {
+    return new Date().getFullYear();
   }
 
   addCssThatLocatesFooter() {
@@ -32,29 +33,16 @@ class Footer extends Component {
     return this.location[1] !== '';
   }
 
-  toggleButtonOnAndOff(buttonLabel) {
-    this.setState({
-      [buttonLabel]:
-        this.state[buttonLabel] === 'inactive' ? 'active' : 'inactive'
-    });
-  }
-
-  toggleStoryText() {
-    this.props.toggleText();
-    this.toggleButtonOnAndOff('explore');
-  }
-
   toggleBusinessCard() {
-    this.toggleButtonOnAndOff('contact');
+    this.setState({
+      contact: this.state.contact === 'inactive' ? 'active' : 'inactive'
+    });
   }
 
   componentDidUpdate(prevProps) {
     if (this.state.contact === 'active') {
       const prevPath = splitPath(prevProps);
-      let prevSection =
-        prevPath.split('/')[1] === 'menu'
-          ? prevPath.split('/')[2]
-          : prevPath.split('/')[1];
+      let prevSection = prevPath[1] === 'menu' ? prevPath[2] : prevPath[1];
 
       if (this.location[1] !== '' && prevSection === '') {
         /*
@@ -74,13 +62,12 @@ class Footer extends Component {
         this.state.contact === 'active' &&
         !this.location.includes(prevSection)
       ) {
-        this.toggleButtonOnAndOff('contact');
+        this.toggleBusinessCard('contact');
       }
     }
 
     if (this.state.explore === 'active' && !this.location.includes('chapter')) {
       this.props.toggleText();
-      this.toggleButtonOnAndOff('explore');
     }
   }
 
@@ -91,16 +78,21 @@ class Footer extends Component {
         className={this.props.state.magicClicks}
         style={this.location[1] === '' ? this.props.state.magicOpacity : null}
       >
+        <Legal state={this.props.state} />
         <BusinessCard state={this.state} />
         <FooterText
+          state={this.props.state}
           footerState={this.state}
+          toggleLegal={this.props.toggleLegal}
           toggleBusinessCard={this.toggleBusinessCard}
         />
         {this.addAppBarToPage() && (
           <AppBar
             state={this.props.state}
             footerState={this.state}
-            toggleStoryText={this.toggleStoryText}
+            toggleText={this.props.toggleText}
+            toggleMenu={this.props.toggleMenu}
+            toggleLegal={this.props.toggleLegal}
             toggleBusinessCard={this.toggleBusinessCard}
           />
         )}

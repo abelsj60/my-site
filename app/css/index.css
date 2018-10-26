@@ -24,6 +24,7 @@ body {
 @import 'css-reset.css';
 @import 'header.css';
 @import 'business-card.css';
+@import 'legal.css';
 @import 'app-bar.css';
 @import 'magic-content.css';
 @import 'inner-page.css';
