@@ -14,14 +14,6 @@ class Home extends Component {
     this.setMagicScale = this.setMagicScale.bind(this);
   }
 
-  get imagePath() {
-    return '/dreaming-boy-co-2.png';
-  }
-
-  get location() {
-    return splitPath(this.props);
-  }
-
   componentDidMount() {
     window.addEventListener('scroll', this.setMagicScale);
   }
@@ -50,7 +42,7 @@ class Home extends Component {
         <img
           id="magic-image"
           style={this.state.magicScale}
-          src={this.imagePath}
+          src="/dreaming-boy-co-2.png"
           alt="a fantastic imaginary world"
         />
         <section id="first-hint">⥥</section>

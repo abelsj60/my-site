@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { splitPath } from './helpers/utils.js';
 
-// ~ja Turn off legal in mobile (standard css), not home or about.
-
 class Legal extends Component {
   constructor(props) {
     super(props);

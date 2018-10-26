@@ -99,7 +99,10 @@ class Header extends Component {
         className={`${this.state.visibility}${this.state.menu}`}
       >
         <HeaderText />
-        <HeaderNav />
+        <HeaderNav
+          state={this.props.state}
+          toggleMenu={this.props.toggleMenu}
+        />
         <HeaderNavIcon
           toggleHeaderMenu={this.toggleHeaderMenu}
           closeHeaderMenuViaSetTimeout={this.closeHeaderMenuViaSetTimeout}
