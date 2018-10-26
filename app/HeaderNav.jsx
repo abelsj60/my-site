@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import headerData from './data/headerData.js';
+import { splitPath } from './helpers/utils.js';
 
 class HeaderNav extends Component {
   constructor(props) {
@@ -8,15 +9,14 @@ class HeaderNav extends Component {
   }
 
   addCssToActiveLink(section) {
-    if (section.toLowerCase() === 'the story') {
-      section = 'chapter';
+    let sectionName = section.name.toLowerCase();
+    const currentPath = splitPath(this.props);
+
+    if (sectionName === 'the story') {
+      sectionName = 'chapter';
     }
 
-    return this.props.location.pathname
-      .toLowerCase()
-      .includes(section.toLowerCase())
-      ? 'active'
-      : '';
+    return currentPath.includes(sectionName) ? 'active' : '';
   }
 
   deactiveMenuButton() {
@@ -31,9 +31,9 @@ class HeaderNav extends Component {
         {headerData.map((section, index) => (
           <Link
             key={index}
-            className={this.addCssToActiveLink(section.name)}
             to={section.path}
             onClick={() => this.deactiveMenuButton()}
+            className={this.addCssToActiveLink(section)}
           >
             {section.name}
           </Link>

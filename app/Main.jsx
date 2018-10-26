@@ -16,9 +16,11 @@ import NotFound from './NotFound.jsx';
     https://tylermcginnis.com/react-router-programmatically-navigate/
   2. Layout, design
   3. Browser testing, polyfills, etc
-  4. When navigating away from home, reset scrollTop to 0?
+  4. When navigating away from home, reset scrollTop to 0 ?
   5. Image storage in sight? / Bundling?
   6. When using menu to navigate away from Menu, shut off menu
+  7. Remove extra space from last thumbnail group in menu/
+  8. Refactor StateManagement (tighten?)
 
   --Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
 
