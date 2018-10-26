@@ -4,7 +4,8 @@
   display: none;
 }
 
-#legal.active {
+#home-page-footer #legal.active,
+#legal.active.about {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +24,18 @@
 
 @media only screen and (min-width: 849px) {
   #legal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 52px;
+    bottom: 80px;
+    width: 100%;
+    background-color: whitesmoke;
+    color: black;
+  }
+
+  #inner-page-footer #legal.active {
     bottom: 55px;
   }
 }
