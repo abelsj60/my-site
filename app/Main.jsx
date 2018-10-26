@@ -7,7 +7,7 @@ import Journalism from './Journalism.jsx';
 import About from './About.jsx';
 import Toys from './Toys.jsx';
 import Menu from './Menu.jsx';
-import Legal from './Legal.jsx';
+// import Legal from './Legal.jsx';
 import NotFound from './NotFound.jsx';
 
 /*

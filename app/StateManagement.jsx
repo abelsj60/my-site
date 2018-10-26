@@ -232,6 +232,9 @@ class StateManagement extends Component {
       this.state.magicClicks === '';
     const updateMagicClicksWhenLeavingHome =
       location[1] !== '' && this.state.magicClicks === 'block';
+    const updateMenu =
+      this.state.menu === 'active' &&
+      !splitPath(this.props).includes(prevLocation);
     const updateLegal =
       this.state.legal === 'active' &&
       splitPath(this.props)[1] !== prevLocation;
@@ -244,6 +247,7 @@ class StateManagement extends Component {
       updateHeadline ||
       updateMagicClicksWhenGoingHome ||
       updateMagicClicksWhenLeavingHome ||
+      updateMenu ||
       updateLegal
     ) {
       this.setState({
@@ -261,6 +265,7 @@ class StateManagement extends Component {
           : updateMagicClicksWhenLeavingHome
             ? ''
             : this.state.magicClicks,
+        menu: updateMenu ? 'inactive' : this.state.menu,
         legal: updateLegal ? 'inactive' : this.state.legal
       });
     }
