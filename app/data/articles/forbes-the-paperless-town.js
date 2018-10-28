@@ -32,9 +32,9 @@ export default (
     </p>
     <p>
       "There's so many other ways to get your message out, I can understand the
-      problem of keeping [it] open," he says, though he doesn't like it--some 50
-      years ago, he was a paperboy for the Press. "The reality is that some of
-      the other newspapers in the area will probably step it up."
+      problem of keeping [it] open," he says, though he doesn't like it — some
+      50 years ago, he was a paperboy for the Press. "The reality is that some
+      of the other newspapers in the area will probably step it up."
     </p>
     <p>
       That's what happened to the Post-Herald in Birmingham, Ala. Owned by E.W.
@@ -71,8 +71,8 @@ export default (
       Joanie Paterson says her funeral business was cut in half by some $10,000
       because the elderly stopped learning of deaths soon enough to send
       flowers. But she says she can't think of any other local businesses
-      similarly impacted, although folks living in the town's rural
-      outskirts--like her father--have trouble getting the news.
+      similarly impacted, although folks living in the town's rural outskirts —
+      like her father — have trouble getting the news.
     </p>
     <p>
       The local radio station's Web site has become a major spot for community

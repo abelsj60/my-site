@@ -41,7 +41,7 @@ export default (
       well over 5,000 live streams this month.
     </p>
     <p>
-      Most months average 4,000--a number that already represents tremendous
+      Most months average 4,000 — a number that already represents tremendous
       recent growth. Alan Riley, director of Web operations, says the
       eight-year-old company was averaging just 2,000 monthly streams 18 months
       ago.
@@ -51,9 +51,9 @@ export default (
       wonder. Religious groups are looking for younger parishioners, says
       Quentin Schultze, a communications professor focusing on religion at
       Calvin College in Michigan. The Internet has made competing for their
-      attention harder than ever he says. The Internet is teaching
-      people--particularly younger ones--that they can demand convenience in how
-      they consume all types of messages, including religious ones.
+      attention harder than ever he says. The Internet is teaching people —
+      particularly younger ones — that they can demand convenience in how they
+      consume all types of messages, including religious ones.
     </p>
     <p>
       "I think that goes to the cultural shift of the younger generations coming
@@ -85,7 +85,7 @@ export default (
 
     <p>
       And online viewers tend to donate less as well. At LifeChurch.tv people
-      give an average of $8 to $10 per week online--far lower than the $25-$35
+      give an average of $8 to $10 per week online — far lower than the $25-$35
       they donate in person. Perhaps it's not surprising then that the church
       sees the format as a way to help drive people to physical locations,
       rather than a destination in itself.

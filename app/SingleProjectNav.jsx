@@ -14,6 +14,11 @@ class SingleProjectNav extends Component {
             thumbnail && (
               <Link
                 key={index}
+                onClick={
+                  this.props.state && this.props.state.menu === 'active'
+                    ? () => this.props.toggleMenu()
+                    : undefined
+                }
                 to={`/projects/${this.props.projectData.name}/${index + 1}`}
               >
                 <img src={thumbnail} alt={`Thumbnail ${index + 1}`} />

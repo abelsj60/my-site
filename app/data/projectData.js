@@ -23,7 +23,7 @@ export default [
         'Arrow caption three'
       ],
       description:
-        'Arrow packages Internet video just-in-time for delivery, making it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.'
+        'Arrow makes it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.'
     }
   },
   {
@@ -47,7 +47,7 @@ export default [
         'Slingshot caption three'
       ],
       contribution:
-        'Founder, oversaw platform development, managed dev team, prioritized features',
+        "As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.",
       technologies: 'PHP, WebSockets, PubNub, AWS',
       description:
         'Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible.'
@@ -77,7 +77,7 @@ export default [
         'TMMnews caption three'
       ],
       description:
-        'TMM news is a custom WordPress theme that builds programmatically assembles news shows from individual video segments'
+        'TMM news is a custom WordPress theme that programmatically assembles news shows from individual video segments'
     }
   }
 ];

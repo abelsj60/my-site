@@ -24,13 +24,13 @@ export default (
       thousands upon thousands of blogs, droves of journalists have fled
       traditional newsrooms in the past decade looking for a way to make a
       living from the exploding world of digital media. So far, precious few
-      have replicated the quality or impact--or profits--of the name-brand
+      have replicated the quality or impact — or profits — of the name-brand
       companies they left behind.
     </p>
     <p>
       But Balboni thinks he can, using the lure of ownership. His site is hiring
-      the five regional editors--for the Americas, Asia, Africa, Europe and the
-      Middle East--and some 72 correspondents located around the world. None of
+      the five regional editors — for the Americas, Asia, Africa, Europe and the
+      Middle East — and some 72 correspondents located around the world. None of
       them will be full-time employees. Instead, each is being lured by sizable
       equity stakes (not stock options) and a five-year guarantee of monthly
       fees of about $1,000. Correspondents will report to regional editors, who
@@ -38,7 +38,7 @@ export default (
     </p>
     <p>
       "Foreign correspondents used to be the stars of journalism," he says. Now
-      cutbacks have left them starved for an outlet to fund--and market--their
+      cutbacks have left them starved for an outlet to fund — and market — their
       reporting. He thinks he can turn it around and doesn't shy away from the
       challenge. It isn't his first long shot. Previously, Balboni founded and
       ran New England Cable News, a joint venture between Hearst Corporation and
@@ -56,9 +56,9 @@ export default (
       Haaretz newspaper had 167,000.
     </p>
     <p>
-      Balboni knows that growing the audience--and advertising base--to the size
-      needed to pay for all this is risky, especially because he's focused on
-      coverage outside of popular locations like England. So, similar to the
+      Balboni knows that growing the audience — and advertising base — to the
+      size needed to pay for all this is risky, especially because he's focused
+      on coverage outside of popular locations like England. So, similar to the
       model Politico is increasingly moving toward, GNE's multimedia content
       will be sold to newspaper sites and other English-based sites around the
       world. Balboni will only say syndicated content will be priced based on
@@ -66,7 +66,7 @@ export default (
       large customer has already signed up, but Balboni won't identify it yet.
     </p>
     <p>
-      Beyond that, Balboni expects to experiment with "custom reporting"--an
+      Beyond that, Balboni expects to experiment with "custom reporting" — an
       on-demand service where clients can hire GNE correspondents to generate
       custom news reports.
     </p>
@@ -81,7 +81,7 @@ export default (
     </p>
     <p>
       The media entrepreneur thinks he has time. Balboni claims he isn't angling
-      to quickly build and sell the company--another Silicon Valley mantra--to
+      to quickly build and sell the company — another Silicon Valley mantra — to
       Time Warner or The New York Times Company or News Corp. or anyone else.
       But with all the stock he's been printing to acquire journalistic talent,
       he says he knows his reporters and editors will be keenly focused on the

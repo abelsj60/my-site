@@ -5,7 +5,7 @@ export default (
     <p>
       Local television stations need some good news. Just this month, the
       Television Bureau of Advertising announced spot TV advertising would fall
-      this year roughly 7%--despite the lucrative presidential election. Next
+      this year roughly 7% — despite the lucrative presidential election. Next
       year looks bleak too: It predicted 7% to 11% declines. Those are big
       numbers in an industry that's used to clearing roughly $65 billion in
       advertising.
@@ -62,7 +62,7 @@ export default (
       Giving sales staff incentives to sell the Web remains a huge problem, says
       Steve Ridge, president of media strategy at television consultancy Frank
       N. Magid Associates. And there is no consistency on how to approach the
-      issue--whether via separate sales reps or a unified sales force.
+      issue — whether via separate sales reps or a unified sales force.
     </p>
     <p>
       But Web sites continue to be a bet on the future for most stations, rather
@@ -80,7 +80,7 @@ export default (
       Communications, says the company has spent the last year rebuilding the
       technology system underlying its 12 Web properties, including eight
       television stations. With 70,000 to 80,000 videos streaming from his sites
-      per month--many of which will soon be in high definition--and 75 to 100
+      per month — many of which will soon be in high definition — and 75 to 100
       new videos published per day, Forsyth says increasing online ad dollars
       remains a priority for 2009.
     </p>

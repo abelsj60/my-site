@@ -1,8 +1,6 @@
 /* My story rules */
 
 #chapter {
-  /* Need display: flex to show content in .left container; it's otherwise set to none */
-
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -27,15 +25,15 @@
   margin-bottom: 25px;
 }
 
+#chapter h2 {
+  display: none;
+}
+
 #chapter p {
   font-size: 1.75rem;
   line-height: normal;
   white-space: pre-wrap;
   overflow: auto;
-}
-
-#illustration {
-  justify-content: center;
 }
 
 #illustration img {
@@ -49,21 +47,25 @@
   }
 
   #chapter {
-    flex: 1;
+    width: 327px;
     position: unset;
     bottom: 48px;
-    background-color: unset;
+    margin: 25px;
+    background-color: cornflowerblue;
     color: black;
   }
 
-  #chapter.inactive {
+  #chapter h2 {
     display: block;
+    font-size: 1.75rem;
+    margin-bottom: 7px;
   }
 
   #desktop-story-nav {
     display: flex;
     margin-bottom: 20px;
     min-height: 40px;
+    border-bottom: whitesmoke dotted 0.5px;
   }
 
   #desktop-story-nav a p {
@@ -73,23 +75,29 @@
 
   #desktop-story-nav a.active {
     flex: 1;
-    color: black;
-    background-color: deepskyblue;
+    color: whitesmoke;
     display: flex;
     align-items: center;
+    border-top: whitesmoke dotted 0.5px;
   }
 
   #desktop-story-nav a.inactive {
     flex: 1;
     color: whitesmoke;
-    background-color: deepskyblue;
     display: flex;
     align-items: center;
   }
 
   #desktop-story-nav a.inactive:hover {
     color: black;
-    background-color: antiquewhite;
+    border-top: whitesmoke dotted 0.5px;
+    /* background-color: antiquewhite; */
+  }
+
+  #illustration {
+    margin-right: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
   }
 
   #illustration img {

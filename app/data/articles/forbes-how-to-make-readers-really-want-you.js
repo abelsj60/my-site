@@ -5,8 +5,8 @@ export default (
     <p>
       Forget Anna Wintour, famed editrix of Vogue. Just like New York's Fashion
       Week, which ended last Friday, she's so over. The big ideas for keeping
-      Vogue hot are coming from the business department down the hall--and it is
-      betting big on the appeal of Web television.
+      Vogue hot are coming from the business department down the hall — and it
+      is betting big on the appeal of Web television.
     </p>
     <p>
       At the top of the list: Model.Live, a 12-episode Web video series now
@@ -21,7 +21,7 @@ export default (
       by IMG Sports & Entertainment. Vogue is coy about the numbers, but some
       reports place production costs at $3 million. With single magazine ad
       pages going for as much as $121,000, show sponsors may be getting
-      exclusive access toVogue's name--in full motion video--on the cheap.
+      exclusive access toVogue's name — in full motion video — on the cheap.
     </p>
     <p>
       That's quite a powerful advertising pitch for the magazine industry. Faced
@@ -69,8 +69,9 @@ export default (
       Still, what seem clear is that dangerous fault lines are forming beneath
       some of the industry's biggest names. Though Florio saysVogue is set to
       have its second-best year of ad sales ever, he's worried about keeping the
-      brand relevant for the next generation of readers. So he--not Wintour--is
-      creating Web shows like Model.Live with his 16-year-old daughter in mind.
+      brand relevant for the next generation of readers. So he — not Wintour —
+      is creating Web shows like Model.Live with his 16-year-old daughter in
+      mind.
     </p>
     <p>
       "I'm comfortable with it, because I feel that the principals of what we're
@@ -107,11 +108,11 @@ export default (
     </p>
     <p>
       Still, syndication fees like these are based on the reputation of Vogue
-      and its editors--not partners like Express. That highlights the risk:
+      and its editors — not partners like Express. That highlights the risk:
       These new efforts could dilute the Vogue brand.
     </p>
     <p>
-      "I talk about the 'elasticity of content'--how far out can you take it to
+      "I talk about the 'elasticity of content' — how far out can you take it to
       satisfy advertisers is something of a concern for sure," says Tom Hartle,
       owner of the influential music magazine Spin. Also facing circulation
       decline, his magazine is about to announce its own branded show about

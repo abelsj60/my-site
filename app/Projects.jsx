@@ -29,11 +29,12 @@ class Projects extends Component {
       <main id="my-projects" className="">
         <section id="desktop-project-nav" className="left">
           <div id="content">
-            <h1>Select a project</h1>
+            <h1>My projects</h1>
+            <h2>Technology projects for myself, clients, and fun</h2>
             <MultiProjectNav currentProject={this.projectData} />
           </div>
         </section>
-        <section className="right">
+        <section id="active-project" className="right">
           <h1>{this.projectData.details.name}</h1>
           <section id="project-container">
             <ProjectDescription

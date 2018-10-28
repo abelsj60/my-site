@@ -30,15 +30,15 @@ export default (
       make money here," says Joey Faust, a software solutions consultant for
       National TeleConsultants, which builds production facilities for big media
       networks like the Fox Business Network. He says his clients are heavily
-      investing in production facilities that can quickly, easily--and
-      simultaneously--distribute video content via traditional networks and the
+      investing in production facilities that can quickly, easily — and
+      simultaneously — distribute video content via traditional networks and the
       Internet.
     </p>
     <p>
-      News Corp. and General Electric's NBC Universal both show signs they
-      agree--and that they want more online viewers than MySpace has delivered
-      to date. The two networks agreed this week to feed live video coverage of
-      the debates to their Hulu joint venture. Brenner says MySpace had no
+      News Corp. and General Electric's NBC Universal both show signs they agree
+      — and that they want more online viewers than MySpace has delivered to
+      date. The two networks agreed this week to feed live video coverage of the
+      debates to their Hulu joint venture. Brenner says MySpace had no
       involvement in sister site Hulu's deal to showcase the debates live.
     </p>
     <p>
@@ -53,8 +53,8 @@ export default (
       While MySpace is using the debate coverage to help raise its profile and
       attract more users, Hulu showed a 15- or 30-second paid ad before the
       stream started. The same will be done during next week's final debate.
-      Curiously, NBC News provided the video feed this week and Fox News--also
-      supplying MySpace's feed--will provide it next week. Lee would only say
+      Curiously, NBC News provided the video feed this week and Fox News — also
+      supplying MySpace's feed — will provide it next week. Lee would only say
       both investors offered their video feed to Hulu.
     </p>
     <p>

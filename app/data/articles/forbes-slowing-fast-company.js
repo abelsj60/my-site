@@ -78,10 +78,10 @@ export default (
       information.
     </p>
     <p>
-      I want the editor of Fastcompany.com and the editor of Inc.com--neither of
-      whom have been named yet and the Fast Company job is still up for grabs--I
-      want them to put out a weekly or monthly report saying here's what drove
-      our traffic this month.
+      I want the editor of Fastcompany.com and the editor of Inc.com — neither
+      of whom have been named yet and the Fast Company job is still up for grabs
+      — I want them to put out a weekly or monthly report saying here's what
+      drove our traffic this month.
     </p>
     <p>
       We have these big video screens to help layout the magazine, but I'm
@@ -107,8 +107,8 @@ export default (
       [they're] going to contribute to online.
     </p>
     <p>
-      If I'm a journalist, I need to be able to do online, print, video,
-      audio--whatever the heck is out there. I wanted to start a super- reporter
+      If I'm a journalist, I need to be able to do online, print, video, audio —
+      whatever the heck is out there. I wanted to start a super- reporter
       program here, where we took two reporters from digital, two reporters from
       Fast Company and two reporters from Inc. and have them cross-train like
       hell to create a super-reporter who could wear all nine hats. Then I

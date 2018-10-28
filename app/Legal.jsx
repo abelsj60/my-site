@@ -7,6 +7,10 @@ class Legal extends Component {
     super(props);
   }
 
+  get copyrightYear() {
+    return new Date().getFullYear();
+  }
+
   addCssToFlagAboutPage() {
     return splitPath(this.props)[1] === 'about' ? 'about' : '';
   }
@@ -18,7 +22,7 @@ class Legal extends Component {
         className={`${this.props.state.legal} ${this.addCssToFlagAboutPage()}`}
       >
         <section>
-          <p>James Abels. All rights reserved. {this.props.copyrightYear}</p>
+          <p>© {this.copyrightYear} James Abels. All rights reserved.</p>
         </section>
       </section>
     );

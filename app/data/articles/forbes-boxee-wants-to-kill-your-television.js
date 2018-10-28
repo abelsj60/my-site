@@ -19,9 +19,9 @@ export default (
     <p>
       Crazy? Maybe. Gutsy? You bet. While there's no shortage of people looking
       to steal a television advertising market worth some $65 billion, Boxee's
-      five founders--who learned their trade working in the Israeli army--think
-      they can take advantage of content producers' need to find audiences by
-      creating what is essentially a television with limitless channels and
+      five founders — who learned their trade working in the Israeli army —
+      think they can take advantage of content producers' need to find audiences
+      by creating what is essentially a television with limitless channels and
       offerings that's easy to use. Kind of a personalized YouTube on your
       desktop.
     </p>
@@ -30,8 +30,8 @@ export default (
       preferences, the media stored on their hard drives and what friends from
       social networks prefer. Essentially, it "moves" content, creating an
       advertising incentive for media to give him a cut of ad sales. Ronen
-      argues, people--particularly kids--will instantly give up cable service if
-      Internet media were easily aggregated in one place.
+      argues, people — particularly kids — will instantly give up cable service
+      if Internet media were easily aggregated in one place.
     </p>
     <p>
       At the moment, there is little data to support his idea. But there is
@@ -74,7 +74,7 @@ export default (
     <p>
       If it sounds a bit grand, it is. Despite a novel business model, Boxee's
       got its share of challenges ahead. The first is that, despite its claims,
-      it doesn't currently aggregate all the Web's video--but it is getting
+      it doesn't currently aggregate all the Web's video — but it is getting
       better. This week it added CBS, Comedy Central, MySpaceTV and Hulu to its
       repertoire. Ronen also says Boxee's in talks with all the major networks
       and content aggregators like Netflix to fix that. Why shouldn't they work
@@ -87,8 +87,8 @@ export default (
       drive, Boxee does not run inside a Web browser. Forcing people to download
       software is increasingly impossible in an Internet world that accesses
       information and programs via the Web. The strategy just about killed off
-      Joost--a high profile Web video portal that raised $40 million from the
-      likes of CBS and Viacom--earlier this year. Boxee is now working with
+      Joost — a high profile Web video portal that raised $40 million from the
+      likes of CBS and Viacom — earlier this year. Boxee is now working with
       Joost, which recently launched a browser version, on a new partnership.
     </p>
     <p>

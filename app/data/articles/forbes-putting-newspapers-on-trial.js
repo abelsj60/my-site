@@ -5,7 +5,7 @@ export default (
     <p>
       Sam Zell was sued in Federal Court in California yesterday by a group of
       current and former Tribune Company employees. They did a lot more than go
-      after the billionaire they say ruined their company--you could make the
+      after the billionaire they say ruined their company — you could make the
       case that they've put the fast-changing newspaper business on trial, too.
     </p>
     <p>
@@ -27,8 +27,8 @@ export default (
       Leading the charge from the LA Times newsroom, Neil and his cadre of
       plaintiffs are claiming various violations of the Employee Retirement
       Income Security Act (ERISA). Essentially, they allege that as members of
-      Tribune's Employee Stock Ownership Plan (ESOP)--which became the legal
-      owne of Tribune during a complicated buyout in April of 2007--Zell has
+      Tribune's Employee Stock Ownership Plan (ESOP) — which became the legal
+      owne of Tribune during a complicated buyout in April of 2007 — Zell has
       breached his duty of loyalty to Tribune's employees. The group has asked
       the court to certify the case as a class action.
     </p>
@@ -74,7 +74,7 @@ export default (
       to talk about.
     </p>
     <p>
-      The ramifications of Zell's--and Tribune's--actions are defined by the
+      The ramifications of Zell's — and Tribune's — actions are defined by the
       Cotchett firm as nothing short of the destruction of American democracy.
       "Sam Zell exacted a severe, long-lasting damage to an institution that
       citizens in a democracy rely on and require to effectively speak truth to
@@ -90,7 +90,7 @@ export default (
     </p>
     <p>
       At that time, he allegedly convinced the ESOP to pay too much for Tribune
-      in acquiring the rest of its public stock--$38 per share versus a more
+      in acquiring the rest of its public stock — $38 per share versus a more
       reasonable value of something under $10.
     </p>
     <p>

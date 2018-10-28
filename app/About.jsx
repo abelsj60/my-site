@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import siteText from './data/siteText.js';
+import aboutText from './data/aboutText.js';
 
 class About extends Component {
   constructor(props) {
@@ -9,11 +9,11 @@ class About extends Component {
   render() {
     return (
       <main id="about">
-        <h1>About</h1>
-        <section id="about-content">
-          <section id="about-pic" />
-          <section id="about-description">
-            <p>{siteText.bio}</p>
+        <section id="about-illustration" className="left" />
+        <section id="about-content" className="right">
+          <h1>About</h1>
+          <section id="about-text-container">
+            <p>{aboutText.bio}</p>
           </section>
         </section>
       </main>

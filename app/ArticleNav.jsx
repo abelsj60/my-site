@@ -26,6 +26,11 @@ class DesktopArticleList extends Component {
               normalize(article.headline),
               this.props.state.headline
             )}
+            onClick={
+              this.props.state.menu === 'active'
+                ? () => this.props.toggleMenu()
+                : undefined
+            }
             to={`/journalism/${normalize(article.publication)}/${normalize(
               article.headline
             )}`}

@@ -22,7 +22,10 @@ class Menu extends Component {
         >
           <p>(X) Close</p>
         </Link>
-        <SectionMenu state={this.props.state} />
+        <SectionMenu
+          state={this.props.state}
+          toggleMenu={this.props.toggleMenu}
+        />
       </main>
     );
   }

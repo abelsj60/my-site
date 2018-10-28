@@ -7,8 +7,8 @@ export default (
       the departure of chief executive Ken Stern in March. Soon after, an NPR
       journalist reported the reason was a failure "to convince the board where
       local stations fit into the digital age, when listeners can bypass
-      old-fashioned FM stations." Like all media, NPR--which supplies
-      programming to over 860 local radio stations--is struggling with the
+      old-fashioned FM stations." Like all media, NPR — which supplies
+      programming to over 860 local radio stations — is struggling with the
       results of the Internet's ability to cheaply distribute content.
     </p>
 

@@ -2,45 +2,39 @@
   display: flex;
   height: 100%;
   padding: 25px;
+  flex-direction: row;
 }
 
 #about h1 {
   font-size: 3rem;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 #about-content {
   flex: 1;
-  margin-top: 15px;
-  background-color: cornflowerblue;
+  font-size: 1.75rem;
+  white-space: pre-wrap;
 }
 
-#about-pic {
+#about-text-container {
+  overflow: auto;
+}
+
+#about-illustration {
   display: none;
 }
 
-#about-description {
-  white-space: pre-wrap;
-  flex: 1.5;
-  padding: 25px;
-}
-
-/* #about-description h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-top: 25px;
-  margin-left: 25px;
-} */
-
-@media only screen and (min-width: 600px) {
-  #about-pic {
+@media only screen and (min-width: 849px) {
+  #about-illustration {
     display: block;
-    flex: 1;
+    width: 327px;
+    padding: 25px;
+    margin-right: 25px;
     background-color: rgba(255, 0, 0, 0.5);
   }
 
   #about-content {
-    flex: 1;
     display: flex;
   }
 }

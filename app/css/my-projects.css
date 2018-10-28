@@ -1,7 +1,6 @@
 /* My projects rules */
 
 #my-projects {
-  padding: 25px;
   line-height: normal;
 }
 
@@ -10,6 +9,10 @@
   margin-bottom: 15px;
   padding-bottom: 5px;
   border-bottom: lightgrey dotted 0.5px;
+}
+
+#active-project {
+  margin: 25px;
 }
 
 #project-container {
@@ -111,23 +114,34 @@
     flex-direction: row;
   }
 
+  #active-project {
+    margin-left: 0;
+  }
+
   #desktop-project-nav {
     display: flex;
     flex-direction: column;
+    margin: 25px;
+    padding: 25px;
     max-width: 20%;
-    min-width: 300px;
-    margin-right: 20px;
+    min-width: 327px;
     background-color: cornflowerblue;
     color: white;
-  }
-
-  #desktop-project-nav #content {
-    margin: 25px;
   }
 
   #desktop-project-nav #content h1 {
     border: none;
     font-size: 2rem;
+    padding: 0;
+    margin-bottom: 7px;
+  }
+
+  #desktop-project-nav #content h2 {
+    color: white;
+    font-style: italic;
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+    border-bottom: white dotted 0.5px;
   }
 
   #desktop-project-nav #nav-group {

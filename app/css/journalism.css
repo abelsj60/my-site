@@ -68,9 +68,17 @@
   }
 
   #desktop-article-navigation h1 {
-    color: black;
+    color: white;
     font-size: 2rem;
+    margin-bottom: 7px;
+  }
+
+  #desktop-article-navigation h2 {
+    color: white;
+    font-style: italic;
+    padding-bottom: 7px;
     margin-bottom: 10px;
+    border-bottom: white dotted 0.5px;
   }
 
   #article {

@@ -29,11 +29,20 @@ class SectionMenu extends Component {
         className={`${this.location[2].toLowerCase()}-menu`}
       >
         {this.projectPage ? (
-          <MultiProjectNav />
+          <MultiProjectNav
+            state={this.props.state}
+            toggleMenu={this.props.toggleMenu}
+          />
         ) : this.storyPage ? (
-          <ChapterNav state={this.props.state} />
+          <ChapterNav
+            state={this.props.state}
+            toggleMenu={this.props.toggleMenu}
+          />
         ) : (
-          <ArticleNav state={this.props.state} />
+          <ArticleNav
+            state={this.props.state}
+            toggleMenu={this.props.toggleMenu}
+          />
         )}
       </section>
     );

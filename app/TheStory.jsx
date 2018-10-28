@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import ChapterNav from './ChapterNav.jsx';
 import Chapter from './Chapter.jsx';
 import storyData from './data/storyData';
-import { normalize } from './helpers/utils.js';
+import { splitPath, normalize } from './helpers/utils.js';
 
 class TheStory extends Component {
   constructor() {
@@ -32,4 +33,4 @@ class TheStory extends Component {
   }
 }
 
-export default TheStory;
+export default withRouter(TheStory);

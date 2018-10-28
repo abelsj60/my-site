@@ -11,6 +11,10 @@
   color: red;
 }
 
+#close-button:hover {
+  color: black;
+}
+
 #site-menu .chapter-menu,
 #site-menu .journalism-menu,
 #site-menu .projects-menu {
