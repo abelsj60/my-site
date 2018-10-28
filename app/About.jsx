@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import siteText from './data/siteText.js';
 
 class About extends Component {
   constructor(props) {
@@ -12,8 +13,7 @@ class About extends Component {
         <section id="about-content">
           <section id="about-pic" />
           <section id="about-description">
-            <h1>James Abels</h1>
-            <p>Short story</p>
+            <p>{siteText.bio}</p>
           </section>
         </section>
       </main>

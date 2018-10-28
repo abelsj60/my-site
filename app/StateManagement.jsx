@@ -13,15 +13,13 @@ class StateManagement extends Component {
 
     const location = splitPath(this.props);
 
-    // LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+    /*
+      ~ja Ternaries prevent collisions
 
-    // ~ja Technically, we don't need the location checks/ternaries in state
-    // b/c the type of each route element is different for each section of
-    // the site, but explicitly checking seems like a better practice.
+      State is not updated when we first come through, then we hit render, run Reconciliation, id an update, call cDU, setState, and repeat.
 
-    // ~ja E.g., No collisions
-
-    // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the console.log and the completion of setState is Reconciliation).
+      LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+    */
 
     this.state = {
       chapterTitle:
@@ -211,6 +209,7 @@ class StateManagement extends Component {
       splitPath(prevProps)[1] === 'menu'
         ? splitPath(prevProps)[2]
         : splitPath(prevProps)[1];
+
     const updateChapterTitle = chapterTitle
       ? chapterTitle !== this.state.chapterTitle
       : undefined;
@@ -237,7 +236,7 @@ class StateManagement extends Component {
       !splitPath(this.props).includes(prevLocation);
     const updateLegal =
       this.state.legal === 'active' &&
-      splitPath(this.props)[1] !== prevLocation;
+      !splitPath(this.props).includes(prevLocation);
 
     if (
       updateChapterTitle ||

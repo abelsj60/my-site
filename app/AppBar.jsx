@@ -56,10 +56,7 @@ class AppBar extends Component {
       this.location.includes('journalism')
     ) {
       return this.pickButtons(['menu', 'contact']);
-    } else if (
-      this.location.includes('toys') ||
-      this.location.includes('about')
-    ) {
+    } else {
       return this.pickButtons(['contact', 'legal']);
     }
   }

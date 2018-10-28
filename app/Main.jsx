@@ -5,7 +5,6 @@ import TheStory from './TheStory.jsx';
 import Projects from './Projects.jsx';
 import Journalism from './Journalism.jsx';
 import About from './About.jsx';
-import Toys from './Toys.jsx';
 import Menu from './Menu.jsx';
 import NotFound from './NotFound.jsx';
 
@@ -14,17 +13,17 @@ import NotFound from './NotFound.jsx';
   1. Use setState() instead of links in most nav locations?
     https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
     https://tylermcginnis.com/react-router-programmatically-navigate/
-  2. Layout, design
+  2. Style
   3. Browser testing, polyfills, etc
   4. When navigating away from home, reset scrollTop to 0 ?
-  5. Image storage in sight? / Bundling?
-  6. When using menu to navigate away from Menu, shut off menu
+  5. Image storage / bundling?
+  x 6. When using menu to navigate away from Menu, shut off menu
   7. Remove extra space from last thumbnail group in menu/
   8. Refactor StateManagement (tighten?)
 
-  --Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
+  -Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
 
-  --Rendering:
+  -Rendering:
   https://robots.thoughtbot.com/react-rendering-misconception
 
 */
@@ -134,7 +133,6 @@ class Main extends Component {
           }}
         />
 
-        <Route path="/toys" render={() => <Toys />} />
         <Route path="/about" render={() => <About />} />
         <Route component={NotFound} />
       </Switch>

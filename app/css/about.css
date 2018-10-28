@@ -20,20 +20,17 @@
 }
 
 #about-description {
+  white-space: pre-wrap;
   flex: 1.5;
+  padding: 25px;
 }
 
-#about-description h1 {
+/* #about-description h1 {
   font-size: 3rem;
   font-weight: bold;
   margin-top: 25px;
   margin-left: 25px;
-}
-
-#about-description p {
-  margin-top: 15px;
-  margin-left: 25px;
-}
+} */
 
 @media only screen and (min-width: 600px) {
   #about-pic {
