@@ -5,9 +5,11 @@
 }
 
 #close-button {
+  font-size: 2rem;
+  position: absolute;
+  top: 65px;
+  right: 20px;
   align-self: flex-end;
-  margin-top: 25px;
-  margin-right: 25px;
   color: red;
 }
 

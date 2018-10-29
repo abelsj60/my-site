@@ -6,13 +6,21 @@ import { normalize } from './helpers/utils.js';
 class DesktopArticleList extends Component {
   constructor(props) {
     super(props);
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  setActiveItem(headline, headlineOnState) {
+  addCssToShowActiveLink(headline, headlineOnState) {
     if (headline === headlineOnState) {
       return 'active';
     } else {
       return 'inactive';
+    }
+  }
+
+  handleClick() {
+    if (this.props.state.menu === 'active') {
+      this.props.toggleMenu();
     }
   }
 
@@ -22,15 +30,11 @@ class DesktopArticleList extends Component {
         {articleData.map((article, index) => (
           <Link
             key={index}
-            className={this.setActiveItem(
+            className={this.addCssToShowActiveLink(
               normalize(article.headline),
               this.props.state.headline
             )}
-            onClick={
-              this.props.state.menu === 'active'
-                ? () => this.props.toggleMenu()
-                : undefined
-            }
+            onClick={this.handleClick}
             to={`/journalism/${normalize(article.publication)}/${normalize(
               article.headline
             )}`}

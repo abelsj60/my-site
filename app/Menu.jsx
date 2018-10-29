@@ -20,7 +20,7 @@ class Menu extends Component {
           onClick={() => this.props.toggleMenu()}
           to={`/${this.location[2].toLowerCase()}`}
         >
-          <p>(X) Close</p>
+          <p>✘</p>
         </Link>
         <SectionMenu
           state={this.props.state}

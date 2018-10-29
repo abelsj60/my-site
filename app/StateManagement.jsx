@@ -44,11 +44,11 @@ class StateManagement extends Component {
           ? this.validateHeadline(location[2], location[3]) ||
             normalize(articleData[0].headline)
           : normalize(articleData[0].headline),
+      magicOpacity: { opacity: 0 },
+      magicClicks: splitPath(this.props)[1] === '' ? 'block' : '',
       menu: location[1] === 'menu' ? 'active' : 'inactive',
       legal: 'inactive',
-      explore: 'active',
-      magicOpacity: { opacity: 0 },
-      magicClicks: splitPath(this.props)[1] === '' ? 'block' : ''
+      explore: 'active'
     };
 
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -56,6 +56,7 @@ class StateManagement extends Component {
     this.toggleLegal = this.toggleLegal.bind(this);
     this.setMagicOpacity = this.setMagicOpacity.bind(this);
     this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
+    this.turnOffActiveButtons = this.turnOffActiveButtons.bind(this);
   }
 
   get scrollTop() {
@@ -80,6 +81,20 @@ class StateManagement extends Component {
     this.setState({
       legal: this.state.legal === 'active' ? 'inactive' : 'active'
     });
+  }
+
+  turnOffActiveButtons() {
+    if (this.state.explore === 'inactive') {
+      this.toggleText();
+    }
+
+    if (this.state.menu === 'active') {
+      this.toggleMenu();
+    }
+
+    if (this.state.legal === 'active') {
+      this.toggleLegal();
+    }
   }
 
   validatePublication(publication) {
@@ -181,7 +196,7 @@ class StateManagement extends Component {
     window.addEventListener('scroll', this.toggleMagicPointer);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     // ~ja Must compare props to state to see a difference
     // Location checks used to prevent collisions
 
@@ -205,10 +220,6 @@ class StateManagement extends Component {
       location[1] === 'journalism'
         ? this.validateHeadline(location[2], location[3])
         : undefined;
-    const prevLocation =
-      splitPath(prevProps)[1] === 'menu'
-        ? splitPath(prevProps)[2]
-        : splitPath(prevProps)[1];
 
     const updateChapterTitle = chapterTitle
       ? chapterTitle !== this.state.chapterTitle
@@ -231,12 +242,6 @@ class StateManagement extends Component {
       this.state.magicClicks === '';
     const updateMagicClicksWhenLeavingHome =
       location[1] !== '' && this.state.magicClicks === 'block';
-    const updateMenu =
-      this.state.menu === 'active' &&
-      !splitPath(this.props).includes(prevLocation);
-    const updateLegal =
-      this.state.legal === 'active' &&
-      !splitPath(this.props).includes(prevLocation);
 
     if (
       updateChapterTitle ||
@@ -245,9 +250,7 @@ class StateManagement extends Component {
       updatePublication ||
       updateHeadline ||
       updateMagicClicksWhenGoingHome ||
-      updateMagicClicksWhenLeavingHome ||
-      updateMenu ||
-      updateLegal
+      updateMagicClicksWhenLeavingHome
     ) {
       this.setState({
         chapterTitle: updateChapterTitle
@@ -263,9 +266,7 @@ class StateManagement extends Component {
           ? 'block'
           : updateMagicClicksWhenLeavingHome
             ? ''
-            : this.state.magicClicks,
-        menu: updateMenu ? 'inactive' : this.state.menu,
-        legal: updateLegal ? 'inactive' : this.state.legal
+            : this.state.magicClicks
       });
     }
 
@@ -281,6 +282,7 @@ class StateManagement extends Component {
           toggleText={this.toggleText}
           toggleMenu={this.toggleMenu}
           toggleLegal={this.toggleLegal}
+          turnOffActiveButtons={this.turnOffActiveButtons}
         />
         <MagicScroller />
       </Fragment>

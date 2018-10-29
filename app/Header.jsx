@@ -101,7 +101,7 @@ class Header extends Component {
         <HeaderText />
         <HeaderNav
           state={this.props.state}
-          toggleMenu={this.props.toggleMenu}
+          turnOffActiveButtons={this.props.turnOffActiveButtons}
         />
         <HeaderNavIcon
           toggleHeaderMenu={this.toggleHeaderMenu}
