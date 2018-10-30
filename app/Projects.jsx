@@ -44,9 +44,9 @@ class Projects extends Component {
             <section id="project-images">
               <SingleProjectNav projectData={this.projectData} />
               <ProjectImageContainer
-                projectDescriptions={this.projectDescriptions}
-                projectData={this.projectData}
                 state={this.props.state}
+                projectData={this.projectData}
+                projectDescriptions={this.projectDescriptions}
               />
             </section>
           </section>

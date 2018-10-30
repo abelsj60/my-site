@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import AppBar from './AppBar.jsx';
 import BusinessCard from './BusinessCard.jsx';
 import FooterText from './FooterText.jsx';
-import Legal from './Legal.jsx';
+import LegalTerms from './LegalTerms.jsx';
 import { splitPath } from './helpers/utils.js';
 
 class Footer extends Component {
@@ -102,7 +102,7 @@ class Footer extends Component {
         className={this.props.state.magicClicks}
         style={this.location[1] === '' ? this.props.state.magicOpacity : null}
       >
-        <Legal footerState={this.state} />
+        <LegalTerms footerState={this.state} />
         <BusinessCard footerState={this.state} />
         <FooterText
           state={this.props.state}

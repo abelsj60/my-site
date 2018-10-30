@@ -5,12 +5,12 @@ class ProjectDescription extends Component {
     super(props);
   }
 
-  getKeyName(name) {
+  getKey(name) {
     return this.props.projectKeys.find(key => key === name);
   }
 
   formatKeyForDisplay(name) {
-    const keyName = this.getKeyName(name);
+    const keyName = this.getKey(name);
     return keyName[0].toUpperCase() + keyName.slice(1);
   }
 

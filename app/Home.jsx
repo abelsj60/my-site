@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
 import MagicNav from './MagicNav.jsx';
-import { splitPath } from './helpers/utils.js';
 
 class Home extends Component {
   constructor(props) {

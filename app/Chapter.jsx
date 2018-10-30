@@ -6,12 +6,10 @@ class Chapter extends Component {
   }
 
   render() {
-    const chapter = this.props.chapter;
-
     return (
       <Fragment>
-        <h1>{chapter.title}</h1>
-        <p>{chapter.text}</p>
+        <h1>{this.props.chapter.title}</h1>
+        <p>{this.props.chapter.text}</p>
       </Fragment>
     );
   }

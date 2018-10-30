@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import ChapterNav from './ChapterNav.jsx';
 import Chapter from './Chapter.jsx';
 import storyData from './data/storyData';
-import { splitPath, normalize } from './helpers/utils.js';
+import { normalize } from './helpers/utils.js';
 
 class TheStory extends Component {
   constructor() {
@@ -17,16 +17,18 @@ class TheStory extends Component {
   }
 
   render() {
+    const chapter = this.chapter;
+
     return (
       <main id="the-story">
         <section id="chapter" className={`left ${this.props.state.explore}`}>
           <section id="desktop-story-nav">
             <ChapterNav state={this.props.state} />
           </section>
-          <Chapter chapter={this.chapter} />
+          <Chapter chapter={chapter} />
         </section>
         <section id="illustration" className="right">
-          <img src={this.chapter.illustration} alt="fantasy illustration" />
+          <img src={chapter.illustration} alt="fantasy illustration" />
         </section>
       </main>
     );
