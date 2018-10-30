@@ -11,9 +11,11 @@ class Footer extends Component {
     super(props);
 
     this.state = {
-      contact: 'inactive'
+      contact: 'inactive',
+      legalTerms: 'inactive'
     };
 
+    this.toggleLegalTerms = this.toggleLegalTerms.bind(this);
     this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
   }
 
@@ -26,7 +28,8 @@ class Footer extends Component {
   }
 
   addCssThatLocatesFooter() {
-    return this.location[1] !== '' ? 'inner-page-footer' : 'home-page-footer';
+    const isRoot = this.location[1] === '';
+    return isRoot ? 'home-page-footer' : 'inner-page-footer';
   }
 
   addAppBarToPage() {
@@ -34,40 +37,61 @@ class Footer extends Component {
   }
 
   toggleBusinessCard() {
+    const isActive = this.state.contact === 'active';
+
     this.setState({
-      contact: this.state.contact === 'inactive' ? 'active' : 'inactive'
+      contact: isActive ? 'inactive' : 'active'
     });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.state.contact === 'active') {
-      const prevPath = splitPath(prevProps);
-      let prevSection = prevPath[1] === 'menu' ? prevPath[2] : prevPath[1];
+  toggleLegalTerms() {
+    const isActive = this.state.legalTerms === 'active';
 
-      if (this.location[1] !== '' && prevSection === '') {
-        /*
-          ~ja Without this conditional, the prevSection, a string will
-          match and the businessCard won't shut off:
-            '' -businessCard on
-            '/chapter' - businessCard on b/c prevSection matched
-            '/chapter/title' - buisnessCard stays on b/c we match 'chapter'
+    this.setState({
+      legalTerms: isActive ? 'inactive' : 'active'
+    });
+  }
 
-          This is b/c we use redirects to navigate via Links.
-        */
+  deactivateButton(type, prevProps) {
+    const splitPreviousPath = splitPath(prevProps);
+    const previousSection =
+      splitPreviousPath[1] === 'menu'
+        ? splitPreviousPath[2]
+        : splitPreviousPath[1];
+    const userIsNotHome = this.location[1] !== '';
+    const userIsComingFromHome = previousSection === '';
+    let userIsTraveling = !this.location.includes(previousSection);
 
-        prevSection = 'Close businessCard when leaving home';
-      }
-
-      if (
-        this.state.contact === 'active' &&
-        !this.location.includes(prevSection)
-      ) {
-        this.toggleBusinessCard('contact');
-      }
+    if (userIsNotHome && userIsComingFromHome) {
+      userIsTraveling = true;
     }
 
-    if (this.state.explore === 'active' && !this.location.includes('chapter')) {
-      this.props.toggleText();
+    if (userIsTraveling) {
+      if (type === 'businessCard') {
+        return this.toggleBusinessCard();
+      } else if (type === 'legalTerms') {
+        return this.toggleLegalTerms();
+      } else {
+        return this.props.toggleText();
+      }
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const businessCardIsActive = this.state.contact === 'active';
+    const legalTermsAreActive = this.state.legalTerms === 'active';
+    const storyTextIsNotActive = this.state.explore === 'active';
+
+    if (businessCardIsActive) {
+      this.deactivateButton('businessCard', prevProps);
+    }
+
+    if (legalTermsAreActive) {
+      this.deactivateButton('legalTerms', prevProps);
+    }
+
+    if (storyTextIsNotActive) {
+      this.deactivateButton('storyText', prevProps);
     }
   }
 
@@ -78,12 +102,12 @@ class Footer extends Component {
         className={this.props.state.magicClicks}
         style={this.location[1] === '' ? this.props.state.magicOpacity : null}
       >
-        <Legal state={this.props.state} />
-        <BusinessCard state={this.state} />
+        <Legal footerState={this.state} />
+        <BusinessCard footerState={this.state} />
         <FooterText
           state={this.props.state}
           footerState={this.state}
-          toggleLegal={this.props.toggleLegal}
+          toggleLegalTerms={this.toggleLegalTerms}
           toggleBusinessCard={this.toggleBusinessCard}
         />
         {this.addAppBarToPage() && (
@@ -91,8 +115,7 @@ class Footer extends Component {
             state={this.props.state}
             footerState={this.state}
             toggleText={this.props.toggleText}
-            toggleMenu={this.props.toggleMenu}
-            toggleLegal={this.props.toggleLegal}
+            toggleLegalTerms={this.toggleLegalTerms}
             toggleBusinessCard={this.toggleBusinessCard}
           />
         )}

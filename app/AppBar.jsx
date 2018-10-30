@@ -18,26 +18,26 @@ class AppBar extends Component {
         linkPath: this.location.includes('menu')
           ? '/' + this.location[2]
           : '/menu/' + this.location[1],
-        css: this.props.state.menu,
-        handleClick: () => this.props.toggleMenu()
+        css: this.location.includes('menu') ? 'active' : 'inactive',
+        handleClick: () => undefined
       },
       {
         label: 'explore',
         linkPath: getPath(this.props),
         css: this.props.state.explore === 'active' ? 'inactive' : 'active',
-        handleClick: () => this.props.toggleText()
+        handleClick: this.props.toggleText
       },
       {
         label: 'legal',
         linkPath: getPath(this.props),
-        css: this.props.state.legal,
-        handleClick: () => this.props.toggleLegal()
+        css: this.props.footerState.legalTerms,
+        handleClick: this.props.toggleLegalTerms
       },
       {
         label: 'contact',
         linkPath: getPath(this.props),
         css: this.props.footerState.contact,
-        handleClick: () => this.props.toggleBusinessCard()
+        handleClick: this.props.toggleBusinessCard
       }
     ];
   }
@@ -91,12 +91,7 @@ class AppBar extends Component {
             <Link
               to={button.linkPath}
               className={button.css}
-              onClick={event => {
-                button.handleClick();
-                if (button.label !== 'menu') {
-                  event.preventDefault();
-                }
-              }}
+              onClick={() => button.handleClick()}
             >
               <p>{this.formatButtonLabel(button)}</p>
             </Link>

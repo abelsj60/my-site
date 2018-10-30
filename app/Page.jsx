@@ -21,13 +21,8 @@ class Page extends Component {
           state={this.props.state}
           turnOffActiveButtons={this.props.turnOffActiveButtons}
         />
-        <Main state={this.props.state} toggleMenu={this.props.toggleMenu} />
-        <Footer
-          state={this.props.state}
-          toggleText={this.props.toggleText}
-          toggleMenu={this.props.toggleMenu}
-          toggleLegal={this.props.toggleLegal}
-        />
+        <Main state={this.props.state} />
+        <Footer state={this.props.state} toggleText={this.props.toggleText} />
       </section>
     );
   }

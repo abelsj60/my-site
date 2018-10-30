@@ -9,16 +9,14 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
+    const userIsHome = splitPath(this.props)[1] === '';
+
     this.state = {
       menu: '',
-      visibility: splitPath(this.props)[1] === '' ? 'transparent' : 'opaque'
+      visibility: userIsHome ? 'transparent' : 'opaque'
     };
 
     this.timeoutId = 0;
-
-    this.closeHeaderMenuViaSetTimeout = this.closeHeaderMenuViaSetTimeout.bind(
-      this
-    );
     this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
     this.toggleTransparency = this.toggleTransparency.bind(this);
   }
@@ -32,37 +30,40 @@ class Header extends Component {
   }
 
   addCssWhenHeaderIsHome() {
-    return this.location[1] === '' ? 'home-page-header' : 'inner-page-header';
+    const userIsHome = this.location[1] === '';
+    return userIsHome ? 'home-page-header' : 'inner-page-header';
   }
 
   toggleHeaderMenu() {
+    const menuIsClosed = this.state.menu === '';
+
     this.setState({
-      menu: this.state.menu === '' ? ' menu-open' : ''
+      menu: menuIsClosed ? ' menu-open' : ''
     });
+
+    if (menuIsClosed) {
+      this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4000);
+    } else {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = 0;
+    }
+  }
+
+  restartMenuTimeout() {
+    clearTimeout(this.timeoutId);
+    this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4000);
   }
 
   toggleTransparency() {
-    // ~ja Called via event listeners, not component!
-
     const scrollTop = this.scrollTop;
+    const headerIsTransparent = this.state.visibility === 'transparent';
 
-    if (this.state.visibility === 'transparent' && scrollTop >= 7) {
+    if (headerIsTransparent && scrollTop >= 7) {
       this.setState({ visibility: 'opaque' });
     }
 
-    if (this.state.visibility === 'opaque' && scrollTop < 7) {
+    if (!headerIsTransparent && scrollTop < 7) {
       this.setState({ visibility: 'transparent' });
-    }
-  }
-
-  closeHeaderMenuViaSetTimeout() {
-    if (this.state.menu === '') {
-      this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4000);
-    }
-
-    if (this.timeoutId && this.state.menu !== '') {
-      clearTimeout(this.timeoutId);
-      this.timeoutId = 0;
     }
   }
 
@@ -71,24 +72,21 @@ class Header extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.location[1] !== '' && this.state.visibility === 'transparent') {
+    const userIsHome = this.location[1] === '';
+    const headerIsTransparent = this.state.visibility === 'transparent';
+    const userIsTraveling = this.location[1] !== splitPath(prevProps)[1];
+    const timeoutIsRunning = this.timeoutId;
+
+    if (!userIsHome && headerIsTransparent) {
       this.setState({ visibility: 'opaque' });
     }
 
-    if (
-      this.location[1] === '' &&
-      this.scrollTop < 7 &&
-      this.state.visibility === 'opaque'
-    ) {
+    if (userIsHome && !headerIsTransparent && this.scrollTop < 7) {
       this.setState({ visibility: 'transparent' });
     }
 
-    if (this.location[1] !== splitPath(prevProps)[1]) {
-      if (this.timeoutId) {
-        clearTimeout(this.timeoutId);
-        this.timeoutId = 0;
-        this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4000);
-      }
+    if (userIsTraveling && timeoutIsRunning) {
+      this.restartMenuTimeout();
     }
   }
 
@@ -103,10 +101,7 @@ class Header extends Component {
           state={this.props.state}
           turnOffActiveButtons={this.props.turnOffActiveButtons}
         />
-        <HeaderNavIcon
-          toggleHeaderMenu={this.toggleHeaderMenu}
-          closeHeaderMenuViaSetTimeout={this.closeHeaderMenuViaSetTimeout}
-        />
+        <HeaderNavIcon toggleHeaderMenu={this.toggleHeaderMenu} />
       </header>
     );
   }

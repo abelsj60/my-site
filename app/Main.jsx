@@ -126,7 +126,6 @@ class Main extends Component {
             return (
               <Menu
                 state={this.props.state}
-                toggleMenu={this.props.toggleMenu}
                 section={match.params.section.toLowerCase()}
               />
             );

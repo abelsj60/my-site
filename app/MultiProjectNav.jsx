@@ -22,11 +22,7 @@ class MultiProjectNav extends Component {
         <h1>
           {formatProjectName(project.name)} | {project.details.type}
         </h1>
-        <SingleProjectNav
-          state={this.props.state}
-          toggleMenu={this.props.toggleMenu}
-          projectData={project}
-        />
+        <SingleProjectNav state={this.props.state} projectData={project} />
       </section>
     ));
   }

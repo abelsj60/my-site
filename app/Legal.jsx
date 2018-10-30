@@ -19,7 +19,9 @@ class Legal extends Component {
     return (
       <section
         id="legal"
-        className={`${this.props.state.legal} ${this.addCssToFlagAboutPage()}`}
+        className={`${
+          this.props.footerState.legalTerms
+        } ${this.addCssToFlagAboutPage()}`}
       >
         <section>
           <p>© {this.copyrightYear} James Abels. All rights reserved.</p>

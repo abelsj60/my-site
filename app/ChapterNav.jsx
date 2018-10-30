@@ -30,11 +30,6 @@ class ChapterNav extends Component {
           chapter,
           this.props.state.chapterTitle
         )}
-        onClick={
-          this.props.state.menu === 'active'
-            ? () => this.props.toggleMenu()
-            : undefined
-        }
         to={`/chapter/${normalize(chapter.title)}`}
       >
         {this.location[1] === 'menu' && (
