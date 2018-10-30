@@ -25,19 +25,19 @@ class AppBar extends Component {
         label: 'explore',
         linkPath: getPath(this.props),
         css: this.props.state.explore === 'active' ? 'inactive' : 'active',
-        handleClick: this.props.toggleText
+        handleClick: () => this.props.toggleText()
       },
       {
         label: 'legal',
         linkPath: getPath(this.props),
         css: this.props.footerState.legalTerms,
-        handleClick: this.props.toggleLegalTerms
+        handleClick: () => this.props.toggleLegalTerms()
       },
       {
         label: 'contact',
         linkPath: getPath(this.props),
         css: this.props.footerState.contact,
-        handleClick: this.props.toggleBusinessCard
+        handleClick: () => this.props.toggleBusinessCard()
       }
     ];
   }
@@ -91,7 +91,7 @@ class AppBar extends Component {
             <Link
               to={button.linkPath}
               className={button.css}
-              onClick={() => button.handleClick()}
+              onClick={button.handleClick}
             >
               <p>{this.formatButtonLabel(button)}</p>
             </Link>
