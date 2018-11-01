@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import Header from './Header.jsx';
-import Main from './Main.jsx';
+import Body from './Body.jsx';
 import Footer from './Footer.jsx';
 import { splitPath } from './helpers/utils.js';
 
@@ -21,7 +21,7 @@ class Page extends Component {
           state={this.props.state}
           turnOffActiveButtons={this.props.turnOffActiveButtons}
         />
-        <Main state={this.props.state} />
+        <Body state={this.props.state} />
         <Footer state={this.props.state} toggleText={this.props.toggleText} />
       </section>
     );

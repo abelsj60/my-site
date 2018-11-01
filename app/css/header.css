@@ -13,7 +13,30 @@ header {
 
 header.opaque {
   color: black;
+  /* background-color: white; */
   background-color: white;
+
+  /* background-image: url('https://www.transparenttextures.com/patterns/squairy.png'); */
+  /* background-image: url('https://www.transparenttextures.com/patterns/sos.png'); */
+  /* box-shadow: 0 0 0.75em black; */
+  /* box-shadow: 0 -7px 9px -7px rgba(0, 0, 0, 0.4); */
+  /* border-bottom: lightgrey dotted 0.5px; */
+}
+
+header.opaque.menu-open {
+  background-color: white;
+  box-shadow: none;
+  /* box-shadow: 0 0 0.75em black; */
+  /* background-image: url('https://www.transparenttextures.com/patterns/subtle-grey.png'); */
+}
+
+#home-page-header.opaque {
+  border-bottom: none;
+  box-shadow: none;
+  /* color: black; */
+  /* background-color: white; */
+  /* background-image: none; */
+  /* box-shadow: none; */
 }
 
 #site-name,
@@ -35,6 +58,12 @@ header.menu-open #site-motto {
   margin-top: 1px;
   font-size: 1.3rem;
   font-style: italic;
+}
+
+#home-page-header.opaque,
+#home-page-header.opaque a,
+#home-page-header.opaque a:hover {
+  color: black;
 }
 
 header nav {
@@ -121,13 +150,13 @@ header.opaque.menu-open #nav-icon:hover {
 }
 
 header.menu-open #full-screen-nav-menu {
+  z-index: 3;
   display: flex;
   position: absolute;
   width: 100%;
   top: 52px;
   bottom: 48px;
-  background-color: whitesmoke;
-  z-index: 3;
+  /* background-color: whitesmoke; */
 }
 
 @media only screen and (min-width: 705px) {

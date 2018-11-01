@@ -5,41 +5,56 @@
 }
 
 #business-card.active {
+  z-index: 0;
   display: flex;
   justify-content: center;
   position: absolute;
   top: 52px;
   bottom: 80px;
   width: 100%;
-  background-color: rgba(0, 0, 255, 0.6);
+  background-color: #f5e900;
+  background-image: url('https://www.transparenttextures.com/patterns/starring.png');
 }
 
-#home-page-footer #business-card.active {
-  top: 52px;
+.home #business-card.active {
+  z-index: 2;
   bottom: 55px;
 }
 
-#business-card section {
+#business-card #card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 200px;
   width: 350px;
   align-self: center;
-  background-color: black;
-  font-size: 1.7rem;
+  background-color: #6100f2;
+  background-image: url('https://www.transparenttextures.com/patterns/3px-tile.png');
+  font-size: 1.75rem;
   line-height: 2.5rem;
+  color: white;
+  box-shadow: 0 0 0.75em black;
+}
+
+#business-card #card:hover {
+  transform: rotate(3deg);
+  color: lightgoldenrodyellow;
+}
+
+#business-card #card:hover .line {
+  /* box-shadow: inset 100px 0 0 0 deepskyblue;
+  color: deepskyblue; */
 }
 
 #business-card p {
-  margin-left: 85px;
+  margin-left: 70px;
 }
 
-@media only screen and (min-width: 500px) {
-  #business-card section {
-    height: 300px;
-    width: 450px;
-  }
+#business-card .line {
+  background-color: white;
+  width: 80%;
+  height: 2px;
+  margin-left: 70px;
 }
 
 @media only screen and (min-width: 849px) {

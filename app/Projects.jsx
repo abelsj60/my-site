@@ -30,7 +30,7 @@ class Projects extends Component {
         <section id="desktop-project-nav" className="left">
           <div id="content">
             <h1>My projects</h1>
-            <h2>Technology projects for myself, clients, and fun</h2>
+            <h2>Technology projects for me, clients, and fun</h2>
             <MultiProjectNav currentProject={this.projectData} />
           </div>
         </section>

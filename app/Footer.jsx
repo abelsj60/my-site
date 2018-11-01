@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import AppBar from './AppBar.jsx';
 import BusinessCard from './BusinessCard.jsx';
@@ -97,29 +97,31 @@ class Footer extends Component {
 
   render() {
     return (
-      <footer
-        id={this.addCssThatLocatesFooter()}
-        className={this.props.state.magicClicks}
-        style={this.location[1] === '' ? this.props.state.magicOpacity : null}
-      >
-        <LegalTerms footerState={this.state} />
-        <BusinessCard footerState={this.state} />
-        <FooterText
-          state={this.props.state}
-          footerState={this.state}
-          toggleLegalTerms={this.toggleLegalTerms}
-          toggleBusinessCard={this.toggleBusinessCard}
-        />
-        {this.addAppBarToPage() && (
-          <AppBar
+      <Fragment>
+        <footer
+          id={this.addCssThatLocatesFooter()}
+          className={this.props.state.magicClicks}
+          style={this.location[1] === '' ? this.props.state.magicOpacity : null}
+        >
+          <BusinessCard footerState={this.state} />
+          <LegalTerms footerState={this.state} />
+          <FooterText
             state={this.props.state}
             footerState={this.state}
-            toggleText={this.props.toggleText}
             toggleLegalTerms={this.toggleLegalTerms}
             toggleBusinessCard={this.toggleBusinessCard}
           />
-        )}
-      </footer>
+          {this.addAppBarToPage() && (
+            <AppBar
+              state={this.props.state}
+              footerState={this.state}
+              toggleText={this.props.toggleText}
+              toggleLegalTerms={this.toggleLegalTerms}
+              toggleBusinessCard={this.toggleBusinessCard}
+            />
+          )}
+        </footer>
+      </Fragment>
     );
   }
 }

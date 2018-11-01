@@ -11,8 +11,37 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#desktop-story-nav {
-  display: none;
+#story-nav {
+  display: flex;
+  margin-bottom: 20px;
+  min-height: 40px;
+  border-bottom: whitesmoke dotted 0.5px;
+}
+
+#story-nav a p {
+  flex: 1;
+  text-align: center;
+}
+
+#story-nav a.active {
+  flex: 1;
+  color: white;
+  display: flex;
+  align-items: center;
+  border-top: white dotted 0.5px;
+}
+
+#story-nav a.inactive {
+  flex: 1;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+#story-nav a.inactive:hover {
+  color: lightyellow;
+  /* border-top: whitesmoke dotted 0.5px; */
+  /* background-color: antiquewhite; */
 }
 
 #chapter.inactive {
@@ -51,8 +80,9 @@
     position: unset;
     bottom: 48px;
     margin: 25px;
-    background-color: cornflowerblue;
-    color: black;
+    background-color: #6100f2;
+    color: white;
+    background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
   }
 
   #chapter h2 {
@@ -61,37 +91,12 @@
     margin-bottom: 7px;
   }
 
-  #desktop-story-nav {
-    display: flex;
-    margin-bottom: 20px;
-    min-height: 40px;
-    border-bottom: whitesmoke dotted 0.5px;
+  #story-nav a.active {
+    color: white;
   }
 
-  #desktop-story-nav a p {
-    flex: 1;
-    text-align: center;
-  }
-
-  #desktop-story-nav a.active {
-    flex: 1;
-    color: whitesmoke;
-    display: flex;
-    align-items: center;
-    border-top: whitesmoke dotted 0.5px;
-  }
-
-  #desktop-story-nav a.inactive {
-    flex: 1;
-    color: whitesmoke;
-    display: flex;
-    align-items: center;
-  }
-
-  #desktop-story-nav a.inactive:hover {
-    color: black;
-    border-top: whitesmoke dotted 0.5px;
-    /* background-color: antiquewhite; */
+  #story-nav a.inactive:hover {
+    color: deepskyblue;
   }
 
   #illustration {

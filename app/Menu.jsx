@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import SectionMenu from './SectionMenu.jsx';
+import { withRouter } from 'react-router-dom';
+import CloseButton from './CloseButton.jsx';
+import MenuContents from './MenuContents.jsx';
+import MenuDescription from './MenuDescription.jsx';
 import { splitPath } from './helpers/utils.js';
 
 class Menu extends Component {
@@ -15,10 +17,9 @@ class Menu extends Component {
   render() {
     return (
       <main id="site-menu">
-        <Link id="close-button" to={`/${this.location[2].toLowerCase()}`}>
-          <p>✘</p>
-        </Link>
-        <SectionMenu state={this.props.state} />
+        <CloseButton />
+        <MenuDescription />
+        <MenuContents state={this.props.state} />
       </main>
     );
   }

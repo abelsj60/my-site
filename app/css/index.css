@@ -28,10 +28,10 @@ body {
 @import 'app-bar.css';
 @import 'magic-content.css';
 @import 'inner-page.css';
-@import 'my-projects.css';
+@import 'projects.css';
 @import 'the-story.css';
 @import 'journalism.css';
-@import 'site-menu.css';
+@import 'menu.css';
 @import 'about.css';
 @import 'not-found.css';
 @import 'footer.css';

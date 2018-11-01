@@ -1,10 +1,10 @@
 /* App bar rules */
 
 #app-bar-menu {
+  z-index: 1;
   flex: 1;
   display: flex;
   height: 80px;
-  background-color: black;
 }
 
 #app-bar-menu a {
@@ -12,17 +12,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: lightgrey;
 }
 
 #app-bar-menu a:hover {
-  background-color: yellow;
-  color: black;
+  border-top: yellow solid 4px;
 }
 
 #app-bar-menu a.active {
-  background-color: yellow;
-  color: red;
+  border-top: yellow solid 6px;
+  color: lightyellow;
 }
 
 #app-bar-menu p {
@@ -30,9 +29,8 @@
 }
 
 #button-border {
-  border-right: red dotted 0.5px;
+  border-right: lightgrey dotted 0.5px;
   width: 1px;
-  /* height: 80px; */
 }
 
 @media only screen and (min-width: 849px) {

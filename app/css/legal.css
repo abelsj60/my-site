@@ -4,8 +4,9 @@
   display: none;
 }
 
-#home-page-footer #legal.active,
+.home #legal.active,
 #legal.active.about {
+  z-index: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,25 +18,22 @@
   color: black;
 }
 
-#home-page-footer #legal.active {
-  top: 52px;
+.home #legal.active {
+  z-index: 2;
   bottom: 55px;
 }
 
 @media only screen and (min-width: 849px) {
-  #legal.active {
+  #legal.active,
+  #legal.active.about {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     top: 52px;
-    bottom: 80px;
+    bottom: 55px;
     width: 100%;
     background-color: whitesmoke;
     color: black;
-  }
-
-  #inner-page-footer #legal.active {
-    bottom: 55px;
   }
 }

@@ -49,6 +49,10 @@
   border-bottom: lightgrey dotted 0.5px;
 }
 
+.project-thumbnails a:hover {
+  opacity: 0.6;
+}
+
 #project-images .project-thumbnails img {
   max-width: 100%;
   vertical-align: bottom;
@@ -125,7 +129,8 @@
     padding: 25px;
     max-width: 20%;
     min-width: 327px;
-    background-color: cornflowerblue;
+    background-color: #6100f2;
+    background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
     color: white;
   }
 
@@ -153,6 +158,10 @@
   #desktop-project-nav #nav-group h1 {
     font-size: 1.5rem;
     margin-bottom: 7px;
+  }
+
+  #desktop-project-nav #nav-group:hover h1 {
+    color: deepskyblue;
   }
 
   #desktop-project-nav .project-thumbnails {

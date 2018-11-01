@@ -22,7 +22,7 @@ class TheStory extends Component {
     return (
       <main id="the-story">
         <section id="chapter" className={`left ${this.props.state.explore}`}>
-          <section id="desktop-story-nav">
+          <section id="story-nav">
             <ChapterNav state={this.props.state} />
           </section>
           <Chapter chapter={chapter} />

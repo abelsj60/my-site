@@ -4,7 +4,6 @@
   width: 100%;
   min-height: 100vh;
   z-index: 1;
-  /* top: 52px; */
   bottom: 48px;
   object-fit: cover;
   position: fixed;
@@ -19,12 +18,12 @@
 }
 
 #magic-content {
+  z-index: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
   pointer-events: all;
-  z-index: 2;
 }
 
 #magic-content.block {
@@ -33,7 +32,7 @@
 
 #magic-nav {
   flex: 1;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.15);
   display: block;
   overflow: auto;
 }
@@ -46,16 +45,12 @@
   flex: 1;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   align-items: flex-end;
-  color: white;
+  font-size: 6rem;
+  color: deepskyblue;
   padding-left: 25px;
   padding-right: 25px;
   min-height: 100%;
-}
-
-#magic-nav-content {
-  flex: 1;
 }
 
 #magic-nav a:nth-child(-n + 2) {
@@ -63,13 +58,19 @@
 }
 
 #magic-nav a:hover {
-  background-color: rgba(255, 0, 0, 0.3);
   color: white;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#magic-nav h3 {
+  padding-bottom: 30px;
 }
 
 #second-hint {
+  font-size: 2rem;
   padding-bottom: 10px;
   color: lightgrey;
+  display: none;
 }
 
 #abracadabra {
@@ -92,6 +93,5 @@
 
   #magic-nav a:nth-child(-n + 2) {
     border-bottom: none;
-    border-right: 0.5px solid red;
   }
 }

@@ -44,15 +44,16 @@
     padding: 25px;
     min-width: 324px;
     max-width: 327px;
-    background-color: cornflowerblue;
+    background-color: #6100f2;
+    background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
   }
 
   #desktop-article-navigation a.active {
-    color: yellow;
+    color: lightgoldenrodyellow;
   }
 
   #desktop-article-navigation a.active:hover {
-    color: black;
+    /* color: deepskyblue; */
   }
 
   #desktop-article-navigation a.inactive {
@@ -60,7 +61,7 @@
   }
 
   #desktop-article-navigation a.inactive:hover {
-    color: navy;
+    color: deepskyblue;
   }
 
   #desktop-article-navigation section {

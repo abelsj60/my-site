@@ -2,63 +2,78 @@
 
 #site-menu {
   align-items: center;
+  background-image: url('https://www.transparenttextures.com/patterns/my-little-plaid.png');
+  background-color: navy;
+  color: white;
 }
 
 #close-button {
   font-size: 2rem;
-  position: absolute;
-  top: 65px;
-  right: 20px;
   align-self: flex-end;
-  color: red;
+  color: lightseagreen;
+  margin-top: 25px;
+  margin-right: 25px;
 }
 
 #close-button:hover {
-  color: black;
+  color: lightgoldenrodyellow;
+}
+
+#menu-description {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 25px;
+  max-width: 507px;
+  padding-bottom: 8px;
+  border-bottom: white dotted 0.5px;
 }
 
 #site-menu .chapter-menu,
 #site-menu .journalism-menu,
 #site-menu .projects-menu {
   overflow: auto;
-  margin: 25px;
+  margin: 15px 25px 25px;
   flex: 1;
 }
 
 #site-menu .chapter-menu a.active,
 #site-menu .journalism-menu a.active {
-  color: blue;
+  color: deepskyblue;
 }
 
 #site-menu .chapter-menu a.active:hover,
 #site-menu .journalism-menu a.active:hover {
-  color: black;
+  /* color: lightgoldenrodyellow; */
 }
 
 #site-menu .chapter-menu a.inactive,
 #site-menu .journalism-menu a.inactive {
-  color: black;
+  color: white;
 }
 
 #site-menu .chapter-menu a.inactive:hover,
 #site-menu .journalism-menu a.inactive:hover {
-  color: cornflowerblue;
+  color: lightgoldenrodyellow;
 }
 
-#site-menu #source,
-#site-menu .chapter-menu {
-  font-size: 1.75rem;
+#site-menu #source {
+  font-size: 1.4rem;
   font-style: italic;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 #site-menu #hed {
-  font-size: 5rem;
-  margin-bottom: 25px;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+#contents-list #story-chapter {
+  font-style: italic;
+  margin-bottom: 2px;
 }
 
 .chapter-menu p {
-  font-size: 5rem;
+  font-size: 3rem;
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
@@ -96,7 +111,16 @@
   margin-bottom: 20px;
 }
 
-#site-menu h1 {
-  font-size: 1.75rem;
-  margin-bottom: 10px;
+.chapter-menu h1 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+#site-menu #nav-group h1 {
+  font-size: 1.6rem;
+  margin-bottom: 7px;
+}
+
+#site-menu #nav-group:hover {
+  color: lightgoldenrodyellow;
 }

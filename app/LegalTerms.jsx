@@ -26,6 +26,7 @@ class Legal extends Component {
         <section>
           <p>© {this.copyrightYear} James Abels. All rights reserved.</p>
         </section>
+        <div id="temp-content-box-shadow" />
       </section>
     );
   }
