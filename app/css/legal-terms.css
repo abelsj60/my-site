@@ -14,8 +14,10 @@
   top: 52px;
   bottom: 80px;
   width: 100%;
-  background-color: whitesmoke;
-  color: black;
+  /* background-color: whitesmoke; */
+  color: white;
+  background-color: navy;
+  background-image: url('https://www.transparenttextures.com/patterns/my-little-plaid.png');
 }
 
 .home #legal.active {
@@ -33,7 +35,7 @@
     top: 52px;
     bottom: 55px;
     width: 100%;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     color: black;
   }
 }

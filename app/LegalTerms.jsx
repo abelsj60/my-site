@@ -23,9 +23,7 @@ class Legal extends Component {
           this.props.footerState.legalTerms
         } ${this.addCssToFlagAboutPage()}`}
       >
-        <section>
-          <p>© {this.copyrightYear} James Abels. All rights reserved.</p>
-        </section>
+        <p>© {this.copyrightYear} James Abels. All rights reserved.</p>
         <div id="temp-content-box-shadow" />
       </section>
     );
