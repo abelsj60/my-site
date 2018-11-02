@@ -7,6 +7,7 @@
   top: 52px;
   bottom: 80px;
   padding: 25px;
+  margin: 25px;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -25,23 +26,21 @@
 
 #story-nav a.active {
   flex: 1;
-  color: white;
+  color: whitesmoke;
   display: flex;
   align-items: center;
-  border-top: white dotted 0.5px;
+  border-top: whitesmoke dotted 0.5px;
 }
 
 #story-nav a.inactive {
   flex: 1;
-  color: white;
+  color: whitesmoke;
   display: flex;
   align-items: center;
 }
 
 #story-nav a.inactive:hover {
   color: lightyellow;
-  /* border-top: whitesmoke dotted 0.5px; */
-  /* background-color: antiquewhite; */
 }
 
 #chapter.inactive {
@@ -63,6 +62,10 @@
   line-height: normal;
   white-space: pre-wrap;
   overflow: auto;
+}
+
+#illustration {
+  margin: 25px;
 }
 
 #illustration img {
@@ -91,18 +94,15 @@
     margin-bottom: 7px;
   }
 
-  #story-nav a.active {
-    color: white;
-  }
-
   #story-nav a.inactive:hover {
     color: deepskyblue;
   }
 
   #illustration {
-    margin-right: 25px;
     margin-top: 25px;
     margin-bottom: 25px;
+    margin-right: 25px;
+    margin-left: 0px;
   }
 
   #illustration img {

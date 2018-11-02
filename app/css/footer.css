@@ -7,15 +7,10 @@ footer {
   align-items: center;
   height: 80px;
   background-color: darkred;
-  /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
   background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
   pointer-events: all;
-  box-shadow: 0 0 0.75em black;
+  box-shadow: 0 1px 0.75em black;
 }
-
-/* .home footer {
-  background-color: white;
-} */
 
 #temp-content-box-shadow {
   z-index: 0;
@@ -23,7 +18,7 @@ footer {
   bottom: 0;
   height: 80px;
   width: 100%;
-  box-shadow: 0 0 0.75em black;
+  box-shadow: 0 1px 0.75em black;
 }
 
 footer.block {
@@ -35,15 +30,11 @@ footer.block {
   height: 55px;
 }
 
-/* .home #footer-text {
-  color: black;
-} */
-
 #footer-text {
   z-index: 2;
   display: flex;
   font-size: 1.1rem;
-  color: lightgrey;
+  color: burlywood;
 }
 
 #footer-text p:hover {

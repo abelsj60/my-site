@@ -42,11 +42,6 @@
   text-shadow: 0.5px 1px 2px black;
 }
 
-#business-card #card:hover .line {
-  /* box-shadow: inset 100px 0 0 0 deepskyblue;
-  color: deepskyblue; */
-}
-
 #business-card p {
   margin-left: 70px;
 }

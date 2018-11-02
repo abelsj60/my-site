@@ -9,10 +9,8 @@
 main {
   flex: 1;
   display: flex;
-  /* background-color: whitesmoke; */
   flex-direction: column;
   color: black;
-  /* background-color: whitesmoke; */
   background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
 }
 
