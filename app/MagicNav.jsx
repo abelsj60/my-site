@@ -12,7 +12,7 @@ class MagicNav extends Component {
     return (
       <section id="magic-nav">
         {magicData.map((section, index) => (
-          <Link key={index} to={section.link} key={index}>
+          <Link key={index} to={section.link}>
             <h3>{section.hed}</h3>
             <p id="second-hint">{`${index !== 2 ? '⥥ ⥣' : '⥣'}`}</p>
           </Link>
