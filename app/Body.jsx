@@ -20,6 +20,8 @@ import NotFound from './NotFound.jsx';
   x 6. When using menu to navigate away from Menu, shut off menu
   7. Remove extra space from last thumbnail group in menu/
   8. Refactor StateManagement (tighten?)
+  9. Identify active project and thumbnail?
+  10.
 
   -Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
 

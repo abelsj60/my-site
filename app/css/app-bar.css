@@ -12,7 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: burlywood;
+  color: blanchedalmond;
 }
 
 #app-bar-menu a:hover {
@@ -21,7 +21,6 @@
 
 #app-bar-menu a.active {
   border-top: yellow solid 6px;
-  color: burlywood;
 }
 
 #app-bar-menu p {
