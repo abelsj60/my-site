@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
 import projectData from './data/projectData';
+import { splitPath } from './helpers/utils.js';
 
 class Projects extends Component {
   constructor(props) {
     super(props);
+  }
+
+  get location() {
+    return splitPath(this.props);
   }
 
   get projectData() {
@@ -31,7 +37,10 @@ class Projects extends Component {
           <div id="content">
             <h1>My projects</h1>
             <h2>Technology projects for me, clients, and fun</h2>
-            <MultiProjectNav currentProject={this.projectData} />
+            <MultiProjectNav
+              state={this.props.state}
+              currentProject={this.projectData}
+            />
           </div>
         </section>
         <section id="active-project" className="right">
@@ -42,7 +51,10 @@ class Projects extends Component {
               projectDescriptions={this.projectDescriptions}
             />
             <section id="project-images">
-              <SingleProjectNav projectData={this.projectData} />
+              <SingleProjectNav
+                projectData={this.projectData}
+                projectName={this.props.state.projectName}
+              />
               <ProjectImageContainer
                 state={this.props.state}
                 projectData={this.projectData}
@@ -56,4 +68,4 @@ class Projects extends Component {
   }
 }
 
-export default Projects;
+export default withRouter(Projects);

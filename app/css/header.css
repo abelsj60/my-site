@@ -13,30 +13,7 @@ header {
 
 header.opaque {
   color: black;
-  /* background-color: white; */
   background-color: white;
-
-  /* background-image: url('https://www.transparenttextures.com/patterns/squairy.png'); */
-  /* background-image: url('https://www.transparenttextures.com/patterns/sos.png'); */
-  /* box-shadow: 0 0 0.75em black; */
-  /* box-shadow: 0 -7px 9px -7px rgba(0, 0, 0, 0.4); */
-  /* border-bottom: lightgrey dotted 0.5px; */
-}
-
-header.opaque.menu-open {
-  background-color: white;
-  box-shadow: none;
-  /* box-shadow: 0 0 0.75em black; */
-  /* background-image: url('https://www.transparenttextures.com/patterns/subtle-grey.png'); */
-}
-
-#home-page-header.opaque {
-  border-bottom: none;
-  box-shadow: none;
-  /* color: black; */
-  /* background-color: white; */
-  /* background-image: none; */
-  /* box-shadow: none; */
 }
 
 #site-name,

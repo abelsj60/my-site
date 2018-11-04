@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { splitPath } from './helpers/utils.js';
 
 class FooterText extends Component {
@@ -13,17 +13,23 @@ class FooterText extends Component {
     return splitPath(this.props);
   }
 
+  get isReverie() {
+    return this.location.includes('reverie');
+  }
+
   getCopyrightYear() {
     return new Date().getFullYear();
   }
 
-  addCssToHideTextForAppBar() {
-    return this.location[1] !== '' ? 'app-bar-active' : '';
-  }
-
   render() {
     return (
-      <section id="footer-text" className={this.addCssToHideTextForAppBar()}>
+      <section id="footer-text" className="app-bar-active">
+        <Link
+          to={this.isReverie ? '/' : '/reverie'}
+          className={this.isReverie ? 'active' : 'inactive'}
+        >
+          <p>Reverie</p>
+        </Link>
         <p
           className={this.props.footerState.contact}
           onClick={event => {

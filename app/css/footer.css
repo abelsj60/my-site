@@ -25,12 +25,8 @@ footer.block {
   pointer-events: none;
 }
 
-#home-page-footer,
-#home-page-footer #temp-content-box-shadow {
-  height: 55px;
-}
-
-#footer-text {
+#footer-text,
+#footer-text a {
   z-index: 2;
   display: flex;
   font-size: 1.1rem;
@@ -41,7 +37,8 @@ footer.block {
   color: palegoldenrod;
 }
 
-#footer-text p.active {
+#footer-text p.active,
+#footer-text a.active {
   color: palegoldenrod;
 }
 

@@ -32,9 +32,9 @@ class Footer extends Component {
     return isRoot ? 'home-page-footer' : 'inner-page-footer';
   }
 
-  addAppBarToPage() {
-    return this.location[1] !== '';
-  }
+  // addAppBarToPage() {
+  //   return this.location[1] !== '';
+  // }
 
   toggleBusinessCard() {
     const isActive = this.state.contact === 'active';
@@ -111,15 +111,13 @@ class Footer extends Component {
             toggleLegalTerms={this.toggleLegalTerms}
             toggleBusinessCard={this.toggleBusinessCard}
           />
-          {this.addAppBarToPage() && (
-            <AppBar
-              state={this.props.state}
-              footerState={this.state}
-              toggleText={this.props.toggleText}
-              toggleLegalTerms={this.toggleLegalTerms}
-              toggleBusinessCard={this.toggleBusinessCard}
-            />
-          )}
+          <AppBar
+            state={this.props.state}
+            footerState={this.state}
+            toggleText={this.props.toggleText}
+            toggleLegalTerms={this.toggleLegalTerms}
+            toggleBusinessCard={this.toggleBusinessCard}
+          />
         </footer>
       </Fragment>
     );

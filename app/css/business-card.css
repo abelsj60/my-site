@@ -18,7 +18,7 @@
 
 .home #business-card.active {
   z-index: 2;
-  bottom: 55px;
+  /* bottom: 55px; */
 }
 
 #business-card #card {

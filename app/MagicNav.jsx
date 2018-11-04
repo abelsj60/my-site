@@ -8,13 +8,20 @@ class MagicNav extends Component {
     super();
   }
 
+  getCssToShowAndHideNavItems(index) {
+    return `magicnav-link-${index + 1}`;
+  }
+
   render() {
     return (
       <section id="magic-nav">
         {magicData.map((section, index) => (
-          <Link key={index} to={section.link}>
+          <Link
+            key={index}
+            to={section.link}
+            className={this.getCssToShowAndHideNavItems(index)}
+          >
             <h3>{section.hed}</h3>
-            <p id="second-hint">{`${index !== 2 ? '⥥ ⥣' : '⥣'}`}</p>
           </Link>
         ))}
       </section>

@@ -49,10 +49,6 @@
   border-bottom: lightgrey dotted 0.5px;
 }
 
-.project-thumbnails a:hover {
-  opacity: 0.6;
-}
-
 #project-images .project-thumbnails img {
   max-width: 100%;
   vertical-align: bottom;
@@ -87,7 +83,9 @@
     justify-content: flex-start;
     margin-top: 31px;
     padding-bottom: 0px;
+    padding-left: 7px;
     border-bottom: none;
+    border-left: lightgrey dotted 0.5px;
   }
 
   #project-images .project-thumbnails a:nth-child(-n + 2) {
@@ -109,7 +107,7 @@
   }
 
   #main-image img {
-    margin-right: 5px;
+    margin-right: 10px;
   }
 }
 
@@ -120,6 +118,32 @@
 
   #active-project {
     margin-left: 0;
+  }
+
+  #project-images {
+    flex-direction: column;
+  }
+
+  #project-images .project-thumbnails {
+    flex-direction: row;
+    margin-top: 0;
+    padding-left: 0;
+    padding-bottom: 7px;
+    border-bottom: lightgrey dotted 0.5px;
+    border-left: none;
+  }
+
+  #project-images .project-thumbnails a:nth-child(-n + 2) {
+    margin-right: 5px !important;
+    margin-bottom: 0;
+  }
+
+  #main-image p {
+    margin-top: 10px;
+  }
+
+  #main-image img {
+    margin-right: 0;
   }
 
   #desktop-project-nav {
@@ -161,7 +185,7 @@
   }
 
   #desktop-project-nav #nav-group:hover h1 {
-    color: deepskyblue;
+    color: lightgoldenrodyellow;
   }
 
   #desktop-project-nav .project-thumbnails {
@@ -169,14 +193,30 @@
   }
 }
 
-@media only screen and (min-width: 1147px) {
+@media only screen and (min-width: 1072px) {
+  #project-images {
+    flex-direction: row-reverse;
+  }
+
   #project-images .project-thumbnails {
-    flex-direction: row;
-    max-height: 161.75px;
+    flex-direction: column;
+    margin-top: 31px;
+    padding-left: 7px;
+    border-bottom: none;
+    border-left: lightgrey dotted 0.5px;
+    max-height: 100%;
   }
 
   #project-images .project-thumbnails a:nth-child(-n + 2) {
-    margin-right: 5px;
-    margin-bottom: 0;
+    margin-right: 0px !important;
+    margin-bottom: 5px;
+  }
+
+  #main-image img {
+    margin-right: 10px;
+  }
+
+  #main-image p {
+    margin-top: 0;
   }
 }

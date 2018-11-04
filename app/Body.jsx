@@ -6,6 +6,7 @@ import Projects from './Projects.jsx';
 import Journalism from './Journalism.jsx';
 import About from './About.jsx';
 import Menu from './Menu.jsx';
+import Reverie from './Reverie.jsx';
 import NotFound from './NotFound.jsx';
 
 /*
@@ -21,7 +22,7 @@ import NotFound from './NotFound.jsx';
   7. Remove extra space from last thumbnail group in menu/
   8. Refactor StateManagement (tighten?)
   9. Identify active project and thumbnail?
-  10.
+  10. Header time it broken
 
   -Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
 
@@ -134,6 +135,7 @@ class Main extends Component {
           }}
         />
 
+        <Route path="/reverie" render={() => <Reverie />} />
         <Route path="/about" render={() => <About />} />
         <Route component={NotFound} />
       </Switch>

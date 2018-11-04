@@ -4,7 +4,6 @@
   display: none;
 }
 
-.home #legal.active,
 #legal.active.about {
   z-index: 0;
   display: flex;
@@ -24,11 +23,12 @@
 
 .home #legal.active {
   z-index: 2;
-  bottom: 55px;
+  /* bottom: 55px; */
 }
 
 @media only screen and (min-width: 849px) {
   #legal.active,
+  .home #legal.active,
   #legal.active.about {
     display: flex;
     justify-content: center;
