@@ -13,14 +13,35 @@
   justify-content: center;
   align-items: center;
   color: blanchedalmond;
+  position: relative;
 }
 
+#active-button {
+  /* Currently unused, could remove, along with div */
+
+  position: absolute;
+  top: 0;
+  height: 4px;
+  width: 100%;
+}
+
+/* #app-bar-menu a:hover #active-button {
+  height: 4px;
+  background-color: rgb(255, 0, 0, 1);
+}
+
+#app-bar-menu a.active #active-button {
+  height: 8px;
+  background-color: whitesmoke;
+} */
+
 #app-bar-menu a:hover {
-  border-top: yellow solid 4px;
+  background-color: rgb(255, 0, 0, 0.125);
 }
 
 #app-bar-menu a.active {
-  border-top: yellow solid 6px;
+  border-top: rgb(239, 0, 0, 1) solid 8px;
+  background-color: rgb(239, 0, 0, 0.14);
 }
 
 #app-bar-menu p {
@@ -28,8 +49,11 @@
 }
 
 #button-border {
-  border-right: lightgrey dotted 0.5px;
-  width: 1px;
+  width: 7px;
+  background-color: rgb(139, 0, 0, 0.85);
+  /* background-color: rgb(139, 0, 0, 0.1); */
+  box-shadow: inset 7.5px 0 5px -7px rgba(0, 0, 0, 0.6),
+    inset -7.5px 0 5px -7px rgba(0, 0, 0, 0.6);
 }
 
 @media only screen and (min-width: 849px) {

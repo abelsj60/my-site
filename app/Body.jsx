@@ -9,28 +9,6 @@ import Menu from './Menu.jsx';
 import Reverie from './Reverie.jsx';
 import NotFound from './NotFound.jsx';
 
-/*
-
-  1. Use setState() instead of links in most nav locations?
-    https://stackoverflow.com/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router
-    https://tylermcginnis.com/react-router-programmatically-navigate/
-  2. Style
-  3. Browser testing, polyfills, etc
-  4. When navigating away from home, reset scrollTop to 0 ?
-  5. Image storage / bundling?
-  x 6. When using menu to navigate away from Menu, shut off menu
-  7. Remove extra space from last thumbnail group in menu/
-  8. Refactor StateManagement (tighten?)
-  9. Identify active project and thumbnail?
-  10. Header time it broken
-
-  -Debouncing: https://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
-
-  -Rendering:
-  https://robots.thoughtbot.com/react-rendering-misconception
-
-*/
-
 class Main extends Component {
   constructor(props) {
     super(props);

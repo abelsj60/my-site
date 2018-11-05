@@ -116,6 +116,7 @@ class AppBar extends Component {
               onClick={button.handleClick}
             >
               <p>{this.formatButtonLabel(button)}</p>
+              <div id="active-button" />
             </Link>
             {button.label === 'contact' ? null : <div id="button-border" />}
           </Fragment>
