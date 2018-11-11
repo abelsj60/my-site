@@ -11,9 +11,11 @@ class Chapter extends Component {
     return (
       <Fragment>
         <h1>{this.props.chapter.attributes.title}</h1>
-        {ReactHtmlParser(
-          marked(this.props.chapter.body, { smartypants: true })
-        )}
+        <section id="text">
+          {ReactHtmlParser(
+            marked(this.props.chapter.body, { smartypants: true })
+          )}
+        </section>
       </Fragment>
     );
   }

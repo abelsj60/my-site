@@ -58,6 +58,10 @@
 }
 
 #chapter p {
+  margin-bottom: 10px;
+}
+
+#chapter #text {
   font-size: 1.75rem;
   line-height: normal;
   white-space: pre-wrap;
