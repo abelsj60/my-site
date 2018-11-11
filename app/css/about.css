@@ -11,10 +11,13 @@
   margin-bottom: 15px;
 }
 
+#about p {
+  margin-bottom: 10px;
+}
+
 #about-content {
   flex: 1;
   font-size: 1.75rem;
-  white-space: pre-wrap;
 }
 
 #about-text-container {

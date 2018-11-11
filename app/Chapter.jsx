@@ -1,4 +1,6 @@
 import React, { Fragment, Component } from 'react';
+import ReactHtmlParser from 'react-html-parser';
+import marked from 'marked';
 
 class Chapter extends Component {
   constructor(props) {
@@ -8,8 +10,10 @@ class Chapter extends Component {
   render() {
     return (
       <Fragment>
-        <h1>{this.props.chapter.title}</h1>
-        <p>{this.props.chapter.text}</p>
+        <h1>{this.props.chapter.attributes.title}</h1>
+        {ReactHtmlParser(
+          marked(this.props.chapter.body, { smartypants: true })
+        )}
       </Fragment>
     );
   }

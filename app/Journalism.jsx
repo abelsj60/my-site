@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import DesktopArticleNav from './DesktopArticleNav.jsx';
 import Article from './Article.jsx';
-import articleData from './data/articleData';
+import articles from './data/clips/index.js';
 import { normalize } from './helpers/utils.js';
 
 class Journalism extends Component {
@@ -11,8 +11,8 @@ class Journalism extends Component {
   }
 
   get article() {
-    return articleData.find(clip =>
-      normalize(clip.headline).includes(this.props.state.headline)
+    return articles.find(clip =>
+      normalize(clip.attributes.headline).includes(this.props.state.headline)
     );
   }
 

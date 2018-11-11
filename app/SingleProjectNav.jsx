@@ -33,14 +33,15 @@ class SingleProjectNav extends Component {
   render() {
     return (
       <section className="project-thumbnails">
-        {this.props.projectData.thumbnails.map(
+        {this.props.project.attributes.thumbnails.map(
           (thumbnail, index) =>
             thumbnail && (
               <Link
                 key={index}
-                to={`/projects/${this.props.projectData.name}/${index + 1}`}
+                to={`/projects/${this.props.project.attributes.name}/${index +
+                  1}`}
                 className={this.addCssToShowActiveThumbnail(
-                  this.props.projectName || this.props.projectData.name,
+                  this.props.projectName || this.props.project.attributes.name,
                   index + 1
                 )}
               >

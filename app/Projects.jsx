@@ -4,7 +4,7 @@ import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
-import projectData from './data/projectData';
+import projects from './data/projects/index.js';
 import { splitPath } from './helpers/utils.js';
 
 class Projects extends Component {
@@ -16,18 +16,14 @@ class Projects extends Component {
     return splitPath(this.props);
   }
 
-  get projectData() {
-    return projectData.filter(
-      project => project.name === this.props.state.projectName
+  get project() {
+    return projects.filter(
+      project => project.attributes.name === this.props.state.projectName
     )[0];
   }
 
-  get projectDescriptions() {
-    return this.projectData.details;
-  }
-
   get projectKeys() {
-    return Object.keys(this.projectDescriptions);
+    return Object.keys(this.project.attributes.details);
   }
 
   render() {
@@ -39,26 +35,26 @@ class Projects extends Component {
             <h2>Technology projects for me, clients, and fun</h2>
             <MultiProjectNav
               state={this.props.state}
-              currentProject={this.projectData}
+              currentProject={this.project}
             />
           </div>
         </section>
         <section id="active-project" className="right">
-          <h1>{this.projectData.details.name}</h1>
+          <h1>{this.project.attributes.details.name}</h1>
           <section id="project-container">
             <ProjectDescription
               projectKeys={this.projectKeys}
-              projectDescriptions={this.projectDescriptions}
+              projectDetails={this.project.attributes.details}
             />
             <section id="project-images">
               <SingleProjectNav
-                projectData={this.projectData}
+                project={this.project}
                 projectName={this.props.state.projectName}
               />
               <ProjectImageContainer
                 state={this.props.state}
-                projectData={this.projectData}
-                projectDescriptions={this.projectDescriptions}
+                project={this.project}
+                projectDetails={this.project.attributes.details}
               />
             </section>
           </section>

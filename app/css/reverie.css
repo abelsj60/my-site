@@ -7,9 +7,14 @@
 }
 
 #reverie h1 {
+  margin-bottom: 5px;
   font-size: 1.75rem;
   font-style: italic;
   color: deeppink;
+}
+
+#reverie #post {
+  overflow: auto;
 }
 
 #reverie h2 {
@@ -19,6 +24,10 @@
 }
 
 #reverie p {
+  margin-bottom: 10px;
+}
+
+#reverie img {
   margin-bottom: 10px;
 }
 

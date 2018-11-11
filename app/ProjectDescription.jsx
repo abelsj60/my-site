@@ -17,11 +17,11 @@ class ProjectDescription extends Component {
   render() {
     return (
       <Fragment>
-        <p id="type">{this.props.projectDescriptions.type}</p>
+        <p id="type">{this.props.projectDetails.type}</p>
         <h2>{this.formatKeyForDisplay('contribution')}</h2>
-        <p>{this.props.projectDescriptions.contribution}</p>
+        <p>{this.props.projectDetails.contribution}</p>
         <h2>{this.formatKeyForDisplay('description')}</h2>
-        <p>{this.props.projectDescriptions.description}</p>
+        <p>{this.props.projectDetails.description}</p>
       </Fragment>
     );
   }

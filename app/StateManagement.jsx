@@ -2,9 +2,9 @@ import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
 import Page from './Page.jsx';
 import MagicScroller from './MagicScroller.jsx';
-import articleData from './data/articleData.js';
-import storyData from './data/storyData.js';
-import projectData from './data/projectData.js';
+import clips from './data/clips/index.js';
+import story from './data/the-story/index.js';
+import projects from './data/projects/index.js';
 import { splitPath, normalize } from './helpers/utils.js';
 
 class StateManagement extends Component {
@@ -24,12 +24,13 @@ class StateManagement extends Component {
     this.state = {
       chapterTitle:
         location[1] === 'chapter'
-          ? this.validateChapter(location[2]) || normalize(storyData[0].title)
-          : normalize(storyData[0].title),
+          ? this.validateChapter(location[2]) ||
+            normalize(story[0].attributes.title)
+          : normalize(story[0].attributes.title),
       projectName:
         location[1] === 'projects'
-          ? this.validateProjectName(location[2]) || projectData[0].name
-          : projectData[0].name,
+          ? this.validateProjectName(location[2]) || projects[0].attributes.name
+          : projects[0].attributes.name,
       projectThumbnail:
         location[1] === 'projects'
           ? this.validateProjectThumbnail(location[3], 3) || 1
@@ -37,13 +38,13 @@ class StateManagement extends Component {
       publication:
         location[1] === 'journalism'
           ? this.validatePublication(location[2]) ||
-            articleData[0].publication.toLowerCase()
-          : articleData[0].publication.toLowerCase(),
+            clips[0].attributes.publication.toLowerCase()
+          : clips[0].attributes.publication.toLowerCase(),
       headline:
         location[1] === 'journalism'
           ? this.validateHeadline(location[2], location[3]) ||
-            normalize(articleData[0].headline)
-          : normalize(articleData[0].headline),
+            normalize(clips[0].attributes.headline)
+          : normalize(clips[0].attributes.headline),
       magicOpacity: { opacity: 0 },
       magicClicks: splitPath(this.props)[1] === '' ? 'block' : '',
       explore: 'active'
@@ -74,27 +75,28 @@ class StateManagement extends Component {
   }
 
   validatePublication(publication) {
-    return articleData.find(clip =>
-      normalize(clip.publication).includes(publication)
+    return clips.find(clip =>
+      normalize(clip.attributes.publication).includes(publication)
     )
       ? publication
       : undefined;
   }
 
   validateHeadline(publication, headline) {
-    const headlineIsValid = articleData.find(clip => {
-      return normalize(clip.headline).includes(headline);
+    const headlineIsValid = clips.find(clip => {
+      return normalize(clip.attributes.headline).includes(headline);
     });
 
     if (!headline && !headlineIsValid) {
-      const defaultClip = articleData.filter(clip => {
+      const defaultClip = clips.filter(clip => {
         return (
-          normalize(clip.publication) === this.validatePublication(publication)
+          normalize(clip.attributes.publication) ===
+          this.validatePublication(publication)
         );
       });
 
       headline = defaultClip.length
-        ? normalize(defaultClip[0].headline)
+        ? normalize(defaultClip[0].attriubtes.headline)
         : undefined;
     }
 
@@ -102,7 +104,7 @@ class StateManagement extends Component {
   }
 
   validateProjectName(name) {
-    return projectData.find(project => project.name.includes(name))
+    return projects.find(project => project.attributes.name.includes(name))
       ? name
       : undefined;
   }
@@ -114,11 +116,13 @@ class StateManagement extends Component {
   }
 
   validateChapter(title) {
-    const chapterTitle = storyData.filter(chapter => {
-      return normalize(chapter.title) === title;
+    const chapterTitle = story.filter(chapter => {
+      return normalize(chapter.attributes.title) === title;
     });
 
-    return chapterTitle.length ? normalize(chapterTitle[0].title) : undefined;
+    return chapterTitle.length
+      ? normalize(chapterTitle[0].attributes.title)
+      : undefined;
   }
 
   setMagicOpacity() {

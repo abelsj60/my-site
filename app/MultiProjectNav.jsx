@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import SingleProjectNav from './SingleProjectNav.jsx';
-import projectData from './data/projectData';
+import projects from './data/projects/index.js';
 import { formatProjectName } from './helpers/utils.js';
 import { splitPath } from './helpers/utils.js';
 
@@ -14,12 +14,14 @@ class MultiProjectNav extends Component {
     return splitPath(this.props);
   }
 
-  get projectDataForDisplay() {
+  get projectsForDisplay() {
     return this.props.currentProject
-      ? projectData.filter(
-        project => project.name !== this.props.currentProject.name
+      ? projects.filter(
+        project =>
+          project.attributes.name !==
+            this.props.currentProject.attributes.name
       )
-      : projectData;
+      : projects;
   }
 
   addCssToShowActiveProjectName(name) {
@@ -29,18 +31,19 @@ class MultiProjectNav extends Component {
   }
 
   render() {
-    return this.projectDataForDisplay.map((project, index) => (
+    return this.projectsForDisplay.map((project, index) => (
       <section id="nav-group" key={index}>
         <h1
           className={
             this.location.includes('menu')
-              ? this.addCssToShowActiveProjectName(project.name)
+              ? this.addCssToShowActiveProjectName(project.attributes.name)
               : ''
           }
         >
-          {formatProjectName(project.name)} | {project.details.type}
+          {formatProjectName(project.attributes.name)} |{' '}
+          {project.attributes.details.type}
         </h1>
-        <SingleProjectNav projectData={project} state={this.props.state} />
+        <SingleProjectNav project={project} state={this.props.state} />
       </section>
     ));
   }

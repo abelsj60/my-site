@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import aboutText from './data/aboutText.js';
+import ReactHtmlParser from 'react-html-parser';
+import marked from 'marked';
+import bio from './data/about.md';
 
 class About extends Component {
   constructor(props) {
@@ -13,7 +15,7 @@ class About extends Component {
         <section id="about-content" className="right">
           <h1>About</h1>
           <section id="about-text-container">
-            <p>{aboutText.bio}</p>
+            {ReactHtmlParser(marked(bio.body, { smartypants: true }))}
           </section>
         </section>
       </main>
