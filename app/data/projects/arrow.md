@@ -1,5 +1,6 @@
 ---
 name: arrow
+
 details:
   {
     name: 'Arrow',
@@ -11,13 +12,15 @@ details:
       'Arrow caption two',
       'Arrow caption three'
     ],
-    description: 'Arrow makes it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.',
+    description: 'Arrow makes it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.'
   }
+
 thumbnails: [
   'https://picsum.photos/196/175/?random',
   'https://picsum.photos/197/175/?random',
   'https://picsum.photos/198/175/?random'
 ]
+
 full: [
   'https://picsum.photos/873/569/?random',
   'https://picsum.photos/874/569/?random',

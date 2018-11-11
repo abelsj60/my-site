@@ -8,7 +8,13 @@ class ProjectImageContainer extends Component {
   render() {
     return (
       <section id="main-image">
-        <p>{this.props.projectDetails.captions[0]}</p>
+        <p>
+          {
+            this.props.projectDetails.captions[
+              this.props.state.projectThumbnail - 1
+            ]
+          }
+        </p>
         <img
           src={
             this.props.project.attributes.full[

@@ -1,5 +1,6 @@
 ---
 name: 'tmmnews'
+
 details: {
   name: 'TMMnews',
   type: 'Bespoke video news site',
@@ -14,11 +15,13 @@ details: {
   description:
     'TMMnews is a custom WordPress theme that programmatically assembles news shows from individual video segments'
 }
+
 thumbnails: [
   'https://picsum.photos/202/175/?random',
   'https://picsum.photos/203/175/?random',
   'https://picsum.photos/204/175/?random'
 ]
+
 full: [
   'https://picsum.photos/879/569/?random',
   'https://picsum.photos/880/569/?random',
