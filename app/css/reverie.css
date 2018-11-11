@@ -18,6 +18,14 @@
   margin-bottom: 7px;
 }
 
+#reverie p {
+  margin-bottom: 10px;
+}
+
+#reverie ol {
+  padding-left: 15px;
+}
+
 #reverie-unused {
   display: none;
 }

@@ -21,16 +21,16 @@ module.exports = {
       },
       {
         test: /\.(png|jp(e*)g)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 250000,
-              fallback: 'file-loader',
-              name: '[path][name]-[hash:8].[ext]'
-            }
-          }
-        ]
+        loader: 'url-loader',
+        options: {
+          limit: 250000,
+          fallback: 'file-loader',
+          name: '[path][name]-[hash:8].[ext]'
+        }
+      },
+      {
+        test: /\.md$/,
+        loader: ['json-loader', 'yaml-frontmatter-loader']
       }
     ]
   }

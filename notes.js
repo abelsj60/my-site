@@ -39,4 +39,19 @@
   -ScrollToTop?:
   https://github.com/Jinksi/netlify-cms-react-starter/blob/master/src/components/ScrollToTop.js
 
+  -CMS
+    CMS must get ahold of files to use them.
+    For example, if on local file system, you might 'walk' the right director, build an array of files, parse them for formatting, add them to a data structure, then display them.
+
+    The boys and girls of nozzle put together a good exmaple for react-static here:
+
+    https://github.com/nozzle/react-static/blob/master/examples/netlifycms/static.config.js
+    https://github.com/nozzle/react-static/blob/master/examples/netlifycms/static.config.js
+
+    Note: This isn't instantly transferable b/c react static is a static site generator, which builds a live picture of pages and then serves them with all resources attached. With a live site, you need to use an api to "grab" files if they aren't bundled with the site directly.
+
+    https://www.npmjs.com/package/klaw
+    https://www.npmjs.com/package/gray-matter
+    https://www.npmjs.com/package/react-markdown
+
 */
