@@ -1,20 +1,46 @@
 /* My story rules */
 
 #chapter {
-  /* Need display: flex to show content in .left container; it's otherwise set to none */
-
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 52px;
   bottom: 80px;
   padding: 25px;
+  margin: 25px;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#desktop-story-nav {
-  display: none;
+#story-nav {
+  display: flex;
+  margin-bottom: 20px;
+  min-height: 40px;
+  /* border-bottom: whitesmoke dotted 0.5px; */
+}
+
+#story-nav a p {
+  flex: 1;
+  text-align: center;
+}
+
+#story-nav a.active {
+  flex: 1;
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  border-bottom: whitesmoke solid 0.5px;
+}
+
+#story-nav a.inactive {
+  flex: 1;
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+}
+
+#story-nav a.inactive:hover {
+  color: lightyellow;
 }
 
 #chapter.inactive {
@@ -27,15 +53,23 @@
   margin-bottom: 25px;
 }
 
-#chapter p {
+#chapter h2 {
+  display: none;
+}
+
+#chapter #text {
   font-size: 1.75rem;
   line-height: normal;
   white-space: pre-wrap;
   overflow: auto;
 }
 
+#text p {
+  margin-bottom: 10px;
+}
+
 #illustration {
-  justify-content: center;
+  margin: 25px;
 }
 
 #illustration img {
@@ -49,47 +83,30 @@
   }
 
   #chapter {
-    flex: 1;
+    width: 327px;
     position: unset;
     bottom: 48px;
-    background-color: unset;
-    color: black;
+    margin: 25px;
+    background-color: #6100f2;
+    color: white;
+    background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
   }
 
-  #chapter.inactive {
+  #chapter h2 {
     display: block;
+    font-size: 1.75rem;
+    margin-bottom: 7px;
   }
 
-  #desktop-story-nav {
-    display: flex;
-    margin-bottom: 20px;
-    min-height: 40px;
+  #story-nav a.inactive:hover {
+    color: deepskyblue;
   }
 
-  #desktop-story-nav a p {
-    flex: 1;
-    text-align: center;
-  }
-
-  #desktop-story-nav a.active {
-    flex: 1;
-    color: black;
-    background-color: deepskyblue;
-    display: flex;
-    align-items: center;
-  }
-
-  #desktop-story-nav a.inactive {
-    flex: 1;
-    color: whitesmoke;
-    background-color: deepskyblue;
-    display: flex;
-    align-items: center;
-  }
-
-  #desktop-story-nav a.inactive:hover {
-    color: black;
-    background-color: antiquewhite;
+  #illustration {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-right: 25px;
+    margin-left: 0px;
   }
 
   #illustration img {

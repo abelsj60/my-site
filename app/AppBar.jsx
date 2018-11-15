@@ -11,15 +11,29 @@ class AppBar extends Component {
     return splitPath(this.props);
   }
 
+  get isMenu() {
+    return this.location.includes('menu');
+  }
+
+  get isReverie() {
+    return this.location.includes('reverie');
+  }
+
   get buttons() {
     return [
       {
         label: 'menu',
-        linkPath: this.location.includes('menu')
+        linkPath: this.isMenu
           ? '/' + this.location[2]
           : '/menu/' + this.location[1],
-        css: this.props.state.menu,
-        handleClick: () => this.props.toggleMenu()
+        css: this.isMenu ? 'active' : 'inactive',
+        handleClick: () => undefined
+      },
+      {
+        label: 'reverie',
+        linkPath: this.isReverie ? '/' : '/reverie',
+        css: this.isReverie ? 'active' : 'inactive',
+        handleClick: () => undefined
       },
       {
         label: 'explore',
@@ -30,8 +44,8 @@ class AppBar extends Component {
       {
         label: 'legal',
         linkPath: getPath(this.props),
-        css: this.props.state.legal,
-        handleClick: () => this.props.toggleLegal()
+        css: this.props.footerState.legalTerms,
+        handleClick: () => this.props.toggleLegalTerms()
       },
       {
         label: 'contact',
@@ -49,22 +63,23 @@ class AppBar extends Component {
   }
 
   getButtonsForDisplay() {
-    if (this.location.includes('chapter')) {
+    if (this.location[1] === '') {
+      return this.pickButtons(['reverie', 'contact']);
+    } else if (this.location.includes('chapter')) {
       return this.pickButtons(['menu', 'explore', 'contact']);
     } else if (
       this.location.includes('projects') ||
       this.location.includes('journalism')
     ) {
       return this.pickButtons(['menu', 'contact']);
-    } else if (
-      this.location.includes('toys') ||
-      this.location.includes('about')
-    ) {
+    } else if (this.location.includes('reverie')) {
+      return this.pickButtons(['reverie', 'contact']);
+    } else {
       return this.pickButtons(['contact', 'legal']);
     }
   }
 
-  getLabelForMenu(section) {
+  getMenuName(section) {
     if (section === 'chapter') {
       return 'chapters';
     } else if (section === 'projects') {
@@ -74,13 +89,17 @@ class AppBar extends Component {
     }
   }
 
+  prepMenuLabel() {
+    if (this.location.includes('menu')) {
+      return this.getMenuName(this.location[2]);
+    } else {
+      return this.getMenuName(this.location[1]);
+    }
+  }
+
   formatButtonLabel(button) {
     const menuLabel =
-      button.label === 'menu'
-        ? this.location[1] !== 'menu'
-          ? this.getLabelForMenu(this.location[1])
-          : this.getLabelForMenu(this.location[2])
-        : undefined;
+      button.label === 'menu' ? this.prepMenuLabel() : undefined;
     const label = menuLabel ? menuLabel : button.label;
 
     return label[0].toUpperCase() + label.slice(1);
@@ -94,14 +113,10 @@ class AppBar extends Component {
             <Link
               to={button.linkPath}
               className={button.css}
-              onClick={event => {
-                button.handleClick();
-                if (button.label !== 'menu') {
-                  event.preventDefault();
-                }
-              }}
+              onClick={button.handleClick}
             >
               <p>{this.formatButtonLabel(button)}</p>
+              <div id="active-button" />
             </Link>
             {button.label === 'contact' ? null : <div id="button-border" />}
           </Fragment>

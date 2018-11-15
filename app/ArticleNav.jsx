@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import articleData from './data/articleData.js';
+import articles from './data/clips/index.js';
 import { normalize } from './helpers/utils.js';
 
 class DesktopArticleList extends Component {
@@ -8,8 +8,8 @@ class DesktopArticleList extends Component {
     super(props);
   }
 
-  setActiveItem(headline, headlineOnState) {
-    if (headline === headlineOnState) {
+  addCssToShowActiveLink(headline, headlineOnState) {
+    if (normalize(headline) === headlineOnState) {
       return 'active';
     } else {
       return 'inactive';
@@ -19,19 +19,19 @@ class DesktopArticleList extends Component {
   render() {
     return (
       <section>
-        {articleData.map((article, index) => (
+        {articles.map((article, index) => (
           <Link
             key={index}
-            className={this.setActiveItem(
-              normalize(article.headline),
+            className={this.addCssToShowActiveLink(
+              article.attributes.headline,
               this.props.state.headline
             )}
-            to={`/journalism/${normalize(article.publication)}/${normalize(
-              article.headline
-            )}`}
+            to={`/journalism/${normalize(
+              article.attributes.publication
+            )}/${normalize(article.attributes.headline)}`}
           >
-            <p id="source">{article.publication}</p>
-            <p id="hed">{article.headline}</p>
+            <p id="source">{article.attributes.publication}</p>
+            <p id="hed">{article.attributes.headline}</p>
           </Link>
         ))}
       </section>

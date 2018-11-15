@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import storyData from './data/storyData';
+import story from './data/the-story/index.js';
 import { splitPath, normalize } from './helpers/utils.js';
 
 class ChapterNav extends Component {
@@ -13,29 +13,33 @@ class ChapterNav extends Component {
   }
 
   setActiveChapter(chapter, currentChapterTitle) {
-    const chapterTitle = normalize(chapter.title);
+    const chapterTitle = normalize(chapter.attributes.title);
 
     if (chapterTitle === currentChapterTitle) {
       return 'active';
-    } else {
-      return 'inactive';
     }
+
+    return 'inactive';
   }
 
   render() {
-    return storyData.map((chapter, index) => (
+    return story.map((chapter, index) => (
       <Link
         key={index}
         className={this.setActiveChapter(
           chapter,
           this.props.state.chapterTitle
         )}
-        to={`/chapter/${normalize(chapter.title)}`}
+        to={`/chapter/${normalize(chapter.attributes.title)}`}
       >
         {this.location[1] === 'menu' && (
           <h1 id="story-chapter">Chapter {index + 1}</h1>
         )}
-        <p>{this.location[1] === 'chapter' ? index + 1 : chapter.title}</p>
+        <p>
+          {this.location[1] === 'chapter'
+            ? index + 1
+            : chapter.attributes.title}
+        </p>
       </Link>
     ));
   }

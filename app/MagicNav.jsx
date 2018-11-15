@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import magicData from './data/magicData.js';
-
 // Create, Build, Amaze
 
 class MagicNav extends Component {
@@ -9,16 +8,20 @@ class MagicNav extends Component {
     super();
   }
 
+  getCssToShowAndHideNavItems(index) {
+    return `magicnav-link-${index + 1}`;
+  }
+
   render() {
     return (
       <section id="magic-nav">
         {magicData.map((section, index) => (
-          <Link to={section.link} key={index}>
-            <section id="magic-nav-content">
-              <h3>{section.hed}</h3>
-              <p>{section.blurb}</p>
-            </section>
-            <section id="second-hint">{`${index !== 2 ? '⥥ ⥣' : '⥣'}`}</section>
+          <Link
+            key={index}
+            to={section.link}
+            className={this.getCssToShowAndHideNavItems(index)}
+          >
+            <h3>{section.hed}</h3>
           </Link>
         ))}
       </section>

@@ -8,7 +8,7 @@ class HeaderNav extends Component {
     super(props);
   }
 
-  addCssToActiveLink(section) {
+  addCssToShowActiveLink(section) {
     let sectionName = section.name.toLowerCase();
     const currentPath = splitPath(this.props);
 
@@ -19,12 +19,6 @@ class HeaderNav extends Component {
     return currentPath.includes(sectionName) ? 'active' : '';
   }
 
-  deactiveMenuButton() {
-    if (this.props.state.menu === 'active') {
-      this.props.toggleMenu();
-    }
-  }
-
   render() {
     return (
       <nav>
@@ -32,8 +26,8 @@ class HeaderNav extends Component {
           <Link
             key={index}
             to={section.path}
-            onClick={() => this.deactiveMenuButton()}
-            className={this.addCssToActiveLink(section)}
+            onClick={this.props.turnOffActiveButtons}
+            className={this.addCssToShowActiveLink(section)}
           >
             {section.name}
           </Link>

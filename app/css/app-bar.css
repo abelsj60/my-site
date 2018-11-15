@@ -1,10 +1,10 @@
 /* App bar rules */
 
 #app-bar-menu {
+  z-index: 2;
   flex: 1;
   display: flex;
   height: 80px;
-  background-color: black;
 }
 
 #app-bar-menu a {
@@ -12,17 +12,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: blanchedalmond;
+  position: relative;
 }
 
+#active-button {
+  /* Currently unused, could remove, along with div */
+
+  position: absolute;
+  top: 0;
+  height: 4px;
+  width: 100%;
+}
+
+/* #app-bar-menu a:hover #active-button {
+  height: 4px;
+  background-color: rgb(255, 0, 0, 1);
+}
+
+#app-bar-menu a.active #active-button {
+  height: 8px;
+  background-color: whitesmoke;
+} */
+
 #app-bar-menu a:hover {
-  background-color: yellow;
-  color: black;
+  background-color: rgb(255, 0, 0, 0.125);
 }
 
 #app-bar-menu a.active {
-  background-color: yellow;
-  color: red;
+  border-top: rgb(219, 0, 0) solid 8px;
+  background-color: rgb(239, 0, 0, 0.14);
 }
 
 #app-bar-menu p {
@@ -30,9 +49,11 @@
 }
 
 #button-border {
-  border-right: red dotted 0.5px;
-  width: 1px;
-  /* height: 80px; */
+  width: 7px;
+  background-color: rgb(139, 0, 0, 0.5);
+  /* background-color: rgb(139, 0, 0, 0.1); */
+  box-shadow: inset 7.5px 0 5px -7px rgba(0, 0, 0, 0.6),
+    inset -7.5px 0 5px -7px rgba(0, 0, 0, 0.6);
 }
 
 @media only screen and (min-width: 849px) {

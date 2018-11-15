@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
 import MagicNav from './MagicNav.jsx';
-import { splitPath } from './helpers/utils.js';
 
 class Home extends Component {
   constructor(props) {
@@ -45,7 +44,7 @@ class Home extends Component {
           src="/dreaming-boy-co-2.png"
           alt="a fantastic imaginary world"
         />
-        <section id="first-hint">⥥</section>
+        {/*<section id="first-hint">⥥</section>*/}
         <section
           id="magic-content"
           className={this.props.state.magicClicks}

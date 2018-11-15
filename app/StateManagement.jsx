@@ -2,9 +2,9 @@ import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
 import Page from './Page.jsx';
 import MagicScroller from './MagicScroller.jsx';
-import articleData from './data/articleData.js';
-import storyData from './data/storyData.js';
-import projectData from './data/projectData.js';
+import clips from './data/clips/index.js';
+import story from './data/the-story/index.js';
+import projects from './data/projects/index.js';
 import { splitPath, normalize } from './helpers/utils.js';
 
 class StateManagement extends Component {
@@ -13,25 +13,24 @@ class StateManagement extends Component {
 
     const location = splitPath(this.props);
 
-    // LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+    /*
+      ~ja Ternaries prevent collisions
 
-    // ~ja Technically, we don't need the location checks/ternaries in state
-    // b/c the type of each route element is different for each section of
-    // the site, but explicitly checking seems like a better practice.
+      State is not updated when we first come through, then we hit render, run Reconciliation, id an update, call cDU, setState, and repeat.
 
-    // ~ja E.g., No collisions
-
-    // ~ja ! Note, state is not updated when we come through to the links, so we hit render, then we cDU, where a setState occurs, then re-render (I think the lag between the console.log and the completion of setState is Reconciliation).
+      LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+    */
 
     this.state = {
       chapterTitle:
         location[1] === 'chapter'
-          ? this.validateChapter(location[2]) || normalize(storyData[0].title)
-          : normalize(storyData[0].title),
+          ? this.validateChapter(location[2]) ||
+            normalize(story[0].attributes.title)
+          : normalize(story[0].attributes.title),
       projectName:
         location[1] === 'projects'
-          ? this.validateProjectName(location[2]) || projectData[0].name
-          : projectData[0].name,
+          ? this.validateProjectName(location[2]) || projects[0].attributes.name
+          : projects[0].attributes.name,
       projectThumbnail:
         location[1] === 'projects'
           ? this.validateProjectThumbnail(location[3], 3) || 1
@@ -39,25 +38,22 @@ class StateManagement extends Component {
       publication:
         location[1] === 'journalism'
           ? this.validatePublication(location[2]) ||
-            articleData[0].publication.toLowerCase()
-          : articleData[0].publication.toLowerCase(),
+            clips[0].attributes.publication.toLowerCase()
+          : clips[0].attributes.publication.toLowerCase(),
       headline:
         location[1] === 'journalism'
           ? this.validateHeadline(location[2], location[3]) ||
-            normalize(articleData[0].headline)
-          : normalize(articleData[0].headline),
-      menu: location[1] === 'menu' ? 'active' : 'inactive',
-      legal: 'inactive',
-      explore: 'active',
+            normalize(clips[0].attributes.headline)
+          : normalize(clips[0].attributes.headline),
       magicOpacity: { opacity: 0 },
-      magicClicks: splitPath(this.props)[1] === '' ? 'block' : ''
+      magicClicks: splitPath(this.props)[1] === '' ? 'block' : '',
+      explore: 'active'
     };
 
-    this.toggleMenu = this.toggleMenu.bind(this);
     this.toggleText = this.toggleText.bind(this);
-    this.toggleLegal = this.toggleLegal.bind(this);
     this.setMagicOpacity = this.setMagicOpacity.bind(this);
     this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
+    this.turnOffActiveButtons = this.turnOffActiveButtons.bind(this);
   }
 
   get scrollTop() {
@@ -72,40 +68,35 @@ class StateManagement extends Component {
     });
   }
 
-  toggleMenu() {
-    this.setState({
-      menu: this.state.menu === 'active' ? 'inactive' : 'active'
-    });
-  }
-
-  toggleLegal() {
-    this.setState({
-      legal: this.state.legal === 'active' ? 'inactive' : 'active'
-    });
+  turnOffActiveButtons() {
+    if (this.state.explore === 'inactive') {
+      this.toggleText();
+    }
   }
 
   validatePublication(publication) {
-    return articleData.find(clip =>
-      normalize(clip.publication).includes(publication)
+    return clips.find(clip =>
+      normalize(clip.attributes.publication).includes(publication)
     )
       ? publication
       : undefined;
   }
 
   validateHeadline(publication, headline) {
-    const headlineIsValid = articleData.find(clip => {
-      return normalize(clip.headline).includes(headline);
+    const headlineIsValid = clips.find(clip => {
+      return normalize(clip.attributes.headline).includes(headline);
     });
 
     if (!headline && !headlineIsValid) {
-      const defaultClip = articleData.filter(clip => {
+      const defaultClip = clips.filter(clip => {
         return (
-          normalize(clip.publication) === this.validatePublication(publication)
+          normalize(clip.attributes.publication) ===
+          this.validatePublication(publication)
         );
       });
 
       headline = defaultClip.length
-        ? normalize(defaultClip[0].headline)
+        ? normalize(defaultClip[0].attriubtes.headline)
         : undefined;
     }
 
@@ -113,7 +104,7 @@ class StateManagement extends Component {
   }
 
   validateProjectName(name) {
-    return projectData.find(project => project.name.includes(name))
+    return projects.find(project => project.attributes.name.includes(name))
       ? name
       : undefined;
   }
@@ -125,11 +116,13 @@ class StateManagement extends Component {
   }
 
   validateChapter(title) {
-    const chapterTitle = storyData.filter(chapter => {
-      return normalize(chapter.title) === title;
+    const chapterTitle = story.filter(chapter => {
+      return normalize(chapter.attributes.title) === title;
     });
 
-    return chapterTitle.length ? normalize(chapterTitle[0].title) : undefined;
+    return chapterTitle.length
+      ? normalize(chapterTitle[0].attributes.title)
+      : undefined;
   }
 
   setMagicOpacity() {
@@ -183,7 +176,7 @@ class StateManagement extends Component {
     window.addEventListener('scroll', this.toggleMagicPointer);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     // ~ja Must compare props to state to see a difference
     // Location checks used to prevent collisions
 
@@ -207,10 +200,7 @@ class StateManagement extends Component {
       location[1] === 'journalism'
         ? this.validateHeadline(location[2], location[3])
         : undefined;
-    const prevLocation =
-      splitPath(prevProps)[1] === 'menu'
-        ? splitPath(prevProps)[2]
-        : splitPath(prevProps)[1];
+
     const updateChapterTitle = chapterTitle
       ? chapterTitle !== this.state.chapterTitle
       : undefined;
@@ -232,12 +222,6 @@ class StateManagement extends Component {
       this.state.magicClicks === '';
     const updateMagicClicksWhenLeavingHome =
       location[1] !== '' && this.state.magicClicks === 'block';
-    const updateMenu =
-      this.state.menu === 'active' &&
-      !splitPath(this.props).includes(prevLocation);
-    const updateLegal =
-      this.state.legal === 'active' &&
-      splitPath(this.props)[1] !== prevLocation;
 
     if (
       updateChapterTitle ||
@@ -246,9 +230,7 @@ class StateManagement extends Component {
       updatePublication ||
       updateHeadline ||
       updateMagicClicksWhenGoingHome ||
-      updateMagicClicksWhenLeavingHome ||
-      updateMenu ||
-      updateLegal
+      updateMagicClicksWhenLeavingHome
     ) {
       this.setState({
         chapterTitle: updateChapterTitle
@@ -264,9 +246,7 @@ class StateManagement extends Component {
           ? 'block'
           : updateMagicClicksWhenLeavingHome
             ? ''
-            : this.state.magicClicks,
-        menu: updateMenu ? 'inactive' : this.state.menu,
-        legal: updateLegal ? 'inactive' : this.state.legal
+            : this.state.magicClicks
       });
     }
 
@@ -280,8 +260,7 @@ class StateManagement extends Component {
         <Page
           state={this.state}
           toggleText={this.toggleText}
-          toggleMenu={this.toggleMenu}
-          toggleLegal={this.toggleLegal}
+          turnOffActiveButtons={this.turnOffActiveButtons}
         />
         <MagicScroller />
       </Fragment>

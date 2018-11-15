@@ -2,10 +2,7 @@
 
 #article {
   margin: 25px;
-}
-
-#article h3 {
-  font-style: italic;
+  overflow: auto;
 }
 
 #hed p {
@@ -14,16 +11,12 @@
 }
 
 #article h3 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+  font-style: italic;
   margin-bottom: 4px;
 }
 
-#article-container {
-  overflow: auto;
-  line-height: normal;
-}
-
-#article-container p {
+#byline {
   margin-bottom: 15px;
 }
 
@@ -44,15 +37,16 @@
     padding: 25px;
     min-width: 324px;
     max-width: 327px;
-    background-color: cornflowerblue;
+    background-color: #6100f2;
+    background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
   }
 
   #desktop-article-navigation a.active {
-    color: yellow;
+    color: lightgoldenrodyellow;
   }
 
   #desktop-article-navigation a.active:hover {
-    color: black;
+    /* color: deepskyblue; */
   }
 
   #desktop-article-navigation a.inactive {
@@ -60,7 +54,7 @@
   }
 
   #desktop-article-navigation a.inactive:hover {
-    color: navy;
+    color: deepskyblue;
   }
 
   #desktop-article-navigation section {
@@ -68,9 +62,17 @@
   }
 
   #desktop-article-navigation h1 {
-    color: black;
+    color: white;
     font-size: 2rem;
+    margin-bottom: 7px;
+  }
+
+  #desktop-article-navigation h2 {
+    color: white;
+    font-style: italic;
+    padding-bottom: 7px;
     margin-bottom: 10px;
+    border-bottom: white dotted 0.5px;
   }
 
   #article {

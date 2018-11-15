@@ -1,0 +1,44 @@
+/* Reverie CSS */
+
+#reverie {
+  /* background-image: url('https://www.transparenttextures.com/patterns/my-little-plaid.png'); */
+  background-color: navy;
+  color: white;
+}
+
+#reverie h1 {
+  margin-bottom: 5px;
+  font-size: 1.75rem;
+  font-style: italic;
+  color: deeppink;
+}
+
+#reverie #post {
+  overflow: auto;
+}
+
+#reverie h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+#reverie p {
+  margin-bottom: 10px;
+}
+
+#reverie img {
+  margin-bottom: 10px;
+}
+
+#reverie ol {
+  padding-left: 15px;
+}
+
+#reverie-unused {
+  display: none;
+}
+
+#reverie-content {
+  padding: 25px;
+}
