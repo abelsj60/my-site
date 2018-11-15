@@ -6,7 +6,7 @@ publication: 'Seton Hall Magazine'
 “When I started, I was told this is 24 hours a day, seven days a week. And
 I laughed. Now I’m not too sure it was a joke.”
 
-Adam Desiderio ’05 laughs again. The 29- year-old associate producer with
+Adam Desiderio ’05 laughs again. The 29-year-old associate producer with
 the “NBC Nightly News” is like a lot of journalists. He disarms quickly by
 poking fun at himself and speaking plainly about almost anything. Being a
 bit over 6 foot 3 inches tall with a handsome face and thoughtful demeanor
@@ -58,7 +58,7 @@ original Web video series named “PRESS Pass.” It only takes six or so
 people to create each segment. That’s a far cry from the roughly 28 people
 Nevins, 56, leads each week to broadcast the main program nationally.
 
-“They’re breaking the mold,” says the 27- year NBC veteran.
+“They’re breaking the mold,” says the 27-year NBC veteran.
 
 By redefining what qualifies as professional- grade video, “Meet the
 Press” can afford to recruit new viewers online with stories it normally
@@ -66,7 +66,7 @@ couldn’t do. For instance, host David Gregory was able to interview
 actress Sigourney Weaver in July about her new cable mini-series,
 “Political Animals.”
 
-It’s an evolution that Erin Ganley ’09 navi- gates daily. As a line
+It’s an evolution that Erin Ganley ’09 navigates daily. As a line
 producer for MSNBC’s “The Ed Schultz Show,” her days begin with the
 creation of a show schedule and end in a rush to get people to stick to it
 during broadcast. That doesn’t always leave the 25-year-old as much time

@@ -4,7 +4,7 @@
   width: 100%;
   min-height: 100vh;
   z-index: 1;
-  bottom: 80px;
+  /* bottom: 80px; */
   object-fit: cover;
   position: fixed;
 }
@@ -52,14 +52,17 @@
   flex-direction: row;
   align-items: flex-end;
   font-size: 6rem;
-  color: lightskyblue;
+  color: deepskyblue;
+  /* text-shadow: 1px 1px 1px #000; */
   padding-left: 25px;
   padding-right: 25px;
   min-height: 100%;
 }
 
 #magic-nav a:hover {
-  background-color: rgba(0, 0, 0, 0.15);
+  /* background-color: rgba(0, 0, 0, 0.15); */
+  color: deeppink;
+  /* text-shadow: 1px 1px 1px #000; */
 }
 
 #magic-nav h3 {
@@ -73,7 +76,7 @@
 
 @media only screen and (min-width: 848px) {
   #magic-image {
-    bottom: 48px;
+    /* bottom: 48px; */
   }
 
   #magic-nav .magicnav-link-1,

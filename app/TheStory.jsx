@@ -8,6 +8,12 @@ import { normalize } from './helpers/utils.js';
 class TheStory extends Component {
   constructor() {
     super();
+
+    console.log('TheStory constructor was called!');
+
+    this.state = {
+      currentChapter: 1
+    };
   }
 
   get chapter() {
@@ -15,6 +21,18 @@ class TheStory extends Component {
       chapter =>
         normalize(chapter.attributes.title) === this.props.state.chapterTitle
     )[0];
+  }
+
+  componentDidMount() {
+    console.log('TheStory mounted!');
+  }
+
+  componentWillUnmount() {
+    console.log('TheStory unmounted!');
+  }
+
+  componentDidUpdate() {
+    console.log('TheStory updated!');
   }
 
   render() {

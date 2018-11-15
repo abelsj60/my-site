@@ -8,21 +8,21 @@
   4. When navigating away from home, reset scrollTop to 0 ?
   5. Image storage / bundling?
   x 6. When using menu to navigate away from Menu, shut off menu
-  7. Remove extra space from last thumbnail group in menu/
+  7. Remove useless last-child spaces
   8. Refactor StateManagement (tighten?)
-  9. Identify active project and thumbnail?
+  x 9. Identify active project and thumbnail?
   10. Header timeout is broken
   11. Map out home page illustration
   12. Further styling of text and fonts?
-  13. CMS for react w/self-hosting
+  x 13. Implement markdown and frontmatter for content
   14. Timetravel feature for Reverie blog
   15. Editing and pictures...
-  16. Particle animation in header?
-  17. Particle animation to enter and leave Reverie?
 
   -Animate:
     https://swizec.com/blog/declarative-d3-transitions-react/swizec/8323
     https://medium.com/@khwsc1/step-by-step-guide-of-simple-routing-transition-effect-for-react-with-react-router-v4-and-9152db1566a0
+    https://github.com/FormidableLabs/react-animations
+    https://medium.com/gronda/the-illusion-of-speed-loading-states-with-react-1c676ccce484
 
   -Markdown:
   https://stackoverflow.com/questions/42928530/how-do-i-load-a-markdown-file-into-a-react-component
@@ -53,5 +53,8 @@
     https://www.npmjs.com/package/klaw
     https://www.npmjs.com/package/gray-matter
     https://www.npmjs.com/package/react-markdown
+
+    -LifeCycle
+    http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
 */

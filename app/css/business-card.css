@@ -12,8 +12,9 @@
   top: 52px;
   bottom: 80px;
   width: 100%;
-  background-color: #f5e900;
-  background-image: url('https://www.transparenttextures.com/patterns/starring.png');
+  background-color: white;
+  /* background-color: #f5e900; */
+  /* background-image: url('https://www.transparenttextures.com/patterns/starring.png'); */
 }
 
 .home #business-card.active {

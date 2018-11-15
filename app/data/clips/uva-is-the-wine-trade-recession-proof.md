@@ -11,7 +11,7 @@ the pain of recession set into people’s minds.
 
 These days, Young’s wealthy Long Island clientele of Wall Street bankers
 and Madison Avenue advertising executives aren’t so quick to spend so big.
-That’s why the store is pushing wines ranging in price from $15 to$25
+That’s why the store is pushing wines ranging in price from $15 to \$25
 from a huge stock that regularly runs over 3,000 bottles. “At some point,
 people are going to buy less,” said Young’s President Edward Wassmer (TEP
 ’95).
@@ -26,16 +26,11 @@ hopes it can buck the trend—or at least embrace it slowly.
 “People are going to continue to drink. I think it’s one of our national
 pastimes, isn’t it?” asked Gene Meoni, general manager of hospitality for
 the Darden School Foundation, which includes a pub and a 300-seat dining
-room. Recent sales at wine retailers suggest he’s right. They increased by
-4.9 percent year-over-year to $8.2 billion for the 52 weeks ending January
-  10 (which includes the lucrative holiday season), according to Nielsen
-  Scantrak. Indeed, for the four weeks ending January 10—just after the
-  recession became official—retail sales grew 7.6 percent to$810 million.
+room. Recent sales at wine retailers suggest he’s right. They increased by 4.9 percent year-over-year to $8.2 billion for the 52 weeks ending January 10 (which includes the lucrative holiday season), according to Nielsen Scantrak. Indeed, for the four weeks ending January 10—just after the recession became official—retail sales grew 7.6 percent to \$810 million.
 
 Still, pressure remains high to retain a big cut of those numbers.
 “Everybody can dance around it, but retailers want sharply reduced
-prices,” said Jack Kennard (MBA ’73), a senior vice president at Brown-
-Forman, one of the largest producers of wine and spirits in the world.
+prices,” said Jack Kennard (MBA ’73), a senior vice president at Brown-Forman, one of the largest producers of wine and spirits in the world.
 Kennard argues that giving into widespread and deep price reductions is a
 mistake that will permanently undermine a business’s product and a brand’s
 health. “Deep discounting is highly destructive to brand equity over the
@@ -50,19 +45,19 @@ Whether people will buy the strategy for long is hard to say, as no one
 knows just how bad the economy will get—or when it will get better.
 
 One thing is already clear, though— cheaper is better as far as consumers
-are concerned. Nielsen reports that the $3.00–$5.99 category of wine
-bottles saw the strongest year-over-year growth at 12.9 percent to $189
-  million for the four weeks ending January 10. Yet wines costing$15 or
-more grew only 3.7 percent to $120 million during the same period. Indeed,
-  that was the only price range to shrink last fall as the economic strength
-  of the U.S. plummeted, dropping 0.5 percent to$311 million over the 13
+are concerned. Nielsen reports that the $3.00 – \$5.99 category of wine
+bottles saw the strongest year-over-year growth at 12.9 percent to \$189
+million for the four weeks ending January 10. Yet wines costing \$15 or
+more grew only 3.7 percent to \$120 million during the same period. Indeed,
+that was the only price range to shrink last fall as the economic strength
+of the U.S. plummeted, dropping 0.5 percent to \$311 million over the 13
 weeks ending January 10.
 
 Without a doubt, premium wines are in a tough spot. Judith Fowler (MBA
 ’81), owner of the Clevedon, New Zealand– based winery Puriri Hills, knows
 that only too well. With just 12,000 bottles of wine coming out of her
 winery a year, Fowler agrees that cutting the price of her three labels,
-which range from $25 to$150 in the U.S., is a bad idea. “The price point
+which range from $25 to \$150 in the U.S., is a bad idea. “The price point
 has to say something about quality,” she said. A strategy of massive price
 discounting is incompatible with the small volumes produced.
 
@@ -95,25 +90,20 @@ struggling to keep business up, said Darden’s Meoni. Wine sales are often
 an important component of their revenues because of what can be an
 extremely high markup on each bottle. But with people spending carefully,
 Meoni said both groups are thirsty for unusual labels from places such as
-New Zealand that can sustain a similar markup at a lower price than super-
-high premium wines. “There’s a lot of stu that isn’t mainstream that is a
-very, very good value,” he said.
+New Zealand that can sustain a similar markup at a lower price than super-high premium wines. “There’s a lot of stu that isn’t mainstream that is a very, very good value,” he said.
 
 Still, there is a strong demand for cheaper wines. That’s a big reason
 Pleasant Valley Wine Company President Mike Doyle (MBA ’66) said business
 is booming right now. While the winery sells some of its own labels, much
 of its business comes from producing wines for third parties whose bottles
-generally run less than $20. “This is usually a slow time of year, and
-  we’re pretty busy,” said Doyle. In fact, there are more opportunities than
-  he can keep up with at the moment. And why not—he said most people can’t
-  tell the di erence between a$25 and a \$125 bottle of Merlot.
+generally run less than $20. “This is usually a slow time of year, and we’re pretty busy,” said Doyle. In fact, there are more opportunities than he can keep up with at the moment. And why not—he said most people can’t tell the difference between a \$25 and a \$125 bottle of Merlot.
 
-Brown-Forman’s Kennard doesn’t en- tirely agree. The “trade-down” e ect,
+Brown-Forman’s Kennard doesn’t entirely agree. The “trade-down” effect,
 as the industry likes to call it, is only temporary, he said. By shying
 away from expensive wines and spirits, people aren’t casting a vote
 against the premium brands they’ve been loyal to for many years. “They
 just simply feel it’s not right for them right now as they attempt to
-economize,” he said. “Luxury brands are ‘worn’ by consum- ers like badges,
+economize,” he said. “Luxury brands are ‘worn’ by consumers like badges,
 and premium sector wine and spirits consumers look forward rather
 hopefully to better times when they will confidently express themselves
 through luxury brands again.”

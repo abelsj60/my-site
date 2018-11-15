@@ -14,9 +14,16 @@ class Page extends Component {
     return splitPath(this.props)[1] === '' ? 'home' : 'inner';
   }
 
+  addCssForMenuPages() {
+    return splitPath(this.props)[1] === 'menu' ? ' menu-page' : '';
+  }
+
   render() {
     return (
-      <section id="page" className={this.addCssForPageControl()}>
+      <section
+        id="page"
+        className={this.addCssForPageControl() + this.addCssForMenuPages()}
+      >
         <Header
           state={this.props.state}
           turnOffActiveButtons={this.props.turnOffActiveButtons}

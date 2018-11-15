@@ -40,7 +40,7 @@
 }
 
 #app-bar-menu a.active {
-  border-bottom: rgb(209, 0, 0, 1) solid 8px;
+  border-top: rgb(219, 0, 0) solid 8px;
   background-color: rgb(239, 0, 0, 0.14);
 }
 
@@ -50,7 +50,7 @@
 
 #button-border {
   width: 7px;
-  background-color: rgb(139, 0, 0, 0.85);
+  background-color: rgb(139, 0, 0, 0.5);
   /* background-color: rgb(139, 0, 0, 0.1); */
   box-shadow: inset 7.5px 0 5px -7px rgba(0, 0, 0, 0.6),
     inset -7.5px 0 5px -7px rgba(0, 0, 0, 0.6);

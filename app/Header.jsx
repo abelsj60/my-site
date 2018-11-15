@@ -96,12 +96,12 @@ class Header extends Component {
         id={this.addCssWhenHeaderIsHome()}
         className={`${this.state.visibility}${this.state.menu}`}
       >
-        <HeaderText />
-        <HeaderNav
-          state={this.props.state}
-          turnOffActiveButtons={this.props.turnOffActiveButtons}
-        />
-        <HeaderNavIcon toggleHeaderMenu={this.toggleHeaderMenu} />
+        <section id="header-content">
+          <HeaderText />
+          <HeaderNav turnOffActiveButtons={this.props.turnOffActiveButtons} />
+          <HeaderNavIcon toggleHeaderMenu={this.toggleHeaderMenu} />
+        </section>
+        <hr id="header-separator" />
       </header>
     );
   }

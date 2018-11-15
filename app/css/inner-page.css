@@ -11,7 +11,7 @@ main {
   display: flex;
   flex-direction: column;
   color: black;
-  background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
+  /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
 }
 
 .left {

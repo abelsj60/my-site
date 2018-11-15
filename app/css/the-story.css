@@ -16,7 +16,7 @@
   display: flex;
   margin-bottom: 20px;
   min-height: 40px;
-  border-bottom: whitesmoke dotted 0.5px;
+  /* border-bottom: whitesmoke dotted 0.5px; */
 }
 
 #story-nav a p {
@@ -29,7 +29,7 @@
   color: whitesmoke;
   display: flex;
   align-items: center;
-  border-top: whitesmoke dotted 0.5px;
+  border-bottom: whitesmoke solid 0.5px;
 }
 
 #story-nav a.inactive {
@@ -57,15 +57,15 @@
   display: none;
 }
 
-#chapter p {
-  margin-bottom: 10px;
-}
-
 #chapter #text {
   font-size: 1.75rem;
   line-height: normal;
   white-space: pre-wrap;
   overflow: auto;
+}
+
+#text p {
+  margin-bottom: 10px;
 }
 
 #illustration {

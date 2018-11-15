@@ -14,7 +14,7 @@
   bottom: 80px;
   width: 100%;
   background-color: navy;
-  background-image: url('https://www.transparenttextures.com/patterns/my-little-plaid.png');
+  /* background-image: url('https://www.transparenttextures.com/patterns/my-little-plaid.png'); */
 }
 
 #legal.active {

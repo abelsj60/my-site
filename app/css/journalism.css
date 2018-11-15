@@ -2,10 +2,7 @@
 
 #article {
   margin: 25px;
-}
-
-#article h3 {
-  font-style: italic;
+  overflow: auto;
 }
 
 #hed p {
@@ -14,16 +11,12 @@
 }
 
 #article h3 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+  font-style: italic;
   margin-bottom: 4px;
 }
 
-#article-container {
-  overflow: auto;
-  line-height: normal;
-}
-
-#article-container p {
+#byline {
   margin-bottom: 15px;
 }
 

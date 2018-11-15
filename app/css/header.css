@@ -9,11 +9,37 @@ header {
   transition: background-color 0.7s, color 0.7s;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
-header.opaque {
+#inner-page-header.opaque {
   color: black;
-  background-color: white;
+  /* background-color: white; */
+  /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
+}
+
+#inner-page-header.opaque {
+  /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
+}
+
+#header-content {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+#header-separator {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.05),
+    rgba(0, 0, 0, 0)
+  );
 }
 
 #site-name,
@@ -32,9 +58,13 @@ header.menu-open #site-motto {
 }
 
 #site-motto {
-  margin-top: 1px;
+  margin-top: 2px;
   font-size: 1.3rem;
   font-style: italic;
+}
+
+#home-page-header.opaque {
+  background-color: white;
 }
 
 #home-page-header.opaque,

@@ -5,7 +5,7 @@ publication: 'The Darden Report'
 
 In both the East and the West, it was hard to believe the story.
 
-At a factory in Shenzen, China, at least 14 workers killed themselves in 2010. The factory, owned by Foxconn, produces iPads and iPhones for Apple and computers for Dell and Hewlett-Packard. By most accounts, the manufacturers’ unrelenting production de- mands had triggered the spate of
+At a factory in Shenzen, China, at least 14 workers killed themselves in 2010. The factory, owned by Foxconn, produces iPads and iPhones for Apple and computers for Dell and Hewlett-Packard. By most accounts, the manufacturers’ unrelenting production demands had triggered the spate of
 suicides.
 
 So, who’s responsible? The Western companies, who rely increasingly on
@@ -17,7 +17,7 @@ In his strategic management course “Strategic Thinking: Integrating East
 and West” this past spring, Darden School of Business Professor Ming-Jer
 Chen asked his students to opine on the issue.
 
-“Chinese managers are shifting to the Western culture of pro- duce,
+“Chinese managers are shifting to the Western culture of produce,
 produce, produce,” said Kristyn Kelly of the Class of 2011. “It’s the sort
 of hyper-productivity that only works if people are ready, willing and
 able to say ‘no.’” But Kelly says many Asians — long accustomed to rigid
@@ -26,13 +26,13 @@ hierarchies — simply won’t say no. This time, the cultural clash appeared to
 The Foxconn case spotlights the challenges Eastern and Western managers
 face as they blend their businesses.
 
-And Chen is the perfect per- son to steer the conversation.
+And Chen is the perfect person to steer the conversation.
 
 A New Discipline
 
-Chen’s work and life focus on bal- ance. He grew up in Taitung on the
+Chen’s work and life focus on balance. He grew up in Taitung on the
 southeast coast of Taiwan. As a youth, he studied philosophy and the
-Chinese classics with a cousin of Puyi, “The Last Em- peror” of China. In
+Chinese classics with a cousin of Puyi, “The Last Emperor” of China. In
 1981, Chen emigrated to the United States with a visionary quest: to “make
 the world smaller.”
 
@@ -80,7 +80,7 @@ Asians to set up shop on Eastern shores is not uncommon.
 That’s one reason Chen thinks the market is ready to formally expand its
 horizons.
 
-He may be right. Harvard’s Rivkin leads the academy commit- tee that
+He may be right. Harvard’s Rivkin leads the academy committee that
 decides which sessions to feature during the annual meeting’s full-day
 “All-Academy Theme” program. Proposals have ranged from whether Asian
 business schools should follow a Western model to yoga’s impact on an
@@ -125,7 +125,7 @@ Traditionally, a corporation’s finances were managed at its
 
 Western headquarters, says Leslie Grayson, professor emeritus of
 international business at Darden for whom Chen’s academic chair is named.
-Today, funds may move between foreign territo- ries without passing
+Today, funds may move between foreign territories without passing
 through the West.
 
 As a result, Easterners and Westerners have good reason to adapt to one
@@ -153,7 +153,7 @@ avoided until they’ve been defined. So the professor is creating a survey
 to be sent to Eastern and Western managers later this year that he thinks
 will do just that.
 
-For instance, the survey may ask executives to rate the impor- tance they
+For instance, the survey may ask executives to rate the importance they
 place on personal connections, and to numerically prioritize their
 interest in employees, stakeholders and society.
 
@@ -173,8 +173,8 @@ eight-year period.
 The database made the competitive patterns that businesses fall into clear
 enough to study — and often, to predict.
 
-The result: A popular new area of strategic theory named com- petitive
-dynamics emerged over the past 25 years in the manage- ment field and
+The result: A popular new area of strategic theory named competitive
+dynamics emerged over the past 25 years in the management field and
 continues to thrive today. Competitive dynamics is the analysis of
 competition at the action and response level to predict how a firm will
 act or react toward opponents.

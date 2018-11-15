@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './Home.jsx';
 import TheStory from './TheStory.jsx';
 import Projects from './Projects.jsx';
@@ -9,12 +9,13 @@ import Menu from './Menu.jsx';
 import Reverie from './Reverie.jsx';
 import NotFound from './NotFound.jsx';
 
-class Main extends Component {
+class Body extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    console.log('Switch called');
     return (
       <Switch>
         <Route
@@ -121,4 +122,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(Main);
+export default Body;

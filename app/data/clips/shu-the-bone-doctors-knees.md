@@ -30,9 +30,9 @@ almost 130 percent, the American Academy of Orthopaedic Surgeons says,
 with more than 600,000 done each year in the U.S. alone.
 
 “It’s a hot topic,” says Daniel Brown, an orthopedic devices analyst at
-Mil- lennium Research Group.
+Millennium Research Group.
 
-There are at least two reasons. People younger than 65 increasing- ly want
+There are at least two reasons. People younger than 65 increasingly want
 to temper sport and other high-impact injuries, and those who are older
 are staying active longer.
 
@@ -47,7 +47,7 @@ Sciences.
 
 The orthopedic surgeon has known Buechel since organizing a panel of knee
 designers for the New Jersey Orthopaedic Society about 30 years ago. Other
-presenters had more elite credentials, but Buechel’s dynam- ic,
+presenters had more elite credentials, but Buechel’s dynamic,
 data-driven presentation stood out. “I immediately switched over to the
 New Jersey Knee,” says Hirsch.
 
@@ -58,7 +58,7 @@ interest,” says Pappas, now 80.
 
 Buechel’s decision to ask for help wasn’t entirely surprising. The young
 doctor, who won four New Jersey Amateur Athletic Union and three
-Metropolitan Intercolle- giate Wrestling Championships while at Seton
+Metropolitan Intercollegiate Wrestling Championships while at Seton
 Hall, liked a challenge — if evenly matched. Once he started working on
 the replacement ankle, he realized he wasn’t well matched; he hadn’t
 thought about the technical aspects of building the device.
@@ -96,7 +96,7 @@ men still work together on their own.)
 
 Still, knees are big business, and the technology keeps improving. Debates
 about which type is best remain some of the hottest at orthopedic
-conferences today, says Millen- nium’s Brown, the device analyst.
+conferences today, says Millennium’s Brown, the device analyst.
 
 Buechel, always ready for a good challenge, is prepared to defend the
 merits of his knee.

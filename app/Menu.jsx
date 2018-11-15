@@ -19,7 +19,7 @@ class Menu extends Component {
       <main id="site-menu">
         <CloseButton />
         <MenuDescription />
-        <MenuContents state={this.props.state} />
+        <MenuContents state={this.props.state} section={this.props.section} />
       </main>
     );
   }

@@ -13,6 +13,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
 }
 
 #page.home {
@@ -20,6 +21,11 @@ body {
   width: 100%;
   position: fixed;
 }
+
+/* #page.menu-page {
+  background-image: url('https://www.transparenttextures.com/patterns/my-little-plaid.png');
+  background-color: navy;
+} */
 
 @import 'css-reset.css';
 @import 'header.css';

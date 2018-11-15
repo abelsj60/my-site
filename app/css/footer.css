@@ -5,11 +5,11 @@ footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 80px;
-  background-color: rgb(59, 0, 0);
+  /* height: 80px; */
+  background-color: rgb(115, 0, 0);
   background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
   pointer-events: all;
-  box-shadow: 0 1px 0.75em black;
+  /* box-shadow: 0 1px 0.75em black; */
 }
 
 #temp-content-box-shadow {
@@ -18,7 +18,7 @@ footer {
   bottom: 0;
   height: 80px;
   width: 100%;
-  box-shadow: 0 1px 0.75em black;
+  /* box-shadow: 0 1px 0.75em black; */
 }
 
 footer.block {
@@ -60,7 +60,7 @@ footer.block {
   }
 
   #temp-content-box-shadow {
-    height: 55px;
+    /* height: 55px; */
   }
 
   #footer-text.app-bar-active {

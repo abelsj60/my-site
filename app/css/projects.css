@@ -6,31 +6,30 @@
 
 #my-projects h1 {
   font-size: 2.5rem;
-  margin-bottom: 15px;
-  padding-bottom: 5px;
-  border-bottom: lightgrey dotted 0.5px;
+  margin-bottom: 10px;
 }
 
 #active-project {
   margin: 25px;
-}
-
-#project-container {
   overflow: auto;
 }
 
-#project-container #type {
+/* #project-container {
+  overflow: auto;
+} */
+
+#active-project #type {
   font-size: 1.7rem;
   margin-bottom: 15px;
 }
 
-#project-container h2 {
+#active-project h2 {
   font-size: 1.5rem;
   font-style: italic;
   margin-bottom: 7px;
 }
 
-#project-container p {
+#active-project p {
   font-size: 1.7rem;
   margin-bottom: 10px;
 }
