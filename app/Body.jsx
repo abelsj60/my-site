@@ -9,113 +9,47 @@ import Menu from './Menu.jsx';
 import Reverie from './Reverie.jsx';
 import NotFound from './NotFound.jsx';
 
+import bodies from './data/bodies.md';
+
 class Body extends Component {
   constructor(props) {
     super(props);
   }
 
+  get components() {
+    return [
+      { name: 'Home', value: Home },
+      { name: 'TheStory', value: TheStory },
+      { name: 'Projects', value: Projects },
+      { name: 'Journalism', value: Journalism },
+      { name: 'About', value: About },
+      { name: 'Menu', value: Menu },
+      { name: 'Reverie', value: Reverie }
+    ];
+  }
+
+  getBodyToRender(name) {
+    return this.components.filter(component => name === component.name)[0]
+      .value;
+  }
+
   render() {
-    console.log('Switch called');
     return (
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => <Home state={this.props.state} />}
-        />
-
-        <Route
-          exact
-          path="/chapter"
-          render={() => (
-            <Redirect to={`/chapter/${this.props.state.chapterTitle}`} />
-          )}
-        />
-
-        <Route
-          exact
-          path="/chapter/:title"
-          render={() => <TheStory state={this.props.state} />}
-        />
-
-        <Route
-          exact
-          path="/projects"
-          render={() => (
-            <Redirect
-              to={`/projects/${this.props.state.projectName}/${
-                this.props.state.projectThumbnail
-              }`}
+        {bodies.attributes.routes.map(body => {
+          const BodyToRender = this.getBodyToRender(body.componentName);
+          return (
+            <Route
+              key={body.name}
+              exact={body.link === body.route}
+              path={body.route}
+              render={({ match }) => (
+                <BodyToRender match={match} state={this.props.state} />
+              )}
             />
-          )}
-        />
+          );
+        })}
 
-        <Route
-          exact
-          path="/projects/:name"
-          render={() => (
-            <Redirect
-              to={`/projects/${this.props.state.projectName}/${
-                this.props.state.projectThumbnail
-              }`}
-            />
-          )}
-        />
-
-        <Route
-          path="/projects/:name/:projectThumbnail"
-          render={() => <Projects state={this.props.state} />}
-        />
-
-        <Route
-          exact
-          path="/journalism"
-          render={() => (
-            <Redirect
-              to={`/journalism/${this.props.state.publication}/${
-                this.props.state.headline
-              }`}
-            />
-          )}
-        />
-
-        <Route
-          exact
-          path="/journalism/:publication"
-          render={() => (
-            <Redirect
-              to={`/journalism/${this.props.state.publication}/${
-                this.props.state.headline
-              }`}
-            />
-          )}
-        />
-
-        <Route
-          path="/journalism/:publication/:headline"
-          render={() => <Journalism state={this.props.state} />}
-        />
-
-        <Route
-          exact
-          path="/menu"
-          render={() => <Redirect to={'/menu/projects'} />}
-        />
-
-        <Route
-          path="/menu/:section"
-          render={({ match }) => {
-            return (
-              <Menu
-                state={this.props.state}
-                section={match.params.section.toLowerCase()}
-              />
-            );
-          }}
-        />
-
-        <Route path="/reverie" render={() => <Reverie />} />
-        <Route path="/about" render={() => <About />} />
         <Route component={NotFound} />
       </Switch>
     );

@@ -9,49 +9,44 @@ sections: [
 ]
 
 routes:
-  - home:
+  -
     name: Home
-    component: Home
+    componentName: Home
     route: /
     link: /
     display: false
-
-  - theStory:
-    name: The story
-    component: Chapter
+  -
+    name: TheStory
+    componentName: TheStory
     route: /chapter
     childRoute: [/title1, /title2, /title3, /title4]
     link: /chapter/
     display: true
-
-  - projects:
+  -
     name: Projects
-    component: Project
+    componentName: Projects
     route: /projects
     childRoute: [/arrow, /slingshot, /tmmnews]
     grandChildRoute: [/1, /2, /3]
     link: /projects/
     display: true
-
-  - journalism:
-    name: Journalism,
-    component: Journalism
+  -
+    name: Journalism
+    componentName: Journalism
     route: /journalism
     childRoute: [/forbes, /shumagazine, /slate]
-    grandChildRoute: [/hedOne, hedTwo, hedThree]
+    grandChildRoute: [/hedOne, /hedTwo, /hedThree]
     link: /journalism/
     display: true
-
-  - reverie:
+  -
     name: Reverie
-    component: Reverie
+    componentName: Reverie
     route: /reverie
     link: /reverie/
     display: false
-
-  - about:
-    name: About,
-    component: About
+  -
+    name: About
+    componentName: About
     route: /about
     link: /about/
     display: true

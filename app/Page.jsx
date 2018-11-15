@@ -20,8 +20,6 @@ class Page extends Component {
   }
 
   render() {
-    console.log('Bodies:', bodies.attributes.sections);
-
     return (
       <section
         id="page"
