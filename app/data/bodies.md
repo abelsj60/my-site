@@ -1,0 +1,58 @@
+---
+sections: [
+  home,
+  theStory,
+  projects,
+  journalism,
+  reverie,
+  about
+]
+
+routes:
+  - home:
+    name: Home
+    component: Home
+    route: /
+    link: /
+    display: false
+
+  - theStory:
+    name: The story
+    component: Chapter
+    route: /chapter
+    childRoute: [/title1, /title2, /title3, /title4]
+    link: /chapter/
+    display: true
+
+  - projects:
+    name: Projects
+    component: Project
+    route: /projects
+    childRoute: [/arrow, /slingshot, /tmmnews]
+    grandChildRoute: [/1, /2, /3]
+    link: /projects/
+    display: true
+
+  - journalism:
+    name: Journalism,
+    component: Journalism
+    route: /journalism
+    childRoute: [/forbes, /shumagazine, /slate]
+    grandChildRoute: [/hedOne, hedTwo, hedThree]
+    link: /journalism/
+    display: true
+
+  - reverie:
+    name: Reverie
+    component: Reverie
+    route: /reverie
+    link: /reverie/
+    display: false
+
+  - about:
+    name: About,
+    component: About
+    route: /about
+    link: /about/
+    display: true
+---

@@ -4,6 +4,7 @@ import Header from './Header.jsx';
 import Body from './Body.jsx';
 import Footer from './Footer.jsx';
 import { splitPath } from './helpers/utils.js';
+import bodies from './data/bodies.md';
 
 class Page extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class Page extends Component {
   }
 
   render() {
+    console.log('Bodies:', bodies.attributes.sections);
+
     return (
       <section
         id="page"

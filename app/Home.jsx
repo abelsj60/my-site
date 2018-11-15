@@ -18,6 +18,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
+    console.log('Home unmounted, reset scroll?');
     window.removeEventListener('scroll', this.setMagicScale);
   }
 
