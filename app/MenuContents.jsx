@@ -11,7 +11,13 @@ class MenuContents extends Component {
 
   getContent() {
     if (this.props.section.includes('chapter')) {
-      return <ChapterNav state={this.props.state} />;
+      return (
+        <ChapterNav
+          data={this.props.data}
+          handleClick={this.props.handleClick}
+          indexForChapterData={this.props.indexForChapterData}
+        />
+      );
     } else if (this.props.section.includes('projects')) {
       return <MultiProjectNav state={this.props.state} />;
     } else {

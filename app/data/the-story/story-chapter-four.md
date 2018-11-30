@@ -1,6 +1,7 @@
 ---
 title: 'Forever magical'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
+number: 4
 ---
 
 One night, the pixie swooped into the boy's room.

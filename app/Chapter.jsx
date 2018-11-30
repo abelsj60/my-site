@@ -10,10 +10,10 @@ class Chapter extends Component {
   render() {
     return (
       <Fragment>
-        <h1>{this.props.chapter.attributes.title}</h1>
+        <h1>{this.props.chapterData.attributes.title}</h1>
         <section id="text">
           {ReactHtmlParser(
-            marked(this.props.chapter.body, { smartypants: true })
+            marked(this.props.chapterData.body, { smartypants: true })
           )}
         </section>
       </Fragment>

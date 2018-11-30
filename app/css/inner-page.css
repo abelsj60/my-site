@@ -6,6 +6,10 @@
   height: 100vh;
 }
 
+.inner-page #site-menu {
+  background-color: navy;
+}
+
 main {
   flex: 1;
   display: flex;

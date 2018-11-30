@@ -68,13 +68,13 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    console.log('Header Mounted!');
+    // console.log('Header Mounted!');
 
     window.addEventListener('scroll', this.toggleTransparency);
   }
 
   componentDidUpdate(prevProps) {
-    console.log('Header Updated!');
+    // console.log('Header Updated!');
 
     const userIsHome = this.location[1] === '';
     const headerIsTransparent = this.state.visibility === 'transparent';

@@ -13,7 +13,7 @@ class CloseButton extends Component {
 
   render() {
     return (
-      <Link id="close-button" to={`/${this.location[2].toLowerCase()}`}>
+      <Link id="close-button" to={this.props.link}>
         <p>✘</p>
       </Link>
     );

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import Page from './Page.jsx';
 import MagicScroller from './MagicScroller.jsx';
 import clips from './data/clips/index.js';
-import story from './data/the-story/index.js';
+// import story from './data/the-story/index.js';
 import projects from './data/projects/index.js';
 import { splitPath, normalize } from './helpers/utils.js';
 
@@ -22,11 +22,6 @@ class StateManagement extends Component {
     */
 
     this.state = {
-      chapterTitle:
-        location[1] === 'chapter'
-          ? this.validateChapter(location[2]) ||
-            normalize(story[0].attributes.title)
-          : normalize(story[0].attributes.title),
       projectName:
         location[1] === 'projects'
           ? this.validateProjectName(location[2]) || projects[0].attributes.name
@@ -115,16 +110,6 @@ class StateManagement extends Component {
       : undefined;
   }
 
-  validateChapter(title) {
-    const chapterTitle = story.filter(chapter => {
-      return normalize(chapter.attributes.title) === title;
-    });
-
-    return chapterTitle.length
-      ? normalize(chapterTitle[0].attributes.title)
-      : undefined;
-  }
-
   setMagicOpacity() {
     let finalOpacity;
     const opacityValue = (this.scrollTop - 580) / (3221 - 580);
@@ -182,8 +167,6 @@ class StateManagement extends Component {
 
     const location = splitPath(this.props);
 
-    const chapterTitle =
-      location[1] === 'chapter' ? this.validateChapter(location[2]) : undefined;
     const projectName =
       location[1] === 'projects'
         ? this.validateProjectName(location[2])
@@ -201,9 +184,6 @@ class StateManagement extends Component {
         ? this.validateHeadline(location[2], location[3])
         : undefined;
 
-    const updateChapterTitle = chapterTitle
-      ? chapterTitle !== this.state.chapterTitle
-      : undefined;
     const updateProjectName = projectName
       ? projectName !== this.state.projectName
       : undefined;
@@ -224,7 +204,6 @@ class StateManagement extends Component {
       location[1] !== '' && this.state.magicClicks === 'block';
 
     if (
-      updateChapterTitle ||
       updateProjectName ||
       updateProjectThumbnail ||
       updatePublication ||
@@ -233,9 +212,6 @@ class StateManagement extends Component {
       updateMagicClicksWhenLeavingHome
     ) {
       this.setState({
-        chapterTitle: updateChapterTitle
-          ? chapterTitle
-          : this.state.chapterTitle,
         projectName: updateProjectName ? projectName : this.state.projectName,
         projectThumbnail: updateProjectThumbnail
           ? projectThumbnail

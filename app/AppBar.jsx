@@ -20,12 +20,15 @@ class AppBar extends Component {
   }
 
   get buttons() {
+    // console.log('AppBar location:', this.location[1]);
+    // console.log('isMenu test:', this.isMenu);
+
     return [
       {
         label: 'menu',
         linkPath: this.isMenu
-          ? '/' + this.location[2]
-          : '/menu/' + this.location[1],
+          ? `/${this.location[1]}`
+          : `/${this.location[1]}/menu`,
         css: this.isMenu ? 'active' : 'inactive',
         handleClick: () => undefined
       },
@@ -108,19 +111,22 @@ class AppBar extends Component {
   render() {
     return (
       <section id="app-bar-menu">
-        {this.getButtonsForDisplay().map((button, index) => (
-          <Fragment key={index}>
-            <Link
-              to={button.linkPath}
-              className={button.css}
-              onClick={button.handleClick}
-            >
-              <p>{this.formatButtonLabel(button)}</p>
-              <div id="active-button" />
-            </Link>
-            {button.label === 'contact' ? null : <div id="button-border" />}
-          </Fragment>
-        ))}
+        {this.getButtonsForDisplay().map((button, index) => {
+          const needsButtonBorder = button.label !== 'contact';
+
+          return (
+            <Fragment key={index}>
+              <Link
+                to={button.linkPath}
+                className={button.css}
+                onClick={button.handleClick}
+              >
+                <p>{this.formatButtonLabel(button)}</p>
+              </Link>
+              {needsButtonBorder ? <div id="button-border" /> : null}
+            </Fragment>
+          );
+        })}
       </section>
     );
   }

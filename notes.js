@@ -57,4 +57,10 @@
     -LifeCycle
     http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
+    -Links
+      https://stackoverflow.com/a/43986829/9215718
+
+    -Test params/routes
+      https://pshrmn.github.io/route-tester/#/
+      ANSWER: https://stackoverflow.com/a/35604855/9215718
 */

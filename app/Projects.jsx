@@ -1,32 +1,17 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
-import projects from './data/projects/index.js';
-import { splitPath } from './helpers/utils.js';
 
 class Projects extends Component {
   constructor(props) {
     super(props);
   }
 
-  get location() {
-    return splitPath(this.props);
-  }
-
-  get project() {
-    return projects.filter(
-      project => project.attributes.name === this.props.state.projectName
-    )[0];
-  }
-
-  get projectKeys() {
-    return Object.keys(this.project.attributes.details);
-  }
-
   render() {
+    const project = this.props.data[this.props.state.indexForProjectData];
+
     return (
       <main id="my-projects" className="">
         <section id="desktop-project-nav" className="left">
@@ -34,27 +19,27 @@ class Projects extends Component {
             <h1>My projects</h1>
             <h2>Technology projects for me, clients, and fun</h2>
             <MultiProjectNav
+              section={'projects'}
+              data={this.props.data}
               state={this.props.state}
-              currentProject={this.project}
+              handleClick={this.props.handleClick}
             />
           </div>
         </section>
         <section id="active-project" className="right">
-          <h1>{this.project.attributes.details.name}</h1>
+          <h1>{project.attributes.details.name}</h1>
           <section id="project-container">
-            <ProjectDescription
-              projectKeys={this.projectKeys}
-              projectDetails={this.project.attributes.details}
-            />
+            <ProjectDescription project={project} />
             <section id="project-images">
               <SingleProjectNav
-                project={this.project}
-                projectName={this.props.state.projectName}
+                project={project}
+                isCurrentProject={true}
+                state={this.props.state}
+                handleClick={this.props.handleClick}
               />
               <ProjectImageContainer
+                project={project}
                 state={this.props.state}
-                project={this.project}
-                projectDetails={this.project.attributes.details}
               />
             </section>
           </section>
@@ -64,4 +49,4 @@ class Projects extends Component {
   }
 }
 
-export default withRouter(Projects);
+export default Projects;

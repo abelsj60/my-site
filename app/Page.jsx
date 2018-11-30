@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import Header from './Header.jsx';
 import Body from './Body.jsx';
 import Footer from './Footer.jsx';
 import { splitPath } from './helpers/utils.js';
-import bodies from './data/bodies.md';
+// import bodies from './data/bodies.md';
 
 class Page extends Component {
   constructor(props) {

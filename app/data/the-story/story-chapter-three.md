@@ -1,6 +1,7 @@
 ---
 title: 'A new adventure'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
+number: 3
 ---
 
 The wee fairy watched the boy turn over every stone, forever telling better tales about his software.

@@ -16,15 +16,16 @@
   display: flex;
   margin-bottom: 20px;
   min-height: 40px;
+  cursor: pointer;
   /* border-bottom: whitesmoke dotted 0.5px; */
 }
 
-#story-nav a p {
+#story-nav p {
   flex: 1;
   text-align: center;
 }
 
-#story-nav a.active {
+#story-nav .active {
   flex: 1;
   color: whitesmoke;
   display: flex;
@@ -32,14 +33,14 @@
   border-bottom: whitesmoke solid 0.5px;
 }
 
-#story-nav a.inactive {
+#story-nav .inactive {
   flex: 1;
   color: whitesmoke;
   display: flex;
   align-items: center;
 }
 
-#story-nav a.inactive:hover {
+#story-nav .inactive:hover {
   color: lightyellow;
 }
 
@@ -98,7 +99,7 @@
     margin-bottom: 7px;
   }
 
-  #story-nav a.inactive:hover {
+  #story-nav .inactive:hover {
     color: deepskyblue;
   }
 

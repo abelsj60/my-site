@@ -1,6 +1,7 @@
 ---
 title: "The sprite's story"
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
+number: 2
 ---
 
 The little sprite watched the boy from afar.

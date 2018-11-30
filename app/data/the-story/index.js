@@ -1,4 +1,5 @@
 module.exports = (() => {
   const context = require.context('./', true, /\.md$/);
-  return context.keys().map(key => context(key));
+  const keys = context.keys();
+  return keys.map(key => context(key));
 })();

@@ -28,30 +28,34 @@
   border-bottom: white dotted 0.5px;
 }
 
-#site-menu .chapter-menu,
-#site-menu .journalism-menu,
-#site-menu .projects-menu {
+#site-menu.chapter-menu,
+#site-menu.journalism-menu,
+#site-menu.projects-menu {
   overflow: auto;
   margin: 15px 25px 25px;
   flex: 1;
 }
 
-#site-menu .chapter-menu a.active,
+.chapter-menu section {
+  cursor: pointer;
+}
+
+#site-menu .chapter-menu .active,
 #site-menu .journalism-menu a.active {
   color: deepskyblue;
 }
 
-#site-menu .chapter-menu a.active:hover,
+#site-menu .chapter-menu .active:hover,
 #site-menu .journalism-menu a.active:hover {
   /* color: lightgoldenrodyellow; */
 }
 
-#site-menu .chapter-menu a.inactive,
+#site-menu .chapter-menu .inactive,
 #site-menu .journalism-menu a.inactive {
   color: white;
 }
 
-#site-menu .chapter-menu a.inactive:hover,
+#site-menu .chapter-menu .inactive:hover,
 #site-menu .journalism-menu a.inactive:hover {
   color: lightgoldenrodyellow;
 }
@@ -81,7 +85,7 @@
 }
 
 .projects-menu {
-  max-width: 563px;
+  /* max-width: 563px; */
 }
 
 #site-menu .project-thumbnails {
@@ -91,7 +95,7 @@
   flex-direction: row;
 }
 
-.project-thumbnails a {
+.project-thumbnails section {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,7 +103,7 @@
   position: relative;
 }
 
-.project-thumbnails a:not(:last-child) {
+.project-thumbnails section:not(:last-child) {
   margin-right: 5px;
 }
 
@@ -109,7 +113,7 @@
   max-width: 100%;
 }
 
-.project-thumbnails a.inactive:hover {
+.project-thumbnails section.inactive:hover {
   background-color: rgb(255, 255, 255, 0.1);
 }
 
@@ -119,11 +123,11 @@
   height: 100%;
 }
 
-.project-thumbnails a.active #thumbnail-highlight {
+.project-thumbnails section.active #thumbnail-highlight {
   background-color: rgb(0, 0, 0, 0.2);
 }
 
-.project-thumbnails a.inactive #thumbnail-highlight:hover {
+.project-thumbnails section.inactive #thumbnail-highlight:hover {
   background-color: rgb(0, 0, 0, 0.2);
 }
 

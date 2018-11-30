@@ -1,6 +1,7 @@
 ---
 title: 'The beginnings of magic'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
+number: 1
 ---
 
 Magic was real to the wide-eyed boy.

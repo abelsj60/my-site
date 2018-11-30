@@ -1,48 +1,37 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import story from './data/the-story/index.js';
-import { splitPath, normalize } from './helpers/utils.js';
 
 class ChapterNav extends Component {
   constructor(props) {
     super(props);
   }
 
-  get location() {
-    return splitPath(this.props);
-  }
+  renderThisHtml() {
+    const props = this.props;
+    const state = this.props.state;
 
-  setActiveChapter(chapter, currentChapterTitle) {
-    const chapterTitle = normalize(chapter.attributes.title);
-
-    if (chapterTitle === currentChapterTitle) {
-      return 'active';
-    }
-
-    return 'inactive';
+    return this.props.data.map((chapter, index) => (
+      <section
+        key={index}
+        className={index === state.indexForChapterData ? 'active' : 'inactive'}
+        onClick={() => props.handleClick(index, chapter.attributes.title)}
+      >
+        {state.isStoryMenu && <h1 id="story-chapter">Chapter {index + 1}</h1>}
+        <p>{!state.isStoryMenu ? index + 1 : chapter.attributes.title}</p>
+      </section>
+    ));
   }
 
   render() {
-    return story.map((chapter, index) => (
-      <Link
-        key={index}
-        className={this.setActiveChapter(
-          chapter,
-          this.props.state.chapterTitle
-        )}
-        to={`/chapter/${normalize(chapter.attributes.title)}`}
-      >
-        {this.location[1] === 'menu' && (
-          <h1 id="story-chapter">Chapter {index + 1}</h1>
-        )}
-        <p>
-          {this.location[1] === 'chapter'
-            ? index + 1
-            : chapter.attributes.title}
-        </p>
-      </Link>
-    ));
+    if (this.props.state.isStoryMenu) {
+      return (
+        <section id="contents-list" className={`${this.props.section}-menu`}>
+          {this.renderThisHtml()}
+        </section>
+      );
+    } else {
+      return <section id="story-nav">{this.renderThisHtml()}</section>;
+    }
   }
 }
 
-export default withRouter(ChapterNav);
+export default ChapterNav;

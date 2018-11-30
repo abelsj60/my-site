@@ -1,58 +1,38 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import { splitPath } from './helpers/utils.js';
 
 class SingleProjectNav extends Component {
   constructor(props) {
     super(props);
   }
 
-  get location() {
-    return splitPath(this.props);
-  }
-
-  addCssToShowActiveThumbnail(name, thumbnail) {
-    let currentName;
-    let currentThumbnail;
-
-    if (!this.location.includes('menu')) {
-      currentName = this.location[2];
-      currentThumbnail = parseInt(this.location[3]);
-    } else {
-      currentName = this.props.state.projectName;
-      currentThumbnail = this.props.state.projectThumbnail;
-    }
-
-    if (name === currentName && thumbnail === currentThumbnail) {
-      return 'active';
-    }
-
-    return 'inactive';
-  }
-
   render() {
+    const state = this.props.state;
+    const project = this.props.project;
+
+    // TODO: Loading /projects/menu directly, change model with switches?
+
     return (
       <section className="project-thumbnails">
-        {this.props.project.attributes.thumbnails.map(
-          (thumbnail, index) =>
-            thumbnail && (
-              <Link
-                key={index}
-                to={`/projects/${this.props.project.attributes.name}/${index +
-                  1}`}
-                className={this.addCssToShowActiveThumbnail(
-                  this.props.projectName || this.props.project.attributes.name,
-                  index + 1
-                )}
-              >
-                <img src={thumbnail} alt={`Thumbnail ${index + 1}`} />
-                <div id="thumbnail-highlight" />
-              </Link>
-            )
-        )}
+        {project.attributes.thumbnails.map((thumbnail, index) => (
+          <section
+            key={index}
+            className={
+              this.props.isCurrentProject &&
+              state.indexForProjectPictures === index
+                ? 'active'
+                : 'inactive'
+            }
+            onClick={() =>
+              this.props.handleClick(project.attributes.name, index)
+            }
+          >
+            <img src={thumbnail} alt={`Thumbnail ${index + 1}`} />
+            <div id="thumbnail-highlight" />
+          </section>
+        ))}
       </section>
     );
   }
 }
 
-export default withRouter(SingleProjectNav);
+export default SingleProjectNav;

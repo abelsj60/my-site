@@ -5,23 +5,22 @@ class ProjectDescription extends Component {
     super(props);
   }
 
-  getKey(name) {
-    return this.props.projectKeys.find(key => key === name);
-  }
-
-  formatKeyForDisplay(name) {
-    const keyName = this.getKey(name);
-    return keyName[0].toUpperCase() + keyName.slice(1);
+  formatKeyForDisplay(name, data) {
+    const key = data.find(k => k === name);
+    return key[0].toUpperCase() + key.slice(1);
   }
 
   render() {
+    const project = this.props.project;
+    const projectKeys = Object.keys(this.props.project.attributes.details);
+
     return (
       <Fragment>
-        <p id="type">{this.props.projectDetails.type}</p>
-        <h2>{this.formatKeyForDisplay('contribution')}</h2>
-        <p>{this.props.projectDetails.contribution}</p>
-        <h2>{this.formatKeyForDisplay('description')}</h2>
-        <p>{this.props.projectDetails.description}</p>
+        <p id="type">{project.attributes.details.type}</p>
+        <h2>{this.formatKeyForDisplay('contribution', projectKeys)}</h2>
+        <p>{project.attributes.details.contribution}</p>
+        <h2>{this.formatKeyForDisplay('description', projectKeys)}</h2>
+        <p>{project.attributes.details.description}</p>
       </Fragment>
     );
   }

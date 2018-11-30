@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Home from './Home.jsx';
-import TheStory from './TheStory.jsx';
-import Projects from './Projects.jsx';
+import StoryLoader from './StoryLoader.jsx';
+import ProjectLoader from './ProjectLoader.jsx';
 import Journalism from './Journalism.jsx';
 import About from './About.jsx';
 import Menu from './Menu.jsx';
@@ -16,40 +16,38 @@ class Body extends Component {
     super(props);
   }
 
-  get components() {
+  get bodyTypes() {
     return [
-      { name: 'Home', value: Home },
-      { name: 'TheStory', value: TheStory },
-      { name: 'Projects', value: Projects },
-      { name: 'Journalism', value: Journalism },
-      { name: 'About', value: About },
-      { name: 'Menu', value: Menu },
-      { name: 'Reverie', value: Reverie }
+      { name: 'Home', body: Home },
+      { name: 'StoryLoader', body: StoryLoader },
+      { name: 'Projects', body: ProjectLoader },
+      { name: 'Journalism', body: Journalism },
+      { name: 'About', body: About },
+      { name: 'Menu', body: Menu },
+      { name: 'Reverie', body: Reverie }
     ];
   }
 
   getBodyToRender(name) {
-    return this.components.filter(component => name === component.name)[0]
-      .value;
+    return this.bodyTypes.filter(body => name === body.name)[0].body;
   }
 
   render() {
+    const state = this.props.state;
     return (
       <Switch>
         {bodies.attributes.routes.map(body => {
-          const BodyToRender = this.getBodyToRender(body.componentName);
+          const BodyToRender = this.getBodyToRender(body.component);
+
           return (
             <Route
               key={body.name}
-              exact={body.link === body.route}
               path={body.route}
-              render={({ match }) => (
-                <BodyToRender match={match} state={this.props.state} />
-              )}
+              exact={body.route === body.link}
+              render={props => <BodyToRender {...props} state={state} />}
             />
           );
         })}
-
         <Route component={NotFound} />
       </Switch>
     );

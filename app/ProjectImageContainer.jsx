@@ -10,15 +10,15 @@ class ProjectImageContainer extends Component {
       <section id="main-image">
         <p>
           {
-            this.props.projectDetails.captions[
-              this.props.state.projectThumbnail - 1
+            this.props.project.attributes.details.captions[
+              this.props.state.indexForProjectPictures
             ]
           }
         </p>
         <img
           src={
             this.props.project.attributes.full[
-              this.props.state.projectThumbnail - 1
+              this.props.state.indexForProjectPictures
             ]
           }
           alt="mainPic"
