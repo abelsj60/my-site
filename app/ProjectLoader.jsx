@@ -10,6 +10,8 @@ export default class ProjectLoader extends Component {
   constructor(props) {
     super(props);
 
+    console.log('HERE');
+
     const urlParams = splitPath(this.props);
     const isProjectMenu = urlParams[2] === 'menu';
     const projectHasNoName = this.props.match.isExact;
@@ -141,8 +143,8 @@ export default class ProjectLoader extends Component {
     return this.state.isProjectMenu ? (
       <Menu
         text="Technology projects for me, clients, and fun"
-        section={'projects'}
-        link={'/projects'}
+        section="projects"
+        link="/projects"
       >
         <MultiProjectNav
           data={projectData}

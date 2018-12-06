@@ -63,4 +63,7 @@
     -Test params/routes
       https://pshrmn.github.io/route-tester/#/
       ANSWER: https://stackoverflow.com/a/35604855/9215718
+
+    -Wes bos transcripts:
+      https://github.com/wesbos/React-For-Beginners-Transcriptions
 */

@@ -56,4 +56,11 @@ routes:
     exact: false
     link: /about/
     display: true
+  -
+    name: RestateRoute
+    component: RestateRoute
+    route: /i
+    exact: false
+    linke: /i/
+    display: true
 ---

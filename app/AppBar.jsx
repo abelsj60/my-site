@@ -30,30 +30,40 @@ class AppBar extends Component {
           ? `/${this.location[1]}`
           : `/${this.location[1]}/menu`,
         css: this.isMenu ? 'active' : 'inactive',
+        state: 'menu',
+        hash: undefined,
         handleClick: () => undefined
       },
       {
         label: 'reverie',
         linkPath: this.isReverie ? '/' : '/reverie',
         css: this.isReverie ? 'active' : 'inactive',
+        state: undefined,
+        hash: undefined,
         handleClick: () => undefined
       },
       {
         label: 'explore',
         linkPath: getPath(this.props),
-        css: this.props.state.explore === 'active' ? 'inactive' : 'active',
+        css: this.props.state.explore !== 'active' ? 'active' : 'inactive',
+        state: undefined,
+        hash: '#explore',
         handleClick: () => this.props.toggleText()
       },
       {
         label: 'legal',
         linkPath: getPath(this.props),
         css: this.props.footerState.legalTerms,
+        state: undefined,
+        hash: undefined,
         handleClick: () => this.props.toggleLegalTerms()
       },
       {
         label: 'contact',
         linkPath: getPath(this.props),
         css: this.props.footerState.contact,
+        state: undefined,
+        hash: undefined,
         handleClick: () => this.props.toggleBusinessCard()
       }
     ];
@@ -109,15 +119,24 @@ class AppBar extends Component {
   }
 
   render() {
+    console.log('App bar render');
     return (
       <section id="app-bar-menu">
         {this.getButtonsForDisplay().map((button, index) => {
           const needsButtonBorder = button.label !== 'contact';
 
+          if (button.label === 'explore') {
+            console.log('Button:', button.hash);
+          }
+
           return (
             <Fragment key={index}>
               <Link
-                to={button.linkPath}
+                to={{
+                  pathname: button.linkPath,
+                  state: button.state,
+                  hash: button.hash
+                }}
                 className={button.css}
                 onClick={button.handleClick}
               >

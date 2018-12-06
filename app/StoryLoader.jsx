@@ -1,139 +1,77 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
-import { normalize, validateParam } from './helpers/utils.js';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import TheStory from './TheStory.jsx';
 import Menu from './Menu.jsx';
 import ChapterNav from './ChapterNav.jsx';
+import Location from './custom/Location.js';
 import storyData from './data/the-story/index.js';
 
 export default class StoryLoader extends Component {
   constructor(props) {
     super(props);
 
-    const params = props.match.params;
-    const paramKeys = Object.keys(params);
-    const missingParams = paramKeys.filter(k => params[k] === undefined);
-    const isMissingParams = missingParams.length > 0;
-    const isMenu = params[paramKeys[0]] === 'menu';
-    const indexForChapterData = !isMissingParams
-      ? validateParam('title', storyData, params[paramKeys[0]])
-      : 0;
-
-    if (isMissingParams) {
-      const currentUrl = props.match.url;
-      const finalCharacter = currentUrl.length - 1;
-      const urlHasSlash = currentUrl[finalCharacter] === '/';
-      const urlWithAllParams = `${currentUrl}${
-        !urlHasSlash ? '/' : ''
-      }${normalize(storyData[indexForChapterData].attributes.title)}`;
-
-      this.props.history.replace(urlWithAllParams);
-    }
+    const pathToMatch = '/chapter/:title';
+    const location = new Location(pathToMatch, props);
 
     this.state = {
-      isStoryMenu: isMenu,
-      indexForChapterData
+      pathToMatch,
+      isMenu: false,
+      isNotFound: location.pathIsNotFound,
+      needsRedirect: location.needsRedirect
     };
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  render() {
-    return this.state.isStoryMenu ? (
-      <Menu text="The story so far" link={'/chapter'}>
-        <ChapterNav
-          data={storyData}
-          state={this.state}
-          section={'chapter'}
-          handleClick={this.handleClick}
-        />
-      </Menu>
-    ) : this.state.indexForChapterData !== -1 ? (
-      <TheStory
-        data={storyData}
-        state={this.state}
-        handleClick={this.handleClick}
-        explore={this.props.state.explore}
-      />
-    ) : (
-      <Redirect to="/notfound" />
-    );
-  }
-
-  updateState(menuStatus, newIndex) {
-    const needsMenuStatus = menuStatus === undefined;
-    const needsNewIndex = newIndex === undefined;
-
-    if (needsMenuStatus || needsNewIndex) {
-      throw 'Params must be defined to updateState()';
-    }
-
-    this.setState({
-      isStoryMenu: menuStatus,
-      indexForChapterData: newIndex
-    });
-  }
-
-  handleClick(index, location) {
-    const linkChangesChapters = index !== this.state.indexForChapterData;
-
-    if (linkChangesChapters) {
-      const userIsInMenu = location === 'menu';
-
-      this.props.history.push(
-        `/chapter/${normalize(storyData[index].attributes.title)}`
-      );
-
-      this.updateState(userIsInMenu, index);
-    }
   }
 
   componentDidUpdate(prevProps) {
-    const userHitTheBrowserBackOrForwardButton =
-      this.props.history.action === 'POP';
-    const userHitTheMenuButton =
-      this.props.match.url.includes('menu') ||
-      prevProps.match.url.includes('menu');
-    const chapterHasAlreadyChanged =
-      this.props.match.url === prevProps.match.url;
+    /** Handle story navigation:
+     *
+     * 1. Short internal links mean redirect to last known location
+     * 2. Changing chapter means body.returnState must be updated
+     */
 
-    if (
-      (userHitTheBrowserBackOrForwardButton || userHitTheMenuButton) &&
-      !chapterHasAlreadyChanged
-    ) {
-      const params = this.props.match.params;
-      const paramKeys = Object.keys(params);
-      const missingParams = paramKeys.filter(k => params[k] === undefined);
-      const isMissingParams = missingParams.length > 0;
-      const isMenu = params[paramKeys[0]] === 'menu';
-      const newIndexForChapterData =
-        !isMissingParams && !isMenu
-          ? validateParam('title', storyData, params[paramKeys[0]])
-          : this.state.indexForChapterData;
+    const location = new Location(
+      this.state.pathToMatch,
+      this.props,
+      prevProps
+    );
 
-      if (isMissingParams) {
-        const currentUrl = this.props.match.url;
-        const newUrl = `${currentUrl}/${normalize(
-          storyData[newIndexForChapterData].attributes.title
-        )}`;
+    if (location.needsRedirect) {
+      const startRedirect = !this.state.needsRedirect;
 
-        this.props.history.replace(newUrl);
+      if (startRedirect) {
+        this.setState({ needsRedirect: startRedirect });
       }
-
-      // ~ja While we do, we don't have to update index when entering 'menu'
-
-      this.updateState(isMenu, newIndexForChapterData);
+    } else if (location.isSwappingContent) {
+      const newChapterIndex = location.params.validateTitle;
+      this.props.updateReturnState(newChapterIndex);
     }
   }
-}
 
-/*
-  return needToRedirect ? (
-    this.components.Redirect
-  ) : (
-    <Switch>
-      <Route />
-      <Route />
-    </Switch>
-  );
-*/
+  render() {
+    return this.state.needsRedirect ? (
+      <Redirect to={{ pathname: '/i', state: 'chapter' }} />
+    ) : this.state.isNotFound ? (
+      <Redirect to="/not-found" />
+    ) : (
+      <Switch>
+        <Route
+          path="/chapter/menu"
+          render={() => (
+            <Menu section="story" link="/chapter" text="The story so far">
+              <ChapterNav
+                isMenu={true}
+                data={storyData}
+                section={'chapter'}
+                chapterIndex={this.props.localState.indexForChapterData}
+              />
+            </Menu>
+          )}
+        />
+
+        <Route
+          path="/chapter/:title"
+          render={({ match }) => <TheStory match={match} data={storyData} />}
+        />
+      </Switch>
+    );
+  }
+}
