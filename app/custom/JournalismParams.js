@@ -1,25 +1,39 @@
 import Params from './Params';
-// import articles from '../data/clips/index.js';
-// import { validateParam } from '../helpers/utils.js';
 
 export default class JournalismParams extends Params {
-  constructor(type, params) {
+  constructor(type, params, prevProps) {
     super(type, params);
-  }
 
-  get hasPublication() {
-    return this.journalism && this.params.publication !== undefined;
-  }
+    this.paramNames = ['publication', 'headline'];
+    this.lastHeadline = prevProps && prevProps.match.params.headline;
+    this.lastPublication = prevProps && prevProps.match.params.publication;
 
-  get hasHeadline() {
-    return this.journalism && this.params.headline !== undefined;
+    this._actualNumber = this.paramNames.filter(p => {
+      return this[p] !== false;
+    }).length;
   }
 
   get publication() {
-    return this.journalism && this.params.publication;
+    return this.validateParam(this._one, 'publication', 'text');
   }
 
   get headline() {
-    return this.journalism && this.params.headline;
+    return this.validateParam(this._two, 'headline', 'text');
+  }
+
+  get defaultHeadline() {
+    if (this.publication && this._two === undefined) {
+      const defaultHeadline = this._searchData.find(a => {
+        return (
+          this._normalizeParam(a.attributes.publication) === this.publication
+        );
+      }).attributes.headline;
+
+      return this._searchData.findIndex(a => {
+        return a.attributes.headline === defaultHeadline;
+      });
+    }
+
+    return 0;
   }
 }

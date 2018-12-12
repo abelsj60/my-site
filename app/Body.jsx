@@ -3,26 +3,18 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import Home from './Home.jsx';
 import StoryLoader from './StoryLoader.jsx';
 import ProjectLoader from './ProjectLoader.jsx';
-import Journalism from './Journalism.jsx';
+import JournalismLoader from './JournalismLoader.jsx';
 import About from './About.jsx';
 import Menu from './Menu.jsx';
 import Reverie from './Reverie.jsx';
 import RestateRoute from './RestateRoute.jsx';
 import NotFound from './NotFound.jsx';
 import Location from './custom/Location';
-import storyData from './data/the-story/index.js';
-import { validateParam } from './helpers/utils.js';
-
 import bodies from './data/bodies.md';
 
 class Body extends Component {
   constructor(props) {
     super(props);
-
-    const path = this.props.location.pathname;
-    const referrer = path.split('/')[1];
-
-    let indexForChapterData;
 
     /** Build initial return state.
      *
@@ -31,14 +23,20 @@ class Body extends Component {
      * between sections or from section-to-menu.
      */
 
+    const path = this.props.location.pathname;
+    const referrer = path.split('/')[1];
+
+    let pathToMatch;
+
     switch (referrer) {
       case 'chapter':
-        const location = new Location('/chapter/:title', props);
-
-        if (location.pathIsJustRight) {
-          const title = path.split('/')[2];
-          indexForChapterData = validateParam('title', storyData, title);
-        }
+        pathToMatch = '/chapter/:title?';
+        break;
+      case 'projects':
+        pathToMatch = '/projects/:projectName?/:projectThumbnail?';
+        break;
+      case 'journalism':
+        pathToMatch = '/journalism/:publication?/:headline?';
         break;
       default:
         console.log('BodyConstructor: Keep calm, carry on');
@@ -46,21 +44,55 @@ class Body extends Component {
 
     /** Return state */
 
+    const location = new Location(pathToMatch, props);
+    const lParams = location.params;
+
     this.state = {
-      indexForChapterData: indexForChapterData || 0
+      indexForChapterData: lParams.toIndex('title') || 0,
+      indexForProjectData: lParams.toIndex('projectName') || 0,
+      indexForProjectPictures: lParams.toIndex('projectThumbnail') || 0,
+      indexForPublicationData: lParams.toIndex('publication') || 0,
+      indexForArticleData:
+        lParams.toIndex('headline') || lParams.defaultHeadline || 0
     };
 
     /** Method bindings */
 
     this.updateReturnState = this.updateReturnState.bind(this);
+
+    console.log('---');
+  }
+
+  updateReturnState(paramOne, paramTwo) {
+    const referrer = this.props.location.pathname.split('/')[1];
+
+    switch (referrer) {
+      case 'chapter':
+        this.setState({ indexForChapterData: paramOne });
+        break;
+      case 'projects':
+        this.setState({
+          indexForProjectData: paramOne,
+          indexForProjectPictures: paramTwo
+        });
+        break;
+      case 'journalism':
+        this.setState({
+          indexForArticleData: paramOne,
+          indexForPublicationData: paramTwo
+        });
+        break;
+      default:
+        console.log('updateReturnState: Keep calm, carry on');
+    }
   }
 
   get bodyTypes() {
     return [
       { name: 'Home', body: Home },
       { name: 'StoryLoader', body: StoryLoader },
-      { name: 'Projects', body: ProjectLoader },
-      { name: 'Journalism', body: Journalism },
+      { name: 'ProjectLoader', body: ProjectLoader },
+      { name: 'JournalismLoader', body: JournalismLoader },
       { name: 'About', body: About },
       { name: 'Menu', body: Menu },
       { name: 'Reverie', body: Reverie },
@@ -68,24 +100,11 @@ class Body extends Component {
     ];
   }
 
-  updateReturnState(newIndexForChapterData) {
-    const referrer = this.props.location.pathname.split('/')[1];
-
-    switch (referrer) {
-      case 'chapter':
-        this.setState({ indexForChapterData: newIndexForChapterData });
-        break;
-      default:
-        console.log('updateReturnState: Keep calm, carry on');
-    }
-  }
-
   getBodyToRender(name) {
     return this.bodyTypes.filter(body => name === body.name)[0].body;
   }
 
   render() {
-    console.log('Explore:', this.props);
     return (
       <Switch>
         {bodies.attributes.routes.map(body => {

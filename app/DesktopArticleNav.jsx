@@ -10,11 +10,11 @@ class DesktopArticleNav extends Component {
     return (
       <section id="desktop-article-navigation" className="left">
         <h1>My clips</h1>
-        <h2>
-          Staff and freelance reporting for Forbes.com, Mergermarket, Slate and
-          others
-        </h2>
-        <ArticleNav state={this.props.state} />
+        <h2>{this.props.text}</h2>
+        <ArticleNav
+          data={this.props.data}
+          articleIndex={this.props.articleIndex}
+        />
       </section>
     );
   }

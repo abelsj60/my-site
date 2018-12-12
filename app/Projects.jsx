@@ -3,6 +3,7 @@ import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
+import { normalize } from 'path';
 
 class Projects extends Component {
   constructor(props) {
@@ -10,7 +11,17 @@ class Projects extends Component {
   }
 
   render() {
-    const project = this.props.data[this.props.state.indexForProjectData];
+    const data = this.props.data;
+    const project = data.find(p => {
+      return (
+        normalize(p.attributes.name) === this.props.match.params.projectName
+      );
+    });
+    const projectIndex = data.findIndex(p => {
+      return (
+        normalize(p.attributes.name) === this.props.match.params.projectName
+      );
+    });
 
     return (
       <main id="my-projects" className="">
@@ -20,9 +31,10 @@ class Projects extends Component {
             <h2>Technology projects for me, clients, and fun</h2>
             <MultiProjectNav
               section={'projects'}
+              isProjectMenu={false}
               data={this.props.data}
-              state={this.props.state}
-              handleClick={this.props.handleClick}
+              projectIndex={projectIndex}
+              localState={this.props.localState}
             />
           </div>
         </section>
@@ -34,12 +46,11 @@ class Projects extends Component {
               <SingleProjectNav
                 project={project}
                 isCurrentProject={true}
-                state={this.props.state}
-                handleClick={this.props.handleClick}
+                localState={this.props.localState}
               />
               <ProjectImageContainer
                 project={project}
-                state={this.props.state}
+                localState={this.props.localState}
               />
             </section>
           </section>

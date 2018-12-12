@@ -1,25 +1,18 @@
 import Params from './Params';
-import storyData from '../data/the-story/index.js';
-import { normalize, validateParam } from '../helpers/utils.js';
 
 export default class StoryParams extends Params {
-  constructor(type, params) {
+  constructor(type, params, prevProps) {
     super(type, params);
 
-    const paramsThatAreDefined = Object.keys(params).filter(p => {
-      const param = params[p];
-      return param !== undefined && param !== 'menu';
-    });
+    this.paramNames = ['title'];
+    this.lastChapter = prevProps && prevProps.match.params.title;
 
-    this.number = paramsThatAreDefined.length;
-    this.title = paramsThatAreDefined.includes('title') && params.title;
+    this._actualNumber = this.paramNames.filter(p => {
+      return this[p] !== false;
+    }).length;
   }
 
-  get normalizedTitle() {
-    return this.title && normalize(this.title);
-  }
-
-  get validateTitle() {
-    return this.title && validateParam('title', storyData, this.title);
+  get title() {
+    return this.validateParam(this._one, 'title', 'text');
   }
 }

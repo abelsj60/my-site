@@ -36,10 +36,13 @@ function validateParam(propertyName, siteData, urlParam) {
 
     if (!isNumber) {
       return siteData.findIndex(d => {
+        // console.log('In validate:', propertyName);
+
         return normalize(d.attributes[propertyName]) === normalize(urlParam);
       });
     } else {
       const urlParamConvertedToIndex = isNumber && parseInt(urlParam) - 1;
+
       return urlParamConvertedToIndex >= 0 &&
         urlParamConvertedToIndex < siteData[0].attributes[propertyName].length
         ? urlParamConvertedToIndex

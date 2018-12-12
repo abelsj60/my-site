@@ -7,11 +7,11 @@ class MultiProjectNav extends Component {
   }
 
   get projectsForDisplay() {
-    return this.props.state.isProjectMenu
+    return this.props.isProjectMenu
       ? this.props.data
-      : this.props.data.filter(
-        (_, index) => this.props.state.indexForProjectData !== index
-      );
+      : this.props.data.filter((_, index) => {
+        return this.props.localState.indexForProjectData !== index;
+      });
   }
 
   render() {
@@ -19,8 +19,8 @@ class MultiProjectNav extends Component {
       <section id="nav-group" key={index}>
         <h1
           className={
-            this.props.state.isProjectMenu &&
-            this.props.state.indexForProjectData === index
+            this.props.isProjectMenu &&
+            this.props.localState.indexForProjectData === index
               ? 'active'
               : ''
           }
@@ -31,11 +31,10 @@ class MultiProjectNav extends Component {
         </h1>
         <SingleProjectNav
           project={project}
-          state={this.props.state}
-          handleClick={this.props.handleClick}
+          localState={this.props.localState}
           isCurrentProject={
-            this.props.state.isProjectMenu
-              ? this.props.state.indexForProjectData === index
+            this.props.isProjectMenu
+              ? this.props.localState.indexForProjectData === index
               : false
           }
         />

@@ -25,8 +25,8 @@ routes:
     link: /chapter/
     display: true
   -
-    name: Projects
-    component: Projects
+    name: ProjectLoader
+    component: ProjectLoader
     route: /projects/:projectName?/:projectThumbnail?
     exact: false
     childRoute: [/arrow, /slingshot, /tmmnews]
@@ -34,8 +34,8 @@ routes:
     link: /projects/
     display: true
   -
-    name: Journalism
-    component: Journalism
+    name: JournalismLoader
+    component: JournalismLoader
     route: /journalism/:publication?/:headline?
     exact: false
     childRoute: [/forbes, /shumagazine, /slate]

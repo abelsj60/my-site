@@ -1,25 +1,26 @@
 import Params from './Params';
-// import { validateParam } from '../helpers/utils.js';
-// import projectData from '../data/projects/index.js';
 
-export default class Projects extends Params {
-  constructor(type, params) {
+export default class ProjectsParams extends Params {
+  constructor(type, params, prevProps) {
     super(type, params);
-  }
 
-  get hasProjectName() {
-    return this.projects && this.params.projectName !== undefined;
-  }
+    this.paramNames = ['projectName', 'projectThumbnail'];
+    this.lastProject = prevProps && prevProps.match.params.projectName;
+    this.lastProjectPicture =
+      prevProps && (parseInt(prevProps.match.params.projectThumbnail) || false);
 
-  get hasProjectThumbnail() {
-    return this.projects && this.params.projectThumbnail !== undefined;
+    this._actualNumber = this.paramNames.filter(p => {
+      return this[p] !== false;
+    }).length;
   }
 
   get projectName() {
-    return this.hasProjectName && this.params.projectName;
+    return this.validateParam(this._one, 'name', 'text');
   }
 
+  // TODO Should this be undefined, rather than false?
+
   get projectThumbnail() {
-    return this.hasProjectThumbnail && this.params.projectThumbnail;
+    return parseInt(this.validateParam(this._two, 'full', 'number')) || false;
   }
 }

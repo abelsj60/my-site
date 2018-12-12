@@ -1,45 +1,17 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
-import Page from './Page.jsx';
+import PageContainer from './PageContainer.jsx';
+import Header from './Header.jsx';
+import Body from './Body.jsx';
+import Footer from './Footer.jsx';
 import MagicScroller from './MagicScroller.jsx';
-import clips from './data/clips/index.js';
-// import story from './data/the-story/index.js';
-import projects from './data/projects/index.js';
-import { splitPath, normalize } from './helpers/utils.js';
+import { splitPath } from './helpers/utils.js';
 
 class StateManagement extends Component {
   constructor(props) {
     super(props);
 
-    const location = splitPath(this.props);
-
-    /*
-      ~ja Ternaries prevent collisions
-
-      State is not updated when we first come through, then we hit render, run Reconciliation, id an update, call cDU, setState, and repeat.
-
-      LC: http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
-    */
-
     this.state = {
-      projectName:
-        location[1] === 'projects'
-          ? this.validateProjectName(location[2]) || projects[0].attributes.name
-          : projects[0].attributes.name,
-      projectThumbnail:
-        location[1] === 'projects'
-          ? this.validateProjectThumbnail(location[3], 3) || 1
-          : 1,
-      publication:
-        location[1] === 'journalism'
-          ? this.validatePublication(location[2]) ||
-            clips[0].attributes.publication.toLowerCase()
-          : clips[0].attributes.publication.toLowerCase(),
-      headline:
-        location[1] === 'journalism'
-          ? this.validateHeadline(location[2], location[3]) ||
-            normalize(clips[0].attributes.headline)
-          : normalize(clips[0].attributes.headline),
       magicOpacity: { opacity: 0 },
       magicClicks: splitPath(this.props)[1] === '' ? 'block' : '',
       explore: 'active'
@@ -67,47 +39,6 @@ class StateManagement extends Component {
     if (this.state.explore === 'inactive') {
       this.toggleText();
     }
-  }
-
-  validatePublication(publication) {
-    return clips.find(clip =>
-      normalize(clip.attributes.publication).includes(publication)
-    )
-      ? publication
-      : undefined;
-  }
-
-  validateHeadline(publication, headline) {
-    const headlineIsValid = clips.find(clip => {
-      return normalize(clip.attributes.headline).includes(headline);
-    });
-
-    if (!headline && !headlineIsValid) {
-      const defaultClip = clips.filter(clip => {
-        return (
-          normalize(clip.attributes.publication) ===
-          this.validatePublication(publication)
-        );
-      });
-
-      headline = defaultClip.length
-        ? normalize(defaultClip[0].attriubtes.headline)
-        : undefined;
-    }
-
-    return headline;
-  }
-
-  validateProjectName(name) {
-    return projects.find(project => project.attributes.name.includes(name))
-      ? name
-      : undefined;
-  }
-
-  validateProjectThumbnail(number, max) {
-    return parseInt(number) >= 0 && parseInt(number) <= max
-      ? parseInt(number)
-      : undefined;
   }
 
   setMagicOpacity() {
@@ -162,40 +93,8 @@ class StateManagement extends Component {
   }
 
   componentDidUpdate() {
-    // ~ja Must compare props to state to see a difference
-    // Location checks used to prevent collisions
-
     const location = splitPath(this.props);
 
-    const projectName =
-      location[1] === 'projects'
-        ? this.validateProjectName(location[2])
-        : undefined;
-    const projectThumbnail =
-      location[1] === 'projects'
-        ? this.validateProjectThumbnail(location[3], 3)
-        : undefined;
-    const publication =
-      location[1] === 'journalism'
-        ? this.validatePublication(location[2])
-        : undefined;
-    const headline =
-      location[1] === 'journalism'
-        ? this.validateHeadline(location[2], location[3])
-        : undefined;
-
-    const updateProjectName = projectName
-      ? projectName !== this.state.projectName
-      : undefined;
-    const updateProjectThumbnail = projectThumbnail
-      ? projectThumbnail !== this.state.projectThumbnail
-      : undefined;
-    const updatePublication = publication
-      ? publication !== this.state.publication
-      : undefined;
-    const updateHeadline = headline
-      ? headline !== this.state.headline
-      : undefined;
     const updateMagicClicksWhenGoingHome =
       location[1] === '' &&
       this.scrollTop < 3220 &&
@@ -203,21 +102,8 @@ class StateManagement extends Component {
     const updateMagicClicksWhenLeavingHome =
       location[1] !== '' && this.state.magicClicks === 'block';
 
-    if (
-      updateProjectName ||
-      updateProjectThumbnail ||
-      updatePublication ||
-      updateHeadline ||
-      updateMagicClicksWhenGoingHome ||
-      updateMagicClicksWhenLeavingHome
-    ) {
+    if (updateMagicClicksWhenGoingHome || updateMagicClicksWhenLeavingHome) {
       this.setState({
-        projectName: updateProjectName ? projectName : this.state.projectName,
-        projectThumbnail: updateProjectThumbnail
-          ? projectThumbnail
-          : this.state.projectThumbnail,
-        publication: updatePublication ? publication : this.state.publication,
-        headline: updateHeadline ? headline : this.state.headline,
         magicClicks: updateMagicClicksWhenGoingHome
           ? 'block'
           : updateMagicClicksWhenLeavingHome
@@ -225,19 +111,19 @@ class StateManagement extends Component {
             : this.state.magicClicks
       });
     }
-
-    // console.log('State in cDU: ', this.state);
-    // console.log('--', Date.now());
   }
 
   render() {
     return (
       <Fragment>
-        <Page
-          state={this.state}
-          toggleText={this.toggleText}
-          turnOffActiveButtons={this.turnOffActiveButtons}
-        />
+        <PageContainer location={this.props.location}>
+          <Header
+            state={this.props.state}
+            turnOffActiveButtons={this.turnOffActiveButtons}
+          />
+          <Body state={this.state} />
+          <Footer state={this.state} toggleText={this.toggleText} />
+        </PageContainer>
         <MagicScroller />
       </Fragment>
     );

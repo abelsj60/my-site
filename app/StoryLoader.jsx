@@ -15,8 +15,7 @@ export default class StoryLoader extends Component {
 
     this.state = {
       pathToMatch,
-      isMenu: false,
-      isNotFound: location.pathIsNotFound,
+      isNotFound: !location.pathIsJustRight,
       needsRedirect: location.needsRedirect
     };
   }
@@ -41,12 +40,16 @@ export default class StoryLoader extends Component {
         this.setState({ needsRedirect: startRedirect });
       }
     } else if (location.isSwappingContent) {
-      const newChapterIndex = location.params.validateTitle;
-      this.props.updateReturnState(newChapterIndex);
+      const newChapterIndex = location.params.toIndex('title');
+
+      if (typeof newChapterIndex === 'number') {
+        this.props.updateReturnState(newChapterIndex);
+      }
     }
   }
 
   render() {
+    const index = this.props.localState.indexForChapterData;
     return this.state.needsRedirect ? (
       <Redirect to={{ pathname: '/i', state: 'chapter' }} />
     ) : this.state.isNotFound ? (
@@ -60,8 +63,8 @@ export default class StoryLoader extends Component {
               <ChapterNav
                 isMenu={true}
                 data={storyData}
-                section={'chapter'}
-                chapterIndex={this.props.localState.indexForChapterData}
+                section="chapter"
+                chapterIndex={index}
               />
             </Menu>
           )}

@@ -1,42 +1,44 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import articles from './data/clips/index.js';
 import { normalize } from './helpers/utils.js';
 
-class DesktopArticleList extends Component {
+class ArticleNav extends Component {
   constructor(props) {
     super(props);
-  }
-
-  addCssToShowActiveLink(headline, headlineOnState) {
-    if (normalize(headline) === headlineOnState) {
-      return 'active';
-    } else {
-      return 'inactive';
-    }
   }
 
   render() {
     return (
       <section>
-        {articles.map((article, index) => (
-          <Link
-            key={index}
-            className={this.addCssToShowActiveLink(
-              article.attributes.headline,
-              this.props.state.headline
-            )}
-            to={`/journalism/${normalize(
-              article.attributes.publication
-            )}/${normalize(article.attributes.headline)}`}
-          >
-            <p id="source">{article.attributes.publication}</p>
-            <p id="hed">{article.attributes.headline}</p>
-          </Link>
-        ))}
+        {this.props.data.map((article, index) => {
+          const publication = article.attributes.publication;
+          const normalizedPublication = normalize(publication);
+
+          const headline = article.attributes.headline;
+          const normalizedHeadline = normalize(headline);
+
+          const headlineFromState = this.props.data[this.props.articleIndex]
+            .attributes.headline;
+          const normalizedHeadlineFromState = normalize(headlineFromState);
+
+          return (
+            <Link
+              key={index}
+              className={
+                normalizedHeadline === normalizedHeadlineFromState
+                  ? 'active'
+                  : 'inactive'
+              }
+              to={`/journalism/${normalizedPublication}/${normalizedHeadline}`}
+            >
+              <p id="source">{publication}</p>
+              <p id="hed">{headline}</p>
+            </Link>
+          );
+        })}
       </section>
     );
   }
 }
 
-export default DesktopArticleList;
+export default ArticleNav;

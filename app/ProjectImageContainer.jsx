@@ -11,14 +11,14 @@ class ProjectImageContainer extends Component {
         <p>
           {
             this.props.project.attributes.details.captions[
-              this.props.state.indexForProjectPictures
+              this.props.localState.indexForProjectPictures
             ]
           }
         </p>
         <img
           src={
             this.props.project.attributes.full[
-              this.props.state.indexForProjectPictures
+              this.props.localState.indexForProjectPictures
             ]
           }
           alt="mainPic"

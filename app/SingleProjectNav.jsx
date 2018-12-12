@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class SingleProjectNav extends Component {
   constructor(props) {
@@ -6,7 +7,6 @@ class SingleProjectNav extends Component {
   }
 
   render() {
-    const state = this.props.state;
     const project = this.props.project;
 
     // TODO: Loading /projects/menu directly, change model with switches?
@@ -14,21 +14,19 @@ class SingleProjectNav extends Component {
     return (
       <section className="project-thumbnails">
         {project.attributes.thumbnails.map((thumbnail, index) => (
-          <section
+          <Link
             key={index}
             className={
               this.props.isCurrentProject &&
-              state.indexForProjectPictures === index
+              this.props.localState.indexForProjectPictures === index
                 ? 'active'
                 : 'inactive'
             }
-            onClick={() =>
-              this.props.handleClick(project.attributes.name, index)
-            }
+            to={`/projects/${project.attributes.name}/${index + 1}`}
           >
             <img src={thumbnail} alt={`Thumbnail ${index + 1}`} />
             <div id="thumbnail-highlight" />
-          </section>
+          </Link>
         ))}
       </section>
     );

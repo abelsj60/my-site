@@ -40,23 +40,23 @@
   cursor: pointer;
 }
 
-#site-menu .chapter-menu .active,
-#site-menu .journalism-menu a.active {
+.chapter-menu .active,
+.journalism-menu a.active {
   color: deepskyblue;
 }
 
-#site-menu .chapter-menu .active:hover,
-#site-menu .journalism-menu a.active:hover {
+.chapter-menu .active:hover,
+.journalism-menu .active:hover {
   /* color: lightgoldenrodyellow; */
 }
 
-#site-menu .chapter-menu .inactive,
-#site-menu .journalism-menu a.inactive {
+.chapter-menu .inactive,
+.journalism-menu a.inactive {
   color: white;
 }
 
-#site-menu .chapter-menu .inactive:hover,
-#site-menu .journalism-menu a.inactive:hover {
+.chapter-menu .inactive:hover,
+.journalism-menu a.inactive:hover {
   color: lightgoldenrodyellow;
 }
 
@@ -95,7 +95,7 @@
   flex-direction: row;
 }
 
-.project-thumbnails section {
+.project-thumbnails a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,7 +103,7 @@
   position: relative;
 }
 
-.project-thumbnails section:not(:last-child) {
+.project-thumbnails a:not(:last-child) {
   margin-right: 5px;
 }
 
@@ -113,7 +113,7 @@
   max-width: 100%;
 }
 
-.project-thumbnails section.inactive:hover {
+.project-thumbnails a.inactive:hover {
   background-color: rgb(255, 255, 255, 0.1);
 }
 
@@ -123,11 +123,11 @@
   height: 100%;
 }
 
-.project-thumbnails section.active #thumbnail-highlight {
+.project-thumbnails a.active #thumbnail-highlight {
   background-color: rgb(0, 0, 0, 0.2);
 }
 
-.project-thumbnails section.inactive #thumbnail-highlight:hover {
+.project-thumbnails a.inactive #thumbnail-highlight:hover {
   background-color: rgb(0, 0, 0, 0.2);
 }
 

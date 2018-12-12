@@ -1,169 +1,89 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
-import { normalize, splitPath, validateParam } from './helpers/utils.js';
+import { Route, Redirect, Switch } from 'react-router';
 import Projects from './Projects.jsx';
 import Menu from './Menu.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
+import Location from './custom/Location.js';
 import projectData from './data/projects/index.js';
 
 export default class ProjectLoader extends Component {
   constructor(props) {
     super(props);
 
-    console.log('HERE');
-
-    const urlParams = splitPath(this.props);
-    const isProjectMenu = urlParams[2] === 'menu';
-    const projectHasNoName = this.props.match.isExact;
-    const projectHasNoPicture = urlParams.length !== 4;
-    const useDefaultProjectName = isProjectMenu || projectHasNoName;
-    const useDefaultPictureIndex = projectHasNoPicture;
-
-    const indexForProjectData = !useDefaultProjectName
-      ? validateParam('name', projectData, urlParams[2])
-      : 0;
-    const indexForProjectPictures = !useDefaultPictureIndex
-      ? validateParam('full', projectData, urlParams[3])
-      : 0;
-
-    if (!isProjectMenu) {
-      const indexForProjectPicturesConvertedToUrlParam =
-        indexForProjectPictures + 1;
-
-      if (projectHasNoName) {
-        const defaultProjectName = normalize(
-          projectData[indexForProjectData].attributes.name
-        );
-
-        this.props.history.replace(
-          `/projects/${defaultProjectName}/${indexForProjectPicturesConvertedToUrlParam}`
-        );
-      } else if (projectHasNoPicture) {
-        const currentProjectName = urlParams[2];
-
-        this.props.history.replace(
-          `/projects/${currentProjectName}/${indexForProjectPicturesConvertedToUrlParam}`
-        );
-      }
-    }
+    const pathToMatch = '/projects/:projectName/:projectThumbnail';
+    const location = new Location(pathToMatch, props);
 
     this.state = {
-      isProjectMenu,
-      indexForProjectData,
-      indexForProjectPictures
+      pathToMatch,
+      isNotFound: !location.pathIsJustRight,
+      needsRedirect: location.needsRedirect
     };
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(projectName, projectPictureIndex) {
-    const linkChangesProjects =
-      projectData[this.state.indexForProjectData].attributes.name !==
-      projectName;
-    const linkChangesProjectPicture =
-      this.state.indexForProjectPictures !== projectPictureIndex;
-
-    if (linkChangesProjects || linkChangesProjectPicture) {
-      const newIndexForProjectData =
-        linkChangesProjects &&
-        projectData.findIndex(
-          project => project.attributes.name === projectName
-        );
-      const newIndexForProjectPicturesConvertedToUrlParam =
-        projectPictureIndex + 1;
-
-      this.props.history.push(
-        `/projects/${projectName}/${newIndexForProjectPicturesConvertedToUrlParam}`
-      );
-
-      if (linkChangesProjects) {
-        this.setState({
-          indexForProjectData: newIndexForProjectData,
-          indexForProjectPictures: projectPictureIndex
-        });
-      } else {
-        this.setState({ indexForProjectPictures: projectPictureIndex });
-      }
-    }
   }
 
   componentDidUpdate(prevProps) {
-    const userHitTheBrowserBackOrForwardButton =
-      this.props.history.action === 'POP';
-    const userHitTheMenuButton =
-      this.props.location.pathname.includes('menu') ||
-      prevProps.location.pathname.includes('menu');
-    const projectHasAlreadyChanged =
-      this.props.location.pathname === prevProps.location.pathname;
+    const location = new Location(
+      this.state.pathToMatch,
+      this.props,
+      prevProps
+    );
 
-    if (
-      (userHitTheBrowserBackOrForwardButton || userHitTheMenuButton) &&
-      !projectHasAlreadyChanged
-    ) {
-      const urlParams = splitPath(this.props);
-      const isProjectMenu = urlParams[2] === 'menu';
-      const projectHasNoName = this.props.match.isExact;
-      const projectHasNoPicture = urlParams.length !== 4;
-      const useProjectNameFromState = projectHasNoName || isProjectMenu;
-      const useProjectPictureFromState = projectHasNoPicture || isProjectMenu;
-      const newIndexForProjectData = !useProjectNameFromState
-        ? validateParam('name', projectData, urlParams[2])
-        : this.state.indexForProjectData;
-      const newIndexForProjectPictures = !useProjectPictureFromState
-        ? validateParam('full', projectData, urlParams[3])
-        : this.state.indexForProjectPictures;
-      const newIndexForProjectPicturesConvertedToUrlParam =
-        newIndexForProjectPictures + 1;
+    if (location.needsRedirect) {
+      const startRedirect = !this.state.needsRedirect;
 
-      if (projectHasNoName) {
-        const projectName = normalize(
-          projectData[newIndexForProjectData].attributes.name
-        );
-
-        this.props.history.replace(
-          `/projects/${projectName}/${newIndexForProjectPicturesConvertedToUrlParam}`
-        );
-      } else if (projectHasNoPicture) {
-        const currentProjectName = urlParams[2];
-
-        this.props.history.replace(
-          `/projects/${currentProjectName}/${newIndexForProjectPicturesConvertedToUrlParam}`
-        );
+      if (startRedirect) {
+        this.setState({ needsRedirect: startRedirect });
       }
+    } else if (location.isSwappingContent) {
+      const newDataIndex = location.params.toIndex('projectName');
+      const newPictureIndex = location.params.toIndex('projectThumbnail');
 
-      this.setState({
-        isProjectMenu: isProjectMenu,
-        indexForProjectData: newIndexForProjectData,
-        indexForProjectPictures: newIndexForProjectPictures
-      });
+      if (
+        typeof newDataIndex === 'number' &&
+        typeof newPictureIndex === 'number'
+      ) {
+        this.props.updateReturnState(newDataIndex, newPictureIndex);
+      }
     }
   }
 
   render() {
-    return this.state.isProjectMenu ? (
-      <Menu
-        text="Technology projects for me, clients, and fun"
-        section="projects"
-        link="/projects"
-      >
-        <MultiProjectNav
-          data={projectData}
-          state={this.state}
-          handleClick={this.handleClick}
-        />
-      </Menu>
-    ) : this.state.indexForProjectData !== -1 ? (
-      <Projects
-        data={projectData}
-        state={this.state}
-        handleClick={this.handleClick}
-      />
+    const projectIndex = this.props.localState.indexForProjectData;
+    return this.state.needsRedirect ? (
+      <Redirect to={{ pathname: '/i', state: 'projects' }} />
+    ) : this.state.isNotFound ? (
+      <Redirect to="/not-found" />
     ) : (
-      <Redirect to="/notfound" />
+      <Switch>
+        <Route
+          path="/projects/menu"
+          render={() => (
+            <Menu
+              section="projects"
+              link="/projects"
+              text="Technology projects for me, clients, and fun"
+            >
+              <MultiProjectNav
+                data={projectData}
+                section="projects"
+                isProjectMenu={true}
+                projectIndex={projectIndex}
+                localState={this.props.localState}
+              />
+            </Menu>
+          )}
+        />
+
+        <Route
+          path="/projects/:projectName/:projectThumbnail"
+          render={({ match }) => (
+            <Projects
+              match={match}
+              data={projectData}
+              localState={this.props.localState}
+            />
+          )}
+        />
+      </Switch>
     );
   }
 }
-
-// base/projects — this.props.match.isExact
-// base/projects/name — urlParams.length === 3
-// base/projects/name/0 — OK

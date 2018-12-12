@@ -47,7 +47,7 @@ class AppBar extends Component {
         linkPath: getPath(this.props),
         css: this.props.state.explore !== 'active' ? 'active' : 'inactive',
         state: undefined,
-        hash: '#explore',
+        hash: undefined,
         handleClick: () => this.props.toggleText()
       },
       {
@@ -119,15 +119,10 @@ class AppBar extends Component {
   }
 
   render() {
-    console.log('App bar render');
     return (
       <section id="app-bar-menu">
         {this.getButtonsForDisplay().map((button, index) => {
           const needsButtonBorder = button.label !== 'contact';
-
-          if (button.label === 'explore') {
-            console.log('Button:', button.hash);
-          }
 
           return (
             <Fragment key={index}>
