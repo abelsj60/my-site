@@ -9,7 +9,7 @@ header {
   transition: background-color 0.7s, color 0.7s;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 #inner-page-header.opaque {
@@ -22,12 +22,12 @@ header {
   /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
 }
 
-#header-content {
+/* #header-content {
   flex: 1;
   display: flex;
   width: 100%;
   align-items: center;
-}
+} */
 
 #header-separator {
   width: 100%;

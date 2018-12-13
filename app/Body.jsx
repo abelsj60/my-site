@@ -121,6 +121,14 @@ class Body extends Component {
                   localState={this.state}
                   state={this.props.state}
                   updateReturnState={this.updateReturnState}
+                  setMagicOpacity={
+                    body.route === '/' ? this.props.setMagicOpacity : undefined
+                  }
+                  toggleMagicPionter={
+                    body.route === '/'
+                      ? this.props.toggleMagicPionter
+                      : undefined
+                  }
                 />
               )}
             />

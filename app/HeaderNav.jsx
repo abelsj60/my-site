@@ -1,40 +1,23 @@
-import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import headerData from './data/headerData.js';
 import { splitPath } from './helpers/utils.js';
 
-class HeaderNav extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function HeaderNav(props) {
+  const currentSection = splitPath(props)[1];
 
-  addCssToShowActiveLink(section) {
-    let sectionName = section.name.toLowerCase();
-    const currentPath = splitPath(this.props);
-
-    if (sectionName === 'the story') {
-      sectionName = 'chapter';
-    }
-
-    return currentPath.includes(sectionName) ? 'active' : '';
-  }
-
-  render() {
-    return (
-      <nav>
-        {headerData.map((section, index) => (
-          <Link
-            key={index}
-            to={section.path}
-            onClick={this.props.turnOffActiveButtons}
-            className={this.addCssToShowActiveLink(section)}
-          >
-            {section.name}
-          </Link>
-        ))}
-      </nav>
-    );
-  }
+  return headerData.map((section, index) => (
+    <Link
+      key={index}
+      to={section.path}
+      onClick={props.turnOffActiveButtons}
+      className={
+        section.path.includes(currentSection) && currentSection !== ''
+          ? 'active'
+          : ''
+      }
+    >
+      {section.name}
+    </Link>
+  ));
 }
-
-export default withRouter(HeaderNav);

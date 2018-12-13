@@ -1,44 +1,51 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
+import { splitPath } from './helpers/utils.js';
 import PageContainer from './PageContainer.jsx';
 import Header from './Header.jsx';
 import Body from './Body.jsx';
 import Footer from './Footer.jsx';
 import MagicScroller from './MagicScroller.jsx';
-import { splitPath } from './helpers/utils.js';
 
-class StateManagement extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       magicOpacity: { opacity: 0 },
-      magicClicks: splitPath(this.props)[1] === '' ? 'block' : '',
-      explore: 'active'
+      magicClicks: splitPath(this.props)[1] === '' ? 'block' : ''
     };
 
-    this.toggleText = this.toggleText.bind(this);
     this.setMagicOpacity = this.setMagicOpacity.bind(this);
     this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
-    this.turnOffActiveButtons = this.turnOffActiveButtons.bind(this);
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <PageContainer location={this.props.location}>
+          <Header
+            state={this.props.state}
+            location={this.props.location}
+            setMagicOpacity={this.setMagicOpacity}
+            toggleMagicPointer={this.toggleMagicPointer}
+            turnOffActiveButtons={this.turnOffActiveButtons}
+          />
+          <hr id="header-separator" />
+          <Body
+            state={this.state}
+            setMagicOpacity={this.setMagicOpacity}
+            toggleMagicPointer={this.toggleMagicPointer}
+          />
+          <Footer state={this.state} />
+        </PageContainer>
+        <MagicScroller />
+      </Fragment>
+    );
   }
 
   get scrollTop() {
     return window.pageYOffset;
-  }
-
-  toggleText() {
-    // Expl: https://stackoverflow.com/a/29101393/9215718
-
-    this.setState({
-      explore: this.state.explore === 'active' ? 'inactive' : 'active'
-    });
-  }
-
-  turnOffActiveButtons() {
-    if (this.state.explore === 'inactive') {
-      this.toggleText();
-    }
   }
 
   setMagicOpacity() {
@@ -87,11 +94,6 @@ class StateManagement extends Component {
     }
   }
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.setMagicOpacity);
-    window.addEventListener('scroll', this.toggleMagicPointer);
-  }
-
   componentDidUpdate() {
     const location = splitPath(this.props);
 
@@ -112,22 +114,6 @@ class StateManagement extends Component {
       });
     }
   }
-
-  render() {
-    return (
-      <Fragment>
-        <PageContainer location={this.props.location}>
-          <Header
-            state={this.props.state}
-            turnOffActiveButtons={this.turnOffActiveButtons}
-          />
-          <Body state={this.state} />
-          <Footer state={this.state} toggleText={this.toggleText} />
-        </PageContainer>
-        <MagicScroller />
-      </Fragment>
-    );
-  }
 }
 
-export default withRouter(StateManagement);
+export default withRouter(App);

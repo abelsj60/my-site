@@ -23,17 +23,17 @@ export default class JournalismParams extends Params {
 
   get defaultHeadline() {
     if (this.publication && this._two === undefined) {
-      const defaultHeadline = this._searchData.find(a => {
+      const firstHedToMatchPublication = this._searchData.find(a => {
         return (
           this._normalizeParam(a.attributes.publication) === this.publication
         );
       }).attributes.headline;
 
       return this._searchData.findIndex(a => {
-        return a.attributes.headline === defaultHeadline;
+        return a.attributes.headline === firstHedToMatchPublication;
       });
     }
 
-    return 0;
+    return;
   }
 }

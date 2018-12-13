@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import HeaderText from './HeaderText.jsx';
 import HeaderNav from './HeaderNav.jsx';
-import HeaderNavIcon from './HeaderNavIcon.jsx';
+import HeaderIcon from './HeaderIcon.jsx';
+import HtmlContainer from './HtmlContainer.jsx';
 import { splitPath } from './helpers/utils.js';
 
 class Header extends Component {
@@ -27,11 +27,6 @@ class Header extends Component {
 
   get scrollTop() {
     return window.pageYOffset;
-  }
-
-  addCssWhenHeaderIsHome() {
-    const userIsHome = this.location[1] === '';
-    return userIsHome ? 'home-page-header' : 'inner-page-header';
   }
 
   toggleHeaderMenu() {
@@ -68,14 +63,10 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    // console.log('Header Mounted!');
-
     window.addEventListener('scroll', this.toggleTransparency);
   }
 
   componentDidUpdate(prevProps) {
-    // console.log('Header Updated!');
-
     const userIsHome = this.location[1] === '';
     const headerIsTransparent = this.state.visibility === 'transparent';
     const userIsTraveling = this.location[1] !== splitPath(prevProps)[1];
@@ -96,19 +87,23 @@ class Header extends Component {
 
   render() {
     return (
-      <header
-        id={this.addCssWhenHeaderIsHome()}
-        className={`${this.state.visibility}${this.state.menu}`}
+      <HtmlContainer
+        element="header"
+        id={
+          splitPath(this.props)[1] === ''
+            ? 'home-page-header'
+            : 'inner-page-header'
+        }
+        className={`${this.state.visibility}`}
       >
-        <section id="header-content">
-          <HeaderText />
-          <HeaderNav turnOffActiveButtons={this.props.turnOffActiveButtons} />
-          <HeaderNavIcon toggleHeaderMenu={this.toggleHeaderMenu} />
-        </section>
-        <hr id="header-separator" />
-      </header>
+        <HeaderText />
+        <HtmlContainer element="nav">
+          <HeaderNav location={this.props.location} />
+        </HtmlContainer>
+        <HeaderIcon toggleHeaderMenu={this.toggleHeaderMenu} />
+      </HtmlContainer>
     );
   }
 }
 
-export default withRouter(Header);
+export default Header;

@@ -15,11 +15,14 @@ class Home extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.setMagicScale);
+    window.addEventListener('scroll', this.props.setMagicOpacity);
+    window.addEventListener('scroll', this.props.toggleMagicPointer);
   }
 
   componentWillUnmount() {
-    console.log('Home unmounted, reset scroll?');
     window.removeEventListener('scroll', this.setMagicScale);
+    window.removeEventListener('scroll', this.props.setMagicOpacity);
+    window.removeEventListener('scroll', this.props.toggleMagicPointer);
   }
 
   setMagicScale() {

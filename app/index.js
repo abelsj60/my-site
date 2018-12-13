@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './css/index.css';
-import StateManagement from './StateManagement.jsx';
+import App from './App.jsx';
 
 ReactDOM.render(
   <Router>
-    <StateManagement />
+    <App />
   </Router>,
   document.getElementById('app')
 );
