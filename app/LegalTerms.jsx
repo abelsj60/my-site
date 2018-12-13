@@ -1,33 +1,17 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
 import { splitPath } from './helpers/utils.js';
 
-class Legal extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function Legal(props) {
+  const copyrightYear = new Date().getFullYear();
+  const aboutPage = splitPath(props)[1] === 'about';
 
-  get copyrightYear() {
-    return new Date().getFullYear();
-  }
-
-  addCssToFlagAboutPage() {
-    return splitPath(this.props)[1] === 'about' ? 'about' : '';
-  }
-
-  render() {
-    return (
-      <section
-        id="legal"
-        className={`${
-          this.props.footerState.legalTerms
-        } ${this.addCssToFlagAboutPage()}`}
-      >
-        <p>© {this.copyrightYear} James Abels. All rights reserved.</p>
-        <div id="temp-content-box-shadow" />
-      </section>
-    );
-  }
+  return (
+    <section
+      id="legal"
+      className={`${props.state.legalTerms} ${aboutPage ? 'about' : ''}`}
+    >
+      <p>© {copyrightYear} James Abels. All rights reserved.</p>
+      <div id="temp-content-box-shadow" />
+    </section>
+  );
 }
-
-export default withRouter(Legal);

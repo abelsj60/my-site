@@ -1,44 +1,69 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
 import { splitPath } from './helpers/utils.js';
-import PageContainer from './PageContainer.jsx';
+import HtmlContainer from './HtmlContainer.jsx';
 import Header from './Header.jsx';
 import Body from './Body.jsx';
-import Footer from './Footer.jsx';
+import BusinessCard from './BusinessCard.jsx';
+import LegalTerms from './LegalTerms.jsx';
+import FooterContainer from './FooterContainer.jsx';
 import MagicScroller from './MagicScroller.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
+    const home = splitPath(this.props)[1] === '';
+
     this.state = {
+      contact: 'inactive',
+      legalTerms: 'inactive',
       magicOpacity: { opacity: 0 },
-      magicClicks: splitPath(this.props)[1] === '' ? 'block' : ''
+      magicClicks: home ? 'block' : ''
     };
+
+    /** Method bindings */
 
     this.setMagicOpacity = this.setMagicOpacity.bind(this);
     this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
+    this.toggleLegalTerms = this.toggleLegalTerms.bind(this);
+    this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
   }
 
   render() {
+    const path = splitPath(this.props)[1];
+
+    const pageCss = path === '' ? 'home' : 'inner';
+    const menuCss = path === 'menu' ? ' menu-page' : '';
+
     return (
       <Fragment>
-        <PageContainer location={this.props.location}>
+        <HtmlContainer
+          id="page"
+          element="section"
+          className={`${pageCss} ${menuCss}`}
+        >
           <Header
+            {...this.props}
             state={this.props.state}
-            location={this.props.location}
-            setMagicOpacity={this.setMagicOpacity}
-            toggleMagicPointer={this.toggleMagicPointer}
-            turnOffActiveButtons={this.turnOffActiveButtons}
+            scrollTop={this.scrollTop}
           />
           <hr id="header-separator" />
           <Body
+            {...this.props}
             state={this.state}
             setMagicOpacity={this.setMagicOpacity}
             toggleMagicPointer={this.toggleMagicPointer}
           />
-          <Footer state={this.state} />
-        </PageContainer>
+          <BusinessCard state={this.state} />
+          <LegalTerms state={this.state} {...this.props} />
+          <FooterContainer
+            {...this.props}
+            state={this.state}
+            toggleLegalTerms={this.toggleLegalTerms}
+            toggleBusinessCard={this.toggleBusinessCard}
+          />
+        </HtmlContainer>
         <MagicScroller />
       </Fragment>
     );
@@ -92,6 +117,22 @@ class App extends Component {
     ) {
       this.setState({ magicClicks: 'block' });
     }
+  }
+
+  toggleBusinessCard() {
+    const isActive = this.state.contact === 'active';
+
+    this.setState({
+      contact: isActive ? 'inactive' : 'active'
+    });
+  }
+
+  toggleLegalTerms() {
+    const isActive = this.state.legalTerms === 'active';
+
+    this.setState({
+      legalTerms: isActive ? 'inactive' : 'active'
+    });
   }
 
   componentDidUpdate() {

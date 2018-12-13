@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Home from './Home.jsx';
 import StoryLoader from './StoryLoader.jsx';
 import ProjectLoader from './ProjectLoader.jsx';
@@ -124,7 +124,7 @@ class Body extends Component {
                   setMagicOpacity={
                     body.route === '/' ? this.props.setMagicOpacity : undefined
                   }
-                  toggleMagicPionter={
+                  toggleMagicPointer={
                     body.route === '/'
                       ? this.props.toggleMagicPionter
                       : undefined
@@ -140,4 +140,4 @@ class Body extends Component {
   }
 }
 
-export default withRouter(Body);
+export default Body;

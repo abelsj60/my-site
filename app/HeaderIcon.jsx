@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function HeaderIcon() {
+export default function HeaderIcon(props) {
   return (
     <section
       id="nav-icon"
       onClick={() => {
-        this.props.toggleHeaderMenu();
+        props.toggleHeaderMenu();
       }}
     />
   );

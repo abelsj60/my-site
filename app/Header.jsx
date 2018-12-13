@@ -9,11 +9,11 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
-    const userIsHome = splitPath(this.props)[1] === '';
+    const home = splitPath(this.props)[1] === '';
 
     this.state = {
       menu: '',
-      visibility: userIsHome ? 'transparent' : 'opaque'
+      visibility: home ? 'transparent' : 'opaque'
     };
 
     this.timeoutId = 0;
@@ -25,12 +25,9 @@ class Header extends Component {
     return splitPath(this.props);
   }
 
-  get scrollTop() {
-    return window.pageYOffset;
-  }
-
   toggleHeaderMenu() {
     const menuIsClosed = this.state.menu === '';
+    console.log('t:', menuIsClosed);
 
     this.setState({
       menu: menuIsClosed ? ' menu-open' : ''
@@ -50,14 +47,16 @@ class Header extends Component {
   }
 
   toggleTransparency() {
-    const scrollTop = this.scrollTop;
+    const scrollTop = this.props.scrollTop;
     const headerIsTransparent = this.state.visibility === 'transparent';
 
     if (headerIsTransparent && scrollTop >= 7) {
+      console.log('h2:', 'here!');
       this.setState({ visibility: 'opaque' });
     }
 
-    if (!headerIsTransparent && scrollTop < 7) {
+    if (!headerIsTransparent && scrollTop <= 7) {
+      console.log('h3:', 'here!');
       this.setState({ visibility: 'transparent' });
     }
   }
@@ -67,16 +66,16 @@ class Header extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const userIsHome = this.location[1] === '';
+    const home = this.location[1] === '';
     const headerIsTransparent = this.state.visibility === 'transparent';
     const userIsTraveling = this.location[1] !== splitPath(prevProps)[1];
     const timeoutIsRunning = this.timeoutId;
 
-    if (!userIsHome && headerIsTransparent) {
+    if (!home && headerIsTransparent) {
       this.setState({ visibility: 'opaque' });
     }
 
-    if (userIsHome && !headerIsTransparent && this.scrollTop < 7) {
+    if (home && !headerIsTransparent && this.scrollTop < 7) {
       this.setState({ visibility: 'transparent' });
     }
 
@@ -86,19 +85,17 @@ class Header extends Component {
   }
 
   render() {
+    const home = splitPath(this.props)[1] === '';
+
     return (
       <HtmlContainer
         element="header"
-        id={
-          splitPath(this.props)[1] === ''
-            ? 'home-page-header'
-            : 'inner-page-header'
-        }
+        id={home ? 'home-page-header' : 'inner-page-header'}
         className={`${this.state.visibility}`}
       >
         <HeaderText />
         <HtmlContainer element="nav">
-          <HeaderNav location={this.props.location} />
+          <HeaderNav {...this.props} />
         </HtmlContainer>
         <HeaderIcon toggleHeaderMenu={this.toggleHeaderMenu} />
       </HtmlContainer>
