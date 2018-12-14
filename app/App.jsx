@@ -8,6 +8,7 @@ import BusinessCard from './BusinessCard.jsx';
 import LegalTerms from './LegalTerms.jsx';
 import FooterContainer from './FooterContainer.jsx';
 import MagicScroller from './MagicScroller.jsx';
+import EventHandling from './custom/EventHandling.js';
 
 class App extends Component {
   constructor(props) {
@@ -16,8 +17,9 @@ class App extends Component {
     const home = splitPath(this.props)[1] === '';
 
     this.state = {
-      contact: 'inactive',
-      legalTerms: 'inactive',
+      showStory: true,
+      showLegalTerms: false,
+      showBusinessCard: false,
       magicOpacity: { opacity: 0 },
       magicClicks: home ? 'block' : ''
     };
@@ -26,15 +28,16 @@ class App extends Component {
 
     this.setMagicOpacity = this.setMagicOpacity.bind(this);
     this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
-    this.toggleLegalTerms = this.toggleLegalTerms.bind(this);
-    this.toggleBusinessCard = this.toggleBusinessCard.bind(this);
+
+    console.log('---APP---');
   }
 
   render() {
     const path = splitPath(this.props)[1];
-
     const pageCss = path === '' ? 'home' : 'inner';
     const menuCss = path === 'menu' ? ' menu-page' : '';
+    const eventHandlingForApp = new EventHandling('app', this);
+    const boundHandleClickForApp = eventHandlingForApp.boundHandleClick;
 
     return (
       <Fragment>
@@ -60,8 +63,7 @@ class App extends Component {
           <FooterContainer
             {...this.props}
             state={this.state}
-            toggleLegalTerms={this.toggleLegalTerms}
-            toggleBusinessCard={this.toggleBusinessCard}
+            boundHandleClickForApp={boundHandleClickForApp}
           />
         </HtmlContainer>
         <MagicScroller />
@@ -117,22 +119,6 @@ class App extends Component {
     ) {
       this.setState({ magicClicks: 'block' });
     }
-  }
-
-  toggleBusinessCard() {
-    const isActive = this.state.contact === 'active';
-
-    this.setState({
-      contact: isActive ? 'inactive' : 'active'
-    });
-  }
-
-  toggleLegalTerms() {
-    const isActive = this.state.legalTerms === 'active';
-
-    this.setState({
-      legalTerms: isActive ? 'inactive' : 'active'
-    });
   }
 
   componentDidUpdate() {

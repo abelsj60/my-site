@@ -43,7 +43,8 @@ export default class StoryLoader extends Component {
       const newChapterIndex = location.params.toIndex('title');
 
       if (typeof newChapterIndex === 'number') {
-        this.props.updateReturnState(newChapterIndex);
+        this.props.boundHandleClickForBody(newChapterIndex);
+        // this.props.updateReturnState(newChapterIndex);
       }
     }
   }
@@ -72,7 +73,9 @@ export default class StoryLoader extends Component {
 
         <Route
           path="/chapter/:title"
-          render={({ match }) => <TheStory match={match} data={storyData} />}
+          render={({ match }) => (
+            <TheStory match={match} data={storyData} {...this.props} />
+          )}
         />
       </Switch>
     );

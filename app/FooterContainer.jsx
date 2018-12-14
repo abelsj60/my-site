@@ -30,19 +30,19 @@ export default class Footer extends Component {
     if (userIsTraveling) {
       switch (type) {
         case 'businessCard':
-          return this.props.toggleBusinessCard();
+          return this.props.boundHandleClickForApp('showBusinessCard');
         case 'legalTerms':
-          return this.props.toggleLegalTerms();
+          return this.props.boundHandleClickForApp('showLegalTerms');
         default:
-          return this.props.toggleText();
+          return this.props.boundHandleClickForApp('showStoryText');
       }
     }
   }
 
   componentDidUpdate(prevProps) {
-    const businessCardIsActive = this.props.state.contact === 'active';
-    const legalTermsAreActive = this.props.state.legalTerms === 'active';
-    const storyTextIsNotActive = this.props.state.explore === 'active';
+    const businessCardIsActive = this.props.state.showBusinessCard;
+    const legalTermsAreActive = this.props.state.showLegalTerms;
+    const storyTextIsNotActive = this.props.state.showStory;
 
     if (businessCardIsActive) {
       this.deactivateButton('businessCard', prevProps);

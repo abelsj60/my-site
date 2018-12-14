@@ -35,13 +35,12 @@ export default class JournalismLoader extends Component {
       }
     } else if (location.isSwappingContent) {
       const newDataIndex = location.params.toIndex('headline');
-      const newPublicationIndex = location.params.toIndex('publication');
+      const newPubIndex = location.params.toIndex('publication');
 
-      if (
-        typeof newDataIndex === 'number' &&
-        typeof newPublicationIndex === 'number'
-      ) {
-        this.props.updateReturnState(newDataIndex, newPublicationIndex);
+      // ? Can this just be a falsy check?
+      if (typeof newDataIndex === 'number' && typeof newPubIndex === 'number') {
+        this.props.boundHandleClickForBody(newDataIndex, newPubIndex);
+        // this.props.updateReturnState(newDataIndex, newPublicationIndex);
       }
     }
   }

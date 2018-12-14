@@ -84,7 +84,7 @@ science while a sophomore at Saint Peter’s.
 But he did learn some new tricks under Becker, now the associate provost
 for research and technology initiatives at the Polytechnic Institute of
 New York University. Becker treated doctoral students like colleagues, not
-employees. He encouraged them to explore their own interests, and tried to
+employees. He encouraged them to story their own interests, and tried to
 get them whatever they needed to do it.
 
 “If someone had a good idea, my attitude was: Go try it out,” he says.

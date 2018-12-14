@@ -41,7 +41,7 @@ export default class ProjectLoader extends Component {
         typeof newDataIndex === 'number' &&
         typeof newPictureIndex === 'number'
       ) {
-        this.props.updateReturnState(newDataIndex, newPictureIndex);
+        this.props.boundHandleClickForBody(newDataIndex, newPictureIndex);
       }
     }
   }

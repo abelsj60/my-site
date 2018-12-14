@@ -17,7 +17,7 @@ export default function FooterAppBar(props) {
                 state: button.state,
                 hash: button.hash
               }}
-              className={button.css}
+              className={button.className}
               onClick={button.handleClick}
             >
               <p>{buttonGroup.formatButtonName(button.name)}</p>

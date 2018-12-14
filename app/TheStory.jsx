@@ -15,7 +15,10 @@ export default function TheStory(props) {
 
   return (
     <main id="the-story">
-      <section id="chapter" className={`left ${props.explore}`}>
+      <section
+        id="chapter"
+        className={`left ${props.state.showStory ? 'active' : 'inactive'}`}
+      >
         <ChapterNav
           data={data}
           isMenu={isMenu}

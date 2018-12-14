@@ -10,6 +10,8 @@ import Reverie from './Reverie.jsx';
 import RestateRoute from './RestateRoute.jsx';
 import NotFound from './NotFound.jsx';
 import Location from './custom/Location';
+import EventHandling from './custom/EventHandling.js';
+
 import bodies from './data/bodies.md';
 
 class Body extends Component {
@@ -56,35 +58,7 @@ class Body extends Component {
         lParams.toIndex('headline') || lParams.defaultHeadline || 0
     };
 
-    /** Method bindings */
-
-    this.updateReturnState = this.updateReturnState.bind(this);
-
-    console.log('---');
-  }
-
-  updateReturnState(paramOne, paramTwo) {
-    const referrer = this.props.location.pathname.split('/')[1];
-
-    switch (referrer) {
-      case 'chapter':
-        this.setState({ indexForChapterData: paramOne });
-        break;
-      case 'projects':
-        this.setState({
-          indexForProjectData: paramOne,
-          indexForProjectPictures: paramTwo
-        });
-        break;
-      case 'journalism':
-        this.setState({
-          indexForArticleData: paramOne,
-          indexForPublicationData: paramTwo
-        });
-        break;
-      default:
-        console.log('updateReturnState: Keep calm, carry on');
-    }
+    console.log('---BODY---');
   }
 
   get bodyTypes() {
@@ -105,6 +79,9 @@ class Body extends Component {
   }
 
   render() {
+    const eventHandlingForBody = new EventHandling('body', this);
+    const boundHandleClickForBody = eventHandlingForBody.boundHandleClick;
+
     return (
       <Switch>
         {bodies.attributes.routes.map(body => {
@@ -120,15 +97,7 @@ class Body extends Component {
                   {...props}
                   localState={this.state}
                   state={this.props.state}
-                  updateReturnState={this.updateReturnState}
-                  setMagicOpacity={
-                    body.route === '/' ? this.props.setMagicOpacity : undefined
-                  }
-                  toggleMagicPointer={
-                    body.route === '/'
-                      ? this.props.toggleMagicPionter
-                      : undefined
-                  }
+                  boundHandleClickForBody={boundHandleClickForBody}
                 />
               )}
             />

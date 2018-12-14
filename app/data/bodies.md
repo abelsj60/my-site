@@ -61,6 +61,6 @@ routes:
     component: RestateRoute
     route: /i
     exact: false
-    linke: /i/
+    link: /i/
     display: true
 ---

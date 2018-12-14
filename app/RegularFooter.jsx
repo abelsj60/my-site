@@ -16,17 +16,17 @@ export default function footerText(props) {
       </Link>
       <HtmlContainer
         element="p"
-        className={props.state.contact}
+        className={props.state.showBusinessCard ? 'active' : 'inactive'}
         onClick={() => {
-          props.toggleBusinessCard();
+          props.boundHandleClickForApp('showBusinessCard');
         }}
       >
         Contact
       </HtmlContainer>
       <HtmlContainer
         element="p"
-        className={props.state.legalTerms}
-        onClick={() => props.toggleLegalTerms()}
+        className={props.state.showLegalTerms ? 'active' : 'inactive'}
+        onClick={() => props.boundHandleClickForApp('showLegalTerms')}
       >
         Legal
       </HtmlContainer>

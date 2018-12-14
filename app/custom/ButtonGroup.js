@@ -5,12 +5,13 @@ export default class ButtonGroup {
     this._path = getPath(props);
     this._referrer = splitPath(props)[1];
     this._isMenu = this._path.includes('menu');
-    this._explore = props.state.explore;
-    this._legalTerms = props.state.legalTerms;
-    this._contact = props.state.contact;
+    this._showStory = props.state.showStory;
+    this._showLegalTerms = props.state.showLegalTerms;
+    this._showBusinessCard = props.state.showBusinessCard;
     this._toggleText = props.toggleText;
     this._toggleLegalTerms = props.toggleLegalTerms;
     this._toggleBusinessCard = props.toggleBusinessCard;
+    this._handleClick = props.boundHandleClickForApp;
     this._propsBackup = props;
 
     this.buttons = this._getButtonGroup();
@@ -21,7 +22,7 @@ export default class ButtonGroup {
       {
         name: 'menu',
         link: this._isMenu ? `/${this._referrer}` : `/${this._referrer}/menu`,
-        css: this._referrer === 'menu' ? 'active' : 'inactive',
+        className: this._referrer === 'menu' ? 'active' : 'inactive',
         state: 'menu',
         hash: undefined,
         needsBorder: true,
@@ -30,38 +31,38 @@ export default class ButtonGroup {
       {
         name: 'reverie',
         link: this._referrer === 'reverie' ? '/' : '/reverie',
-        css: this._referrer === 'reverie' ? 'active' : 'inactive',
+        className: this._referrer === 'reverie' ? 'active' : 'inactive',
         state: undefined,
         hash: undefined,
         needsBorder: true,
         handleClick: () => undefined
       },
       {
-        name: 'explore',
+        name: 'story',
         link: this._path,
-        css: this._explore !== 'active' ? 'active' : 'inactive',
+        className: !this._showStory ? 'active' : 'inactive',
         state: undefined,
         hash: undefined,
         needsBorder: true,
-        handleClick: () => this._toggleText()
+        handleClick: () => this._handleClick('showStoryText')
       },
       {
         name: 'legal',
         link: this._path,
-        css: this._legalTerms,
+        className: this.showLegalTerms ? 'active' : 'inactive',
         state: undefined,
         hash: undefined,
         needsBorder: true,
-        handleClick: () => this._toggleLegalTerms()
+        handleClick: () => this._handleClick('showLegalTerms')
       },
       {
         name: 'contact',
         link: this._path,
-        css: this._contact,
+        className: this._showBusinessCard ? 'active' : 'inactive',
         state: undefined,
         hash: undefined,
         needsBorder: false,
-        handleClick: () => this._toggleBusinessCard()
+        handleClick: () => this._handleClick('showBusinessCard')
       }
     ];
   }
@@ -74,7 +75,7 @@ export default class ButtonGroup {
         buttonGroup = ['reverie', 'contact'];
         break;
       case 'chapter':
-        buttonGroup = ['menu', 'explore', 'contact'];
+        buttonGroup = ['menu', 'story', 'contact'];
         break;
       case 'projects':
         buttonGroup = ['menu', 'contact'];
@@ -107,6 +108,15 @@ export default class ButtonGroup {
           break;
         case 'journalism':
           finalName = 'clips';
+          break;
+      }
+    } else if (name === 'story') {
+      switch (this._showStory) {
+        case true:
+          finalName = 'picture';
+          break;
+        case false:
+          finalName = 'story';
           break;
       }
     }
