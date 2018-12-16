@@ -59,11 +59,12 @@ export default class Footer extends Component {
 
   render() {
     const home = this.location[1] === '';
+    const magicOpacity = this.props.state.magicOpacity;
 
     return (
       <footer
         className={this.props.state.magicClicks}
-        style={home ? this.props.state.magicOpacity : null}
+        style={home ? { opacity: magicOpacity } : null}
         id={home ? 'home-page-footer' : 'inner-page-footer'}
       >
         <RegularFooter {...this.props} />

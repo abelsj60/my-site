@@ -27,7 +27,6 @@ class Header extends Component {
 
   toggleHeaderMenu() {
     const menuIsClosed = this.state.menu === '';
-    console.log('t:', menuIsClosed);
 
     this.setState({
       menu: menuIsClosed ? ' menu-open' : ''
@@ -51,7 +50,6 @@ class Header extends Component {
     const headerIsTransparent = this.state.visibility === 'transparent';
 
     if (headerIsTransparent && scrollTop >= 7) {
-      console.log('h2:', 'here!');
       this.setState({ visibility: 'opaque' });
     }
 

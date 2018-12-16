@@ -1,32 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Mapper from './Mapper.jsx';
 import magicData from './data/magicData.js';
+
 // Create, Build, Amaze
 
-class MagicNav extends Component {
-  constructor() {
-    super();
-  }
-
-  getCssToShowAndHideNavItems(index) {
-    return `magicnav-link-${index + 1}`;
-  }
-
-  render() {
-    return (
-      <section id="magic-nav">
-        {magicData.map((section, index) => (
-          <Link
-            key={index}
-            to={section.link}
-            className={this.getCssToShowAndHideNavItems(index)}
-          >
-            <h3>{section.hed}</h3>
-          </Link>
-        ))}
-      </section>
-    );
-  }
+export default function MagicNav() {
+  return (
+    <section id="magic-nav">
+      <Mapper
+        mapData={magicData}
+        render={(name, idx) => {
+          const itemCss = `magicnav-link-${idx + 1}`;
+          return (
+            <Link key={idx} to={name.link} className={itemCss}>
+              <h3>{name.hed}</h3>
+            </Link>
+          );
+        }}
+      />
+    </section>
+  );
 }
-
-export default MagicNav;

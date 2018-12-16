@@ -11,10 +11,9 @@ import RestateRoute from './RestateRoute.jsx';
 import NotFound from './NotFound.jsx';
 import Location from './custom/Location';
 import EventHandling from './custom/EventHandling.js';
-
 import bodies from './data/bodies.md';
 
-class Body extends Component {
+export default class Body extends Component {
   constructor(props) {
     super(props);
 
@@ -97,6 +96,8 @@ class Body extends Component {
                   {...props}
                   localState={this.state}
                   state={this.props.state}
+                  setMagicScale={this.props.setMagicScale}
+                  setMagicOpacity={this.props.setMagicOpacity}
                   boundHandleClickForBody={boundHandleClickForBody}
                 />
               )}
@@ -108,5 +109,3 @@ class Body extends Component {
     );
   }
 }
-
-export default Body;

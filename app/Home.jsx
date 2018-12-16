@@ -1,64 +1,124 @@
 import React, { Fragment, Component } from 'react';
 import MagicNav from './MagicNav.jsx';
 
-class Home extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      magicScale: {
-        transform: 'scale(6)'
-      }
+      scale: 1,
+      opacity: 0
     };
 
-    this.setMagicScale = this.setMagicScale.bind(this);
+    this.testScale = this.testScale.bind(this);
+    this.testOpacity = this.testOpacity.bind(this);
+
+    this.startToBelieve = 300;
+  }
+
+  get scrollTop() {
+    return window.pageYOffset;
+  }
+
+  testScale() {
+    // if (this.scrollTop > 300) {
+    //   const scale = Math.min(7, 1 + 0.006 * (this.scrollTop - 300));
+    //   console.log('m:', scale);
+    //   this.setState({ scale: scale });
+    // }
+  }
+
+  testOpacity() {
+    if (this.scrollTop < 100 && this.state.opacity !== 0) {
+      this.setState({ opacity: 0 });
+    } else if (this.scrollTop >= 100) {
+      const opacity = Math.min(1, 1 - (1000 - this.scrollTop) / 1000);
+      const opacityToString = opacity + '';
+
+      this.setState({ opacity: opacityToString });
+    } else if (this.scrollTop >= 1100) {
+      // const opacity = Math.max(0, 1 / (200 - this.scrollTop - 100) / 200);
+      // const opacityToString = opacity + '';
+      // console.log('o:', 1 / ((200 + this.scrollTop) / 200));
+      // this.setState({ opacity: opacityToString });
+    }
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.setMagicScale);
+    window.addEventListener('scroll', this.testScale);
+    window.addEventListener('scroll', this.testOpacity);
+    window.addEventListener('scroll', this.props.setMagicScale);
     window.addEventListener('scroll', this.props.setMagicOpacity);
     window.addEventListener('scroll', this.props.toggleMagicPointer);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.setMagicScale);
+    window.removeEventListener('scroll', this.props.setMagicScale);
     window.removeEventListener('scroll', this.props.setMagicOpacity);
     window.removeEventListener('scroll', this.props.toggleMagicPointer);
   }
 
-  setMagicScale() {
-    const scrollTop = window.pageYOffset;
-    const oldScale = scrollTop / 3221;
-    const newScale = 6 / ((6 - 1) * oldScale + 1);
-    const newScaleToString = newScale + '';
-    const finalScale = newScale >= 1 ? newScaleToString.slice(0, 4) : 1;
-
-    this.setState({
-      magicScale: {
-        transform: `scale(${finalScale})`
-      }
-    });
-  }
-
   render() {
+    // const magicOpacity = this.props.state.magicOpacity;
+
+    const mainStyle = { justifyContent: 'center', alignItems: 'center' };
+    const believeStyle = {
+      zIndex: '1',
+      fontSize: '5rem',
+      transform: `scale(${this.state.scale})`,
+      opacity: this.state.opacity
+    };
+    // console.log(`rgba(0,0,0,${this.state.opacity})`);
+
     return (
-      <Fragment>
-        <img
+      <main style={mainStyle}>
+        {/** <img
           id="magic-image"
-          style={this.state.magicScale}
+          style={{ transform: `scale(${this.props.state.magicScale})` }}
           src="/dreaming-boy-co-2.png"
           alt="a fantastic imaginary world"
-        />
-        {/*<section id="first-hint">⥥</section>*/}
-        <section
+        /> */}
+        <section style={believeStyle}>
+          <h2>Believe In Magic</h2>
+        </section>
+        {/** <section
           id="magic-content"
           className={this.props.state.magicClicks}
-          style={this.props.state.magicOpacity}
+          style={{ opacity: magicOpacity }}
         >
           <MagicNav />
-        </section>
-      </Fragment>
+        </section>*/}
+      </main>
     );
   }
 }
 
-export default Home;
+// testScale() {
+//   if (this.scrollTop > 300) {
+//     const scale = Math.min(7, 0.006 * (this.scrollTop - 300));
+//     console.log('m:', scale);
+
+//     this.setState({ scale: scale });
+//   }
+// }
+
+// testOpacity() {
+
+//     if (this.state.opacity < 1) {
+//       const opacity = Math.min(1, 1 - (1000 - (this.scrollTop - 300)) / 1000);
+//       const opacityToString = opacity + '';
+
+//       this.setState({ opacity: opacityToString });
+
+//   if (this.scrollTop > 300 && this.scrollTop < 2000) {
+//     const opacity = Math.max(0, (1000 - (this.scrollTop - 300)) / 1000);
+//     const opacityToString = opacity + '';
+
+//     this.setState({ opacity: opacityToString });
+//   } else {
+//     // const useFailSafe = this.state.opacity > 0;
+//     // if (useFailSafe) {
+//     //   this.setState({ opacity: 0 });
+//     // }
+//   }
+// }

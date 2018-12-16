@@ -16,16 +16,22 @@ class App extends Component {
 
     const home = splitPath(this.props)[1] === '';
 
+    this.magicClicks = home ? 'block' : '';
+    this.startingScale = 6;
+    this.startingOpacity = 0;
+
     this.state = {
       showStory: true,
       showLegalTerms: false,
       showBusinessCard: false,
-      magicOpacity: { opacity: 0 },
-      magicClicks: home ? 'block' : ''
+      magicOpacity: this.startingOpacity,
+      magicScale: this.startingScale,
+      magicClicks: this.magicClicks
     };
 
     /** Method bindings */
 
+    this.setMagicScale = this.setMagicScale.bind(this);
     this.setMagicOpacity = this.setMagicOpacity.bind(this);
     this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
 
@@ -55,6 +61,7 @@ class App extends Component {
           <Body
             {...this.props}
             state={this.state}
+            setMagicScale={this.setMagicScale}
             setMagicOpacity={this.setMagicOpacity}
             toggleMagicPointer={this.toggleMagicPointer}
           />
@@ -77,10 +84,22 @@ class App extends Component {
 
   setMagicOpacity() {
     let finalOpacity;
-    const opacityValue = (this.scrollTop - 580) / (3221 - 580);
+
+    // const opacityValue = (this.scrollTop - 580) / (3221 - 580);
+
+    const opacityValue = this.scrollTop / 6000;
+
+    // const ratioOfScrollTopToPosition = this.scrollTop / 3900;
+    // const valueForResizing =
+    //   this.startingScale - ratioOfScrollTopToPosition * this.startingScale;
+
+    // console.log('sT:', this.scrollTop);
+    // console.log('oV:', opacityValue);
+    // console.log();
+
     const opacityToString = opacityValue + '';
     const opacityFailSafe =
-      this.scrollTop < 15 && this.state.magicOpacity.opacity !== 0;
+      this.scrollTop < 15 && this.state.magicOpacity !== 0;
 
     if (opacityValue > 0 && opacityValue <= 1) {
       finalOpacity = opacityToString.slice(1, 4);
@@ -96,9 +115,7 @@ class App extends Component {
 
     if (finalOpacity || opacityFailSafe) {
       this.setState({
-        magicOpacity: {
-          opacity: finalOpacity
-        }
+        magicOpacity: finalOpacity
       });
     }
   }
@@ -119,6 +136,23 @@ class App extends Component {
     ) {
       this.setState({ magicClicks: 'block' });
     }
+  }
+
+  setMagicScale() {
+    const scrollTopToContainerRatio = this.scrollTop / 3900;
+    const valueForResizing =
+      this.startingScale - scrollTopToContainerRatio * this.startingScale;
+
+    /** Note: Passing as string considerably reduces jank, using
+     * true numbers w/parseInt() is a TOTAL DISASTER
+     */
+
+    const resizeToString = valueForResizing + '';
+    const finalScale = resizeToString.slice(0, 4);
+
+    this.setState({
+      magicScale: finalScale
+    });
   }
 
   componentDidUpdate() {

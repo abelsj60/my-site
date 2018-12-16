@@ -1,23 +1,29 @@
 export default class EventHandling {
-  constructor(component, externalThis) {
-    const path = externalThis.props.location.pathname;
+  constructor(component, outsideThis) {
+    const path = outsideThis.props.location.pathname;
     const referrer = path.split('/')[1];
 
     this._component = component;
     this._referrer = referrer;
 
-    this.boundHandleClick = this._selectHandleClick(externalThis);
+    this.boundHandleClick = this._selectHandleClick(outsideThis);
   }
 
-  _selectHandleClick(t) {
-    const component = this._component;
+  _selectHandleClick(outerThis) {
+    let selectedHandleClick;
 
-    switch (component) {
+    switch (this._component) {
       case 'app':
-        return this._handleClickForAppComponent.call(t);
+        selectedHandleClick = this._handleClickForAppComponent;
+        break;
       case 'body':
-        return this._handleClickForBodyComponent.call(t, this._referrer);
+        selectedHandleClick = this._handleClickForBodyComponent;
+        break;
+      default:
+        console.log('_selectHandleClick: Keep calm, carry on');
     }
+
+    return selectedHandleClick.call(outerThis, this);
   }
 
   _handleClickForAppComponent() {
@@ -35,7 +41,7 @@ export default class EventHandling {
           stateToUpdate = { showStory: !this.state.showStory };
           break;
         default:
-          console.log('handleClickForAppComponent: Keep calm, carry on');
+          console.log('_handleClickForAppComponent: Keep calm, carry on');
           break;
       }
 
@@ -43,28 +49,28 @@ export default class EventHandling {
     };
   }
 
-  _handleClickForBodyComponent(referrer) {
-    return (paramOne, paramTwo) => {
+  _handleClickForBodyComponent(innerThis) {
+    return (propertyOne, propertyTwo) => {
       let stateToUpdate;
 
-      switch (referrer) {
+      switch (innerThis._referrer) {
         case 'chapter':
-          stateToUpdate = { indexForChapterData: paramOne };
+          stateToUpdate = { indexForChapterData: propertyOne };
           break;
         case 'projects':
           stateToUpdate = {
-            indexForProjectData: paramOne,
-            indexForProjectPictures: paramTwo
+            indexForProjectData: propertyOne,
+            indexForProjectPictures: propertyTwo
           };
           break;
         case 'journalism':
           stateToUpdate = {
-            indexForArticleData: paramOne,
-            indexForPublicationData: paramTwo
+            indexForArticleData: propertyOne,
+            indexForPublicationData: propertyTwo
           };
           break;
         default:
-          console.log('handleClickForBodyComponent: Keep calm, carry on');
+          console.log('_handleClickForBodyComponent: Keep calm, carry on');
       }
 
       return this.setState(stateToUpdate);
