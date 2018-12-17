@@ -6,6 +6,7 @@ export default function HtmlContainer(props) {
   return (
     <ContainerType
       id={props.id}
+      style={props.style}
       onClick={props.onClick}
       className={props.className}
     >

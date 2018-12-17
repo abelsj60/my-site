@@ -17,7 +17,7 @@ export default class ParentLocation extends Location {
       let paramsForCaller = params;
 
       switch (type) {
-        case 'chapter':
+        case 'story':
           if (!paramsExist) {
             paramsForCaller = {
               title: splitPath[2]

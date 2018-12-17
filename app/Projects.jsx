@@ -1,63 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
-import { normalize } from 'path';
 
-class Projects extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function Projects(props) {
+  const { localState, data, projectIndex } = props;
+  const { indexForProjectData } = props.localState;
+  const project = data[indexForProjectData];
+  const { name } = project.attributes.details;
 
-  render() {
-    const data = this.props.data;
-    const project = data.find(p => {
-      return (
-        normalize(p.attributes.name) === this.props.match.params.projectName
-      );
-    });
-    const projectIndex = data.findIndex(p => {
-      return (
-        normalize(p.attributes.name) === this.props.match.params.projectName
-      );
-    });
-
-    return (
-      <main id="my-projects" className="">
-        <section id="desktop-project-nav" className="left">
-          <div id="content">
-            <h1>My projects</h1>
-            <h2>Technology projects for me, clients, and fun</h2>
-            <MultiProjectNav
-              section={'projects'}
-              isProjectMenu={false}
-              data={this.props.data}
-              projectIndex={projectIndex}
-              localState={this.props.localState}
+  return (
+    <main id="my-projects" className="">
+      <section id="desktop-project-nav" className="left">
+        <div id="content">
+          <h1>My projects</h1>
+          <h2>Technology projects for me, clients, and fun</h2>
+          <MultiProjectNav
+            section={'projects'}
+            isProjectMenu={false}
+            data={data}
+            projectIndex={projectIndex}
+            localState={localState}
+          />
+        </div>
+      </section>
+      <section id="active-project" className="right">
+        <h1>{name}</h1>
+        <section id="project-container">
+          <ProjectDescription project={project} />
+          <section id="project-images">
+            <SingleProjectNav
+              project={project}
+              isCurrentProject={true}
+              localState={localState}
             />
-          </div>
-        </section>
-        <section id="active-project" className="right">
-          <h1>{project.attributes.details.name}</h1>
-          <section id="project-container">
-            <ProjectDescription project={project} />
-            <section id="project-images">
-              <SingleProjectNav
-                project={project}
-                isCurrentProject={true}
-                localState={this.props.localState}
-              />
-              <ProjectImageContainer
-                project={project}
-                localState={this.props.localState}
-              />
-            </section>
+            <ProjectImageContainer project={project} localState={localState} />
           </section>
         </section>
-      </main>
-    );
-  }
+      </section>
+    </main>
+  );
 }
-
-export default Projects;

@@ -1,21 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MenuCloseButton from './MenuCloseButton.jsx';
 import MenuDescription from './MenuDescription.jsx';
 
-class Menu extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function Menu(props) {
+  const { userLocation, link, text, children } = props;
 
-  render() {
-    return (
-      <main id="site-menu" className={`${this.props.section}-menu`}>
-        <MenuCloseButton link={this.props.link} />
-        <MenuDescription text={this.props.text} />
-        {this.props.children}
-      </main>
-    );
-  }
+  return (
+    <main id="site-menu" className={`${userLocation}-menu`}>
+      <MenuCloseButton link={link} />
+      <MenuDescription text={text} />
+      {children}
+    </main>
+  );
 }
-
-export default Menu;

@@ -47,10 +47,11 @@ export default class ProjectLoader extends Component {
   }
 
   render() {
-    const projectIndex = this.props.localState.indexForProjectData;
-    return this.state.needsRedirect ? (
+    const { needsRedirect, isNotFound } = this.state;
+
+    return needsRedirect ? (
       <Redirect to={{ pathname: '/i', state: 'projects' }} />
-    ) : this.state.isNotFound ? (
+    ) : isNotFound ? (
       <Redirect to="/not-found" />
     ) : (
       <Switch>
@@ -63,11 +64,10 @@ export default class ProjectLoader extends Component {
               text="Technology projects for me, clients, and fun"
             >
               <MultiProjectNav
+                {...this.props}
                 data={projectData}
                 section="projects"
                 isProjectMenu={true}
-                projectIndex={projectIndex}
-                localState={this.props.localState}
               />
             </Menu>
           )}
@@ -75,13 +75,7 @@ export default class ProjectLoader extends Component {
 
         <Route
           path="/projects/:projectName/:projectThumbnail"
-          render={({ match }) => (
-            <Projects
-              match={match}
-              data={projectData}
-              localState={this.props.localState}
-            />
-          )}
+          render={() => <Projects {...this.props} data={projectData} />}
         />
       </Switch>
     );

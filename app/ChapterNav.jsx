@@ -1,36 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { normalize } from './helpers/utils.js';
+import Mapper from './Mapper.jsx';
 
-class ChapterNav extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function ChapterNav(props) {
+  const { data, isMenu, section } = props;
+  const { indexForChapterData } = props.localState;
+  const elementId = isMenu ? 'contents-list' : 'story-nav';
+  const className = isMenu ? `${section}-menu` : '';
 
-  renderThisHtml() {
-    return this.props.data.map((chapter, index) => (
-      <Link
-        key={index}
-        className={this.props.chapterIndex === index ? 'active' : 'inactive'}
-        to={`/chapter/${normalize(this.props.data[index].attributes.title)}`}
-      >
-        {this.props.isMenu && <h1 id="story-chapter">Chapter {index + 1}</h1>}
-        <p>{!this.props.isMenu ? index + 1 : chapter.attributes.title}</p>
-      </Link>
-    ));
-  }
-
-  render() {
-    if (this.props.isMenu) {
-      return (
-        <section id="contents-list" className={`${this.props.section}-menu`}>
-          {this.renderThisHtml()}
-        </section>
-      );
-    } else {
-      return <section id="story-nav">{this.renderThisHtml()}</section>;
-    }
-  }
+  return (
+    <section id={elementId} className={className}>
+      <Mapper
+        mapData={data}
+        render={(chapter, idx) => (
+          <Link
+            key={idx}
+            className={indexForChapterData === idx ? 'active' : 'inactive'}
+            to={`/story/chapter/${normalize(data[idx].attributes.title)}`}
+          >
+            {isMenu && <h1 id="story-chapter">Chapter {idx + 1}</h1>}
+            <p>{!isMenu ? idx + 1 : chapter.attributes.title}</p>
+          </Link>
+        )}
+      />
+    </section>
+  );
 }
-
-export default ChapterNav;

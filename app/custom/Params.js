@@ -18,7 +18,7 @@ export default class Params {
 
   get _searchData() {
     switch (this.type) {
-      case 'chapter':
+      case 'story':
         return storyData;
       case 'projects':
         return projectData;
@@ -90,11 +90,10 @@ export default class Params {
   }
 
   toIndex(paramName) {
-    if (this[paramName]) {
+    if (paramName !== 'chapter' && this[paramName]) {
       const isNumber = parseInt(this[paramName]);
 
       if (!isNumber) {
-        const searchData = this._searchData;
         let paramIs;
 
         if (paramName === 'projectName') {
@@ -103,14 +102,16 @@ export default class Params {
           paramIs = paramName;
         }
 
-        return searchData.findIndex(d => {
-          const officialName = this._normalizeParam(d.attributes[paramIs]);
-          return officialName === this[paramName];
+        return this._searchData.findIndex(d => {
+          const normalizedName = this._normalizeParam(d.attributes[paramIs]);
+          return normalizedName === this[paramName];
         });
       } else if (isNumber) {
         return this[paramName] - 1;
       }
     }
+
+    // TODO If I return -1, an infinite loop runs when going to menu. Why?
 
     return;
   }

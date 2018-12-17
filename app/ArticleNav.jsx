@@ -1,44 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { normalize } from './helpers/utils.js';
+import Mapper from './Mapper.jsx';
 
-class ArticleNav extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function ArticleNav(props) {
+  const { data } = props;
+  const { indexForArticleData } = props.localState;
 
-  render() {
-    return (
-      <section>
-        {this.props.data.map((article, index) => {
-          const publication = article.attributes.publication;
-          const normalizedPublication = normalize(publication);
+  return (
+    <section>
+      <Mapper
+        mapData={data}
+        render={(article, idx) => {
+          const { publication, headline } = article.attributes;
 
-          const headline = article.attributes.headline;
-          const normalizedHeadline = normalize(headline);
+          const nPublication = normalize(publication);
+          const nHeadline = normalize(headline);
 
-          const headlineFromState = this.props.data[this.props.articleIndex]
-            .attributes.headline;
-          const normalizedHeadlineFromState = normalize(headlineFromState);
+          const currentHeadline = data[indexForArticleData].attributes.headline;
+          const nCurrentHeadline = normalize(currentHeadline);
+
+          const className =
+            nHeadline === nCurrentHeadline ? 'active' : 'inactive';
+          const articleLink = `/journalism/${nPublication}/${nHeadline}`;
 
           return (
-            <Link
-              key={index}
-              className={
-                normalizedHeadline === normalizedHeadlineFromState
-                  ? 'active'
-                  : 'inactive'
-              }
-              to={`/journalism/${normalizedPublication}/${normalizedHeadline}`}
-            >
+            <Link key={idx} className={className} to={articleLink}>
               <p id="source">{publication}</p>
               <p id="hed">{headline}</p>
             </Link>
           );
-        })}
-      </section>
-    );
-  }
+        }}
+      />
+    </section>
+  );
 }
-
-export default ArticleNav;

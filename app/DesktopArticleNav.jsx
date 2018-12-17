@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ArticleNav from './ArticleNav.jsx';
 
-class DesktopArticleNav extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function DesktopArticleNav(props) {
+  const { text, data, articleIndex } = props;
 
-  render() {
-    return (
-      <section id="desktop-article-navigation" className="left">
-        <h1>My clips</h1>
-        <h2>{this.props.text}</h2>
-        <ArticleNav
-          data={this.props.data}
-          articleIndex={this.props.articleIndex}
-        />
-      </section>
-    );
-  }
+  return (
+    <section id="desktop-article-navigation" className="left">
+      <h1>My clips</h1>
+      <h2>{text}</h2>
+      <ArticleNav {...props} data={data} articleIndex={articleIndex} />
+    </section>
+  );
 }
-
-export default DesktopArticleNav;

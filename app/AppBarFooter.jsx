@@ -4,25 +4,35 @@ import ButtonGroup from './custom/ButtonGroup.js';
 
 export default function FooterAppBar(props) {
   const buttonGroup = new ButtonGroup(props);
-  const buttons = buttonGroup.buttons;
+  const { buttons, formatButtonName } = buttonGroup;
 
   return (
     <section id="app-bar-menu">
       {buttons.map((button, index) => {
+        const {
+          name,
+          hash,
+          link,
+          state,
+          className,
+          needsBorder,
+          handleClick
+        } = button;
+
         return (
           <Fragment key={index}>
             <Link
               to={{
-                pathname: button.link,
-                state: button.state,
-                hash: button.hash
+                pathname: link,
+                state: state,
+                hash: hash
               }}
-              className={button.className}
-              onClick={button.handleClick}
+              className={className}
+              onClick={handleClick}
             >
-              <p>{buttonGroup.formatButtonName(button.name)}</p>
+              <p>{formatButtonName.call(buttonGroup, name)}</p>
             </Link>
-            {button.needsBorder ? <div id="button-border" /> : null}
+            {needsBorder ? <div id="button-border" /> : null}
           </Fragment>
         );
       })}

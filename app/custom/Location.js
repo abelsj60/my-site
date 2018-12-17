@@ -19,11 +19,12 @@ export default class Location {
 
     this.type = props.location.pathname.split('/')[1];
     this.isExact = this._matchPath && this._matchPath.isExact;
+
     this.params = (params => {
       const type = this.type;
 
       switch (type) {
-        case 'chapter':
+        case 'story':
           return new StoryParams(type, params, prevProps);
         case 'projects':
           return new ProjectsParams(type, params, prevProps);
@@ -86,7 +87,7 @@ export default class Location {
 
   get isSwappingContent() {
     switch (this.type) {
-      case 'chapter':
+      case 'story':
         const currentChapter = this.params.title;
         const lastChapter = this.params.lastChapter;
 

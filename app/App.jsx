@@ -6,7 +6,7 @@ import Header from './Header.jsx';
 import Body from './Body.jsx';
 import BusinessCard from './BusinessCard.jsx';
 import LegalTerms from './LegalTerms.jsx';
-import FooterContainer from './FooterContainer.jsx';
+import Footer from './Footer.jsx';
 import MagicScroller from './MagicScroller.jsx';
 import EventHandling from './custom/EventHandling.js';
 
@@ -66,8 +66,8 @@ class App extends Component {
             toggleMagicPointer={this.toggleMagicPointer}
           />
           <BusinessCard state={this.state} />
-          <LegalTerms state={this.state} {...this.props} />
-          <FooterContainer
+          <LegalTerms {...this.props} state={this.state} />
+          <Footer
             {...this.props}
             state={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
@@ -155,8 +155,10 @@ class App extends Component {
     });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const location = splitPath(this.props);
+    const eventHandlingForApp = new EventHandling('app', this);
+    const handleClickForApp = eventHandlingForApp.boundHandleClick;
 
     const updateMagicClicksWhenGoingHome =
       location[1] === '' &&
@@ -173,6 +175,22 @@ class App extends Component {
             ? ''
             : this.state.magicClicks
       });
+    }
+
+    if (location[1] !== splitPath(prevProps)[1]) {
+      const { showBusinessCard, showLegalTerms, showStory } = this.state;
+
+      if (showBusinessCard) {
+        handleClickForApp('showBusinessCard');
+      }
+
+      if (showLegalTerms) {
+        handleClickForApp('showLegalTerms');
+      }
+
+      if (!showStory) {
+        handleClickForApp('showStoryText');
+      }
     }
   }
 }

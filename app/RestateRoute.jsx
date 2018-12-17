@@ -8,7 +8,7 @@ import articleData from './data/clips/index.js';
 /** Redirect users w/body.returnState */
 
 export default function RestateRoute(props) {
-  const localState = props.localState;
+  const { localState } = props;
   const referrer = props.location.state
     ? props.location.state.toLowerCase()
     : '';
@@ -16,11 +16,11 @@ export default function RestateRoute(props) {
   console.log('RestateRoute called by (/' + referrer + ')');
 
   switch (referrer) {
-    case 'chapter':
+    case 'story':
       const title = storyData[localState.indexForChapterData].attributes.title;
       const normalizedTitle = normalize(title);
 
-      return <Redirect to={`/${referrer}/${normalizedTitle}`} />;
+      return <Redirect to={`/${referrer}/chapter/${normalizedTitle}`} />;
     case 'projects':
       const projectName =
         projectData[localState.indexForProjectData].attributes.name;

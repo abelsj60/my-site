@@ -1,9 +1,10 @@
 ---
 sections: [
   home,
+  oneLoader,
   storyLoader,
-  projects,
   journalism,
+  projects,
   reverie,
   about
 ]
@@ -18,15 +19,15 @@ routes:
     display: false
   -
     name: StoryLoader
-    component: StoryLoader
-    route: /chapter/:title?
+    component: OneLoader
+    route: /story/:chapter?/:title?
     exact: false
     childRoute: [/title1, /title2, /title3, /title4]
     link: /chapter/
     display: true
   -
     name: ProjectLoader
-    component: ProjectLoader
+    component: OneLoader
     route: /projects/:projectName?/:projectThumbnail?
     exact: false
     childRoute: [/arrow, /slingshot, /tmmnews]
@@ -35,7 +36,7 @@ routes:
     display: true
   -
     name: JournalismLoader
-    component: JournalismLoader
+    component: OneLoader
     route: /journalism/:publication?/:headline?
     exact: false
     childRoute: [/forbes, /shumagazine, /slate]

@@ -54,8 +54,8 @@ export default class EventHandling {
       let stateToUpdate;
 
       switch (innerThis._referrer) {
-        case 'chapter':
-          stateToUpdate = { indexForChapterData: propertyOne };
+        case 'story':
+          stateToUpdate = { indexForChapterData: propertyTwo };
           break;
         case 'projects':
           stateToUpdate = {
@@ -65,8 +65,8 @@ export default class EventHandling {
           break;
         case 'journalism':
           stateToUpdate = {
-            indexForArticleData: propertyOne,
-            indexForPublicationData: propertyTwo
+            indexForPublicationData: propertyOne,
+            indexForArticleData: propertyTwo
           };
           break;
         default:

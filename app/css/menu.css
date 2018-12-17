@@ -28,7 +28,7 @@
   border-bottom: white dotted 0.5px;
 }
 
-#site-menu.chapter-menu,
+#site-menu.story-menu,
 #site-menu.journalism-menu,
 #site-menu.projects-menu {
   overflow: auto;
@@ -36,26 +36,26 @@
   flex: 1;
 }
 
-.chapter-menu section {
+.story-menu section {
   cursor: pointer;
 }
 
-.chapter-menu .active,
+.story-menu .active,
 .journalism-menu a.active {
   color: deepskyblue;
 }
 
-.chapter-menu .active:hover,
+.story-menu .active:hover,
 .journalism-menu .active:hover {
   /* color: lightgoldenrodyellow; */
 }
 
-.chapter-menu .inactive,
+.story-menu .inactive,
 .journalism-menu a.inactive {
   color: white;
 }
 
-.chapter-menu .inactive:hover,
+.story-menu .inactive:hover,
 .journalism-menu a.inactive:hover {
   color: lightgoldenrodyellow;
 }
@@ -76,7 +76,7 @@
   margin-bottom: 2px;
 }
 
-.chapter-menu p {
+.story-menu p {
   font-size: 3rem;
   margin-top: 0;
   margin-left: 0;
@@ -139,7 +139,7 @@
   margin-bottom: 20px;
 }
 
-.chapter-menu h1 {
+.story-menu h1 {
   font-size: 1.4rem;
   margin-bottom: 6px;
 }

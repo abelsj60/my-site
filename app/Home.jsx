@@ -1,5 +1,5 @@
-import React, { Fragment, Component } from 'react';
-import MagicNav from './MagicNav.jsx';
+import React, { Component } from 'react';
+// import MagicNav from './MagicNav.jsx';
 
 export default class Home extends Component {
   constructor(props) {
@@ -32,15 +32,14 @@ export default class Home extends Component {
     if (this.scrollTop < 100 && this.state.opacity !== 0) {
       this.setState({ opacity: 0 });
     } else if (this.scrollTop >= 100) {
-      const opacity = Math.min(1, 1 - (1000 - this.scrollTop) / 1000);
+      const opacity = Math.min(1, 1 - (3233 - this.scrollTop - 100) / 3233);
+
+      // console.log('o:', opacity);
+
       const opacityToString = opacity + '';
 
       this.setState({ opacity: opacityToString });
     } else if (this.scrollTop >= 1100) {
-      // const opacity = Math.max(0, 1 / (200 - this.scrollTop - 100) / 200);
-      // const opacityToString = opacity + '';
-      // console.log('o:', 1 / ((200 + this.scrollTop) / 200));
-      // this.setState({ opacity: opacityToString });
     }
   }
 
@@ -53,6 +52,8 @@ export default class Home extends Component {
   }
 
   componentWillUnmount() {
+    window.removeEventListener('scroll', this.testScale);
+    window.removeEventListener('scroll', this.testOpacity);
     window.removeEventListener('scroll', this.props.setMagicScale);
     window.removeEventListener('scroll', this.props.setMagicOpacity);
     window.removeEventListener('scroll', this.props.toggleMagicPointer);
@@ -72,14 +73,14 @@ export default class Home extends Component {
 
     return (
       <main style={mainStyle}>
-        {/** <img
+        <img
           id="magic-image"
           style={{ transform: `scale(${this.props.state.magicScale})` }}
           src="/dreaming-boy-co-2.png"
           alt="a fantastic imaginary world"
-        /> */}
+        />
         <section style={believeStyle}>
-          <h2>Believe In Magic</h2>
+          <h2>I believe in magic?</h2>
         </section>
         {/** <section
           id="magic-content"

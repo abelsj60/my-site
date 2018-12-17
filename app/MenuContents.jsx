@@ -10,7 +10,7 @@ class MenuContents extends Component {
   }
 
   getContent() {
-    if (this.props.section.includes('chapter')) {
+    if (this.props.section.includes('story')) {
       return (
         <ChapterNav
           data={this.props.data}

@@ -74,7 +74,7 @@ export default class ButtonGroup {
       case '':
         buttonGroup = ['reverie', 'contact'];
         break;
-      case 'chapter':
+      case 'story':
         buttonGroup = ['menu', 'story', 'contact'];
         break;
       case 'projects':
@@ -98,9 +98,9 @@ export default class ButtonGroup {
   formatButtonName(name) {
     let finalName = name;
 
-    if (name === 'menu') {
-      switch (this.referrer) {
-        case 'chapter':
+    if (name === 'menu' && this._isMenu) {
+      switch (this._referrer) {
+        case 'story':
           finalName = 'chapters';
           break;
         case 'projects':

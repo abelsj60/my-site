@@ -5,28 +5,32 @@ import { splitPath } from './helpers/utils.js';
 
 export default function footerText(props) {
   const isReverie = splitPath(props).includes('reverie');
+  const { showBusinessCard, showLegalTerms } = props.state;
+  const { boundHandleClickForApp } = props;
+
+  const reverieLink = isReverie ? '/' : '/reverie';
+  const reverieClassName = isReverie ? 'active' : 'inactive';
+  const businessCardClassName = showBusinessCard ? 'active' : 'inactive';
+  const legalTermsClassName = showLegalTerms ? 'active' : 'inactive';
 
   return (
     <section id="footer-text" className="app-bar-active">
-      <Link
-        to={isReverie ? '/' : '/reverie'}
-        className={isReverie ? 'active' : 'inactive'}
-      >
+      <Link to={reverieLink} className={reverieClassName}>
         <p>Reverie</p>
       </Link>
       <HtmlContainer
         element="p"
-        className={props.state.showBusinessCard ? 'active' : 'inactive'}
+        className={businessCardClassName}
         onClick={() => {
-          props.boundHandleClickForApp('showBusinessCard');
+          boundHandleClickForApp('showBusinessCard');
         }}
       >
         Contact
       </HtmlContainer>
       <HtmlContainer
         element="p"
-        className={props.state.showLegalTerms ? 'active' : 'inactive'}
-        onClick={() => props.boundHandleClickForApp('showLegalTerms')}
+        className={legalTermsClassName}
+        onClick={() => boundHandleClickForApp('showLegalTerms')}
       >
         Legal
       </HtmlContainer>

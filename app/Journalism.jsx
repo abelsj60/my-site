@@ -1,28 +1,12 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import React from 'react';
 import DesktopArticleNav from './DesktopArticleNav.jsx';
 import Article from './Article.jsx';
 
-class Journalism extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <main id="journalism" className="">
-        <DesktopArticleNav
-          data={this.props.data}
-          localState={this.props.localState}
-          articleIndex={this.props.articleIndex}
-        />
-        <Article
-          data={this.props.data}
-          articleIndex={this.props.articleIndex}
-        />
-      </main>
-    );
-  }
+export default function Journalism(props) {
+  return (
+    <main id="journalism" className="">
+      <DesktopArticleNav {...props} />
+      <Article {...props} />
+    </main>
+  );
 }
-
-export default withRouter(Journalism);

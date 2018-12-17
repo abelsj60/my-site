@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+
 import Home from './Home.jsx';
-import StoryLoader from './StoryLoader.jsx';
-import ProjectLoader from './ProjectLoader.jsx';
-import JournalismLoader from './JournalismLoader.jsx';
+import OneLoader from './OneLoader.jsx';
 import About from './About.jsx';
 import Menu from './Menu.jsx';
 import Reverie from './Reverie.jsx';
@@ -11,6 +10,8 @@ import RestateRoute from './RestateRoute.jsx';
 import NotFound from './NotFound.jsx';
 import Location from './custom/Location';
 import EventHandling from './custom/EventHandling.js';
+import Referrer from './custom/Referrer.js';
+
 import bodies from './data/bodies.md';
 
 export default class Body extends Component {
@@ -24,57 +25,30 @@ export default class Body extends Component {
      * between sections or from section-to-menu.
      */
 
-    const path = this.props.location.pathname;
-    const referrer = path.split('/')[1];
-
-    let pathToMatch;
-
-    switch (referrer) {
-      case 'chapter':
-        pathToMatch = '/chapter/:title?';
-        break;
-      case 'projects':
-        pathToMatch = '/projects/:projectName?/:projectThumbnail?';
-        break;
-      case 'journalism':
-        pathToMatch = '/journalism/:publication?/:headline?';
-        break;
-      default:
-        console.log('BodyConstructor: Keep calm, carry on');
-    }
-
-    /** Return state */
-
-    const location = new Location(pathToMatch, props);
-    const lParams = location.params;
+    const r = new Referrer(props);
+    const l = new Location(r.pathToMatch, props);
 
     this.state = {
-      indexForChapterData: lParams.toIndex('title') || 0,
-      indexForProjectData: lParams.toIndex('projectName') || 0,
-      indexForProjectPictures: lParams.toIndex('projectThumbnail') || 0,
-      indexForPublicationData: lParams.toIndex('publication') || 0,
+      indexForChapterData: l.params.toIndex('title') || 0,
+      indexForProjectData: l.params.toIndex('projectName') || 0,
+      indexForProjectPictures: l.params.toIndex('projectThumbnail') || 0,
+      indexForPublicationData: l.params.toIndex('publication') || 0,
       indexForArticleData:
-        lParams.toIndex('headline') || lParams.defaultHeadline || 0
+        l.params.toIndex('headline') || l.params.defaultHeadline || 0
     };
 
     console.log('---BODY---');
   }
 
-  get bodyTypes() {
+  getBodyToRender(name) {
     return [
       { name: 'Home', body: Home },
-      { name: 'StoryLoader', body: StoryLoader },
-      { name: 'ProjectLoader', body: ProjectLoader },
-      { name: 'JournalismLoader', body: JournalismLoader },
+      { name: 'OneLoader', body: OneLoader },
       { name: 'About', body: About },
       { name: 'Menu', body: Menu },
       { name: 'Reverie', body: Reverie },
       { name: 'RestateRoute', body: RestateRoute }
-    ];
-  }
-
-  getBodyToRender(name) {
-    return this.bodyTypes.filter(body => name === body.name)[0].body;
+    ].filter(body => name === body.name)[0].body;
   }
 
   render() {
@@ -83,24 +57,24 @@ export default class Body extends Component {
 
     return (
       <Switch>
-        {bodies.attributes.routes.map(body => {
+        {bodies.attributes.routes.map((body, index) => {
           const BodyToRender = this.getBodyToRender(body.component);
 
           return (
             <Route
-              key={body.name}
+              key={index}
               path={body.route}
               exact={body.route === body.link}
-              render={props => (
-                <BodyToRender
-                  {...props}
-                  localState={this.state}
-                  state={this.props.state}
-                  setMagicScale={this.props.setMagicScale}
-                  setMagicOpacity={this.props.setMagicOpacity}
-                  boundHandleClickForBody={boundHandleClickForBody}
-                />
-              )}
+              render={props => {
+                return (
+                  <BodyToRender
+                    {...props}
+                    localState={this.state}
+                    state={this.props.state}
+                    boundHandleClickForBody={boundHandleClickForBody}
+                  />
+                );
+              }}
             />
           );
         })}

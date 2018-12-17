@@ -40,33 +40,30 @@ export default class JournalismLoader extends Component {
       // ? Can this just be a falsy check?
       if (typeof newDataIndex === 'number' && typeof newPubIndex === 'number') {
         this.props.boundHandleClickForBody(newDataIndex, newPubIndex);
-        // this.props.updateReturnState(newDataIndex, newPublicationIndex);
       }
     }
   }
 
   render() {
-    const articleIndex = this.props.localState.indexForArticleData;
+    const { indexForArticleData } = this.props.localState;
+    const { needsRedirect, isNotFound } = this.state;
+    const text =
+      'Staff and freelance reporting for Forbes.com, Mergermarket, Slate and others';
 
-    return this.state.needsRedirect ? (
+    return needsRedirect ? (
       <Redirect to={{ pathname: '/i', state: 'journalism' }} />
-    ) : this.state.isNotFound ? (
+    ) : isNotFound ? (
       <Redirect to="/not-found" />
     ) : (
       <Switch>
         <Route
           path="/journalism/menu"
           render={() => (
-            <Menu
-              section="journalism"
-              link="/journalism"
-              text="Staff and freelance reporting for Forbes.com, Mergermarket, Slate and
-              others"
-            >
+            <Menu section="journalism" link="/journalism" text={text}>
               <ArticleNav
+                {...this.props}
                 data={articleData}
                 section="journalism"
-                articleIndex={articleIndex}
               />
             </Menu>
           )}
@@ -75,11 +72,7 @@ export default class JournalismLoader extends Component {
         <Route
           path="/journalism/:publication/:headline"
           render={() => (
-            <Journalism
-              data={articleData}
-              articleIndex={articleIndex}
-              text="Staff and freelance reporting for Forbes.com, Mergermarket, Slate and others"
-            />
+            <Journalism {...this.props} text={text} data={articleData} />
           )}
         />
       </Switch>

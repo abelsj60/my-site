@@ -10,7 +10,7 @@ export default class StoryLoader extends Component {
   constructor(props) {
     super(props);
 
-    const pathToMatch = '/chapter/:title';
+    const pathToMatch = '/story/:chapter/:title';
     const location = new Location(pathToMatch, props);
 
     this.state = {
@@ -44,38 +44,36 @@ export default class StoryLoader extends Component {
 
       if (typeof newChapterIndex === 'number') {
         this.props.boundHandleClickForBody(newChapterIndex);
-        // this.props.updateReturnState(newChapterIndex);
       }
     }
   }
 
   render() {
-    const index = this.props.localState.indexForChapterData;
-    return this.state.needsRedirect ? (
-      <Redirect to={{ pathname: '/i', state: 'chapter' }} />
-    ) : this.state.isNotFound ? (
+    const { needsRedirect, isNotFound } = this.state;
+
+    return needsRedirect ? (
+      <Redirect to={{ pathname: '/i', state: 'story' }} />
+    ) : isNotFound ? (
       <Redirect to="/not-found" />
     ) : (
       <Switch>
         <Route
-          path="/chapter/menu"
+          path="/story/menu"
           render={() => (
-            <Menu section="story" link="/chapter" text="The story so far">
+            <Menu section="story" link="/story" text="The story so far">
               <ChapterNav
+                {...this.props}
                 isMenu={true}
                 data={storyData}
                 section="chapter"
-                chapterIndex={index}
               />
             </Menu>
           )}
         />
 
         <Route
-          path="/chapter/:title"
-          render={({ match }) => (
-            <TheStory match={match} data={storyData} {...this.props} />
-          )}
+          path="/story/:chapter/:title"
+          render={() => <TheStory {...this.props} data={storyData} />}
         />
       </Switch>
     );

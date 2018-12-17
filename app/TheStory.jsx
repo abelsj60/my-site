@@ -1,34 +1,35 @@
 import React from 'react';
 import Chapter from './Chapter.jsx';
 import ChapterNav from './ChapterNav.jsx';
-import { normalize } from './helpers/utils.js';
+import Referrer from './custom/Referrer.js';
+import Location from './custom/Location.js';
 
 export default function TheStory(props) {
-  const data = props.data;
-  const chapter = data.find(
-    c => normalize(c.attributes.title) === props.match.params.title
-  );
-  const chapterIndex = data.findIndex(
-    c => normalize(c.attributes.title) === props.match.params.title
-  );
-  const isMenu = props.match.url.includes('menu');
+  const r = new Referrer(props);
+  const location = new Location(r.pathToMatch, props);
+  const { data } = props;
+  const { indexForChapterData } = props.localState;
+  const { showStory } = props.state;
+  const { isMenu } = location.params;
+  const chapter = data[indexForChapterData];
+  const { image } = chapter.attributes;
 
   return (
     <main id="the-story">
       <section
         id="chapter"
-        className={`left ${props.state.showStory ? 'active' : 'inactive'}`}
+        className={`left ${showStory ? 'active' : 'inactive'}`}
       >
         <ChapterNav
+          {...props}
           data={data}
           isMenu={isMenu}
           section={'chapter'}
-          chapterIndex={chapterIndex}
         />
         <Chapter chapterData={chapter} />
       </section>
       <section id="illustration" className="right">
-        <img src={chapter.attributes.image} alt="fantasy illustration" />
+        <img src={image} alt="fantasy illustration" />
       </section>
     </main>
   );
