@@ -6,7 +6,7 @@ import Location from './custom/Location.js';
 import Referrer from './custom/Referrer.js';
 import Data from './custom/Data.js';
 
-export default class OneLoader extends Component {
+export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
@@ -35,12 +35,7 @@ export default class OneLoader extends Component {
       const indexOne = location.params.toIndex(paramOne);
       const indexTwo = location.params.toIndex(paramTwo);
 
-      // TODO Handling undefined chapter needs to better, w/o special checks
-
-      if (
-        (paramOne === 'chapter' || typeof indexOne === 'number') &&
-        typeof indexTwo === 'number'
-      ) {
+      if (indexOne !== -1 && indexTwo !== -1) {
         this.props.boundHandleClickForBody(indexOne, indexTwo);
       }
     }
@@ -50,7 +45,7 @@ export default class OneLoader extends Component {
     const { needsRedirect, isNotFound } = this.state;
 
     const r = new Referrer(this.props);
-    const dataForLoader = new Data(r.location, this.props);
+    const loadData = new Data(r.location, this.props);
 
     return needsRedirect ? (
       <Redirect to={{ pathname: '/i', state: `${r.location}` }} />
@@ -64,19 +59,18 @@ export default class OneLoader extends Component {
             return (
               <Menu
                 link={`/${r.location}`}
-                text={dataForLoader.text}
+                text={loadData.text}
                 userLocation={`${r.location}`}
               >
-                {dataForLoader.menuNavigator}
+                {loadData.menuNavigator}
               </Menu>
             );
           }}
         />
-
         <Route
           path={`${r.path}`}
           render={() => {
-            return dataForLoader.component;
+            return loadData.component;
           }}
         />
       </Switch>

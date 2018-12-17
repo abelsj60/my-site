@@ -34,6 +34,6 @@ export default class JournalismParams extends Params {
       });
     }
 
-    return;
+    return -1;
   }
 }

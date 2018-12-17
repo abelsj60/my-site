@@ -90,7 +90,7 @@ export default class Params {
   }
 
   toIndex(paramName) {
-    if (paramName !== 'chapter' && this[paramName]) {
+    if (this[paramName]) {
       const isNumber = parseInt(this[paramName]);
 
       if (!isNumber) {
@@ -98,6 +98,9 @@ export default class Params {
 
         if (paramName === 'projectName') {
           paramIs = 'name';
+        } else if (paramName === 'chapter') {
+          console.log('here');
+          return 0;
         } else {
           paramIs = paramName;
         }
@@ -111,8 +114,6 @@ export default class Params {
       }
     }
 
-    // TODO If I return -1, an infinite loop runs when going to menu. Why?
-
-    return;
+    return -1;
   }
 }

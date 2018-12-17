@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from './Home.jsx';
-import OneLoader from './OneLoader.jsx';
+import ContentLoader from './ContentLoader.jsx';
 import About from './About.jsx';
-import Menu from './Menu.jsx';
 import Reverie from './Reverie.jsx';
 import RestateRoute from './RestateRoute.jsx';
-import NotFound from './NotFound.jsx';
 import Location from './custom/Location';
+import NotFound from './NotFound.jsx';
+
 import EventHandling from './custom/EventHandling.js';
 import Referrer from './custom/Referrer.js';
-
-import bodies from './data/bodies.md';
 
 export default class Body extends Component {
   constructor(props) {
@@ -29,26 +27,30 @@ export default class Body extends Component {
     const l = new Location(r.pathToMatch, props);
 
     this.state = {
-      indexForChapterData: l.params.toIndex('title') || 0,
-      indexForProjectData: l.params.toIndex('projectName') || 0,
-      indexForProjectPictures: l.params.toIndex('projectThumbnail') || 0,
-      indexForPublicationData: l.params.toIndex('publication') || 0,
+      indexForChapterData:
+        l.params.toIndex('title') !== -1 ? l.params.toIndex('title') : 0,
+      indexForProjectData:
+        l.params.toIndex('projectName') !== -1
+          ? l.params.toIndex('projectName')
+          : 0,
+      indexForProjectPictures:
+        l.params.toIndex('projectThumbnail') !== -1
+          ? l.params.toIndex('projectThumbnail')
+          : 0,
+      indexForPublicationData:
+        l.params.toIndex('publication') !== -1
+          ? l.params.toIndex('publication')
+          : 0,
       indexForArticleData:
-        l.params.toIndex('headline') || l.params.defaultHeadline || 0
+        l.params.toIndex('headline') !== -1
+          ? l.params.toIndex('headline')
+          : l.params.defaultHeadline !== undefined &&
+            l.params.defaultHeadline !== -1
+            ? l.params.defaultHeadline
+            : 0
     };
 
     console.log('---BODY---');
-  }
-
-  getBodyToRender(name) {
-    return [
-      { name: 'Home', body: Home },
-      { name: 'OneLoader', body: OneLoader },
-      { name: 'About', body: About },
-      { name: 'Menu', body: Menu },
-      { name: 'Reverie', body: Reverie },
-      { name: 'RestateRoute', body: RestateRoute }
-    ].filter(body => name === body.name)[0].body;
   }
 
   render() {
@@ -57,27 +59,70 @@ export default class Body extends Component {
 
     return (
       <Switch>
-        {bodies.attributes.routes.map((body, index) => {
-          const BodyToRender = this.getBodyToRender(body.component);
-
-          return (
-            <Route
-              key={index}
-              path={body.route}
-              exact={body.route === body.link}
-              render={props => {
-                return (
-                  <BodyToRender
-                    {...props}
-                    localState={this.state}
-                    state={this.props.state}
-                    boundHandleClickForBody={boundHandleClickForBody}
-                  />
-                );
-              }}
-            />
-          );
-        })}
+        <Route
+          exact
+          path="/"
+          render={props => {
+            return <Home {...props} {...this.props} />;
+          }}
+        />
+        <Route
+          path="/story/:chapter?/:title?"
+          render={props => {
+            return (
+              <ContentLoader
+                {...props}
+                localState={this.state}
+                state={this.props.state}
+                boundHandleClickForBody={boundHandleClickForBody}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/projects/:projectName?/:projectThumbnail?"
+          render={props => {
+            return (
+              <ContentLoader
+                {...props}
+                localState={this.state}
+                state={this.props.state}
+                boundHandleClickForBody={boundHandleClickForBody}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/journalism/:publication?/:headline?"
+          render={props => {
+            return (
+              <ContentLoader
+                {...props}
+                localState={this.state}
+                state={this.props.state}
+                boundHandleClickForBody={boundHandleClickForBody}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/reverie"
+          render={() => {
+            return <Reverie />;
+          }}
+        />
+        <Route
+          path="/about"
+          render={() => {
+            return <About />;
+          }}
+        />
+        <Route
+          path="/i"
+          render={props => {
+            return <RestateRoute {...props} localState={this.state} />;
+          }}
+        />
         <Route component={NotFound} />
       </Switch>
     );
