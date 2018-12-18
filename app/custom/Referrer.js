@@ -5,11 +5,11 @@ export default class Referrer {
     }
 
     this.location = props.location.pathname.split('/')[1];
-    this.pathToMatch = this._getPathToMatch();
-    this.path = this._getExactPath();
+    this.pathToMatch = this._loadPathToMatch();
+    this.path = this._loadExactPath();
   }
 
-  _getPathToMatch() {
+  _loadPathToMatch() {
     switch (this.location) {
       case 'story':
         return '/story/:chapter?/:title?';
@@ -18,13 +18,13 @@ export default class Referrer {
       case 'journalism':
         return '/journalism/:publication?/:headline?';
       default:
-        console.log('Referrer.getPathToMatch(): Keep calm, carry on');
+        console.log('Referrer.loadPathToMatch(): Keep calm, carry on');
     }
 
     return;
   }
 
-  _getExactPath() {
+  _loadExactPath() {
     switch (this.location) {
       case 'story':
         return '/story/:chapter/:title';
@@ -33,7 +33,7 @@ export default class Referrer {
       case 'journalism':
         return '/journalism/:publication/:headline';
       default:
-        console.log('Referrer.getExactPath(): Keep calm, carry on');
+        console.log('Referrer.loadExactPath(): Keep calm, carry on');
     }
 
     return;

@@ -13,16 +13,18 @@ export default function ChapterNav(props) {
     <section id={elementId} className={className}>
       <Mapper
         mapData={data}
-        render={(chapter, idx) => (
-          <Link
-            key={idx}
-            className={indexForChapterData === idx ? 'active' : 'inactive'}
-            to={`/story/chapter/${normalize(data[idx].attributes.title)}`}
-          >
-            {isMenu && <h1 id="story-chapter">Chapter {idx + 1}</h1>}
-            <p>{!isMenu ? idx + 1 : chapter.attributes.title}</p>
-          </Link>
-        )}
+        render={(chapter, idx) => {
+          return (
+            <Link
+              key={idx}
+              className={indexForChapterData === idx ? 'active' : 'inactive'}
+              to={`/story/chapter/${normalize(data[idx].attributes.title)}`}
+            >
+              {isMenu && <h1 id="story-chapter">Chapter {idx + 1}</h1>}
+              <p>{!isMenu ? idx + 1 : chapter.attributes.title}</p>
+            </Link>
+          );
+        }}
       />
     </section>
   );

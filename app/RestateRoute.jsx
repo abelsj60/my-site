@@ -23,7 +23,6 @@ export default function RestateRoute(props) {
 
       return <Redirect to={`/${referrer}/chapter/${normalizedTitle}`} />;
     case 'projects':
-      console.log('Exist:', projectData[localState.indexForProjectData]);
       const projectName =
         projectData[localState.indexForProjectData].attributes.name;
       const normalizedProjectName = normalize(projectName);

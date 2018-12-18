@@ -14,7 +14,7 @@ export default class ButtonGroup {
     this._handleClick = props.boundHandleClickForApp;
     this._propsBackup = props;
 
-    this.buttons = this._getButtonGroup();
+    this.buttons = this._loadButtonGroup();
   }
 
   get _buttonData() {
@@ -67,7 +67,7 @@ export default class ButtonGroup {
     ];
   }
 
-  _getButtonGroup() {
+  _loadButtonGroup() {
     let buttonGroup;
 
     switch (this._referrer) {

@@ -14,18 +14,18 @@ export default class Data {
     this._props = props;
 
     this.section = section;
-    this.text = this._getText();
-    this.component = this._getComponent();
-    this.contentData = this._getContentData();
-    this.menuNavigator = this._getMenuNavigator();
+    this.text = this._loadText();
+    this.component = this._loadComponent();
+    this.contentData = this._loadContentData();
+    this.menuNavigator = this._loadMenuNavigator();
   }
 
-  _getContentData() {
+  _loadContentData() {
     const c = new Content(this.section);
     return c.contentData;
   }
 
-  _getText() {
+  _loadText() {
     const section = this.section;
 
     switch (section) {
@@ -40,21 +40,21 @@ export default class Data {
     }
   }
 
-  _getComponent() {
+  _loadComponent() {
     const props = this._props;
     const section = this.section;
 
     switch (section) {
       case 'story':
-        return <TheStory {...props} data={this._getContentData()} />;
+        return <TheStory {...props} data={this._loadContentData()} />;
       case 'projects':
-        return <Projects {...props} data={this._getContentData()} />;
+        return <Projects {...props} data={this._loadContentData()} />;
       case 'journalism':
         return (
           <Journalism
             {...props}
-            text={this._getText()}
-            data={this._getContentData()}
+            text={this._loadText()}
+            data={this._loadContentData()}
           />
         );
       default:
@@ -62,7 +62,7 @@ export default class Data {
     }
   }
 
-  _getMenuNavigator() {
+  _loadMenuNavigator() {
     const props = this._props;
     const section = this.section;
 
@@ -73,7 +73,7 @@ export default class Data {
             {...props}
             isMenu={true}
             section={section}
-            data={this._getContentData()}
+            data={this._loadContentData()}
           />
         );
       case 'projects':
@@ -82,7 +82,7 @@ export default class Data {
             {...props}
             section={section}
             isProjectMenu={true}
-            data={this._getContentData()}
+            data={this._loadContentData()}
           />
         );
       case 'journalism':
@@ -90,7 +90,7 @@ export default class Data {
           <ArticleNav
             {...props}
             section={section}
-            data={this._getContentData()}
+            data={this._loadContentData()}
           />
         );
       default:

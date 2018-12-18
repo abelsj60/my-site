@@ -28,12 +28,10 @@ export default class Body extends Component {
 
     // ! Needs heavy review!
 
-    console.log('p is:', l.params.paramNames);
-
     this.state = {
       indexForChapterData:
-        r.location === 'story' && l.params.oneToIndex() !== -1
-          ? l.params.oneToIndex()
+        r.location === 'story' && l.params.twoToIndex() !== -1
+          ? l.params.twoToIndex()
           : 0,
       indexForProjectData:
         r.location === 'projects' && l.params.oneToIndex() !== -1
@@ -55,8 +53,6 @@ export default class Body extends Component {
             ? l.params.firstArticleToMatchPublication
             : 0
     };
-
-    console.log('Body state:', this.state);
 
     console.log('---BODY---');
   }

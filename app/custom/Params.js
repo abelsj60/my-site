@@ -107,8 +107,6 @@ export default class Params {
   }
 
   oneToIndex() {
-    console.log(this.paramNames[0]);
-
     if (this.paramNames[0] === 'fakeData') {
       return -1;
     }
@@ -117,8 +115,6 @@ export default class Params {
   }
 
   twoToIndex() {
-    console.log(this.paramNames[1]);
-
     if (this.paramNames[1] === 'fakeData') {
       return -1;
     }

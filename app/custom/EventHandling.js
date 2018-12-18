@@ -74,8 +74,6 @@ export default class EventHandling {
           console.log('_handleClickForBodyComponent: Keep calm, carry on');
       }
 
-      console.log('stateToUpdate:', stateToUpdate);
-
       return this.setState(stateToUpdate);
     };
   }
