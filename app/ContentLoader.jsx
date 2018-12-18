@@ -30,13 +30,11 @@ export default class ContentLoader extends Component {
         this.setState({ needsRedirect: startRedirect });
       }
     } else if (location.isSwappingContent) {
-      const paramOne = location.params.paramNames[0];
-      const paramTwo = location.params.paramNames[1];
-      const indexOne = location.params.toIndex(paramOne);
-      const indexTwo = location.params.toIndex(paramTwo);
+      const paramOneAsIndex = location.params.oneToIndex();
+      const paramTwoAsIndex = location.params.twoToIndex();
 
-      if (indexOne !== -1 && indexTwo !== -1) {
-        this.props.boundHandleClickForBody(indexOne, indexTwo);
+      if (paramOneAsIndex !== -1 && paramTwoAsIndex !== -1) {
+        this.props.boundHandleClickForBody(paramOneAsIndex, paramTwoAsIndex);
       }
     }
   }

@@ -1,14 +1,15 @@
 export default class Referrer {
   constructor(props) {
-    // TODO Add cases for rest of site, can't use everywhere now...
-    // TODO Currently tied to props.location...make more universal?
+    if (props.location === undefined) {
+      throw 'The Location class requires props.location.';
+    }
 
     this.location = props.location.pathname.split('/')[1];
-    this.pathToMatch = this.getPathToMatch();
-    this.path = this.getPath();
+    this.pathToMatch = this._getPathToMatch();
+    this.path = this._getExactPath();
   }
 
-  getPathToMatch() {
+  _getPathToMatch() {
     switch (this.location) {
       case 'story':
         return '/story/:chapter?/:title?';
@@ -17,13 +18,13 @@ export default class Referrer {
       case 'journalism':
         return '/journalism/:publication?/:headline?';
       default:
-        console.log('Referrer: Keep calm, carry on');
+        console.log('Referrer.getPathToMatch(): Keep calm, carry on');
     }
 
     return;
   }
 
-  getPath() {
+  _getExactPath() {
     switch (this.location) {
       case 'story':
         return '/story/:chapter/:title';
@@ -31,17 +32,8 @@ export default class Referrer {
         return '/projects/:projectName/:projectThumbnail';
       case 'journalism':
         return '/journalism/:publication/:headline';
-      case 'about':
-        return '/about';
-      case 'reverie':
-        return '/reverie';
-      case 'i':
-        return '/i';
-      case '':
-        return '/';
-
       default:
-        console.log('Referrer: Keep calm, carry on');
+        console.log('Referrer.getExactPath(): Keep calm, carry on');
     }
 
     return;

@@ -3,14 +3,14 @@ import { Switch, Route } from 'react-router-dom';
 
 import Home from './Home.jsx';
 import ContentLoader from './ContentLoader.jsx';
-import About from './About.jsx';
 import Reverie from './Reverie.jsx';
+import About from './About.jsx';
 import RestateRoute from './RestateRoute.jsx';
-import Location from './custom/Location';
 import NotFound from './NotFound.jsx';
 
-import EventHandling from './custom/EventHandling.js';
+import Location from './custom/Location';
 import Referrer from './custom/Referrer.js';
+import EventHandling from './custom/EventHandling.js';
 
 export default class Body extends Component {
   constructor(props) {
@@ -26,29 +26,37 @@ export default class Body extends Component {
     const r = new Referrer(props);
     const l = new Location(r.pathToMatch, props);
 
+    // ! Needs heavy review!
+
+    console.log('p is:', l.params.paramNames);
+
     this.state = {
       indexForChapterData:
-        l.params.toIndex('title') !== -1 ? l.params.toIndex('title') : 0,
+        r.location === 'story' && l.params.oneToIndex() !== -1
+          ? l.params.oneToIndex()
+          : 0,
       indexForProjectData:
-        l.params.toIndex('projectName') !== -1
-          ? l.params.toIndex('projectName')
+        r.location === 'projects' && l.params.oneToIndex() !== -1
+          ? l.params.oneToIndex()
           : 0,
       indexForProjectPictures:
-        l.params.toIndex('projectThumbnail') !== -1
-          ? l.params.toIndex('projectThumbnail')
+        r.location === 'projects' && l.params.twoToIndex() !== -1
+          ? l.params.twoToIndex()
           : 0,
-      indexForPublicationData:
-        l.params.toIndex('publication') !== -1
-          ? l.params.toIndex('publication')
+      indexForPublication:
+        r.location === 'journalism' && l.params.oneToIndex() !== -1
+          ? l.params.oneToIndex()
           : 0,
       indexForArticleData:
-        l.params.toIndex('headline') !== -1
-          ? l.params.toIndex('headline')
-          : l.params.defaultHeadline !== undefined &&
-            l.params.defaultHeadline !== -1
-            ? l.params.defaultHeadline
+        r.location === 'journalism' && l.params.twoToIndex() !== -1
+          ? l.params.twoToIndex()
+          : r.location === 'journalism' &&
+            l.params.firstArticleToMatchPublication !== -1
+            ? l.params.firstArticleToMatchPublication
             : 0
     };
+
+    console.log('Body state:', this.state);
 
     console.log('---BODY---');
   }

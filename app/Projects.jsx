@@ -1,14 +1,21 @@
 import React from 'react';
+
 import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
 import MultiProjectNav from './MultiProjectNav.jsx';
 
+import Referrer from './custom/Referrer.js';
+import Location from './custom/Location.js';
+
 export default function Projects(props) {
   const { localState, data, projectIndex } = props;
-  const { indexForProjectData } = props.localState;
+
+  const r = new Referrer(props);
+  const l = new Location(r.pathToMatch, props);
+
+  const indexForProjectData = l.params.oneToIndex();
   const project = data[indexForProjectData];
-  const { name } = project.attributes.details;
 
   return (
     <main id="my-projects" className="">
@@ -26,7 +33,7 @@ export default function Projects(props) {
         </div>
       </section>
       <section id="active-project" className="right">
-        <h1>{name}</h1>
+        <h1>{project.attributes.details.name}</h1>
         <section id="project-container">
           <ProjectDescription project={project} />
           <section id="project-images">

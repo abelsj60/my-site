@@ -21,7 +21,7 @@ export default class JournalismParams extends Params {
     return this.validateParam(this._two, 'headline', 'text');
   }
 
-  get defaultHeadline() {
+  get firstArticleToMatchPublication() {
     if (this.publication && this._two === undefined) {
       const firstHedToMatchPublication = this._searchData.find(a => {
         return (

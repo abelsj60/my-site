@@ -1,18 +1,20 @@
 import React from 'react';
+
 import Chapter from './Chapter.jsx';
 import ChapterNav from './ChapterNav.jsx';
+
 import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
 export default function TheStory(props) {
-  const r = new Referrer(props);
-  const location = new Location(r.pathToMatch, props);
   const { data } = props;
-  const { indexForChapterData } = props.localState;
   const { showStory } = props.state;
-  const { isMenu } = location.params;
+
+  const r = new Referrer(props);
+  const l = new Location(r.pathToMatch, props);
+
+  const indexForChapterData = l.params.twoToIndex();
   const chapter = data[indexForChapterData];
-  const { image } = chapter.attributes;
 
   return (
     <main id="the-story">
@@ -23,13 +25,13 @@ export default function TheStory(props) {
         <ChapterNav
           {...props}
           data={data}
-          isMenu={isMenu}
+          isMenu={l.params.isMenu}
           section={'chapter'}
         />
         <Chapter chapterData={chapter} />
       </section>
       <section id="illustration" className="right">
-        <img src={image} alt="fantasy illustration" />
+        <img src={chapter.attributes.image} alt="fantasy illustration" />
       </section>
     </main>
   );

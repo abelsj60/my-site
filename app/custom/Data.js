@@ -1,22 +1,19 @@
 import React from 'react';
 
-import storyData from '../data/the-story/index.js';
-import projectData from '../data/projects/index.js';
-import articleData from '../data/clips/index.js';
-
 import TheStory from '../TheStory.jsx';
 import Projects from '../Projects.jsx';
 import Journalism from '../Journalism.jsx';
-
 import ArticleNav from '../ArticleNav.jsx';
 import ChapterNav from '../ChapterNav.jsx';
 import MultiProjectNav from '../MultiProjectNav.jsx';
 
+import Content from './Content.js';
+
 export default class Data {
-  constructor(type, props) {
+  constructor(section, props) {
     this._props = props;
 
-    this.type = type;
+    this.section = section;
     this.text = this._getText();
     this.component = this._getComponent();
     this.contentData = this._getContentData();
@@ -24,24 +21,14 @@ export default class Data {
   }
 
   _getContentData() {
-    const type = this.type;
-
-    switch (type) {
-      case 'story':
-        return storyData;
-      case 'projects':
-        return projectData;
-      case 'journalism':
-        return articleData;
-      default:
-        return undefined;
-    }
+    const c = new Content(this.section);
+    return c.contentData;
   }
 
   _getText() {
-    const type = this.type;
+    const section = this.section;
 
-    switch (type) {
+    switch (section) {
       case 'story':
         return;
       case 'projects':
@@ -55,9 +42,9 @@ export default class Data {
 
   _getComponent() {
     const props = this._props;
-    const type = this.type;
+    const section = this.section;
 
-    switch (type) {
+    switch (section) {
       case 'story':
         return <TheStory {...props} data={this._getContentData()} />;
       case 'projects':
@@ -77,15 +64,15 @@ export default class Data {
 
   _getMenuNavigator() {
     const props = this._props;
-    const type = this.type;
+    const section = this.section;
 
-    switch (type) {
+    switch (section) {
       case 'story':
         return (
           <ChapterNav
             {...props}
             isMenu={true}
-            section={type}
+            section={section}
             data={this._getContentData()}
           />
         );
@@ -93,14 +80,18 @@ export default class Data {
         return (
           <MultiProjectNav
             {...props}
-            section={type}
+            section={section}
             isProjectMenu={true}
             data={this._getContentData()}
           />
         );
       case 'journalism':
         return (
-          <ArticleNav {...props} section={type} data={this._getContentData()} />
+          <ArticleNav
+            {...props}
+            section={section}
+            data={this._getContentData()}
+          />
         );
       default:
         return undefined;

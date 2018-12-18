@@ -1,11 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { normalize } from './helpers/utils.js';
+
 import storyData from './data/the-story/index.js';
 import projectData from './data/projects/index.js';
 import articleData from './data/clips/index.js';
 
-/** Redirect users w/body.returnState */
+/** Redirect users via returnState on Body */
 
 export default function RestateRoute(props) {
   const { localState } = props;
@@ -22,6 +23,7 @@ export default function RestateRoute(props) {
 
       return <Redirect to={`/${referrer}/chapter/${normalizedTitle}`} />;
     case 'projects':
+      console.log('Exist:', projectData[localState.indexForProjectData]);
       const projectName =
         projectData[localState.indexForProjectData].attributes.name;
       const normalizedProjectName = normalize(projectName);
@@ -35,9 +37,9 @@ export default function RestateRoute(props) {
       );
     case 'journalism':
       const publication =
-        articleData[localState.indexForPublicationData].attributes.publication;
+        articleData[localState.indexForPublication].attributes.publication;
       const headline =
-        articleData[localState.indexForPublicationData].attributes.headline;
+        articleData[localState.indexForPublication].attributes.headline;
       const normalizedPublication = normalize(publication);
       const normalizedHeadline = normalize(headline);
 

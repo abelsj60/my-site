@@ -1,6 +1,4 @@
-import projectData from '../data/projects/index.js';
-import storyData from '../data/the-story/index.js';
-import articleData from '../data/clips/index.js';
+import Content from './Content.js';
 
 export default class Params {
   constructor(type, params) {
@@ -11,23 +9,15 @@ export default class Params {
     this._originalData = params;
 
     this.type = type;
+    this.paramNames = ['fakeData', 'fakeData'];
     this.undefined = this._paramKeys.filter(p => {
       return params[p] === undefined;
     });
   }
 
   get _searchData() {
-    switch (this.type) {
-      case 'story':
-        return storyData;
-      case 'projects':
-        return projectData;
-      case 'journalism':
-        return articleData;
-      default:
-        console.log('Params.validateParam: Keep calm, carry on');
-        break;
-    }
+    const c = new Content(this.type);
+    return c.contentData;
   }
 
   _normalizeParam(param) {
@@ -99,7 +89,6 @@ export default class Params {
         if (paramName === 'projectName') {
           paramIs = 'name';
         } else if (paramName === 'chapter') {
-          console.log('here');
           return 0;
         } else {
           paramIs = paramName;
@@ -115,5 +104,25 @@ export default class Params {
     }
 
     return -1;
+  }
+
+  oneToIndex() {
+    console.log(this.paramNames[0]);
+
+    if (this.paramNames[0] === 'fakeData') {
+      return -1;
+    }
+
+    return this.toIndex(this.paramNames[0]);
+  }
+
+  twoToIndex() {
+    console.log(this.paramNames[1]);
+
+    if (this.paramNames[1] === 'fakeData') {
+      return -1;
+    }
+
+    return this.toIndex(this.paramNames[1]);
   }
 }

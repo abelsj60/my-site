@@ -1,10 +1,11 @@
 export default class EventHandling {
   constructor(component, outsideThis) {
-    const path = outsideThis.props.location.pathname;
-    const referrer = path.split('/')[1];
+    if (outsideThis.props.location === undefined) {
+      throw 'EventHandling requires external this to carry props.location.';
+    }
 
     this._component = component;
-    this._referrer = referrer;
+    this._referrer = outsideThis.props.location.pathname.split('/')[1];
 
     this.boundHandleClick = this._selectHandleClick(outsideThis);
   }
@@ -65,13 +66,15 @@ export default class EventHandling {
           break;
         case 'journalism':
           stateToUpdate = {
-            indexForPublicationData: propertyOne,
+            indexForPublication: propertyOne,
             indexForArticleData: propertyTwo
           };
           break;
         default:
           console.log('_handleClickForBodyComponent: Keep calm, carry on');
       }
+
+      console.log('stateToUpdate:', stateToUpdate);
 
       return this.setState(stateToUpdate);
     };
