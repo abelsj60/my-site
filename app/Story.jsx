@@ -6,7 +6,7 @@ import ChapterNav from './ChapterNav.jsx';
 import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
-export default function TheStory(props) {
+export default function Story(props) {
   const { data } = props;
   const { showStory } = props.state;
 

@@ -1,29 +1,22 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 
-class ProjectDescription extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  formatKeyForDisplay(name, data) {
-    const key = data.find(k => k === name);
-    return key[0].toUpperCase() + key.slice(1);
-  }
-
-  render() {
-    const project = this.props.project;
-    const projectKeys = Object.keys(this.props.project.attributes.details);
-
-    return (
-      <Fragment>
-        <p id="type">{project.attributes.details.type}</p>
-        <h2>{this.formatKeyForDisplay('contribution', projectKeys)}</h2>
-        <p>{project.attributes.details.contribution}</p>
-        <h2>{this.formatKeyForDisplay('description', projectKeys)}</h2>
-        <p>{project.attributes.details.description}</p>
-      </Fragment>
-    );
-  }
+function formatKeyForDisplay(name, data) {
+  const key = data.find(k => k === name);
+  return key[0].toUpperCase() + key.slice(1);
 }
 
-export default ProjectDescription;
+export default function ProjectDescription(props) {
+  const { details } = props.project.attributes;
+  const { type, contribution, description } = details;
+  const projectKeys = Object.keys(details);
+
+  return (
+    <Fragment>
+      <p id="type">{type}</p>
+      <h2>{formatKeyForDisplay('contribution', projectKeys)}</h2>
+      <p>{contribution}</p>
+      <h2>{formatKeyForDisplay('description', projectKeys)}</h2>
+      <p>{description}</p>
+    </Fragment>
+  );
+}

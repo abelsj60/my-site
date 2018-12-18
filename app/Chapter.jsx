@@ -1,24 +1,17 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import marked from 'marked';
 
-class Chapter extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function Chapter(props) {
+  const { title } = props.chapterData.attributes;
+  const { body } = props.chapterData;
 
-  render() {
-    return (
-      <Fragment>
-        <h1>{this.props.chapterData.attributes.title}</h1>
-        <section id="text">
-          {ReactHtmlParser(
-            marked(this.props.chapterData.body, { smartypants: true })
-          )}
-        </section>
-      </Fragment>
-    );
-  }
+  return (
+    <Fragment>
+      <h1>{title}</h1>
+      <section id="text">
+        {ReactHtmlParser(marked(body, { smartypants: true }))}
+      </section>
+    </Fragment>
+  );
 }
-
-export default Chapter;

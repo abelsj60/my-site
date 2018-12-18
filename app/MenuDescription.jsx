@@ -1,14 +1,6 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
 
-class MenuDescription extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return <h1 id="menu-description">{this.props.text}</h1>;
-  }
+export default function MenuDescription(props) {
+  const { text } = props;
+  return <h1 id="menu-description">{text}</h1>;
 }
-
-export default withRouter(MenuDescription);

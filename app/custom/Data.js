@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TheStory from '../TheStory.jsx';
+import Story from '../Story.jsx';
 import Projects from '../Projects.jsx';
-import Journalism from '../Journalism.jsx';
+import Article from '../Article.jsx';
 import ArticleNav from '../ArticleNav.jsx';
 import ChapterNav from '../ChapterNav.jsx';
 import MultiProjectNav from '../MultiProjectNav.jsx';
@@ -46,12 +46,12 @@ export default class Data {
 
     switch (section) {
       case 'story':
-        return <TheStory {...props} data={this._loadContentData()} />;
+        return <Story {...props} data={this._loadContentData()} />;
       case 'projects':
         return <Projects {...props} data={this._loadContentData()} />;
       case 'journalism':
         return (
-          <Journalism
+          <Article
             {...props}
             text={this._loadText()}
             data={this._loadContentData()}

@@ -26,8 +26,6 @@ export default class Body extends Component {
     const r = new Referrer(props);
     const l = new Location(r.pathToMatch, props);
 
-    // ! Needs heavy review!
-
     this.state = {
       indexForChapterData:
         r.location === 'story' && l.params.twoToIndex() !== -1

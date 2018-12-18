@@ -2,6 +2,7 @@ import React from 'react';
 import { splitPath } from './helpers/utils.js';
 
 export default function PageContainer(props) {
+  const { children } = props;
   const path = splitPath(props)[1];
 
   const pageCss = path === '' ? 'home' : 'inner';
@@ -9,7 +10,7 @@ export default function PageContainer(props) {
 
   return (
     <section id="page" className={pageCss + menuCss}>
-      {props.children}
+      {children}
     </section>
   );
 }
