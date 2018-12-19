@@ -28,8 +28,6 @@ export default class Body extends Component {
     const location = new Location(r.pathToMatch, props);
     const initialState = new InitialState(props, location);
 
-    // ! Doesn't work. 0 is falsy...
-
     this.state = {
       indexForChapterData: initialState.build('indexForChapterData'),
       indexForProjectData: initialState.build('indexForProjectData'),
@@ -37,8 +35,6 @@ export default class Body extends Component {
       indexForPublication: initialState.build('indexForPublication'),
       indexForArticleData: initialState.build('indexForArticleData')
     };
-
-    console.log('---BODY---');
   }
 
   render() {

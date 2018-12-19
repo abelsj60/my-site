@@ -9,23 +9,21 @@ import MultiProjectNav from '../MultiProjectNav.jsx';
 
 import Content from './Content.js';
 
-export default class Data {
+export default class ComponentData {
   constructor(type, props) {
     const c = new Content(type);
-    const contentData = c.getContentData();
 
+    this._type = type;
     this._props = props;
-
-    this.type = type;
-    this.contentData = contentData;
+    this._contentData = c.getContentData();
   }
 
   getText() {
-    const type = this.type;
+    const type = this._type;
 
     switch (type) {
       case 'story':
-        return;
+        return 'The story so far';
       case 'projects':
         return 'Technology projects for me, clients, and fun';
       case 'journalism':
@@ -35,20 +33,20 @@ export default class Data {
     }
   }
 
-  getComponent() {
+  getMainComponent() {
     const props = this._props;
-    const type = this.type;
+    const type = this._type;
 
     switch (type) {
       case 'story':
-        return <Story {...props} data={this.contentData} />;
+        return <Story {...props} data={this._contentData} />;
       case 'projects':
         return (
-          <Projects {...props} text={this.getText()} data={this.contentData} />
+          <Projects {...props} text={this.getText()} data={this._contentData} />
         );
       case 'journalism':
         return (
-          <Article {...props} text={this.getText()} data={this.contentData} />
+          <Article {...props} text={this.getText()} data={this._contentData} />
         );
       default:
         return undefined;
@@ -57,7 +55,7 @@ export default class Data {
 
   getMenuNavigator() {
     const props = this._props;
-    const type = this.type;
+    const type = this._type;
 
     switch (type) {
       case 'story':
@@ -66,7 +64,7 @@ export default class Data {
             {...props}
             isMenu={true}
             section={type}
-            data={this.contentData}
+            data={this._contentData}
           />
         );
       case 'projects':
@@ -75,11 +73,13 @@ export default class Data {
             {...props}
             section={type}
             isProjectMenu={true}
-            data={this.contentData}
+            data={this._contentData}
           />
         );
       case 'journalism':
-        return <ArticleNav {...props} section={type} data={this.contentData} />;
+        return (
+          <ArticleNav {...props} section={type} data={this._contentData} />
+        );
       default:
         return undefined;
     }

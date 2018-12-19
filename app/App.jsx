@@ -54,11 +54,7 @@ class App extends Component {
           element="section"
           className={`${pageCss} ${menuCss}`}
         >
-          <Header
-            {...this.props}
-            state={this.props.state}
-            scrollTop={this.scrollTop}
-          />
+          <Header {...this.props} scrollTop={this.scrollTop} />
           <hr id="header-separator" />
           <Body
             {...this.props}
