@@ -6,9 +6,24 @@ export default class Reload {
     const { state } = props.location;
 
     this._props = props;
+    this._referrer = state ? state.toLowerCase() : 'none';
 
-    this.referrer = state ? state.toLowerCase() : 'none';
     this.path = this._buildPath();
+  }
+
+  _buildPath() {
+    const section = this._referrer;
+
+    switch (section) {
+      case 'story':
+        return this._buildStoryPath(section);
+      case 'projects':
+        return this._buildProjectsPath(section);
+      case 'journalism':
+        return this._buildArticlePath(section);
+      default:
+        return '/';
+    }
   }
 
   _normalize(text) {
@@ -17,7 +32,7 @@ export default class Reload {
   }
 
   _loadContentData() {
-    const referrer = this.referrer;
+    const referrer = this._referrer;
     const c = new Content(referrer);
 
     return c.contentData;
@@ -51,20 +66,5 @@ export default class Reload {
     const normalizedHeadline = this._normalize(headline);
 
     return `/${section}/${normalizedPublication}/${normalizedHeadline}`;
-  }
-
-  _buildPath() {
-    const section = this.referrer;
-
-    switch (section) {
-      case 'story':
-        return this._buildStoryPath(section);
-      case 'projects':
-        return this._buildProjectsPath(section);
-      case 'journalism':
-        return this._buildArticlePath(section);
-      default:
-        return '/';
-    }
   }
 }

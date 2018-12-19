@@ -24,8 +24,8 @@ export default class Body extends Component {
      * between sections or from section-to-menu.
      */
 
-    const r = new Referrer(props);
-    const location = new Location(r.pathToMatch, props);
+    const referrer = new Referrer(props);
+    const location = new Location(referrer.pathToMatch, props);
     const buildState = new BuildState('body', props, location);
 
     this.state = {
