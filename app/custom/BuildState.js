@@ -9,6 +9,25 @@ export default class BuildState {
     this.component = component;
   }
 
+  now(type) {
+    switch (type) {
+      case 'indexForChapterData':
+        return this._initialIndexForChapterData;
+      case 'indexForProjectData':
+        return this._initialIndexForProjectData;
+      case 'indexForProjectPics':
+        return this._initialIndexForProjectPics;
+      case 'indexForPublication':
+        return this._initialIndexForPublication;
+      case 'indexForArticleData':
+        return this._initialIndexForArticleData;
+      default:
+        console.log('State.buildState: Keep calm, carry on');
+    }
+
+    return;
+  }
+
   get _initialIndexForChapterData() {
     if (this.referrer === 'story') {
       return this.location.params.twoToIndex() !== -1
@@ -49,24 +68,5 @@ export default class BuildState {
           ? this.location.params.firstArticleToMatchPublication
           : undefined;
     }
-  }
-
-  now(type) {
-    switch (type) {
-      case 'indexForChapterData':
-        return this._initialIndexForChapterData;
-      case 'indexForProjectData':
-        return this._initialIndexForProjectData;
-      case 'indexForProjectPics':
-        return this._initialIndexForProjectPics;
-      case 'indexForPublication':
-        return this._initialIndexForPublication;
-      case 'indexForArticleData':
-        return this._initialIndexForArticleData;
-      default:
-        console.log('State.buildState: Keep calm, carry on');
-    }
-
-    return;
   }
 }

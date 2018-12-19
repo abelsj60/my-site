@@ -1,16 +1,13 @@
 import Content from './Content.js';
-// import Referrer from './Referrer.js';
-import Location from './Location.js';
 import Normalize from './Normalize.js';
 
 export default class Reload {
   constructor(props) {
+    const { state } = props.location;
+
     this._props = props;
 
-    this.referrer = this._props.location.state
-      ? this._props.location.state.toLowerCase()
-      : 'home';
-    this.location = new Location(this.referrer.pathToMatch, props);
+    this.referrer = state ? state.toLowerCase() : 'none';
     this.path = this._buildPath();
   }
 
@@ -20,8 +17,8 @@ export default class Reload {
   }
 
   _loadContentData() {
-    const location = this.referrer;
-    const c = new Content(location);
+    const referrer = this.referrer;
+    const c = new Content(referrer);
 
     return c.contentData;
   }
