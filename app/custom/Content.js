@@ -5,10 +5,9 @@ import articleData from '../data/clips/index.js';
 export default class Content {
   constructor(type) {
     this.type = type;
-    this.contentData = this._getContentData();
   }
 
-  _getContentData() {
+  getContentData() {
     const type = this.type;
 
     switch (type) {
@@ -19,8 +18,7 @@ export default class Content {
       case 'journalism':
         return articleData;
       default:
-        console.log('Content._getContentData: Keep calm, carry on');
-        return undefined;
+        return;
     }
   }
 }

@@ -10,25 +10,20 @@ import MultiProjectNav from '../MultiProjectNav.jsx';
 import Content from './Content.js';
 
 export default class Data {
-  constructor(section, props) {
+  constructor(type, props) {
+    const c = new Content(type);
+    const contentData = c.getContentData();
+
     this._props = props;
 
-    this.section = section;
-    this.text = this._loadText();
-    this.component = this._loadComponent();
-    this.contentData = this._loadContentData();
-    this.menuNavigator = this._loadMenuNavigator();
+    this.type = type;
+    this.contentData = contentData;
   }
 
-  _loadContentData() {
-    const c = new Content(this.section);
-    return c.contentData;
-  }
+  getText() {
+    const type = this.type;
 
-  _loadText() {
-    const section = this.section;
-
-    switch (section) {
+    switch (type) {
       case 'story':
         return;
       case 'projects':
@@ -40,59 +35,51 @@ export default class Data {
     }
   }
 
-  _loadComponent() {
+  getComponent() {
     const props = this._props;
-    const section = this.section;
+    const type = this.type;
 
-    switch (section) {
+    switch (type) {
       case 'story':
-        return <Story {...props} data={this._loadContentData()} />;
+        return <Story {...props} data={this.contentData} />;
       case 'projects':
-        return <Projects {...props} data={this._loadContentData()} />;
+        return (
+          <Projects {...props} text={this.getText()} data={this.contentData} />
+        );
       case 'journalism':
         return (
-          <Article
-            {...props}
-            text={this._loadText()}
-            data={this._loadContentData()}
-          />
+          <Article {...props} text={this.getText()} data={this.contentData} />
         );
       default:
         return undefined;
     }
   }
 
-  _loadMenuNavigator() {
+  getMenuNavigator() {
     const props = this._props;
-    const section = this.section;
+    const type = this.type;
 
-    switch (section) {
+    switch (type) {
       case 'story':
         return (
           <ChapterNav
             {...props}
             isMenu={true}
-            section={section}
-            data={this._loadContentData()}
+            section={type}
+            data={this.contentData}
           />
         );
       case 'projects':
         return (
           <MultiProjectNav
             {...props}
-            section={section}
+            section={type}
             isProjectMenu={true}
-            data={this._loadContentData()}
+            data={this.contentData}
           />
         );
       case 'journalism':
-        return (
-          <ArticleNav
-            {...props}
-            section={section}
-            data={this._loadContentData()}
-          />
-        );
+        return <ArticleNav {...props} section={type} data={this.contentData} />;
       default:
         return undefined;
     }

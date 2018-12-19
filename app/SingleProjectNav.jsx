@@ -4,7 +4,7 @@ import Mapper from './Mapper.jsx';
 
 export default function SingleProjectNav(props) {
   const { project, isCurrentProject } = props;
-  const { thumbnails, name } = project.attributes;
+  const { thumbnails, projectName } = project.attributes;
   const { indexForProjectPics } = props.localState;
 
   return (
@@ -20,7 +20,7 @@ export default function SingleProjectNav(props) {
                   ? 'active'
                   : 'inactive'
               }
-              to={`/projects/${name}/${idx + 1}`}
+              to={`/projects/${projectName}/${idx + 1}`}
             >
               <img src={thumbnail} alt={`Thumbnail ${idx + 1}`} />
               <div id="thumbnail-highlight" />

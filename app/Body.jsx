@@ -24,9 +24,9 @@ export default class Body extends Component {
      * between sections or from section-to-menu.
      */
 
-    const referrer = new Referrer(props);
-    const location = new Location(referrer.pathToMatch, props);
-    const initialState = new InitialState('body', props, location);
+    const r = new Referrer(props);
+    const location = new Location(r.pathToMatch, props);
+    const initialState = new InitialState(props, location);
 
     // ! Doesn't work. 0 is falsy...
 

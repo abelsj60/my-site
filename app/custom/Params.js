@@ -18,12 +18,12 @@ export default class Params {
 
   get _searchData() {
     const c = new Content(this.type);
-    return c.contentData;
+    return c.getContentData();
   }
 
   _normalizeParam(param) {
-    const normalizedParam = new Normalize(param);
-    return normalizedParam.done;
+    const n = new Normalize(param);
+    return n.done;
   }
 
   get hasExpectedNumber() {
@@ -65,12 +65,15 @@ export default class Params {
         break;
     }
 
-    if (paramIsValid) {
-      /** Returns original, so no falsy problems w/index when 0) */
-      return param;
+    /** Returns original, so no falsy problems when index is 0) */
+
+    if (!paramIsValid) {
+      /** NOTE: this._actualNumber tests against FALSE */
+
+      return false;
     }
 
-    return false;
+    return param;
   }
 
   toIndex(paramName) {
@@ -78,18 +81,12 @@ export default class Params {
       const isNumber = parseInt(this[paramName]);
 
       if (!isNumber) {
-        let paramIs;
-
-        if (paramName === 'projectName') {
-          paramIs = 'name';
-        } else if (paramName === 'chapter') {
+        if (paramName === 'chapter') {
           return 0;
-        } else {
-          paramIs = paramName;
         }
 
         return this._searchData.findIndex(d => {
-          const normalizedName = this._normalizeParam(d.attributes[paramIs]);
+          const normalizedName = this._normalizeParam(d.attributes[paramName]);
           return normalizedName === this[paramName];
         });
       } else if (isNumber) {

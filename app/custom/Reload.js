@@ -6,40 +6,40 @@ export default class Reload {
     const { state } = props.location;
 
     this._props = props;
-    this._referrer = state ? state.toLowerCase() : 'none';
+    this._caller = state ? state.toLowerCase() : 'none';
 
     this.path = this._buildPath();
   }
 
   _buildPath() {
-    const section = this._referrer;
+    const section = this._caller;
 
     switch (section) {
       case 'story':
-        return this._buildStoryPath(section);
+        return this._storyPath(section);
       case 'projects':
-        return this._buildProjectsPath(section);
+        return this._projectsPath(section);
       case 'journalism':
-        return this._buildArticlePath(section);
+        return this._articlePath(section);
       default:
         return '/';
     }
   }
 
   _normalize(text) {
-    const normalizedText = new Normalize(text);
-    return normalizedText.done;
+    const n = new Normalize(text);
+    return n.done;
   }
 
-  _loadContentData() {
-    const referrer = this._referrer;
-    const c = new Content(referrer);
+  _getContentData() {
+    const caller = this._caller;
+    const c = new Content(caller);
 
-    return c.contentData;
+    return c.getContentData();
   }
 
-  _buildStoryPath(section) {
-    const storyData = this._loadContentData();
+  _storyPath(section) {
+    const storyData = this._getContentData();
     const { indexForChapterData } = this._props.localState;
     const title = storyData[indexForChapterData].attributes.title;
     const normalizedTitle = this._normalize(title);
@@ -47,20 +47,20 @@ export default class Reload {
     return `/${section}/chapter/${normalizedTitle}`;
   }
 
-  _buildProjectsPath(section) {
-    const projectData = this._loadContentData();
+  _projectsPath(section) {
+    const projectData = this._getContentData();
     const { indexForProjectData, indexForProjectPics } = this._props.localState;
-    const projectName = projectData[indexForProjectData].attributes.name;
+    const projectName = projectData[indexForProjectData].attributes.projectName;
     const normalizedProjectName = this._normalize(projectName);
     const thumbnailNumber = indexForProjectPics + 1;
 
     return `/${section}/${normalizedProjectName}/${thumbnailNumber}`;
   }
 
-  _buildArticlePath(section) {
-    const articleData = this._loadContentData();
-    const { indexForPublication } = this._props.localState;
-    const article = articleData[indexForPublication];
+  _articlePath(section) {
+    const articleData = this._getContentData();
+    const { indexForArticleData } = this._props.localState;
+    const article = articleData[indexForArticleData];
     const { publication, headline } = article.attributes;
     const normalizedPublication = this._normalize(publication);
     const normalizedHeadline = this._normalize(headline);

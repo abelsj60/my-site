@@ -15,12 +15,25 @@ export default class ProjectsParams extends Params {
   }
 
   get projectName() {
-    return this.validateParam(this._one, 'name', 'text');
+    return this.validateParam(this._one, 'projectName', 'text');
   }
 
-  // TODO Should this be undefined, rather than false?
+  // TODO Should this be undefined, rather than false? / Why false?
 
   get projectThumbnail() {
-    return parseInt(this.validateParam(this._two, 'full', 'number')) || false;
+    const paramIsValid = this.validateParam(this._two, 'full', 'number');
+    return paramIsValid && parseInt(paramIsValid);
+  }
+
+  projectNameToIndex() {
+    if (!this.projectName) return -1;
+
+    return this.oneToIndex();
+  }
+
+  projectThumbnailToIndex() {
+    if (!this.projectThumbnail) return -1;
+
+    return this.twoToIndex();
   }
 }

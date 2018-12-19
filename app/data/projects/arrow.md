@@ -1,5 +1,5 @@
 ---
-name: arrow
+projectName: arrow
 details:
   {
     name: 'Arrow',

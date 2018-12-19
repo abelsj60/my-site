@@ -43,7 +43,7 @@ export default class ContentLoader extends Component {
     const { needsRedirect, isNotFound } = this.state;
 
     const r = new Referrer(this.props);
-    const loadData = new Data(r.location, this.props);
+    const data = new Data(r.location, this.props);
 
     return needsRedirect ? (
       <Redirect to={{ pathname: '/i', state: `${r.location}` }} />
@@ -57,10 +57,10 @@ export default class ContentLoader extends Component {
             return (
               <Menu
                 link={`/${r.location}`}
-                text={loadData.text}
+                text={data.getText()}
                 userLocation={`${r.location}`}
               >
-                {loadData.menuNavigator}
+                {data.getMenuNavigator()}
               </Menu>
             );
           }}
@@ -68,7 +68,7 @@ export default class ContentLoader extends Component {
         <Route
           path={`${r.path}`}
           render={() => {
-            return loadData.component;
+            return data.getComponent();
           }}
         />
       </Switch>

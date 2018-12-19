@@ -1,7 +1,7 @@
 export default class Referrer {
   constructor(props) {
     if (props.location === undefined) {
-      throw 'The Location class requires props.location.';
+      throw 'Caller must offer props.location.';
     }
 
     this.location = props.location.pathname.split('/')[1];
@@ -18,10 +18,8 @@ export default class Referrer {
       case 'journalism':
         return '/journalism/:publication?/:headline?';
       default:
-        console.log('Referrer.loadPathToMatch(): Keep calm, carry on');
+        return;
     }
-
-    return;
   }
 
   _loadExactPath() {
@@ -33,9 +31,7 @@ export default class Referrer {
       case 'journalism':
         return '/journalism/:publication/:headline';
       default:
-        console.log('Referrer.loadExactPath(): Keep calm, carry on');
+        return;
     }
-
-    return;
   }
 }

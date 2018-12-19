@@ -1,11 +1,15 @@
+import Referrer from './Referrer';
+
 export default class EventHandling {
   constructor(component, outsideThis) {
     if (outsideThis.props.location === undefined) {
-      throw 'EventHandling requires external this to carry props.location.';
+      throw 'Caller must carry location.';
     }
 
+    const r = new Referrer(outsideThis.props);
+
     this._component = component;
-    this._referrer = outsideThis.props.location.pathname.split('/')[1];
+    this._referrer = r.location;
 
     this.boundHandleClick = this._selectHandleClick(outsideThis);
   }

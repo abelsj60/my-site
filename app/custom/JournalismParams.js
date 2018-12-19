@@ -21,8 +21,22 @@ export default class JournalismParams extends Params {
     return this.validateParam(this._two, 'headline', 'text');
   }
 
+  publicationToIndex() {
+    if (!this.publication) return -1;
+
+    return this.oneToIndex();
+  }
+
+  headlineToIndex() {
+    if (!this.headline) return -1;
+
+    return this.twoToIndex();
+  }
+
   get firstArticleToMatchPublication() {
-    if (this.publication && this._two === undefined) {
+    const headlineParamIsUndefined = this._two === undefined;
+
+    if (this.publication && headlineParamIsUndefined) {
       const firstHedToMatchPublication = this._searchData.find(a => {
         return (
           this._normalizeParam(a.attributes.publication) === this.publication

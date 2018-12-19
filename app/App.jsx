@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
 import { splitPath } from './helpers/utils.js';
+
 import HtmlContainer from './HtmlContainer.jsx';
 import Header from './Header.jsx';
 import Body from './Body.jsx';
@@ -8,6 +9,7 @@ import BusinessCard from './BusinessCard.jsx';
 import LegalTerms from './LegalTerms.jsx';
 import Footer from './Footer.jsx';
 import MagicScroller from './MagicScroller.jsx';
+
 import EventHandling from './custom/EventHandling.js';
 
 class App extends Component {
