@@ -10,7 +10,7 @@ import NotFound from './NotFound.jsx';
 
 import Location from './custom/Location';
 import Referrer from './custom/Referrer.js';
-import BuildState from './custom/BuildState.js';
+import InitialState from './custom/InitialState.js';
 import EventHandling from './custom/EventHandling.js';
 
 export default class Body extends Component {
@@ -26,14 +26,16 @@ export default class Body extends Component {
 
     const referrer = new Referrer(props);
     const location = new Location(referrer.pathToMatch, props);
-    const buildState = new BuildState('body', props, location);
+    const initialState = new InitialState('body', props, location);
+
+    // ! Doesn't work. 0 is falsy...
 
     this.state = {
-      indexForChapterData: buildState.now('indexForChapterData') || 0,
-      indexForProjectData: buildState.now('indexForProjectData') || 0,
-      indexForProjectPics: buildState.now('indexForProjectPics') || 0,
-      indexForPublication: buildState.now('indexForPublication') || 0,
-      indexForArticleData: buildState.now('indexForArticleData') || 0
+      indexForChapterData: initialState.build('indexForChapterData'),
+      indexForProjectData: initialState.build('indexForProjectData'),
+      indexForProjectPics: initialState.build('indexForProjectPics'),
+      indexForPublication: initialState.build('indexForPublication'),
+      indexForArticleData: initialState.build('indexForArticleData')
     };
 
     console.log('---BODY---');

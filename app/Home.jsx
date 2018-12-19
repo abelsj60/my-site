@@ -80,7 +80,7 @@ export default class Home extends Component {
           alt="a fantastic imaginary world"
         />
         <section style={believeStyle}>
-          <h2>I believe in magic?</h2>
+          <h2>Still believe in magic?</h2>
         </section>
         {/** <section
           id="magic-content"
