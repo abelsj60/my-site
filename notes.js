@@ -66,4 +66,7 @@
 
     -Wes bos transcripts:
       https://github.com/wesbos/React-For-Beginners-Transcriptions
+
+    -Interfaces:
+      https://stackoverflow.com/a/1022060
 */

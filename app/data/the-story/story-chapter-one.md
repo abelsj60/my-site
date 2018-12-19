@@ -1,5 +1,5 @@
 ---
-title: 'The beginnings of magic'
+title: 'Magical begninnings'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 1
 ---

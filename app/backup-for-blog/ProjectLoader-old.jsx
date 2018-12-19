@@ -20,13 +20,12 @@ export default class ProjectLoader extends Component {
     const indexForProjectData = !useDefaultProjectName
       ? validateParam('name', projectData, urlParams[2])
       : 0;
-    const indexForProjectPictures = !useDefaultPictureIndex
+    const indexForProjectPics = !useDefaultPictureIndex
       ? validateParam('full', projectData, urlParams[3])
       : 0;
 
     if (!isProjectMenu) {
-      const indexForProjectPicturesConvertedToUrlParam =
-        indexForProjectPictures + 1;
+      const indexForProjectPicsConvertedToUrlParam = indexForProjectPics + 1;
 
       if (projectHasNoName) {
         const defaultProjectName = normalize(
@@ -34,13 +33,13 @@ export default class ProjectLoader extends Component {
         );
 
         this.props.history.replace(
-          `/projects/${defaultProjectName}/${indexForProjectPicturesConvertedToUrlParam}`
+          `/projects/${defaultProjectName}/${indexForProjectPicsConvertedToUrlParam}`
         );
       } else if (projectHasNoPicture) {
         const currentProjectName = urlParams[2];
 
         this.props.history.replace(
-          `/projects/${currentProjectName}/${indexForProjectPicturesConvertedToUrlParam}`
+          `/projects/${currentProjectName}/${indexForProjectPicsConvertedToUrlParam}`
         );
       }
     }
@@ -48,7 +47,7 @@ export default class ProjectLoader extends Component {
     this.state = {
       isProjectMenu,
       indexForProjectData,
-      indexForProjectPictures
+      indexForProjectPics
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -59,7 +58,7 @@ export default class ProjectLoader extends Component {
       projectData[this.state.indexForProjectData].attributes.name !==
       projectName;
     const linkChangesProjectPicture =
-      this.state.indexForProjectPictures !== projectPictureIndex;
+      this.state.indexForProjectPics !== projectPictureIndex;
 
     if (linkChangesProjects || linkChangesProjectPicture) {
       const newIndexForProjectData =
@@ -77,10 +76,10 @@ export default class ProjectLoader extends Component {
       if (linkChangesProjects) {
         this.setState({
           indexForProjectData: newIndexForProjectData,
-          indexForProjectPictures: projectPictureIndex
+          indexForProjectPics: projectPictureIndex
         });
       } else {
-        this.setState({ indexForProjectPictures: projectPictureIndex });
+        this.setState({ indexForProjectPics: projectPictureIndex });
       }
     }
   }
@@ -109,7 +108,7 @@ export default class ProjectLoader extends Component {
         : this.state.indexForProjectData;
       const newIndexForProjectPictures = !useProjectPictureFromState
         ? validateParam('full', projectData, urlParams[3])
-        : this.state.indexForProjectPictures;
+        : this.state.indexForProjectPics;
       const newIndexForProjectPicturesConvertedToUrlParam =
         newIndexForProjectPictures + 1;
 
@@ -132,7 +131,7 @@ export default class ProjectLoader extends Component {
       this.setState({
         isProjectMenu: isProjectMenu,
         indexForProjectData: newIndexForProjectData,
-        indexForProjectPictures: newIndexForProjectPictures
+        indexForProjectPics: newIndexForProjectPictures
       });
     }
   }

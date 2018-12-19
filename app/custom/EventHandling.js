@@ -61,7 +61,7 @@ export default class EventHandling {
         case 'projects':
           stateToUpdate = {
             indexForProjectData: propertyOne,
-            indexForProjectPictures: propertyTwo
+            indexForProjectPics: propertyTwo
           };
           break;
         case 'journalism':

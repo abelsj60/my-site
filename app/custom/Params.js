@@ -1,4 +1,5 @@
 import Content from './Content.js';
+import Normalize from './Normalize.js';
 
 export default class Params {
   constructor(type, params) {
@@ -21,15 +22,8 @@ export default class Params {
   }
 
   _normalizeParam(param) {
-    return param
-      .replace(/\s+/g, '-')
-      .replace(/\./g, '')
-      .replace(/'+/g, '')
-      .replace(/,+/g, '')
-      .replace(/:/g, '')
-      .replace(/\//g, '-')
-      .replace(/\?/g, '')
-      .toLowerCase();
+    const normalizedParam = new Normalize(param);
+    return normalizedParam.done;
   }
 
   get hasExpectedNumber() {

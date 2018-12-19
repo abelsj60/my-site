@@ -5,7 +5,7 @@ import Mapper from './Mapper.jsx';
 export default function SingleProjectNav(props) {
   const { project, isCurrentProject } = props;
   const { thumbnails, name } = project.attributes;
-  const { indexForProjectPictures } = props.localState;
+  const { indexForProjectPics } = props.localState;
 
   return (
     <section className="project-thumbnails">
@@ -16,7 +16,7 @@ export default function SingleProjectNav(props) {
             <Link
               key={idx}
               className={
-                isCurrentProject && indexForProjectPictures === idx
+                isCurrentProject && indexForProjectPics === idx
                   ? 'active'
                   : 'inactive'
               }

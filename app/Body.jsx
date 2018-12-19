@@ -5,11 +5,12 @@ import Home from './Home.jsx';
 import ContentLoader from './ContentLoader.jsx';
 import Reverie from './Reverie.jsx';
 import About from './About.jsx';
-import RestateRoute from './RestateRoute.jsx';
+import ReloadRoute from './ReloadRoute.jsx';
 import NotFound from './NotFound.jsx';
 
 import Location from './custom/Location';
 import Referrer from './custom/Referrer.js';
+import BuildState from './custom/BuildState.js';
 import EventHandling from './custom/EventHandling.js';
 
 export default class Body extends Component {
@@ -23,33 +24,16 @@ export default class Body extends Component {
      * between sections or from section-to-menu.
      */
 
-    const r = new Referrer(props);
-    const l = new Location(r.pathToMatch, props);
+    const referrer = new Referrer(props);
+    const location = new Location(referrer.pathToMatch, props);
+    const buildState = new BuildState('body', props, location);
 
     this.state = {
-      indexForChapterData:
-        r.location === 'story' && l.params.twoToIndex() !== -1
-          ? l.params.twoToIndex()
-          : 0,
-      indexForProjectData:
-        r.location === 'projects' && l.params.oneToIndex() !== -1
-          ? l.params.oneToIndex()
-          : 0,
-      indexForProjectPictures:
-        r.location === 'projects' && l.params.twoToIndex() !== -1
-          ? l.params.twoToIndex()
-          : 0,
-      indexForPublication:
-        r.location === 'journalism' && l.params.oneToIndex() !== -1
-          ? l.params.oneToIndex()
-          : 0,
-      indexForArticleData:
-        r.location === 'journalism' && l.params.twoToIndex() !== -1
-          ? l.params.twoToIndex()
-          : r.location === 'journalism' &&
-            l.params.firstArticleToMatchPublication !== -1
-            ? l.params.firstArticleToMatchPublication
-            : 0
+      indexForChapterData: buildState.now('indexForChapterData') || 0,
+      indexForProjectData: buildState.now('indexForProjectData') || 0,
+      indexForProjectPics: buildState.now('indexForProjectPics') || 0,
+      indexForPublication: buildState.now('indexForPublication') || 0,
+      indexForArticleData: buildState.now('indexForArticleData') || 0
     };
 
     console.log('---BODY---');
@@ -122,7 +106,7 @@ export default class Body extends Component {
         <Route
           path="/i"
           render={props => {
-            return <RestateRoute {...props} localState={this.state} />;
+            return <ReloadRoute {...props} localState={this.state} />;
           }}
         />
         <Route component={NotFound} />
