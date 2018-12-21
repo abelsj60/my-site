@@ -20,6 +20,41 @@ const Main = styled.main`
     flex-direction: row;
   }
 `;
+const Project = styled.section`
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+  overflow: auto;
+
+  @media (min-width: 848px) {
+    margin-left: 0;
+  }
+`;
+const Hed = styled.h1`
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+`;
+const Images = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 10px;
+  border: lightgrey dotted 0.5px;
+
+  @media (min-width: 672px) {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  @media (min-width: 848px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 1072px) {
+    flex-direction: row-reverse;
+  }
+`;
 const DPSelector = styled.section`
   display: none;
 
@@ -35,10 +70,10 @@ const DPSelector = styled.section`
     color: white;
   }
 `;
-const DPSHed = styled.h1`
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-`;
+// const DPSHed = styled.h1`
+//   font-size: 2.5rem;
+//   margin-bottom: 10px;
+// `;
 const DPSDescripton = styled.p`
   color: white;
   font-style: italic;
@@ -55,11 +90,12 @@ export default function Projects(props) {
 
   const indexForProjectData = l.params.oneToIndex();
   const project = data[indexForProjectData];
+  const { name } = project.attributes.details;
 
   return (
     <Main>
       <DPSelector>
-        <DPSHed>My projects</DPSHed>
+        <Hed>My projects</Hed>
         <DPSDescripton>{props.text}</DPSDescripton>
         <MultiProjectNav
           section={'projects'}
@@ -69,20 +105,18 @@ export default function Projects(props) {
           localState={localState}
         />
       </DPSelector>
-      <section id="active-project" className="right">
-        <h1>{project.attributes.details.name}</h1>
-        <section id="project-container">
-          <ProjectDescription project={project} />
-          <section id="project-images">
-            <SingleProjectNav
-              project={project}
-              isCurrentProject={true}
-              localState={localState}
-            />
-            <ProjectImageContainer project={project} localState={localState} />
-          </section>
-        </section>
-      </section>
+      <Project>
+        <Hed>{name}</Hed>
+        <ProjectDescription project={project} />
+        <Images>
+          <SingleProjectNav
+            project={project}
+            isCurrentProject={true}
+            localState={localState}
+          />
+          <ProjectImageContainer project={project} localState={localState} />
+        </Images>
+      </Project>
     </Main>
   );
 }

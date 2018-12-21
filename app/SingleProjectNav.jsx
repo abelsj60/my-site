@@ -36,9 +36,11 @@ const Highlighter = styled.div`
 `;
 
 export default function SingleProjectNav(props) {
+  // ! Using return state to ID active project b/c no params in Menu
+
   const { project, isCurrentProject } = props;
-  const { thumbnails, projectName } = project.attributes;
   const { indexForProjectPics } = props.localState;
+  const { thumbnails, projectName } = project.attributes;
 
   return (
     <ThumbnailContainer>
