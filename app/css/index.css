@@ -29,19 +29,13 @@ body {
 
 @import 'css-reset.css';
 @import 'header.css';
-@import 'business-card.css';
-@import 'legal-terms.css';
-@import 'app-bar.css';
 @import 'magic.css';
 @import 'inner-page.css';
 @import 'projects.css';
 @import 'the-story.css';
 @import 'journalism.css';
 @import 'menu.css';
-@import 'about.css';
 @import 'reverie.css';
-@import 'not-found.css';
-@import 'footer.css';
 
 /*
   https://learn.shayhowe.com/html-css/positioning-content/

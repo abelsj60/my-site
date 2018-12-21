@@ -1,6 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import Mapper from './Mapper.jsx';
+
+const ThumbnailContainer = styled.section`
+  display: flex;
+  padding-bottom: 7px;
+  border-bottom: lightgrey dotted 0.5px;
+
+  @media (min-width: 849px) {
+    display: flex;
+  }
+`;
+const StyledLink = styled(Link)`
+  position: relative;
+  margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+`;
+const Image = styled.img`
+  max-width: 100%;
+  vertical-align: bottom;
+`;
+const Highlighter = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: ${p =>
+    p.highlight === 'active' ? 'rgb(0, 0, 0, 0.2)' : ''};
+
+  &:hover {
+    background-color: rgb(0, 0, 0, 0.2);
+  }
+`;
 
 export default function SingleProjectNav(props) {
   const { project, isCurrentProject } = props;
@@ -8,26 +41,28 @@ export default function SingleProjectNav(props) {
   const { indexForProjectPics } = props.localState;
 
   return (
-    <section className="project-thumbnails">
+    <ThumbnailContainer>
       <Mapper
         mapData={thumbnails}
-        render={(thumbnail, idx) => {
+        render={(thumb, idx) => {
+          const thumbnailNeedsPadding = idx < 2 ? 'active' : '';
+          const thumbnailNumber = idx + 1;
+          const thumbnailIsActive =
+            isCurrentProject && indexForProjectPics === idx ? 'active' : '';
+
           return (
-            <Link
+            <StyledLink
               key={idx}
-              className={
-                isCurrentProject && indexForProjectPics === idx
-                  ? 'active'
-                  : 'inactive'
-              }
-              to={`/projects/${projectName}/${idx + 1}`}
+              active={thumbnailIsActive}
+              padding={thumbnailNeedsPadding}
+              to={`/projects/${projectName}/${thumbnailNumber}`}
             >
-              <img src={thumbnail} alt={`Thumbnail ${idx + 1}`} />
-              <div id="thumbnail-highlight" />
-            </Link>
+              <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
+              <Highlighter highlight={thumbnailIsActive} />
+            </StyledLink>
           );
         }}
       />
-    </section>
+    </ThumbnailContainer>
   );
 }

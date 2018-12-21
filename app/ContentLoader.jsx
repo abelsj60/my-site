@@ -23,16 +23,20 @@ export default class ContentLoader extends Component {
   render() {
     const { needsRedirect, isNotFound } = this.state;
 
-    /** ComponentData, below, has fully configured Components:
+    /** ComponentData, below, contains fully configured Components:
      *
      * This includes all data from and derived from props, e.g.,
-     * all section data ('contentData'). Note: This component
+     * all section data ('contentData'). Note: ContentaLoader
      * unmounts when users swap sections, so there's no
-     * need to update the data when cDU() runs.
+     * need to update contentData when cDU() runs.
      */
 
+    let componentData;
     const r = new Referrer(this.props);
-    const componentData = new ComponentData(r.location, this.props);
+
+    if (!needsRedirect && !isNotFound) {
+      componentData = new ComponentData(r.location, this.props);
+    }
 
     return needsRedirect ? (
       <Redirect to={{ pathname: '/i', state: `${r.location}` }} />
@@ -46,11 +50,12 @@ export default class ContentLoader extends Component {
             return (
               <Menu
                 link={`/${r.location}`}
-                text={componentData.getText()}
                 userLocation={`${r.location}`}
-              >
-                {componentData.getMenuNavigator()}
-              </Menu>
+                text={componentData.getText()}
+                render={() => {
+                  return componentData.getMenuNavigator();
+                }}
+              />
             );
           }}
         />

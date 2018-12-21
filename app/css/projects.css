@@ -38,7 +38,7 @@
   border: lightgrey dotted 0.5px;
 }
 
-#project-images .project-thumbnails {
+/* #project-images .project-thumbnails {
   display: flex;
   padding-bottom: 7px;
   border-bottom: lightgrey dotted 0.5px;
@@ -51,7 +51,7 @@
 
 #project-images .project-thumbnails a:nth-child(-n + 2) {
   margin-right: 5px;
-}
+} */
 
 #main-image p {
   display: flex;
@@ -142,7 +142,7 @@
   }
 
   #desktop-project-nav {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     margin: 25px;
     padding: 25px;
@@ -150,42 +150,42 @@
     min-width: 327px;
     background-color: #6100f2;
     background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
-    color: white;
+    color: white; */
   }
 
   #desktop-project-nav #content h1 {
-    border: none;
+    /* border: none;
     font-size: 2rem;
     padding: 0;
-    margin-bottom: 7px;
+    margin-bottom: 7px; */
   }
 
   #desktop-project-nav #content h2 {
-    color: white;
+    /* color: white;
     font-style: italic;
     padding-bottom: 7px;
     margin-bottom: 10px;
-    border-bottom: white dotted 0.5px;
+    border-bottom: white dotted 0.5px; */
   }
 
-  #desktop-project-nav #nav-group {
+  #content #nav-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
   }
 
-  #desktop-project-nav #nav-group h1 {
+  #content #nav-group h1 {
     font-size: 1.5rem;
     margin-bottom: 7px;
   }
 
-  #desktop-project-nav #nav-group:hover h1 {
+  #content #nav-group:hover h1 {
     color: lightgoldenrodyellow;
   }
 
-  #desktop-project-nav .project-thumbnails {
+  /* #content .project-thumbnails {
     display: flex;
-  }
+  } */
 }
 
 @media only screen and (min-width: 1072px) {

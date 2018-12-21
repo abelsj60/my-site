@@ -7,7 +7,7 @@ import Header from './Header.jsx';
 import Body from './Body.jsx';
 import BusinessCard from './BusinessCard.jsx';
 import LegalTerms from './LegalTerms.jsx';
-import Footer from './Footer.jsx';
+import FooterContainer from './Footer.jsx';
 import MagicScroller from './MagicScroller.jsx';
 
 import EventHandling from './custom/EventHandling.js';
@@ -63,9 +63,9 @@ class App extends Component {
             setMagicOpacity={this.setMagicOpacity}
             toggleMagicPointer={this.toggleMagicPointer}
           />
-          <BusinessCard state={this.state} />
+          <BusinessCard {...this.props} state={this.state} />
           <LegalTerms {...this.props} state={this.state} />
-          <Footer
+          <FooterContainer
             {...this.props}
             state={this.state}
             boundHandleClickForApp={boundHandleClickForApp}

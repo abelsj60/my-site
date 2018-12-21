@@ -1,39 +1,59 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HtmlContainer from './HtmlContainer.jsx';
-import { splitPath } from './helpers/utils.js';
+import styled from 'styled-components';
+
+import Referrer from './custom/Referrer.js';
+
+const Graf = styled.p`
+  cursor: pointer;
+  margin-right: 25px;
+  color: ${props => (props.show ? 'palegoldenrod' : 'blanchedalmond')};
+
+  &:hover {
+    color: palegoldenrod;
+  }
+`;
+const ContainerForRegularFooter = styled.section`
+  display: none;
+
+  @media (min-width: 848px) {
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    height: 55px;
+    z-index: 2;
+    display: flex;
+    font-size: 1.1rem;
+  }
+`;
 
 export default function footerText(props) {
-  const isReverie = splitPath(props).includes('reverie');
   const { showBusinessCard, showLegalTerms } = props.state;
   const { boundHandleClickForApp } = props;
 
-  const reverieLink = isReverie ? '/' : '/reverie';
-  const reverieClassName = isReverie ? 'active' : 'inactive';
-  const businessCardClassName = showBusinessCard ? 'active' : 'inactive';
-  const legalTermsClassName = showLegalTerms ? 'active' : 'inactive';
+  const r = new Referrer(props);
+  const isReverie = r.location.includes('reverie');
+  const linkForReverie = isReverie ? '/' : '/reverie';
 
   return (
-    <section id="footer-text" className="app-bar-active">
-      <Link to={reverieLink} className={reverieClassName}>
-        <p>Reverie</p>
+    <ContainerForRegularFooter>
+      <Link to={linkForReverie}>
+        <Graf show={isReverie}>Reverie</Graf>
       </Link>
-      <HtmlContainer
-        element="p"
-        className={businessCardClassName}
+      <Graf
+        show={showBusinessCard}
         onClick={() => {
           boundHandleClickForApp('showBusinessCard');
         }}
       >
         Contact
-      </HtmlContainer>
-      <HtmlContainer
-        element="p"
-        className={legalTermsClassName}
+      </Graf>
+      <Graf
+        show={showLegalTerms}
         onClick={() => boundHandleClickForApp('showLegalTerms')}
       >
         Legal
-      </HtmlContainer>
-    </section>
+      </Graf>
+    </ContainerForRegularFooter>
   );
 }

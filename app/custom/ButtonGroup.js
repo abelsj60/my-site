@@ -22,46 +22,46 @@ export default class ButtonGroup {
       {
         name: 'menu',
         link: this._isMenu ? `/${this._referrer}` : `/${this._referrer}/menu`,
-        className: this._referrer === 'menu' ? 'active' : 'inactive',
+        active: this._referrer === 'menu' ? 'active' : '',
         state: 'menu',
         hash: undefined,
-        needsBorder: true,
+        needsSeperation: true,
         handleClick: () => undefined
       },
       {
         name: 'reverie',
         link: this._referrer === 'reverie' ? '/' : '/reverie',
-        className: this._referrer === 'reverie' ? 'active' : 'inactive',
+        active: this._referrer === 'reverie' ? 'active' : '',
         state: undefined,
         hash: undefined,
-        needsBorder: true,
+        needsSeperation: true,
         handleClick: () => undefined
       },
       {
         name: 'story',
         link: this._path,
-        className: !this._showStory ? 'active' : 'inactive',
+        active: !this._showStory ? 'active' : '',
         state: undefined,
         hash: undefined,
-        needsBorder: true,
+        needsSeperation: true,
         handleClick: () => this._handleClick('showStoryText')
       },
       {
         name: 'legal',
         link: this._path,
-        className: this.showLegalTerms ? 'active' : 'inactive',
+        active: this._showLegalTerms ? 'active' : '',
         state: undefined,
         hash: undefined,
-        needsBorder: true,
+        needsSeperation: true,
         handleClick: () => this._handleClick('showLegalTerms')
       },
       {
         name: 'contact',
         link: this._path,
-        className: this._showBusinessCard ? 'active' : 'inactive',
+        active: this._showBusinessCard ? 'active' : '',
         state: undefined,
         hash: undefined,
-        needsBorder: false,
+        needsSeperation: false,
         handleClick: () => this._handleClick('showBusinessCard')
       }
     ];

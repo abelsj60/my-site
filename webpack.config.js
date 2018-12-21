@@ -12,6 +12,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         options: {
+          plugins: ['babel-plugin-styled-components'],
           presets: ['react', 'env'] // if you aren't using 'babel-preset-env', then omit the 'env'
         }
       },

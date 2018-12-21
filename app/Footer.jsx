@@ -1,18 +1,29 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import AppBarFooter from './AppBarFooter.jsx';
 import RegularFooter from './RegularFooter.jsx';
-import { splitPath } from './helpers/utils.js';
 
-export default function Footer(props) {
-  const home = splitPath(props)[1] === '';
+import Referrer from './custom/Referrer.js';
+
+const Footer = styled.footer`
+  z-index: 1;
+  background-color: rgb(115, 0, 0);
+  background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+  opacity: ${props => (props.home ? props.op : '')};
+  pointer-events: ${props => (props.mc !== 'block' ? 'all' : 'none')};
+`;
+
+export default function FooterContainer(props) {
   const { magicClicks, magicOpacity } = props.state;
-  const opacity = home ? { opacity: magicOpacity } : null;
-  const location = home ? 'home-page-footer' : 'inner-page-footer';
+
+  const r = new Referrer(props);
+  const isHome = r.location === '';
 
   return (
-    <footer className={magicClicks} style={opacity} id={location}>
+    <Footer home={isHome} op={magicOpacity} mc={magicClicks}>
       <RegularFooter {...props} />
       <AppBarFooter {...props} />
-    </footer>
+    </Footer>
   );
 }
