@@ -6,6 +6,7 @@ import bio from './data/about.md';
 import styled from 'styled-components';
 
 const Main = styled.main`
+  flex: 1;
   display: flex;
   height: 100%;
   padding: 25px;

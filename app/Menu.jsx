@@ -5,6 +5,9 @@ import CloseButton from './MenuCloseButton.jsx';
 import Description from './MenuDescription.jsx';
 
 const StyledMenu = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   background-color: navy;
   color: white;
@@ -19,8 +22,6 @@ const Overflow = styled.section`
 
 export default function Menu(props) {
   const { link, text, render } = props;
-
-  console.log(props);
 
   return (
     <StyledMenu>

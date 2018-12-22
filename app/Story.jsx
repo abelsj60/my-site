@@ -8,6 +8,7 @@ import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
 const Main = styled.main`
+  flex: 1;
   display: flex;
   flex-direction: column;
   color: black;

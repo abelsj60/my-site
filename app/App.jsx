@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
-import styled, { css } from 'styled-components';
 import { withRouter } from 'react-router';
 import { splitPath } from './helpers/utils.js';
+import styled, { css, createGlobalStyle } from 'styled-components';
 
 import Header from './Header.jsx';
 import Body from './Body.jsx';
@@ -12,6 +12,16 @@ import MagicScroller from './MagicScroller.jsx';
 
 import EventHandling from './custom/EventHandling.js';
 
+const GlobalStyle = createGlobalStyle`
+  html {
+    font-family: lato;
+    font-size: 62.5%;
+  }
+
+  body {
+    font-size: 1.5rem;
+  }
+`;
 const Page = styled.section`
   display: flex;
   flex-direction: column;
@@ -24,6 +34,18 @@ const Page = styled.section`
       position: fixed;
       background: url('/howls-background-dl.jpg') no-repeat fixed center top;
     `};
+`;
+const HeaderRule = styled.hr`
+  width: 100%;
+  margin: 0;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.05),
+    rgba(0, 0, 0, 0)
+  );
 `;
 
 class App extends Component {
@@ -63,9 +85,10 @@ class App extends Component {
 
     return (
       <Fragment>
+        <GlobalStyle />
         <Page home={homeIsActive} menu={menuIsActive}>
           <Header {...this.props} scrollTop={this.scrollTop} />
-          <hr id="header-separator" />
+          <HeaderRule />
           <Body
             {...this.props}
             state={this.state}
