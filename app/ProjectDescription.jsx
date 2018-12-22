@@ -1,4 +1,15 @@
 import React, { Fragment } from 'react';
+import styled from 'styled-components';
+
+const Hed = styled.h1`
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 7px;
+`;
+const Graf = styled.p`
+  font-size: 1.7rem;
+  margin-bottom: 15px;
+`;
 
 function formatKeyForDisplay(name, data) {
   const key = data.find(k => k === name);
@@ -12,11 +23,11 @@ export default function ProjectDescription(props) {
 
   return (
     <Fragment>
-      <p id="type">{type}</p>
-      <h2>{formatKeyForDisplay('contribution', projectKeys)}</h2>
-      <p>{contribution}</p>
-      <h2>{formatKeyForDisplay('description', projectKeys)}</h2>
-      <p>{description}</p>
+      <Graf>{type}</Graf>
+      <Hed>{formatKeyForDisplay('contribution', projectKeys)}</Hed>
+      <Graf>{contribution}</Graf>
+      <Hed>{formatKeyForDisplay('description', projectKeys)}</Hed>
+      <Graf>{description}</Graf>
     </Fragment>
   );
 }

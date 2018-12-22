@@ -9,33 +9,9 @@ body {
   font-size: 1.5rem;
 }
 
-#page {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
-}
-
-#page.home {
-  background: url('/howls-background-dl.jpg') no-repeat fixed center top;
-  width: 100%;
-  position: fixed;
-}
-
-/* #page.menu-page {
-  background-image: url('https://www.transparenttextures.com/patterns/my-little-plaid.png');
-  background-color: navy;
-} */
-
 @import 'css-reset.css';
 @import 'header.css';
 @import 'magic.css';
-@import 'inner-page.css';
-@import 'projects.css';
-@import 'the-story.css';
-@import 'journalism.css';
-@import 'menu.css';
-@import 'reverie.css';
 
 /*
   https://learn.shayhowe.com/html-css/positioning-content/

@@ -9,7 +9,7 @@ import MultiProjectNav from './MultiProjectNav.jsx';
 import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
-const Main = styled.main`
+const ProjectContainer = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@ const Main = styled.main`
     flex-direction: row;
   }
 `;
-const Project = styled.section`
+const ActiveProject = styled.section`
   flex: 2;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@ const Hed = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 10px;
 `;
-const Images = styled.section`
+const ImageFrame = styled.section`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -70,10 +70,6 @@ const DPSelector = styled.section`
     color: white;
   }
 `;
-// const DPSHed = styled.h1`
-//   font-size: 2.5rem;
-//   margin-bottom: 10px;
-// `;
 const DPSDescripton = styled.p`
   color: white;
   font-style: italic;
@@ -83,7 +79,7 @@ const DPSDescripton = styled.p`
 `;
 
 export default function Projects(props) {
-  const { localState, data, projectIndex } = props;
+  const { localState, data, text, projectIndex } = props;
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
@@ -93,62 +89,31 @@ export default function Projects(props) {
   const { name } = project.attributes.details;
 
   return (
-    <Main>
+    <ProjectContainer>
       <DPSelector>
         <Hed>My projects</Hed>
-        <DPSDescripton>{props.text}</DPSDescripton>
+        <DPSDescripton>{text}</DPSDescripton>
         <MultiProjectNav
-          section={'projects'}
-          isProjectMenu={false}
           data={data}
-          projectIndex={projectIndex}
+          section={'projects'}
           localState={localState}
+          projectIndex={projectIndex}
         />
       </DPSelector>
-      <Project>
+      <ActiveProject>
         <Hed>{name}</Hed>
-        <ProjectDescription project={project} />
-        <Images>
-          <SingleProjectNav
-            project={project}
-            isCurrentProject={true}
-            localState={localState}
-          />
-          <ProjectImageContainer project={project} localState={localState} />
-        </Images>
-      </Project>
-    </Main>
+        <section>
+          <ProjectDescription project={project} />
+          <ImageFrame>
+            <SingleProjectNav
+              project={project}
+              activeProject={true}
+              localState={localState}
+            />
+            <ProjectImageContainer project={project} localState={localState} />
+          </ImageFrame>
+        </section>
+      </ActiveProject>
+    </ProjectContainer>
   );
 }
-
-// return (
-//   <Main id="my-projects" className="">
-//     <DesktopProjectSelector className="left">
-//       <div id="content">
-//         <h1>My projects</h1>
-//         <h2>{props.text}</h2>
-//         <MultiProjectNav
-//           section={'projects'}
-//           isProjectMenu={false}
-//           data={data}
-//           projectIndex={projectIndex}
-//           localState={localState}
-//         />
-//       </div>
-//     </DesktopProjectSelector>
-//     <section id="active-project" className="right">
-//       <h1>{project.attributes.details.name}</h1>
-//       <section id="project-container">
-//         <ProjectDescription project={project} />
-//         <section id="project-images">
-//           <SingleProjectNav
-//             project={project}
-//             isCurrentProject={true}
-//             localState={localState}
-//           />
-//           <ProjectImageContainer project={project} localState={localState} />
-//         </section>
-//       </section>
-//     </section>
-//   </Main>
-// );

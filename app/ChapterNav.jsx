@@ -6,39 +6,23 @@ import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize.js';
 
 const StoryNavigation = styled.section`
-  display: flex;
-  margin-bottom: 20px;
-  min-height: 40px;
-  cursor: pointer;
-`;
-const MenuNavigation = styled.section`
-  overflow: auto;
-  margin: 15px 25px 25px;
-  flex: 1;
+  display: ${props => (props.menu !== 'active' ? 'flex' : '')};
+  flex-direction: ${props => (props.menu === 'active' ? 'column' : '')};
+  min-height: ${props => (props.menu !== 'active' ? '35px' : '')};
 `;
 const StyledLink = styled(Link)`
-  flex: 1;
-  display: flex;
+  flex: ${props => (props.menu !== 'active' ? '1' : '')};
   flex-direction: ${props => (props.menu === 'active' ? 'column' : '')};
-  align-items: center;
-  color: whitesmoke;
+  align-items: ${props => (props.menu === 'active' ? 'flex-start' : 'center')};
+  border-bottom: ${props =>
+    props.link === 'active' && props.menu !== 'active'
+      ? 'whitesmoke solid .5px'
+      : ''};
+  color: ${props =>
+    props.link === 'active' && props.menu === 'active'
+      ? 'deepskyblue'
+      : 'whitesmoke'};
   text-decoration: none;
-
-  ${props =>
-    (props.link === 'active' &&
-      props.menu !== 'active' &&
-      css`
-        flex: 1;
-        display: flex;
-        align-items: center;
-        color: whitesmoke;
-        border-bottom: whitesmoke solid 0.5px;
-      `) ||
-    (props.link === 'active' &&
-      props.menu === 'active' &&
-      css`
-        color: deepskyblue;
-      `)};
 
   &:focus,
   &:hover,
@@ -65,33 +49,34 @@ const ExtraTextForMenu = styled.h1`
     props.menu === 'active' &&
     css`
       display: block;
-      font-size: 3rem;
+      font-size: 1.75rem;
+      margin-bottom: 0;
+      margin-top: ${p => (p.padding === 'active' ? '15px' : '')};
       font-style: italic;
       line-height: normal;
-      margin-bottom: 25px;
     `};
 `;
 const NavigationText = styled.p`
-  flex: 1;
-  text-align: center;
+  flex: ${props => (props.menu !== 'active' ? '1' : '')};
+  text-align: ${props => (props.menu !== 'active' ? 'center' : '')};
+  font-size: ${props => (props.menu === 'active' ? '3rem' : '')};
+  margin-bottom: ${props => (props.menu === 'active' ? '10px' : '')};
 `;
 
 export default function ChapterNav(props) {
   const { data, isMenu } = props;
   const { indexForChapterData } = props.localState;
-  const NavigationStyleContainer = isMenu ? MenuNavigation : StoryNavigation;
-
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <NavigationStyleContainer>
+    <StoryNavigation menu={menuIsActive}>
       <Mapper
         mapData={data}
         render={(chapter, idx) => {
           const chapterNumberForMenu = idx + 1;
           const linkIsActive = indexForChapterData === idx ? 'active' : '';
+          const chapterNeedsTopPadding = idx > 0 ? 'active' : '';
           const pageOrMenuText = isMenu ? chapter.attributes.title : idx + 1;
-
           const n = new Normalize(data[idx].attributes.title);
           const normalizedTitle = n.done;
 
@@ -102,14 +87,19 @@ export default function ChapterNav(props) {
               menu={menuIsActive}
               to={`/story/chapter/${normalizedTitle}`}
             >
-              <ExtraTextForMenu menu={menuIsActive}>
+              <ExtraTextForMenu
+                menu={menuIsActive}
+                padding={chapterNeedsTopPadding}
+              >
                 Chapter {chapterNumberForMenu}
               </ExtraTextForMenu>
-              <NavigationText>{pageOrMenuText}</NavigationText>
+              <NavigationText menu={menuIsActive}>
+                {pageOrMenuText}
+              </NavigationText>
             </StyledLink>
           );
         }}
       />
-    </NavigationStyleContainer>
+    </StoryNavigation>
   );
 }

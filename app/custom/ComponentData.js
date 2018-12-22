@@ -71,6 +71,7 @@ export default class ComponentData {
         return (
           <MultiProjectNav
             {...props}
+            isMenu={true}
             section={type}
             isProjectMenu={true}
             data={this._contentData}
@@ -78,7 +79,12 @@ export default class ComponentData {
         );
       case 'journalism':
         return (
-          <ArticleNav {...props} section={type} data={this._contentData} />
+          <ArticleNav
+            {...props}
+            isMenu={true}
+            section={type}
+            data={this._contentData}
+          />
         );
       default:
         return undefined;

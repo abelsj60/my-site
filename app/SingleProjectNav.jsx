@@ -1,32 +1,87 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Mapper from './Mapper.jsx';
 
-const ThumbnailContainer = styled.section`
+const ThumbnailsContainer = styled.section`
   display: flex;
   padding-bottom: 7px;
-  border-bottom: lightgrey dotted 0.5px;
 
-  @media (min-width: 849px) {
-    display: flex;
-  }
+  ${props =>
+    props.menu === 'active' &&
+    css`
+      margin-bottom: 20px;
+      margin: 0;
+      padding-bottom: 0;
+      max-width: 100%;
+      flex-direction: row;
+    `};
+
+  ${props =>
+    !props.desktop &&
+    css`
+      border-bottom: lightgrey dotted 0.5px;
+
+      @media (min-width: 672px) {
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 31px;
+        padding: 0;
+        border: 0;
+      }
+
+      @media (min-width: 849px) {
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+        padding-bottom: 7px;
+        border-bottom: lightgrey dotted 0.5px;
+      }
+
+      @media (min-width: 1072px) {
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 31px;
+        padding: 0;
+        border: 0;
+      }
+    `}};
 `;
 const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
   position: relative;
   margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+
+  ${props =>
+    props.desktop &&
+    css`
+      @media (min-width: 672px) {
+        margin-right: 0;
+      }
+
+      @media (min-width: 848px) {
+        margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+      }
+
+      @media (min-width: 1072px) {
+        margin-right: 0;
+      }
+    `};
 `;
 const Image = styled.img`
+  flex: 1;
+  min-width: 0;
   max-width: 100%;
   vertical-align: bottom;
 `;
 const Highlighter = styled.div`
-  position: absolute;
   width: 100%;
   height: 100%;
-  left: 0;
-  top: 0;
+  position: absolute;
   background-color: ${p =>
     p.highlight === 'active' ? 'rgb(0, 0, 0, 0.2)' : ''};
 
@@ -38,23 +93,26 @@ const Highlighter = styled.div`
 export default function SingleProjectNav(props) {
   // ! Using return state to ID active project b/c no params in Menu
 
-  const { project, isCurrentProject } = props;
+  const { project, activeProject, isDesktop, isMenu } = props;
   const { indexForProjectPics } = props.localState;
   const { thumbnails, projectName } = project.attributes;
 
+  const menuIsActive = isMenu ? 'active' : '';
+
   return (
-    <ThumbnailContainer>
+    <ThumbnailsContainer desktop={isDesktop} menu={menuIsActive}>
       <Mapper
         mapData={thumbnails}
         render={(thumb, idx) => {
           const thumbnailNeedsPadding = idx < 2 ? 'active' : '';
           const thumbnailNumber = idx + 1;
           const thumbnailIsActive =
-            isCurrentProject && indexForProjectPics === idx ? 'active' : '';
+            activeProject && indexForProjectPics === idx ? 'active' : '';
 
           return (
             <StyledLink
               key={idx}
+              menu={menuIsActive}
               active={thumbnailIsActive}
               padding={thumbnailNeedsPadding}
               to={`/projects/${projectName}/${thumbnailNumber}`}
@@ -65,6 +123,6 @@ export default function SingleProjectNav(props) {
           );
         }}
       />
-    </ThumbnailContainer>
+    </ThumbnailsContainer>
   );
 }

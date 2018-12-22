@@ -63,20 +63,16 @@ export default function Story(props) {
 
   const indexForChapterData = l.params.twoToIndex();
   const chapter = data[indexForChapterData];
+  const { image } = chapter.attributes;
 
   return (
     <Main>
       <StyledChapter>
-        <ChapterNav
-          {...props}
-          data={data}
-          isMenu={l.params.isMenu}
-          section={'chapter'}
-        />
+        <ChapterNav {...props} data={data} section={'chapter'} />
         <Chapter chapterData={chapter} />
       </StyledChapter>
       <Illustration id="illustration" className="right">
-        <Image src={chapter.attributes.image} alt="fantasy illustration" />
+        <Image src={image} alt="fantasy illustration" />
       </Illustration>
     </Main>
   );

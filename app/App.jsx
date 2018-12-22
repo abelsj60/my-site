@@ -1,8 +1,8 @@
 import React, { Fragment, Component } from 'react';
+import styled, { css } from 'styled-components';
 import { withRouter } from 'react-router';
 import { splitPath } from './helpers/utils.js';
 
-import HtmlContainer from './HtmlContainer.jsx';
 import Header from './Header.jsx';
 import Body from './Body.jsx';
 import BusinessCard from './BusinessCard.jsx';
@@ -11,6 +11,20 @@ import FooterContainer from './Footer.jsx';
 import MagicScroller from './MagicScroller.jsx';
 
 import EventHandling from './custom/EventHandling.js';
+
+const Page = styled.section`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  ${props =>
+    props.home === 'active' &&
+    css`
+      width: 100%;
+      position: fixed;
+      background: url('/howls-background-dl.jpg') no-repeat fixed center top;
+    `};
+`;
 
 class App extends Component {
   constructor(props) {
@@ -42,18 +56,14 @@ class App extends Component {
 
   render() {
     const path = splitPath(this.props)[1];
-    const pageCss = path === '' ? 'home' : 'inner';
-    const menuCss = path === 'menu' ? ' menu-page' : '';
+    const homeIsActive = path === '' ? 'active' : '';
+    const menuIsActive = path === 'menu' ? 'active' : '';
     const eventHandlingForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eventHandlingForApp.boundHandleClick;
 
     return (
       <Fragment>
-        <HtmlContainer
-          id="page"
-          element="section"
-          className={`${pageCss} ${menuCss}`}
-        >
+        <Page home={homeIsActive} menu={menuIsActive}>
           <Header {...this.props} scrollTop={this.scrollTop} />
           <hr id="header-separator" />
           <Body
@@ -70,7 +80,7 @@ class App extends Component {
             state={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
           />
-        </HtmlContainer>
+        </Page>
         <MagicScroller />
       </Fragment>
     );

@@ -1,15 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Mapper from './Mapper.jsx';
+import styled from 'styled-components';
 
+import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
 
+const OverflowContainer = styled.section`
+  overflow: auto;
+`;
+const StyledLink = styled(Link)`
+  color: ${props =>
+    props.link === 'active' ? 'lightgoldenrodyellow' : 'white'};
+
+  &:hover {
+    color: deepskyblue;
+  }
+`;
+const Source = styled.p`
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 5px;
+`;
+const Hed = styled.p`
+  font-size: ${props => (props.menu === 'active' ? '3rem' : '1.75rem')};
+  margin-bottom: 10px;
+`;
+
 export default function ArticleNav(props) {
-  const { data } = props;
+  const { data, isMenu } = props;
   const { indexForArticleData } = props.localState;
 
+  const menuIsActive = isMenu ? 'active' : '';
+
   return (
-    <section>
+    <OverflowContainer>
       <Mapper
         mapData={data}
         render={(article, idx) => {
@@ -20,22 +44,20 @@ export default function ArticleNav(props) {
           const normalizeHed = new Normalize(headline);
           const normalizeCurrentHed = new Normalize(currentHed);
 
-          const className =
-            normalizeHed.done === normalizeCurrentHed.done
-              ? 'active'
-              : 'inactive';
+          const linkIsActive =
+            normalizeHed.done === normalizeCurrentHed.done ? 'active' : '';
           const articleLink = `/journalism/${normalizePub.done}/${
             normalizeHed.done
           }`;
 
           return (
-            <Link key={idx} className={className} to={articleLink}>
-              <p id="source">{publication}</p>
-              <p id="hed">{headline}</p>
-            </Link>
+            <StyledLink key={idx} link={linkIsActive} to={articleLink}>
+              <Source>{publication}</Source>
+              <Hed menu={menuIsActive}>{headline}</Hed>
+            </StyledLink>
           );
         }}
       />
-    </section>
+    </OverflowContainer>
   );
 }

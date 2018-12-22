@@ -1,22 +1,32 @@
 import React from 'react';
-import MenuCloseButton from './MenuCloseButton.jsx';
-import MenuDescription from './MenuDescription.jsx';
 import styled from 'styled-components';
+
+import CloseButton from './MenuCloseButton.jsx';
+import Description from './MenuDescription.jsx';
 
 const StyledMenu = styled.main`
   align-items: center;
   background-color: navy;
   color: white;
 `;
+const Overflow = styled.section`
+  margin-top: 15px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  overflow: auto;
+`;
 
 export default function Menu(props) {
-  const { userLocation, link, text, render } = props;
+  const { link, text, render } = props;
+
+  console.log(props);
 
   return (
-    <StyledMenu id="site-menu" className={`${userLocation}-menu`}>
-      <MenuCloseButton link={link} />
-      <MenuDescription text={text} />
-      {render()}
+    <StyledMenu>
+      <CloseButton link={link} />
+      <Description text={text} />
+      <Overflow>{render()}</Overflow>
     </StyledMenu>
   );
 }

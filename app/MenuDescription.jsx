@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Hed = styled.h1`
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 25px;
   margin-right: 25px;
   max-width: 507px;
   padding-bottom: 8px;

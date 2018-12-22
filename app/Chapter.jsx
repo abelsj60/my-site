@@ -6,7 +6,8 @@ import styled from 'styled-components';
 const Hed = styled.h1`
   font-size: 3rem;
   line-height: normal;
-  margin-bottom: 25px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 `;
 const StoryText = styled.section`
   font-size: 1.75rem;
