@@ -7,24 +7,21 @@ import magicData from './data/magicData.js';
 // Create, Build, Amaze
 
 const MagicNavContainer = styled.section`
-  flex: 1;
-  display: block;
-  overflow: auto;
+  height: 100%;
+  display: flex;
 
   @media (min-width: 848px) {
-    display: flex;
+    // display: flex;
   }
 `;
 const StyledLink = styled(Link)`
   flex: 1;
   display: ${props => (props.item !== 2 ? 'none' : 'flex')};
-  flex-direction: row;
   align-items: flex-end;
   font-size: 6rem;
   color: deepskyblue;
   padding-left: 25px;
   padding-right: 25px;
-  min-height: 100%;
 
   &:hover {
     color: deeppink;
@@ -32,14 +29,12 @@ const StyledLink = styled(Link)`
 
   @media (min-width: 848px) {
     font-size: 5rem;
+    display: flex;
   }
 `;
 const Hed = styled.h3`
   padding-bottom: 30px;
-  flex: 1;
 `;
-
-// <StyledLink key={idx} link={linkIsActive} to={articleLink}></StyledLink>
 
 export default function MagicNav() {
   return (

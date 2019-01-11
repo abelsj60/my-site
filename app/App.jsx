@@ -88,8 +88,8 @@ class App extends Component {
             state={this.state}
             boundSpellsForHome={boundSpellsForHome}
           />
-          <BusinessCard {...this.props} state={this.state} />
-          <LegalTerms {...this.props} state={this.state} />
+          <BusinessCard {...this.props} state={this.state} home={isHome} />
+          <LegalTerms {...this.props} state={this.state} home={isHome} />
           <FooterContainer
             {...this.props}
             state={this.state}

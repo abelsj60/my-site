@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Referrer from './custom/Referrer.js';
 
 const InactiveContainer = styled.section`
   display: none;
@@ -62,13 +61,13 @@ export default function BusinessCard(props) {
     return null;
   }
 
-  const referrer = new Referrer(props);
+  const homeIsActive = props.home === 'active';
   const StyledContainer = props.state.showBusinessCard
     ? ActiveContainer
     : InactiveContainer;
 
   return (
-    <StyledContainer home={referrer.location === ''}>
+    <StyledContainer home={homeIsActive}>
       <Card>
         <Graph>James Abels</Graph>
         <Line />

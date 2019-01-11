@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Referrer from './custom/Referrer.js';
-
 const ActiveContainer = styled.section`
   z-index: ${props => (props.home ? 2 : 0)};
   display: flex;
@@ -38,14 +36,14 @@ export default function Legal(props) {
     return null;
   }
 
-  const referrer = new Referrer(props);
+  const homeIsActive = props.home === 'active';
   const StyledContainer = props.state.showLegalTerms
     ? ActiveContainer
     : InactiveContainer;
   const copyrightYear = new Date().getFullYear();
 
   return (
-    <StyledContainer home={referrer.location === ''}>
+    <StyledContainer home={homeIsActive}>
       <Graf>© {copyrightYear} James Abels. All rights reserved.</Graf>
     </StyledContainer>
   );

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import MagicNav from './MagicNav.jsx';
+import Mapper from './Mapper.jsx';
+import magicData from './data/magicData.js';
 
 const Main = styled.main`
   flex: 1;
@@ -15,16 +17,36 @@ const Image = styled.img`
   min-height: 100vh;
   z-index: 1;
   object-fit: cover;
+  position: fixed;
 `;
 const MagicContent = styled.section`
   z-index: 1;
-  flex: 1;
   display: flex;
-  flex-direction: column;
   height: 100%;
   width: 100%;
   opacity: ${props => `${props.magicOpacity}`};
   pointer-events: ${props => (props.pointerIsBlocked ? 'none' : 'all')};
+`;
+const StyledLink = styled(Link)`
+  flex: 1;
+  display: ${props => (props.item !== 2 ? 'none' : 'flex')};
+  align-items: flex-end;
+  font-size: 6rem;
+  color: deepskyblue;
+  padding-left: 25px;
+  padding-right: 25px;
+
+  &:hover {
+    color: deeppink;
+  }
+
+  @media (min-width: 848px) {
+    font-size: 5rem;
+    display: flex;
+  }
+`;
+const Hed = styled.h3`
+  padding-bottom: 30px;
 `;
 
 export default class Home extends Component {
@@ -79,7 +101,16 @@ export default class Home extends Component {
           magicOpacity={magicOpacity}
           pointerIsBlocked={blockPointer}
         >
-          <MagicNav />
+          <Mapper
+            mapData={magicData}
+            render={(name, idx) => {
+              return (
+                <StyledLink key={idx} to={name.link} item={idx + 1}>
+                  <Hed>{name.hed}</Hed>
+                </StyledLink>
+              );
+            }}
+          />
         </MagicContent>
       </Main>
     );
