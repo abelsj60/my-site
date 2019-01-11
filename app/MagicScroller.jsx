@@ -6,7 +6,7 @@ const Abracadabra = styled.section`
 `;
 
 export default function MagicScroller(props) {
-  if (props.home) {
+  if (props.home === 'active') {
     return <Abracadabra />;
   }
 

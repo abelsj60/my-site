@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import AppBarFooter from './AppBarFooter.jsx';
 import RegularFooter from './RegularFooter.jsx';
 
-import Referrer from './custom/Referrer.js';
-
 const Footer = styled.footer`
   z-index: 1;
   background-color: rgb(115, 0, 0);
@@ -15,10 +13,8 @@ const Footer = styled.footer`
 `;
 
 export default function FooterContainer(props) {
+  const isHome = props.home === 'active';
   const { blockPointer, magicOpacity } = props.state;
-
-  const r = new Referrer(props);
-  const isHome = r.location === 'home';
 
   return (
     <Footer home={isHome} op={magicOpacity} blockPointer={blockPointer}>

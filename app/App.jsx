@@ -7,7 +7,7 @@ import Header from './Header.jsx';
 import Body from './Body.jsx';
 import BusinessCard from './BusinessCard.jsx';
 import LegalTerms from './LegalTerms.jsx';
-import FooterContainer from './Footer.jsx';
+import Footer from './Footer.jsx';
 import MagicScroller from './MagicScroller.jsx';
 
 import Referrer from './custom/Referrer.js';
@@ -90,7 +90,8 @@ class App extends Component {
           />
           <BusinessCard {...this.props} state={this.state} home={isHome} />
           <LegalTerms {...this.props} state={this.state} home={isHome} />
-          <FooterContainer
+          <Footer
+            home={isHome}
             {...this.props}
             state={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
