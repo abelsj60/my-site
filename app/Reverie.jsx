@@ -5,6 +5,7 @@ import marked from 'marked';
 import reveries from './data/reveries/index';
 
 const Main = styled.main`
+  flex: 1;
   background-color: navy;
   color: white;
 `;
@@ -14,7 +15,7 @@ const Content = styled.section`
   flex-direction: column;
   padding: 25px;
 `;
-const Title = styled.h1`
+const Name = styled.h1`
   margin-bottom: 5px;
   font-size: 1.75rem;
   font-style: italic;
@@ -40,11 +41,11 @@ const Hed = styled.h2`
   font-weight: bold;
   margin-bottom: 7px;
 `;
-const Date = styled.p`
+const PostDate = styled.p`
   margin-bottom: 10px;
 `;
 
-class Reverie extends Component {
+export default class Reverie extends Component {
   constructor(props) {
     super(props);
 
@@ -61,10 +62,10 @@ class Reverie extends Component {
     return (
       <Main>
         <Content>
-          <Title>Reverie</Title>
+          <Name>Reverie</Name>
           <Post>
             <Hed>{hed}</Hed>
-            <Date>{date}</Date>
+            <PostDate>{date}</PostDate>
             {ReactHtmlParser(marked(reverie.body, { smartypants: true }))}
           </Post>
         </Content>
@@ -72,5 +73,3 @@ class Reverie extends Component {
     );
   }
 }
-
-export default Reverie;

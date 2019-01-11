@@ -20,7 +20,7 @@ const ProjectContainer = styled.main`
     flex-direction: row;
   }
 `;
-const ActiveProject = styled.section`
+const Project = styled.section`
   flex: 2;
   display: flex;
   flex-direction: column;
@@ -32,8 +32,9 @@ const ActiveProject = styled.section`
   }
 `;
 const Hed = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 10px;
+  font-weight: bold;
 `;
 const ImageFrame = styled.section`
   display: flex;
@@ -55,7 +56,7 @@ const ImageFrame = styled.section`
     flex-direction: row-reverse;
   }
 `;
-const DPSelector = styled.section`
+const ProjectSelector = styled.section`
   display: none;
 
   @media (min-width: 848px) {
@@ -70,7 +71,7 @@ const DPSelector = styled.section`
     color: white;
   }
 `;
-const DPSDescripton = styled.p`
+const Blurb = styled.p`
   color: white;
   font-style: italic;
   padding-bottom: 7px;
@@ -90,17 +91,17 @@ export default function Projects(props) {
 
   return (
     <ProjectContainer>
-      <DPSelector>
+      <ProjectSelector>
         <Hed>My projects</Hed>
-        <DPSDescripton>{text}</DPSDescripton>
+        <Blurb>{text}</Blurb>
         <MultiProjectNav
           data={data}
           section={'projects'}
           localState={localState}
           projectIndex={projectIndex}
         />
-      </DPSelector>
-      <ActiveProject>
+      </ProjectSelector>
+      <Project>
         <Hed>{name}</Hed>
         <section>
           <ProjectDescription project={project} />
@@ -113,7 +114,7 @@ export default function Projects(props) {
             <ProjectImageContainer project={project} localState={localState} />
           </ImageFrame>
         </section>
-      </ActiveProject>
+      </Project>
     </ProjectContainer>
   );
 }

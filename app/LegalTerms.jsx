@@ -3,19 +3,6 @@ import styled from 'styled-components';
 
 import Referrer from './custom/Referrer.js';
 
-const ShadowBox = styled.div`
-  z-index: 0;
-  position: fixed;
-  bottom: 0;
-  height: 80px;
-  width: 100%;
-`;
-const InactiveContainer = styled.section`
-  display: none;
-`;
-const Graf = styled.p`
-  color: lightgoldenrodyellow;
-`;
 const ActiveContainer = styled.section`
   z-index: ${props => (props.home ? 2 : 0)};
   display: flex;
@@ -32,8 +19,25 @@ const ActiveContainer = styled.section`
     bottom: 55px;
   }
 `;
+const InactiveContainer = styled.section`
+  display: none;
+`;
+const Graf = styled.p`
+  color: lightgoldenrodyellow;
+`;
+// const ShadowBox = styled.div`
+//   z-index: 0;
+//   position: fixed;
+//   bottom: 0;
+//   height: 80px;
+//   width: 100%;
+// `;
 
 export default function Legal(props) {
+  if (!props.state.showLegalTerms) {
+    return null;
+  }
+
   const referrer = new Referrer(props);
   const StyledContainer = props.state.showLegalTerms
     ? ActiveContainer
@@ -43,7 +47,8 @@ export default function Legal(props) {
   return (
     <StyledContainer home={referrer.location === ''}>
       <Graf>© {copyrightYear} James Abels. All rights reserved.</Graf>
-      <ShadowBox />
     </StyledContainer>
   );
 }
+
+// <ShadowBox />

@@ -1,8 +1,8 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
-import { splitPath } from './helpers/utils.js';
 import styled, { css, createGlobalStyle } from 'styled-components';
 
+import Location from './custom/Location.js';
 import Header from './Header.jsx';
 import Body from './Body.jsx';
 import BusinessCard from './BusinessCard.jsx';
@@ -10,7 +10,9 @@ import LegalTerms from './LegalTerms.jsx';
 import FooterContainer from './Footer.jsx';
 import MagicScroller from './MagicScroller.jsx';
 
+import Referrer from './custom/Referrer.js';
 import EventHandling from './custom/EventHandling.js';
+import Spellbook from './custom/Spellbook.js';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -35,7 +37,7 @@ const Page = styled.section`
       background: url('/howls-background-dl.jpg') no-repeat fixed center top;
     `};
 `;
-const HeaderRule = styled.hr`
+const HeaderSeperator = styled.hr`
   width: 100%;
   margin: 0;
   border: 0;
@@ -52,49 +54,39 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const home = splitPath(this.props)[1] === '';
-
-    this.magicClicks = home ? 'block' : '';
-    this.startingScale = 6;
-    this.startingOpacity = 0;
+    const r = new Referrer(this.props);
 
     this.state = {
       showStory: true,
       showLegalTerms: false,
       showBusinessCard: false,
-      magicOpacity: this.startingOpacity,
-      magicScale: this.startingScale,
-      magicClicks: this.magicClicks
+      magicOpacity: 0,
+      blockPointer: r.location === 'home'
     };
-
-    /** Method bindings */
-
-    this.setMagicScale = this.setMagicScale.bind(this);
-    this.setMagicOpacity = this.setMagicOpacity.bind(this);
-    this.toggleMagicPointer = this.toggleMagicPointer.bind(this);
 
     console.log('---APP---');
   }
 
   render() {
-    const path = splitPath(this.props)[1];
-    const homeIsActive = path === '' ? 'active' : '';
-    const menuIsActive = path === 'menu' ? 'active' : '';
-    const eventHandlingForApp = new EventHandling('app', this);
-    const boundHandleClickForApp = eventHandlingForApp.boundHandleClick;
+    const l = new Location('/', this.props);
+    const isHome = l.type === 'home' ? 'active' : '';
+
+    const eForApp = new EventHandling('app', this);
+    const boundHandleClickForApp = eForApp.boundHandleClick;
+
+    const spellBook = new Spellbook('home', this);
+    const boundSpellsForHome = spellBook.castSpell;
 
     return (
       <Fragment>
         <GlobalStyle />
-        <Page home={homeIsActive} menu={menuIsActive}>
+        <Page home={isHome}>
           <Header {...this.props} scrollTop={this.scrollTop} />
-          <HeaderRule />
+          <HeaderSeperator />
           <Body
             {...this.props}
             state={this.state}
-            setMagicScale={this.setMagicScale}
-            setMagicOpacity={this.setMagicOpacity}
-            toggleMagicPointer={this.toggleMagicPointer}
+            boundSpellsForHome={boundSpellsForHome}
           />
           <BusinessCard {...this.props} state={this.state} />
           <LegalTerms {...this.props} state={this.state} />
@@ -104,7 +96,7 @@ class App extends Component {
             boundHandleClickForApp={boundHandleClickForApp}
           />
         </Page>
-        <MagicScroller />
+        <MagicScroller home={isHome} />
       </Fragment>
     );
   }
@@ -113,102 +105,13 @@ class App extends Component {
     return window.pageYOffset;
   }
 
-  setMagicOpacity() {
-    let finalOpacity;
-
-    // const opacityValue = (this.scrollTop - 580) / (3221 - 580);
-
-    const opacityValue = this.scrollTop / 6000;
-
-    // const ratioOfScrollTopToPosition = this.scrollTop / 3900;
-    // const valueForResizing =
-    //   this.startingScale - ratioOfScrollTopToPosition * this.startingScale;
-
-    // console.log('sT:', this.scrollTop);
-    // console.log('oV:', opacityValue);
-    // console.log();
-
-    const opacityToString = opacityValue + '';
-    const opacityFailSafe =
-      this.scrollTop < 15 && this.state.magicOpacity !== 0;
-
-    if (opacityValue > 0 && opacityValue <= 1) {
-      finalOpacity = opacityToString.slice(1, 4);
-    } else if (opacityValue >= 1) {
-      finalOpacity = 1;
-    } else if (opacityFailSafe) {
-      finalOpacity = 0;
-    }
-
-    if (typeof finalOpacity !== 'string') {
-      finalOpacity = finalOpacity + '';
-    }
-
-    if (finalOpacity || opacityFailSafe) {
-      this.setState({
-        magicOpacity: finalOpacity
-      });
-    }
-  }
-
-  toggleMagicPointer() {
-    if (
-      splitPath(this.props)[1] === '' &&
-      this.state.magicClicks === 'block' &&
-      this.scrollTop > 3220
-    ) {
-      this.setState({ magicClicks: '' });
-    }
-
-    if (
-      splitPath(this.props)[1] === '' &&
-      this.state.magicClicks === '' &&
-      this.scrollTop < 3220
-    ) {
-      this.setState({ magicClicks: 'block' });
-    }
-  }
-
-  setMagicScale() {
-    const scrollTopToContainerRatio = this.scrollTop / 3900;
-    const valueForResizing =
-      this.startingScale - scrollTopToContainerRatio * this.startingScale;
-
-    /** Note: Passing as string considerably reduces jank, using
-     * true numbers w/parseInt() is a TOTAL DISASTER
-     */
-
-    const resizeToString = valueForResizing + '';
-    const finalScale = resizeToString.slice(0, 4);
-
-    this.setState({
-      magicScale: finalScale
-    });
-  }
-
   componentDidUpdate(prevProps) {
-    const location = splitPath(this.props);
-    const eventHandlingForApp = new EventHandling('app', this);
-    const handleClickForApp = eventHandlingForApp.boundHandleClick;
+    const l = new Location('/', this.props, prevProps);
 
-    const updateMagicClicksWhenGoingHome =
-      location[1] === '' &&
-      this.scrollTop < 3220 &&
-      this.state.magicClicks === '';
-    const updateMagicClicksWhenLeavingHome =
-      location[1] !== '' && this.state.magicClicks === 'block';
+    const eForApp = new EventHandling('app', this);
+    const handleClickForApp = eForApp.boundHandleClick;
 
-    if (updateMagicClicksWhenGoingHome || updateMagicClicksWhenLeavingHome) {
-      this.setState({
-        magicClicks: updateMagicClicksWhenGoingHome
-          ? 'block'
-          : updateMagicClicksWhenLeavingHome
-            ? ''
-            : this.state.magicClicks
-      });
-    }
-
-    if (location[1] !== splitPath(prevProps)[1]) {
+    if (l.justChanged) {
       const { showBusinessCard, showLegalTerms, showStory } = this.state;
 
       if (showBusinessCard) {
@@ -227,3 +130,16 @@ class App extends Component {
 }
 
 export default withRouter(App);
+
+/**
+ * At 2200, it's 0
+ * At 3223, it's 1
+ *
+ * At 2200, it's 0
+ * At 3223, it's 1
+ */
+
+/** Temp notes
+ *  At 0, it's 6
+ *  At 3223, it's 1
+ */

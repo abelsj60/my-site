@@ -4,9 +4,9 @@
   width: 100%;
   min-height: 100vh;
   z-index: 1;
-  /* bottom: 80px; */
   object-fit: cover;
-  position: fixed;
+  /* position: fixed; */
+  /* bottom: 80px; */
 }
 
 #first-hint {

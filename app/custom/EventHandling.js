@@ -33,18 +33,28 @@ export default class EventHandling {
 
   _handleClickForAppComponent() {
     return propertyToUpdate => {
+      const {
+        showBusinessCard,
+        showLegalTerms,
+        blockPointer,
+        showStory
+      } = this.state;
       let stateToUpdate;
 
       switch (propertyToUpdate) {
         case 'showBusinessCard':
-          stateToUpdate = { showBusinessCard: !this.state.showBusinessCard };
+          stateToUpdate = { showBusinessCard: !showBusinessCard };
           break;
         case 'showLegalTerms':
-          stateToUpdate = { showLegalTerms: !this.state.showLegalTerms };
+          stateToUpdate = { showLegalTerms: !showLegalTerms };
           break;
         case 'showStoryText':
-          stateToUpdate = { showStory: !this.state.showStory };
+          stateToUpdate = { showStory: !showStory };
           break;
+        case 'toggleMagicPointer':
+          stateToUpdate = {
+            blockPointer: !blockPointer
+          };
         default:
           console.log('_handleClickForAppComponent: Keep calm, carry on');
           break;

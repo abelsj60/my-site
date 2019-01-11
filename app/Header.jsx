@@ -54,7 +54,6 @@ class Header extends Component {
     }
 
     if (!headerIsTransparent && scrollTop <= 7) {
-      console.log('h3:', 'here!');
       this.setState({ visibility: 'transparent' });
     }
   }

@@ -11,17 +11,17 @@ const Footer = styled.footer`
   background-color: rgb(115, 0, 0);
   background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
   opacity: ${props => (props.home ? props.op : '')};
-  pointer-events: ${props => (props.mc !== 'block' ? 'all' : 'none')};
+  pointer-events: ${props => (props.blockPointer ? 'none' : 'auto')};
 `;
 
 export default function FooterContainer(props) {
-  const { magicClicks, magicOpacity } = props.state;
+  const { blockPointer, magicOpacity } = props.state;
 
   const r = new Referrer(props);
-  const isHome = r.location === '';
+  const isHome = r.location === 'home';
 
   return (
-    <Footer home={isHome} op={magicOpacity} mc={magicClicks}>
+    <Footer home={isHome} op={magicOpacity} blockPointer={blockPointer}>
       <RegularFooter {...props} />
       <AppBarFooter {...props} />
     </Footer>

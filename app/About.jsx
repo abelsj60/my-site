@@ -14,6 +14,7 @@ const Main = styled.main`
 `;
 const Content = styled.section`
   flex: 1;
+  flex-direction: column;
   font-size: 1.75rem;
 
   @media (min-width: 848px) {

@@ -1,10 +1,14 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { splitPath } from './helpers/utils.js';
+import styled from 'styled-components';
 
-function MagicScroller(props) {
-  const abracadabra = splitPath(props)[1] === '';
-  return abracadabra && <section id="abracadabra" />;
+const Abracadabra = styled.section`
+  height: 4000px;
+`;
+
+export default function MagicScroller(props) {
+  if (props.home) {
+    return <Abracadabra />;
+  }
+
+  return null;
 }
-
-export default withRouter(MagicScroller);

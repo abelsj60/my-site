@@ -69,4 +69,42 @@
 
     -Interfaces:
       https://stackoverflow.com/a/1022060
+
+    Old Scale:
+      const scrollSpot = this.scrollTop / 3900;
+    const imageScale = 6 - scrollSpot * 6;
+
+
+     * Old: 0 - 4000
+     * New: 6 - 1
+     *
+     * Number:
+
+
+    console.log('iS:', scrollSpot * 6);
+
+    Note: Passing as string reduces jank, using
+    * numbers (via parseInt()) is a disaster
+
+
+    const failSafe = Math.max(1, imageScale);
+    const scaleAsString = failSafe.toString();
+    const magicScale = scaleAsString.slice(0, 6);
+
+    this.setState({
+      magicScale
+    });
+
+
+// <section style={believeStyle}>
+// <h2>Still believe in magic?</h2>
+// </section>
+
+// const believeStyle = {
+//   zIndex: '1',
+//   fontSize: '5rem',
+//   transform: `scale(${this.state.scale})`,
+//   opacity: this.state.opacity
+// };
+
 */

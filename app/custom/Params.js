@@ -31,7 +31,6 @@ export default class Params {
   }
 
   get isMenu() {
-    // console.log('_one:', this._one);
     return this._one === 'menu';
   }
 

@@ -11,19 +11,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use('/api', require('./api'));
 
-app.get('/bundle.js', (req, res, next) => {
+app.get('/bundle.js', (_req, res) => {
   res.sendFile(path.join(__dirname, '../bundle.js'));
 });
 
-app.get('/bundle.js.map', (req, res, next) => {
+app.get('/bundle.js.map', (_req, res) => {
   res.sendFile(path.join(__dirname, '../bundle.js.map'));
 });
 
-app.get('*', (req, res, next) => {
+app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res) => {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');

@@ -2,22 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Referrer from './custom/Referrer.js';
 
-const Graph = styled.p`
-  margin-left: 70px;
-`;
-const Line = styled.div`
-  background-color: white;
-  width: 80%;
-  height: 2px;
-  margin-left: 70px;
-`;
-const ShadowBox = styled.div`
-  z-index: 0;
-  position: fixed;
-  bottom: 0;
-  height: 80px;
-  width: 100%;
-`;
 const InactiveContainer = styled.section`
   display: none;
 `;
@@ -56,8 +40,28 @@ const Card = styled.section`
     text-shadow: 0.5px 1px 2px black;
   }
 `;
+const Graph = styled.p`
+  margin-left: 70px;
+`;
+const Line = styled.div`
+  background-color: white;
+  width: 80%;
+  height: 2px;
+  margin-left: 70px;
+`;
+// const ShadowBox = styled.div`
+//   z-index: 0;
+//   position: fixed;
+//   bottom: 0;
+//   height: 80px;
+//   width: 100%;
+// `;
 
 export default function BusinessCard(props) {
+  if (!props.state.showBusinessCard) {
+    return null;
+  }
+
   const referrer = new Referrer(props);
   const StyledContainer = props.state.showBusinessCard
     ? ActiveContainer
@@ -71,7 +75,8 @@ export default function BusinessCard(props) {
         <Graph>917-854-7848</Graph>
         <Graph>abelsj60_AT_gmail.com</Graph>
       </Card>
-      <ShadowBox />
     </StyledContainer>
   );
 }
+
+// <ShadowBox />
