@@ -9,11 +9,11 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
-    const home = splitPath(this.props)[1] === '';
+    const isHome = props.home === 'active';
 
     this.state = {
       menu: '',
-      visibility: home ? 'transparent' : 'opaque'
+      visibility: isHome ? 'transparent' : 'opaque'
     };
 
     this.timeoutId = 0;
@@ -49,11 +49,15 @@ class Header extends Component {
     const scrollTop = this.props.scrollTop;
     const headerIsTransparent = this.state.visibility === 'transparent';
 
-    if (headerIsTransparent && scrollTop >= 7) {
+    console.log('hIT:', headerIsTransparent, ' | ', scrollTop);
+
+    if (scrollTop >= 51) {
+      console.log('make opaque');
       this.setState({ visibility: 'opaque' });
     }
 
-    if (!headerIsTransparent && scrollTop <= 7) {
+    if (scrollTop < 50) {
+      console.log('make transparent');
       this.setState({ visibility: 'transparent' });
     }
   }
@@ -63,16 +67,16 @@ class Header extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const home = this.location[1] === '';
+    const isHome = this.props.home === 'active';
     const headerIsTransparent = this.state.visibility === 'transparent';
     const userIsTraveling = this.location[1] !== splitPath(prevProps)[1];
     const timeoutIsRunning = this.timeoutId;
 
-    if (!home && headerIsTransparent) {
+    if (!isHome && headerIsTransparent) {
       this.setState({ visibility: 'opaque' });
     }
 
-    if (home && !headerIsTransparent && this.scrollTop < 7) {
+    if (isHome && !headerIsTransparent && this.scrollTop < 7) {
       this.setState({ visibility: 'transparent' });
     }
 
@@ -82,12 +86,12 @@ class Header extends Component {
   }
 
   render() {
-    const home = splitPath(this.props)[1] === '';
+    const isHome = this.props.home === 'active';
 
     return (
       <HtmlContainer
         element="header"
-        id={home ? 'home-page-header' : 'inner-page-header'}
+        id={isHome ? 'home-page-header' : 'inner-page-header'}
         className={`${this.state.visibility}`}
       >
         <HeaderText />

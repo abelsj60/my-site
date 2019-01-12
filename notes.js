@@ -95,6 +95,18 @@
       magicScale
     });
 
+/**
+ * At 2200, it's 0
+ * At 3223, it's 1
+ *
+ * At 2200, it's 0
+ * At 3223, it's 1
+ */
+
+/** Temp notes
+ *  At 0, it's 6
+ *  At 3223, it's 1
+ */
 
 // <section style={believeStyle}>
 // <h2>Still believe in magic?</h2>
@@ -107,4 +119,4 @@
 //   opacity: this.state.opacity
 // };
 
-*/
+// https://stackoverflow.com/questions/19057731/scrolltop-on-page-reload-doesnt-work-possible-script-conflict

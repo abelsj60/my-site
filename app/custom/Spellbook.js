@@ -19,9 +19,6 @@ export default class Spellbook {
     let spellbook;
 
     switch (this._component) {
-      case 'app':
-        spellbook = this._appComponentSpellbook;
-        break;
       case 'home':
         spellbook = this._homeComponentSpellbook;
     }
@@ -29,24 +26,6 @@ export default class Spellbook {
     // 'this' bound to App. 'innerThis' set to Spellbook via currying.
 
     return spellbook.call(outerThis, this);
-  }
-
-  _appComponentSpellbook(innerThis) {
-    return spell => {
-      let stateToUpdate;
-
-      switch (spell) {
-        case 'toggleMagicPointer':
-          console.log('Running?');
-          stateToUpdate = innerThis._toggleMagicPointer(this);
-          break;
-        default:
-          console.log('_selectSpellForAppComponent: Keep calm, carry on');
-          break;
-      }
-
-      return this.setState(stateToUpdate);
-    };
   }
 
   // We curry homeSpellbook b/c it's going to be an event listener.

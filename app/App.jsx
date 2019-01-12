@@ -54,7 +54,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const r = new Referrer(this.props);
+    const r = new Referrer(props);
 
     this.state = {
       showStory: true,
@@ -63,8 +63,6 @@ class App extends Component {
       magicOpacity: 0,
       blockPointer: r.location === 'home'
     };
-
-    console.log('---APP---');
   }
 
   render() {
@@ -81,15 +79,15 @@ class App extends Component {
       <Fragment>
         <GlobalStyle />
         <Page home={isHome}>
-          <Header {...this.props} scrollTop={this.scrollTop} />
+          <Header home={isHome} {...this.props} scrollTop={this.scrollTop} />
           <HeaderSeperator />
           <Body
             {...this.props}
             state={this.state}
             boundSpellsForHome={boundSpellsForHome}
           />
-          <BusinessCard {...this.props} state={this.state} home={isHome} />
-          <LegalTerms {...this.props} state={this.state} home={isHome} />
+          <BusinessCard home={isHome} {...this.props} state={this.state} />
+          <LegalTerms home={isHome} {...this.props} state={this.state} />
           <Footer
             home={isHome}
             {...this.props}
@@ -131,16 +129,3 @@ class App extends Component {
 }
 
 export default withRouter(App);
-
-/**
- * At 2200, it's 0
- * At 3223, it's 1
- *
- * At 2200, it's 0
- * At 3223, it's 1
- */
-
-/** Temp notes
- *  At 0, it's 6
- *  At 3223, it's 1
- */

@@ -11,21 +11,25 @@ const Main = styled.main`
   height: 100%;
   width: 100%;
 `;
-const Image = styled.img`
-  transform: ${props => `scale(${props.magicScale})`};
+const Image = styled.img.attrs(props => ({
+  style: { transform: `scale(${props.magicScale})` }
+}))`
   width: 100%;
   min-height: 100vh;
   z-index: 1;
   object-fit: cover;
   position: fixed;
 `;
-const MagicContent = styled.section`
+const MagicContent = styled.section.attrs(props => ({
+  style: {
+    opacity: props.magicOpacity,
+    pointerEvents: props.pointerIsBlocked ? 'none' : 'all'
+  }
+}))`
   z-index: 1;
   display: flex;
   height: 100%;
   width: 100%;
-  opacity: ${props => `${props.magicOpacity}`};
-  pointer-events: ${props => (props.pointerIsBlocked ? 'none' : 'all')};
 `;
 const StyledLink = styled(Link)`
   flex: 1;
