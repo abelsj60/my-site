@@ -47,11 +47,11 @@ const Image = styled.section`
 
 export default function About() {
   return (
-    <Main id="about">
-      <Image id="about-illustration" className="left" />
-      <Content id="about-content" className="right">
+    <Main>
+      <Image />
+      <Content>
         <Hed>About</Hed>
-        <TextContainer id="about-text-container">
+        <TextContainer>
           {ReactHtmlParser(marked(bio.body, { smartypants: true }))}
         </TextContainer>
       </Content>

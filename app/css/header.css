@@ -1,27 +1,5 @@
 /* HEADER CSS */
 
-header {
-  z-index: 2;
-  position: relative;
-  height: 52px;
-  color: white;
-  background-color: transparent;
-  transition: background-color 0.7s, color 0.7s;
-  display: flex;
-  align-items: center;
-  /* flex-direction: column; */
-}
-
-#inner-page-header.opaque {
-  color: black;
-  /* background-color: white; */
-  /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
-}
-
-#inner-page-header.opaque {
-  /* background-image: url('https://www.transparenttextures.com/patterns/debut-light.png'); */
-}
-
 /* #header-content {
   flex: 1;
   display: flex;
@@ -29,77 +7,77 @@ header {
   align-items: center;
 } */
 
-#site-name,
+/* #site-name,
 #site-motto {
   margin-left: 15px;
-}
+} */
 
-header.menu-open #site-name,
+/* header.menu-open #site-name,
 header.menu-open #site-motto {
   display: none;
-}
+} */
 
-#site-name {
+/* #site-name {
   font-size: 1.5rem;
   font-weight: bold;
-}
+} */
 
-#site-motto {
+/* #site-motto {
   margin-top: 2px;
   font-size: 1.3rem;
   font-style: italic;
-}
+} */
 
-#home-page-header.opaque {
+/* #home-page-header.opaque {
   background-color: white;
-}
+} */
 
-#home-page-header.opaque,
+/* #home-page-header.opaque,
 #home-page-header.opaque a,
 #home-page-header.opaque a:hover {
   color: black;
-}
-
+} */
+/*
 header nav {
   display: none;
-}
+} */
 
-header.menu-open nav {
+/* header.menu-open nav {
   display: flex;
   flex: 1;
-}
+} */
 
-header a {
+/* header a {
   color: white;
   transition: color 0.7s;
   margin-left: 15px;
-}
+} */
 
-#inner-page-header,
+/* #inner-page-header,
 #inner-page-header a,
 #inner-page-header #nav-icon {
   transition: none;
-}
+} */
 
-header.opaque a {
+/* header.opaque a {
   color: black;
-}
+} */
 
-header a:hover {
+/* header a:hover {
   color: white;
   text-decoration: underline;
-}
+} */
 
-header.opaque a:hover {
+/* header.opaque a:hover {
   color: black;
-}
+} */
 
-header a.active {
+/* header a.active {
   color: black;
   text-decoration: underline;
-}
+} */
 
-#nav-icon {
+/* #nav-icon {
   height: 17px;
   width: 17px;
   background: url('/sign-white-closed.png') no-repeat center;
@@ -137,36 +115,36 @@ header.menu-open #nav-icon:hover {
 
 header.opaque.menu-open #nav-icon:hover {
   background: url('/sign-black-closed.png') no-repeat center;
-}
+} */
 
-#full-screen-nav-menu {
+/* #full-screen-nav-menu {
   display: none;
-}
+} */
 
-header.menu-open #full-screen-nav-menu {
+/* header.menu-open #full-screen-nav-menu {
   z-index: 3;
   display: flex;
   position: absolute;
   width: 100%;
   top: 52px;
   bottom: 48px;
-  /* background-color: whitesmoke; */
-}
+  background-color: whitesmoke;
+} */
 
 @media only screen and (min-width: 705px) {
-  header.menu-open #site-name,
+  /* header.menu-open #site-name,
   header.menu-open #site-motto {
     display: block;
-  }
+  } */
 
-  #nav-icon {
+  /* #nav-icon {
     display: none;
-  }
+  } */
 
-  header nav {
+  /* header nav {
     display: flex;
     justify-content: flex-end;
     margin-left: auto;
     margin-right: 15px;
-  }
+  } */
 }

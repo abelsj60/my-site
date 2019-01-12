@@ -1,9 +1,74 @@
 import React, { Component } from 'react';
-import HeaderText from './HeaderText.jsx';
-import HeaderNav from './HeaderNav.jsx';
-import HeaderIcon from './HeaderIcon.jsx';
-import HtmlContainer from './HtmlContainer.jsx';
-import { splitPath } from './helpers/utils.js';
+import { Link } from 'react-router-dom';
+import Mapper from './Mapper.jsx';
+import Location from './custom/Location.js';
+import headerData from './data/headerData.js';
+import styled from 'styled-components';
+import Referrer from './custom/Referrer.js';
+
+const HeaderContainer = styled.header.attrs(props => ({
+  style: {
+    backgroundColor: props.home === 'active' ? 'transparent' : 'white',
+    color: props.home === 'active' ? 'white' : 'black'
+  }
+}))`
+  z-index: 2;
+  position: relative;
+  height: 52px;
+  display: flex;
+  align-items: center;
+`;
+const StyledLink = styled(Link)`
+  margin-left: 15px;
+  color: ${props => (props.home === 'active' ? 'white' : 'black')};
+  text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+const MyNameLinksHome = styled(StyledLink)`
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
+const Motto = styled.p`
+  flex: 1;
+  margin-top: 2px;
+  margin-left: 15px;
+  font-size: 1.3rem;
+  font-style: italic;
+`;
+const HeaderNav = styled.nav`
+  display: none;
+  margin-right: 15px;
+
+  @media (min-width: 705px) {
+    display: block;
+  }
+`;
+const TogglerIcon = styled.section`
+  height: 17px;
+  width: 17px;
+  background: ${props =>
+    `url(/sign-${
+      props.home === 'active' ? 'white' : 'black'
+    }-closed.png) no-repeat center`};
+  transition: background 0.7s;
+  margin-left: auto;
+  margin-right: 15px;
+
+  &:hover {
+    background: ${props =>
+    `url(/sign-${
+      props.home === 'active' ? 'white' : 'black'
+    }-open.png) no-repeat center`};
+    transition: background 0.7s;
+  }
+
+  @media (min-width: 705px) {
+    display: none;
+  }
+`;
 
 class Header extends Component {
   constructor(props) {
@@ -18,11 +83,6 @@ class Header extends Component {
 
     this.timeoutId = 0;
     this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
-    this.toggleTransparency = this.toggleTransparency.bind(this);
-  }
-
-  get location() {
-    return splitPath(this.props);
   }
 
   toggleHeaderMenu() {
@@ -45,61 +105,52 @@ class Header extends Component {
     this.timeoutId = setTimeout(() => this.setState({ menu: '' }), 4000);
   }
 
-  toggleTransparency() {
-    const scrollTop = this.props.scrollTop;
-    const headerIsTransparent = this.state.visibility === 'transparent';
-
-    console.log('hIT:', headerIsTransparent, ' | ', scrollTop);
-
-    if (scrollTop >= 51) {
-      console.log('make opaque');
-      this.setState({ visibility: 'opaque' });
-    }
-
-    if (scrollTop < 50) {
-      console.log('make transparent');
-      this.setState({ visibility: 'transparent' });
-    }
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.toggleTransparency);
-  }
-
   componentDidUpdate(prevProps) {
-    const isHome = this.props.home === 'active';
-    const headerIsTransparent = this.state.visibility === 'transparent';
-    const userIsTraveling = this.location[1] !== splitPath(prevProps)[1];
+    const l = new Location('/', this.props, prevProps);
     const timeoutIsRunning = this.timeoutId;
 
-    if (!isHome && headerIsTransparent) {
-      this.setState({ visibility: 'opaque' });
-    }
-
-    if (isHome && !headerIsTransparent && this.scrollTop < 7) {
-      this.setState({ visibility: 'transparent' });
-    }
-
-    if (userIsTraveling && timeoutIsRunning) {
-      this.restartMenuTimeout();
+    if (l.justChanged) {
+      if (timeoutIsRunning) {
+        this.restartMenuTimeout();
+      }
     }
   }
 
   render() {
-    const isHome = this.props.home === 'active';
+    const { home } = this.props;
+    const r = new Referrer(this.props);
 
     return (
-      <HtmlContainer
-        element="header"
-        id={isHome ? 'home-page-header' : 'inner-page-header'}
-        className={`${this.state.visibility}`}
-      >
-        <HeaderText />
-        <HtmlContainer element="nav">
-          <HeaderNav {...this.props} />
-        </HtmlContainer>
-        <HeaderIcon toggleHeaderMenu={this.toggleHeaderMenu} />
-      </HtmlContainer>
+      <HeaderContainer home={home}>
+        <MyNameLinksHome to={'/'} home={home}>
+          James Abels
+        </MyNameLinksHome>
+        <Motto>Magical stories and other adventures</Motto>
+        <HeaderNav>
+          <Mapper
+            mapData={headerData}
+            render={(link, idx) => {
+              const isActive = link.path.includes(r.location) ? 'active' : '';
+              return (
+                <StyledLink
+                  key={idx}
+                  home={home}
+                  to={link.path}
+                  active={isActive}
+                >
+                  {link.name}
+                </StyledLink>
+              );
+            }}
+          />
+        </HeaderNav>
+        <TogglerIcon
+          home={home}
+          onClick={() => {
+            this.props.toggleHeaderMenu();
+          }}
+        />
+      </HeaderContainer>
     );
   }
 }

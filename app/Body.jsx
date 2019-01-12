@@ -25,21 +25,21 @@ export default class Body extends Component {
      */
 
     const r = new Referrer(props);
-    const location = new Location(r.pathToMatch, props);
-    const initialState = new InitialState(props, location);
+    const l = new Location(r.pathToMatch, props);
+    const s = new InitialState(props, l);
 
     this.state = {
-      indexForChapterData: initialState.build('indexForChapterData'),
-      indexForProjectData: initialState.build('indexForProjectData'),
-      indexForProjectPics: initialState.build('indexForProjectPics'),
-      indexForPublication: initialState.build('indexForPublication'),
-      indexForArticleData: initialState.build('indexForArticleData')
+      indexForChapterData: s.build('indexForChapterData'),
+      indexForProjectData: s.build('indexForProjectData'),
+      indexForProjectPics: s.build('indexForProjectPics'),
+      indexForPublication: s.build('indexForPublication'),
+      indexForArticleData: s.build('indexForArticleData')
     };
   }
 
   render() {
-    const eventHandlingForBody = new EventHandling('body', this);
-    const boundHandleClickForBody = eventHandlingForBody.boundHandleClick;
+    const eH = new EventHandling('body', this);
+    const boundHandleClickForBody = eH.boundHandleClick;
 
     return (
       <Switch>
