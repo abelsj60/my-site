@@ -70,8 +70,8 @@ export default class Home extends Component {
     this.scaleSpell = boundSpellsForHome('setMagicScale', this);
     this.opacitySpell = boundSpellsForHome('setMagicOpacity');
     this.pointerSpell = boundSpellsForHome('toggleMagicPointer');
-    this.startPointerSpell = boundSpellsForHome('prepPointerSpell', this);
-    this.finishPointerSpell = boundSpellsForHome('prepPointerSpell');
+    this.startPointerSpell = boundSpellsForHome('startPointerSpell');
+    this.resetTheMagic = boundSpellsForHome('resetTheMagic');
   }
 
   componentDidMount() {
@@ -83,7 +83,7 @@ export default class Home extends Component {
   }
 
   componentWillUnmount() {
-    this.finishPointerSpell();
+    this.resetTheMagic();
 
     window.removeEventListener('scroll', this.scaleSpell);
     window.removeEventListener('scroll', this.opacitySpell);

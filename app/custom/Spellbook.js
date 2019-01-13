@@ -1,6 +1,8 @@
 import Referrer from './Referrer';
 import linearScale from 'simple-linear-scale';
 
+// 'this' bound to App. 'innerThis' set to Spellbook via currying.
+
 export default class Spellbook {
   constructor(component, outsideThis) {
     if (outsideThis.props.location === undefined) {
@@ -21,9 +23,10 @@ export default class Spellbook {
     switch (this._component) {
       case 'home':
         spellbook = this._homeComponentSpellbook;
+        break;
+      default:
+        console.log('_selectSpellbook: Keep calm, carry on');
     }
-
-    // 'this' bound to App. 'innerThis' set to Spellbook via currying.
 
     return spellbook.call(outerThis, this);
   }
@@ -45,23 +48,24 @@ export default class Spellbook {
         case 'toggleMagicPointer':
           stateToUpdate = innerThis._toggleMagicPointer(this);
           break;
-        case 'prepPointerSpell':
-          stateToUpdate = innerThis._prepPointerSpell(
-            this,
-            thisFromHome,
-            innerThis
-          );
+        case 'startPointerSpell':
+          stateToUpdate = innerThis._startPointerSpell(this, innerThis);
+          break;
+        case 'resetTheMagic':
+          stateToUpdate = innerThis._resetTheMagic();
           break;
         default:
           console.log('_selectSpellForAppComponent: Keep calm, carry on');
-          break;
       }
 
       if (
-        spell === 'setMagicOpacity' ||
-        spell === 'prepPointerSpell' ||
-        spell === 'toggleMagicPointer'
+        stateToUpdate !== null &&
+        (spell === 'setMagicOpacity' ||
+          spell === 'startPointerSpell' ||
+          spell === 'toggleMagicPointer' ||
+          spell === 'resetTheMagic')
       ) {
+        console.log('s:', spell, stateToUpdate);
         return this.setState(stateToUpdate);
       } else if (spell === 'setMagicScale') {
         return thisFromHome.setState(stateToUpdate);
@@ -88,25 +92,27 @@ export default class Spellbook {
     } else if (resetTheMagic) {
       return { magicOpacity: 0 };
     }
+
+    return null;
   }
 
   _toggleMagicPointer(thisFromApp) {
-    if (thisFromApp.scrollTop >= 3220) {
+    const blockPointer = thisFromApp.state.blockPointer;
+
+    if (thisFromApp.scrollTop >= 3220 && blockPointer) {
       return { blockPointer: false };
-    } else if (thisFromApp.scrollTop < 3220) {
+    } else if (thisFromApp.scrollTop < 3220 && !blockPointer) {
       return { blockPointer: true };
     }
+
+    return null;
   }
 
-  _prepPointerSpell(thisFromApp, thisFromHome, innerThis) {
-    const isHome = thisFromHome !== undefined;
-    const { blockPointer } = thisFromApp.state;
+  _startPointerSpell(thisFromApp, innerThis) {
+    return innerThis._toggleMagicPointer(thisFromApp);
+  }
 
-    if (isHome && !blockPointer) {
-      innerThis._toggleMagicPointer(thisFromApp);
-      return;
-    } else if (!isHome && blockPointer) {
-      return { blockPointer: false };
-    }
+  _resetTheMagic() {
+    return { magicOpacity: 0, blockPointer: false };
   }
 }
