@@ -28,14 +28,26 @@ const MagicContent = styled.section.attrs(props => ({
   }
 }))`
   z-index: 1;
-  display: flex;
   height: 100%;
   width: 100%;
 `;
-const StyledLink = styled(Link)`
+const MagicList = styled.ul`
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+`;
+const MagicListItem = styled.li`
   flex: 1;
   display: ${props => (props.item !== 2 ? 'none' : 'flex')};
   align-items: flex-end;
+
+  @media (min-width: 848px) {
+    display: flex;
+  }
+`;
+const StyledLink = styled(Link)`
   color: deepskyblue;
   padding-left: 25px;
   padding-right: 25px;
@@ -48,12 +60,8 @@ const StyledLink = styled(Link)`
     text-decoration: none;
   }
 
-  &:hover {
+  ${MagicListItem}:hover & {
     color: deeppink;
-  }
-
-  @media (min-width: 848px) {
-    display: flex;
   }
 `;
 const Hed = styled.h3`
@@ -115,16 +123,20 @@ export default class Home extends Component {
           magicOpacity={magicOpacity}
           pointerIsBlocked={blockPointer}
         >
-          <Mapper
-            mapData={magicData}
-            render={(name, idx) => {
-              return (
-                <StyledLink key={idx} to={name.link} item={idx + 1}>
-                  <Hed>{name.hed}</Hed>
-                </StyledLink>
-              );
-            }}
-          />
+          <MagicList>
+            <Mapper
+              mapData={magicData}
+              render={(name, idx) => {
+                return (
+                  <MagicListItem key={idx} item={idx + 1}>
+                    <StyledLink to={name.link}>
+                      <Hed>{name.hed}</Hed>
+                    </StyledLink>
+                  </MagicListItem>
+                );
+              }}
+            />
+          </MagicList>
         </MagicContent>
       </Main>
     );

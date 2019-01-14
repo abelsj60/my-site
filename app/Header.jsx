@@ -68,16 +68,23 @@ const HeaderNav = styled.nav`
   ${props =>
     props.menu === 'active' &&
     css`
-      display: block;
       flex: 1;
-      text-align: center;
+      display: flex;
+      justify-content: center;
     `};
 
   @media (min-width: 705px) {
-    display: block;
+    display: flex;
     margin-right: 15px;
   }
 `;
+const HeaderNavList = styled.ul`
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+`;
+const HeaderNavItem = styled.li``;
 const TogglerIcon = styled.section`
   height: 17px;
   width: 17px;
@@ -131,25 +138,29 @@ class Header extends Component {
         </MyName>
         <Motto menu={menuIsOpen}>Magical stories and other adventures</Motto>
         <HeaderNav menu={menuIsOpen}>
-          <Mapper
-            mapData={headerData}
-            render={(link, idx) => {
-              const pathIsActive = link.path.includes(r.location)
-                ? 'active'
-                : '';
-              return (
-                <StyledLink
-                  key={idx}
-                  num={idx}
-                  home={home}
-                  to={link.path}
-                  active={pathIsActive}
-                >
-                  {link.name}
-                </StyledLink>
-              );
-            }}
-          />
+          <HeaderNavList>
+            <Mapper
+              mapData={headerData}
+              render={(link, idx) => {
+                const pathIsActive = link.path.includes(r.location)
+                  ? 'active'
+                  : '';
+                return (
+                  <HeaderNavItem>
+                    <StyledLink
+                      key={idx}
+                      num={idx}
+                      home={home}
+                      to={link.path}
+                      active={pathIsActive}
+                    >
+                      {link.name}
+                    </StyledLink>
+                  </HeaderNavItem>
+                );
+              }}
+            />
+          </HeaderNavList>
         </HeaderNav>
         <TogglerIcon
           home={home}

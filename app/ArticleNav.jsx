@@ -5,7 +5,10 @@ import styled from 'styled-components';
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
 
-const OverflowContainer = styled.section`
+const ArticleList = styled.ul`
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
   overflow: auto;
 `;
 const StyledLink = styled(Link)`
@@ -39,35 +42,33 @@ export default function ArticleNav(props) {
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <OverflowContainer>
-      <ul style={{ margin: '0', listStyleType: 'none', padding: '0' }}>
-        <Mapper
-          mapData={data}
-          render={(article, idx) => {
-            const { publication, headline } = article.attributes;
-            const currentHed = data[indexForArticleData].attributes.headline;
+    <ArticleList>
+      <Mapper
+        mapData={data}
+        render={(article, idx) => {
+          const { publication, headline } = article.attributes;
+          const currentHed = data[indexForArticleData].attributes.headline;
 
-            const normalizePub = new Normalize(publication);
-            const normalizeHed = new Normalize(headline);
-            const normalizeCurrentHed = new Normalize(currentHed);
+          const normalizePub = new Normalize(publication);
+          const normalizeHed = new Normalize(headline);
+          const normalizeCurrentHed = new Normalize(currentHed);
 
-            const linkIsActive =
-              normalizeHed.done === normalizeCurrentHed.done ? 'active' : '';
-            const articleLink = `/journalism/${normalizePub.done}/${
-              normalizeHed.done
-            }`;
+          const linkIsActive =
+            normalizeHed.done === normalizeCurrentHed.done ? 'active' : '';
+          const articleLink = `/journalism/${normalizePub.done}/${
+            normalizeHed.done
+          }`;
 
-            return (
-              <li key={idx}>
-                <StyledLink link={linkIsActive} to={articleLink}>
-                  <Source>{publication}</Source>
-                  <Hed menu={menuIsActive}>{headline}</Hed>
-                </StyledLink>
-              </li>
-            );
-          }}
-        />
-      </ul>
-    </OverflowContainer>
+          return (
+            <li key={idx}>
+              <StyledLink link={linkIsActive} to={articleLink}>
+                <Source>{publication}</Source>
+                <Hed menu={menuIsActive}>{headline}</Hed>
+              </StyledLink>
+            </li>
+          );
+        }}
+      />
+    </ArticleList>
   );
 }

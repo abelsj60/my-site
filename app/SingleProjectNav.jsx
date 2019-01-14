@@ -4,15 +4,19 @@ import styled, { css } from 'styled-components';
 
 import Mapper from './Mapper.jsx';
 
-const ThumbnailsContainer = styled.section`
+const ThumbnailGroup = styled.ul`
   display: flex;
+  margin: 0;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
   padding-bottom: 7px;
+  list-style-type: none;
 
   ${props =>
     props.menu === 'active' &&
     css`
       margin-bottom: 20px;
-      margin: 0;
       padding-bottom: 0;
       max-width: 100%;
       flex-direction: row;
@@ -48,6 +52,7 @@ const ThumbnailsContainer = styled.section`
       }
     `}};
 `;
+const ThumbnailListItem = styled.li``;
 const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
@@ -91,7 +96,7 @@ const Highlighter = styled.div`
 `;
 
 export default function SingleProjectNav(props) {
-  // ! Using return state to ID active project b/c no params in Menu
+  // ! ID active project via returnState b/c no params in '/.../menu'
 
   const { project, activeProject, isDesktop, isMenu } = props;
   const { indexForProjectPics } = props.localState;
@@ -100,7 +105,7 @@ export default function SingleProjectNav(props) {
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <ThumbnailsContainer desktop={isDesktop} menu={menuIsActive}>
+    <ThumbnailGroup desktop={isDesktop} menu={menuIsActive}>
       <Mapper
         mapData={thumbnails}
         render={(thumb, idx) => {
@@ -110,19 +115,20 @@ export default function SingleProjectNav(props) {
             activeProject && indexForProjectPics === idx ? 'active' : '';
 
           return (
-            <StyledLink
-              key={idx}
-              menu={menuIsActive}
-              active={thumbnailIsActive}
-              padding={thumbnailNeedsPadding}
-              to={`/projects/${projectName}/${thumbnailNumber}`}
-            >
-              <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
-              <Highlighter highlight={thumbnailIsActive} />
-            </StyledLink>
+            <ThumbnailListItem key={idx}>
+              <StyledLink
+                menu={menuIsActive}
+                active={thumbnailIsActive}
+                padding={thumbnailNeedsPadding}
+                to={`/projects/${projectName}/${thumbnailNumber}`}
+              >
+                <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
+                <Highlighter highlight={thumbnailIsActive} />
+              </StyledLink>
+            </ThumbnailListItem>
           );
         }}
       />
-    </ThumbnailsContainer>
+    </ThumbnailGroup>
   );
 }

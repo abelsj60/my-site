@@ -5,22 +5,29 @@ import styled, { css } from 'styled-components';
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize.js';
 
-const StoryNavigation = styled.nav`
+const ChapterNavContainer = styled.nav`
+  margin: 0;
+  padding: 0;
+`;
+const ChapterList = styled.ul`
+  flex: 1;
   display: ${props => (props.menu !== 'active' ? 'flex' : '')};
   flex-direction: ${props => (props.menu === 'active' ? 'column' : '')};
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 `;
-const StyledLink = styled(Link)`
+const ChapterListItem = styled.li`
   flex: ${props => (props.menu !== 'active' ? '1' : '')};
   flex-direction: ${props => (props.menu === 'active' ? 'column' : '')};
   align-items: ${props => (props.menu === 'active' ? 'flex-start' : 'center')};
-  border-bottom: ${props =>
-    props.link === 'active' && props.menu !== 'active'
-      ? 'whitesmoke solid .5px'
-      : ''};
+`;
+const StyledLink = styled(Link)`
   color: ${props =>
-    props.link === 'active' && props.menu === 'active'
+    props.item === 'active' && props.menu === 'active'
       ? 'deepskyblue'
       : 'whitesmoke'};
+
   text-decoration: none;
 
   &:focus,
@@ -63,6 +70,10 @@ const NavigationText = styled.p`
   margin-bottom: ${props =>
     props.menu === 'active' && props.num !== 3 ? '10px' : '0px'};
   padding-bottom: ${props => (props.menu !== 'active' ? '10px' : '')};
+  border-bottom: ${props =>
+    props.item === 'active' && props.menu !== 'active'
+      ? 'whitesmoke solid .5px'
+      : ''};
 `;
 
 export default function ChapterNav(props) {
@@ -71,37 +82,44 @@ export default function ChapterNav(props) {
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <StoryNavigation menu={menuIsActive}>
-      <Mapper
-        mapData={data}
-        render={(chapter, idx) => {
-          const chapterNumberForMenu = idx + 1;
-          const linkIsActive = indexForChapterData === idx ? 'active' : '';
-          const chapterNeedsTopPadding = idx > 0 ? 'active' : '';
-          const pageOrMenuText = isMenu ? chapter.attributes.title : idx + 1;
-          const n = new Normalize(data[idx].attributes.title);
-          const normalizedTitle = n.done;
+    <ChapterNavContainer>
+      <ChapterList menu={menuIsActive}>
+        <Mapper
+          mapData={data}
+          render={(chapter, idx) => {
+            const chapterNumberForMenu = idx + 1;
+            const chapterNeedsTopPadding = idx > 0 ? 'active' : '';
+            const itemIsActive = indexForChapterData === idx ? 'active' : '';
+            const pageOrMenuText = isMenu ? chapter.attributes.title : idx + 1;
+            const n = new Normalize(data[idx].attributes.title);
+            const normalizedTitle = n.done;
 
-          return (
-            <StyledLink
-              key={idx}
-              link={linkIsActive}
-              menu={menuIsActive}
-              to={`/story/chapter/${normalizedTitle}`}
-            >
-              <ExtraTextForMenu
-                menu={menuIsActive}
-                padding={chapterNeedsTopPadding}
-              >
-                Chapter {chapterNumberForMenu}
-              </ExtraTextForMenu>
-              <NavigationText menu={menuIsActive} num={idx}>
-                {pageOrMenuText}
-              </NavigationText>
-            </StyledLink>
-          );
-        }}
-      />
-    </StoryNavigation>
+            return (
+              <ChapterListItem key={idx} menu={menuIsActive}>
+                <StyledLink
+                  menu={menuIsActive}
+                  item={itemIsActive}
+                  to={`/story/chapter/${normalizedTitle}`}
+                >
+                  <ExtraTextForMenu
+                    menu={menuIsActive}
+                    padding={chapterNeedsTopPadding}
+                  >
+                    Chapter {chapterNumberForMenu}
+                  </ExtraTextForMenu>
+                  <NavigationText
+                    item={itemIsActive}
+                    menu={menuIsActive}
+                    num={idx}
+                  >
+                    {pageOrMenuText}
+                  </NavigationText>
+                </StyledLink>
+              </ChapterListItem>
+            );
+          }}
+        />
+      </ChapterList>
+    </ChapterNavContainer>
   );
 }

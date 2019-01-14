@@ -10,7 +10,7 @@ const ActiveContainer = styled.section`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 52px;
+  top: 53px;
   bottom: 55px;
   width: 100%;
   background-color: white;
