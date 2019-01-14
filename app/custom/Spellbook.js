@@ -65,7 +65,6 @@ export default class Spellbook {
           spell === 'toggleMagicPointer' ||
           spell === 'resetTheMagic')
       ) {
-        console.log('s:', spell, stateToUpdate);
         return this.setState(stateToUpdate);
       } else if (spell === 'setMagicScale') {
         return thisFromHome.setState(stateToUpdate);

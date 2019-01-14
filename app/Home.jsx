@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import Mapper from './Mapper.jsx';
+
 import magicData from './data/magicData.js';
 
 const Main = styled.main`

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Mapper from './Mapper.jsx';
 import headerData from './data/headerData.js';
@@ -22,7 +22,7 @@ const HeaderContainer = styled.header.attrs(props => ({
   align-items: center;
 `;
 const StyledLink = styled(Link)`
-  margin-left: 15px;
+  margin-left: ${props => (props.num === 0 ? '0px' : '15px')};
   color: ${props => (props.home === 'active' ? 'white' : 'black')};
   text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
 
@@ -53,15 +53,18 @@ const Motto = styled.p`
   }
 `;
 const HeaderNav = styled.nav`
-  flex: ${props => (props.menu === 'active' ? '1' : '')};
-  display: ${props => (props.menu !== 'active' ? 'none' : '')};
-  text-align: ${props => (props.menu === 'active' ? 'center' : '')};
-  margin-right: ${props => (props.menu !== 'active' ? '15px' : '0')};
+  display: none;
+
+  ${props =>
+    props.menu === 'active' &&
+    css`
+      display: block;
+      flex: 1;
+      text-align: center;
+    `};
 
   @media (min-width: 705px) {
     display: block;
-    flex: none;
-    text-align: none;
     margin-right: 15px;
   }
 `;
@@ -128,6 +131,7 @@ class Header extends Component {
               return (
                 <StyledLink
                   key={idx}
+                  num={idx}
                   home={home}
                   to={link.path}
                   active={pathIsActive}

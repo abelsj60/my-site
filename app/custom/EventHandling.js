@@ -26,6 +26,7 @@ export default class EventHandling {
         break;
       case 'header':
         selectedHandleClick = this._handleClickForHeader;
+        break;
       default:
         console.log('_selectHandleClick: Keep calm, carry on');
     }

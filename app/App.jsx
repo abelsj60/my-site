@@ -2,16 +2,16 @@ import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
 import styled, { css, createGlobalStyle } from 'styled-components';
 
-import Location from './custom/Location.js';
-import Header from './Header.jsx';
 import Body from './Body.jsx';
 import BusinessCard from './BusinessCard.jsx';
-import LegalTerms from './LegalTerms.jsx';
 import Footer from './Footer.jsx';
+import Header from './Header.jsx';
+import LegalTerms from './LegalTerms.jsx';
+import Location from './custom/Location.js';
 import MagicScroller from './MagicScroller.jsx';
 
-import Referrer from './custom/Referrer.js';
 import EventHandling from './custom/EventHandling.js';
+import Referrer from './custom/Referrer.js';
 import Spellbook from './custom/Spellbook.js';
 
 const GlobalStyle = createGlobalStyle`
