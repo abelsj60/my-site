@@ -29,6 +29,7 @@ const StyledChapter = styled.section`
   background-color: rgba(0, 0, 0, 0.5);
 
   @media (min-width: 848px) {
+    display: flex;
     width: 327px;
     position: unset;
     bottom: 48px;
