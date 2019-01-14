@@ -24,6 +24,8 @@ export default class EventHandling {
       case 'body':
         selectedHandleClick = this._handleClickForBodyComponent;
         break;
+      case 'header':
+        selectedHandleClick = this._handleClickForHeader;
       default:
         console.log('_selectHandleClick: Keep calm, carry on');
     }
@@ -57,7 +59,6 @@ export default class EventHandling {
           };
         default:
           console.log('_handleClickForAppComponent: Keep calm, carry on');
-          break;
       }
 
       return this.setState(stateToUpdate);
@@ -89,6 +90,29 @@ export default class EventHandling {
       }
 
       return this.setState(stateToUpdate);
+    };
+  }
+
+  _handleClickForHeader() {
+    return () => {
+      const { menuIsOpen } = this.state;
+      const toggleState = function() {
+        this.setState({
+          menuIsOpen: !menuIsOpen
+        });
+      };
+
+      if (!menuIsOpen) {
+        toggleState.call(this);
+        this.timeoutId = setTimeout(() => {
+          this.setState({ menuIsOpen: false });
+        }, 4000);
+      } else {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = undefined;
+
+        toggleState.call(this);
+      }
     };
   }
 }

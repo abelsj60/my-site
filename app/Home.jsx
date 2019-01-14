@@ -63,15 +63,15 @@ export default class Home extends Component {
 
     const { boundSpellsForHome } = this.props;
 
-    // No need to use .bind() here because we curry inside
-    // Spellbook._homeComponentSpellbook, creating closures
+    // No need to use .bind() because we curry inside
+    // _homeComponentSpellbook, creating closures
     // for all relevant 'this' values.
 
-    this.scaleSpell = boundSpellsForHome('setMagicScale', this);
+    this.resetTheMagic = boundSpellsForHome('resetTheMagic');
     this.opacitySpell = boundSpellsForHome('setMagicOpacity');
+    this.scaleSpell = boundSpellsForHome('setMagicScale', this);
     this.pointerSpell = boundSpellsForHome('toggleMagicPointer');
     this.startPointerSpell = boundSpellsForHome('startPointerSpell');
-    this.resetTheMagic = boundSpellsForHome('resetTheMagic');
   }
 
   componentDidMount() {

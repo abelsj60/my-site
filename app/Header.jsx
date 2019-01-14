@@ -7,6 +7,7 @@ import headerData from './data/headerData.js';
 
 import Location from './custom/Location.js';
 import Referrer from './custom/Referrer.js';
+import EventHandling from './custom/EventHandling.js';
 
 const HeaderContainer = styled.header.attrs(props => ({
   style: {
@@ -89,44 +90,27 @@ class Header extends Component {
     this.state = {
       menuIsOpen: false
     };
-
-    this.toggleHeaderMenu = this.toggleHeaderMenu.bind(this);
-  }
-
-  toggleHeaderMenu() {
-    const { menuIsOpen } = this.state;
-    const toggleState = function() {
-      this.setState({
-        menuIsOpen: !menuIsOpen
-      });
-    };
-
-    if (!menuIsOpen) {
-      toggleState.call(this);
-      this.timeoutId = setTimeout(() => {
-        this.setState({ menuIsOpen: false });
-      }, 4000);
-    } else {
-      clearTimeout(this.timeoutId);
-      this.timeoutId = undefined;
-
-      toggleState.call(this);
-    }
   }
 
   componentDidUpdate(prevProps) {
     const l = new Location('/', this.props, prevProps);
-    const timeoutIsRunning = this.timeoutId !== undefined;
 
-    if (l.justChanged && timeoutIsRunning) {
-      this.toggleHeaderMenu();
+    if (l.justChanged && this.timeoutId !== undefined) {
+      const eForApp = new EventHandling('header', this);
+      const handleClickFoHeader = eForApp.boundHandleClick;
+
+      handleClickFoHeader();
     }
   }
 
   render() {
     const { home } = this.props;
-    const r = new Referrer(this.props);
     const menuIsOpen = this.state.menuIsOpen ? 'active' : '';
+
+    const r = new Referrer(this.props);
+
+    const eForApp = new EventHandling('header', this);
+    const handleClickFoHeader = eForApp.boundHandleClick;
 
     return (
       <HeaderContainer home={home}>
@@ -158,7 +142,7 @@ class Header extends Component {
           home={home}
           menu={menuIsOpen}
           onClick={() => {
-            this.toggleHeaderMenu();
+            handleClickFoHeader();
           }}
         />
       </HeaderContainer>
