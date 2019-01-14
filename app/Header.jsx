@@ -69,17 +69,17 @@ const HeaderNav = styled.nav`
     props.menu === 'active' &&
     css`
       flex: 1;
-      display: flex;
-      justify-content: center;
+      display: block;
     `};
 
   @media (min-width: 705px) {
-    display: flex;
+    display: block;
     margin-right: 15px;
   }
 `;
 const HeaderNavList = styled.ul`
   display: flex;
+  justify-content: center;
   margin: 0px;
   padding: 0px;
   list-style: none;
