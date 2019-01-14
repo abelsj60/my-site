@@ -16,7 +16,7 @@ const ThumbnailGroup = styled.ul`
   ${props =>
     props.menu === 'active' &&
     css`
-      margin-bottom: 20px;
+      margin-bottom: ${props.num !== 2 ? '20px' : ''};
       padding-bottom: 0;
       max-width: 100%;
       flex-direction: row;
@@ -98,14 +98,14 @@ const Highlighter = styled.div`
 export default function SingleProjectNav(props) {
   // ! ID active project via returnState b/c no params in '/.../menu'
 
-  const { project, activeProject, isDesktop, isMenu } = props;
+  const { num, project, activeProject, isDesktop, isMenu } = props;
   const { indexForProjectPics } = props.localState;
   const { thumbnails, projectName } = project.attributes;
 
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <ThumbnailGroup desktop={isDesktop} menu={menuIsActive}>
+    <ThumbnailGroup desktop={isDesktop} menu={menuIsActive} num={num}>
       <Mapper
         mapData={thumbnails}
         render={(thumb, idx) => {

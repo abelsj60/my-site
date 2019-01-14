@@ -3,12 +3,11 @@ import { withRouter } from 'react-router';
 import styled, { css, createGlobalStyle } from 'styled-components';
 
 import Body from './Body.jsx';
-import BusinessCard from './BusinessCard.jsx';
 import Footer from './Footer.jsx';
 import Header from './Header.jsx';
-import LegalTerms from './LegalTerms.jsx';
 import Location from './custom/Location.js';
 import MagicScroller from './MagicScroller.jsx';
+import LegalTermsOrBizCard from './LegalTermsOrBizCard.jsx';
 
 import EventHandling from './custom/EventHandling.js';
 import Referrer from './custom/Referrer.js';
@@ -91,8 +90,11 @@ class App extends Component {
             state={this.state}
             boundSpellsForHome={boundSpellsForHome}
           />
-          <BusinessCard home={isHome} {...this.props} state={this.state} />
-          <LegalTerms home={isHome} {...this.props} state={this.state} />
+          <LegalTermsOrBizCard
+            home={isHome}
+            {...this.props}
+            state={this.state}
+          />
           <Footer
             home={isHome}
             {...this.props}

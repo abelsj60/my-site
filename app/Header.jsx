@@ -146,9 +146,8 @@ class Header extends Component {
                   ? 'active'
                   : '';
                 return (
-                  <HeaderNavItem>
+                  <HeaderNavItem key={idx}>
                     <StyledLink
-                      key={idx}
                       num={idx}
                       home={home}
                       to={link.path}

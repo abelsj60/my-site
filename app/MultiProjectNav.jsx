@@ -48,8 +48,8 @@ export default function MultiProjectNav(props) {
     <DesktopNavGroup menu={menuIsActive}>
       <Mapper
         mapData={filteredData}
-        render={(proj, idx) => {
-          const { name, type } = proj.attributes.details;
+        render={(project, idx) => {
+          const { name, type } = project.attributes.details;
           const isActiveProject = isMenu && indexForProjectData === idx;
           const hedIsActive = isActiveProject ? 'active' : '';
 
@@ -58,8 +58,9 @@ export default function MultiProjectNav(props) {
               <Hed num={idx} active={hedIsActive}>{`${name} | ${type}`}</Hed>
               <SingleProjectNav
                 {...props}
+                num={idx}
                 menu={isMenu}
-                project={proj}
+                project={project}
                 isDesktop={true}
                 activeProject={isActiveProject}
               />
