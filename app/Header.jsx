@@ -75,7 +75,6 @@ const TogglerIcon = styled.section`
     `url(/sign-${props.home === 'active' ? 'white' : 'black'}-${
       props.menu === 'active' ? 'open' : 'closed'
     }.png) no-repeat center`};
-  transition: ${props => (props.home !== 'active' ? 'background 0.3s' : '')};
   margin-left: auto;
   margin-right: 15px;
 
@@ -112,8 +111,8 @@ class Header extends Component {
 
     const r = new Referrer(this.props);
 
-    const eForApp = new EventHandling('header', this);
-    const handleClickFoHeader = eForApp.boundHandleClick;
+    const eForHeader = new EventHandling('header', this);
+    const handleClickFoHeader = eForHeader.boundHandleClick;
 
     return (
       <HeaderContainer home={home}>

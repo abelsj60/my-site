@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Mapper from './Mapper.jsx';
-
 import magicData from './data/magicData.js';
 
 const Main = styled.main`
@@ -69,26 +68,27 @@ export default class Home extends Component {
     // _homeComponentSpellbook, creating closures
     // for all relevant 'this' values.
 
-    this.resetTheMagic = boundSpellsForHome('resetTheMagic');
     this.opacitySpell = boundSpellsForHome('setMagicOpacity');
-    this.scaleSpell = boundSpellsForHome('setMagicScale', this);
     this.pointerSpell = boundSpellsForHome('toggleMagicPointer');
+    this.scaleSpell = boundSpellsForHome('setMagicScale', this);
+
+    this.resetTheMagic = boundSpellsForHome('resetTheMagic');
     this.startPointerSpell = boundSpellsForHome('startPointerSpell');
   }
 
   componentDidMount() {
     this.startPointerSpell();
 
-    window.addEventListener('scroll', this.scaleSpell);
     window.addEventListener('scroll', this.opacitySpell);
+    window.addEventListener('scroll', this.scaleSpell);
     window.addEventListener('scroll', this.pointerSpell);
   }
 
   componentWillUnmount() {
     this.resetTheMagic();
 
-    window.removeEventListener('scroll', this.scaleSpell);
     window.removeEventListener('scroll', this.opacitySpell);
+    window.removeEventListener('scroll', this.scaleSpell);
     window.removeEventListener('scroll', this.pointerSpell);
   }
 

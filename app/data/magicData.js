@@ -7,7 +7,7 @@ export default [
   {
     hed: 'The story',
     blurb: 'Adventures in storytelling',
-    link: '/chapter'
+    link: '/story'
   },
   {
     hed: 'Journalism',
