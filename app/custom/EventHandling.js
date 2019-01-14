@@ -40,7 +40,7 @@ export default class EventHandling {
         showBusinessCard,
         showLegalTerms,
         blockPointer,
-        showStory
+        showStoryText
       } = this.state;
       let stateToUpdate;
 
@@ -52,7 +52,8 @@ export default class EventHandling {
           stateToUpdate = { showLegalTerms: !showLegalTerms };
           break;
         case 'showStoryText':
-          stateToUpdate = { showStory: !showStory };
+          console.log('fired');
+          stateToUpdate = { showStoryText: !showStoryText };
           break;
         case 'toggleMagicPointer':
           stateToUpdate = {

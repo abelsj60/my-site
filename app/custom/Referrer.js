@@ -4,12 +4,13 @@ export default class Referrer {
       throw 'Caller must offer props.location.';
     }
 
+    this.path = props.location.pathname;
     this.location =
       props.location.pathname.split('/')[1] !== ''
         ? props.location.pathname.split('/')[1]
         : 'home';
+    this.genericPath = this._loadExactPath();
     this.pathToMatch = this._loadPathToMatch();
-    this.path = this._loadExactPath();
   }
 
   _loadPathToMatch() {

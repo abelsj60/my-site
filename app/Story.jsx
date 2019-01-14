@@ -18,10 +18,10 @@ const Main = styled.main`
   }
 `;
 const StyledChapter = styled.section`
-  display: flex;
+  display: ${props => (props.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   position: absolute;
-  top: 52px;
+  top: 53px;
   bottom: 80px;
   padding: 25px;
   margin: 25px;
@@ -57,7 +57,7 @@ const Image = styled.img`
 
 export default function Story(props) {
   const { data } = props;
-  const { showStory } = props.state;
+  const hideStoryText = !props.state.showStoryText ? 'hidden' : '';
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
@@ -68,11 +68,11 @@ export default function Story(props) {
 
   return (
     <Main>
-      <StyledChapter>
+      <StyledChapter text={hideStoryText}>
         <ChapterNav {...props} data={data} section={'chapter'} />
         <Chapter chapterData={chapter} />
       </StyledChapter>
-      <Illustration id="illustration" className="right">
+      <Illustration>
         <Image src={image} alt="fantasy illustration" />
       </Illustration>
     </Main>

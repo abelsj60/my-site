@@ -62,7 +62,7 @@ class App extends Component {
     const r = new Referrer(props);
 
     this.state = {
-      showStory: true,
+      showStoryText: true,
       showLegalTerms: false,
       showBusinessCard: false,
       magicOpacity: 0,
@@ -116,7 +116,7 @@ class App extends Component {
     const handleClickForApp = eForApp.boundHandleClick;
 
     if (l.justChanged) {
-      const { showBusinessCard, showLegalTerms, showStory } = this.state;
+      const { showBusinessCard, showLegalTerms, showStoryText } = this.state;
 
       if (showBusinessCard) {
         handleClickForApp('showBusinessCard');
@@ -126,7 +126,7 @@ class App extends Component {
         handleClickForApp('showLegalTerms');
       }
 
-      if (!showStory) {
+      if (!showStoryText) {
         handleClickForApp('showStoryText');
       }
     }

@@ -1,11 +1,13 @@
-import { getPath, splitPath } from '../helpers/utils.js';
+import Referrer from './Referrer.js';
 
 export default class ButtonGroup {
   constructor(props) {
-    this._path = getPath(props);
-    this._referrer = splitPath(props)[1];
+    const r = new Referrer(props);
+
+    this._path = r.path;
+    this._referrer = r.location;
     this._isMenu = this._path.includes('menu');
-    this._showStory = props.state.showStory;
+    this._showStoryText = props.state.showStoryText;
     this._showLegalTerms = props.state.showLegalTerms;
     this._showBusinessCard = props.state.showBusinessCard;
     this._toggleText = props.toggleText;
@@ -22,7 +24,7 @@ export default class ButtonGroup {
       {
         name: 'menu',
         link: this._isMenu ? `/${this._referrer}` : `/${this._referrer}/menu`,
-        active: this._referrer === 'menu' ? 'active' : '',
+        active: this._isMenu ? 'active' : '',
         state: 'menu',
         hash: undefined,
         needsSeperation: true,
@@ -40,7 +42,7 @@ export default class ButtonGroup {
       {
         name: 'story',
         link: this._path,
-        active: !this._showStory ? 'active' : '',
+        active: !this._showStoryText ? 'active' : '',
         state: undefined,
         hash: undefined,
         needsSeperation: true,
@@ -71,7 +73,7 @@ export default class ButtonGroup {
     let buttonGroup;
 
     switch (this._referrer) {
-      case '':
+      case 'home':
         buttonGroup = ['reverie', 'contact'];
         break;
       case 'story':

@@ -58,8 +58,8 @@ export default function ArticleNav(props) {
             }`;
 
             return (
-              <li>
-                <StyledLink key={idx} link={linkIsActive} to={articleLink}>
+              <li key={idx}>
+                <StyledLink link={linkIsActive} to={articleLink}>
                   <Source>{publication}</Source>
                   <Hed menu={menuIsActive}>{headline}</Hed>
                 </StyledLink>

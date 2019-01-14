@@ -12,30 +12,32 @@ export default class ContentLoader extends Component {
     super(props);
 
     const r = new Referrer(props);
-    const location = new Location(r.pathToMatch, props);
+    const l = new Location(r.pathToMatch, props);
 
     this.state = {
-      isNotFound: !location.pathIsJustRight,
-      needsRedirect: location.needsRedirect
+      isNotFound: !l.pathIsJustRight,
+      needsRedirect: l.needsRedirect
     };
   }
 
   render() {
     const { needsRedirect, isNotFound } = this.state;
 
-    /** ComponentData, below, contains fully configured Components:
+    /** ComponentData contains configured Components
      *
-     * This includes all data from and derived from props, e.g.,
-     * all section data ('contentData'). Note: ContentaLoader
-     * unmounts when users swap sections, so there's no
-     * need to update contentData when cDU() runs.
+     * Includes data from and derived from props, e.g.,
+     * all section data ('contentData').
+     *
+     * Note: ContentaLoader unmounts when users swap
+     * sections, so there's no need to update
+     * contentData when cDU() runs.
      */
 
-    let componentData;
     const r = new Referrer(this.props);
+    let cD;
 
     if (!needsRedirect && !isNotFound) {
-      componentData = new ComponentData(r.location, this.props);
+      cD = new ComponentData(r.location, this.props);
     }
 
     return needsRedirect ? (
@@ -50,18 +52,18 @@ export default class ContentLoader extends Component {
             return (
               <Menu
                 link={`/${r.location}`}
-                text={componentData.getText()}
+                text={cD.getText()}
                 render={() => {
-                  return componentData.getMenuNavigator();
+                  return cD.getMenuNavigator();
                 }}
               />
             );
           }}
         />
         <Route
-          path={`${r.path}`}
+          path={`${r.genericPath}`}
           render={() => {
-            return componentData.getMainComponent();
+            return cD.getMainComponent();
           }}
         />
       </Switch>
@@ -70,17 +72,17 @@ export default class ContentLoader extends Component {
 
   componentDidUpdate(prevProps) {
     const r = new Referrer(this.props);
-    const location = new Location(r.pathToMatch, this.props, prevProps);
+    const l = new Location(r.pathToMatch, this.props, prevProps);
 
-    if (location.needsRedirect) {
+    if (l.needsRedirect) {
       const startRedirect = !this.state.needsRedirect;
 
       if (startRedirect) {
         this.setState({ needsRedirect: startRedirect });
       }
-    } else if (location.isSwappingContent) {
-      const paramOneAsIndex = location.params.oneToIndex();
-      const paramTwoAsIndex = location.params.twoToIndex();
+    } else if (l.isSwappingContent) {
+      const paramOneAsIndex = l.params.oneToIndex();
+      const paramTwoAsIndex = l.params.twoToIndex();
 
       if (paramOneAsIndex !== -1 && paramTwoAsIndex !== -1) {
         this.props.boundHandleClickForBody(paramOneAsIndex, paramTwoAsIndex);

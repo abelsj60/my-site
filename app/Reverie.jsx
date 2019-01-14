@@ -47,6 +47,7 @@ const Hed = styled.h2`
   margin-bottom: 7px;
 `;
 const PostDate = styled.p`
+  font-style: italic;
   margin-bottom: 10px;
 `;
 
