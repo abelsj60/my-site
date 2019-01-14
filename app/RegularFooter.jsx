@@ -4,15 +4,6 @@ import styled from 'styled-components';
 
 import Referrer from './custom/Referrer.js';
 
-const Graf = styled.p`
-  cursor: pointer;
-  margin-right: 25px;
-  color: ${props => (props.show ? 'palegoldenrod' : 'blanchedalmond')};
-
-  &:hover {
-    color: palegoldenrod;
-  }
-`;
 const ContainerForRegularFooter = styled.section`
   display: none;
 
@@ -26,6 +17,24 @@ const ContainerForRegularFooter = styled.section`
     font-size: 1.1rem;
   }
 `;
+const StyledLink = styled(Link)`
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+const Graf = styled.p`
+  cursor: pointer;
+  margin-right: 25px;
+  color: ${props => (props.show ? 'palegoldenrod' : 'blanchedalmond')};
+
+  &:hover {
+    color: palegoldenrod;
+  }
+`;
 
 export default function footerText(props) {
   const { showBusinessCard, showLegalTerms } = props.state;
@@ -37,9 +46,9 @@ export default function footerText(props) {
 
   return (
     <ContainerForRegularFooter>
-      <Link to={linkForReverie}>
+      <StyledLink to={linkForReverie}>
         <Graf show={isReverie}>Reverie</Graf>
-      </Link>
+      </StyledLink>
       <Graf
         show={showBusinessCard}
         onClick={() => {

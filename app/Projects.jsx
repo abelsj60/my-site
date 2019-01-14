@@ -33,6 +33,7 @@ const Project = styled.section`
 `;
 const Hed = styled.h1`
   font-size: 2rem;
+  margin-top: 0px;
   margin-bottom: 10px;
   font-weight: bold;
 `;
@@ -56,7 +57,7 @@ const ImageFrame = styled.section`
     flex-direction: row-reverse;
   }
 `;
-const ProjectSelector = styled.section`
+const ProjectSelector = styled.nav`
   display: none;
 
   @media (min-width: 848px) {
@@ -75,6 +76,7 @@ const Blurb = styled.p`
   color: white;
   font-style: italic;
   padding-bottom: 7px;
+  margin-top: 0px;
   margin-bottom: 10px;
   border-bottom: white dotted 0.5px;
 `;

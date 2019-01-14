@@ -5,10 +5,9 @@ import styled, { css } from 'styled-components';
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize.js';
 
-const StoryNavigation = styled.section`
+const StoryNavigation = styled.nav`
   display: ${props => (props.menu !== 'active' ? 'flex' : '')};
   flex-direction: ${props => (props.menu === 'active' ? 'column' : '')};
-  min-height: ${props => (props.menu !== 'active' ? '35px' : '')};
 `;
 const StyledLink = styled(Link)`
   flex: ${props => (props.menu !== 'active' ? '1' : '')};
@@ -50,8 +49,8 @@ const ExtraTextForMenu = styled.h1`
     css`
       display: block;
       font-size: 1.75rem;
-      margin-bottom: 0;
-      margin-top: ${p => (p.padding === 'active' ? '15px' : '')};
+      margin-bottom: 6px;
+      margin-top: 0px;
       font-style: italic;
       line-height: normal;
     `};
@@ -60,7 +59,10 @@ const NavigationText = styled.p`
   flex: ${props => (props.menu !== 'active' ? '1' : '')};
   text-align: ${props => (props.menu !== 'active' ? 'center' : '')};
   font-size: ${props => (props.menu === 'active' ? '3rem' : '')};
-  margin-bottom: ${props => (props.menu === 'active' ? '10px' : '')};
+  margin-top: ${props => (props.menu === 'active' ? '0px' : '0px')};
+  margin-bottom: ${props =>
+    props.menu === 'active' && props.num !== 3 ? '10px' : '0px'};
+  padding-bottom: ${props => (props.menu !== 'active' ? '10px' : '')};
 `;
 
 export default function ChapterNav(props) {
@@ -93,7 +95,7 @@ export default function ChapterNav(props) {
               >
                 Chapter {chapterNumberForMenu}
               </ExtraTextForMenu>
-              <NavigationText menu={menuIsActive}>
+              <NavigationText menu={menuIsActive} num={idx}>
                 {pageOrMenuText}
               </NavigationText>
             </StyledLink>

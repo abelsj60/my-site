@@ -21,6 +21,7 @@ const InactiveContainer = styled.section`
   display: none;
 `;
 const Graf = styled.p`
+  margin: 0px;
   color: lightgoldenrodyellow;
 `;
 // const ShadowBox = styled.div`

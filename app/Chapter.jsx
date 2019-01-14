@@ -6,8 +6,8 @@ import styled from 'styled-components';
 const Hed = styled.h1`
   font-size: 3rem;
   line-height: normal;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin-top: 13px;
+  margin-bottom: 12px;
 `;
 const StoryText = styled.section`
   font-size: 1.75rem;
@@ -16,7 +16,12 @@ const StoryText = styled.section`
   overflow: auto;
 
   p {
+    margin-top: 0px;
     margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
   }
 `;
 

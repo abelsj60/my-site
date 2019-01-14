@@ -36,21 +36,29 @@ const StyledArticle = styled.section`
 const Publication = styled.h3`
   font-size: 1.75rem;
   font-style: italic;
+  margin-top: 0px;
   margin-bottom: 4px;
 `;
 const Hed = styled.h1`
+  margin-top: 0px;
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 3rem;
 `;
 const Byline = styled.p`
+  margin-top: 0px;
   margin-bottom: 15px;
 `;
 const Text = styled.section`
   font-size: 1.75rem;
 
   p {
+    margin-top: 0px;
     margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
   }
 `;
 

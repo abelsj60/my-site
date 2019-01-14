@@ -36,22 +36,30 @@ const StyledLink = styled(Link)`
   flex: 1;
   display: ${props => (props.item !== 2 ? 'none' : 'flex')};
   align-items: flex-end;
-  font-size: 6rem;
   color: deepskyblue;
   padding-left: 25px;
   padding-right: 25px;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
 
   &:hover {
     color: deeppink;
   }
 
   @media (min-width: 848px) {
-    font-size: 5rem;
     display: flex;
   }
 `;
 const Hed = styled.h3`
+  margin: 0px;
   padding-bottom: 30px;
+  font-size: 5rem;
 `;
 
 export default class Home extends Component {

@@ -24,13 +24,19 @@ const Content = styled.section`
 const Hed = styled.h1`
   font-size: 3rem;
   font-weight: bold;
+  margin-top: 0px;
   margin-bottom: 15px;
 `;
 const TextContainer = styled.section`
   overflow: auto;
 
   p {
+    margin-top: 0px;
     margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
   }
 `;
 const Image = styled.section`

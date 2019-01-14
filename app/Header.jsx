@@ -24,10 +24,19 @@ const HeaderContainer = styled.header.attrs(props => ({
 const StyledLink = styled(Link)`
   margin-left: ${props => (props.num === 0 ? '0px' : '15px')};
   color: ${props => (props.home === 'active' ? 'white' : 'black')};
-  text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
+
+  &:focus,
+  &:visited,
+  &:link {
+    text-decoration: none;
+  }
 
   &:hover {
     text-decoration: underline;
+  }
+
+  && {
+    text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
   }
 `;
 const MyName = styled(StyledLink)`
@@ -45,6 +54,7 @@ const Motto = styled.p`
   flex: 1;
   margin-top: 2px;
   margin-left: 15px;
+  margin-bottom: 0px;
   font-size: 1.3rem;
   font-style: italic;
 

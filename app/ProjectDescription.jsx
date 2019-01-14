@@ -4,10 +4,12 @@ import styled from 'styled-components';
 const Hed = styled.h1`
   font-size: 1.5rem;
   font-style: italic;
+  margin-top: 0px;
   margin-bottom: 7px;
 `;
 const Graf = styled.p`
   font-size: 1.7rem;
+  margin-top: 0px;
   margin-bottom: 15px;
 `;
 

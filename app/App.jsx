@@ -21,6 +21,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
     font-size: 1.5rem;
   }
 `;

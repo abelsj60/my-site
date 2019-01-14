@@ -50,7 +50,6 @@ export default class ContentLoader extends Component {
             return (
               <Menu
                 link={`/${r.location}`}
-                userLocation={`${r.location}`}
                 text={componentData.getText()}
                 render={() => {
                   return componentData.getMenuNavigator();

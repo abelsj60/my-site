@@ -16,6 +16,7 @@ const Content = styled.section`
   padding: 25px;
 `;
 const Name = styled.h1`
+  margin-top: 0px;
   margin-bottom: 5px;
   font-size: 1.75rem;
   font-style: italic;
@@ -24,21 +25,25 @@ const Name = styled.h1`
 const Post = styled.section`
   overflow: auto;
 
+  img,
+  p {
+    margin-top: 0px;
+  }
+
+  ol,
   p {
     margin-bottom: 10px;
   }
 
-  img {
-    margin-bottom: 10px;
-  }
-
   ol {
+    margin-top: 10px;
     padding-left: 15px;
   }
 `;
 const Hed = styled.h2`
   font-size: 3rem;
   font-weight: bold;
+  margin-top: 0px;
   margin-bottom: 7px;
 `;
 const PostDate = styled.p`

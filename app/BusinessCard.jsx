@@ -40,7 +40,10 @@ const Card = styled.section`
   }
 `;
 const Graph = styled.p`
+  margin-top: 0px;
   margin-left: 70px;
+  margin-right: 0px;
+  margin-bottom: 0px;
 `;
 const Line = styled.div`
   background-color: white;
