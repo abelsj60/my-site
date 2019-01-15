@@ -1,29 +1,18 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { splitPath } from './helpers/utils.js';
+import React from 'react';
+import styled from 'styled-components';
 
-class MenuDescription extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Hed = styled.h1`
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 0px;
+  font-size: 1.5rem;
+  max-width: 507px;
+  padding-bottom: 8px;
+  border-bottom: white dotted 0.5px;
+`;
 
-  get currentLocation() {
-    return splitPath(this.props)[2].toLowerCase();
-  }
-
-  getDescription() {
-    if (this.currentLocation.includes('projects')) {
-      return 'Technology projects for me, clients, and fun';
-    } else if (this.currentLocation.includes('journalism')) {
-      return 'Staff and freelance reporting for Forbes.com, Mergermarket, Slate and others';
-    } else {
-      return 'The story so far';
-    }
-  }
-
-  render() {
-    return <h1 id="menu-description">{this.getDescription()}</h1>;
-  }
+export default function MenuDescription(props) {
+  const { text } = props;
+  return <Hed>{text}</Hed>;
 }
-
-export default withRouter(MenuDescription);

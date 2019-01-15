@@ -1,52 +1,73 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
+import styled, { css } from 'styled-components';
+
+import Mapper from './Mapper.jsx';
 import SingleProjectNav from './SingleProjectNav.jsx';
-import projects from './data/projects/index.js';
-import { formatProjectName } from './helpers/utils.js';
-import { splitPath } from './helpers/utils.js';
 
-class MultiProjectNav extends Component {
-  constructor(props) {
-    super(props);
-  }
+const DesktopNavGroup = styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+  padding: 0px;
+  list-style-type: none;
 
-  get location() {
-    return splitPath(this.props);
-  }
+  ${props =>
+    props.menu === 'active' &&
+    css`
+      display: block;
+      max-width: 590px;
+      margin: 0;
+    `};
+`;
+const ProjectGroup = styled.li``;
+const Hed = styled.section`
+  font-size: 1.5rem;
+  margin-top: ${props => (props.num !== 0 ? '15px' : '')};
+  margin-bottom: 9px;
+  color: ${props => (props.active === 'active' ? 'deepskyblue' : 'white')};
 
-  get projectsForDisplay() {
-    return this.props.currentProject
-      ? projects.filter(
-        project =>
-          project.attributes.name !==
-            this.props.currentProject.attributes.name
-      )
-      : projects;
+  ${ProjectGroup}:hover & {
+    color: lightgoldenrodyellow;
   }
+`;
 
-  addCssToShowActiveProjectName(name) {
-    if (this.props.state.projectName === name) {
-      return 'active';
-    }
-  }
+export default function MultiProjectNav(props) {
+  const { isMenu } = props;
+  const { indexForProjectData } = props.localState;
+  const filteredData = props.isMenu
+    ? props.data
+    : props.data.filter(
+      (_, index) => props.localState.indexForProjectData !== index
+    );
+  const menuIsActive = isMenu ? 'active' : '';
 
-  render() {
-    return this.projectsForDisplay.map((project, index) => (
-      <section id="nav-group" key={index}>
-        <h1
-          className={
-            this.location.includes('menu')
-              ? this.addCssToShowActiveProjectName(project.attributes.name)
-              : ''
-          }
-        >
-          {formatProjectName(project.attributes.name)} |{' '}
-          {project.attributes.details.type}
-        </h1>
-        <SingleProjectNav project={project} state={this.props.state} />
-      </section>
-    ));
-  }
+  return (
+    <DesktopNavGroup menu={menuIsActive}>
+      <Mapper
+        mapData={filteredData}
+        render={(project, idx) => {
+          const { name, type } = project.attributes.details;
+          const isActiveProject = isMenu && indexForProjectData === idx;
+          const hedIsActive = isActiveProject ? 'active' : '';
+
+          return (
+            <ProjectGroup key={idx}>
+              <Hed num={idx} active={hedIsActive}>{`${name} | ${type}`}</Hed>
+              <SingleProjectNav
+                {...props}
+                num={idx}
+                menu={isMenu}
+                project={project}
+                isDesktop={true}
+                activeProject={isActiveProject}
+              />
+            </ProjectGroup>
+          );
+        }}
+      />
+    </DesktopNavGroup>
+  );
 }
-
-export default withRouter(MultiProjectNav);

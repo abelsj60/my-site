@@ -1,125 +1,114 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+
 import Home from './Home.jsx';
-import TheStory from './TheStory.jsx';
-import Projects from './Projects.jsx';
-import Journalism from './Journalism.jsx';
-import About from './About.jsx';
-import Menu from './Menu.jsx';
+import ContentLoader from './ContentLoader.jsx';
 import Reverie from './Reverie.jsx';
+import About from './About.jsx';
+import ReloadRoute from './ReloadRoute.jsx';
 import NotFound from './NotFound.jsx';
 
-class Body extends Component {
+import Location from './custom/Location';
+import Referrer from './custom/Referrer.js';
+import InitialState from './custom/InitialState.js';
+import EventHandling from './custom/EventHandling.js';
+
+export default class Body extends Component {
   constructor(props) {
     super(props);
+
+    /** Build initial return state.
+     *
+     * Renders are defined by path params. State is used
+     * to return to current location when user moves
+     * between sections or from section-to-menu.
+     */
+
+    const r = new Referrer(props);
+    const l = new Location(r.pathToMatch, props);
+    const s = new InitialState(props, l);
+
+    this.state = {
+      indexForChapterData: s.build('indexForChapterData'),
+      indexForProjectData: s.build('indexForProjectData'),
+      indexForProjectPics: s.build('indexForProjectPics'),
+      indexForPublication: s.build('indexForPublication'),
+      indexForArticleData: s.build('indexForArticleData')
+    };
   }
 
   render() {
-    console.log('Switch called');
+    const eH = new EventHandling('body', this);
+    const boundHandleClickForBody = eH.boundHandleClick;
+
     return (
       <Switch>
         <Route
           exact
           path="/"
-          render={() => <Home state={this.props.state} />}
+          render={props => {
+            return <Home {...props} {...this.props} />;
+          }}
         />
-
         <Route
-          exact
-          path="/chapter"
-          render={() => (
-            <Redirect to={`/chapter/${this.props.state.chapterTitle}`} />
-          )}
-        />
-
-        <Route
-          exact
-          path="/chapter/:title"
-          render={() => <TheStory state={this.props.state} />}
-        />
-
-        <Route
-          exact
-          path="/projects"
-          render={() => (
-            <Redirect
-              to={`/projects/${this.props.state.projectName}/${
-                this.props.state.projectThumbnail
-              }`}
-            />
-          )}
-        />
-
-        <Route
-          exact
-          path="/projects/:name"
-          render={() => (
-            <Redirect
-              to={`/projects/${this.props.state.projectName}/${
-                this.props.state.projectThumbnail
-              }`}
-            />
-          )}
-        />
-
-        <Route
-          path="/projects/:name/:projectThumbnail"
-          render={() => <Projects state={this.props.state} />}
-        />
-
-        <Route
-          exact
-          path="/journalism"
-          render={() => (
-            <Redirect
-              to={`/journalism/${this.props.state.publication}/${
-                this.props.state.headline
-              }`}
-            />
-          )}
-        />
-
-        <Route
-          exact
-          path="/journalism/:publication"
-          render={() => (
-            <Redirect
-              to={`/journalism/${this.props.state.publication}/${
-                this.props.state.headline
-              }`}
-            />
-          )}
-        />
-
-        <Route
-          path="/journalism/:publication/:headline"
-          render={() => <Journalism state={this.props.state} />}
-        />
-
-        <Route
-          exact
-          path="/menu"
-          render={() => <Redirect to={'/menu/projects'} />}
-        />
-
-        <Route
-          path="/menu/:section"
-          render={({ match }) => {
+          path="/story/:chapter?/:title?"
+          render={props => {
             return (
-              <Menu
+              <ContentLoader
+                {...props}
+                localState={this.state}
                 state={this.props.state}
-                section={match.params.section.toLowerCase()}
+                boundHandleClickForBody={boundHandleClickForBody}
               />
             );
           }}
         />
-
-        <Route path="/reverie" render={() => <Reverie />} />
-        <Route path="/about" render={() => <About />} />
+        <Route
+          path="/projects/:projectName?/:projectThumbnail?"
+          render={props => {
+            return (
+              <ContentLoader
+                {...props}
+                localState={this.state}
+                state={this.props.state}
+                boundHandleClickForBody={boundHandleClickForBody}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/journalism/:publication?/:headline?"
+          render={props => {
+            return (
+              <ContentLoader
+                {...props}
+                localState={this.state}
+                state={this.props.state}
+                boundHandleClickForBody={boundHandleClickForBody}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/reverie"
+          render={() => {
+            return <Reverie />;
+          }}
+        />
+        <Route
+          path="/about"
+          render={() => {
+            return <About />;
+          }}
+        />
+        <Route
+          path="/i"
+          render={props => {
+            return <ReloadRoute {...props} localState={this.state} />;
+          }}
+        />
         <Route component={NotFound} />
       </Switch>
     );
   }
 }
-
-export default Body;

@@ -57,4 +57,66 @@
     -LifeCycle
     http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
-*/
+    -Links
+      https://stackoverflow.com/a/43986829/9215718
+
+    -Test params/routes
+      https://pshrmn.github.io/route-tester/#/
+      ANSWER: https://stackoverflow.com/a/35604855/9215718
+
+    -Wes bos transcripts:
+      https://github.com/wesbos/React-For-Beginners-Transcriptions
+
+    -Interfaces:
+      https://stackoverflow.com/a/1022060
+
+    Old Scale:
+      const scrollSpot = this.scrollTop / 3900;
+    const imageScale = 6 - scrollSpot * 6;
+
+
+     * Old: 0 - 4000
+     * New: 6 - 1
+     *
+     * Number:
+
+
+    console.log('iS:', scrollSpot * 6);
+
+    Note: Passing as string reduces jank, using
+    * numbers (via parseInt()) is a disaster
+
+
+    const failSafe = Math.max(1, imageScale);
+    const scaleAsString = failSafe.toString();
+    const magicScale = scaleAsString.slice(0, 6);
+
+    this.setState({
+      magicScale
+    });
+
+/**
+ * At 2200, it's 0
+ * At 3223, it's 1
+ *
+ * At 2200, it's 0
+ * At 3223, it's 1
+ */
+
+/** Temp notes
+ *  At 0, it's 6
+ *  At 3223, it's 1
+ */
+
+// <section style={believeStyle}>
+// <h2>Still believe in magic?</h2>
+// </section>
+
+// const believeStyle = {
+//   zIndex: '1',
+//   fontSize: '5rem',
+//   transform: `scale(${this.state.scale})`,
+//   opacity: this.state.opacity
+// };
+
+// https://stackoverflow.com/questions/19057731/scrolltop-on-page-reload-doesnt-work-possible-script-conflict

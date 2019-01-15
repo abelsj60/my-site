@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { splitPath } from './helpers/utils.js';
+import React from 'react';
+import styled from 'styled-components';
 
-class MagicScroller extends Component {
-  constructor(props) {
-    super(props);
+const Abracadabra = styled.section`
+  height: 4000px;
+`;
+
+export default function MagicScroller(props) {
+  if (props.home === 'active') {
+    return <Abracadabra />;
   }
 
-  get abracadabra() {
-    return splitPath(this.props)[1] === '';
-  }
-
-  render() {
-    return this.abracadabra && <section id="abracadabra" />;
-  }
+  return null;
 }
-
-export default withRouter(MagicScroller);

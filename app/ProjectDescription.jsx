@@ -1,30 +1,35 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
 
-class ProjectDescription extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Hed = styled.h1`
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-top: 0px;
+  margin-bottom: 7px;
+`;
+const Graf = styled.p`
+  font-size: 1.7rem;
+  margin-top: 0px;
+  margin-bottom: 15px;
+`;
 
-  getKey(name) {
-    return this.props.projectKeys.find(key => key === name);
-  }
-
-  formatKeyForDisplay(name) {
-    const keyName = this.getKey(name);
-    return keyName[0].toUpperCase() + keyName.slice(1);
-  }
-
-  render() {
-    return (
-      <Fragment>
-        <p id="type">{this.props.projectDetails.type}</p>
-        <h2>{this.formatKeyForDisplay('contribution')}</h2>
-        <p>{this.props.projectDetails.contribution}</p>
-        <h2>{this.formatKeyForDisplay('description')}</h2>
-        <p>{this.props.projectDetails.description}</p>
-      </Fragment>
-    );
-  }
+function formatKeyForDisplay(name, data) {
+  const key = data.find(k => k === name);
+  return key[0].toUpperCase() + key.slice(1);
 }
 
-export default ProjectDescription;
+export default function ProjectDescription(props) {
+  const { details } = props.project.attributes;
+  const { type, contribution, description } = details;
+  const projectKeys = Object.keys(details);
+
+  return (
+    <Fragment>
+      <Graf>{type}</Graf>
+      <Hed>{formatKeyForDisplay('contribution', projectKeys)}</Hed>
+      <Graf>{contribution}</Graf>
+      <Hed>{formatKeyForDisplay('description', projectKeys)}</Hed>
+      <Graf>{description}</Graf>
+    </Fragment>
+  );
+}

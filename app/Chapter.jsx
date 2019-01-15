@@ -1,24 +1,40 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import marked from 'marked';
+import styled from 'styled-components';
 
-class Chapter extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Hed = styled.h1`
+  font-size: 3rem;
+  line-height: normal;
+  margin-top: 13px;
+  margin-bottom: 12px;
+`;
+const StoryText = styled.section`
+  font-size: 1.75rem;
+  line-height: normal;
+  white-space: pre-wrap;
+  overflow: auto;
 
-  render() {
-    return (
-      <Fragment>
-        <h1>{this.props.chapter.attributes.title}</h1>
-        <section id="text">
-          {ReactHtmlParser(
-            marked(this.props.chapter.body, { smartypants: true })
-          )}
-        </section>
-      </Fragment>
-    );
+  p {
+    margin-top: 0px;
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
   }
+`;
+
+export default function Chapter(props) {
+  const { title } = props.chapterData.attributes;
+  const { body } = props.chapterData;
+
+  return (
+    <Fragment>
+      <Hed>{title}</Hed>
+      <StoryText>
+        {ReactHtmlParser(marked(body, { smartypants: true }))}
+      </StoryText>
+    </Fragment>
+  );
 }
-
-export default Chapter;

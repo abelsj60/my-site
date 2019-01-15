@@ -1,5 +1,5 @@
 ---
-name: 'slingshot'
+projectName: 'slingshot'
 
 details: {
   name: 'Slingshot',

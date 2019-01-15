@@ -1,5 +1,5 @@
 ---
-name: 'tmmnews'
+projectName: 'tmmnews'
 
 details: {
   name: 'TMMnews',

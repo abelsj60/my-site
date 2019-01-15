@@ -1,18 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 
-class NotFound extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 25px;
+`;
+const Hed = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+`;
+const FailWhale = styled.section`
+  flex: 1;
+  margin-top: 15px;
+  background-color: cornflowerblue;
+`;
 
-  render() {
-    return (
-      <main id="not-found" className="left">
-        <h1>Uh oh. Not found!</h1>
-        <section id="image-box" />
-      </main>
-    );
-  }
+export default function NotFound() {
+  return (
+    <Main>
+      <Hed>Uh oh. Not found!</Hed>
+      <FailWhale />
+    </Main>
+  );
 }
-
-export default NotFound;

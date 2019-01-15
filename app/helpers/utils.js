@@ -26,9 +26,35 @@ function formatProjectName(name) {
   }
 }
 
+function validateParam(propertyName, siteData, urlParam) {
+  // ~ja Usage: validateParam('title', story, chapterTitle)
+
+  if (urlParam === 'menu') return 0;
+
+  if (Array.isArray(siteData)) {
+    const isNumber = parseInt(urlParam);
+
+    if (!isNumber) {
+      return siteData.findIndex(d => {
+        return normalize(d.attributes[propertyName]) === normalize(urlParam);
+      });
+    } else {
+      const urlParamConvertedToIndex = isNumber && parseInt(urlParam) - 1;
+
+      return urlParamConvertedToIndex >= 0 &&
+        urlParamConvertedToIndex < siteData[0].attributes[propertyName].length
+        ? urlParamConvertedToIndex
+        : -1;
+    }
+  } else {
+    throw 'Data must be an array';
+  }
+}
+
 module.exports = {
   normalize,
   getPath,
   splitPath,
+  validateParam,
   formatProjectName
 };

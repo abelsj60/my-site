@@ -1,28 +1,33 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import CloseButton from './CloseButton.jsx';
-import MenuContents from './MenuContents.jsx';
-import MenuDescription from './MenuDescription.jsx';
-import { splitPath } from './helpers/utils.js';
+import React from 'react';
+import styled from 'styled-components';
 
-class Menu extends Component {
-  constructor(props) {
-    super(props);
-  }
+import CloseButton from './MenuCloseButton.jsx';
+import Description from './MenuDescription.jsx';
 
-  get location() {
-    return splitPath(this.props);
-  }
+const StyledMenu = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: navy;
+  color: white;
+`;
+const Overflow = styled.section`
+  margin-top: 15px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
+  overflow: auto;
+`;
 
-  render() {
-    return (
-      <main id="site-menu">
-        <CloseButton />
-        <MenuDescription />
-        <MenuContents state={this.props.state} section={this.props.section} />
-      </main>
-    );
-  }
+export default function Menu(props) {
+  const { link, text, render } = props;
+
+  return (
+    <StyledMenu>
+      <CloseButton link={link} />
+      <Description text={text} />
+      <Overflow>{render()}</Overflow>
+    </StyledMenu>
+  );
 }
-
-export default withRouter(Menu);
