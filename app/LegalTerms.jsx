@@ -8,6 +8,5 @@ const Graf = styled.p`
 
 export default function Legal() {
   const copyrightYear = new Date().getFullYear();
-
   return <Graf>© {copyrightYear} James Abels. All rights reserved.</Graf>;
 }
