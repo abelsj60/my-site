@@ -13,10 +13,6 @@ const Container = styled.section`
   bottom: 55px;
   width: 100%;
   background-color: white;
-
-  @media (max-width: 848px) {
-    bottom: 80px;
-  }
 `;
 
 export default function LegalTermsOrBizCard(props) {

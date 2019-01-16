@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import MenuSelector from './MenuSelector.jsx';
 import Chapter from './Chapter.jsx';
 import ChapterNav from './ChapterNav.jsx';
 
@@ -22,7 +23,7 @@ const StyledChapter = styled.section`
   flex-direction: column;
   position: absolute;
   top: 53px;
-  bottom: 80px;
+  bottom: 55px;
   padding: 25px;
   margin: 25px;
   color: white;
@@ -70,7 +71,7 @@ export default function Story(props) {
   return (
     <Main>
       <StyledChapter text={hideStoryText}>
-        <ChapterNav {...props} data={data} section={'chapter'} />
+        <ChapterNav {...props} />
         <Chapter chapterData={chapter} />
       </StyledChapter>
       <Illustration>

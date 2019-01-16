@@ -52,7 +52,6 @@ export default class EventHandling {
           stateToUpdate = { showLegalTerms: !showLegalTerms };
           break;
         case 'showStoryText':
-          console.log('fired');
           stateToUpdate = { showStoryText: !showStoryText };
           break;
         case 'toggleMagicPointer':

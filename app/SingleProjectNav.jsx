@@ -96,7 +96,7 @@ const Highlighter = styled.div`
 `;
 
 export default function SingleProjectNav(props) {
-  // ! ID active project via returnState b/c no params in '/.../menu'
+  // ID active project via returnState b/c no params in '/menu'
 
   const { num, project, activeProject, isDesktop, isMenu } = props;
   const { indexForProjectPics } = props.localState;

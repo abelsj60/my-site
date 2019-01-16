@@ -6,8 +6,6 @@ import reveries from './data/reveries/index';
 
 const Main = styled.main`
   flex: 1;
-  background-color: navy;
-  color: white;
 `;
 const Content = styled.section`
   flex: 2;

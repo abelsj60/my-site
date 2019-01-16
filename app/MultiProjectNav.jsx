@@ -30,7 +30,7 @@ const Hed = styled.section`
   color: ${props => (props.active === 'active' ? 'deepskyblue' : 'white')};
 
   ${ProjectGroup}:hover & {
-    color: lightgoldenrodyellow;
+    color: blue;
   }
 `;
 
@@ -55,7 +55,11 @@ export default function MultiProjectNav(props) {
 
           return (
             <ProjectGroup key={idx}>
-              <Hed num={idx} active={hedIsActive}>{`${name} | ${type}`}</Hed>
+              <Hed
+                num={idx}
+                menu={isMenu}
+                active={hedIsActive}
+              >{`${name} | ${type}`}</Hed>
               <SingleProjectNav
                 {...props}
                 num={idx}

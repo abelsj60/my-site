@@ -33,7 +33,7 @@ export default class ComponentData {
     }
   }
 
-  getMainComponent() {
+  getSection() {
     const props = this._props;
     const type = this._type;
 
@@ -53,7 +53,7 @@ export default class ComponentData {
     }
   }
 
-  getMenuNavigator() {
+  getMenu() {
     const props = this._props;
     const type = this._type;
 

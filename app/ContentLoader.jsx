@@ -51,11 +51,9 @@ export default class ContentLoader extends Component {
           render={() => {
             return (
               <Menu
-                link={`/${r.location}`}
+                {...this.props}
                 text={cD.getText()}
-                render={() => {
-                  return cD.getMenuNavigator();
-                }}
+                link={`/${r.location}`}
               />
             );
           }}
@@ -63,7 +61,7 @@ export default class ContentLoader extends Component {
         <Route
           path={`${r.genericPath}`}
           render={() => {
-            return cD.getMainComponent();
+            return cD.getSection();
           }}
         />
       </Switch>

@@ -3,6 +3,7 @@ import marked from 'marked';
 import styled from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 
+import MenuSelector from './MenuSelector.jsx';
 import DesktopArticleNav from './DesktopArticleNav.jsx';
 
 import Referrer from './custom/Referrer.js';
@@ -19,25 +20,26 @@ const ArticleContainer = styled.main`
     line-height: normal;
   }
 `;
-
 const StyledArticle = styled.section`
   flex: 2;
   display: flex;
   flex-direction: column;
   margin: 25px;
+  margin-top: 10px;
   overflow: auto;
 
   @media (min-width: 848px) {
+    margin-top: 25px;
     margin-left: 0;
     min-width: 400px;
   }
 `;
-
 const Publication = styled.h3`
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-style: italic;
   margin-top: 0px;
   margin-bottom: 4px;
+  font-weight: normal;
 `;
 const Hed = styled.h1`
   margin-top: 0px;
@@ -76,6 +78,16 @@ export default function Article(props) {
   return (
     <ArticleContainer>
       <DesktopArticleNav {...props} />
+
+      <MenuSelector
+        link={{
+          hash: undefined,
+          state: 'menu',
+          pathname: '/journalism/menu'
+        }}
+        text={'Menu'}
+      />
+
       <StyledArticle>
         <Publication>{publication}</Publication>
         <Hed>{headline}</Hed>
@@ -85,3 +97,8 @@ export default function Article(props) {
     </ArticleContainer>
   );
 }
+
+// <div>
+//   Staff and freelance reporting for Forbes.com, Mergermarket, Slate and
+//   others
+// </div>

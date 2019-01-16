@@ -5,17 +5,13 @@ import styled from 'styled-components';
 import Referrer from './custom/Referrer.js';
 
 const ContainerForRegularFooter = styled.section`
-  display: none;
-
-  @media (min-width: 848px) {
-    flex: 1;
-    justify-content: flex-end;
-    align-items: center;
-    height: 55px;
-    z-index: 2;
-    display: flex;
-    font-size: 1.1rem;
-  }
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 2;
+  height: 55px;
+  font-size: 1.1rem;
 `;
 const StyledLink = styled(Link)`
   &:focus,

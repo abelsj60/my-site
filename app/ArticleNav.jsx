@@ -12,8 +12,7 @@ const ArticleList = styled.ul`
   overflow: auto;
 `;
 const StyledLink = styled(Link)`
-  color: ${props =>
-    props.link === 'active' ? 'lightgoldenrodyellow' : 'white'};
+  color: ${props => (props.link === 'active' ? 'blue' : 'black')};
 
   &:focus,
   &:visited,
@@ -28,7 +27,7 @@ const StyledLink = styled(Link)`
 const Source = styled.div`
   font-size: 1.5rem;
   font-style: italic;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 `;
 const Hed = styled.div`
   font-size: ${props => (props.menu === 'active' ? '3rem' : '1.75rem')};

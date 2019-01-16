@@ -94,6 +94,7 @@ const TogglerIcon = styled.section`
     }.png) no-repeat center`};
   margin-left: auto;
   margin-right: 15px;
+  cursor: pointer;
 
   @media (min-width: 705px) {
     display: none;

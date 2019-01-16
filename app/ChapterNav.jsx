@@ -72,7 +72,7 @@ const NavigationText = styled.p`
   padding-bottom: ${props => (props.menu !== 'active' ? '10px' : '')};
   border-bottom: ${props =>
     props.item === 'active' && props.menu !== 'active'
-      ? 'whitesmoke solid .5px'
+      ? 'whitesmoke dotted .5px'
       : ''};
 `;
 

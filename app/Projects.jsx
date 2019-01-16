@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import MenuSelector from './MenuSelector.jsx';
 import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
@@ -26,8 +27,10 @@ const Project = styled.section`
   flex-direction: column;
   margin: 25px;
   overflow: auto;
+  margin-top: 15px;
 
   @media (min-width: 848px) {
+    margin-top: 25px;
     margin-left: 0;
   }
 `;
@@ -103,6 +106,14 @@ export default function Projects(props) {
           projectIndex={projectIndex}
         />
       </ProjectSelector>
+      <MenuSelector
+        link={{
+          hash: undefined,
+          state: 'menu',
+          pathname: '/projects/menu'
+        }}
+        text={'Menu'}
+      />
       <Project>
         <Hed>{name}</Hed>
         <section>
