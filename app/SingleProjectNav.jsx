@@ -10,7 +10,7 @@ const ThumbnailGroup = styled.ul`
   padding-top: 0px;
   padding-left: 0px;
   padding-right: 0px;
-  padding-bottom: 7px;
+  padding-bottom: 10px;
   list-style-type: none;
 
   ${props =>
@@ -25,12 +25,12 @@ const ThumbnailGroup = styled.ul`
   ${props =>
     !props.desktop &&
     css`
-      border-bottom: lightgrey dotted 0.5px;
+      border-bottom: #6e7dab solid 0.5px;
 
       @media (min-width: 672px) {
         flex-direction: column;
         justify-content: space-between;
-        margin-top: 31px;
+        margin-top: 28px;
         padding: 0;
         border: 0;
       }
@@ -40,13 +40,13 @@ const ThumbnailGroup = styled.ul`
         flex-direction: row;
         margin: 0;
         padding-bottom: 7px;
-        border-bottom: lightgrey dotted 0.5px;
+        border-bottom: #6e7dab solid 0.5px;
       }
 
       @media (min-width: 1072px) {
         flex-direction: column;
         justify-content: space-between;
-        margin-top: 31px;
+        margin-top: 28px;
         padding: 0;
         border: 0;
       }
@@ -90,9 +90,9 @@ const Highlighter = styled.div`
   background-color: ${p =>
     p.highlight === 'active' ? 'rgb(0, 0, 0, 0.2)' : ''};
 
-  &:hover {
-    background-color: rgb(0, 0, 0, 0.2);
-  }
+  // &:hover {
+  //   background-color: rgb(0, 0, 0, 0.2);
+  // }
 `;
 
 export default function SingleProjectNav(props) {

@@ -81,7 +81,6 @@ class App extends Component {
         <GlobalStyle />
         <Page home={isHome}>
           <Header home={isHome} {...this.props} scrollTop={this.scrollTop} />
-          <HeaderSeperator />
           <Body
             {...this.props}
             state={this.state}
@@ -133,3 +132,5 @@ class App extends Component {
 }
 
 export default withRouter(App);
+
+// <HeaderSeperator />

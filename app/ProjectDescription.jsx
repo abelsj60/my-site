@@ -2,15 +2,21 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 const Hed = styled.h1`
-  font-size: 1.5rem;
-  font-style: italic;
-  margin-top: 0px;
-  margin-bottom: 7px;
-`;
-const Graf = styled.p`
+  color: #6e7dab;
   font-size: 1.7rem;
   margin-top: 0px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+  font-weight: normal;
+`;
+const Graf = styled.p`
+  // color: #455057;
+  font-size: 1.5rem;
+  margin-top: 0px;
+  margin-bottom: 10px;
+`;
+const TopGraf = styled(Graf)`
+  color: #455057;
+  font-size: 1.8rem;
 `;
 
 function formatKeyForDisplay(name, data) {
@@ -25,7 +31,7 @@ export default function ProjectDescription(props) {
 
   return (
     <Fragment>
-      <Graf>{type}</Graf>
+      <TopGraf>{type}</TopGraf>
       <Hed>{formatKeyForDisplay('contribution', projectKeys)}</Hed>
       <Graf>{contribution}</Graf>
       <Hed>{formatKeyForDisplay('description', projectKeys)}</Hed>

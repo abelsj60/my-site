@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import MenuSelector from './MenuSelector.jsx';
 import Chapter from './Chapter.jsx';
 import ChapterNav from './ChapterNav.jsx';
 
@@ -13,6 +12,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   color: black;
+  // background-color: whitesmoke;
 
   @media (min-width: 848px) {
     flex-direction: row;
@@ -32,13 +32,17 @@ const StyledChapter = styled.section`
   @media (min-width: 848px) {
     display: flex;
     width: 327px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     position: unset;
     bottom: 48px;
     margin: 25px;
     margin-right: 0;
-    background-color: #6100f2;
-    color: white;
-    background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
+    background-color: unset;
+    border-right: 0.5px solid #666f75;
+    color: black;
+    // background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
   }
 `;
 const Illustration = styled.section`

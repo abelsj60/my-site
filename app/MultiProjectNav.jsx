@@ -24,14 +24,14 @@ const DesktopNavGroup = styled.ul`
 `;
 const ProjectGroup = styled.li``;
 const Hed = styled.section`
-  font-size: 1.5rem;
-  margin-top: ${props => (props.num !== 0 ? '15px' : '')};
+  font-size: 1.6rem;
+  // margin-top: ${props => (props.num !== 0 ? '15px' : '')};
   margin-bottom: 9px;
-  color: ${props => (props.active === 'active' ? 'deepskyblue' : 'white')};
+  color: ${props => (props.active === 'active' ? '#6E7DAB' : '#6E7DAB')};
 
-  ${ProjectGroup}:hover & {
-    color: blue;
-  }
+  // ${ProjectGroup}:hover & {
+  //   color: #FD1172;
+  // }
 `;
 
 export default function MultiProjectNav(props) {

@@ -4,14 +4,13 @@ import ComponentData from './custom/ComponentData.js';
 import Referrer from './custom/Referrer.js';
 
 import MenuSelector from './MenuSelector.jsx';
-// import CloseButton from './MenuCloseButton.jsx';
-// import Description from './MenuDescription.jsx';
 
 const StyledMenu = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
-  color: black;
+  // color: black;
+  // background-color: whitesmoke;
 `;
 const Overflow = styled.section`
   margin-top: 10px;
@@ -43,7 +42,3 @@ export default function Menu(props) {
     </Fragment>
   );
 }
-
-// <CloseButton link={link} />
-// <Description text={text} />
-// Removed text from {} = props;

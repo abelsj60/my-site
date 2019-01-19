@@ -12,7 +12,7 @@ const Container = styled.section`
   top: 53px;
   bottom: 55px;
   width: 100%;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export default function LegalTermsOrBizCard(props) {

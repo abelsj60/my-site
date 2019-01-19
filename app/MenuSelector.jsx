@@ -7,7 +7,7 @@ const SelectorLink = styled(Link)`
   margin-top: 25px;
   margin-left: 25px;
   margin-right: auto;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   position: relative;
   padding-bottom: 6px;
 
@@ -24,14 +24,16 @@ const SelectorLink = styled(Link)`
   }
 `;
 const Label = styled.p`
-  color: lightskyblue;
+  font-size: 1.3rem;
+  color: ${props => (props.menu !== 'active' ? '#6e7dab' : '#FD1172')};
   transition: color 1s;
   margin: 0px;
 `;
 const Arrow = styled.img`
-  height: 5px;
+  height: 4px;
   margin-left: 50px;
   align-self: center;
+  fill: #6e7dab;
 `;
 const LowerLine = styled.hr`
   position: absolute;
@@ -40,7 +42,7 @@ const LowerLine = styled.hr`
   margin: 0px;
   border-style: solid;
   border-width: ${props => (props.menu !== 'active' ? '.5px' : '1px')};
-  color: lightskyblue;
+  color: ${props => (props.menu !== 'active' ? '#6e7dab' : '#FD1172')};
 
   ${SelectorLink}:hover & {
     border-width: 1px;

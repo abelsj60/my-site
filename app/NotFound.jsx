@@ -14,7 +14,7 @@ const Hed = styled.h1`
 const FailWhale = styled.section`
   flex: 1;
   margin-top: 15px;
-  background-color: cornflowerblue;
+  // background-color: cornflowerblue;
 `;
 
 export default function NotFound() {

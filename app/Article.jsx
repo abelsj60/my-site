@@ -14,6 +14,7 @@ const ArticleContainer = styled.main`
   display: flex;
   flex-direction: column;
   color: black;
+  // background-color: whitesmoke;
 
   @media (min-width: 848px) {
     flex-direction: row;
@@ -35,6 +36,7 @@ const StyledArticle = styled.section`
   }
 `;
 const Publication = styled.h3`
+  color: #fd1172;
   font-size: 1.5rem;
   font-style: italic;
   margin-top: 0px;
@@ -48,11 +50,12 @@ const Hed = styled.h1`
   font-size: 3rem;
 `;
 const Byline = styled.p`
+  font-size: 1.4rem;
   margin-top: 0px;
   margin-bottom: 15px;
 `;
 const Text = styled.section`
-  font-size: 1.75rem;
+  font-size: 1.65rem;
 
   p {
     margin-top: 0px;

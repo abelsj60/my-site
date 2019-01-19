@@ -12,7 +12,7 @@ import EventHandling from './custom/EventHandling.js';
 const HeaderContainer = styled.header.attrs(props => ({
   style: {
     backgroundColor: props.home === 'active' ? 'transparent' : 'white',
-    color: props.home === 'active' ? 'white' : 'black'
+    color: props.home === 'active' ? 'white' : '#455057'
   }
 }))`
   z-index: 2;
@@ -23,7 +23,7 @@ const HeaderContainer = styled.header.attrs(props => ({
 `;
 const StyledLink = styled(Link)`
   margin-left: ${props => (props.num === 0 ? '0px' : '15px')};
-  color: ${props => (props.home === 'active' ? 'white' : 'black')};
+  color: ${props => (props.home === 'active' ? 'white' : '#455057')};
 
   &:focus,
   &:visited,
@@ -31,9 +31,9 @@ const StyledLink = styled(Link)`
     text-decoration: none;
   }
 
-  &:hover {
-    text-decoration: underline;
-  }
+  // &:hover {
+  //   text-decoration: underline;
+  // }
 
   && {
     text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
@@ -175,3 +175,5 @@ class Header extends Component {
 }
 
 export default Header;
+
+// 2C3338

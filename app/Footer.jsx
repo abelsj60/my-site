@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import StoryButton from './StoryButton.jsx';
-
 import Referrer from './custom/Referrer.js';
 
 const Footer = styled.footer.attrs(props => ({
@@ -19,8 +18,8 @@ const Footer = styled.footer.attrs(props => ({
   height: 55px;
   font-size: 1.1rem;
   z-index: 1;
-  background-color: whitesmoke;
-  border-top: 0.5px solid lightgrey;
+  // background-color: #802a30;
+  border-top: 0.5px solid #fd1172;
 
   @media (min-width: 848px) {
     justify-content: flex-end;
@@ -38,11 +37,11 @@ const StyledLinkToReverie = styled(Link)`
 const Graf = styled.p`
   cursor: pointer;
   margin-right: 25px;
-  color: ${props => (props.show ? 'black' : 'grey')};
+  color: ${props => (props.show ? '#FD1172' : '#6E7DAB')};
 
-  &:hover {
-    color: black;
-  }
+  // &:hover {
+  //   color: #fd1172;
+  // }
 `;
 const FooterText = styled.div`
   display: flex;
@@ -63,9 +62,6 @@ export default function FooterContainer(props) {
   const isReverie = r.location.includes('reverie');
   const isStory = r.location.includes('story');
   const linkForReverie = isReverie ? '/' : '/reverie';
-  const textForStoryButton = showStoryText
-    ? 'Hide story text'
-    : 'Show story text';
 
   return (
     <Footer
@@ -76,7 +72,7 @@ export default function FooterContainer(props) {
     >
       <StoryButton
         story={isStory}
-        text={textForStoryButton}
+        showStoryText={showStoryText}
         boundHandleClickForApp={boundHandleClickForApp}
       />
       <FooterText>

@@ -12,7 +12,7 @@ const ArticleList = styled.ul`
   overflow: auto;
 `;
 const StyledLink = styled(Link)`
-  color: ${props => (props.link === 'active' ? 'blue' : 'black')};
+  color: ${props => (props.link === 'active' ? 'blue' : '')};
 
   &:focus,
   &:visited,
@@ -25,13 +25,15 @@ const StyledLink = styled(Link)`
   }
 `;
 const Source = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-style: italic;
   margin-bottom: 4px;
+  color: ${props => (props.menu === 'active' ? '#455057' : '#6E7DAB')};
 `;
 const Hed = styled.div`
-  font-size: ${props => (props.menu === 'active' ? '3rem' : '1.75rem')};
+  font-size: ${props => (props.menu === 'active' ? '3rem' : '1.6rem')};
   margin-bottom: 10px;
+  color: ${props => (props.menu === 'active' ? '#455057' : '#6E7DAB')};
 `;
 
 export default function ArticleNav(props) {
@@ -61,7 +63,7 @@ export default function ArticleNav(props) {
           return (
             <li key={idx}>
               <StyledLink link={linkIsActive} to={articleLink}>
-                <Source>{publication}</Source>
+                <Source menu={menuIsActive}>{publication}</Source>
                 <Hed menu={menuIsActive}>{headline}</Hed>
               </StyledLink>
             </li>

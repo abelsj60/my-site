@@ -8,9 +8,14 @@ const Hed = styled.h1`
   line-height: normal;
   margin-top: 13px;
   margin-bottom: 12px;
+  color: #ffe74c;
+
+  @media (min-width: 848px) {
+    color: #fd1172;
+  }
 `;
 const StoryText = styled.section`
-  font-size: 1.75rem;
+  font-size: 1.6rem;
   line-height: normal;
   white-space: pre-wrap;
   overflow: auto;
