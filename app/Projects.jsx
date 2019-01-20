@@ -35,7 +35,7 @@ const Project = styled.section`
 
   @media (min-width: 848px) {
     margin-top: 25px;
-    margin-left: 0px;
+    // margin-left: 0px;
   }
 `;
 const Hed = styled.h1`
@@ -76,11 +76,11 @@ const ProjectSelector = styled.nav`
     flex-direction: column;
     margin-top: 25px;
     margin-left: 25px;
-    margin-right: 24px;
+    // margin-right: 24px;
     margin-bottom: 25px;
     padding-right: 25px;
-    max-width: 20%;
-    min-width: 327px;
+    width: 327px;
+    // min-width: 327px;
     color: white;
     border-right: 0.5px solid #6e7dab;
   }
@@ -92,7 +92,7 @@ export default function Projects(props) {
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
 
-  const indexForProjectData = l.params.oneToIndex();
+  const indexForProjectData = l.params.projectNameToIndex();
   const project = data[indexForProjectData];
   const { name } = project.attributes.details;
 
@@ -106,14 +106,7 @@ export default function Projects(props) {
           projectIndex={projectIndex}
         />
       </ProjectSelector>
-      <MenuSelector
-        link={{
-          hash: undefined,
-          state: 'menu',
-          pathname: '/projects/menu'
-        }}
-        text={'Menu'}
-      />
+      <MenuSelector {...props} />
       <Project>
         <Hed>{name}</Hed>
         <section>

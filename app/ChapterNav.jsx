@@ -107,7 +107,7 @@ export default function ChapterNav(props) {
                 <StyledLink
                   menu={menuIsActive}
                   item={itemIsActive}
-                  to={`/story/chapter/${normalizedTitle}`}
+                  to={`/chapter/${normalizedTitle}`}
                 >
                   <ExtraTextForMenu
                     menu={menuIsActive}

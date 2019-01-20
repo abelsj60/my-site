@@ -38,18 +38,6 @@ const Page = styled.section`
       background: url('/howls-background-dl.jpg') no-repeat fixed center top;
     `};
 `;
-const HeaderSeperator = styled.hr`
-  width: 100%;
-  margin: 0;
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.05),
-    rgba(0, 0, 0, 0)
-  );
-`;
 
 class App extends Component {
   constructor(props) {
@@ -62,7 +50,10 @@ class App extends Component {
       showLegalTerms: false,
       showBusinessCard: false,
       magicOpacity: 0,
-      blockPointer: r.location === 'home'
+      blockPointer: r.location === 'home',
+      currentCaller: r.getLocation(props),
+      lastCaller: '',
+      isMenu: r.checkForMenu(props)
     };
   }
 
@@ -110,11 +101,21 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     const l = new Location('/', this.props, prevProps);
 
-    const eForApp = new EventHandling('app', this);
-    const handleClickForApp = eForApp.boundHandleClick;
-
     if (l.justChanged) {
-      const { showBusinessCard, showLegalTerms, showStoryText } = this.state;
+      const {
+        showBusinessCard,
+        showLegalTerms,
+        showStoryText,
+        lastCaller,
+        isMenu
+      } = this.state;
+
+      const r = new Referrer(prevProps);
+      const currentCall = r.getLocation(this.props);
+      const lastCall = r.getLocation(prevProps);
+
+      const eForApp = new EventHandling('app', this);
+      const handleClickForApp = eForApp.boundHandleClick;
 
       if (showBusinessCard) {
         handleClickForApp('showBusinessCard');
@@ -127,10 +128,22 @@ class App extends Component {
       if (!showStoryText) {
         handleClickForApp('showStoryText');
       }
+
+      // ! Refactor:
+
+      if (lastCaller === '' || (currentCall !== 'i' && lastCall !== 'i')) {
+        this.setState({ currentCaller: currentCall });
+
+        if (lastCall !== 'reverie') {
+          this.setState({ lastCaller: lastCall });
+        }
+      }
+
+      if (isMenu !== r.checkForMenu(this.props)) {
+        this.setState({ isMenu: !isMenu });
+      }
     }
   }
 }
 
 export default withRouter(App);
-
-// <HeaderSeperator />

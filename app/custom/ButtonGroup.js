@@ -102,7 +102,7 @@ export default class ButtonGroup {
 
     if (name === 'menu' && this._isMenu) {
       switch (this._referrer) {
-        case 'story':
+        case 'chapter':
           finalName = 'chapters';
           break;
         case 'projects':
@@ -112,13 +112,13 @@ export default class ButtonGroup {
           finalName = 'clips';
           break;
       }
-    } else if (name === 'story') {
+    } else if (name === 'chapter') {
       switch (this._showStory) {
         case true:
           finalName = 'picture';
           break;
         case false:
-          finalName = 'story';
+          finalName = 'chapter';
           break;
       }
     }

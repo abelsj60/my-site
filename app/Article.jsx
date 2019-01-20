@@ -31,8 +31,8 @@ const StyledArticle = styled.section`
 
   @media (min-width: 848px) {
     margin-top: 25px;
-    margin-left: 0;
-    min-width: 400px;
+    padding-left: 1px;
+    margin-left: 24px;
   }
 `;
 const Publication = styled.h3`
@@ -73,7 +73,7 @@ export default function Article(props) {
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
 
-  const indexForArticleData = l.params.twoToIndex();
+  const indexForArticleData = l.params.headlineToIndex();
   const article = data[indexForArticleData];
   const { publication, headline } = article.attributes;
   const markedBody = marked(article.body);
@@ -81,16 +81,7 @@ export default function Article(props) {
   return (
     <ArticleContainer>
       <DesktopArticleNav {...props} />
-
-      <MenuSelector
-        link={{
-          hash: undefined,
-          state: 'menu',
-          pathname: '/journalism/menu'
-        }}
-        text={'Menu'}
-      />
-
+      <MenuSelector {...props} />
       <StyledArticle>
         <Publication>{publication}</Publication>
         <Hed>{headline}</Hed>
@@ -100,8 +91,3 @@ export default function Article(props) {
     </ArticleContainer>
   );
 }
-
-// <div>
-//   Staff and freelance reporting for Forbes.com, Mergermarket, Slate and
-//   others
-// </div>

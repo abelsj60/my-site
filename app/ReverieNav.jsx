@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
 
-const ArticleList = styled.ul`
+const ReverieList = styled.ul`
   margin: 0;
   list-style-type: none;
   padding: 0;
@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
     text-decoration: none;
   }
 `;
-const Source = styled.p`
+const ReverieDate = styled.p`
   font-size: 1.3rem;
   font-style: italic;
   margin-bottom: 0px;
@@ -39,36 +39,33 @@ const Hed = styled.h1`
     props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
 `;
 
-export default function ArticleNav(props) {
+export default function ReverieNav(props) {
   const { data, isMenu } = props;
-  const { indexForArticleData } = props.localState;
+  const { indexForReverieData } = props.localState;
 
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <ArticleList>
+    <ReverieList>
       <Mapper
         mapData={data}
-        render={(article, idx) => {
-          const { publication, headline } = article.attributes;
-          const currentHed = data[indexForArticleData].attributes.headline;
+        render={(reverie, idx) => {
+          const { headline, date } = reverie.attributes;
+          const currentHed = data[indexForReverieData].attributes.headline;
 
-          const normalizePub = new Normalize(publication);
           const normalizeHed = new Normalize(headline);
           const normalizeCurrentHed = new Normalize(currentHed);
 
           const linkIsActive =
             normalizeHed.done === normalizeCurrentHed.done ? 'active' : '';
-          const articleLink = `/journalism/${normalizePub.done}/${
-            normalizeHed.done
-          }`;
+          const reverieLink = `/reverie/${normalizeHed.done}`;
 
           return (
             <li key={idx}>
-              <StyledLink link={linkIsActive} to={articleLink}>
-                <Source menu={menuIsActive} link={linkIsActive}>
-                  {publication}
-                </Source>
+              <StyledLink link={linkIsActive} to={reverieLink}>
+                <ReverieDate menu={menuIsActive} link={linkIsActive}>
+                  {date}
+                </ReverieDate>
                 <Hed menu={menuIsActive} link={linkIsActive}>
                   {headline}
                 </Hed>
@@ -77,6 +74,6 @@ export default function ArticleNav(props) {
           );
         }}
       />
-    </ArticleList>
+    </ReverieList>
   );
 }

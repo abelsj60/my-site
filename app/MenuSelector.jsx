@@ -25,7 +25,7 @@ const SelectorLink = styled(Link)`
 `;
 const Label = styled.p`
   font-size: 1.3rem;
-  color: ${props => (props.menu !== 'active' ? '#6e7dab' : '#FD1172')};
+  color: ${props => (props.menu !== 'active' ? '#6e7dab' : '#fd1172')};
   transition: color 1s;
   margin: 0px;
 `;
@@ -42,7 +42,7 @@ const LowerLine = styled.hr`
   margin: 0px;
   border-style: solid;
   border-width: ${props => (props.menu !== 'active' ? '.5px' : '1px')};
-  color: ${props => (props.menu !== 'active' ? '#6e7dab' : '#FD1172')};
+  color: ${props => (props.menu !== 'active' ? '#6e7dab' : '#ffe74c')};
 
   ${SelectorLink}:hover & {
     border-width: 1px;
@@ -50,14 +50,23 @@ const LowerLine = styled.hr`
 `;
 
 export default function MenuSelector(props) {
-  const menu = props.isMenu ? 'active' : '';
-  const arrowIcon = !props.isMenu ? '/arrow-down.svg' : '/arrow-up.svg';
+  const { isMenu, lastCaller, currentCaller } = props.state;
+  const menuIsActive = isMenu ? 'active' : '';
+  const isReverie = currentCaller === 'reverie';
+  const link =
+    isReverie && isMenu
+      ? '/reverie'
+      : isMenu
+        ? `/${lastCaller}`
+        : `/${currentCaller}/menu`;
+  const arrowIcon = !isMenu ? '/arrow-down.svg' : '/arrow-up.svg';
+  const text = isMenu ? 'Close' : 'Menu';
 
   return (
-    <SelectorLink to={props.link} menu={menu}>
-      <Label menu={menu}>{props.text}</Label>
+    <SelectorLink to={link} menu={menuIsActive}>
+      <Label menu={menuIsActive}>{text}</Label>
       <Arrow src={arrowIcon} />
-      <LowerLine menu={menu} />
+      <LowerLine menu={menuIsActive} />
     </SelectorLink>
   );
 }

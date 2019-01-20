@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 
 import Home from './Home.jsx';
 import ContentLoader from './ContentLoader.jsx';
-import Reverie from './Reverie.jsx';
 import About from './About.jsx';
 import ReloadRoute from './ReloadRoute.jsx';
 import NotFound from './NotFound.jsx';
@@ -33,7 +32,8 @@ export default class Body extends Component {
       indexForProjectData: s.build('indexForProjectData'),
       indexForProjectPics: s.build('indexForProjectPics'),
       indexForPublication: s.build('indexForPublication'),
-      indexForArticleData: s.build('indexForArticleData')
+      indexForArticleData: s.build('indexForArticleData'),
+      indexForReverieData: s.build('indexForReverieData')
     };
   }
 
@@ -46,18 +46,18 @@ export default class Body extends Component {
         <Route
           exact
           path="/"
-          render={props => {
-            return <Home {...props} {...this.props} />;
+          render={() => {
+            return <Home {...this.props} />;
           }}
         />
         <Route
-          path="/story/:chapter?/:title?"
-          render={props => {
+          path="/chapter/:title?"
+          render={({ match }) => {
             return (
               <ContentLoader
-                {...props}
+                {...this.props}
+                match={match}
                 localState={this.state}
-                state={this.props.state}
                 boundHandleClickForBody={boundHandleClickForBody}
               />
             );
@@ -65,12 +65,12 @@ export default class Body extends Component {
         />
         <Route
           path="/projects/:projectName?/:projectThumbnail?"
-          render={props => {
+          render={({ match }) => {
             return (
               <ContentLoader
-                {...props}
+                {...this.props}
                 localState={this.state}
-                state={this.props.state}
+                match={match}
                 boundHandleClickForBody={boundHandleClickForBody}
               />
             );
@@ -78,33 +78,42 @@ export default class Body extends Component {
         />
         <Route
           path="/journalism/:publication?/:headline?"
-          render={props => {
+          render={({ match }) => {
             return (
               <ContentLoader
-                {...props}
+                {...this.props}
                 localState={this.state}
-                state={this.props.state}
+                match={match}
                 boundHandleClickForBody={boundHandleClickForBody}
               />
             );
           }}
         />
         <Route
-          path="/reverie"
-          render={() => {
-            return <Reverie />;
+          path="/reverie/:headline?"
+          render={({ match }) => {
+            return (
+              <ContentLoader
+                {...this.props}
+                localState={this.state}
+                match={match}
+                boundHandleClickForBody={boundHandleClickForBody}
+              />
+            );
           }}
         />
         <Route
+          exact
           path="/about"
           render={() => {
             return <About />;
           }}
         />
         <Route
+          exact
           path="/i"
-          render={props => {
-            return <ReloadRoute {...props} localState={this.state} />;
+          render={() => {
+            return <ReloadRoute {...this.props} localState={this.state} />;
           }}
         />
         <Route component={NotFound} />

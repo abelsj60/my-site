@@ -41,7 +41,7 @@ export default class ContentLoader extends Component {
     }
 
     return needsRedirect ? (
-      <Redirect to={{ pathname: '/i', state: `${r.location}` }} />
+      <Redirect to="/i" />
     ) : isNotFound ? (
       <Redirect to="/not-found" />
     ) : (
@@ -49,13 +49,7 @@ export default class ContentLoader extends Component {
         <Route
           path={`/${r.location}/menu`}
           render={() => {
-            return (
-              <Menu
-                {...this.props}
-                text={cD.getText()}
-                link={`/${r.location}`}
-              />
-            );
+            return <Menu {...this.props} />;
           }}
         />
         <Route
@@ -79,11 +73,33 @@ export default class ContentLoader extends Component {
         this.setState({ needsRedirect: startRedirect });
       }
     } else if (l.isSwappingContent) {
-      const paramOneAsIndex = l.params.oneToIndex();
-      const paramTwoAsIndex = l.params.twoToIndex();
+      let readyToUpdateState;
+      let pOneIndex;
+      let pTwoIndex;
 
-      if (paramOneAsIndex !== -1 && paramTwoAsIndex !== -1) {
-        this.props.boundHandleClickForBody(paramOneAsIndex, paramTwoAsIndex);
+      switch (l.type) {
+        case 'chapter':
+          pOneIndex = l.params.titleToIndex();
+          readyToUpdateState = pTwoIndex !== -1;
+          break;
+        case 'projects':
+          pOneIndex = l.params.projectNameToIndex();
+          pTwoIndex = l.params.projectThumbnailToIndex();
+          readyToUpdateState = pOneIndex !== -1 && pTwoIndex !== -1;
+          break;
+        case 'journalism':
+          pOneIndex = l.params.publicationToIndex();
+          pTwoIndex = l.params.headlineToIndex();
+          readyToUpdateState = pOneIndex !== -1 && pTwoIndex !== -1;
+          break;
+        case 'reverie':
+          pOneIndex = l.params.headlineToIndex();
+          readyToUpdateState = pOneIndex !== -1;
+          break;
+      }
+
+      if (readyToUpdateState) {
+        this.props.boundHandleClickForBody(pOneIndex, pTwoIndex);
       }
     }
   }

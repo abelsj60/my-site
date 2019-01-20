@@ -1,6 +1,7 @@
-import storyData from '../data/the-story/index.js';
-import projectData from '../data/projects/index.js';
-import articleData from '../data/clips/index.js';
+import stories from '../data/the-story/index.js';
+import projects from '../data/projects/index.js';
+import articles from '../data/clips/index.js';
+import reveries from '../data/reveries/index.js';
 
 export default class Content {
   constructor(type) {
@@ -11,12 +12,14 @@ export default class Content {
     const type = this.type;
 
     switch (type) {
-      case 'story':
-        return storyData;
+      case 'chapter':
+        return stories;
       case 'projects':
-        return projectData;
+        return projects;
       case 'journalism':
-        return articleData;
+        return articles;
+      case 'reverie':
+        return reveries;
       default:
         return;
     }

@@ -85,14 +85,10 @@ const Image = styled.img`
 `;
 const Highlighter = styled.div`
   width: 100%;
-  height: 100%;
+  height: 3px;
+  bottom: 0px;
   position: absolute;
-  background-color: ${p =>
-    p.highlight === 'active' ? 'rgb(0, 0, 0, 0.2)' : ''};
-
-  // &:hover {
-  //   background-color: rgb(0, 0, 0, 0.2);
-  // }
+  background-color: #ffe74c;
 `;
 
 export default function SingleProjectNav(props) {
@@ -113,6 +109,8 @@ export default function SingleProjectNav(props) {
           const thumbnailNumber = idx + 1;
           const thumbnailIsActive =
             activeProject && indexForProjectPics === idx ? 'active' : '';
+          const highlightActiveThumbnail = menuIsActive &&
+            thumbnailIsActive && <Highlighter />;
 
           return (
             <ThumbnailListItem key={idx}>
@@ -123,7 +121,7 @@ export default function SingleProjectNav(props) {
                 to={`/projects/${projectName}/${thumbnailNumber}`}
               >
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
-                <Highlighter highlight={thumbnailIsActive} />
+                {highlightActiveThumbnail}
               </StyledLink>
             </ThumbnailListItem>
           );

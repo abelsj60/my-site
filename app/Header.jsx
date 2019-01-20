@@ -20,6 +20,10 @@ const HeaderContainer = styled.header.attrs(props => ({
   height: 52px;
   display: flex;
   align-items: center;
+
+  &:hover {
+    color: #fd1172;
+  }
 `;
 const StyledLink = styled(Link)`
   margin-left: ${props => (props.num === 0 ? '0px' : '15px')};
@@ -31,9 +35,9 @@ const StyledLink = styled(Link)`
     text-decoration: none;
   }
 
-  // &:hover {
-  //   text-decoration: underline;
-  // }
+  &:hover {
+    // text-decoration: underline;
+  }
 
   && {
     text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};

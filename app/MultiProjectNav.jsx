@@ -27,7 +27,7 @@ const Hed = styled.section`
   font-size: 1.6rem;
   // margin-top: ${props => (props.num !== 0 ? '15px' : '')};
   margin-bottom: 9px;
-  color: ${props => (props.active === 'active' ? '#6E7DAB' : '#6E7DAB')};
+  color: ${props => (props.active === 'active' ? '#6E7DAB' : 'black')};
 
   // ${ProjectGroup}:hover & {
   //   color: #FD1172;

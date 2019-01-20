@@ -21,21 +21,12 @@ const Overflow = styled.section`
 `;
 
 export default function Menu(props) {
-  const { link } = props;
   const r = new Referrer(props);
   const cD = new ComponentData(r.location, props);
 
   return (
     <Fragment>
-      <MenuSelector
-        link={{
-          hash: undefined,
-          state: 'menu',
-          pathname: link
-        }}
-        text={'Close'}
-        isMenu={true}
-      />
+      <MenuSelector {...props} />
       <StyledMenu>
         <Overflow>{cD.getMenu()}</Overflow>
       </StyledMenu>

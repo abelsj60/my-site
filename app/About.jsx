@@ -9,7 +9,7 @@ const Main = styled.main`
   flex: 1;
   display: flex;
   height: 100%;
-  padding: 25px;
+  // padding: 25px;
   flex-direction: row;
   // background-color: whitesmoke;
 `;
@@ -17,7 +17,8 @@ const Content = styled.section`
   flex: 1;
   flex-direction: column;
   font-size: 1.75rem;
-  margin-top: -4px;
+  margin: 25px;
+  // margin-top: -7px;
 
   @media (min-width: 848px) {
     display: flex;
@@ -25,8 +26,8 @@ const Content = styled.section`
 `;
 const Hed = styled.h1`
   color: #fd1172;
-  font-size: 3rem;
-  margin-top: -3px;
+  font-size: 2.5rem;
+  margin-top: -4px;
   margin-bottom: 15px;
 `;
 const TextContainer = styled.section`
@@ -48,8 +49,10 @@ const Image = styled.section`
   @media (min-width: 848px) {
     display: block;
     width: 327px;
-    padding: 25px;
-    margin-right: 25px;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    padding-right: 25px;
     border-right: 0.5px solid #6e7dab;
     // background-color: rgba(255, 0, 0, 0.5);
   }

@@ -1,27 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 import marked from 'marked';
-import reveries from './data/reveries/index';
+
+import MenuSelector from './MenuSelector.jsx';
+import DesktopReverieNav from './DesktopReverieNav.jsx';
+
+import Referrer from './custom/Referrer.js';
+import Location from './custom/Location.js';
 
 const Main = styled.main`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 848px) {
+    flex-direction: row;
+  }
+  // overflow: auto;
 `;
 const Content = styled.section`
   flex: 2;
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  margin-left: 25px;
+  margin-right: 25px;
+  overflow: auto;
+
+  @media (min-width: 848px) {
+    margin-top: 25px;
+  }
 `;
-const Name = styled.h1`
+const Name = styled.p`
   margin-top: 0px;
-  margin-bottom: 5px;
-  font-size: 1.75rem;
+  margin-bottom: 0px;
+  font-size: 1.6rem;
   font-style: italic;
-  color: deeppink;
+  color: #fd1172;
 `;
 const Post = styled.section`
-  overflow: auto;
+  p {
+    font-size: 1.6rem;
+  }
 
   img,
   p {
@@ -46,34 +68,34 @@ const Hed = styled.h2`
 `;
 const PostDate = styled.p`
   font-style: italic;
+  font-size: 1.4rem;
+  margin-top: 0px;
   margin-bottom: 10px;
 `;
 
-export default class Reverie extends Component {
-  constructor(props) {
-    super(props);
+export default function Reverie(props) {
+  const { data } = props;
 
-    this.state = {
-      latestReverie: reveries[0],
-      pastReveries: reveries.slice(1)
-    };
-  }
+  const r = new Referrer(props);
+  const l = new Location(r.pathToMatch, props);
 
-  render() {
-    const reverie = this.state.latestReverie;
-    const { hed, date } = reverie.attributes;
+  const indexForReverieData = l.params.headlineToIndex();
 
-    return (
-      <Main>
-        <Content>
-          <Name>Reverie</Name>
-          <Post>
-            <Hed>{hed}</Hed>
-            <PostDate>{date}</PostDate>
-            {ReactHtmlParser(marked(reverie.body, { smartypants: true }))}
-          </Post>
-        </Content>
-      </Main>
-    );
-  }
+  const reverie = data[indexForReverieData];
+  const { headline, date } = reverie.attributes;
+
+  return (
+    <Main>
+      <DesktopReverieNav {...props} />
+      <MenuSelector {...props} />
+      <Content>
+        <Name>Reverie</Name>
+        <Hed>{headline}</Hed>
+        <PostDate>{date}</PostDate>
+        <Post>
+          {ReactHtmlParser(marked(reverie.body, { smartypants: true }))}
+        </Post>
+      </Content>
+    </Main>
+  );
 }

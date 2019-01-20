@@ -4,6 +4,7 @@ import Normalize from './Normalize.js';
 export default class Params {
   constructor(type, params) {
     this._paramKeys = Object.keys(params);
+
     this._one = params[this._paramKeys[0]];
     this._two = params[this._paramKeys[1]];
     this._expectedNumber = this._paramKeys.length;
@@ -42,15 +43,14 @@ export default class Params {
 
     switch (paramType) {
       case 'text':
-        const filterDataForParam = searchData.filter(d => {
-          const data = this._normalizeParam(d.attributes[paramName]);
+        const paramTestResults = searchData.filter(d => {
+          const valueFromData = this._normalizeParam(d.attributes[paramName]);
           const paramToTest = this._normalizeParam(param);
 
-          return data === paramToTest;
+          return valueFromData === paramToTest;
         });
 
-        paramIsValid = filterDataForParam.length > 0;
-
+        paramIsValid = paramTestResults.length > 0;
         break;
       case 'number':
         if (!parseInt(param)) return false;
@@ -61,7 +61,6 @@ export default class Params {
           paramToTestConvertedToIndex >= 0 &&
           paramToTestConvertedToIndex <
             searchData[0].attributes[paramName].length;
-
         break;
     }
 
@@ -81,10 +80,6 @@ export default class Params {
       const isNumber = parseInt(this[paramName]);
 
       if (!isNumber) {
-        if (paramName === 'chapter') {
-          return 0;
-        }
-
         return this._searchData.findIndex(d => {
           const normalizedName = this._normalizeParam(d.attributes[paramName]);
           return normalizedName === this[paramName];
@@ -101,6 +96,10 @@ export default class Params {
     if (this.paramNames[0] === 'fakeData') {
       return -1;
     }
+
+    // if (this.paramNames[0] === 'chapter') {
+    //   return 0;
+    // }
 
     return this.toIndex(this.paramNames[0]);
   }

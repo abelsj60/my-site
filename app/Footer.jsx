@@ -25,7 +25,7 @@ const Footer = styled.footer.attrs(props => ({
     justify-content: flex-end;
   }
 `;
-const StyledLinkToReverie = styled(Link)`
+const LinkToReverie = styled(Link)`
   &:focus,
   &:hover,
   &:visited,
@@ -49,19 +49,24 @@ const FooterText = styled.div`
 
 export default function FooterContainer(props) {
   const isHome = props.home === 'active';
+  const { boundHandleClickForApp, state } = props;
   const {
     blockPointer,
     magicOpacity,
     showBusinessCard,
     showLegalTerms,
-    showStoryText
-  } = props.state;
-  const { boundHandleClickForApp } = props;
+    showStoryText,
+    lastCaller
+  } = state;
 
   const r = new Referrer(props);
-  const isReverie = r.location.includes('reverie');
-  const isStory = r.location.includes('story');
-  const linkForReverie = isReverie ? '/' : '/reverie';
+  const location = r.getLocation(props);
+
+  const isReverie = location === 'reverie';
+  const isStory = location === 'chapter';
+
+  const whereItStarted = lastCaller !== 'home' ? lastCaller : '';
+  const linkForReverie = isReverie ? `/${whereItStarted}` : '/reverie';
 
   return (
     <Footer
@@ -76,9 +81,9 @@ export default function FooterContainer(props) {
         boundHandleClickForApp={boundHandleClickForApp}
       />
       <FooterText>
-        <StyledLinkToReverie to={linkForReverie}>
+        <LinkToReverie to={linkForReverie}>
           <Graf show={isReverie}>Reverie</Graf>
-        </StyledLinkToReverie>
+        </LinkToReverie>
         <Graf
           show={showBusinessCard}
           onClick={() => {

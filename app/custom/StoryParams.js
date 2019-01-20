@@ -4,7 +4,7 @@ export default class StoryParams extends Params {
   constructor(type, params, prevProps) {
     super(type, params);
 
-    this.paramNames = ['chapter', 'title'];
+    this.paramNames = ['title'];
     this.lastChapter = prevProps && prevProps.match.params.title;
 
     this._actualNumber = this.paramNames.filter(p => {
@@ -12,17 +12,13 @@ export default class StoryParams extends Params {
     }).length;
   }
 
-  get chapter() {
-    return this._one === 'chapter' ? 'chapter' : false;
-  }
-
   get title() {
-    return this.validateParam(this._two, 'title', 'text');
+    return this.validateParam(this._one, 'title', 'text');
   }
 
   titleToIndex() {
     if (!this.title) return -1;
 
-    return this.twoToIndex();
+    return this.oneToIndex();
   }
 }

@@ -3,10 +3,10 @@ import Normalize from './Normalize.js';
 
 export default class Reload {
   constructor(props) {
-    const { state } = props.location;
+    const { currentCaller } = props.state;
 
     this._props = props;
-    this._caller = state ? state.toLowerCase() : 'none';
+    this._caller = currentCaller;
 
     this.path = this._buildPath();
   }
@@ -15,12 +15,14 @@ export default class Reload {
     const section = this._caller;
 
     switch (section) {
-      case 'story':
+      case 'chapter':
         return this._storyPath(section);
       case 'projects':
         return this._projectsPath(section);
       case 'journalism':
         return this._articlePath(section);
+      case 'reverie':
+        return this._reveriePath(section);
       default:
         return '/';
     }
@@ -44,7 +46,7 @@ export default class Reload {
     const title = storyData[indexForChapterData].attributes.title;
     const normalizedTitle = this._normalize(title);
 
-    return `/${section}/chapter/${normalizedTitle}`;
+    return `/${section}/${normalizedTitle}`;
   }
 
   _projectsPath(section) {
@@ -66,5 +68,14 @@ export default class Reload {
     const normalizedHeadline = this._normalize(headline);
 
     return `/${section}/${normalizedPublication}/${normalizedHeadline}`;
+  }
+
+  _reveriePath(section) {
+    const reverieData = this._getContentData();
+    const { indexForReverieData } = this._props.localState;
+    const headline = reverieData[indexForReverieData].attributes.headline;
+    const normalizedHeadline = this._normalize(headline);
+
+    return `/${section}/${normalizedHeadline}`;
   }
 }

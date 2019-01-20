@@ -1,10 +1,12 @@
 import React from 'react';
 
 import Story from '../Story.jsx';
+import Reverie from '../Reverie.jsx';
 import Projects from '../Projects.jsx';
 import Article from '../Article.jsx';
 import ArticleNav from '../ArticleNav.jsx';
 import ChapterNav from '../ChapterNav.jsx';
+import ReverieNav from '../ReverieNav.jsx';
 import MultiProjectNav from '../MultiProjectNav.jsx';
 
 import Content from './Content.js';
@@ -18,36 +20,19 @@ export default class ComponentData {
     this._contentData = c.getContentData();
   }
 
-  getText() {
-    const type = this._type;
-
-    switch (type) {
-      case 'story':
-        return 'The story so far';
-      case 'projects':
-        return 'Technology projects for me, clients, and fun';
-      case 'journalism':
-        return 'Staff and freelance reporting for Forbes.com, Mergermarket, Slate and others';
-      default:
-        return undefined;
-    }
-  }
-
   getSection() {
     const props = this._props;
     const type = this._type;
 
     switch (type) {
-      case 'story':
+      case 'chapter':
         return <Story {...props} data={this._contentData} />;
       case 'projects':
-        return (
-          <Projects {...props} text={this.getText()} data={this._contentData} />
-        );
+        return <Projects {...props} data={this._contentData} />;
       case 'journalism':
-        return (
-          <Article {...props} text={this.getText()} data={this._contentData} />
-        );
+        return <Article {...props} data={this._contentData} />;
+      case 'reverie':
+        return <Reverie {...props} data={this._contentData} />;
       default:
         return undefined;
     }
@@ -58,7 +43,7 @@ export default class ComponentData {
     const type = this._type;
 
     switch (type) {
-      case 'story':
+      case 'chapter':
         return (
           <ChapterNav
             {...props}
@@ -80,6 +65,15 @@ export default class ComponentData {
       case 'journalism':
         return (
           <ArticleNav
+            {...props}
+            isMenu={true}
+            section={type}
+            data={this._contentData}
+          />
+        );
+      case 'reverie':
+        return (
+          <ReverieNav
             {...props}
             isMenu={true}
             section={type}

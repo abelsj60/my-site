@@ -68,7 +68,7 @@ export default function Story(props) {
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
 
-  const indexForChapterData = l.params.twoToIndex();
+  const indexForChapterData = l.params.titleToIndex();
   const chapter = data[indexForChapterData];
   const { image } = chapter.attributes;
 
