@@ -7,18 +7,16 @@ import Referrer from './custom/Referrer.js';
 
 const Footer = styled.footer.attrs(props => ({
   style: {
-    opacity: props.home ? props.opacity : '',
+    opacity: props.home ? props.magicOpacity : '',
     pointerEvents: props.blockPointer ? 'none' : 'auto'
   }
 }))`
   display: flex;
   justify-content: ${props => (!props.story ? 'flex-end' : 'space-between')};
   align-items: center;
-  z-index: 2;
   height: 55px;
   font-size: 1.1rem;
   z-index: 1;
-  // background-color: #802a30;
   border-top: 0.5px solid #fd1172;
 
   @media (min-width: 848px) {
@@ -38,17 +36,12 @@ const Graf = styled.p`
   cursor: pointer;
   margin-right: 25px;
   color: ${props => (props.show ? '#FD1172' : '#6E7DAB')};
-
-  // &:hover {
-  //   color: #fd1172;
-  // }
 `;
 const FooterText = styled.div`
   display: flex;
 `;
 
 export default function FooterContainer(props) {
-  const isHome = props.home === 'active';
   const { boundHandleClickForApp, state } = props;
   const {
     blockPointer,
@@ -56,23 +49,23 @@ export default function FooterContainer(props) {
     showBusinessCard,
     showLegalTerms,
     showStoryText,
+    currentCaller,
     lastCaller
   } = state;
 
-  const r = new Referrer(props);
-  const location = r.getLocation(props);
+  const isReverie = currentCaller === 'reverie';
+  const isStory = currentCaller === 'chapter';
+  const isHome = currentCaller === 'home';
 
-  const isReverie = location === 'reverie';
-  const isStory = location === 'chapter';
-
-  const whereItStarted = lastCaller !== 'home' ? lastCaller : '';
+  const whereItStarted =
+    lastCaller !== 'home' && lastCaller !== 'i' ? lastCaller : '';
   const linkForReverie = isReverie ? `/${whereItStarted}` : '/reverie';
 
   return (
     <Footer
       home={isHome}
       story={isStory}
-      opacity={magicOpacity}
+      magicOpacity={magicOpacity}
       blockPointer={blockPointer}
     >
       <StoryButton

@@ -1,6 +1,7 @@
 ---
 headline: 'Rupert Murdoch: Big Man On Campus'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 Heading back to college this fall? Rupert Murdoch will be waiting.

@@ -128,8 +128,9 @@ class Header extends Component {
   }
 
   render() {
-    const { home } = this.props;
+    const { currentCaller } = this.props.state;
     const menuIsOpen = this.state.menuIsOpen ? 'active' : '';
+    const homeIsActive = currentCaller === 'home' ? 'active' : '';
 
     const r = new Referrer(this.props);
 
@@ -137,8 +138,8 @@ class Header extends Component {
     const handleClickFoHeader = eForHeader.boundHandleClick;
 
     return (
-      <HeaderContainer home={home}>
-        <MyName to={'/'} home={home} menu={menuIsOpen}>
+      <HeaderContainer home={homeIsActive}>
+        <MyName to={'/'} home={homeIsActive} menu={menuIsOpen}>
           James Abels
         </MyName>
         <Motto menu={menuIsOpen}>Magical stories and other adventures</Motto>
@@ -154,7 +155,7 @@ class Header extends Component {
                   <HeaderNavItem key={idx}>
                     <StyledLink
                       num={idx}
-                      home={home}
+                      home={homeIsActive}
                       to={link.path}
                       active={pathIsActive}
                     >
@@ -167,7 +168,7 @@ class Header extends Component {
           </HeaderNavList>
         </HeaderNav>
         <TogglerIcon
-          home={home}
+          home={homeIsActive}
           menu={menuIsOpen}
           onClick={() => {
             handleClickFoHeader();
@@ -179,5 +180,3 @@ class Header extends Component {
 }
 
 export default Header;
-
-// 2C3338

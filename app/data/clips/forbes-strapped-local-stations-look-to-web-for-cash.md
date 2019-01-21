@@ -1,6 +1,7 @@
 ---
 headline: 'Strapped Local Sations Look to Web for Cash'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 Local television stations need some good news. Just this month, the

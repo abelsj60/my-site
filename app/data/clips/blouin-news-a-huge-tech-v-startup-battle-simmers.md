@@ -1,6 +1,7 @@
 ---
 headline: 'A Huge Tech Vs. Start-up Battle Simmers'
 publication: 'Blouin News'
+position: 'Freelance'
 ---
 
 A new battle in the war between lithe start-ups and huge tech is

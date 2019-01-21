@@ -60,9 +60,9 @@ const StyledLink = styled(Link)`
     text-decoration: none;
   }
 
-  ${MagicListItem}:hover & {
-    color: deeppink;
-  }
+  // ${MagicListItem}:hover & {
+  //   color: deeppink;
+  // }
 `;
 const Hed = styled.h3`
   margin: 0px;

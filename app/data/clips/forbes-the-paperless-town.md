@@ -1,6 +1,7 @@
 ---
 headline: 'The Paperless Town'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 An odor of death clings to the newspaper industry. According to Editor &

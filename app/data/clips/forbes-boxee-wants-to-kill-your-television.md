@@ -1,6 +1,7 @@
 ---
 headline: 'Boxee Wants To Kill Your Television'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 Avner Ronen thinks he can kill cable television. How? With software that

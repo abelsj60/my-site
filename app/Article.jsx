@@ -75,7 +75,7 @@ export default function Article(props) {
 
   const indexForArticleData = l.params.headlineToIndex();
   const article = data[indexForArticleData];
-  const { publication, headline } = article.attributes;
+  const { publication, headline, position } = article.attributes;
   const markedBody = marked(article.body);
 
   return (
@@ -85,7 +85,7 @@ export default function Article(props) {
       <StyledArticle>
         <Publication>{publication}</Publication>
         <Hed>{headline}</Hed>
-        <Byline>by James Erik Abels</Byline>
+        <Byline>by James Erik Abels | {position}</Byline>
         <Text>{ReactHtmlParser(markedBody)}</Text>
       </StyledArticle>
     </ArticleContainer>

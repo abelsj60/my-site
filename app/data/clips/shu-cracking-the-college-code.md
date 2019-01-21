@@ -1,6 +1,7 @@
 ---
 headline: 'Cracking the College Code'
 publication: 'Seton Hall Magazine'
+position: 'Freelance'
 ---
 
 Last winter, 15 students from Newark’s Technology High School took part in

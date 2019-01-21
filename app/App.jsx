@@ -59,7 +59,7 @@ class App extends Component {
 
   render() {
     const l = new Location('/', this.props);
-    const isHome = l.type === 'home' ? 'active' : '';
+    const homeIsActive = l.type === 'home' ? 'active' : '';
 
     const eForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eForApp.boundHandleClick;
@@ -70,26 +70,25 @@ class App extends Component {
     return (
       <Fragment>
         <GlobalStyle />
-        <Page home={isHome}>
-          <Header home={isHome} {...this.props} scrollTop={this.scrollTop} />
+        <Page home={homeIsActive}>
+          <Header
+            {...this.props}
+            state={this.state}
+            scrollTop={this.scrollTop}
+          />
           <Body
             {...this.props}
             state={this.state}
             boundSpellsForHome={boundSpellsForHome}
           />
-          <LegalTermsOrBizCard
-            home={isHome}
-            {...this.props}
-            state={this.state}
-          />
+          <LegalTermsOrBizCard {...this.props} state={this.state} />
           <Footer
-            home={isHome}
             {...this.props}
             state={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
           />
         </Page>
-        <MagicScroller home={isHome} />
+        <MagicScroller home={homeIsActive} />
       </Fragment>
     );
   }
@@ -111,8 +110,12 @@ class App extends Component {
       } = this.state;
 
       const r = new Referrer(prevProps);
-      const currentCall = r.getLocation(this.props);
-      const lastCall = r.getLocation(prevProps);
+
+      const currentCall = l.type;
+      const lastCall = l.lastType;
+
+      const firstTimeThrough = lastCaller === '';
+      const routeIsNotReloading = currentCall !== 'i' && lastCall !== 'i';
 
       const eForApp = new EventHandling('app', this);
       const handleClickForApp = eForApp.boundHandleClick;
@@ -129,21 +132,28 @@ class App extends Component {
         handleClickForApp('showStoryText');
       }
 
-      // ! Refactor:
-
-      if (lastCaller === '' || (currentCall !== 'i' && lastCall !== 'i')) {
-        this.setState({ currentCaller: currentCall });
-
-        if (lastCall !== 'reverie') {
-          this.setState({ lastCaller: lastCall });
-        }
+      if (firstTimeThrough || routeIsNotReloading) {
+        handleClickForApp('callers', currentCall, lastCall);
       }
 
       if (isMenu !== r.checkForMenu(this.props)) {
-        this.setState({ isMenu: !isMenu });
+        handleClickForApp('isMenu');
       }
     }
   }
 }
 
 export default withRouter(App);
+
+// Thumbnail glitch
+// Rename eventHandling funcs? Toggles rather than shows?
+// homeIsActive...
+// Story edit
+
+// Structure, more modular, theme, share design elements?
+
+// Browser testing, and major errors + design (fonts?, bullets in Reverie)
+// Images — how to store for React?
+// Take pictures, write copy for Arrow, Slingshot, TMMnews
+// Illustrator. List needs, specs?
+// Hosting?

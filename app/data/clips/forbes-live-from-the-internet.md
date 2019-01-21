@@ -1,6 +1,7 @@
 ---
 headline: 'Live, From The Internet'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 Some 63.2 million television viewers tuned into the presidential debate

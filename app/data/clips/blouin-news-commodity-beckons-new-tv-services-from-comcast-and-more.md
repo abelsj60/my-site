@@ -1,6 +1,7 @@
 ---
 headline: 'Commodity Beckons New TV Services...'
 publication: 'Blouin News'
+position: 'Freelance'
 ---
 
 Gracenote offered an important lesson about internet technology last week.

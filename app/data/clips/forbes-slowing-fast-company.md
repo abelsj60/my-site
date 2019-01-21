@@ -1,6 +1,7 @@
 ---
 headline: 'Slowing Fast Company'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 While layoffs and hiring freezes are the topic du jour at media companies

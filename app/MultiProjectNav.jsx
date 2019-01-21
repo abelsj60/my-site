@@ -10,7 +10,7 @@ const DesktopNavGroup = styled.ul`
   margin-top: 0px;
   margin-left: 0px;
   margin-right: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   padding: 0px;
   list-style-type: none;
 

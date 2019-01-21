@@ -35,29 +35,37 @@ export default class EventHandling {
   }
 
   _handleClickForAppComponent() {
-    return propertyToUpdate => {
+    return (propertyToUpdate, propertyOne, propertyTwo) => {
       const {
         showBusinessCard,
         showLegalTerms,
         blockPointer,
-        showStoryText
+        showStoryText,
+        isMenu
       } = this.state;
-      let stateToUpdate;
+      const stateToUpdate = {};
 
       switch (propertyToUpdate) {
         case 'showBusinessCard':
-          stateToUpdate = { showBusinessCard: !showBusinessCard };
+          stateToUpdate.showBusinessCard = !showBusinessCard;
           break;
         case 'showLegalTerms':
-          stateToUpdate = { showLegalTerms: !showLegalTerms };
+          stateToUpdate.showLegalTerms = !showLegalTerms;
           break;
         case 'showStoryText':
-          stateToUpdate = { showStoryText: !showStoryText };
+          stateToUpdate.showStoryText = !showStoryText;
           break;
         case 'toggleMagicPointer':
-          stateToUpdate = {
-            blockPointer: !blockPointer
-          };
+          stateToUpdate.blockPointer = !blockPointer;
+        case 'callers':
+          stateToUpdate.currentCaller = propertyOne;
+          if (propertyTwo !== 'reverie') {
+            stateToUpdate.lastCaller = propertyTwo;
+          }
+          break;
+        case 'isMenu':
+          stateToUpdate.isMenu = !isMenu;
+          break;
         default:
           console.log('_handleClickForAppComponent: Keep calm, carry on');
       }
@@ -68,28 +76,22 @@ export default class EventHandling {
 
   _handleClickForBodyComponent(innerThis) {
     return (propertyOne, propertyTwo) => {
-      let stateToUpdate;
+      const stateToUpdate = {};
 
       switch (innerThis._referrer) {
         case 'chapter':
-          stateToUpdate = { indexForChapterData: propertyOne };
+          stateToUpdate.indexForChapterData = propertyOne;
           break;
         case 'projects':
-          stateToUpdate = {
-            indexForProjectData: propertyOne,
-            indexForProjectPics: propertyTwo
-          };
+          stateToUpdate.indexForProjectData = propertyOne;
+          stateToUpdate.indexForProjectPics = propertyTwo;
           break;
         case 'journalism':
-          stateToUpdate = {
-            indexForPublication: propertyOne,
-            indexForArticleData: propertyTwo
-          };
+          stateToUpdate.indexForPublication = propertyOne;
+          stateToUpdate.indexForArticleData = propertyTwo;
           break;
         case 'reverie':
-          stateToUpdate = {
-            indexForReverieData: propertyOne
-          };
+          stateToUpdate.indexForReverieData = propertyOne;
           break;
         default:
           console.log('_handleClickForBodyComponent: Keep calm, carry on');
