@@ -9,14 +9,10 @@ const StyledMenu = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
-  // color: black;
-  // background-color: whitesmoke;
+  overflow: hidden;
+  margin: 25px;
 `;
-const Overflow = styled.section`
-  margin-top: 10px;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 25px;
+const OverflowContainer = styled.section`
   overflow: auto;
 `;
 
@@ -26,9 +22,9 @@ export default function Menu(props) {
 
   return (
     <Fragment>
-      <MenuSelector {...props} />
       <StyledMenu>
-        <Overflow>{cD.getMenu()}</Overflow>
+        <MenuSelector {...props} />
+        <OverflowContainer>{cD.getMenu()}</OverflowContainer>
       </StyledMenu>
     </Fragment>
   );

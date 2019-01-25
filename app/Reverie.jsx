@@ -13,20 +13,17 @@ const Main = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   @media (min-width: 848px) {
     flex-direction: row;
   }
-  // overflow: auto;
 `;
 const Content = styled.section`
   flex: 2;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
-  margin-bottom: 25px;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin: 25px;
   overflow: auto;
 
   @media (min-width: 848px) {
@@ -57,7 +54,7 @@ const Post = styled.section`
 
   ol {
     margin-top: 10px;
-    padding-left: 15px;
+    // padding-left: 20px;
   }
 `;
 const Hed = styled.h2`
@@ -71,6 +68,9 @@ const PostDate = styled.p`
   font-size: 1.4rem;
   margin-top: 0px;
   margin-bottom: 10px;
+`;
+const OverflowContainer = styled.div`
+  overflow: auto;
 `;
 
 export default function Reverie(props) {
@@ -87,14 +87,16 @@ export default function Reverie(props) {
   return (
     <Main>
       <DesktopReverieNav {...props} />
-      <MenuSelector {...props} />
       <Content>
-        <Name>Reverie</Name>
-        <Hed>{headline}</Hed>
-        <PostDate>{date}</PostDate>
-        <Post>
-          {ReactHtmlParser(marked(reverie.body, { smartypants: true }))}
-        </Post>
+        <MenuSelector {...props} />
+        <OverflowContainer>
+          <Name>Reverie</Name>
+          <Hed>{headline}</Hed>
+          <PostDate>{date}</PostDate>
+          <Post>
+            {ReactHtmlParser(marked(reverie.body, { smartypants: true }))}
+          </Post>
+        </OverflowContainer>
       </Content>
     </Main>
   );

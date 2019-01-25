@@ -1,5 +1,5 @@
 ---
-headline: 'Commodity Beckons New TV Services...'
+headline: 'Commodity Beckons New TV Services from Comcast, Microsoft, and More'
 publication: 'Blouin News'
 position: 'Freelance'
 ---

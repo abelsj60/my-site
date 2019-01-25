@@ -12,7 +12,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   color: black;
-  // background-color: whitesmoke;
+  overflow: hidden;
 
   @media (min-width: 848px) {
     flex-direction: row;
@@ -42,7 +42,6 @@ const StyledChapter = styled.section`
     background-color: unset;
     border-right: 0.5px solid #666f75;
     color: black;
-    // background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
   }
 `;
 const Illustration = styled.section`
@@ -50,6 +49,7 @@ const Illustration = styled.section`
   display: flex;
   flex-direction: column;
   margin: 25px;
+  overflow: hidden;
 `;
 const Image = styled.img`
   object-fit: cover;

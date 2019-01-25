@@ -22,7 +22,7 @@ const Caption = styled.p`
     margin-top: 10px;
   }
 
-  @media (min-width: 1072px) {
+  @media (min-width: 1048px) {
     margin-top: 0;
   }
 `;
@@ -42,7 +42,7 @@ const Image = styled.img`
     margin-right: 0px;
   }
 
-  @media (min-width: 1072px) {
+  @media (min-width: 1048px) {
     margin-right: 10px;
   }
 `;

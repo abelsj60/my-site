@@ -1,5 +1,5 @@
 ---
-headline: 'A Huge Tech Vs. Start-up Battle Simmers'
+headline: 'A huge Tech vs. Start-up Battle Simmers'
 publication: 'Blouin News'
 position: 'Freelance'
 ---
@@ -18,7 +18,7 @@ create these technologies on their own.
 
 Intel’s move is simultaneously important and ironic. It was once a part of
 the same start-up scene it is now trying to penetrate by buying Mashery.
-So, on one hand, Intel wants to be at the center of an Internet- focused
+So, on one hand, Intel wants to be at the center of an Internet-focused
 developer ecosystem. But, on the other, the need to buy into it shows huge
 tech firms like Intel need help relating to a lot of these start-up
 technologists.

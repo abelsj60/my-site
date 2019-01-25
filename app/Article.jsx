@@ -13,25 +13,23 @@ const ArticleContainer = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
-  color: black;
-  // background-color: whitesmoke;
+  overflow: hidden;
 
   @media (min-width: 848px) {
     flex-direction: row;
-    line-height: normal;
   }
 `;
 const StyledArticle = styled.section`
-  flex: 2;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   margin: 25px;
-  margin-top: 10px;
+  // margin-top: 10px;
   overflow: auto;
 
   @media (min-width: 848px) {
-    margin-top: 25px;
     padding-left: 1px;
+    margin-top: 25px;
     margin-left: 24px;
   }
 `;
@@ -66,6 +64,9 @@ const Text = styled.section`
     }
   }
 `;
+const OverflowContainer = styled.div`
+  overflow: auto;
+`;
 
 export default function Article(props) {
   const { data } = props;
@@ -81,12 +82,15 @@ export default function Article(props) {
   return (
     <ArticleContainer>
       <DesktopArticleNav {...props} />
-      <MenuSelector {...props} />
       <StyledArticle>
-        <Publication>{publication}</Publication>
-        <Hed>{headline}</Hed>
-        <Byline>by James Erik Abels | {position}</Byline>
-        <Text>{ReactHtmlParser(markedBody)}</Text>
+        <MenuSelector {...props} />
+        <OverflowContainer>
+          <Publication>{publication}</Publication>
+          <Hed>{headline}</Hed>
+          <Byline>by James Erik Abels | {position}</Byline>
+
+          <Text>{ReactHtmlParser(markedBody)}</Text>
+        </OverflowContainer>
       </StyledArticle>
     </ArticleContainer>
   );

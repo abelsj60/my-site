@@ -50,7 +50,7 @@ export default function ArticleNav(props) {
       <Mapper
         mapData={data}
         render={(article, idx) => {
-          const { publication, headline, position } = article.attributes;
+          const { publication, headline } = article.attributes;
           const currentHed = data[indexForArticleData].attributes.headline;
 
           const normalizePub = new Normalize(publication);

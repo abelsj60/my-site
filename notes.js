@@ -120,3 +120,8 @@
 // };
 
 // https://stackoverflow.com/questions/19057731/scrolltop-on-page-reload-doesnt-work-possible-script-conflict
+
+// https://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
+// https://github.com/philipwalton/flexbugs#flexbug-1
+// https://github.com/jonathantneal/fitie
+// https://stackoverflow.com/questions/18778020/cant-get-scrolltop-to-work-in-both-chrome-firefox

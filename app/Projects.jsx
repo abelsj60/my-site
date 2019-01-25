@@ -16,17 +16,17 @@ const ProjectContainer = styled.main`
   flex-direction: column;
   color: black;
   line-height: normal;
-  // background-color: whitesmoke;
+  overflow: hidden;
 
   @media (min-width: 848px) {
     flex-direction: row;
   }
 `;
 const Project = styled.section`
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 25px;
   margin-bottom: 25px;
   margin-left: 24px;
   margin-right: 25px;
@@ -35,7 +35,6 @@ const Project = styled.section`
 
   @media (min-width: 848px) {
     margin-top: 25px;
-    // margin-left: 0px;
   }
 `;
 const Hed = styled.h1`
@@ -44,7 +43,7 @@ const Hed = styled.h1`
   margin-top: 0px;
   margin-bottom: 5px;
 
-  @media (min-width: 838px) {
+  @media (min-width: 848px) {
     margin-top: -4px;
   }
 `;
@@ -64,7 +63,7 @@ const ImageFrame = styled.section`
     flex-direction: column;
   }
 
-  @media (min-width: 1072px) {
+  @media (min-width: 1048px) {
     flex-direction: row-reverse;
   }
 `;
@@ -76,14 +75,15 @@ const ProjectSelector = styled.nav`
     flex-direction: column;
     margin-top: 25px;
     margin-left: 25px;
-    // margin-right: 24px;
     margin-bottom: 25px;
     padding-right: 25px;
     width: 327px;
-    // min-width: 327px;
     color: white;
     border-right: 0.5px solid #6e7dab;
   }
+`;
+const OverflowContainer = styled.div`
+  oveflow: auto;
 `;
 
 export default function Projects(props) {
@@ -106,42 +106,26 @@ export default function Projects(props) {
           projectIndex={projectIndex}
         />
       </ProjectSelector>
-      <MenuSelector {...props} />
       <Project>
-        <Hed>{name}</Hed>
-        <section>
-          <ProjectDescription project={project} />
-          <ImageFrame>
-            <SingleProjectNav
-              project={project}
-              activeProject={true}
-              localState={localState}
-            />
-            <ProjectImageContainer project={project} localState={localState} />
-          </ImageFrame>
-        </section>
+        <MenuSelector {...props} />
+        <OverflowContainer>
+          <Hed>{name}</Hed>
+          <section>
+            <ProjectDescription project={project} />
+            <ImageFrame>
+              <SingleProjectNav
+                project={project}
+                activeProject={true}
+                localState={localState}
+              />
+              <ProjectImageContainer
+                project={project}
+                localState={localState}
+              />
+            </ImageFrame>
+          </section>
+        </OverflowContainer>
       </Project>
     </ProjectContainer>
   );
 }
-
-// <Hed>My projects</Hed>
-// <Blurb>{text}</Blurb>
-
-// const Blurb = styled.p`
-//   color: white;
-//   font-style: italic;
-//   padding-bottom: 7px;
-//   margin-top: 0px;
-//   margin-bottom: 10px;
-//   border-bottom: white dotted 0.5px;
-// `;
-
-// <ImageFrame>
-//   <SingleProjectNav
-//     project={project}
-//     activeProject={true}
-//     localState={localState}
-//   />
-//   <ProjectImageContainer project={project} localState={localState} />
-// </ImageFrame>

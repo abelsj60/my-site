@@ -15,6 +15,7 @@ const HeaderContainer = styled.header.attrs(props => ({
     color: props.home === 'active' ? 'white' : '#455057'
   }
 }))`
+  flex-shrink: 0;
   z-index: 2;
   position: relative;
   height: 52px;
@@ -53,14 +54,17 @@ const MyName = styled(StyledLink)`
   }
 `;
 const Motto = styled.p`
-  display: ${props => (props.menu === 'active' ? 'none' : '')};
-  transition: display 0.3s;
   flex: 1;
+  display: ${props => (props.menu === 'active' ? 'none' : '')};
+  font-size: 1.05rem;
   margin-top: 2px;
   margin-left: 15px;
   margin-bottom: 0px;
-  font-size: 1.3rem;
   font-style: italic;
+
+  @media (min-width: 373px) {
+    font-size: 1.3rem;
+  }
 
   @media (min-width: 705px) {
     display: block;
@@ -89,13 +93,9 @@ const HeaderNavList = styled.ul`
   list-style: none;
 `;
 const HeaderNavItem = styled.li``;
-const TogglerIcon = styled.section`
+const TogglerIcon = styled.img`
   height: 17px;
   width: 17px;
-  background: ${props =>
-    `url(/sign-${props.home === 'active' ? 'white' : 'black'}-${
-      props.menu === 'active' ? 'open' : 'closed'
-    }.png) no-repeat center`};
   margin-left: auto;
   margin-right: 15px;
   cursor: pointer;
@@ -129,8 +129,11 @@ class Header extends Component {
 
   render() {
     const { currentCaller } = this.props.state;
-    const menuIsOpen = this.state.menuIsOpen ? 'active' : '';
+    const menuIsActive = this.state.menuIsOpen ? 'active' : '';
     const homeIsActive = currentCaller === 'home' ? 'active' : '';
+    const togglerSource = `/sign-${homeIsActive ? 'white' : 'black'}-${
+      menuIsActive ? 'open' : 'closed'
+    }.png`;
 
     const r = new Referrer(this.props);
 
@@ -139,11 +142,11 @@ class Header extends Component {
 
     return (
       <HeaderContainer home={homeIsActive}>
-        <MyName to={'/'} home={homeIsActive} menu={menuIsOpen}>
+        <MyName to={'/'} home={homeIsActive} menu={menuIsActive}>
           James Abels
         </MyName>
-        <Motto menu={menuIsOpen}>Magical stories and other adventures</Motto>
-        <HeaderNav menu={menuIsOpen}>
+        <Motto menu={menuIsActive}>Magical stories and other adventures</Motto>
+        <HeaderNav menu={menuIsActive}>
           <HeaderNavList>
             <Mapper
               mapData={headerData}
@@ -169,7 +172,8 @@ class Header extends Component {
         </HeaderNav>
         <TogglerIcon
           home={homeIsActive}
-          menu={menuIsOpen}
+          menu={menuIsActive}
+          src={togglerSource}
           onClick={() => {
             handleClickFoHeader();
           }}

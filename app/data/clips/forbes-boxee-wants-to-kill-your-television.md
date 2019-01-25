@@ -1,5 +1,5 @@
 ---
-headline: 'Boxee Wants To Kill Your Television'
+headline: 'Boxee Wants to Kill Your Television'
 publication: 'Forbes'
 position: 'Staff reporter'
 ---

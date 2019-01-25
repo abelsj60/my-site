@@ -36,20 +36,23 @@ export default class Spellbook {
 
   _homeComponentSpellbook(innerThis) {
     return (spell, thisFromHome) => () => {
-      let stateToUpdate;
+      let stateToUpdate = {};
 
       switch (spell) {
         case 'setMagicScale':
-          stateToUpdate = innerThis._setMagicScale(this);
+          stateToUpdate.magicScale = innerThis._setMagicScale(this);
           break;
         case 'setMagicOpacity':
-          stateToUpdate = innerThis._setMagicOpacity(this);
+          stateToUpdate.magicOpacity = innerThis._setMagicOpacity(this);
           break;
         case 'toggleMagicPointer':
-          stateToUpdate = innerThis._toggleMagicPointer(this);
+          stateToUpdate.blockPointer = innerThis._toggleMagicPointer(this);
           break;
         case 'startPointerSpell':
-          stateToUpdate = innerThis._startPointerSpell(this, innerThis);
+          stateToUpdate.blockPointer = innerThis._startPointerSpell(
+            this,
+            innerThis
+          );
           break;
         case 'resetTheMagic':
           stateToUpdate = innerThis._resetTheMagic();
@@ -59,13 +62,27 @@ export default class Spellbook {
       }
 
       if (
-        stateToUpdate !== null &&
-        (spell === 'setMagicOpacity' ||
-          spell === 'startPointerSpell' ||
-          spell === 'toggleMagicPointer' ||
-          spell === 'resetTheMagic')
+        spell === 'setMagicOpacity' ||
+        spell === 'startPointerSpell' ||
+        spell === 'toggleMagicPointer' ||
+        spell === 'resetTheMagic'
       ) {
-        return this.setState(stateToUpdate);
+        return this.setState(() => {
+          const noObject = stateToUpdate === null;
+
+          if (!noObject) {
+            const keysForState = Object.keys(stateToUpdate).filter(
+              k => stateToUpdate[k] !== null
+            );
+            const stateNeedsUpdate = keysForState.length > 0;
+
+            if (stateNeedsUpdate) {
+              return stateToUpdate;
+            }
+          }
+
+          return null;
+        });
       } else if (spell === 'setMagicScale') {
         return thisFromHome.setState(stateToUpdate);
       }
@@ -73,23 +90,26 @@ export default class Spellbook {
   }
 
   _setMagicScale(thisFromApp) {
-    const scaleFunction = linearScale([0, 3223], [6, 1.05]);
-    const magicScale = Math.max(1, scaleFunction(thisFromApp.scrollTop));
+    const setScale = linearScale([0, 3223], [6, 1.05]);
+    const magicScale = Math.max(1, setScale(thisFromApp.scrollTop));
 
-    return { magicScale };
+    return magicScale;
   }
 
   _setMagicOpacity(thisFromApp) {
-    const startTheMagic = thisFromApp.scrollTop >= 2000;
+    const castTheSpell = thisFromApp.scrollTop >= 2000;
     const resetTheMagic =
-      thisFromApp.scrollTop <= 2200 && thisFromApp.state.magicOpacity !== 0;
+      thisFromApp.scrollTop <= 2200 &&
+      thisFromApp.state.magicOpacity !== 0 &&
+      thisFromApp.state.magicOpacity !== null;
 
-    if (startTheMagic) {
-      const scaleFunction = linearScale([2000, 3223], [0, 1]);
-      const magicOpacity = Math.min(1, scaleFunction(thisFromApp.scrollTop));
-      return { magicOpacity };
+    if (castTheSpell) {
+      const setScale = linearScale([2000, 3223], [0, 1]);
+      const magicOpacity = Math.min(1, setScale(thisFromApp.scrollTop));
+
+      return magicOpacity;
     } else if (resetTheMagic) {
-      return { magicOpacity: 0 };
+      return 0;
     }
 
     return null;
@@ -99,9 +119,9 @@ export default class Spellbook {
     const blockPointer = thisFromApp.state.blockPointer;
 
     if (thisFromApp.scrollTop >= 3220 && blockPointer) {
-      return { blockPointer: false };
+      return false;
     } else if (thisFromApp.scrollTop < 3220 && !blockPointer) {
-      return { blockPointer: true };
+      return true;
     }
 
     return null;

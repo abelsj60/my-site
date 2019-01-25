@@ -8,18 +8,22 @@ import magicData from './data/magicData.js';
 const Main = styled.main`
   flex: 1;
   display: flex;
+  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
 `;
-const Image = styled.img.attrs(props => ({
+const MagicImage = styled.img.attrs(props => ({
   style: { transform: `scale(${props.magicScale})` }
 }))`
-  width: 100%;
-  min-height: 100vh;
-  z-index: 1;
-  object-fit: cover;
   position: fixed;
+  align-self: center;
+  object-fit: cover;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  // bottom: 0px; // May need, scrolling img doesn't always reach bottom
 `;
 const MagicContent = styled.section.attrs(props => ({
   style: {
@@ -69,6 +73,20 @@ const Hed = styled.h3`
   padding-bottom: 30px;
   font-size: 5rem;
 `;
+const Image = styled.img`
+  // z-index: 0;
+  position: absolute;
+  // align-self: center;
+  object-fit: cover;
+  min-width: 100%;
+  height: 100%;
+  // bottom: 0px;
+
+  // position: absolute;
+  // align-self: center;
+  // height: 100%;
+  // bottom: 0px;
+`;
 
 export default class Home extends Component {
   constructor(props) {
@@ -114,7 +132,8 @@ export default class Home extends Component {
 
     return (
       <Main>
-        <Image
+        {/*<Image src="/howls-background-dl.jpg" />*/}
+        <MagicImage
           magicScale={magicScale}
           src="/dreaming-boy-co-2.png"
           alt="a fantastic imaginary world"
@@ -142,3 +161,5 @@ export default class Home extends Component {
     );
   }
 }
+
+// <Image src="/howls-background-dl.jpg" />

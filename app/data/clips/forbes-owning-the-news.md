@@ -1,5 +1,5 @@
 ---
-headline: 'Owning The News'
+headline: 'Owning the News'
 publication: 'Forbes'
 position: 'Staff reporter'
 ---

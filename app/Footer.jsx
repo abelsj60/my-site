@@ -11,6 +11,7 @@ const Footer = styled.footer.attrs(props => ({
     pointerEvents: props.blockPointer ? 'none' : 'auto'
   }
 }))`
+  flex-shrink: 0;
   display: flex;
   justify-content: ${props => (!props.story ? 'flex-end' : 'space-between')};
   align-items: center;
@@ -80,14 +81,14 @@ export default function FooterContainer(props) {
         <Graf
           show={showBusinessCard}
           onClick={() => {
-            boundHandleClickForApp('showBusinessCard');
+            boundHandleClickForApp('toggleBusinessCard');
           }}
         >
           Contact
         </Graf>
         <Graf
           show={showLegalTerms}
-          onClick={() => boundHandleClickForApp('showLegalTerms')}
+          onClick={() => boundHandleClickForApp('toggleLegalTerms')}
         >
           Legal
         </Graf>

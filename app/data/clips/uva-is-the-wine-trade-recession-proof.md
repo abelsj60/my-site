@@ -1,5 +1,5 @@
 ---
-headline: 'Is The Wine Trade Recession-Proof?'
+headline: 'Is the Wine Trade Recession-Proof?'
 publication: 'The Darden Report'
 position: 'Freelance'
 ---

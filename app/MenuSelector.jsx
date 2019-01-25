@@ -4,8 +4,7 @@ import styled from 'styled-components';
 
 const SelectorLink = styled(Link)`
   display: flex;
-  margin-top: 25px;
-  margin-left: 25px;
+  flex-shrink: 0;
   margin-right: auto;
   margin-bottom: 10px;
   position: relative;
@@ -35,17 +34,17 @@ const Arrow = styled.img`
   align-self: center;
   fill: #6e7dab;
 `;
-const LowerLine = styled.hr`
+const LowerLine = styled.div`
   position: absolute;
   width: 100%;
   bottom: 0px;
   margin: 0px;
-  border-style: solid;
-  border-width: ${props => (props.menu !== 'active' ? '.5px' : '1px')};
-  color: ${props => (props.menu !== 'active' ? '#6e7dab' : '#ffe74c')};
+  height: ${props => (props.menu !== 'active' ? '1px' : '2px')};
+  background-color: ${props =>
+    props.menu !== 'active' ? '#6e7dab' : '#ffe74c'};
 
   ${SelectorLink}:hover & {
-    border-width: 1px;
+    height: 2px;
   }
 `;
 

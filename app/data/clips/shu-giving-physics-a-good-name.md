@@ -1,5 +1,5 @@
 ---
-headline: 'Giving Physics A Good Name'
+headline: 'Giving Physics a Good Name'
 publication: 'Seton Hall Magazine'
 position: 'Freelance'
 ---

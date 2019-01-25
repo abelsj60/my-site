@@ -1,5 +1,5 @@
 ---
-headline: Putting newspapers on trial
+headline: Putting Newspapers on Trial
 publication: Forbes
 position: 'Staff reporter'
 ---

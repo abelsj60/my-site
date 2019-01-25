@@ -12,7 +12,7 @@
    y="0px"
    version="1.1"
    id="svg10"
-   sodipodi:docname="arrow-down.svg"
+   sodipodi:docname="arrow-down-grey.svg"
    width="31.74"
    height="15.88"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06">
@@ -44,9 +44,9 @@
      id="namedview12"
      showgrid="false"
      inkscape:zoom="1.888"
-     inkscape:cx="15.87"
+     inkscape:cx="-15.909661"
      inkscape:cy="-4.56"
-     inkscape:window-x="0"
+     inkscape:window-x="505"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg10"
@@ -63,5 +63,6 @@
      inkscape:export-filename="/Users/james/Desktop/arrow-down.svg.png"
      inkscape:export-xdpi="35.66"
      inkscape:export-ydpi="35.66"
-     transform="translate(-34.13,-42.06)" />
+     transform="translate(-34.13,-42.06)"
+     style="fill:#455057;fill-opacity:1" />
 </svg>

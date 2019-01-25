@@ -16,7 +16,7 @@ const ThumbnailGroup = styled.ul`
   ${props =>
     props.menu === 'active' &&
     css`
-      margin-bottom: ${props.num !== 2 ? '20px' : ''};
+      margin-bottom: ${props.num !== 2 ? '15px' : ''};
       padding-bottom: 0;
       max-width: 100%;
       flex-direction: row;
@@ -29,13 +29,13 @@ const ThumbnailGroup = styled.ul`
 
       @media (min-width: 672px) {
         flex-direction: column;
-        justify-content: space-between;
+        // justify-content: space-between;
         margin-top: 28px;
         padding: 0;
         border: 0;
       }
 
-      @media (min-width: 849px) {
+      @media (min-width: 848px) {
         display: flex;
         flex-direction: row;
         margin: 0;
@@ -43,23 +43,39 @@ const ThumbnailGroup = styled.ul`
         border-bottom: #6e7dab solid 0.5px;
       }
 
-      @media (min-width: 1072px) {
+      @media (min-width: 1048px) {
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
         margin-top: 28px;
         padding: 0;
         border: 0;
       }
     `}};
 `;
-const ThumbnailListItem = styled.li``;
+const ThumbnailListItem = styled.li`
+  margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+
+  @media (min-width: 672px) {
+    margin-right: ${p => (!p.desktop ? '0px' : '')};
+    margin-bottom: ${p => (!p.desktop ? '5px' : '')};
+  }
+
+  @media (min-width: 848px) {
+    margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+  }
+
+  @media (min-width: 1048px) {
+    margin-right: ${p => (!p.desktop ? '0px' : '')};
+    margin-bottom: ${p => (!p.desktop ? '5px' : '')};
+  }
+`;
 const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 0;
   position: relative;
-  margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+  // margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
 
   ${props =>
     props.desktop &&
@@ -72,7 +88,7 @@ const StyledLink = styled(Link)`
         margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
       }
 
-      @media (min-width: 1072px) {
+      @media (min-width: 1048px) {
         margin-right: 0;
       }
     `};
@@ -85,7 +101,7 @@ const Image = styled.img`
 `;
 const Highlighter = styled.div`
   width: 100%;
-  height: 3px;
+  height: 4px;
   bottom: 0px;
   position: absolute;
   background-color: #ffe74c;
@@ -105,7 +121,7 @@ export default function SingleProjectNav(props) {
       <Mapper
         mapData={thumbnails}
         render={(thumb, idx) => {
-          const thumbnailNeedsPadding = idx < 2 ? 'active' : '';
+          const paddingIsActive = idx < 2 ? 'active' : '';
           const thumbnailNumber = idx + 1;
           const thumbnailIsActive =
             activeProject && indexForProjectPics === idx ? 'active' : '';
@@ -113,11 +129,15 @@ export default function SingleProjectNav(props) {
             thumbnailIsActive && <Highlighter />;
 
           return (
-            <ThumbnailListItem key={idx}>
+            <ThumbnailListItem
+              key={idx}
+              desktop={isDesktop}
+              padding={paddingIsActive}
+            >
               <StyledLink
                 menu={menuIsActive}
                 active={thumbnailIsActive}
-                padding={thumbnailNeedsPadding}
+                padding={paddingIsActive}
                 to={`/projects/${projectName}/${thumbnailNumber}`}
               >
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />

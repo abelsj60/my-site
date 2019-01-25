@@ -34,7 +34,7 @@ export default function StoryButton(props) {
   return (
     <MenuButton
       storyText={storyText}
-      onClick={() => props.boundHandleClickForApp('showStoryText')}
+      onClick={() => props.boundHandleClickForApp('toggleStoryText')}
     >
       {textForStoryButton}
     </MenuButton>

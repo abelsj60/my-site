@@ -1,5 +1,5 @@
 ---
-headline: 'Rupert Murdoch: Big Man On Campus'
+headline: 'Rupert Murdoch: Big Man on Campus'
 publication: 'Forbes'
 position: 'Staff reporter'
 ---

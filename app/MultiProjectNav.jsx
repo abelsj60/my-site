@@ -24,10 +24,11 @@ const DesktopNavGroup = styled.ul`
 `;
 const ProjectGroup = styled.li``;
 const Hed = styled.section`
-  font-size: 1.6rem;
+  font-size: ${props => (props.menu !== 'active' ? '1.4rem' : '1.6rem')};
   // margin-top: ${props => (props.num !== 0 ? '15px' : '')};
   margin-bottom: 9px;
-  color: ${props => (props.active === 'active' ? '#6E7DAB' : 'black')};
+  color: black;
+  // color: ${props => (props.active === 'active' ? '#6E7DAB' : 'black')};
 
   // ${ProjectGroup}:hover & {
   //   color: #FD1172;
@@ -57,13 +58,13 @@ export default function MultiProjectNav(props) {
             <ProjectGroup key={idx}>
               <Hed
                 num={idx}
-                menu={isMenu}
+                menu={menuIsActive}
                 active={hedIsActive}
               >{`${name} | ${type}`}</Hed>
               <SingleProjectNav
                 {...props}
                 num={idx}
-                menu={isMenu}
+                menu={menuIsActive}
                 project={project}
                 isDesktop={true}
                 activeProject={isActiveProject}

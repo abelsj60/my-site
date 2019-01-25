@@ -1,5 +1,5 @@
 ---
-headline: 'Live, From The Internet'
+headline: 'Live, from the Internet'
 publication: 'Forbes'
 position: 'Staff reporter'
 ---

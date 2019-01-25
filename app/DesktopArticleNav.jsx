@@ -15,7 +15,7 @@ const NavigationContainer = styled.nav`
     // margin-right: 25px;
     padding-right: 25px;
     // min-width: 324px;
-    width: 327px;
+    min-width: 327px;
     border-right: 0.5px solid #6e7dab;
     // background-color: #6100f2;
     overflow: auto;

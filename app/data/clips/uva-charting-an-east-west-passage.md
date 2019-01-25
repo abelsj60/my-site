@@ -1,5 +1,5 @@
 ---
-headline: 'Charting an East/West Passage...'
+headline: 'Charting an East/West Passage'
 publication: 'The Darden Report'
 position: 'Freelance'
 ---

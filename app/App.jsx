@@ -7,6 +7,7 @@ import Footer from './Footer.jsx';
 import Header from './Header.jsx';
 import Location from './custom/Location.js';
 import MagicScroller from './MagicScroller.jsx';
+import FantasticImage from './FantasticImage.jsx';
 import LegalTermsOrBizCard from './LegalTermsOrBizCard.jsx';
 
 import EventHandling from './custom/EventHandling.js';
@@ -35,7 +36,8 @@ const Page = styled.section`
     css`
       width: 100%;
       position: fixed;
-      background: url('/howls-background-dl.jpg') no-repeat fixed center top;
+      // background: url('/howls-background-dl.jpg') no-repeat fixed center top;
+      // background-color: lightgrey;
     `};
 `;
 
@@ -44,15 +46,16 @@ class App extends Component {
     super(props);
 
     const r = new Referrer(props);
+    const location = r.getLocation(props);
 
     this.state = {
       showStoryText: true,
       showLegalTerms: false,
       showBusinessCard: false,
       magicOpacity: 0,
-      blockPointer: r.location === 'home',
-      currentCaller: r.getLocation(props),
-      lastCaller: '',
+      blockPointer: location === 'home',
+      currentCaller: location,
+      lastCaller: location !== 'reverie' ? location : 'home',
       isMenu: r.checkForMenu(props)
     };
   }
@@ -64,8 +67,8 @@ class App extends Component {
     const eForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eForApp.boundHandleClick;
 
-    const spellBook = new Spellbook('home', this);
-    const boundSpellsForHome = spellBook.castSpell;
+    const spellbook = new Spellbook('home', this);
+    const boundSpellsForHome = spellbook.castSpell;
 
     return (
       <Fragment>
@@ -81,6 +84,7 @@ class App extends Component {
             state={this.state}
             boundSpellsForHome={boundSpellsForHome}
           />
+          <FantasticImage state={this.state} />
           <LegalTermsOrBizCard {...this.props} state={this.state} />
           <Footer
             {...this.props}
@@ -94,6 +98,7 @@ class App extends Component {
   }
 
   get scrollTop() {
+    // console.log('b:', window);
     return window.pageYOffset;
   }
 
@@ -105,7 +110,6 @@ class App extends Component {
         showBusinessCard,
         showLegalTerms,
         showStoryText,
-        lastCaller,
         isMenu
       } = this.state;
 
@@ -113,31 +117,29 @@ class App extends Component {
 
       const currentCall = l.type;
       const lastCall = l.lastType;
-
-      const firstTimeThrough = lastCaller === '';
-      const routeIsNotReloading = currentCall !== 'i' && lastCall !== 'i';
+      const routeIsReloading = currentCall === 'i' || lastCall === 'i';
 
       const eForApp = new EventHandling('app', this);
       const handleClickForApp = eForApp.boundHandleClick;
 
       if (showBusinessCard) {
-        handleClickForApp('showBusinessCard');
+        handleClickForApp('toggleBusinessCard');
       }
 
       if (showLegalTerms) {
-        handleClickForApp('showLegalTerms');
+        handleClickForApp('toggleLegalTerms');
       }
 
       if (!showStoryText) {
-        handleClickForApp('showStoryText');
+        handleClickForApp('toggleStoryText');
       }
 
-      if (firstTimeThrough || routeIsNotReloading) {
-        handleClickForApp('callers', currentCall, lastCall);
+      if (!routeIsReloading) {
+        handleClickForApp('setCallers', currentCall, lastCall);
       }
 
       if (isMenu !== r.checkForMenu(this.props)) {
-        handleClickForApp('isMenu');
+        handleClickForApp('toggleMenu');
       }
     }
   }
@@ -145,15 +147,17 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Thumbnail glitch
-// Rename eventHandling funcs? Toggles rather than shows?
-// homeIsActive...
 // Story edit
+// Flexbox retool
+// Blockpoint on Firefox, Safari
 
 // Structure, more modular, theme, share design elements?
+// Scroll elements to top on location change
 
-// Browser testing, and major errors + design (fonts?, bullets in Reverie)
+// Browser testing, and major errors + design (font)
 // Images — how to store for React?
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
 // Illustrator. List needs, specs?
 // Hosting?
+// Bug 1190721 - Throttle animations that produce any transform change hint if the target element is out-of-view.
+// https://github.com/zurb/foundation-sites/issues/10924

@@ -1,5 +1,5 @@
 ---
-headline: 'Breaking news online'
+headline: 'Breaking News Online'
 publication: 'Seton Hall Magazine'
 position: 'Freelance'
 ---

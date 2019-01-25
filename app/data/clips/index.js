@@ -1,4 +1,16 @@
 module.exports = (() => {
   const context = require.context('./', true, /\.md$/);
-  return context.keys().map(key => context(key));
+  const keys = context.keys();
+
+  return keys.map(key => context(key)).sort((a, b) => {
+    if (b.attributes.position > a.attributes.position) {
+      return 1;
+    }
+
+    if (b.attributes.position < a.attributes.position) {
+      return -1;
+    }
+
+    return 0;
+  });
 })();
