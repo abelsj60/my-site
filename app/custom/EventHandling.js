@@ -15,23 +15,26 @@ export default class EventHandling {
   }
 
   _selectHandleClick(outerThis) {
-    let selectedHandleClick;
+    let selectedHandler;
 
     switch (this._component) {
       case 'app':
-        selectedHandleClick = this._handleClickForAppComponent;
+        selectedHandler = this._handleClickForAppComponent;
         break;
       case 'body':
-        selectedHandleClick = this._handleClickForBodyComponent;
+        selectedHandler = this._handleClickForBodyComponent;
         break;
       case 'header':
-        selectedHandleClick = this._handleClickForHeader;
+        selectedHandler = this._handleClickForHeader;
+        break;
+      case 'contentLoader': // ! Currently unused. Take out when done.
+        selectedHandler = this._handleScrollForContentLoader;
         break;
       default:
         console.log('_selectHandleClick: Keep calm, carry on');
     }
 
-    return selectedHandleClick.call(outerThis, this);
+    return selectedHandler.call(outerThis, this);
   }
 
   _handleClickForAppComponent() {
@@ -122,5 +125,10 @@ export default class EventHandling {
         toggleState.call(this);
       }
     };
+  }
+
+  // ! Currently unused. Take out when done.
+  _handleScrollForContentLoader() {
+    return p => this.setState({ scrollPosition: p });
   }
 }

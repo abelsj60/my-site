@@ -118,9 +118,9 @@ export default class Spellbook {
   _toggleMagicPointer(thisFromApp) {
     const blockPointer = thisFromApp.state.blockPointer;
 
-    if (thisFromApp.scrollTop >= 3220 && blockPointer) {
+    if (thisFromApp.fullyScrolled && blockPointer) {
       return false;
-    } else if (thisFromApp.scrollTop < 3220 && !blockPointer) {
+    } else if (!thisFromApp.fullyScrolled && !blockPointer) {
       return true;
     }
 

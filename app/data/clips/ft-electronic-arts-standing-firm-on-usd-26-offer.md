@@ -1,5 +1,5 @@
 ---
-headline: 'EA standing firm on USD 26 offer for Take-Two'
+headline: 'EA standing firm on USD 26 offer'
 publication: 'FT.com'
 position: 'Staff reporter'
 ---

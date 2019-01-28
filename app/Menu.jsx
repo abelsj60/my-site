@@ -24,7 +24,7 @@ export default function Menu(props) {
     <Fragment>
       <StyledMenu>
         <MenuSelector {...props} />
-        <OverflowContainer>{cD.getMenu()}</OverflowContainer>
+        <OverflowContainer>{cD.getMenuComponent(props)}</OverflowContainer>
       </StyledMenu>
     </Fragment>
   );

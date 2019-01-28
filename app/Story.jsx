@@ -22,7 +22,7 @@ const StyledChapter = styled.section`
   display: ${props => (props.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   position: absolute;
-  top: 53px;
+  top: 52px;
   bottom: 55px;
   padding: 25px;
   margin: 25px;
@@ -76,7 +76,7 @@ export default function Story(props) {
     <Main>
       <StyledChapter text={hideStoryText}>
         <ChapterNav {...props} />
-        <Chapter chapterData={chapter} />
+        <Chapter chapterData={chapter} overflowRef={props.overflowRef} />
       </StyledChapter>
       <Illustration>
         <Image src={image} alt="fantasy illustration" />

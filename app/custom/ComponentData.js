@@ -12,34 +12,37 @@ import MultiProjectNav from '../MultiProjectNav.jsx';
 import Content from './Content.js';
 
 export default class ComponentData {
-  constructor(type, props) {
+  constructor(type) {
     const c = new Content(type);
 
     this._type = type;
-    this._props = props;
     this._contentData = c.getContentData();
   }
 
-  getSection() {
-    const props = this._props;
+  getSection(props, ref) {
     const type = this._type;
 
     switch (type) {
       case 'chapter':
-        return <Story {...props} data={this._contentData} />;
+        return <Story {...props} overflowRef={ref} data={this._contentData} />;
       case 'projects':
-        return <Projects {...props} data={this._contentData} />;
+        return (
+          <Projects {...props} overflowRef={ref} data={this._contentData} />
+        );
       case 'journalism':
-        return <Article {...props} data={this._contentData} />;
+        return (
+          <Article {...props} overflowRef={ref} data={this._contentData} />
+        );
       case 'reverie':
-        return <Reverie {...props} data={this._contentData} />;
+        return (
+          <Reverie {...props} overflowRef={ref} data={this._contentData} />
+        );
       default:
         return undefined;
     }
   }
 
-  getMenu() {
-    const props = this._props;
+  getMenuComponent(props) {
     const type = this._type;
 
     switch (type) {

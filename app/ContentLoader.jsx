@@ -14,6 +14,8 @@ export default class ContentLoader extends Component {
     const r = new Referrer(props);
     const l = new Location(r.pathToMatch, props);
 
+    this.overflowRef = React.createRef();
+
     this.state = {
       isNotFound: !l.pathIsJustRight,
       needsRedirect: l.needsRedirect
@@ -34,6 +36,7 @@ export default class ContentLoader extends Component {
      */
 
     const r = new Referrer(this.props);
+
     let cD;
 
     if (!needsRedirect && !isNotFound) {
@@ -55,7 +58,7 @@ export default class ContentLoader extends Component {
         <Route
           path={`${r.genericPath}`}
           render={() => {
-            return cD.getSection();
+            return cD.getSection(this.props, this.overflowRef);
           }}
         />
       </Switch>
@@ -73,33 +76,41 @@ export default class ContentLoader extends Component {
         this.setState({ needsRedirect: startRedirect });
       }
     } else if (l.isSwappingContent) {
-      let readyToUpdateState;
-      let pOneIndex;
-      let pTwoIndex;
+      let paramIndexOne;
+      let paramIndexTwo;
 
       switch (l.type) {
         case 'chapter':
-          pOneIndex = l.params.titleToIndex();
-          readyToUpdateState = pTwoIndex !== -1;
+          paramIndexOne = l.params.titleToIndex();
           break;
         case 'projects':
-          pOneIndex = l.params.projectNameToIndex();
-          pTwoIndex = l.params.projectThumbnailToIndex();
-          readyToUpdateState = pOneIndex !== -1 && pTwoIndex !== -1;
+          paramIndexOne = l.params.projectNameToIndex();
+          paramIndexTwo = l.params.projectThumbnailToIndex();
           break;
         case 'journalism':
-          pOneIndex = l.params.publicationToIndex();
-          pTwoIndex = l.params.headlineToIndex();
-          readyToUpdateState = pOneIndex !== -1 && pTwoIndex !== -1;
+          paramIndexOne = l.params.publicationToIndex();
+          paramIndexTwo = l.params.headlineToIndex();
           break;
         case 'reverie':
-          pOneIndex = l.params.headlineToIndex();
-          readyToUpdateState = pOneIndex !== -1;
+          paramIndexOne = l.params.headlineToIndex();
           break;
       }
 
-      if (readyToUpdateState) {
-        this.props.boundHandleClickForBody(pOneIndex, pTwoIndex);
+      if (paramIndexOne !== -1 && paramIndexTwo !== -1) {
+        const { indexForProjectData } = prevProps.localState;
+
+        this.props.boundHandleClickForBody(paramIndexOne, paramIndexTwo);
+
+        if (this.overflowRef.current.scrollTop !== 0) {
+          const isProjects = l.type === 'projects';
+          const updateScrollTop = isProjects
+            ? paramIndexOne !== indexForProjectData
+            : true;
+
+          if (updateScrollTop) {
+            this.overflowRef.current.scrollTop = 0;
+          }
+        }
       }
     }
   }

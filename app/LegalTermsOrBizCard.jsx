@@ -10,7 +10,7 @@ const Container = styled.section`
   align-items: center;
   position: absolute;
   top: ${props => (props.home ? '0' : '53px')};
-  bottom: ${props => (props.home ? '0' : '55px')};
+  bottom: ${props => (props.home ? '0' : '56px')};
   width: 100%;
   background-color: rgba(0, 0, 0, 0.3);
 `;

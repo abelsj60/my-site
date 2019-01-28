@@ -31,13 +31,14 @@ const StoryText = styled.section`
 `;
 
 export default function Chapter(props) {
-  const { title } = props.chapterData.attributes;
+  const { overflowRef } = props;
   const { body } = props.chapterData;
+  const { title } = props.chapterData.attributes;
 
   return (
     <Fragment>
       <Hed>{title}</Hed>
-      <StoryText>
+      <StoryText ref={ref => (overflowRef.current = ref)}>
         {ReactHtmlParser(marked(body, { smartypants: true }))}
       </StoryText>
     </Fragment>

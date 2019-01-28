@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const MenuButton = styled.div`
   padding: 10px;
-  border: 0.5px solid #455057;
+  border: ${props =>
+    `0.5px solid ${props.storyText !== 'active' ? '#fd1172' : '#455057'}`};
   color: ${props => (props.storyText !== 'active' ? '#FFE74C' : '#6E7DAB')};
   font-size: 1.2rem;
   cursor: pointer;

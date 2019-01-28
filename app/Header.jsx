@@ -36,18 +36,18 @@ const StyledLink = styled(Link)`
     text-decoration: none;
   }
 
-  &:hover {
-    // text-decoration: underline;
-  }
-
   && {
     text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
   }
 `;
 const MyName = styled(StyledLink)`
   display: ${props => (props.menu === 'active' ? 'none' : '')};
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
+
+  @media (min-width: 390px) {
+    font-size: 1.5rem;
+  }
 
   @media (min-width: 705px) {
     display: block;
@@ -58,12 +58,16 @@ const Motto = styled.p`
   display: ${props => (props.menu === 'active' ? 'none' : '')};
   font-size: 1.05rem;
   margin-top: 2px;
-  margin-left: 15px;
+  margin-left: 10px;
   margin-bottom: 0px;
   font-style: italic;
+  padding-top: 1px;
 
-  @media (min-width: 373px) {
-    font-size: 1.3rem;
+  @media (min-width: 390px) {
+    padding: 0px;
+    margin-top: 1.9px;
+    font-size: 1.4rem;
+    margin-left: 15px;
   }
 
   @media (min-width: 705px) {

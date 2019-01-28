@@ -74,7 +74,7 @@ const OverflowContainer = styled.div`
 `;
 
 export default function Reverie(props) {
-  const { data } = props;
+  const { data, overflowRef } = props;
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
@@ -89,7 +89,7 @@ export default function Reverie(props) {
       <DesktopReverieNav {...props} />
       <Content>
         <MenuSelector {...props} />
-        <OverflowContainer>
+        <OverflowContainer ref={ref => (overflowRef.current = ref)}>
           <Name>Reverie</Name>
           <Hed>{headline}</Hed>
           <PostDate>{date}</PostDate>

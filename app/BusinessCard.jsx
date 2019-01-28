@@ -35,16 +35,16 @@ const Line = styled.div`
   height: 2px;
   margin-left: 70px;
 `;
-const PeterPanImg = styled.img`
-  position: absolute;
-  top: 5px;
-  left: 9.5px;
-  height: 80px;
-`;
+// const PeterPanImg = styled.img`
+//   position: absolute;
+//   top: 5px;
+//   left: 9.5px;
+//   height: 80px;
+// `;
 
 export default class BusinessCard extends Component {
   componentWillUnmount() {
-    this.image.src = '';
+    // this.image.src = '';
   }
 
   render() {
@@ -53,7 +53,6 @@ export default class BusinessCard extends Component {
         <Graph>James Abels</Graph>
         <Line />
 
-        <PeterPanImg src={'/peter-pan.gif'} ref={img => (this.image = img)} />
         <ContactGraphOne>917-854-7848</ContactGraphOne>
         <ContactGraphTwo>abelsj60_AT_gmail.com</ContactGraphTwo>
       </Card>
@@ -63,3 +62,4 @@ export default class BusinessCard extends Component {
 
 // https://giphy.com/benjybrooke
 // https://stackoverflow.com/questions/10730212/proper-way-to-reset-a-gif-animation-with-displaynone-on-chrome
+// <PeterPanImg src={'/peter-pan.gif'} ref={img => (this.image = img)} />

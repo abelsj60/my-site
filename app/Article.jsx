@@ -69,7 +69,7 @@ const OverflowContainer = styled.div`
 `;
 
 export default function Article(props) {
-  const { data } = props;
+  const { data, overflowRef } = props;
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
@@ -84,11 +84,10 @@ export default function Article(props) {
       <DesktopArticleNav {...props} />
       <StyledArticle>
         <MenuSelector {...props} />
-        <OverflowContainer>
+        <OverflowContainer ref={ref => (overflowRef.current = ref)}>
           <Publication>{publication}</Publication>
           <Hed>{headline}</Hed>
           <Byline>by James Erik Abels | {position}</Byline>
-
           <Text>{ReactHtmlParser(markedBody)}</Text>
         </OverflowContainer>
       </StyledArticle>

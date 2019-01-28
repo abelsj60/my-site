@@ -83,11 +83,11 @@ const ProjectSelector = styled.nav`
   }
 `;
 const OverflowContainer = styled.div`
-  oveflow: auto;
+  overflow: auto;
 `;
 
 export default function Projects(props) {
-  const { localState, data, projectIndex } = props;
+  const { localState, data, projectIndex, overflowRef } = props;
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
@@ -108,7 +108,7 @@ export default function Projects(props) {
       </ProjectSelector>
       <Project>
         <MenuSelector {...props} />
-        <OverflowContainer>
+        <OverflowContainer ref={ref => (overflowRef.current = ref)}>
           <Hed>{name}</Hed>
           <section>
             <ProjectDescription project={project} />

@@ -73,20 +73,20 @@ const Hed = styled.h3`
   padding-bottom: 30px;
   font-size: 5rem;
 `;
-const Image = styled.img`
-  // z-index: 0;
-  position: absolute;
-  // align-self: center;
-  object-fit: cover;
-  min-width: 100%;
-  height: 100%;
-  // bottom: 0px;
+// const Image = styled.img`
+//   // z-index: 0;
+//   position: absolute;
+//   // align-self: center;
+//   object-fit: cover;
+//   min-width: 100%;
+//   height: 100%;
+//   // bottom: 0px;
 
-  // position: absolute;
-  // align-self: center;
-  // height: 100%;
-  // bottom: 0px;
-`;
+//   // position: absolute;
+//   // align-self: center;
+//   // height: 100%;
+//   // bottom: 0px;
+// `;
 
 export default class Home extends Component {
   constructor(props) {

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import StoryButton from './StoryButton.jsx';
-import Referrer from './custom/Referrer.js';
 
 const Footer = styled.footer.attrs(props => ({
   style: {
@@ -18,11 +17,19 @@ const Footer = styled.footer.attrs(props => ({
   height: 55px;
   font-size: 1.1rem;
   z-index: 1;
-  border-top: 0.5px solid #fd1172;
+  position: relative;
 
   @media (min-width: 848px) {
     justify-content: flex-end;
   }
+`;
+const UpperLine = styled.div`
+  position: absolute;
+  width: 100%;
+  top: -1px;
+  margin: 0px;
+  height: 0.5px;
+  background-color: #fd1172;
 `;
 const LinkToReverie = styled(Link)`
   &:focus,
@@ -69,6 +76,7 @@ export default function FooterContainer(props) {
       magicOpacity={magicOpacity}
       blockPointer={blockPointer}
     >
+      <UpperLine />
       <StoryButton
         story={isStory}
         showStoryText={showStoryText}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
@@ -37,6 +37,15 @@ const Hed = styled.h1`
   color: ${props => (props.menu === 'active' ? 'black' : '#6E7DAB')};
   color: ${props =>
     props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
+
+  ${props =>
+    props.menu !== 'active' &&
+    css`
+      width: 315px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    `};
 `;
 
 export default function ArticleNav(props) {
