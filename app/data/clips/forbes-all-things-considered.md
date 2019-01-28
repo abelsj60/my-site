@@ -1,6 +1,7 @@
 ---
 headline: 'All Things Considered Digitally'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 National Public Radio has seen its share of shake-ups lately, including

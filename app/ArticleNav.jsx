@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
@@ -12,27 +12,40 @@ const ArticleList = styled.ul`
   overflow: auto;
 `;
 const StyledLink = styled(Link)`
-  color: ${props =>
-    props.link === 'active' ? 'lightgoldenrodyellow' : 'white'};
-
   &:focus,
   &:visited,
   &:link {
     text-decoration: none;
   }
+`;
+const Source = styled.p`
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 0px;
+  color: ${props => (props.menu === 'active' ? 'black' : '#6E7DAB')};
+  color: ${props =>
+    props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
 
-  &:hover {
-    color: deepskyblue;
+  &:first-child {
+    margin-top: 0px;
   }
 `;
-const Source = styled.div`
-  font-size: 1.5rem;
-  font-style: italic;
-  margin-bottom: 5px;
-`;
-const Hed = styled.div`
-  font-size: ${props => (props.menu === 'active' ? '3rem' : '1.75rem')};
+const Hed = styled.h1`
+  font-size: ${props => (props.menu === 'active' ? '3rem' : '1.6rem')};
+  margin-top: 0px;
   margin-bottom: 10px;
+  color: ${props => (props.menu === 'active' ? 'black' : '#6E7DAB')};
+  color: ${props =>
+    props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
+
+  ${props =>
+    props.menu !== 'active' &&
+    css`
+      width: 315px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    `};
 `;
 
 export default function ArticleNav(props) {
@@ -62,8 +75,12 @@ export default function ArticleNav(props) {
           return (
             <li key={idx}>
               <StyledLink link={linkIsActive} to={articleLink}>
-                <Source>{publication}</Source>
-                <Hed menu={menuIsActive}>{headline}</Hed>
+                <Source menu={menuIsActive} link={linkIsActive}>
+                  {publication}
+                </Source>
+                <Hed menu={menuIsActive} link={linkIsActive}>
+                  {headline}
+                </Hed>
               </StyledLink>
             </li>
           );

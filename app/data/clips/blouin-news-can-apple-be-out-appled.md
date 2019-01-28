@@ -1,6 +1,7 @@
 ---
 headline: 'Can Apple Be Out-Appled?'
 publication: 'Blouin News'
+position: 'Freelance'
 ---
 
 Can Apple wow the world a third time? It certainly seems to think so.

@@ -7,11 +7,12 @@ const Container = styled.section`
     flex-direction: column;
   }
 `;
-const Graf = styled.p`
+const Caption = styled.p`
   display: flex;
-  margin-top: 10px;
+  margin-top: 7px;
   margin-bottom: 10px;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
+  color: #6e7dab;
 
   @media (min-width: 672px) {
     margin-top: 0;
@@ -21,7 +22,7 @@ const Graf = styled.p`
     margin-top: 10px;
   }
 
-  @media (min-width: 1072px) {
+  @media (min-width: 1048px) {
     margin-top: 0;
   }
 `;
@@ -30,6 +31,8 @@ const Image = styled.img`
   max-width: 100%;
   object-fit: cover;
   vertical-align: bottom;
+  color: #455057;
+  font-size: 1.5rem;
 
   @media (min-width: 672px) {
     margin-right: 10px;
@@ -39,7 +42,7 @@ const Image = styled.img`
     margin-right: 0px;
   }
 
-  @media (min-width: 1072px) {
+  @media (min-width: 1048px) {
     margin-right: 10px;
   }
 `;
@@ -56,7 +59,7 @@ export default function ProjectImageContainer(props) {
 
   return (
     <Container>
-      <Graf>{caption}</Graf>
+      <Caption>{caption}</Caption>
       <Image src={source} alt="mainPic" />
     </Container>
   );

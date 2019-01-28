@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Card = styled.section`
@@ -8,39 +8,58 @@ const Card = styled.section`
   height: 200px;
   width: 350px;
   align-self: center;
-  background-color: #6100f2;
-  background-image: url('https://www.transparenttextures.com/patterns/3px-tile.png');
+  position: relative;
+  background-color: #ffeb6c;
   font-size: 1.75rem;
   line-height: 2.5rem;
-  color: lightgoldenrodyellow;
   box-shadow: 0 0 0.75em black;
-
-  :hover {
-    transform: rotate(3deg);
-    color: lightgoldenrodyellow;
-    text-shadow: 0.5px 1px 2px black;
-  }
 `;
 const Graph = styled.p`
   margin-top: 0px;
   margin-left: 70px;
   margin-right: 0px;
   margin-bottom: 0px;
+  font-size: 1.5rem;
+`;
+const ContactGraphOne = styled(Graph)`
+  font-size: 1.4rem;
+`;
+const ContactGraphTwo = styled(ContactGraphOne)`
+  margin-top: -5px;
 `;
 const Line = styled.div`
-  background-color: white;
+  background-color: #fd1172;
+  margin-top: 3px;
+  margin-bottom: 3px;
   width: 80%;
   height: 2px;
   margin-left: 70px;
 `;
+// const PeterPanImg = styled.img`
+//   position: absolute;
+//   top: 5px;
+//   left: 9.5px;
+//   height: 80px;
+// `;
 
-export default function BusinessCard() {
-  return (
-    <Card>
-      <Graph>James Abels</Graph>
-      <Line />
-      <Graph>917-854-7848</Graph>
-      <Graph>abelsj60_AT_gmail.com</Graph>
-    </Card>
-  );
+export default class BusinessCard extends Component {
+  componentWillUnmount() {
+    // this.image.src = '';
+  }
+
+  render() {
+    return (
+      <Card>
+        <Graph>James Abels</Graph>
+        <Line />
+
+        <ContactGraphOne>917-854-7848</ContactGraphOne>
+        <ContactGraphTwo>abelsj60_AT_gmail.com</ContactGraphTwo>
+      </Card>
+    );
+  }
 }
+
+// https://giphy.com/benjybrooke
+// https://stackoverflow.com/questions/10730212/proper-way-to-reset-a-gif-animation-with-displaynone-on-chrome
+// <PeterPanImg src={'/peter-pan.gif'} ref={img => (this.image = img)} />

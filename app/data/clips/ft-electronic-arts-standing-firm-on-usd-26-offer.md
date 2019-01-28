@@ -1,6 +1,7 @@
 ---
-headline: 'EA standing firm on USD 26 offer for Take-Two'
+headline: 'EA standing firm on USD 26 offer'
 publication: 'FT.com'
+position: 'Staff reporter'
 ---
 
 Electronic Arts (EA) is standing firm on its offer of USD 26 per share to

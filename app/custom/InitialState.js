@@ -16,7 +16,7 @@ export default class InitialState {
 
     switch (type) {
       case 'indexForChapterData':
-        if (referrer === 'story') {
+        if (referrer === 'chapter') {
           index = params.titleToIndex();
         }
         break;
@@ -41,6 +41,11 @@ export default class InitialState {
             this._params.headlineToIndex() !== -1
               ? this._params.headlineToIndex()
               : this._params.firstArticleToMatchPublication;
+        }
+        break;
+      case 'indexForReverieData':
+        if (referrer === 'reverie') {
+          index = this._params.headlineToIndex();
         }
         break;
       default:

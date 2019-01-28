@@ -1,6 +1,7 @@
 ---
-headline: 'Is The Wine Trade Recession-Proof?'
+headline: 'Is the Wine Trade Recession-Proof?'
 publication: 'The Darden Report'
+position: 'Freelance'
 ---
 
 NO ONE GOT A CHANCE to put away the crate of Tignanello when it first

@@ -1,6 +1,7 @@
 ---
 headline: 'GodTube'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 When Bobby Gruenewald joined LifeChurch.tv as a pastor in 2001, he turned

@@ -1,6 +1,7 @@
 ---
 headline: 'Adventures in State Bailouts'
 publication: 'Slate'
+position: 'Freelance'
 ---
 
 Two months after being laid off by Forbes, I discovered New York's Self

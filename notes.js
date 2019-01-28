@@ -120,3 +120,15 @@
 // };
 
 // https://stackoverflow.com/questions/19057731/scrolltop-on-page-reload-doesnt-work-possible-script-conflict
+
+// https://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
+// https://github.com/philipwalton/flexbugs#flexbug-1
+// https://github.com/jonathantneal/fitie
+// https://stackoverflow.com/questions/18778020/cant-get-scrolltop-to-work-in-both-chrome-firefox
+
+// https://stackoverflow.com/questions/36143767/react-js-communicating-between-sibling-components
+// https://stackoverflow.com/questions/5371139/window-scrolltop-vs-document-scrolltop
+// https://stackoverflow.com/questions/38387609/why-cant-i-get-the-domnodes-style-scrollheight-in-the-react-componentdidmoun
+// https://css-tricks.com/working-with-refs-in-react/
+// https://stackoverflow.com/questions/33748967/change-scrolltop-in-reactjs
+// https://stackoverflow.com/questions/38638303/react-set-scroll-position-before-component-mount

@@ -1,6 +1,7 @@
 ---
-headline: 'Breaking news online'
+headline: 'Breaking News Online'
 publication: 'Seton Hall Magazine'
+position: 'Freelance'
 ---
 
 “When I started, I was told this is 24 hours a day, seven days a week. And

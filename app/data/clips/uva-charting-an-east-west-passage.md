@@ -1,6 +1,7 @@
 ---
-headline: 'Charting an East/West Passage...'
+headline: 'Charting an East/West Passage'
 publication: 'The Darden Report'
+position: 'Freelance'
 ---
 
 In both the East and the West, it was hard to believe the story.

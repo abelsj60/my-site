@@ -3,6 +3,7 @@ import marked from 'marked';
 import styled from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 
+import MenuSelector from './MenuSelector.jsx';
 import DesktopArticleNav from './DesktopArticleNav.jsx';
 
 import Referrer from './custom/Referrer.js';
@@ -12,32 +13,33 @@ const ArticleContainer = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
-  color: black;
+  overflow: hidden;
 
   @media (min-width: 848px) {
     flex-direction: row;
-    line-height: normal;
   }
 `;
-
 const StyledArticle = styled.section`
-  flex: 2;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   margin: 25px;
+  // margin-top: 10px;
   overflow: auto;
 
   @media (min-width: 848px) {
-    margin-left: 0;
-    min-width: 400px;
+    padding-left: 1px;
+    margin-top: 25px;
+    margin-left: 24px;
   }
 `;
-
 const Publication = styled.h3`
-  font-size: 1.75rem;
+  color: #fd1172;
+  font-size: 1.5rem;
   font-style: italic;
   margin-top: 0px;
   margin-bottom: 4px;
+  font-weight: normal;
 `;
 const Hed = styled.h1`
   margin-top: 0px;
@@ -46,11 +48,12 @@ const Hed = styled.h1`
   font-size: 3rem;
 `;
 const Byline = styled.p`
+  font-size: 1.4rem;
   margin-top: 0px;
   margin-bottom: 15px;
 `;
 const Text = styled.section`
-  font-size: 1.75rem;
+  font-size: 1.65rem;
 
   p {
     margin-top: 0px;
@@ -61,26 +64,32 @@ const Text = styled.section`
     }
   }
 `;
+const OverflowContainer = styled.div`
+  overflow: auto;
+`;
 
 export default function Article(props) {
-  const { data } = props;
+  const { data, overflowRef } = props;
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
 
-  const indexForArticleData = l.params.twoToIndex();
+  const indexForArticleData = l.params.headlineToIndex();
   const article = data[indexForArticleData];
-  const { publication, headline } = article.attributes;
+  const { publication, headline, position } = article.attributes;
   const markedBody = marked(article.body);
 
   return (
     <ArticleContainer>
       <DesktopArticleNav {...props} />
       <StyledArticle>
-        <Publication>{publication}</Publication>
-        <Hed>{headline}</Hed>
-        <Byline>by James Erik Abels</Byline>
-        <Text>{ReactHtmlParser(markedBody)}</Text>
+        <MenuSelector {...props} />
+        <OverflowContainer ref={ref => (overflowRef.current = ref)}>
+          <Publication>{publication}</Publication>
+          <Hed>{headline}</Hed>
+          <Byline>by James Erik Abels | {position}</Byline>
+          <Text>{ReactHtmlParser(markedBody)}</Text>
+        </OverflowContainer>
       </StyledArticle>
     </ArticleContainer>
   );

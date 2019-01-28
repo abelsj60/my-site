@@ -46,7 +46,7 @@ export default class ButtonGroup {
         state: undefined,
         hash: undefined,
         needsSeperation: true,
-        handleClick: () => this._handleClick('showStoryText')
+        handleClick: () => this._handleClick('toggleStoryText')
       },
       {
         name: 'legal',
@@ -55,7 +55,7 @@ export default class ButtonGroup {
         state: undefined,
         hash: undefined,
         needsSeperation: true,
-        handleClick: () => this._handleClick('showLegalTerms')
+        handleClick: () => this._handleClick('toggleLegalTerms')
       },
       {
         name: 'contact',
@@ -64,7 +64,7 @@ export default class ButtonGroup {
         state: undefined,
         hash: undefined,
         needsSeperation: false,
-        handleClick: () => this._handleClick('showBusinessCard')
+        handleClick: () => this._handleClick('toggleBusinessCard')
       }
     ];
   }
@@ -102,7 +102,7 @@ export default class ButtonGroup {
 
     if (name === 'menu' && this._isMenu) {
       switch (this._referrer) {
-        case 'story':
+        case 'chapter':
           finalName = 'chapters';
           break;
         case 'projects':
@@ -112,13 +112,13 @@ export default class ButtonGroup {
           finalName = 'clips';
           break;
       }
-    } else if (name === 'story') {
+    } else if (name === 'chapter') {
       switch (this._showStory) {
         case true:
           finalName = 'picture';
           break;
         case false:
-          finalName = 'story';
+          finalName = 'chapter';
           break;
       }
     }

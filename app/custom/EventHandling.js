@@ -15,50 +15,60 @@ export default class EventHandling {
   }
 
   _selectHandleClick(outerThis) {
-    let selectedHandleClick;
+    let selectedHandler;
 
     switch (this._component) {
       case 'app':
-        selectedHandleClick = this._handleClickForAppComponent;
+        selectedHandler = this._handleClickForAppComponent;
         break;
       case 'body':
-        selectedHandleClick = this._handleClickForBodyComponent;
+        selectedHandler = this._handleClickForBodyComponent;
         break;
       case 'header':
-        selectedHandleClick = this._handleClickForHeader;
+        selectedHandler = this._handleClickForHeader;
+        break;
+      case 'contentLoader': // ! Currently unused. Take out when done.
+        selectedHandler = this._handleScrollForContentLoader;
         break;
       default:
         console.log('_selectHandleClick: Keep calm, carry on');
     }
 
-    return selectedHandleClick.call(outerThis, this);
+    return selectedHandler.call(outerThis, this);
   }
 
   _handleClickForAppComponent() {
-    return propertyToUpdate => {
+    return (updateValue, valueOne, valueTwo) => {
       const {
         showBusinessCard,
         showLegalTerms,
         blockPointer,
-        showStoryText
+        showStoryText,
+        isMenu
       } = this.state;
-      let stateToUpdate;
+      const stateToUpdate = {};
 
-      switch (propertyToUpdate) {
-        case 'showBusinessCard':
-          stateToUpdate = { showBusinessCard: !showBusinessCard };
+      switch (updateValue) {
+        case 'toggleBusinessCard':
+          stateToUpdate.showBusinessCard = !showBusinessCard;
           break;
-        case 'showLegalTerms':
-          stateToUpdate = { showLegalTerms: !showLegalTerms };
+        case 'toggleLegalTerms':
+          stateToUpdate.showLegalTerms = !showLegalTerms;
           break;
-        case 'showStoryText':
-          console.log('fired');
-          stateToUpdate = { showStoryText: !showStoryText };
+        case 'toggleStoryText':
+          stateToUpdate.showStoryText = !showStoryText;
           break;
         case 'toggleMagicPointer':
-          stateToUpdate = {
-            blockPointer: !blockPointer
-          };
+          stateToUpdate.blockPointer = !blockPointer;
+        case 'setCallers':
+          stateToUpdate.currentCaller = valueOne;
+          if (valueTwo !== 'reverie') {
+            stateToUpdate.lastCaller = valueTwo;
+          }
+          break;
+        case 'toggleMenu':
+          stateToUpdate.isMenu = !isMenu;
+          break;
         default:
           console.log('_handleClickForAppComponent: Keep calm, carry on');
       }
@@ -68,24 +78,23 @@ export default class EventHandling {
   }
 
   _handleClickForBodyComponent(innerThis) {
-    return (propertyOne, propertyTwo) => {
-      let stateToUpdate;
+    return (valueOne, valueTwo) => {
+      const stateToUpdate = {};
 
       switch (innerThis._referrer) {
-        case 'story':
-          stateToUpdate = { indexForChapterData: propertyTwo };
+        case 'chapter':
+          stateToUpdate.indexForChapterData = valueOne;
           break;
         case 'projects':
-          stateToUpdate = {
-            indexForProjectData: propertyOne,
-            indexForProjectPics: propertyTwo
-          };
+          stateToUpdate.indexForProjectData = valueOne;
+          stateToUpdate.indexForProjectPics = valueTwo;
           break;
         case 'journalism':
-          stateToUpdate = {
-            indexForPublication: propertyOne,
-            indexForArticleData: propertyTwo
-          };
+          stateToUpdate.indexForPublication = valueOne;
+          stateToUpdate.indexForArticleData = valueTwo;
+          break;
+        case 'reverie':
+          stateToUpdate.indexForReverieData = valueOne;
           break;
         default:
           console.log('_handleClickForBodyComponent: Keep calm, carry on');
@@ -116,5 +125,10 @@ export default class EventHandling {
         toggleState.call(this);
       }
     };
+  }
+
+  // ! Currently unused. Take out when done.
+  _handleScrollForContentLoader() {
+    return p => this.setState({ scrollPosition: p });
   }
 }

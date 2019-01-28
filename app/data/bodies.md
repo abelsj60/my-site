@@ -20,7 +20,7 @@ routes:
   -
     name: StoryLoader
     component: OneLoader
-    route: /story/:chapter?/:title?
+    route: /chapter/:title?
     exact: false
     childRoute: [/title1, /title2, /title3, /title4]
     link: /chapter/

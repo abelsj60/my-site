@@ -24,10 +24,7 @@ const ChapterListItem = styled.li`
 `;
 const StyledLink = styled(Link)`
   color: ${props =>
-    props.item === 'active' && props.menu === 'active'
-      ? 'deepskyblue'
-      : 'whitesmoke'};
-
+    props.item === 'active' && props.menu === 'active' ? 'white' : 'white'};
   text-decoration: none;
 
   &:focus,
@@ -39,12 +36,16 @@ const StyledLink = styled(Link)`
   }
 
   &:hover {
-    color: lightyellow;
+    // color: lightyellow;
   }
 
   @media (min-width: 848px) {
+    color: ${props =>
+    props.item === 'active' && props.menu === 'active'
+      ? '#666F75'
+      : '#666F75'};
     &:hover {
-      color: deepskyblue;
+      // color: #fd1172;
     }
   }
 `;
@@ -72,8 +73,15 @@ const NavigationText = styled.p`
   padding-bottom: ${props => (props.menu !== 'active' ? '10px' : '')};
   border-bottom: ${props =>
     props.item === 'active' && props.menu !== 'active'
-      ? 'whitesmoke solid .5px'
+      ? '.5px solid white'
       : ''};
+
+  @media (min-width: 848px) {
+    border-bottom: ${props =>
+    props.item === 'active' && props.menu !== 'active'
+      ? '.5px solid #666F75'
+      : ''};
+  }
 `;
 
 export default function ChapterNav(props) {
@@ -99,7 +107,7 @@ export default function ChapterNav(props) {
                 <StyledLink
                   menu={menuIsActive}
                   item={itemIsActive}
-                  to={`/story/chapter/${normalizedTitle}`}
+                  to={`/chapter/${normalizedTitle}`}
                 >
                   <ExtraTextForMenu
                     menu={menuIsActive}

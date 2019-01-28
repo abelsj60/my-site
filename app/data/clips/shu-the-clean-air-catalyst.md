@@ -1,6 +1,7 @@
 ---
 headline: 'The Clean Air Catalyst'
 publication: 'Seton Hall Magazine'
+position: 'Freelance'
 ---
 
 The FedEx package from John Mooney ’55 arrives less than a week after our

@@ -1,6 +1,7 @@
 ---
-headline: 'Giving Physics A Good Name'
+headline: 'Giving Physics a Good Name'
 publication: 'Seton Hall Magazine'
+position: 'Freelance'
 ---
 
 There’s a bolt of pure lightning that plays music in the basement of

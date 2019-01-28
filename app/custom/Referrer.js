@@ -15,12 +15,14 @@ export default class Referrer {
 
   _loadPathToMatch() {
     switch (this.location) {
-      case 'story':
-        return '/story/:chapter?/:title?';
+      case 'chapter':
+        return '/chapter/:title?';
       case 'projects':
         return '/projects/:projectName?/:projectThumbnail?';
       case 'journalism':
         return '/journalism/:publication?/:headline?';
+      case 'reverie':
+        return '/reverie/:headline?';
       default:
         return;
     }
@@ -28,20 +30,30 @@ export default class Referrer {
 
   _loadExactPath() {
     switch (this.location) {
-      case 'story':
-        return '/story/:chapter/:title';
+      case 'chapter':
+        return '/chapter/:title';
       case 'projects':
         return '/projects/:projectName/:projectThumbnail';
       case 'journalism':
         return '/journalism/:publication/:headline';
+      case 'reverie':
+        return '/reverie/:headline';
       default:
         return;
     }
   }
 
   getLocation(props) {
-    return props.location.pathname.split('/')[1] !== ''
-      ? props.location.pathname.split('/')[1]
-      : 'home';
+    const locationArray = props.location.pathname.split('/');
+    const isHome = locationArray[1] === '';
+
+    return !isHome ? locationArray[1] : 'home';
+  }
+
+  checkForMenu(props) {
+    const locationArray = props.location.pathname.split('/');
+    const indexOfMenu = locationArray.indexOf('menu');
+
+    return indexOfMenu === 2;
   }
 }

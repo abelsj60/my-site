@@ -1,6 +1,7 @@
 ---
-headline: Putting newspapers on trial
+headline: Putting Newspapers on Trial
 publication: Forbes
+position: 'Staff reporter'
 ---
 
 Sam Zell was sued in Federal Court in California yesterday by a group of

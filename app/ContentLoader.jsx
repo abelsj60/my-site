@@ -14,6 +14,8 @@ export default class ContentLoader extends Component {
     const r = new Referrer(props);
     const l = new Location(r.pathToMatch, props);
 
+    this.overflowRef = React.createRef();
+
     this.state = {
       isNotFound: !l.pathIsJustRight,
       needsRedirect: l.needsRedirect
@@ -34,6 +36,7 @@ export default class ContentLoader extends Component {
      */
 
     const r = new Referrer(this.props);
+
     let cD;
 
     if (!needsRedirect && !isNotFound) {
@@ -41,7 +44,7 @@ export default class ContentLoader extends Component {
     }
 
     return needsRedirect ? (
-      <Redirect to={{ pathname: '/i', state: `${r.location}` }} />
+      <Redirect to="/i" />
     ) : isNotFound ? (
       <Redirect to="/not-found" />
     ) : (
@@ -49,21 +52,13 @@ export default class ContentLoader extends Component {
         <Route
           path={`/${r.location}/menu`}
           render={() => {
-            return (
-              <Menu
-                link={`/${r.location}`}
-                text={cD.getText()}
-                render={() => {
-                  return cD.getMenuNavigator();
-                }}
-              />
-            );
+            return <Menu {...this.props} />;
           }}
         />
         <Route
           path={`${r.genericPath}`}
           render={() => {
-            return cD.getMainComponent();
+            return cD.getSection(this.props, this.overflowRef);
           }}
         />
       </Switch>
@@ -81,11 +76,41 @@ export default class ContentLoader extends Component {
         this.setState({ needsRedirect: startRedirect });
       }
     } else if (l.isSwappingContent) {
-      const paramOneAsIndex = l.params.oneToIndex();
-      const paramTwoAsIndex = l.params.twoToIndex();
+      let paramIndexOne;
+      let paramIndexTwo;
 
-      if (paramOneAsIndex !== -1 && paramTwoAsIndex !== -1) {
-        this.props.boundHandleClickForBody(paramOneAsIndex, paramTwoAsIndex);
+      switch (l.type) {
+        case 'chapter':
+          paramIndexOne = l.params.titleToIndex();
+          break;
+        case 'projects':
+          paramIndexOne = l.params.projectNameToIndex();
+          paramIndexTwo = l.params.projectThumbnailToIndex();
+          break;
+        case 'journalism':
+          paramIndexOne = l.params.publicationToIndex();
+          paramIndexTwo = l.params.headlineToIndex();
+          break;
+        case 'reverie':
+          paramIndexOne = l.params.headlineToIndex();
+          break;
+      }
+
+      if (paramIndexOne !== -1 && paramIndexTwo !== -1) {
+        const { indexForProjectData } = prevProps.localState;
+
+        this.props.boundHandleClickForBody(paramIndexOne, paramIndexTwo);
+
+        if (this.overflowRef.current.scrollTop !== 0) {
+          const isProjects = l.type === 'projects';
+          const updateScrollTop = isProjects
+            ? paramIndexOne !== indexForProjectData
+            : true;
+
+          if (updateScrollTop) {
+            this.overflowRef.current.scrollTop = 0;
+          }
+        }
       }
     }
   }

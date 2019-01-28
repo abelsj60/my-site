@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import MenuSelector from './MenuSelector.jsx';
 import SingleProjectNav from './SingleProjectNav.jsx';
 import ProjectImageContainer from './ProjectImageContainer.jsx';
 import ProjectDescription from './ProjectDescription.jsx';
@@ -15,34 +16,43 @@ const ProjectContainer = styled.main`
   flex-direction: column;
   color: black;
   line-height: normal;
+  overflow: hidden;
 
   @media (min-width: 848px) {
     flex-direction: row;
   }
 `;
 const Project = styled.section`
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  margin: 25px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: 24px;
+  margin-right: 25px;
   overflow: auto;
+  padding-left: 1px;
 
   @media (min-width: 848px) {
-    margin-left: 0;
+    margin-top: 25px;
   }
 `;
 const Hed = styled.h1`
-  font-size: 2rem;
+  color: #fd1172;
+  font-size: 2.5rem;
   margin-top: 0px;
-  margin-bottom: 10px;
-  font-weight: bold;
+  margin-bottom: 5px;
+
+  @media (min-width: 848px) {
+    margin-top: -4px;
+  }
 `;
 const ImageFrame = styled.section`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
   padding: 10px;
-  border: lightgrey dotted 0.5px;
+  border: 0.5px solid #6e7dab;
 
   @media (min-width: 672px) {
     flex-direction: row-reverse;
@@ -53,7 +63,7 @@ const ImageFrame = styled.section`
     flex-direction: column;
   }
 
-  @media (min-width: 1072px) {
+  @media (min-width: 1048px) {
     flex-direction: row-reverse;
   }
 `;
@@ -63,39 +73,32 @@ const ProjectSelector = styled.nav`
   @media (min-width: 848px) {
     display: flex;
     flex-direction: column;
-    margin: 25px;
-    padding: 25px;
-    max-width: 20%;
-    min-width: 327px;
-    background-color: #6100f2;
-    background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    padding-right: 25px;
+    width: 327px;
     color: white;
+    border-right: 0.5px solid #6e7dab;
   }
 `;
-const Blurb = styled.p`
-  color: white;
-  font-style: italic;
-  padding-bottom: 7px;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  border-bottom: white dotted 0.5px;
+const OverflowContainer = styled.div`
+  overflow: auto;
 `;
 
 export default function Projects(props) {
-  const { localState, data, text, projectIndex } = props;
+  const { localState, data, projectIndex, overflowRef } = props;
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
 
-  const indexForProjectData = l.params.oneToIndex();
+  const indexForProjectData = l.params.projectNameToIndex();
   const project = data[indexForProjectData];
   const { name } = project.attributes.details;
 
   return (
     <ProjectContainer>
       <ProjectSelector>
-        <Hed>My projects</Hed>
-        <Blurb>{text}</Blurb>
         <MultiProjectNav
           data={data}
           section={'projects'}
@@ -104,18 +107,24 @@ export default function Projects(props) {
         />
       </ProjectSelector>
       <Project>
-        <Hed>{name}</Hed>
-        <section>
-          <ProjectDescription project={project} />
-          <ImageFrame>
-            <SingleProjectNav
-              project={project}
-              activeProject={true}
-              localState={localState}
-            />
-            <ProjectImageContainer project={project} localState={localState} />
-          </ImageFrame>
-        </section>
+        <MenuSelector {...props} />
+        <OverflowContainer ref={ref => (overflowRef.current = ref)}>
+          <Hed>{name}</Hed>
+          <section>
+            <ProjectDescription project={project} />
+            <ImageFrame>
+              <SingleProjectNav
+                project={project}
+                activeProject={true}
+                localState={localState}
+              />
+              <ProjectImageContainer
+                project={project}
+                localState={localState}
+              />
+            </ImageFrame>
+          </section>
+        </OverflowContainer>
       </Project>
     </ProjectContainer>
   );

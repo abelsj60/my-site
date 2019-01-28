@@ -5,6 +5,7 @@ import JournalismParams from './JournalismParams';
 import Params from './Params';
 
 import Referrer from './Referrer.js';
+import ReverieParams from './ReverieParams';
 
 export default class Location {
   constructor(pathToMatch, props, prevProps) {
@@ -26,6 +27,7 @@ export default class Location {
     if (this._lastPath) {
       this.lastType = r.getLocation(prevProps);
     }
+
     this.type = r.getLocation(props);
     this.isExact = this._matchPath && this._matchPath.isExact;
     this.params = this._loadParams(props, prevProps);
@@ -38,27 +40,21 @@ export default class Location {
 
     if (propsHaveParams) {
       paramValues = props.match.params;
-    } else if (this._pathTomatch && this._pathTomatch !== '') {
+    } else if (this._pathToMatch && this._pathToMatch !== '') {
       paramValues = this._matchPath.params;
     } else {
       paramValues = { fakeParam: undefined };
     }
 
-    // const params =
-    //   Object.keys(props.match.params).length > 0
-    //     ? props.match.params
-    //     : this._pathToMatch !== ''
-    //       ? this._matchPath.params
-    //       : { fakeParam: undefined };
-    // const type = this.type;
-
     switch (type) {
-      case 'story':
+      case 'chapter':
         return new StoryParams(type, paramValues, prevProps);
       case 'projects':
         return new ProjectsParams(type, paramValues, prevProps);
       case 'journalism':
         return new JournalismParams(type, paramValues, prevProps);
+      case 'reverie':
+        return new ReverieParams(type, paramValues, prevProps);
       default:
         return new Params(type, paramValues, prevProps);
     }
@@ -109,7 +105,7 @@ export default class Location {
 
   get isSwappingContent() {
     switch (this.type) {
-      case 'story':
+      case 'chapter':
         const currentChapter = this.params.title;
         const lastChapter = this.params.lastChapter;
 
@@ -129,6 +125,11 @@ export default class Location {
         const lastHeadline = this.params.lastHeadline;
 
         return currentHeadline !== lastHeadline;
+      case 'reverie':
+        const currentReverie = this.params.headline;
+        const lastReverie = this.params.lastHeadline;
+
+        return currentReverie !== lastReverie;
       default:
         console.log('Location.isSwappingContent(): Keep calm, carry on');
     }

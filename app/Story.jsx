@@ -12,6 +12,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   color: black;
+  overflow: hidden;
 
   @media (min-width: 848px) {
     flex-direction: row;
@@ -21,8 +22,8 @@ const StyledChapter = styled.section`
   display: ${props => (props.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   position: absolute;
-  top: 53px;
-  bottom: 80px;
+  top: 52px;
+  bottom: 55px;
   padding: 25px;
   margin: 25px;
   color: white;
@@ -31,13 +32,16 @@ const StyledChapter = styled.section`
   @media (min-width: 848px) {
     display: flex;
     width: 327px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     position: unset;
     bottom: 48px;
     margin: 25px;
     margin-right: 0;
-    background-color: #6100f2;
-    color: white;
-    background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
+    background-color: unset;
+    border-right: 0.5px solid #666f75;
+    color: black;
   }
 `;
 const Illustration = styled.section`
@@ -45,6 +49,7 @@ const Illustration = styled.section`
   display: flex;
   flex-direction: column;
   margin: 25px;
+  overflow: hidden;
 `;
 const Image = styled.img`
   object-fit: cover;
@@ -63,15 +68,15 @@ export default function Story(props) {
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
 
-  const indexForChapterData = l.params.twoToIndex();
+  const indexForChapterData = l.params.titleToIndex();
   const chapter = data[indexForChapterData];
   const { image } = chapter.attributes;
 
   return (
     <Main>
       <StyledChapter text={hideStoryText}>
-        <ChapterNav {...props} data={data} section={'chapter'} />
-        <Chapter chapterData={chapter} />
+        <ChapterNav {...props} />
+        <Chapter chapterData={chapter} overflowRef={props.overflowRef} />
       </StyledChapter>
       <Illustration>
         <Image src={image} alt="fantasy illustration" />

@@ -1,17 +1,18 @@
 ---
-headline: 'Boxee Wants To Kill Your Television'
+headline: 'Boxee Wants to Kill Your Television'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 Avner Ronen thinks he can kill cable television. How? With software that
 aggregates all the Web's video, music and media into a slick interface.
 
 What's more, Ronen thinks he can convince broadcasters and others to
-encourage cable's death by paying him a $.05 to$.10 fee every time
+encourage cable's death by paying him a $.05 to $.10 fee every time
 someone watches or listens to something his software recommends.
 
 "We think it becomes a cable replacement for a lot of young people," says
-Ronen, who has raised $1 to$3 million for his New York-based start-up,
+Ronen, who has raised $1 to $3 million for his New York-based start-up,
 Boxee.
 
 Crazy? Maybe. Gutsy? You bet. While there's no shortage of people looking

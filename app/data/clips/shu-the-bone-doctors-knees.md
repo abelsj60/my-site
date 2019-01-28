@@ -1,6 +1,7 @@
 ---
 headline: The Bone Doctor's Knees
 publication: Seton Hall Magazine
+position: 'Freelance'
 ---
 
 It all started in the mid-’70s on scrap paper: cocktail napkins, lined

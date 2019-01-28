@@ -1,33 +1,31 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import ComponentData from './custom/ComponentData.js';
+import Referrer from './custom/Referrer.js';
 
-import CloseButton from './MenuCloseButton.jsx';
-import Description from './MenuDescription.jsx';
+import MenuSelector from './MenuSelector.jsx';
 
 const StyledMenu = styled.main`
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: navy;
-  color: white;
+  overflow: hidden;
+  margin: 25px;
 `;
-const Overflow = styled.section`
-  margin-top: 15px;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 25px;
+const OverflowContainer = styled.section`
   overflow: auto;
 `;
 
 export default function Menu(props) {
-  const { link, text, render } = props;
+  const r = new Referrer(props);
+  const cD = new ComponentData(r.location, props);
 
   return (
-    <StyledMenu>
-      <CloseButton link={link} />
-      <Description text={text} />
-      <Overflow>{render()}</Overflow>
-    </StyledMenu>
+    <Fragment>
+      <StyledMenu>
+        <MenuSelector {...props} />
+        <OverflowContainer>{cD.getMenuComponent(props)}</OverflowContainer>
+      </StyledMenu>
+    </Fragment>
   );
 }

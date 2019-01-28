@@ -1,6 +1,7 @@
 ---
-headline: 'How To Get Readers To Really Want You'
+headline: 'How to Get Readers to Really Want You'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 Forget Anna Wintour, famed editrix of Vogue. Just like New York's Fashion

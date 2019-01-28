@@ -1,6 +1,7 @@
 ---
-headline: 'Owning The News'
+headline: 'Owning the News'
 publication: 'Forbes'
+position: 'Staff reporter'
 ---
 
 Philip Balboni thinks he can build the next great global news organization
