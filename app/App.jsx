@@ -121,9 +121,9 @@ class App extends Component {
 
       const r = new Referrer(prevProps);
 
-      const currentCall = l.type;
-      const lastCall = l.lastType;
-      const routeIsReloading = currentCall === 'i' || lastCall === 'i';
+      const currentCaller = l.type;
+      const lastCaller = l.lastType;
+      const routeIsReloading = currentCaller === 'i' || lastCaller === 'i';
 
       const eForApp = new EventHandling('app', this);
       const handleClickForApp = eForApp.boundHandleClick;
@@ -141,7 +141,7 @@ class App extends Component {
       }
 
       if (!routeIsReloading) {
-        handleClickForApp('setCallers', currentCall, lastCall);
+        handleClickForApp('setCallers', currentCaller, lastCaller);
       }
 
       if (isMenu !== r.checkForMenu(this.props)) {
@@ -153,17 +153,16 @@ class App extends Component {
 
 export default withRouter(App);
 
+// SCROLL:
+// Redo magic scroll actions
+
 // Story edit
 // Restyle business card and legal terms
-
-// SCROLL:
-// Redo scroll actions
-// Scroll to top of container on page change (story, journalism, projects, reverie)
 
 // Flexbox retool
 // Structure, more modular, theme, share design elements?
 
-// Browser testing, and major errors + design (font)
+// Design/styling (font)
 // Images — how to store for React?
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
 // Illustrator. List needs, specs?
