@@ -97,14 +97,15 @@ export default class ContentLoader extends Component {
       }
 
       if (paramIndexOne !== -1 && paramIndexTwo !== -1) {
-        const { indexForProjectData } = prevProps.localState;
+        const lastIndexForProjectData =
+          prevProps.localState.indexForProjectData;
 
         this.props.boundHandleClickForBody(paramIndexOne, paramIndexTwo);
 
         if (this.overflowRef.current.scrollTop !== 0) {
           const isProjects = l.type === 'projects';
           const updateScrollTop = isProjects
-            ? paramIndexOne !== indexForProjectData
+            ? paramIndexOne !== lastIndexForProjectData
             : true;
 
           if (updateScrollTop) {
