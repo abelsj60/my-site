@@ -24,6 +24,8 @@ export default class ContentLoader extends Component {
 
   render() {
     const { needsRedirect, isNotFound } = this.state;
+    const r = new Referrer(this.props);
+    let cD;
 
     /** ComponentData contains configured Components
      *
@@ -34,10 +36,6 @@ export default class ContentLoader extends Component {
      * sections, so there's no need to update
      * contentData when cDU() runs.
      */
-
-    const r = new Referrer(this.props);
-
-    let cD;
 
     if (!needsRedirect && !isNotFound) {
       cD = new ComponentData(r.location, this.props);
@@ -76,36 +74,33 @@ export default class ContentLoader extends Component {
         this.setState({ needsRedirect: startRedirect });
       }
     } else if (l.isSwappingContent) {
-      let paramIndexOne;
-      let paramIndexTwo;
+      let paramOneAsIndex;
+      let paramTwoAsIndex;
 
       switch (l.type) {
         case 'chapter':
-          paramIndexOne = l.params.titleToIndex();
+          paramOneAsIndex = l.params.titleToIndex();
           break;
         case 'projects':
-          paramIndexOne = l.params.projectNameToIndex();
-          paramIndexTwo = l.params.projectThumbnailToIndex();
+          paramOneAsIndex = l.params.projectNameToIndex();
+          paramTwoAsIndex = l.params.projectThumbnailToIndex();
           break;
         case 'journalism':
-          paramIndexOne = l.params.publicationToIndex();
-          paramIndexTwo = l.params.headlineToIndex();
+          paramOneAsIndex = l.params.publicationToIndex();
+          paramTwoAsIndex = l.params.headlineToIndex();
           break;
         case 'reverie':
-          paramIndexOne = l.params.headlineToIndex();
+          paramOneAsIndex = l.params.headlineToIndex();
           break;
       }
 
-      if (paramIndexOne !== -1 && paramIndexTwo !== -1) {
-        const lastIndexForProjectData =
-          prevProps.localState.indexForProjectData;
-
-        this.props.boundHandleClickForBody(paramIndexOne, paramIndexTwo);
+      if (paramOneAsIndex !== -1 && paramTwoAsIndex !== -1) {
+        this.props.boundHandleClickForBody(paramOneAsIndex, paramTwoAsIndex);
 
         if (this.overflowRef.current.scrollTop !== 0) {
           const isProjects = l.type === 'projects';
           const updateScrollTop = isProjects
-            ? paramIndexOne !== lastIndexForProjectData
+            ? paramOneAsIndex !== prevProps.localState.indexForProjectData
             : true;
 
           if (updateScrollTop) {
