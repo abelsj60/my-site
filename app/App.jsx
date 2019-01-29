@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router';
 import styled, { css, createGlobalStyle } from 'styled-components';
 
@@ -59,7 +58,6 @@ class App extends Component {
     };
 
     this.magicRef = React.createRef();
-    // console.log('html:', document.documentElement.scrollTop);
   }
 
   render() {
@@ -71,14 +69,6 @@ class App extends Component {
 
     const spellbook = new Spellbook('home', this);
     const boundSpellsForHome = spellbook.castSpell;
-
-    // console.log(
-    //   '1:',
-    //   this.magicRef.current && this.magicRef.current.scrollHeight
-    // );
-    // console.log('2:', this.magicRef.current && this.magicRef.current.scrollTop);
-
-    // element.scrollHeight - element.scrollTop === element.clientHeight
 
     return (
       <Fragment>
@@ -158,14 +148,6 @@ class App extends Component {
         handleClickForApp('toggleMenu');
       }
     }
-
-    // element.scrollHeight - element.scrollTop === element.clientHeight
-    // console.log(
-    //   'html:',
-    //   document.documentElement.scrollHeight -
-    //     document.documentElement.scrollTop ===
-    //     document.documentElement.clientHeight
-    // );
   }
 }
 
