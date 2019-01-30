@@ -125,9 +125,9 @@ class Header extends Component {
 
     if (l.justChanged && this.timeoutId !== undefined) {
       const eForApp = new EventHandling('header', this);
-      const handleClickFoHeader = eForApp.boundHandleClick;
+      const handleClickForHeader = eForApp.boundHandleClick;
 
-      handleClickFoHeader();
+      handleClickForHeader();
     }
   }
 
@@ -142,7 +142,7 @@ class Header extends Component {
     const r = new Referrer(this.props);
 
     const eForHeader = new EventHandling('header', this);
-    const handleClickFoHeader = eForHeader.boundHandleClick;
+    const handleClickForHeader = eForHeader.boundHandleClick;
 
     return (
       <HeaderContainer home={homeIsActive}>
@@ -179,7 +179,7 @@ class Header extends Component {
           menu={menuIsActive}
           src={togglerSource}
           onClick={() => {
-            handleClickFoHeader();
+            handleClickForHeader();
           }}
         />
       </HeaderContainer>

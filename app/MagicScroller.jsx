@@ -12,14 +12,6 @@ export default function MagicScroller(props) {
     return null;
   }
 
-  // console.log('scrollTop:', props.magicRef.current && props.magicRef.current);
-  // console.log('sT:', document.html);
-
-  // console.log(
-  //   'magicRef:',
-  //   props.magicRef.current && props.magicRef.current.getBoundingClientRect()
-  // );
-
   return (
     <Abracadabra ref={props.magicRef}>
       <div

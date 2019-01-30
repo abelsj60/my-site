@@ -132,3 +132,6 @@
 // https://css-tricks.com/working-with-refs-in-react/
 // https://stackoverflow.com/questions/33748967/change-scrolltop-in-reactjs
 // https://stackoverflow.com/questions/38638303/react-set-scroll-position-before-component-mount
+
+// https://stackoverflow.com/questions/24580708/opera-mini-css3-transform-gradient-transition-polyfill
+// https://codepen.io/mimikos/pen/QMjjzy

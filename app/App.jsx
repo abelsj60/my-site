@@ -6,13 +6,11 @@ import Body from './Body.jsx';
 import Footer from './Footer.jsx';
 import Header from './Header.jsx';
 import Location from './custom/Location.js';
-import MagicScroller from './MagicScroller.jsx';
 import FantasticImage from './FantasticImage.jsx';
 import LegalTermsOrBizCard from './LegalTermsOrBizCard.jsx';
 
 import EventHandling from './custom/EventHandling.js';
 import Referrer from './custom/Referrer.js';
-import Spellbook from './custom/Spellbook.js';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -54,10 +52,33 @@ class App extends Component {
       blockPointer: location === 'home',
       currentCaller: location,
       lastCaller: location !== 'reverie' ? location : 'home',
-      isMenu: r.checkForMenu(props)
+      isMenu: r.checkForMenu(props),
+      homePageMagic: false,
+      pointsUnknown: true
     };
 
     this.magicRef = React.createRef();
+    this.castFlyingSpell = this.castFlyingSpell.bind(this);
+    this.toggleHomePageMagic = this.toggleHomePageMagic.bind(this);
+  }
+
+  castFlyingSpell() {
+    this.setState(() => {
+      const { pointsUnknown, homePageMagic } = this.state;
+      const stateToUpdate = { pointsUnknown: !pointsUnknown };
+
+      if (!homePageMagic) {
+        stateToUpdate.homePageMagic = true;
+      }
+
+      return stateToUpdate;
+    });
+  }
+
+  toggleHomePageMagic() {
+    if (this.state.homePageMagic) {
+      this.setState({ homePageMagic: false });
+    }
   }
 
   render() {
@@ -67,24 +88,21 @@ class App extends Component {
     const eForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eForApp.boundHandleClick;
 
-    const spellbook = new Spellbook('home', this);
-    const boundSpellsForHome = spellbook.castSpell;
-
     return (
       <Fragment>
         <GlobalStyle />
         <Page home={homeIsActive}>
-          <Header
-            {...this.props}
-            state={this.state}
-            scrollTop={this.scrollTop}
-          />
+          <Header {...this.props} state={this.state} />
           <Body
             {...this.props}
             state={this.state}
-            boundSpellsForHome={boundSpellsForHome}
+            castFlyingSpell={this.castFlyingSpell}
+            toggleHomePageMagic={this.toggleHomePageMagic}
           />
-          <FantasticImage state={this.state} />
+          <FantasticImage
+            state={this.state}
+            pointsUnknown={this.state.pointsUnknown}
+          />
           <LegalTermsOrBizCard {...this.props} state={this.state} />
           <Footer
             {...this.props}
@@ -92,19 +110,7 @@ class App extends Component {
             boundHandleClickForApp={boundHandleClickForApp}
           />
         </Page>
-        <MagicScroller home={homeIsActive} magicRef={this.magicRef} />
       </Fragment>
-    );
-  }
-
-  get scrollTop() {
-    return window.pageYOffset;
-  }
-
-  get fullyScrolled() {
-    return (
-      document.documentElement.scrollHeight - this.scrollTop ===
-      document.documentElement.clientHeight
     );
   }
 
@@ -153,11 +159,13 @@ class App extends Component {
 
 export default withRouter(App);
 
-// SCROLL:
-// Redo magic scroll actions
-
 // Story edit
 // Restyle business card and legal terms
+// Turn off legal/contact when hitting 'fly'
+// Expand EventHandler or retool *Spellbook
+// Redo dreaming image?
+// New home page text
+// New fly button
 
 // Flexbox retool
 // Structure, more modular, theme, share design elements?

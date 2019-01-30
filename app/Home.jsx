@@ -13,9 +13,10 @@ const Main = styled.main`
   height: 100%;
   width: 100%;
 `;
-const MagicImage = styled.img.attrs(props => ({
-  style: { transform: `scale(${props.magicScale})` }
-}))`
+const MagicImage = styled.img`
+  opacity: ${p => (p.pointsUnknown ? '0' : '1')};
+  transform: ${p => (p.pointsUnknown ? 'scale(1.01)' : 'scale(1.035)')};
+  transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   position: fixed;
   align-self: center;
   object-fit: cover;
@@ -25,12 +26,10 @@ const MagicImage = styled.img.attrs(props => ({
   z-index: 1;
   // bottom: 0px; // May need, scrolling img doesn't always reach bottom
 `;
-const MagicContent = styled.section.attrs(props => ({
-  style: {
-    opacity: props.magicOpacity,
-    pointerEvents: props.pointerIsBlocked ? 'none' : 'all'
-  }
-}))`
+const MagicContent = styled.section`
+  pointer-events: ${p => (p.pointsUnknown ? 'none' : 'auto')};
+  opacity: ${p => (!p.pointsUnknown ? '1' : '0')};
+  transition: opacity 1.5s;
   z-index: 1;
   height: 100%;
   width: 100%;
@@ -44,10 +43,10 @@ const MagicList = styled.ul`
 `;
 const MagicListItem = styled.li`
   flex: 1;
-  display: ${props => (props.item !== 2 ? 'none' : 'flex')};
+  display: ${p => (p.item !== 2 ? 'none' : 'flex')};
   align-items: flex-end;
 
-  @media (min-width: 848px) {
+  @media (min-width: 700px) {
     display: flex;
   }
 `;
@@ -55,6 +54,7 @@ const StyledLink = styled(Link)`
   color: deepskyblue;
   padding-left: 25px;
   padding-right: 25px;
+  margin-bottom: 40px;
 
   &:focus,
   &:hover,
@@ -70,8 +70,7 @@ const StyledLink = styled(Link)`
 `;
 const Hed = styled.h3`
   margin: 0px;
-  padding-bottom: 30px;
-  font-size: 5rem;
+  font-size: 3rem;
 `;
 // const Image = styled.img`
 //   // z-index: 0;
@@ -88,60 +87,31 @@ const Hed = styled.h3`
 //   // bottom: 0px;
 // `;
 
+const FlyButton = styled.button`
+  z-index: 2;
+  left: 10px;
+  position: absolute;
+`;
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      magicScale: 6
-    };
-
-    const { boundSpellsForHome } = this.props;
-
-    // No need to use .bind() because we curry inside
-    // _homeComponentSpellbook, creating closures
-    // for all relevant 'this' values.
-
-    this.opacitySpell = boundSpellsForHome('setMagicOpacity');
-    this.pointerSpell = boundSpellsForHome('toggleMagicPointer');
-    this.scaleSpell = boundSpellsForHome('setMagicScale', this);
-
-    this.resetTheMagic = boundSpellsForHome('resetTheMagic');
-    this.startPointerSpell = boundSpellsForHome('startPointerSpell');
-  }
-
-  componentDidMount() {
-    this.startPointerSpell();
-
-    window.addEventListener('scroll', this.opacitySpell);
-    window.addEventListener('scroll', this.scaleSpell);
-    window.addEventListener('scroll', this.pointerSpell);
-  }
-
-  componentWillUnmount() {
-    this.resetTheMagic();
-
-    window.removeEventListener('scroll', this.opacitySpell);
-    window.removeEventListener('scroll', this.scaleSpell);
-    window.removeEventListener('scroll', this.pointerSpell);
   }
 
   render() {
-    const { magicScale } = this.state;
-    const { magicOpacity, blockPointer } = this.props.state;
+    const { pointsUnknown } = this.props.state;
+    const { castFlyingSpell } = this.props;
 
     return (
       <Main>
         {/*<Image src="/howls-background-dl.jpg" />*/}
         <MagicImage
-          magicScale={magicScale}
-          src="/dreaming-boy-co-2.png"
+          pointsUnknown={pointsUnknown}
+          src="/dreaming-boy-co-3.png"
           alt="a fantastic imaginary world"
         />
-        <MagicContent
-          magicOpacity={magicOpacity}
-          pointerIsBlocked={blockPointer}
-        >
+        <FlyButton onClick={() => castFlyingSpell()}>Fly</FlyButton>
+        <MagicContent pointsUnknown={pointsUnknown}>
           <MagicList>
             <Mapper
               mapData={magicData}
@@ -159,6 +129,12 @@ export default class Home extends Component {
         </MagicContent>
       </Main>
     );
+  }
+
+  componentWillUnmount() {
+    if (!this.props.state.mount) {
+      this.props.toggleHomePageMagic();
+    }
   }
 }
 

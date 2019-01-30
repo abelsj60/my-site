@@ -4,15 +4,13 @@ import styled from 'styled-components';
 
 import StoryButton from './StoryButton.jsx';
 
-const Footer = styled.footer.attrs(props => ({
-  style: {
-    opacity: props.home ? props.magicOpacity : '',
-    pointerEvents: props.blockPointer ? 'none' : 'auto'
-  }
-}))`
+const Footer = styled.footer`
+  pointer-events: ${p => (p.nextFlight === 'home' ? 'none' : 'auto')};
+  opacity: ${p => (p.nextFlight === 'home' ? '0' : '1')};
+  transition: ${p => (p.homePageMagic ? 'opacity 1.5s' : '')};
   flex-shrink: 0;
   display: flex;
-  justify-content: ${props => (!props.story ? 'flex-end' : 'space-between')};
+  justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
   align-items: center;
   height: 55px;
   font-size: 1.1rem;
@@ -52,13 +50,13 @@ const FooterText = styled.div`
 export default function FooterContainer(props) {
   const { boundHandleClickForApp, state } = props;
   const {
-    blockPointer,
-    magicOpacity,
     showBusinessCard,
     showLegalTerms,
     showStoryText,
     currentCaller,
-    lastCaller
+    lastCaller,
+    pointsUnknown,
+    homePageMagic
   } = state;
 
   const isReverie = currentCaller === 'reverie';
@@ -66,15 +64,17 @@ export default function FooterContainer(props) {
   const isHome = currentCaller === 'home';
 
   const whereItStarted =
-    lastCaller !== 'home' && lastCaller !== 'i' ? lastCaller : '';
-  const linkForReverie = isReverie ? `/${whereItStarted}` : '/reverie';
+    lastCaller !== 'home' && lastCaller !== 'i' ? `/${lastCaller}` : '/';
+  const linkForReverie = isReverie ? whereItStarted : '/reverie';
+
+  const nextFlight = isHome && pointsUnknown ? 'home' : '';
 
   return (
     <Footer
       home={isHome}
       story={isStory}
-      magicOpacity={magicOpacity}
-      blockPointer={blockPointer}
+      nextFlight={nextFlight}
+      homePageMagic={homePageMagic}
     >
       <UpperLine />
       <StoryButton

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ImageForHome = styled.img`
+  transform: ${p => (p.pointsUnknown ? 'scale(1.15)' : 'scale(1)')};
+  transition: transform 1.5s ease-out;
   position: absolute;
   align-self: center;
   object-fit: cover;
@@ -15,5 +17,10 @@ export default function FantasticImage(props) {
     return null;
   }
 
-  return <ImageForHome src="/howls-background-dl.jpg" />;
+  return (
+    <ImageForHome
+      src="/howls-background-dl.jpg"
+      pointsUnknown={props.state.pointsUnknown}
+    />
+  );
 }
