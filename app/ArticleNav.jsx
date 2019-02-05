@@ -22,9 +22,13 @@ const Source = styled.p`
   font-size: 1.3rem;
   font-style: italic;
   margin-bottom: 0px;
-  color: ${props => (props.menu === 'active' ? 'black' : '#6E7DAB')};
+  color: ${props => (props.menu === 'active' ? 'black' : '#6e7dab')};
   color: ${props =>
-    props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
+    props.menu === 'active' && props.link === 'active'
+      ? '#6e7dab'
+      : props.menu !== 'active' && props.link === 'active'
+        ? '#455057'
+        : ''};
 
   &:first-child {
     margin-top: 0px;
@@ -34,7 +38,7 @@ const Hed = styled.h1`
   font-size: ${props => (props.menu === 'active' ? '3rem' : '1.6rem')};
   margin-top: 0px;
   margin-bottom: 10px;
-  color: ${props => (props.menu === 'active' ? 'black' : '#6E7DAB')};
+  color: ${props => (props.menu === 'active' ? 'black' : '#6e7dab')};
   color: ${props =>
     props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
 

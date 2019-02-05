@@ -60,6 +60,7 @@ const LinkedInIcon = styled.div`
 const HedContainer = styled.div`
   display: flex;
   margin-bottom: 15px;
+  padding-left: 1px;
 `;
 const LinkedInLink = styled.a`
   align-self: flex-end;

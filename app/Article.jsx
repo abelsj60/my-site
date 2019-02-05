@@ -24,11 +24,11 @@ const StyledArticle = styled.section`
   display: flex;
   flex-direction: column;
   margin: 25px;
+  margin-left: 24px;
   // margin-top: 10px;
   overflow: auto;
 
   @media (min-width: 848px) {
-    padding-left: 1px;
     margin-top: 25px;
     margin-left: 24px;
   }
@@ -66,6 +66,7 @@ const Text = styled.section`
 `;
 const OverflowContainer = styled.div`
   overflow: auto;
+  padding-left: 1px;
 `;
 
 export default function Article(props) {

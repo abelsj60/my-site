@@ -40,10 +40,7 @@ const StyledLink = styled(Link)`
   }
 
   @media (min-width: 848px) {
-    color: ${props =>
-    props.item === 'active' && props.menu === 'active'
-      ? '#666F75'
-      : '#666F75'};
+    color: #6e7dab;
     &:hover {
       // color: #fd1172;
     }
@@ -79,7 +76,7 @@ const NavigationText = styled.p`
   @media (min-width: 848px) {
     border-bottom: ${props =>
     props.item === 'active' && props.menu !== 'active'
-      ? '.5px solid #666F75'
+      ? '.5px solid #6e7dab'
       : ''};
   }
 `;

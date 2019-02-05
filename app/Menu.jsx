@@ -11,9 +11,11 @@ const StyledMenu = styled.main`
   flex-direction: column;
   overflow: hidden;
   margin: 25px;
+  margin-left: 23px;
 `;
 const OverflowContainer = styled.section`
   overflow: auto;
+  padding-left: 2px;
 `;
 
 export default function Menu(props) {

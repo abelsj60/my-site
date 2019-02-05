@@ -20,6 +20,7 @@ const HeaderContainer = styled.header.attrs(props => ({
   position: relative;
   height: 52px;
   display: flex;
+  justify-content: ${p => (p.home === 'active' ? 'center' : '')};
   align-items: center;
 
   &:hover {
@@ -41,7 +42,8 @@ const StyledLink = styled(Link)`
   }
 `;
 const MyName = styled(StyledLink)`
-  display: ${props => (props.menu === 'active' ? 'none' : '')};
+  display: ${props =>
+    props.home === 'active' || props.menu === 'active' ? 'none' : ''};
   font-size: 1.4rem;
   font-weight: bold;
 
@@ -50,12 +52,13 @@ const MyName = styled(StyledLink)`
   }
 
   @media (min-width: 705px) {
-    display: block;
+    display: ${p => (p.home === 'active' ? 'none' : 'block')};
   }
 `;
 const Motto = styled.p`
   flex: 1;
-  display: ${props => (props.menu === 'active' ? 'none' : '')};
+  display: ${props =>
+    props.home === 'active' || props.menu === 'active' ? 'none' : ''};
   font-size: 1.05rem;
   margin-top: 2px;
   margin-left: 10px;
@@ -71,11 +74,11 @@ const Motto = styled.p`
   }
 
   @media (min-width: 705px) {
-    display: block;
+    display: ${p => (p.home === 'active' ? 'none' : 'block')};
   }
 `;
 const HeaderNav = styled.nav`
-  display: none;
+  display: ${p => (p.home !== 'active' ? 'none' : '')};
 
   ${props =>
     props.menu === 'active' &&
@@ -86,7 +89,7 @@ const HeaderNav = styled.nav`
 
   @media (min-width: 705px) {
     display: block;
-    margin-right: 15px;
+    margin-right: ${props => (props.home !== 'active' ? '15px' : '')};
   }
 `;
 const HeaderNavList = styled.ul`
@@ -98,6 +101,7 @@ const HeaderNavList = styled.ul`
 `;
 const HeaderNavItem = styled.li``;
 const TogglerIcon = styled.img`
+  display: ${p => (p.home === 'active' ? 'none' : '')};
   height: 17px;
   width: 17px;
   margin-left: auto;
@@ -132,12 +136,13 @@ class Header extends Component {
   }
 
   render() {
-    const { currentCaller } = this.props.state;
+    const { currentCaller, pointsUnknown, homePageMagic } = this.props.state;
     const menuIsActive = this.state.menuIsOpen ? 'active' : '';
     const homeIsActive = currentCaller === 'home' ? 'active' : '';
     const togglerSource = `/sign-${homeIsActive ? 'white' : 'black'}-${
       menuIsActive ? 'open' : 'closed'
     }.png`;
+    const nextFlight = homeIsActive === 'active' && pointsUnknown ? 'home' : '';
 
     const r = new Referrer(this.props);
 
@@ -145,12 +150,18 @@ class Header extends Component {
     const handleClickForHeader = eForHeader.boundHandleClick;
 
     return (
-      <HeaderContainer home={homeIsActive}>
+      <HeaderContainer
+        home={homeIsActive}
+        nextFlight={nextFlight}
+        homePageMagic={homePageMagic}
+      >
         <MyName to={'/'} home={homeIsActive} menu={menuIsActive}>
           James Abels
         </MyName>
-        <Motto menu={menuIsActive}>Magical stories and other adventures</Motto>
-        <HeaderNav menu={menuIsActive}>
+        <Motto home={homeIsActive} menu={menuIsActive}>
+          Magical stories and other adventures
+        </Motto>
+        <HeaderNav home={homeIsActive} menu={menuIsActive}>
           <HeaderNavList>
             <Mapper
               mapData={headerData}

@@ -6,7 +6,6 @@ import Body from './Body.jsx';
 import Footer from './Footer.jsx';
 import Header from './Header.jsx';
 import Location from './custom/Location.js';
-import FantasticImage from './FantasticImage.jsx';
 import LegalTermsOrBizCard from './LegalTermsOrBizCard.jsx';
 
 import EventHandling from './custom/EventHandling.js';
@@ -53,32 +52,11 @@ class App extends Component {
       currentCaller: location,
       lastCaller: location !== 'reverie' ? location : 'home',
       isMenu: r.checkForMenu(props),
-      homePageMagic: false,
+      homePageMagic: location === 'home',
       pointsUnknown: true
     };
 
     this.magicRef = React.createRef();
-    this.castFlyingSpell = this.castFlyingSpell.bind(this);
-    this.toggleHomePageMagic = this.toggleHomePageMagic.bind(this);
-  }
-
-  castFlyingSpell() {
-    this.setState(() => {
-      const { pointsUnknown, homePageMagic } = this.state;
-      const stateToUpdate = { pointsUnknown: !pointsUnknown };
-
-      if (!homePageMagic) {
-        stateToUpdate.homePageMagic = true;
-      }
-
-      return stateToUpdate;
-    });
-  }
-
-  toggleHomePageMagic() {
-    if (this.state.homePageMagic) {
-      this.setState({ homePageMagic: false });
-    }
   }
 
   render() {
@@ -96,12 +74,7 @@ class App extends Component {
           <Body
             {...this.props}
             state={this.state}
-            castFlyingSpell={this.castFlyingSpell}
-            toggleHomePageMagic={this.toggleHomePageMagic}
-          />
-          <FantasticImage
-            state={this.state}
-            pointsUnknown={this.state.pointsUnknown}
+            boundHandleClickForApp={boundHandleClickForApp}
           />
           <LegalTermsOrBizCard {...this.props} state={this.state} />
           <Footer
@@ -122,7 +95,8 @@ class App extends Component {
         showBusinessCard,
         showLegalTerms,
         showStoryText,
-        isMenu
+        isMenu,
+        homePageMagic
       } = this.state;
 
       const r = new Referrer(prevProps);
@@ -153,6 +127,10 @@ class App extends Component {
       if (isMenu !== r.checkForMenu(this.props)) {
         handleClickForApp('toggleMenu');
       }
+
+      if (homePageMagic) {
+        handleClickForApp('cancelHomePageMagic');
+      }
     }
   }
 }
@@ -161,16 +139,12 @@ export default withRouter(App);
 
 // Story edit
 // Restyle business card and legal terms
-// Turn off legal/contact when hitting 'fly'
-// Expand EventHandler or retool *Spellbook
-// Redo dreaming image?
-// New home page text
-// New fly button
+// Dark overlay over background image ?
 
 // Flexbox retool
 // Structure, more modular, theme, share design elements?
 
-// Design/styling (font)
+// Design/styling
 // Images — how to store for React?
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
 // Illustrator. List needs, specs?

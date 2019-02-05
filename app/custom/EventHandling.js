@@ -27,9 +27,6 @@ export default class EventHandling {
       case 'header':
         selectedHandler = this._handleClickForHeader;
         break;
-      case 'contentLoader': // ! Currently unused. Take out when done.
-        selectedHandler = this._handleScrollForContentLoader;
-        break;
       default:
         console.log('_selectHandleClick: Keep calm, carry on');
     }
@@ -42,7 +39,8 @@ export default class EventHandling {
       const {
         showBusinessCard,
         showLegalTerms,
-        blockPointer,
+        pointsUnknown,
+        homePageMagic,
         showStoryText,
         isMenu
       } = this.state;
@@ -51,15 +49,36 @@ export default class EventHandling {
       switch (updateValue) {
         case 'toggleBusinessCard':
           stateToUpdate.showBusinessCard = !showBusinessCard;
+          if (showLegalTerms) {
+            stateToUpdate.showLegalTerms = !showLegalTerms;
+          }
           break;
         case 'toggleLegalTerms':
           stateToUpdate.showLegalTerms = !showLegalTerms;
+          if (showBusinessCard) {
+            stateToUpdate.showBusinessCard = !showBusinessCard;
+          }
           break;
         case 'toggleStoryText':
           stateToUpdate.showStoryText = !showStoryText;
           break;
-        case 'toggleMagicPointer':
-          stateToUpdate.blockPointer = !blockPointer;
+        case 'swapHomePageImage':
+          stateToUpdate.pointsUnknown = !pointsUnknown;
+          if (!homePageMagic) {
+            stateToUpdate.homePageMagic = !homePageMagic;
+          }
+          if (!pointsUnknown && showLegalTerms) {
+            stateToUpdate.showLegalTerms = !showLegalTerms;
+          }
+          if (!pointsUnknown && showBusinessCard) {
+            stateToUpdate.showBusinessCard = !showBusinessCard;
+          }
+          break;
+        case 'cancelHomePageMagic':
+          if (homePageMagic) {
+            stateToUpdate.homePageMagic = !homePageMagic;
+          }
+          break;
         case 'setCallers':
           stateToUpdate.currentCaller = valueOne;
           if (valueTwo !== 'reverie') {
@@ -125,10 +144,5 @@ export default class EventHandling {
         toggleState.call(this);
       }
     };
-  }
-
-  // ! Currently unused. Take out when done.
-  _handleScrollForContentLoader() {
-    return p => this.setState({ scrollPosition: p });
   }
 }

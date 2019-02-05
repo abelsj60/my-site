@@ -15,8 +15,8 @@ const Graf = styled.p`
   margin-bottom: 10px;
 `;
 const TopGraf = styled(Graf)`
-  color: #455057;
-  font-size: 1.8rem;
+  // color: #455057;
+  font-size: 1.7rem;
 `;
 
 function formatKeyForDisplay(name, data) {

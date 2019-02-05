@@ -31,7 +31,6 @@ const Project = styled.section`
   margin-left: 24px;
   margin-right: 25px;
   overflow: auto;
-  padding-left: 1px;
 
   @media (min-width: 848px) {
     margin-top: 25px;
@@ -41,7 +40,7 @@ const Hed = styled.h1`
   color: #fd1172;
   font-size: 2.5rem;
   margin-top: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 
   @media (min-width: 848px) {
     margin-top: -4px;
@@ -84,6 +83,7 @@ const ProjectSelector = styled.nav`
 `;
 const OverflowContainer = styled.div`
   overflow: auto;
+  padding-left: 1px;
 `;
 
 export default function Projects(props) {

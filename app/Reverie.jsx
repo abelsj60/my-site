@@ -24,6 +24,7 @@ const Content = styled.section`
   display: flex;
   flex-direction: column;
   margin: 25px;
+  margin-left: 24px;
   overflow: auto;
 
   @media (min-width: 848px) {
@@ -71,6 +72,7 @@ const PostDate = styled.p`
 `;
 const OverflowContainer = styled.div`
   overflow: auto;
+  padding-left: 1px;
 `;
 
 export default function Reverie(props) {
