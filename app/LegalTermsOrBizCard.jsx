@@ -4,15 +4,18 @@ import BusinessCard from './BusinessCard.jsx';
 import LegalTerms from './LegalTerms.jsx';
 
 const Container = styled.section`
-  z-index: ${props => (props.home ? '1' : '0')};
+  z-index: ${props => (props.home ? '0' : '0')};
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: ${props => (props.home ? '0' : '53px')};
+  top: ${props => (props.home ? '0' : '52px')};
   bottom: ${props => (props.home ? '0' : '56px')};
   width: 100%;
   background-color: rgba(0, 0, 0, 0.3);
+
+  background-color: #fd1172;
+  background-image: url('https://www.transparenttextures.com/patterns/noisy-grid.png');
 `;
 
 export default function LegalTermsOrBizCard(props) {

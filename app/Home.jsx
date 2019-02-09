@@ -23,23 +23,24 @@ const MagicImage = styled.img`
   min-height: 100%;
   width: 100%;
   overflow: hidden;
-  z-index: 1;
+  // z-index: 1;
 `;
 const MyName = styled.h1`
   margin: 0px;
   font-family: Kaushan Script, cursive;
+  font-family: 'Aref Ruqaa', serif;
   font-size: 6.5rem;
   color: #ffe74c;
-  // text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 1px 2px black;
 `;
 const Motto = styled.p`
   margin: 0px;
   // font-family: Merienda, cursive;
-  font-size: 1.76rem;
-  color: white;
-  // text-shadow: 1px 1px 2px black;
-  margin-top: -16px;
-  margin-left: 43px;
+  font-size: 1.65rem;
+  color: #fd1172;
+  text-shadow: 1px 1px 2px black;
+  margin-top: -15px;
+  margin-left: 16px;
 `;
 const FlyButton = styled.section`
   z-index: 2;
@@ -71,16 +72,29 @@ export default function Home(props) {
 
   return (
     <Main>
-      <FantasticImage pointsUnknown={pointsUnknown} />
       <LogoContainer nextFlight={nextFlight}>
         <MyName>James Abels</MyName>
-        <Motto>magical adventures and other stories</Motto>
+        <Motto>coding narratives and magical adventures</Motto>
       </LogoContainer>
+      <img
+        style={{
+          position: 'absolute',
+          bottom: '0',
+          alignSelf: 'center',
+          objectFit: 'cover',
+          minHeight: '100%',
+          width: '100%',
+          overflow: 'hidden',
+          zIndex: '1'
+        }}
+        src="/foreground.png"
+      />
+      <FantasticImage pointsUnknown={pointsUnknown} />
       <FlyButton onClick={() => boundHandleClickForApp('swapHomePageImage')}>
         {buttonLocation}
       </FlyButton>
       <MagicImage
-        src="/dreaming-boy.png"
+        src="/background-city.png"
         alt="a fantastic imaginary world"
         pointsUnknown={pointsUnknown}
       />

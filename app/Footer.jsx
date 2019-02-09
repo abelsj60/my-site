@@ -22,6 +22,7 @@ const Footer = styled.footer`
   }
 `;
 const UpperLine = styled.div`
+  display: ${p => (p.home ? 'none' : '')};
   position: absolute;
   width: 100%;
   top: -1px;
@@ -76,7 +77,7 @@ export default function FooterContainer(props) {
       nextFlight={nextFlight}
       homePageMagic={homePageMagic}
     >
-      <UpperLine />
+      <UpperLine home={isHome} />
       <StoryButton
         story={isStory}
         showStoryText={showStoryText}

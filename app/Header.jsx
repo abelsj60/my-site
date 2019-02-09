@@ -61,7 +61,7 @@ const Motto = styled.p`
     props.home === 'active' || props.menu === 'active' ? 'none' : ''};
   font-size: 1.05rem;
   margin-top: 2px;
-  margin-left: 10px;
+  margin-left: 5px;
   margin-bottom: 0px;
   font-style: italic;
   padding-top: 1px;
@@ -69,7 +69,7 @@ const Motto = styled.p`
   @media (min-width: 390px) {
     padding: 0px;
     margin-top: 1.9px;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-left: 15px;
   }
 
@@ -79,12 +79,15 @@ const Motto = styled.p`
 `;
 const HeaderNav = styled.nav`
   display: ${p => (p.home !== 'active' ? 'none' : '')};
+  padding-bottom: ${p => (p.home === 'active' ? '5px' : '')};
+  border-bottom: ${p => (p.home === 'active' ? '.5px solid white' : '')};
 
   ${props =>
     props.menu === 'active' &&
     css`
       flex: 1;
       display: block;
+      margin-left: 32px;
     `};
 
   @media (min-width: 705px) {
@@ -159,7 +162,7 @@ class Header extends Component {
           James Abels
         </MyName>
         <Motto home={homeIsActive} menu={menuIsActive}>
-          Magical stories and other adventures
+          Coding narratives and magical adventures
         </Motto>
         <HeaderNav home={homeIsActive} menu={menuIsActive}>
           <HeaderNavList>

@@ -14,17 +14,17 @@ const Card = styled.section`
   line-height: 2.5rem;
   box-shadow: 0 0 0.75em black;
 `;
-const Graph = styled.p`
+const Graf = styled.p`
   margin-top: 0px;
   margin-left: 70px;
   margin-right: 0px;
   margin-bottom: 0px;
   font-size: 1.5rem;
 `;
-const ContactGraphOne = styled(Graph)`
+const ContactGrafOne = styled(Graf)`
   font-size: 1.4rem;
 `;
-const ContactGraphTwo = styled(ContactGraphOne)`
+const ContactGrafTwo = styled(ContactGrafOne)`
   margin-top: -5px;
 `;
 const Line = styled.div`
@@ -50,11 +50,11 @@ export default class BusinessCard extends Component {
   render() {
     return (
       <Card>
-        <Graph>James Abels</Graph>
+        <Graf>James Abels</Graf>
         <Line />
 
-        <ContactGraphOne>917-854-7848</ContactGraphOne>
-        <ContactGraphTwo>abelsj60_AT_gmail.com</ContactGraphTwo>
+        <ContactGrafOne>917-854-7848</ContactGrafOne>
+        <ContactGrafTwo>abelsj60_AT_gmail.com</ContactGrafTwo>
       </Card>
     );
   }

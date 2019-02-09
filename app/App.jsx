@@ -137,17 +137,14 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Story edit
 // Restyle business card and legal terms
-// Dark overlay over background image ?
+
+// Story edit
+// Structure, more modular, theme, share design elements?
+// Take pictures, write copy for Arrow, Slingshot, TMMnews
 
 // Flexbox retool
-// Structure, more modular, theme, share design elements?
 
-// Design/styling
 // Images — how to store for React?
-// Take pictures, write copy for Arrow, Slingshot, TMMnews
 // Illustrator. List needs, specs?
 // Hosting?
-// Bug 1190721 - Throttle animations that produce any transform change hint if the target element is out-of-view.
-// https://github.com/zurb/foundation-sites/issues/10924

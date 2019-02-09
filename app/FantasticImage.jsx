@@ -5,7 +5,7 @@ const ImageForHome = styled.img`
   transform: ${p => (p.pointsUnknown ? 'scale(1.15)' : 'scale(1)')};
   transition: transform 1.5s ease-out;
   position: absolute;
-  top: 0;
+  bottom: 0;
   align-self: center;
   object-fit: cover;
   min-height: 100%;
@@ -16,7 +16,7 @@ const ImageForHome = styled.img`
 export default function FantasticImage(props) {
   return (
     <ImageForHome
-      src="/howls-background-dl.jpg"
+      src="/background-fantasy.png"
       pointsUnknown={props.pointsUnknown}
     />
   );

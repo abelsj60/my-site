@@ -142,3 +142,5 @@
 // https://tympanus.net/Development/PhotographyWebsiteConcept/
 // https://www.npmjs.com/package/react-touch
 // https://blog.imagekit.io/how-to-deliver-responsive-images-to-browsers-across-multiple-devices-30cfae17390e
+
+// https://medium.mybridge.co/amazing-react-js-open-source-of-the-year-v-2019-364d057ac3f3

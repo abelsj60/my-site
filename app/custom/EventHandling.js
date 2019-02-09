@@ -61,6 +61,12 @@ export default class EventHandling {
           break;
         case 'toggleStoryText':
           stateToUpdate.showStoryText = !showStoryText;
+          if (showBusinessCard) {
+            stateToUpdate.showBusinessCard = !showBusinessCard;
+          }
+          if (showLegalTerms) {
+            stateToUpdate.showLegalTerms = !showLegalTerms;
+          }
           break;
         case 'swapHomePageImage':
           stateToUpdate.pointsUnknown = !pointsUnknown;
