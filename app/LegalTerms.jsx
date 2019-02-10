@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const Graf = styled.p`
   margin: 0px;
-  // color: #fd1172;
   padding: 35px;
-  background-color: #ffe74c;
+  background-color: white;
+  font-size: 1.4rem;
   box-shadow: 0 0 0.75em black;
 `;
 

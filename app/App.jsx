@@ -137,13 +137,13 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Restyle business card and legal terms
-
 // Story edit
 // Structure, more modular, theme, share design elements?
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
 
 // Flexbox retool
+// Picture focus
+// Short height, flex or overflow content container?
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?

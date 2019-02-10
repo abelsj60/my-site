@@ -53,10 +53,11 @@ const FlyButton = styled.section`
   text-align: center;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.3);
+  display: ${p => (p.legalOrBusinessCard ? 'none' : 'block')};
   margin-bottom: 45px;
 `;
 const LogoContainer = styled.div`
-  display: flex;
+  display: ${p => (p.legalOrBusinessCard ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -65,14 +66,22 @@ const LogoContainer = styled.div`
 `;
 
 export default function Home(props) {
-  const { pointsUnknown, currentCaller } = props.state;
+  const {
+    pointsUnknown,
+    currentCaller,
+    showBusinessCard,
+    showLegalTerms
+  } = props.state;
   const { boundHandleClickForApp } = props;
   const nextFlight = currentCaller === 'home' && pointsUnknown ? 'home' : '';
   const buttonLocation = pointsUnknown ? 'New York' : 'Neverland';
 
   return (
     <Main>
-      <LogoContainer nextFlight={nextFlight}>
+      <LogoContainer
+        legalOrBusinessCard={showBusinessCard || showLegalTerms}
+        nextFlight={nextFlight}
+      >
         <MyName>James Abels</MyName>
         <Motto>coding narratives and magical adventures</Motto>
       </LogoContainer>
@@ -90,7 +99,10 @@ export default function Home(props) {
         src="/foreground.png"
       />
       <FantasticImage pointsUnknown={pointsUnknown} />
-      <FlyButton onClick={() => boundHandleClickForApp('swapHomePageImage')}>
+      <FlyButton
+        legalOrBusinessCard={showBusinessCard || showLegalTerms}
+        onClick={() => boundHandleClickForApp('swapHomePageImage')}
+      >
         {buttonLocation}
       </FlyButton>
       <MagicImage

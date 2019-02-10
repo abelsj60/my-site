@@ -1,21 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
-import BusinessCard from './BusinessCard.jsx';
-import LegalTerms from './LegalTerms.jsx';
 
 const Container = styled.section`
-  z-index: ${props => (props.home ? '0' : '0')};
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: ${props => (props.home ? '0' : '52px')};
-  bottom: ${props => (props.home ? '0' : '56px')};
+  top: ${p => (p.home === 'active' ? '0' : '52px')};
+  bottom: ${p => (p.home === 'active' ? '0' : '56px')};
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-
-  background-color: #fd1172;
-  background-image: url('https://www.transparenttextures.com/patterns/noisy-grid.png');
+  background-color: rgba(0, 0, 0, 0.7);
+`;
+const Card = styled.section`
+  margin-top: ${p => (p.home === 'active' ? '-200px' : '')};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  width: 350px;
+  align-self: center;
+  position: relative;
+  background-color: white;
+  font-size: 1.75rem;
+  line-height: 2.5rem;
+  box-shadow: 0 0 0.75em black;
+`;
+const InnerBorder = styled.div`
+  position: absolute;
+  width: 90%;
+  height: 85%;
+  align-self: center;
+  border: 0.5px solid #fd1172;
+`;
+const Graf = styled.p`
+  margin-top: 0px;
+  align-self: center;
+  margin-bottom: 0px;
+  font-size: 1.4rem;
 `;
 
 export default function LegalTermsOrBizCard(props) {
@@ -26,10 +47,16 @@ export default function LegalTermsOrBizCard(props) {
   }
 
   const homeIsActive = currentCaller === 'home' ? 'active' : '';
+  const text = showBusinessCard
+    ? 'abelsj60_at_gmail.com'
+    : `©${new Date().getFullYear()} James Abels. All rights reserved.`;
 
   return (
     <Container home={homeIsActive}>
-      {showBusinessCard ? <BusinessCard {...props} /> : <LegalTerms />}
+      <Card home={homeIsActive}>
+        <Graf>{text}</Graf>
+        {showBusinessCard && <InnerBorder />}
+      </Card>
     </Container>
   );
 }

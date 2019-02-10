@@ -5,16 +5,14 @@ import styled from 'styled-components';
 import StoryButton from './StoryButton.jsx';
 
 const Footer = styled.footer`
-  pointer-events: ${p => (p.nextFlight === 'home' ? 'none' : 'auto')};
-  opacity: ${p => (p.nextFlight === 'home' ? '0' : '1')};
-  transition: ${p => (p.homePageMagic ? 'opacity 1.5s' : '')};
+  // background-color: ${p => (!p.home ? 'white' : '')};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
   align-items: center;
   height: 55px;
   font-size: 1.1rem;
-  z-index: 1;
+  z-index: ${p => (p.home ? '2' : '')};
   position: relative;
 
   @media (min-width: 848px) {
@@ -31,6 +29,8 @@ const UpperLine = styled.div`
   background-color: #fd1172;
 `;
 const LinkToReverie = styled(Link)`
+  color: ${p => (p.show ? '#FD1172' : '#6E7DAB')};
+
   &:focus,
   &:hover,
   &:visited,
@@ -42,7 +42,7 @@ const LinkToReverie = styled(Link)`
 const Graf = styled.p`
   cursor: pointer;
   margin-right: 25px;
-  color: ${props => (props.show ? '#FD1172' : '#6E7DAB')};
+  color: ${p => (p.show ? '#FD1172' : '#6E7DAB')};
 `;
 const FooterText = styled.div`
   display: flex;
@@ -84,9 +84,11 @@ export default function FooterContainer(props) {
         boundHandleClickForApp={boundHandleClickForApp}
       />
       <FooterText>
-        <LinkToReverie to={linkForReverie}>
-          <Graf show={isReverie}>Reverie</Graf>
-        </LinkToReverie>
+        <Graf show={isReverie}>
+          <LinkToReverie show={isReverie} to={linkForReverie}>
+            Reverie
+          </LinkToReverie>
+        </Graf>
         <Graf
           show={showBusinessCard}
           onClick={() => {
