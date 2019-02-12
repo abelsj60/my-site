@@ -2,13 +2,12 @@ import React from 'react';
 import marked from 'marked';
 import ReactHtmlParser from 'react-html-parser';
 
+import Left from './Left.jsx';
+import Main from './Main.jsx';
+
 import bio from './data/about.md';
 import styled from 'styled-components';
 
-const Main = styled.main`
-  flex: 1;
-  display: flex;
-`;
 const Content = styled.section`
   flex: 1;
   font-size: 1.75rem;
@@ -38,19 +37,6 @@ const TextContainer = styled.section`
     }
   }
 `;
-const Image = styled.section`
-  display: none;
-
-  @media (min-width: 848px) {
-    display: block;
-    width: 327px;
-    margin-top: 25px;
-    margin-left: 25px;
-    margin-bottom: 25px;
-    padding-right: 25px;
-    border-right: 0.5px solid #6e7dab;
-  }
-`;
 const LinkedInIcon = styled.div`
   height: 20px;
   width: 30px;
@@ -59,7 +45,7 @@ const LinkedInIcon = styled.div`
 `;
 const HedContainer = styled.div`
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   padding-left: 1px;
 `;
 const LinkedInLink = styled.a`
@@ -78,7 +64,7 @@ const LinkedInLink = styled.a`
 export default function About() {
   return (
     <Main>
-      <Image />
+      <Left />
       <Content>
         <HedContainer>
           <Hed>About</Hed>

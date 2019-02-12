@@ -7,7 +7,7 @@ import Article from '../Article.jsx';
 import ArticleNav from '../ArticleNav.jsx';
 import ChapterNav from '../ChapterNav.jsx';
 import ReverieNav from '../ReverieNav.jsx';
-import MultiProjectNav from '../MultiProjectNav.jsx';
+import DesktopProjectNav from '../DesktopProjectNav.jsx';
 
 import Content from './Content.js';
 
@@ -57,7 +57,7 @@ export default class ComponentData {
         );
       case 'projects':
         return (
-          <MultiProjectNav
+          <DesktopProjectNav
             {...props}
             isMenu={true}
             section={type}

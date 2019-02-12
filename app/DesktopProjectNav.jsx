@@ -1,41 +1,31 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+import UnorderedList from './UnorderedList.jsx';
 import Mapper from './Mapper.jsx';
 import SingleProjectNav from './SingleProjectNav.jsx';
 
-const DesktopNavGroup = styled.ul`
-  display: flex;
-  flex-direction: column;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  padding: 0px;
-  list-style-type: none;
+const StyledUL = styled(UnorderedList)`
+  height: 100%;
+  overflow: auto;
+  width: ${p => (p.menu !== 'active' ? '327px' : '')};
 
-  ${props =>
-    props.menu === 'active' &&
+  ${p =>
+    p.menu === 'active' &&
     css`
       display: block;
       max-width: 590px;
       margin: 0;
     `};
 `;
-const ProjectGroup = styled.li``;
+const HedAndNav = styled.li``;
 const Hed = styled.section`
-  font-size: ${props => (props.menu !== 'active' ? '1.4rem' : '1.6rem')};
-  // margin-top: ${props => (props.num !== 0 ? '15px' : '')};
+  font-size: ${p => (p.menu !== 'active' ? '1.4rem' : '1.6rem')};
   margin-bottom: 9px;
   color: #6e7dab;
-  // color: ${props => (props.active === 'active' ? '#6E7DAB' : 'black')};
-
-  // ${ProjectGroup}:hover & {
-  //   color: #FD1172;
-  // }
 `;
 
-export default function MultiProjectNav(props) {
+export default function DesktopProjectNav(props) {
   const { isMenu } = props;
   const { indexForProjectData } = props.localState;
   const filteredData = props.isMenu
@@ -46,7 +36,7 @@ export default function MultiProjectNav(props) {
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <DesktopNavGroup menu={menuIsActive}>
+    <StyledUL menu={menuIsActive}>
       <Mapper
         mapData={filteredData}
         render={(project, idx) => {
@@ -55,7 +45,7 @@ export default function MultiProjectNav(props) {
           const hedIsActive = isActiveProject ? 'active' : '';
 
           return (
-            <ProjectGroup key={idx}>
+            <HedAndNav key={idx}>
               <Hed
                 num={idx}
                 menu={menuIsActive}
@@ -69,10 +59,10 @@ export default function MultiProjectNav(props) {
                 isDesktop={true}
                 activeProject={isActiveProject}
               />
-            </ProjectGroup>
+            </HedAndNav>
           );
         }}
       />
-    </DesktopNavGroup>
+    </StyledUL>
   );
 }

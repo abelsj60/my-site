@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import StyledLink from './StyledLink.jsx';
 import Mapper from './Mapper.jsx';
 import headerData from './data/headerData.js';
 
@@ -9,12 +9,10 @@ import Location from './custom/Location.js';
 import Referrer from './custom/Referrer.js';
 import EventHandling from './custom/EventHandling.js';
 
-const HeaderContainer = styled.header.attrs(props => ({
-  style: {
-    backgroundColor: props.home === 'active' ? 'transparent' : 'white',
-    color: props.home === 'active' ? 'white' : '#455057'
-  }
-}))`
+const HeaderContainer = styled.header`
+  background-color: ${props =>
+    props.home === 'active' ? 'transparent' : 'white'};
+  color: ${props => (props.home === 'active' ? 'white' : '#455057')};
   flex-shrink: 0;
   z-index: 2;
   position: relative;
@@ -22,26 +20,16 @@ const HeaderContainer = styled.header.attrs(props => ({
   display: flex;
   justify-content: ${p => (p.home === 'active' ? 'center' : '')};
   align-items: center;
-
-  &:hover {
-    color: #fd1172;
-  }
 `;
-const StyledLink = styled(Link)`
+const RestyledLink = styled(StyledLink)`
   margin-left: ${props => (props.num === 0 ? '0px' : '15px')};
   color: ${props => (props.home === 'active' ? 'white' : '#455057')};
-
-  &:focus,
-  &:visited,
-  &:link {
-    text-decoration: none;
-  }
 
   && {
     text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
   }
 `;
-const MyName = styled(StyledLink)`
+const NameLink = styled(RestyledLink)`
   display: ${props =>
     props.home === 'active' || props.menu === 'active' ? 'none' : ''};
   font-size: 1.4rem;
@@ -158,9 +146,9 @@ class Header extends Component {
         nextFlight={nextFlight}
         homePageMagic={homePageMagic}
       >
-        <MyName to={'/'} home={homeIsActive} menu={menuIsActive}>
+        <NameLink to={'/'} home={homeIsActive} menu={menuIsActive}>
           James Abels
-        </MyName>
+        </NameLink>
         <Motto home={homeIsActive} menu={menuIsActive}>
           Coding narratives and magical adventures
         </Motto>
@@ -174,14 +162,14 @@ class Header extends Component {
                   : '';
                 return (
                   <HeaderNavItem key={idx}>
-                    <StyledLink
+                    <RestyledLink
                       num={idx}
                       home={homeIsActive}
                       to={link.path}
                       active={pathIsActive}
                     >
                       {link.name}
-                    </StyledLink>
+                    </RestyledLink>
                   </HeaderNavItem>
                 );
               }}

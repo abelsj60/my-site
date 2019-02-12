@@ -3,36 +3,16 @@ import marked from 'marked';
 import styled from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 
+import Main from './Main.jsx';
+import Right from './Right.jsx';
+import Left from './Left.jsx';
+import Overflow from './Overflow.jsx';
+import ArticleNav from './ArticleNav.jsx';
 import MenuSelector from './MenuSelector.jsx';
-import DesktopArticleNav from './DesktopArticleNav.jsx';
 
 import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
-const ArticleContainer = styled.main`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-
-  @media (min-width: 848px) {
-    flex-direction: row;
-  }
-`;
-const StyledArticle = styled.section`
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  margin: 25px;
-  margin-left: 24px;
-  // margin-top: 10px;
-  overflow: auto;
-
-  @media (min-width: 848px) {
-    margin-top: 25px;
-    margin-left: 24px;
-  }
-`;
 const Publication = styled.h3`
   color: #fd1172;
   font-size: 1.5rem;
@@ -64,10 +44,6 @@ const Text = styled.section`
     }
   }
 `;
-const OverflowContainer = styled.div`
-  overflow: auto;
-  padding-left: 1px;
-`;
 
 export default function Article(props) {
   const { data, overflowRef } = props;
@@ -81,17 +57,19 @@ export default function Article(props) {
   const markedBody = marked(article.body);
 
   return (
-    <ArticleContainer>
-      <DesktopArticleNav {...props} />
-      <StyledArticle>
+    <Main>
+      <Left>
+        <ArticleNav {...props} data={data} />
+      </Left>
+      <Right>
         <MenuSelector {...props} />
-        <OverflowContainer ref={ref => (overflowRef.current = ref)}>
+        <Overflow ref={ref => (overflowRef.current = ref)}>
           <Publication>{publication}</Publication>
           <Hed>{headline}</Hed>
           <Byline>by James Erik Abels | {position}</Byline>
           <Text>{ReactHtmlParser(markedBody)}</Text>
-        </OverflowContainer>
-      </StyledArticle>
-    </ArticleContainer>
+        </Overflow>
+      </Right>
+    </Main>
   );
 }

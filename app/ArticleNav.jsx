@@ -1,22 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import StyledLink from './StyledLink.jsx';
+import UnorderedList from './UnorderedList.jsx';
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
 
-const ArticleList = styled.ul`
-  margin: 0;
-  list-style-type: none;
-  padding: 0;
+const StyledUL = styled(UnorderedList)`
+  height: 100%;
   overflow: auto;
-`;
-const StyledLink = styled(Link)`
-  &:focus,
-  &:visited,
-  &:link {
-    text-decoration: none;
-  }
+  width: ${p => (p.menu !== 'active' ? '327px' : '')};
 `;
 const Source = styled.p`
   font-size: 1.3rem;
@@ -59,7 +52,7 @@ export default function ArticleNav(props) {
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <ArticleList>
+    <StyledUL menu={menuIsActive}>
       <Mapper
         mapData={data}
         render={(article, idx) => {
@@ -90,6 +83,6 @@ export default function ArticleNav(props) {
           );
         }}
       />
-    </ArticleList>
+    </StyledUL>
   );
 }

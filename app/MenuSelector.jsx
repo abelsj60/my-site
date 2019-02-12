@@ -1,22 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import StyledLink from './StyledLink.jsx';
 
-const SelectorLink = styled(Link)`
+const Container = styled.div`
+  width: 91px;
+`;
+const RestyledLink = styled(StyledLink)`
   display: flex;
   flex-shrink: 0;
   margin-right: auto;
   margin-bottom: 10px;
   position: relative;
   padding-bottom: 6px;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
 
   @media (min-width: 848px) {
     display: ${props => (props.menu !== 'active' ? 'none' : '')};
@@ -43,7 +38,7 @@ const LowerLine = styled.div`
   background-color: ${props =>
     props.menu !== 'active' ? '#6e7dab' : '#ffe74c'};
 
-  ${SelectorLink}:hover & {
+  ${StyledLink}:hover & {
     height: 2px;
   }
 `;
@@ -62,10 +57,12 @@ export default function MenuSelector(props) {
   const text = isMenu ? 'Close' : 'Menu';
 
   return (
-    <SelectorLink to={link} menu={menuIsActive}>
-      <Label menu={menuIsActive}>{text}</Label>
-      <Arrow src={arrowIcon} />
-      <LowerLine menu={menuIsActive} />
-    </SelectorLink>
+    <Container>
+      <RestyledLink to={link} menu={menuIsActive}>
+        <Label menu={menuIsActive}>{text}</Label>
+        <Arrow src={arrowIcon} />
+        <LowerLine menu={menuIsActive} />
+      </RestyledLink>
+    </Container>
   );
 }

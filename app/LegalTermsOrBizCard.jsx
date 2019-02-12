@@ -36,7 +36,8 @@ const Graf = styled.p`
   margin-top: 0px;
   align-self: center;
   margin-bottom: 0px;
-  font-size: 1.4rem;
+  font-size: ${p => (p.businessCard ? '1.6rem' : '1.4rem')};
+  font-family: ${p => (p.businessCard ? 'Aref Ruqaa, serif' : '')};
 `;
 
 export default function LegalTermsOrBizCard(props) {
@@ -54,7 +55,7 @@ export default function LegalTermsOrBizCard(props) {
   return (
     <Container home={homeIsActive}>
       <Card home={homeIsActive}>
-        <Graf>{text}</Graf>
+        <Graf businessCard={showBusinessCard}>{text}</Graf>
         {showBusinessCard && <InnerBorder />}
       </Card>
     </Container>

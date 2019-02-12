@@ -1,54 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Main from './Main.jsx';
 import Chapter from './Chapter.jsx';
 import ChapterNav from './ChapterNav.jsx';
+
+import Right from './Right.jsx';
+import Left from './Left.jsx';
 
 import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
-const Main = styled.main`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  color: black;
-  overflow: hidden;
-
-  @media (min-width: 848px) {
-    flex-direction: row;
-  }
-`;
-const StyledChapter = styled.section`
+const RestyledLeft = styled(Left)`
   display: ${props => (props.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   position: absolute;
   top: 52px;
   bottom: 55px;
-  padding: 25px;
-  margin: 25px;
   color: white;
+  padding: 25px;
+  margin: 25px 25px 25px 25px;
   background-color: rgba(0, 0, 0, 0.5);
 
   @media (min-width: 848px) {
-    display: flex;
-    width: 327px;
-    padding-left: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
     position: unset;
-    bottom: 48px;
-    margin: 25px;
-    margin-right: 0;
+    padding: 0px 25px 0px 0px;
     background-color: unset;
-    border-right: 0.5px solid #666f75;
-    color: black;
+    color: unset;
   }
 `;
-const Illustration = styled.section`
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  margin: 25px;
+const RestyledRight = styled(Right)`
+  flex: 1;
   overflow: hidden;
 `;
 const Image = styled.img`
@@ -74,13 +56,13 @@ export default function Story(props) {
 
   return (
     <Main>
-      <StyledChapter text={hideStoryText}>
+      <RestyledLeft as="section" text={hideStoryText}>
         <ChapterNav {...props} />
         <Chapter chapterData={chapter} overflowRef={props.overflowRef} />
-      </StyledChapter>
-      <Illustration>
+      </RestyledLeft>
+      <RestyledRight>
         <Image src={image} alt="fantasy illustration" />
-      </Illustration>
+      </RestyledRight>
     </Main>
   );
 }

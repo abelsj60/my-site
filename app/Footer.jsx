@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import StyledLink from './StyledLink.jsx';
 import StoryButton from './StoryButton.jsx';
 
 const Footer = styled.footer`
@@ -28,21 +29,14 @@ const UpperLine = styled.div`
   height: 0.5px;
   background-color: #fd1172;
 `;
-const LinkToReverie = styled(Link)`
-  color: ${p => (p.show ? '#FD1172' : '#6E7DAB')};
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
+// Why css`` in next component: https://github.com/styled-components/styled-components/issues/1198#issuecomment-336628848
+const RestyledLink = styled(StyledLink)`
+  color: ${p => (p.show === 'active' ? '#fd1172' : '#6e7dab')};
 `;
 const Graf = styled.p`
   cursor: pointer;
   margin-right: 25px;
-  color: ${p => (p.show ? '#FD1172' : '#6E7DAB')};
+  color: ${props => (props.show ? '#fd1172' : '#6e7dab')};
 `;
 const FooterText = styled.div`
   display: flex;
@@ -61,6 +55,7 @@ export default function FooterContainer(props) {
   } = state;
 
   const isReverie = currentCaller === 'reverie';
+  const reverieIsActive = isReverie ? 'active' : '';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
 
@@ -85,9 +80,9 @@ export default function FooterContainer(props) {
       />
       <FooterText>
         <Graf show={isReverie}>
-          <LinkToReverie show={isReverie} to={linkForReverie}>
+          <RestyledLink show={reverieIsActive} to={linkForReverie}>
             Reverie
-          </LinkToReverie>
+          </RestyledLink>
         </Graf>
         <Graf
           show={showBusinessCard}

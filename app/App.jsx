@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router';
-import styled, { css, createGlobalStyle } from 'styled-components';
+import { css, createGlobalStyle } from 'styled-components';
 
 import Body from './Body.jsx';
 import Footer from './Footer.jsx';
@@ -22,18 +22,19 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-size: 1.5rem;
   }
-`;
-const Page = styled.section`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
 
-  ${props =>
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    ${props =>
     props.home === 'active' &&
-    css`
-      width: 100%;
-      position: fixed;
-    `};
+      css`
+        width: 100%;
+        position: fixed;
+      `};
+  }
 `;
 
 class App extends Component {
@@ -68,21 +69,19 @@ class App extends Component {
 
     return (
       <Fragment>
-        <GlobalStyle />
-        <Page home={homeIsActive}>
-          <Header {...this.props} state={this.state} />
-          <Body
-            {...this.props}
-            state={this.state}
-            boundHandleClickForApp={boundHandleClickForApp}
-          />
-          <LegalTermsOrBizCard {...this.props} state={this.state} />
-          <Footer
-            {...this.props}
-            state={this.state}
-            boundHandleClickForApp={boundHandleClickForApp}
-          />
-        </Page>
+        <GlobalStyle home={homeIsActive} />
+        <Header {...this.props} state={this.state} />
+        <Body
+          {...this.props}
+          state={this.state}
+          boundHandleClickForApp={boundHandleClickForApp}
+        />
+        <LegalTermsOrBizCard {...this.props} state={this.state} />
+        <Footer
+          {...this.props}
+          state={this.state}
+          boundHandleClickForApp={boundHandleClickForApp}
+        />
       </Fragment>
     );
   }

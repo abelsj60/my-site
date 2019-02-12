@@ -12,14 +12,8 @@ const NavigationContainer = styled.nav`
     margin-top: 25px;
     margin-bottom: 25px;
     margin-left: 25px;
-    // margin-right: 25px;
     padding-right: 25px;
-    // min-width: 324px;
-    min-width: 327px;
     border-right: 0.5px solid #6e7dab;
-    // background-color: #6100f2;
-    overflow: auto;
-    // background-image: url('https://www.transparenttextures.com/patterns/debut-light.png');
   }
 `;
 

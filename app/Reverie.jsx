@@ -3,34 +3,16 @@ import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 import marked from 'marked';
 
+import Main from './Main.jsx';
+import Right from './Right.jsx';
+import Left from './Left.jsx';
+import Overflow from './Overflow.jsx';
+import ReverieNav from './ReverieNav.jsx';
 import MenuSelector from './MenuSelector.jsx';
-import DesktopReverieNav from './DesktopReverieNav.jsx';
 
 import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
-const Main = styled.main`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-
-  @media (min-width: 848px) {
-    flex-direction: row;
-  }
-`;
-const Content = styled.section`
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  margin: 25px;
-  margin-left: 24px;
-  overflow: auto;
-
-  @media (min-width: 848px) {
-    margin-top: 25px;
-  }
-`;
 const Name = styled.p`
   margin-top: 0px;
   margin-bottom: 0px;
@@ -55,7 +37,6 @@ const Post = styled.section`
 
   ol {
     margin-top: 10px;
-    // padding-left: 20px;
   }
 `;
 const Hed = styled.h2`
@@ -69,10 +50,6 @@ const PostDate = styled.p`
   font-size: 1.4rem;
   margin-top: 0px;
   margin-bottom: 10px;
-`;
-const OverflowContainer = styled.div`
-  overflow: auto;
-  padding-left: 1px;
 `;
 
 export default function Reverie(props) {
@@ -88,18 +65,20 @@ export default function Reverie(props) {
 
   return (
     <Main>
-      <DesktopReverieNav {...props} />
-      <Content>
+      <Left>
+        <ReverieNav {...props} data={data} />
+      </Left>
+      <Right>
         <MenuSelector {...props} />
-        <OverflowContainer ref={ref => (overflowRef.current = ref)}>
+        <Overflow ref={ref => (overflowRef.current = ref)}>
           <Name>Reverie</Name>
           <Hed>{headline}</Hed>
           <PostDate>{date}</PostDate>
           <Post>
             {ReactHtmlParser(marked(reverie.body, { smartypants: true }))}
           </Post>
-        </OverflowContainer>
-      </Content>
+        </Overflow>
+      </Right>
     </Main>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import StyledLink from './StyledLink.jsx';
 import Mapper from './Mapper.jsx';
 
 const ThumbnailGroup = styled.ul`
@@ -69,13 +69,12 @@ const ThumbnailListItem = styled.li`
     margin-bottom: ${p => (!p.desktop ? '5px' : '')};
   }
 `;
-const StyledLink = styled(Link)`
+const RestyledLink = styled(StyledLink)`
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 0;
   position: relative;
-  // margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
 
   ${props =>
     props.desktop &&
@@ -134,7 +133,7 @@ export default function SingleProjectNav(props) {
               desktop={isDesktop}
               padding={paddingIsActive}
             >
-              <StyledLink
+              <RestyledLink
                 menu={menuIsActive}
                 active={thumbnailIsActive}
                 padding={paddingIsActive}
@@ -142,7 +141,7 @@ export default function SingleProjectNav(props) {
               >
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
                 {highlightActiveThumbnail}
-              </StyledLink>
+              </RestyledLink>
             </ThumbnailListItem>
           );
         }}

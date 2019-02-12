@@ -1,22 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import StyledLink from './StyledLink.jsx';
+import UnorderedList from './UnorderedList.jsx';
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
 
-const ReverieList = styled.ul`
-  margin: 0;
-  list-style-type: none;
-  padding: 0;
+const StyledUL = styled(UnorderedList)`
+  height: 100%;
   overflow: auto;
-`;
-const StyledLink = styled(Link)`
-  &:focus,
-  &:visited,
-  &:link {
-    text-decoration: none;
-  }
+  width: ${p => (p.menu !== 'active' ? '327px' : '')};
 `;
 const ReverieDate = styled.p`
   font-size: 1.3rem;
@@ -46,7 +39,7 @@ export default function ReverieNav(props) {
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <ReverieList>
+    <StyledUL>
       <Mapper
         mapData={data}
         render={(reverie, idx) => {
@@ -74,6 +67,6 @@ export default function ReverieNav(props) {
           );
         }}
       />
-    </ReverieList>
+    </StyledUL>
   );
 }
