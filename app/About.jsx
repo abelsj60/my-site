@@ -3,28 +3,26 @@ import marked from 'marked';
 import ReactHtmlParser from 'react-html-parser';
 
 import Left from './Left.jsx';
+import Right from './Right.jsx';
 import Main from './Main.jsx';
+import Hed from './Hed.jsx';
 
 import bio from './data/about.md';
 import styled from 'styled-components';
 
-const Content = styled.section`
-  flex: 1;
-  font-size: 1.75rem;
-  margin: 25px;
-
-  @media (min-width: 848px) {
-    display: flex;
-    flex-direction: column;
-  }
+const RestyledLeft = styled(Left)`
+  min-width: 327px;
 `;
-const Hed = styled.h1`
-  color: #fd1172;
-  font-size: 2.5rem;
-  margin-top: -4px;
-  margin-bottom: 0px;
+const Heading = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+  padding-left: 1px;
 `;
-const TextContainer = styled.section`
+const ExternalLink = styled.a`
+  align-self: flex-end;
+  margin-left: auto;
+`;
+const Text = styled.section`
   overflow: auto;
 
   p {
@@ -37,45 +35,28 @@ const TextContainer = styled.section`
     }
   }
 `;
-const LinkedInIcon = styled.div`
+const Icon = styled.div`
   height: 20px;
   width: 30px;
   margin-bottom: 5px;
   background: url(/profile-badge.svg) no-repeat;
 `;
-const HedContainer = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-  padding-left: 1px;
-`;
-const LinkedInLink = styled.a`
-  align-self: flex-end;
-  margin-left: auto;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-`;
 
 export default function About() {
   return (
     <Main>
-      <Left />
-      <Content>
-        <HedContainer>
-          <Hed>About</Hed>
-          <LinkedInLink href="https://www.linkedin.com/jea" target="_blank">
-            <LinkedInIcon />
-          </LinkedInLink>
-        </HedContainer>
-        <TextContainer>
-          {ReactHtmlParser(marked(bio.body, { smartypants: true }))}
-        </TextContainer>
-      </Content>
+      <RestyledLeft />
+      <Right>
+        <Heading>
+          <Hed color="pink" size="2.5" top="-4">
+            About
+          </Hed>
+          <ExternalLink href="https://www.linkedin.com/jea" target="_blank">
+            <Icon />
+          </ExternalLink>
+        </Heading>
+        <Text>{ReactHtmlParser(marked(bio.body, { smartypants: true }))}</Text>
+      </Right>
     </Main>
   );
 }

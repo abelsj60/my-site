@@ -1,9 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+import Hed from './Hed.jsx';
 import UnorderedList from './UnorderedList.jsx';
 import Mapper from './Mapper.jsx';
-import SingleProjectNav from './SingleProjectNav.jsx';
+import ProjectNav from './ProjectNav.jsx';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
@@ -18,11 +19,8 @@ const StyledUL = styled(UnorderedList)`
       margin: 0;
     `};
 `;
-const HedAndNav = styled.li``;
-const Hed = styled.section`
+const RestyledHed = styled(Hed)`
   font-size: ${p => (p.menu !== 'active' ? '1.4rem' : '1.6rem')};
-  margin-bottom: 9px;
-  color: #6e7dab;
 `;
 
 export default function DesktopProjectNav(props) {
@@ -45,13 +43,16 @@ export default function DesktopProjectNav(props) {
           const hedIsActive = isActiveProject ? 'active' : '';
 
           return (
-            <HedAndNav key={idx}>
-              <Hed
+            <li key={idx}>
+              <RestyledHed
+                normal
+                color="blue"
+                bottom="9"
                 num={idx}
                 menu={menuIsActive}
                 active={hedIsActive}
-              >{`${name} | ${type}`}</Hed>
-              <SingleProjectNav
+              >{`${name} | ${type}`}</RestyledHed>
+              <ProjectNav
                 {...props}
                 num={idx}
                 menu={menuIsActive}
@@ -59,7 +60,7 @@ export default function DesktopProjectNav(props) {
                 isDesktop={true}
                 activeProject={isActiveProject}
               />
-            </HedAndNav>
+            </li>
           );
         }}
       />

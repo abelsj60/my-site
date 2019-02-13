@@ -9,7 +9,7 @@ const RestyledLink = styled(StyledLink)`
   display: flex;
   flex-shrink: 0;
   margin-right: auto;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   position: relative;
   padding-bottom: 6px;
 
@@ -29,7 +29,7 @@ const Arrow = styled.img`
   align-self: center;
   fill: #6e7dab;
 `;
-const LowerLine = styled.div`
+const Line = styled.div`
   position: absolute;
   width: 100%;
   bottom: 0px;
@@ -43,7 +43,7 @@ const LowerLine = styled.div`
   }
 `;
 
-export default function MenuSelector(props) {
+export default function MenuButton(props) {
   const { isMenu, lastCaller, currentCaller } = props.state;
   const menuIsActive = isMenu ? 'active' : '';
   const isReverie = currentCaller === 'reverie';
@@ -61,7 +61,7 @@ export default function MenuSelector(props) {
       <RestyledLink to={link} menu={menuIsActive}>
         <Label menu={menuIsActive}>{text}</Label>
         <Arrow src={arrowIcon} />
-        <LowerLine menu={menuIsActive} />
+        <Line menu={menuIsActive} />
       </RestyledLink>
     </Container>
   );

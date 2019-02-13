@@ -3,24 +3,19 @@ import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 import marked from 'marked';
 
+import Hed from './Hed.jsx';
+import Graf from './Graf.jsx';
 import Main from './Main.jsx';
 import Right from './Right.jsx';
 import Left from './Left.jsx';
 import Overflow from './Overflow.jsx';
 import ReverieNav from './ReverieNav.jsx';
-import MenuSelector from './MenuSelector.jsx';
+import MenuButton from './MenuButton.jsx';
 
 import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
-const Name = styled.p`
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: 1.6rem;
-  font-style: italic;
-  color: #fd1172;
-`;
-const Post = styled.section`
+const Text = styled.section`
   p {
     font-size: 1.6rem;
   }
@@ -38,18 +33,6 @@ const Post = styled.section`
   ol {
     margin-top: 10px;
   }
-`;
-const Hed = styled.h2`
-  font-size: 3rem;
-  font-weight: bold;
-  margin-top: 0px;
-  margin-bottom: 7px;
-`;
-const PostDate = styled.p`
-  font-style: italic;
-  font-size: 1.4rem;
-  margin-top: 0px;
-  margin-bottom: 10px;
 `;
 
 export default function Reverie(props) {
@@ -69,14 +52,20 @@ export default function Reverie(props) {
         <ReverieNav {...props} data={data} />
       </Left>
       <Right>
-        <MenuSelector {...props} />
+        <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Name>Reverie</Name>
-          <Hed>{headline}</Hed>
-          <PostDate>{date}</PostDate>
-          <Post>
+          <Hed as="h2" normal italic size="1.5" color="pink">
+            Reverie
+          </Hed>
+          <Hed size="3" bottom="7">
+            {headline}
+          </Hed>
+          <Graf italic size="1.4" top="15" bottom="15">
+            {date}
+          </Graf>
+          <Text>
             {ReactHtmlParser(marked(reverie.body, { smartypants: true }))}
-          </Post>
+          </Text>
         </Overflow>
       </Right>
     </Main>

@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import StyledLink from './StyledLink.jsx';
+import Graf from './Graf.jsx';
 import UnorderedList from './UnorderedList.jsx';
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
@@ -11,25 +12,27 @@ const StyledUL = styled(UnorderedList)`
   overflow: auto;
   width: ${p => (p.menu !== 'active' ? '327px' : '')};
 `;
-const ReverieDate = styled.p`
-  font-size: 1.3rem;
-  font-style: italic;
-  margin-bottom: 0px;
-  color: ${props => (props.menu === 'active' ? 'black' : '#6E7DAB')};
-  color: ${props =>
-    props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
+const GrafAsDate = styled(Graf)`
+  color: ${p =>
+    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
 
   &:first-child {
     margin-top: 0px;
   }
 `;
-const Hed = styled.h1`
-  font-size: ${props => (props.menu === 'active' ? '3rem' : '1.6rem')};
-  margin-top: 0px;
-  margin-bottom: 10px;
-  color: ${props => (props.menu === 'active' ? 'black' : '#6E7DAB')};
-  color: ${props =>
-    props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
+const GrafAsHed = styled(Graf)`
+  color: ${p =>
+    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
+  font-size: ${p => (p.menu === 'active' ? '3rem' : '1.7rem')};
+
+  ${p =>
+    p.menu !== 'active' &&
+    css`
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 315px;
+      white-space: nowrap;
+    `};
 `;
 
 export default function ReverieNav(props) {
@@ -56,12 +59,23 @@ export default function ReverieNav(props) {
           return (
             <li key={idx}>
               <StyledLink link={linkIsActive} to={reverieLink}>
-                <ReverieDate menu={menuIsActive} link={linkIsActive}>
+                <GrafAsDate
+                  italic
+                  size="1.3"
+                  bottom="0"
+                  menu={menuIsActive}
+                  link={linkIsActive}
+                >
                   {date}
-                </ReverieDate>
-                <Hed menu={menuIsActive} link={linkIsActive}>
+                </GrafAsDate>
+                <GrafAsHed
+                  top="0"
+                  bottom="10"
+                  menu={menuIsActive}
+                  link={linkIsActive}
+                >
                   {headline}
-                </Hed>
+                </GrafAsHed>
               </StyledLink>
             </li>
           );

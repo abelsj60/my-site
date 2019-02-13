@@ -1,30 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
+import Hed from './Hed.jsx';
 import Main from './Main.jsx';
 import Right from './Right.jsx';
 import Left from './Left.jsx';
 import Overflow from './Overflow.jsx';
-import MenuSelector from './MenuSelector.jsx';
-import SingleProjectNav from './SingleProjectNav.jsx';
-import ProjectImageContainer from './ProjectImageContainer.jsx';
-import ProjectDescription from './ProjectDescription.jsx';
+import MenuButton from './MenuButton.jsx';
+import ProjectNav from './ProjectNav.jsx';
+import Graf from './Graf.jsx';
+import Mapper from './Mapper.jsx';
 import DesktopProjectNav from './DesktopProjectNav.jsx';
 
 import Referrer from './custom/Referrer.js';
 import Location from './custom/Location.js';
 
-const Hed = styled.h1`
-  color: #fd1172;
-  font-size: 2.5rem;
-  margin-top: 0px;
-  margin-bottom: 6px;
-
-  @media (min-width: 848px) {
-    margin-top: -4px;
-  }
-`;
-const ImageFrame = styled.section`
+const Images = styled.section`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -44,16 +35,69 @@ const ImageFrame = styled.section`
     flex-direction: row-reverse;
   }
 `;
+const Container = styled.section`
+  @media (min-width: 672px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+const Caption = styled.p`
+  display: flex;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #6e7dab;
+
+  @media (min-width: 672px) {
+    margin-top: 0;
+  }
+
+  @media (min-width: 848px) {
+    margin-top: 10px;
+  }
+
+  @media (min-width: 1048px) {
+    margin-top: 0;
+  }
+`;
+const Image = styled.img`
+  flex: 1;
+  max-width: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+  color: #455057;
+  font-size: 1.5rem;
+
+  @media (min-width: 672px) {
+    margin-right: 10px;
+  }
+
+  @media (min-width: 848px) {
+    margin-right: 0px;
+  }
+
+  @media (min-width: 1048px) {
+    margin-right: 10px;
+  }
+`;
 
 export default function Projects(props) {
+  // Todo Can use params for caption/source, rather than return state'
+
   const { localState, data, projectIndex, overflowRef } = props;
+  const { indexForProjectPics } = localState;
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);
 
   const indexForProjectData = l.params.projectNameToIndex();
   const project = data[indexForProjectData];
-  const { name } = project.attributes.details;
+  const { full, details } = project.attributes;
+  const { captions, name, type, contribution, description } = details;
+  const caption = captions[indexForProjectPics];
+  const source = full[indexForProjectPics];
+  const mapData = [{ contribution }, { description }];
+  const keys = ['Contribution', 'Description'];
 
   return (
     <Main>
@@ -66,22 +110,40 @@ export default function Projects(props) {
         />
       </Left>
       <Right>
-        <MenuSelector {...props} />
+        <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed>{name}</Hed>
+          <Hed color="pink" size="2.5" bottom="6" bigTop="-4">
+            {name}
+          </Hed>
           <section>
-            <ProjectDescription project={project} />
-            <ImageFrame>
-              <SingleProjectNav
+            <Hed as="h2" normal size="1.7" bottom="10">
+              {type}
+            </Hed>
+            <Mapper
+              mapData={mapData}
+              render={(proj, idx) => (
+                <Fragment key={idx}>
+                  <Hed as="h3" normal color="blue" size="1.7" bottom="5">
+                    {keys[idx]}
+                  </Hed>
+                  <Graf top="0" bottom="10">
+                    {proj[keys[idx].toLowerCase()]}
+                  </Graf>
+                </Fragment>
+              )}
+            />
+            <Images>
+              <ProjectNav
+                isRight={true}
                 project={project}
                 activeProject={true}
                 localState={localState}
               />
-              <ProjectImageContainer
-                project={project}
-                localState={localState}
-              />
-            </ImageFrame>
+              <Container>
+                <Caption>{caption}</Caption>
+                <Image src={source} alt="mainPic" />
+              </Container>
+            </Images>
           </section>
         </Overflow>
       </Right>

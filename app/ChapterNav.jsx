@@ -10,7 +10,7 @@ const StyledUL = styled(UnorderedList)`
   flex: 1;
   display: flex;
 `;
-const ChapterListItem = styled.li`
+const Item = styled.li`
   flex: 1;
   flex-direction: column;
   align-items: center;
@@ -22,7 +22,7 @@ const RestyledLink = styled(StyledLink)`
     color: #6e7dab;
   }
 `;
-const NavigationText = styled.p`
+const Text = styled.p`
   flex: 1;
   text-align: center;
   padding-bottom: 10px;
@@ -50,16 +50,16 @@ export default function ChapterNav(props) {
             const normalizedTitle = n.done;
 
             return (
-              <ChapterListItem key={idx}>
+              <Item key={idx}>
                 <RestyledLink
                   item={itemIsActive}
                   to={`/chapter/${normalizedTitle}`}
                 >
-                  <NavigationText item={itemIsActive} num={idx}>
+                  <Text item={itemIsActive} num={idx}>
                     {pageOrMenuText}
-                  </NavigationText>
+                  </Text>
                 </RestyledLink>
-              </ChapterListItem>
+              </Item>
             );
           }}
         />

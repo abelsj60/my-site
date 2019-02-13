@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import StyledLink from './StyledLink.jsx';
 import Mapper from './Mapper.jsx';
 
-const ThumbnailGroup = styled.ul`
+const Group = styled.ul`
   display: flex;
   margin: 0;
   padding-top: 0px;
@@ -29,7 +29,6 @@ const ThumbnailGroup = styled.ul`
 
       @media (min-width: 672px) {
         flex-direction: column;
-        // justify-content: space-between;
         margin-top: 28px;
         padding: 0;
         border: 0;
@@ -52,7 +51,7 @@ const ThumbnailGroup = styled.ul`
       }
     `}};
 `;
-const ThumbnailListItem = styled.li`
+const Item = styled.li`
   margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
 
   @media (min-width: 672px) {
@@ -62,6 +61,7 @@ const ThumbnailListItem = styled.li`
 
   @media (min-width: 848px) {
     margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+    margin-bottom: ${p => (p.isRight ? '0px' : '')};
   }
 
   @media (min-width: 1048px) {
@@ -106,17 +106,17 @@ const Highlighter = styled.div`
   background-color: #ffe74c;
 `;
 
-export default function SingleProjectNav(props) {
+export default function ProjectNav(props) {
   // ID active project via returnState b/c no params in '/menu'
 
-  const { num, project, activeProject, isDesktop, isMenu } = props;
+  const { num, project, activeProject, isDesktop, isMenu, isRight } = props;
   const { indexForProjectPics } = props.localState;
   const { thumbnails, projectName } = project.attributes;
 
   const menuIsActive = isMenu ? 'active' : '';
 
   return (
-    <ThumbnailGroup desktop={isDesktop} menu={menuIsActive} num={num}>
+    <Group desktop={isDesktop} menu={menuIsActive} num={num}>
       <Mapper
         mapData={thumbnails}
         render={(thumb, idx) => {
@@ -128,8 +128,9 @@ export default function SingleProjectNav(props) {
             thumbnailIsActive && <Highlighter />;
 
           return (
-            <ThumbnailListItem
+            <Item
               key={idx}
+              isRight={isRight}
               desktop={isDesktop}
               padding={paddingIsActive}
             >
@@ -142,10 +143,10 @@ export default function SingleProjectNav(props) {
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
                 {highlightActiveThumbnail}
               </RestyledLink>
-            </ThumbnailListItem>
+            </Item>
           );
         }}
       />
-    </ThumbnailGroup>
+    </Group>
   );
 }

@@ -18,9 +18,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     font-size: 1.5rem;
+
+    h1,
+    h2,
+    h3 {
+      margin: 0px;
+    }
   }
 
   #app {
@@ -28,8 +34,8 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     height: 100vh;
 
-    ${props =>
-    props.home === 'active' &&
+    ${p =>
+    p.home === 'active' &&
       css`
         width: 100%;
         position: fixed;

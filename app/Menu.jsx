@@ -3,16 +3,12 @@ import styled from 'styled-components';
 import ComponentData from './custom/ComponentData.js';
 import Referrer from './custom/Referrer.js';
 
-import MenuSelector from './MenuSelector.jsx';
+import Main from './Main.jsx';
+import Overflow from './Overflow.jsx';
+import MenuButton from './MenuButton.jsx';
 
-const Main = styled.main`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+const RestyledMain = styled(Main)`
   margin: 25px;
-`;
-const Overflow = styled.section`
-  overflow: auto;
 `;
 
 export default function Menu(props) {
@@ -20,9 +16,9 @@ export default function Menu(props) {
   const cD = new ComponentData(r.location, props);
 
   return (
-    <Main>
-      <MenuSelector {...props} />
+    <RestyledMain>
+      <MenuButton {...props} />
       <Overflow>{cD.getMenuComponent(props)}</Overflow>
-    </Main>
+    </RestyledMain>
   );
 }

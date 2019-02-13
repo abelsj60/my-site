@@ -5,43 +5,33 @@ import StyledLink from './StyledLink.jsx';
 import UnorderedList from './UnorderedList.jsx';
 import Mapper from './Mapper.jsx';
 import Normalize from './custom/Normalize';
+import Graf from './Graf.jsx';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
   width: ${p => (p.menu !== 'active' ? '327px' : '')};
 `;
-const Source = styled.p`
-  font-size: 1.3rem;
-  font-style: italic;
-  margin-bottom: 0px;
-  color: ${props => (props.menu === 'active' ? 'black' : '#6e7dab')};
-  color: ${props =>
-    props.menu === 'active' && props.link === 'active'
-      ? '#6e7dab'
-      : props.menu !== 'active' && props.link === 'active'
-        ? '#455057'
-        : ''};
+const GrafAsSource = styled(Graf)`
+  color: ${p =>
+    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
 
   &:first-child {
     margin-top: 0px;
   }
 `;
-const Hed = styled.h1`
-  font-size: ${props => (props.menu === 'active' ? '3rem' : '1.6rem')};
-  margin-top: 0px;
-  margin-bottom: 10px;
-  color: ${props => (props.menu === 'active' ? 'black' : '#6e7dab')};
-  color: ${props =>
-    props.menu === 'active' && props.link === 'active' ? '#6e7dab' : ''};
+const GrafAsHed = styled(Graf)`
+  color: ${p =>
+    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
+  font-size: ${p => (p.menu === 'active' ? '3rem' : '1.7rem')};
 
-  ${props =>
-    props.menu !== 'active' &&
+  ${p =>
+    p.menu !== 'active' &&
     css`
-      width: 315px;
       overflow: hidden;
-      white-space: nowrap;
       text-overflow: ellipsis;
+      width: 315px;
+      white-space: nowrap;
     `};
 `;
 
@@ -72,12 +62,23 @@ export default function ArticleNav(props) {
           return (
             <li key={idx}>
               <StyledLink link={linkIsActive} to={articleLink}>
-                <Source menu={menuIsActive} link={linkIsActive}>
+                <GrafAsSource
+                  italic
+                  size="1.3"
+                  bottom="0"
+                  menu={menuIsActive}
+                  link={linkIsActive}
+                >
                   {publication}
-                </Source>
-                <Hed menu={menuIsActive} link={linkIsActive}>
+                </GrafAsSource>
+                <GrafAsHed
+                  top="0"
+                  bottom="10"
+                  menu={menuIsActive}
+                  link={linkIsActive}
+                >
                   {headline}
-                </Hed>
+                </GrafAsHed>
               </StyledLink>
             </li>
           );
