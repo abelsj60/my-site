@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import StyledLink from './StyledLink.jsx';
+import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
   width: 91px;

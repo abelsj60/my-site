@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
-import StyledLink from './StyledLink.jsx';
-import Mapper from './Mapper.jsx';
-import headerData from './data/headerData.js';
+import StyledLink from '../primitives/StyledLink.jsx';
+import Mapper from '../shared/Mapper.jsx';
+import headerData from '../data/headerData.js';
 
-import Location from './custom/Location.js';
-import Referrer from './custom/Referrer.js';
-import EventHandling from './custom/EventHandling.js';
+import Location from '../custom/Location.js';
+import Referrer from '../custom/Referrer.js';
+import EventHandling from '../custom/EventHandling.js';
 
 const HeaderContainer = styled.header`
   background-color: ${props =>

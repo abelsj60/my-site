@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Story from '../Story.jsx';
-import Reverie from '../Reverie.jsx';
-import Projects from '../Projects.jsx';
-import Article from '../Article.jsx';
-import ArticleNav from '../ArticleNav.jsx';
-import ChapterNav from '../ChapterNav.jsx';
-import ReverieNav from '../ReverieNav.jsx';
-import DesktopProjectNav from '../DesktopProjectNav.jsx';
+import Story from '../story/Story.jsx';
+import Reverie from '../reverie/Reverie.jsx';
+import Projects from '../projects/Projects.jsx';
+import Article from '../journalism/Article.jsx';
+import ArticleNav from '../journalism/ArticleNav.jsx';
+import ChapterNav from '../story/ChapterNav.jsx';
+import ReverieNav from '../reverie/ReverieNav.jsx';
+import DesktopProjectNav from '../projects/DesktopProjectNav.jsx';
 
 import Content from './Content.js';
 

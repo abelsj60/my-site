@@ -3,17 +3,17 @@ import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 import marked from 'marked';
 
-import Hed from './Hed.jsx';
-import Graf from './Graf.jsx';
-import Main from './Main.jsx';
-import Right from './Right.jsx';
-import Left from './Left.jsx';
-import Overflow from './Overflow.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Main from '../primitives/Main.jsx';
+import Right from '../primitives/Right.jsx';
+import Left from '../primitives/Left.jsx';
+import Overflow from '../primitives/Overflow.jsx';
 import ReverieNav from './ReverieNav.jsx';
-import MenuButton from './MenuButton.jsx';
+import MenuButton from '../shared/MenuButton.jsx';
 
-import Referrer from './custom/Referrer.js';
-import Location from './custom/Location.js';
+import Referrer from '../custom/Referrer.js';
+import Location from '../custom/Location.js';
 
 const Text = styled.section`
   p {
@@ -42,7 +42,6 @@ export default function Reverie(props) {
   const l = new Location(r.pathToMatch, props);
 
   const indexForReverieData = l.params.headlineToIndex();
-
   const reverie = data[indexForReverieData];
   const { headline, date } = reverie.attributes;
 

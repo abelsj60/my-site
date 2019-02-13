@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import StyledLink from './StyledLink.jsx';
-import UnorderedList from './UnorderedList.jsx';
-import Mapper from './Mapper.jsx';
-import Normalize from './custom/Normalize.js';
+import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
+import Mapper from '../shared/Mapper.jsx';
+import Normalize from '../custom/Normalize.js';
 
 const StyledUL = styled(UnorderedList)`
   flex: 1;

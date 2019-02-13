@@ -3,10 +3,10 @@ import { withRouter } from 'react-router';
 import { css, createGlobalStyle } from 'styled-components';
 
 import Body from './Body.jsx';
-import Footer from './Footer.jsx';
-import Header from './Header.jsx';
+import Footer from './header-footer/Footer.jsx';
+import Header from './header-footer/Header.jsx';
 import Location from './custom/Location.js';
-import LegalTermsOrBizCard from './LegalTermsOrBizCard.jsx';
+import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 
 import EventHandling from './custom/EventHandling.js';
 import Referrer from './custom/Referrer.js';
@@ -146,7 +146,6 @@ export default withRouter(App);
 // Structure, more modular, theme, share design elements?
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
 
-// Flexbox retool
 // Picture focus
 // Short height, flex or overflow content container?
 

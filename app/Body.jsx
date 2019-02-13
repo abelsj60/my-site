@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './Home.jsx';
-import ContentLoader from './ContentLoader.jsx';
-import About from './About.jsx';
-import ReloadRoute from './ReloadRoute.jsx';
-import NotFound from './NotFound.jsx';
+import Home from './home/Home.jsx';
+import ContentLoader from './loader/ContentLoader.jsx';
+import About from './about/About.jsx';
+import ReloadRoute from './reload/ReloadRoute.jsx';
+import NotFound from './not-found/NotFound.jsx';
 
 import Location from './custom/Location';
 import Referrer from './custom/Referrer.js';

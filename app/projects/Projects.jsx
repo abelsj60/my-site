@@ -1,19 +1,19 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
-import Hed from './Hed.jsx';
-import Main from './Main.jsx';
-import Right from './Right.jsx';
-import Left from './Left.jsx';
-import Overflow from './Overflow.jsx';
-import MenuButton from './MenuButton.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Main from '../primitives/Main.jsx';
+import Right from '../primitives/Right.jsx';
+import Left from '../primitives/Left.jsx';
+import Overflow from '../primitives/Overflow.jsx';
+import MenuButton from '../shared/MenuButton.jsx';
 import ProjectNav from './ProjectNav.jsx';
-import Graf from './Graf.jsx';
-import Mapper from './Mapper.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Mapper from '../shared/Mapper.jsx';
 import DesktopProjectNav from './DesktopProjectNav.jsx';
 
-import Referrer from './custom/Referrer.js';
-import Location from './custom/Location.js';
+import Referrer from '../custom/Referrer.js';
+import Location from '../custom/Location.js';
 
 const Images = styled.section`
   display: flex;

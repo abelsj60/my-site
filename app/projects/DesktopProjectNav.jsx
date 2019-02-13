@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import Hed from './Hed.jsx';
-import UnorderedList from './UnorderedList.jsx';
-import Mapper from './Mapper.jsx';
+import Hed from '../primitives/Hed.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
+import Mapper from '../shared/Mapper.jsx';
 import ProjectNav from './ProjectNav.jsx';
 
 const StyledUL = styled(UnorderedList)`

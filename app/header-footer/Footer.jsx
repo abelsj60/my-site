@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import StyledLink from './StyledLink.jsx';
+import StyledLink from '../primitives/StyledLink.jsx';
 import StoryButton from './StoryButton.jsx';
 
 const Footer = styled.footer`

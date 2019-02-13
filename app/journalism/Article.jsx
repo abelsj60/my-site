@@ -3,17 +3,17 @@ import marked from 'marked';
 import styled from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 
-import Hed from './Hed.jsx';
-import Graf from './Graf.jsx';
-import Main from './Main.jsx';
-import Right from './Right.jsx';
-import Left from './Left.jsx';
-import Overflow from './Overflow.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Main from '../primitives/Main.jsx';
+import Right from '../primitives/Right.jsx';
+import Left from '../primitives/Left.jsx';
+import Overflow from '../primitives/Overflow.jsx';
 import ArticleNav from './ArticleNav.jsx';
-import MenuButton from './MenuButton.jsx';
+import MenuButton from '../shared/MenuButton.jsx';
 
-import Referrer from './custom/Referrer.js';
-import Location from './custom/Location.js';
+import Referrer from '../custom/Referrer.js';
+import Location from '../custom/Location.js';
 
 export default function Article(props) {
   const { data, overflowRef } = props;
@@ -24,7 +24,6 @@ export default function Article(props) {
   const indexForArticleData = l.params.headlineToIndex();
   const article = data[indexForArticleData];
   const { publication, headline, position } = article.attributes;
-  const markedBody = marked(article.body);
 
   const Text = styled.section`
     p {
@@ -55,7 +54,9 @@ export default function Article(props) {
           <Graf size="1.4" bottom="15">
             by James Erik Abels | {position}
           </Graf>
-          <Text>{ReactHtmlParser(markedBody)}</Text>
+          <Text>
+            {ReactHtmlParser(marked(article.body, { smartypants: true }))}
+          </Text>
         </Overflow>
       </Right>
     </Main>
