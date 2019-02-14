@@ -132,3 +132,15 @@
 // https://css-tricks.com/working-with-refs-in-react/
 // https://stackoverflow.com/questions/33748967/change-scrolltop-in-reactjs
 // https://stackoverflow.com/questions/38638303/react-set-scroll-position-before-component-mount
+
+// https://stackoverflow.com/questions/24580708/opera-mini-css3-transform-gradient-transition-polyfill
+// https://codepen.io/mimikos/pen/QMjjzy
+// https://jakearchibald.github.io/svgomg/
+// https://easings.net/#easeInOutQuart
+// https://fontbundles.net/blog/ask-a-font-creator-adding-shadow-and-stroke-vector-effects-in-inkscape#
+
+// https://tympanus.net/Development/PhotographyWebsiteConcept/
+// https://www.npmjs.com/package/react-touch
+// https://blog.imagekit.io/how-to-deliver-responsive-images-to-browsers-across-multiple-devices-30cfae17390e
+
+// https://medium.mybridge.co/amazing-react-js-open-source-of-the-year-v-2019-364d057ac3f3
