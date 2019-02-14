@@ -5,11 +5,11 @@ import { css, createGlobalStyle } from 'styled-components';
 import Body from './Body.jsx';
 import Footer from './header-footer/Footer.jsx';
 import Header from './header-footer/Header.jsx';
-import Location from './custom/Location.js';
+import Location from './classes/Location.js';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 
-import EventHandling from './custom/EventHandling.js';
-import Referrer from './custom/Referrer.js';
+import EventHandling from './classes/EventHandling.js';
+import Referrer from './classes/Referrer.js';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
 
     ${p =>
-    p.home === 'active' &&
+      p.home === 'active' &&
       css`
         width: 100%;
         position: fixed;
@@ -54,13 +54,10 @@ class App extends Component {
       showStoryText: true,
       showLegalTerms: false,
       showBusinessCard: false,
-      magicOpacity: 0,
-      blockPointer: location === 'home',
       currentCaller: location,
       lastCaller: location !== 'reverie' ? location : 'home',
       isMenu: r.checkForMenu(props),
-      homePageMagic: location === 'home',
-      pointsUnknown: true
+      inCity: false
     };
 
     this.magicRef = React.createRef();
@@ -100,8 +97,7 @@ class App extends Component {
         showBusinessCard,
         showLegalTerms,
         showStoryText,
-        isMenu,
-        homePageMagic
+        isMenu
       } = this.state;
 
       const r = new Referrer(prevProps);
@@ -132,22 +128,20 @@ class App extends Component {
       if (isMenu !== r.checkForMenu(this.props)) {
         handleClickForApp('toggleMenu');
       }
-
-      if (homePageMagic) {
-        handleClickForApp('cancelHomePageMagic');
-      }
     }
   }
 }
 
 export default withRouter(App);
 
-// Story edit
-// Structure, more modular, theme, share design elements?
-// Take pictures, write copy for Arrow, Slingshot, TMMnews
-
-// Picture focus
+// Structure, more modular, theme?
+//  -Reverie + Article — share?
 // Short height, flex or overflow content container?
+// Simplify Normalize?
+// Picture focus
+
+// Story edit
+// Take pictures, write copy for Arrow, Slingshot, TMMnews
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?

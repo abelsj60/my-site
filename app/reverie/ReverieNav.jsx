@@ -2,10 +2,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import StyledLink from '../primitives/StyledLink.jsx';
-import Graf from '../primitives/Graf.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
-import Normalize from '../custom/Normalize';
+import Graf from '../primitives/Graf.jsx';
+import Normalize from '../classes/Normalize';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
@@ -36,7 +36,8 @@ const GrafAsHed = styled(Graf)`
 `;
 
 export default function ReverieNav(props) {
-  const { data, isMenu } = props;
+  const { data } = props;
+  const { isMenu } = props.state;
   const { indexForReverieData } = props.localState;
 
   const menuIsActive = isMenu ? 'active' : '';

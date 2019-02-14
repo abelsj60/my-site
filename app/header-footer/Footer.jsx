@@ -1,12 +1,12 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
 import StoryButton from './StoryButton.jsx';
 
-const Footer = styled.footer`
-  // background-color: ${p => (!p.home ? 'white' : '')};
+const Container = styled.footer`
+  background-color: ${p => (!p.home ? 'white' : '')};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
@@ -20,7 +20,7 @@ const Footer = styled.footer`
     justify-content: flex-end;
   }
 `;
-const UpperLine = styled.div`
+const Line = styled.div`
   display: ${p => (p.home ? 'none' : '')};
   position: absolute;
   width: 100%;
@@ -29,16 +29,15 @@ const UpperLine = styled.div`
   height: 0.5px;
   background-color: #fd1172;
 `;
-// Why css`` in next component: https://github.com/styled-components/styled-components/issues/1198#issuecomment-336628848
 const RestyledLink = styled(StyledLink)`
   color: ${p => (p.show === 'active' ? '#fd1172' : '#6e7dab')};
 `;
-const Graf = styled.p`
+const RestyledGraf = styled(Graf)`
   cursor: pointer;
   margin-right: 25px;
-  color: ${props => (props.show ? '#fd1172' : '#6e7dab')};
+  color: ${props => (props.show === 'active' ? '#fd1172' : '#6e7dab')};
 `;
-const FooterText = styled.div`
+const TextBox = styled.div`
   display: flex;
 `;
 
@@ -49,56 +48,46 @@ export default function FooterContainer(props) {
     showLegalTerms,
     showStoryText,
     currentCaller,
-    lastCaller,
-    pointsUnknown,
-    homePageMagic
+    lastCaller
   } = state;
 
-  const isReverie = currentCaller === 'reverie';
-  const reverieIsActive = isReverie ? 'active' : '';
+  const isReverie = currentCaller === 'reverie' ? 'active' : '';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
 
   const whereItStarted =
-    lastCaller !== 'home' && lastCaller !== 'i' ? `/${lastCaller}` : '/';
+    lastCaller !== 'home' && lastCaller !== 'i' ? `/${lastCaller}` : '/'; // home is '/', not '/home'
   const linkForReverie = isReverie ? whereItStarted : '/reverie';
 
-  const nextFlight = isHome && pointsUnknown ? 'home' : '';
-
   return (
-    <Footer
-      home={isHome}
-      story={isStory}
-      nextFlight={nextFlight}
-      homePageMagic={homePageMagic}
-    >
-      <UpperLine home={isHome} />
+    <Container home={isHome} story={isStory}>
+      <Line home={isHome} />
       <StoryButton
         story={isStory}
         showStoryText={showStoryText}
         boundHandleClickForApp={boundHandleClickForApp}
       />
-      <FooterText>
-        <Graf show={isReverie}>
-          <RestyledLink show={reverieIsActive} to={linkForReverie}>
+      <TextBox>
+        <RestyledGraf show={isReverie}>
+          <RestyledLink show={isReverie} to={linkForReverie}>
             Reverie
           </RestyledLink>
-        </Graf>
-        <Graf
+        </RestyledGraf>
+        <RestyledGraf
           show={showBusinessCard}
           onClick={() => {
             boundHandleClickForApp('toggleBusinessCard');
           }}
         >
           Contact
-        </Graf>
-        <Graf
+        </RestyledGraf>
+        <RestyledGraf
           show={showLegalTerms}
           onClick={() => boundHandleClickForApp('toggleLegalTerms')}
         >
           Legal
-        </Graf>
-      </FooterText>
-    </Footer>
+        </RestyledGraf>
+      </TextBox>
+    </Container>
   );
 }

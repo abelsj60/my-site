@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
-import Normalize from '../custom/Normalize.js';
+import Normalize from '../classes/Normalize.js';
 
 const StyledUL = styled(UnorderedList)`
   flex: 1;
@@ -35,7 +35,8 @@ const Text = styled.p`
 `;
 
 export default function ChapterNav(props) {
-  const { data, isMenu } = props;
+  const { data } = props;
+  const { isMenu } = props.state;
   const { indexForChapterData } = props.localState;
 
   return (

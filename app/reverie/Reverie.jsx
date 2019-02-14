@@ -12,8 +12,8 @@ import Overflow from '../primitives/Overflow.jsx';
 import ReverieNav from './ReverieNav.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 
-import Referrer from '../custom/Referrer.js';
-import Location from '../custom/Location.js';
+import Referrer from '../classes/Referrer.js';
+import Location from '../classes/Location.js';
 
 const Text = styled.section`
   p {

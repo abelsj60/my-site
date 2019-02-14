@@ -12,8 +12,8 @@ import Overflow from '../primitives/Overflow.jsx';
 import ArticleNav from './ArticleNav.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 
-import Referrer from '../custom/Referrer.js';
-import Location from '../custom/Location.js';
+import Referrer from '../classes/Referrer.js';
+import Location from '../classes/Location.js';
 
 export default function Article(props) {
   const { data, overflowRef } = props;

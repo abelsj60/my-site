@@ -9,8 +9,8 @@ import Left from '../primitives/Left.jsx';
 import Hed from '../primitives/Hed.jsx';
 import ChapterNav from './ChapterNav.jsx';
 
-import Referrer from '../custom/Referrer.js';
-import Location from '../custom/Location.js';
+import Referrer from '../classes/Referrer.js';
+import Location from '../classes/Location.js';
 
 const RestyledLeft = styled(Left)`
   display: ${props => (props.text === 'hidden' ? 'none' : 'flex')};

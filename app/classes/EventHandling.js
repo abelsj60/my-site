@@ -39,8 +39,7 @@ export default class EventHandling {
       const {
         showBusinessCard,
         showLegalTerms,
-        pointsUnknown,
-        homePageMagic,
+        inCity,
         showStoryText,
         isMenu
       } = this.state;
@@ -69,21 +68,7 @@ export default class EventHandling {
           }
           break;
         case 'swapHomePageImage':
-          stateToUpdate.pointsUnknown = !pointsUnknown;
-          if (!homePageMagic) {
-            stateToUpdate.homePageMagic = !homePageMagic;
-          }
-          if (!pointsUnknown && showLegalTerms) {
-            stateToUpdate.showLegalTerms = !showLegalTerms;
-          }
-          if (!pointsUnknown && showBusinessCard) {
-            stateToUpdate.showBusinessCard = !showBusinessCard;
-          }
-          break;
-        case 'cancelHomePageMagic':
-          if (homePageMagic) {
-            stateToUpdate.homePageMagic = !homePageMagic;
-          }
+          stateToUpdate.inCity = !inCity;
           break;
         case 'setCallers':
           stateToUpdate.currentCaller = valueOne;

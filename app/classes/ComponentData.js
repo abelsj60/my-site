@@ -47,42 +47,13 @@ export default class ComponentData {
 
     switch (type) {
       case 'chapter':
-        return (
-          <ChapterNav
-            {...props}
-            isMenu={true}
-            section={type}
-            data={this._contentData}
-          />
-        );
+        return <ChapterNav {...props} data={this._contentData} />;
       case 'projects':
-        return (
-          <DesktopProjectNav
-            {...props}
-            isMenu={true}
-            section={type}
-            isProjectMenu={true}
-            data={this._contentData}
-          />
-        );
+        return <DesktopProjectNav {...props} data={this._contentData} />;
       case 'journalism':
-        return (
-          <ArticleNav
-            {...props}
-            isMenu={true}
-            section={type}
-            data={this._contentData}
-          />
-        );
+        return <ArticleNav {...props} data={this._contentData} />;
       case 'reverie':
-        return (
-          <ReverieNav
-            {...props}
-            isMenu={true}
-            section={type}
-            data={this._contentData}
-          />
-        );
+        return <ReverieNav {...props} data={this._contentData} />;
       default:
         return undefined;
     }

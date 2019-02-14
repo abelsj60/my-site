@@ -24,9 +24,9 @@ const RestyledHed = styled(Hed)`
 `;
 
 export default function DesktopProjectNav(props) {
-  const { isMenu } = props;
+  const { isMenu } = props.state;
   const { indexForProjectData } = props.localState;
-  const filteredData = props.isMenu
+  const filteredData = isMenu
     ? props.data
     : props.data.filter(
       (_, index) => props.localState.indexForProjectData !== index
@@ -40,7 +40,6 @@ export default function DesktopProjectNav(props) {
         render={(project, idx) => {
           const { name, type } = project.attributes.details;
           const isActiveProject = isMenu && indexForProjectData === idx;
-          const hedIsActive = isActiveProject ? 'active' : '';
 
           return (
             <li key={idx}>
@@ -50,7 +49,6 @@ export default function DesktopProjectNav(props) {
                 bottom="9"
                 num={idx}
                 menu={menuIsActive}
-                active={hedIsActive}
               >{`${name} | ${type}`}</RestyledHed>
               <ProjectNav
                 {...props}

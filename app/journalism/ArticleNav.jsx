@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
-import Normalize from '../custom/Normalize';
+import Normalize from '../classes/Normalize';
 import Graf from '../primitives/Graf.jsx';
 
 const StyledUL = styled(UnorderedList)`
@@ -36,7 +36,8 @@ const GrafAsHed = styled(Graf)`
 `;
 
 export default function ArticleNav(props) {
-  const { data, isMenu } = props;
+  const { data } = props;
+  const { isMenu } = props.state;
   const { indexForArticleData } = props.localState;
 
   const menuIsActive = isMenu ? 'active' : '';
@@ -58,6 +59,8 @@ export default function ArticleNav(props) {
           const articleLink = `/journalism/${normalizePub.done}/${
             normalizeHed.done
           }`;
+
+          // console.log('l:', linkIsActive);
 
           return (
             <li key={idx}>

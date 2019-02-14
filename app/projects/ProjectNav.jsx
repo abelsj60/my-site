@@ -109,11 +109,11 @@ const Highlighter = styled.div`
 export default function ProjectNav(props) {
   // ID active project via returnState b/c no params in '/menu'
 
-  const { num, project, activeProject, isDesktop, isMenu, isRight } = props;
+  const { num, project, activeProject, isDesktop, menu, isRight } = props;
   const { indexForProjectPics } = props.localState;
   const { thumbnails, projectName } = project.attributes;
 
-  const menuIsActive = isMenu ? 'active' : '';
+  const menuIsActive = menu ? 'active' : '';
 
   return (
     <Group desktop={isDesktop} menu={menuIsActive} num={num}>

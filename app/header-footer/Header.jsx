@@ -5,11 +5,11 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import headerData from '../data/headerData.js';
 
-import Location from '../custom/Location.js';
-import Referrer from '../custom/Referrer.js';
-import EventHandling from '../custom/EventHandling.js';
+import Location from '../classes/Location.js';
+import Referrer from '../classes/Referrer.js';
+import EventHandling from '../classes/EventHandling.js';
 
-const HeaderContainer = styled.header`
+const Container = styled.header`
   background-color: ${props =>
     props.home === 'active' ? 'transparent' : 'white'};
   color: ${props => (props.home === 'active' ? 'white' : '#455057')};
@@ -29,7 +29,7 @@ const RestyledLink = styled(StyledLink)`
     text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
   }
 `;
-const NameLink = styled(RestyledLink)`
+const Name = styled(RestyledLink)`
   display: ${props =>
     props.home === 'active' || props.menu === 'active' ? 'none' : ''};
   font-size: 1.4rem;
@@ -65,7 +65,7 @@ const Motto = styled.p`
     display: ${p => (p.home === 'active' ? 'none' : 'block')};
   }
 `;
-const HeaderNav = styled.nav`
+const Nav = styled.nav`
   display: ${p => (p.home !== 'active' ? 'none' : '')};
   padding-bottom: ${p => (p.home === 'active' ? '5px' : '')};
   border-bottom: ${p => (p.home === 'active' ? '.5px solid white' : '')};
@@ -83,15 +83,14 @@ const HeaderNav = styled.nav`
     margin-right: ${props => (props.home !== 'active' ? '15px' : '')};
   }
 `;
-const HeaderNavList = styled.ul`
+const NavList = styled.ul`
   display: flex;
   justify-content: center;
   margin: 0px;
   padding: 0px;
   list-style: none;
 `;
-const HeaderNavItem = styled.li``;
-const TogglerIcon = styled.img`
+const Icon = styled.img`
   display: ${p => (p.home === 'active' ? 'none' : '')};
   height: 17px;
   width: 17px;
@@ -104,7 +103,7 @@ const TogglerIcon = styled.img`
   }
 `;
 
-class Header extends Component {
+export default class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -127,13 +126,12 @@ class Header extends Component {
   }
 
   render() {
-    const { currentCaller, pointsUnknown, homePageMagic } = this.props.state;
+    const { currentCaller } = this.props.state;
     const menuIsActive = this.state.menuIsOpen ? 'active' : '';
     const homeIsActive = currentCaller === 'home' ? 'active' : '';
     const togglerSource = `/sign-${homeIsActive ? 'white' : 'black'}-${
       menuIsActive ? 'open' : 'closed'
     }.png`;
-    const nextFlight = homeIsActive === 'active' && pointsUnknown ? 'home' : '';
 
     const r = new Referrer(this.props);
 
@@ -141,19 +139,15 @@ class Header extends Component {
     const handleClickForHeader = eForHeader.boundHandleClick;
 
     return (
-      <HeaderContainer
-        home={homeIsActive}
-        nextFlight={nextFlight}
-        homePageMagic={homePageMagic}
-      >
-        <NameLink to={'/'} home={homeIsActive} menu={menuIsActive}>
+      <Container home={homeIsActive}>
+        <Name to={'/'} home={homeIsActive} menu={menuIsActive}>
           James Abels
-        </NameLink>
+        </Name>
         <Motto home={homeIsActive} menu={menuIsActive}>
           Coding narratives and magical adventures
         </Motto>
-        <HeaderNav home={homeIsActive} menu={menuIsActive}>
-          <HeaderNavList>
+        <Nav home={homeIsActive} menu={menuIsActive}>
+          <NavList>
             <Mapper
               mapData={headerData}
               render={(link, idx) => {
@@ -161,7 +155,7 @@ class Header extends Component {
                   ? 'active'
                   : '';
                 return (
-                  <HeaderNavItem key={idx}>
+                  <li key={idx}>
                     <RestyledLink
                       num={idx}
                       home={homeIsActive}
@@ -170,13 +164,13 @@ class Header extends Component {
                     >
                       {link.name}
                     </RestyledLink>
-                  </HeaderNavItem>
+                  </li>
                 );
               }}
             />
-          </HeaderNavList>
-        </HeaderNav>
-        <TogglerIcon
+          </NavList>
+        </Nav>
+        <Icon
           home={homeIsActive}
           menu={menuIsActive}
           src={togglerSource}
@@ -184,9 +178,7 @@ class Header extends Component {
             handleClickForHeader();
           }}
         />
-      </HeaderContainer>
+      </Container>
     );
   }
 }
-
-export default Header;

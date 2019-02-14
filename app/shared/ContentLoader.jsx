@@ -3,9 +3,9 @@ import { Route, Redirect, Switch } from 'react-router';
 
 import Menu from '../Menu/Menu.jsx';
 
-import Location from '../custom/Location.js';
-import Referrer from '../custom/Referrer.js';
-import ComponentData from '../custom/ComponentData.js';
+import Location from '../classes/Location.js';
+import Referrer from '../classes/Referrer.js';
+import ComponentData from '../classes/ComponentData.js';
 
 export default class ContentLoader extends Component {
   constructor(props) {

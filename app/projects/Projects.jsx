@@ -12,8 +12,8 @@ import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import DesktopProjectNav from './DesktopProjectNav.jsx';
 
-import Referrer from '../custom/Referrer.js';
-import Location from '../custom/Location.js';
+import Referrer from '../classes/Referrer.js';
+import Location from '../classes/Location.js';
 
 const Images = styled.section`
   display: flex;
@@ -84,7 +84,7 @@ const Image = styled.img`
 export default function Projects(props) {
   // Todo Can use params for caption/source, rather than return state'
 
-  const { localState, data, projectIndex, overflowRef } = props;
+  const { localState, data, overflowRef } = props;
   const { indexForProjectPics } = localState;
 
   const r = new Referrer(props);
@@ -102,12 +102,7 @@ export default function Projects(props) {
   return (
     <Main>
       <Left>
-        <DesktopProjectNav
-          data={data}
-          section={'projects'}
-          localState={localState}
-          projectIndex={projectIndex}
-        />
+        <DesktopProjectNav {...props} data={data} localState={localState} />
       </Left>
       <Right>
         <MenuButton {...props} />
