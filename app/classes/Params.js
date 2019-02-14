@@ -1,5 +1,5 @@
 import Content from './Content.js';
-import Normalize from './Normalize.js';
+import normalize from '../helpers/normalize.js';
 
 export default class Params {
   constructor(type, params) {
@@ -23,8 +23,7 @@ export default class Params {
   }
 
   _normalizeParam(param) {
-    const n = new Normalize(param);
-    return n.done;
+    return normalize(param);
   }
 
   get hasExpectedNumber() {

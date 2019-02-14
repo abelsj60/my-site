@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
-import Normalize from '../classes/Normalize.js';
+import normalize from '../helpers/normalize.js';
 
 const StyledUL = styled(UnorderedList)`
   flex: 1;
@@ -47,8 +47,7 @@ export default function ChapterNav(props) {
           render={(chapter, idx) => {
             const itemIsActive = indexForChapterData === idx;
             const pageOrMenuText = isMenu ? chapter.attributes.title : idx + 1;
-            const n = new Normalize(data[idx].attributes.title);
-            const normalizedTitle = n.done;
+            const normalizedTitle = normalize(data[idx].attributes.title);
 
             return (
               <Item key={idx}>

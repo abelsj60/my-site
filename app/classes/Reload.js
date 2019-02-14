@@ -1,5 +1,5 @@
 import Content from './Content.js';
-import Normalize from './Normalize.js';
+import normalize from '../helpers/normalize.js';
 
 export default class Reload {
   constructor(props) {
@@ -29,8 +29,7 @@ export default class Reload {
   }
 
   _normalize(text) {
-    const n = new Normalize(text);
-    return n.done;
+    return normalize(text);
   }
 
   _getContentData() {

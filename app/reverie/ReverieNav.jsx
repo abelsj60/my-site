@@ -5,7 +5,7 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import Graf from '../primitives/Graf.jsx';
-import Normalize from '../classes/Normalize';
+import normalize from '../helpers/normalize.js';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
@@ -48,11 +48,11 @@ export default function ReverieNav(props) {
           const { headline, date } = reverie.attributes;
           const currentHed = data[indexForReverieData].attributes.headline;
 
-          const normalizeHed = new Normalize(headline);
-          const normalizeCurrentHed = new Normalize(currentHed);
+          const normalizeHed = normalize(headline);
+          const normalizeCurrentHed = normalize(currentHed);
 
-          const linkIsActive = normalizeHed.done === normalizeCurrentHed.done;
-          const reverieLink = `/reverie/${normalizeHed.done}`;
+          const linkIsActive = normalizeHed === normalizeCurrentHed;
+          const reverieLink = `/reverie/${normalizeHed}`;
 
           return (
             <li key={idx}>

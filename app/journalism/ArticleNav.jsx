@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
-import Normalize from '../classes/Normalize';
+import normalize from '../helpers/normalize.js';
 import Graf from '../primitives/Graf.jsx';
 
 const StyledUL = styled(UnorderedList)`
@@ -48,14 +48,12 @@ export default function ArticleNav(props) {
           const { publication, headline } = article.attributes;
           const currentHed = data[indexForArticleData].attributes.headline;
 
-          const normalizePub = new Normalize(publication);
-          const normalizeHed = new Normalize(headline);
-          const normalizeCurrentHed = new Normalize(currentHed);
+          const normalizePub = normalize(publication);
+          const normalizeHed = normalize(headline);
+          const normalizeCurrentHed = normalize(currentHed);
 
-          const linkIsActive = normalizeHed.done === normalizeCurrentHed.done;
-          const articleLink = `/journalism/${normalizePub.done}/${
-            normalizeHed.done
-          }`;
+          const linkIsActive = normalizeHed === normalizeCurrentHed;
+          const articleLink = `/journalism/${normalizePub}/${normalizeHed}`;
 
           return (
             <li key={idx}>

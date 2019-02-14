@@ -136,7 +136,6 @@ class App extends Component {
 export default withRouter(App);
 
 // Reverie + Article — share?
-// Simplify Normalize?
 // Picture focus
 
 // Story edit
