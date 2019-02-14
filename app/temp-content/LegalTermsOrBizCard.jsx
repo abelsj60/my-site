@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.section`
   display: flex;
@@ -10,6 +10,13 @@ const Container = styled.section`
   bottom: ${p => (p.home === 'active' ? '0' : '56px')};
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+
+  ${p =>
+    p.home === 'active' &&
+    css`
+      background-color: rgba(0, 0, 0, 0.3);
+      background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
+    `};
 `;
 const Card = styled.section`
   margin-top: ${p => (p.home === 'active' ? '-200px' : '')};

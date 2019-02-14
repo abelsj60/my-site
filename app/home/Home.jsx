@@ -65,6 +65,7 @@ const TravelButton = styled.section`
   background-color: rgba(0, 0, 0, 0.3);
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   margin-bottom: 45px;
+  border: 0.5px solid white;
 `;
 
 export default function Home(props) {

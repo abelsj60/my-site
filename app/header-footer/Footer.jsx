@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -21,13 +21,21 @@ const Container = styled.footer`
   }
 `;
 const Line = styled.div`
-  display: ${p => (p.home ? 'none' : '')};
   position: absolute;
   width: 100%;
   top: -1px;
   margin: 0px;
   height: 0.5px;
   background-color: #fd1172;
+
+  ${p =>
+    p.home &&
+    css`
+      top: -1px;
+      right: 25px;
+      width: 150px;
+      background-color: white;
+    `};
 `;
 const RestyledLink = styled(StyledLink)`
   color: ${p => (p.show === 'active' ? '#fd1172' : '#6e7dab')};
@@ -35,7 +43,7 @@ const RestyledLink = styled(StyledLink)`
 const RestyledGraf = styled(Graf)`
   cursor: pointer;
   margin-right: 25px;
-  color: ${props => (props.show === 'active' ? '#fd1172' : '#6e7dab')};
+  color: ${p => (p.show ? '#fd1172' : '#6e7dab')};
 `;
 const TextBox = styled.div`
   display: flex;
@@ -68,7 +76,7 @@ export default function FooterContainer(props) {
         boundHandleClickForApp={boundHandleClickForApp}
       />
       <TextBox>
-        <RestyledGraf show={isReverie}>
+        <RestyledGraf>
           <RestyledLink show={isReverie} to={linkForReverie}>
             Reverie
           </RestyledLink>

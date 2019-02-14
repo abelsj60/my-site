@@ -3,7 +3,6 @@ import marked from 'marked';
 import ReactHtmlParser from 'react-html-parser';
 
 import Left from '../primitives/Left.jsx';
-import Right from '../primitives/Right.jsx';
 import Main from '../primitives/Main.jsx';
 import Hed from '../primitives/Hed.jsx';
 
@@ -12,6 +11,10 @@ import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`
   min-width: 327px;
+`;
+const Right = styled.section`
+  flex: 1;
+  margin: 25px;
 `;
 const Heading = styled.div`
   display: flex;

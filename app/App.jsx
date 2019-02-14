@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
 
     ${p =>
-      p.home === 'active' &&
+    p.home === 'active' &&
       css`
         width: 100%;
         position: fixed;
@@ -134,9 +134,8 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Structure, more modular, theme?
-//  -Reverie + Article — share?
-// Short height, flex or overflow content container?
+// Theme? Reverie + Article — share?
+// Header Icon png --> svg
 // Simplify Normalize?
 // Picture focus
 

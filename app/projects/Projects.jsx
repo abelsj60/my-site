@@ -35,16 +35,19 @@ const Images = styled.section`
     flex-direction: row-reverse;
   }
 `;
-const Container = styled.section`
+const Figure = styled.figure`
+  margin: 0px;
+
   @media (min-width: 672px) {
     display: flex;
     flex-direction: column;
   }
 `;
-const Caption = styled.p`
+const Caption = styled.figcaption`
   display: flex;
   margin-top: 7px;
   margin-bottom: 10px;
+  margin-right: 10px;
   font-size: 1.5rem;
   color: #6e7dab;
 
@@ -134,10 +137,10 @@ export default function Projects(props) {
                 activeProject={true}
                 localState={localState}
               />
-              <Container>
+              <Figure>
                 <Caption>{caption}</Caption>
                 <Image src={source} alt="mainPic" />
-              </Container>
+              </Figure>
             </Images>
           </section>
         </Overflow>
