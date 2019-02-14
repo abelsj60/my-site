@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
 
     ${p =>
-    p.home === 'active' &&
+      p.home === 'active' &&
       css`
         width: 100%;
         position: fixed;
@@ -138,6 +138,7 @@ export default withRouter(App);
 // Header Icon png --> svg
 // Simplify Normalize?
 // Picture focus
+// Share button?
 
 // Story edit
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
