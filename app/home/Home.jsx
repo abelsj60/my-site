@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Main from '../primitives/Main.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Graf from '../primitives/Graf.jsx';
+import Button from '../shared/Button.jsx';
 
 const RestyledMain = styled(Main)`
   justify-content: space-between;
@@ -52,20 +53,15 @@ const CityAsBackground = styled(FantasyAsBackground)`
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
-const TravelButton = styled.section`
-  z-index: 2;
-  font-size: 1.3rem;
-  border-radius: 5px;
-  width: 80px;
-  color: white;
-  padding: 10px;
-  text-shadow: 1px 1px 2px black;
-  text-align: center;
-  cursor: pointer;
+const TravelButton = styled(Button)`
   background-color: rgba(0, 0, 0, 0.3);
-  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
-  margin-bottom: 45px;
   border: 0.5px solid white;
+  border-radius: 5px;
+  color: white;
+  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
+  font-size: 1.3rem;
+  margin-bottom: 45px;
+  z-index: 2;
 `;
 
 export default function Home(props) {
@@ -95,11 +91,11 @@ export default function Home(props) {
         inCity={inCity}
       />
       <TravelButton
+        className="travel-button"
+        clickFunction={() => boundHandleClickForApp('swapHomePageImage')}
         tempContentIsOn={showBusinessCard || showLegalTerms}
-        onClick={() => boundHandleClickForApp('swapHomePageImage')}
-      >
-        {buttonText}
-      </TravelButton>
+        text={buttonText}
+      />
     </RestyledMain>
   );
 }

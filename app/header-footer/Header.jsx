@@ -10,43 +10,36 @@ import Referrer from '../classes/Referrer.js';
 import EventHandling from '../classes/EventHandling.js';
 
 const Container = styled.header`
-  background-color: ${props =>
-    props.home === 'active' ? 'transparent' : 'white'};
-  color: ${props => (props.home === 'active' ? 'white' : '#455057')};
+  background-color: ${p => (p.home ? 'transparent' : 'white')};
+  color: ${p => (p.home ? 'white' : '#455057')};
   flex-shrink: 0;
   z-index: 2;
   position: relative;
   height: 52px;
   display: flex;
-  justify-content: ${p => (p.home === 'active' ? 'center' : '')};
+  justify-content: ${p => (p.home ? 'center' : '')};
   align-items: center;
 `;
 const RestyledLink = styled(StyledLink)`
-  margin-left: ${props => (props.num === 0 ? '0px' : '15px')};
-  color: ${props => (props.home === 'active' ? 'white' : '#455057')};
+  margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
+  color: ${p => (p.home ? 'white' : '#455057')};
 
   && {
-    text-decoration: ${props => (props.active === 'active' ? 'underline' : '')};
+    text-decoration: ${p => (p.active ? 'underline' : '')};
   }
 `;
 const Name = styled(RestyledLink)`
-  display: ${props =>
-    props.home === 'active' || props.menu === 'active' ? 'none' : ''};
+  display: ${p => (p.hide ? 'none' : '')};
   font-size: 1.4rem;
   font-weight: bold;
 
   @media (min-width: 390px) {
     font-size: 1.5rem;
   }
-
-  @media (min-width: 705px) {
-    display: ${p => (p.home === 'active' ? 'none' : 'block')};
-  }
 `;
 const Motto = styled.p`
   flex: 1;
-  display: ${props =>
-    props.home === 'active' || props.menu === 'active' ? 'none' : ''};
+  display: ${p => (p.hide ? 'none' : '')};
   font-size: 1.05rem;
   margin-top: 2px;
   margin-left: 5px;
@@ -60,18 +53,14 @@ const Motto = styled.p`
     font-size: 1.3rem;
     margin-left: 15px;
   }
-
-  @media (min-width: 705px) {
-    display: ${p => (p.home === 'active' ? 'none' : 'block')};
-  }
 `;
 const Nav = styled.nav`
-  display: ${p => (p.home !== 'active' ? 'none' : '')};
-  padding-bottom: ${p => (p.home === 'active' ? '5px' : '')};
-  border-bottom: ${p => (p.home === 'active' ? '.5px solid white' : '')};
+  display: ${p => (p.home ? '' : 'none')};
+  padding-bottom: ${p => (p.home ? '5px' : '')};
+  border-bottom: ${p => (p.home ? '.5px solid white' : '')};
 
-  ${props =>
-    props.menu === 'active' &&
+  ${p =>
+    p.menu &&
     css`
       flex: 1;
       display: block;
@@ -80,7 +69,7 @@ const Nav = styled.nav`
 
   @media (min-width: 705px) {
     display: block;
-    margin-right: ${props => (props.home !== 'active' ? '15px' : '')};
+    margin-right: ${p => (!p.home ? '15px' : '')};
   }
 `;
 const NavList = styled.ul`
@@ -91,7 +80,7 @@ const NavList = styled.ul`
   list-style: none;
 `;
 const Icon = styled.img`
-  display: ${p => (p.home === 'active' ? 'none' : '')};
+  display: ${p => (p.home ? 'none' : '')};
   height: 17px;
   width: 17px;
   margin-left: auto;
@@ -127,11 +116,9 @@ export default class Header extends Component {
 
   render() {
     const { currentCaller } = this.props.state;
-    const menuIsActive = this.state.menuIsOpen ? 'active' : '';
-    const homeIsActive = currentCaller === 'home' ? 'active' : '';
-    const togglerSource = `/sign-${homeIsActive ? 'white' : 'black'}-${
-      menuIsActive ? 'open' : 'closed'
-    }.png`;
+    const menuIsActive = this.state.menuIsOpen;
+    const homeIsActive = currentCaller === 'home';
+    const togglerSource = `/menu-${menuIsActive ? 'open' : 'closed'}-icon.svg`;
 
     const r = new Referrer(this.props);
 
@@ -140,10 +127,10 @@ export default class Header extends Component {
 
     return (
       <Container home={homeIsActive}>
-        <Name to={'/'} home={homeIsActive} menu={menuIsActive}>
+        <Name to={'/'} hide={menuIsActive || homeIsActive}>
           James Abels
         </Name>
-        <Motto home={homeIsActive} menu={menuIsActive}>
+        <Motto hide={menuIsActive || homeIsActive}>
           Coding narratives and magical adventures
         </Motto>
         <Nav home={homeIsActive} menu={menuIsActive}>
@@ -151,16 +138,15 @@ export default class Header extends Component {
             <Mapper
               mapData={headerData}
               render={(link, idx) => {
-                const pathIsActive = link.path.includes(r.location)
-                  ? 'active'
-                  : '';
+                const pathIsActive = link.path.includes(r.location);
+
                 return (
                   <li key={idx}>
                     <RestyledLink
-                      num={idx}
-                      home={homeIsActive}
-                      to={link.path}
                       active={pathIsActive}
+                      home={homeIsActive}
+                      num={idx}
+                      to={link.path}
                     >
                       {link.name}
                     </RestyledLink>

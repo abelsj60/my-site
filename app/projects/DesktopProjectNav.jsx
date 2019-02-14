@@ -9,10 +9,10 @@ import ProjectNav from './ProjectNav.jsx';
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
-  width: ${p => (p.menu !== 'active' ? '327px' : '')};
+  width: ${p => (!p.menu ? '327px' : '')};
 
   ${p =>
-    p.menu === 'active' &&
+    p.menu &&
     css`
       display: block;
       max-width: 590px;
@@ -31,7 +31,7 @@ export default function DesktopProjectNav(props) {
     : props.data.filter(
       (_, index) => props.localState.indexForProjectData !== index
     );
-  const menuIsActive = isMenu ? 'active' : '';
+  const menuIsActive = isMenu;
 
   return (
     <StyledUL menu={menuIsActive}>

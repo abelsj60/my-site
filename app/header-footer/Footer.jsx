@@ -1,9 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
-import StoryButton from './StoryButton.jsx';
+import Button from '../shared/Button.jsx';
+// import StoryButton from './StoryButton.jsx';
 
 const Container = styled.footer`
   background-color: ${p => (!p.home ? 'white' : '')};
@@ -28,22 +29,26 @@ const Line = styled.div`
   height: 0.5px;
   background-color: #fd1172;
 
-  ${p =>
-    p.home &&
-    css`
-      top: -1px;
-      right: 25px;
-      width: 150px;
-      background-color: white;
-    `};
+  display: ${p => (p.home ? 'none' : '')};
+`;
+const StoryButton = styled(Button)`
+  color: ${p => (!p.active ? '#ffe74c' : '#6e7dab')};
+  margin-left: 25px;
+  background-color: ${p => (!p.active ? '#FD1172' : '')};
+  border: ${p => `0.5px solid ${!p.active ? '#fd1172' : '#455057'}`};
+
+  @media (min-width: 848px) {
+    display: none;
+  }
 `;
 const RestyledLink = styled(StyledLink)`
-  color: ${p => (p.show === 'active' ? '#fd1172' : '#6e7dab')};
+  margin-right: 25px;
+  color: ${p => (p.reverie === 'active' ? '#fd1172' : '#6e7dab')};
 `;
 const RestyledGraf = styled(Graf)`
   cursor: pointer;
   margin-right: 25px;
-  color: ${p => (p.show ? '#fd1172' : '#6e7dab')};
+  color: ${p => (p.active ? '#fd1172' : '#6e7dab')};
 `;
 const TextBox = styled.div`
   display: flex;
@@ -67,22 +72,25 @@ export default function FooterContainer(props) {
     lastCaller !== 'home' && lastCaller !== 'i' ? `/${lastCaller}` : '/'; // home is '/', not '/home'
   const linkForReverie = isReverie ? whereItStarted : '/reverie';
 
+  const textForStoryButton = showStoryText ? 'Hide story' : 'Show story';
+
   return (
     <Container home={isHome} story={isStory}>
       <Line home={isHome} />
       <StoryButton
-        story={isStory}
-        showStoryText={showStoryText}
-        boundHandleClickForApp={boundHandleClickForApp}
+        active={showStoryText}
+        className="story-button"
+        clickFunction={() => boundHandleClickForApp('toggleStoryText')}
+        conditional={true}
+        show={isStory}
+        text={textForStoryButton}
       />
       <TextBox>
-        <RestyledGraf>
-          <RestyledLink show={isReverie} to={linkForReverie}>
-            Reverie
-          </RestyledLink>
-        </RestyledGraf>
+        <RestyledLink reverie={isReverie} to={linkForReverie}>
+          Reverie
+        </RestyledLink>
         <RestyledGraf
-          show={showBusinessCard}
+          active={showBusinessCard}
           onClick={() => {
             boundHandleClickForApp('toggleBusinessCard');
           }}
@@ -90,7 +98,7 @@ export default function FooterContainer(props) {
           Contact
         </RestyledGraf>
         <RestyledGraf
-          show={showLegalTerms}
+          active={showLegalTerms}
           onClick={() => boundHandleClickForApp('toggleLegalTerms')}
         >
           Legal

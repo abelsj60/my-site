@@ -27,10 +27,10 @@ const Text = styled.p`
   text-align: center;
   padding-bottom: 10px;
   margin: 0px;
-  border-bottom: ${p => (p.item === 'active' ? '.5px solid white' : '')};
+  border-bottom: ${p => (p.item ? '.5px solid white' : '')};
 
   @media (min-width: 848px) {
-    border-bottom: ${p => (p.item === 'active' ? '.5px solid #6e7dab' : '')};
+    border-bottom: ${p => (p.item ? '.5px solid #6e7dab' : '')};
   }
 `;
 
@@ -45,7 +45,7 @@ export default function ChapterNav(props) {
         <Mapper
           mapData={data}
           render={(chapter, idx) => {
-            const itemIsActive = indexForChapterData === idx ? 'active' : '';
+            const itemIsActive = indexForChapterData === idx;
             const pageOrMenuText = isMenu ? chapter.attributes.title : idx + 1;
             const n = new Normalize(data[idx].attributes.title);
             const normalizedTitle = n.done;

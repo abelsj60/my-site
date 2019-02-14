@@ -10,23 +10,21 @@ import Graf from '../primitives/Graf.jsx';
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
-  width: ${p => (p.menu !== 'active' ? '327px' : '')};
+  width: ${p => (!p.menu ? '327px' : '')};
 `;
 const GrafAsSource = styled(Graf)`
-  color: ${p =>
-    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
+  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
 
   &:first-child {
     margin-top: 0px;
   }
 `;
 const GrafAsHed = styled(Graf)`
-  color: ${p =>
-    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
-  font-size: ${p => (p.menu === 'active' ? '3rem' : '1.7rem')};
+  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
+  font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
 
   ${p =>
-    p.menu !== 'active' &&
+    !p.menu &&
     css`
       overflow: hidden;
       text-overflow: ellipsis;
@@ -40,7 +38,7 @@ export default function ArticleNav(props) {
   const { isMenu } = props.state;
   const { indexForArticleData } = props.localState;
 
-  const menuIsActive = isMenu ? 'active' : '';
+  const menuIsActive = isMenu;
 
   return (
     <StyledUL menu={menuIsActive}>
@@ -54,13 +52,10 @@ export default function ArticleNav(props) {
           const normalizeHed = new Normalize(headline);
           const normalizeCurrentHed = new Normalize(currentHed);
 
-          const linkIsActive =
-            normalizeHed.done === normalizeCurrentHed.done ? 'active' : '';
+          const linkIsActive = normalizeHed.done === normalizeCurrentHed.done;
           const articleLink = `/journalism/${normalizePub.done}/${
             normalizeHed.done
           }`;
-
-          // console.log('l:', linkIsActive);
 
           return (
             <li key={idx}>

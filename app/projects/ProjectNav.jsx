@@ -13,17 +13,17 @@ const Group = styled.ul`
   padding-bottom: 10px;
   list-style-type: none;
 
-  ${props =>
-    props.menu === 'active' &&
+  ${p =>
+    p.menu &&
     css`
-      margin-bottom: ${props.num !== 2 ? '15px' : ''};
+      margin-bottom: ${p.num !== 2 ? '15px' : ''};
       padding-bottom: 0;
       max-width: 100%;
       flex-direction: row;
     `};
 
-  ${props =>
-    !props.desktop &&
+  ${p =>
+    !p.desktop &&
     css`
       border-bottom: #6e7dab solid 0.5px;
 
@@ -52,7 +52,7 @@ const Group = styled.ul`
     `}};
 `;
 const Item = styled.li`
-  margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+  margin-right: ${p => (p.padding ? '5px' : '')};
 
   @media (min-width: 672px) {
     margin-right: ${p => (!p.desktop ? '0px' : '')};
@@ -60,7 +60,7 @@ const Item = styled.li`
   }
 
   @media (min-width: 848px) {
-    margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+    margin-right: ${p => (p.padding ? '5px' : '')};
     margin-bottom: ${p => (p.isRight ? '0px' : '')};
   }
 
@@ -76,15 +76,15 @@ const RestyledLink = styled(StyledLink)`
   min-width: 0;
   position: relative;
 
-  ${props =>
-    props.desktop &&
+  ${p =>
+    p.desktop &&
     css`
       @media (min-width: 672px) {
         margin-right: 0;
       }
 
       @media (min-width: 848px) {
-        margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+        margin-right: ${p.padding ? '5px' : ''};
       }
 
       @media (min-width: 1048px) {
@@ -113,17 +113,17 @@ export default function ProjectNav(props) {
   const { indexForProjectPics } = props.localState;
   const { thumbnails, projectName } = project.attributes;
 
-  const menuIsActive = menu ? 'active' : '';
+  const menuIsActive = menu;
 
   return (
     <Group desktop={isDesktop} menu={menuIsActive} num={num}>
       <Mapper
         mapData={thumbnails}
         render={(thumb, idx) => {
-          const paddingIsActive = idx < 2 ? 'active' : '';
+          const paddingIsActive = idx < 2;
           const thumbnailNumber = idx + 1;
           const thumbnailIsActive =
-            activeProject && indexForProjectPics === idx ? 'active' : '';
+            activeProject && indexForProjectPics === idx;
           const highlightActiveThumbnail = menuIsActive &&
             thumbnailIsActive && <Highlighter />;
 
@@ -136,7 +136,6 @@ export default function ProjectNav(props) {
             >
               <RestyledLink
                 menu={menuIsActive}
-                active={thumbnailIsActive}
                 padding={paddingIsActive}
                 to={`/projects/${projectName}/${thumbnailNumber}`}
               >

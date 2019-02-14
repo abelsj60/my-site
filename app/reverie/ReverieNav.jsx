@@ -13,17 +13,15 @@ const StyledUL = styled(UnorderedList)`
   width: ${p => (p.menu !== 'active' ? '327px' : '')};
 `;
 const GrafAsDate = styled(Graf)`
-  color: ${p =>
-    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
+  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
 
   &:first-child {
     margin-top: 0px;
   }
 `;
 const GrafAsHed = styled(Graf)`
-  color: ${p =>
-    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
-  font-size: ${p => (p.menu === 'active' ? '3rem' : '1.7rem')};
+  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
+  font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
 
   ${p =>
     p.menu !== 'active' &&
@@ -40,7 +38,7 @@ export default function ReverieNav(props) {
   const { isMenu } = props.state;
   const { indexForReverieData } = props.localState;
 
-  const menuIsActive = isMenu ? 'active' : '';
+  const menuIsActive = isMenu;
 
   return (
     <StyledUL>
@@ -53,8 +51,7 @@ export default function ReverieNav(props) {
           const normalizeHed = new Normalize(headline);
           const normalizeCurrentHed = new Normalize(currentHed);
 
-          const linkIsActive =
-            normalizeHed.done === normalizeCurrentHed.done ? 'active' : '';
+          const linkIsActive = normalizeHed.done === normalizeCurrentHed.done;
           const reverieLink = `/reverie/${normalizeHed.done}`;
 
           return (
