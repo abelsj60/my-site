@@ -16,7 +16,7 @@ const Group = styled.ul`
   ${p =>
     p.menu &&
     css`
-      margin-bottom: ${p.num !== 2 ? '15px' : ''};
+      margin-bottom: ${p.num !== 2 ? '15px' : undefined};
       padding-bottom: 0;
       max-width: 100%;
       flex-direction: row;
@@ -52,21 +52,21 @@ const Group = styled.ul`
     `}};
 `;
 const Item = styled.li`
-  margin-right: ${p => (p.padding ? '5px' : '')};
+  margin-right: ${p => (p.padding ? '5px' : undefined)};
 
   @media (min-width: 672px) {
-    margin-right: ${p => (!p.desktop ? '0px' : '')};
-    margin-bottom: ${p => (!p.desktop ? '5px' : '')};
+    margin-right: ${p => (!p.desktop ? '0px' : undefined)};
+    margin-bottom: ${p => (!p.desktop ? '5px' : undefined)};
   }
 
   @media (min-width: 848px) {
-    margin-right: ${p => (p.padding ? '5px' : '')};
-    margin-bottom: ${p => (p.isRight ? '0px' : '')};
+    margin-right: ${p => (p.padding ? '5px' : undefined)};
+    margin-bottom: ${p => (p.isRight ? '0px' : undefined)};
   }
 
   @media (min-width: 1048px) {
-    margin-right: ${p => (!p.desktop ? '0px' : '')};
-    margin-bottom: ${p => (!p.desktop ? '5px' : '')};
+    margin-right: ${p => (!p.desktop ? '0px' : undefined)};
+    margin-bottom: ${p => (!p.desktop ? '5px' : undefined)};
   }
 `;
 const RestyledLink = styled(StyledLink)`
@@ -84,7 +84,7 @@ const RestyledLink = styled(StyledLink)`
       }
 
       @media (min-width: 848px) {
-        margin-right: ${p.padding ? '5px' : ''};
+        margin-right: ${p.padding ? '5px' : undefined};
       }
 
       @media (min-width: 1048px) {
@@ -134,11 +134,7 @@ export default function ProjectNav(props) {
               desktop={isDesktop}
               padding={paddingIsActive}
             >
-              <RestyledLink
-                menu={menuIsActive}
-                padding={paddingIsActive}
-                to={`/projects/${projectName}/${thumbnailNumber}`}
-              >
+              <RestyledLink to={`/projects/${projectName}/${thumbnailNumber}`}>
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
                 {highlightActiveThumbnail}
               </RestyledLink>

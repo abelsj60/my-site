@@ -96,10 +96,6 @@ export default class Params {
       return -1;
     }
 
-    // if (this.paramNames[0] === 'chapter') {
-    //   return 0;
-    // }
-
     return this.toIndex(this.paramNames[0]);
   }
 

@@ -19,7 +19,7 @@ const Container = styled.section`
     `};
 `;
 const Card = styled.section`
-  margin-top: ${p => (p.home ? '-200px' : '')};
+  margin-top: ${p => (p.home ? '-200px' : undefined)};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,7 +44,7 @@ const Graf = styled.p`
   align-self: center;
   margin-bottom: 0px;
   font-size: ${p => (p.businessCard ? '1.6rem' : '1.4rem')};
-  font-family: ${p => (p.businessCard ? 'Aref Ruqaa, serif' : '')};
+  font-family: ${p => (p.businessCard ? 'Aref Ruqaa, serif' : undefined)};
 `;
 
 export default function LegalTermsOrBizCard(props) {

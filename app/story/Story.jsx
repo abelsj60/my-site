@@ -61,7 +61,7 @@ const Text = styled.section`
 
 export default function Story(props) {
   const { data, overflowRef } = props;
-  const hideStoryText = !props.state.showStoryText ? 'hidden' : '';
+  const hideStoryText = !props.state.showStoryText ? 'hidden' : undefined;
 
   const r = new Referrer(props);
   const l = new Location(r.pathToMatch, props);

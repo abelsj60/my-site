@@ -9,7 +9,7 @@ import ProjectNav from './ProjectNav.jsx';
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
-  width: ${p => (!p.menu ? '327px' : '')};
+  width: ${p => (!p.menu ? '327px' : undefined)};
 
   ${p =>
     p.menu &&
@@ -20,7 +20,7 @@ const StyledUL = styled(UnorderedList)`
     `};
 `;
 const RestyledHed = styled(Hed)`
-  font-size: ${p => (p.menu !== 'active' ? '1.4rem' : '1.6rem')};
+  font-size: ${p => (!p.menu ? '1.4rem' : '1.6rem')};
 `;
 
 export default function DesktopProjectNav(props) {

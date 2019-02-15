@@ -10,7 +10,7 @@ import Graf from '../primitives/Graf.jsx';
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
-  width: ${p => (!p.menu ? '327px' : '')};
+  width: ${p => (!p.menu ? '327px' : undefined)};
 `;
 const GrafAsSource = styled(Graf)`
   color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
@@ -57,7 +57,7 @@ export default function ArticleNav(props) {
 
           return (
             <li key={idx}>
-              <StyledLink link={linkIsActive} to={articleLink}>
+              <StyledLink to={articleLink}>
                 <GrafAsSource
                   italic
                   size="1.3"

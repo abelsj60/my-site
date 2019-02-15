@@ -27,10 +27,10 @@ const Text = styled.p`
   text-align: center;
   padding-bottom: 10px;
   margin: 0px;
-  border-bottom: ${p => (p.item ? '.5px solid white' : '')};
+  border-bottom: ${p => (p.item ? '.5px solid white' : undefined)};
 
   @media (min-width: 848px) {
-    border-bottom: ${p => (p.item ? '.5px solid #6e7dab' : '')};
+    border-bottom: ${p => (p.item ? '.5px solid #6e7dab' : undefined)};
   }
 `;
 
@@ -51,10 +51,7 @@ export default function ChapterNav(props) {
 
             return (
               <Item key={idx}>
-                <RestyledLink
-                  item={itemIsActive}
-                  to={`/chapter/${normalizedTitle}`}
-                >
+                <RestyledLink to={`/chapter/${normalizedTitle}`}>
                   <Text item={itemIsActive} num={idx}>
                     {pageOrMenuText}
                   </Text>

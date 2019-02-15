@@ -17,7 +17,7 @@ const Container = styled.header`
   position: relative;
   height: 52px;
   display: flex;
-  justify-content: ${p => (p.home ? 'center' : '')};
+  justify-content: ${p => (p.home ? 'center' : undefined)};
   align-items: center;
 `;
 const RestyledLink = styled(StyledLink)`
@@ -25,11 +25,11 @@ const RestyledLink = styled(StyledLink)`
   color: ${p => (p.home ? 'white' : '#455057')};
 
   && {
-    text-decoration: ${p => (p.active ? 'underline' : '')};
+    text-decoration: ${p => (p.active === 'active' ? 'underline' : undefined)};
   }
 `;
-const Name = styled(RestyledLink)`
-  display: ${p => (p.hide ? 'none' : '')};
+const NameAsLink = styled(RestyledLink)`
+  display: ${p => (p.hide === 'active' ? 'none' : undefined)};
   font-size: 1.4rem;
   font-weight: bold;
 
@@ -39,7 +39,7 @@ const Name = styled(RestyledLink)`
 `;
 const Motto = styled.p`
   flex: 1;
-  display: ${p => (p.hide ? 'none' : '')};
+  display: ${p => (p.hide ? 'none' : undefined)};
   font-size: 1.05rem;
   margin-top: 2px;
   margin-left: 5px;
@@ -55,9 +55,9 @@ const Motto = styled.p`
   }
 `;
 const Nav = styled.nav`
-  display: ${p => (p.home ? '' : 'none')};
-  padding-bottom: ${p => (p.home ? '5px' : '')};
-  border-bottom: ${p => (p.home ? '.5px solid white' : '')};
+  display: ${p => (p.home ? undefined : 'none')};
+  padding-bottom: ${p => (p.home ? '5px' : undefined)};
+  border-bottom: ${p => (p.home ? '.5px solid white' : undefined)};
 
   ${p =>
     p.menu &&
@@ -69,7 +69,7 @@ const Nav = styled.nav`
 
   @media (min-width: 705px) {
     display: block;
-    margin-right: ${p => (!p.home ? '15px' : '')};
+    margin-right: ${p => (!p.home ? '15px' : undefined)};
   }
 `;
 const NavList = styled.ul`
@@ -80,7 +80,7 @@ const NavList = styled.ul`
   list-style: none;
 `;
 const Icon = styled.img`
-  display: ${p => (p.home ? 'none' : '')};
+  display: ${p => (p.home ? 'none' : undefined)};
   height: 17px;
   width: 17px;
   margin-left: auto;
@@ -127,9 +127,12 @@ export default class Header extends Component {
 
     return (
       <Container home={homeIsActive}>
-        <Name to={'/'} hide={menuIsActive || homeIsActive}>
+        <NameAsLink
+          to={'/'}
+          hide={((menuIsActive || homeIsActive) && 'active') || undefined}
+        >
           James Abels
-        </Name>
+        </NameAsLink>
         <Motto hide={menuIsActive || homeIsActive}>
           Coding narratives and magical adventures
         </Motto>
@@ -143,8 +146,8 @@ export default class Header extends Component {
                 return (
                   <li key={idx}>
                     <RestyledLink
-                      active={pathIsActive}
-                      home={homeIsActive}
+                      active={(pathIsActive && 'active') || undefined}
+                      home={(homeIsActive && 'active') || undefined}
                       num={idx}
                       to={link.path}
                     >

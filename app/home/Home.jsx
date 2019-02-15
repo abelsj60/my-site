@@ -67,7 +67,7 @@ const TravelButton = styled(Button)`
 export default function Home(props) {
   const { inCity, showBusinessCard, showLegalTerms } = props.state;
   const { boundHandleClickForApp } = props;
-  const buttonText = inCity ? 'Home' : 'Away';
+  const travelButtonText = inCity ? 'Home' : 'Away';
 
   return (
     <RestyledMain>
@@ -79,14 +79,14 @@ export default function Home(props) {
           coding narratives and magical adventures
         </RestyledGraf>
       </NameTag>
-      <BoyInForeground src="/foreground.png" />
+      <BoyInForeground src="/foreground.png" alt="the boy looks out" />
       <FantasyAsBackground
-        alt="fantasy world"
+        alt="the boy builds a fantasy world"
         src="/background-fantasy.png"
         inCity={inCity}
       />
       <CityAsBackground
-        alt="city world"
+        alt="the boy sees a city view"
         src="/background-city.png"
         inCity={inCity}
       />
@@ -94,7 +94,7 @@ export default function Home(props) {
         className="travel-button"
         clickFunction={() => boundHandleClickForApp('swapHomePageImage')}
         tempContentIsOn={showBusinessCard || showLegalTerms}
-        text={buttonText}
+        text={travelButtonText}
       />
     </RestyledMain>
   );

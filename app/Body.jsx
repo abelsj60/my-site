@@ -50,65 +50,27 @@ export default class Body extends Component {
             return <Home {...this.props} />;
           }}
         />
-        <Route
-          path="/chapter/:title?"
-          render={({ match }) => {
-            return (
-              <ContentLoader
-                {...this.props}
-                match={match}
-                localState={this.state}
-                boundHandleClickForBody={boundHandleClickForBody}
-              />
-            );
-          }}
-        />
-        <Route
-          path="/projects/:projectName?/:projectThumbnail?"
-          render={({ match }) => {
-            return (
-              <ContentLoader
-                {...this.props}
-                localState={this.state}
-                match={match}
-                boundHandleClickForBody={boundHandleClickForBody}
-              />
-            );
-          }}
-        />
-        <Route
-          path="/journalism/:publication?/:headline?"
-          render={({ match }) => {
-            return (
-              <ContentLoader
-                {...this.props}
-                localState={this.state}
-                match={match}
-                boundHandleClickForBody={boundHandleClickForBody}
-              />
-            );
-          }}
-        />
-        <Route
-          path="/reverie/:headline?"
-          render={({ match }) => {
-            return (
-              <ContentLoader
-                {...this.props}
-                localState={this.state}
-                match={match}
-                boundHandleClickForBody={boundHandleClickForBody}
-              />
-            );
-          }}
-        />
-        <Route
-          exact
-          path="/about"
-          render={() => {
-            return <About />;
-          }}
-        />
+        {[
+          '/chapter/:title?',
+          '/journalism/:publication?/:headline?',
+          '/projects/:projectName?/:projectThumbnail?',
+          '/reverie/:headline?'
+        ].map((path, idx) => (
+          <Route
+            key={idx}
+            path={path}
+            render={({ match }) => {
+              return (
+                <ContentLoader
+                  {...this.props}
+                  match={match}
+                  localState={this.state}
+                  boundHandleClickForBody={boundHandleClickForBody}
+                />
+              );
+            }}
+          />
+        ))}
         <Route
           exact
           path="/i"
@@ -116,6 +78,7 @@ export default class Body extends Component {
             return <ReloadRoute {...this.props} localState={this.state} />;
           }}
         />
+        <Route exact path="/about" component={About} />
         <Route component={NotFound} />
       </Switch>
     );

@@ -14,12 +14,12 @@ const RestyledLink = styled(StyledLink)`
   padding-bottom: 6px;
 
   @media (min-width: 848px) {
-    display: ${props => (props.menu !== 'active' ? 'none' : '')};
+    display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
   }
 `;
 const Label = styled.p`
   font-size: 1.3rem;
-  color: ${props => (props.menu !== 'active' ? '#6e7dab' : '#fd1172')};
+  color: ${p => (!p.menu ? '#6e7dab' : '#fd1172')};
   transition: color 1s;
   margin: 0px;
 `;
@@ -34,9 +34,8 @@ const Line = styled.div`
   width: 100%;
   bottom: 0px;
   margin: 0px;
-  height: ${props => (props.menu !== 'active' ? '1px' : '2px')};
-  background-color: ${props =>
-    props.menu !== 'active' ? '#6e7dab' : '#ffe74c'};
+  height: ${p => (!p.menu ? '1px' : '2px')};
+  background-color: ${p => (!p.menu ? '#6e7dab' : '#ffe74c')};
 
   ${StyledLink}:hover & {
     height: 2px;
@@ -45,7 +44,6 @@ const Line = styled.div`
 
 export default function MenuButton(props) {
   const { isMenu, lastCaller, currentCaller } = props.state;
-  const menuIsActive = isMenu ? 'active' : '';
   const isReverie = currentCaller === 'reverie';
   const link =
     isReverie && isMenu
@@ -58,10 +56,10 @@ export default function MenuButton(props) {
 
   return (
     <Container>
-      <RestyledLink to={link} menu={menuIsActive}>
-        <Label menu={menuIsActive}>{text}</Label>
+      <RestyledLink to={link} menu={(isMenu && 'active') || undefined}>
+        <Label menu={isMenu}>{text}</Label>
         <Arrow src={arrowIcon} />
-        <Line menu={menuIsActive} />
+        <Line menu={isMenu} />
       </RestyledLink>
     </Container>
   );

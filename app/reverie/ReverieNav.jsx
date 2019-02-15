@@ -10,7 +10,7 @@ import normalize from '../helpers/normalize.js';
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
-  width: ${p => (p.menu !== 'active' ? '327px' : '')};
+  width: ${p => (!p.menu ? '327px' : undefined)};
 `;
 const GrafAsDate = styled(Graf)`
   color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
@@ -24,7 +24,7 @@ const GrafAsHed = styled(Graf)`
   font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
 
   ${p =>
-    p.menu !== 'active' &&
+    !p.menu &&
     css`
       overflow: hidden;
       text-overflow: ellipsis;
@@ -37,8 +37,6 @@ export default function ReverieNav(props) {
   const { data } = props;
   const { isMenu } = props.state;
   const { indexForReverieData } = props.localState;
-
-  const menuIsActive = isMenu;
 
   return (
     <StyledUL>
@@ -56,12 +54,12 @@ export default function ReverieNav(props) {
 
           return (
             <li key={idx}>
-              <StyledLink link={linkIsActive} to={reverieLink}>
+              <StyledLink to={reverieLink}>
                 <GrafAsDate
                   italic
                   size="1.3"
                   bottom="0"
-                  menu={menuIsActive}
+                  menu={isMenu}
                   link={linkIsActive}
                 >
                   {date}
@@ -69,7 +67,7 @@ export default function ReverieNav(props) {
                 <GrafAsHed
                   top="0"
                   bottom="10"
-                  menu={menuIsActive}
+                  menu={isMenu}
                   link={linkIsActive}
                 >
                   {headline}
