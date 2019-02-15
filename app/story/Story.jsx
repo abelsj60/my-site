@@ -57,8 +57,8 @@ const Text = styled.section`
 `;
 
 export default function Story(props) {
-  const { data, overflowRef, state, params } = props;
-  const { showStoryText } = state;
+  const { data, overflowRef, appState, params } = props;
+  const { showStoryText } = appState;
   const indexForChapterData = params.titleToIndex();
 
   const chapter = data[indexForChapterData];

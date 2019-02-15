@@ -3,7 +3,7 @@ import normalize from '../helpers/normalize.js';
 
 export default class Reload {
   constructor(props) {
-    const { currentCaller } = props.state;
+    const { currentCaller } = props.appState;
 
     this._props = props;
     this._caller = currentCaller;
@@ -41,7 +41,7 @@ export default class Reload {
 
   _storyPath(section) {
     const storyData = this._getContentData();
-    const { indexForChapterData } = this._props.localState;
+    const { indexForChapterData } = this._props.bodyState;
     const title = storyData[indexForChapterData].attributes.title;
     const normalizedTitle = this._normalize(title);
 
@@ -50,7 +50,7 @@ export default class Reload {
 
   _projectsPath(section) {
     const projectData = this._getContentData();
-    const { indexForProjectData, indexForProjectPics } = this._props.localState;
+    const { indexForProjectData, indexForProjectPics } = this._props.bodyState;
     const projectName = projectData[indexForProjectData].attributes.projectName;
     const normalizedProjectName = this._normalize(projectName);
     const thumbnailNumber = indexForProjectPics + 1;
@@ -60,7 +60,7 @@ export default class Reload {
 
   _articlePath(section) {
     const articleData = this._getContentData();
-    const { indexForArticleData } = this._props.localState;
+    const { indexForArticleData } = this._props.bodyState;
     const article = articleData[indexForArticleData];
     const { publication, headline } = article.attributes;
     const normalizedPublication = this._normalize(publication);
@@ -71,7 +71,7 @@ export default class Reload {
 
   _reveriePath(section) {
     const reverieData = this._getContentData();
-    const { indexForReverieData } = this._props.localState;
+    const { indexForReverieData } = this._props.bodyState;
     const headline = reverieData[indexForReverieData].attributes.headline;
     const normalizedHeadline = this._normalize(headline);
 

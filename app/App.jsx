@@ -72,16 +72,16 @@ class App extends Component {
     return (
       <Fragment>
         <GlobalStyle home={homeIsActive} />
-        <Header {...this.props} state={this.state} />
+        <Header {...this.props} appState={this.state} />
         <Body
           {...this.props}
-          state={this.state}
+          appState={this.state}
           boundHandleClickForApp={boundHandleClickForApp}
         />
-        <LegalTermsOrBizCard {...this.props} state={this.state} />
+        <LegalTermsOrBizCard {...this.props} appState={this.state} />
         <Footer
           {...this.props}
-          state={this.state}
+          appState={this.state}
           boundHandleClickForApp={boundHandleClickForApp}
         />
       </Fragment>
@@ -133,7 +133,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Update returnState comments
 // Reverie + Article — share?
 // Picture focus
 // Cut-off headlines

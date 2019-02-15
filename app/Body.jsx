@@ -64,7 +64,7 @@ export default class Body extends Component {
                 <ContentLoader
                   {...this.props}
                   match={match}
-                  localState={this.state}
+                  bodyState={this.state}
                   boundHandleClickForBody={boundHandleClickForBody}
                 />
               );
@@ -75,7 +75,7 @@ export default class Body extends Component {
           exact
           path="/i"
           render={() => {
-            return <ReloadRoute {...this.props} localState={this.state} />;
+            return <ReloadRoute {...this.props} bodyState={this.state} />;
           }}
         />
         <Route exact path="/about" component={About} />

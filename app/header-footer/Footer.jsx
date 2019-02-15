@@ -54,14 +54,14 @@ const TextBox = styled.div`
 `;
 
 export default function FooterContainer(props) {
-  const { boundHandleClickForApp, state } = props;
+  const { boundHandleClickForApp, appState } = props;
   const {
     showBusinessCard,
     showLegalTerms,
     showStoryText,
     currentCaller,
     lastCaller
-  } = state;
+  } = appState;
 
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';

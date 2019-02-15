@@ -115,7 +115,8 @@ export default class Header extends Component {
   }
 
   render() {
-    const { currentCaller } = this.props.state;
+    const { appState } = this.props;
+    const { currentCaller } = appState;
     const menuIsActive = this.state.menuIsOpen;
     const homeIsActive = currentCaller === 'home';
     const togglerSource = `/menu-${menuIsActive ? 'open' : 'closed'}-icon.svg`;

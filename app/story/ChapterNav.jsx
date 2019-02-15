@@ -35,13 +35,13 @@ const Text = styled.p`
 `;
 
 export default function ChapterNav(props) {
-  const { data, localState, location, params } = props;
+  const { data, bodyState, location, params } = props;
   let indexForChapterData;
 
   if (!location.pathname.split('/')[2] === 'menu') {
     indexForChapterData = params.titleToIndex();
   } else {
-    indexForChapterData = localState.indexForChapterData;
+    indexForChapterData = bodyState.indexForChapterData;
   }
 
   return (

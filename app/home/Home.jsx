@@ -65,7 +65,7 @@ const TravelButton = styled(Button)`
 `;
 
 export default function Home(props) {
-  const { inCity, showBusinessCard, showLegalTerms } = props.state;
+  const { inCity, showBusinessCard, showLegalTerms } = props.appState;
   const { boundHandleClickForApp } = props;
   const travelButtonText = inCity ? 'Home' : 'Away';
 

@@ -91,12 +91,19 @@ const Highlighter = styled.div`
 `;
 
 export default function ProjectNav(props) {
-  const { num, project, isRight, isActive, indexForProjectPics, state } = props;
+  const {
+    num,
+    project,
+    isRight,
+    isActive,
+    indexForProjectPics,
+    appState
+  } = props;
   const { thumbnails, projectName } = project.attributes;
   let isMenu;
 
-  if (state) {
-    isMenu = state.isMenu;
+  if (appState) {
+    isMenu = appState.isMenu;
   }
 
   return (

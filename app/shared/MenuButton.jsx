@@ -43,7 +43,7 @@ const Line = styled.div`
 `;
 
 export default function MenuButton(props) {
-  const { isMenu, lastCaller, currentCaller } = props.state;
+  const { isMenu, lastCaller, currentCaller } = props.appState;
   const isReverie = currentCaller === 'reverie';
   const link =
     isReverie && isMenu

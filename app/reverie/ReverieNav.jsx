@@ -34,14 +34,14 @@ const GrafAsHed = styled(Graf)`
 `;
 
 export default function ReverieNav(props) {
-  const { data, location, params, localState } = props;
-  const { isMenu } = props.state;
+  const { data, location, params, bodyState, appState } = props;
+  const { isMenu } = appState;
   let indexForReverieData;
 
   if (!location.pathname.split('/')[2] === 'menu') {
     indexForReverieData = params.headlineToIndex();
   } else {
-    indexForReverieData = localState.indexForReverieData;
+    indexForReverieData = bodyState.indexForReverieData;
   }
 
   return (

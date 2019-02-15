@@ -24,8 +24,8 @@ const RestyledHed = styled(Hed)`
 `;
 
 export default function DesktopProjectNav(props) {
-  const { params, state, localState, location } = props;
-  const { isMenu } = state;
+  const { params, appState, bodyState, location } = props;
+  const { isMenu } = appState;
 
   let indexForProjectData;
   let indexForProjectPics;
@@ -35,11 +35,11 @@ export default function DesktopProjectNav(props) {
     indexForProjectData = params.projectNameToIndex();
     indexForProjectPics = params.projectThumbnailToIndex();
     finalData = props.data.filter(
-      (_, index) => props.localState.indexForProjectData !== index
+      (_, index) => props.bodyState.indexForProjectData !== index
     );
   } else {
-    indexForProjectData = localState.indexForProjectData;
-    indexForProjectPics = localState.indexForProjectPics;
+    indexForProjectData = bodyState.indexForProjectData;
+    indexForProjectPics = bodyState.indexForProjectPics;
     finalData = props.data;
   }
 

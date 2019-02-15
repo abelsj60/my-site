@@ -48,7 +48,7 @@ const Graf = styled.p`
 `;
 
 export default function LegalTermsOrBizCard(props) {
-  const { showBusinessCard, showLegalTerms, currentCaller } = props.state;
+  const { showBusinessCard, showLegalTerms, currentCaller } = props.appState;
 
   if (!showBusinessCard && !showLegalTerms) {
     return null;

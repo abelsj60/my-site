@@ -107,7 +107,7 @@ export default class ContentLoader extends Component {
         if (this.overflowRef.current.scrollTop !== 0) {
           const isProjects = l.type === 'projects';
           const lastIndexForProjectData =
-            prevProps.localState.indexForProjectData;
+            prevProps.bodyState.indexForProjectData;
           const updateScrollTop = isProjects
             ? paramOneAsIndex !== lastIndexForProjectData
             : true;

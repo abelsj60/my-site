@@ -34,14 +34,14 @@ const GrafAsHed = styled(Graf)`
 `;
 
 export default function ArticleNav(props) {
-  const { data, params, localState, state, location } = props;
-  const { isMenu } = state;
+  const { data, params, bodyState, appState, location } = props;
+  const { isMenu } = appState;
   let indexForArticleData;
 
   if (!location.pathname.split('/')[2] === 'menu') {
     indexForArticleData = params.headlineToIndex();
   } else {
-    indexForArticleData = localState.indexForArticleData;
+    indexForArticleData = bodyState.indexForArticleData;
   }
 
   return (
