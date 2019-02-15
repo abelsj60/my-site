@@ -23,7 +23,7 @@ const Group = styled.ul`
     `};
 
   ${p =>
-    !p.desktop &&
+    p.isRight &&
     css`
       border-bottom: #6e7dab solid 0.5px;
 
@@ -55,8 +55,8 @@ const Item = styled.li`
   margin-right: ${p => (p.padding ? '5px' : undefined)};
 
   @media (min-width: 672px) {
-    margin-right: ${p => (!p.desktop ? '0px' : undefined)};
-    margin-bottom: ${p => (!p.desktop ? '5px' : undefined)};
+    margin-right: ${p => (p.isRight ? '0px' : undefined)};
+    margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
 
   @media (min-width: 848px) {
@@ -65,8 +65,8 @@ const Item = styled.li`
   }
 
   @media (min-width: 1048px) {
-    margin-right: ${p => (!p.desktop ? '0px' : undefined)};
-    margin-bottom: ${p => (!p.desktop ? '5px' : undefined)};
+    margin-right: ${p => (p.isRight ? '0px' : undefined)};
+    margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
 `;
 const RestyledLink = styled(StyledLink)`
@@ -75,22 +75,6 @@ const RestyledLink = styled(StyledLink)`
   align-items: center;
   min-width: 0;
   position: relative;
-
-  ${p =>
-    p.desktop &&
-    css`
-      @media (min-width: 672px) {
-        margin-right: 0;
-      }
-
-      @media (min-width: 848px) {
-        margin-right: ${p.padding ? '5px' : undefined};
-      }
-
-      @media (min-width: 1048px) {
-        margin-right: 0;
-      }
-    `};
 `;
 const Image = styled.img`
   flex: 1;
@@ -107,36 +91,32 @@ const Highlighter = styled.div`
 `;
 
 export default function ProjectNav(props) {
-  // ID active project via returnState b/c no params in '/menu'
-
-  const { num, project, activeProject, isDesktop, menu, isRight } = props;
-  const { indexForProjectPics } = props.localState;
+  const { num, project, isRight, isActive, indexForProjectPics, state } = props;
   const { thumbnails, projectName } = project.attributes;
+  let isMenu;
 
-  const menuIsActive = menu;
+  if (state) {
+    isMenu = state.isMenu;
+  }
 
   return (
-    <Group desktop={isDesktop} menu={menuIsActive} num={num}>
+    <Group isRight={isRight} menu={isMenu} num={num}>
       <Mapper
         mapData={thumbnails}
         render={(thumb, idx) => {
-          const paddingIsActive = idx < 2;
+          const padding = idx < 2;
           const thumbnailNumber = idx + 1;
-          const thumbnailIsActive =
-            activeProject && indexForProjectPics === idx;
-          const highlightActiveThumbnail = menuIsActive &&
-            thumbnailIsActive && <Highlighter />;
+          let highlightActiveThumbnail;
+
+          if (isMenu && isActive && indexForProjectPics === idx) {
+            highlightActiveThumbnail = true;
+          }
 
           return (
-            <Item
-              key={idx}
-              isRight={isRight}
-              desktop={isDesktop}
-              padding={paddingIsActive}
-            >
+            <Item key={idx} isRight={isRight} padding={padding}>
               <RestyledLink to={`/projects/${projectName}/${thumbnailNumber}`}>
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
-                {highlightActiveThumbnail}
+                {highlightActiveThumbnail && <Highlighter />}
               </RestyledLink>
             </Item>
           );

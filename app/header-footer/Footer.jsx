@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
 import Button from '../shared/Button.jsx';
-// import StoryButton from './StoryButton.jsx';
 
 const Container = styled.footer`
   background-color: ${p => (!p.home ? 'white' : undefined)};
@@ -72,8 +71,6 @@ export default function FooterContainer(props) {
     lastCaller !== 'home' && lastCaller !== 'i' ? `/${lastCaller}` : '/'; // home is '/', not '/home'
   const linkForReverie = isReverie ? whereItStarted : '/reverie';
 
-  const storyButtonText = showStoryText ? 'Hide story' : 'Show story';
-
   return (
     <Container home={isHome} story={isStory}>
       <Line home={isHome} />
@@ -83,7 +80,7 @@ export default function FooterContainer(props) {
         clickFunction={() => boundHandleClickForApp('toggleStoryText')}
         conditional={true}
         show={isStory}
-        text={storyButtonText}
+        text={showStoryText ? 'Hide story' : 'Show story'}
       />
       <TextBox>
         <RestyledLink

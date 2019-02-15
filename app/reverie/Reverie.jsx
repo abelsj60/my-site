@@ -12,9 +12,6 @@ import Overflow from '../primitives/Overflow.jsx';
 import ReverieNav from './ReverieNav.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 
-import Referrer from '../classes/Referrer.js';
-import Location from '../classes/Location.js';
-
 const Text = styled.section`
   p {
     font-size: 1.6rem;
@@ -36,12 +33,9 @@ const Text = styled.section`
 `;
 
 export default function Reverie(props) {
-  const { data, overflowRef } = props;
+  const { data, overflowRef, params } = props;
+  const indexForReverieData = params.headlineToIndex();
 
-  const r = new Referrer(props);
-  const l = new Location(r.pathToMatch, props);
-
-  const indexForReverieData = l.params.headlineToIndex();
   const reverie = data[indexForReverieData];
   const { headline, date } = reverie.attributes;
 

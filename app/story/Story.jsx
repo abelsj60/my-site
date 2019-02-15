@@ -9,9 +9,6 @@ import Left from '../primitives/Left.jsx';
 import Hed from '../primitives/Hed.jsx';
 import ChapterNav from './ChapterNav.jsx';
 
-import Referrer from '../classes/Referrer.js';
-import Location from '../classes/Location.js';
-
 const RestyledLeft = styled(Left)`
   display: ${props => (props.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
@@ -60,19 +57,17 @@ const Text = styled.section`
 `;
 
 export default function Story(props) {
-  const { data, overflowRef } = props;
-  const hideStoryText = !props.state.showStoryText ? 'hidden' : undefined;
+  const { data, overflowRef, state, params } = props;
+  const { showStoryText } = state;
+  const indexForChapterData = params.titleToIndex();
 
-  const r = new Referrer(props);
-  const l = new Location(r.pathToMatch, props);
-
-  const indexForChapterData = l.params.titleToIndex();
   const chapter = data[indexForChapterData];
   const { image, title } = chapter.attributes;
+  const textStatus = !showStoryText ? 'hidden' : undefined;
 
   return (
     <Main>
-      <RestyledLeft as="section" text={hideStoryText}>
+      <RestyledLeft as="section" text={textStatus}>
         <ChapterNav {...props} />
         <Hed color="yellow" bigColor="pink" size="3" top="13" bottom="12">
           {title}

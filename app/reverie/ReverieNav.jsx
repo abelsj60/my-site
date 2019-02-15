@@ -34,9 +34,15 @@ const GrafAsHed = styled(Graf)`
 `;
 
 export default function ReverieNav(props) {
-  const { data } = props;
+  const { data, location, params, localState } = props;
   const { isMenu } = props.state;
-  const { indexForReverieData } = props.localState;
+  let indexForReverieData;
+
+  if (!location.pathname.split('/')[2] === 'menu') {
+    indexForReverieData = params.headlineToIndex();
+  } else {
+    indexForReverieData = localState.indexForReverieData;
+  }
 
   return (
     <StyledUL>

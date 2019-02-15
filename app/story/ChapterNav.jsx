@@ -35,25 +35,29 @@ const Text = styled.p`
 `;
 
 export default function ChapterNav(props) {
-  const { data } = props;
-  const { isMenu } = props.state;
-  const { indexForChapterData } = props.localState;
+  const { data, localState, location, params } = props;
+  let indexForChapterData;
+
+  if (!location.pathname.split('/')[2] === 'menu') {
+    indexForChapterData = params.titleToIndex();
+  } else {
+    indexForChapterData = localState.indexForChapterData;
+  }
 
   return (
     <nav>
       <StyledUL>
         <Mapper
           mapData={data}
-          render={(chapter, idx) => {
+          render={(_chapter, idx) => {
             const itemIsActive = indexForChapterData === idx;
-            const pageOrMenuText = isMenu ? chapter.attributes.title : idx + 1;
             const normalizedTitle = normalize(data[idx].attributes.title);
 
             return (
               <Item key={idx}>
                 <RestyledLink to={`/chapter/${normalizedTitle}`}>
                   <Text item={itemIsActive} num={idx}>
-                    {pageOrMenuText}
+                    {idx + 1}
                   </Text>
                 </RestyledLink>
               </Item>

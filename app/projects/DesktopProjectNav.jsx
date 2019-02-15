@@ -24,22 +24,31 @@ const RestyledHed = styled(Hed)`
 `;
 
 export default function DesktopProjectNav(props) {
-  const { isMenu } = props.state;
-  const { indexForProjectData } = props.localState;
-  const filteredData = isMenu
-    ? props.data
-    : props.data.filter(
+  const { params, state, localState, location } = props;
+  const { isMenu } = state;
+
+  let indexForProjectData;
+  let indexForProjectPics;
+  let finalData;
+
+  if (!location.pathname.split('/')[2] === 'menu') {
+    indexForProjectData = params.projectNameToIndex();
+    indexForProjectPics = params.projectThumbnailToIndex();
+    finalData = props.data.filter(
       (_, index) => props.localState.indexForProjectData !== index
     );
-  const menuIsActive = isMenu;
+  } else {
+    indexForProjectData = localState.indexForProjectData;
+    indexForProjectPics = localState.indexForProjectPics;
+    finalData = props.data;
+  }
 
   return (
-    <StyledUL menu={menuIsActive}>
+    <StyledUL menu={isMenu}>
       <Mapper
-        mapData={filteredData}
+        mapData={finalData}
         render={(project, idx) => {
           const { name, type } = project.attributes.details;
-          const isActiveProject = isMenu && indexForProjectData === idx;
 
           return (
             <li key={idx}>
@@ -48,15 +57,14 @@ export default function DesktopProjectNav(props) {
                 color="blue"
                 bottom="9"
                 num={idx}
-                menu={menuIsActive}
+                menu={isMenu}
               >{`${name} | ${type}`}</RestyledHed>
               <ProjectNav
                 {...props}
                 num={idx}
-                menu={menuIsActive}
                 project={project}
-                isDesktop={true}
-                activeProject={isActiveProject}
+                isActive={indexForProjectData === idx}
+                indexForProjectPics={indexForProjectPics}
               />
             </li>
           );

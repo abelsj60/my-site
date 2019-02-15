@@ -60,8 +60,6 @@ class App extends Component {
       isMenu: r.checkForMenu(props),
       inCity: false
     };
-
-    this.magicRef = React.createRef();
   }
 
   render() {
@@ -135,8 +133,10 @@ class App extends Component {
 
 export default withRouter(App);
 
+// Update returnState comments
 // Reverie + Article — share?
 // Picture focus
+// Cut-off headlines
 
 // Story edit
 // Take pictures, write copy for Arrow, Slingshot, TMMnews

@@ -34,14 +34,18 @@ const GrafAsHed = styled(Graf)`
 `;
 
 export default function ArticleNav(props) {
-  const { data } = props;
-  const { isMenu } = props.state;
-  const { indexForArticleData } = props.localState;
+  const { data, params, localState, state, location } = props;
+  const { isMenu } = state;
+  let indexForArticleData;
 
-  const menuIsActive = isMenu;
+  if (!location.pathname.split('/')[2] === 'menu') {
+    indexForArticleData = params.headlineToIndex();
+  } else {
+    indexForArticleData = localState.indexForArticleData;
+  }
 
   return (
-    <StyledUL menu={menuIsActive}>
+    <StyledUL menu={isMenu}>
       <Mapper
         mapData={data}
         render={(article, idx) => {
@@ -62,7 +66,7 @@ export default function ArticleNav(props) {
                   italic
                   size="1.3"
                   bottom="0"
-                  menu={menuIsActive}
+                  menu={isMenu}
                   link={linkIsActive}
                 >
                   {publication}
@@ -70,7 +74,7 @@ export default function ArticleNav(props) {
                 <GrafAsHed
                   top="0"
                   bottom="10"
-                  menu={menuIsActive}
+                  menu={isMenu}
                   link={linkIsActive}
                 >
                   {headline}
