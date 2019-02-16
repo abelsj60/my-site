@@ -42,7 +42,7 @@ const BoyInForeground = styled.img`
   object-fit: cover;
   height: 100vh;
   min-width: 100vw;
-  z-index: 2;
+  z-index: 1;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
   position: unset;

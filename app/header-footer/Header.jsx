@@ -13,7 +13,7 @@ const Container = styled.header`
   background-color: ${p => (p.home ? 'transparent' : 'white')};
   color: ${p => (p.home ? 'white' : '#455057')};
   flex-shrink: 0;
-  z-index: 2;
+  z-index: 3;
   position: relative;
   height: 52px;
   display: flex;
