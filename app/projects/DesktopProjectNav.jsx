@@ -24,23 +24,21 @@ const RestyledHed = styled(Hed)`
 `;
 
 export default function DesktopProjectNav(props) {
-  const { params, appState, bodyState, location } = props;
+  const { params, appState, bodyState, location, data } = props;
   const { isMenu } = appState;
 
   let indexForProjectData;
   let indexForProjectPics;
   let finalData;
 
-  if (!location.pathname.split('/')[2] === 'menu') {
+  if (location.pathname.split('/')[2] !== 'menu') {
     indexForProjectData = params.projectNameToIndex();
     indexForProjectPics = params.projectThumbnailToIndex();
-    finalData = props.data.filter(
-      (_, index) => props.bodyState.indexForProjectData !== index
-    );
+    finalData = data.filter((_, index) => indexForProjectData !== index);
   } else {
     indexForProjectData = bodyState.indexForProjectData;
     indexForProjectPics = bodyState.indexForProjectPics;
-    finalData = props.data;
+    finalData = data;
   }
 
   return (

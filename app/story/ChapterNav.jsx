@@ -38,7 +38,7 @@ export default function ChapterNav(props) {
   const { data, bodyState, location, params } = props;
   let indexForChapterData;
 
-  if (!location.pathname.split('/')[2] === 'menu') {
+  if (location.pathname.split('/')[2] !== 'menu') {
     indexForChapterData = params.titleToIndex();
   } else {
     indexForChapterData = bodyState.indexForChapterData;

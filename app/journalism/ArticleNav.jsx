@@ -38,7 +38,7 @@ export default function ArticleNav(props) {
   const { isMenu } = appState;
   let indexForArticleData;
 
-  if (!location.pathname.split('/')[2] === 'menu') {
+  if (location.pathname.split('/')[2] !== 'menu') {
     indexForArticleData = params.headlineToIndex();
   } else {
     indexForArticleData = bodyState.indexForArticleData;

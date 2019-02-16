@@ -38,7 +38,7 @@ export default function ReverieNav(props) {
   const { isMenu } = appState;
   let indexForReverieData;
 
-  if (!location.pathname.split('/')[2] === 'menu') {
+  if (location.pathname.split('/')[2] !== 'menu') {
     indexForReverieData = params.headlineToIndex();
   } else {
     indexForReverieData = bodyState.indexForReverieData;

@@ -133,9 +133,9 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Reverie + Article — share?
-// Picture focus
 // Cut-off headlines
+// Picture focus
+// Reverie + Article — share?
 
 // Story edit
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
