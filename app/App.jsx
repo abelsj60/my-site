@@ -133,7 +133,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Cut-off headlines
 // Picture focus
 // Reverie + Article — share?
 

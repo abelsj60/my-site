@@ -42,7 +42,7 @@ export default function Article(props) {
           <Hed as="h2" normal italic size="1.5" color="pink" bottom="4">
             {publication}
           </Hed>
-          <Hed size="3" bottom="15">
+          <Hed padIt size="3" bottom="15">
             {headline}
           </Hed>
           <Graf size="1.4" bottom="15">

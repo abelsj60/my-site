@@ -27,6 +27,7 @@ export default styled.h1`
   font-weight: ${p => p.normal && 'normal'};
   line-height: normal;
   margin-bottom: ${p => p.bottom && p.bottom + 'px'};
+  margin-left: ${p => p.padIt && '1px'};
   margin-top: ${p => p.top && p.top + 'px'};
 
   @media (min-width: 848px) {
