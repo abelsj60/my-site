@@ -34,11 +34,6 @@ const RestyledRight = styled(Right)`
 const Image = styled.img`
   object-fit: cover;
   overflow: hidden;
-
-  @media (min-width: 848px) {
-    flex: 1;
-    max-width: 100%;s
-  }
 `;
 const Text = styled.section`
   font-size: 1.6rem;

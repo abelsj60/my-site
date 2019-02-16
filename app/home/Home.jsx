@@ -33,23 +33,27 @@ const RestyledGraf = styled(Graf)`
   text-shadow: 1px 1px 2px black;
   margin-left: 16px;
 `;
+const PictureBox = styled.div`
+  position: absolute;
+  top: 0px;
+`;
 const BoyInForeground = styled.img`
   position: absolute;
-  bottom: 0;
-  align-self: center;
   object-fit: cover;
-  min-height: 100%;
-  width: 100%;
-  overflow: hidden;
-  z-index: 1;
+  height: 100vh;
+  min-width: 100vw;
+  z-index: 2;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
+  position: unset;
+  left: 0px;
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
   transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
+  position: absolute;
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
@@ -79,17 +83,19 @@ export default function Home(props) {
           coding narratives and magical adventures
         </RestyledGraf>
       </NameTag>
-      <BoyInForeground src="/foreground.png" alt="the boy looks out" />
-      <FantasyAsBackground
-        alt="the boy builds a fantasy world"
-        src="/background-fantasy.png"
-        inCity={inCity}
-      />
-      <CityAsBackground
-        alt="the boy sees a city view"
-        src="/background-city.png"
-        inCity={inCity}
-      />
+      <PictureBox>
+        <BoyInForeground src="/foreground.png" alt="the boy looks out" />
+        <FantasyAsBackground
+          alt="the boy builds a fantasy world"
+          src="/background-fantasy.png"
+          inCity={inCity}
+        />
+        <CityAsBackground
+          alt="the boy sees a city view"
+          src="/background-city.png"
+          inCity={inCity}
+        />
+      </PictureBox>
       <TravelButton
         className="travel-button"
         clickFunction={() => boundHandleClickForApp('swapHomePageImage')}
