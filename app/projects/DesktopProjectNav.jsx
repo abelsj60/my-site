@@ -9,10 +9,10 @@ import ProjectNav from './ProjectNav.jsx';
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
-  width: ${p => (p.menu !== 'active' ? '327px' : '')};
+  width: ${p => (!p.menu ? '327px' : undefined)};
 
   ${p =>
-    p.menu === 'active' &&
+    p.menu &&
     css`
       display: block;
       max-width: 590px;
@@ -20,26 +20,33 @@ const StyledUL = styled(UnorderedList)`
     `};
 `;
 const RestyledHed = styled(Hed)`
-  font-size: ${p => (p.menu !== 'active' ? '1.4rem' : '1.6rem')};
+  font-size: ${p => (!p.menu ? '1.4rem' : '1.6rem')};
 `;
 
 export default function DesktopProjectNav(props) {
-  const { isMenu } = props.state;
-  const { indexForProjectData } = props.localState;
-  const filteredData = isMenu
-    ? props.data
-    : props.data.filter(
-      (_, index) => props.localState.indexForProjectData !== index
-    );
-  const menuIsActive = isMenu ? 'active' : '';
+  const { params, appState, bodyState, location, data } = props;
+  const { isMenu } = appState;
+
+  let indexForProjectData;
+  let indexForProjectPics;
+  let finalData;
+
+  if (location.pathname.split('/')[2] !== 'menu') {
+    indexForProjectData = params.projectNameToIndex();
+    indexForProjectPics = params.projectThumbnailToIndex();
+    finalData = data.filter((_, index) => indexForProjectData !== index);
+  } else {
+    indexForProjectData = bodyState.indexForProjectData;
+    indexForProjectPics = bodyState.indexForProjectPics;
+    finalData = data;
+  }
 
   return (
-    <StyledUL menu={menuIsActive}>
+    <StyledUL menu={isMenu}>
       <Mapper
-        mapData={filteredData}
+        mapData={finalData}
         render={(project, idx) => {
           const { name, type } = project.attributes.details;
-          const isActiveProject = isMenu && indexForProjectData === idx;
 
           return (
             <li key={idx}>
@@ -48,15 +55,14 @@ export default function DesktopProjectNav(props) {
                 color="blue"
                 bottom="9"
                 num={idx}
-                menu={menuIsActive}
+                menu={isMenu}
               >{`${name} | ${type}`}</RestyledHed>
               <ProjectNav
                 {...props}
                 num={idx}
-                menu={menuIsActive}
                 project={project}
-                isDesktop={true}
-                activeProject={isActiveProject}
+                isActive={indexForProjectData === idx}
+                indexForProjectPics={indexForProjectPics}
               />
             </li>
           );

@@ -24,7 +24,8 @@ export default class ContentLoader extends Component {
 
   render() {
     const { needsRedirect, isNotFound } = this.state;
-    const r = new Referrer(this.props);
+    let r;
+    let l;
     let cD;
 
     /** ComponentData contains configured Components
@@ -38,6 +39,8 @@ export default class ContentLoader extends Component {
      */
 
     if (!needsRedirect && !isNotFound) {
+      r = new Referrer(this.props);
+      l = new Location(r.pathToMatch, this.props);
       cD = new ComponentData(r.location, this.props);
     }
 
@@ -50,13 +53,17 @@ export default class ContentLoader extends Component {
         <Route
           path={`/${r.location}/menu`}
           render={() => {
-            return <Menu {...this.props} />;
+            return (
+              <Menu {...this.props}>
+                {cD.getMenuComponent(this.props, l.params)}
+              </Menu>
+            );
           }}
         />
         <Route
           path={`${r.genericPath}`}
           render={() => {
-            return cD.getSection(this.props, this.overflowRef);
+            return cD.getSection(this.props, this.overflowRef, l.params);
           }}
         />
       </Switch>
@@ -100,7 +107,7 @@ export default class ContentLoader extends Component {
         if (this.overflowRef.current.scrollTop !== 0) {
           const isProjects = l.type === 'projects';
           const lastIndexForProjectData =
-            prevProps.localState.indexForProjectData;
+            prevProps.bodyState.indexForProjectData;
           const updateScrollTop = isProjects
             ? paramOneAsIndex !== lastIndexForProjectData
             : true;

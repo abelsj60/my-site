@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
-import Normalize from '../classes/Normalize.js';
+import normalize from '../helpers/normalize.js';
 
 const StyledUL = styled(UnorderedList)`
   flex: 1;
@@ -27,37 +27,37 @@ const Text = styled.p`
   text-align: center;
   padding-bottom: 10px;
   margin: 0px;
-  border-bottom: ${p => (p.item === 'active' ? '.5px solid white' : '')};
+  border-bottom: ${p => (p.item ? '.5px solid white' : undefined)};
 
   @media (min-width: 848px) {
-    border-bottom: ${p => (p.item === 'active' ? '.5px solid #6e7dab' : '')};
+    border-bottom: ${p => (p.item ? '.5px solid #6e7dab' : undefined)};
   }
 `;
 
 export default function ChapterNav(props) {
-  const { data } = props;
-  const { isMenu } = props.state;
-  const { indexForChapterData } = props.localState;
+  const { data, bodyState, location, params } = props;
+  let indexForChapterData;
+
+  if (location.pathname.split('/')[2] !== 'menu') {
+    indexForChapterData = params.titleToIndex();
+  } else {
+    indexForChapterData = bodyState.indexForChapterData;
+  }
 
   return (
     <nav>
       <StyledUL>
         <Mapper
           mapData={data}
-          render={(chapter, idx) => {
-            const itemIsActive = indexForChapterData === idx ? 'active' : '';
-            const pageOrMenuText = isMenu ? chapter.attributes.title : idx + 1;
-            const n = new Normalize(data[idx].attributes.title);
-            const normalizedTitle = n.done;
+          render={(_chapter, idx) => {
+            const itemIsActive = indexForChapterData === idx;
+            const normalizedTitle = normalize(data[idx].attributes.title);
 
             return (
               <Item key={idx}>
-                <RestyledLink
-                  item={itemIsActive}
-                  to={`/chapter/${normalizedTitle}`}
-                >
+                <RestyledLink to={`/chapter/${normalizedTitle}`}>
                   <Text item={itemIsActive} num={idx}>
-                    {pageOrMenuText}
+                    {idx + 1}
                   </Text>
                 </RestyledLink>
               </Item>

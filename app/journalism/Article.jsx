@@ -12,30 +12,24 @@ import Overflow from '../primitives/Overflow.jsx';
 import ArticleNav from './ArticleNav.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 
-import Referrer from '../classes/Referrer.js';
-import Location from '../classes/Location.js';
+const Text = styled.section`
+  p {
+    font-size: 1.65rem;
+    margin-top: 0px;
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+`;
 
 export default function Article(props) {
-  const { data, overflowRef } = props;
+  const { data, overflowRef, params } = props;
+  const indexForArticleData = params.headlineToIndex();
 
-  const r = new Referrer(props);
-  const l = new Location(r.pathToMatch, props);
-
-  const indexForArticleData = l.params.headlineToIndex();
   const article = data[indexForArticleData];
   const { publication, headline, position } = article.attributes;
-
-  const Text = styled.section`
-    p {
-      font-size: 1.65rem;
-      margin-top: 0px;
-      margin-bottom: 15px;
-
-      &:last-child {
-        margin-bottom: 0px;
-      }
-    }
-  `;
 
   return (
     <Main>
@@ -48,7 +42,7 @@ export default function Article(props) {
           <Hed as="h2" normal italic size="1.5" color="pink" bottom="4">
             {publication}
           </Hed>
-          <Hed size="3" bottom="15">
+          <Hed padIt size="3" bottom="15">
             {headline}
           </Hed>
           <Graf size="1.4" bottom="15">

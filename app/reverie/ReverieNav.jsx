@@ -5,28 +5,26 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import Graf from '../primitives/Graf.jsx';
-import Normalize from '../classes/Normalize';
+import normalize from '../helpers/normalize.js';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
-  width: ${p => (p.menu !== 'active' ? '327px' : '')};
+  width: ${p => (!p.menu ? '327px' : undefined)};
 `;
 const GrafAsDate = styled(Graf)`
-  color: ${p =>
-    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
+  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
 
   &:first-child {
     margin-top: 0px;
   }
 `;
 const GrafAsHed = styled(Graf)`
-  color: ${p =>
-    p.menu === 'active' && p.link !== 'active' ? 'black' : '#6e7dab'};
-  font-size: ${p => (p.menu === 'active' ? '3rem' : '1.7rem')};
+  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
+  font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
 
   ${p =>
-    p.menu !== 'active' &&
+    !p.menu &&
     css`
       overflow: hidden;
       text-overflow: ellipsis;
@@ -36,11 +34,15 @@ const GrafAsHed = styled(Graf)`
 `;
 
 export default function ReverieNav(props) {
-  const { data } = props;
-  const { isMenu } = props.state;
-  const { indexForReverieData } = props.localState;
+  const { data, location, params, bodyState, appState } = props;
+  const { isMenu } = appState;
+  let indexForReverieData;
 
-  const menuIsActive = isMenu ? 'active' : '';
+  if (location.pathname.split('/')[2] !== 'menu') {
+    indexForReverieData = params.headlineToIndex();
+  } else {
+    indexForReverieData = bodyState.indexForReverieData;
+  }
 
   return (
     <StyledUL>
@@ -50,21 +52,20 @@ export default function ReverieNav(props) {
           const { headline, date } = reverie.attributes;
           const currentHed = data[indexForReverieData].attributes.headline;
 
-          const normalizeHed = new Normalize(headline);
-          const normalizeCurrentHed = new Normalize(currentHed);
+          const normalizeHed = normalize(headline);
+          const normalizeCurrentHed = normalize(currentHed);
 
-          const linkIsActive =
-            normalizeHed.done === normalizeCurrentHed.done ? 'active' : '';
-          const reverieLink = `/reverie/${normalizeHed.done}`;
+          const linkIsActive = normalizeHed === normalizeCurrentHed;
+          const reverieLink = `/reverie/${normalizeHed}`;
 
           return (
             <li key={idx}>
-              <StyledLink link={linkIsActive} to={reverieLink}>
+              <StyledLink to={reverieLink}>
                 <GrafAsDate
                   italic
                   size="1.3"
                   bottom="0"
-                  menu={menuIsActive}
+                  menu={isMenu}
                   link={linkIsActive}
                 >
                   {date}
@@ -72,7 +73,7 @@ export default function ReverieNav(props) {
                 <GrafAsHed
                   top="0"
                   bottom="10"
-                  menu={menuIsActive}
+                  menu={isMenu}
                   link={linkIsActive}
                 >
                   {headline}

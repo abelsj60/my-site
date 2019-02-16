@@ -13,17 +13,17 @@ const Group = styled.ul`
   padding-bottom: 10px;
   list-style-type: none;
 
-  ${props =>
-    props.menu === 'active' &&
+  ${p =>
+    p.menu &&
     css`
-      margin-bottom: ${props.num !== 2 ? '15px' : ''};
+      margin-bottom: ${p.num !== 2 ? '15px' : undefined};
       padding-bottom: 0;
       max-width: 100%;
       flex-direction: row;
     `};
 
-  ${props =>
-    !props.desktop &&
+  ${p =>
+    p.isRight &&
     css`
       border-bottom: #6e7dab solid 0.5px;
 
@@ -52,21 +52,21 @@ const Group = styled.ul`
     `}};
 `;
 const Item = styled.li`
-  margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
+  margin-right: ${p => (p.padding ? '5px' : undefined)};
 
   @media (min-width: 672px) {
-    margin-right: ${p => (!p.desktop ? '0px' : '')};
-    margin-bottom: ${p => (!p.desktop ? '5px' : '')};
+    margin-right: ${p => (p.isRight ? '0px' : undefined)};
+    margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
 
   @media (min-width: 848px) {
-    margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
-    margin-bottom: ${p => (p.isRight ? '0px' : '')};
+    margin-right: ${p => (p.padding ? '5px' : undefined)};
+    margin-bottom: ${p => (p.isRight ? '0px' : undefined)};
   }
 
   @media (min-width: 1048px) {
-    margin-right: ${p => (!p.desktop ? '0px' : '')};
-    margin-bottom: ${p => (!p.desktop ? '5px' : '')};
+    margin-right: ${p => (p.isRight ? '0px' : undefined)};
+    margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
 `;
 const RestyledLink = styled(StyledLink)`
@@ -75,22 +75,6 @@ const RestyledLink = styled(StyledLink)`
   align-items: center;
   min-width: 0;
   position: relative;
-
-  ${props =>
-    props.desktop &&
-    css`
-      @media (min-width: 672px) {
-        margin-right: 0;
-      }
-
-      @media (min-width: 848px) {
-        margin-right: ${p => (p.padding === 'active' ? '5px' : '')};
-      }
-
-      @media (min-width: 1048px) {
-        margin-right: 0;
-      }
-    `};
 `;
 const Image = styled.img`
   flex: 1;
@@ -107,41 +91,39 @@ const Highlighter = styled.div`
 `;
 
 export default function ProjectNav(props) {
-  // ID active project via returnState b/c no params in '/menu'
-
-  const { num, project, activeProject, isDesktop, menu, isRight } = props;
-  const { indexForProjectPics } = props.localState;
+  const {
+    num,
+    project,
+    isRight,
+    isActive,
+    indexForProjectPics,
+    appState
+  } = props;
   const { thumbnails, projectName } = project.attributes;
+  let isMenu;
 
-  const menuIsActive = menu ? 'active' : '';
+  if (appState) {
+    isMenu = appState.isMenu;
+  }
 
   return (
-    <Group desktop={isDesktop} menu={menuIsActive} num={num}>
+    <Group isRight={isRight} menu={isMenu} num={num}>
       <Mapper
         mapData={thumbnails}
         render={(thumb, idx) => {
-          const paddingIsActive = idx < 2 ? 'active' : '';
+          const padding = idx < 2;
           const thumbnailNumber = idx + 1;
-          const thumbnailIsActive =
-            activeProject && indexForProjectPics === idx ? 'active' : '';
-          const highlightActiveThumbnail = menuIsActive &&
-            thumbnailIsActive && <Highlighter />;
+          let highlightActiveThumbnail;
+
+          if (isMenu && isActive && indexForProjectPics === idx) {
+            highlightActiveThumbnail = true;
+          }
 
           return (
-            <Item
-              key={idx}
-              isRight={isRight}
-              desktop={isDesktop}
-              padding={paddingIsActive}
-            >
-              <RestyledLink
-                menu={menuIsActive}
-                active={thumbnailIsActive}
-                padding={paddingIsActive}
-                to={`/projects/${projectName}/${thumbnailNumber}`}
-              >
+            <Item key={idx} isRight={isRight} padding={padding}>
+              <RestyledLink to={`/projects/${projectName}/${thumbnailNumber}`}>
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
-                {highlightActiveThumbnail}
+                {highlightActiveThumbnail && <Highlighter />}
               </RestyledLink>
             </Item>
           );

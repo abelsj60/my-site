@@ -12,9 +12,6 @@ import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import DesktopProjectNav from './DesktopProjectNav.jsx';
 
-import Referrer from '../classes/Referrer.js';
-import Location from '../classes/Location.js';
-
 const Images = styled.section`
   display: flex;
   flex-direction: column;
@@ -85,32 +82,30 @@ const Image = styled.img`
 `;
 
 export default function Projects(props) {
-  // Todo Can use params for caption/source, rather than return state'
+  const { data, overflowRef, params } = props;
 
-  const { localState, data, overflowRef } = props;
-  const { indexForProjectPics } = localState;
-
-  const r = new Referrer(props);
-  const l = new Location(r.pathToMatch, props);
-
-  const indexForProjectData = l.params.projectNameToIndex();
+  const indexForProjectData = params.projectNameToIndex();
+  const indexForProjectPics = params.projectThumbnailToIndex();
   const project = data[indexForProjectData];
+
   const { full, details } = project.attributes;
   const { captions, name, type, contribution, description } = details;
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
   const mapData = [{ contribution }, { description }];
-  const keys = ['Contribution', 'Description'];
+  const keys = mapData.map(item => {
+    return Object.keys(item)[0];
+  });
 
   return (
     <Main>
       <Left>
-        <DesktopProjectNav {...props} data={data} localState={localState} />
+        <DesktopProjectNav {...props} data={data} params={params} />
       </Left>
       <Right>
         <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed color="pink" size="2.5" bottom="6" bigTop="-4">
+          <Hed padIt color="pink" size="2.5" bottom="6" bigTop="-4">
             {name}
           </Hed>
           <section>
@@ -122,10 +117,10 @@ export default function Projects(props) {
               render={(proj, idx) => (
                 <Fragment key={idx}>
                   <Hed as="h3" normal color="blue" size="1.7" bottom="5">
-                    {keys[idx]}
+                    {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
                   </Hed>
                   <Graf top="0" bottom="10">
-                    {proj[keys[idx].toLowerCase()]}
+                    {proj[keys[idx]]}
                   </Graf>
                 </Fragment>
               )}
@@ -134,8 +129,7 @@ export default function Projects(props) {
               <ProjectNav
                 isRight={true}
                 project={project}
-                activeProject={true}
-                localState={localState}
+                indexForProjectPics={indexForProjectPics}
               />
               <Figure>
                 <Caption>{caption}</Caption>

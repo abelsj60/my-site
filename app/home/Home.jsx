@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Main from '../primitives/Main.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Graf from '../primitives/Graf.jsx';
+import Button from '../shared/Button.jsx';
 
 const RestyledMain = styled(Main)`
   justify-content: space-between;
@@ -32,46 +33,45 @@ const RestyledGraf = styled(Graf)`
   text-shadow: 1px 1px 2px black;
   margin-left: 16px;
 `;
+const PictureBox = styled.div`
+  position: absolute;
+  top: 0px;
+`;
 const BoyInForeground = styled.img`
   position: absolute;
-  bottom: 0;
-  align-self: center;
   object-fit: cover;
-  min-height: 100%;
-  width: 100%;
-  overflow: hidden;
+  height: 100vh;
+  min-width: 100vw;
   z-index: 1;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
+  position: unset;
+  left: 0px;
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
   transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
+  position: absolute;
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
-const TravelButton = styled.section`
-  z-index: 2;
-  font-size: 1.3rem;
-  border-radius: 5px;
-  width: 80px;
-  color: white;
-  padding: 10px;
-  text-shadow: 1px 1px 2px black;
-  text-align: center;
-  cursor: pointer;
+const TravelButton = styled(Button)`
   background-color: rgba(0, 0, 0, 0.3);
-  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
-  margin-bottom: 45px;
   border: 0.5px solid white;
+  border-radius: 5px;
+  color: white;
+  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
+  font-size: 1.3rem;
+  margin-bottom: 45px;
+  z-index: 2;
 `;
 
 export default function Home(props) {
-  const { inCity, showBusinessCard, showLegalTerms } = props.state;
+  const { inCity, showBusinessCard, showLegalTerms } = props.appState;
   const { boundHandleClickForApp } = props;
-  const buttonText = inCity ? 'Home' : 'Away';
+  const travelButtonText = inCity ? 'Home' : 'Away';
 
   return (
     <RestyledMain>
@@ -83,23 +83,25 @@ export default function Home(props) {
           coding narratives and magical adventures
         </RestyledGraf>
       </NameTag>
-      <BoyInForeground src="/foreground.png" />
-      <FantasyAsBackground
-        alt="fantasy world"
-        src="/background-fantasy.png"
-        inCity={inCity}
-      />
-      <CityAsBackground
-        alt="city world"
-        src="/background-city.png"
-        inCity={inCity}
-      />
+      <PictureBox>
+        <BoyInForeground src="/foreground.png" alt="the boy looks out" />
+        <FantasyAsBackground
+          alt="the boy builds a fantasy world"
+          src="/background-fantasy.png"
+          inCity={inCity}
+        />
+        <CityAsBackground
+          alt="the boy sees a city view"
+          src="/background-city.png"
+          inCity={inCity}
+        />
+      </PictureBox>
       <TravelButton
+        className="travel-button"
+        clickFunction={() => boundHandleClickForApp('swapHomePageImage')}
         tempContentIsOn={showBusinessCard || showLegalTerms}
-        onClick={() => boundHandleClickForApp('swapHomePageImage')}
-      >
-        {buttonText}
-      </TravelButton>
+        text={travelButtonText}
+      />
     </RestyledMain>
   );
 }

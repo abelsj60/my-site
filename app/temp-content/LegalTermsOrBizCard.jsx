@@ -6,20 +6,20 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: ${p => (p.home === 'active' ? '0' : '52px')};
-  bottom: ${p => (p.home === 'active' ? '0' : '56px')};
+  top: ${p => (p.home ? '0' : '52px')};
+  bottom: ${p => (p.home ? '0' : '56px')};
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
 
   ${p =>
-    p.home === 'active' &&
+    p.home &&
     css`
       background-color: rgba(0, 0, 0, 0.3);
       background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
     `};
 `;
 const Card = styled.section`
-  margin-top: ${p => (p.home === 'active' ? '-200px' : '')};
+  margin-top: ${p => (p.home ? '-200px' : undefined)};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,17 +44,17 @@ const Graf = styled.p`
   align-self: center;
   margin-bottom: 0px;
   font-size: ${p => (p.businessCard ? '1.6rem' : '1.4rem')};
-  font-family: ${p => (p.businessCard ? 'Aref Ruqaa, serif' : '')};
+  font-family: ${p => (p.businessCard ? 'Aref Ruqaa, serif' : undefined)};
 `;
 
 export default function LegalTermsOrBizCard(props) {
-  const { showBusinessCard, showLegalTerms, currentCaller } = props.state;
+  const { showBusinessCard, showLegalTerms, currentCaller } = props.appState;
 
   if (!showBusinessCard && !showLegalTerms) {
     return null;
   }
 
-  const homeIsActive = currentCaller === 'home' ? 'active' : '';
+  const homeIsActive = currentCaller === 'home';
   const text = showBusinessCard
     ? 'abelsj60_at_gmail.com'
     : `©${new Date().getFullYear()} James Abels. All rights reserved.`;

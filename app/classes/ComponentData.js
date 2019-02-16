@@ -19,41 +19,67 @@ export default class ComponentData {
     this._contentData = c.getContentData();
   }
 
-  getSection(props, ref) {
+  getSection(props, ref, params) {
     const type = this._type;
+    const contentData = this._contentData;
 
     switch (type) {
       case 'chapter':
-        return <Story {...props} overflowRef={ref} data={this._contentData} />;
+        return (
+          <Story
+            {...props}
+            overflowRef={ref}
+            data={contentData}
+            params={params}
+          />
+        );
       case 'projects':
         return (
-          <Projects {...props} overflowRef={ref} data={this._contentData} />
+          <Projects
+            {...props}
+            overflowRef={ref}
+            data={contentData}
+            params={params}
+          />
         );
       case 'journalism':
         return (
-          <Article {...props} overflowRef={ref} data={this._contentData} />
+          <Article
+            {...props}
+            overflowRef={ref}
+            data={contentData}
+            params={params}
+          />
         );
       case 'reverie':
         return (
-          <Reverie {...props} overflowRef={ref} data={this._contentData} />
+          <Reverie
+            {...props}
+            overflowRef={ref}
+            data={contentData}
+            params={params}
+          />
         );
       default:
         return undefined;
     }
   }
 
-  getMenuComponent(props) {
+  getMenuComponent(props, params) {
     const type = this._type;
+    const contentData = this._contentData;
 
     switch (type) {
       case 'chapter':
-        return <ChapterNav {...props} data={this._contentData} />;
+        return <ChapterNav {...props} data={contentData} params={params} />;
       case 'projects':
-        return <DesktopProjectNav {...props} data={this._contentData} />;
+        return (
+          <DesktopProjectNav {...props} data={contentData} params={params} />
+        );
       case 'journalism':
-        return <ArticleNav {...props} data={this._contentData} />;
+        return <ArticleNav {...props} data={contentData} params={params} />;
       case 'reverie':
-        return <ReverieNav {...props} data={this._contentData} />;
+        return <ReverieNav {...props} data={contentData} params={params} />;
       default:
         return undefined;
     }

@@ -21,16 +21,17 @@ const colors = {
 };
 
 export default styled.h1`
-  color: ${p => colors[p.color] && colors[p.color]};
+  color: ${p => colors[p.color] || undefined};
   font-size: ${p => p.size && p.size + 'rem'};
   font-style: ${p => p.italic && 'italic'};
   font-weight: ${p => p.normal && 'normal'};
   line-height: normal;
   margin-bottom: ${p => p.bottom && p.bottom + 'px'};
+  margin-left: ${p => p.padIt && '1px'};
   margin-top: ${p => p.top && p.top + 'px'};
 
   @media (min-width: 848px) {
-    color: ${p => colors[p.bigColor] && colors[p.bigColor]};
+    color: ${p => colors[p.bigColor] || undefined};
     margin-top: ${p => p.bigTop && p.bigTop + 'px'};
   }
 `;

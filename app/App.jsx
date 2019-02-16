@@ -24,7 +24,8 @@ const GlobalStyle = createGlobalStyle`
 
     h1,
     h2,
-    h3 {
+    h3,
+    p {
       margin: 0px;
     }
   }
@@ -35,7 +36,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
 
     ${p =>
-    p.home === 'active' &&
+    p.home &&
       css`
         width: 100%;
         position: fixed;
@@ -59,13 +60,11 @@ class App extends Component {
       isMenu: r.checkForMenu(props),
       inCity: false
     };
-
-    this.magicRef = React.createRef();
   }
 
   render() {
     const l = new Location('/', this.props);
-    const homeIsActive = l.type === 'home' ? 'active' : '';
+    const homeIsActive = l.type === 'home';
 
     const eForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eForApp.boundHandleClick;
@@ -73,16 +72,16 @@ class App extends Component {
     return (
       <Fragment>
         <GlobalStyle home={homeIsActive} />
-        <Header {...this.props} state={this.state} />
+        <Header {...this.props} appState={this.state} />
         <Body
           {...this.props}
-          state={this.state}
+          appState={this.state}
           boundHandleClickForApp={boundHandleClickForApp}
         />
-        <LegalTermsOrBizCard {...this.props} state={this.state} />
+        <LegalTermsOrBizCard {...this.props} appState={this.state} />
         <Footer
           {...this.props}
-          state={this.state}
+          appState={this.state}
           boundHandleClickForApp={boundHandleClickForApp}
         />
       </Fragment>
@@ -134,10 +133,8 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Theme? Reverie + Article — share?
-// Header Icon png --> svg
-// Simplify Normalize?
 // Picture focus
+// Reverie + Article — share?
 
 // Story edit
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
