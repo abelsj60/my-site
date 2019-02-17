@@ -13,8 +13,8 @@ import Referrer from './classes/Referrer.js';
 
 const GlobalStyle = createGlobalStyle`
   html {
-    font-family: lato;
-    font-size: 62.5%;
+    font-family: 'Lato', sans-serif;
+    font-size: 65%;
   }
 
   body {
@@ -133,7 +133,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Picture focus
 // Reverie + Article — share?
 
 // Story edit

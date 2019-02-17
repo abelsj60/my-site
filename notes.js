@@ -144,3 +144,5 @@
 // https://blog.imagekit.io/how-to-deliver-responsive-images-to-browsers-across-multiple-devices-30cfae17390e
 
 // https://medium.mybridge.co/amazing-react-js-open-source-of-the-year-v-2019-364d057ac3f3
+
+// Object-fit: https://medium.com/@primozcigler/neat-trick-for-css-object-fit-fallback-on-edge-and-other-browsers-afbc53bbb2c3

@@ -135,7 +135,7 @@ export default class Header extends Component {
           James Abels
         </NameAsLink>
         <Motto hide={menuIsActive || homeIsActive}>
-          Coding narratives and magical adventures
+          Narrative coding and other adventures
         </Motto>
         <Nav home={homeIsActive} menu={menuIsActive}>
           <NavList>

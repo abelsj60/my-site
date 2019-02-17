@@ -14,7 +14,7 @@ const Container = styled.section`
   ${p =>
     p.home &&
     css`
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(255, 231, 76, 0.1);
       background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
     `};
 `;
@@ -43,8 +43,7 @@ const Graf = styled.p`
   margin-top: 0px;
   align-self: center;
   margin-bottom: 0px;
-  font-size: ${p => (p.businessCard ? '1.6rem' : '1.4rem')};
-  font-family: ${p => (p.businessCard ? 'Aref Ruqaa, serif' : undefined)};
+  font-size: 1.4rem;
 `;
 
 export default function LegalTermsOrBizCard(props) {
@@ -57,7 +56,7 @@ export default function LegalTermsOrBizCard(props) {
   const homeIsActive = currentCaller === 'home';
   const text = showBusinessCard
     ? 'abelsj60_at_gmail.com'
-    : `©${new Date().getFullYear()} James Abels. All rights reserved.`;
+    : `© ${new Date().getFullYear()} James Abels. All rights reserved.`;
 
   return (
     <Container home={homeIsActive}>
