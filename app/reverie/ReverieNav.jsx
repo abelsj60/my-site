@@ -64,7 +64,7 @@ export default function ReverieNav(props) {
                 <GrafAsDate
                   italic
                   size="1.3"
-                  bottom="0"
+                  bottom="2"
                   menu={isMenu}
                   link={linkIsActive}
                 >

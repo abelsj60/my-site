@@ -47,7 +47,7 @@ export default function Reverie(props) {
       <Right>
         <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed as="h2" normal italic size="1.5" color="pink">
+          <Hed as="h2" normal italic size="1.5" color="pink" bottom="4">
             Reverie
           </Hed>
           <Hed size="3" bottom="7">

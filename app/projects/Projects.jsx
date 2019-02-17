@@ -105,7 +105,7 @@ export default function Projects(props) {
       <Right>
         <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed padIt color="pink" size="2.5" bottom="6" bigTop="-4">
+          <Hed padIt color="pink" size="2.5" bottom="8" bigTop="-4">
             {name}
           </Hed>
           <section>
@@ -116,7 +116,7 @@ export default function Projects(props) {
               mapData={mapData}
               render={(proj, idx) => (
                 <Fragment key={idx}>
-                  <Hed as="h3" normal color="blue" size="1.7" bottom="5">
+                  <Hed as="h3" normal color="blue" size="1.7" bottom="7">
                     {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
                   </Hed>
                   <Graf top="0" bottom="10">

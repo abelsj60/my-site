@@ -4,7 +4,7 @@ export default styled.nav`
   display: none;
 
   @media (min-width: 848px) {
-    display: block;
+    display: flex;
     padding-right: 25px;
     margin: 25px 0px 25px 25px;
     width: 327px;
