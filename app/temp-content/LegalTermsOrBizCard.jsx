@@ -1,4 +1,5 @@
 import React from 'react';
+import Parallax from '../shared/Parallax.jsx';
 import styled, { css } from 'styled-components';
 
 const Container = styled.section`
@@ -20,7 +21,7 @@ const Container = styled.section`
 `;
 const Card = styled.section`
   margin-top: ${p => (p.home ? '-200px' : undefined)};
-  display: flex;
+  // display: flex;
   flex-direction: column;
   justify-content: center;
   height: 200px;
@@ -60,10 +61,16 @@ export default function LegalTermsOrBizCard(props) {
 
   return (
     <Container home={homeIsActive}>
-      <Card home={homeIsActive}>
-        <Graf businessCard={showBusinessCard}>{text}</Graf>
-        {showBusinessCard && <InnerBorder />}
-      </Card>
+      <Parallax
+        render={renderProps => (
+          <div ref={el => (renderProps.scene = el)}>
+            <Card home={homeIsActive} data-depth=".4">
+              <Graf businessCard={showBusinessCard}>{text}</Graf>
+              {showBusinessCard && <InnerBorder />}
+            </Card>
+          </div>
+        )}
+      />
     </Container>
   );
 }

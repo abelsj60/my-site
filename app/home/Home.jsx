@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Main from '../primitives/Main.jsx';
-// import Hed from '../primitives/Hed.jsx';
-// import Graf from '../primitives/Graf.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Graf from '../primitives/Graf.jsx';
 import Button from '../shared/Button.jsx';
-import Parallax from '../about/Parallax.jsx';
+import Parallax from '../shared/Parallax.jsx';
 
 const RestyledMain = styled(Main)`
   justify-content: space-between;
@@ -17,26 +17,26 @@ const RestyledMain = styled(Main)`
     flex-direction: column;
   }
 `;
-// const NameTag = styled.div`
-//   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 2;
-//   margin-top: 30px;
-//   cursor: pointer;
-// `;
-// const RestyledHed = styled(Hed)`
-//   font-family: 'Aref Ruqaa', serif;
-//   text-shadow: 1px 1px 2px black;
-// `;
-// const RestyledGraf = styled(Graf)`
-//   text-shadow: 1px 1px 2px black;
-//   margin-left: 18px;
-//   font-weight: bold;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-// `;
+const NameTag = styled.div`
+  display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  margin-top: 30px;
+  cursor: pointer;
+`;
+const RestyledHed = styled(Hed)`
+  font-family: 'Aref Ruqaa', serif;
+  text-shadow: 1px 1px 2px black;
+`;
+const RestyledGraf = styled(Graf)`
+  text-shadow: 1px 1px 2px black;
+  margin-left: 18px;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+`;
 const PictureBox = styled.div`
   position: absolute;
   top: 0px;
@@ -87,7 +87,21 @@ export default function Home(props) {
 
   return (
     <RestyledMain>
-      <Parallax {...props} />
+      <Parallax
+        render={renderProps => (
+          <NameTag
+            ref={el => (renderProps.scene = el)}
+            tempContentIsOn={showBusinessCard || showLegalTerms}
+          >
+            <RestyledHed size="6.5" color="yellow" data-depth=".4">
+              JamesAbels
+            </RestyledHed>
+            <RestyledGraf size="1.7" color="pink" top="93" data-depth=".4">
+              narrative coding and other adventures
+            </RestyledGraf>
+          </NameTag>
+        )}
+      />
       <PictureBox>
         <BoyInForeground src="/foreground.png" alt="the boy looks out" />
         <Portal />
