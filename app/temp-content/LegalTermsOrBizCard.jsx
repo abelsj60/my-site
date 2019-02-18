@@ -15,13 +15,13 @@ const Container = styled.section`
   ${p =>
     p.home &&
     css`
+      z-index: 1;
       background-color: rgba(255, 231, 76, 0.1);
       background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
     `};
 `;
 const Card = styled.section`
   margin-top: ${p => (p.home ? '-200px' : undefined)};
-  // display: flex;
   flex-direction: column;
   justify-content: center;
   height: 200px;
