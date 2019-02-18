@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
     h3,
     p {
       margin: 0px;
+      padding-left: 2px;
     }
   }
 
@@ -134,7 +135,6 @@ class App extends Component {
 export default withRouter(App);
 
 // Reverie + Article — share?
-// Style scrollbar? Chrome, Firefox, Safari?
 // https://www.tutorialspoint.com/css/css_animation.htm
 
 // Story edit

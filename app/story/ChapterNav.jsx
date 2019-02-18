@@ -6,6 +6,13 @@ import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 
+const Nav = styled.nav`
+  margin-bottom: 13px;
+
+  @media (min-width: 848px) {
+    padding-right: 25px;
+  }
+`;
 const StyledUL = styled(UnorderedList)`
   flex: 1;
   display: flex;
@@ -45,7 +52,7 @@ export default function ChapterNav(props) {
   }
 
   return (
-    <nav>
+    <Nav>
       <StyledUL>
         <Mapper
           mapData={data}
@@ -65,6 +72,6 @@ export default function ChapterNav(props) {
           }}
         />
       </StyledUL>
-    </nav>
+    </Nav>
   );
 }

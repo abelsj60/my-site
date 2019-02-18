@@ -22,7 +22,6 @@ const GrafAsSource = styled(Graf)`
 const GrafAsHed = styled(Graf)`
   color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
   font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
-  // font-weight: bold;
 
   ${p =>
     !p.menu &&

@@ -19,7 +19,6 @@ const Right = styled.section`
 const Heading = styled.div`
   display: flex;
   margin-bottom: 10px;
-  padding-left: 1px;
 `;
 const ExternalLink = styled.a`
   align-self: flex-end;

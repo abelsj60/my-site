@@ -30,6 +30,7 @@ export default function Article(props) {
 
   const article = data[indexForArticleData];
   const { publication, headline, position } = article.attributes;
+  const padHed = headline[0] === 'A' || headline[0] === 'T';
 
   return (
     <Main>
@@ -42,7 +43,7 @@ export default function Article(props) {
           <Hed as="h2" normal italic size="1.5" color="pink" bottom="4">
             {publication}
           </Hed>
-          <Hed padIt size="3" bottom="15">
+          <Hed size="3" bottom="15">
             {headline}
           </Hed>
           <Graf size="1.4" bottom="15">

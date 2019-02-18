@@ -96,6 +96,7 @@ export default function Projects(props) {
   const keys = mapData.map(item => {
     return Object.keys(item)[0];
   });
+  const padHed = name[0] === 'A' || name[0] === 'T';
 
   return (
     <Main>
@@ -105,7 +106,7 @@ export default function Projects(props) {
       <Right>
         <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed padIt color="pink" size="2.5" bottom="8" bigTop="-4">
+          <Hed color="pink" size="2.5" bottom="8" bigTop="-4">
             {name}
           </Hed>
           <section>

@@ -38,6 +38,7 @@ export default function Reverie(props) {
 
   const reverie = data[indexForReverieData];
   const { headline, date } = reverie.attributes;
+  const padHed = headline[0] === 'A' || headline[0] === 'T';
 
   return (
     <Main>
