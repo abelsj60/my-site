@@ -134,6 +134,8 @@ class App extends Component {
 export default withRouter(App);
 
 // Reverie + Article — share?
+// Style scrollbar? Chrome, Firefox, Safari?
+// https://www.tutorialspoint.com/css/css_animation.htm
 
 // Story edit
 // Take pictures, write copy for Arrow, Slingshot, TMMnews

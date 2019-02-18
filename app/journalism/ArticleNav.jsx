@@ -29,7 +29,7 @@ const GrafAsHed = styled(Graf)`
     css`
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 315px;
+      width: 306px;
       white-space: nowrap;
     `};
 `;

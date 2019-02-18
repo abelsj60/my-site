@@ -71,7 +71,7 @@ export default function Story(props) {
           {ReactHtmlParser(marked(chapter.body, { smartypants: true }))}
         </Text>
       </RestyledLeft>
-      <RestyledRight>
+      <RestyledRight rightMargin>
         <Image src={image} alt="fantasy illustration" />
       </RestyledRight>
     </Main>

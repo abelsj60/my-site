@@ -9,6 +9,7 @@ import ProjectNav from './ProjectNav.jsx';
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
+  margin-right: 25px;
   width: ${p => (!p.menu ? '327px' : undefined)};
 
   ${p =>
