@@ -20,8 +20,11 @@ const Container = styled.section`
       background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
     `};
 `;
-const Card = styled.section`
+const InnerContainer = styled.div`
   margin-top: ${p => (p.home ? '-200px' : undefined)};
+`;
+const Card = styled.section`
+  // margin-top: ${p => (p.home ? '-200px' : undefined)};
   flex-direction: column;
   justify-content: center;
   height: 200px;
@@ -63,12 +66,12 @@ export default function LegalTermsOrBizCard(props) {
     <Container home={homeIsActive}>
       <Parallax
         render={renderProps => (
-          <div ref={el => (renderProps.scene = el)}>
+          <InnerContainer ref={el => (renderProps.scene = el)} home={homeIsActive}>
             <Card home={homeIsActive} data-depth="1">
               <Graf businessCard={showBusinessCard}>{text}</Graf>
               {showBusinessCard && <InnerBorder />}
             </Card>
-          </div>
+          </InnerContainer>
         )}
       />
     </Container>
