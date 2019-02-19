@@ -10,7 +10,7 @@ import Right from '../primitives/Right.jsx';
 import Left from '../primitives/Left.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
-import ArticleOrReverieNav from './article-or-reverie/ArticleOrReverieNav.jsx';
+import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
 
 const ReverieText = styled.section`
   p {

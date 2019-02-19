@@ -3,9 +3,9 @@ import React from 'react';
 import Story from '../story/Story.jsx';
 import Projects from '../projects/Projects.jsx';
 import ChapterNav from '../story/ChapterNav.jsx';
-import ArticleOrReverie from '../ArticleOrReverie/ArticleOrReverie.jsx';
 import DesktopProjectNav from '../projects/DesktopProjectNav.jsx';
-import ArticleOrReverieNav from '../article-or-reverie/ArticleOrReverieNav.jsx';
+import ArticleOrReverie from '../article-n-reverie/ArticleOrReverie.jsx';
+import ArticleOrReverieNav from '../article-n-reverie/ArticleOrReverieNav.jsx';
 
 import Content from './Content.js';
 
