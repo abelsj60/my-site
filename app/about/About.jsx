@@ -6,7 +6,7 @@ import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
 import Hed from '../primitives/Hed.jsx';
 
-import bio from '../data/about.md';
+import bio from '../data/about/about.md';
 import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`

@@ -3,11 +3,17 @@ import styled, { css } from 'styled-components';
 
 import StyledLink from '../primitives/StyledLink.jsx';
 import Mapper from '../shared/Mapper.jsx';
-import headerData from '../data/headerData.js';
 
 import Location from '../classes/Location.js';
 import Referrer from '../classes/Referrer.js';
 import EventHandling from '../classes/EventHandling.js';
+
+const data = [
+  { name: 'The story', path: '/chapter' },
+  { name: 'Projects', path: '/projects' },
+  { name: 'Journalism', path: '/journalism' },
+  { name: 'About', path: '/about' }
+];
 
 const Container = styled.header`
   background-color: ${p => (p.home ? 'transparent' : 'white')};
@@ -140,7 +146,7 @@ export default class Header extends Component {
         <Nav home={homeIsActive} menu={menuIsActive}>
           <NavList>
             <Mapper
-              mapData={headerData}
+              mapData={data}
               render={(link, idx) => {
                 const pathIsActive = link.path.includes(r.location);
 

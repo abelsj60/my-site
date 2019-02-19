@@ -24,7 +24,6 @@ const InnerContainer = styled.div`
   margin-top: ${p => (p.home ? '-200px' : undefined)};
 `;
 const Card = styled.section`
-  // margin-top: ${p => (p.home ? '-200px' : undefined)};
   flex-direction: column;
   justify-content: center;
   height: 200px;

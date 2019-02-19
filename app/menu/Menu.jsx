@@ -12,6 +12,9 @@ const RestyledMain = styled(Main)`
     flex-direction: column;
   }
 `;
+const RestyledOverfiow = styled(Overflow)`
+  padding-right: 0px;
+`;
 
 export default function Menu(props) {
   const { children } = props;
@@ -19,7 +22,7 @@ export default function Menu(props) {
   return (
     <RestyledMain>
       <MenuButton {...props} />
-      <Overflow>{children}</Overflow>
+      <RestyledOverfiow>{children}</RestyledOverfiow>
     </RestyledMain>
   );
 }
