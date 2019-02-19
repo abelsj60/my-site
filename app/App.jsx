@@ -134,7 +134,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Reverie + Article — share?
 // https://www.tutorialspoint.com/css/css_animation.htm
 
 // Story edit

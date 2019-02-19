@@ -9,10 +9,10 @@ import Main from '../primitives/Main.jsx';
 import Right from '../primitives/Right.jsx';
 import Left from '../primitives/Left.jsx';
 import Overflow from '../primitives/Overflow.jsx';
-import ReverieNav from './ReverieNav.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
+import ArticleOrReverieNav from './article-or-reverie/ArticleOrReverieNav.jsx';
 
-const Text = styled.section`
+const ReverieText = styled.section`
   p {
     font-size: 1.6rem;
   }
@@ -31,19 +31,32 @@ const Text = styled.section`
     margin-top: 10px;
   }
 `;
+const ArticleText = styled.section`
+  p {
+    font-size: 1.65rem;
+    margin-top: 0px;
+    margin-bottom: 15px;
 
-export default function Reverie(props) {
-  const { data, overflowRef, params } = props;
-  const indexForReverieData = params.headlineToIndex();
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+`;
 
-  const reverie = data[indexForReverieData];
-  const { headline, date } = reverie.attributes;
-  const padHed = headline[0] === 'A' || headline[0] === 'T';
+export default function ArticleOrReverie(props) {
+  const { data, overflowRef, params, location } = props;
+  const currentPath = location.pathname.split('/');
+  const isReverie = currentPath[1] === 'reverie';
+
+  const index = params.headlineToIndex();
+  const article = data[index];
+  const { headline, date } = article.attributes;
+  const ArticleOrReverieText = isReverie ? ReverieText : ArticleText;
 
   return (
     <Main>
       <Left>
-        <ReverieNav {...props} data={data} />
+        <ArticleOrReverieNav {...props} data={data} />
       </Left>
       <Right>
         <MenuButton {...props} />
@@ -57,9 +70,9 @@ export default function Reverie(props) {
           <Graf italic size="1.4" top="15" bottom="15">
             {date}
           </Graf>
-          <Text>
-            {ReactHtmlParser(marked(reverie.body, { smartypants: true }))}
-          </Text>
+          <ArticleOrReverieText>
+            {ReactHtmlParser(marked(article.body, { smartypants: true }))}
+          </ArticleOrReverieText>
         </Overflow>
       </Right>
     </Main>
