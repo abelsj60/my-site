@@ -11,7 +11,7 @@ import Overflow from '../primitives/Overflow.jsx';
 import ChapterNav from './ChapterNav.jsx';
 
 const RestyledLeft = styled(Left)`
-  display: ${props => (props.text === 'hidden' ? 'none' : 'flex')};
+  display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   position: absolute;
   top: 52px;
@@ -29,7 +29,6 @@ const RestyledLeft = styled(Left)`
   }
 `;
 const RestyledOverflow = styled(Overflow)`
-  overflow: auto;
   padding-right: 0px;
 
   @media (min-width: 848px) {
@@ -72,15 +71,15 @@ export default function Story(props) {
   return (
     <Main>
       <RestyledLeft as="section" text={textStatus}>
-          <ChapterNav {...props} />
-          <RestyledOverflow ref={ref => (overflowRef.current = ref)}>
-            <Hed color="yellow" bigColor="pink" size="3" bottom="12">
-              {title}
-            </Hed>
-            <Text >
-              {ReactHtmlParser(marked(chapter.body, { smartypants: true }))}
-            </Text>
-          </RestyledOverflow>
+        <ChapterNav {...props} />
+        <RestyledOverflow ref={ref => (overflowRef.current = ref)}>
+          <Hed color="yellow" bigColor="pink" size="3" bottom="12">
+            {title}
+          </Hed>
+          <Text>
+            {ReactHtmlParser(marked(chapter.body, { smartypants: true }))}
+          </Text>
+        </RestyledOverflow>
       </RestyledLeft>
       <RestyledRight rightMargin>
         <Image src={image} alt="fantasy illustration" />

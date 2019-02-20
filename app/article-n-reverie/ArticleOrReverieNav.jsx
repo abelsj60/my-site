@@ -28,12 +28,12 @@ const GrafAsHed = styled(Graf)`
     css`
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 306px;
+      width: 300px;
       white-space: nowrap;
     `};
 `;
 
-export default function LongListNav(props) {
+export default function ArticleOrReverieNav(props) {
   const { data, params, bodyState, appState, location } = props;
   const { isMenu } = appState;
   const currentPath = location.pathname.split('/');
@@ -65,7 +65,11 @@ export default function LongListNav(props) {
           const dateOrPublicationFromItem = !isReverie ? publication : date;
 
           const linkIsActive = normalizedCurrentHed === normalizedHedFromItem;
-          const articleLink = isReverie ? `/reverie/${normalizedHedFromItem}` : `/journalism/${normalize(dateOrPublicationFromItem)}/${normalizedHedFromItem}`;
+          const articleLink = isReverie
+            ? `/reverie/${normalizedHedFromItem}`
+            : `/journalism/${normalize(
+              dateOrPublicationFromItem
+            )}/${normalizedHedFromItem}`;
 
           return (
             <li key={idx}>

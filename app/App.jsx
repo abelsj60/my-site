@@ -26,8 +26,7 @@ const GlobalStyle = createGlobalStyle`
     h2,
     h3,
     p {
-      margin: 0px;
-      padding-left: 2px;
+      margin: 0px 0px 0px 2px;
     }
   }
 
@@ -134,11 +133,16 @@ class App extends Component {
 
 export default withRouter(App);
 
-// https://www.tutorialspoint.com/css/css_animation.htm
+// Attribute handling for h1 and p?
+// Tighten Graf v. Hed components
 
 // Story edit
+// Add c to a
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?
 // Hosting?
+
+// https://www.tutorialspoint.com/css/css_animation.htm
+// https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/

@@ -1,12 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import StyledLink from '../primitives/StyledLink.jsx';
-import UnorderedList from '../primitives/UnorderedList.jsx';
-import Mapper from '../shared/Mapper.jsx';
-import normalize from '../helpers/normalize.js';
+import StyledLink from "../primitives/StyledLink.jsx";
+import UnorderedList from "../primitives/UnorderedList.jsx";
+import Mapper from "../shared/Mapper.jsx";
+import normalize from "../helpers/normalize.js";
 
 const Nav = styled.nav`
+  margin-left: 2px;
   margin-bottom: 13px;
 
   @media (min-width: 848px) {
@@ -34,10 +35,10 @@ const Text = styled.p`
   text-align: center;
   padding-bottom: 10px;
   margin: 0px;
-  border-bottom: ${p => (p.item ? '.5px solid white' : undefined)};
+  border-bottom: ${p => (p.item ? ".5px solid white" : undefined)};
 
   @media (min-width: 848px) {
-    border-bottom: ${p => (p.item ? '.5px solid #6e7dab' : undefined)};
+    border-bottom: ${p => (p.item ? ".5px solid #6e7dab" : undefined)};
   }
 `;
 
@@ -45,7 +46,7 @@ export default function ChapterNav(props) {
   const { data, bodyState, location, params } = props;
   let indexForChapterData;
 
-  if (location.pathname.split('/')[2] !== 'menu') {
+  if (location.pathname.split("/")[2] !== "menu") {
     indexForChapterData = params.titleToIndex();
   } else {
     indexForChapterData = bodyState.indexForChapterData;

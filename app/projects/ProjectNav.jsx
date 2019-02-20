@@ -53,6 +53,7 @@ const Group = styled.ul`
 `;
 const Item = styled.li`
   margin-right: ${p => (p.padding ? '5px' : undefined)};
+  margin-left: ${p => (!p.isRight ? '2px' : undefined)};
 
   @media (min-width: 672px) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};

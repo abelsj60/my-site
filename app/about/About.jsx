@@ -11,6 +11,10 @@ import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`
   min-width: 327px;
+
+  @media (min-width: 848px) {
+    margin-left: 25px;
+  }
 `;
 const Right = styled.section`
   flex: 1;
