@@ -1,8 +1,7 @@
+import Mapper from '../shared/Mapper.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
-
 import StyledLink from '../primitives/StyledLink.jsx';
-import Mapper from '../shared/Mapper.jsx';
 
 const Group = styled.ul`
   display: flex;

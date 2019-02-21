@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-
 import Reload from '../classes/Reload.js';
 
 /** Redirect users via State from Body */
