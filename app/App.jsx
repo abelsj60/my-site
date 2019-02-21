@@ -133,8 +133,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Review projects data and order
-
 // Story edit
 // Add copyright to articles?
 // Take pictures, write copy for Arrow, Slingshot, TMMnews

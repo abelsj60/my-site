@@ -122,7 +122,7 @@ export default function ProjectNav(props) {
 
           return (
             <Item key={idx} isRight={isRight} padding={padding}>
-              <RestyledLink to={`/projects/${projectName}/${thumbnailNumber}`}>
+              <RestyledLink to={`/projects/${projectName.toLowerCase()}/${thumbnailNumber}`}>
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
                 {highlightActiveThumbnail && <Highlighter />}
               </RestyledLink>

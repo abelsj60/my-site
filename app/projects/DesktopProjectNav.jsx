@@ -47,7 +47,7 @@ export default function DesktopProjectNav(props) {
       <Mapper
         mapData={finalData}
         render={(project, idx) => {
-          const { name, type } = project.attributes.details;
+          const { projectName, type } = project.attributes;
 
           return (
             <li key={idx}>
@@ -57,7 +57,7 @@ export default function DesktopProjectNav(props) {
                 b="9"
                 num={idx}
                 menu={isMenu}
-              >{`${name} | ${type}`}</RestyledHed>
+              >{`${projectName} | ${type}`}</RestyledHed>
               <ProjectNav
                 {...props}
                 num={idx}

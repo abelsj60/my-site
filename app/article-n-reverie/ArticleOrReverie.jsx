@@ -72,10 +72,10 @@ export default function ArticleOrReverie(props) {
       <Right>
         <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed as="h2" normal italic s="1.5" c="pink" onBlur="4">
+          <Hed as="h2" normal italic s="1.5" c="pink">
             {reverieOrPublicationAsDek}
           </Hed>
-          <Hed s="3" b="7">
+          <Hed s="3">
             {headline}
           </Hed>
           <Graf s="1.3" t="14" b="14">

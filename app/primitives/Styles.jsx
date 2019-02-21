@@ -1,6 +1,6 @@
 // We use single letter props to avoid adding them to
 // HTML elements as attributes. Why? Don't know!
-// Just works...!
+// Just works...
 
 const noCSS = '';
 const colors = {

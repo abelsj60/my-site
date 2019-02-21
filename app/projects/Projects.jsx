@@ -88,11 +88,18 @@ export default function Projects(props) {
   const indexForProjectPics = params.projectThumbnailToIndex();
   const project = data[indexForProjectData];
 
-  const { full, details } = project.attributes;
-  const { captions, name, type, contribution, description } = details;
+  const {
+    full,
+    captions,
+    projectName,
+    type,
+    contribution,
+    description,
+    technologies
+  } = project.attributes;
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
-  const mapData = [{ contribution }, { description }];
+  const mapData = [{ technologies }, { contribution }, { description }];
   const keys = mapData.map(item => {
     return Object.keys(item)[0];
   });
@@ -106,7 +113,7 @@ export default function Projects(props) {
         <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
           <Hed c="pink" s="3" b="8">
-            {name}
+            {projectName}
           </Hed>
           <section>
             <Hed as="h2" normal s="1.7" b="10">

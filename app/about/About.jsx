@@ -44,7 +44,7 @@ const Text = styled.section`
 const Icon = styled.div`
   height: 20px;
   width: 30px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   background: url(/profile-badge.svg) no-repeat;
 `;
 
