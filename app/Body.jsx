@@ -8,7 +8,10 @@ import NotFound from './not-found/NotFound.jsx';
 import React, { Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import ReloadRoute from './reload/ReloadRoute.jsx';
-import { Switch, Route } from 'react-router-dom';
+import {
+  Switch,
+  Route
+} from 'react-router-dom';
 
 export default class Body extends Component {
   constructor(props) {
@@ -53,22 +56,23 @@ export default class Body extends Component {
           '/journalism/:publication?/:headline?',
           '/projects/:projectName?/:projectThumbnail?',
           '/reverie/:headline?'
-        ].map((path, idx) => (
-          <Route
-            key={idx}
-            path={path}
-            render={
-              ({ match }) => (
-                <ContentLoader
-                  {...this.props}
-                  bodyState={this.state}
-                  boundHandleClickForBody={boundHandleClickForBody}
-                  match={match}
-                />
-              )
-            }
-          />
-        ))}
+        ].map(
+          (path, idx) => (
+            <Route
+              key={idx}
+              path={path}
+              render={
+                ({ match }) => (
+                  <ContentLoader
+                    {...this.props}
+                    bodyState={this.state}
+                    boundHandleClickForBody={boundHandleClickForBody}
+                    match={match}
+                  />
+                )
+              }
+            />
+          ))}
         <Route
           exact
           path="/i"

@@ -1,5 +1,8 @@
 import Body from './Body.jsx';
-import { css, createGlobalStyle } from 'styled-components';
+import {
+  css,
+  createGlobalStyle
+} from 'styled-components';
 import Footer from './header-footer/Footer.jsx';
 import Header from './header-footer/Header.jsx';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';

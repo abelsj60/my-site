@@ -3,7 +3,11 @@ import Location from '../classes/Location.js';
 import Menu from '../menu/Menu.jsx';
 import React, { Component } from 'react';
 import Referrer from '../classes/Referrer.js';
-import { Route, Redirect, Switch } from 'react-router';
+import {
+  Route,
+  Redirect,
+  Switch
+} from 'react-router';
 
 export default class ContentLoader extends Component {
   constructor(props) {
