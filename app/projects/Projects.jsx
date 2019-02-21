@@ -45,7 +45,7 @@ const Caption = styled.figcaption`
   margin-top: 7px;
   margin-bottom: 10px;
   margin-right: 10px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #6e7dab;
 
   @media (min-width: 672px) {
@@ -123,7 +123,7 @@ export default function Projects(props) {
               mapData={mapData}
               render={(proj, idx) => (
                 <Fragment key={idx}>
-                  <Hed as="h3" normal c="blue" s="1.7" b="7">
+                  <Hed as="h3" normal c="blue" s="1.4" b="7">
                     {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
                   </Hed>
                   <Graf t="0" b="10">
