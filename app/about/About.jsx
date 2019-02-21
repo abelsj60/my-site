@@ -54,7 +54,7 @@ export default function About() {
       <RestyledLeft />
       <Right>
         <Heading>
-          <Hed color="pink" size="3" top="-4">
+          <Hed c="pink" s="3">
             About
           </Hed>
           <ExternalLink href="https://www.linkedin.com/jea" target="_blank">

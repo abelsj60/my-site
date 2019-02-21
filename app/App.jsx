@@ -133,11 +133,10 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Attribute handling for h1 and p?
-// Tighten Graf v. Hed components
+// Review projects data and order
 
 // Story edit
-// Add c to a
+// Add copyright to articles?
 // Take pictures, write copy for Arrow, Slingshot, TMMnews
 
 // Images — how to store for React?

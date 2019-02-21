@@ -76,16 +76,16 @@ export default function ArticleOrReverieNav(props) {
               <StyledLink to={articleLink}>
                 <GrafAsDek
                   italic
-                  size="1.3"
-                  bottom="2"
+                  s="1.3"
+                  b="2"
                   menu={isMenu}
                   link={linkIsActive}
                 >
                   {dateOrPublicationFromItem}
                 </GrafAsDek>
                 <GrafAsHed
-                  top="0"
-                  bottom="10"
+                  t="0"
+                  b="10"
                   menu={isMenu}
                   link={linkIsActive}
                 >

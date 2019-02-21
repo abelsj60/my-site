@@ -105,21 +105,21 @@ export default function Projects(props) {
       <Right>
         <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed color="pink" size="3" bottom="8" bigTop="-4">
+          <Hed c="pink" s="3" b="8">
             {name}
           </Hed>
           <section>
-            <Hed as="h2" normal size="1.7" bottom="10">
+            <Hed as="h2" normal s="1.7" b="10">
               {type}
             </Hed>
             <Mapper
               mapData={mapData}
               render={(proj, idx) => (
                 <Fragment key={idx}>
-                  <Hed as="h3" normal color="blue" size="1.7" bottom="7">
+                  <Hed as="h3" normal c="blue" s="1.7" b="7">
                     {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
                   </Hed>
-                  <Graf top="0" bottom="10">
+                  <Graf t="0" b="10">
                     {proj[keys[idx]]}
                   </Graf>
                 </Fragment>

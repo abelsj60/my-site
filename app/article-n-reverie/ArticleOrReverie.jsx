@@ -50,7 +50,18 @@ export default function ArticleOrReverie(props) {
 
   const index = params.headlineToIndex();
   const article = data[index];
-  const { headline, date } = article.attributes;
+  const { headline, date, publication } = article.attributes;
+  let reverieOrPublicationAsDek;
+  let bylineOrDate;
+
+  if (isReverie) {
+    reverieOrPublicationAsDek = 'Reverie';
+    bylineOrDate = date;
+  } else {
+    reverieOrPublicationAsDek = publication;
+    bylineOrDate = 'by James Erik Abels';
+  }
+
   const ArticleOrReverieText = isReverie ? ReverieText : ArticleText;
 
   return (
@@ -61,14 +72,14 @@ export default function ArticleOrReverie(props) {
       <Right>
         <MenuButton {...props} />
         <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed as="h2" normal italic size="1.5" color="pink" bottom="4">
-            Reverie
+          <Hed as="h2" normal italic s="1.5" c="pink" onBlur="4">
+            {reverieOrPublicationAsDek}
           </Hed>
-          <Hed size="3" bottom="7">
+          <Hed s="3" b="7">
             {headline}
           </Hed>
-          <Graf italic size="1.4" top="15" bottom="15">
-            {date}
+          <Graf s="1.3" t="14" b="14">
+            {bylineOrDate}
           </Graf>
           <ArticleOrReverieText>
             {ReactHtmlParser(marked(article.body, { smartypants: true }))}

@@ -19,7 +19,7 @@ const RestyledLeft = styled(Left)`
   color: white;
   padding: 25px;
   margin: 25px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 
   @media (min-width: 848px) {
     position: unset;
@@ -73,7 +73,7 @@ export default function Story(props) {
       <RestyledLeft as="section" text={textStatus}>
         <ChapterNav {...props} />
         <RestyledOverflow ref={ref => (overflowRef.current = ref)}>
-          <Hed color="yellow" bigColor="pink" size="3" bottom="12">
+          <Hed c="yellow" bC="pink" s="3" b="12">
             {title}
           </Hed>
           <Text>

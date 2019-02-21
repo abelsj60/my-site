@@ -93,10 +93,10 @@ export default function Home(props) {
             ref={el => (renderProps.scene = el)}
             tempContentIsOn={showBusinessCard || showLegalTerms}
           >
-            <RestyledHed size="6.5" color="yellow" data-depth=".4">
+            <RestyledHed s="6.5" c="yellow" data-depth=".4">
               JamesAbels
             </RestyledHed>
-            <RestyledGraf size="1.7" color="pink" top="93" data-depth=".4">
+            <RestyledGraf s="1.7" c="pink" t="93" data-depth=".4">
               narrative coding and other adventures
             </RestyledGraf>
           </NameTag>

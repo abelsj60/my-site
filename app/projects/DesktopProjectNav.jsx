@@ -53,8 +53,8 @@ export default function DesktopProjectNav(props) {
             <li key={idx}>
               <RestyledHed
                 normal
-                color="blue"
-                bottom="9"
+                c="blue"
+                b="9"
                 num={idx}
                 menu={isMenu}
               >{`${name} | ${type}`}</RestyledHed>
