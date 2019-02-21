@@ -82,7 +82,11 @@ const Image = styled.img`
 `;
 
 export default function Projects(props) {
-  const { data, overflowRef, params } = props;
+  const {
+    data,
+    overflowRef,
+    params
+  } = props;
 
   const indexForProjectData = params.projectNameToIndex();
   const indexForProjectPics = params.projectThumbnailToIndex();
@@ -99,7 +103,11 @@ export default function Projects(props) {
   } = project.attributes;
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
-  const mapData = [{ technologies }, { contribution }, { description }];
+  const mapData = [
+    { technologies },
+    { contribution },
+    { description }
+  ];
   const keys = mapData.map(item => {
     return Object.keys(item)[0];
   });

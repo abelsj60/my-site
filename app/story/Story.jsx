@@ -60,12 +60,20 @@ const Text = styled.section`
 `;
 
 export default function Story(props) {
-  const { data, overflowRef, appState, params } = props;
+  const {
+    data,
+    overflowRef,
+    appState,
+    params
+  } = props;
   const { showStoryText } = appState;
   const indexForChapterData = params.titleToIndex();
 
   const chapter = data[indexForChapterData];
-  const { image, title } = chapter.attributes;
+  const {
+    image,
+    title
+  } = chapter.attributes;
   const textStatus = !showStoryText ? 'hidden' : undefined;
 
   return (

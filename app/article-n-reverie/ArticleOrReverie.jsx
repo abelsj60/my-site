@@ -44,13 +44,23 @@ const ArticleText = styled.section`
 `;
 
 export default function ArticleOrReverie(props) {
-  const { data, overflowRef, params, location } = props;
+  const {
+    data,
+    overflowRef,
+    params,
+    location
+  } = props;
   const currentPath = location.pathname.split('/');
   const isReverie = currentPath[1] === 'reverie';
 
   const index = params.headlineToIndex();
   const article = data[index];
-  const { headline, date, publication, position } = article.attributes;
+  const {
+    headline,
+    date,
+    publication,
+    position
+  } = article.attributes;
   let reverieOrPublicationAsDek;
   let bylineOrDate;
 

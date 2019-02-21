@@ -25,7 +25,13 @@ const RestyledHed = styled(Hed)`
 `;
 
 export default function DesktopProjectNav(props) {
-  const { params, appState, bodyState, location, data } = props;
+  const {
+    params,
+    appState,
+    bodyState,
+    location,
+    data
+  } = props;
   const { isMenu } = appState;
 
   let indexForProjectData;
@@ -47,7 +53,10 @@ export default function DesktopProjectNav(props) {
       <Mapper
         mapData={finalData}
         render={(project, idx) => {
-          const { projectName, type } = project.attributes;
+          const {
+            projectName,
+            type
+          } = project.attributes;
 
           return (
             <li key={idx}>

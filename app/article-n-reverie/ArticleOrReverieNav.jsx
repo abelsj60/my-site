@@ -34,7 +34,13 @@ const GrafAsHed = styled(Graf)`
 `;
 
 export default function ArticleOrReverieNav(props) {
-  const { data, params, bodyState, appState, location } = props;
+  const {
+    data,
+    params,
+    bodyState,
+    appState,
+    location
+  } = props;
   const { isMenu } = appState;
   const currentPath = location.pathname.split('/');
 
@@ -59,7 +65,11 @@ export default function ArticleOrReverieNav(props) {
       <Mapper
         mapData={data}
         render={(articleOrReverie, idx) => {
-          const { publication, headline, date } = articleOrReverie.attributes;
+          const {
+            publication,
+            headline,
+            date
+          } = articleOrReverie.attributes;
 
           const normalizedHedFromItem = normalize(headline);
           const dateOrPublicationFromItem = !isReverie ? publication : date;

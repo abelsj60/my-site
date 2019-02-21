@@ -100,7 +100,10 @@ export default function ProjectNav(props) {
     indexForProjectPics,
     appState
   } = props;
-  const { thumbnails, projectName } = project.attributes;
+  const {
+    thumbnails,
+    projectName
+  } = project.attributes;
   let isMenu;
 
   if (appState) {
