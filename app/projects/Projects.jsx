@@ -28,7 +28,7 @@ const Images = styled.section`
     flex-direction: column;
   }
 
-  @media (min-width: 1048px) {
+  @media (min-width: 1026px) {
     flex-direction: row-reverse;
   }
 `;
@@ -45,7 +45,7 @@ const Caption = styled.figcaption`
   margin-top: 7px;
   margin-bottom: 10px;
   margin-right: 10px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #6e7dab;
 
   @media (min-width: 672px) {
@@ -56,7 +56,7 @@ const Caption = styled.figcaption`
     margin-top: 10px;
   }
 
-  @media (min-width: 1048px) {
+  @media (min-width: 1026px) {
     margin-top: 0;
   }
 `;
@@ -76,23 +76,38 @@ const Image = styled.img`
     margin-right: 0px;
   }
 
-  @media (min-width: 1048px) {
+  @media (min-width: 1026px) {
     margin-right: 10px;
   }
 `;
 
 export default function Projects(props) {
-  const { data, overflowRef, params } = props;
+  const {
+    data,
+    overflowRef,
+    params
+  } = props;
 
   const indexForProjectData = params.projectNameToIndex();
   const indexForProjectPics = params.projectThumbnailToIndex();
   const project = data[indexForProjectData];
 
-  const { full, details } = project.attributes;
-  const { captions, name, type, contribution, description } = details;
+  const {
+    full,
+    captions,
+    projectName,
+    type,
+    contribution,
+    description,
+    technologies
+  } = project.attributes;
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
-  const mapData = [{ contribution }, { description }];
+  const mapData = [
+    { technologies },
+    { contribution },
+    { description }
+  ];
   const keys = mapData.map(item => {
     return Object.keys(item)[0];
   });
@@ -104,22 +119,24 @@ export default function Projects(props) {
       </Left>
       <Right>
         <MenuButton {...props} />
-        <Overflow ref={ref => (overflowRef.current = ref)}>
-          <Hed padIt color="pink" size="2.5" bottom="8" bigTop="-4">
-            {name}
+        <Overflow ref={ref => {
+          overflowRef.current = ref;
+        }}>
+          <Hed c="pink" s="3" b="8">
+            {projectName}
           </Hed>
           <section>
-            <Hed as="h2" normal size="1.7" bottom="10">
+            <Hed as="h2" normal s="1.7" b="10">
               {type}
             </Hed>
             <Mapper
               mapData={mapData}
               render={(proj, idx) => (
                 <Fragment key={idx}>
-                  <Hed as="h3" normal color="blue" size="1.7" bottom="7">
+                  <Hed as="h3" normal c="blue" s="1.4" b="7">
                     {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
                   </Hed>
-                  <Graf top="0" bottom="10">
+                  <Graf t="0" b="10">
                     {proj[keys[idx]]}
                   </Graf>
                 </Fragment>

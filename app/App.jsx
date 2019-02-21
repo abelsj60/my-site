@@ -26,14 +26,14 @@ const GlobalStyle = createGlobalStyle`
     h2,
     h3,
     p {
-      margin: 0px;
+      margin: 0px 0px 0px 2px;
     }
   }
 
   #app {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 
     ${p =>
     p.home &&
@@ -133,11 +133,13 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Reverie + Article — share?
-
 // Story edit
-// Take pictures, write copy for Arrow, Slingshot, TMMnews
+// Add copyright to articles?
+// Take pictures, write captions for Arrow, Slingshot, TMMnews
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?
 // Hosting?
+
+// https://www.tutorialspoint.com/css/css_animation.htm
+// https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/

@@ -9,6 +9,7 @@ import ProjectNav from './ProjectNav.jsx';
 const StyledUL = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
+  margin-right: 25px;
   width: ${p => (!p.menu ? '327px' : undefined)};
 
   ${p =>
@@ -24,7 +25,13 @@ const RestyledHed = styled(Hed)`
 `;
 
 export default function DesktopProjectNav(props) {
-  const { params, appState, bodyState, location, data } = props;
+  const {
+    params,
+    appState,
+    bodyState,
+    location,
+    data
+  } = props;
   const { isMenu } = appState;
 
   let indexForProjectData;
@@ -46,17 +53,20 @@ export default function DesktopProjectNav(props) {
       <Mapper
         mapData={finalData}
         render={(project, idx) => {
-          const { name, type } = project.attributes.details;
+          const {
+            projectName,
+            type
+          } = project.attributes;
 
           return (
             <li key={idx}>
               <RestyledHed
                 normal
-                color="blue"
-                bottom="9"
+                c="blue"
+                b="9"
                 num={idx}
                 menu={isMenu}
-              >{`${name} | ${type}`}</RestyledHed>
+              >{`${projectName} | ${type}`}</RestyledHed>
               <ProjectNav
                 {...props}
                 num={idx}

@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Main from '../primitives/Main.jsx';
-// import Hed from '../primitives/Hed.jsx';
-// import Graf from '../primitives/Graf.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Graf from '../primitives/Graf.jsx';
 import Button from '../shared/Button.jsx';
-import Parallax from '../about/Parallax.jsx';
+import Parallax from '../shared/Parallax.jsx';
 
 const RestyledMain = styled(Main)`
   justify-content: space-between;
@@ -17,26 +17,26 @@ const RestyledMain = styled(Main)`
     flex-direction: column;
   }
 `;
-// const NameTag = styled.div`
-//   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 2;
-//   margin-top: 30px;
-//   cursor: pointer;
-// `;
-// const RestyledHed = styled(Hed)`
-//   font-family: 'Aref Ruqaa', serif;
-//   text-shadow: 1px 1px 2px black;
-// `;
-// const RestyledGraf = styled(Graf)`
-//   text-shadow: 1px 1px 2px black;
-//   margin-left: 18px;
-//   font-weight: bold;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-// `;
+const NameTag = styled.div`
+  display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  margin-top: 30px;
+  cursor: pointer;
+`;
+const RestyledHed = styled(Hed)`
+  font-family: 'Aref Ruqaa', serif;
+  text-shadow: 1px 1px 2px black;
+`;
+const RestyledGraf = styled(Graf)`
+  text-shadow: 1px 1px 2px black;
+  margin-left: 18px;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+`;
 const PictureBox = styled.div`
   position: absolute;
   top: 0px;
@@ -81,13 +81,31 @@ const TravelButton = styled(Button)`
 `;
 
 export default function Home(props) {
-  const { inCity, showBusinessCard, showLegalTerms } = props.appState;
+  const {
+    inCity,
+    showBusinessCard,
+    showLegalTerms
+  } = props.appState;
   const { boundHandleClickForApp } = props;
   const travelButtonText = inCity ? 'Home' : 'Away';
 
   return (
     <RestyledMain>
-      <Parallax {...props} />
+      <Parallax
+        render={renderProps => (
+          <NameTag
+            ref={el => (renderProps.scene = el)}
+            tempContentIsOn={showBusinessCard || showLegalTerms}
+          >
+            <RestyledHed s="6.5" c="yellow" data-depth=".4">
+              JamesAbels
+            </RestyledHed>
+            <RestyledGraf s="1.7" c="pink" t="93" data-depth=".4">
+              narrative coding and other adventures
+            </RestyledGraf>
+          </NameTag>
+        )}
+      />
       <PictureBox>
         <BoyInForeground src="/foreground.png" alt="the boy looks out" />
         <Portal />

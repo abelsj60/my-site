@@ -50,7 +50,10 @@ export default class Reload {
 
   _projectsPath(section) {
     const projectData = this._getContentData();
-    const { indexForProjectData, indexForProjectPics } = this._props.bodyState;
+    const {
+      indexForProjectData,
+      indexForProjectPics
+    } = this._props.bodyState;
     const projectName = projectData[indexForProjectData].attributes.projectName;
     const normalizedProjectName = this._normalize(projectName);
     const thumbnailNumber = indexForProjectPics + 1;
@@ -62,7 +65,10 @@ export default class Reload {
     const articleData = this._getContentData();
     const { indexForArticleData } = this._props.bodyState;
     const article = articleData[indexForArticleData];
-    const { publication, headline } = article.attributes;
+    const {
+      publication,
+      headline
+    } = article.attributes;
     const normalizedPublication = this._normalize(publication);
     const normalizedHeadline = this._normalize(headline);
 

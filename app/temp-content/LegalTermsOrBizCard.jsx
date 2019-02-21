@@ -1,4 +1,5 @@
 import React from 'react';
+import Parallax from '../shared/Parallax.jsx';
 import styled, { css } from 'styled-components';
 
 const Container = styled.section`
@@ -14,13 +15,15 @@ const Container = styled.section`
   ${p =>
     p.home &&
     css`
+      z-index: 1;
       background-color: rgba(255, 231, 76, 0.1);
       background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
     `};
 `;
-const Card = styled.section`
+const InnerContainer = styled.div`
   margin-top: ${p => (p.home ? '-200px' : undefined)};
-  display: flex;
+`;
+const Card = styled.section`
   flex-direction: column;
   justify-content: center;
   height: 200px;
@@ -47,7 +50,11 @@ const Graf = styled.p`
 `;
 
 export default function LegalTermsOrBizCard(props) {
-  const { showBusinessCard, showLegalTerms, currentCaller } = props.appState;
+  const {
+    showBusinessCard,
+    showLegalTerms,
+    currentCaller
+  } = props.appState;
 
   if (!showBusinessCard && !showLegalTerms) {
     return null;
@@ -60,10 +67,16 @@ export default function LegalTermsOrBizCard(props) {
 
   return (
     <Container home={homeIsActive}>
-      <Card home={homeIsActive}>
-        <Graf businessCard={showBusinessCard}>{text}</Graf>
-        {showBusinessCard && <InnerBorder />}
-      </Card>
+      <Parallax
+        render={renderProps => (
+          <InnerContainer ref={el => (renderProps.scene = el)} home={homeIsActive}>
+            <Card home={homeIsActive} data-depth="1">
+              <Graf businessCard={showBusinessCard}>{text}</Graf>
+              {showBusinessCard && <InnerBorder />}
+            </Card>
+          </InnerContainer>
+        )}
+      />
     </Container>
   );
 }

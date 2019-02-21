@@ -16,7 +16,7 @@ export default function NotFound() {
   return (
     <Main>
       <RestyledRight>
-        <Hed size="3" bottom="15">
+        <Hed s="3" b="15">
           Uh oh. Not found!
         </Hed>
         <FailWhale />

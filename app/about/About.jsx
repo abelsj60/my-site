@@ -6,11 +6,15 @@ import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
 import Hed from '../primitives/Hed.jsx';
 
-import bio from '../data/about.md';
+import bio from '../data/about/about.md';
 import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`
   min-width: 327px;
+
+  @media (min-width: 848px) {
+    margin-left: 25px;
+  }
 `;
 const Right = styled.section`
   flex: 1;
@@ -19,7 +23,6 @@ const Right = styled.section`
 const Heading = styled.div`
   display: flex;
   margin-bottom: 10px;
-  padding-left: 1px;
 `;
 const ExternalLink = styled.a`
   align-self: flex-end;
@@ -41,7 +44,7 @@ const Text = styled.section`
 const Icon = styled.div`
   height: 20px;
   width: 30px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   background: url(/profile-badge.svg) no-repeat;
 `;
 
@@ -51,7 +54,7 @@ export default function About() {
       <RestyledLeft />
       <Right>
         <Heading>
-          <Hed color="pink" size="2.5" top="-4">
+          <Hed c="pink" s="3">
             About
           </Hed>
           <ExternalLink href="https://www.linkedin.com/jea" target="_blank">

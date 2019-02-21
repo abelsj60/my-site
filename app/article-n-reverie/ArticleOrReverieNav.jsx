@@ -12,7 +12,7 @@ const StyledUL = styled(UnorderedList)`
   overflow: auto;
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;
-const GrafAsSource = styled(Graf)`
+const GrafAsDek = styled(Graf)`
   color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
 
   &:first-child {
@@ -22,59 +22,80 @@ const GrafAsSource = styled(Graf)`
 const GrafAsHed = styled(Graf)`
   color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
   font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
-  // font-weight: bold;
 
   ${p =>
     !p.menu &&
     css`
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 315px;
+      width: 300px;
       white-space: nowrap;
     `};
 `;
 
-export default function ArticleNav(props) {
-  const { data, params, bodyState, appState, location } = props;
+export default function ArticleOrReverieNav(props) {
+  const {
+    data,
+    params,
+    bodyState,
+    appState,
+    location
+  } = props;
   const { isMenu } = appState;
-  let indexForArticleData;
+  const currentPath = location.pathname.split('/');
 
-  if (location.pathname.split('/')[2] !== 'menu') {
-    indexForArticleData = params.headlineToIndex();
+  const isReverie = currentPath[1] === 'reverie';
+  let index;
+
+  if (currentPath[2] !== 'menu') {
+    index = params.headlineToIndex();
   } else {
-    indexForArticleData = bodyState.indexForArticleData;
+    if (isReverie) {
+      index = bodyState.indexForReverieData;
+    } else {
+      index = bodyState.indexForArticleData;
+    }
   }
+
+  const currentHed = data[index].attributes.headline;
+  const normalizedCurrentHed = normalize(currentHed);
 
   return (
     <StyledUL menu={isMenu}>
       <Mapper
         mapData={data}
-        render={(article, idx) => {
-          const { publication, headline } = article.attributes;
-          const currentHed = data[indexForArticleData].attributes.headline;
+        render={(articleOrReverie, idx) => {
+          const {
+            publication,
+            headline,
+            date
+          } = articleOrReverie.attributes;
 
-          const normalizePub = normalize(publication);
-          const normalizeHed = normalize(headline);
-          const normalizeCurrentHed = normalize(currentHed);
+          const normalizedHedFromItem = normalize(headline);
+          const dateOrPublicationFromItem = !isReverie ? publication : date;
 
-          const linkIsActive = normalizeHed === normalizeCurrentHed;
-          const articleLink = `/journalism/${normalizePub}/${normalizeHed}`;
+          const linkIsActive = normalizedCurrentHed === normalizedHedFromItem;
+          const articleLink = isReverie
+            ? `/reverie/${normalizedHedFromItem}`
+            : `/journalism/${normalize(
+              dateOrPublicationFromItem
+            )}/${normalizedHedFromItem}`;
 
           return (
             <li key={idx}>
               <StyledLink to={articleLink}>
-                <GrafAsSource
+                <GrafAsDek
                   italic
-                  size="1.3"
-                  bottom="2"
+                  s="1.3"
+                  b="2"
                   menu={isMenu}
                   link={linkIsActive}
                 >
-                  {publication}
-                </GrafAsSource>
+                  {dateOrPublicationFromItem}
+                </GrafAsDek>
                 <GrafAsHed
-                  top="0"
-                  bottom="10"
+                  t="0"
+                  b="10"
                   menu={isMenu}
                   link={linkIsActive}
                 >

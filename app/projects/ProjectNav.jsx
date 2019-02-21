@@ -42,7 +42,7 @@ const Group = styled.ul`
         border-bottom: #6e7dab solid 0.5px;
       }
 
-      @media (min-width: 1048px) {
+      @media (min-width: 1026px) {
         flex-direction: column;
         justify-content: flex-start;
         margin-top: 28px;
@@ -53,6 +53,7 @@ const Group = styled.ul`
 `;
 const Item = styled.li`
   margin-right: ${p => (p.padding ? '5px' : undefined)};
+  margin-left: ${p => (!p.isRight ? '2px' : undefined)};
 
   @media (min-width: 672px) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
@@ -64,7 +65,7 @@ const Item = styled.li`
     margin-bottom: ${p => (p.isRight ? '0px' : undefined)};
   }
 
-  @media (min-width: 1048px) {
+  @media (min-width: 1026px) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
@@ -99,7 +100,10 @@ export default function ProjectNav(props) {
     indexForProjectPics,
     appState
   } = props;
-  const { thumbnails, projectName } = project.attributes;
+  const {
+    thumbnails,
+    projectName
+  } = project.attributes;
   let isMenu;
 
   if (appState) {
@@ -121,7 +125,7 @@ export default function ProjectNav(props) {
 
           return (
             <Item key={idx} isRight={isRight} padding={padding}>
-              <RestyledLink to={`/projects/${projectName}/${thumbnailNumber}`}>
+              <RestyledLink to={`/projects/${projectName.toLowerCase()}/${thumbnailNumber}`}>
                 <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
                 {highlightActiveThumbnail && <Highlighter />}
               </RestyledLink>
