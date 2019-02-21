@@ -46,9 +46,9 @@ const ArticleText = styled.section`
 export default function ArticleOrReverie(props) {
   const {
     data,
+    location,
     overflowRef,
-    params,
-    location
+    params
   } = props;
   const currentPath = location.pathname.split('/');
   const isReverie = currentPath[1] === 'reverie';
@@ -56,20 +56,20 @@ export default function ArticleOrReverie(props) {
   const index = params.headlineToIndex();
   const article = data[index];
   const {
-    headline,
     date,
-    publication,
-    position
+    headline,
+    position,
+    publication
   } = article.attributes;
-  let reverieOrPublicationAsDek;
   let bylineOrDate;
+  let reverieOrPublicationAsDek;
 
   if (isReverie) {
-    reverieOrPublicationAsDek = 'Reverie';
     bylineOrDate = date;
+    reverieOrPublicationAsDek = 'Reverie';
   } else {
-    reverieOrPublicationAsDek = publication;
     bylineOrDate = `by James Erik Abels | ${position}`;
+    reverieOrPublicationAsDek = publication;
   }
 
   const ArticleOrReverieText = isReverie ? ReverieText : ArticleText;
@@ -81,16 +81,16 @@ export default function ArticleOrReverie(props) {
       </Left>
       <Right>
         <MenuButton {...props} />
-        <Overflow ref={ref => {
-          overflowRef.current = ref;
-        }}>
-          <Hed as="h2" normal italic s="1.5" c="pink">
+        <Overflow ref={
+          ref => overflowRef.current = ref
+        }>
+          <Hed as="h2" normal italic c="pink" s="1.5" >
             {reverieOrPublicationAsDek}
           </Hed>
           <Hed s="3">
             {headline}
           </Hed>
-          <Graf s="1.3" t="14" b="14">
+          <Graf b="14" s="1.3" t="14">
             {bylineOrDate}
           </Graf>
           <ArticleOrReverieText>

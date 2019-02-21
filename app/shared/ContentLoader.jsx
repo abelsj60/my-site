@@ -23,10 +23,13 @@ export default class ContentLoader extends Component {
   }
 
   render() {
-    const { needsRedirect, isNotFound } = this.state;
-    let r;
-    let l;
+    const {
+      needsRedirect,
+      isNotFound
+    } = this.state;
     let cD;
+    let l;
+    let r;
 
     /** ComponentData contains configured Components
      *
@@ -40,8 +43,8 @@ export default class ContentLoader extends Component {
 
     if (!needsRedirect && !isNotFound) {
       r = new Referrer(this.props);
-      l = new Location(r.pathToMatch, this.props);
       cD = new ComponentData(r.location, this.props);
+      l = new Location(r.pathToMatch, this.props);
     }
 
     return needsRedirect ? (
@@ -52,19 +55,19 @@ export default class ContentLoader extends Component {
       <Switch>
         <Route
           path={`/${r.location}/menu`}
-          render={() => {
-            return (
+          render={
+            () => (
               <Menu {...this.props}>
                 {cD.getMenuComponent(this.props, l.params)}
               </Menu>
-            );
-          }}
+            )
+          }
         />
         <Route
           path={`${r.genericPath}`}
-          render={() => {
-            return cD.getSection(this.props, this.overflowRef, l.params);
-          }}
+          render={
+            () => cD.getSection(this.props, this.overflowRef, l.params)
+          }
         />
       </Switch>
     );

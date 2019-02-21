@@ -121,11 +121,17 @@ export default class Header extends Component {
   }
 
   render() {
-    const { appState } = this.props;
-    const { currentCaller } = appState;
+    const {
+      appState
+    } = this.props;
+    const {
+      currentCaller
+    } = appState;
     const menuIsActive = this.state.menuIsOpen;
     const homeIsActive = currentCaller === 'home';
-    const togglerSource = `/menu-${menuIsActive ? 'open' : 'closed'}-icon.svg`;
+    const togglerSource = `/menu-${menuIsActive
+      ? 'open'
+      : 'closed'}-icon.svg`;
 
     const r = new Referrer(this.props);
 
@@ -135,8 +141,11 @@ export default class Header extends Component {
     return (
       <Container home={homeIsActive}>
         <NameAsLink
+          hide={
+            ((menuIsActive || homeIsActive) && 'active')
+            || undefined
+          }
           to={'/'}
-          hide={((menuIsActive || homeIsActive) && 'active') || undefined}
         >
           James Abels
         </NameAsLink>
@@ -147,22 +156,30 @@ export default class Header extends Component {
           <NavList>
             <Mapper
               mapData={data}
-              render={(link, idx) => {
-                const pathIsActive = link.path.includes(r.location);
+              render={
+                (link, idx) => {
+                  const pathIsActive = link.path.includes(r.location);
 
-                return (
-                  <li key={idx}>
-                    <RestyledLink
-                      active={(pathIsActive && 'active') || undefined}
-                      home={(homeIsActive && 'active') || undefined}
-                      num={idx}
-                      to={link.path}
-                    >
-                      {link.name}
-                    </RestyledLink>
-                  </li>
-                );
-              }}
+                  return (
+                    <li key={idx}>
+                      <RestyledLink
+                        active={
+                          (pathIsActive && 'active')
+                        || undefined
+                        }
+                        home={
+                          (homeIsActive && 'active')
+                        || undefined
+                        }
+                        num={idx}
+                        to={link.path}
+                      >
+                        {link.name}
+                      </RestyledLink>
+                    </li>
+                  );
+                }
+              }
             />
           </NavList>
         </Nav>
@@ -170,9 +187,9 @@ export default class Header extends Component {
           home={homeIsActive}
           menu={menuIsActive}
           src={togglerSource}
-          onClick={() => {
-            handleClickForHeader();
-          }}
+          onClick={
+            () => handleClickForHeader()
+          }
         />
       </Container>
     );

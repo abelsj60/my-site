@@ -68,14 +68,17 @@ export default function LegalTermsOrBizCard(props) {
   return (
     <Container home={homeIsActive}>
       <Parallax
-        render={renderProps => (
-          <InnerContainer ref={el => (renderProps.scene = el)} home={homeIsActive}>
-            <Card home={homeIsActive} data-depth="1">
-              <Graf businessCard={showBusinessCard}>{text}</Graf>
-              {showBusinessCard && <InnerBorder />}
-            </Card>
-          </InnerContainer>
-        )}
+        render={
+          renderProps => (
+            <InnerContainer home={homeIsActive} ref={
+              el => (renderProps.scene = el)
+            }>
+              <Card data-depth="1" home={homeIsActive}>
+                <Graf businessCard={showBusinessCard}>{text}</Graf>
+                {showBusinessCard && <InnerBorder />}
+              </Card>
+            </InnerContainer>
+          )}
       />
     </Container>
   );

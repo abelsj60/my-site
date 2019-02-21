@@ -17,7 +17,9 @@ const RestyledOverfiow = styled(Overflow)`
 `;
 
 export default function Menu(props) {
-  const { children } = props;
+  const {
+    children
+  } = props;
 
   return (
     <RestyledMain>

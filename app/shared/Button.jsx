@@ -14,9 +14,15 @@ export default function Button(props) {
     return null;
   }
 
+  const {
+    className,
+    clickFunction,
+    text
+  } = props;
+
   return (
-    <Structure className={props.className} onClick={props.clickFunction}>
-      {props.text}
+    <Structure className={className} onClick={clickFunction}>
+      {text}
     </Structure>
   );
 }

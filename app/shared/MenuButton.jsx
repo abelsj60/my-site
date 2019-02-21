@@ -43,7 +43,11 @@ const Line = styled.div`
 `;
 
 export default function MenuButton(props) {
-  const { isMenu, lastCaller, currentCaller } = props.appState;
+  const {
+    isMenu,
+    lastCaller,
+    currentCaller
+  } = props.appState;
   const isReverie = currentCaller === 'reverie';
   const link =
     isReverie && isMenu
@@ -56,7 +60,10 @@ export default function MenuButton(props) {
 
   return (
     <Container>
-      <RestyledLink to={link} menu={(isMenu && 'active') || undefined}>
+      <RestyledLink to={link} menu={
+        (isMenu && 'active')
+        || undefined
+      }>
         <Label menu={isMenu}>{text}</Label>
         <Arrow src={arrowIcon} />
         <Line menu={isMenu} />

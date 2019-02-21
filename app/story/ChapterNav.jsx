@@ -44,8 +44,8 @@ const Text = styled.p`
 
 export default function ChapterNav(props) {
   const {
-    data,
     bodyState,
+    data,
     location,
     params
   } = props;
@@ -62,20 +62,22 @@ export default function ChapterNav(props) {
       <StyledUL>
         <Mapper
           mapData={data}
-          render={(_chapter, idx) => {
-            const itemIsActive = indexForChapterData === idx;
-            const normalizedTitle = normalize(data[idx].attributes.title);
+          render={
+            (_chapter, idx) => {
+              const itemIsActive = indexForChapterData === idx;
+              const normalizedTitle = normalize(data[idx].attributes.title);
 
-            return (
-              <Item key={idx}>
-                <RestyledLink to={`/chapter/${normalizedTitle}`}>
-                  <Text item={itemIsActive} num={idx}>
-                    {idx + 1}
-                  </Text>
-                </RestyledLink>
-              </Item>
-            );
-          }}
+              return (
+                <Item key={idx}>
+                  <RestyledLink to={`/chapter/${normalizedTitle}`}>
+                    <Text item={itemIsActive} num={idx}>
+                      {idx + 1}
+                    </Text>
+                  </RestyledLink>
+                </Item>
+              );
+            }
+          }
         />
       </StyledUL>
     </Nav>

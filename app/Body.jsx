@@ -46,9 +46,9 @@ export default class Body extends Component {
         <Route
           exact
           path="/"
-          render={() => {
-            return <Home {...this.props} />;
-          }}
+          render={
+            () => <Home {...this.props} />
+          }
         />
         {[
           '/chapter/:title?',
@@ -59,24 +59,24 @@ export default class Body extends Component {
           <Route
             key={idx}
             path={path}
-            render={({ match }) => {
-              return (
+            render={
+              ({ match }) => (
                 <ContentLoader
                   {...this.props}
-                  match={match}
                   bodyState={this.state}
                   boundHandleClickForBody={boundHandleClickForBody}
+                  match={match}
                 />
-              );
-            }}
+              )
+            }
           />
         ))}
         <Route
           exact
           path="/i"
-          render={() => {
-            return <ReloadRoute {...this.props} bodyState={this.state} />;
-          }}
+          render={
+            () => <ReloadRoute {...this.props} bodyState={this.state} />
+          }
         />
         <Route exact path="/about" component={About} />
         <Route component={NotFound} />

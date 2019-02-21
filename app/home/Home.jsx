@@ -86,43 +86,55 @@ export default function Home(props) {
     showBusinessCard,
     showLegalTerms
   } = props.appState;
-  const { boundHandleClickForApp } = props;
-  const travelButtonText = inCity ? 'Home' : 'Away';
+  const {
+    boundHandleClickForApp
+  } = props;
+  const travelButtonText = inCity
+    ? 'Home'
+    : 'Away';
 
   return (
     <RestyledMain>
       <Parallax
-        render={renderProps => (
-          <NameTag
-            ref={el => (renderProps.scene = el)}
-            tempContentIsOn={showBusinessCard || showLegalTerms}
-          >
-            <RestyledHed s="6.5" c="yellow" data-depth=".4">
+        render={
+          renderProps => (
+            <NameTag
+              ref={
+                el => {
+                  renderProps.scene = el;
+                }
+              }
+              tempContentIsOn={showBusinessCard || showLegalTerms}
+            >
+              <RestyledHed c="yellow" data-depth=".4" s="6.5">
               JamesAbels
-            </RestyledHed>
-            <RestyledGraf s="1.7" c="pink" t="93" data-depth=".4">
+              </RestyledHed>
+              <RestyledGraf c="pink" data-depth=".4" s="1.7" t="93">
               narrative coding and other adventures
-            </RestyledGraf>
-          </NameTag>
-        )}
+              </RestyledGraf>
+            </NameTag>
+          )
+        }
       />
       <PictureBox>
-        <BoyInForeground src="/foreground.png" alt="the boy looks out" />
+        <BoyInForeground alt="the boy looks out" src="/foreground.png" />
         <Portal />
         <FantasyAsBackground
           alt="the boy builds a fantasy world"
-          src="/background-fantasy.png"
           inCity={inCity}
+          src="/background-fantasy.png"
         />
         <CityAsBackground
           alt="the boy sees a city view"
-          src="/background-city.png"
           inCity={inCity}
+          src="/background-city.png"
         />
       </PictureBox>
       <TravelButton
         className="travel-button"
-        clickFunction={() => boundHandleClickForApp('swapHomePageImage')}
+        clickFunction={
+          () => boundHandleClickForApp('swapHomePageImage')
+        }
         tempContentIsOn={showBusinessCard || showLegalTerms}
         text={travelButtonText}
       />

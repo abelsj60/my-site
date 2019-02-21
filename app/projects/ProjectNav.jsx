@@ -93,16 +93,16 @@ const Highlighter = styled.div`
 
 export default function ProjectNav(props) {
   const {
-    num,
-    project,
-    isRight,
-    isActive,
+    appState,
     indexForProjectPics,
-    appState
+    isActive,
+    isRight,
+    num,
+    project
   } = props;
   const {
-    thumbnails,
-    projectName
+    projectName,
+    thumbnails
   } = project.attributes;
   let isMenu;
 
@@ -114,24 +114,26 @@ export default function ProjectNav(props) {
     <Group isRight={isRight} menu={isMenu} num={num}>
       <Mapper
         mapData={thumbnails}
-        render={(thumb, idx) => {
-          const padding = idx < 2;
-          const thumbnailNumber = idx + 1;
-          let highlightActiveThumbnail;
+        render={
+          (thumb, idx) => {
+            const padding = idx < 2;
+            const thumbnailNumber = idx + 1;
+            let highlightActiveThumbnail;
 
-          if (isMenu && isActive && indexForProjectPics === idx) {
-            highlightActiveThumbnail = true;
+            if (isMenu && isActive && indexForProjectPics === idx) {
+              highlightActiveThumbnail = true;
+            }
+
+            return (
+              <Item key={idx} isRight={isRight} padding={padding}>
+                <RestyledLink to={`/projects/${projectName.toLowerCase()}/${thumbnailNumber}`}>
+                  <Image alt={`Thumbnail ${thumbnailNumber}`} src={thumb} />
+                  {highlightActiveThumbnail && <Highlighter />}
+                </RestyledLink>
+              </Item>
+            );
           }
-
-          return (
-            <Item key={idx} isRight={isRight} padding={padding}>
-              <RestyledLink to={`/projects/${projectName.toLowerCase()}/${thumbnailNumber}`}>
-                <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
-                {highlightActiveThumbnail && <Highlighter />}
-              </RestyledLink>
-            </Item>
-          );
-        }}
+        }
       />
     </Group>
   );

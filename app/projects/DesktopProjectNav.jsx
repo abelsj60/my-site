@@ -26,13 +26,15 @@ const RestyledHed = styled(Hed)`
 
 export default function DesktopProjectNav(props) {
   const {
-    params,
     appState,
     bodyState,
+    data,
     location,
-    data
+    params
   } = props;
-  const { isMenu } = appState;
+  const {
+    isMenu
+  } = appState;
 
   let indexForProjectData;
   let indexForProjectPics;
@@ -52,31 +54,35 @@ export default function DesktopProjectNav(props) {
     <StyledUL menu={isMenu}>
       <Mapper
         mapData={finalData}
-        render={(project, idx) => {
-          const {
-            projectName,
-            type
-          } = project.attributes;
+        render={
+          (project, idx) => {
+            const {
+              projectName,
+              type
+            } = project.attributes;
 
-          return (
-            <li key={idx}>
-              <RestyledHed
-                normal
-                c="blue"
-                b="9"
-                num={idx}
-                menu={isMenu}
-              >{`${projectName} | ${type}`}</RestyledHed>
-              <ProjectNav
-                {...props}
-                num={idx}
-                project={project}
-                isActive={indexForProjectData === idx}
-                indexForProjectPics={indexForProjectPics}
-              />
-            </li>
-          );
-        }}
+            return (
+              <li key={idx}>
+                <RestyledHed
+                  normal
+                  b="9"
+                  c="blue"
+                  menu={isMenu}
+                  num={idx}
+                >
+                  {`${projectName} | ${type}`}
+                </RestyledHed>
+                <ProjectNav
+                  {...props}
+                  isActive={indexForProjectData === idx}
+                  indexForProjectPics={indexForProjectPics}
+                  num={idx}
+                  project={project}
+                />
+              </li>
+            );
+          }
+        }
       />
     </StyledUL>
   );
