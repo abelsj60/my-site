@@ -1,14 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import marked from 'marked';
-import ReactHtmlParser from 'react-html-parser';
-
-import Main from '../primitives/Main.jsx';
-import Right from '../primitives/Right.jsx';
-import Left from '../primitives/Left.jsx';
-import Hed from '../primitives/Hed.jsx';
-import Overflow from '../primitives/Overflow.jsx';
 import ChapterNav from './ChapterNav.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Left from '../primitives/Left.jsx';
+import marked from 'marked';
+import Main from '../primitives/Main.jsx';
+import Overflow from '../primitives/Overflow.jsx';
+import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
+import Right from '../primitives/Right.jsx';
+import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};

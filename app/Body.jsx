@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-
-import Home from './home/Home.jsx';
-import ContentLoader from './shared/ContentLoader.jsx';
 import About from './about/About.jsx';
-import ReloadRoute from './reload/ReloadRoute.jsx';
-import NotFound from './not-found/NotFound.jsx';
-
-import Location from './classes/Location';
-import Referrer from './classes/Referrer.js';
-import InitialState from './classes/InitialState.js';
+import ContentLoader from './shared/ContentLoader.jsx';
 import EventHandling from './classes/EventHandling.js';
+import Home from './home/Home.jsx';
+import InitialState from './classes/InitialState.js';
+import Location from './classes/Location';
+import NotFound from './not-found/NotFound.jsx';
+import React, { Component } from 'react';
+import Referrer from './classes/Referrer.js';
+import ReloadRoute from './reload/ReloadRoute.jsx';
+import { Switch, Route } from 'react-router-dom';
 
 export default class Body extends Component {
   constructor(props) {

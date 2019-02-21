@@ -1,9 +1,8 @@
+import Button from '../shared/Button.jsx';
+import Graf from '../primitives/Graf.jsx';
 import React from 'react';
 import styled from 'styled-components';
-
-import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
-import Button from '../shared/Button.jsx';
 
 const Container = styled.footer`
   background-color: ${p => (!p.home ? 'white' : undefined)};

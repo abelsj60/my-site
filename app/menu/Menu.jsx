@@ -1,9 +1,8 @@
+import Main from '../primitives/Main.jsx';
+import MenuButton from '../shared/MenuButton.jsx';
+import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import styled from 'styled-components';
-
-import Main from '../primitives/Main.jsx';
-import Overflow from '../primitives/Overflow.jsx';
-import MenuButton from '../shared/MenuButton.jsx';
 
 const RestyledMain = styled(Main)`
   margin: 25px;

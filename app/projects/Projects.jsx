@@ -1,16 +1,15 @@
-import React, { Fragment } from 'react';
-import styled from 'styled-components';
-
-import Hed from '../primitives/Hed.jsx';
-import Main from '../primitives/Main.jsx';
-import Right from '../primitives/Right.jsx';
-import Left from '../primitives/Left.jsx';
-import Overflow from '../primitives/Overflow.jsx';
-import MenuButton from '../shared/MenuButton.jsx';
-import ProjectNav from './ProjectNav.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Mapper from '../shared/Mapper.jsx';
 import DesktopProjectNav from './DesktopProjectNav.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Left from '../primitives/Left.jsx';
+import Main from '../primitives/Main.jsx';
+import Mapper from '../shared/Mapper.jsx';
+import MenuButton from '../shared/MenuButton.jsx';
+import Overflow from '../primitives/Overflow.jsx';
+import ProjectNav from './ProjectNav.jsx';
+import React, { Fragment } from 'react';
+import Right from '../primitives/Right.jsx';
+import styled from 'styled-components';
 
 const Images = styled.section`
   display: flex;
@@ -104,9 +103,9 @@ export default function Projects(props) {
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
   const mapData = [
+    { technologies },
     { contribution },
-    { description },
-    { technologies }
+    { description }
   ];
   const keys = mapData.map(item => Object.keys(item)[0]);
 

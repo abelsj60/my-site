@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-
-import StyledLink from '../primitives/StyledLink.jsx';
-import Mapper from '../shared/Mapper.jsx';
-
-import Location from '../classes/Location.js';
-import Referrer from '../classes/Referrer.js';
 import EventHandling from '../classes/EventHandling.js';
+import Location from '../classes/Location.js';
+import Mapper from '../shared/Mapper.jsx';
+import React, { Component } from 'react';
+import Referrer from '../classes/Referrer.js';
+import styled, { css } from 'styled-components';
+import StyledLink from '../primitives/StyledLink.jsx';
 
 const data = [
   { name: 'The story', path: '/chapter' },

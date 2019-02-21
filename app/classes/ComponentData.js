@@ -1,13 +1,11 @@
-import React from 'react';
-
-import Story from '../story/Story.jsx';
-import Projects from '../projects/Projects.jsx';
-import ChapterNav from '../story/ChapterNav.jsx';
-import DesktopProjectNav from '../projects/DesktopProjectNav.jsx';
 import ArticleOrReverie from '../article-n-reverie/ArticleOrReverie.jsx';
 import ArticleOrReverieNav from '../article-n-reverie/ArticleOrReverieNav.jsx';
-
+import ChapterNav from '../story/ChapterNav.jsx';
 import Content from './Content.js';
+import DesktopProjectNav from '../projects/DesktopProjectNav.jsx';
+import Projects from '../projects/Projects.jsx';
+import React from 'react';
+import Story from '../story/Story.jsx';
 
 export default class ComponentData {
   constructor(type) {

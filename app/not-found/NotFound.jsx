@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import Main from '../primitives/Main.jsx';
 import Hed from '../primitives/Hed.jsx';
+import Main from '../primitives/Main.jsx';
+import React from 'react';
 import Right from '../primitives/Right.jsx';
+import styled from 'styled-components';
 
 const RestyledRight = styled(Right)`
   flex: 1;

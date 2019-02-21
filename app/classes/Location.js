@@ -1,11 +1,10 @@
-import { matchPath } from 'react-router';
-import StoryParams from './StoryParams';
-import ProjectsParams from './ProjectsParams';
 import JournalismParams from './JournalismParams';
+import { matchPath } from 'react-router';
 import Params from './Params';
-
+import ProjectsParams from './ProjectsParams';
 import Referrer from './Referrer.js';
 import ReverieParams from './ReverieParams';
+import StoryParams from './StoryParams';
 
 export default class Location {
   constructor(pathToMatch, props, prevProps) {

@@ -1,5 +1,5 @@
-import React from 'react';
 import Parallax from '../shared/Parallax.jsx';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Container = styled.section`

@@ -1,12 +1,10 @@
-import React from 'react';
-import marked from 'marked';
-import ReactHtmlParser from 'react-html-parser';
-
+import bio from '../data/about/about.md';
+import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
-import Hed from '../primitives/Hed.jsx';
-
-import bio from '../data/about/about.md';
+import marked from 'marked';
+import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`

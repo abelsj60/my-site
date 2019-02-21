@@ -1,11 +1,10 @@
+import Button from '../shared/Button.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Main from '../primitives/Main.jsx';
+import Parallax from '../shared/Parallax.jsx';
 import React from 'react';
 import styled from 'styled-components';
-
-import Main from '../primitives/Main.jsx';
-import Hed from '../primitives/Hed.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Button from '../shared/Button.jsx';
-import Parallax from '../shared/Parallax.jsx';
 
 const RestyledMain = styled(Main)`
   justify-content: space-between;

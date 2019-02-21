@@ -1,10 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-
-import StyledLink from '../primitives/StyledLink.jsx';
-import UnorderedList from '../primitives/UnorderedList.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
+import React from 'react';
+import styled from 'styled-components';
+import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
   margin-left: 2px;

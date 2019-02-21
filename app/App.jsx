@@ -1,12 +1,11 @@
-import React, { Fragment, Component } from 'react';
-import { withRouter } from 'react-router';
-import { css, createGlobalStyle } from 'styled-components';
-
 import Body from './Body.jsx';
+import { css, createGlobalStyle } from 'styled-components';
 import Footer from './header-footer/Footer.jsx';
 import Header from './header-footer/Header.jsx';
-import Location from './classes/Location.js';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
+import Location from './classes/Location.js';
+import React, { Fragment, Component } from 'react';
+import { withRouter } from 'react-router';
 
 import EventHandling from './classes/EventHandling.js';
 import Referrer from './classes/Referrer.js';

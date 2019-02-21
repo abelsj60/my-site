@@ -1,16 +1,15 @@
+import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Left from '../primitives/Left.jsx';
+import Main from '../primitives/Main.jsx';
+import marked from 'marked';
+import MenuButton from '../shared/MenuButton.jsx';
+import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import styled from 'styled-components';
-import marked from 'marked';
-
-import Hed from '../primitives/Hed.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Main from '../primitives/Main.jsx';
 import Right from '../primitives/Right.jsx';
-import Left from '../primitives/Left.jsx';
-import Overflow from '../primitives/Overflow.jsx';
-import MenuButton from '../shared/MenuButton.jsx';
-import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
+import styled from 'styled-components';
 
 const ReverieText = styled.section`
   p {

@@ -1,11 +1,10 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-
-import StyledLink from '../primitives/StyledLink.jsx';
-import UnorderedList from '../primitives/UnorderedList.jsx';
+import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
-import Graf from '../primitives/Graf.jsx';
+import React from 'react';
+import styled, { css } from 'styled-components';
+import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
