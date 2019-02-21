@@ -50,7 +50,7 @@ export default function ArticleOrReverie(props) {
 
   const index = params.headlineToIndex();
   const article = data[index];
-  const { headline, date, publication } = article.attributes;
+  const { headline, date, publication, position } = article.attributes;
   let reverieOrPublicationAsDek;
   let bylineOrDate;
 
@@ -59,7 +59,7 @@ export default function ArticleOrReverie(props) {
     bylineOrDate = date;
   } else {
     reverieOrPublicationAsDek = publication;
-    bylineOrDate = 'by James Erik Abels';
+    bylineOrDate = `by James Erik Abels | ${position}`;
   }
 
   const ArticleOrReverieText = isReverie ? ReverieText : ArticleText;
