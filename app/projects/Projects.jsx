@@ -28,7 +28,7 @@ const Images = styled.section`
     flex-direction: column;
   }
 
-  @media (min-width: 1048px) {
+  @media (min-width: 1026px) {
     flex-direction: row-reverse;
   }
 `;
@@ -56,7 +56,7 @@ const Caption = styled.figcaption`
     margin-top: 10px;
   }
 
-  @media (min-width: 1048px) {
+  @media (min-width: 1026px) {
     margin-top: 0;
   }
 `;
@@ -76,7 +76,7 @@ const Image = styled.img`
     margin-right: 0px;
   }
 
-  @media (min-width: 1048px) {
+  @media (min-width: 1026px) {
     margin-right: 10px;
   }
 `;

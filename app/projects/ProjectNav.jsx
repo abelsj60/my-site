@@ -42,7 +42,7 @@ const Group = styled.ul`
         border-bottom: #6e7dab solid 0.5px;
       }
 
-      @media (min-width: 1048px) {
+      @media (min-width: 1026px) {
         flex-direction: column;
         justify-content: flex-start;
         margin-top: 28px;
@@ -65,7 +65,7 @@ const Item = styled.li`
     margin-bottom: ${p => (p.isRight ? '0px' : undefined)};
   }
 
-  @media (min-width: 1048px) {
+  @media (min-width: 1026px) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }

@@ -135,7 +135,7 @@ export default withRouter(App);
 
 // Story edit
 // Add copyright to articles?
-// Take pictures, write copy for Arrow, Slingshot, TMMnews
+// Take pictures, write captions for Arrow, Slingshot, TMMnews
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?
