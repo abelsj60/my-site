@@ -16,14 +16,6 @@ import styles from './Styles.jsx';
  * colors: 'blue', 'lightblack', 'pink', 'yellow', 'white'
  */
 
-// const colors = {
-//   blue: '#6e7dab',
-//   lightBlack: '#455057',
-//   pink: '#fd1172',
-//   yellow: '#ffe74c',
-//   white: 'white'
-// };
-
 export default styled.h1`
   ${p => styles(p)};
 `;
