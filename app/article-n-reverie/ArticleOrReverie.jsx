@@ -71,7 +71,9 @@ export default function ArticleOrReverie(props) {
       </Left>
       <Right>
         <MenuButton {...props} />
-        <Overflow ref={ref => (overflowRef.current = ref)}>
+        <Overflow ref={ref => {
+          overflowRef.current = ref;
+        }}>
           <Hed as="h2" normal italic s="1.5" c="pink">
             {reverieOrPublicationAsDek}
           </Hed>

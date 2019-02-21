@@ -72,7 +72,9 @@ export default function Story(props) {
     <Main>
       <RestyledLeft as="section" text={textStatus}>
         <ChapterNav {...props} />
-        <RestyledOverflow ref={ref => (overflowRef.current = ref)}>
+        <RestyledOverflow ref={ref => {
+          overflowRef.current = ref;
+        }}>
           <Hed c="yellow" bC="pink" s="3" b="12">
             {title}
           </Hed>

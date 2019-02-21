@@ -111,7 +111,9 @@ export default function Projects(props) {
       </Left>
       <Right>
         <MenuButton {...props} />
-        <Overflow ref={ref => (overflowRef.current = ref)}>
+        <Overflow ref={ref => {
+          overflowRef.current = ref;
+        }}>
           <Hed c="pink" s="3" b="8">
             {projectName}
           </Hed>
