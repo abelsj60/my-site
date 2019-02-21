@@ -26,11 +26,11 @@ export default class Body extends Component {
     const s = new InitialState(props, l);
 
     this.state = {
+      indexForArticleData: s.build('indexForArticleData'),
       indexForChapterData: s.build('indexForChapterData'),
       indexForProjectData: s.build('indexForProjectData'),
       indexForProjectPics: s.build('indexForProjectPics'),
       indexForPublication: s.build('indexForPublication'),
-      indexForArticleData: s.build('indexForArticleData'),
       indexForReverieData: s.build('indexForReverieData')
     };
   }

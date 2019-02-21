@@ -51,13 +51,13 @@ class App extends Component {
     const location = r.getLocation(props);
 
     this.state = {
-      showStoryText: true,
-      showLegalTerms: false,
-      showBusinessCard: false,
       currentCaller: location,
       lastCaller: location !== 'reverie' ? location : 'home',
+      inCity: false,
       isMenu: r.checkForMenu(props),
-      inCity: false
+      showBusinessCard: false,
+      showLegalTerms: false,
+      showStoryText: true
     };
   }
 
