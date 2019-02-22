@@ -4,12 +4,16 @@ image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-
 number: 2
 ---
 
-The little sprite watched the boy from afar.
+One day, the boy felt blue. 
 
-She saw many adventures. He grew, became a lawyer, then a journalist. He wrote about digital media and technology, and looked as though he again flew among the stars.
+It was time to go home. So, his little fairy friend flew him back to real life. 
 
-Before long, dreams carried him to his own company, and a new friend who coded the software he imagined. They built platforms unlike others — one that controlled online networks of interactive video with the specificity and sophistication of NBC, and one that let startup founders choreograph worldwide software demos as if directing a Broadway Show.
+The boy stetched awake in his own bed, knocking a little lamp off his nightside table. Then he grew big, and learned to navigate the wide world alone. 
 
-But, the fairy sighed. The boy forgot the story told about technology, not its capabilites, was what really mattered.
+The boy studied, became a lawyer, and then a journalist. He wrote about digital media and technology, talking to bankers and executives the world wide. Life was good, then curved, and the boy found himself starting a company. 
 
-That was the magic.
+He met a friend and built the software of his dreams. Their platforms were clever. 
+
+One let media firms control interactive networks of online video as if they were NBC. The other let startups choreograph worldwide software demos with all the grace of a Broadway Show.
+
+But neither took. The boy had forgotten the little fairy's biggest rule. The story behind technology — not its features — mattered most.

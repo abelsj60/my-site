@@ -106,10 +106,10 @@ export default function Home(props) {
               tempContentIsOn={showBusinessCard || showLegalTerms}
             >
               <RestyledHed c="yellow" data-depth=".4" s="6.5">
-              JamesAbels
+                JamesAbels
               </RestyledHed>
               <RestyledGraf c="pink" data-depth=".4" s="1.7" t="93">
-              narrative coding and other adventures
+                narrative coding and other adventures
               </RestyledGraf>
             </NameTag>
           )

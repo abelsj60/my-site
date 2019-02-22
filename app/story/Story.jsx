@@ -50,7 +50,7 @@ const Text = styled.section`
 
   p {
     margin-top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     &:last-child {
       margin-bottom: 0px;

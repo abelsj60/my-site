@@ -28,7 +28,7 @@ const Group = styled.ul`
 
       @media (min-width: 672px) {
         flex-direction: column;
-        margin-top: 28px;
+        margin-top: 26px;
         padding: 0;
         border: 0;
       }
@@ -44,7 +44,7 @@ const Group = styled.ul`
       @media (min-width: 1026px) {
         flex-direction: column;
         justify-content: flex-start;
-        margin-top: 28px;
+        margin-top: 26px;
         padding: 0;
         border: 0;
       }

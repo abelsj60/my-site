@@ -146,3 +146,5 @@
 // https://medium.mybridge.co/amazing-react-js-open-source-of-the-year-v-2019-364d057ac3f3
 
 // Object-fit: https://medium.com/@primozcigler/neat-trick-for-css-object-fit-fallback-on-edge-and-other-browsers-afbc53bbb2c3
+
+// https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight

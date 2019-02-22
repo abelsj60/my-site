@@ -4,12 +4,18 @@ image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-
 number: 3
 ---
 
-The wee fairy watched the boy turn over every stone, forever telling better tales about his software.
+One morning, the boy saw a faint glow beside his bedside table. 
 
-And while many listened, the boy finally decided it was time for something new.
+Behind it, he found a dusty golden lamp, a trail of strange purple letters etched over it. The world exploded in pixelated color as he spoke them aloud. 
 
-The fairy danced for joy when he decided to become a software developer. The boy applied to a coding bootcamp in New York, where he was given a book full of practical magic. It held powerful, unintelligible words — React, Express, Node.js, and Sequelize.
+"Are you ready for your wish," said a Jinn amidst the magic. 
 
-But the school, Fullstack Academy, taught him what they meant and how to write spells with them. It taught how to think about algorithms, gel with development teams, and learn about new software technologies on his own.
+While surprised, the boy was game. 
 
-It was intense. The school reminded the boy of riding with Aslan into battle. The boy felt new fire. His friend swooned.
+"I turned over every stone," he said. "It's time for new adventure." The boy woke again, targeted ads dancing across his computer. "Coding," he thought. 
+
+Before long, the boy was at coding school in lower Manhattan. He was given a book of practical magics, and surrounded by studious, shockingly smart people. 
+
+It was intense and strange.
+
+But the boy soon heard the call of modern battle. Aslan couldn't have been more rousing if he'd bellowed beside the bull on the broad wide way.

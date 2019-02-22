@@ -145,3 +145,5 @@ export default withRouter(App);
 
 // https://www.tutorialspoint.com/css/css_animation.htm
 // https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/
+// https://jilles.me/
+// https://www.taniarascia.com/basic-authentication-for-an-express-node-app-htpasswd/
