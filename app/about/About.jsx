@@ -55,7 +55,7 @@ export default function About() {
           <Hed c="pink" s="3">
             About
           </Hed>
-          <ExternalLink href="https://www.linkedin.com/jea" target="_blank">
+          <ExternalLink href="https://www.linkedin.com/in/jameserikabels" target="_blank">
             <Icon />
           </ExternalLink>
         </Heading>
