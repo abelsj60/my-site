@@ -14,6 +14,8 @@ The boy studied, became a lawyer, and then a journalist. He wrote about digital 
 
 He met a friend and built the software of his dreams. Their platforms were clever. 
 
-One let media firms control interactive networks of online video as if they were NBC. The other let startups choreograph worldwide software demos with all the grace of a Broadway Show.
+One made it easy to control interactive networks of online videos. The other let people choreograph software demos with the grace of a Broadway Show. 
 
-But neither took. The boy had forgotten the little fairy's biggest rule. The story behind technology — not its features — mattered most.
+But neither took. 
+
+The boy had forgotten the fairy's magic lesson. The story behind technology — not its features — mattered most.

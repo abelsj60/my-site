@@ -135,9 +135,8 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Story edit
-// Add copyright to articles?
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
+// Add copyright to articles?
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?

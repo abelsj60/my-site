@@ -4,7 +4,7 @@ image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-
 number: 4
 ---
 
-The boy left his window open one warm night. With a woosh, a pixie flew inside.
+One warm night, the boy's window was open. With a woosh, a pixie flew inside.
 
 She smiled down at the sleeping boy. 
 
@@ -16,8 +16,8 @@ The boy felt as though he'd been with an old friend, casting spells, telling tal
 
 He grabbed his laptop and headed out. 
 
-There were stories to tell, platforms to build, and magic to make. Behind him, a polished golden lamp began to glow lightly purple. 
+There were stories to craft, platforms to build, and magic to make. Behind him, a polished golden lamp began to glow. 
 
-High above, a fairy looped-de-loop as she spied the faint glow beneath. She clapped her hands, then turned toward home and more adventure. 
+High above, a fairy looped-de-loop as she spied the faint purple shine beneath. She clapped her hands, bursting for joy. Far, far below walked a boy who'd always believe in magic. 
 
-Behind her, there walked a boy who would forever believe in magic.
+To be continued...
