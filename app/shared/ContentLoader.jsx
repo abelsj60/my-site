@@ -25,6 +25,9 @@ export default class ContentLoader extends Component {
   }
 
   render() {
+    // No need to test isNotFound once app's loaded
+    // b/c internal links are correctly constructed
+
     const {
       isNotFound,
       needsRedirect
@@ -35,8 +38,8 @@ export default class ContentLoader extends Component {
 
     /** ComponentData contains configured Components
      *
-     * Includes data from and derived from props, e.g.,
-     * all section data ('contentData').
+     * Includes data from or derived from props,
+     * e.g., section data (AKA, 'contentData').
      *
      * Note: ContentaLoader unmounts when users swap
      * sections, so there's no need to update

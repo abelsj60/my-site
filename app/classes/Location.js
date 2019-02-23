@@ -78,28 +78,25 @@ export default class Location {
   }
 
   get needsRedirect() {
-    if (!this.pathIsJustRight) {
-      const firstParam = this.params.paramNames[0];
-      const firstParamIsValid = !!this.params[firstParam];
-      const firstParamIsUndefined =
-        this.params.undefined.filter(p => {
-          return p === firstParam;
-        }).length > 0;
-      const secondParamIsUndefined =
-        this.params.undefined.filter(p => {
-          const paramTwo = this.params.paramNames[1];
-          return p === paramTwo;
-        }).length > 0;
-
-      if (
-        firstParamIsUndefined ||
-        (firstParamIsValid && secondParamIsUndefined)
-      ) {
-        return true;
-      }
+    if (this.pathIsJustRight) {
+      return false;
     }
 
-    return false;
+    const nameOfParamOne = this.params.paramNames[0];
+    const firstParamIsValid = !!this.params[nameOfParamOne];
+    const firstParamIsUndefined =
+        this.params.areUndefined.filter(p => {
+          return p === nameOfParamOne;
+        }).length > 0;
+    const nameOfParamTwo = this.params.paramNames[1];
+    const secondParamIsUndefined =
+        this.params.areUndefined.filter(p => {
+          return p === nameOfParamTwo;
+        }).length > 0;
+
+    return firstParamIsUndefined ||
+        (firstParamIsValid && secondParamIsUndefined);
+
   }
 
   get isSwappingContent() {

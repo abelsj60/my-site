@@ -20,6 +20,14 @@ export default function Menu(props) {
     children
   } = props;
 
+  /** Props explanation
+   *
+   * 1. props (above) go to <MenuButton />
+   * 2. { children } get props, params, and data
+   * from cD.getMenuContent(props, params)
+   * in Contentloader.jsx
+   */
+
   return (
     <RestyledMain>
       <MenuButton {...props} />

@@ -12,7 +12,7 @@ export default class Params {
 
     this.type = type;
     this.paramNames = ['fakeData', 'fakeData'];
-    this.undefined = this._paramKeys.filter(p => {
+    this.areUndefined = this._paramKeys.filter(p => {
       return params[p] === undefined;
     });
   }

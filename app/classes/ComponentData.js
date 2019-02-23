@@ -39,8 +39,8 @@ export default class ComponentData {
 
     return <Section
       {...props}
-      overflowRef={ref}
       data={contentData}
+      overflowRef={ref}
       params={params}
     />;
   }
