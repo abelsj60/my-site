@@ -65,14 +65,14 @@ export default class ContentLoader extends Component {
 
               return (
                 <Menu {...this.props}>
-                  {cD.getMenuComponent(this.props, l.params)}
+                  {cD.getMenuContent(this.props, l.params)}
                 </Menu>
               );
             }
           }
         />
         <Route
-          path={r.genericPath}
+          path={r.finalPath}
           render={
             () => cD.getSection(this.props, this.overflowRef, l.params)
           }

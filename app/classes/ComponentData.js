@@ -45,7 +45,7 @@ export default class ComponentData {
     />;
   }
 
-  getMenuComponent(props, params) {
+  getMenuContent(props, params) {
     const type = this._type;
     const contentData = this._contentData;
 

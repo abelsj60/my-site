@@ -9,7 +9,7 @@ export default class Referrer {
       props.location.pathname.split('/')[1] !== ''
         ? props.location.pathname.split('/')[1]
         : 'home';
-    this.genericPath = this._loadExactPath();
+    this.finalPath = this._loadFinalPath();
     this.pathToMatch = this._loadPathToMatch();
   }
 
@@ -28,7 +28,7 @@ export default class Referrer {
     }
   }
 
-  _loadExactPath() {
+  _loadFinalPath() {
     switch (this.location) {
       case 'chapter':
         return '/chapter/:title';
