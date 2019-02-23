@@ -94,11 +94,13 @@ class App extends Component {
     const l = new Location('/', this.props, prevProps);
 
     if (l.justChanged) {
+      // Update appState when changing locations
+
       const {
+        isMenu,
         showBusinessCard,
         showLegalTerms,
-        showStoryText,
-        isMenu
+        showStoryText
       } = this.state;
 
       const r = new Referrer(prevProps);
@@ -123,6 +125,8 @@ class App extends Component {
       }
 
       if (!routeIsReloading) {
+        // Don't update callers on reload
+
         handleClickForApp('setCallers', currentCaller, lastCaller);
       }
 

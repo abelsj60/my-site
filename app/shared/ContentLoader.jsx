@@ -26,8 +26,8 @@ export default class ContentLoader extends Component {
 
   render() {
     const {
-      needsRedirect,
-      isNotFound
+      isNotFound,
+      needsRedirect
     } = this.state;
     let cD;
     let l;
@@ -92,6 +92,8 @@ export default class ContentLoader extends Component {
         this.setState({ needsRedirect: startRedirect });
       }
     } else if (l.isSwappingContent) {
+      // Keep bodyState in sync
+
       let paramOneAsIndex;
       let paramTwoAsIndex;
 
@@ -100,13 +102,13 @@ export default class ContentLoader extends Component {
           // paramTwoAsIndex is undefined, so won't fail below
           paramOneAsIndex = l.params.titleToIndex();
           break;
-        case 'projects':
-          paramOneAsIndex = l.params.projectNameToIndex();
-          paramTwoAsIndex = l.params.projectThumbnailToIndex();
-          break;
         case 'journalism':
           paramOneAsIndex = l.params.publicationToIndex();
           paramTwoAsIndex = l.params.headlineToIndex();
+          break;
+        case 'projects':
+          paramOneAsIndex = l.params.projectNameToIndex();
+          paramTwoAsIndex = l.params.projectThumbnailToIndex();
           break;
         case 'reverie':
           // paramTwoAsIndex is undefined, so won't fail below
@@ -118,6 +120,8 @@ export default class ContentLoader extends Component {
         this.props.boundHandleClickForBody(paramOneAsIndex, paramTwoAsIndex);
 
         if (this.overflowRef.current.scrollTop !== 0) {
+          // Reset scroll top when swapping content
+
           const isProjects = l.type === 'projects';
           const lastIndexForProjectData =
             prevProps.bodyState.indexForProjectData;

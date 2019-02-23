@@ -17,7 +17,7 @@ export default class Body extends Component {
   constructor(props) {
     super(props);
 
-    /** Build initial return state.
+    /** Build initial bodyState.
      *
      * Renders are defined by path params. State is used
      * to return to current location when user moves

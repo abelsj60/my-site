@@ -24,11 +24,11 @@ export default class ComponentData {
       case 'chapter':
         Section = Story;
         break;
-      case 'projects':
-        Section = Projects;
-        break;
       case 'journalism':
         Section = ArticleOrReverie;
+        break;
+      case 'projects':
+        Section = Projects;
         break;
       case 'reverie':
         Section = ArticleOrReverie;
@@ -52,11 +52,11 @@ export default class ComponentData {
     let MenuContent;
 
     switch (type) {
-      case 'projects':
-        MenuContent = DesktopProjectNav;
-        break;
       case 'journalism':
         MenuContent = ArticleOrReverieNav;
+        break;
+      case 'projects':
+        MenuContent = DesktopProjectNav;
         break;
       case 'reverie':
         MenuContent = ArticleOrReverieNav;
