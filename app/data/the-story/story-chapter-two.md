@@ -18,4 +18,4 @@ One made it easy to control interactive networks of online videos. The other let
 
 But neither took. 
 
-The boy had forgotten the fairy's magic lesson. The story behind technology — not its features — mattered most.
+The boy had forgotten the fairy's magic lesson. The story behind technology — not its features — matter most.

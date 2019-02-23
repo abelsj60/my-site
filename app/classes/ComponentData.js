@@ -1,6 +1,5 @@
 import ArticleOrReverie from '../article-n-reverie/ArticleOrReverie.jsx';
 import ArticleOrReverieNav from '../article-n-reverie/ArticleOrReverieNav.jsx';
-import ChapterNav from '../story/ChapterNav.jsx';
 import Content from './Content.js';
 import DesktopProjectNav from '../projects/DesktopProjectNav.jsx';
 import Projects from '../projects/Projects.jsx';
@@ -19,65 +18,53 @@ export default class ComponentData {
     const type = this._type;
     const contentData = this._contentData;
 
+    let Section;
+
     switch (type) {
       case 'chapter':
-        return (
-          <Story
-            {...props}
-            overflowRef={ref}
-            data={contentData}
-            params={params}
-          />
-        );
+        Section = Story;
+        break;
       case 'projects':
-        return (
-          <Projects
-            {...props}
-            overflowRef={ref}
-            data={contentData}
-            params={params}
-          />
-        );
+        Section = Projects;
+        break;
       case 'journalism':
-        return (
-          <ArticleOrReverie
-            {...props}
-            overflowRef={ref}
-            data={contentData}
-            params={params}
-          />
-        );
+        Section = ArticleOrReverie;
+        break;
       case 'reverie':
-        return (
-          <ArticleOrReverie
-            {...props}
-            overflowRef={ref}
-            data={contentData}
-            params={params}
-          />
-        );
+        Section = ArticleOrReverie;
+        break;
       default:
         return undefined;
     }
+
+    return <Section
+      {...props}
+      overflowRef={ref}
+      data={contentData}
+      params={params}
+    />;
   }
 
   getMenuComponent(props, params) {
     const type = this._type;
     const contentData = this._contentData;
 
+    let MenuContent;
+
     switch (type) {
-      case 'chapter':
-        return <ChapterNav {...props} data={contentData} params={params} />;
       case 'projects':
-        return (
-          <DesktopProjectNav {...props} data={contentData} params={params} />
-        );
+        MenuContent = DesktopProjectNav;
+        break;
       case 'journalism':
-        return <ArticleOrReverieNav {...props} data={contentData} params={params} />;
+        MenuContent = ArticleOrReverieNav;
+        break;
       case 'reverie':
-        return <ArticleOrReverieNav {...props} data={contentData} params={params} />;
+        MenuContent = ArticleOrReverieNav;
+        break;
       default:
         return undefined;
     }
+
+    return <MenuContent {...props} data={contentData} params={params} />;
   }
 }

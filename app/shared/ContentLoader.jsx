@@ -58,15 +58,21 @@ export default class ContentLoader extends Component {
         <Route
           path={`/${r.location}/menu`}
           render={
-            () => (
-              <Menu {...this.props}>
-                {cD.getMenuComponent(this.props, l.params)}
-              </Menu>
-            )
+            () => {
+              if (l.type === 'chapter') {
+                return <Redirect to="/not-found" />;
+              }
+
+              return (
+                <Menu {...this.props}>
+                  {cD.getMenuComponent(this.props, l.params)}
+                </Menu>
+              );
+            }
           }
         />
         <Route
-          path={`${r.genericPath}`}
+          path={r.genericPath}
           render={
             () => cD.getSection(this.props, this.overflowRef, l.params)
           }
@@ -91,6 +97,7 @@ export default class ContentLoader extends Component {
 
       switch (l.type) {
         case 'chapter':
+          // paramTwoAsIndex is undefined, so won't fail below
           paramOneAsIndex = l.params.titleToIndex();
           break;
         case 'projects':
@@ -102,6 +109,7 @@ export default class ContentLoader extends Component {
           paramTwoAsIndex = l.params.headlineToIndex();
           break;
         case 'reverie':
+          // paramTwoAsIndex is undefined, so won't fail below
           paramOneAsIndex = l.params.headlineToIndex();
           break;
       }

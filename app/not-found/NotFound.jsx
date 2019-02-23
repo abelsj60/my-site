@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 const RestyledRight = styled(Right)`
   flex: 1;
+  margin-right: 25px;
 `;
 const FailWhale = styled.section`
   flex: 1;
