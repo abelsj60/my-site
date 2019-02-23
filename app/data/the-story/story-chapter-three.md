@@ -12,10 +12,10 @@ Behind it, he found a dusty golden lamp, a trail of strange purple letters etche
 
 While surprised, the boy was game. 
 
-"I turned over every stone," he said. "It's time for new adventure." The boy woke again, targeted ads dancing across his screen. "Coding," he thought. 
+"I turned over every stone," he said. "It's time for new adventure." The boy woke again, targeted ads dancing across his screen. "Code," he thought. 
 
-Before long, the boy was coding at school in lower Manhattan. He was given a book of practical magics, and surrounded by studious, shockingly smart people. 
+Before long, the boy was coding at school in lower Manhattan. He was given a book of practical magics, and surrounded by ferociously smart people.
 
 It was intense. 
 
-But the boy heard a cry to modern battle. Aslan wouldn't have been more rousing if bellowing beside the bull on the great broad way. So the boy kept coding.
+But the boy heard a cry to modern battle. Aslan couldn't have been more rousing if bellowing beside the bull on the great broad way. The boy coded on.
