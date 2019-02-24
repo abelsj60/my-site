@@ -71,7 +71,7 @@ export default class ContentLoader extends Component {
           path={`/${referrer.location}/menu`}
           render={
             () => {
-              if (location.type === 'chapter') {
+              if (referrer.location === 'chapter') {
                 return <Redirect to="/not-found" />;
               }
 
@@ -121,6 +121,7 @@ export default class ContentLoader extends Component {
 
       if (this.overflowRef.current) {
         const scroll = new Scroll(location);
+
         scroll.resetIfNeeded(
           this.overflowRef,
           prevProps
