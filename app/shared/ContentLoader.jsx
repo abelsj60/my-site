@@ -1,10 +1,10 @@
-import State from '../classes/State.js';
 import ComponentData from '../classes/ComponentData.js';
 import Location from '../classes/Location.js';
 import Menu from '../menu/Menu.jsx';
 import React, { Component } from 'react';
 import Referrer from '../classes/Referrer.js';
 import Scroll from '../classes/Scroll.js';
+import State from '../classes/State.js';
 import {
   Route,
   Redirect,

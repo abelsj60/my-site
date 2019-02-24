@@ -25,27 +25,30 @@ export default class Body extends Component {
      */
 
     const referrer = new Referrer(props);
-    const location = new Location(referrer.pathToMatch, props);
+    const location = new Location(
+      referrer.pathToMatch,
+      props
+    );
     const state = new State(props, location);
 
     this.state = {
-      indexForArticleData: state.get(
-        'indexForArticleData'
+      indexForArticleData: state.getIndex(
+        'article'
       ),
-      indexForChapterData: state.get(
-        'indexForChapterData'
+      indexForChapterData: state.getIndex(
+        'chapter'
       ),
-      indexForProjectData: state.get(
-        'indexForProjectData'
+      indexForProjectData: state.getIndex(
+        'project'
       ),
-      indexForProjectPics: state.get(
-        'indexForProjectPics'
+      indexForProjectPics: state.getIndex(
+        'projectPics'
       ),
-      indexForPublication: state.get(
-        'indexForPublication'
+      indexForPublication: state.getIndex(
+        'publication'
       ),
-      indexForReverieData: state.get(
-        'indexForReverieData'
+      indexForReverieData: state.getIndex(
+        'reverie'
       )
     };
   }
