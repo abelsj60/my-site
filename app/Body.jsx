@@ -1,5 +1,4 @@
 import About from './about/About.jsx';
-import State from './classes/State.js';
 import ContentLoader from './shared/ContentLoader.jsx';
 import EventHandling from './classes/EventHandling.js';
 import Home from './home/Home.jsx';
@@ -9,9 +8,10 @@ import React, { Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import ReloadRoute from './reload/ReloadRoute.jsx';
 import {
-  Switch,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
+import State from './classes/State.js';
 
 export default class Body extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class Body extends Component {
      *
      * Renders are defined by path params. State is used
      * to return to current location when user moves
-     * between sections or from section-to-menu.
+     * between sections or returns from a menu.
      */
 
     const referrer = new Referrer(props);

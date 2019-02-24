@@ -3,13 +3,13 @@ import Location from '../classes/Location.js';
 import Menu from '../menu/Menu.jsx';
 import React, { Component } from 'react';
 import Referrer from '../classes/Referrer.js';
-import Scroll from '../classes/Scroll.js';
-import State from '../classes/State.js';
 import {
   Route,
   Redirect,
   Switch
 } from 'react-router';
+import Scroll from '../classes/Scroll.js';
+import State from '../classes/State.js';
 
 export default class ContentLoader extends Component {
   constructor(props) {
@@ -67,6 +67,7 @@ export default class ContentLoader extends Component {
     ) : (
       <Switch>
         <Route
+          exact
           path={`/${referrer.location}/menu`}
           render={
             () => {
@@ -108,11 +109,7 @@ export default class ContentLoader extends Component {
     );
 
     if (location.needsRedirect) {
-      const startRedirect = !this.state.needsRedirect;
-
-      if (startRedirect) {
-        this.setState({ needsRedirect: startRedirect });
-      }
+      this.setState({ needsRedirect: true });
     } else if (location.isSwappingContent) {
       const state = new State(
         this.props,
