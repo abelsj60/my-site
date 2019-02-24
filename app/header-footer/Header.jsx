@@ -108,9 +108,16 @@ export default class Header extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const l = new Location('/', this.props, prevProps);
+    const location = new Location(
+      '/',
+      this.props,
+      prevProps
+    );
 
-    if (l.justChanged && this.timeoutId !== undefined) {
+    if (
+      location.justChanged &&
+      this.timeoutId !== undefined
+    ) {
       const eForApp = new EventHandling('header', this);
       const handleClickForHeader = eForApp.boundHandleClick;
 
@@ -131,9 +138,12 @@ export default class Header extends Component {
       ? 'open'
       : 'closed'}-icon.svg`;
 
-    const r = new Referrer(this.props);
+    const referrer = new Referrer(this.props);
 
-    const eForHeader = new EventHandling('header', this);
+    const eForHeader = new EventHandling(
+      'header',
+      this
+    );
     const handleClickForHeader = eForHeader.boundHandleClick;
 
     return (
@@ -156,7 +166,8 @@ export default class Header extends Component {
               mapData={data}
               render={
                 (link, idx) => {
-                  const pathIsActive = link.path.includes(r.location);
+                  const pathIsActive =
+                    link.path.includes(referrer.location);
 
                   return (
                     <li key={idx}>

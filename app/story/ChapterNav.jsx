@@ -63,8 +63,11 @@ export default function ChapterNav(props) {
           mapData={data}
           render={
             (_chapter, idx) => {
-              const itemIsActive = indexForChapterData === idx;
-              const normalizedTitle = normalize(data[idx].attributes.title);
+              const itemIsActive =
+                indexForChapterData === idx;
+              const normalizedTitle = normalize(
+                data[idx].attributes.title
+              );
 
               return (
                 <Item key={idx}>

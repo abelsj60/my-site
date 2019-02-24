@@ -50,14 +50,14 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const r = new Referrer(props);
-    const location = r.getLocation(props);
+    const referrer = new Referrer(props);
+    const location = referrer.getLocation(props);
 
     this.state = {
       currentCaller: location,
       lastCaller: location !== 'reverie' ? location : 'home',
       inCity: false,
-      isMenu: r.checkForMenu(props),
+      isMenu: referrer.checkForMenu(props),
       showBusinessCard: false,
       showLegalTerms: false,
       showStoryText: true
@@ -65,8 +65,8 @@ class App extends Component {
   }
 
   render() {
-    const l = new Location('/', this.props);
-    const homeIsActive = l.type === 'home';
+    const location = new Location('/', this.props);
+    const homeIsActive = location.type === 'home';
 
     const eForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eForApp.boundHandleClick;
@@ -91,9 +91,13 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const l = new Location('/', this.props, prevProps);
+    const location = new Location(
+      '/',
+      this.props,
+      prevProps
+    );
 
-    if (l.justChanged) {
+    if (location.justChanged) {
       // Update appState when changing locations
 
       const {
@@ -103,11 +107,12 @@ class App extends Component {
         showStoryText
       } = this.state;
 
-      const r = new Referrer(prevProps);
+      const referrer = new Referrer(prevProps);
 
-      const currentCaller = l.type;
-      const lastCaller = l.lastType;
-      const routeIsReloading = currentCaller === 'i' || lastCaller === 'i';
+      const currentCaller = location.type;
+      const lastCaller = location.lastType;
+      const routeIsReloading =
+        currentCaller === 'i' || lastCaller === 'i';
 
       const eForApp = new EventHandling('app', this);
       const handleClickForApp = eForApp.boundHandleClick;
@@ -127,10 +132,14 @@ class App extends Component {
       if (!routeIsReloading) {
         // Don't update callers on reload
 
-        handleClickForApp('setCallers', currentCaller, lastCaller);
+        handleClickForApp(
+          'setCallers',
+          currentCaller,
+          lastCaller
+        );
       }
 
-      if (isMenu !== r.checkForMenu(this.props)) {
+      if (isMenu !== referrer.checkForMenu(this.props)) {
         handleClickForApp('toggleMenu');
       }
     }

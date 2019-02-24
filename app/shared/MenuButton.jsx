@@ -55,7 +55,9 @@ export default function MenuButton(props) {
       : isMenu
         ? `/${lastCaller}`
         : `/${currentCaller}/menu`;
-  const arrowIcon = !isMenu ? '/arrow-down.svg' : '/arrow-up.svg';
+  const arrowIcon = !isMenu
+    ? '/arrow-down.svg'
+    : '/arrow-up.svg';
   const text = isMenu ? 'Close' : 'Menu';
 
   return (

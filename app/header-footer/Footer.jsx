@@ -53,7 +53,10 @@ const TextBox = styled.div`
 `;
 
 export default function FooterContainer(props) {
-  const { boundHandleClickForApp, appState } = props;
+  const {
+    boundHandleClickForApp,
+    appState
+  } = props;
   const {
     currentCaller,
     lastCaller,
@@ -70,7 +73,9 @@ export default function FooterContainer(props) {
     lastCaller !== 'home' && lastCaller !== 'i'
       ? `/${lastCaller}`
       : '/'; // home is '/', not '/home'
-  const linkForReverie = isReverie ? whereItStarted : '/reverie';
+  const linkForReverie = isReverie
+    ? whereItStarted
+    : '/reverie';
 
   return (
     <Container home={isHome} story={isStory}>

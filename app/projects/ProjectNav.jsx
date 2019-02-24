@@ -119,13 +119,19 @@ export default function ProjectNav(props) {
             const thumbnailNumber = idx + 1;
             let highlightActiveThumbnail;
 
-            if (isMenu && isActive && indexForProjectPics === idx) {
+            if (
+              isMenu &&
+              isActive &&
+              indexForProjectPics === idx
+            ) {
               highlightActiveThumbnail = true;
             }
 
             return (
               <Item key={idx} isRight={isRight} padding={padding}>
-                <RestyledLink to={`/projects/${projectName.toLowerCase()}/${thumbnailNumber}`}>
+                <RestyledLink to={`/projects/${
+                  projectName.toLowerCase()
+                }/${thumbnailNumber}`}>
                   <Image alt={`Thumbnail ${thumbnailNumber}`} src={thumb} />
                   {highlightActiveThumbnail && <Highlighter />}
                 </RestyledLink>

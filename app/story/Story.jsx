@@ -73,7 +73,9 @@ export default function Story(props) {
     image,
     title
   } = chapter.attributes;
-  const textStatus = !showStoryText ? 'hidden' : undefined;
+  const textStatus = !showStoryText
+    ? 'hidden'
+    : undefined;
 
   return (
     <Main>
@@ -86,7 +88,12 @@ export default function Story(props) {
             {title}
           </Hed>
           <Text>
-            {ReactHtmlParser(marked(chapter.body, { smartypants: true }))}
+            {ReactHtmlParser(
+              marked(
+                chapter.body,
+                { smartypants: true }
+              )
+            )}
           </Text>
         </RestyledOverflow>
       </RestyledLeft>

@@ -71,7 +71,9 @@ export default function ArticleOrReverie(props) {
     reverieOrPublicationAsDek = publication;
   }
 
-  const ArticleOrReverieText = isReverie ? ReverieText : ArticleText;
+  const ArticleOrReverieText = isReverie
+    ? ReverieText
+    : ArticleText;
 
   return (
     <Main>
@@ -93,7 +95,12 @@ export default function ArticleOrReverie(props) {
             {bylineOrDate}
           </Graf>
           <ArticleOrReverieText>
-            {ReactHtmlParser(marked(article.body, { smartypants: true }))}
+            {ReactHtmlParser(
+              marked(
+                article.body,
+                { smartypants: true }
+              )
+            )}
           </ArticleOrReverieText>
         </Overflow>
       </Right>

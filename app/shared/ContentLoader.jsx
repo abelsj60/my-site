@@ -1,8 +1,10 @@
+import State from '../classes/State.js';
 import ComponentData from '../classes/ComponentData.js';
 import Location from '../classes/Location.js';
 import Menu from '../menu/Menu.jsx';
 import React, { Component } from 'react';
 import Referrer from '../classes/Referrer.js';
+import Scroll from '../classes/Scroll.js';
 import {
   Route,
   Redirect,
@@ -13,28 +15,28 @@ export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
-    const r = new Referrer(props);
-    const l = new Location(r.pathToMatch, props);
+    const referrer = new Referrer(props);
+    const location = new Location(
+      referrer.pathToMatch,
+      props
+    );
 
     this.overflowRef = React.createRef();
 
     this.state = {
-      isNotFound: !l.pathIsJustRight,
-      needsRedirect: l.needsRedirect
+      isNotFound: !location.pathIsJustRight,
+      needsRedirect: location.needsRedirect
     };
   }
 
   render() {
-    // No need to test isNotFound once app's loaded
-    // b/c internal links are correctly constructed
-
     const {
       isNotFound,
       needsRedirect
     } = this.state;
-    let cD;
-    let l;
-    let r;
+    let componentData;
+    let location;
+    let referrer;
 
     /** ComponentData contains configured Components
      *
@@ -47,9 +49,15 @@ export default class ContentLoader extends Component {
      */
 
     if (!needsRedirect && !isNotFound) {
-      r = new Referrer(this.props);
-      cD = new ComponentData(r.location, this.props);
-      l = new Location(r.pathToMatch, this.props);
+      referrer = new Referrer(this.props);
+      componentData = new ComponentData(
+        referrer.location,
+        this.props
+      );
+      location = new Location(
+        referrer.pathToMatch,
+        this.props
+      );
     }
 
     return needsRedirect ? (
@@ -59,25 +67,32 @@ export default class ContentLoader extends Component {
     ) : (
       <Switch>
         <Route
-          path={`/${r.location}/menu`}
+          path={`/${referrer.location}/menu`}
           render={
             () => {
-              if (l.type === 'chapter') {
+              if (location.type === 'chapter') {
                 return <Redirect to="/not-found" />;
               }
 
               return (
                 <Menu {...this.props}>
-                  {cD.getMenuContent(this.props, l.params)}
+                  {componentData.getMenuContent(
+                    this.props,
+                    location.params
+                  )}
                 </Menu>
               );
             }
           }
         />
         <Route
-          path={r.finalPath}
+          path={referrer.finalPath}
           render={
-            () => cD.getSection(this.props, this.overflowRef, l.params)
+            () => componentData.getSection(
+              this.props,
+              this.overflowRef,
+              location.params
+            )
           }
         />
       </Switch>
@@ -85,57 +100,34 @@ export default class ContentLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const r = new Referrer(this.props);
-    const l = new Location(r.pathToMatch, this.props, prevProps);
+    const referrer = new Referrer(this.props);
+    const location = new Location(
+      referrer.pathToMatch,
+      this.props,
+      prevProps
+    );
 
-    if (l.needsRedirect) {
+    if (location.needsRedirect) {
       const startRedirect = !this.state.needsRedirect;
 
       if (startRedirect) {
         this.setState({ needsRedirect: startRedirect });
       }
-    } else if (l.isSwappingContent) {
-      // Keep bodyState in sync
+    } else if (location.isSwappingContent) {
+      const state = new State(
+        this.props,
+        location
+      );
+      state.rebuild(
+        this.props.boundHandleClickForBody
+      );
 
-      let paramOneAsIndex;
-      let paramTwoAsIndex;
-
-      switch (l.type) {
-        case 'chapter':
-          // paramTwoAsIndex is undefined, so won't fail below
-          paramOneAsIndex = l.params.titleToIndex();
-          break;
-        case 'journalism':
-          paramOneAsIndex = l.params.publicationToIndex();
-          paramTwoAsIndex = l.params.headlineToIndex();
-          break;
-        case 'projects':
-          paramOneAsIndex = l.params.projectNameToIndex();
-          paramTwoAsIndex = l.params.projectThumbnailToIndex();
-          break;
-        case 'reverie':
-          // paramTwoAsIndex is undefined, so won't fail below
-          paramOneAsIndex = l.params.headlineToIndex();
-          break;
-      }
-
-      if (paramOneAsIndex !== -1 && paramTwoAsIndex !== -1) {
-        this.props.boundHandleClickForBody(paramOneAsIndex, paramTwoAsIndex);
-
-        if (this.overflowRef.current.scrollTop !== 0) {
-          // Reset scroll top when swapping content
-
-          const isProjects = l.type === 'projects';
-          const lastIndexForProjectData =
-            prevProps.bodyState.indexForProjectData;
-          const updateScrollTop = isProjects
-            ? paramOneAsIndex !== lastIndexForProjectData
-            : true;
-
-          if (updateScrollTop) {
-            this.overflowRef.current.scrollTop = 0;
-          }
-        }
+      if (this.overflowRef.current) {
+        const scroll = new Scroll(location);
+        scroll.resetIfNeeded(
+          this.overflowRef,
+          prevProps
+        );
       }
     }
   }

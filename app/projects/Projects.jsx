@@ -107,7 +107,9 @@ export default function Projects(props) {
     { contribution },
     { description }
   ];
-  const keys = mapData.map(item => Object.keys(item)[0]);
+  const keys = mapData.map(
+    item => Object.keys(item)[0]
+  );
 
   return (
     <Main>

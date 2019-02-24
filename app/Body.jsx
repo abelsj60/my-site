@@ -1,8 +1,8 @@
 import About from './about/About.jsx';
+import State from './classes/State.js';
 import ContentLoader from './shared/ContentLoader.jsx';
 import EventHandling from './classes/EventHandling.js';
 import Home from './home/Home.jsx';
-import InitialState from './classes/InitialState.js';
 import Location from './classes/Location';
 import NotFound from './not-found/NotFound.jsx';
 import React, { Component } from 'react';
@@ -24,23 +24,35 @@ export default class Body extends Component {
      * between sections or from section-to-menu.
      */
 
-    const r = new Referrer(props);
-    const l = new Location(r.pathToMatch, props);
-    const s = new InitialState(props, l);
+    const referrer = new Referrer(props);
+    const location = new Location(referrer.pathToMatch, props);
+    const state = new State(props, location);
 
     this.state = {
-      indexForArticleData: s.build('indexForArticleData'),
-      indexForChapterData: s.build('indexForChapterData'),
-      indexForProjectData: s.build('indexForProjectData'),
-      indexForProjectPics: s.build('indexForProjectPics'),
-      indexForPublication: s.build('indexForPublication'),
-      indexForReverieData: s.build('indexForReverieData')
+      indexForArticleData: state.get(
+        'indexForArticleData'
+      ),
+      indexForChapterData: state.get(
+        'indexForChapterData'
+      ),
+      indexForProjectData: state.get(
+        'indexForProjectData'
+      ),
+      indexForProjectPics: state.get(
+        'indexForProjectPics'
+      ),
+      indexForPublication: state.get(
+        'indexForPublication'
+      ),
+      indexForReverieData: state.get(
+        'indexForReverieData'
+      )
     };
   }
 
   render() {
-    const eH = new EventHandling('body', this);
-    const boundHandleClickForBody = eH.boundHandleClick;
+    const eventHandling = new EventHandling('body', this);
+    const boundHandleClickForBody = eventHandling.boundHandleClick;
 
     return (
       <Switch>

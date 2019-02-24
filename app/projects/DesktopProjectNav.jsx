@@ -42,7 +42,9 @@ export default function DesktopProjectNav(props) {
   if (location.pathname.split('/')[2] !== 'menu') {
     indexForProjectData = params.projectNameToIndex();
     indexForProjectPics = params.projectThumbnailToIndex();
-    finalData = data.filter((_, index) => indexForProjectData !== index);
+    finalData = data.filter(
+      (_, index) => indexForProjectData !== index
+    );
   } else {
     indexForProjectData = bodyState.indexForProjectData;
     indexForProjectPics = bodyState.indexForProjectPics;

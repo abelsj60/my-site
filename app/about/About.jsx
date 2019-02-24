@@ -59,7 +59,14 @@ export default function About() {
             <Icon />
           </ExternalLink>
         </Heading>
-        <Text>{ReactHtmlParser(marked(bio.body, { smartypants: true }))}</Text>
+        <Text>
+          {ReactHtmlParser(
+            marked(
+              bio.body,
+              { smartypants: true }
+            )
+          )}
+        </Text>
       </Right>
     </Main>
   );
