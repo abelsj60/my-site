@@ -108,14 +108,11 @@ class App extends Component {
       } = this.state;
 
       const referrer = new Referrer(prevProps);
-
-      const currentCaller = location.type;
-      const lastCaller = location.lastType;
-      const routeIsReloading =
-        currentCaller === 'i' || lastCaller === 'i';
-
       const eForApp = new EventHandling('app', this);
+
       const handleClickForApp = eForApp.boundHandleClick;
+      const routeIsReloading =
+        location.type === 'i' || location.lastType === 'i';
 
       if (showBusinessCard) {
         handleClickForApp('toggleBusinessCard');
@@ -134,8 +131,8 @@ class App extends Component {
 
         handleClickForApp(
           'setCallers',
-          currentCaller,
-          lastCaller
+          location.type,
+          location.lastType
         );
       }
 

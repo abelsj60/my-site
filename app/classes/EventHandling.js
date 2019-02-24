@@ -6,10 +6,10 @@ export default class EventHandling {
       throw 'Caller must carry location.';
     }
 
-    const r = new Referrer(outsideThis.props);
+    const referrer = new Referrer(outsideThis.props);
 
     this._component = component;
-    this._referrer = r.location;
+    this._referrer = referrer.location;
 
     this.boundHandleClick = this._selectHandleClick(outsideThis);
   }

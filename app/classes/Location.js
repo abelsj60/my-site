@@ -12,34 +12,46 @@ export default class Location {
       throw new Error('The Location class requires props.location.');
     }
 
-    const r = new Referrer(props);
+    const referrer = new Referrer(props);
 
-    this._pathToMatch = pathToMatch || '';
+    this._pathToMatch = pathToMatch;
     this._userPath = props.location.pathname;
     this._lastPath = prevProps && prevProps.location.pathname;
     this._actualLengthOfPath = this._userPath
       .split('/')
       .filter(p => p !== '').length;
-    this._expectedLengthOfPath = this._pathToMatch.split('/').length;
-    this._matchPath = matchPath(this._userPath, { path: pathToMatch });
+    this._expectedLengthOfPath = this._pathToMatch.split(
+      '/'
+    ).length;
+    this._matchPath = matchPath(
+      this._userPath,
+      { path: this._pathToMatch }
+    );
 
     if (this._lastPath) {
-      this.lastType = r.getLocation(prevProps);
+      this.lastType = referrer.getLocation(prevProps);
     }
 
-    this.type = r.getLocation(props);
+    this.type = referrer.getLocation(props);
     this.isExact = this._matchPath && this._matchPath.isExact;
     this.params = this._loadParams(props, prevProps);
   }
 
   _loadParams(props, prevProps) {
-    let paramValues;
     const type = this.type;
-    const propsHaveParams = Object.keys(props.match.params).length > 0;
+    const propsHaveParams = Object.keys(
+      props.match.params
+    ).length > 0;
+
+    let paramValues;
+    let ParamsClass;
 
     if (propsHaveParams) {
       paramValues = props.match.params;
-    } else if (this._pathToMatch && this._pathToMatch !== '') {
+    } else if (
+      this._pathToMatch &&
+      this._pathToMatch !== ''
+    ) {
       paramValues = this._matchPath.params;
     } else {
       paramValues = { fakeParam: undefined };
@@ -47,16 +59,27 @@ export default class Location {
 
     switch (type) {
       case 'chapter':
-        return new StoryParams(type, paramValues, prevProps);
-      case 'projects':
-        return new ProjectsParams(type, paramValues, prevProps);
+        ParamsClass = StoryParams;
+        break;
       case 'journalism':
-        return new JournalismParams(type, paramValues, prevProps);
+        ParamsClass = JournalismParams;
+        break;
+      case 'projects':
+        ParamsClass = ProjectsParams;
+        break;
       case 'reverie':
-        return new ReverieParams(type, paramValues, prevProps);
+        ParamsClass = ReverieParams;
+        break;
       default:
-        return new Params(type, paramValues, prevProps);
+        ParamsClass = Params;
+        break;
     }
+
+    return new ParamsClass(
+      type,
+      paramValues,
+      prevProps
+    );
   }
 
   get _pathIsShort() {
@@ -68,9 +91,15 @@ export default class Location {
   }
 
   get pathIsJustRight() {
-    if (this.params.isMenu && this._pathIsShort) {
+    if (
+      this.params.isMenu &&
+      this._pathIsShort
+    ) {
       return true;
-    } else if (this.isExact && !this._pathIsTooLong) {
+    } else if (
+      this.isExact &&
+      !this._pathIsTooLong
+    ) {
       return this.params.hasExpectedNumber;
     }
 
@@ -85,14 +114,14 @@ export default class Location {
     const nameOfParamOne = this.params.paramNames[0];
     const firstParamIsValid = !!this.params[nameOfParamOne];
     const firstParamIsUndefined =
-        this.params.areUndefined.filter(p => {
-          return p === nameOfParamOne;
-        }).length > 0;
+        this.params.areUndefined.filter(
+          p => p === nameOfParamOne
+        ).length > 0;
     const nameOfParamTwo = this.params.paramNames[1];
     const secondParamIsUndefined =
-        this.params.areUndefined.filter(p => {
-          return p === nameOfParamTwo;
-        }).length > 0;
+        this.params.areUndefined.filter(
+          p => p === nameOfParamTwo
+        ).length > 0;
 
     return firstParamIsUndefined ||
         (firstParamIsValid && secondParamIsUndefined);

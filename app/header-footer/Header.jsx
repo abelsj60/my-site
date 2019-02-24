@@ -107,24 +107,6 @@ export default class Header extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    const location = new Location(
-      '/',
-      this.props,
-      prevProps
-    );
-
-    if (
-      location.justChanged &&
-      this.timeoutId !== undefined
-    ) {
-      const eForApp = new EventHandling('header', this);
-      const handleClickForHeader = eForApp.boundHandleClick;
-
-      handleClickForHeader();
-    }
-  }
-
   render() {
     const {
       appState
@@ -134,16 +116,18 @@ export default class Header extends Component {
     } = appState;
     const menuIsActive = this.state.menuIsOpen;
     const homeIsActive = currentCaller === 'home';
-    const togglerSource = `/menu-${menuIsActive
-      ? 'open'
-      : 'closed'}-icon.svg`;
+    const togglerSource = `/menu-${
+      menuIsActive
+        ? 'open'
+        : 'closed'
+    }-icon.svg`;
 
     const referrer = new Referrer(this.props);
-
     const eForHeader = new EventHandling(
       'header',
       this
     );
+
     const handleClickForHeader = eForHeader.boundHandleClick;
 
     return (
@@ -202,5 +186,23 @@ export default class Header extends Component {
         />
       </Container>
     );
+  }
+
+  componentDidUpdate(prevProps) {
+    const location = new Location(
+      '/',
+      this.props,
+      prevProps
+    );
+
+    if (
+      location.justChanged &&
+      this.timeoutId !== undefined
+    ) {
+      const eForApp = new EventHandling('header', this);
+      const handleClickForHeader = eForApp.boundHandleClick;
+
+      handleClickForHeader();
+    }
   }
 }

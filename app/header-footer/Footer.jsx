@@ -69,10 +69,11 @@ export default function FooterContainer(props) {
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
 
+  // home is '/', not '/home'
   const whereItStarted =
     lastCaller !== 'home' && lastCaller !== 'i'
       ? `/${lastCaller}`
-      : '/'; // home is '/', not '/home'
+      : '/';
   const linkForReverie = isReverie
     ? whereItStarted
     : '/reverie';
@@ -88,9 +89,11 @@ export default function FooterContainer(props) {
         className="story-button"
         conditional={true}
         show={isStory}
-        text={showStoryText
-          ? 'Hide story'
-          : 'Show story'}
+        text={
+          showStoryText
+            ? 'Hide story'
+            : 'Show story'
+        }
       />
       <TextBox>
         <RestyledLink

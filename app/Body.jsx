@@ -21,7 +21,7 @@ export default class Body extends Component {
      *
      * Renders are defined by path params. State is used
      * to return to current location when user moves
-     * between sections or returns from a menu.
+     * between sections, e.g., returns from a menu.
      */
 
     const referrer = new Referrer(props);

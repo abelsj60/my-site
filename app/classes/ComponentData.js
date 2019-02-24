@@ -8,10 +8,10 @@ import Story from '../story/Story.jsx';
 
 export default class ComponentData {
   constructor(type) {
-    const c = new Content(type);
+    const content = new Content(type);
 
     this._type = type;
-    this._contentData = c.getContentData();
+    this._contentData = content.getContentData();
   }
 
   getSection(props, ref, params) {

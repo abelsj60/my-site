@@ -4,8 +4,7 @@ import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
-import
-UnorderedList from '../primitives/UnorderedList.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
@@ -82,10 +81,16 @@ export default function ArticleOrReverieNav(props) {
             const linkIsActive =
               normalizedCurrentHed === normalizedHedFromItem;
             const articleLink = isReverie
-              ? `/reverie/${normalizedHedFromItem}`
-              : `/journalism/${normalize(
-                dateOrPublicationFromItem
-              )}/${normalizedHedFromItem}`;
+              ? `/reverie/${
+                normalizedHedFromItem
+              }`
+              : `/journalism/${
+                normalize(
+                  dateOrPublicationFromItem
+                )
+              }/${
+                normalizedHedFromItem
+              }`;
 
             return (
               <li key={idx}>
