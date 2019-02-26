@@ -3,15 +3,14 @@ import {
   css,
   createGlobalStyle
 } from 'styled-components';
+import EventHandling from './classes/EventHandling.js';
 import Footer from './header-footer/Footer.jsx';
 import Header from './header-footer/Header.jsx';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
-import { withRouter } from 'react-router';
-
-import EventHandling from './classes/EventHandling.js';
 import Referrer from './classes/Referrer.js';
+import { withRouter } from 'react-router';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -126,6 +125,10 @@ class App extends Component {
         handleClickForApp('toggleStoryText');
       }
 
+      if (isMenu !== referrer.checkForMenu(this.props)) {
+        handleClickForApp('toggleMenu');
+      }
+
       if (!routeIsReloading) {
         // Don't update callers on reload
 
@@ -134,10 +137,6 @@ class App extends Component {
           location.type,
           location.lastType
         );
-      }
-
-      if (isMenu !== referrer.checkForMenu(this.props)) {
-        handleClickForApp('toggleMenu');
       }
     }
   }
@@ -149,6 +148,7 @@ export default withRouter(App);
 // Add copyright to articles?
 
 // Images — how to store for React?
+// Favicon
 // Illustrator. List needs, specs?
 // Hosting?
 
@@ -156,3 +156,6 @@ export default withRouter(App);
 // https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/
 // https://jilles.me/
 // https://www.taniarascia.com/basic-authentication-for-an-express-node-app-htpasswd/
+
+// ! https://github.com/rafrex/spa-github-pages
+// ! http://spa-github-pages.rafrex.com/

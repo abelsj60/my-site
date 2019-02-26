@@ -68,7 +68,9 @@ export default class ContentLoader extends Component {
       <Switch>
         <Route
           exact
-          path={`/${referrer.location}/menu`}
+          path={`/${
+            referrer.location
+          }/menu`}
           render={
             () => {
               if (referrer.location === 'chapter') {
@@ -115,6 +117,7 @@ export default class ContentLoader extends Component {
         this.props,
         location
       );
+
       state.rebuild(
         this.props.boundHandleClickForBody
       );
@@ -122,7 +125,7 @@ export default class ContentLoader extends Component {
       if (this.overflowRef.current) {
         const scroll = new Scroll(location);
 
-        scroll.resetIfNeeded(
+        scroll.resetTopIfNeeded(
           this.overflowRef,
           prevProps
         );

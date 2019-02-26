@@ -15,7 +15,7 @@ export default class Scroll {
     return currentIndexForProjectData !== prevIndexForProjectData;
   }
 
-  resetIfNeeded(overflowRef, prevProps) {
+  resetTopIfNeeded(overflowRef, prevProps) {
     if (overflowRef.current.scrollTop !== 0) {
       const updateScrollTop = this._type === 'projects'
         ? this._swappingProjects(prevProps)

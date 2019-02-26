@@ -4,14 +4,20 @@ image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-
 number: 1
 ---
 
-Magic was real to the wide-eyed boy.
+The cardboard fort crumbled.
 
-And why not? It was a true and honest way to surpise and delight people.
+A wee sprite destroyed it after zipping through the wide-eyed boy's window with all the force of a cannonball. 
 
-So, one night, the boy grabbed the hand of a small fairy who darted through his window and promised to teach him great magics. She held fast, flying him across a wide blue sea toward home, a land of grand adventure.
+"Want to find a glowing purple lamp," she asked, beaming as she floated, eye-level.
 
-The boy played there for many years.
+"Of course," he said. "What does it do?"
 
-As night fell, he'd tell his wee friend tales of the day's adventure. Sometimes he'd talk of soaring between pirate ships, battling one-armed bandits for friend and fortune. Other times, he'd tell how he'd tricked a Jinn into letting him save his wishes in a small golden lamp etched by purple incantation. He even stabbed the air once while telling her how he'd joined a massive animal army, marching to save the nine hidden realms. 
+"I'll show you," she said, grabbing his hand and flying them over the moon toward home, a land of grand adventure. 
 
-As they spoke, the boy learned the fairy's magical secret — good stories shape life as much as life shapes good stories. 
+By day, they searched, soaring over pirate ships, chasing Jinns across sun-drenched sands, and joining great animal armies. 
+
+By night, they told stories about the day's big adventures. The boy soon learned the magic land's secret — good stories shape life as much as life shapes good stories. 
+
+One day, the fairy opened a secret door in the floor and took out a golden lamp with purple incantations. "You've grown up," she said. "It's time to go." He sniffled.
+
+"Fear not, you'll remember the magic you saw here as long this lamp glows purple."

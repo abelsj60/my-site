@@ -4,18 +4,16 @@ image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-
 number: 2
 ---
 
-One day, the boy felt blue. 
+The boy woke at home the next morning. 
 
-It was time to go home. So, his little fairy friend flew him back to real life. 
+The lamp glowed beside him. The sprite was right — it was time to confront the world. So, the boy studied, became a lawyer and then a journalist. 
 
-The boy stetched awake in his own bed, knocking a little lamp off his nightside table. Then he grew big, and learned to navigate the wide world alone. 
+He wrote about digital media, technology, and venture capital, talking to bankers and execs for Forbes and others.
 
-The boy studied, became a lawyer, and then a journalist. He wrote about digital media and technology, talking to bankers and executives the world wide. Life was good, then curved, and the boy found himself starting a company. 
+His lamp burst with bright light. Then, one day, life took a magic turn. The boy met a Web developer, started a company, and built two clever software platforms. 
 
-He met a friend and built the software of his dreams. Their platforms were clever. 
+One made it easy to control interactive networks of online video, the other to choreograph software demos as if directing a Broadway Show. 
 
-One made it easy to control interactive networks of online videos. The other let people choreograph software demos with the grace of a Broadway Show. 
+The boy tirelessly pitched them, telling ever better stories about software. 
 
-But neither took. 
-
-The boy had forgotten the fairy's magic lesson. The story behind technology — not its features — matter most.
+Neither took, and the boy's golden lamp grew dim. One morning, he stretched awake, knocking it dark behind his nightside table.
