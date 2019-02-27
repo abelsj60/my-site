@@ -6,14 +6,20 @@ number: 2
 
 The boy woke at home the next morning. 
 
-The lamp glowed beside him. The sprite was right — it was time to confront the world. So, the boy studied, became a lawyer and then a journalist. 
+The little lamp sat on his nightside table, glowing only slightly. "What does that mean," he asked, hoping for a sign.
 
-He wrote about digital media, technology, and venture capital, talking to bankers and execs for Forbes and others.
+None came. It was just a lamp. 
 
-His lamp burst with bright light. Then, one day, life took a magic turn. The boy met a Web developer, started a company, and built two clever software platforms. 
+So he got on with life. He studied, became a lawyer, and then a journalist. He wrote about media, tech, and venture capital, talking to bankers and executives for Forbes and others.
 
-One made it easy to control interactive networks of online video, the other to choreograph software demos as if directing a Broadway Show. 
+No matter what, he kept the lamp nearby. He loved its mystery. "Why do you grow brighter when I tell stories?" 
 
-The boy tirelessly pitched them, telling ever better stories about software. 
+It was best he didn't know. 
 
-Neither took, and the boy's golden lamp grew dim. One morning, he stretched awake, knocking it dark behind his nightside table.
+Adventure demands the unknown. Thus, there was nothing holding him back the day he met a Web developer, created a start-up, and began to build software. 
+
+One platform made it easy to control an interactive network of online video, the other to remotely run software demos that were as smooth as Broadway. 
+
+The boy pitched them tirelessly. 
+
+But, neither took — and the golden lamp grew dim. One morning, he stretched, knocking it dark beneath its table.

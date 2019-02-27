@@ -159,3 +159,4 @@ export default withRouter(App);
 
 // ! https://github.com/rafrex/spa-github-pages
 // ! http://spa-github-pages.rafrex.com/
+// 3\. _posts/YYYY-MM-DD-title.md
