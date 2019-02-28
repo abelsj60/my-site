@@ -4,6 +4,24 @@ image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-
 number: 4
 ---
 
+The Six sped through darkness.
+
+The boy climbed out at Wall Street, and snaked through back alleys to Hanover Square, magicians thronging the way.
+
+He went to a school by the big bull on Broadway. It taught practical magics. 
+
+
+The boy got a book of practical magic.
+
+Before long, the boy was coding at school in lower Manhattan. He was given a book of practical magics, and surrounded by ferociously smart people.
+
+Time was intense. 
+
+But the boy heard a cry to modern battle. Aslan couldn't have been more rousing if bellowing beside the bull on the great broad way. The boy coded on.
+
+
+
+
 One warm night, the boy's window was open. With a woosh, a pixie flew inside.
 
 She smiled down at the sleeping boy. 
