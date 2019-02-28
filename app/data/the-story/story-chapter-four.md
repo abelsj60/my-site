@@ -6,36 +6,20 @@ number: 4
 
 The Six sped through darkness.
 
-The boy climbed out at Wall Street, and snaked through back alleys to Hanover Square, magicians thronging the way.
+The boy climbed out at Wall Street, and snaked through back alleys to Hanover Square. Magicians thronged the ways.
 
-He went to a school by the big bull on Broadway. It taught practical magics. 
+"Here we are." 
 
+A white building soared skyward. The boy logged into practical magic 11 stories up. Code covered computer screens across the floor. It was smart and austere.
 
-The boy got a book of practical magic.
+"And mindless," he thought. 
 
-Before long, the boy was coding at school in lower Manhattan. He was given a book of practical magics, and surrounded by ferociously smart people.
+Pixelated colors began flooding the floor. "Software is a story," he said, looking out to a blur on the horizon. City and spires were drenched in warm autumn light. 
 
-Time was intense. 
+"Code just a way to tell it."
 
-But the boy heard a cry to modern battle. Aslan couldn't have been more rousing if bellowing beside the bull on the great broad way. The boy coded on.
+A sprite blurred into his room that night, sparks dancing around her as she stood atop the little golden lamp beside him. 
 
+"He believes," she sang down its spout. An angry blue spark shot out, then its metal grew warm and took on a purple glow.
 
-
-
-One warm night, the boy's window was open. With a woosh, a pixie flew inside.
-
-She smiled down at the sleeping boy. 
-
-Dust fell beneath her. The boy woke with a sneaze, and looked out toward the last twinkles of a swiftly moving shadow. 
-
-Dawn was reaching out, drenching the city and its spires in warm, bright light. 
-
-The boy felt as though he'd been with an old friend, casting spells, telling tales. 
-
-He grabbed his laptop and headed out. 
-
-There were stories to craft, platforms to build, and magic to make. Behind him, a polished golden lamp began to glow. 
-
-High above, a fairy looped-de-loop as she spied the faint purple shine beneath. She clapped her hands, bursting for joy. Far, far below walked a boy who'd always believe in magic. 
-
-To be continued...
+But that, of course, is another story.
