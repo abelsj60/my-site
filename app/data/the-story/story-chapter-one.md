@@ -20,8 +20,8 @@ The sprite sighed late one eve.
 
 "You've grown up," she said. "It's time to go home." The boy began to sniffle.
 
-She smiled kindly, then knocked twice on the floor between them. A door opened. She dove in and flew out with the gold lamp they sought! It was etched by strange purple incantations. 
+She smiled kindly, then knocked twice on the floor between them. A door opened. She dove in and flew out with the very thing they'd sought! A golden lamp, etched by purple incantations. 
 
-The fairy read one out even though his eyes were drooping. "There now," she said. "The brighter its purple glow..." 
+She read one aloud while the boy's eyes drooped. "There now," she said. "The brighter its purple glow..." 
 
 But he was out.

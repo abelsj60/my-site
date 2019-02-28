@@ -4,18 +4,24 @@ image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-
 number: 3
 ---
 
-One morning, the boy saw a faint glow beside his bedside table. 
+One afternoon, the boy's room twinkled.
 
-Behind it, he found a dusty golden lamp, a trail of strange purple letters etched over it. The world exploded in pixelated color as he read them aloud. 
+Dust, scattered by a broom, was catching the sun's pale winter light. The quiet was pierced by the hollow ring of the broom on metal. The boy knelt to pick it up.
 
-"Are you ready for a wish," said a Jinn amidst the magic. 
+"I forgot about you," he said, tracing the lamp's purple etchings with a finger.
 
-While surprised, the boy was game. 
+Reality glitched. The room was drenched in pixelated technicolor as clear red rays shot between free-floating sparkles of dust, drawing a giant Jinn into view.
 
-"I turned over every stone," he said. "It's time for new adventure." The boy woke again, targeted ads dancing across his screen. "Code," he thought. 
+"What are you doing," it boomed.
 
-Before long, the boy was coding at school in lower Manhattan. He was given a book of practical magics, and surrounded by ferociously smart people.
+The boy sighed. "I turned over every stone," he said, shrugging. "No mas."
 
-It was intense. 
+The Jinn leaned menacingly forward to stab at the boy with crisp blue sparks. "You've lost our secret," it bellowed.
 
-But the boy heard a cry to modern battle. Aslan couldn't have been more rousing if bellowing beside the bull on the great broad way. The boy coded on.
+A storm began to brew.
+
+A fairy flit through the boy's vision. She yelled violently at the Jinn, who shrank from her sight, then turned to speak.
+
+But the Jinn clapped hands around her, waking the boy with thunder. A coding school Web site glowed on the screen beside his still darkened magic lamp.
+
+Fate was sealed.
