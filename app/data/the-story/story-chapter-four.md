@@ -18,7 +18,7 @@ Pixelated colors began flooding the floor. "Software is a story," he said, looki
 
 "Code just a way to tell it."
 
-A sprite blurred into his room that night, sparks dancing around her as she stood atop the little golden lamp beside him. 
+A sprite blurred into his room that night. Sparks danced around her as she stood atop the little gold lamp beside him. 
 
 "He believes," she sang down its spout. An angry blue spark shot out, then its metal grew warm and took on a purple glow.
 
