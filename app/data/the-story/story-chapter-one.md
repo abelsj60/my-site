@@ -1,5 +1,5 @@
 ---
-title: 'The purple quest'
+title: 'A purple quest'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 1
 ---

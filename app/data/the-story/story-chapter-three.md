@@ -1,5 +1,5 @@
 ---
-title: 'A reality glitch'
+title: 'The reality glitch'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 3
 ---
