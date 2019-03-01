@@ -16,11 +16,9 @@ Clear red rays shot between sparkles of dust, drawing a giant Jinn into view. It
 
 "What are you doing," it screamed.
 
-The boy groaned. "I turned over every stone," he shouted. "There's no mas!"
+The Jinn leaned forward, stabbing at the boy with crisp blue sparks. "You've lost my secret," it roared. All seemed lost.
 
-A storm began to brew. The Jinn leaned forward, stabbing at the boy with crisp blue sparks. "You've lost my secret," it roared. For a tick, all seemed lost.
-
-And then the tock of time carried a small fairy through the improbable scene. She yelled violently at the Jinn, who shrank from her sight, then turned to speak.
+Then the tick tock of time carried a small fairy through the improbable scene. She yelled violently at the Jinn, who shrank from her sight, then turned to speak.
 
 But the Jinn, flushed and angry, tried to slam hands around her, waking the boy with thunder. A coding school website glowed beside his still dark lamp.
 

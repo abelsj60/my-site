@@ -1,5 +1,5 @@
 ---
-title: 'All new magic'
+title: 'All good magic'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 4
 ---

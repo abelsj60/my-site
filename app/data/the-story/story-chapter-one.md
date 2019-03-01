@@ -22,8 +22,8 @@ The fairy sighed late one eve.
 
 She smiled kindly, then knocked twice on the floor between them. A door opened. She dove in and flew out with the very thing they'd sought! A golden lamp, etched by purple incantations. 
 
-"The adventure matters most," she said. The boy was fading fast, so she quickly read one of the lamp's spells aloud. 
+"The adventure matters most," she said. 
 
-"Now this is important," she said. "The lamp's gold will glow purple as long..." 
+Then she began to read one of its spells aloud. "OK," she said. "The lamp'll glow purple as long..." It was too late. 
 
-Too late. He was out.
+He was out.
