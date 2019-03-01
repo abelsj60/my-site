@@ -1,10 +1,10 @@
 ---
-title: "True adventure"
+title: 'True adventure'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 2
 ---
 
-The boy woke at home the next morning. 
+The boy woke at home the next day. 
 
 The gold lamp sat on his bedside table. It glowed slightly purple. "What does that mean," he asked, hoping for a sign.
 
@@ -16,10 +16,8 @@ No matter what he did, he kept the lamp nearby. The boy loved its mystery. "Why 
 
 Best he didn't know. 
 
-Adventure demands the unknown. Thus, there was nothing holding him back the day he met a developer and created a start-up to build two platforms. 
+Adventure demands the unknown. Thus, there was nothing holding him back the day he met a software developer and began to build two Web platforms. 
 
-One made it easy to run interactive video networks online, the other to run remote software demos as smooth as Broadway.
+One ran interactive video networks, the other, remote software demos, smooth like silk. He pitched them tirelessly. 
 
-The boy pitched them tirelessly. 
-
-But neither took, and he tired of the tale. As he did, his golden lamp's purple glow grew dim. One morning, he stretched, knocking it dark beneath its table.
+But neither took, and he tired of the tale. As he did, the golden lamp's purple glow grew dark. Then, he stretched one pitch black night, knocking it under a table.

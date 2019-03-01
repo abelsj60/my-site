@@ -1,5 +1,5 @@
 ---
-title: 'All good magic'
+title: 'Impractical magic'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 4
 ---
@@ -8,18 +8,18 @@ The Six train sped through darkness.
 
 The boy climbed out at Wall Street, and snaked through back alleys to Hanover Square. Magicians thronged the way.
 
-"Here we are," he said to himself. 
+"Coding school," he said. 
 
-A white building soared skyward. The boy logged into practical magic 11 stories up. Code covered computer screens across the floor. It was smart and austere.
+A white tower soared skyward. The boy logged into practical magic 11 flights up. Code covered computer screens across the floor. While smart and austere, the logic lacked something important.
 
-"But it lacks purpose," he thought. 
+"Purpose," he thought.
 
-Pixelated colors began flooding the floor. "Software is a story," he said, looking out at a blur on the horizon. City and spires were drenched in warm autumn light. 
+Pixelated colors flooded the floor, stirring memories of impractical magic. "Software is a story," he said, as a blur zipped across the horizon. The city and its spires were drenched in warm autumn light. 
 
-"Code just a way to tell it."
+"Code the way to tell it," he added aloud, while writing a recursive loop to screen.
 
-A fairy zipped inside his room that night. Sparks danced around her as she stood atop the little gold lamp beside him.
+That night, a fairy darted inside the boy's room as he slept. She skid to a swift stop on the dark lamp beside him. "He still believes," she sang down its spout. 
 
-"He believes," she sang down its spout. An angry blue spark shot out, then its metal grew warm and took on a purple glow.
+An angry blue bolt shot out. 
 
-But that, of course, is another story.
+Then the gold grew warm and took on a purple glow...but, that's another story.

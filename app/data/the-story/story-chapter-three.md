@@ -4,7 +4,7 @@ image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-
 number: 3
 ---
 
-His bedroom twinkled one afternoon.
+The boy's room twinkled one morning.
 
 Dust, scattered by a broom, was catching the sun's pale winter light. The quiet was pierced by the hollow ring of the broom on metal. The boy knelt to pick it up.
 

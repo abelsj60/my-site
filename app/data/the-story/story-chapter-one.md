@@ -1,5 +1,5 @@
 ---
-title: 'A purple quest'
+title: 'A magic quest'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 1
 ---
@@ -16,14 +16,10 @@ She laughed the sound of waves crashing ashore. Then she took his hand and flew 
 
 By day, they searched, soaring over pirate ships, chasing Jinns across sun-drenched sands. And, by night, they told amazing stories about their big adventures. 
 
-The fairy sighed late one eve. 
+Late one night, the fairy sighed. "You've grown up," she said. "Time to go home." 
 
-"You've grown up," she said. "It's time to go home." The boy began to sniffle.
+The boy started sniffling.
 
 She smiled kindly, then knocked twice on the floor between them. A door opened. She dove in and flew out with the very thing they'd sought! A golden lamp, etched by purple incantations. 
 
-"The adventure matters most," she said. 
-
-Then she began to read one of its spells aloud. "OK," she said. "The lamp'll glow purple as long..." It was too late. 
-
-He was out.
+"The adventure mattered most," she said, before reading one aloud. "This'll glow purple as long..." But he was out.
