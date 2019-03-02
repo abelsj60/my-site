@@ -16,9 +16,9 @@ A white tower soared skyward. The boy logged into practical magic 11 flights up.
 
 Pixelated colors flooded the floor, stirring memories of impractical magic. "Software is a story," he said, as a blur zipped across the horizon. The city and its spires were drenched in warm autumn light. 
 
-"Code the way to tell it," he added aloud, while writing a recursive loop to screen.
+"Code the way to tell it," he added, while writing a small recursive loop to screen.
 
-That night, a fairy darted inside the boy's room as he slept. She skid to a swift stop on the dark lamp beside him. "He still believes," she sang down its spout. 
+That night, a fairy darted inside the boy's room as he slept. She skid to a swift stop on the dark lamp beside him. "He does believe," she cried down its spout. 
 
 An angry blue bolt shot out. 
 

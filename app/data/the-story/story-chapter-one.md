@@ -22,4 +22,8 @@ The boy started sniffling.
 
 She smiled kindly, then knocked twice on the floor between them. A door opened. She dove in and flew out with the very thing they'd sought! A golden lamp, etched by purple incantations. 
 
-"The adventure mattered most," she said, before reading one aloud. "This'll glow purple as long..." But he was out.
+"The adventure matters most," she told a fast fading boy. Then she read one aloud. 
+
+"By bright day and black night, through tall tale and purple light, rub me twice and release my might, if..." Too late. 
+
+He was out.

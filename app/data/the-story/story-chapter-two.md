@@ -20,4 +20,4 @@ Adventure demands the unknown. Thus, there was nothing holding him back the day 
 
 One ran interactive video networks, the other, remote software demos, smooth like silk. He pitched them tirelessly. 
 
-But neither took, and he tired of the tale. As he did, the golden lamp's purple glow grew dark. Then, he stretched one pitch black night, knocking it under a table.
+But neither took, and he tired of the tale. As he did, the golden lamp's purple glow grew dim. Then he stretched one night, knocking it beneath its table, dark.
