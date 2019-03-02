@@ -144,11 +144,13 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Take pictures, write captions for Arrow, Slingshot, TMMnews
+// Favicon
+// _posts/YYYY-MM-DD-title.md
+
 // Add copyright to articles?
+// Take pictures, write captions for Arrow, Slingshot, TMMnews
 
 // Images — how to store for React?
-// Favicon
 // Illustrator. List needs, specs?
 // Hosting?
 
@@ -159,4 +161,3 @@ export default withRouter(App);
 
 // ! https://github.com/rafrex/spa-github-pages
 // ! http://spa-github-pages.rafrex.com/
-// 3\. _posts/YYYY-MM-DD-title.md
