@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: An introduction
+headline: Welcome to Reverie
 date: March 2, 2019
 slug: Let's slip away
 ---
