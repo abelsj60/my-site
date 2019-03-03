@@ -45,6 +45,8 @@ export default function ArticleOrReverieNav(props) {
   } = appState;
   const currentPath = location.pathname.split('/');
 
+  console.log('d:', data);
+
   const isReverie = currentPath[1] === 'reverie';
   let index;
 

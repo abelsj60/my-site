@@ -144,8 +144,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-// _posts/YYYY-MM-DD-title.md
-
 // Add copyright to articles?
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 
