@@ -10,7 +10,7 @@ A small fairy destroyed it after zipping through the wide-eyed boy's window with
 
 "Want to find a glowing purple lamp," she asked, beaming as she floated eye-level.
 
-"Of course," he said. "What does it do?"
+"Of course," he said. "What do I do?"
 
 She laughed the sound of waves crashing ashore. Then she took his hand and flew them over the moon toward home — a land of grand adventure. 
 
