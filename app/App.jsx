@@ -144,7 +144,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Favicon
 // _posts/YYYY-MM-DD-title.md
 
 // Add copyright to articles?
