@@ -15,12 +15,16 @@ export default class Referrer {
 
   _loadPathToMatch() {
     switch (this.location) {
+      case 'about':
+        return '/about';
       case 'chapter':
         return '/chapter/:title?';
-      case 'projects':
-        return '/projects/:projectName?/:projectThumbnail?';
+      case 'home':
+        return '/';
       case 'journalism':
         return '/journalism/:publication?/:headline?';
+      case 'projects':
+        return '/projects/:projectName?/:projectThumbnail?';
       case 'reverie':
         return '/reverie/:headline?';
       default:

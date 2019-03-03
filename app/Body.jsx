@@ -25,6 +25,8 @@ export default class Body extends Component {
      */
 
     const referrer = new Referrer(props);
+    console.log(referrer.pathToMatch);
+
     const location = new Location(
       referrer.pathToMatch,
       props
