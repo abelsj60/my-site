@@ -40,8 +40,8 @@ export default class ContentLoader extends Component {
 
     /** ComponentData contains configured Components
      *
-     * Includes data from or derived from props,
-     * e.g., section data (AKA, 'contentData').
+     * Includes data from props, e.g., section
+     * data (AKA, 'contentData').
      *
      * Note: ContentaLoader unmounts when users swap
      * sections, so there's no need to update

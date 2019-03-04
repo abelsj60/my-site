@@ -32,24 +32,12 @@ export default class Body extends Component {
     const state = new State(props, location);
 
     this.state = {
-      indexForArticleData: state.getIndex(
-        'article'
-      ),
-      indexForChapterData: state.getIndex(
-        'chapter'
-      ),
-      indexForProjectData: state.getIndex(
-        'project'
-      ),
-      indexForProjectPics: state.getIndex(
-        'projectPics'
-      ),
-      indexForPublication: state.getIndex(
-        'publication'
-      ),
-      indexForReverieData: state.getIndex(
-        'reverie'
-      )
+      indexForArticleData: state.getIndex('article'),
+      indexForChapterData: state.getIndex('chapter'),
+      indexForProjectData: state.getIndex('project'),
+      indexForProjectPics: state.getIndex('projectPics'),
+      indexForPublication: state.getIndex('publication'),
+      indexForReverieData: state.getIndex('reverie')
     };
   }
 

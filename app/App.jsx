@@ -97,8 +97,6 @@ class App extends Component {
     );
 
     if (location.justChanged) {
-      // Update appState when changing locations
-
       const {
         isMenu,
         showBusinessCard,
@@ -129,9 +127,8 @@ class App extends Component {
         handleClickForApp('toggleMenu');
       }
 
+      /** Don't update callers on reload */
       if (!routeIsReloading) {
-        // Don't update callers on reload
-
         handleClickForApp(
           'setCallers',
           location.type,
@@ -144,16 +141,21 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Add copyright to articles?
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
+// Add copyright to articles?
+// ngrok on mobile + Endtest
+
+// Clean up public folder
+// Clean up/remove notes
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?
 // Hosting?
 
 // https://www.tutorialspoint.com/css/css_animation.htm
-// https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/
 // https://jilles.me/
+// https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/
+// Alt: Manage contentSwapping via keys
 
 // ! https://github.com/rafrex/spa-github-pages
 // ! http://spa-github-pages.rafrex.com/
