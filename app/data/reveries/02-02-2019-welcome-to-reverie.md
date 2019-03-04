@@ -31,7 +31,7 @@ What about social sharing and the like?
 
 Well, let's see if I keep this up and if anyone reads, then I can explore. 
 
-What about Medium, where all the cool kids are these days?
+What about Medium, where all the cool kids write these days?
 
 Meh. Something to be said for going old school, for now.
 
