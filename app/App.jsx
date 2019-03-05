@@ -142,20 +142,14 @@ class App extends Component {
 export default withRouter(App);
 
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
-// Add copyright to articles?
 // ngrok on mobile + Endtest
 
-// Clean up public folder
-// Clean up/remove notes
+// Right or left margin spacing — equalize
+// Prallalax on bacground image on home
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?
+
 // Hosting?
-
-// https://www.tutorialspoint.com/css/css_animation.htm
-// https://jilles.me/
-// https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/
-// Alt: Manage contentSwapping via keys
-
 // ! https://github.com/rafrex/spa-github-pages
 // ! http://spa-github-pages.rafrex.com/

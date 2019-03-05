@@ -15,7 +15,7 @@ I'm not entirely sure what this is, but here's what it's not:
 
 Here's what it may be:
 
-A spot for a few thoughts about whatever inspires me, momentarily. That should keep it light, although, I have a couple longer pieces I'd like to do about things like:  
+A spot for a few thoughts about whatever momentarily inspires me. That should keep it light, although, I have a couple longer pieces I'd like to do about things like:  
 
 * The state of broadcast TV Web sites
 * Some thoughts on Netflix and Amazon Prime
