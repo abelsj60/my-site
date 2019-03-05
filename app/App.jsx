@@ -141,6 +141,7 @@ class App extends Component {
 
 export default withRouter(App);
 
+// copyright?
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 // ngrok on mobile + Endtest
 
