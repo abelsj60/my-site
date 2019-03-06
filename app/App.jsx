@@ -138,9 +138,9 @@ class App extends Component {
         !location.isTopLevel
         // lastCaller was not '/i':
         && !location.isCalledAfterReload
-        // Restate route moves the window to '/i',
-        // then re-renders away from it (but the
-        // window remains /i until the 'push'):
+        // Restate route moves the window to '/i', then
+        // re-renders away from it (but the window stays
+        // on '/i' until React pushes us away from it):
         && window.location.pathname !== '/i'
       ) {
         // console.log('Run GA:', window.location.pathname);
