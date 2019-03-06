@@ -50,7 +50,7 @@ class App extends Component {
     super(props);
 
     const referrer = new Referrer(props);
-    const location = referrer.getLocation(props);
+    const location = referrer.location;
     // console.log('first run of GA:', window.location.pathname);
 
     this.state = {
@@ -134,8 +134,13 @@ class App extends Component {
       }
 
       if (
+        // 1. '/chapter', '/projects', etc:
         !location.isTopLevel
+        // 2. lastCaller was not '/i':
         && !location.isCalledAfterReload
+        // 3. Restate route moves the window
+        // to '/i', then re-renders away from it
+        // (but window remains /i until the 'push'):
         && window.location.pathname !== '/i'
       ) {
         // console.log('Run GA:', window.location.pathname);

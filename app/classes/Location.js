@@ -32,7 +32,7 @@ export default class Location {
       this.lastType = referrer.getLocation(prevProps);
     }
 
-    this.type = referrer.getLocation(props);
+    this.type = referrer.location;
     this.isExact = this._matchPath && this._matchPath.isExact;
     this.params = this._loadParams(prevProps);
   }

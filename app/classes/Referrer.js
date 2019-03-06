@@ -5,10 +5,7 @@ export default class Referrer {
     }
 
     this.path = props.location.pathname;
-    this.location =
-      props.location.pathname.split('/')[1] !== ''
-        ? props.location.pathname.split('/')[1]
-        : 'home';
+    this.location = this.getLocation(props);
     this.finalPath = this._loadFinalPath();
     this.pathToMatch = this._loadPathToMatch();
   }
