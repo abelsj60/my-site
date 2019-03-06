@@ -69,9 +69,10 @@ export default function FooterContainer(props) {
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
 
-  // home is '/', not '/home'
+  // Remember: home is '/', not '/home'
   const whereItStarted =
-    lastCaller !== 'home' && lastCaller !== 'i'
+    lastCaller !== 'home'
+    && lastCaller !== 'i'
       ? `/${lastCaller}`
       : '/';
   const linkForReverie = isReverie

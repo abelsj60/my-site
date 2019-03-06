@@ -24,7 +24,7 @@ A spot for a few thoughts about whatever momentarily inspires me. That should ke
 Here's how it works:
 
 * Reverie is accessed through the footer, not header, because it's irregular and ancillary to the rest of the site. Like a daydream.
-* Clicking Reverie from Reverie will take you back to whereever you came from in the site. If you came direct, you'll go home.
+* Clicking Reverie from Reverie will take you back to whereever you were before the reverie. If you came here directly, you'll go home.
 * I built this from scratch. It's an actual, real-life, home-grown blog. Half the point was to figure out how to do it. I'll write about that soon-ish.
 
 What about social sharing and the like?

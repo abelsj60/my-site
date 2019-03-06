@@ -56,11 +56,13 @@ class App extends Component {
       currentCaller: location,
       lastCaller: location !== 'reverie' ? location : 'home',
       inCity: false,
-      isMenu: referrer.checkForMenu(props),
+      isMenu: referrer.isMenu(props),
       showBusinessCard: false,
       showLegalTerms: false,
       showStoryText: true
     };
+
+    console.log('first run of GA:', window.location.pathname);
   }
 
   render() {
@@ -103,13 +105,9 @@ class App extends Component {
         showLegalTerms,
         showStoryText
       } = this.state;
-
       const referrer = new Referrer(prevProps);
       const eForApp = new EventHandling('app', this);
-
       const handleClickForApp = eForApp.boundHandleClick;
-      const routeIsReloading =
-        location.type === 'i' || location.lastType === 'i';
 
       if (showBusinessCard) {
         handleClickForApp('toggleBusinessCard');
@@ -123,17 +121,25 @@ class App extends Component {
         handleClickForApp('toggleStoryText');
       }
 
-      if (isMenu !== referrer.checkForMenu(this.props)) {
+      if (isMenu !== referrer.isMenu(this.props)) {
         handleClickForApp('toggleMenu');
       }
 
       /** Don't update callers on reload */
-      if (!routeIsReloading) {
+      if (!location.isReloading) {
         handleClickForApp(
           'setCallers',
           location.type,
           location.lastType
         );
+      }
+
+      if (
+        !location.isTopLevel
+        && !location.isCalledAfterReload
+        && window.location.pathname !== '/i'
+      ) {
+        console.log('Run GA:', window.location.pathname);
       }
     }
   }
@@ -144,9 +150,11 @@ export default withRouter(App);
 // copyright?
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 // ngrok on mobile + Endtest
+// Content loader referrer or location
 
 // Right or left margin spacing — equalize
-// Prallalax on bacground image on home
+// Analytics, a. find password/account, b. set up ngrok, c. configure ga location, d. add to page
+// URL
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?

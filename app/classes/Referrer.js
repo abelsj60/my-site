@@ -25,6 +25,8 @@ export default class Referrer {
         return '/journalism/:publication?/:headline?';
       case 'projects':
         return '/projects/:projectName?/:projectThumbnail?';
+      case 'i':
+        return '/i';
       case 'reverie':
         return '/reverie/:headline?';
       default:
@@ -54,7 +56,7 @@ export default class Referrer {
     return !isHome ? locationArray[1] : 'home';
   }
 
-  checkForMenu(props) {
+  isMenu(props) {
     const locationArray = props.location.pathname.split('/');
     const indexOfMenu = locationArray.indexOf('menu');
 

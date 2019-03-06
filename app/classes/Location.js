@@ -19,14 +19,14 @@ export default class Location {
     this._lastPath = prevProps && prevProps.location.pathname;
     this._actualLengthOfPath = this._userPath
       .split('/')
-      .filter(p => p !== '').length;
+      .filter(p => p !== '').length; // Filter out empty lengths
     this._expectedLengthOfPath = this._pathToMatch.split(
       '/'
-    ).length;
+    ).length; // Templates, so no need to filter empty parts
     this._matchPath = matchPath(
       this._userPath,
       { path: this._pathToMatch }
-    );
+    ); // Normalizes use of params, ensuring all values
 
     if (this._lastPath) {
       this.lastType = referrer.getLocation(prevProps);
@@ -34,29 +34,15 @@ export default class Location {
 
     this.type = referrer.getLocation(props);
     this.isExact = this._matchPath && this._matchPath.isExact;
-    this.params = this._loadParams(props, prevProps);
+    this.params = this._loadParams(prevProps);
   }
 
-  _loadParams(props, prevProps) {
+  _loadParams(prevProps) {
     const type = this.type;
-    const propsHaveParams = Object.keys(
-      props.match.params
-    ).length > 0;
-
-    let paramValues;
+    const paramValues = this._matchPath.params;
     let ParamsClass;
 
-    if (propsHaveParams) {
-      paramValues = props.match.params;
-    } else if (
-      this._pathToMatch &&
-      this._pathToMatch !== ''
-    ) {
-      paramValues = this._matchPath.params;
-    } else {
-      paramValues = { fakeParam: undefined };
-    }
-
+    // Select param class
     switch (type) {
       case 'chapter':
         ParamsClass = StoryParams;
@@ -90,42 +76,43 @@ export default class Location {
     return this._actualLengthOfPath > this._expectedLengthOfPath;
   }
 
-  get pathIsJustRight() {
+  get pathIsValid() {
     if (
-      this.params.isMenu &&
-      this._pathIsShort
+      this.params.isMenu
+      && this._pathIsShort
     ) {
+      // Path is exactly right —
+      // a menu and short
       return true;
-    } else if (
-      this.isExact &&
-      !this._pathIsTooLong
-    ) {
-      return this.params.hasExpectedNumber;
     }
 
-    return false;
+    // isExact checks type, e.g.,
+    // ...goodPath/soft is no good
+
+    return this.isExact
+      && !this._pathIsTooLong
+      && this.params.hasExpectedNumber;
   }
 
   get needsRedirect() {
-    if (this.pathIsJustRight) {
-      return false;
-    }
+    if (this.pathIsValid) return false;
 
-    const nameOfParamOne = this.params.paramNames[0];
-    const firstParamIsValid = !!this.params[nameOfParamOne];
-    const firstParamIsUndefined =
-        this.params.areUndefined.filter(
-          p => p === nameOfParamOne
-        ).length > 0;
-    const nameOfParamTwo = this.params.paramNames[1];
-    const secondParamIsUndefined =
-        this.params.areUndefined.filter(
-          p => p === nameOfParamTwo
-        ).length > 0;
+    const paramOneIsUndefined =
+      this.params.areUndefined.includes(
+        this.params.paramNames[0]
+      );
+    const paramTwoIsUndefined =
+      this.params.areUndefined.includes(
+        this.params.paramNames[1]
+      );
 
-    return firstParamIsUndefined ||
-        (firstParamIsValid && secondParamIsUndefined);
+    // A single param is tested on its own (is it found?)
+    // Two params are tested against if the first is found,
+    // meaning the request is to a valid section, and if
+    // the second is undefined, meaning we need a redirect
 
+    return paramOneIsUndefined ||
+        (!paramOneIsUndefined && paramTwoIsUndefined);
   }
 
   get isSwappingContent() {
@@ -166,5 +153,23 @@ export default class Location {
     }
 
     return this._userPath !== this._lastPath;
+  }
+
+  get isReloading() {
+    return this.type === 'i' || this.lastType === 'i';
+  }
+
+  get isCalledAfterReload() {
+    return this.lastType === 'i';
+  }
+
+  get isTopLevel() {
+    const topLevels = [
+      '/chapter',
+      '/journalism',
+      '/projects',
+      '/reverie'
+    ];
+    return topLevels.includes(this._userPath);
   }
 }
