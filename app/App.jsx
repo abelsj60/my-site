@@ -51,6 +51,7 @@ class App extends Component {
 
     const referrer = new Referrer(props);
     const location = referrer.getLocation(props);
+    // console.log('first run of GA:', window.location.pathname);
 
     this.state = {
       currentCaller: location,
@@ -61,8 +62,6 @@ class App extends Component {
       showLegalTerms: false,
       showStoryText: true
     };
-
-    console.log('first run of GA:', window.location.pathname);
   }
 
   render() {
@@ -139,7 +138,7 @@ class App extends Component {
         && !location.isCalledAfterReload
         && window.location.pathname !== '/i'
       ) {
-        console.log('Run GA:', window.location.pathname);
+        // console.log('Run GA:', window.location.pathname);
       }
     }
   }
@@ -150,11 +149,9 @@ export default withRouter(App);
 // copyright?
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 // ngrok on mobile + Endtest
-// Content loader referrer or location
 
 // Right or left margin spacing — equalize
-// Analytics, a. find password/account, b. set up ngrok, c. configure ga location, d. add to page
-// URL
+// Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?

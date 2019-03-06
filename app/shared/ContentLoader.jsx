@@ -69,11 +69,11 @@ export default class ContentLoader extends Component {
         <Route
           exact
           path={`/${
-            referrer.location
+            location.type
           }/menu`}
           render={
             () => {
-              if (referrer.location === 'chapter') {
+              if (location.type === 'chapter') {
                 return <Redirect to="/not-found" />;
               }
 
