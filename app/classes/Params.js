@@ -5,7 +5,7 @@ export default class Params {
   constructor(type, params, paramNames) {
     // Array.isArray() ensures nothing breaks when
     // Params() is called by location._loadParams
-    // (params are an object at this time)
+    // (super's not called, so they're a true {})
     this._paramNames = Array.isArray(paramNames)
       ? paramNames
       : [];
