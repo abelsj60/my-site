@@ -16,24 +16,26 @@ export default class Location {
 
     this._pathToMatch = pathToMatch;
     this._userPath = props.location.pathname;
-    this._lastPath = prevProps && prevProps.location.pathname;
-    this._actualLengthOfPath = this._userPath
-      .split('/')
-      .filter(p => p !== '').length; // Filter out empty lengths
-    this._expectedLengthOfPath = this._pathToMatch.split(
-      '/'
-    ).length; // Templates, so no need to filter empty parts
+    this._lastPath = prevProps
+      && prevProps.location.pathname;
+    this._actualLengthOfPath =
+      this._userPath
+        .split('/')
+        .filter(p => p !== '').length; // Filter out empty lengths
+    this._expectedLengthOfPath =
+      this._pathToMatch.split(
+        '/'
+      ).length; // Templates, so no need to filter for empty parts
     this._matchPath = matchPath(
       this._userPath,
       { path: this._pathToMatch }
     ); // Normalizes use of params, ensuring all values
 
-    if (this._lastPath) {
-      this.lastType = referrer.getLocation(prevProps);
-    }
-
+    this.lastType = this._lastPath
+      && referrer.getLocation(prevProps);
     this.type = referrer.location;
-    this.isExact = this._matchPath && this._matchPath.isExact;
+    this.isExact = this._matchPath
+      && this._matchPath.isExact;
     this.params = this._loadParams(prevProps);
   }
 
@@ -106,10 +108,10 @@ export default class Location {
         this.params.paramNames[1]
       );
 
-    // A single param is tested on its own (is it found?)
-    // Two params are tested against if the first is found,
-    // meaning the request is to a valid section, and if
-    // the second is undefined, meaning we need a redirect
+    // 1. A single param is tested on its own
+    // 2. Two params are tested by checking if the first is
+    // found, meaning the request is valid, and if the
+    // second is undefined, meaning we need a redirect
 
     return paramOneIsUndefined ||
         (!paramOneIsUndefined && paramTwoIsUndefined);

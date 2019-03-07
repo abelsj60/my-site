@@ -140,7 +140,7 @@ class App extends Component {
         && !location.isCalledAfterReload
         // Restate route moves the window to '/i', then
         // re-renders away from it (but the window stays
-        // on '/i' until React pushes us away from it):
+        // on '/i' until React pushes us away from that):
         && window.location.pathname !== '/i'
       ) {
         // console.log('Run GA:', window.location.pathname);
@@ -154,6 +154,7 @@ export default withRouter(App);
 // copyright?
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 // ngrok on mobile + Endtest
+// Link length in article/reverie
 
 // Right or left margin spacing — equalize
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
