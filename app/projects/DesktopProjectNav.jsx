@@ -12,8 +12,8 @@ const StyledUL = styled(UnorderedList)`
   width: ${p => (!p.menu ? '327px' : undefined)};
 
   ${p =>
-    p.menu &&
-    css`
+    p.menu
+    && css`
       display: block;
       max-width: 590px;
       margin: 0;

@@ -34,9 +34,9 @@ export default class Reload {
 
   _getContentData() {
     const caller = this._caller;
-    const c = new Content(caller);
+    const content = new Content(caller);
 
-    return c.getContentData();
+    return content.getContentData();
   }
 
   _storyPath(section) {

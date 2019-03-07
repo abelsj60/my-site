@@ -5,20 +5,24 @@ export default class StoryParams extends Params {
     super(type, params);
 
     this.paramNames = ['title'];
-    this.lastChapter = prevProps && prevProps.match.params.title;
+    this.lastChapter = prevProps
+      && prevProps.match.params.title;
 
-    this._actualNumber = this.paramNames.filter(p => {
-      return this[p] !== false;
-    }).length;
+    this._actualNumber = this.paramNames.filter(
+      p => this[p] !== false
+    ).length;
   }
 
   get title() {
-    return this.validateParam(this._one, 'title', 'text');
+    return this.validateParam(
+      this._one,
+      'title',
+      'text'
+    );
   }
 
   titleToIndex() {
     if (!this.title) return -1;
-
     return this.oneToIndex();
   }
 }

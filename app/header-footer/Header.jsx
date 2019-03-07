@@ -64,8 +64,8 @@ const Nav = styled.nav`
   border-bottom: ${p => (p.home ? '.5px solid white' : undefined)};
 
   ${p =>
-    p.menu &&
-    css`
+    p.menu
+    && css`
       flex: 1;
       display: block;
       margin-left: 32px;

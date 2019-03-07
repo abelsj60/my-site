@@ -13,8 +13,8 @@ const Container = styled.section`
   background-color: rgba(0, 0, 0, 0.7);
 
   ${p =>
-    p.home &&
-    css`
+    p.home
+    && css`
       z-index: 1;
       background-color: rgba(255, 231, 76, 0.1);
       background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');

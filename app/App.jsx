@@ -37,8 +37,8 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
 
     ${p =>
-    p.home &&
-      css`
+    p.home
+      && css`
         width: 100%;
         position: fixed;
       `};

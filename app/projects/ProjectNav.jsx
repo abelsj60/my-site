@@ -13,8 +13,8 @@ const Group = styled.ul`
   list-style-type: none;
 
   ${p =>
-    p.menu &&
-    css`
+    p.menu
+    && css`
       margin-bottom: ${p.num !== 2 ? '15px' : undefined};
       padding-bottom: 0;
       max-width: 100%;
@@ -22,8 +22,8 @@ const Group = styled.ul`
     `};
 
   ${p =>
-    p.isRight &&
-    css`
+    p.isRight
+    && css`
       border-bottom: #6e7dab solid 0.5px;
 
       @media (min-width: 672px) {
@@ -120,9 +120,9 @@ export default function ProjectNav(props) {
             let highlightActiveThumbnail;
 
             if (
-              isMenu &&
-              isActive &&
-              indexForProjectPics === idx
+              isMenu
+              && isActive
+              && indexForProjectPics === idx
             ) {
               highlightActiveThumbnail = true;
             }

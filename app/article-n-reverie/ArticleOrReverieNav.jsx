@@ -23,8 +23,8 @@ const GrafAsHed = styled(Graf)`
   font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
 
   ${p =>
-    !p.menu &&
-    css`
+    !p.menu
+    && css`
       overflow: hidden;
       text-overflow: ellipsis;
       width: 300px;
