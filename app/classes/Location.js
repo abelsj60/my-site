@@ -19,13 +19,12 @@ export default class Location {
     this._lastPath = prevProps
       && prevProps.location.pathname;
     this._actualLengthOfPath =
-      this._userPath
-        .split('/')
-        .filter(p => p !== '').length; // Filter out empty lengths
+      this._userPath.split('/')
+        .filter(p => p !== '')
+        .length; // Filter out empty lengths
     this._expectedLengthOfPath =
-      this._pathToMatch.split(
-        '/'
-      ).length; // Templates, so no need to filter for empty parts
+      this._pathToMatch.split('/')
+        .length; // Templates, so no need to filter for empty parts
     this._matchPath = matchPath(
       this._userPath,
       { path: this._pathToMatch }
@@ -113,8 +112,8 @@ export default class Location {
     // found, meaning the request is valid, and if the
     // second is undefined, meaning we need a redirect
 
-    return paramOneIsUndefined ||
-        (!paramOneIsUndefined && paramTwoIsUndefined);
+    return paramOneIsUndefined
+      || (!paramOneIsUndefined && paramTwoIsUndefined);
   }
 
   get isSwappingContent() {
@@ -122,30 +121,28 @@ export default class Location {
       case 'chapter':
         const currentChapter = this.params.title;
         const lastChapter = this.params.lastChapter;
-
         return currentChapter !== lastChapter;
       case 'projects':
         const currentProjectPicture = this.params.projectThumbnail;
         const lastProjectPicture = this.params.lastProjectPicture;
         const currentProjectName = this.params.projectName;
         const lastProjectName = this.params.lastProject;
-
         return (
-          currentProjectName !== lastProjectName ||
-          currentProjectPicture !== lastProjectPicture
+          currentProjectName !== lastProjectName
+          || currentProjectPicture !== lastProjectPicture
         );
       case 'journalism':
         const currentHeadline = this.params.headline;
         const lastHeadline = this.params.lastHeadline;
-
         return currentHeadline !== lastHeadline;
       case 'reverie':
         const currentReverie = this.params.headline;
         const lastReverie = this.params.lastHeadline;
-
         return currentReverie !== lastReverie;
       default:
-        console.log('Location.isSwappingContent(): Keep calm, carry on');
+        console.log(
+          'Location.isSwappingContent(): Keep calm, carry on'
+        );
     }
   }
 
@@ -158,7 +155,8 @@ export default class Location {
   }
 
   get isReloading() {
-    return this.type === 'i' || this.lastType === 'i';
+    return this.type === 'i'
+      || this.lastType === 'i';
   }
 
   get isCalledAfterReload() {
