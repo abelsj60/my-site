@@ -2,17 +2,15 @@ import Params from './Params';
 
 export default class JournalismParams extends Params {
   constructor(type, params, prevProps) {
-    super(type, params);
+    super(type, params, [
+      'publication',
+      'headline'
+    ]);
 
-    this.paramNames = ['publication', 'headline'];
     this.lastHeadline = prevProps
       && prevProps.match.params.headline;
     this.lastPublication = prevProps
       && prevProps.match.params.publication;
-
-    this._actualNumber = this.paramNames.filter(
-      p => this[p] !== false
-    ).length;
   }
 
   get publication() {

@@ -45,7 +45,6 @@ export default class Location {
     const paramValues = this._matchPath.params;
     let ParamsClass;
 
-    // Select param class
     switch (type) {
       case 'chapter':
         ParamsClass = StoryParams;
@@ -100,11 +99,11 @@ export default class Location {
 
     const paramOneIsUndefined =
       this.params.areUndefined.includes(
-        this.params.paramNames[0]
+        this.params._paramNames[0]
       );
     const paramTwoIsUndefined =
       this.params.areUndefined.includes(
-        this.params.paramNames[1]
+        this.params._paramNames[1]
       );
 
     return paramOneIsUndefined

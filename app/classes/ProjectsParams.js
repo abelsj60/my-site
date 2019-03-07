@@ -2,17 +2,17 @@ import Params from './Params';
 
 export default class ProjectsParams extends Params {
   constructor(type, params, prevProps) {
-    super(type, params);
+    super(type, params, [
+      'projectName',
+      'projectThumbnail'
+    ]);
 
-    this.paramNames = ['projectName', 'projectThumbnail'];
     this.lastProject = prevProps
       && prevProps.match.params.projectName;
     this.lastProjectPicture = prevProps
-      && parseInt(prevProps.match.params.projectThumbnail);
-
-    this._actualNumber = this.paramNames.filter(
-      p => this[p] !== false
-    ).length;
+      && parseInt(
+        prevProps.match.params.projectThumbnail
+      );
   }
 
   get projectName() {

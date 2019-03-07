@@ -2,15 +2,12 @@ import Params from './Params';
 
 export default class ReverieParams extends Params {
   constructor(type, params, prevProps) {
-    super(type, params);
+    super(type, params, [
+      'headline'
+    ]);
 
-    this.paramNames = ['headline'];
     this.lastHeadline = prevProps
       && prevProps.match.params.headline;
-
-    this._actualNumber = this.paramNames.filter(
-      p => this[p] !== false
-    ).length;
   }
 
   get headline() {

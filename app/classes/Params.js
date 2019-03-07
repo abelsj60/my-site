@@ -2,18 +2,25 @@ import Content from './Content.js';
 import normalize from '../helpers/normalize.js';
 
 export default class Params {
-  constructor(type, params) {
-    this._paramKeys = Object.keys(params);
-    this._one = params[this._paramKeys[0]];
-    this._two = params[this._paramKeys[1]];
-    this._expectedNumber = this._paramKeys.length;
-    this._originalData = params;
+  constructor(type, params, paramNames) {
+    // Array.isArray() ensures nothing breaks when
+    // Params() is called by location._loadParams
+    // (params are an object at this time)
+    this._paramNames = Array.isArray(paramNames)
+      ? paramNames
+      : [];
+    this._one = params[this._paramNames[0]];
+    this._two = params[this._paramNames[1]];
+    this._expectedNumber = this._paramNames.length;
+    this._actualNumber = this._paramNames.filter(
+      p => params[p] !== undefined
+    ).length;
 
     this.type = type;
-    this.paramNames = [];
-    this.areUndefined = this._paramKeys.filter(
+    this.areUndefined = this._paramNames.filter(
       p => params[p] === undefined
     );
+    this.originalData = params;
   }
 
   get _searchData() {
@@ -61,13 +68,9 @@ export default class Params {
         break;
     }
 
-    if (paramIsValid === false) {
-      return false;
-    } else {
-      // Return original to avoid problems
-      // with falsy when index is 0
-      return param;
-    }
+    // Return original to avoid problems
+    // with falsy should index bes 0
+    return paramIsValid && param;
   }
 
   _toIndex(paramName) {
@@ -93,13 +96,13 @@ export default class Params {
   }
 
   _oneToIndex() {
-    if (this.paramNames.length < 1) return -1;
-    return this._toIndex(this.paramNames[0]);
+    if (this._paramNames.length < 1) return -1;
+    return this._toIndex(this._paramNames[0]);
   }
 
   _twoToIndex() {
-    if (this.paramNames.length < 1) return -1;
-    return this._toIndex(this.paramNames[1]);
+    if (this._paramNames.length < 2) return -1;
+    return this._toIndex(this._paramNames[1]);
   }
 
   get hasExpectedNumber() {

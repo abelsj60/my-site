@@ -52,7 +52,7 @@ class App extends Component {
 
     const referrer = new Referrer(props);
     const location = referrer.location;
-    // ReactGA.initialize('tbd');
+    // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
     this.state = {
@@ -140,11 +140,19 @@ class App extends Component {
       if (
         // '/chapter', '/projects', etc:
         !location.isTopLevel
-        // lastCaller was not '/i':
+        // lastCaller was not '/i'. The app will
+        // run two re-renders after a <Redirect />
+        // moves us from '/i' to the next page's
+        // URL (see next statement). As a result,
+        // we filter one of the re-renders out so
+        // we don't tally the page URL twice:
         && !location.isCalledAfterReload
-        // Restate route moves the window to '/i', then
-        // re-renders away from it (but the window stays
-        // on '/i' until React pushes us away from that):
+        // current window URL is not '/i'.
+        // Restate route occurs on the '/i' url.
+        // The app doesn't move to the next page's
+        // URL until a <Redirect /> loads it. This
+        // check blocks '/i' from being tallied
+        // by GA:
         && window.location.pathname !== '/i'
       ) {
         // ReactGA.pageview(window.location.pathname);
