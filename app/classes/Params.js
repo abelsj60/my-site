@@ -12,14 +12,16 @@ export default class Params {
     this._one = params[this._paramNames[0]];
     this._two = params[this._paramNames[1]];
     this._expectedNumber = this._paramNames.length;
-    this._actualNumber = this._paramNames.filter(
-      p => params[p] !== undefined
-    ).length;
+    this._actualNumber =
+      this._paramNames.filter(
+        p => params[p] !== undefined
+      ).length;
 
     this.type = type;
-    this.areUndefined = this._paramNames.filter(
-      p => params[p] === undefined
-    );
+    this.areUndefined =
+      this._paramNames.filter(
+        p => params[p] === undefined
+      );
     this.originalData = params;
   }
 
