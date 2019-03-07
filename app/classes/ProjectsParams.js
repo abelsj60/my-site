@@ -18,16 +18,14 @@ export default class ProjectsParams extends Params {
   get projectName() {
     return this._validateParam(
       this._one,
-      'projectName',
-      'text'
+      this._paramNames[0]
     );
   }
 
   get projectThumbnail() {
     const paramIsValid = this._validateParam(
-      this._two,
-      'full',
-      'number'
+      parseInt(this._two),
+      this._paramNames[1]
     );
     return paramIsValid && parseInt(paramIsValid);
   }

@@ -11,6 +11,7 @@ export default class Params {
       : [];
     this._one = params[this._paramNames[0]];
     this._two = params[this._paramNames[1]];
+    console.log('top:', typeof this._two);
     this._expectedNumber = this._paramNames.length;
     this._actualNumber =
       this._paramNames.filter(
@@ -34,14 +35,14 @@ export default class Params {
     return normalize(param);
   }
 
-  _validateParam(param, paramName, paramType) {
+  _validateParam(param, paramName) {
     if (!param) return false;
 
     const searchData = this._searchData;
     let paramIsValid;
 
-    switch (paramType) {
-      case 'text':
+    switch (typeof param) {
+      case 'string':
         const paramTestResults = searchData.filter(
           d => {
             const valueFromData = this._normalizeParam(
@@ -54,11 +55,6 @@ export default class Params {
         paramIsValid = paramTestResults.length > 0;
         break;
       case 'number':
-        if (!parseInt(param)) {
-          paramIsValid = false;
-          break;
-        }
-
         const paramToTestConvertedToIndex = parseInt(param) - 1;
         paramIsValid =
           paramToTestConvertedToIndex >= 0
@@ -71,30 +67,35 @@ export default class Params {
     }
 
     // Return original to avoid problems
-    // with falsy should index bes 0
+    // with falsy should index be 0
     return paramIsValid && param;
   }
 
   _toIndex(paramName) {
-    if (this[paramName]) {
-      const isNumber = parseInt(this[paramName]);
+    if (!this[paramName]) return -1;
 
-      if (!isNumber) {
+    // this[paramName] access convenience methods
+    // on each subclass, e.g., .projectThumbnail
+    // or .headline. parseInt() is run whenever
+    // the param corresponds to a number.
+    const param = this[paramName];
+
+    switch (typeof param) {
+      case 'string':
         return this._searchData.findIndex(
           d => {
-            const normalizedName =
+            const normalizedData =
               this._normalizeParam(
                 d.attributes[paramName]
               );
-            return normalizedName === this[paramName];
+            return normalizedData === param;
           }
         );
-      } else if (isNumber) {
-        return this[paramName] - 1;
-      }
+      case 'number':
+        return parseInt(param) - 1;
+      default:
+        return;
     }
-
-    return -1;
   }
 
   _oneToIndex() {

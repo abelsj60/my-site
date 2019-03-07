@@ -164,15 +164,15 @@ class App extends Component {
 export default withRouter(App);
 
 // copyright?
-// Take pictures, write captions for Arrow, Slingshot, TMMnews
 // ngrok on mobile + Endtest
-// Link length in article/reverie
-// Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
+// Take pictures, write captions for Arrow, Slingshot, TMMnews
 
+// Link length in article/reverie
 // Right or left margin spacing — equalize
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?
+// Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 
 // Hosting?
 // ! https://github.com/rafrex/spa-github-pages

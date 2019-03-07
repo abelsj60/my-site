@@ -16,16 +16,14 @@ export default class JournalismParams extends Params {
   get publication() {
     return this._validateParam(
       this._one,
-      'publication',
-      'text'
+      this._paramNames[0]
     );
   }
 
   get headline() {
     return this._validateParam(
       this._two,
-      'headline',
-      'text'
+      this._paramNames[1]
     );
   }
 

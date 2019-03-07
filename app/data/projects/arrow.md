@@ -9,7 +9,7 @@
     'Arrow caption two',
     'Arrow caption three'
   ],
-  thumbnails: [
+  projectThumbnail: [
     'https://picsum.photos/196/175/?random',
     'https://picsum.photos/197/175/?random',
     'https://picsum.photos/198/175/?random'

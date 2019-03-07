@@ -12,7 +12,7 @@
     'TMMnews caption two',
     'TMMnews caption three'
   ],
-  thumbnails: [
+  projectThumbnail: [
     'https://picsum.photos/202/175/?random',
     'https://picsum.photos/203/175/?random',
     'https://picsum.photos/204/175/?random'

@@ -13,8 +13,7 @@ export default class StoryParams extends Params {
   get title() {
     return this._validateParam(
       this._one,
-      'title',
-      'text'
+      this._paramNames[0]
     );
   }
 

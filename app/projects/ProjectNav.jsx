@@ -101,7 +101,7 @@ export default function ProjectNav(props) {
   } = props;
   const {
     projectName,
-    thumbnails
+    projectThumbnail
   } = project.attributes;
   let isMenu;
 
@@ -112,7 +112,7 @@ export default function ProjectNav(props) {
   return (
     <Group isRight={isRight} menu={isMenu} num={num}>
       <Mapper
-        mapData={thumbnails}
+        mapData={projectThumbnail}
         render={
           (thumb, idx) => {
             const padding = idx < 2;

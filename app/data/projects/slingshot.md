@@ -12,7 +12,7 @@
     'Slingshot caption two',
     'Slingshot caption three'
   ],
-  thumbnails: [
+  projectThumbnail: [
     'https://picsum.photos/199/175/?random',
     'https://picsum.photos/200/175/?random',
     'https://picsum.photos/201/175/?random'
