@@ -1,15 +1,23 @@
 ---
-title: "The sprite's story"
+title: 'True adventure'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 2
 ---
 
-The little sprite watched the boy from afar.
+The boy woke at home the next day. 
 
-She saw many adventures. He grew, became a lawyer, then a journalist. He wrote about digital media and technology, and looked as though he again flew among the stars.
+The gold lamp sat on his bedside table. It glowed slightly purple. "What does that mean," he asked, hoping for a sign.
 
-Before long, dreams carried him to his own company, and a new friend who coded the software he imagined. They built platforms unlike others — one that controlled online networks of interactive video with the specificity and sophistication of NBC, and one that let startup founders choreograph worldwide software demos as if directing a Broadway Show.
+None came. It was just a lamp. 
 
-But, the fairy sighed. The boy forgot the story told about technology, not its capabilites, was what really mattered.
+So he got on with life. He studied, became a lawyer, and then a journalist. He wrote about media, technology, and venture capital for Forbes and others.
 
-That was the magic.
+No matter what he did, he kept the lamp nearby. The boy loved its mystery. "Why do you get brighter when I tell stories," he'd wonder aloud sometimes. 
+
+Best he didn't know. 
+
+Adventure demands the unknown. Thus, there was nothing holding him back the day he met a software developer and began to build two Web platforms. 
+
+One ran interactive video networks, the other, remote software demos, smooth like silk. He pitched them tirelessly. 
+
+But neither took, and he tired of the tale. As he did, the golden lamp's purple glow grew dim. Then he stretched one night, knocking it beneath its table, dark.

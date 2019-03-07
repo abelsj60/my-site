@@ -1,7 +1,7 @@
-import stories from '../data/the-story/index.js';
-import projects from '../data/projects/index.js';
 import articles from '../data/clips/index.js';
+import projects from '../data/projects/index.js';
 import reveries from '../data/reveries/index.js';
+import stories from '../data/the-story/index.js';
 
 export default class Content {
   constructor(type) {

@@ -1,37 +1,47 @@
-import React, { Component } from 'react';
-import { Route, Redirect, Switch } from 'react-router';
-
-import Menu from '../menu/Menu.jsx';
-
-import Location from '../classes/Location.js';
-import Referrer from '../classes/Referrer.js';
 import ComponentData from '../classes/ComponentData.js';
+import Location from '../classes/Location.js';
+import Menu from '../menu/Menu.jsx';
+import React, { Component } from 'react';
+import Referrer from '../classes/Referrer.js';
+import {
+  Route,
+  Redirect,
+  Switch
+} from 'react-router';
+import Scroll from '../classes/Scroll.js';
+import State from '../classes/State.js';
 
 export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
-    const r = new Referrer(props);
-    const l = new Location(r.pathToMatch, props);
+    const referrer = new Referrer(props);
+    const location = new Location(
+      referrer.pathToMatch,
+      props
+    );
 
     this.overflowRef = React.createRef();
 
     this.state = {
-      isNotFound: !l.pathIsJustRight,
-      needsRedirect: l.needsRedirect
+      needsRedirect: location.needsRedirect,
+      isNotFound: !location.pathIsValid
     };
   }
 
   render() {
-    const { needsRedirect, isNotFound } = this.state;
-    let r;
-    let l;
-    let cD;
+    const {
+      isNotFound,
+      needsRedirect
+    } = this.state;
+    let componentData;
+    let location;
+    let referrer;
 
     /** ComponentData contains configured Components
      *
-     * Includes data from and derived from props, e.g.,
-     * all section data ('contentData').
+     * Includes data from props, e.g., section
+     * data (AKA, 'contentData').
      *
      * Note: ContentaLoader unmounts when users swap
      * sections, so there's no need to update
@@ -39,9 +49,15 @@ export default class ContentLoader extends Component {
      */
 
     if (!needsRedirect && !isNotFound) {
-      r = new Referrer(this.props);
-      l = new Location(r.pathToMatch, this.props);
-      cD = new ComponentData(r.location, this.props);
+      referrer = new Referrer(this.props);
+      componentData = new ComponentData(
+        referrer.location,
+        this.props
+      );
+      location = new Location(
+        referrer.pathToMatch,
+        this.props
+      );
     }
 
     return needsRedirect ? (
@@ -51,71 +67,68 @@ export default class ContentLoader extends Component {
     ) : (
       <Switch>
         <Route
-          path={`/${r.location}/menu`}
-          render={() => {
-            return (
-              <Menu {...this.props}>
-                {cD.getMenuComponent(this.props, l.params)}
-              </Menu>
-            );
-          }}
+          exact
+          path={`/${
+            location.type
+          }/menu`}
+          render={
+            () => {
+              if (location.type === 'chapter') {
+                return <Redirect to="/not-found" />;
+              }
+
+              return (
+                <Menu {...this.props}>
+                  {componentData.getMenuContent(
+                    this.props,
+                    location.params
+                  )}
+                </Menu>
+              );
+            }
+          }
         />
         <Route
-          path={`${r.genericPath}`}
-          render={() => {
-            return cD.getSection(this.props, this.overflowRef, l.params);
-          }}
+          path={referrer.finalPath}
+          render={
+            () => componentData.getSection(
+              this.props,
+              this.overflowRef,
+              location.params
+            )
+          }
         />
       </Switch>
     );
   }
 
   componentDidUpdate(prevProps) {
-    const r = new Referrer(this.props);
-    const l = new Location(r.pathToMatch, this.props, prevProps);
+    const referrer = new Referrer(this.props);
+    const location = new Location(
+      referrer.pathToMatch,
+      this.props,
+      prevProps
+    );
 
-    if (l.needsRedirect) {
-      const startRedirect = !this.state.needsRedirect;
+    if (location.needsRedirect) {
+      this.setState({ needsRedirect: true });
+    } else if (location.isSwappingContent) {
+      const state = new State(
+        this.props,
+        location
+      );
 
-      if (startRedirect) {
-        this.setState({ needsRedirect: startRedirect });
-      }
-    } else if (l.isSwappingContent) {
-      let paramOneAsIndex;
-      let paramTwoAsIndex;
+      state.rebuild(
+        this.props.boundHandleClickForBody
+      );
 
-      switch (l.type) {
-        case 'chapter':
-          paramOneAsIndex = l.params.titleToIndex();
-          break;
-        case 'projects':
-          paramOneAsIndex = l.params.projectNameToIndex();
-          paramTwoAsIndex = l.params.projectThumbnailToIndex();
-          break;
-        case 'journalism':
-          paramOneAsIndex = l.params.publicationToIndex();
-          paramTwoAsIndex = l.params.headlineToIndex();
-          break;
-        case 'reverie':
-          paramOneAsIndex = l.params.headlineToIndex();
-          break;
-      }
+      if (this.overflowRef.current) {
+        const scroll = new Scroll(location);
 
-      if (paramOneAsIndex !== -1 && paramTwoAsIndex !== -1) {
-        this.props.boundHandleClickForBody(paramOneAsIndex, paramTwoAsIndex);
-
-        if (this.overflowRef.current.scrollTop !== 0) {
-          const isProjects = l.type === 'projects';
-          const lastIndexForProjectData =
-            prevProps.bodyState.indexForProjectData;
-          const updateScrollTop = isProjects
-            ? paramOneAsIndex !== lastIndexForProjectData
-            : true;
-
-          if (updateScrollTop) {
-            this.overflowRef.current.scrollTop = 0;
-          }
-        }
+        scroll.resetTopIfNeeded(
+          this.overflowRef,
+          prevProps
+        );
       }
     }
   }

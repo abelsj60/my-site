@@ -1,17 +1,29 @@
 ---
-title: 'Magical beginnings'
+title: 'A magic quest'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 1
 ---
 
-Magic was real to the wide-eyed boy.
+The cardboard fort crumbled.
 
-And why not? It was an honest way to delight people.
+A small fairy destroyed it after zipping through the wide-eyed boy's window with all the force of a cannonball. 
 
-So, one night, when a fairy flew through an upstairs window, the boy fearlessly grabbed her hand. She looked at him delightedly, then carried her new friend across a wide blue sea toward home, a magical land of grand adventure. The boy played with his tiny companion for many years, soaring between pirate ships, kicking up sand with powerful Jinns, and racing through unknown lands.
+"Want to find a glowing purple lamp," she asked, beaming as she floated eye-level.
 
-His tales grew more amazing as he went.
+"Of course," he said. "What do I do?"
 
-Short and sweet or long and labored, the boy learned that a good story shaped life as much as life shaped a good story. Magic.
+She laughed the sound of waves crashing ashore. Then she took his hand and flew them over the moon toward home — a land of grand adventure. 
 
-But, one day, the boy felt blue. It was time to go home. His tiny, magical friend was very sad.
+By day, they searched, soaring over pirate ships, chasing Jinns across sun-drenched sands. And, by night, they told amazing stories about their big adventures. 
+
+Late one night, the fairy sighed. "You've grown up," she said. "Time to go home." 
+
+The boy started sniffling.
+
+She smiled kindly, then knocked twice on the floor between them. A door opened. She dove in and flew out with the very thing they'd sought! A golden lamp, etched by purple incantations. 
+
+"The adventure matters most," she told a fast fading boy. Then she read one aloud. 
+
+"By bright day and black night, through tall tale and purple light, rub me twice and release my might, if..." Too late. 
+
+He was out.

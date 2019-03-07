@@ -1,14 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import marked from 'marked';
-import ReactHtmlParser from 'react-html-parser';
-
-import Main from '../primitives/Main.jsx';
-import Right from '../primitives/Right.jsx';
-import Left from '../primitives/Left.jsx';
-import Hed from '../primitives/Hed.jsx';
-import Overflow from '../primitives/Overflow.jsx';
 import ChapterNav from './ChapterNav.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Left from '../primitives/Left.jsx';
+import marked from 'marked';
+import Main from '../primitives/Main.jsx';
+import Overflow from '../primitives/Overflow.jsx';
+import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
+import Right from '../primitives/Right.jsx';
+import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
@@ -51,7 +50,7 @@ const Text = styled.section`
 
   p {
     margin-top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     &:last-child {
       margin-bottom: 0px;
@@ -74,25 +73,32 @@ export default function Story(props) {
     image,
     title
   } = chapter.attributes;
-  const textStatus = !showStoryText ? 'hidden' : undefined;
+  const textStatus = !showStoryText
+    ? 'hidden'
+    : undefined;
 
   return (
     <Main>
       <RestyledLeft as="section" text={textStatus}>
         <ChapterNav {...props} />
-        <RestyledOverflow ref={ref => {
-          overflowRef.current = ref;
-        }}>
+        <RestyledOverflow ref={
+          ref => overflowRef.current = ref
+        }>
           <Hed c="yellow" bC="pink" s="3" b="12">
             {title}
           </Hed>
           <Text>
-            {ReactHtmlParser(marked(chapter.body, { smartypants: true }))}
+            {ReactHtmlParser(
+              marked(
+                chapter.body,
+                { smartypants: true }
+              )
+            )}
           </Text>
         </RestyledOverflow>
       </RestyledLeft>
       <RestyledRight rightMargin>
-        <Image src={image} alt="fantasy illustration" />
+        <Image alt="fantasy illustration" src={image} />
       </RestyledRight>
     </Main>
   );

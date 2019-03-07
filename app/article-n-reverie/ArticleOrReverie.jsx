@@ -1,16 +1,15 @@
+import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Left from '../primitives/Left.jsx';
+import Main from '../primitives/Main.jsx';
+import marked from 'marked';
+import MenuButton from '../shared/MenuButton.jsx';
+import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import styled from 'styled-components';
-import marked from 'marked';
-
-import Hed from '../primitives/Hed.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Main from '../primitives/Main.jsx';
 import Right from '../primitives/Right.jsx';
-import Left from '../primitives/Left.jsx';
-import Overflow from '../primitives/Overflow.jsx';
-import MenuButton from '../shared/MenuButton.jsx';
-import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
+import styled from 'styled-components';
 
 const ReverieText = styled.section`
   p {
@@ -46,9 +45,9 @@ const ArticleText = styled.section`
 export default function ArticleOrReverie(props) {
   const {
     data,
+    location,
     overflowRef,
-    params,
-    location
+    params
   } = props;
   const currentPath = location.pathname.split('/');
   const isReverie = currentPath[1] === 'reverie';
@@ -56,23 +55,25 @@ export default function ArticleOrReverie(props) {
   const index = params.headlineToIndex();
   const article = data[index];
   const {
-    headline,
     date,
-    publication,
-    position
+    headline,
+    position,
+    publication
   } = article.attributes;
-  let reverieOrPublicationAsDek;
   let bylineOrDate;
+  let reverieOrPublicationAsDek;
 
   if (isReverie) {
-    reverieOrPublicationAsDek = 'Reverie';
     bylineOrDate = date;
+    reverieOrPublicationAsDek = 'Reverie';
   } else {
-    reverieOrPublicationAsDek = publication;
     bylineOrDate = `by James Erik Abels | ${position}`;
+    reverieOrPublicationAsDek = publication;
   }
 
-  const ArticleOrReverieText = isReverie ? ReverieText : ArticleText;
+  const ArticleOrReverieText = isReverie
+    ? ReverieText
+    : ArticleText;
 
   return (
     <Main>
@@ -81,20 +82,25 @@ export default function ArticleOrReverie(props) {
       </Left>
       <Right>
         <MenuButton {...props} />
-        <Overflow ref={ref => {
-          overflowRef.current = ref;
-        }}>
-          <Hed as="h2" normal italic s="1.5" c="pink">
+        <Overflow ref={
+          ref => overflowRef.current = ref
+        }>
+          <Hed as="h2" normal italic c="pink" s="1.5" >
             {reverieOrPublicationAsDek}
           </Hed>
           <Hed s="3">
             {headline}
           </Hed>
-          <Graf s="1.3" t="14" b="14">
+          <Graf b="14" s="1.3" t="14">
             {bylineOrDate}
           </Graf>
           <ArticleOrReverieText>
-            {ReactHtmlParser(marked(article.body, { smartypants: true }))}
+            {ReactHtmlParser(
+              marked(
+                article.body,
+                { smartypants: true }
+              )
+            )}
           </ArticleOrReverieText>
         </Overflow>
       </Right>

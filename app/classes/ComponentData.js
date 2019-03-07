@@ -1,85 +1,70 @@
-import React from 'react';
-
-import Story from '../story/Story.jsx';
-import Projects from '../projects/Projects.jsx';
-import ChapterNav from '../story/ChapterNav.jsx';
-import DesktopProjectNav from '../projects/DesktopProjectNav.jsx';
 import ArticleOrReverie from '../article-n-reverie/ArticleOrReverie.jsx';
 import ArticleOrReverieNav from '../article-n-reverie/ArticleOrReverieNav.jsx';
-
 import Content from './Content.js';
+import DesktopProjectNav from '../projects/DesktopProjectNav.jsx';
+import Projects from '../projects/Projects.jsx';
+import React from 'react';
+import Story from '../story/Story.jsx';
 
 export default class ComponentData {
   constructor(type) {
-    const c = new Content(type);
+    const content = new Content(type);
 
     this._type = type;
-    this._contentData = c.getContentData();
+    this._contentData = content.getContentData();
   }
 
   getSection(props, ref, params) {
     const type = this._type;
     const contentData = this._contentData;
 
+    let Section;
+
     switch (type) {
       case 'chapter':
-        return (
-          <Story
-            {...props}
-            overflowRef={ref}
-            data={contentData}
-            params={params}
-          />
-        );
-      case 'projects':
-        return (
-          <Projects
-            {...props}
-            overflowRef={ref}
-            data={contentData}
-            params={params}
-          />
-        );
+        Section = Story;
+        break;
       case 'journalism':
-        return (
-          <ArticleOrReverie
-            {...props}
-            overflowRef={ref}
-            data={contentData}
-            params={params}
-          />
-        );
+        Section = ArticleOrReverie;
+        break;
+      case 'projects':
+        Section = Projects;
+        break;
       case 'reverie':
-        return (
-          <ArticleOrReverie
-            {...props}
-            overflowRef={ref}
-            data={contentData}
-            params={params}
-          />
-        );
+        Section = ArticleOrReverie;
+        break;
       default:
         return undefined;
     }
+
+    return <Section
+      {...props}
+      data={contentData}
+      overflowRef={ref}
+      params={params}
+    />;
   }
 
-  getMenuComponent(props, params) {
+  getMenuContent(props, params) {
     const type = this._type;
     const contentData = this._contentData;
 
+    let MenuContent;
+
     switch (type) {
-      case 'chapter':
-        return <ChapterNav {...props} data={contentData} params={params} />;
-      case 'projects':
-        return (
-          <DesktopProjectNav {...props} data={contentData} params={params} />
-        );
       case 'journalism':
-        return <ArticleOrReverieNav {...props} data={contentData} params={params} />;
+        MenuContent = ArticleOrReverieNav;
+        break;
+      case 'projects':
+        MenuContent = DesktopProjectNav;
+        break;
       case 'reverie':
-        return <ArticleOrReverieNav {...props} data={contentData} params={params} />;
+        MenuContent = ArticleOrReverieNav;
+        break;
       default:
         return undefined;
     }
+
+    return <MenuContent {...props} data={contentData} params={params} />;
   }
 }

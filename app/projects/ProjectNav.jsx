@@ -1,8 +1,7 @@
+import Mapper from '../shared/Mapper.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
-
 import StyledLink from '../primitives/StyledLink.jsx';
-import Mapper from '../shared/Mapper.jsx';
 
 const Group = styled.ul`
   display: flex;
@@ -14,8 +13,8 @@ const Group = styled.ul`
   list-style-type: none;
 
   ${p =>
-    p.menu &&
-    css`
+    p.menu
+    && css`
       margin-bottom: ${p.num !== 2 ? '15px' : undefined};
       padding-bottom: 0;
       max-width: 100%;
@@ -23,13 +22,13 @@ const Group = styled.ul`
     `};
 
   ${p =>
-    p.isRight &&
-    css`
+    p.isRight
+    && css`
       border-bottom: #6e7dab solid 0.5px;
 
       @media (min-width: 672px) {
         flex-direction: column;
-        margin-top: 28px;
+        margin-top: 26px;
         padding: 0;
         border: 0;
       }
@@ -45,7 +44,7 @@ const Group = styled.ul`
       @media (min-width: 1026px) {
         flex-direction: column;
         justify-content: flex-start;
-        margin-top: 28px;
+        margin-top: 26px;
         padding: 0;
         border: 0;
       }
@@ -93,16 +92,16 @@ const Highlighter = styled.div`
 
 export default function ProjectNav(props) {
   const {
-    num,
-    project,
-    isRight,
-    isActive,
+    appState,
     indexForProjectPics,
-    appState
+    isActive,
+    isRight,
+    num,
+    project
   } = props;
   const {
-    thumbnails,
-    projectName
+    projectName,
+    thumbnails
   } = project.attributes;
   let isMenu;
 
@@ -114,24 +113,32 @@ export default function ProjectNav(props) {
     <Group isRight={isRight} menu={isMenu} num={num}>
       <Mapper
         mapData={thumbnails}
-        render={(thumb, idx) => {
-          const padding = idx < 2;
-          const thumbnailNumber = idx + 1;
-          let highlightActiveThumbnail;
+        render={
+          (thumb, idx) => {
+            const padding = idx < 2;
+            const thumbnailNumber = idx + 1;
+            let highlightActiveThumbnail;
 
-          if (isMenu && isActive && indexForProjectPics === idx) {
-            highlightActiveThumbnail = true;
+            if (
+              isMenu
+              && isActive
+              && indexForProjectPics === idx
+            ) {
+              highlightActiveThumbnail = true;
+            }
+
+            return (
+              <Item key={idx} isRight={isRight} padding={padding}>
+                <RestyledLink to={`/projects/${
+                  projectName.toLowerCase()
+                }/${thumbnailNumber}`}>
+                  <Image alt={`Thumbnail ${thumbnailNumber}`} src={thumb} />
+                  {highlightActiveThumbnail && <Highlighter />}
+                </RestyledLink>
+              </Item>
+            );
           }
-
-          return (
-            <Item key={idx} isRight={isRight} padding={padding}>
-              <RestyledLink to={`/projects/${projectName.toLowerCase()}/${thumbnailNumber}`}>
-                <Image src={thumb} alt={`Thumbnail ${thumbnailNumber}`} />
-                {highlightActiveThumbnail && <Highlighter />}
-              </RestyledLink>
-            </Item>
-          );
-        }}
+        }
       />
     </Group>
   );

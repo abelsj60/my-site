@@ -1,15 +1,25 @@
 ---
-title: 'A new adventure'
+title: 'The reality glitch'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 3
 ---
 
-The wee fairy watched the boy turn over every stone, forever telling better tales about his software.
+One morning, the boy's room twinkled.
 
-And while many listened, the boy finally decided it was time for something new.
+Dust, scattered by a broom, was catching the sun's pale winter light. The quiet was pierced by the hollow ring of the broom on metal. The boy knelt to pick it up.
 
-The fairy danced for joy when he decided to become a software developer. The boy applied to a coding bootcamp in New York, where he was given a book full of practical magic. It held powerful, unintelligible words — React, Express, Node.js, and Sequelize.
+"I forgot about you," he said, tracing the lamp's purple etchings with a finger.
 
-But the school, Fullstack Academy, taught him what they meant and how to write spells with them. It taught how to think about algorithms, gel with development teams, and learn about new software technologies on his own.
+Reality glitched. 
 
-It was intense. The school reminded the boy of riding with Aslan into battle. The boy felt new fire. His friend swooned.
+Clear red rays shot between sparkles of dust, drawing a giant Jinn into view. It scowled at the dark gold lamp. 
+
+"What are you doing," it screamed.
+
+The Jinn leaned forward, stabbing at the boy with crisp blue sparks. "You've lost my secret," it roared. All seemed lost.
+
+Then the tick tock of time carried a small fairy through the improbable scene. She yelled violently at the Jinn, who shrank from her sight, then turned to speak.
+
+But the Jinn, flushed and angry, tried to slam hands around her, waking the boy with thunder. A coding school website glowed beside the darkened lamp.
+
+Fate seemed sealed.

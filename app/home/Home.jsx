@@ -1,11 +1,10 @@
+import Button from '../shared/Button.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Main from '../primitives/Main.jsx';
+import Parallax from '../shared/Parallax.jsx';
 import React from 'react';
 import styled from 'styled-components';
-
-import Main from '../primitives/Main.jsx';
-import Hed from '../primitives/Hed.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Button from '../shared/Button.jsx';
-import Parallax from '../shared/Parallax.jsx';
 
 const RestyledMain = styled(Main)`
   justify-content: space-between;
@@ -86,43 +85,55 @@ export default function Home(props) {
     showBusinessCard,
     showLegalTerms
   } = props.appState;
-  const { boundHandleClickForApp } = props;
-  const travelButtonText = inCity ? 'Home' : 'Away';
+  const {
+    boundHandleClickForApp
+  } = props;
+  const travelButtonText = inCity
+    ? 'Home'
+    : 'Away';
 
   return (
     <RestyledMain>
       <Parallax
-        render={renderProps => (
-          <NameTag
-            ref={el => (renderProps.scene = el)}
-            tempContentIsOn={showBusinessCard || showLegalTerms}
-          >
-            <RestyledHed s="6.5" c="yellow" data-depth=".4">
-              JamesAbels
-            </RestyledHed>
-            <RestyledGraf s="1.7" c="pink" t="93" data-depth=".4">
-              narrative coding and other adventures
-            </RestyledGraf>
-          </NameTag>
-        )}
+        render={
+          renderProps => (
+            <NameTag
+              ref={
+                el => {
+                  renderProps.scene = el;
+                }
+              }
+              tempContentIsOn={showBusinessCard || showLegalTerms}
+            >
+              <RestyledHed c="yellow" data-depth=".4" s="6.5">
+                JamesAbels
+              </RestyledHed>
+              <RestyledGraf c="pink" data-depth=".4" s="1.7" t="93">
+                narrative coding and other adventures
+              </RestyledGraf>
+            </NameTag>
+          )
+        }
       />
       <PictureBox>
-        <BoyInForeground src="/foreground.png" alt="the boy looks out" />
+        <BoyInForeground alt="the boy looks out" src="/foreground.png" />
         <Portal />
         <FantasyAsBackground
           alt="the boy builds a fantasy world"
-          src="/background-fantasy.png"
           inCity={inCity}
+          src="/background-fantasy.png"
         />
         <CityAsBackground
           alt="the boy sees a city view"
-          src="/background-city.png"
           inCity={inCity}
+          src="/background-city.png"
         />
       </PictureBox>
       <TravelButton
         className="travel-button"
-        clickFunction={() => boundHandleClickForApp('swapHomePageImage')}
+        clickFunction={
+          () => boundHandleClickForApp('swapHomePageImage')
+        }
         tempContentIsOn={showBusinessCard || showLegalTerms}
         text={travelButtonText}
       />

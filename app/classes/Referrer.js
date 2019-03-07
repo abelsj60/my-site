@@ -1,26 +1,33 @@
 export default class Referrer {
   constructor(props) {
     if (props.location === undefined) {
-      throw 'Caller must offer props.location.';
+      throw new Error(
+        'Caller must offer props.location.'
+      );
     }
 
     this.path = props.location.pathname;
-    this.location =
-      props.location.pathname.split('/')[1] !== ''
-        ? props.location.pathname.split('/')[1]
-        : 'home';
-    this.genericPath = this._loadExactPath();
+    this.location = this.getLocation(props);
+    this.finalPath = this._loadFinalPath();
     this.pathToMatch = this._loadPathToMatch();
   }
 
   _loadPathToMatch() {
     switch (this.location) {
+      case 'about':
+        return '/about';
       case 'chapter':
         return '/chapter/:title?';
-      case 'projects':
-        return '/projects/:projectName?/:projectThumbnail?';
+      case 'home':
+        return '/';
       case 'journalism':
         return '/journalism/:publication?/:headline?';
+      case 'projects':
+        return '/projects/:projectName?/:projectThumbnail?';
+      case 'i':
+        return '/i';
+      case 'not-found':
+        return '/not-found';
       case 'reverie':
         return '/reverie/:headline?';
       default:
@@ -28,7 +35,7 @@ export default class Referrer {
     }
   }
 
-  _loadExactPath() {
+  _loadFinalPath() {
     switch (this.location) {
       case 'chapter':
         return '/chapter/:title';
@@ -50,7 +57,7 @@ export default class Referrer {
     return !isHome ? locationArray[1] : 'home';
   }
 
-  checkForMenu(props) {
+  isMenu(props) {
     const locationArray = props.location.pathname.split('/');
     const indexOfMenu = locationArray.indexOf('menu');
 

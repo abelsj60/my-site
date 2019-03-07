@@ -1,15 +1,17 @@
-import React, { Fragment, Component } from 'react';
-import { withRouter } from 'react-router';
-import { css, createGlobalStyle } from 'styled-components';
-
 import Body from './Body.jsx';
-import Footer from './header-footer/Footer.jsx';
-import Header from './header-footer/Header.jsx';
-import Location from './classes/Location.js';
-import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
-
+import {
+  css,
+  createGlobalStyle
+} from 'styled-components';
 import EventHandling from './classes/EventHandling.js';
+import Footer from './header-footer/Footer.jsx';
+// import ReactGA from 'react-ga';
+import Header from './header-footer/Header.jsx';
+import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
+import Location from './classes/Location.js';
+import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
+import { withRouter } from 'react-router';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -36,8 +38,8 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
 
     ${p =>
-    p.home &&
-      css`
+    p.home
+      && css`
         width: 100%;
         position: fixed;
       `};
@@ -48,23 +50,27 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const r = new Referrer(props);
-    const location = r.getLocation(props);
+    const referrer = new Referrer(props);
+    const location = referrer.location;
+    // ReactGA.initialize('tbd');
+    // ReactGA.pageview(window.location.pathname);
 
     this.state = {
-      showStoryText: true,
-      showLegalTerms: false,
-      showBusinessCard: false,
       currentCaller: location,
-      lastCaller: location !== 'reverie' ? location : 'home',
-      isMenu: r.checkForMenu(props),
-      inCity: false
+      lastCaller: location !== 'reverie'
+        ? location
+        : 'home',
+      inCity: false,
+      isMenu: referrer.isMenu(props),
+      showBusinessCard: false,
+      showLegalTerms: false,
+      showStoryText: true
     };
   }
 
   render() {
-    const l = new Location('/', this.props);
-    const homeIsActive = l.type === 'home';
+    const location = new Location('/', this.props);
+    const homeIsActive = location.type === 'home';
 
     const eForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eForApp.boundHandleClick;
@@ -89,22 +95,20 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const l = new Location('/', this.props, prevProps);
+    const location = new Location(
+      '/',
+      this.props,
+      prevProps
+    );
 
-    if (l.justChanged) {
+    if (location.justChanged) {
       const {
+        isMenu,
         showBusinessCard,
         showLegalTerms,
-        showStoryText,
-        isMenu
+        showStoryText
       } = this.state;
-
-      const r = new Referrer(prevProps);
-
-      const currentCaller = l.type;
-      const lastCaller = l.lastType;
-      const routeIsReloading = currentCaller === 'i' || lastCaller === 'i';
-
+      const referrer = new Referrer(prevProps);
       const eForApp = new EventHandling('app', this);
       const handleClickForApp = eForApp.boundHandleClick;
 
@@ -120,12 +124,30 @@ class App extends Component {
         handleClickForApp('toggleStoryText');
       }
 
-      if (!routeIsReloading) {
-        handleClickForApp('setCallers', currentCaller, lastCaller);
+      if (isMenu !== referrer.isMenu(this.props)) {
+        handleClickForApp('toggleMenu');
       }
 
-      if (isMenu !== r.checkForMenu(this.props)) {
-        handleClickForApp('toggleMenu');
+      /** Don't update callers on reload */
+      if (!location.isReloading) {
+        handleClickForApp(
+          'setCallers',
+          location.type,
+          location.lastType
+        );
+      }
+
+      if (
+        // '/chapter', '/projects', etc:
+        !location.isTopLevel
+        // lastCaller was not '/i':
+        && !location.isCalledAfterReload
+        // Restate route moves the window to '/i', then
+        // re-renders away from it (but the window stays
+        // on '/i' until React pushes us away from that):
+        && window.location.pathname !== '/i'
+      ) {
+        // ReactGA.pageview(window.location.pathname);
       }
     }
   }
@@ -133,13 +155,17 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Story edit
-// Add copyright to articles?
+// copyright?
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
+// ngrok on mobile + Endtest
+// Link length in article/reverie
+// Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
+
+// Right or left margin spacing — equalize
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?
-// Hosting?
 
-// https://www.tutorialspoint.com/css/css_animation.htm
-// https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/
+// Hosting?
+// ! https://github.com/rafrex/spa-github-pages
+// ! http://spa-github-pages.rafrex.com/

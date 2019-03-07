@@ -1,12 +1,11 @@
-import React from 'react';
-import marked from 'marked';
-import ReactHtmlParser from 'react-html-parser';
-
+import bio from '../data/about/about.md';
+import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
-import Hed from '../primitives/Hed.jsx';
-
-import bio from '../data/about/about.md';
+import marked from 'marked';
+import React from 'react';
+// import ReactGA from 'react-ga';
+import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`
@@ -57,11 +56,27 @@ export default function About() {
           <Hed c="pink" s="3">
             About
           </Hed>
-          <ExternalLink href="https://www.linkedin.com/jea" target="_blank">
+          <ExternalLink href="https://www.linkedin.com/in/jameserikabels" target="_blank">
+            {
+              /*<ReactGA.OutboundLink
+              eventLabel="toLinkedIn"
+              to="https://www.linkedin.com/in/jameserikabels"
+              target="_blank">*/
+            }
             <Icon />
+            {
+              /*</ReactGA.OutboundLink>*/
+            }
           </ExternalLink>
         </Heading>
-        <Text>{ReactHtmlParser(marked(bio.body, { smartypants: true }))}</Text>
+        <Text>
+          {ReactHtmlParser(
+            marked(
+              bio.body,
+              { smartypants: true }
+            )
+          )}
+        </Text>
       </Right>
     </Main>
   );

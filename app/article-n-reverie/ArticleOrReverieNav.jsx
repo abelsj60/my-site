@@ -1,11 +1,10 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-
-import StyledLink from '../primitives/StyledLink.jsx';
-import UnorderedList from '../primitives/UnorderedList.jsx';
+import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
-import Graf from '../primitives/Graf.jsx';
+import React from 'react';
+import styled, { css } from 'styled-components';
+import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
@@ -24,8 +23,8 @@ const GrafAsHed = styled(Graf)`
   font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
 
   ${p =>
-    !p.menu &&
-    css`
+    !p.menu
+    && css`
       overflow: hidden;
       text-overflow: ellipsis;
       width: 300px;
@@ -35,15 +34,16 @@ const GrafAsHed = styled(Graf)`
 
 export default function ArticleOrReverieNav(props) {
   const {
-    data,
-    params,
-    bodyState,
     appState,
-    location
+    bodyState,
+    data,
+    location,
+    params
   } = props;
-  const { isMenu } = appState;
+  const {
+    isMenu
+  } = appState;
   const currentPath = location.pathname.split('/');
-
   const isReverie = currentPath[1] === 'reverie';
   let index;
 
@@ -64,47 +64,58 @@ export default function ArticleOrReverieNav(props) {
     <StyledUL menu={isMenu}>
       <Mapper
         mapData={data}
-        render={(articleOrReverie, idx) => {
-          const {
-            publication,
-            headline,
-            date
-          } = articleOrReverie.attributes;
+        render={
+          (articleOrReverie, idx) => {
+            const {
+              date,
+              headline,
+              publication
+            } = articleOrReverie.attributes;
 
-          const normalizedHedFromItem = normalize(headline);
-          const dateOrPublicationFromItem = !isReverie ? publication : date;
+            const normalizedHedFromItem = normalize(headline);
+            const dateOrPublicationFromItem = !isReverie
+              ? publication
+              : date;
 
-          const linkIsActive = normalizedCurrentHed === normalizedHedFromItem;
-          const articleLink = isReverie
-            ? `/reverie/${normalizedHedFromItem}`
-            : `/journalism/${normalize(
-              dateOrPublicationFromItem
-            )}/${normalizedHedFromItem}`;
+            const linkIsActive =
+              normalizedCurrentHed === normalizedHedFromItem;
+            const articleLink = isReverie
+              ? `/reverie/${
+                normalizedHedFromItem
+              }`
+              : `/journalism/${
+                normalize(
+                  dateOrPublicationFromItem
+                )
+              }/${
+                normalizedHedFromItem
+              }`;
 
-          return (
-            <li key={idx}>
-              <StyledLink to={articleLink}>
-                <GrafAsDek
-                  italic
-                  s="1.3"
-                  b="2"
-                  menu={isMenu}
-                  link={linkIsActive}
-                >
-                  {dateOrPublicationFromItem}
-                </GrafAsDek>
-                <GrafAsHed
-                  t="0"
-                  b="10"
-                  menu={isMenu}
-                  link={linkIsActive}
-                >
-                  {headline}
-                </GrafAsHed>
-              </StyledLink>
-            </li>
-          );
-        }}
+            return (
+              <li key={idx}>
+                <StyledLink to={articleLink}>
+                  <GrafAsDek
+                    italic
+                    b="2"
+                    link={linkIsActive}
+                    menu={isMenu}
+                    s="1.3"
+                  >
+                    {dateOrPublicationFromItem}
+                  </GrafAsDek>
+                  <GrafAsHed
+                    b="10"
+                    link={linkIsActive}
+                    menu={isMenu}
+                    t="0"
+                  >
+                    {headline}
+                  </GrafAsHed>
+                </StyledLink>
+              </li>
+            );
+          }
+        }
       />
     </StyledUL>
   );

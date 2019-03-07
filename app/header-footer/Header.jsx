@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-
-import StyledLink from '../primitives/StyledLink.jsx';
-import Mapper from '../shared/Mapper.jsx';
-
-import Location from '../classes/Location.js';
-import Referrer from '../classes/Referrer.js';
 import EventHandling from '../classes/EventHandling.js';
+import Location from '../classes/Location.js';
+import Mapper from '../shared/Mapper.jsx';
+import React, { Component } from 'react';
+import Referrer from '../classes/Referrer.js';
+import styled, { css } from 'styled-components';
+import StyledLink from '../primitives/StyledLink.jsx';
 
 const data = [
   { name: 'The story', path: '/chapter' },
@@ -66,8 +64,8 @@ const Nav = styled.nav`
   border-bottom: ${p => (p.home ? '.5px solid white' : undefined)};
 
   ${p =>
-    p.menu &&
-    css`
+    p.menu
+    && css`
       flex: 1;
       display: block;
       margin-left: 32px;
@@ -109,34 +107,37 @@ export default class Header extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    const l = new Location('/', this.props, prevProps);
-
-    if (l.justChanged && this.timeoutId !== undefined) {
-      const eForApp = new EventHandling('header', this);
-      const handleClickForHeader = eForApp.boundHandleClick;
-
-      handleClickForHeader();
-    }
-  }
-
   render() {
-    const { appState } = this.props;
-    const { currentCaller } = appState;
+    const {
+      appState
+    } = this.props;
+    const {
+      currentCaller
+    } = appState;
     const menuIsActive = this.state.menuIsOpen;
     const homeIsActive = currentCaller === 'home';
-    const togglerSource = `/menu-${menuIsActive ? 'open' : 'closed'}-icon.svg`;
+    const togglerSource = `/menu-${
+      menuIsActive
+        ? 'open'
+        : 'closed'
+    }-icon.svg`;
 
-    const r = new Referrer(this.props);
+    const referrer = new Referrer(this.props);
+    const eForHeader = new EventHandling(
+      'header',
+      this
+    );
 
-    const eForHeader = new EventHandling('header', this);
     const handleClickForHeader = eForHeader.boundHandleClick;
 
     return (
       <Container home={homeIsActive}>
         <NameAsLink
+          hide={
+            ((menuIsActive || homeIsActive) && 'active')
+            || undefined
+          }
           to={'/'}
-          hide={((menuIsActive || homeIsActive) && 'active') || undefined}
         >
           James Abels
         </NameAsLink>
@@ -147,22 +148,31 @@ export default class Header extends Component {
           <NavList>
             <Mapper
               mapData={data}
-              render={(link, idx) => {
-                const pathIsActive = link.path.includes(r.location);
+              render={
+                (link, idx) => {
+                  const pathIsActive =
+                    link.path.includes(referrer.location);
 
-                return (
-                  <li key={idx}>
-                    <RestyledLink
-                      active={(pathIsActive && 'active') || undefined}
-                      home={(homeIsActive && 'active') || undefined}
-                      num={idx}
-                      to={link.path}
-                    >
-                      {link.name}
-                    </RestyledLink>
-                  </li>
-                );
-              }}
+                  return (
+                    <li key={idx}>
+                      <RestyledLink
+                        active={
+                          (pathIsActive && 'active')
+                        || undefined
+                        }
+                        home={
+                          (homeIsActive && 'active')
+                        || undefined
+                        }
+                        num={idx}
+                        to={link.path}
+                      >
+                        {link.name}
+                      </RestyledLink>
+                    </li>
+                  );
+                }
+              }
             />
           </NavList>
         </Nav>
@@ -170,11 +180,29 @@ export default class Header extends Component {
           home={homeIsActive}
           menu={menuIsActive}
           src={togglerSource}
-          onClick={() => {
-            handleClickForHeader();
-          }}
+          onClick={
+            () => handleClickForHeader()
+          }
         />
       </Container>
     );
+  }
+
+  componentDidUpdate(prevProps) {
+    const location = new Location(
+      '/',
+      this.props,
+      prevProps
+    );
+
+    if (
+      location.justChanged &&
+      this.timeoutId !== undefined
+    ) {
+      const eForApp = new EventHandling('header', this);
+      const handleClickForHeader = eForApp.boundHandleClick;
+
+      handleClickForHeader();
+    }
   }
 }

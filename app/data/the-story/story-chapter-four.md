@@ -1,13 +1,25 @@
 ---
-title: 'Forever magical'
+title: 'Impractical magic'
 image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 4
 ---
 
-One night, the pixie swooped into the boy's room.
+The Six train sped through darkness.
 
-He was sleeping soundly beneath her. She flitted above him head to toe, twinkling dust trailing beneath her.
+The boy climbed out at Wall Street, and snaked through back alleys to Hanover Square. Magicians thronged the way.
 
-The boy woke with a sneaze and looked out his open window. Dawn was stretching across the sky, drenching the city's spires in warm, bright light. As he got ready, the boy felt as though he'd been with an old friend all night, casting spells and telling tales. He grabbed his laptop and headed out. There were stories to shape, platforms to build, and magic to make.
+"Coding school," he said. 
 
-High above, a small figure smiled and cheered. There went a boy who still believed in magic. Then she turned toward home and sailed on for new adventure.
+A white tower soared skyward. The boy logged into practical magic 11 flights up. Code covered computer screens across the floor. While smart and austere, the logic lacked something important.
+
+"Purpose," he thought.
+
+Pixelated colors flooded the floor, stirring memories of impractical magic. "Software is a story," he said, as a blur zipped across the horizon. The city and its spires were drenched in warm autumn light. 
+
+"Code the way to tell it," he added as he wrote a small recursive loop to screen.
+
+That night, a fairy darted inside the boy's room as he slept. She skid to a swift stop on the dark lamp beside him. "He does believe," she cried down its spout. 
+
+An angry blue bolt shot out. 
+
+Then the gold grew warm and took on a purple glow...but, that's another story.

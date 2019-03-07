@@ -1,5 +1,5 @@
-import React from 'react';
 import Parallax from '../shared/Parallax.jsx';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Container = styled.section`
@@ -13,8 +13,8 @@ const Container = styled.section`
   background-color: rgba(0, 0, 0, 0.7);
 
   ${p =>
-    p.home &&
-    css`
+    p.home
+    && css`
       z-index: 1;
       background-color: rgba(255, 231, 76, 0.1);
       background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
@@ -68,14 +68,17 @@ export default function LegalTermsOrBizCard(props) {
   return (
     <Container home={homeIsActive}>
       <Parallax
-        render={renderProps => (
-          <InnerContainer ref={el => (renderProps.scene = el)} home={homeIsActive}>
-            <Card home={homeIsActive} data-depth="1">
-              <Graf businessCard={showBusinessCard}>{text}</Graf>
-              {showBusinessCard && <InnerBorder />}
-            </Card>
-          </InnerContainer>
-        )}
+        render={
+          renderProps => (
+            <InnerContainer home={homeIsActive} ref={
+              el => (renderProps.scene = el)
+            }>
+              <Card data-depth="1" home={homeIsActive}>
+                <Graf businessCard={showBusinessCard}>{text}</Graf>
+                {showBusinessCard && <InnerBorder />}
+              </Card>
+            </InnerContainer>
+          )}
       />
     </Container>
   );

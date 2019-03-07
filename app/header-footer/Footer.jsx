@@ -1,9 +1,8 @@
+import Button from '../shared/Button.jsx';
+import Graf from '../primitives/Graf.jsx';
 import React from 'react';
 import styled from 'styled-components';
-
-import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
-import Button from '../shared/Button.jsx';
 
 const Container = styled.footer`
   background-color: ${p => (!p.home ? 'white' : undefined)};
@@ -54,52 +53,72 @@ const TextBox = styled.div`
 `;
 
 export default function FooterContainer(props) {
-  const { boundHandleClickForApp, appState } = props;
   const {
+    boundHandleClickForApp,
+    appState
+  } = props;
+  const {
+    currentCaller,
+    lastCaller,
     showBusinessCard,
     showLegalTerms,
     showStoryText,
-    currentCaller,
-    lastCaller
   } = appState;
 
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
 
+  // Remember: home is '/', not '/home'
   const whereItStarted =
-    lastCaller !== 'home' && lastCaller !== 'i' ? `/${lastCaller}` : '/'; // home is '/', not '/home'
-  const linkForReverie = isReverie ? whereItStarted : '/reverie';
+    lastCaller !== 'home'
+    && lastCaller !== 'i'
+      ? `/${lastCaller}`
+      : '/';
+  const linkForReverie = isReverie
+    ? whereItStarted
+    : '/reverie';
 
   return (
     <Container home={isHome} story={isStory}>
       <Line home={isHome} />
       <StoryButton
         active={showStoryText}
+        clickFunction={
+          () => boundHandleClickForApp('toggleStoryText')
+        }
         className="story-button"
-        clickFunction={() => boundHandleClickForApp('toggleStoryText')}
         conditional={true}
         show={isStory}
-        text={showStoryText ? 'Hide story' : 'Show story'}
+        text={
+          showStoryText
+            ? 'Hide story'
+            : 'Show story'
+        }
       />
       <TextBox>
         <RestyledLink
-          active={(isReverie && 'active') || undefined}
+          active={
+            (isReverie && 'active')
+            || undefined
+          }
           to={linkForReverie}
         >
           Reverie
         </RestyledLink>
         <RestyledGraf
           active={showBusinessCard}
-          onClick={() => {
-            boundHandleClickForApp('toggleBusinessCard');
-          }}
+          onClick={
+            () => boundHandleClickForApp('toggleBusinessCard')
+          }
         >
           Contact
         </RestyledGraf>
         <RestyledGraf
           active={showLegalTerms}
-          onClick={() => boundHandleClickForApp('toggleLegalTerms')}
+          onClick={
+            () => boundHandleClickForApp('toggleLegalTerms')
+          }
         >
           Legal
         </RestyledGraf>

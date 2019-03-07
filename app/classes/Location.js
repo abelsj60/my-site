@@ -1,106 +1,114 @@
-import { matchPath } from 'react-router';
-import StoryParams from './StoryParams';
-import ProjectsParams from './ProjectsParams';
 import JournalismParams from './JournalismParams';
+import { matchPath } from 'react-router';
 import Params from './Params';
-
+import ProjectsParams from './ProjectsParams';
 import Referrer from './Referrer.js';
 import ReverieParams from './ReverieParams';
+import StoryParams from './StoryParams';
 
 export default class Location {
   constructor(pathToMatch, props, prevProps) {
     if (props.location === undefined) {
-      throw new Error('The Location class requires props.location.');
+      throw new Error(
+        'The Location class requires props.location.'
+      );
     }
 
-    const r = new Referrer(props);
+    const referrer = new Referrer(props);
 
-    this._pathToMatch = pathToMatch || '';
+    this._pathToMatch = pathToMatch;
     this._userPath = props.location.pathname;
-    this._lastPath = prevProps && prevProps.location.pathname;
-    this._actualLengthOfPath = this._userPath
-      .split('/')
-      .filter(p => p !== '').length;
-    this._expectedLengthOfPath = this._pathToMatch.split('/').length;
-    this._matchPath = matchPath(this._userPath, { path: pathToMatch });
+    this._lastPath = prevProps
+      && prevProps.location.pathname;
+    this._actualLengthOfPath =
+      this._userPath.split('/')
+        .filter(p => p !== '')
+        .length; // Filter out empty lengths
+    this._expectedLengthOfPath =
+      this._pathToMatch.split('/')
+        .length; // Templates, so no need to filter for empty parts
+    this._matchPath = matchPath(
+      this._userPath,
+      { path: this._pathToMatch }
+    ); // Normalizes use of params, ensuring all values
 
-    if (this._lastPath) {
-      this.lastType = r.getLocation(prevProps);
-    }
-
-    this.type = r.getLocation(props);
-    this.isExact = this._matchPath && this._matchPath.isExact;
-    this.params = this._loadParams(props, prevProps);
+    this.lastType = this._lastPath
+      && referrer.getLocation(prevProps);
+    this.type = referrer.location;
+    this.isExact = this._matchPath
+      && this._matchPath.isExact;
+    this.params = this._loadParams(prevProps);
   }
 
-  _loadParams(props, prevProps) {
-    let paramValues;
+  _loadParams(prevProps) {
     const type = this.type;
-    const propsHaveParams = Object.keys(props.match.params).length > 0;
+    const paramValues = this._matchPath.params;
+    let ParamsClass;
 
-    if (propsHaveParams) {
-      paramValues = props.match.params;
-    } else if (this._pathToMatch && this._pathToMatch !== '') {
-      paramValues = this._matchPath.params;
-    } else {
-      paramValues = { fakeParam: undefined };
-    }
-
+    // Select param class
     switch (type) {
       case 'chapter':
-        return new StoryParams(type, paramValues, prevProps);
-      case 'projects':
-        return new ProjectsParams(type, paramValues, prevProps);
+        ParamsClass = StoryParams;
+        break;
       case 'journalism':
-        return new JournalismParams(type, paramValues, prevProps);
+        ParamsClass = JournalismParams;
+        break;
+      case 'projects':
+        ParamsClass = ProjectsParams;
+        break;
       case 'reverie':
-        return new ReverieParams(type, paramValues, prevProps);
+        ParamsClass = ReverieParams;
+        break;
       default:
-        return new Params(type, paramValues, prevProps);
+        ParamsClass = Params;
+        break;
     }
+
+    return new ParamsClass(
+      type,
+      paramValues,
+      prevProps
+    );
   }
 
   get _pathIsShort() {
     return this._actualLengthOfPath < this._expectedLengthOfPath;
   }
 
-  get _pathIsTooLong() {
+  get _pathIsLong() {
     return this._actualLengthOfPath > this._expectedLengthOfPath;
   }
 
-  get pathIsJustRight() {
-    if (this.params.isMenu && this._pathIsShort) {
-      return true;
-    } else if (this.isExact && !this._pathIsTooLong) {
-      return this.params.hasExpectedNumber;
-    }
+  get pathIsValid() {
+    if (this.params.isMenu) return true;
 
-    return false;
+    return this.isExact
+      && !this._pathIsLong
+      && this.params.hasExpectedNumber;
   }
 
   get needsRedirect() {
-    if (!this.pathIsJustRight) {
-      const firstParam = this.params.paramNames[0];
-      const firstParamIsValid = !!this.params[firstParam];
-      const firstParamIsUndefined =
-        this.params.undefined.filter(p => {
-          return p === firstParam;
-        }).length > 0;
-      const secondParamIsUndefined =
-        this.params.undefined.filter(p => {
-          const paramTwo = this.params.paramNames[1];
-          return p === paramTwo;
-        }).length > 0;
+    if (this.pathIsValid) return false;
 
-      if (
-        firstParamIsUndefined ||
-        (firstParamIsValid && secondParamIsUndefined)
-      ) {
-        return true;
-      }
-    }
+    /** Return statement
+     *
+     * 1. A single param is tested on its own
+     * 2. Two params are tested by checking if the first is
+     * found, meaning the request is valid, and if the
+     * second is undefined, meaning we need a redirect
+    */
 
-    return false;
+    const paramOneIsUndefined =
+      this.params.areUndefined.includes(
+        this.params.paramNames[0]
+      );
+    const paramTwoIsUndefined =
+      this.params.areUndefined.includes(
+        this.params.paramNames[1]
+      );
+
+    return paramOneIsUndefined
+      || (!paramOneIsUndefined && paramTwoIsUndefined);
   }
 
   get isSwappingContent() {
@@ -108,38 +116,55 @@ export default class Location {
       case 'chapter':
         const currentChapter = this.params.title;
         const lastChapter = this.params.lastChapter;
-
         return currentChapter !== lastChapter;
       case 'projects':
         const currentProjectPicture = this.params.projectThumbnail;
         const lastProjectPicture = this.params.lastProjectPicture;
         const currentProjectName = this.params.projectName;
         const lastProjectName = this.params.lastProject;
-
         return (
-          currentProjectName !== lastProjectName ||
-          currentProjectPicture !== lastProjectPicture
+          currentProjectName !== lastProjectName
+          || currentProjectPicture !== lastProjectPicture
         );
       case 'journalism':
         const currentHeadline = this.params.headline;
         const lastHeadline = this.params.lastHeadline;
-
         return currentHeadline !== lastHeadline;
       case 'reverie':
         const currentReverie = this.params.headline;
         const lastReverie = this.params.lastHeadline;
-
         return currentReverie !== lastReverie;
       default:
-        console.log('Location.isSwappingContent(): Keep calm, carry on');
+        return;
     }
   }
 
   get justChanged() {
     if (!this._lastPath) {
-      throw 'Location.isChangingLocation() requires prevProps';
+      throw new Error(
+        'Location.isChangingLocation() requires prevProps'
+      );
     }
 
     return this._userPath !== this._lastPath;
+  }
+
+  get isReloading() {
+    return this.type === 'i'
+      || this.lastType === 'i';
+  }
+
+  get isCalledAfterReload() {
+    return this.lastType === 'i';
+  }
+
+  get isTopLevel() {
+    const topLevels = [
+      '/chapter',
+      '/journalism',
+      '/projects',
+      '/reverie'
+    ];
+    return topLevels.includes(this._userPath);
   }
 }

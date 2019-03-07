@@ -1,16 +1,15 @@
-import React, { Fragment } from 'react';
-import styled from 'styled-components';
-
-import Hed from '../primitives/Hed.jsx';
-import Main from '../primitives/Main.jsx';
-import Right from '../primitives/Right.jsx';
-import Left from '../primitives/Left.jsx';
-import Overflow from '../primitives/Overflow.jsx';
-import MenuButton from '../shared/MenuButton.jsx';
-import ProjectNav from './ProjectNav.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Mapper from '../shared/Mapper.jsx';
 import DesktopProjectNav from './DesktopProjectNav.jsx';
+import Graf from '../primitives/Graf.jsx';
+import Hed from '../primitives/Hed.jsx';
+import Left from '../primitives/Left.jsx';
+import Main from '../primitives/Main.jsx';
+import Mapper from '../shared/Mapper.jsx';
+import MenuButton from '../shared/MenuButton.jsx';
+import Overflow from '../primitives/Overflow.jsx';
+import ProjectNav from './ProjectNav.jsx';
+import React, { Fragment } from 'react';
+import Right from '../primitives/Right.jsx';
+import styled from 'styled-components';
 
 const Images = styled.section`
   display: flex;
@@ -93,13 +92,13 @@ export default function Projects(props) {
   const project = data[indexForProjectData];
 
   const {
-    full,
     captions,
-    projectName,
-    type,
     contribution,
     description,
-    technologies
+    full,
+    projectName,
+    technologies,
+    type
   } = project.attributes;
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
@@ -108,9 +107,9 @@ export default function Projects(props) {
     { contribution },
     { description }
   ];
-  const keys = mapData.map(item => {
-    return Object.keys(item)[0];
-  });
+  const keys = mapData.map(
+    item => Object.keys(item)[0]
+  );
 
   return (
     <Main>
@@ -119,38 +118,40 @@ export default function Projects(props) {
       </Left>
       <Right>
         <MenuButton {...props} />
-        <Overflow ref={ref => {
-          overflowRef.current = ref;
-        }}>
-          <Hed c="pink" s="3" b="8">
+        <Overflow ref={
+          ref => overflowRef.current = ref
+        }>
+          <Hed b="8" c="pink" s="3">
             {projectName}
           </Hed>
           <section>
-            <Hed as="h2" normal s="1.7" b="10">
+            <Hed as="h2" normal b="10" s="1.7">
               {type}
             </Hed>
             <Mapper
               mapData={mapData}
-              render={(proj, idx) => (
-                <Fragment key={idx}>
-                  <Hed as="h3" normal c="blue" s="1.4" b="7">
-                    {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
-                  </Hed>
-                  <Graf t="0" b="10">
-                    {proj[keys[idx]]}
-                  </Graf>
-                </Fragment>
-              )}
+              render={
+                (proj, idx) => (
+                  <Fragment key={idx}>
+                    <Hed as="h3" normal b="7" c="blue" s="1.4">
+                      {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
+                    </Hed>
+                    <Graf b="10" t="0">
+                      {proj[keys[idx]]}
+                    </Graf>
+                  </Fragment>
+                )
+              }
             />
             <Images>
               <ProjectNav
+                indexForProjectPics={indexForProjectPics}
                 isRight={true}
                 project={project}
-                indexForProjectPics={indexForProjectPics}
               />
               <Figure>
                 <Caption>{caption}</Caption>
-                <Image src={source} alt="mainPic" />
+                <Image alt="mainPic" src={source} />
               </Figure>
             </Images>
           </section>
