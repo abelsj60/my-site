@@ -55,7 +55,9 @@ class App extends Component {
 
     this.state = {
       currentCaller: location,
-      lastCaller: location !== 'reverie' ? location : 'home',
+      lastCaller: location !== 'reverie'
+        ? location
+        : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
       showBusinessCard: false,
