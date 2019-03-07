@@ -1,7 +1,9 @@
 export default class Referrer {
   constructor(props) {
     if (props.location === undefined) {
-      throw 'Caller must offer props.location.';
+      throw new Error(
+        'Caller must offer props.location.'
+      );
     }
 
     this.path = props.location.pathname;

@@ -9,7 +9,9 @@ import StoryParams from './StoryParams';
 export default class Location {
   constructor(pathToMatch, props, prevProps) {
     if (props.location === undefined) {
-      throw new Error('The Location class requires props.location.');
+      throw new Error(
+        'The Location class requires props.location.'
+      );
     }
 
     const referrer = new Referrer(props);
@@ -133,15 +135,15 @@ export default class Location {
         const lastReverie = this.params.lastHeadline;
         return currentReverie !== lastReverie;
       default:
-        console.log(
-          'Location.isSwappingContent(): Keep calm, carry on'
-        );
+        return;
     }
   }
 
   get justChanged() {
     if (!this._lastPath) {
-      throw 'Location.isChangingLocation() requires prevProps';
+      throw new Error(
+        'Location.isChangingLocation() requires prevProps'
+      );
     }
 
     return this._userPath !== this._lastPath;

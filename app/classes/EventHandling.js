@@ -3,7 +3,9 @@ import Referrer from './Referrer';
 export default class EventHandling {
   constructor(component, outsideThis) {
     if (outsideThis.props.location === undefined) {
-      throw 'Caller must carry location.';
+      throw new Error(
+        'Caller must carry location.'
+      );
     }
 
     const referrer = new Referrer(outsideThis.props);
@@ -28,7 +30,7 @@ export default class EventHandling {
         selectedHandler = this._handleClickForHeader;
         break;
       default:
-        console.log('_selectHandleClick: Keep calm, carry on');
+        break;
     }
 
     return selectedHandler.call(outerThis, this);
@@ -80,7 +82,7 @@ export default class EventHandling {
           stateToUpdate.isMenu = !isMenu;
           break;
         default:
-          console.log('_handleClickForAppComponent: Keep calm, carry on');
+          break;
       }
 
       return this.setState(stateToUpdate);
@@ -107,7 +109,7 @@ export default class EventHandling {
           stateToUpdate.indexForReverieData = valueOne;
           break;
         default:
-          console.log('_handleClickForBodyComponent: Keep calm, carry on');
+          break;
       }
 
       return this.setState(stateToUpdate);

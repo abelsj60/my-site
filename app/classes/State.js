@@ -49,7 +49,7 @@ export default class State {
         }
         break;
       default:
-        console.log('State.get: Keep calm, carry on');
+        break;
     }
 
     return index && index !== -1 ? index : 0;
