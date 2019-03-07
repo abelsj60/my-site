@@ -14,7 +14,7 @@ export default class StoryParams extends Params {
   }
 
   get title() {
-    return this.validateParam(
+    return this._validateParam(
       this._one,
       'title',
       'text'
@@ -23,6 +23,6 @@ export default class StoryParams extends Params {
 
   titleToIndex() {
     if (!this.title) return -1;
-    return this.oneToIndex();
+    return this._oneToIndex();
   }
 }

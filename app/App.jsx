@@ -5,6 +5,7 @@ import {
 } from 'styled-components';
 import EventHandling from './classes/EventHandling.js';
 import Footer from './header-footer/Footer.jsx';
+// import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
@@ -51,7 +52,8 @@ class App extends Component {
 
     const referrer = new Referrer(props);
     const location = referrer.location;
-    // console.log('first run of GA:', window.location.pathname);
+    // ReactGA.initialize('tbd');
+    // ReactGA.pageview(window.location.pathname);
 
     this.state = {
       currentCaller: location,
@@ -145,7 +147,7 @@ class App extends Component {
         // on '/i' until React pushes us away from that):
         && window.location.pathname !== '/i'
       ) {
-        // console.log('Run GA:', window.location.pathname);
+        // ReactGA.pageview(window.location.pathname);
       }
     }
   }
@@ -157,9 +159,9 @@ export default withRouter(App);
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 // ngrok on mobile + Endtest
 // Link length in article/reverie
+// Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 
 // Right or left margin spacing — equalize
-// Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?

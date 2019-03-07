@@ -25,15 +25,7 @@ export default class Params {
     return normalize(param);
   }
 
-  get hasExpectedNumber() {
-    return this._expectedNumber === this._actualNumber;
-  }
-
-  get isMenu() {
-    return this._one === 'menu';
-  }
-
-  validateParam(param, paramName, paramType) {
+  _validateParam(param, paramName, paramType) {
     if (!param) return false;
 
     const searchData = this._searchData;
@@ -53,7 +45,10 @@ export default class Params {
         paramIsValid = paramTestResults.length > 0;
         break;
       case 'number':
-        if (!parseInt(param)) return false;
+        if (!parseInt(param)) {
+          paramIsValid = false;
+          break;
+        }
 
         const paramToTestConvertedToIndex = parseInt(param) - 1;
         paramIsValid =
@@ -61,16 +56,21 @@ export default class Params {
           && paramToTestConvertedToIndex <
             searchData[0].attributes[paramName].length;
         break;
+      default:
+        paramIsValid = false;
+        break;
     }
 
-    if (!paramIsValid) {
+    if (paramIsValid === false) {
       return false;
     } else {
-      return param; // Returns original, so no falsy problems if paramToIndex is 0
+      // Return original to avoid problems
+      // with falsy when index is 0
+      return param;
     }
   }
 
-  toIndex(paramName) {
+  _toIndex(paramName) {
     if (this[paramName]) {
       const isNumber = parseInt(this[paramName]);
 
@@ -92,13 +92,21 @@ export default class Params {
     return -1;
   }
 
-  oneToIndex() {
+  _oneToIndex() {
     if (this.paramNames.length < 1) return -1;
-    return this.toIndex(this.paramNames[0]);
+    return this._toIndex(this.paramNames[0]);
   }
 
-  twoToIndex() {
+  _twoToIndex() {
     if (this.paramNames.length < 1) return -1;
-    return this.toIndex(this.paramNames[1]);
+    return this._toIndex(this.paramNames[1]);
+  }
+
+  get hasExpectedNumber() {
+    return this._expectedNumber === this._actualNumber;
+  }
+
+  get isMenu() {
+    return this._one === 'menu';
   }
 }

@@ -16,7 +16,7 @@ export default class ProjectsParams extends Params {
   }
 
   get projectName() {
-    return this.validateParam(
+    return this._validateParam(
       this._one,
       'projectName',
       'text'
@@ -24,7 +24,7 @@ export default class ProjectsParams extends Params {
   }
 
   get projectThumbnail() {
-    const paramIsValid = this.validateParam(
+    const paramIsValid = this._validateParam(
       this._two,
       'full',
       'number'
@@ -34,11 +34,11 @@ export default class ProjectsParams extends Params {
 
   projectNameToIndex() {
     if (!this.projectName) return -1;
-    return this.oneToIndex();
+    return this._oneToIndex();
   }
 
   projectThumbnailToIndex() {
     if (!this.projectThumbnail) return -1;
-    return this.twoToIndex();
+    return this._twoToIndex();
   }
 }

@@ -4,6 +4,7 @@ import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';
 import React from 'react';
+// import ReactGA from 'react-ga';
 import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 
@@ -56,7 +57,16 @@ export default function About() {
             About
           </Hed>
           <ExternalLink href="https://www.linkedin.com/in/jameserikabels" target="_blank">
+            {
+              /*<ReactGA.OutboundLink
+              eventLabel="toLinkedIn"
+              to="https://www.linkedin.com/in/jameserikabels"
+              target="_blank">*/
+            }
             <Icon />
+            {
+              /*</ReactGA.OutboundLink>*/
+            }
           </ExternalLink>
         </Heading>
         <Text>

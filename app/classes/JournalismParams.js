@@ -16,7 +16,7 @@ export default class JournalismParams extends Params {
   }
 
   get publication() {
-    return this.validateParam(
+    return this._validateParam(
       this._one,
       'publication',
       'text'
@@ -24,7 +24,7 @@ export default class JournalismParams extends Params {
   }
 
   get headline() {
-    return this.validateParam(
+    return this._validateParam(
       this._two,
       'headline',
       'text'
@@ -33,12 +33,12 @@ export default class JournalismParams extends Params {
 
   publicationToIndex() {
     if (!this.publication) return -1;
-    return this.oneToIndex();
+    return this._oneToIndex();
   }
 
   headlineToIndex() {
     if (!this.headline) return -1;
-    return this.twoToIndex();
+    return this._twoToIndex();
   }
 
   get firstArticleToMatchPublication() {
