@@ -24,6 +24,8 @@ export default class Referrer {
         return '/projects/:projectName?/:projectThumbnail?';
       case 'i':
         return '/i';
+      case 'not-found':
+        return '/not-found';
       case 'reverie':
         return '/reverie/:headline?';
       default:

@@ -73,30 +73,28 @@ export default class Location {
     return this._actualLengthOfPath < this._expectedLengthOfPath;
   }
 
-  get _pathIsTooLong() {
+  get _pathIsLong() {
     return this._actualLengthOfPath > this._expectedLengthOfPath;
   }
 
   get pathIsValid() {
-    if (
-      this.params.isMenu
-      && this._pathIsShort
-    ) {
-      // Path is exactly right —
-      // a menu and short
-      return true;
-    }
-
-    // isExact checks type, e.g.,
-    // ...goodPath/soft is no good
+    if (this.params.isMenu) return true;
 
     return this.isExact
-      && !this._pathIsTooLong
+      && !this._pathIsLong
       && this.params.hasExpectedNumber;
   }
 
   get needsRedirect() {
     if (this.pathIsValid) return false;
+
+    /** Return statement
+     *
+     * 1. A single param is tested on its own
+     * 2. Two params are tested by checking if the first is
+     * found, meaning the request is valid, and if the
+     * second is undefined, meaning we need a redirect
+    */
 
     const paramOneIsUndefined =
       this.params.areUndefined.includes(
@@ -106,11 +104,6 @@ export default class Location {
       this.params.areUndefined.includes(
         this.params.paramNames[1]
       );
-
-    // 1. A single param is tested on its own
-    // 2. Two params are tested by checking if the first is
-    // found, meaning the request is valid, and if the
-    // second is undefined, meaning we need a redirect
 
     return paramOneIsUndefined
       || (!paramOneIsUndefined && paramTwoIsUndefined);
