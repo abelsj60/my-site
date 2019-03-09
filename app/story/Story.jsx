@@ -97,7 +97,7 @@ export default function Story(props) {
           </Text>
         </RestyledOverflow>
       </RestyledLeft>
-      <RestyledRight>
+      <RestyledRight rightMargin>
         <Image alt="fantasy illustration" src={image} />
       </RestyledRight>
     </Main>
