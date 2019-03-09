@@ -31,9 +31,6 @@ export default class Params {
         // want to tet the real-true original URL.
         p => params[p] === undefined
       );
-
-    console.log('test:', params);
-    console.log('test2:', this);
     this.originalData = params;
   }
 
@@ -92,9 +89,9 @@ export default class Params {
   }
 
   _toIndex(paramName) {
-    // The next two lines run through ._validateParam(),
-    // thus it can't be used inside ._validateParam()
-    // to avoid an infinite loop...
+    // The next two rely on ._validateParam(). As a,
+    // result, it can't be used in ._validateParam()
+    // to avoid an infinite loop.
 
     if (!this[paramName]) return -1;
 
