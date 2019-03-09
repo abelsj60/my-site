@@ -167,8 +167,6 @@ export default withRouter(App);
 // ngrok on mobile + Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 
-// Right or left margin spacing — equalize
-
 // Images — how to store for React?
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.

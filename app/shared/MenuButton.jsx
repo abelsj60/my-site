@@ -4,6 +4,7 @@ import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
   width: 91px;
+  margin-left: 2px;
 `;
 const RestyledLink = styled(StyledLink)`
   display: flex;
