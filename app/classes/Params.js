@@ -74,7 +74,9 @@ export default class Params {
         paramIsValid =
           paramAsIndex >= 0
           && paramAsIndex <
-            searchData[0].attributes[paramName].length;
+            searchData[0].attributes[
+              paramName
+            ].length;
         break;
       default:
         paramIsValid = false;
