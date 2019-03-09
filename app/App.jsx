@@ -167,7 +167,6 @@ export default withRouter(App);
 // ngrok on mobile + Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 
-// Fix tooLongMenuPaths
 // Right or left margin spacing — equalize
 
 // Images — how to store for React?

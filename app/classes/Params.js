@@ -27,10 +27,13 @@ export default class Params {
     this.areUndefined =
       this._paramNames.filter(
         // Check params, not 'this' b/c this[param]
-        // is defined by location._matchPath,
-        // which is built internally by hand
+        // is defined by a call to matchPath(); we
+        // want to tet the real-true original URL.
         p => params[p] === undefined
       );
+
+    console.log('test:', params);
+    console.log('test2:', this);
     this.originalData = params;
   }
 
