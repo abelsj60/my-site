@@ -27,8 +27,8 @@ export default class Params {
     this.areUndefined =
       this._paramNames.filter(
         // Check params, not 'this' b/c this[param]
-        // is defined by a call to matchPath(); we
-        // want to tet the real-true original URL.
+        // is defined by matchPath(); we want to
+        // tet the real-true original URL.
         p => params[p] === undefined
       );
     this.originalData = params;
