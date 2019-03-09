@@ -166,9 +166,8 @@ export default withRouter(App);
 // copyright?
 // ngrok on mobile + Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
-// Evaluate validations — too long, too short, wrong names/values
 
-// Link length in article/reverie
+// Fix tooLongMenuPaths
 // Right or left margin spacing — equalize
 
 // Images — how to store for React?

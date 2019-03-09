@@ -78,17 +78,18 @@ export default class Location {
   }
 
   get pathIsValid() {
-    if (this.params.isMenu) return true;
-
-    // 1. The path is of the right type (e.g. /chapter)
-    // 2. The path isn't too long (isExact doesn't check)
-    // 3. The path has the proper number of params after
+    // 1. The path is a menu and the length is exactly 3
+    // 2. The path is of the right type (e.g. /chapter)
+    // 3. The path isn't too long (isExact doesn't check)
+    // 4. The path has the proper number of params after
     // eliminating invalid entries (isExact can't know,
     // it only checks for fulfilled values)
 
-    return this.isExact
-      && !this._pathIsLong
-      && this.params.hasExpectedNumber;
+    return this.params.isMenu
+      ? this._actualLengthOfPath === 3
+      : this.isExact
+        && !this._pathIsLong
+        && this.params.hasExpectedNumber;
   }
 
   get needsRedirect() {
