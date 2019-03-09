@@ -17,24 +17,23 @@ export default class Location {
     const referrer = new Referrer(props);
 
     this._pathToMatch = pathToMatch;
-    this._userPath = props.location.pathname;
+    this._currentPath = props.location.pathname;
     this._lastPath = prevProps
       && prevProps.location.pathname;
     this._actualLengthOfPath =
-      this._userPath.split('/')
-        .filter(p => p !== '')
-        .length; // Filter out empty lengths
+      this._currentPath.split('/')
+        .length;
     this._expectedLengthOfPath =
       this._pathToMatch.split('/')
-        .length; // Templates, so no need to filter for empty parts
+        .length;
     this._matchPath = matchPath(
-      this._userPath,
+      this._currentPath,
       { path: this._pathToMatch }
-    ); // Normalizes use of params, ensuring all values
+    ); // Normalizes params within class
 
+    this.type = referrer.location;
     this.lastType = this._lastPath
       && referrer.getLocation(prevProps);
-    this.type = referrer.location;
     this.isExact = this._matchPath
       && this._matchPath.isExact;
     this.params = this._loadParams(prevProps);
@@ -81,6 +80,12 @@ export default class Location {
   get pathIsValid() {
     if (this.params.isMenu) return true;
 
+    // 1. The path is of the right type (e.g. /chapter)
+    // 2. The path isn't too long (isExact doesn't check)
+    // 3. The path has the proper number of params after
+    // eliminating invalid entries (isExact can't know,
+    // it only checks for fulfilled values)
+
     return this.isExact
       && !this._pathIsLong
       && this.params.hasExpectedNumber;
@@ -91,10 +96,9 @@ export default class Location {
 
     /** Return statement
      *
-     * 1. A single param is tested on its own
-     * 2. Two params are tested by checking if the first is
-     * found, meaning the request is valid, and if the
-     * second is undefined, meaning we need a redirect
+     * 1. The first param is literally undefined
+     * 2. Two first param is validated but the
+     * second param is literally undefined
     */
 
     const paramOneIsUndefined =
@@ -107,7 +111,10 @@ export default class Location {
       );
 
     return paramOneIsUndefined
-      || (!paramOneIsUndefined && paramTwoIsUndefined);
+      || (
+        this.params.oneIsValid
+          && paramTwoIsUndefined
+      );
   }
 
   get isSwappingContent() {
@@ -145,7 +152,7 @@ export default class Location {
       );
     }
 
-    return this._userPath !== this._lastPath;
+    return this._currentPath !== this._lastPath;
   }
 
   get isReloading() {
@@ -164,6 +171,6 @@ export default class Location {
       '/projects',
       '/reverie'
     ];
-    return topLevels.includes(this._userPath);
+    return topLevels.includes(this._currentPath);
   }
 }

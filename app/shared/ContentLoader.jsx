@@ -24,8 +24,8 @@ export default class ContentLoader extends Component {
     this.overflowRef = React.createRef();
 
     this.state = {
-      needsRedirect: location.needsRedirect,
-      isNotFound: !location.pathIsValid
+      isNotFound: !location.pathIsValid,
+      needsRedirect: location.needsRedirect
     };
   }
 

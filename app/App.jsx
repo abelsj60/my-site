@@ -166,6 +166,7 @@ export default withRouter(App);
 // copyright?
 // ngrok on mobile + Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
+// Evaluate validations — too long, too short, wrong names/values
 
 // Link length in article/reverie
 // Right or left margin spacing — equalize

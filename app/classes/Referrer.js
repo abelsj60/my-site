@@ -31,7 +31,7 @@ export default class Referrer {
       case 'reverie':
         return '/reverie/:headline?';
       default:
-        return;
+        return '/';
     }
   }
 

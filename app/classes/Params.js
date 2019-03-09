@@ -5,29 +5,37 @@ export default class Params {
   constructor(type, params, paramNames) {
     // Array.isArray() ensures nothing breaks when
     // Params() is called by location._loadParams
-    // (super's not called, so they're a true {})
+    // (super's not called, so the {} is empty)
+    this._type = type;
     this._paramNames = Array.isArray(paramNames)
       ? paramNames
       : [];
     this._one = params[this._paramNames[0]];
     this._two = params[this._paramNames[1]];
-    console.log('top:', typeof this._two);
     this._expectedNumber = this._paramNames.length;
-    this._actualNumber =
+    this._validatedNumber =
       this._paramNames.filter(
-        p => params[p] !== undefined
+        // Check this to assess their validity;
+        // invalid params come back false
+        p => this[p] !== false
       ).length;
 
-    this.type = type;
+    this.oneIsValid =
+      this[this._paramNames[0]] !== false;
+    this.twoIsValid =
+      this[this._paramNames[1]] !== false;
     this.areUndefined =
       this._paramNames.filter(
+        // Check params, not 'this' b/c this[param]
+        // is defined by location._matchPath,
+        // which is built internally by hand
         p => params[p] === undefined
       );
     this.originalData = params;
   }
 
   get _searchData() {
-    const content = new Content(this.type);
+    const content = new Content(this._type);
     return content.getContentData();
   }
 
@@ -36,6 +44,11 @@ export default class Params {
   }
 
   _validateParam(param, paramName) {
+    // This function has to stand on its own in
+    // order to avoid an infinit loop. Remember,
+    // any call to this[param] runs through this
+    // method (validate), including ._toIndex()
+
     if (!param) return false;
 
     const searchData = this._searchData;
@@ -48,17 +61,19 @@ export default class Params {
             const valueFromData = this._normalizeParam(
               d.attributes[paramName]
             );
-            const paramToTest = this._normalizeParam(param);
+            const paramToTest = this._normalizeParam(
+              param
+            );
             return valueFromData === paramToTest;
           }
         );
         paramIsValid = paramTestResults.length > 0;
         break;
       case 'number':
-        const paramToTestConvertedToIndex = parseInt(param) - 1;
+        const paramAsIndex = parseInt(param) - 1;
         paramIsValid =
-          paramToTestConvertedToIndex >= 0
-          && paramToTestConvertedToIndex <
+          paramAsIndex >= 0
+          && paramAsIndex <
             searchData[0].attributes[paramName].length;
         break;
       default:
@@ -72,12 +87,17 @@ export default class Params {
   }
 
   _toIndex(paramName) {
+    // The next two lines run through ._validateParam(),
+    // thus it can't be used inside ._validateParam()
+    // to avoid an infinite loop...
+
     if (!this[paramName]) return -1;
 
     // this[paramName] access convenience methods
     // on each subclass, e.g., .projectThumbnail
     // or .headline. parseInt() is run whenever
     // the param corresponds to a number.
+
     const param = this[paramName];
 
     switch (typeof param) {
@@ -109,7 +129,7 @@ export default class Params {
   }
 
   get hasExpectedNumber() {
-    return this._expectedNumber === this._actualNumber;
+    return this._expectedNumber === this._validatedNumber;
   }
 
   get isMenu() {
