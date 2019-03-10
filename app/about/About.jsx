@@ -1,6 +1,7 @@
 import bio from '../data/about/about.md';
 import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
+import Right from '../primitives/Right.jsx';
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';
 import React from 'react';
@@ -14,10 +15,6 @@ const RestyledLeft = styled(Left)`
   @media (min-width: 848px) {
     margin-left: 25px;
   }
-`;
-const Right = styled.section`
-  flex: 1;
-  margin: 25px;
 `;
 const Heading = styled.div`
   display: flex;

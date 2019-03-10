@@ -125,17 +125,17 @@ export default class EventHandling {
         });
       };
 
-      if (!menuIsOpen) {
-        toggleState.call(this);
-        this.timeoutId = setTimeout(() => {
-          this.setState({ menuIsOpen: false });
-        }, 4000);
-      } else {
-        clearTimeout(this.timeoutId);
-        this.timeoutId = undefined;
+      // if (!menuIsOpen) {
+      //   toggleState.call(this);
+      //   this.timeoutId = setTimeout(() => {
+      //     this.setState({ menuIsOpen: false });
+      //   }, 4000);
+      // } else {
+      //   clearTimeout(this.timeoutId);
+      //   this.timeoutId = undefined;
 
-        toggleState.call(this);
-      }
+      toggleState.call(this);
+      // }
     };
   }
 }

@@ -15,6 +15,7 @@ const Images = styled.section`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  margin-bottom: 1px;
   padding: 10px;
   border: 0.5px solid #6e7dab;
 

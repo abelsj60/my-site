@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
 export default styled.section`
+  margin: 5px 25px 25px 25px;
   display: flex;
   flex-direction: column;
-  margin: 25px ${p => (p.rightMargin && 25) || 0}px 25px 25px;
   overflow: auto;
+
+  @media (min-width: 848px) {
+    margin: 25px;
+  }
 `;

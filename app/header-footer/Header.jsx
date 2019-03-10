@@ -25,11 +25,16 @@ const Container = styled.header`
   align-items: center;
 `;
 const RestyledLink = styled(StyledLink)`
+  font-size: 1.25rem;
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
   color: ${p => (p.home ? 'white' : '#455057')};
 
   && {
     text-decoration: ${p => (p.active === 'active' ? 'underline' : undefined)};
+  }
+
+  @media (min-width: 390px) {
+    font-size: 1.5rem;
   }
 `;
 const NameAsLink = styled(RestyledLink)`
@@ -42,20 +47,35 @@ const NameAsLink = styled(RestyledLink)`
   }
 `;
 const Motto = styled.p`
+  display: none;
+  
+  @media (min-width: 390px) {
+    flex: 1;
+    display: ${p => (p.hide ? 'none' : undefined)};
+    font-size: 1.05rem;
+    margin-top: 2px;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    font-style: italic;
+    padding-top: 1px;
+    padding: 0px;
+    margin-top: 1.9px;
+    font-size: 1.3rem;
+    margin-left: 15px;
+  }
+`;
+const MottoMobile = styled.p`
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
-  font-size: 1.05rem;
-  margin-top: 2px;
-  margin-left: 5px;
+  font-size: 1.2rem;
+  // margin-top: 2px;
+  margin-left: 10px;
   margin-bottom: 0px;
   font-style: italic;
   padding-top: 1px;
 
   @media (min-width: 390px) {
-    padding: 0px;
-    margin-top: 1.9px;
-    font-size: 1.3rem;
-    margin-left: 15px;
+    display: none
   }
 `;
 const Nav = styled.nav`
@@ -68,7 +88,10 @@ const Nav = styled.nav`
     && css`
       flex: 1;
       display: block;
-      margin-left: 32px;
+
+      @media (min-width: 390px) {
+        margin-left: 32px;
+      }
     `};
 
   @media (min-width: 705px) {
@@ -144,6 +167,9 @@ export default class Header extends Component {
         <Motto hide={menuIsActive || homeIsActive}>
           Narrative coding and other adventures
         </Motto>
+        <MottoMobile hide={menuIsActive || homeIsActive}>
+          Narrative coding and more
+        </MottoMobile>
         <Nav home={homeIsActive} menu={menuIsActive}>
           <NavList>
             <Mapper
@@ -158,11 +184,11 @@ export default class Header extends Component {
                       <RestyledLink
                         active={
                           (pathIsActive && 'active')
-                        || undefined
+                          || undefined
                         }
                         home={
                           (homeIsActive && 'active')
-                        || undefined
+                          || undefined
                         }
                         num={idx}
                         to={link.path}

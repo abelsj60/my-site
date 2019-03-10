@@ -5,7 +5,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const RestyledMain = styled(Main)`
-  margin: 25px;
+  margin: 5px 25px 25px 25px;
+
+  @media (min-width: 390px) {
+    margin-top: 25px;
+  }
 
   @media (min-width: 848px) {
     flex-direction: column;

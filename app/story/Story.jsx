@@ -13,11 +13,14 @@ const RestyledLeft = styled(Left)`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   position: absolute;
-  top: 52px;
-  bottom: 55px;
+  // top: 52px;
+  // bottom: 55px;
+  // height: 100%;
+  flex: 1;
   color: white;
   padding: 25px;
-  margin: 25px;
+  // margin: 0px;
+  margin: 5px 25px 25px 25px;
   background-color: rgba(0, 0, 0, 0.7);
 
   @media (min-width: 848px) {
@@ -37,6 +40,7 @@ const RestyledOverflow = styled(Overflow)`
 const RestyledRight = styled(Right)`
   flex: 1;
   overflow: hidden;
+  // margin: 0px;
 `;
 const Image = styled.img`
   object-fit: cover;

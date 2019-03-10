@@ -26,7 +26,7 @@ const Label = styled.p`
 `;
 const Arrow = styled.img`
   height: 4px;
-  margin-left: 50px;
+  margin-left: 48px;
   align-self: center;
   fill: #6e7dab;
 `;
