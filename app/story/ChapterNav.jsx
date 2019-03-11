@@ -2,15 +2,24 @@ import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled from 'styled-components';
+import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
-  margin-left: 2px;
-  margin-bottom: 13px;
+  // margin-left: 2px;
+  // margin-bottom: 13px;
+  // margin-right: 25px;
+  // width: 150px;
+  // margin: 0px 25px 11px 2px;
+  // margin-bottom: 10px;
+  flex: 1;
+  // max-width: 175px;
+  // margin-left: 15px;
+  margin-right: 25px;
+  margin-bottom: 11px;
 
   @media (min-width: 848px) {
-    padding-right: 25px;
   }
 `;
 const StyledUL = styled(UnorderedList)`
@@ -23,21 +32,20 @@ const Item = styled.li`
   align-items: center;
 `;
 const RestyledLink = styled(StyledLink)`
-  color: white;
+  // color: white;
+  // color: #6e7dab;
+  color: black;
 
   @media (min-width: 848px) {
-    color: #6e7dab;
   }
 `;
-const Text = styled.p`
+const RestyledGraf = styled(Graf)`
   flex: 1;
   text-align: center;
-  padding-bottom: 10px;
+  font-size: 1.3rem;
   margin: 0px;
-  border-bottom: ${p => (p.item ? '.5px solid white' : undefined)};
 
   @media (min-width: 848px) {
-    border-bottom: ${p => (p.item ? '.5px solid #6e7dab' : undefined)};
   }
 `;
 
@@ -68,13 +76,16 @@ export default function ChapterNav(props) {
               const normalizedTitle = normalize(
                 data[idx].attributes.title
               );
+              const chapterId = itemIsActive
+                ? '●'
+                : '○';
 
               return (
                 <Item key={idx}>
                   <RestyledLink to={`/chapter/${normalizedTitle}`}>
-                    <Text item={itemIsActive} num={idx}>
-                      {idx + 1}
-                    </Text>
+                    <RestyledGraf item={itemIsActive} num={idx} s="1.3" c="lightBlack">
+                      {chapterId}
+                    </RestyledGraf>
                   </RestyledLink>
                 </Item>
               );

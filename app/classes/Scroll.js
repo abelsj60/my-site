@@ -5,9 +5,7 @@ export default class Scroll {
   }
 
   _swappingProjects(prevProps) {
-    if (this._type !== 'projects') {
-      return false;
-    }
+    if (this._type !== 'projects') return false;
 
     const prevIndexForProjectData = prevProps.bodyState.indexForProjectData;
     const currentIndexForProjectData = this._location.params.projectNameToIndex();
@@ -24,6 +22,15 @@ export default class Scroll {
       if (updateScrollTop) {
         overflowRef.current.scrollTop = 0;
       }
+    }
+  }
+
+  resetMobileSafariTop() {
+    if (window.scrollY > 0) {
+      window.scroll({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
   }
 }

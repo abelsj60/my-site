@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
-  width: 91px;
+  width: 60px;
   margin-left: 2px;
 `;
 const RestyledLink = styled(StyledLink)`
   display: flex;
   flex-shrink: 0;
   margin-right: auto;
-  margin-bottom: 15px;
+  margin-bottom: 11px;
   position: relative;
   padding-bottom: 6px;
 
@@ -26,7 +26,7 @@ const Label = styled.p`
 `;
 const Arrow = styled.img`
   height: 4px;
-  margin-left: 48px;
+  margin-left: 17px;
   align-self: center;
   fill: #6e7dab;
 `;

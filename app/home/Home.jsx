@@ -1,4 +1,4 @@
-import Button from '../shared/Button.jsx';
+// import Button from '../shared/Button.jsx';
 import Graf from '../primitives/Graf.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
@@ -9,8 +9,9 @@ import styled from 'styled-components';
 const RestyledMain = styled(Main)`
   justify-content: space-between;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  overflow: hidden;
+  // height: 100%;
+  // width: 100%;
 
   @media (min-width: 848px) {
     flex-direction: column;
@@ -22,12 +23,25 @@ const NameTag = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 2;
-  margin-top: 30px;
+  margin-top: 10px;
   cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  @media (min-width: 390px) {
+    margin-top: 20px;
+  }
+
+  // @media (min-width: 848px) {
+  //   margin-top: 30px;
+  // }
 `;
 const RestyledHed = styled(Hed)`
   font-family: 'Aref Ruqaa', serif;
   text-shadow: 1px 1px 2px black;
+
+  @media (min-width: 390px) {
+    font-size: 6rem;
+  }
 `;
 const RestyledGraf = styled(Graf)`
   text-shadow: 1px 1px 2px black;
@@ -68,16 +82,6 @@ const CityAsBackground = styled(FantasyAsBackground)`
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
-const TravelButton = styled(Button)`
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 0.5px solid white;
-  border-radius: 5px;
-  color: white;
-  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
-  font-size: 1.3rem;
-  margin-bottom: 45px;
-  z-index: 2;
-`;
 
 export default function Home(props) {
   const {
@@ -88,9 +92,6 @@ export default function Home(props) {
   const {
     boundHandleClickForApp
   } = props;
-  const travelButtonText = inCity
-    ? 'Home'
-    : 'Away';
 
   return (
     <RestyledMain>
@@ -103,13 +104,17 @@ export default function Home(props) {
                   renderProps.scene = el;
                 }
               }
+              onClick={
+                () => boundHandleClickForApp('swapHomePageImage')
+              }
+              data-pointer-events={true}
               tempContentIsOn={showBusinessCard || showLegalTerms}
             >
-              <RestyledHed c="yellow" data-depth=".4" s="6.5">
+              <RestyledHed c="yellow" data-depth=".3" s="4.5" bS="6.5">
                 JamesAbels
               </RestyledHed>
-              <RestyledGraf c="pink" data-depth=".4" s="1.7" t="93">
-                narrative coding and other adventures
+              <RestyledGraf c="pink" data-depth=".3" s="1.5" t="64" bS="1.7" bT="93">
+                Coding narratives and more
               </RestyledGraf>
             </NameTag>
           )
@@ -129,14 +134,6 @@ export default function Home(props) {
           src="/background-city.png"
         />
       </PictureBox>
-      <TravelButton
-        className="travel-button"
-        clickFunction={
-          () => boundHandleClickForApp('swapHomePageImage')
-        }
-        tempContentIsOn={showBusinessCard || showLegalTerms}
-        text={travelButtonText}
-      />
     </RestyledMain>
   );
 }

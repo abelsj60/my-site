@@ -1,16 +1,19 @@
 import Body from './Body.jsx';
-import {
+import styled, {
   css,
   createGlobalStyle
 } from 'styled-components';
 import EventHandling from './classes/EventHandling.js';
 import Footer from './header-footer/Footer.jsx';
 // import ReactGA from 'react-ga';
+import Graf from './primitives/Graf.jsx';
 import Header from './header-footer/Header.jsx';
+import { isMobileSafari, isMobile } from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
+import Scroll from './classes/Scroll.js';
 import { withRouter } from 'react-router';
 
 const GlobalStyle = createGlobalStyle`
@@ -23,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0px;
     padding: 0px;
     font-size: 1.5rem;
+    -webkit-overflow-scrolling: touch;
 
     h1,
     h2,
@@ -36,14 +40,26 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-
+    
     ${p =>
     p.home
       && css`
-        width: 100%;
-        position: fixed;
+      width: 100%;
+      position: fixed;
+      overflow: hidden;
       `};
   }
+`;
+const SpacerForMobileSafari = styled.div`
+  height: 74px; 
+  background-color: #fd1172;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const TextForMobileSafariSpacer = styled(Graf)`
+  max-width: 70%; 
+  text-align: center;
 `;
 
 class App extends Component {
@@ -54,6 +70,8 @@ class App extends Component {
     const location = referrer.location;
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
+
+    this.ref = React.createRef();
 
     this.state = {
       currentCaller: location,
@@ -70,10 +88,17 @@ class App extends Component {
 
   render() {
     const location = new Location('/', this.props);
-    const homeIsActive = location.type === 'home';
-
     const eForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eForApp.boundHandleClick;
+
+    let scroll;
+
+    if (isMobileSafari) {
+      scroll = new Scroll(location);
+    }
+
+    const homeIsActive = location.type === 'home';
+    const textForSafariSpacer = "Pay me no mind. I'm a spacer for mobile Safari. Tap to hide me...!";
 
     return (
       <Fragment>
@@ -90,6 +115,21 @@ class App extends Component {
           appState={this.state}
           boundHandleClickForApp={boundHandleClickForApp}
         />
+        {isMobileSafari
+          && <SpacerForMobileSafari
+            onClick={
+              () => scroll.resetMobileSafariTop()
+            }
+            ref={
+              ref => this.ref.current = ref
+            }>
+            <TextForMobileSafariSpacer
+              c="yellow"
+              s="1.3"
+            >
+              {textForSafariSpacer}
+            </TextForMobileSafariSpacer>
+          </SpacerForMobileSafari>}
       </Fragment>
     );
   }
@@ -100,6 +140,12 @@ class App extends Component {
       this.props,
       prevProps
     );
+    let scroll;
+
+    if (isMobileSafari) {
+      scroll = new Scroll(location);
+      scroll.resetMobileSafariTop();
+    }
 
     if (location.justChanged) {
       const {
@@ -166,6 +212,7 @@ export default withRouter(App);
 // copyright?
 // ngrok on mobile + Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
+// Why is link color flashing red on ChapterNav
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?
@@ -174,3 +221,7 @@ export default withRouter(App);
 // Hosting?
 // ! https://github.com/rafrex/spa-github-pages
 // ! http://spa-github-pages.rafrex.com/
+
+// Sticky footer/wrapper: https://stackoverflow.com/a/44771365
+// https://www.eventbrite.com/engineering/mobile-safari-why/
+// https://www.npmjs.com/package/react-device-detect

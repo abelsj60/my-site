@@ -20,7 +20,11 @@ const StyledUL = styled(UnorderedList)`
     `};
 `;
 const RestyledHed = styled(Hed)`
-  font-size: ${p => (!p.menu ? '1.4rem' : '1.6rem')};
+    font-size: 1.2rem;
+
+  @media (min-width: 390px) {
+    font-size: ${p => (!p.menu ? '1.4rem' : '1.6rem')};
+  }
 `;
 
 export default function DesktopProjectNav(props) {

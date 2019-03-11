@@ -12,6 +12,7 @@ import styles from './Styles.jsx';
  * @media (min-width: 848px)
  * color: bC="string"
  * margin-top: bT="num" (+ px)
+ * font-size: bS="num" (+ rem)
  *
  * colors: 'blue', 'lightblack', 'pink', 'yellow', 'white'
  */

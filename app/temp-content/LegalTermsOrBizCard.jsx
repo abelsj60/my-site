@@ -8,7 +8,7 @@ const Container = styled.section`
   align-items: center;
   position: absolute;
   top: ${p => (p.home ? '0' : '52px')};
-  bottom: ${p => (p.home ? '0' : '56px')};
+  bottom: ${p => (p.home ? '0' : '54px')};
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
 
@@ -21,19 +21,24 @@ const Container = styled.section`
     `};
 `;
 const InnerContainer = styled.div`
-  margin-top: ${p => (p.home ? '-200px' : undefined)};
+  margin-top: ${p => (p.home ? '-135px' : undefined)};
 `;
 const Card = styled.section`
   flex-direction: column;
   justify-content: center;
-  height: 200px;
-  width: 350px;
+  height: 160px;
+  width: 275px;
   align-self: center;
   position: relative;
   background-color: white;
   font-size: 1.75rem;
   line-height: 2.5rem;
   box-shadow: 0 0 0.75em black;
+
+  @media (min-width: 400px) {
+    height: 200px;
+    width: 350px;
+  }
 `;
 const InnerBorder = styled.div`
   position: absolute;
@@ -46,7 +51,11 @@ const Graf = styled.p`
   margin-top: 0px;
   align-self: center;
   margin-bottom: 0px;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+
+  @media (min-width: 400px) {
+    font-size: 1.4rem;
+  }
 `;
 
 export default function LegalTermsOrBizCard(props) {

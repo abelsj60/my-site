@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.section`
-  margin: 5px 25px 25px 25px;
+  margin: 10px 0px 25px 25px;
   display: flex;
   flex-direction: column;
   overflow: auto;

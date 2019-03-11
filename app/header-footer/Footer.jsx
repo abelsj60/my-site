@@ -16,13 +16,13 @@ const Container = styled.footer`
   position: relative;
 
   @media (min-width: 848px) {
-    justify-content: flex-end;
+    justify-content: 'flex-end';
   }
 `;
 const Line = styled.div`
   position: absolute;
   width: 100%;
-  top: -1px;
+  top: 0px;
   margin: 0px;
   height: 0.5px;
   background-color: #fd1172;
@@ -32,21 +32,28 @@ const Line = styled.div`
 const StoryButton = styled(Button)`
   color: ${p => (!p.active ? '#ffe74c' : '#6e7dab')};
   margin-left: 25px;
-  background-color: ${p => (!p.active ? '#FD1172' : undefined)};
+  background-color: ${p => (!p.active ? '#fd1172' : undefined)};
   border: ${p => `0.5px solid ${!p.active ? '#fd1172' : '#455057'}`};
+  width: 60px;
 
   @media (min-width: 848px) {
     display: none;
   }
 `;
 const RestyledLink = styled(StyledLink)`
-  margin-right: 25px;
+  margin-right: 20px;
   color: ${p => (p.active ? '#fd1172' : '#6e7dab')};
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
 `;
 const RestyledGraf = styled(Graf)`
   cursor: pointer;
-  margin-right: 25px;
+  margin-right: 20px;
   color: ${p => (p.active ? '#fd1172' : '#6e7dab')};
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
 `;
 const TextBox = styled.div`
   display: flex;
@@ -92,8 +99,8 @@ export default function FooterContainer(props) {
         show={isStory}
         text={
           showStoryText
-            ? 'Hide story'
-            : 'Show story'
+            ? 'Show'
+            : 'Hide'
         }
       />
       <TextBox>

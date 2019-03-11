@@ -2,6 +2,7 @@ import ChapterNav from './ChapterNav.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import marked from 'marked';
+// import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
@@ -12,35 +13,38 @@ import styled from 'styled-components';
 const RestyledLeft = styled(Left)`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
-  position: absolute;
+  // position: absolute;
   // top: 52px;
   // bottom: 55px;
   // height: 100%;
   flex: 1;
-  color: white;
-  padding: 25px;
+  // color: white;
+  padding: 0px 0px 25px 25px;
   // margin: 0px;
-  margin: 5px 25px 25px 25px;
-  background-color: rgba(0, 0, 0, 0.7);
+  margin-top: 10px;
+  // background-color: rgba(0, 0, 0, 0.7);
 
   @media (min-width: 848px) {
-    position: unset;
+    // position: unset;
     padding: 0px;
     background-color: unset;
     color: unset;
   }
 `;
 const RestyledOverflow = styled(Overflow)`
-  padding-right: 0px;
+  // padding-right: 0px;
 
   @media (min-width: 848px) {
     padding-right: 25px;
   }
 `;
 const RestyledRight = styled(Right)`
+  display: ${p => (p.text !== 'hidden' ? 'none' : 'flex')};
+
   flex: 1;
   overflow: hidden;
-  // margin: 0px;
+  margin: 0px;
+  // margin-bottom: 1px;
 `;
 const Image = styled.img`
   object-fit: cover;
@@ -61,6 +65,10 @@ const Text = styled.section`
     }
   }
 `;
+const ChapterLabel = styled.p`
+  font-size: 1.3rem;
+  color: #6e7dab;
+`;
 
 export default function Story(props) {
   const {
@@ -80,15 +88,18 @@ export default function Story(props) {
   const textStatus = !showStoryText
     ? 'hidden'
     : undefined;
+  const ChapterId = params.titleToIndex() + 1;
 
   return (
     <Main>
       <RestyledLeft as="section" text={textStatus}>
         <ChapterNav {...props} />
+
         <RestyledOverflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed c="yellow" bC="pink" s="3" b="12">
+          <Hed as="h2" normal italic s="1.5" c="blue">Chapter {ChapterId}</Hed>
+          <Hed c="pink" s="3" b="12">
             {title}
           </Hed>
           <Text>
@@ -101,7 +112,7 @@ export default function Story(props) {
           </Text>
         </RestyledOverflow>
       </RestyledLeft>
-      <RestyledRight rightMargin>
+      <RestyledRight rightMargin text={textStatus}>
         <Image alt="fantasy illustration" src={image} />
       </RestyledRight>
     </Main>

@@ -12,15 +12,22 @@ const colors = {
 };
 
 export default p => `
-    ${p.c ? 'color:' + colors[p.c] : noCSS};
-    ${p.s ? 'font-size:' + p.s + 'rem' : noCSS};
-    ${p.italic ? 'font-style: italic' : noCSS};
-    ${p.normal ? 'font-weight: normal' : noCSS};
-    ${p.t ? 'margin-top:' + p.t + 'px' : noCSS};
-    ${p.b ? 'margin-bottom:' + p.b + 'px' : noCSS};
+  ${p.c ? 'color:' + colors[p.c] : noCSS};
+  ${p.s ? 'font-size:' + p.s + 'rem' : noCSS};
+  ${p.italic ? 'font-style: italic' : noCSS};
+  ${p.normal ? 'font-weight: normal' : noCSS};
+  ${p.t ? 'margin-top:' + p.t + 'px' : noCSS};
+  ${p.b ? 'margin-bottom:' + p.b + 'px' : noCSS};
 
-    @media (min-width: 848px){
-        ${p.bC ? 'color:' + colors[p.bC] : noCSS};
-        ${p.bT ? 'margin-top:' + p.bT + 'px' : noCSS};
-    }
+  @media (min-width: 390px) {
+    ${p.rS ? 'font-size:' + p.rS + 'rem' : noCSS};
+    ${p.rT ? 'margin-top:' + p.rT + 'px' : noCSS};
+    ${p.rB ? 'margin-bottom:' + p.rB + 'px' : noCSS};
+  } 
+
+  @media (min-width: 848px){
+      ${p.bC ? 'color:' + colors[p.bC] : noCSS};
+      ${p.bT ? 'margin-top:' + p.bT + 'px' : noCSS};
+      ${p.bS ? 'font-size:' + p.bS + 'rem' : noCSS};
+  }
 `;
