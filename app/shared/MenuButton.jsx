@@ -23,6 +23,7 @@ const Label = styled.p`
   color: ${p => (!p.menu ? '#6e7dab' : '#fd1172')};
   transition: color 1s;
   margin: 0px;
+  cursor: pointer;
 `;
 const Icon = styled.div`
   height: 4px;
@@ -40,8 +41,10 @@ const Line = styled.div`
   height: ${p => (!p.menu ? '1px' : '2px')};
   background-color: ${p => (!p.menu ? '#6e7dab' : '#ffe74c')};
 
-  ${StyledLink}:hover & {
-    height: 2px;
+  @media (hover) {
+    ${Container}:hover & {
+      height: 2px;
+    }
   }
 `;
 
