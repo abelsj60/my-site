@@ -1,3 +1,5 @@
+import dotFull from '../../public/dot-full.png';
+import dotEmpty from '../../public/dot-empty.png';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';
@@ -40,20 +42,12 @@ const RestyledLink = styled(StyledLink)`
   @media (min-width: 848px) {
   }
 `;
-// const RestyledGraf = styled(Graf)`
-//   flex: 1;
-//   text-align: center;
-//   font-size: 1.3rem;
-//   margin: 0px;
-
-//   @media (min-width: 848px) {
-//   }
-// `;
 const Selector = styled.div`
   // flex: 1;
   // padding-top: 5px;
   height: 8px;
   background: ${p => `url(${p.image})`} center no-repeat;
+  background-size: contain;
 `;
 
 export default function ChapterNav(props) {
@@ -84,8 +78,8 @@ export default function ChapterNav(props) {
                 data[idx].attributes.title
               );
               const dot = itemIsActive
-                ? '/dot-full.svg'
-                : '/dot-empty.svg';
+                ? dotFull
+                : dotEmpty;
 
               return (
                 <Item key={idx}>

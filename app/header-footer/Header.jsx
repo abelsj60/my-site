@@ -1,4 +1,6 @@
 import EventHandling from '../classes/EventHandling.js';
+import headerNavClose from '../../public/header-nav-open.png';
+import headerNavOpen from '../../public/header-nav-closed.png';
 import Location from '../classes/Location.js';
 import Mapper from '../shared/Mapper.jsx';
 import React, { Component } from 'react';
@@ -54,7 +56,7 @@ const Motto = styled.p`
   
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
-  margin-top: 2px;
+  margin-top: 7px;
   font-style: italic;
   font-size: 1.2rem;
   margin-left: 10px;
@@ -129,11 +131,9 @@ export default class Header extends Component {
     } = appState;
     const menuIsActive = this.state.menuIsOpen;
     const homeIsActive = currentCaller === 'home';
-    const togglerSource = `/menu-${
-      menuIsActive
-        ? 'open'
-        : 'closed'
-    }-icon.svg`;
+    const iconType = menuIsActive
+      ? headerNavClose
+      : headerNavOpen;
 
     const referrer = new Referrer(this.props);
     const eForHeader = new EventHandling(
@@ -192,7 +192,7 @@ export default class Header extends Component {
         <Icon
           home={homeIsActive}
           menu={menuIsActive}
-          src={togglerSource}
+          src={iconType}
           onClick={
             () => handleClickForHeader()
           }

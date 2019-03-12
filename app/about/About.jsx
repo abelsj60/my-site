@@ -1,6 +1,7 @@
 import bio from '../data/about/about.md';
 import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
+import linkedInIcon from '../../public/linked-in-icon.png';
 import Right from '../primitives/Right.jsx';
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';
@@ -48,7 +49,8 @@ const Icon = styled.div`
   width: 30px;
   // margin-bottom: 6px;
   margin-right: 2px;
-  background: url(/profile-badge.svg) no-repeat;
+  background: url(${p => p.src}) no-repeat;
+  background-size: contain;
 `;
 const RestyledExternalLink = styled(ExternalLink)`
   @media (min-width: 848px) {
@@ -76,7 +78,7 @@ export default function About() {
               to="https://www.linkedin.com/in/jameserikabels"
               target="_blank">*/
               }
-              <Icon />
+              <Icon src={linkedInIcon} />
               {
               /*</ReactGA.OutboundLink>*/
               }

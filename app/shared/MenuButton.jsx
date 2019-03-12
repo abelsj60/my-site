@@ -1,3 +1,5 @@
+import arrowUp from '../../public/arrow-up.png';
+import arrowDown from '../../public/arrow-down.png';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -32,6 +34,7 @@ const Icon = styled.div`
   align-self: center;
   fill: #6e7dab;
   background: ${p => `url(${p.image})`} no-repeat;
+  background-size: contain;
 `;
 const Line = styled.div`
   position: absolute;
@@ -42,6 +45,7 @@ const Line = styled.div`
   background-color: ${p => (!p.menu ? '#6e7dab' : '#ffe74c')};
 
   @media (hover) {
+    // https://css-tricks.com/annoying-mobile-double-tap-link-issue/
     ${Container}:hover & {
       height: 2px;
     }
@@ -62,8 +66,8 @@ export default function MenuButton(props) {
         ? `/${lastCaller}`
         : `/${currentCaller}/menu`;
   const arrowIcon = !isMenu
-    ? '/arrow-down.svg'
-    : '/arrow-up.svg';
+    ? arrowDown
+    : arrowUp;
   const text = isMenu ? 'Close' : 'Menu';
 
   return (
