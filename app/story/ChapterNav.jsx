@@ -2,7 +2,7 @@ import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled from 'styled-components';
-import Graf from '../primitives/Graf.jsx';
+// import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
@@ -51,6 +51,7 @@ const RestyledLink = styled(StyledLink)`
 // `;
 const Selector = styled.div`
   // flex: 1;
+  // padding-top: 5px;
   height: 8px;
   background: ${p => `url(${p.image})`} center no-repeat;
 `;

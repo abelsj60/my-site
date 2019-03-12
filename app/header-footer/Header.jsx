@@ -43,6 +43,7 @@ const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
   font-size: 1.4rem;
   font-weight: bold;
+  padding-bottom: 0px;
 
   @media (min-width: 390px) {
     font-size: 1.5rem;
@@ -96,10 +97,12 @@ const Icon = styled.img`
   height: 17px;
   width: 17px;
   margin-left: auto;
-  margin-right: 15px;
+  margin-right: 10px;
   cursor: pointer;
   padding-top: 5px;
   padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 
   @media (min-width: 705px) {
     display: none;

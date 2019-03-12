@@ -211,9 +211,12 @@ class App extends Component {
 export default withRouter(App);
 
 // copyright?
-// ngrok on mobile + Endtest
+// Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
-// Why is link color flashing red on ChapterNav
+
+// ScrollTop for Reverie?
+// Line size under Menu Button
+// Desktop size CSS — A MESS!
 
 // Images — how to store for React?
 // Illustrator. List needs, specs?

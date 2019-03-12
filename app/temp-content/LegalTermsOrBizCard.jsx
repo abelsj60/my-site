@@ -16,8 +16,8 @@ const Container = styled.section`
     p.home
     && css`
       z-index: 1;
-      background-color: rgba(255, 231, 76, 0.1);
-      background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
+      background-color: rgba(0, 0, 0, 0.5);
+      // background-image: url('https://www.transparenttextures.com/patterns/bright-squares.png');
     `};
 `;
 const InnerContainer = styled.div`
