@@ -24,11 +24,13 @@ const Label = styled.p`
   transition: color 1s;
   margin: 0px;
 `;
-const Arrow = styled.img`
+const Icon = styled.div`
   height: 4px;
-  margin-left: 17px;
+  width: 8px;
+  margin-left: 16px;
   align-self: center;
   fill: #6e7dab;
+  background: ${p => `url(${p.image})`} no-repeat;
 `;
 const Line = styled.div`
   position: absolute;
@@ -68,7 +70,7 @@ export default function MenuButton(props) {
         || undefined
       }>
         <Label menu={isMenu}>{text}</Label>
-        <Arrow src={arrowIcon} />
+        <Icon image={arrowIcon} />
         <Line menu={isMenu} />
       </RestyledLink>
     </Container>

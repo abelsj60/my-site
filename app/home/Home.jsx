@@ -25,7 +25,6 @@ const NameTag = styled.div`
   z-index: 2;
   margin-top: 10px;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
 
   @media (min-width: 390px) {
     margin-top: 20px;

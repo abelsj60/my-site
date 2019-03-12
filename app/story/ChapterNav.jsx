@@ -13,7 +13,7 @@ const Nav = styled.nav`
   // width: 150px;
   // margin: 0px 25px 11px 2px;
   // margin-bottom: 10px;
-  flex: 1;
+  // flex: 1;
   // max-width: 175px;
   // margin-left: 15px;
   margin-right: 25px;
@@ -23,30 +23,36 @@ const Nav = styled.nav`
   }
 `;
 const StyledUL = styled(UnorderedList)`
-  flex: 1;
+  // flex: 1;
   display: flex;
 `;
 const Item = styled.li`
   flex: 1;
-  flex-direction: column;
-  align-items: center;
+  // flex-direction: column;
+  // align-items: center;
 `;
 const RestyledLink = styled(StyledLink)`
   // color: white;
   // color: #6e7dab;
-  color: black;
+  // color: black;
+  // display: flex;
 
   @media (min-width: 848px) {
   }
 `;
-const RestyledGraf = styled(Graf)`
-  flex: 1;
-  text-align: center;
-  font-size: 1.3rem;
-  margin: 0px;
+// const RestyledGraf = styled(Graf)`
+//   flex: 1;
+//   text-align: center;
+//   font-size: 1.3rem;
+//   margin: 0px;
 
-  @media (min-width: 848px) {
-  }
+//   @media (min-width: 848px) {
+//   }
+// `;
+const Selector = styled.div`
+  // flex: 1;
+  height: 8px;
+  background: ${p => `url(${p.image})`} center no-repeat;
 `;
 
 export default function ChapterNav(props) {
@@ -76,16 +82,20 @@ export default function ChapterNav(props) {
               const normalizedTitle = normalize(
                 data[idx].attributes.title
               );
-              const chapterId = itemIsActive
-                ? '●'
-                : '○';
+              const dot = itemIsActive
+                ? '/dot-full.svg'
+                : '/dot-empty.svg';
 
               return (
                 <Item key={idx}>
                   <RestyledLink to={`/chapter/${normalizedTitle}`}>
-                    <RestyledGraf item={itemIsActive} num={idx} s="1.3" c="lightBlack">
-                      {chapterId}
-                    </RestyledGraf>
+                    <Selector
+                      image={dot}
+                      item={itemIsActive}
+                      num={idx}
+                      s="1.3"
+                      c="lightBlack"
+                    />
                   </RestyledLink>
                 </Item>
               );

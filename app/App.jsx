@@ -8,7 +8,7 @@ import Footer from './header-footer/Footer.jsx';
 // import ReactGA from 'react-ga';
 import Graf from './primitives/Graf.jsx';
 import Header from './header-footer/Header.jsx';
-import { isMobileSafari, isMobile } from 'react-device-detect';
+import { isMobileSafari } from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
@@ -21,12 +21,13 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Lato', sans-serif;
     font-size: 65%;
   }
-
+  
   body {
     margin: 0px;
     padding: 0px;
     font-size: 1.5rem;
     -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 
     h1,
     h2,
