@@ -118,31 +118,41 @@ export default class Location {
   }
 
   get isSwappingContent() {
+    let contentMismatch;
+    const { isMenu } = this.params;
+
     switch (this.type) {
       case 'chapter':
         const currentChapter = this.params.title;
         const lastChapter = this.params.lastChapter;
-        return currentChapter !== lastChapter;
+        contentMismatch = currentChapter !== lastChapter;
+        break;
       case 'projects':
         const currentProjectPicture = this.params.projectThumbnail;
         const lastProjectPicture = this.params.lastProjectPicture;
         const currentProjectName = this.params.projectName;
         const lastProjectName = this.params.lastProject;
-        return (
+        contentMismatch = (
           currentProjectName !== lastProjectName
           || currentProjectPicture !== lastProjectPicture
         );
+        break;
       case 'journalism':
         const currentHeadline = this.params.headline;
         const lastHeadline = this.params.lastHeadline;
-        return currentHeadline !== lastHeadline;
+        contentMismatch = currentHeadline !== lastHeadline;
+        break;
       case 'reverie':
         const currentReverie = this.params.headline;
         const lastReverie = this.params.lastHeadline;
-        return currentReverie !== lastReverie;
+        contentMismatch = currentReverie !== lastReverie;
+        break;
       default:
-        return;
+        contentMismatch = false;
+        break;
     }
+
+    return contentMismatch && !isMenu;
   }
 
   get justChanged() {

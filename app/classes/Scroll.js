@@ -13,14 +13,18 @@ export default class Scroll {
     return currentIndexForProjectData !== prevIndexForProjectData;
   }
 
-  resetTopIfNeeded(overflowRef, prevProps) {
-    if (overflowRef.current.scrollTop !== 0) {
-      const updateScrollTop = this._type === 'projects'
-        ? this._swappingProjects(prevProps)
-        : true;
+  resetTopIfGreaterThanZero(overflowRef, prevProps) {
+    const overflowRefExists = overflowRef.current !== null;
 
-      if (updateScrollTop) {
-        overflowRef.current.scrollTop = 0;
+    if (overflowRefExists) {
+      if (overflowRef.current.scrollTop !== 0) {
+        const updateScrollTop = this._type === 'projects'
+          ? this._swappingProjects(prevProps)
+          : true;
+
+        if (updateScrollTop) {
+          overflowRef.current.scrollTop = 0;
+        }
       }
     }
   }

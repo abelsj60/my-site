@@ -45,6 +45,7 @@ const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
   font-size: 1.4rem;
   font-weight: bold;
+  padding-top: 0px;
   padding-bottom: 0px;
 
   @media (min-width: 390px) {
@@ -56,14 +57,16 @@ const Motto = styled.p`
   
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
-  margin-top: 7px;
+  // margin-top: 7px;
   font-style: italic;
   font-size: 1.2rem;
   margin-left: 10px;
+  padding-top: 2.1px;
 
   @media (min-width: 390px) {
     font-size: 1.3rem;
     margin-left: 15px;
+    padding-top: 1px;
   }
 `;
 const Nav = styled.nav`

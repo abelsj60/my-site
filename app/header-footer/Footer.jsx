@@ -16,7 +16,7 @@ const Container = styled.footer`
   position: relative;
 
   @media (min-width: 848px) {
-    justify-content: 'flex-end';
+    justify-content: flex-end;
   }
 `;
 const Line = styled.div`
@@ -116,7 +116,9 @@ export default function FooterContainer(props) {
         <RestyledGraf
           active={showBusinessCard}
           onClick={
-            () => boundHandleClickForApp('toggleBusinessCard')
+            () => {
+              boundHandleClickForApp('toggleBusinessCard');
+            }
           }
         >
           Contact

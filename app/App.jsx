@@ -1,16 +1,16 @@
 import Body from './Body.jsx';
-import styled, {
+import {
   css,
   createGlobalStyle
 } from 'styled-components';
 import EventHandling from './classes/EventHandling.js';
 import Footer from './header-footer/Footer.jsx';
 // import ReactGA from 'react-ga';
-import Graf from './primitives/Graf.jsx';
 import Header from './header-footer/Header.jsx';
 import { isMobileSafari } from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
+import MobileSafariSpacer from './shared/MobileSafariSpacer.jsx';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import Scroll from './classes/Scroll.js';
@@ -19,7 +19,7 @@ import { withRouter } from 'react-router';
 const GlobalStyle = createGlobalStyle`
   html {
     font-family: 'Lato', sans-serif;
-    font-size: 65%;
+    font-size: 65%; // 62.5%
   }
   
   body {
@@ -51,17 +51,6 @@ const GlobalStyle = createGlobalStyle`
       `};
   }
 `;
-const SpacerForMobileSafari = styled.div`
-  height: 74px; 
-  background-color: #fd1172;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const TextForMobileSafariSpacer = styled(Graf)`
-  max-width: 70%; 
-  text-align: center;
-`;
 
 class App extends Component {
   constructor(props) {
@@ -83,23 +72,22 @@ class App extends Component {
       isMenu: referrer.isMenu(props),
       showBusinessCard: false,
       showLegalTerms: false,
-      showStoryText: true
+      showStoryText: true,
+      copied: false
     };
+
+    this.makeCopies = this.makeCopies.bind(this);
+  }
+
+  makeCopies(val) {
+    this.setState(() => ({ copied: val }));
   }
 
   render() {
     const location = new Location('/', this.props);
     const eForApp = new EventHandling('app', this);
     const boundHandleClickForApp = eForApp.boundHandleClick;
-
-    let scroll;
-
-    if (isMobileSafari) {
-      scroll = new Scroll(location);
-    }
-
     const homeIsActive = location.type === 'home';
-    const textForSafariSpacer = "Pay me no mind. I'm a spacer for mobile Safari. Tap to hide me...!";
 
     return (
       <Fragment>
@@ -110,27 +98,18 @@ class App extends Component {
           appState={this.state}
           boundHandleClickForApp={boundHandleClickForApp}
         />
-        <LegalTermsOrBizCard {...this.props} appState={this.state} />
+        <LegalTermsOrBizCard
+          {...this.props}
+          appState={this.state}
+          makeCopies={this.makeCopies}
+          boundHandleClickForApp={boundHandleClickForApp}
+        />
         <Footer
           {...this.props}
           appState={this.state}
           boundHandleClickForApp={boundHandleClickForApp}
         />
-        {isMobileSafari
-          && <SpacerForMobileSafari
-            onClick={
-              () => scroll.resetMobileSafariTop()
-            }
-            ref={
-              ref => this.ref.current = ref
-            }>
-            <TextForMobileSafariSpacer
-              c="yellow"
-              s="1.3"
-            >
-              {textForSafariSpacer}
-            </TextForMobileSafariSpacer>
-          </SpacerForMobileSafari>}
+        <MobileSafariSpacer {...this.props} />
       </Fragment>
     );
   }
@@ -164,6 +143,7 @@ class App extends Component {
       }
 
       if (showLegalTerms) {
+        console.log('setState?');
         handleClickForApp('toggleLegalTerms');
       }
 
@@ -214,11 +194,9 @@ export default withRouter(App);
 // Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 
-// ScrollTop for Reverie?
-// Line size under Menu Button
-// Desktop size CSS — A MESS!
+// Set state using existing state needs to be () => {} format
 
-// Images — how to store for React?
+// Clean up CSS
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 

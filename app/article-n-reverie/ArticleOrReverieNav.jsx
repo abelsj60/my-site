@@ -8,7 +8,7 @@ import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const StyledUL = styled(UnorderedList)`
   height: 100%;
-  overflow: auto;
+  overflow: ${p => (!p.menu ? 'auto' : undefined) };
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;
 const GrafAsDek = styled(Graf)`

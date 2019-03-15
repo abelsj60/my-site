@@ -85,7 +85,7 @@ export default class EventHandling {
           break;
       }
 
-      return this.setState(stateToUpdate);
+      return this.setState(() => stateToUpdate);
     };
   }
 

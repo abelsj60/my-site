@@ -26,6 +26,7 @@ const Label = styled.p`
   transition: color 1s;
   margin: 0px;
   cursor: pointer;
+  margin-top: -2px;
 `;
 const Icon = styled.div`
   height: 4px;

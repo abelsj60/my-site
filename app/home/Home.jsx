@@ -1,4 +1,3 @@
-// import Button from '../shared/Button.jsx';
 import Graf from '../primitives/Graf.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
@@ -10,8 +9,6 @@ const RestyledMain = styled(Main)`
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-  // height: 100%;
-  // width: 100%;
 
   @media (min-width: 848px) {
     flex-direction: column;
@@ -29,23 +26,14 @@ const NameTag = styled.div`
   @media (min-width: 390px) {
     margin-top: 20px;
   }
-
-  // @media (min-width: 848px) {
-  //   margin-top: 30px;
-  // }
 `;
 const RestyledHed = styled(Hed)`
   font-family: 'Aref Ruqaa', serif;
   text-shadow: 1px 1px 2px black;
-
-  @media (min-width: 390px) {
-    font-size: 6rem;
-  }
 `;
 const RestyledGraf = styled(Graf)`
   text-shadow: 1px 1px 2px black;
   margin-left: 18px;
-  font-weight: bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 `;
@@ -109,10 +97,23 @@ export default function Home(props) {
               data-pointer-events={true}
               tempContentIsOn={showBusinessCard || showLegalTerms}
             >
-              <RestyledHed c="yellow" data-depth=".3" s="4.5" bS="6.5">
+              <RestyledHed
+                c="yellow"
+                data-depth=".35"
+                s="4.5"
+                rS="6.5"
+              >
                 JamesAbels
               </RestyledHed>
-              <RestyledGraf c="pink" data-depth=".3" s="1.5" t="64" bS="1.7" bT="93">
+              <RestyledGraf
+                c="pink"
+                data-depth=".2"
+                s="1.7"
+                t="64"
+                rS="2.35"
+                rT="93"
+                rL="20"
+              >
                 Coding narratives and more
               </RestyledGraf>
             </NameTag>

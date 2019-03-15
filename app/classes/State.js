@@ -58,6 +58,7 @@ export default class State {
   rebuild(setStateCallback) {
     const indices = this._convertParamsToIndices();
 
+    // Only -1 if explicitly set by a params method
     if (indices.one !== -1 && indices.two !== -1) {
       setStateCallback(indices.one, indices.two);
     }
@@ -67,6 +68,8 @@ export default class State {
     const params = this._params;
     const referrer = this._referrer;
 
+    // Variables will only be -1 if explicitly set by a params method
+    // Thus, single param routes will pass the rebuild test w/o fuss
     let indexOne;
     let indexTwo;
 

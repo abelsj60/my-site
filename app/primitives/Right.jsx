@@ -5,8 +5,4 @@ export default styled.section`
   display: flex;
   flex-direction: column;
   overflow: auto;
-
-  @media (min-width: 848px) {
-    margin: 25px;
-  }
 `;

@@ -23,6 +23,7 @@ export default p => `
     ${p.rS ? 'font-size:' + p.rS + 'rem' : noCSS};
     ${p.rT ? 'margin-top:' + p.rT + 'px' : noCSS};
     ${p.rB ? 'margin-bottom:' + p.rB + 'px' : noCSS};
+    ${p.rL ? 'margin-left:' + p.rL + 'px' : noCSS};
   } 
 
   @media (min-width: 848px){

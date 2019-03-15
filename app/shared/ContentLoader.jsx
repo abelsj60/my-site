@@ -118,14 +118,17 @@ export default class ContentLoader extends Component {
         location
       );
 
+      // Pass handleClick to save new path params (converted to index) to bodyState
       state.rebuild(
         this.props.boundHandleClickForBody
       );
 
-      if (this.overflowRef.current) {
+      // ContentLoader is still mounted on the /menu path, but it may
+      // nt contain an overflowRef, so we filter it to prevent error
+      if (!location.params.isMenu) {
         const scroll = new Scroll(location);
 
-        scroll.resetTopIfNeeded(
+        scroll.resetTopIfGreaterThanZero(
           this.overflowRef,
           prevProps
         );
