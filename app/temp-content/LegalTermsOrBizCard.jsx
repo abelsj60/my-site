@@ -32,7 +32,7 @@ const InnerContainer = styled.div`
 const Card = styled.section`
   height: 160px;
   width: 275px;
-  background-color: ${p => p.reverie ? '#D2E7FF' : 'white'};
+  background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
   pointer-events: all;
 
   @media (min-width: 400px) {
@@ -48,7 +48,7 @@ const CardContentArea = styled.div`
 `;
 const StyledClipboardButton = styled(Clipboard)`
   border: ${p => p.businessCard ? '0.5px solid #fd1172' : 'unset'};
-  background-color: ${p => p.reverie ? '#D2E7FF' : 'white'};
+  background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
   padding: 0px;
   height: 85%;
   width: 90%;
