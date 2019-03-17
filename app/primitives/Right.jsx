@@ -5,4 +5,8 @@ export default styled.section`
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  @media (min-height: 530px) {
+    margin-top: 25px;
+  }
 `;

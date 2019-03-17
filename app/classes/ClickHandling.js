@@ -1,6 +1,6 @@
 import Referrer from './Referrer';
 
-export default class EventHandling {
+export default class ClickHandling {
   constructor(component, outsideThis) {
     if (outsideThis.props.location === undefined) {
       throw new Error(

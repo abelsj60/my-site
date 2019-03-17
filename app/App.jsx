@@ -1,9 +1,9 @@
 import Body from './Body.jsx';
+import ClickHandling from './classes/ClickHandling.js';
 import {
   css,
   createGlobalStyle
 } from 'styled-components';
-import EventHandling from './classes/EventHandling.js';
 import Footer from './header-footer/Footer.jsx';
 // import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
@@ -13,7 +13,7 @@ import Location from './classes/Location.js';
 import MobileSafariSpacer from './shared/MobileSafariSpacer.jsx';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
-import Scroll from './classes/Scroll.js';
+import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
 
 const GlobalStyle = createGlobalStyle`
@@ -72,21 +72,14 @@ class App extends Component {
       isMenu: referrer.isMenu(props),
       showBusinessCard: false,
       showLegalTerms: false,
-      showStoryText: true,
-      copied: false
+      showStoryText: true
     };
-
-    this.makeCopies = this.makeCopies.bind(this);
-  }
-
-  makeCopies(val) {
-    this.setState(() => ({ copied: val }));
   }
 
   render() {
     const location = new Location('/', this.props);
-    const eForApp = new EventHandling('app', this);
-    const boundHandleClickForApp = eForApp.boundHandleClick;
+    const hcForApp = new ClickHandling('app', this);
+    const boundHandleClickForApp = hcForApp.boundHandleClick;
     const homeIsActive = location.type === 'home';
 
     return (
@@ -101,7 +94,6 @@ class App extends Component {
         <LegalTermsOrBizCard
           {...this.props}
           appState={this.state}
-          makeCopies={this.makeCopies}
           boundHandleClickForApp={boundHandleClickForApp}
         />
         <Footer
@@ -120,11 +112,11 @@ class App extends Component {
       this.props,
       prevProps
     );
-    let scroll;
+    let scrollHandler;
 
     if (isMobileSafari) {
-      scroll = new Scroll(location);
-      scroll.resetMobileSafariTop();
+      scrollHandler = new ScrollHandling(location);
+      scrollHandler.resetMobileSafariTop();
     }
 
     if (location.justChanged) {
@@ -135,15 +127,14 @@ class App extends Component {
         showStoryText
       } = this.state;
       const referrer = new Referrer(prevProps);
-      const eForApp = new EventHandling('app', this);
-      const handleClickForApp = eForApp.boundHandleClick;
+      const hcForApp = new ClickHandling('app', this);
+      const handleClickForApp = hcForApp.boundHandleClick;
 
       if (showBusinessCard) {
         handleClickForApp('toggleBusinessCard');
       }
 
       if (showLegalTerms) {
-        console.log('setState?');
         handleClickForApp('toggleLegalTerms');
       }
 
@@ -152,11 +143,30 @@ class App extends Component {
       }
 
       if (isMenu !== referrer.isMenu(this.props)) {
+        // See note below.
         handleClickForApp('toggleMenu');
       }
 
       /** Don't update callers on reload */
       if (!location.isReloading) {
+        // Note: In some situations, the callers on state
+        // will lag the reality of the application. In at
+        // least some of these cases, the reason is that
+        // seState is asynchornous, meaning there is a
+        // lag in execution, leaving appState behind.
+        // A partial fix is to move the callers out
+        // of appState and treat them as class properties
+        // instead. This raises the question — what is the
+        // line as to when to manage a property on state
+        // versus as non-state class properties. Properties
+        // that track something, but which don't have to
+        // cause a re-render, shouldn't necessarily be
+        // added to state. This rule might apply to the
+        // callers, and isMenu (above).
+        // As of 3/16, we are not addressing it. If you
+        // want to restore scroll position, however you
+        // may need to tackle this question as the values
+        // and state changes will need up-to-date info.
         handleClickForApp(
           'setCallers',
           location.type,
@@ -194,9 +204,9 @@ export default withRouter(App);
 // Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 
-// Set state using existing state needs to be () => {} format
-
+// Fix styled-components attribute use
 // Clean up CSS
+
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 

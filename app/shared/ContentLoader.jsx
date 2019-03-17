@@ -8,7 +8,7 @@ import {
   Redirect,
   Switch
 } from 'react-router';
-import Scroll from '../classes/Scroll.js';
+import ScrollHandling from '../classes/ScrollHandling.js';
 import State from '../classes/State.js';
 
 export default class ContentLoader extends Component {
@@ -118,17 +118,18 @@ export default class ContentLoader extends Component {
         location
       );
 
-      // Pass handleClick to save new path params (converted to index) to bodyState
+      // Pass handleClick to save new path params
+      // (converted to index) to bodyState
       state.rebuild(
         this.props.boundHandleClickForBody
       );
 
-      // ContentLoader is still mounted on the /menu path, but it may
-      // nt contain an overflowRef, so we filter it to prevent error
+      // ContentLoader is still mounted on the /menu
+      // path, but it may not contain an overflowRef,
+      // so we filter it to prevent error
       if (!location.params.isMenu) {
-        const scroll = new Scroll(location);
-
-        scroll.resetTopIfGreaterThanZero(
+        const scrollHandler = new ScrollHandling(location);
+        scrollHandler.resetTopIfGreaterThanZero(
           this.overflowRef,
           prevProps
         );

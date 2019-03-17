@@ -1,4 +1,4 @@
-export default class Scroll {
+export default class ScrollHandling {
   constructor(location) {
     this._location = location;
     this._type = location.type;

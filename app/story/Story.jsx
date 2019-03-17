@@ -17,6 +17,10 @@ const RestyledLeft = styled(Left)`
   padding: 0px 0px 25px 25px;
   margin-top: 10px;
 
+  @media (min-height: 530px) {
+    margin-top: 25px;
+  }
+
   @media (min-width: 848px) {
     max-width: 327px;
     padding: 0px;

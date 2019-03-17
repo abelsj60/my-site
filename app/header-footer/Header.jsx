@@ -1,4 +1,4 @@
-import EventHandling from '../classes/EventHandling.js';
+import ClickHandling from '../classes/ClickHandling.js';
 import headerNavClose from '../../public/header-nav-open.png';
 import headerNavOpen from '../../public/header-nav-closed.png';
 import Location from '../classes/Location.js';
@@ -139,12 +139,12 @@ export default class Header extends Component {
       : headerNavOpen;
 
     const referrer = new Referrer(this.props);
-    const eForHeader = new EventHandling(
+    const hcForHeader = new ClickHandling(
       'header',
       this
     );
 
-    const handleClickForHeader = eForHeader.boundHandleClick;
+    const handleClickForHeader = hcForHeader.boundHandleClick;
 
     return (
       <Container home={homeIsActive}>
@@ -158,7 +158,7 @@ export default class Header extends Component {
           James Abels
         </NameAsLink>
         <Motto hide={menuIsActive || homeIsActive}>
-          Coding narratives and more
+          Narrative coding and more
         </Motto>
         <Nav home={homeIsActive} menu={menuIsActive}>
           <NavList>
@@ -215,8 +215,8 @@ export default class Header extends Component {
       location.justChanged &&
       this.timeoutId !== undefined
     ) {
-      const eForApp = new EventHandling('header', this);
-      const handleClickForHeader = eForApp.boundHandleClick;
+      const hcForApp = new ClickHandling('header', this);
+      const handleClickForHeader = hcForApp.boundHandleClick;
 
       handleClickForHeader();
     }

@@ -1,6 +1,6 @@
 import About from './about/About.jsx';
+import ClickHandling from './classes/ClickHandling.js';
 import ContentLoader from './shared/ContentLoader.jsx';
-import EventHandling from './classes/EventHandling.js';
 import Home from './home/Home.jsx';
 import Location from './classes/Location';
 import NotFound from './not-found/NotFound.jsx';
@@ -42,7 +42,7 @@ export default class Body extends Component {
   }
 
   render() {
-    const eventHandling = new EventHandling('body', this);
+    const eventHandling = new ClickHandling('body', this);
     const boundHandleClickForBody = eventHandling.boundHandleClick;
 
     return (

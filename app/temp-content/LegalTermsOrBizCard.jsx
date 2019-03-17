@@ -1,6 +1,7 @@
 import Clipboard from 'react-clipboard.js';
+import Graf from '../primitives/Graf.jsx';
 import Parallax from '../shared/Parallax.jsx';
-import React from 'react';
+import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
 const Container = styled.section`
@@ -11,21 +12,14 @@ const Container = styled.section`
   top: ${p => (p.home ? '0' : '52px')};
   bottom: ${p => (p.home ? '0' : '54px')};
   width: 100%;
-  background-color: ${
-  p => !p.copied
-    ? 'rgba(0, 0, 0, 0.7)'
-    : 'rgba(253,17,114, 0.7)'};
+  background-color: ${p => !p.copying ? 'rgba(0, 0, 0, 0.7)' : 'rgba(253,17,114, 0.7)'};
   transition: background-color .75s;
 
   ${p =>
     p.home
     && css`
       z-index: 1;
-      background-color: ${
-  !p.copied
-    ? 'rgba(0, 0, 0, 0.5)'
-    : 'rgba(253,17,114, 0.5)'};
-    `};
+      background-color: ${!p.copying ? 'rgba(0, 0, 0, 0.35)' : 'rgba(255,231,76, 0.25)'};`};
 `;
 const CardHolder = styled.div`
   display: flex;
@@ -51,16 +45,15 @@ const CardContentArea = styled.div`
   align-items: center;
   height: 100%;
 `;
-const Graf = styled.p`
+const RestyledGraf = styled(Graf)`
   height: 100%;
   flex: 1;
-  font-size: ${p => !p.copied ? '1.2rem' : '4rem'};
-  color: ${p => p.copied ? '#455057' : 'unset'};
+  font-size: 1.2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   @media (min-width: 400px) {
-    font-size: ${p => !p.copied ? '1.4rem' : '4rem'};
+    font-size: 1.4rem;
   }
 `;
 const StyledClipboardButton = styled(Clipboard)`
@@ -72,95 +65,153 @@ const StyledClipboardButton = styled(Clipboard)`
   pointer-events: all;
 
   :focus {
-    outline: 0;
+    outline: 0px;
   }
 `;
 
-export default function LegalTermsOrBizCard(props) {
-  const {
-    showBusinessCard,
-    showLegalTerms,
-    copied,
-    currentCaller
-  } = props.appState;
+export default class LegalTermsOrBizCard extends Component {
+  constructor(props) {
+    super(props);
 
-  if (
-    !showBusinessCard && !showLegalTerms
-  ) return null;
+    this.timeoutId = null;
 
-  const homeIsActive = currentCaller === 'home';
-  const text = showBusinessCard
-    ? !copied
-      ? 'abelsj60_at_gmail.com'
-      : 'Copied!'
-    : `© ${
-      new Date().getFullYear()
-    } James Abels. All rights reserved.`;
-  const copyText = showBusinessCard
-    ? 'abelsj60@gmail.com'
-    : ''; // Nothing copied when empty string
-  let timeoutId = null;
+    this.state = {
+      copying: false
+    };
 
-  return (
-    <Container
-      home={homeIsActive}
-      copied={copied && !showLegalTerms}
-      onClick={
-        () => {
-          if (showBusinessCard) {
-            props.boundHandleClickForApp(
-              'toggleBusinessCard'
-            );
-          } else {
-            props.boundHandleClickForApp(
-              'toggleLegalTerms'
-            );
+    this.makeCopies = this.makeCopies.bind(this);
+  }
+
+  // Not added to ClickHandling. Dealing w/'this'
+  // binding inside the class is nightmarish.
+  // K.I.S.S.
+  makeCopies() {
+    const { copying } = this.state;
+    this.setState(
+      {
+        copying: !copying
+      }
+    );
+  }
+
+  render() {
+    if (
+      !this.props.appState.showBusinessCard
+        && !this.props.appState.showLegalTerms
+    ) return null;
+
+    const {
+      makeCopies,
+      state
+    } = this;
+    const {
+      copying
+    } = state;
+    const {
+      appState,
+      boundHandleClickForApp
+    } = this.props;
+    const {
+      showBusinessCard,
+      showLegalTerms,
+      currentCaller
+    } = appState;
+
+    const homeIsActive = currentCaller === 'home';
+    const cardText = showBusinessCard
+      ? !copying
+        ? 'abelsj60_at_gmail.com'
+        : 'Copied!'
+      : `© ${
+        new Date().getFullYear()
+      } James Abels. All rights reserved.`;
+
+    // StyledClipboardButton triggers success handler
+    // AFTER it's copied something to the DOM. So, we
+    // need to prevent its operation if we want to
+    // share this component with legalTerms. Turns
+    // out, it won't copy empty strings.
+    const textToCopy = showBusinessCard
+      ? 'abelsj60@gmail.com'
+      : '';
+
+    return (
+      <Container
+        home={homeIsActive}
+        copying={copying && !showLegalTerms}
+        onClick={
+          () => {
+            if (showBusinessCard) {
+              boundHandleClickForApp(
+                'toggleBusinessCard'
+              );
+            } else {
+              boundHandleClickForApp(
+                'toggleLegalTerms'
+              );
+            }
           }
         }
-      }
-    >
-      <CardHolder>
-        <Parallax
-          render={
-            renderProps => (
-              <InnerContainer
-                home={homeIsActive}
-                ref={
-                  el => (renderProps.scene = el)
-                }
-                onClick={
-                  e => e.stopPropagation()
-                }
-              >
-                <Card
-                  data-depth="1"
+      >
+        <CardHolder>
+          <Parallax
+            render={
+              renderProps => (
+                <InnerContainer
                   home={homeIsActive}
+                  ref={
+                    ref => (renderProps.scene = ref)
+                  }
+                  onClick={
+                    event => event.stopPropagation()
+                  }
                 >
-                  <CardContentArea>
-                    <StyledClipboardButton
-                      businessCard={showBusinessCard}
-                      data-clipboard-text={copyText}
-                      onSuccess={() => {
-                        if (showBusinessCard && timeoutId === null) {
-                          props.makeCopies(true);
-                          timeoutId = setTimeout(() => {
-                            props.makeCopies(false);
-                            timeoutId = null;
-                          }, 1300);
+                  <Card
+                    data-depth="1"
+                    home={homeIsActive}
+                  >
+                    <CardContentArea>
+                      <StyledClipboardButton
+                        businessCard={showBusinessCard}
+                        data-clipboard-text={textToCopy}
+                        onSuccess={
+                          () => {
+                            // Use this.props... so the value's updateed
+                            // when the listener's added to Clipboard.
+                            // There's a problem w/'this' otherwise.
+                            if (
+                              this.props.appState.showBusinessCard
+                                && this.timeoutId === null
+                            ) {
+                              makeCopies();
+                              this.timeoutId = setTimeout(
+                                () => {
+                                  this.timeoutId = null;
+                                  makeCopies();
+                                }, 1150
+                              );
+                            }
+                          }
                         }
-                      }}
-                    >
-                      <Graf copied={copied && !showLegalTerms}>
-                        {text}
-                      </Graf>
-                    </StyledClipboardButton>
-                  </CardContentArea>
-                </Card>
-              </InnerContainer>
-            )
-          }
-        />
-      </CardHolder>
-    </Container>
-  );
+                      >
+                        <RestyledGraf
+                          key={cardText}
+                          copying={
+                            !showLegalTerms
+                            && copying
+                          }
+                        >
+                          {cardText}
+                        </RestyledGraf>
+                      </StyledClipboardButton>
+                    </CardContentArea>
+                  </Card>
+                </InnerContainer>
+              )
+            }
+          />
+        </CardHolder>
+      </Container>
+    );
+  }
 }
