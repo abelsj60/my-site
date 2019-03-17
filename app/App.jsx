@@ -121,6 +121,8 @@ class App extends Component {
 
     if (location.justChanged) {
       const {
+        currentCaller,
+        lastCaller,
         isMenu,
         showBusinessCard,
         showLegalTerms,
@@ -138,7 +140,15 @@ class App extends Component {
         handleClickForApp('toggleLegalTerms');
       }
 
-      if (!showStoryText) {
+      if (
+        !showStoryText
+          && !location.isReloading
+          && location.type !== 'reverie'
+          && location.lastType !== 'reverie'
+      ) {
+        // If you've hidden text, and gone to reverie, and
+        // come back, the text will still be hidden. You
+        // can remove the three &&'s above to change.
         handleClickForApp('toggleStoryText');
       }
 
