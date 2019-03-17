@@ -85,7 +85,7 @@ export default function ArticleOrReverie(props) {
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed as="h2" normal italic c="pink" s="1.5" >
+          <Hed as="h2" normal italic c="pink" s="1.5">
             {reverieOrPublicationAsDek}
           </Hed>
           <Hed s="3">

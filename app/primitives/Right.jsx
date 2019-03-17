@@ -6,7 +6,7 @@ export default styled.section`
   flex-direction: column;
   overflow: auto;
 
-  @media (min-height: 530px) {
+  @media (min-width: 848px) {
     margin-top: 25px;
   }
 `;

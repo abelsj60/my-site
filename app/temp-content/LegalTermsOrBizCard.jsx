@@ -1,5 +1,6 @@
 import Clipboard from 'react-clipboard.js';
 import Graf from '../primitives/Graf.jsx';
+import StyledLink from '../primitives/StyledLink.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
@@ -46,6 +47,7 @@ const CardContentArea = styled.div`
   height: 100%;
 `;
 const RestyledGraf = styled(Graf)`
+  white-space: pre-wrap;
   height: 100%;
   flex: 1;
   font-size: 1.2rem;
@@ -82,18 +84,6 @@ export default class LegalTermsOrBizCard extends Component {
     this.makeCopies = this.makeCopies.bind(this);
   }
 
-  // Not added to ClickHandling. Dealing w/'this'
-  // binding inside the class is nightmarish.
-  // K.I.S.S.
-  makeCopies() {
-    const { copying } = this.state;
-    this.setState(
-      {
-        copying: !copying
-      }
-    );
-  }
-
   render() {
     if (
       !this.props.appState.showBusinessCard
@@ -118,13 +108,21 @@ export default class LegalTermsOrBizCard extends Component {
     } = appState;
 
     const homeIsActive = currentCaller === 'home';
+    const legalNotice =
+      <span>
+        <span style={{ marginBottom: '5px', display: 'block' }}>©
+          {new Date().getFullYear()}, James Abels. All rights reserved.
+        </span>
+        <span style={{ fontSize: '1.1rem', fontStyle: 'italic' }}>
+          (All <a style={{ color: 'black' }} href="/journalism" target="_blank">
+          clips</a> owned by their respective publisher.)
+        </span>
+      </span>;
     const cardText = showBusinessCard
       ? !copying
         ? 'abelsj60_at_gmail.com'
         : 'Copied!'
-      : `© ${
-        new Date().getFullYear()
-      } James Abels. All rights reserved.`;
+      : legalNotice;
 
     // StyledClipboardButton triggers success handler
     // AFTER it's copied something to the DOM. So, we
@@ -177,7 +175,7 @@ export default class LegalTermsOrBizCard extends Component {
                         onSuccess={
                           () => {
                             // Use this.props... so the value's updateed
-                            // when the listener's added to Clipboard.
+                            // after the listener's added to Clipboard.
                             // There's a problem w/'this' otherwise.
                             if (
                               this.props.appState.showBusinessCard
@@ -212,6 +210,18 @@ export default class LegalTermsOrBizCard extends Component {
           />
         </CardHolder>
       </Container>
+    );
+  }
+
+  // Not added to ClickHandling. Dealing w/'this'
+  // binding inside the class is nightmarish.
+  // K.I.S.S.
+  makeCopies() {
+    const { copying } = this.state;
+    this.setState(
+      {
+        copying: !copying
+      }
     );
   }
 }

@@ -12,7 +12,7 @@ const RestyledLink = styled(StyledLink)`
   display: flex;
   flex-shrink: 0;
   margin-right: auto;
-  margin-bottom: 11px;
+  margin-bottom: 13px;
   position: relative;
   padding-bottom: 6px;
 

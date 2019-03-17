@@ -53,19 +53,23 @@ const NameAsLink = styled(RestyledLink)`
   }
 `;
 const Motto = styled.p`
-  // display: none;
-  
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
-  // margin-top: 7px;
   font-style: italic;
   font-size: 1.2rem;
   margin-left: 10px;
+  margin-right: 15px;
   padding-top: 2.1px;
+  min-width: 0px;
+  // https://css-tricks.com/flexbox-truncated-text/
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @media (min-width: 390px) {
     font-size: 1.3rem;
     margin-left: 15px;
+    margin-right: 0px;
     padding-top: 1px;
   }
 `;
@@ -151,14 +155,14 @@ export default class Header extends Component {
         <NameAsLink
           hide={
             ((menuIsActive || homeIsActive) && 'active')
-            || undefined
+              || undefined
           }
           to={'/'}
         >
           James Abels
         </NameAsLink>
         <Motto hide={menuIsActive || homeIsActive}>
-          Narrative coding and more
+          Narrative coding and other adventures
         </Motto>
         <Nav home={homeIsActive} menu={menuIsActive}>
           <NavList>
@@ -174,11 +178,11 @@ export default class Header extends Component {
                       <RestyledLink
                         active={
                           (pathIsActive && 'active')
-                          || undefined
+                            || undefined
                         }
                         home={
                           (homeIsActive && 'active')
-                          || undefined
+                            || undefined
                         }
                         num={idx}
                         to={link.path}
@@ -212,8 +216,8 @@ export default class Header extends Component {
     );
 
     if (
-      location.justChanged &&
-      this.timeoutId !== undefined
+      location.justChanged
+        && this.timeoutId !== undefined
     ) {
       const hcForApp = new ClickHandling('header', this);
       const handleClickForHeader = hcForApp.boundHandleClick;
