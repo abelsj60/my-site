@@ -108,7 +108,6 @@ export default function Home(props) {
               <RestyledGraf
                 bold
                 c="yellow"
-                rC="yellow"
                 data-depth=".2"
                 s="1.21"
                 t="64"
