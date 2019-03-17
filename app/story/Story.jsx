@@ -33,11 +33,14 @@ const RestyledOverflow = styled(Overflow)`
 `;
 const RestyledRight = styled(Right)`
   display: ${p => (p.text !== 'hidden' ? 'none' : 'flex')};
-
   flex: 1;
   overflow: hidden;
   margin: 0px;
 
+  @media (min-height: 530px) {
+    margin-top: 0px;
+  }
+  
   @media (min-width: 848px) {
     display: flex;
     margin: 25px;
