@@ -47,7 +47,6 @@ const CardContentArea = styled.div`
   height: 100%;
 `;
 const RestyledGraf = styled(Graf)`
-  white-space: pre-wrap;
   height: 100%;
   flex: 1;
   font-size: 1.2rem;
@@ -108,14 +107,26 @@ export default class LegalTermsOrBizCard extends Component {
     } = appState;
 
     const homeIsActive = currentCaller === 'home';
+    const linkOrTextForClips = currentCaller !== 'journalism'
+      ? <StyledLink style={{
+        color: 'black',
+        textDecoration: 'underline'
+      }} to="/journalism">
+      clips</StyledLink>
+      : 'clips';
     const legalNotice =
       <span>
-        <span style={{ marginBottom: '5px', display: 'block' }}>©
+        <span style={{
+          display: 'block',
+          marginBottom: '5px'
+        }}>©
           {new Date().getFullYear()}, James Abels. All rights reserved.
         </span>
-        <span style={{ fontSize: '1.1rem', fontStyle: 'italic' }}>
-          (All <a style={{ color: 'black' }} href="/journalism" target="_blank">
-          clips</a> owned by their respective publisher.)
+        <span style={{
+          fontSize: '1.1rem',
+          fontStyle: 'italic'
+        }}>
+          (All {linkOrTextForClips} owned by their respective publisher.)
         </span>
       </span>;
     const cardText = showBusinessCard
