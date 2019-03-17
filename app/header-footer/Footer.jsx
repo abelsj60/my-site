@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
-  background-color: ${p => (!p.home ? 'white' : undefined)};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#D2E7FF' : 'white')};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
@@ -87,7 +87,11 @@ export default function FooterContainer(props) {
     : '/reverie';
 
   return (
-    <Container home={isHome} story={isStory}>
+    <Container
+      home={isHome}
+      story={isStory}
+      reverie={isReverie}
+    >
       <Line home={isHome} />
       <StoryButton
         active={showStoryText}

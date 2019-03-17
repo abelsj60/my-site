@@ -32,7 +32,7 @@ const InnerContainer = styled.div`
 const Card = styled.section`
   height: 160px;
   width: 275px;
-  background-color: white;
+  background-color: ${p => p.reverie ? '#D2E7FF' : 'white'};
   pointer-events: all;
 
   @media (min-width: 400px) {
@@ -46,6 +46,19 @@ const CardContentArea = styled.div`
   align-items: center;
   height: 100%;
 `;
+const StyledClipboardButton = styled(Clipboard)`
+  border: ${p => p.businessCard ? '0.5px solid #fd1172' : 'unset'};
+  background-color: ${p => p.reverie ? '#D2E7FF' : 'white'};
+  padding: 0px;
+  height: 85%;
+  width: 90%;
+  display: flex;
+  pointer-events: all;
+
+  :focus {
+    outline: 0px;
+  }
+`;
 const RestyledGraf = styled(Graf)`
   height: 100%;
   flex: 1;
@@ -55,18 +68,6 @@ const RestyledGraf = styled(Graf)`
 
   @media (min-width: 400px) {
     font-size: 1.4rem;
-  }
-`;
-const StyledClipboardButton = styled(Clipboard)`
-  border: ${p => p.businessCard ? '0.5px solid #fd1172' : 'unset'};
-  padding: 0px;
-  height: 85%;
-  width: 90%;
-  display: flex;
-  pointer-events: all;
-
-  :focus {
-    outline: 0px;
   }
 `;
 
@@ -107,6 +108,7 @@ export default class LegalTermsOrBizCard extends Component {
     } = appState;
 
     const homeIsActive = currentCaller === 'home';
+    const reverieIsActive = currentCaller === 'reverie';
     const linkOrTextForClips = currentCaller !== 'journalism'
       ? <StyledLink style={{
         color: 'black',
@@ -119,8 +121,7 @@ export default class LegalTermsOrBizCard extends Component {
         <span style={{
           display: 'block',
           marginBottom: '5px'
-        }}>©
-          {new Date().getFullYear()}, James Abels. All rights reserved.
+        }}>© {new Date().getFullYear()}, James Abels. All rights reserved.
         </span>
         <span style={{
           fontSize: '1.1rem',
@@ -178,10 +179,12 @@ export default class LegalTermsOrBizCard extends Component {
                   <Card
                     data-depth="1"
                     home={homeIsActive}
+                    reverie={reverieIsActive}
                   >
                     <CardContentArea>
                       <StyledClipboardButton
                         businessCard={showBusinessCard}
+                        reverie={reverieIsActive}
                         data-clipboard-text={textToCopy}
                         onSuccess={
                           () => {

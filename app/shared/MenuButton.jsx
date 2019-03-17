@@ -43,7 +43,7 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => (!p.menu ? '#6e7dab' : '#ffe74c')};
+  background-color: ${p => (!p.menu ? '#6e7dab' : p.reverie ? '#455057' : '#ffe74c')};
 
   // https://css-tricks.com/annoying-mobile-double-tap-link-issue/
   @media (hover) {
@@ -79,7 +79,7 @@ export default function MenuButton(props) {
       }>
         <Label menu={isMenu}>{text}</Label>
         <Icon image={arrowIcon} />
-        <Line menu={isMenu} />
+        <Line menu={isMenu} reverie={isReverie}/>
       </RestyledLink>
     </Container>
   );

@@ -16,7 +16,7 @@ const data = [
 ];
 
 const Container = styled.header`
-  background-color: ${p => (p.home ? 'transparent' : 'white')};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#d2e7ff' : 'white')};
   color: ${p => (p.home ? 'white' : '#455057')};
   flex-shrink: 0;
   z-index: 3;
@@ -138,6 +138,7 @@ export default class Header extends Component {
     } = appState;
     const menuIsActive = this.state.menuIsOpen;
     const homeIsActive = currentCaller === 'home';
+    const reverieIsActive = currentCaller === 'reverie';
     const iconType = menuIsActive
       ? headerNavClose
       : headerNavOpen;
@@ -151,7 +152,10 @@ export default class Header extends Component {
     const handleClickForHeader = hcForHeader.boundHandleClick;
 
     return (
-      <Container home={homeIsActive}>
+      <Container
+        home={homeIsActive}
+        reverie={reverieIsActive}
+      >
         <NameAsLink
           hide={
             ((menuIsActive || homeIsActive) && 'active')

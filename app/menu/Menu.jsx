@@ -19,8 +19,11 @@ const RestyledMain = styled(Main)`
 
 export default function Menu(props) {
   const {
-    children
+    appState,
+    children,
   } = props;
+  const { currentCaller } = appState;
+  const isReverie = currentCaller === 'reverie';
 
   /** Props explanation
    *
@@ -31,7 +34,7 @@ export default function Menu(props) {
    */
 
   return (
-    <RestyledMain>
+    <RestyledMain reverie={isReverie}>
       <Right>
         <MenuButton {...props} />
         <Overflow>{children}</Overflow>

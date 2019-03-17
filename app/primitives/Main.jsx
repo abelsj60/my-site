@@ -7,6 +7,7 @@ export default styled.main`
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
+  background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
 
   @media (min-width: 848px) {
     flex-direction: unset;

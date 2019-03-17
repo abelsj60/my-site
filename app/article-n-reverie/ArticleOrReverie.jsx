@@ -76,7 +76,7 @@ export default function ArticleOrReverie(props) {
     : ArticleText;
 
   return (
-    <Main>
+    <Main reverie={isReverie}>
       <Left>
         <ArticleOrReverieNav {...props} data={data} />
       </Left>
