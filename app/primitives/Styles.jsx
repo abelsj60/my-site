@@ -16,11 +16,14 @@ export default p => `
   ${p.s ? 'font-size:' + p.s + 'rem' : noCSS};
   ${p.italic ? 'font-style: italic' : noCSS};
   ${p.normal ? 'font-weight: normal' : noCSS};
+  // ${p.boldSmall ? 'font-weight: bold' : noCSS};
   ${p.t ? 'margin-top:' + p.t + 'px' : noCSS};
   ${p.b ? 'margin-bottom:' + p.b + 'px' : noCSS};
 
   @media (min-width: 390px) {
+    ${p.rC ? 'color:' + colors[p.rC] : noCSS};
     ${p.rS ? 'font-size:' + p.rS + 'rem' : noCSS};
+    ${p.bold ? 'font-weight: bold' : noCSS};
     ${p.rT ? 'margin-top:' + p.rT + 'px' : noCSS};
     ${p.rB ? 'margin-bottom:' + p.rB + 'px' : noCSS};
     ${p.rL ? 'margin-left:' + p.rL + 'px' : noCSS};

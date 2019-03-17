@@ -106,15 +106,17 @@ export default function Home(props) {
                 JamesAbels
               </RestyledHed>
               <RestyledGraf
-                c="pink"
+                bold
+                c="yellow"
+                rC="yellow"
                 data-depth=".2"
-                s="1.7"
+                s="1.21"
                 t="64"
-                rS="2.35"
+                rS="1.65"
                 rT="93"
                 rL="20"
               >
-                Coding narratives and more
+                Narrative coding and other adventures
               </RestyledGraf>
             </NameTag>
           )

@@ -121,8 +121,6 @@ class App extends Component {
 
     if (location.justChanged) {
       const {
-        currentCaller,
-        lastCaller,
         isMenu,
         showBusinessCard,
         showLegalTerms,
@@ -213,8 +211,7 @@ export default withRouter(App);
 // Endtest
 // Take pictures, write captions for Arrow, Slingshot, TMMnews
 
-// Fix styled-components attribute use
-// Clean up CSS
+// Fix styled-components attribute use / clean up CSS
 
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
