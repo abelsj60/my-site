@@ -70,6 +70,18 @@ const RestyledGraf = styled(Graf)`
     font-size: 1.4rem;
   }
 `;
+const MyCopyright = styled.span`
+  display: block;
+  margin-bottom: 5px;
+`;
+const ClipCopyright = styled.span`
+  font-size: .9rem;
+  font-style: italic;
+
+  @media (min-width: 390px) {
+    font-size: 1rem;
+  }
+`;
 
 export default class LegalTermsOrBizCard extends Component {
   constructor(props) {
@@ -117,18 +129,15 @@ export default class LegalTermsOrBizCard extends Component {
       clips</StyledLink>
       : 'clips';
     const legalNotice =
+      // This HTML is span,  not a <p>, b/c it's nested in a <p>
+      // (React doesn't allow <p> nesting, kicks a 'warning')
       <span>
-        <span style={{
-          display: 'block',
-          marginBottom: '5px'
-        }}>© {new Date().getFullYear()}, James Abels. All rights reserved.
-        </span>
-        <span style={{
-          fontSize: '1.1rem',
-          fontStyle: 'italic'
-        }}>
+        <MyCopyright>
+          © {new Date().getFullYear()}, James Abels. All rights reserved.
+        </MyCopyright>
+        <ClipCopyright>
           (All {linkOrTextForClips} owned by their respective publisher.)
-        </span>
+        </ClipCopyright>
       </span>;
     const cardText = showBusinessCard
       ? !copying

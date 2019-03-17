@@ -69,14 +69,12 @@ export default function MenuButton(props) {
   const arrowIcon = !isMenu
     ? arrowDown
     : arrowUp;
+  const menuIsActive = isMenu ? 'active' : undefined;
   const text = isMenu ? 'Close' : 'Menu';
 
   return (
     <Container>
-      <RestyledLink to={link} menu={
-        (isMenu && 'active')
-        || undefined
-      }>
+      <RestyledLink to={link} menu={menuIsActive}>
         <Label menu={isMenu}>{text}</Label>
         <Icon image={arrowIcon} />
         <Line menu={isMenu} reverie={isReverie}/>
