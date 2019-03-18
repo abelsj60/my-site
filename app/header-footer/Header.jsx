@@ -8,7 +8,7 @@ import Referrer from '../classes/Referrer.js';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
-const data = [
+const headerLinks = [
   { name: 'The story', path: '/chapter' },
   { name: 'Projects', path: '/projects' },
   { name: 'Journalism', path: '/journalism' },
@@ -151,9 +151,9 @@ export default class Header extends Component {
     );
 
     const handleClickForHeader = hcForHeader.boundHandleClick;
-    const reverieOrRegularMotto = referrer.location !== 'reverie'
-      ? 'Narrative coding and other adventures'
-      : "Let's take a flight of fancy";
+    // const reverieOrRegularMotto = referrer.location !== 'reverie'
+    //   ? 'Narrative coding and other adventures'
+    //   : "Let's take a flight of fancy";
 
     return (
       <Container
@@ -170,12 +170,12 @@ export default class Header extends Component {
           James Abels
         </NameAsLink>
         <Motto hide={menuIsActive || homeIsActive}>
-          {reverieOrRegularMotto}
+          Narrative coding and other adventures
         </Motto>
         <Nav home={homeIsActive} menu={menuIsActive}>
           <NavList>
             <Mapper
-              mapData={data}
+              mapData={headerLinks}
               render={
                 (link, idx) => {
                   const pathIsActive =
