@@ -29,11 +29,11 @@ const NameTag = styled.div`
 `;
 const RestyledHed = styled(Hed)`
   font-family: 'Aref Ruqaa', serif;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
 `;
 const RestyledGraf = styled(Graf)`
-  text-shadow: 1px 1px 2px black;
   margin-left: 18px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 `;
