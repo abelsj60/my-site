@@ -45,7 +45,7 @@ const CardContentArea = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 7px 7px 5px -1px rgba(0, 0, 0, 0.3);
 `;
 const StyledClipboardButton = styled(Clipboard)`
   border: ${p => p.businessCard ? '0.5px solid #fd1172' : 'unset'};

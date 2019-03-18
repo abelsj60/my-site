@@ -42,12 +42,11 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     min-height: 100vh;
     
-    ${p =>
-    p.home
+    ${p => p.home
       && css`
-      width: 100%;
-      position: fixed;
-      overflow: hidden;
+        width: 100%;
+        position: fixed;
+        overflow: hidden;
       `};
   }
 `;

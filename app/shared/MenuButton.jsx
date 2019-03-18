@@ -44,14 +44,14 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => (!p.menu ? '#6e7dab' : p.reverie ? '#5B678C' : '#ffe74c')};
+  background-color: ${p => (!p.menu ? '#6e7dab' : p.reverie ? '#5b678c' : '#ffe74c')};
 
   // https://css-tricks.com/annoying-mobile-double-tap-link-issue/
-  @media (hover) {
-    ${Container}:hover & {
-      height: 2px;
-    }
-  }
+  // @media (hover) {
+  //   ${Container}:hover & {
+  //     height: 2px;
+  //   }
+  // }
 `;
 
 export default function MenuButton(props) {
@@ -76,9 +76,9 @@ export default function MenuButton(props) {
   return (
     <Container>
       <RestyledLink to={link} menu={menuIsActive}>
-        <Label menu={isMenu}>{text}</Label>
+        <Label menu={isMenu} reverie={isReverie}>{text}</Label>
         <Icon image={arrowIcon} />
-        <Line menu={isMenu} reverie={isReverie}/>
+        <Line menu={isMenu} reverie={isReverie} />
       </RestyledLink>
     </Container>
   );
