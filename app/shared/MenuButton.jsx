@@ -29,9 +29,10 @@ const Label = styled.p`
   margin-top: -2px;
 `;
 const Icon = styled.div`
+  position: absolute;
+  right: 0px;
   height: 4px;
   width: 8px;
-  margin-left: 16px;
   align-self: center;
   fill: #6e7dab;
   background: ${p => `url(${p.image})`} no-repeat;
@@ -43,7 +44,7 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => (!p.menu ? '#6e7dab' : p.reverie ? '#455057' : '#ffe74c')};
+  background-color: ${p => (!p.menu ? '#6e7dab' : p.reverie ? '#5B678C' : '#ffe74c')};
 
   // https://css-tricks.com/annoying-mobile-double-tap-link-issue/
   @media (hover) {

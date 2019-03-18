@@ -121,6 +121,9 @@ export default class LegalTermsOrBizCard extends Component {
 
     const homeIsActive = currentCaller === 'home';
     const reverieIsActive = currentCaller === 'reverie';
+
+    // Styled as attribute for simplicity,
+    // breaking it out above's a headache
     const linkOrTextForClips = currentCaller !== 'journalism'
       ? <StyledLink style={{
         color: 'black',
@@ -128,9 +131,10 @@ export default class LegalTermsOrBizCard extends Component {
       }} to="/journalism">
       clips</StyledLink>
       : 'clips';
+
+    // The following HTML is span, not a <p>, b/c it's nested in
+    // a <p> (React doesn't allow <p> nesting, kicks a warning)
     const legalNotice =
-      // This HTML is span,  not a <p>, b/c it's nested in a <p>
-      // (React doesn't allow <p> nesting, kicks a 'warning')
       <span>
         <MyCopyright>
           © {new Date().getFullYear()}, James Abels. All rights reserved.
@@ -139,9 +143,12 @@ export default class LegalTermsOrBizCard extends Component {
           (All {linkOrTextForClips} owned by their respective publisher.)
         </ClipCopyright>
       </span>;
+
+    // Real email address shouldn't be a problem here b/c it isn't
+    // on a real route. It'd be hard to scrape w/o special effort.
     const cardText = showBusinessCard
       ? !copying
-        ? 'abelsj60_at_gmail.com'
+        ? 'abelsj60@gmail.com'
         : 'Copied!'
       : legalNotice;
 

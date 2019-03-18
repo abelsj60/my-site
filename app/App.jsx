@@ -208,10 +208,13 @@ class App extends Component {
 
 export default withRouter(App);
 
-// Endtest
-// Take pictures, write captions for Arrow, Slingshot, TMMnews
+// 1. Endtest
+// 2. Edit story
+// 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
+// 4. Fix styled-components attribute use / clean up CSS
 
-// Fix styled-components attribute use / clean up CSS
+// 5. If last location is the same as this location, don't add to history stack
+// See: https://stackoverflow.com/a/51580782 !!!
 
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.

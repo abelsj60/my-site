@@ -75,8 +75,9 @@ const Motto = styled.p`
 `;
 const Nav = styled.nav`
   display: ${p => (p.home ? undefined : 'none')};
-  padding-bottom: ${p => (p.home ? '5px' : undefined)};
-  border-bottom: ${p => (p.home ? '.5px solid white' : undefined)};
+  padding: ${p => p.home ? '8px 15px' : undefined};
+  background-color: ${p => p.home ? 'rgba(0,0,0,0.18)' : undefined};
+  border-radius: ${p => p.home ? '10px' : undefined};
 
   ${p =>
     p.menu
@@ -150,6 +151,9 @@ export default class Header extends Component {
     );
 
     const handleClickForHeader = hcForHeader.boundHandleClick;
+    const reverieOrRegularMotto = referrer.location !== 'reverie'
+      ? 'Narrative coding and other adventures'
+      : "Let's take a flight of fancy";
 
     return (
       <Container
@@ -166,7 +170,7 @@ export default class Header extends Component {
           James Abels
         </NameAsLink>
         <Motto hide={menuIsActive || homeIsActive}>
-          Narrative coding and other adventures
+          {reverieOrRegularMotto}
         </Motto>
         <Nav home={homeIsActive} menu={menuIsActive}>
           <NavList>
