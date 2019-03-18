@@ -208,7 +208,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-// 1. Endtest
 // 2. Edit story
 // 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
 // 4. Fix styled-components attribute use / clean up CSS
