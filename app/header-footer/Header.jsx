@@ -38,7 +38,7 @@ const RestyledLink = styled(StyledLink)`
   }
 
   @media (min-width: 390px) {
-    font-size: 1.5rem;
+    font-size: ${p => p.home ? '1.4rem' : '1.5rem'};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
@@ -75,7 +75,7 @@ const Motto = styled.p`
 `;
 const Nav = styled.nav`
   display: ${p => (p.home ? undefined : 'none')};
-  padding: ${p => p.home ? '8px 15px' : undefined};
+  padding: ${p => p.home ? '8px 13px' : undefined};
   background-color: ${p => p.home ? 'rgba(0,0,0,0.18)' : undefined};
   border-radius: ${p => p.home ? '10px' : undefined};
 
