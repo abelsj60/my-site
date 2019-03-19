@@ -11,6 +11,11 @@ import React, { Fragment } from 'react';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
+const RestyledLeft = styled(Left)`
+  @media (min-width: 848px) {
+    margin-left: 23px;
+  }
+`;
 const Images = styled.section`
   display: flex;
   flex-direction: column;
@@ -31,6 +36,9 @@ const Images = styled.section`
   @media (min-width: 1026px) {
     flex-direction: row-reverse;
   }
+`;
+const RestyledRight = styled(Right)`
+  margin-left: 25px;
 `;
 const Figure = styled.figure`
   margin: 0px;
@@ -114,10 +122,10 @@ export default function Projects(props) {
 
   return (
     <Main>
-      <Left>
+      <RestyledLeft>
         <DesktopProjectNav {...props} data={data} params={params} />
-      </Left>
-      <Right>
+      </RestyledLeft>
+      <RestyledRight>
         <MenuButton {...props} />
         <Overflow ref={
           ref => overflowRef.current = ref
@@ -157,7 +165,7 @@ export default function Projects(props) {
             </Images>
           </section>
         </Overflow>
-      </Right>
+      </RestyledRight>
     </Main>
   );
 }

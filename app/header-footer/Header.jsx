@@ -70,7 +70,7 @@ const Motto = styled.p`
     font-size: 1.3rem;
     margin-left: 15px;
     margin-right: 0px;
-    padding-top: 1px;
+    padding-top: 2px;
   }
 `;
 const Nav = styled.nav`

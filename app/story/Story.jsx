@@ -14,10 +14,11 @@ const RestyledLeft = styled(Left)`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   flex: 1;
-  padding: 0px 0px 25px 25px;
+  padding: 0px 0px 25px 23px;
   margin-top: 10px;
 
   @media (min-width: 848px) {
+    margin-left: 23px;
     max-width: 327px;
     padding: 0px;
   }

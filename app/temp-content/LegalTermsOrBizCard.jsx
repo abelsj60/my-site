@@ -201,8 +201,8 @@ export default class LegalTermsOrBizCard extends Component {
                     <CardContentArea>
                       <StyledClipboardButton
                         businessCard={showBusinessCard}
-                        reverie={reverieIsActive}
                         data-clipboard-text={textToCopy}
+                        reverie={reverieIsActive}
                         onSuccess={
                           () => {
                             // Use this.props... so the value's updateed

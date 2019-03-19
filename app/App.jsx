@@ -210,6 +210,7 @@ export default withRouter(App);
 // 2. Edit story
 // 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
 // 4. Fix styled-components attribute use / clean up CSS
+// 5. Browser testing, step 1, screenshots
 
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
@@ -221,3 +222,5 @@ export default withRouter(App);
 // Sticky footer/wrapper: https://stackoverflow.com/a/44771365
 // https://www.eventbrite.com/engineering/mobile-safari-why/
 // https://www.npmjs.com/package/react-device-detect
+
+// Just for fun: https://stackoverflow.com/a/49328427
