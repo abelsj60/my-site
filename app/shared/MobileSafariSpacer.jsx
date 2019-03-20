@@ -1,5 +1,5 @@
 import Graf from '../primitives/Graf.jsx';
-import { isMobileSafari } from 'react-device-detect';
+import { isMobileSafari, isTablet } from 'react-device-detect';
 import Location from '../classes/Location.js';
 import React from 'react';
 import ScrollHandling from '../classes/ScrollHandling.js';

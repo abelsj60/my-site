@@ -5,8 +5,13 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
+  min-height: 34px;
   width: 60px;
-  margin-left: 2px;
+  margin-left: ${p => p.offset !== 'active' ? '2px' : '0px'};
+
+  @media (min-width: 848px) {
+    display:  none;
+  }
 `;
 const RestyledLink = styled(StyledLink)`
   display: flex;
@@ -15,6 +20,7 @@ const RestyledLink = styled(StyledLink)`
   margin-bottom: 13px;
   position: relative;
   padding-bottom: 6px;
+  justify-content: space-between;
 
   @media (min-width: 848px) {
     display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
@@ -29,8 +35,6 @@ const Label = styled.p`
   margin-top: -2px;
 `;
 const Icon = styled.div`
-  position: absolute;
-  right: 0px;
   height: 4px;
   width: 8px;
   align-self: center;
@@ -41,6 +45,7 @@ const Icon = styled.div`
 const Line = styled.div`
   position: absolute;
   width: 100%;
+  left: 0px;
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
@@ -71,10 +76,13 @@ export default function MenuButton(props) {
     ? arrowDown
     : arrowUp;
   const menuIsActive = isMenu ? 'active' : undefined;
+  const offsetIsActive = props.noOffset ? 'active' : '';
   const text = isMenu ? 'Close' : 'Menu';
 
+  console.log('offset:', offsetIsActive);
+
   return (
-    <Container>
+    <Container offset={offsetIsActive}>
       <RestyledLink to={link} menu={menuIsActive}>
         <Label menu={isMenu} reverie={isReverie}>{text}</Label>
         <Icon image={arrowIcon} />

@@ -23,6 +23,7 @@ const Line = styled.div`
   position: absolute;
   width: 100%;
   top: 0px;
+  left: 0px;
   margin: 0px;
   height: 0.5px;
   background-color: #fd1172;

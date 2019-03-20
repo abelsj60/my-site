@@ -38,7 +38,7 @@ const RestyledLink = styled(StyledLink)`
   }
 
   @media (min-width: 390px) {
-    font-size: ${p => p.home ? '1.4rem' : '1.5rem'};
+    font-size: ${p => p.home ? '1.35rem' : '1.5rem'};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
@@ -61,6 +61,7 @@ const Motto = styled.p`
   margin-right: 15px;
   padding-top: 2.1px;
   min-width: 0px;
+  
   // https://css-tricks.com/flexbox-truncated-text/
   white-space: nowrap;
   overflow: hidden;
@@ -75,7 +76,7 @@ const Motto = styled.p`
 `;
 const Nav = styled.nav`
   display: ${p => (p.home ? undefined : 'none')};
-  padding: ${p => p.home ? '8px 13px' : undefined};
+  padding: ${p => p.home ? '7px 13px' : undefined};
   background-color: ${p => p.home ? 'rgba(0,0,0,0.18)' : undefined};
   border-radius: ${p => p.home ? '10px' : undefined};
 

@@ -126,7 +126,7 @@ export default function Projects(props) {
         <DesktopProjectNav {...props} data={data} params={params} />
       </RestyledLeft>
       <RestyledRight>
-        <MenuButton {...props} />
+        <MenuButton {...props} noOffset={true} />
         <Overflow ref={
           ref => overflowRef.current = ref
         }>

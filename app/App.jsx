@@ -7,7 +7,7 @@ import {
 import Footer from './header-footer/Footer.jsx';
 // import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
-import { isMobileSafari } from 'react-device-detect';
+import { isMobileSafari, isTablet } from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import MobileSafariSpacer from './shared/MobileSafariSpacer.jsx';
@@ -15,6 +15,10 @@ import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
+
+console.log('1:', isTablet);
+const vHeight = !isTablet ? '97.5vh' : '100vh';
+console.log('2:', vHeight);
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -40,7 +44,7 @@ const GlobalStyle = createGlobalStyle`
   #app {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: ${p => !p.iPad ? '100vh' : '97.45vh'};
     
     ${p => p.home
       && css`
@@ -83,7 +87,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <GlobalStyle home={homeIsActive} />
+        <GlobalStyle home={homeIsActive} iPad={isTablet && isMobileSafari} />
         <Header {...this.props} appState={this.state} />
         <Body
           {...this.props}
@@ -100,9 +104,18 @@ class App extends Component {
           appState={this.state}
           boundHandleClickForApp={boundHandleClickForApp}
         />
-        <MobileSafariSpacer {...this.props} />
       </Fragment>
     );
+  }
+
+  componentDidMount() {
+    // getBouncingRect via this.ref1, this.ref2, this.ref3
+    // If the .top and .left are what we expect, this.setState({supportedBrowser: false})
+    // reRender. If !supportedBrowser, <UnsupportedBrowserSite>
+    //  -Header (name + motto)
+    //  -Body (explanatory message)
+    //  -Footer (All rights reserved)
+    // Otherwise, show appAsIntended
   }
 
   componentDidUpdate(prevProps) {
@@ -214,6 +227,8 @@ export default withRouter(App);
 
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
+// Story image is too small? Scale: https://stackoverflow.com/a/23805337
+// 2. https://stackoverflow.com/a/28450112
 
 // Hosting?
 // ! https://github.com/rafrex/spa-github-pages

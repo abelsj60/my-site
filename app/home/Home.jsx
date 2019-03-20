@@ -122,18 +122,20 @@ export default function Home(props) {
         }
       />
       <PictureBox>
-        <BoyInForeground alt="the boy looks out" src="/foreground.png" />
-        <Portal />
-        <FantasyAsBackground
-          alt="the boy builds a fantasy world"
-          inCity={inCity}
-          src="/background-fantasy.png"
-        />
-        <CityAsBackground
-          alt="the boy sees a city view"
-          inCity={inCity}
-          src="/background-city.png"
-        />
+        <div>
+          <BoyInForeground alt="the boy looks out" src="/foreground.png" />
+          <Portal />
+          <FantasyAsBackground
+            alt="the boy builds a fantasy world"
+            inCity={inCity}
+            src="/background-fantasy.png"
+          />
+          <CityAsBackground
+            alt="the boy sees a city view"
+            inCity={inCity}
+            src="/background-city.png"
+          />
+        </div>
       </PictureBox>
     </RestyledMain>
   );

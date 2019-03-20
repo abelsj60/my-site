@@ -86,6 +86,7 @@ const Highlighter = styled.div`
   width: 100%;
   height: 4px;
   bottom: 0px;
+  left: 0px;
   position: absolute;
   background-color: #ffe74c;
 `;

@@ -10,6 +10,6 @@ export default styled.main`
   background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
 
   @media (min-width: 848px) {
-    flex-direction: unset;
+    flex-direction: row;
   }
 `;

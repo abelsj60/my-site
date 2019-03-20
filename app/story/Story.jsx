@@ -34,6 +34,8 @@ const RestyledRight = styled(Right)`
   overflow: hidden;
   margin: 0px;
 
+  position: relative;
+
   @media (min-height: 530px) {
     margin-top: 0px;
   }
@@ -46,6 +48,10 @@ const RestyledRight = styled(Right)`
 const Image = styled.img`
   object-fit: cover;
   overflow: hidden;
+
+  position: absolute;
+  height: 100%;
+  width: 100%;
 `;
 const Text = styled.section`
   font-size: 1.6rem;
