@@ -40,6 +40,9 @@ const RestyledGraf = styled(Graf)`
 const PictureBox = styled.div`
   position: absolute;
   top: 0px;
+  left: -.5px;
+  height: 100.5%;
+  width: 100.5%;
 `;
 const Portal = styled.div`
   position: absolute;
@@ -50,22 +53,40 @@ const Portal = styled.div`
 `;
 const BoyInForeground = styled.img`
   position: absolute;
-  object-fit: cover;
-  height: 100vh;
-  min-width: 100vw;
+  // object-fit: cover;
+  // height: 100vh;
+  // min-width: 100vw;
   z-index: 1;
   pointer-events: none;
+
+  // https://stackoverflow.com/a/28439444
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url(${p => p.srcImage});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
-  position: unset;
-  left: 0px;
+  // position: unset;
+  // left: 0px;
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
   transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
+
+  // display: block;
+  // width: 100%;
+  // height: 100%;
+
+  // background-image: url(${p => p.srcImage});
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
-  position: absolute;
+  // position: absolute;
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
@@ -122,20 +143,20 @@ export default function Home(props) {
         }
       />
       <PictureBox>
-        <div>
-          <BoyInForeground alt="the boy looks out" src="/foreground.png" />
-          <Portal />
-          <FantasyAsBackground
-            alt="the boy builds a fantasy world"
-            inCity={inCity}
-            src="/background-fantasy.png"
-          />
-          <CityAsBackground
-            alt="the boy sees a city view"
-            inCity={inCity}
-            src="/background-city.png"
-          />
-        </div>
+        <BoyInForeground alt="" src="" srcImage="/foreground.png" />
+        <Portal />
+        <FantasyAsBackground
+          alt=""
+          inCity={inCity}
+          src=""
+          srcImage="/background-fantasy.png"
+        />
+        <CityAsBackground
+          alt=""
+          inCity={inCity}
+          src=""
+          srcImage="/background-city.png"
+        />
       </PictureBox>
     </RestyledMain>
   );
