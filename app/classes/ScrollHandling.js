@@ -30,7 +30,9 @@ export default class ScrollHandling {
   }
 
   resetWindowTop() {
-    if (window.scrollY > 0) {
+    // Usering pageYOffset instead of scrollY
+    // for cross-browser support, per MDN
+    if (window.pageYOffset > 0) {
       window.scroll({
         top: 0,
         behavior: 'smooth'

@@ -210,6 +210,10 @@ export default class LegalTermsOrBizCard extends Component {
                 >
                   <Card
                     data-depth="1"
+                    data-friction-x=".5"
+                    data-friction-y=".5"
+                    data-limit-x="2" // Value unclear
+                    data-limit-y="2" // Value unclear
                     home={homeIsActive}
                     reverie={reverieIsActive}
                   >

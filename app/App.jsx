@@ -12,7 +12,6 @@ import { isMobileSafari, isTablet, osVersion } from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
-// import ReactResizeDetector from 'react-resize-detector';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
@@ -41,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
   #app {
     display: flex;
     flex-direction: column;
-    height: ${p => p.pageHeight}px;
+    height: ${p => p.theme.pageHeight}px;
     
     @media(orientation:landscape) {
       // Fix esoteric iOS 7 iPad bug
@@ -90,18 +89,25 @@ class App extends Component {
     const hcForApp = new ClickHandling('app', this);
     const boundHandleClickForApp = hcForApp.boundHandleClick;
     const homeIsActive = location.type === 'home';
-    const fixMobileSafariBugOn7 = isTablet && isMobileSafari && osVersion[0] === '7';
+    const fixMobileSafariBugOn7 = isTablet
+      && isMobileSafari
+      && osVersion[0] === '7';
 
     return (
-      <ThemeProvider theme={{ pageHeight: this.state.height.toString() }}>
+      <ThemeProvider
+        theme={{
+          pageHeight: this.state.height.toString()
+        }}
+      >
         <Fragment>
           <GlobalStyle
             home={homeIsActive}
-            pageHeight={this.state.height}
-            pageWidth={this.state.innerWidth}
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
           />
-          <Header {...this.props} appState={this.state} />
+          <Header
+            {...this.props}
+            appState={this.state}
+          />
           <Body
             {...this.props}
             appState={this.state}
@@ -116,7 +122,6 @@ class App extends Component {
             {...this.props}
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
-            footerRef={this.state.footerRef}
           />
         </Fragment>
       </ThemeProvider>
@@ -156,7 +161,8 @@ class App extends Component {
       this.props,
       prevProps
     );
-    // Make sure window top's at zero after orientation change
+
+    // Ensure window top's at zero after orientation change
     const scrollHandling = new ScrollHandling(location);
     scrollHandling.resetWindowTop();
 
@@ -249,25 +255,13 @@ class App extends Component {
 
 export default withRouter(App);
 
-// isTablet && isMobileSafari && osVersion === '7'
-
 // 2. Edit story
 // 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
 // 4. Fix styled-components attribute use / clean up CSS
-// 5. Browser testing, step 1, screenshots
-
-// Parallax.js width limits?
-
-// window.innerHeight and window.scrollY fallbacks?
-// https://stackoverflow.com/questions/16618785/ie8-alternative-to-window-scrolly
-// https://stackoverflow.com/questions/10173236/window-innerheight-ie8-alternative
-
-// Windows 10 FF 63 — bizCard, center text
 
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 // Story image is too small? Scale: https://stackoverflow.com/a/23805337
-// 2. https://stackoverflow.com/a/28450112
 
 // Hosting?
 // ! https://github.com/rafrex/spa-github-pages
@@ -277,6 +271,6 @@ export default withRouter(App);
 // https://www.eventbrite.com/engineering/mobile-safari-why/
 // https://www.npmjs.com/package/react-device-detect
 
-// Just for fun: https://stackoverflow.com/a/49328427
-
-// Set viewport explained: https://developers.google.com/web/tools/lighthouse/audits/has-viewport-meta-tag
+// Flexbox, no support:
+// 1. https://johanronsse.be/2016/01/03/simple-flexbox-check/
+// 2. https://github.com/ergcode/ergonomic.detect_flex

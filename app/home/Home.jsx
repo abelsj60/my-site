@@ -125,6 +125,8 @@ export default function Home(props) {
                 <RestyledHed
                   c="yellow"
                   data-depth=".3"
+                  data-friction-x=".7"
+                  data-friction-y=".7"
                   s="4.5"
                   rS="6.5"
                 >
@@ -134,6 +136,8 @@ export default function Home(props) {
                   bold
                   c="yellow"
                   data-depth=".2"
+                  data-friction-x=".9"
+                  data-friction-y=".9"
                   s="1.21"
                   t="64"
                   rS="1.65"

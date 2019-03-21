@@ -59,9 +59,9 @@ const RestyledExternalLink = styled(ExternalLink)`
   }
 `;
 
-export default function About(props) {
+export default function About() {
   return (
-    <Main pageHeight={props.appState.height}>
+    <Main>
       <RestyledLeft />
       <Right>
         <Overflow>
