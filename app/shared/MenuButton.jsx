@@ -10,7 +10,7 @@ const Container = styled.div`
   margin-left: ${p => p.offset !== 'active' ? '2px' : '0px'};
 
   @media (min-width: 848px) {
-    display:  none;
+    display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
   }
 `;
 const RestyledLink = styled(StyledLink)`
@@ -21,10 +21,6 @@ const RestyledLink = styled(StyledLink)`
   position: relative;
   padding-bottom: 6px;
   justify-content: space-between;
-
-  @media (min-width: 848px) {
-    display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
-  }
 `;
 const Label = styled.p`
   font-size: 1.3rem;
@@ -79,11 +75,9 @@ export default function MenuButton(props) {
   const offsetIsActive = props.noOffset ? 'active' : '';
   const text = isMenu ? 'Close' : 'Menu';
 
-  console.log('offset:', offsetIsActive);
-
   return (
-    <Container offset={offsetIsActive}>
-      <RestyledLink to={link} menu={menuIsActive}>
+    <Container offset={offsetIsActive} menu={menuIsActive}>
+      <RestyledLink to={link}>
         <Label menu={isMenu} reverie={isReverie}>{text}</Label>
         <Icon image={arrowIcon} />
         <Line menu={isMenu} reverie={isReverie} />

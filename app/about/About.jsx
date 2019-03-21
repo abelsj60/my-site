@@ -15,7 +15,8 @@ const RestyledLeft = styled(Left)`
   min-width: 327px;
 
   @media (min-width: 848px) {
-    margin-left: 25px;
+    margin-left: 23px; // Prob temporary
+    // margin-left: 25px;
   }
 `;
 const Heading = styled.div`
@@ -58,9 +59,9 @@ const RestyledExternalLink = styled(ExternalLink)`
   }
 `;
 
-export default function About() {
+export default function About(props) {
   return (
-    <Main>
+    <Main pageHeight={props.appState.height}>
       <RestyledLeft />
       <Right>
         <Overflow>

@@ -19,8 +19,8 @@ const Container = styled.header`
   background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#d2e7ff' : 'white')};
   color: ${p => (p.home ? 'white' : '#455057')};
   flex-shrink: 0;
-  z-index: 3;
-  position: relative;
+  // z-index: 3;
+  // position: relative;
   height: 52px;
   display: flex;
   justify-content: ${p => (p.home ? 'center' : undefined)};

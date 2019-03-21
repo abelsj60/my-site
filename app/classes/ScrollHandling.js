@@ -29,7 +29,7 @@ export default class ScrollHandling {
     }
   }
 
-  resetMobileSafariTop() {
+  resetWindowTop() {
     if (window.scrollY > 0) {
       window.scroll({
         top: 0,

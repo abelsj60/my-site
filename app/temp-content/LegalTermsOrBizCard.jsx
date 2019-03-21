@@ -10,11 +10,14 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: ${p => (p.home ? '0' : '52px')};
-  bottom: ${p => (p.home ? '0' : '54px')};
+  top: ${p => (!p.home ? '52px' : '0px')};
+  bottom: ${p => !p.home ? '55px' : '0px'};
+  // top: 0px;
+  // bottom: 0px;
   width: 100%;
   background-color: ${p => !p.copying ? 'rgba(0, 0, 0, 0.7)' : 'rgba(253,17,114, 0.7)'};
   transition: background-color .75s;
+  z-index: 1;
 
   ${p =>
     p.home
@@ -48,20 +51,32 @@ const CardContentArea = styled.div`
   box-shadow: 7px 7px 5px -1px rgba(0, 0, 0, 0.3);
 `;
 const StyledClipboardButton = styled(Clipboard)`
-  border: ${p => p.businessCard ? '0.5px solid #fd1172' : 'none'};
+  border: ${p => p.businessCard ? '1px solid #fd1172' : 'none'};
   background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
   padding: 0px;
   height: 85%;
   width: 90%;
   display: flex;
+  align-items: center;
   pointer-events: all;
 
   :focus {
     outline: 0px;
   }
+
+  https://stackoverflow.com/a/18997800
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    border: 1px #999 solid;;
+    transform: scale(0.5);
+  }
 `;
 const RestyledGraf = styled(Graf)`
-  height: 100%;
+  // height: 100%;
   flex: 1;
   font-size: 1.2rem;
   -webkit-font-smoothing: antialiased;
@@ -212,6 +227,7 @@ export default class LegalTermsOrBizCard extends Component {
                               this.props.appState.showBusinessCard
                                 && this.timeoutId === null
                             ) {
+                              // Runs after copy is made!
                               makeCopies();
                               this.timeoutId = setTimeout(
                                 () => {

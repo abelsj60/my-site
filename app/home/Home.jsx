@@ -2,13 +2,14 @@ import Graf from '../primitives/Graf.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
 import Parallax from '../shared/Parallax.jsx';
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 const RestyledMain = styled(Main)`
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+  background-color: transparent;
 
   @media (min-width: 848px) {
     flex-direction: column;
@@ -38,11 +39,13 @@ const RestyledGraf = styled(Graf)`
   -moz-osx-font-smoothing: grayscale;
 `;
 const PictureBox = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: -.5px;
-  height: 100.5%;
-  width: 100.5%;
+  height: 101%;
+  width: 101%;
+  overflow: hidden;
+  z-index: -1;
 `;
 const Portal = styled.div`
   position: absolute;
@@ -102,62 +105,64 @@ export default function Home(props) {
   } = props;
 
   return (
-    <RestyledMain>
-      <Parallax
-        render={
-          renderProps => (
-            <NameTag
-              ref={
-                el => {
-                  renderProps.scene = el;
+    <Fragment>
+      <RestyledMain>
+        <Parallax
+          render={
+            renderProps => (
+              <NameTag
+                ref={
+                  el => {
+                    renderProps.scene = el;
+                  }
                 }
-              }
-              onClick={
-                () => boundHandleClickForApp('swapHomePageImage')
-              }
-              data-pointer-events={true}
-              tempContentIsOn={showBusinessCard || showLegalTerms}
-            >
-              <RestyledHed
-                c="yellow"
-                data-depth=".35"
-                s="4.5"
-                rS="6.5"
+                onClick={
+                  () => boundHandleClickForApp('swapHomePageImage')
+                }
+                data-pointer-events={true}
+                tempContentIsOn={showBusinessCard || showLegalTerms}
               >
+                <RestyledHed
+                  c="yellow"
+                  data-depth=".3"
+                  s="4.5"
+                  rS="6.5"
+                >
                 JamesAbels
-              </RestyledHed>
-              <RestyledGraf
-                bold
-                c="yellow"
-                data-depth=".2"
-                s="1.21"
-                t="64"
-                rS="1.65"
-                rT="93"
-                rL="20"
-              >
+                </RestyledHed>
+                <RestyledGraf
+                  bold
+                  c="yellow"
+                  data-depth=".2"
+                  s="1.21"
+                  t="64"
+                  rS="1.65"
+                  rT="93"
+                  rL="20"
+                >
                 Narrative coding and other adventures
-              </RestyledGraf>
-            </NameTag>
-          )
-        }
-      />
-      <PictureBox>
-        <BoyInForeground alt="" src="" srcImage="/foreground.png" />
-        <Portal />
-        <FantasyAsBackground
-          alt=""
-          inCity={inCity}
-          src=""
-          srcImage="/background-fantasy.png"
+                </RestyledGraf>
+              </NameTag>
+            )
+          }
         />
-        <CityAsBackground
-          alt=""
-          inCity={inCity}
-          src=""
-          srcImage="/background-city.png"
-        />
-      </PictureBox>
-    </RestyledMain>
+        <PictureBox>
+          <BoyInForeground alt="" src="" srcImage="/foreground.png" />
+          <Portal />
+          <FantasyAsBackground
+            alt=""
+            inCity={inCity}
+            src=""
+            srcImage="/background-fantasy.png"
+          />
+          <CityAsBackground
+            alt=""
+            inCity={inCity}
+            src=""
+            srcImage="/background-city.png"
+          />
+        </PictureBox>
+      </RestyledMain>
+    </Fragment>
   );
 }

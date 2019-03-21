@@ -2,23 +2,20 @@ import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import {
   css,
-  createGlobalStyle
+  createGlobalStyle,
+  ThemeProvider
 } from 'styled-components';
 import Footer from './header-footer/Footer.jsx';
 // import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
-import { isMobileSafari, isTablet } from 'react-device-detect';
+import { isMobileSafari, isTablet, osVersion } from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
-import MobileSafariSpacer from './shared/MobileSafariSpacer.jsx';
 import React, { Fragment, Component } from 'react';
+// import ReactResizeDetector from 'react-resize-detector';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
-
-console.log('1:', isTablet);
-const vHeight = !isTablet ? '97.5vh' : '100vh';
-console.log('2:', vHeight);
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -44,14 +41,20 @@ const GlobalStyle = createGlobalStyle`
   #app {
     display: flex;
     flex-direction: column;
-    min-height: ${p => !p.iPad ? '100vh' : '97.45vh'};
+    height: ${p => p.pageHeight}px;
     
-    ${p => p.home
-      && css`
-        width: 100%;
-        position: fixed;
-        overflow: hidden;
-      `};
+    @media(orientation:landscape) {
+      // Fix esoteric iOS 7 iPad bug
+      // https://stackoverflow.com/a/19449123
+      // https://stackoverflow.com/q/19012135
+      // https://krpano.com/ios/bugs/ios7-ipad-landscape/
+      ${p => p.fixMobileSafariBugOn7 && 'position:fixed; bottom: 0;'};
+    }
+    
+    ${p => p.home && css`
+      width: 100%;
+      overflow: hidden;
+    `};
   }
 `;
 
@@ -73,10 +76,13 @@ class App extends Component {
         : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
+      height: window.innerHeight || document.documentElement.clientHeight,
       showBusinessCard: false,
       showLegalTerms: false,
       showStoryText: true
     };
+
+    this.updateHeight = this.updateHeight.bind(this);
   }
 
   render() {
@@ -84,27 +90,36 @@ class App extends Component {
     const hcForApp = new ClickHandling('app', this);
     const boundHandleClickForApp = hcForApp.boundHandleClick;
     const homeIsActive = location.type === 'home';
+    const fixMobileSafariBugOn7 = isTablet && isMobileSafari && osVersion[0] === '7';
 
     return (
-      <Fragment>
-        <GlobalStyle home={homeIsActive} iPad={isTablet && isMobileSafari} />
-        <Header {...this.props} appState={this.state} />
-        <Body
-          {...this.props}
-          appState={this.state}
-          boundHandleClickForApp={boundHandleClickForApp}
-        />
-        <LegalTermsOrBizCard
-          {...this.props}
-          appState={this.state}
-          boundHandleClickForApp={boundHandleClickForApp}
-        />
-        <Footer
-          {...this.props}
-          appState={this.state}
-          boundHandleClickForApp={boundHandleClickForApp}
-        />
-      </Fragment>
+      <ThemeProvider theme={{ pageHeight: this.state.height.toString() }}>
+        <Fragment>
+          <GlobalStyle
+            home={homeIsActive}
+            pageHeight={this.state.height}
+            pageWidth={this.state.innerWidth}
+            fixMobileSafariBugOn7={fixMobileSafariBugOn7}
+          />
+          <Header {...this.props} appState={this.state} />
+          <Body
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
+          <LegalTermsOrBizCard
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
+          <Footer
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+            footerRef={this.state.footerRef}
+          />
+        </Fragment>
+      </ThemeProvider>
     );
   }
 
@@ -116,6 +131,23 @@ class App extends Component {
     //  -Body (explanatory message)
     //  -Footer (All rights reserved)
     // Otherwise, show appAsIntended
+
+    window.addEventListener('resize', this.updateHeight);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateHeight);
+  }
+
+  updateHeight() {
+    if (
+      (this.state.height !== window.innerHeight)
+        || (this.state.height !== document.documentElement.clientHeight)
+    ) {
+      this.setState({
+        height: window.innerHeight
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -124,12 +156,9 @@ class App extends Component {
       this.props,
       prevProps
     );
-    let scrollHandler;
-
-    if (isMobileSafari) {
-      scrollHandler = new ScrollHandling(location);
-      scrollHandler.resetMobileSafariTop();
-    }
+    // Make sure window top's at zero after orientation change
+    const scrollHandling = new ScrollHandling(location);
+    scrollHandling.resetWindowTop();
 
     if (location.justChanged) {
       const {
@@ -220,10 +249,20 @@ class App extends Component {
 
 export default withRouter(App);
 
+// isTablet && isMobileSafari && osVersion === '7'
+
 // 2. Edit story
 // 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
 // 4. Fix styled-components attribute use / clean up CSS
 // 5. Browser testing, step 1, screenshots
+
+// Parallax.js width limits?
+
+// window.innerHeight and window.scrollY fallbacks?
+// https://stackoverflow.com/questions/16618785/ie8-alternative-to-window-scrolly
+// https://stackoverflow.com/questions/10173236/window-innerheight-ie8-alternative
+
+// Windows 10 FF 63 — bizCard, center text
 
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
@@ -239,3 +278,5 @@ export default withRouter(App);
 // https://www.npmjs.com/package/react-device-detect
 
 // Just for fun: https://stackoverflow.com/a/49328427
+
+// Set viewport explained: https://developers.google.com/web/tools/lighthouse/audits/has-viewport-meta-tag

@@ -5,15 +5,13 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
-  background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#D2E7FF' : 'white')};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#d2e7ff' : 'white')};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
   align-items: center;
   height: 55px;
   font-size: 1.1rem;
-  z-index: ${p => (p.home ? '2' : undefined)};
-  position: relative;
 
   @media (min-width: 848px) {
     justify-content: flex-end;
@@ -21,11 +19,13 @@ const Container = styled.footer`
 `;
 const Line = styled.div`
   position: absolute;
+  z-index: 0;
   width: 100%;
-  top: 0px;
+  top: ${p => parseInt(p.theme.pageHeight) - 55}px;
   left: 0px;
   margin: 0px;
-  height: 0.5px;
+  height: 1px;
+  transform: scaleY(0.5);
   background-color: #fd1172;
 
   display: ${p => (p.home ? 'none' : undefined)};
@@ -34,11 +34,23 @@ const StoryButton = styled(Button)`
   color: ${p => (!p.active ? '#ffe74c' : '#6e7dab')};
   margin-left: 25px;
   background-color: ${p => (!p.active ? '#fd1172' : undefined)};
-  border: ${p => `0.5px solid ${!p.active ? '#fd1172' : '#455057'}`};
-  width: 60px;
+  border: ${p => `1px solid ${!p.active ? '#fd1172' : '#6e7dab'}`};
+  width: 43px;
+  padding: 7px;
 
   @media (min-width: 848px) {
     display: none;
+  }
+
+  https://stackoverflow.com/a/18997800
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    border: 1px #999 solid;;
+    transform: scale(0.5);
   }
 `;
 const RestyledLink = styled(StyledLink)`
@@ -92,6 +104,7 @@ export default function FooterContainer(props) {
       home={isHome}
       story={isStory}
       reverie={isReverie}
+
     >
       <Line home={isHome} />
       <StoryButton
