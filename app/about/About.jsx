@@ -13,11 +13,6 @@ import styled from 'styled-components';
 
 const RestyledLeft = styled(Left)`
   min-width: 327px;
-
-  @media (min-width: 848px) {
-    margin-left: 23px; // Prob temporary
-    // margin-left: 25px;
-  }
 `;
 const Heading = styled.div`
   display: flex;
@@ -48,7 +43,7 @@ const Text = styled.section`
 const Icon = styled.div`
   height: 20px;
   width: 30px;
-  // margin-bottom: 6px;
+  margin-bottom: 6px;
   margin-right: 2px;
   background: url(${p => p.src}) no-repeat;
   background-size: contain;
@@ -66,7 +61,7 @@ export default function About() {
       <Right>
         <Overflow>
           <Heading>
-            <Hed c="pink" s="3">
+            <Hed c="pink" s="3" t="-8">
             About
             </Hed>
             <RestyledExternalLink

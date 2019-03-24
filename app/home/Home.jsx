@@ -5,8 +5,13 @@ import Parallax from '../shared/Parallax.jsx';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
+import bio from '../data/about/home-page-about.md';
+import shortBio from '../data/about/home-page-about-short.md';
+import ReactHtmlParser from 'react-html-parser';
+import marked from 'marked';
+
 const RestyledMain = styled(Main)`
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   overflow: hidden;
   background-color: transparent;
@@ -21,11 +26,11 @@ const NameTag = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 2;
-  margin-top: 10px;
+  // margin-top: 10px;
   cursor: pointer;
 
   @media (min-width: 390px) {
-    margin-top: 20px;
+    // margin-top: 20px;
   }
 `;
 const RestyledHed = styled(Hed)`
@@ -33,6 +38,7 @@ const RestyledHed = styled(Hed)`
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
 `;
 const RestyledGraf = styled(Graf)`
+  font-family: 'Aref Ruqaa', serif;
   margin-left: 18px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
@@ -94,6 +100,43 @@ const CityAsBackground = styled(FantasyAsBackground)`
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
 
+const BioContainer = styled.div`
+  width: 75%;
+  margin-top: 25px;
+  display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
+
+  @media (min-width: 390px) {
+    margin-top: 40px;
+    width: 340px;
+  }
+
+  // @media (min-width: 848px) {
+  //   width: 45%;
+  // }
+`;
+const Text = styled.section`
+  overflow: auto;
+
+  p {
+    margin-top: 0px;
+    margin-left: 2px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #ffe74c;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
+    text-align: center;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+
+    @media (min-width: 390px) {
+      font-size: 1.4rem;
+    }
+    
+  }
+`;
+
 export default function Home(props) {
   const {
     inCity,
@@ -103,6 +146,15 @@ export default function Home(props) {
   const {
     boundHandleClickForApp
   } = props;
+
+  let aboutMeText = shortBio.body;
+  const screenSize = window.innerWidth;
+
+  if (screenSize < 390) {
+    aboutMeText = shortBio.body;
+  } else {
+    aboutMeText = bio.body;
+  }
 
   return (
     <Fragment>
@@ -130,7 +182,7 @@ export default function Home(props) {
                   s="4.5"
                   rS="6.5"
                 >
-                JamesAbels
+                James Abels
                 </RestyledHed>
                 <RestyledGraf
                   bold
@@ -138,15 +190,42 @@ export default function Home(props) {
                   data-depth=".2"
                   data-friction-x=".9"
                   data-friction-y=".9"
-                  s="1.21"
-                  t="64"
+                  s="1.3"
+                  t="65"
                   rS="1.65"
-                  rT="93"
+                  rT="90"
                   rL="20"
                 >
                 Narrative coding and other adventures
                 </RestyledGraf>
               </NameTag>
+            )
+          }
+        />
+        <Parallax
+          render={
+            renderProps => (
+              <BioContainer
+                ref={
+                  el => {
+                    renderProps.scene = el;
+                  }
+                }
+                tempContentIsOn={showBusinessCard || showLegalTerms}
+              >
+                <Text
+                  data-depth=".4"
+                  data-friction-x=".7"
+                  data-friction-y=".7"
+                >
+                  {ReactHtmlParser(
+                    marked(
+                      aboutMeText,
+                      { smartypants: true }
+                    )
+                  )}
+                </Text>
+              </BioContainer>
             )
           }
         />

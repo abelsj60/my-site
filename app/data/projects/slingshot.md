@@ -1,7 +1,7 @@
 ---
 {
   projectName: 'Slingshot',
-  type: 'Perfect software demos worldwide',
+  type: 'Global software demos',
   technologies: 'Cloud: AWS ∙ Language: PHP ∙ Broadcasting: PubNub / Websockets',
   contribution:
     "As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.",

@@ -16,6 +16,11 @@ const RestyledMain = styled(Main)`
     flex-direction: column;
   }
 `;
+const RestyledRight = styled(Right)`
+  @media (min-width: 848px) {
+    margin-top: 10px;
+  }
+`;
 
 export default function Menu(props) {
   const {
@@ -35,10 +40,10 @@ export default function Menu(props) {
 
   return (
     <RestyledMain reverie={isReverie}>
-      <Right>
+      <RestyledRight>
         <MenuButton {...props} />
         <Overflow>{children}</Overflow>
-      </Right>
+      </RestyledRight>
     </RestyledMain>
   );
 }

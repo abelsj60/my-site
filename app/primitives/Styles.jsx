@@ -5,6 +5,7 @@
 const noCSS = '';
 const colors = {
   blue: '#6e7dab',
+  lightBlue: '#e4e7ef',
   lightBlack: '#455057',
   pink: '#fd1172',
   yellow: '#ffe74c',
@@ -32,6 +33,7 @@ export default p => `
   @media (min-width: 848px){
       ${p.bC ? 'color:' + colors[p.bC] : noCSS};
       ${p.bT ? 'margin-top:' + p.bT + 'px' : noCSS};
+      ${p.bB ? 'margin-bottom:' + p.bB + 'px' : noCSS};
       ${p.bS ? 'font-size:' + p.bS + 'rem' : noCSS};
   }
 `;

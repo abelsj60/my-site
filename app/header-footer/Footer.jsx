@@ -18,23 +18,24 @@ const Container = styled.footer`
   }
 `;
 const Line = styled.div`
+  display: ${p => p.home || p.hide ? 'none' : ''};
   position: absolute;
   z-index: 0;
-  width: 100%;
+  // width: 100%;
+  left: 25px;
+  right: 25px;
   top: ${p => parseInt(p.theme.pageHeight) - 55}px;
-  left: 0px;
+  // left: 0px;
   margin: 0px;
   height: 1px;
   transform: scaleY(0.5);
-  background-color: #fd1172;
-
-  display: ${p => (p.home ? 'none' : undefined)};
+  background-color: #fd5198;
 `;
 const StoryButton = styled(Button)`
   color: ${p => (!p.active ? '#ffe74c' : '#6e7dab')};
   margin-left: 25px;
   background-color: ${p => (!p.active ? '#fd1172' : undefined)};
-  border: ${p => `1px solid ${!p.active ? '#fd1172' : '#6e7dab'}`};
+  border: ${p => `1px solid ${!p.active ? '#fd1172' : '#e4e7ef'}`};
   width: 43px;
   padding: 7px;
 
@@ -59,6 +60,7 @@ const RestyledLink = styled(StyledLink)`
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
+  // font-style: italic;
 `;
 const RestyledGraf = styled(Graf)`
   cursor: pointer;
@@ -67,9 +69,11 @@ const RestyledGraf = styled(Graf)`
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
+  // font-style: italic;
 `;
 const TextBox = styled.div`
   display: flex;
+  z-index: 1;
 `;
 
 export default function FooterContainer(props) {
@@ -104,9 +108,15 @@ export default function FooterContainer(props) {
       home={isHome}
       story={isStory}
       reverie={isReverie}
-
     >
-      <Line home={isHome} />
+      <Line
+        home={isHome}
+        hide={
+          (!showStoryText && !isReverie)
+            || showBusinessCard
+            || showLegalTerms
+        }
+      />
       <StoryButton
         active={showStoryText}
         clickFunction={

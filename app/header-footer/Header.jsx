@@ -16,8 +16,8 @@ const headerLinks = [
 ];
 
 const Container = styled.header`
-  background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#d2e7ff' : 'white')};
-  color: ${p => (p.home ? 'white' : '#455057')};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? '#d2e7ff' : 'white')};
+  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? '#455057' : '#555F66')};
   flex-shrink: 0;
   // z-index: 3;
   // position: relative;
@@ -29,28 +29,35 @@ const Container = styled.header`
 const RestyledLink = styled(StyledLink)`
   font-size: 1.25rem;
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
-  color: ${p => (p.home ? 'white' : '#455057')};
-  padding-top: 5px;
-  padding-bottom: 5px;
+  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? '#455057' : '#555F66')};
+  // padding-top: 5px;
+  // padding-bottom: 5px;
+
+  font-family: ${p => !p.home ? "'Aref Ruqaa', serif" : ''};
+  margin-top: -4px;
 
   && {
     text-decoration: ${p => (p.active === 'active' ? 'underline' : undefined)};
   }
 
   @media (min-width: 390px) {
-    font-size: ${p => p.home ? '1.35rem' : '1.5rem'};
+    font-size: ${p => !p.home ? '1.4rem' : '1.2rem'};
+    // font-size: ${p => p.home ? '1.35rem' : '1.3rem'};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
-  font-size: 1.4rem;
-  font-weight: bold;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  font-size: 1.2rem;
+  // font-weight: bold;
+  // padding-top: 0px;
+  // padding-bottom: 0px;
 
-  @media (min-width: 390px) {
-    font-size: 1.5rem;
-  }
+  // font-family: 'Aref Ruqaa', serif;
+  // margin-top: -4px;
+
+  // @media (min-width: 390px) {
+  //   font-size: 1.3rem;
+  // }
 `;
 const Motto = styled.p`
   flex: 1;
@@ -59,8 +66,11 @@ const Motto = styled.p`
   font-size: 1.2rem;
   margin-left: 10px;
   margin-right: 15px;
-  padding-top: 2.1px;
+  // padding-top: 2.1px;
   min-width: 0px;
+
+  font-family: 'Aref Ruqaa', serif;
+  margin-top: -4px;
   
   // https://css-tricks.com/flexbox-truncated-text/
   white-space: nowrap;
@@ -69,9 +79,9 @@ const Motto = styled.p`
 
   @media (min-width: 390px) {
     font-size: 1.3rem;
-    margin-left: 15px;
+    margin-left: 13px;
     margin-right: 0px;
-    padding-top: 2px;
+    // padding-top: 0px;
   }
 `;
 const Nav = styled.nav`
@@ -79,17 +89,16 @@ const Nav = styled.nav`
   padding: ${p => p.home ? '7px 13px' : undefined};
   background-color: ${p => p.home ? 'rgba(0,0,0,0.18)' : undefined};
   border-radius: ${p => p.home ? '10px' : undefined};
+  margin-top: -4px;
 
-  ${p =>
-    p.menu
-    && css`
-      flex: 1;
-      display: block;
+  ${p => p.menu && css`
+    flex: 1;
+    display: block;
 
-      @media (min-width: 390px) {
-        margin-left: 32px;
-      }
-    `};
+    @media (min-width: 390px) {
+      margin-left: 32px;
+    }
+  `};
 
   @media (min-width: 705px) {
     display: block;
@@ -140,7 +149,7 @@ export default class Header extends Component {
     } = appState;
     const menuIsActive = this.state.menuIsOpen;
     const homeIsActive = currentCaller === 'home';
-    const reverieIsActive = currentCaller === 'reverie';
+    const reverieIsActive = currentCaller === 'reverie' ? 'active' : '';
     const iconType = menuIsActive
       ? headerNavClose
       : headerNavOpen;
@@ -162,6 +171,7 @@ export default class Header extends Component {
         reverie={reverieIsActive}
       >
         <NameAsLink
+          reverie={reverieIsActive}
           hide={
             ((menuIsActive || homeIsActive) && 'active')
               || undefined
@@ -185,6 +195,7 @@ export default class Header extends Component {
                   return (
                     <li key={idx}>
                       <RestyledLink
+                        reverie={reverieIsActive}
                         active={
                           (pathIsActive && 'active')
                             || undefined

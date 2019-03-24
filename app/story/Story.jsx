@@ -14,11 +14,13 @@ const RestyledLeft = styled(Left)`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   flex: 1;
-  padding: 0px 0px 25px 23px;
+  // padding: 0px 0px 25px 23px;
+
+  padding: 0px 0px 25px 25px;
   margin-top: 10px;
 
   @media (min-width: 848px) {
-    margin-left: 23px;
+    // margin-left: 23px;
     max-width: 327px;
     padding: 0px;
   }
@@ -48,7 +50,7 @@ const RestyledRight = styled(Right)`
 const Image = styled.img`
   object-fit: cover;
   overflow: hidden;
-
+  // Fill page with image: https://stackoverflow.com/a/30794589
   position: absolute;
   height: 100%;
   width: 100%;
@@ -97,7 +99,7 @@ export default function Story(props) {
         <RestyledOverflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed as="h2" normal italic s="1.5" c="blue">
+          <Hed as="h2" normal s="1.4" c="blue">
             Chapter {chapterArray[indexForChapterData]}
           </Hed>
           <Hed c="pink" s="3" b="12">

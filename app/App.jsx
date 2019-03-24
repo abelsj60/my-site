@@ -8,7 +8,12 @@ import {
 import Footer from './header-footer/Footer.jsx';
 // import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
-import { isMobileSafari, isTablet, osVersion } from 'react-device-detect';
+import {
+  isMobileSafari,
+  isOpera,
+  isTablet,
+  osVersion
+} from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
@@ -18,7 +23,7 @@ import { withRouter } from 'react-router';
 
 const GlobalStyle = createGlobalStyle`
   html {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 65%; // 62.5%
   }
   
@@ -33,7 +38,21 @@ const GlobalStyle = createGlobalStyle`
     h2,
     h3,
     p {
-      margin: 0px 0px 0px 2px;
+      margin: 0px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      margin-left: 2px;
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    p {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.5;
     }
   }
 
@@ -128,19 +147,35 @@ class App extends Component {
     );
   }
 
+  hasFlexbox() {
+    // https://johanronsse.be/2016/01/03/simple-flexbox-check/
+    const document = window.document.body
+      || window.document.documentElement;
+    const style = document.style;
+
+    if (
+      style.webkitFlexWrap === ''
+        || style.msFlexWrap === ''
+        || style.flexWrap === ''
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
   componentDidMount() {
-    // getBouncingRect via this.ref1, this.ref2, this.ref3
-    // If the .top and .left are what we expect, this.setState({supportedBrowser: false})
-    // reRender. If !supportedBrowser, <UnsupportedBrowserSite>
-    //  -Header (name + motto)
-    //  -Body (explanatory message)
-    //  -Footer (All rights reserved)
-    // Otherwise, show appAsIntended
+    if (!this.hasFlexbox()) {
+      throw new Error("Browser doesn't support Flexbox");
+    } else if (isOpera) {
+      throw new Error("We don't currently support Opera");
+    }
 
     window.addEventListener('resize', this.updateHeight);
   }
 
   componentWillUnmount() {
+    // It'll never be called, here as good practice
     window.removeEventListener('resize', this.updateHeight);
   }
 
@@ -259,18 +294,12 @@ export default withRouter(App);
 // 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
 // 4. Fix styled-components attribute use / clean up CSS
 
+// https://codersblock.com/blog/creating-glow-effects-with-css/
+
 // Illustrator. List needs, specs?
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
-// Story image is too small? Scale: https://stackoverflow.com/a/23805337
 
 // Hosting?
 // ! https://github.com/rafrex/spa-github-pages
 // ! http://spa-github-pages.rafrex.com/
 
-// Sticky footer/wrapper: https://stackoverflow.com/a/44771365
-// https://www.eventbrite.com/engineering/mobile-safari-why/
-// https://www.npmjs.com/package/react-device-detect
-
-// Flexbox, no support:
-// 1. https://johanronsse.be/2016/01/03/simple-flexbox-check/
-// 2. https://github.com/ergcode/ergonomic.detect_flex

@@ -3,6 +3,7 @@ import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Component } from 'react';
+// import ReactGA from 'react-ga';
 import styled, { css } from 'styled-components';
 
 const Container = styled.section`
@@ -78,24 +79,32 @@ const StyledClipboardButton = styled(Clipboard)`
 const RestyledGraf = styled(Graf)`
   // height: 100%;
   flex: 1;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  // margin-top: ${p => p.copying ? '0px' : '-4px'};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   @media (min-width: 400px) {
-    font-size: 1.4rem;
+  font-size: 1.5rem;
   }
 `;
 const MyCopyright = styled.span`
+  font-size: 1.2rem;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
+  font-family: 'Montserrat', sans-serif;
+
+  @media (min-width: 390px) {
+    font-size: 1.45rem;
+  }
 `;
 const ClipCopyright = styled.span`
   font-size: .9rem;
   font-style: italic;
+  font-family: 'Montserrat', sans-serif;
 
   @media (min-width: 390px) {
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 `;
 
@@ -209,7 +218,7 @@ export default class LegalTermsOrBizCard extends Component {
                   }
                 >
                   <Card
-                    data-depth="1"
+                    data-depth=".6"
                     data-friction-x=".5"
                     data-friction-y=".5"
                     data-limit-x="2" // Value unclear
@@ -262,6 +271,20 @@ export default class LegalTermsOrBizCard extends Component {
         </CardHolder>
       </Container>
     );
+  }
+
+  componentDidUpdate() {
+    const { showBusinessCard, showLegalTerms } = this.props.appState;
+
+    if (showBusinessCard || showLegalTerms) {
+      // ReactGA.event({
+      //   category: 'Temp content',
+      //   action: 'Opened',
+      //   label: showBusinessCard
+      //     ? 'BusinessCard opened'
+      //     : 'LegalNotice opened'
+      // });
+    }
   }
 
   // Not added to ClickHandling. Dealing w/'this'

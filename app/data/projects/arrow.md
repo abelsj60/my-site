@@ -1,7 +1,8 @@
 ---
 {
   projectName: 'Arrow',
-  type: 'Easily deliver custom interactive video',technologies: 'Cloud: AWS ∙ Language: PHP ∙ Transcoding: FFmpeg',
+  type: 'Personalize interactive video',
+  technologies: 'Cloud: AWS ∙ Language: PHP ∙ Transcoding: FFmpeg',
   contribution: "As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.",
   description: 'Arrow makes it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.',
   captions: [

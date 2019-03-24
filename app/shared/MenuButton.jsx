@@ -7,7 +7,7 @@ import StyledLink from '../primitives/StyledLink.jsx';
 const Container = styled.div`
   min-height: 34px;
   width: 60px;
-  margin-left: ${p => p.offset !== 'active' ? '2px' : '0px'};
+  // margin-left: ${p => p.noOffset !== 'active' ? '2px' : '2px'};
 
   @media (min-width: 848px) {
     display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
@@ -19,13 +19,13 @@ const RestyledLink = styled(StyledLink)`
   margin-right: auto;
   margin-bottom: 13px;
   position: relative;
-  padding-bottom: 6px;
+  padding-bottom: 5px;
   justify-content: space-between;
 `;
 const Label = styled.p`
-  font-size: 1.3rem;
-  color: ${p => (!p.menu ? '#6e7dab' : '#fd1172')};
-  transition: color 1s;
+  font-size: 1.2rem;
+  color: #6e7dab;
+  // transition: color 1s;
   margin: 0px;
   cursor: pointer;
   margin-top: -2px;
@@ -45,7 +45,12 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => (!p.menu ? '#6e7dab' : p.reverie ? '#5b678c' : '#ffe74c')};
+  background-color: ${p => (!p.menu && !p.reverie
+    ? '#e6f1ff'
+    : (!p.menu && p.reverie)
+      || (p.menu && p.reverie)
+      ? '#f1f3f7'
+      : '#e6f1ff')};
 
   // https://css-tricks.com/annoying-mobile-double-tap-link-issue/
   // @media (hover) {

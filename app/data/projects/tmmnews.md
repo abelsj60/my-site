@@ -1,7 +1,7 @@
 ---
 {
   projectName: 'TMMnews',
-  type: 'Bespoke video news site',
+  type: 'Bespoke video news',
   technologies: 'Cloud: WordPress ∙ Language: JavaScript, HTML, CSS',
   contribution:
     'News anchor, oversaw platform development, managed dev team, prioritized features.',

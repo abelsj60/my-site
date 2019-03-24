@@ -13,7 +13,7 @@ import styled from 'styled-components';
 
 const ReverieText = styled.section`
   p {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   img,
@@ -32,7 +32,7 @@ const ReverieText = styled.section`
 `;
 const ArticleText = styled.section`
   p {
-    font-size: 1.65rem;
+    font-size: 1.5rem;
     margin-top: 0px;
     margin-bottom: 15px;
 
@@ -77,7 +77,7 @@ export default function ArticleOrReverie(props) {
 
   return (
     <Main reverie={isReverie}>
-      <Left>
+      <Left reverie={isReverie}>
         <ArticleOrReverieNav {...props} data={data} />
       </Left>
       <Right>
@@ -85,13 +85,13 @@ export default function ArticleOrReverie(props) {
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed as="h2" normal italic c="pink" s="1.5">
+          <Hed as="h2" c="pink" s="1.35" bS="1.4" b="2">
             {reverieOrPublicationAsDek}
           </Hed>
           <Hed s="3">
             {headline}
           </Hed>
-          <Graf b="14" s="1.3" t="14">
+          <Graf italic b="14" s="1.2" t="14">
             {bylineOrDate}
           </Graf>
           <ArticleOrReverieText>
