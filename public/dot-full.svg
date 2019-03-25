@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -7,18 +9,18 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="7.995"
-   height="4"
+   width="8"
+   height="8"
    version="1.1"
-   viewBox="0 0 7.9949622 4"
-   id="svg8"
-   sodipodi:docname="arrow-up.svg"
-   inkscape:export-filename="/Users/james/Desktop/foundations/my-site/public/arrow-up.png"
+   viewBox="0 0 2.1166668 2.1166668"
+   id="svg10"
+   sodipodi:docname="dot-full.svg"
+   inkscape:export-filename="/Users/james/Desktop/foundations/my-site/public/dot-full.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06">
   <defs
-     id="defs12" />
+     id="defs14" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -28,17 +30,17 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1440"
-     inkscape:window-height="855"
-     id="namedview10"
+     inkscape:window-width="748"
+     inkscape:window-height="480"
+     id="namedview12"
      showgrid="false"
-     inkscape:zoom="40.525329"
-     inkscape:cx="3.9974999"
-     inkscape:cy="2"
+     inkscape:zoom="29.5"
+     inkscape:cx="4"
+     inkscape:cy="4"
      inkscape:window-x="0"
-     inkscape:window-y="1"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg8" />
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg10" />
   <metadata
      id="metadata2">
     <rdf:RDF>
@@ -47,15 +49,22 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>Dropdown</dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <title
-     id="title4">Dropdown</title>
-  <polygon
-     transform="matrix(.25189 0 0 -.25189 -8.597 14.594)"
-     points="50 57.94 34.13 42.06 65.87 42.06"
-     style="fill:#455057"
-     id="polygon6" />
+  <g
+     transform="translate(-68.792 -102.87)"
+     id="g8">
+    <g
+       transform="matrix(.66667 0 0 .66667 22.931 34.996)"
+       id="g6">
+      <circle
+         cx="70.379"
+         cy="103.4"
+         r="1.5875"
+         style="fill:#455057"
+         id="circle4" />
+    </g>
+  </g>
 </svg>

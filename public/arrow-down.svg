@@ -7,17 +7,40 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   viewBox="0 0 31.74 15.88"
-   x="0px"
-   y="0px"
+   width="7.995"
+   height="4"
    version="1.1"
-   id="svg10"
-   sodipodi:docname="arrow-down-grey.svg"
-   width="31.74"
-   height="15.88"
+   viewBox="0 0 7.9949622 4"
+   id="svg8"
+   sodipodi:docname="arrow-down.svg"
+   inkscape:export-filename="/Users/james/Desktop/foundations/my-site/public/arrow-down.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1092"
+     inkscape:window-height="685"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="40.525329"
+     inkscape:cx="3.9974999"
+     inkscape:cy="2"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg8" />
   <metadata
-     id="metadata16">
+     id="metadata2">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -28,41 +51,11 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <defs
-     id="defs14" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="854"
-     inkscape:window-height="724"
-     id="namedview12"
-     showgrid="false"
-     inkscape:zoom="1.888"
-     inkscape:cx="-15.909661"
-     inkscape:cy="-4.56"
-     inkscape:window-x="505"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg10"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:showpageshadow="false" />
   <title
-     id="title2">Dropdown</title>
+     id="title4">Dropdown</title>
   <polygon
-     points="34.13,42.06 65.87,42.06 50,57.94 "
-     id="polygon4"
-     inkscape:export-filename="/Users/james/Desktop/arrow-down.svg.png"
-     inkscape:export-xdpi="35.66"
-     inkscape:export-ydpi="35.66"
-     transform="translate(-34.13,-42.06)"
-     style="fill:#455057;fill-opacity:1" />
+     transform="matrix(.25189 0 0 .25189 -8.597 -10.594)"
+     points="34.13 42.06 65.87 42.06 50 57.94"
+     style="fill:#455057"
+     id="polygon6" />
 </svg>

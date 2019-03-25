@@ -1,12 +1,12 @@
 ---
 {
   projectName: 'Slingshot',
-  type: 'Perfect software demos worldwide',
+  type: 'Global software demos',
   technologies: 'Cloud: AWS ∙ Language: PHP ∙ Broadcasting: PubNub / Websockets',
   contribution:
     "As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.",
   description:
-    'Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible.',
+    'Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible.',
   captions: [
     'Slingshot caption one',
     'Slingshot caption two',

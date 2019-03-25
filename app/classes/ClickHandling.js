@@ -1,6 +1,7 @@
 import Referrer from './Referrer';
+// import ReactGA from 'react-ga';
 
-export default class EventHandling {
+export default class ClickHandling {
   constructor(component, outsideThis) {
     if (outsideThis.props.location === undefined) {
       throw new Error(
@@ -39,6 +40,7 @@ export default class EventHandling {
   _handleClickForAppComponent() {
     return (updateValue, valueOne, valueTwo) => {
       const {
+        // currentCaller,
         showBusinessCard,
         showLegalTerms,
         inCity,
@@ -46,6 +48,9 @@ export default class EventHandling {
         isMenu
       } = this.state;
       const stateToUpdate = {};
+      // let category = '';
+      // let action = '';
+      // let label = '';
 
       switch (updateValue) {
         case 'toggleBusinessCard':
@@ -53,12 +58,26 @@ export default class EventHandling {
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
+          // category = 'Business card';
+          // action = !showBusinessCard
+          //   ? 'Clicked to open'
+          //   : 'Clicked to close';
+          // label = showLegalTerms
+          //   ? 'Legal notice was open'
+          //   : '';
           break;
         case 'toggleLegalTerms':
           stateToUpdate.showLegalTerms = !showLegalTerms;
           if (showBusinessCard) {
             stateToUpdate.showBusinessCard = !showBusinessCard;
           }
+          // category = 'Legal terms';
+          // action = !showLegalTerms
+          //   ? 'Clicked to open'
+          //   : 'Clicked to close';
+          // label = showBusinessCard
+          //   ? 'Business card was open'
+          //   : '';
           break;
         case 'toggleStoryText':
           stateToUpdate.showStoryText = !showStoryText;
@@ -68,9 +87,22 @@ export default class EventHandling {
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
+          // category = 'Show story text';
+          // action = showStoryText
+          //   ? 'Clicked to hide text'
+          //   : 'Clicked to show text';
+          // label = showBusinessCard
+          //   ? 'Business card was open'
+          //   : showLegalTerms
+          //     ? 'Legal notice was open'
+          //     : '';
           break;
         case 'swapHomePageImage':
           stateToUpdate.inCity = !inCity;
+          // category = 'Swap home page background image';
+          // action = !inCity
+          //   ? 'Go to city realm'
+          //   : 'Go to fantasy realm';
           break;
         case 'setCallers':
           stateToUpdate.currentCaller = valueOne;
@@ -80,12 +112,24 @@ export default class EventHandling {
           break;
         case 'toggleMenu':
           stateToUpdate.isMenu = !isMenu;
+          // category = 'Toggle menu';
+          // action = !isMenu
+          //   ? `Go to ${currentCaller} menu`
+          //   : `Leave ${currentCaller} menu`;
           break;
         default:
           break;
       }
 
-      return this.setState(stateToUpdate);
+      if (updateValue !== 'setCallers') {
+        // ReactGA.event({
+        //   category,
+        //   action,
+        //   label
+        // });
+      }
+
+      return this.setState(() => stateToUpdate);
     };
   }
 
@@ -129,7 +173,7 @@ export default class EventHandling {
         toggleState.call(this);
         this.timeoutId = setTimeout(() => {
           this.setState({ menuIsOpen: false });
-        }, 4000);
+        }, 5000);
       } else {
         clearTimeout(this.timeoutId);
         this.timeoutId = undefined;

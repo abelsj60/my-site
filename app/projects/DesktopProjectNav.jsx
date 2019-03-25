@@ -1,4 +1,5 @@
-import Hed from '../primitives/Hed.jsx';
+// import Hed from '../primitives/Hed.jsx';
+import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React from 'react';
@@ -19,8 +20,17 @@ const StyledUL = styled(UnorderedList)`
       margin: 0;
     `};
 `;
-const RestyledHed = styled(Hed)`
-  font-size: ${p => (!p.menu ? '1.4rem' : '1.6rem')};
+const ListItem = styled.li`
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+`;
+const RestyledGraf = styled(Graf)`
+  font-size: 1.3rem;
+
+  @media (min-width: 390px) {
+    font-size: ${p => (!p.menu ? '1.3rem' : '1.6rem')};
+  }
 `;
 
 export default function DesktopProjectNav(props) {
@@ -63,8 +73,8 @@ export default function DesktopProjectNav(props) {
             } = project.attributes;
 
             return (
-              <li key={idx}>
-                <RestyledHed
+              <ListItem key={idx}>
+                <RestyledGraf
                   normal
                   b="9"
                   c="blue"
@@ -72,7 +82,7 @@ export default function DesktopProjectNav(props) {
                   num={idx}
                 >
                   {`${projectName} | ${type}`}
-                </RestyledHed>
+                </RestyledGraf>
                 <ProjectNav
                   {...props}
                   isActive={indexForProjectData === idx}
@@ -80,7 +90,7 @@ export default function DesktopProjectNav(props) {
                   num={idx}
                   project={project}
                 />
-              </li>
+              </ListItem>
             );
           }
         }

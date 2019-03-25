@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
 export default styled.section`
+  margin: 10px 0px 25px 25px;
+  // margin: 10px 0px 25px 23px;
   display: flex;
   flex-direction: column;
-  margin: 25px ${p => (p.rightMargin && 25) || 0}px 25px 25px;
   overflow: auto;
+
+  @media (min-width: 848px) {
+    margin-top: 25px;
+  }
 `;

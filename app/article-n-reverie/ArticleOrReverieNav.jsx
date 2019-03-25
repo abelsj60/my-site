@@ -7,12 +7,13 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const StyledUL = styled(UnorderedList)`
-  height: 100%;
-  overflow: auto;
+  // height: 100%;
+  overflow: ${p => (!p.menu ? 'auto' : undefined) };
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;
 const GrafAsDek = styled(Graf)`
   color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
+  margin-bottom: ${p => (!p.menu ? '1px' : undefined)};
 
   &:first-child {
     margin-top: 0px;
@@ -20,7 +21,8 @@ const GrafAsDek = styled(Graf)`
 `;
 const GrafAsHed = styled(Graf)`
   color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
-  font-size: ${p => (p.menu ? '3rem' : '1.7rem')};
+  font-size: ${p => (p.menu ? '2rem' : '1.55rem')};
+  margin-top: -2px;
 
   ${p =>
     !p.menu
@@ -30,6 +32,10 @@ const GrafAsHed = styled(Graf)`
       width: 300px;
       white-space: nowrap;
     `};
+
+  @media (min-width: 500px) {
+    font-size: ${p => (p.menu && '3rem')}
+  }
 `;
 
 export default function ArticleOrReverieNav(props) {
@@ -96,10 +102,9 @@ export default function ArticleOrReverieNav(props) {
                 <StyledLink to={articleLink}>
                   <GrafAsDek
                     italic
-                    b="2"
                     link={linkIsActive}
                     menu={isMenu}
-                    s="1.3"
+                    s="1.25"
                   >
                     {dateOrPublicationFromItem}
                   </GrafAsDek>
@@ -120,3 +125,5 @@ export default function ArticleOrReverieNav(props) {
     </StyledUL>
   );
 }
+
+//

@@ -5,8 +5,9 @@ export default styled.nav`
 
   @media (min-width: 848px) {
     display: flex;
+    // margin: 25px 0px 25px 23px;
     margin: 25px 0px 25px 25px;
-    width: 327px;
-    border-right: 0.5px solid #6e7dab;
+    min-width: 327px;
+    border-right: 0.5px solid ${p => !p.reverie ? '#e4e7ef' : '#e6f1ff'};
   }
 `;

@@ -11,14 +11,22 @@ import React, { Fragment } from 'react';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
+const RestyledLeft = styled(Left)`
+  @media (min-width: 848px) {
+    // margin-left: 23px;
+  }
+`;
 const Images = styled.section`
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
-  padding: 10px;
-  border: 0.5px solid #6e7dab;
+  // margin-top: 10px;
+  margin-bottom: 1px;
 
-  @media (min-width: 672px) {
+  // margin-left: 2px;
+  // padding: 10px;
+  // border: 0.5px solid #6e7dab;
+
+  @media (min-width: 651px) {
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
@@ -34,20 +42,20 @@ const Images = styled.section`
 const Figure = styled.figure`
   margin: 0px;
 
-  @media (min-width: 672px) {
+  @media (min-width: 651px) {
     display: flex;
     flex-direction: column;
   }
 `;
 const Caption = styled.figcaption`
   display: flex;
-  margin-top: 7px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 8px;
   margin-right: 10px;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: #6e7dab;
 
-  @media (min-width: 672px) {
+  @media (min-width: 651px) {
     margin-top: 0;
   }
 
@@ -67,7 +75,7 @@ const Image = styled.img`
   color: #455057;
   font-size: 1.5rem;
 
-  @media (min-width: 672px) {
+  @media (min-width: 651px) {
     margin-right: 10px;
   }
 
@@ -113,19 +121,19 @@ export default function Projects(props) {
 
   return (
     <Main>
-      <Left>
+      <RestyledLeft>
         <DesktopProjectNav {...props} data={data} params={params} />
-      </Left>
+      </RestyledLeft>
       <Right>
-        <MenuButton {...props} />
+        <MenuButton {...props} noOffset={true} />
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed b="8" c="pink" s="3">
+          <Hed b="5" c="pink" s="3" t="-8">
             {projectName}
           </Hed>
           <section>
-            <Hed as="h2" normal b="10" s="1.7">
+            <Hed as="h2" normal b="15" s="1.7">
               {type}
             </Hed>
             <Mapper
@@ -133,7 +141,7 @@ export default function Projects(props) {
               render={
                 (proj, idx) => (
                   <Fragment key={idx}>
-                    <Hed as="h3" normal b="7" c="blue" s="1.4">
+                    <Hed as="h3" normal b="8" c="blue" s="1.4">
                       {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
                     </Hed>
                     <Graf b="10" t="0">
@@ -160,3 +168,5 @@ export default function Projects(props) {
     </Main>
   );
 }
+
+//

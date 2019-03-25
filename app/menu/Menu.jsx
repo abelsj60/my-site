@@ -1,24 +1,34 @@
 import Main from '../primitives/Main.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
+import Right from '../primitives/Right.jsx';
 import React from 'react';
 import styled from 'styled-components';
 
 const RestyledMain = styled(Main)`
-  margin: 25px;
+  // margin: 5px 25px 25px 25px;
+
+  @media (min-width: 390px) {
+    // margin-top: 25px;
+  }
 
   @media (min-width: 848px) {
     flex-direction: column;
   }
 `;
-const RestyledOverfiow = styled(Overflow)`
-  padding-right: 0px;
+const RestyledRight = styled(Right)`
+  @media (min-width: 848px) {
+    margin-top: 10px;
+  }
 `;
 
 export default function Menu(props) {
   const {
-    children
+    appState,
+    children,
   } = props;
+  const { currentCaller } = appState;
+  const isReverie = currentCaller === 'reverie';
 
   /** Props explanation
    *
@@ -29,9 +39,11 @@ export default function Menu(props) {
    */
 
   return (
-    <RestyledMain>
-      <MenuButton {...props} />
-      <RestyledOverfiow>{children}</RestyledOverfiow>
+    <RestyledMain reverie={isReverie}>
+      <RestyledRight>
+        <MenuButton {...props} />
+        <Overflow>{children}</Overflow>
+      </RestyledRight>
     </RestyledMain>
   );
 }

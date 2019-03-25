@@ -1,3 +1,5 @@
+import dotFull from '../../public/dot-full.png';
+import dotEmpty from '../../public/dot-empty.png';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';
@@ -6,39 +8,24 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
-  margin-left: 2px;
-  margin-bottom: 13px;
-
-  @media (min-width: 848px) {
-    padding-right: 25px;
-  }
+  margin-top: -5px;
+  margin-bottom: 5px;
+  margin-left: -13px; // Deliberately not flush
+  max-width: 150px;
+  display: flex;
+  flex-shrink: 0;
 `;
 const StyledUL = styled(UnorderedList)`
-  flex: 1;
   display: flex;
-`;
-const Item = styled.li`
   flex: 1;
-  flex-direction: column;
-  align-items: center;
 `;
-const RestyledLink = styled(StyledLink)`
-  color: white;
-
-  @media (min-width: 848px) {
-    color: #6e7dab;
-  }
-`;
-const Text = styled.p`
+const ListItem = styled.li`
   flex: 1;
-  text-align: center;
-  padding-bottom: 10px;
-  margin: 0px;
-  border-bottom: ${p => (p.item ? '.5px solid white' : undefined)};
-
-  @media (min-width: 848px) {
-    border-bottom: ${p => (p.item ? '.5px solid #6e7dab' : undefined)};
-  }
+`;
+const Selector = styled.div`
+  height: 8px;
+  background: ${p => `url(${p.image})`} center no-repeat;
+  background-size: contain;
 `;
 
 export default function ChapterNav(props) {
@@ -68,15 +55,28 @@ export default function ChapterNav(props) {
               const normalizedTitle = normalize(
                 data[idx].attributes.title
               );
+              const dot = itemIsActive
+                ? dotFull
+                : dotEmpty;
 
               return (
-                <Item key={idx}>
-                  <RestyledLink to={`/chapter/${normalizedTitle}`}>
-                    <Text item={itemIsActive} num={idx}>
-                      {idx + 1}
-                    </Text>
-                  </RestyledLink>
-                </Item>
+                <ListItem key={idx}>
+                  <StyledLink to={`/chapter/${normalizedTitle}`}>
+                    <div
+                      style={{
+                        paddingTop: '8px',
+                        paddingBottom: '8px'
+                      }}>
+                      <Selector
+                        image={dot}
+                        item={itemIsActive}
+                        num={idx}
+                        s="1.3"
+                        c="lightBlack"
+                      />
+                    </div>
+                  </StyledLink>
+                </ListItem>
               );
             }
           }

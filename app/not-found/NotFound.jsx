@@ -7,6 +7,10 @@ import styled from 'styled-components';
 const RestyledRight = styled(Right)`
   flex: 1;
   margin-right: 25px;
+
+  @media (min-width: 848px) {
+    margin-top: 10px;
+  }
 `;
 const FailWhale = styled.section`
   flex: 1;

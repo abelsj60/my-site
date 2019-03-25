@@ -9,9 +9,9 @@ Hi. Welcome to Reverie.
 
 I'm not entirely sure what this is, but here's what it's not:
 
-* A place for regular commentary
-* Something terribly serious
 * A click-bait machine
+* Something terribly serious
+* A place for regular commentary
 
 Here's what it may be:
 

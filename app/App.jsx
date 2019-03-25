@@ -1,48 +1,82 @@
 import Body from './Body.jsx';
+import ClickHandling from './classes/ClickHandling.js';
 import {
   css,
-  createGlobalStyle
+  createGlobalStyle,
+  ThemeProvider
 } from 'styled-components';
-import EventHandling from './classes/EventHandling.js';
 import Footer from './header-footer/Footer.jsx';
 // import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
+import {
+  isMobileSafari,
+  isOpera,
+  isTablet,
+  osVersion
+} from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
+import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
 
 const GlobalStyle = createGlobalStyle`
   html {
-    font-family: 'Lato', sans-serif;
-    font-size: 65%;
+    // Best practice to load fonts: 
+    // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
+    font-family: 'Montserrat', sans-serif;
+    font-size: 65%; // 62.5%
   }
-
+  
   body {
     margin: 0px;
     padding: 0px;
     font-size: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 
     h1,
     h2,
     h3,
     p {
-      margin: 0px 0px 0px 2px;
+      margin: 0px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      margin-left: 2px;
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+    }
+
+    p {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.5;
+      font-weight: 300;
     }
   }
 
   #app {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-
-    ${p =>
-    p.home
-      && css`
-        width: 100%;
-        position: fixed;
-      `};
+    height: ${p => p.theme.pageHeight}px;
+    
+    @media(orientation:landscape) {
+      // Fix esoteric iOS 7 iPad bug
+      // https://stackoverflow.com/a/19449123
+      // https://stackoverflow.com/q/19012135
+      // https://krpano.com/ios/bugs/ios7-ipad-landscape/
+      ${p => p.fixMobileSafariBugOn7 && 'position:fixed; bottom: 0;'};
+    }
+    
+    ${p => p.home && css`
+      width: 100%;
+      overflow: hidden;
+    `};
   }
 `;
 
@@ -55,6 +89,9 @@ class App extends Component {
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
+    this.ref = React.createRef();
+    // this.zoomIndicator = React.createRef();
+
     this.state = {
       currentCaller: location,
       lastCaller: location !== 'reverie'
@@ -62,36 +99,130 @@ class App extends Component {
         : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
+      height: window.innerHeight || document.documentElement.clientHeight,
       showBusinessCard: false,
       showLegalTerms: false,
       showStoryText: true
     };
+
+    this.updateHeight = this.updateHeight.bind(this);
   }
 
   render() {
     const location = new Location('/', this.props);
+    const hcForApp = new ClickHandling('app', this);
+    const boundHandleClickForApp = hcForApp.boundHandleClick;
     const homeIsActive = location.type === 'home';
+    const fixMobileSafariBugOn7 = isTablet
+      && isMobileSafari
+      && osVersion[0] === '7';
 
-    const eForApp = new EventHandling('app', this);
-    const boundHandleClickForApp = eForApp.boundHandleClick;
+    // console.log('zI window:', this.zoomIndicator.current && this.zoomIndicator.current.getBoundingClientRect());
+    // console.log('zI height:', this.zoomIndicator.current && this.zoomIndicator.current.offsetHeight);
 
     return (
-      <Fragment>
-        <GlobalStyle home={homeIsActive} />
-        <Header {...this.props} appState={this.state} />
-        <Body
-          {...this.props}
-          appState={this.state}
-          boundHandleClickForApp={boundHandleClickForApp}
-        />
-        <LegalTermsOrBizCard {...this.props} appState={this.state} />
-        <Footer
-          {...this.props}
-          appState={this.state}
-          boundHandleClickForApp={boundHandleClickForApp}
-        />
-      </Fragment>
+      <ThemeProvider
+        theme={{
+          pageHeight: this.state.height.toString()
+        }}
+      >
+        <Fragment>
+          <GlobalStyle
+            home={homeIsActive}
+            fixMobileSafariBugOn7={fixMobileSafariBugOn7}
+          />
+          <div style={{
+            position: 'absolute',
+            top: '0px',
+            left: '0px',
+            visibility: 'hidden',
+            height: '5px',
+            width: '5px'
+          }}
+          // ref={ref => this.zoomIndicator.current = ref}
+          />
+          <Header
+            {...this.props}
+            appState={this.state}
+          />
+          <Body
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
+          <LegalTermsOrBizCard
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
+          <Footer
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
+        </Fragment>
+      </ThemeProvider>
     );
+  }
+
+  hasFlexbox() {
+    // https://johanronsse.be/2016/01/03/simple-flexbox-check/
+    const document = window.document.body
+      || window.document.documentElement;
+    const style = document.style;
+
+    if (
+      style.webkitFlexWrap === ''
+        || style.msFlexWrap === ''
+        || style.flexWrap === ''
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  componentDidMount() {
+    if (!this.hasFlexbox()) {
+      throw new Error("Browser doesn't support Flexbox");
+    } else if (isOpera) {
+      throw new Error("We don't currently support Opera");
+    }
+
+    window.addEventListener('resize', this.updateHeight);
+  }
+
+  componentWillUnmount() {
+    // It'll never be called, here as good practice
+    window.removeEventListener('resize', this.updateHeight);
+  }
+
+  updateHeight() {
+    if (
+      (
+        (this.state.height !== window.innerHeight)
+        || (this.state.height !== document.documentElement.clientHeight)
+      )
+    // && this.zoomIndicator.current.getBoundingClientRect().left === 0
+    ) {
+      // ReactGA.event({
+      //   category: 'Re-calculate height',
+      //   action: `Current height: ${
+      //     this.state.height
+      // } doesn't match new height: ${
+      //   window.innerHeight
+      //   ? window.innerHeight
+      //   : document.documentElement.clientHeight
+      // }`;
+      //   label:
+      // });
+
+      this.setState({
+        height: window.innerHeight
+          ? window.innerHeight
+          : document.documentElement.clientHeight
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -101,6 +232,10 @@ class App extends Component {
       prevProps
     );
 
+    // Ensure window top's at zero after orientation change
+    const scrollHandling = new ScrollHandling(location);
+    scrollHandling.resetWindowTop();
+
     if (location.justChanged) {
       const {
         isMenu,
@@ -109,8 +244,8 @@ class App extends Component {
         showStoryText
       } = this.state;
       const referrer = new Referrer(prevProps);
-      const eForApp = new EventHandling('app', this);
-      const handleClickForApp = eForApp.boundHandleClick;
+      const hcForApp = new ClickHandling('app', this);
+      const handleClickForApp = hcForApp.boundHandleClick;
 
       if (showBusinessCard) {
         handleClickForApp('toggleBusinessCard');
@@ -120,16 +255,43 @@ class App extends Component {
         handleClickForApp('toggleLegalTerms');
       }
 
-      if (!showStoryText) {
+      if (
+        !showStoryText
+          && !location.isReloading
+          && location.type !== 'reverie'
+          && location.lastType !== 'reverie'
+      ) {
+        // If you've hidden text, and gone to reverie, and
+        // come back, the text will still be hidden. You
+        // can remove the three &&'s above to change.
         handleClickForApp('toggleStoryText');
       }
 
       if (isMenu !== referrer.isMenu(this.props)) {
+        // See note below.
         handleClickForApp('toggleMenu');
       }
 
       /** Don't update callers on reload */
       if (!location.isReloading) {
+        // Note: In some situations, the callers on state
+        // will lag the reality of the application. In at
+        // least some of these cases, the reason is that
+        // seState is asynchornous, meaning there is a
+        // lag in execution, leaving appState behind.
+        // A partial fix is to move the callers out
+        // of appState and treat them as class properties
+        // instead. This raises the question — what is the
+        // line as to when to manage a property on state
+        // versus as non-state class properties. Properties
+        // that track something, but which don't have to
+        // cause a re-render, shouldn't necessarily be
+        // added to state. This rule might apply to the
+        // callers, and isMenu (above).
+        // As of 3/16, we are not addressing it. If you
+        // want to restore scroll position, however you
+        // may need to tackle this question as the values
+        // and state changes will need up-to-date info.
         handleClickForApp(
           'setCallers',
           location.type,
@@ -163,14 +325,21 @@ class App extends Component {
 
 export default withRouter(App);
 
-// copyright?
-// ngrok on mobile + Endtest
-// Take pictures, write captions for Arrow, Slingshot, TMMnews
+// 2. Edit story
+// 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
+// 4. Fix styled-components attribute use / clean up CSS
 
-// Images — how to store for React?
-// Illustrator. List needs, specs?
+// https://codersblock.com/blog/creating-glow-effects-with-css/
+// https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
+// https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
+
+// https://www.kirupa.com/animations/creating_pulsing_circle_animation.htm
+// ! https://css-tricks.com/almanac/properties/a/animation/
+
+// Illustrator
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 
 // Hosting?
 // ! https://github.com/rafrex/spa-github-pages
 // ! http://spa-github-pages.rafrex.com/
+

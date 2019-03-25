@@ -5,51 +5,68 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
-  background-color: ${p => (!p.home ? 'white' : undefined)};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#d2e7ff' : 'white')};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
   align-items: center;
   height: 55px;
   font-size: 1.1rem;
-  z-index: ${p => (p.home ? '2' : undefined)};
-  position: relative;
 
   @media (min-width: 848px) {
     justify-content: flex-end;
   }
 `;
 const Line = styled.div`
+  display: ${p => p.home || p.hide ? 'none' : ''};
   position: absolute;
-  width: 100%;
-  top: -1px;
+  z-index: 0;
+  // width: 100%;
+  left: 25px;
+  right: 25px;
+  top: ${p => parseInt(p.theme.pageHeight) - 55}px;
+  // left: 0px;
   margin: 0px;
-  height: 0.5px;
-  background-color: #fd1172;
-
-  display: ${p => (p.home ? 'none' : undefined)};
+  height: 1px;
+  transform: scaleY(0.5);
+  background-color: #fd5198;
 `;
 const StoryButton = styled(Button)`
   color: ${p => (!p.active ? '#ffe74c' : '#6e7dab')};
   margin-left: 25px;
-  background-color: ${p => (!p.active ? '#FD1172' : undefined)};
-  border: ${p => `0.5px solid ${!p.active ? '#fd1172' : '#455057'}`};
+  background-color: ${p => (!p.active ? '#fd1172' : undefined)};
+  border: ${p => `1px solid ${!p.active ? '#fd1172' : '#e4e7ef'}`};
+  width: 43px;
+  padding: 7px;
 
   @media (min-width: 848px) {
     display: none;
   }
-`;
-const RestyledLink = styled(StyledLink)`
-  margin-right: 25px;
-  color: ${p => (p.active ? '#fd1172' : '#6e7dab')};
+
+  https://stackoverflow.com/a/18997800
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    border: 1px #999 solid;;
+    transform: scale(0.5);
+  }
 `;
 const RestyledGraf = styled(Graf)`
   cursor: pointer;
-  margin-right: 25px;
+  margin-right: 20px;
   color: ${p => (p.active ? '#fd1172' : '#6e7dab')};
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  font-weight: 400;
+  // font-style: italic;
 `;
 const TextBox = styled.div`
   display: flex;
+  z-index: 1;
 `;
 
 export default function FooterContainer(props) {
@@ -80,8 +97,19 @@ export default function FooterContainer(props) {
     : '/reverie';
 
   return (
-    <Container home={isHome} story={isStory}>
-      <Line home={isHome} />
+    <Container
+      home={isHome}
+      story={isStory}
+      reverie={isReverie}
+    >
+      <Line
+        home={isHome}
+        hide={
+          (!showStoryText && !isReverie)
+            || showBusinessCard
+            || showLegalTerms
+        }
+      />
       <StoryButton
         active={showStoryText}
         clickFunction={
@@ -92,24 +120,30 @@ export default function FooterContainer(props) {
         show={isStory}
         text={
           showStoryText
-            ? 'Hide story'
-            : 'Show story'
+            ? 'Show'
+            : 'Hide'
         }
       />
       <TextBox>
-        <RestyledLink
-          active={
-            (isReverie && 'active')
-            || undefined
-          }
+        <StyledLink
+
           to={linkForReverie}
         >
-          Reverie
-        </RestyledLink>
+          <RestyledGraf
+            active={
+              (isReverie && 'active')
+            || undefined
+            }
+          >
+            Reverie
+          </RestyledGraf>
+        </StyledLink>
         <RestyledGraf
           active={showBusinessCard}
           onClick={
-            () => boundHandleClickForApp('toggleBusinessCard')
+            () => {
+              boundHandleClickForApp('toggleBusinessCard');
+            }
           }
         >
           Contact

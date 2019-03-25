@@ -5,56 +5,54 @@ import StyledLink from '../primitives/StyledLink.jsx';
 
 const Group = styled.ul`
   display: flex;
-  margin: 0;
-  padding-top: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-bottom: 10px;
+  margin: 0px;
+  padding: 0px 0px ${p => !p.menu ? '0px' : '10px'} 0px;
   list-style-type: none;
 
-  ${p =>
-    p.menu
-    && css`
-      margin-bottom: ${p.num !== 2 ? '15px' : undefined};
-      padding-bottom: 0;
-      max-width: 100%;
+  ${p => p.menu && css`
+    margin-bottom: ${p.num !== 2 ? '15px' : undefined};
+    padding-bottom: 0;
+    max-width: 100%;
+    // flex-direction: row;
+  `};
+
+  ${p => p.isRight && css`
+    // border-top: 0.5px solid #e4e7ef;
+
+    @media (min-width: 652px) {
+      flex-direction: column;
+      margin-top: 26px;
+      padding: 0;
+      border: 0;
+    }
+
+    @media (min-width: 848px) {
+      display: flex;
       flex-direction: row;
-    `};
+      margin: 0;
+      // padding-top: ${!p.isMenu && p.isRight ? '10px' : '0px'};
+      // border-top: 0.5px solid #e4e7ef;
+    }
 
-  ${p =>
-    p.isRight
-    && css`
-      border-bottom: #6e7dab solid 0.5px;
-
-      @media (min-width: 672px) {
-        flex-direction: column;
-        margin-top: 26px;
-        padding: 0;
-        border: 0;
-      }
-
-      @media (min-width: 848px) {
-        display: flex;
-        flex-direction: row;
-        margin: 0;
-        padding-bottom: 7px;
-        border-bottom: #6e7dab solid 0.5px;
-      }
-
-      @media (min-width: 1026px) {
-        flex-direction: column;
-        justify-content: flex-start;
-        margin-top: 26px;
-        padding: 0;
-        border: 0;
-      }
-    `}};
+    @media (min-width: 1026px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-top: 26px;
+      padding: 0;
+      border: 0;
+    }
+  `};
 `;
 const Item = styled.li`
   margin-right: ${p => (p.padding ? '5px' : undefined)};
-  margin-left: ${p => (!p.isRight ? '2px' : undefined)};
 
-  @media (min-width: 672px) {
+  &:first-child {
+    // margin-left: ${p => (!p.isRight ? '2px' : undefined)};
+    
+    margin-left: ${p => (!p.isRight ? '0px' : undefined)};
+  }
+
+  @media (min-width: 651px) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
@@ -86,6 +84,7 @@ const Highlighter = styled.div`
   width: 100%;
   height: 4px;
   bottom: 0px;
+  left: 0px;
   position: absolute;
   background-color: #ffe74c;
 `;
