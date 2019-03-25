@@ -47,10 +47,7 @@ const Line = styled.div`
   height: ${p => (!p.menu ? '1px' : '2px')};
   background-color: ${p => (!p.menu && !p.reverie
     ? '#e6f1ff'
-    : (!p.menu && p.reverie)
-      || (p.menu && p.reverie)
-      ? '#f1f3f7'
-      : '#e6f1ff')};
+    : '#f1f3f7')};
 
   // https://css-tricks.com/annoying-mobile-double-tap-link-issue/
   // @media (hover) {

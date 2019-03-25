@@ -23,6 +23,8 @@ import { withRouter } from 'react-router';
 
 const GlobalStyle = createGlobalStyle`
   html {
+    // Best practice to load fonts: 
+    // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
     font-family: 'Montserrat', sans-serif;
     font-size: 65%; // 62.5%
   }
@@ -48,11 +50,13 @@ const GlobalStyle = createGlobalStyle`
 
     h2 {
       font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
     }
 
     p {
       font-family: 'Montserrat', sans-serif;
       line-height: 1.5;
+      font-weight: 300;
     }
   }
 
@@ -86,6 +90,7 @@ class App extends Component {
     // ReactGA.pageview(window.location.pathname);
 
     this.ref = React.createRef();
+    // this.zoomIndicator = React.createRef();
 
     this.state = {
       currentCaller: location,
@@ -112,6 +117,9 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
+    // console.log('zI window:', this.zoomIndicator.current && this.zoomIndicator.current.getBoundingClientRect());
+    // console.log('zI height:', this.zoomIndicator.current && this.zoomIndicator.current.offsetHeight);
+
     return (
       <ThemeProvider
         theme={{
@@ -122,6 +130,16 @@ class App extends Component {
           <GlobalStyle
             home={homeIsActive}
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
+          />
+          <div style={{
+            position: 'absolute',
+            top: '0px',
+            left: '0px',
+            visibility: 'hidden',
+            height: '5px',
+            width: '5px'
+          }}
+          // ref={ref => this.zoomIndicator.current = ref}
           />
           <Header
             {...this.props}
@@ -181,11 +199,28 @@ class App extends Component {
 
   updateHeight() {
     if (
-      (this.state.height !== window.innerHeight)
+      (
+        (this.state.height !== window.innerHeight)
         || (this.state.height !== document.documentElement.clientHeight)
+      )
+    // && this.zoomIndicator.current.getBoundingClientRect().left === 0
     ) {
+      // ReactGA.event({
+      //   category: 'Re-calculate height',
+      //   action: `Current height: ${
+      //     this.state.height
+      // } doesn't match new height: ${
+      //   window.innerHeight
+      //   ? window.innerHeight
+      //   : document.documentElement.clientHeight
+      // }`;
+      //   label:
+      // });
+
       this.setState({
         height: window.innerHeight
+          ? window.innerHeight
+          : document.documentElement.clientHeight
       });
     }
   }
@@ -295,8 +330,13 @@ export default withRouter(App);
 // 4. Fix styled-components attribute use / clean up CSS
 
 // https://codersblock.com/blog/creating-glow-effects-with-css/
+// https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
+// https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
 
-// Illustrator. List needs, specs?
+// https://www.kirupa.com/animations/creating_pulsing_circle_animation.htm
+// ! https://css-tricks.com/almanac/properties/a/animation/
+
+// Illustrator
 // Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
 
 // Hosting?

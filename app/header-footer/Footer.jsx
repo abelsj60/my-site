@@ -54,14 +54,6 @@ const StoryButton = styled(Button)`
     transform: scale(0.5);
   }
 `;
-const RestyledLink = styled(StyledLink)`
-  margin-right: 20px;
-  color: ${p => (p.active ? '#fd1172' : '#6e7dab')};
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-right: 5px;
-  // font-style: italic;
-`;
 const RestyledGraf = styled(Graf)`
   cursor: pointer;
   margin-right: 20px;
@@ -69,6 +61,7 @@ const RestyledGraf = styled(Graf)`
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
+  font-weight: 400;
   // font-style: italic;
 `;
 const TextBox = styled.div`
@@ -132,15 +125,19 @@ export default function FooterContainer(props) {
         }
       />
       <TextBox>
-        <RestyledLink
-          active={
-            (isReverie && 'active')
-            || undefined
-          }
+        <StyledLink
+
           to={linkForReverie}
         >
-          Reverie
-        </RestyledLink>
+          <RestyledGraf
+            active={
+              (isReverie && 'active')
+            || undefined
+            }
+          >
+            Reverie
+          </RestyledGraf>
+        </StyledLink>
         <RestyledGraf
           active={showBusinessCard}
           onClick={

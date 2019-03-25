@@ -79,6 +79,7 @@ export default class ErrorBoundary extends Component {
 
   // Catch errors re-render
   componentDidCatch(error, errorInfo) {
+    // const { initialLoad } = this.state;
     this.setState({
       hasError: true,
       error: error,
@@ -86,7 +87,7 @@ export default class ErrorBoundary extends Component {
     });
 
   // ReactGA.exception({
-  //   description: `Error ${error} occurred: ${errorInfo}`
+  //   description: `An error ${error} occurred. Initial load: ${initialLoad}. Info: ${errorInfo}`
   // });
   }
 

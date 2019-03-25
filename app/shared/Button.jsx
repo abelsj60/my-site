@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Structure = styled.div`
   font-size: 1.2rem;
+  font-weight: 400;
   width: 80px;
   padding: 10px;
   text-align: center;
@@ -22,7 +23,7 @@ export default function Button(props) {
 
   return (
     <Structure className={className} onClick={clickFunction}>
-      {text}
+      <p>{text}</p>
     </Structure>
   );
 }

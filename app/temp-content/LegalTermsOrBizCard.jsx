@@ -78,6 +78,7 @@ const StyledClipboardButton = styled(Clipboard)`
 `;
 const RestyledGraf = styled(Graf)`
   // height: 100%;
+  font-weight: 400;
   flex: 1;
   font-size: 1.3rem;
   // margin-top: ${p => p.copying ? '0px' : '-4px'};
@@ -240,7 +241,11 @@ export default class LegalTermsOrBizCard extends Component {
                               this.props.appState.showBusinessCard
                                 && this.timeoutId === null
                             ) {
-                              // Runs after copy is made!
+                              // Technically runs after copy is made!
+                              // ReactGA.event({
+                              //   category: 'Copy email address',
+                              //   action: 'Start copier'
+                              // });
                               makeCopies();
                               this.timeoutId = setTimeout(
                                 () => {
@@ -271,20 +276,6 @@ export default class LegalTermsOrBizCard extends Component {
         </CardHolder>
       </Container>
     );
-  }
-
-  componentDidUpdate() {
-    const { showBusinessCard, showLegalTerms } = this.props.appState;
-
-    if (showBusinessCard || showLegalTerms) {
-      // ReactGA.event({
-      //   category: 'Temp content',
-      //   action: 'Opened',
-      //   label: showBusinessCard
-      //     ? 'BusinessCard opened'
-      //     : 'LegalNotice opened'
-      // });
-    }
   }
 
   // Not added to ClickHandling. Dealing w/'this'

@@ -18,6 +18,7 @@ const RestyledLeft = styled(Left)`
 
   padding: 0px 0px 25px 25px;
   margin-top: 10px;
+  overflow: auto; // Needed by desktop Chrome for no known reason
 
   @media (min-width: 848px) {
     // margin-left: 23px;
@@ -99,7 +100,7 @@ export default function Story(props) {
         <RestyledOverflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed as="h2" normal s="1.4" c="blue">
+          <Hed as="h2" s="1.4" c="blue">
             Chapter {chapterArray[indexForChapterData]}
           </Hed>
           <Hed c="pink" s="3" b="12">

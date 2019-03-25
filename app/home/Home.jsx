@@ -28,17 +28,25 @@ const NameTag = styled.div`
   z-index: 2;
   // margin-top: 10px;
   cursor: pointer;
+  // font-family: 'Aref Ruqaa', serif;
 
   @media (min-width: 390px) {
     // margin-top: 20px;
   }
 `;
 const RestyledHed = styled(Hed)`
+  // font-family: inherit;
   font-family: 'Aref Ruqaa', serif;
+  font-weight: 700;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
 `;
 const RestyledGraf = styled(Graf)`
+  // font-family: inherit;
   font-family: 'Aref Ruqaa', serif;
+  font-weight: 700;
   margin-left: 18px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
@@ -99,15 +107,14 @@ const CityAsBackground = styled(FantasyAsBackground)`
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
-
 const BioContainer = styled.div`
-  width: 75%;
+  width: 80%;
   margin-top: 25px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
 
   @media (min-width: 390px) {
     margin-top: 40px;
-    width: 340px;
+    width: 360px;
   }
 
   // @media (min-width: 848px) {
@@ -116,25 +123,47 @@ const BioContainer = styled.div`
 `;
 const Text = styled.section`
   overflow: auto;
-
+  
   p {
+    font-family: 'Aref Ruqaa', serif;
+    font-weight: 700;
     margin-top: 0px;
-    margin-left: 2px;
+    // margin-left: 2px;
     margin-bottom: 10px;
     font-size: 1.2rem;
     color: #ffe74c;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
     text-align: center;
+    // font-weight: 600; // Use if not Aref Ruqaa!
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     &:last-child {
       margin-bottom: 0px;
     }
 
     @media (min-width: 390px) {
-      font-size: 1.4rem;
+      // font-size: 1.4rem;
+      font-size: 1.6rem;
     }
     
   }
+`;
+const Ball = styled.div`
+  position: absolute;
+  top: 185px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow:
+      inset 0 0 50px #fff,      /* inner white */
+      inset 20px 0 80px #f0f,   /* inner left magenta short */
+      inset -20px 0 80px #0ff,  /* inner right cyan short */
+      inset 20px 0 300px #f0f,  /* inner left magenta broad */
+      inset -20px 0 300px #0ff, /* inner right cyan broad */
+      0 0 50px #fff,            /* outer white */
+      -10px 0 80px #f0f,        /* outer left magenta */
+      10px 0 80px #0ff;         /* outer right cyan */
 `;
 
 export default function Home(props) {
@@ -175,6 +204,7 @@ export default function Home(props) {
                 tempContentIsOn={showBusinessCard || showLegalTerms}
               >
                 <RestyledHed
+                  normal
                   c="yellow"
                   data-depth=".3"
                   data-friction-x=".7"
@@ -185,19 +215,23 @@ export default function Home(props) {
                 James Abels
                 </RestyledHed>
                 <RestyledGraf
-                  bold
                   c="yellow"
                   data-depth=".2"
                   data-friction-x=".9"
                   data-friction-y=".9"
-                  s="1.3"
+                  s="1.298"
                   t="65"
-                  rS="1.65"
-                  rT="90"
+                  rS="1.9"
+                  rT="95"
                   rL="20"
                 >
                 Narrative coding and other adventures
                 </RestyledGraf>
+                {/*<Line
+                  data-depth=".2"
+                  data-friction-x=".7"
+                  data-friction-y=".7"
+                />*/}
               </NameTag>
             )
           }

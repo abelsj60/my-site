@@ -129,7 +129,7 @@ export default class ContentLoader extends Component {
       // so we filter it to prevent error
       if (!location.params.isMenu) {
         const scrollHandler = new ScrollHandling(location);
-        scrollHandler.resetTopIfGreaterThanZero(
+        scrollHandler.resetElementTop(
           this.overflowRef,
           prevProps
         );

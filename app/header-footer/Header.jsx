@@ -28,10 +28,12 @@ const Container = styled.header`
 `;
 const RestyledLink = styled(StyledLink)`
   font-size: 1.25rem;
+  font-weight: ${p => p.home ? 400 : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
   color: ${p => (p.home ? 'white' : p.reverie === 'active' ? '#455057' : '#555F66')};
   // padding-top: 5px;
   // padding-bottom: 5px;
+  // text-shadow: ${p => p.home ? '1px 1px rgba(0,0,0,.2)' : ''};
 
   font-family: ${p => !p.home ? "'Aref Ruqaa', serif" : ''};
   margin-top: -4px;
@@ -87,9 +89,10 @@ const Motto = styled.p`
 const Nav = styled.nav`
   display: ${p => (p.home ? undefined : 'none')};
   padding: ${p => p.home ? '7px 13px' : undefined};
-  background-color: ${p => p.home ? 'rgba(0,0,0,0.18)' : undefined};
+  background-color: ${p => p.home ? 'rgba(0,0,0,0.25)' : undefined};
   border-radius: ${p => p.home ? '10px' : undefined};
   margin-top: -4px;
+  // font-style: ${p => p.home ? 'italic' : ''};
 
   ${p => p.menu && css`
     flex: 1;
