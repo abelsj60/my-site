@@ -1,4 +1,5 @@
 import DesktopProjectNav from './DesktopProjectNav.jsx';
+import Dek from '../primitives/Dek.jsx';
 import Graf from '../primitives/Graf.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
@@ -11,11 +12,11 @@ import React, { Fragment } from 'react';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
-const RestyledHedOne = styled(Hed)`
-  font-weight: 300;
+const RestyledDek = styled(Dek)`
+  font-size: ${p => p.theme.fontSizes.largeText};
 `;
-const RestyledHedTwo = styled(Hed)`
-  font-weight: 400;
+const RestyledHed = styled(Hed)`
+  font-size: ${p => p.theme.fontSizes.projectHed}
 `;
 const Images = styled.section`
   display: flex;
@@ -121,21 +122,21 @@ export default function Projects(props) {
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed b="5" c="pink" s="3" t="-8">
+          <Hed flushTop color="pink">
             {projectName}
           </Hed>
           <section>
-            <RestyledHedOne as="h2" b="15" s="1.7">
+            <RestyledDek bottom="15" weight="300">
               {type}
-            </RestyledHedOne>
+            </RestyledDek>
             <Mapper
               mapData={mapData}
               render={
                 (proj, idx) => (
                   <Fragment key={idx}>
-                    <RestyledHedTwo as="h3" b="8" c="blue" s="1.4">
+                    <RestyledHed as="h3" bottom="8" color="blue" weight="400">
                       {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
-                    </RestyledHedTwo>
+                    </RestyledHed>
                     <Graf b="10" t="0">
                       {proj[keys[idx]]}
                     </Graf>

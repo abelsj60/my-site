@@ -1,5 +1,5 @@
 import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
-import Graf from '../primitives/Graf.jsx';
+import Dek from '../primitives/Dek.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
@@ -11,38 +11,34 @@ import ReactHtmlParser from 'react-html-parser';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
-const ReverieText = styled.section`
+const RestyledDek = styled(Dek)`
+  font-size: 1.35rem;
+
+  @media (min-width: 390px) {
+      font-size: 1.45rem;
+  }
+`;
+const Text = styled.section`
   p {
     &:last-child {
       margin-bottom: 0px;
     }
   }
 
-  img,
-  {
+  img {
     margin-top: 0px;
-  }
-
-  ol,
-  p {
-    margin-bottom: 10px;
   }
 
   ol {
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 `;
-const ArticleText = styled.section`
-  p {
-    margin-bottom: 15px;
-
-    &:last-child {
-      margin-bottom: 0px;
-    }
-  }
-`;
-const RestyledHed = styled(Hed)`
-  font-weight: 400;
+const BylineOrDate = styled.p`
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-top: 14px;
+  margin-bottom: 14px;
 `;
 
 export default function ArticleOrReverie(props) {
@@ -74,10 +70,6 @@ export default function ArticleOrReverie(props) {
     reverieOrPublicationAsDek = publication;
   }
 
-  const ArticleOrReverieText = isReverie
-    ? ReverieText
-    : ArticleText;
-
   return (
     <Main reverie={isReverie}>
       <Left reverie={isReverie}>
@@ -88,23 +80,23 @@ export default function ArticleOrReverie(props) {
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <RestyledHed as="h2" c="pink" s="1.35" bS="1.4" b="2">
+          <RestyledDek color="pink" weight="400">
             {reverieOrPublicationAsDek}
-          </RestyledHed>
-          <Hed s="3">
+          </RestyledDek>
+          <Hed>
             {headline}
           </Hed>
-          <Graf italic b="14" s="1.2" t="14">
+          <BylineOrDate>
             {bylineOrDate}
-          </Graf>
-          <ArticleOrReverieText>
+          </BylineOrDate>
+          <Text>
             {ReactHtmlParser(
               marked(
                 article.body,
                 { smartypants: true }
               )
             )}
-          </ArticleOrReverieText>
+          </Text>
         </Overflow>
       </Right>
     </Main>

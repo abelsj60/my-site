@@ -59,11 +59,11 @@ const StoryButton = styled(Button)`
 const RestyledGraf = styled(Graf)`
   cursor: pointer;
   margin-right: 20px;
+  margin-bottom: 0px;
   color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.blue)};
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
-  font-weight: 400;
 `;
 const TextBox = styled.div`
   display: flex;
@@ -136,6 +136,7 @@ export default function FooterContainer(props) {
               (isReverie && 'active')
             || undefined
             }
+            weight="400"
           >
             Reverie
           </RestyledGraf>
@@ -147,6 +148,7 @@ export default function FooterContainer(props) {
               boundHandleClickForApp('toggleBusinessCard');
             }
           }
+          weight="400"
         >
           Contact
         </RestyledGraf>
@@ -155,6 +157,7 @@ export default function FooterContainer(props) {
           onClick={
             () => boundHandleClickForApp('toggleLegalTerms')
           }
+          weight="400"
         >
           Legal
         </RestyledGraf>

@@ -69,8 +69,6 @@ export default function ChapterNav(props) {
                         image={dot}
                         item={itemIsActive}
                         num={idx}
-                        s="1.3"
-                        c="lightBlack"
                       />
                     </div>
                   </StyledLink>

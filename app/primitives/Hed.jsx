@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import styles from './Styles.jsx';
 
 /** API
  * color: c="string"
@@ -18,5 +17,9 @@ import styles from './Styles.jsx';
  */
 
 export default styled.h1`
-  ${p => styles(p)};
+  font-size: ${p => p.theme.fontSizes.hed};
+  color: ${p => p.theme.colors[p.color]};
+  margin-top: ${p => p.flushTop ? '-8px' : ''};
+  margin-bottom: ${p => p.bottom && p.bottom + 'px'};
+  font-weight: ${p => p.weight && p.weight};
 `;

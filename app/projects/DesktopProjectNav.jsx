@@ -14,7 +14,7 @@ const StyledUL = styled(UnorderedList)`
   ${p => p.menu && css`
     display: block;
     max-width: 590px;
-    margin: 0;
+    margin-right: 0;
   `};
 `;
 const ListItem = styled.li`
@@ -23,11 +23,10 @@ const ListItem = styled.li`
   }
 `;
 const RestyledGraf = styled(Graf)`
-  font-size: 1.3rem;
-  font-weight: 400;
+  font-size: ${p => p.theme.fontSizes.desktopProjectHed};
 
   @media (min-width: 390px) {
-    font-size: ${p => (!p.menu ? '1.3rem' : '1.6rem')};
+    font-size: ${p => (p.menu ? '1.6rem' : '')};
   }
 `;
 
@@ -73,8 +72,9 @@ export default function DesktopProjectNav(props) {
             return (
               <ListItem key={idx}>
                 <RestyledGraf
-                  b="9"
-                  c="blue"
+                  bottom="9"
+                  color="blue"
+                  weight="400"
                   menu={isMenu}
                   num={idx}
                 >

@@ -11,6 +11,7 @@ const Structure = styled.div`
 `;
 const Text = styled.p`
   font-weight: 400;
+  margin-bottom: 0px;
 `;
 
 export default function Button(props) {

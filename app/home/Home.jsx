@@ -30,19 +30,29 @@ const NameTag = styled.div`
 `;
 const RestyledHed = styled(Hed)`
   font-family: 'Aref Ruqaa', serif;
-  font-weight: 700;
+  font-size: 4.5rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
+  @media (min-width: 390px) {
+    font-size: 6.5rem;
+  }
 `;
 const RestyledGraf = styled(Graf)`
   font-family: 'Aref Ruqaa', serif;
-  font-weight: 700;
   margin-left: 18px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 1.298rem;
+  margin-top: 65px;
+
+  @media (min-width: 390px) {
+    font-size: 1.9rem;
+    margin-top: 95px;
+    margin-left: 20px;
+  }
 `;
 const PictureBox = styled.div`
   position: fixed;
@@ -192,25 +202,20 @@ export default function Home(props) {
               >
                 <RestyledHed
                   normal
-                  c="yellow"
+                  color="yellow"
                   data-depth=".3"
                   data-friction-x=".7"
                   data-friction-y=".7"
-                  s="4.5"
-                  rS="6.5"
+                  weight="700"
                 >
                 James Abels
                 </RestyledHed>
                 <RestyledGraf
-                  c="yellow"
+                  color="yellow"
                   data-depth=".2"
                   data-friction-x=".9"
                   data-friction-y=".9"
-                  s="1.298"
-                  t="65"
-                  rS="1.9"
-                  rT="95"
-                  rL="20"
+                  weight="700"
                 >
                 Narrative coding and other adventures
                 </RestyledGraf>
@@ -261,13 +266,13 @@ export default function Home(props) {
           <FantasyAsBackground
             alt=""
             inCity={inCity}
-            src=""
+            // src=""
             srcImage="/background-fantasy.png"
           />
           <CityAsBackground
             alt=""
             inCity={inCity}
-            src=""
+            // src=""
             srcImage="/background-city.png"
           />
         </PictureBox>

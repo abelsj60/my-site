@@ -32,7 +32,8 @@ const Text = styled.section`
 
   p {
     margin-bottom: 10px;
-    font-size: 1.6rem;
+    // font-size: ${p => p.theme.fontSizes.text}
+    // font-size: 1.6rem;
 
     &:last-child {
       margin-bottom: 0px;
@@ -60,7 +61,7 @@ export default function About() {
       <Right>
         <Overflow>
           <Heading>
-            <Hed c="pink" s="3" t="-8">
+            <Hed color="pink" flushTop>
             About
             </Hed>
             <RestyledExternalLink

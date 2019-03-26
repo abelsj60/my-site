@@ -34,18 +34,34 @@ const colors = {
   white: 'white',
   yellow: '#ffe74c'
 };
+const fontSizes = {
+  text: '1.6rem',
+  hed: '3.1rem',
+  dek: '1.4rem',
+  largeText: '1.7rem',
+  header: '6rem',
+  motto: '1.95rem',
+  headerText: '1.45rem',
+  headerMotto: '1.35rem',
+  footerText: '1.15rem',
+  navigationDek: '1.25rem',
+  navigationHed: '1.55rem',
+  menuHed: '2rem',
+  projectHed: '1.4rem',
+  desktopProjectHed: '1.3rem'
+};
 const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
     // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
     font-family: 'Montserrat', sans-serif;
-    font-size: 65%; // 62.5%
+    font-size: 62.5%; // 62.5%
   }
   
   body {
     margin: 0px;
     padding: 0px;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 
@@ -68,6 +84,7 @@ const GlobalStyle = createGlobalStyle`
 
     p {
       font-family: 'Montserrat', sans-serif;
+      margin-bottom: 10px;
       line-height: 1.5;
       font-weight: 300;
     }
@@ -133,6 +150,7 @@ class App extends Component {
       <ThemeProvider
         theme={{
           colors,
+          fontSizes,
           pageHeight: this.state.height.toString()
         }}
       >

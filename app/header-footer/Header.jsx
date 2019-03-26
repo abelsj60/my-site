@@ -44,7 +44,7 @@ const RestyledLink = styled(StyledLink)`
 `;
 const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
-  font-size: 1.2rem;
+  font-size: ${p => p.theme.fontSizes.headerText}
 `;
 const Motto = styled.p`
   flex: 1;
@@ -53,6 +53,7 @@ const Motto = styled.p`
   font-size: 1.2rem;
   margin-left: 10px;
   margin-right: 15px;
+  margin-bottom: 0px;
   min-width: 0px;
 
   font-family: 'Aref Ruqaa', serif;

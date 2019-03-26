@@ -48,7 +48,7 @@ const CardContentArea = styled.div`
   box-shadow: 7px 7px 5px -1px rgba(0, 0, 0, 0.3);
 `;
 const StyledClipboardButton = styled(Clipboard)`
-  border: ${p => p.businessCard ? '1px solid #fd1172' : 'none'};
+  border: ${p => p.businessCard ? `1px solid ${p.theme.colors.pink}` : 'none'};
   background-color: ${p => p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white};
   padding: 0px;
   height: 85%;
@@ -73,7 +73,6 @@ const StyledClipboardButton = styled(Clipboard)`
   }
 `;
 const RestyledGraf = styled(Graf)`
-  font-weight: 400;
   flex: 1;
   font-size: 1.3rem;
   -webkit-font-smoothing: antialiased;
@@ -257,6 +256,7 @@ export default class LegalTermsOrBizCard extends Component {
                             !showLegalTerms
                             && copying
                           }
+                          weight="400"
                         >
                           {cardText}
                         </RestyledGraf>

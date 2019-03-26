@@ -1,5 +1,6 @@
 import ChapterNav from './ChapterNav.jsx';
 import Hed from '../primitives/Hed.jsx';
+import Dek from '../primitives/Dek.jsx';
 import Left from '../primitives/Left.jsx';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
@@ -38,8 +39,8 @@ const RestyledRight = styled(Right)`
     margin: 25px;
   }
 `;
-const RestyledHed = styled(Hed)`
-  font-weight: 400;
+const RestyledDek = styled(Dek)`
+  font-size: 1.45rem;
 `;
 const Image = styled.img`
   // How to fill page with image: 
@@ -89,10 +90,10 @@ export default function Story(props) {
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <RestyledHed as="h2" s="1.4" c="blue">
+          <RestyledDek color="blue" weight="400">
             Chapter {chapterArray[indexForChapterData]}
-          </RestyledHed>
-          <Hed c="pink" s="3" b="12">
+          </RestyledDek>
+          <Hed color="pink" bottom="12">
             {title}
           </Hed>
           <Text>

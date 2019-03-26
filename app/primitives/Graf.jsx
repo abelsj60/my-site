@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import styles from './Styles.jsx';
 
 /** API
  * color: color="string"
@@ -16,5 +15,7 @@ import styles from './Styles.jsx';
  */
 
 export default styled.p`
-  ${p => styles(p)};
+  font-weight: ${p => p.weight && p.weight};
+  margin-bottom: ${p => p.bottom && p.bottom + 'px'};
+  color: ${p => p.theme.colors[p.color]};
 `;

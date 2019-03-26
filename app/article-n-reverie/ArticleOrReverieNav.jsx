@@ -1,4 +1,3 @@
-import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';
@@ -10,18 +9,21 @@ const StyledUL = styled(UnorderedList)`
   overflow: ${p => (!p.menu ? 'auto' : undefined) };
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;
-const GrafAsDek = styled(Graf)`
+const NavigationDek = styled.p`
   color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
-  margin-bottom: ${p => (!p.menu ? '1px' : undefined)};
+  margin-bottom: ${p => (!p.menu ? '1px' : '0px')};
+  font-size: ${p => p.theme.fontSizes.navigationDek};
+  font-style: italic;
 
   &:first-child {
     margin-top: 0px;
   }
 `;
-const GrafAsHed = styled(Graf)`
+const NavigationHed = styled.p`
   color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
-  font-size: ${p => (p.menu ? '2rem' : '1.55rem')};
+  font-size: ${p => (p.menu ? p.theme.fontSizes.menuHed : p.theme.fontSizes.navigationHed)};
   margin-top: -2px;
+  margin-bottom: 10px;
   font-weight: 400;
 
   ${p => !p.menu && css`
@@ -32,7 +34,7 @@ const GrafAsHed = styled(Graf)`
   `};
 
   @media (min-width: 500px) {
-    font-size: ${p => (p.menu && '3rem')}
+    font-size: ${p => (p.menu && p.theme.fontSizes.hed)}
   }
 `;
 
@@ -98,22 +100,18 @@ export default function ArticleOrReverieNav(props) {
             return (
               <li key={idx}>
                 <StyledLink to={articleLink}>
-                  <GrafAsDek
-                    italic
+                  <NavigationDek
                     link={linkIsActive}
                     menu={isMenu}
-                    s="1.25"
                   >
                     {dateOrPublicationFromItem}
-                  </GrafAsDek>
-                  <GrafAsHed
-                    b="10"
+                  </NavigationDek>
+                  <NavigationHed
                     link={linkIsActive}
                     menu={isMenu}
-                    t="0"
                   >
                     {headline}
-                  </GrafAsHed>
+                  </NavigationHed>
                 </StyledLink>
               </li>
             );
