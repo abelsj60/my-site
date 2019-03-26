@@ -89,11 +89,10 @@ class App extends Component {
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
-    this.ref = React.createRef();
-    // this.zoomIndicator = React.createRef();
+    // this.ref = React.createRef();
 
     this.state = {
-      currentCaller: location,
+      currentCaller: location !== 'i' ? location : 'home',
       lastCaller: location !== 'reverie'
         ? location
         : 'home',
@@ -117,9 +116,6 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
-    // console.log('zI window:', this.zoomIndicator.current && this.zoomIndicator.current.getBoundingClientRect());
-    // console.log('zI height:', this.zoomIndicator.current && this.zoomIndicator.current.offsetHeight);
-
     return (
       <ThemeProvider
         theme={{
@@ -130,16 +126,6 @@ class App extends Component {
           <GlobalStyle
             home={homeIsActive}
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
-          />
-          <div style={{
-            position: 'absolute',
-            top: '0px',
-            left: '0px',
-            visibility: 'hidden',
-            height: '5px',
-            width: '5px'
-          }}
-          // ref={ref => this.zoomIndicator.current = ref}
           />
           <Header
             {...this.props}
@@ -199,11 +185,8 @@ class App extends Component {
 
   updateHeight() {
     if (
-      (
-        (this.state.height !== window.innerHeight)
+      (this.state.height !== window.innerHeight)
         || (this.state.height !== document.documentElement.clientHeight)
-      )
-    // && this.zoomIndicator.current.getBoundingClientRect().left === 0
     ) {
       // ReactGA.event({
       //   category: 'Re-calculate height',
@@ -329,15 +312,16 @@ export default withRouter(App);
 // 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
 // 4. Fix styled-components attribute use / clean up CSS
 
-// https://codersblock.com/blog/creating-glow-effects-with-css/
 // https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
+
+// https://codersblock.com/blog/creating-glow-effects-with-css/
 // https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
 
 // https://www.kirupa.com/animations/creating_pulsing_circle_animation.htm
 // ! https://css-tricks.com/almanac/properties/a/animation/
 
 // Illustrator
-// Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
+// Analytics, a. find password/account, d. connect GA to acct.
 
 // Hosting?
 // ! https://github.com/rafrex/spa-github-pages

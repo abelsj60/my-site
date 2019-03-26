@@ -20,7 +20,7 @@ const Images = styled.section`
   display: flex;
   flex-direction: column;
   // margin-top: 10px;
-  margin-bottom: 1px;
+  // margin-bottom: 1px;
 
   // margin-left: 2px;
   // padding: 10px;
@@ -35,7 +35,7 @@ const Images = styled.section`
     flex-direction: column;
   }
 
-  @media (min-width: 1026px) {
+  @media (min-width: 1004px) {
     flex-direction: row-reverse;
   }
 `;
@@ -63,7 +63,7 @@ const Caption = styled.figcaption`
     margin-top: 10px;
   }
 
-  @media (min-width: 1026px) {
+  @media (min-width: 1004px) {
     margin-top: 0;
   }
 `;
@@ -83,7 +83,7 @@ const Image = styled.img`
     margin-right: 0px;
   }
 
-  @media (min-width: 1026px) {
+  @media (min-width: 1004px) {
     margin-right: 10px;
   }
 `;

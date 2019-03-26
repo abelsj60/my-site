@@ -19,9 +19,9 @@ const Group = styled.ul`
   ${p => p.isRight && css`
     // border-top: 0.5px solid #e4e7ef;
 
-    @media (min-width: 652px) {
+    @media (min-width: 651px) {
       flex-direction: column;
-      margin-top: 26px;
+      margin-top: 25px;
       padding: 0;
       border: 0;
     }
@@ -29,12 +29,12 @@ const Group = styled.ul`
     @media (min-width: 848px) {
       display: flex;
       flex-direction: row;
-      margin: 0;
+      margin-top: 0;
       // padding-top: ${!p.isMenu && p.isRight ? '10px' : '0px'};
       // border-top: 0.5px solid #e4e7ef;
     }
 
-    @media (min-width: 1026px) {
+    @media (min-width: 1004px) {
       flex-direction: column;
       justify-content: flex-start;
       margin-top: 26px;
@@ -62,7 +62,7 @@ const Item = styled.li`
     margin-bottom: ${p => (p.isRight ? '0px' : undefined)};
   }
 
-  @media (min-width: 1026px) {
+  @media (min-width: 1004px) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }

@@ -3,7 +3,7 @@ import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Fragment } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import bio from '../data/about/home-page-about.md';
 import shortBio from '../data/about/home-page-about-short.md';
@@ -65,15 +65,16 @@ const Portal = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.25);
   z-index: 1;
+  // animation: ${PulseKeyframes} 10s infinite;
 `;
 const BoyInForeground = styled.img`
   position: absolute;
   // object-fit: cover;
   // height: 100vh;
   // min-width: 100vw;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 
   // https://stackoverflow.com/a/28439444
@@ -149,21 +150,60 @@ const Text = styled.section`
     
   }
 `;
+const PulseKeyframes = keyframes`
+  // 0% {
+  //   background-color: rgba(0,0,0,.5);
+  // }
+  // 50% {
+  //   background-color: rgba(253,17,114,.5);
+  // }
+  // 100% {
+  //   background-color: rgba(0,0,0,.5);
+  // }
+
+  0% {
+    background-color: rgba(0,0,0,.1);
+    box-shadow: 0 0 0 0 rgba(255,231,76, 0.2);
+  }
+  50% {
+    background-color: rgba(0,0,0,0);
+    box-shadow: 0 0 0 15px rgba(0,0,0, 0);
+  }
+  100% {
+    background-color: rgba(0,0,0,0);
+    box-shadow: 0 0 0 0 rgba(255,231,76, 0);
+  }
+`;
 const Ball = styled.div`
   position: absolute;
-  top: 185px;
-  width: 30px;
-  height: 30px;
+  // background-color: rgba(255,231,76,.5);
+  // top: 185px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  box-shadow:
-      inset 0 0 50px #fff,      /* inner white */
-      inset 20px 0 80px #f0f,   /* inner left magenta short */
-      inset -20px 0 80px #0ff,  /* inner right cyan short */
-      inset 20px 0 300px #f0f,  /* inner left magenta broad */
-      inset -20px 0 300px #0ff, /* inner right cyan broad */
-      0 0 50px #fff,            /* outer white */
-      -10px 0 80px #f0f,        /* outer left magenta */
-      10px 0 80px #0ff;         /* outer right cyan */
+  // box-shadow:
+  //     inset 0 0 50px #fff,      /* inner white */
+  //     inset 20px 0 80px #f0f,   /* inner left magenta short */
+  //     inset -20px 0 80px #0ff,  /* inner right cyan short */
+  //     inset 20px 0 300px #f0f,  /* inner left magenta broad */
+  //     inset -20px 0 300px #0ff, /* inner right cyan broad */
+  //     0 0 50px #fff,            /* outer white */
+  //     -10px 0 80px #f0f,        /* outer left magenta */
+  //     10px 0 80px #0ff;         /* outer right cyan */
+  margin-top: 227px;
+  margin-left: 125px;
+  animation: ${PulseKeyframes} 2.5s ease-out -10s infinite;
+  // will-change: true;
+  padding: 7px;
+  z-index: 3;
+
+  @media (min-width: 390px) {
+    width: 5px;
+    height: 5px;
+    margin-top: 368px;
+    margin-left: 175px;
+    padding: 10px;
+  }
 `;
 
 export default function Home(props) {
@@ -228,6 +268,11 @@ export default function Home(props) {
                 Narrative coding and other adventures
                 </RestyledGraf>
                 {/*<Line
+                  data-depth=".2"
+                  data-friction-x=".7"
+                  data-friction-y=".7"
+                />*/}
+                {/*<Ball
                   data-depth=".2"
                   data-friction-x=".7"
                   data-friction-y=".7"

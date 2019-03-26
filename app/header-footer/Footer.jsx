@@ -30,6 +30,10 @@ const Line = styled.div`
   height: 1px;
   transform: scaleY(0.5);
   background-color: #fd5198;
+
+  @media(orientation:landscape) {
+    display: ${p => !p.showStoryText ? 'block' : ''};
+  }
 `;
 const StoryButton = styled(Button)`
   color: ${p => (!p.active ? '#ffe74c' : '#6e7dab')};
@@ -109,6 +113,7 @@ export default function FooterContainer(props) {
             || showBusinessCard
             || showLegalTerms
         }
+        showStoryText={showStoryText}
       />
       <StoryButton
         active={showStoryText}
