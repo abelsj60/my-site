@@ -9,6 +9,9 @@ const Structure = styled.div`
   text-align: center;
   cursor: pointer;
 `;
+const Text = styled.p`
+  font-weight: 400;
+`;
 
 export default function Button(props) {
   if (props.conditional && !props.show) {
@@ -23,7 +26,7 @@ export default function Button(props) {
 
   return (
     <Structure className={className} onClick={clickFunction}>
-      <p>{text}</p>
+      <Text>{text}</Text>
     </Structure>
   );
 }

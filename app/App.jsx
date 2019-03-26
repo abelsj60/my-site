@@ -21,6 +21,15 @@ import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
 
+const colors = {
+  blue: '#6e7dab',
+  lightBlue: '#e4e7ef',
+  lightBlack: '#455057',
+  pink: '#fd1172',
+  reverieBlue: '#d2e7ff',
+  white: 'white',
+  yellow: '#ffe74c'
+};
 const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
@@ -119,6 +128,7 @@ class App extends Component {
     return (
       <ThemeProvider
         theme={{
+          colors,
           pageHeight: this.state.height.toString()
         }}
       >

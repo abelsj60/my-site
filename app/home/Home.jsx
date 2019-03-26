@@ -192,6 +192,7 @@ const Ball = styled.div`
   //     10px 0 80px #0ff;         /* outer right cyan */
   margin-top: 227px;
   margin-left: 125px;
+  // Easing function reference: https://easings.net/en
   animation: ${PulseKeyframes} 2.5s ease-out -10s infinite;
   // will-change: true;
   padding: 7px;

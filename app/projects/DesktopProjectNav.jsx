@@ -27,6 +27,7 @@ const ListItem = styled.li`
 `;
 const RestyledGraf = styled(Graf)`
   font-size: 1.3rem;
+  font-weight: 400;
 
   @media (min-width: 390px) {
     font-size: ${p => (!p.menu ? '1.3rem' : '1.6rem')};
@@ -75,7 +76,6 @@ export default function DesktopProjectNav(props) {
             return (
               <ListItem key={idx}>
                 <RestyledGraf
-                  normal
                   b="9"
                   c="blue"
                   menu={isMenu}

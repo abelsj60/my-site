@@ -19,7 +19,7 @@ const Container = styled.header`
   background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? '#d2e7ff' : 'white')};
   color: ${p => (p.home ? 'white' : p.reverie === 'active' ? '#455057' : '#555F66')};
   flex-shrink: 0;
-  // z-index: 3;
+  z-index: 2;
   // position: relative;
   height: 52px;
   display: flex;

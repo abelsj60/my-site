@@ -16,6 +16,12 @@ const RestyledLeft = styled(Left)`
     // margin-left: 23px;
   }
 `;
+const RestyledHedOne = styled(Hed)`
+  font-weight: 300;
+`;
+const RestyledHedTwo = styled(Hed)`
+  font-weight: 400;
+`;
 const Images = styled.section`
   display: flex;
   flex-direction: column;
@@ -54,6 +60,7 @@ const Caption = styled.figcaption`
   margin-right: 10px;
   font-size: 1.4rem;
   color: #6e7dab;
+  font-weight: 300;
 
   @media (min-width: 651px) {
     margin-top: 0;
@@ -133,17 +140,17 @@ export default function Projects(props) {
             {projectName}
           </Hed>
           <section>
-            <Hed as="h2" normal b="15" s="1.7">
+            <RestyledHedOne as="h2" b="15" s="1.7">
               {type}
-            </Hed>
+            </RestyledHedOne>
             <Mapper
               mapData={mapData}
               render={
                 (proj, idx) => (
                   <Fragment key={idx}>
-                    <Hed as="h3" normal b="8" c="blue" s="1.4">
+                    <RestyledHedTwo as="h3" b="8" c="blue" s="1.4">
                       {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
-                    </Hed>
+                    </RestyledHedTwo>
                     <Graf b="10" t="0">
                       {proj[keys[idx]]}
                     </Graf>

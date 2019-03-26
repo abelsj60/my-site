@@ -45,6 +45,8 @@ export default class Body extends Component {
     const eventHandling = new ClickHandling('body', this);
     const boundHandleClickForBody = eventHandling.boundHandleClick;
 
+    // How to set up optional params in React (use '?'):
+    // https://stackoverflow.com/a/35604855
     return (
       <Switch>
         <Route

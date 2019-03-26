@@ -6,7 +6,7 @@ import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
   min-height: 34px;
-  width: 60px;
+  width: 52px;
   // margin-left: ${p => p.noOffset !== 'active' ? '2px' : '2px'};
 
   @media (min-width: 848px) {
@@ -23,12 +23,13 @@ const RestyledLink = styled(StyledLink)`
   justify-content: space-between;
 `;
 const Label = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: #6e7dab;
   // transition: color 1s;
   margin: 0px;
   cursor: pointer;
   margin-top: -2px;
+  font-weight: 400;
 `;
 const Icon = styled.div`
   height: 4px;

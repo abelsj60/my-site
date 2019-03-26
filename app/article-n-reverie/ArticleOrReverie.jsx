@@ -41,6 +41,9 @@ const ArticleText = styled.section`
     }
   }
 `;
+const RestyledHed = styled(Hed)`
+  font-weight: 400;
+`;
 
 export default function ArticleOrReverie(props) {
   const {
@@ -85,9 +88,9 @@ export default function ArticleOrReverie(props) {
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed as="h2" c="pink" s="1.35" bS="1.4" b="2">
+          <RestyledHed as="h2" c="pink" s="1.35" bS="1.4" b="2">
             {reverieOrPublicationAsDek}
-          </Hed>
+          </RestyledHed>
           <Hed s="3">
             {headline}
           </Hed>

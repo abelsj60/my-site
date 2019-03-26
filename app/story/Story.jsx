@@ -2,7 +2,6 @@ import ChapterNav from './ChapterNav.jsx';
 import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import marked from 'marked';
-// import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
@@ -14,21 +13,14 @@ const RestyledLeft = styled(Left)`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   flex: 1;
-  // padding: 0px 0px 25px 23px;
-
   padding: 0px 0px 25px 25px;
   margin-top: 10px;
   overflow: auto; // Needed by desktop Chrome for no known reason
 
+
   @media (min-width: 848px) {
-    // margin-left: 23px;
     max-width: 327px;
     padding: 0px;
-  }
-`;
-const RestyledOverflow = styled(Overflow)`
-  @media (min-width: 848px) {
-    padding-right: 25px;
   }
 `;
 const RestyledRight = styled(Right)`
@@ -36,7 +28,6 @@ const RestyledRight = styled(Right)`
   flex: 1;
   overflow: hidden;
   margin: 0px;
-
   position: relative;
 
   @media (min-height: 530px) {
@@ -48,22 +39,22 @@ const RestyledRight = styled(Right)`
     margin: 25px;
   }
 `;
+const RestyledHed = styled(Hed)`
+  font-weight: 400;
+`;
 const Image = styled.img`
+  // How to fill page with image: 
+  // https://stackoverflow.com/a/30794589
   object-fit: cover;
   overflow: hidden;
-  // Fill page with image: https://stackoverflow.com/a/30794589
   position: absolute;
   height: 100%;
   width: 100%;
 `;
 const Text = styled.section`
   font-size: 1.6rem;
-  line-height: normal;
-  white-space: pre-wrap;
-  overflow: auto;
 
   p {
-    margin-top: 0px;
     margin-bottom: 12px;
 
     &:last-child {
@@ -97,12 +88,12 @@ export default function Story(props) {
       <RestyledLeft as="section" text={textStatus}>
         <ChapterNav {...props} />
 
-        <RestyledOverflow ref={
+        <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed as="h2" s="1.4" c="blue">
+          <RestyledHed as="h2" s="1.4" c="blue">
             Chapter {chapterArray[indexForChapterData]}
-          </Hed>
+          </RestyledHed>
           <Hed c="pink" s="3" b="12">
             {title}
           </Hed>
@@ -114,7 +105,7 @@ export default function Story(props) {
               )
             )}
           </Text>
-        </RestyledOverflow>
+        </Overflow>
       </RestyledLeft>
       <RestyledRight rightMargin text={textStatus}>
         <Image alt="fantasy illustration" src={image} />

@@ -8,9 +8,7 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
-  margin-top: -5px;
-  margin-bottom: 5px;
-  margin-left: -13px; // Deliberately not flush
+  margin: -5px 0px 5px -13px;
   max-width: 150px;
   display: flex;
   flex-shrink: 0;

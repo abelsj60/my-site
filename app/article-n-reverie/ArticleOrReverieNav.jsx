@@ -23,6 +23,7 @@ const GrafAsHed = styled(Graf)`
   color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
   font-size: ${p => (p.menu ? '2rem' : '1.55rem')};
   margin-top: -2px;
+  font-weight: 400;
 
   ${p =>
     !p.menu
