@@ -31,7 +31,6 @@ const Text = styled.section`
   overflow: auto;
 
   p {
-    margin-top: 0px;
     margin-bottom: 10px;
     font-size: 1.6rem;
 

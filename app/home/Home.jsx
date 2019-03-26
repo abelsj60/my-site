@@ -3,7 +3,7 @@ import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Fragment } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import bio from '../data/about/home-page-about.md';
 import shortBio from '../data/about/home-page-about-short.md';
@@ -26,16 +26,9 @@ const NameTag = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 2;
-  // margin-top: 10px;
   cursor: pointer;
-  // font-family: 'Aref Ruqaa', serif;
-
-  @media (min-width: 390px) {
-    // margin-top: 20px;
-  }
 `;
 const RestyledHed = styled(Hed)`
-  // font-family: inherit;
   font-family: 'Aref Ruqaa', serif;
   font-weight: 700;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
@@ -44,7 +37,6 @@ const RestyledHed = styled(Hed)`
   
 `;
 const RestyledGraf = styled(Graf)`
-  // font-family: inherit;
   font-family: 'Aref Ruqaa', serif;
   font-weight: 700;
   margin-left: 18px;
@@ -67,13 +59,9 @@ const Portal = styled.div`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.25);
   z-index: 1;
-  // animation: ${PulseKeyframes} 10s infinite;
 `;
 const BoyInForeground = styled.img`
   position: absolute;
-  // object-fit: cover;
-  // height: 100vh;
-  // min-width: 100vw;
   z-index: 2;
   pointer-events: none;
 
@@ -87,24 +75,12 @@ const BoyInForeground = styled.img`
   background-position: center;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
-  // position: unset;
-  // left: 0px;
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
   transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
-
-  // display: block;
-  // width: 100%;
-  // height: 100%;
-
-  // background-image: url(${p => p.srcImage});
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // background-position: center;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
-  // position: absolute;
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
@@ -117,10 +93,6 @@ const BioContainer = styled.div`
     margin-top: 40px;
     width: 360px;
   }
-
-  // @media (min-width: 848px) {
-  //   width: 45%;
-  // }
 `;
 const Text = styled.section`
   overflow: auto;
@@ -128,14 +100,11 @@ const Text = styled.section`
   p {
     font-family: 'Aref Ruqaa', serif;
     font-weight: 700;
-    margin-top: 0px;
-    // margin-left: 2px;
     margin-bottom: 10px;
     font-size: 1.2rem;
     color: #ffe74c;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
     text-align: center;
-    // font-weight: 600; // Use if not Aref Ruqaa!
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -144,68 +113,45 @@ const Text = styled.section`
     }
 
     @media (min-width: 390px) {
-      // font-size: 1.4rem;
       font-size: 1.6rem;
     }
     
   }
 `;
-const PulseKeyframes = keyframes`
-  // 0% {
-  //   background-color: rgba(0,0,0,.5);
-  // }
-  // 50% {
-  //   background-color: rgba(253,17,114,.5);
-  // }
-  // 100% {
-  //   background-color: rgba(0,0,0,.5);
-  // }
+// const PulseKeyframes = keyframes`
+//   0% {
+//     background-color: rgba(0,0,0,.1);
+//     box-shadow: 0 0 0 0 rgba(255,231,76, 0.2);
+//   }
+//   50% {
+//     background-color: rgba(0,0,0,0);
+//     box-shadow: 0 0 0 15px rgba(0,0,0, 0);
+//   }
+//   100% {
+//     background-color: rgba(0,0,0,0);
+//     box-shadow: 0 0 0 0 rgba(255,231,76, 0);
+//   }
+// `;
+// const Ball = styled.div`
+//   position: absolute;
+//   width: 5px;
+//   height: 5px;
+//   border-radius: 50%;
+//   margin-top: 227px;
+//   margin-left: 125px;
+//   // Easing function reference: https://easings.net/en
+//   animation: ${PulseKeyframes} 2.5s ease-out -10s infinite;
+//   padding: 7px;
+//   z-index: 3;
 
-  0% {
-    background-color: rgba(0,0,0,.1);
-    box-shadow: 0 0 0 0 rgba(255,231,76, 0.2);
-  }
-  50% {
-    background-color: rgba(0,0,0,0);
-    box-shadow: 0 0 0 15px rgba(0,0,0, 0);
-  }
-  100% {
-    background-color: rgba(0,0,0,0);
-    box-shadow: 0 0 0 0 rgba(255,231,76, 0);
-  }
-`;
-const Ball = styled.div`
-  position: absolute;
-  // background-color: rgba(255,231,76,.5);
-  // top: 185px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  // box-shadow:
-  //     inset 0 0 50px #fff,      /* inner white */
-  //     inset 20px 0 80px #f0f,   /* inner left magenta short */
-  //     inset -20px 0 80px #0ff,  /* inner right cyan short */
-  //     inset 20px 0 300px #f0f,  /* inner left magenta broad */
-  //     inset -20px 0 300px #0ff, /* inner right cyan broad */
-  //     0 0 50px #fff,            /* outer white */
-  //     -10px 0 80px #f0f,        /* outer left magenta */
-  //     10px 0 80px #0ff;         /* outer right cyan */
-  margin-top: 227px;
-  margin-left: 125px;
-  // Easing function reference: https://easings.net/en
-  animation: ${PulseKeyframes} 2.5s ease-out -10s infinite;
-  // will-change: true;
-  padding: 7px;
-  z-index: 3;
-
-  @media (min-width: 390px) {
-    width: 5px;
-    height: 5px;
-    margin-top: 368px;
-    margin-left: 175px;
-    padding: 10px;
-  }
-`;
+//   @media (min-width: 390px) {
+//     width: 5px;
+//     height: 5px;
+//     margin-top: 368px;
+//     margin-left: 175px;
+//     padding: 10px;
+//   }
+// `;
 
 export default function Home(props) {
   const {

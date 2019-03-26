@@ -13,12 +13,9 @@ const Group = styled.ul`
     margin-bottom: ${p.num !== 2 ? '15px' : undefined};
     padding-bottom: 0;
     max-width: 100%;
-    // flex-direction: row;
   `};
 
   ${p => p.isRight && css`
-    // border-top: 0.5px solid #e4e7ef;
-
     @media (min-width: 651px) {
       flex-direction: column;
       margin-top: 25px;
@@ -30,8 +27,6 @@ const Group = styled.ul`
       display: flex;
       flex-direction: row;
       margin-top: 0;
-      // padding-top: ${!p.isMenu && p.isRight ? '10px' : '0px'};
-      // border-top: 0.5px solid #e4e7ef;
     }
 
     @media (min-width: 1004px) {
@@ -47,8 +42,6 @@ const Item = styled.li`
   margin-right: ${p => (p.padding ? '5px' : undefined)};
 
   &:first-child {
-    // margin-left: ${p => (!p.isRight ? '2px' : undefined)};
-    
     margin-left: ${p => (!p.isRight ? '0px' : undefined)};
   }
 

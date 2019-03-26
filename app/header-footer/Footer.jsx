@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
-  background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#d2e7ff' : 'white')};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white)};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
@@ -21,25 +21,23 @@ const Line = styled.div`
   display: ${p => p.home || p.hide ? 'none' : ''};
   position: absolute;
   z-index: 0;
-  // width: 100%;
   left: 25px;
   right: 25px;
   top: ${p => parseInt(p.theme.pageHeight) - 55}px;
-  // left: 0px;
   margin: 0px;
   height: 1px;
   transform: scaleY(0.5);
-  background-color: #fd5198;
+  background-color: ${p => p.theme.colors.lightPink};
 
   @media(orientation:landscape) {
     display: ${p => !p.showStoryText ? 'block' : ''};
   }
 `;
 const StoryButton = styled(Button)`
-  color: ${p => (!p.active ? '#ffe74c' : '#6e7dab')};
+  color: ${p => (!p.active ? p.theme.colors.yellow : p.theme.colors.blue)};
   margin-left: 25px;
-  background-color: ${p => (!p.active ? '#fd1172' : undefined)};
-  border: ${p => `1px solid ${!p.active ? '#fd1172' : '#e4e7ef'}`};
+  background-color: ${p => (!p.active ? p.theme.colors.pink : undefined)};
+  border: ${p => `1px solid ${!p.active ? p.theme.colors.pink : p.theme.colors.pink}`};
   width: 43px;
   padding: 7px;
 
@@ -61,12 +59,11 @@ const StoryButton = styled(Button)`
 const RestyledGraf = styled(Graf)`
   cursor: pointer;
   margin-right: 20px;
-  color: ${p => (p.active ? '#fd1172' : '#6e7dab')};
+  color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.blue)};
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
   font-weight: 400;
-  // font-style: italic;
 `;
 const TextBox = styled.div`
   display: flex;

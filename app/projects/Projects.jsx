@@ -11,11 +11,6 @@ import React, { Fragment } from 'react';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
-const RestyledLeft = styled(Left)`
-  @media (min-width: 848px) {
-    // margin-left: 23px;
-  }
-`;
 const RestyledHedOne = styled(Hed)`
   font-weight: 300;
 `;
@@ -25,12 +20,6 @@ const RestyledHedTwo = styled(Hed)`
 const Images = styled.section`
   display: flex;
   flex-direction: column;
-  // margin-top: 10px;
-  // margin-bottom: 1px;
-
-  // margin-left: 2px;
-  // padding: 10px;
-  // border: 0.5px solid #6e7dab;
 
   @media (min-width: 651px) {
     flex-direction: row-reverse;
@@ -55,11 +44,9 @@ const Figure = styled.figure`
 `;
 const Caption = styled.figcaption`
   display: flex;
-  margin-top: 10px;
-  margin-bottom: 8px;
-  margin-right: 10px;
+  margin: 10px 10px 8px 0px;
   font-size: 1.4rem;
-  color: #6e7dab;
+  color: ${p => p.theme.colors.blue};
   font-weight: 300;
 
   @media (min-width: 651px) {
@@ -79,8 +66,6 @@ const Image = styled.img`
   max-width: 100%;
   object-fit: cover;
   vertical-align: bottom;
-  color: #455057;
-  font-size: 1.5rem;
 
   @media (min-width: 651px) {
     margin-right: 10px;
@@ -128,9 +113,9 @@ export default function Projects(props) {
 
   return (
     <Main>
-      <RestyledLeft>
+      <Left>
         <DesktopProjectNav {...props} data={data} params={params} />
-      </RestyledLeft>
+      </Left>
       <Right>
         <MenuButton {...props} noOffset={true} />
         <Overflow ref={
@@ -175,5 +160,3 @@ export default function Projects(props) {
     </Main>
   );
 }
-
-//

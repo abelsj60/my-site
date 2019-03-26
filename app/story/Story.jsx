@@ -17,7 +17,6 @@ const RestyledLeft = styled(Left)`
   margin-top: 10px;
   overflow: auto; // Needed by desktop Chrome for no known reason
 
-
   @media (min-width: 848px) {
     max-width: 327px;
     padding: 0px;
@@ -87,7 +86,6 @@ export default function Story(props) {
     <Main>
       <RestyledLeft as="section" text={textStatus}>
         <ChapterNav {...props} />
-
         <Overflow ref={
           ref => overflowRef.current = ref
         }>

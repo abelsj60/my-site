@@ -1,4 +1,3 @@
-// import Hed from '../primitives/Hed.jsx';
 import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import ProjectNav from './ProjectNav.jsx';
@@ -12,13 +11,11 @@ const StyledUL = styled(UnorderedList)`
   margin-right: 25px;
   width: ${p => (!p.menu ? '327px' : undefined)};
 
-  ${p =>
-    p.menu
-    && css`
-      display: block;
-      max-width: 590px;
-      margin: 0;
-    `};
+  ${p => p.menu && css`
+    display: block;
+    max-width: 590px;
+    margin: 0;
+  `};
 `;
 const ListItem = styled.li`
   &:not(:last-child) {

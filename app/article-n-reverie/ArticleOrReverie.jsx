@@ -13,11 +13,13 @@ import styled from 'styled-components';
 
 const ReverieText = styled.section`
   p {
-    font-size: 1.5rem;
+    &:last-child {
+      margin-bottom: 0px;
+    }
   }
 
   img,
-  p {
+  {
     margin-top: 0px;
   }
 
@@ -32,8 +34,6 @@ const ReverieText = styled.section`
 `;
 const ArticleText = styled.section`
   p {
-    font-size: 1.5rem;
-    margin-top: 0px;
     margin-bottom: 15px;
 
     &:last-child {

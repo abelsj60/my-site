@@ -7,12 +7,11 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const StyledUL = styled(UnorderedList)`
-  // height: 100%;
   overflow: ${p => (!p.menu ? 'auto' : undefined) };
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;
 const GrafAsDek = styled(Graf)`
-  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
+  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
   margin-bottom: ${p => (!p.menu ? '1px' : undefined)};
 
   &:first-child {
@@ -20,19 +19,17 @@ const GrafAsDek = styled(Graf)`
   }
 `;
 const GrafAsHed = styled(Graf)`
-  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
+  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
   font-size: ${p => (p.menu ? '2rem' : '1.55rem')};
   margin-top: -2px;
   font-weight: 400;
 
-  ${p =>
-    !p.menu
-    && css`
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 300px;
-      white-space: nowrap;
-    `};
+  ${p => !p.menu && css`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+    white-space: nowrap;
+  `};
 
   @media (min-width: 500px) {
     font-size: ${p => (p.menu && '3rem')}

@@ -17,7 +17,6 @@ export default p => `
   ${p.s ? 'font-size:' + p.s + 'rem' : noCSS};
   ${p.italic ? 'font-style: italic' : noCSS};
   ${p.normal ? 'font-weight: normal' : noCSS};
-  // ${p.boldSmall ? 'font-weight: bold' : noCSS};
   ${p.t ? 'margin-top:' + p.t + 'px' : noCSS};
   ${p.b ? 'margin-bottom:' + p.b + 'px' : noCSS};
 

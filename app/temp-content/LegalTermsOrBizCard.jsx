@@ -13,18 +13,14 @@ const Container = styled.section`
   position: absolute;
   top: ${p => (!p.home ? '52px' : '0px')};
   bottom: ${p => !p.home ? '55px' : '0px'};
-  // top: 0px;
-  // bottom: 0px;
   width: 100%;
   background-color: ${p => !p.copying ? 'rgba(0, 0, 0, 0.7)' : 'rgba(253,17,114, 0.7)'};
   transition: background-color .75s;
   z-index: 1;
 
-  ${p =>
-    p.home
-    && css`
-      z-index: 1;
-      background-color: ${!p.copying ? 'rgba(0, 0, 0, 0.35)' : 'rgba(255,231,76, 0.25)'};`};
+  ${p => p.home && css`
+    z-index: 1;
+    background-color: ${!p.copying ? 'rgba(0, 0, 0, 0.35)' : 'rgba(255,231,76, 0.25)'};`};
 `;
 const CardHolder = styled.div`
   display: flex;
@@ -36,7 +32,7 @@ const InnerContainer = styled.div`
 const Card = styled.section`
   height: 160px;
   width: 275px;
-  background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
+  background-color: ${p => p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white};
   pointer-events: all;
 
   @media (min-width: 400px) {
@@ -53,7 +49,7 @@ const CardContentArea = styled.div`
 `;
 const StyledClipboardButton = styled(Clipboard)`
   border: ${p => p.businessCard ? '1px solid #fd1172' : 'none'};
-  background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
+  background-color: ${p => p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white};
   padding: 0px;
   height: 85%;
   width: 90%;
@@ -77,16 +73,14 @@ const StyledClipboardButton = styled(Clipboard)`
   }
 `;
 const RestyledGraf = styled(Graf)`
-  // height: 100%;
   font-weight: 400;
   flex: 1;
   font-size: 1.3rem;
-  // margin-top: ${p => p.copying ? '0px' : '-4px'};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   @media (min-width: 400px) {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
   }
 `;
 const MyCopyright = styled.span`

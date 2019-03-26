@@ -7,7 +7,6 @@ import StyledLink from '../primitives/StyledLink.jsx';
 const Container = styled.div`
   min-height: 34px;
   width: 52px;
-  // margin-left: ${p => p.noOffset !== 'active' ? '2px' : '2px'};
 
   @media (min-width: 848px) {
     display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
@@ -24,8 +23,7 @@ const RestyledLink = styled(StyledLink)`
 `;
 const Label = styled.p`
   font-size: 1.15rem;
-  color: #6e7dab;
-  // transition: color 1s;
+  color: ${p => p.theme.colors.blue};
   margin: 0px;
   cursor: pointer;
   margin-top: -2px;
@@ -35,7 +33,7 @@ const Icon = styled.div`
   height: 4px;
   width: 8px;
   align-self: center;
-  fill: #6e7dab;
+  fill: ${p => p.theme.colors.blue};
   background: ${p => `url(${p.image})`} no-repeat;
   background-size: contain;
 `;
@@ -46,16 +44,7 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => (!p.menu && !p.reverie
-    ? '#e6f1ff'
-    : '#f1f3f7')};
-
-  // https://css-tricks.com/annoying-mobile-double-tap-link-issue/
-  // @media (hover) {
-  //   ${Container}:hover & {
-  //     height: 2px;
-  //   }
-  // }
+  background-color: ${p => p.theme.colors.lightestBlue};
 `;
 
 export default function MenuButton(props) {

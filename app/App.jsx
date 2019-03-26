@@ -22,9 +22,13 @@ import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
 
 const colors = {
+  black: 'black',
   blue: '#6e7dab',
   lightBlue: '#e4e7ef',
+  lightestBlue: '#e6f1ff',
   lightBlack: '#455057',
+  lightPink: '#fd5198',
+  mediumBlack: '#555F66',
   pink: '#fd1172',
   reverieBlue: '#d2e7ff',
   white: 'white',

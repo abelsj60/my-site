@@ -16,11 +16,10 @@ const headerLinks = [
 ];
 
 const Container = styled.header`
-  background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? '#d2e7ff' : 'white')};
-  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? '#455057' : '#555F66')};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? p.theme.colors.reverieBlue : p.theme.colors.white)};
+  color: ${p => (p.home ? p.theme.colors.white : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
   flex-shrink: 0;
   z-index: 2;
-  // position: relative;
   height: 52px;
   display: flex;
   justify-content: ${p => (p.home ? 'center' : undefined)};
@@ -30,10 +29,7 @@ const RestyledLink = styled(StyledLink)`
   font-size: 1.25rem;
   font-weight: ${p => p.home ? 400 : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
-  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? '#455057' : '#555F66')};
-  // padding-top: 5px;
-  // padding-bottom: 5px;
-  // text-shadow: ${p => p.home ? '1px 1px rgba(0,0,0,.2)' : ''};
+  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
 
   font-family: ${p => !p.home ? "'Aref Ruqaa', serif" : ''};
   margin-top: -4px;
@@ -44,22 +40,11 @@ const RestyledLink = styled(StyledLink)`
 
   @media (min-width: 390px) {
     font-size: ${p => !p.home ? '1.4rem' : '1.2rem'};
-    // font-size: ${p => p.home ? '1.35rem' : '1.3rem'};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
   font-size: 1.2rem;
-  // font-weight: bold;
-  // padding-top: 0px;
-  // padding-bottom: 0px;
-
-  // font-family: 'Aref Ruqaa', serif;
-  // margin-top: -4px;
-
-  // @media (min-width: 390px) {
-  //   font-size: 1.3rem;
-  // }
 `;
 const Motto = styled.p`
   flex: 1;
@@ -68,7 +53,6 @@ const Motto = styled.p`
   font-size: 1.2rem;
   margin-left: 10px;
   margin-right: 15px;
-  // padding-top: 2.1px;
   min-width: 0px;
 
   font-family: 'Aref Ruqaa', serif;
@@ -83,7 +67,6 @@ const Motto = styled.p`
     font-size: 1.3rem;
     margin-left: 13px;
     margin-right: 0px;
-    // padding-top: 0px;
   }
 `;
 const Nav = styled.nav`
@@ -92,7 +75,6 @@ const Nav = styled.nav`
   background-color: ${p => p.home ? 'rgba(0,0,0,0.25)' : undefined};
   border-radius: ${p => p.home ? '10px' : undefined};
   margin-top: -4px;
-  // font-style: ${p => p.home ? 'italic' : ''};
 
   ${p => p.menu && css`
     flex: 1;
