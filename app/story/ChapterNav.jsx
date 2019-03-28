@@ -7,14 +7,16 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Nav = styled.nav`
-  margin: -5px 0px 5px -13px;
+  margin: -7px 0px 16px -13px;
   max-width: 150px;
   display: flex;
   flex-shrink: 0;
+  position: relative; // For line
 `;
 const StyledUL = styled.ul`
   display: flex;
   flex: 1;
+  padding-bottom: 2px; // For line
 `;
 const ListItem = styled.li`
   flex: 1;
@@ -24,9 +26,21 @@ const SelectorContainer = styled.div`
   padding-bottom: 8px;
 `;
 const Selector = styled.div`
-  height: 8px;
+  height: 7px;
   background: ${p => `url(${p.image})`} center no-repeat;
   background-size: contain;
+`;
+
+const Line = styled.div`
+  position: absolute;
+  // width: 100%; // For line
+  left: 0px;
+  bottom: 0px;
+  margin: 0px;
+  height: ${p => (!p.menu ? '1px' : '2px')};
+  background-color: ${p => p.theme.colors.lightBlue};
+  width: 80%; // For line
+  margin-left: 16px; // For line
 `;
 
 export default function ChapterNav(props) {
@@ -77,6 +91,7 @@ export default function ChapterNav(props) {
           }
         />
       </StyledUL>
+      <Line />
     </Nav>
   );
 }

@@ -18,7 +18,7 @@ const RestyledLink = styled(StyledLink)`
   margin-right: auto;
   margin-bottom: 13px;
   position: relative;
-  padding-bottom: 5px;
+  padding-bottom: 3px;
   justify-content: space-between;
 `;
 const Label = styled.p`
@@ -29,11 +29,15 @@ const Label = styled.p`
   margin-top: -2px;
   font-weight: 400;
 `;
+const IconContainer = styled.div`
+  margin-top: 2px; 
+  margin-bottom: 5px; 
+  display: flex; 
+  align-items: center;
+`;
 const Icon = styled.div`
-  height: 4px;
-  width: 8px;
-  align-self: center;
-  fill: ${p => p.theme.colors.blue};
+  height: 3px;
+  width: 7px;
   background: ${p => `url(${p.image})`} no-repeat;
   background-size: contain;
 `;
@@ -68,11 +72,28 @@ export default function MenuButton(props) {
   const text = isMenu ? 'Close' : 'Menu';
 
   return (
-    <Container offset={offsetIsActive} menu={menuIsActive}>
-      <RestyledLink to={link}>
-        <Label menu={isMenu} reverie={isReverie}>{text}</Label>
-        <Icon image={arrowIcon} />
-        <Line menu={isMenu} reverie={isReverie} />
+    <Container
+      offset={offsetIsActive}
+      menu={menuIsActive}
+    >
+      <RestyledLink
+        to={link}
+      >
+        <Label
+          menu={isMenu}
+          reverie={isReverie}
+        >
+          {text}
+        </Label>
+        <IconContainer>
+          <Icon
+            image={arrowIcon}
+          />
+        </IconContainer>
+        <Line
+          menu={isMenu}
+          reverie={isReverie}
+        />
       </RestyledLink>
     </Container>
   );

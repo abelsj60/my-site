@@ -134,8 +134,6 @@ class App extends Component {
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
-    // this.ref = React.createRef();
-
     this.state = {
       currentCaller: location !== 'i' ? location : 'home',
       lastCaller: location !== 'reverie'
@@ -331,7 +329,7 @@ class App extends Component {
       }
 
       if (
-        // '/chapter', '/projects', etc:
+        // '/chapter', '/projects', etc.
         !location.isTopLevel
           // lastCaller was not '/i'. The app will
           // run two re-renders after a <Redirect />
@@ -366,6 +364,7 @@ export default withRouter(App);
 
 // https://www.kirupa.com/animations/creating_pulsing_circle_animation.htm
 // ! https://css-tricks.com/almanac/properties/a/animation/
+// https://tilomitra.github.io/infinite/
 
 // Illustrator
 // Analytics, a. find password/account, d. connect GA to acct.

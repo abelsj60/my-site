@@ -39,12 +39,11 @@ const RestyledLink = styled(StyledLink)`
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    font-size: ${p => !p.home ? '1.4rem' : '1.2rem'};
+    font-size: ${p => !p.home ? p.theme.fontSizes.nine : p.theme.fontSizes.three};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
-  font-size: ${p => p.theme.fontSizes.nine};
 `;
 const Motto = styled.p`
   flex: 1;
@@ -57,7 +56,7 @@ const Motto = styled.p`
   min-width: 0px;
 
   font-family: 'Aref Ruqaa', serif;
-  margin-top: -4px;
+  margin-top: -3px;
   
   // https://css-tricks.com/flexbox-truncated-text/
   white-space: nowrap;
@@ -65,7 +64,7 @@ const Motto = styled.p`
   text-overflow: ellipsis;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    font-size: ${p => p.theme.fontSizes.six};
+    font-size: ${p => p.theme.fontSizes.seven};
     margin-left: 13px;
     margin-right: 0px;
   }
