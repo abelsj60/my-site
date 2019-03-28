@@ -1,5 +1,4 @@
 import Button from '../shared/Button.jsx';
-import Graf from '../primitives/Graf.jsx';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -11,9 +10,9 @@ const Container = styled.footer`
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
   align-items: center;
   height: 55px;
-  font-size: 1.1rem;
+  font-size: ${p => p.theme.fontSizes.one};
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     justify-content: flex-end;
   }
 `;
@@ -41,7 +40,7 @@ const StoryButton = styled(Button)`
   width: 43px;
   padding: 7px;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     display: none;
   }
 
@@ -56,7 +55,7 @@ const StoryButton = styled(Button)`
     transform: scale(0.5);
   }
 `;
-const RestyledGraf = styled(Graf)`
+const Graf = styled.p`
   cursor: pointer;
   margin-right: 20px;
   margin-bottom: 0px;
@@ -64,6 +63,8 @@ const RestyledGraf = styled(Graf)`
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
+  font-weight: 400;
+  font-size: ${p => p.theme.fontSizes.one};
 `;
 const TextBox = styled.div`
   display: flex;
@@ -90,7 +91,7 @@ export default function FooterContainer(props) {
   // Remember: home is '/', not '/home'
   const whereItStarted =
     lastCaller !== 'home'
-    && lastCaller !== 'i'
+      && lastCaller !== 'i'
       ? `/${lastCaller}`
       : '/';
   const linkForReverie = isReverie
@@ -131,36 +132,33 @@ export default function FooterContainer(props) {
 
           to={linkForReverie}
         >
-          <RestyledGraf
+          <Graf
             active={
               (isReverie && 'active')
-            || undefined
+                || undefined
             }
-            weight="400"
           >
             Reverie
-          </RestyledGraf>
+          </Graf>
         </StyledLink>
-        <RestyledGraf
+        <Graf
           active={showBusinessCard}
           onClick={
             () => {
               boundHandleClickForApp('toggleBusinessCard');
             }
           }
-          weight="400"
         >
           Contact
-        </RestyledGraf>
-        <RestyledGraf
+        </Graf>
+        <Graf
           active={showLegalTerms}
           onClick={
             () => boundHandleClickForApp('toggleLegalTerms')
           }
-          weight="400"
         >
           Legal
-        </RestyledGraf>
+        </Graf>
       </TextBox>
     </Container>
   );

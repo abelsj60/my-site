@@ -1,4 +1,3 @@
-import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React from 'react';
@@ -22,11 +21,14 @@ const ListItem = styled.li`
     margin-bottom: 10px;
   }
 `;
-const RestyledGraf = styled(Graf)`
-  font-size: ${p => p.theme.fontSizes.desktopProjectHed};
+const Graf = styled.p`
+  font-size: ${p => p.theme.fontSizes.six};
+  color: ${p => p.theme.colors.blue};
+  margin-bottom: 9px;
+  font-weight: 400;
 
-  @media (min-width: 390px) {
-    font-size: ${p => (p.menu ? '1.6rem' : '')};
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => (p.menu && p.theme.fontSizes.twelve)};
   }
 `;
 
@@ -68,18 +70,14 @@ export default function DesktopProjectNav(props) {
               projectName,
               type
             } = project.attributes;
-
             return (
               <ListItem key={idx}>
-                <RestyledGraf
-                  bottom="9"
-                  color="blue"
-                  weight="400"
+                <Graf
                   menu={isMenu}
                   num={idx}
                 >
                   {`${projectName} | ${type}`}
-                </RestyledGraf>
+                </Graf>
                 <ProjectNav
                   {...props}
                   isActive={indexForProjectData === idx}

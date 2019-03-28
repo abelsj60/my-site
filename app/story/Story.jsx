@@ -1,6 +1,5 @@
 import ChapterNav from './ChapterNav.jsx';
-import Hed from '../primitives/Hed.jsx';
-import Dek from '../primitives/Dek.jsx';
+// import Dek from '../primitives/Dek.jsx';
 import Left from '../primitives/Left.jsx';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
@@ -18,7 +17,7 @@ const RestyledLeft = styled(Left)`
   margin-top: 10px;
   overflow: auto; // Needed by desktop Chrome for no known reason
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     max-width: 327px;
     padding: 0px;
   }
@@ -29,18 +28,21 @@ const RestyledRight = styled(Right)`
   overflow: hidden;
   margin: 0px;
   position: relative;
-
-  @media (min-height: 530px) {
-    margin-top: 0px;
-  }
   
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     display: flex;
     margin: 25px;
   }
 `;
-const RestyledDek = styled(Dek)`
-  font-size: 1.45rem;
+const Chapter = styled.h2`
+  color: ${p => p.theme.colors.blue};
+  font-weight: 400;
+  font-size: ${p => p.theme.fontSizes.nine};
+`;
+const Title = styled.h1`
+  font-size: ${p => p.theme.fontSizes.sixteen};
+  color: ${p => p.theme.colors.pink};
+  margin-bottom: 12px;
 `;
 const Image = styled.img`
   // How to fill page with image: 
@@ -51,8 +53,8 @@ const Image = styled.img`
   height: 100%;
   width: 100%;
 `;
-const Text = styled.section`
-  font-size: 1.6rem;
+const StoryText = styled.section`
+  font-size: ${p => p.theme.fontSizes.twelve};
 
   p {
     margin-bottom: 12px;
@@ -90,20 +92,20 @@ export default function Story(props) {
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <RestyledDek color="blue" weight="400">
+          <Chapter>
             Chapter {chapterArray[indexForChapterData]}
-          </RestyledDek>
-          <Hed color="pink" bottom="12">
+          </Chapter>
+          <Title>
             {title}
-          </Hed>
-          <Text>
+          </Title>
+          <StoryText>
             {ReactHtmlParser(
               marked(
                 chapter.body,
                 { smartypants: true }
               )
             )}
-          </Text>
+          </StoryText>
         </Overflow>
       </RestyledLeft>
       <RestyledRight rightMargin text={textStatus}>

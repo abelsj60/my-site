@@ -1,7 +1,4 @@
 import DesktopProjectNav from './DesktopProjectNav.jsx';
-import Dek from '../primitives/Dek.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
 import Mapper from '../shared/Mapper.jsx';
@@ -12,33 +9,47 @@ import React, { Fragment } from 'react';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
-const RestyledDek = styled(Dek)`
-  font-size: ${p => p.theme.fontSizes.largeText};
+const ProjectName = styled.h1`
+  font-size: ${p => p.theme.fontSizes.sixteen};
+  color: ${p => p.theme.colors.pink};
+  margin-top: -8px;
 `;
-const RestyledHed = styled(Hed)`
-  font-size: ${p => p.theme.fontSizes.projectHed}
+const Hed = styled.h3`
+  font-size: ${p => p.theme.fontSizes.eight};
+  font-weight: 400;
+  color: ${p => p.theme.colors.blue};
+  margin-bottom: 8px;
+`;
+const Dek = styled.h2`
+  font-size: ${p => p.theme.fontSizes.thirteen};
+  margin-top: 2px;
+  margin-bottom: 15px;
+  font-weight: 300;
+`;
+const Graf = styled.p`
+  margin-bottom: 10px;
 `;
 const Images = styled.section`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     flex-direction: column;
   }
 
-  @media (min-width: 1004px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
     flex-direction: row-reverse;
   }
 `;
 const Figure = styled.figure`
   margin: 0px;
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: flex;
     flex-direction: column;
   }
@@ -46,19 +57,19 @@ const Figure = styled.figure`
 const Caption = styled.figcaption`
   display: flex;
   margin: 10px 10px 8px 0px;
-  font-size: 1.4rem;
+  font-size: ${p => p.theme.fontSizes.eight};
   color: ${p => p.theme.colors.blue};
   font-weight: 300;
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     margin-top: 0;
   }
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-top: 10px;
   }
 
-  @media (min-width: 1004px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
     margin-top: 0;
   }
 `;
@@ -68,15 +79,15 @@ const Image = styled.img`
   object-fit: cover;
   vertical-align: bottom;
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     margin-right: 10px;
   }
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-right: 0px;
   }
 
-  @media (min-width: 1004px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
     margin-right: 10px;
   }
 `;
@@ -115,29 +126,36 @@ export default function Projects(props) {
   return (
     <Main>
       <Left>
-        <DesktopProjectNav {...props} data={data} params={params} />
+        <DesktopProjectNav
+          {...props}
+          data={data}
+          params={params}
+        />
       </Left>
       <Right>
-        <MenuButton {...props} noOffset={true} />
+        <MenuButton
+          {...props}
+          noOffset={true}
+        />
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed flushTop color="pink">
+          <ProjectName>
             {projectName}
-          </Hed>
+          </ProjectName>
           <section>
-            <RestyledDek bottom="15" weight="300">
+            <Dek>
               {type}
-            </RestyledDek>
+            </Dek>
             <Mapper
               mapData={mapData}
               render={
                 (proj, idx) => (
                   <Fragment key={idx}>
-                    <RestyledHed as="h3" bottom="8" color="blue" weight="400">
+                    <Hed>
                       {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
-                    </RestyledHed>
-                    <Graf b="10" t="0">
+                    </Hed>
+                    <Graf>
                       {proj[keys[idx]]}
                     </Graf>
                   </Fragment>

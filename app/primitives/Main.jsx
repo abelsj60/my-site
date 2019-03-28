@@ -11,7 +11,7 @@ export default styled.main`
   flex-shrink: 0;
   flex-basis: auto;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     flex-direction: row;
   }
 `;

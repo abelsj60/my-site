@@ -6,12 +6,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const RestyledMain = styled(Main)`
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     flex-direction: column;
   }
 `;
 const RestyledRight = styled(Right)`
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-top: 10px;
   }
 `;

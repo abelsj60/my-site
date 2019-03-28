@@ -16,20 +16,20 @@ const Group = styled.ul`
   `};
 
   ${p => p.isRight && css`
-    @media (min-width: 651px) {
+    @media (min-width: ${p.theme.mediaQueries.narrowBreakTwo}) {
       flex-direction: column;
       margin-top: 25px;
       padding: 0;
       border: 0;
     }
 
-    @media (min-width: 848px) {
+    @media (min-width: ${p.theme.mediaQueries.desktopView}) {
       display: flex;
       flex-direction: row;
       margin-top: 0;
     }
 
-    @media (min-width: 1004px) {
+    @media (min-width: ${p.theme.mediaQueries.desktopWide}) {
       flex-direction: column;
       justify-content: flex-start;
       margin-top: 27px;
@@ -45,17 +45,17 @@ const Item = styled.li`
     margin-left: ${p => (!p.isRight ? '0px' : undefined)};
   }
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-right: ${p => (p.padding ? '5px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '0px' : undefined)};
   }
 
-  @media (min-width: 1004px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
@@ -79,7 +79,7 @@ const Highlighter = styled.div`
   bottom: 0px;
   left: 0px;
   position: absolute;
-  background-color: #ffe74c;
+  background-color: ${p => p.theme.colors.yellow};
 `;
 
 export default function ProjectNav(props) {
@@ -102,7 +102,11 @@ export default function ProjectNav(props) {
   }
 
   return (
-    <Group isRight={isRight} menu={isMenu} num={num}>
+    <Group
+      isRight={isRight}
+      menu={isMenu}
+      num={num}
+    >
       <Mapper
         mapData={projectThumbnail}
         render={
@@ -113,18 +117,27 @@ export default function ProjectNav(props) {
 
             if (
               isMenu
-              && isActive
-              && indexForProjectPics === idx
+                && isActive
+                && indexForProjectPics === idx
             ) {
               highlightActiveThumbnail = true;
             }
 
             return (
-              <Item key={idx} isRight={isRight} padding={padding}>
-                <RestyledLink to={`/projects/${
-                  projectName.toLowerCase()
-                }/${thumbnailNumber}`}>
-                  <Image alt={`Thumbnail ${thumbnailNumber}`} src={thumb} />
+              <Item
+                key={idx}
+                isRight={isRight}
+                padding={padding}
+              >
+                <RestyledLink
+                  to={`/projects/${
+                    projectName.toLowerCase()
+                  }/${thumbnailNumber}`}
+                >
+                  <Image
+                    alt={`Thumbnail ${thumbnailNumber}`}
+                    src={thumb}
+                  />
                   {highlightActiveThumbnail && <Highlighter />}
                 </RestyledLink>
               </Item>

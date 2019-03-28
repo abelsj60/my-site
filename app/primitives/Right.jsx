@@ -7,7 +7,7 @@ export default styled.section`
   flex-direction: column;
   overflow: auto;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-top: 25px;
   }
 `;

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Structure = styled.div`
-  font-size: 1.2rem;
+  font-size: ${p => p.theme.fontSizes.three};
   font-weight: 400;
   width: 80px;
   padding: 10px;
@@ -10,6 +10,7 @@ const Structure = styled.div`
   cursor: pointer;
 `;
 const Text = styled.p`
+  font-size: ${p => p.theme.fontSizes.one};
   font-weight: 400;
   margin-bottom: 0px;
 `;
@@ -26,7 +27,10 @@ export default function Button(props) {
   } = props;
 
   return (
-    <Structure className={className} onClick={clickFunction}>
+    <Structure
+      className={className}
+      onClick={clickFunction}
+    >
       <Text>{text}</Text>
     </Structure>
   );

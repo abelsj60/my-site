@@ -26,7 +26,7 @@ const Container = styled.header`
   align-items: center;
 `;
 const RestyledLink = styled(StyledLink)`
-  font-size: 1.25rem;
+  font-size: ${p => p.theme.fontSizes.four};
   font-weight: ${p => p.home ? 400 : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
   color: ${p => (p.home ? 'white' : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
@@ -38,19 +38,19 @@ const RestyledLink = styled(StyledLink)`
     text-decoration: ${p => (p.active === 'active' ? 'underline' : undefined)};
   }
 
-  @media (min-width: 390px) {
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => !p.home ? '1.4rem' : '1.2rem'};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
-  font-size: ${p => p.theme.fontSizes.headerText}
+  font-size: ${p => p.theme.fontSizes.nine};
 `;
 const Motto = styled.p`
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: ${p => p.theme.fontSizes.three};
   margin-left: 10px;
   margin-right: 15px;
   margin-bottom: 0px;
@@ -64,8 +64,8 @@ const Motto = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @media (min-width: 390px) {
-    font-size: 1.3rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.six};
     margin-left: 13px;
     margin-right: 0px;
   }
@@ -81,12 +81,12 @@ const Nav = styled.nav`
     flex: 1;
     display: block;
 
-    @media (min-width: 390px) {
+    @media (min-width: ${p.theme.mediaQueries.tinyView}) {
       margin-left: 32px;
     }
   `};
 
-  @media (min-width: 705px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     display: block;
     margin-right: ${p => (!p.home ? '15px' : undefined)};
   }
@@ -110,7 +110,7 @@ const Icon = styled.img`
   padding-left: 5px;
   padding-right: 5px;
 
-  @media (min-width: 705px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     display: none;
   }
 `;
@@ -213,6 +213,7 @@ export default class Header extends Component {
       </Container>
     );
   }
+
   componentDidUpdate(prevProps) {
     const location = new Location(
       '/',

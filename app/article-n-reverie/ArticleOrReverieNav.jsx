@@ -12,7 +12,7 @@ const StyledUL = styled(UnorderedList)`
 const NavigationDek = styled.p`
   color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
   margin-bottom: ${p => (!p.menu ? '1px' : '0px')};
-  font-size: ${p => p.theme.fontSizes.navigationDek};
+  font-size: ${p => p.theme.fontSizes.four};
   font-style: italic;
 
   &:first-child {
@@ -21,7 +21,7 @@ const NavigationDek = styled.p`
 `;
 const NavigationHed = styled.p`
   color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
-  font-size: ${p => (p.menu ? p.theme.fontSizes.menuHed : p.theme.fontSizes.navigationHed)};
+  font-size: ${p => (p.menu ? p.theme.fontSizes.fifteen : p.theme.fontSizes.eleven)};
   margin-top: -2px;
   margin-bottom: 10px;
   font-weight: 400;
@@ -33,8 +33,8 @@ const NavigationHed = styled.p`
     white-space: nowrap;
   `};
 
-  @media (min-width: 500px) {
-    font-size: ${p => (p.menu && p.theme.fontSizes.hed)}
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    font-size: ${p => (p.menu && p.theme.fontSizes.sixteen)};
   }
 `;
 

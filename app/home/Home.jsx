@@ -1,10 +1,7 @@
-import Graf from '../primitives/Graf.jsx';
-import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Fragment } from 'react';
 import styled, { keyframes } from 'styled-components';
-
 import bio from '../data/about/home-page-about.md';
 import shortBio from '../data/about/home-page-about-short.md';
 import ReactHtmlParser from 'react-html-parser';
@@ -16,7 +13,7 @@ const RestyledMain = styled(Main)`
   overflow: hidden;
   background-color: transparent;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     flex-direction: column;
   }
 `;
@@ -28,28 +25,33 @@ const NameTag = styled.div`
   z-index: 2;
   cursor: pointer;
 `;
-const RestyledHed = styled(Hed)`
+const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
   font-size: 4.5rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: ${p => p.theme.colors.yellow};
+  font-weight: 700;
 
-  @media (min-width: 390px) {
-    font-size: 6.5rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.seventeen};
   }
 `;
-const RestyledGraf = styled(Graf)`
+const Motto = styled.p`
   font-family: 'Aref Ruqaa', serif;
   margin-left: 18px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 1.298rem;
+  font-size: ${p => p.theme.fontSizes.five};
   margin-top: 65px;
+  color: ${p => p.theme.colors.yellow};
+  font-weight: 700;
 
-  @media (min-width: 390px) {
-    font-size: 1.9rem;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.fourteen};
     margin-top: 95px;
     margin-left: 20px;
   }
@@ -99,7 +101,7 @@ const BioContainer = styled.div`
   margin-top: 25px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
 
-  @media (min-width: 390px) {
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 40px;
     width: 360px;
   }
@@ -111,8 +113,8 @@ const Text = styled.section`
     font-family: 'Aref Ruqaa', serif;
     font-weight: 700;
     margin-bottom: 10px;
-    font-size: 1.2rem;
-    color: #ffe74c;
+    font-size: ${p => p.theme.fontSizes.three};
+    color: ${p => p.theme.colors.yellow};
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
     text-align: center;
     -webkit-font-smoothing: antialiased;
@@ -122,8 +124,8 @@ const Text = styled.section`
       margin-bottom: 0px;
     }
 
-    @media (min-width: 390px) {
-      font-size: 1.6rem;
+    @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+      font-size: ${p => p.theme.fontSizes.twelve};
     }
     
   }
@@ -154,7 +156,7 @@ const Text = styled.section`
 //   padding: 7px;
 //   z-index: 3;
 
-//   @media (min-width: 390px) {
+//   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
 //     width: 5px;
 //     height: 5px;
 //     margin-top: 368px;
@@ -200,25 +202,21 @@ export default function Home(props) {
                 data-pointer-events={true}
                 tempContentIsOn={showBusinessCard || showLegalTerms}
               >
-                <RestyledHed
+                <Hed
                   normal
-                  color="yellow"
                   data-depth=".3"
                   data-friction-x=".7"
                   data-friction-y=".7"
-                  weight="700"
                 >
                 James Abels
-                </RestyledHed>
-                <RestyledGraf
-                  color="yellow"
+                </Hed>
+                <Motto
                   data-depth=".2"
                   data-friction-x=".9"
                   data-friction-y=".9"
-                  weight="700"
                 >
                 Narrative coding and other adventures
-                </RestyledGraf>
+                </Motto>
                 {/*<Line
                   data-depth=".2"
                   data-friction-x=".7"

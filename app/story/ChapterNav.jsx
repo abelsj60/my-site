@@ -20,6 +20,10 @@ const StyledUL = styled(UnorderedList)`
 const ListItem = styled.li`
   flex: 1;
 `;
+const SelectorContainer = styled.div`
+  padding-top: 8px;
+  padding-bottom: 8px;
+`;
 const Selector = styled.div`
   height: 8px;
   background: ${p => `url(${p.image})`} center no-repeat;
@@ -60,17 +64,13 @@ export default function ChapterNav(props) {
               return (
                 <ListItem key={idx}>
                   <StyledLink to={`/chapter/${normalizedTitle}`}>
-                    <div
-                      style={{
-                        paddingTop: '8px',
-                        paddingBottom: '8px'
-                      }}>
+                    <SelectorContainer>
                       <Selector
                         image={dot}
                         item={itemIsActive}
                         num={idx}
                       />
-                    </div>
+                    </SelectorContainer>
                   </StyledLink>
                 </ListItem>
               );

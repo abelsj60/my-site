@@ -24,9 +24,8 @@ import { withRouter } from 'react-router';
 const colors = {
   black: 'black',
   blue: '#6e7dab',
-  lightBlue: '#e4e7ef',
-  lightestBlue: '#e6f1ff',
   lightBlack: '#455057',
+  lightBlue: '#e6f1ff',
   lightPink: '#fd5198',
   mediumBlack: '#555F66',
   pink: '#fd1172',
@@ -35,33 +34,45 @@ const colors = {
   yellow: '#ffe74c'
 };
 const fontSizes = {
-  text: '1.6rem',
-  hed: '3.1rem',
-  dek: '1.4rem',
-  largeText: '1.7rem',
-  header: '6rem',
-  motto: '1.95rem',
-  headerText: '1.45rem',
-  headerMotto: '1.35rem',
-  footerText: '1.15rem',
-  navigationDek: '1.25rem',
-  navigationHed: '1.55rem',
-  menuHed: '2rem',
-  projectHed: '1.4rem',
-  desktopProjectHed: '1.3rem'
+  zero: '.9rem',
+  one: '1.1rem',
+  two: '1.15rem',
+  three: '1.2rem',
+  four: '1.25rem',
+  five: '1.298rem',
+  six: '1.3rem',
+  seven: '1.35rem',
+  eight: '1.4rem',
+  nine: '1.45rem',
+  ten: '1.5rem',
+  eleven: '1.55rem',
+  twelve: '1.6rem',
+  thirteen: '1.7rem',
+  fourteen: '1.9rem',
+  fifteen: '2rem',
+  sixteen: '3.1rem',
+  seventeen: '6.5rem'
+};
+const mediaQueries = {
+  tinyView: '390px',
+  narrowBreakOne: '500px',
+  narrowBreakTwo: '651px',
+  narrowBreakThree: '705px',
+  desktopView: '848px',
+  desktopWide: '1004px'
 };
 const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
     // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
     font-family: 'Montserrat', sans-serif;
-    font-size: 62.5%; // 62.5%
+    font-size: 62.5%;
   }
   
   body {
     margin: 0px;
     padding: 0px;
-    font-size: 1.6rem;
+    font-size: ${p => p.theme.fontSizes.twelve};
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 
@@ -84,6 +95,7 @@ const GlobalStyle = createGlobalStyle`
 
     p {
       font-family: 'Montserrat', sans-serif;
+      font-size: ${p => p.theme.fontSizes.ten};
       margin-bottom: 10px;
       line-height: 1.5;
       font-weight: 300;
@@ -151,6 +163,7 @@ class App extends Component {
         theme={{
           colors,
           fontSizes,
+          mediaQueries,
           pageHeight: this.state.height.toString()
         }}
       >
@@ -317,20 +330,20 @@ class App extends Component {
       if (
         // '/chapter', '/projects', etc:
         !location.isTopLevel
-        // lastCaller was not '/i'. The app will
-        // run two re-renders after a <Redirect />
-        // moves us from '/i' to the next page's
-        // URL (see next statement). As a result,
-        // we filter one of the re-renders out so
-        // we don't tally the page URL twice:
-        && !location.isCalledAfterReload
-        // current window URL is not '/i'.
-        // Restate route occurs on the '/i' url.
-        // The app doesn't move to the next page's
-        // URL until a <Redirect /> loads it. This
-        // check blocks '/i' from being tallied
-        // by GA:
-        && window.location.pathname !== '/i'
+          // lastCaller was not '/i'. The app will
+          // run two re-renders after a <Redirect />
+          // moves us from '/i' to the next page's
+          // URL (see next statement). As a result,
+          // we filter one of the re-renders out so
+          // we don't tally the page URL twice:
+          && !location.isCalledAfterReload
+          // current window URL is not '/i'.
+          // Restate route occurs on the '/i' url.
+          // The app doesn't move to the next page's
+          // URL until a <Redirect /> loads it. This
+          // check blocks '/i' from being tallied
+          // by GA:
+          && window.location.pathname !== '/i'
       ) {
         // ReactGA.pageview(window.location.pathname);
       }
@@ -342,7 +355,7 @@ export default withRouter(App);
 
 // 2. Edit story
 // 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
-// 4. Fix styled-components attribute use / clean up CSS
+// 5. Screen image on home (Safari)
 
 // https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
 

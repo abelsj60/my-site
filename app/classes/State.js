@@ -59,7 +59,10 @@ export default class State {
     const indices = this._convertParamsToIndices();
 
     // Only -1 if explicitly set by a params method
-    if (indices.one !== -1 && indices.two !== -1) {
+    if (
+      indices.one !== -1
+        && indices.two !== -1
+    ) {
       setStateCallback(indices.one, indices.two);
     }
   }

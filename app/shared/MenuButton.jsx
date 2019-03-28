@@ -8,7 +8,7 @@ const Container = styled.div`
   min-height: 34px;
   width: 52px;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
   }
 `;
@@ -22,7 +22,7 @@ const RestyledLink = styled(StyledLink)`
   justify-content: space-between;
 `;
 const Label = styled.p`
-  font-size: 1.15rem;
+  font-size: ${p => p.theme.fontSizes.two};
   color: ${p => p.theme.colors.blue};
   margin: 0px;
   cursor: pointer;
@@ -44,7 +44,7 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => p.theme.colors.lightestBlue};
+  background-color: ${p => p.theme.colors.lightBlue};
 `;
 
 export default function MenuButton(props) {

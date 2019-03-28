@@ -1,6 +1,4 @@
 import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
-import Dek from '../primitives/Dek.jsx';
-import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';
@@ -11,12 +9,17 @@ import ReactHtmlParser from 'react-html-parser';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
-const RestyledDek = styled(Dek)`
-  font-size: 1.35rem;
+const Dek = styled.h2`
+  font-size: ${p => p.theme.fontSizes.seven};
+  color: ${p => p.theme.colors.pink};
+  font-weight: 400;
 
-  @media (min-width: 390px) {
-      font-size: 1.45rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+      font-size: ${p => p.theme.fontSizes.nine};
   }
+`;
+const Hed = styled.h1`
+  font-size: ${p => p.theme.fontSizes.sixteen};
 `;
 const Text = styled.section`
   p {
@@ -35,7 +38,7 @@ const Text = styled.section`
   }
 `;
 const BylineOrDate = styled.p`
-  font-size: 1.2rem;
+  font-size: ${p => p.theme.fontSizes.three};
   font-style: italic;
   margin-top: 14px;
   margin-bottom: 14px;
@@ -73,16 +76,19 @@ export default function ArticleOrReverie(props) {
   return (
     <Main reverie={isReverie}>
       <Left reverie={isReverie}>
-        <ArticleOrReverieNav {...props} data={data} />
+        <ArticleOrReverieNav
+          {...props}
+          data={data}
+        />
       </Left>
       <Right>
         <MenuButton {...props} />
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <RestyledDek color="pink" weight="400">
+          <Dek>
             {reverieOrPublicationAsDek}
-          </RestyledDek>
+          </Dek>
           <Hed>
             {headline}
           </Hed>

@@ -1,5 +1,4 @@
 import Clipboard from 'react-clipboard.js';
-import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Component } from 'react';
@@ -35,7 +34,7 @@ const Card = styled.section`
   background-color: ${p => p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white};
   pointer-events: all;
 
-  @media (min-width: 400px) {
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     height: 200px;
     width: 350px;
   }
@@ -72,34 +71,39 @@ const StyledClipboardButton = styled(Clipboard)`
     transform: scale(0.5);
   }
 `;
-const RestyledGraf = styled(Graf)`
+const Graf = styled.p`
+  font-weight: 400;
   flex: 1;
-  font-size: 1.3rem;
+  font-size: ${p => p.theme.fontSizes.six};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (min-width: 400px) {
-    font-size: 1.5rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.ten};
   }
 `;
 const MyCopyright = styled.span`
-  font-size: 1.2rem;
+  font-size: ${p => p.theme.fontSizes.three};
   display: block;
   margin-bottom: 3px;
   font-family: 'Montserrat', sans-serif;
 
-  @media (min-width: 390px) {
-    font-size: 1.45rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.nine};
   }
 `;
 const ClipCopyright = styled.span`
-  font-size: .9rem;
+  font-size: ${p => p.theme.fontSizes.zero};
   font-style: italic;
   font-family: 'Montserrat', sans-serif;
 
-  @media (min-width: 390px) {
-    font-size: 1.15rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.two};
   }
+`;
+const RestyledLink = styled(StyledLink)`
+  color: black;
+  text-decoration: underline;
 `;
 
 export default class LegalTermsOrBizCard extends Component {
@@ -144,11 +148,7 @@ export default class LegalTermsOrBizCard extends Component {
     // Styled as attribute for simplicity,
     // breaking it out above's a headache
     const linkOrTextForClips = currentCaller !== 'journalism'
-      ? <StyledLink style={{
-        color: 'black',
-        textDecoration: 'underline'
-      }} to="/journalism">
-      clips</StyledLink>
+      ? <RestyledLink to="/journalism">clips</RestyledLink>
       : 'clips';
 
     // The following HTML is span, not a <p>, b/c it's nested in
@@ -250,16 +250,15 @@ export default class LegalTermsOrBizCard extends Component {
                           }
                         }
                       >
-                        <RestyledGraf
+                        <Graf
                           key={cardText}
                           copying={
                             !showLegalTerms
                             && copying
                           }
-                          weight="400"
                         >
                           {cardText}
-                        </RestyledGraf>
+                        </Graf>
                       </StyledClipboardButton>
                     </CardContentArea>
                   </Card>
