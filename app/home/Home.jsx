@@ -11,7 +11,6 @@ const RestyledMain = styled(Main)`
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  background-color: transparent;
 
   @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     flex-direction: column;
@@ -56,50 +55,11 @@ const Motto = styled.p`
     margin-left: 20px;
   }
 `;
-const PictureBox = styled.div`
-  position: fixed;
-  top: 0px;
-  left: -.5px;
-  height: 101%;
-  width: 101%;
-  overflow: hidden;
-  z-index: -1;
-`;
-const Portal = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-  z-index: 1;
-`;
-const BoyInForeground = styled.img`
-  position: absolute;
-  z-index: 2;
-  pointer-events: none;
-
-  // https://stackoverflow.com/a/28439444
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-image: url(${p => p.srcImage});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-`;
-const FantasyAsBackground = styled(BoyInForeground)`
-  opacity: ${p => (p.inCity ? '0' : '1')};
-  transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
-  transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
-  z-index: 0;
-`;
-const CityAsBackground = styled(FantasyAsBackground)`
-  opacity: ${p => (p.inCity ? '1' : '0')};
-  transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
-`;
-const BioContainer = styled.div`
+const BioBox = styled.div`
   width: 80%;
   margin-top: 25px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
+  z-index: 2;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 40px;
@@ -126,10 +86,50 @@ const Text = styled.section`
 
     @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
       font-size: ${p => p.theme.fontSizes.twelve};
-    }
-    
+    } 
   }
 `;
+const PictureBox = styled.div`
+  position: fixed;
+  top: 0px;
+  left: -1px;
+  height: 101%;
+  width: 101%;
+  overflow: hidden;
+  z-index: 1;
+`;
+const BoyInForeground = styled.img`
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+
+  // https://stackoverflow.com/a/28439444
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url(${p => p.srcImage});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+`;
+const Portal = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 1;
+`;
+const FantasyAsBackground = styled(BoyInForeground)`
+  opacity: ${p => (p.inCity ? '0' : '1')};
+  transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
+  transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 0;
+`;
+const CityAsBackground = styled(FantasyAsBackground)`
+  opacity: ${p => (p.inCity ? '1' : '0')};
+  transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
+`;
+
 // const PulseKeyframes = keyframes`
 //   0% {
 //     background-color: rgba(0,0,0,.1);
@@ -234,7 +234,7 @@ export default function Home(props) {
         <Parallax
           render={
             renderProps => (
-              <BioContainer
+              <BioBox
                 ref={
                   el => {
                     renderProps.scene = el;
@@ -254,7 +254,7 @@ export default function Home(props) {
                     )
                   )}
                 </Text>
-              </BioContainer>
+              </BioBox>
             )
           }
         />

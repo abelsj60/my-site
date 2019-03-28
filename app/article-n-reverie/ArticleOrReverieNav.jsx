@@ -3,9 +3,8 @@ import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
-import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const StyledUL = styled(UnorderedList)`
+const StyledUL = styled.ul`
   overflow: ${p => (!p.menu ? 'auto' : undefined) };
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;

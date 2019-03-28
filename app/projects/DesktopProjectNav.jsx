@@ -2,9 +2,8 @@ import Mapper from '../shared/Mapper.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const StyledUL = styled(UnorderedList)`
+const StyledUL = styled.ul`
   height: 100%;
   overflow: auto;
   margin-right: 25px;

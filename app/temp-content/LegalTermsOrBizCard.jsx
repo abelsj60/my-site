@@ -56,7 +56,13 @@ const StyledClipboardButton = styled(Clipboard)`
   align-items: center;
   pointer-events: all;
 
+  :active {
+    // Ensures text is seen on button click in Safari
+    color: black;
+  }
+
   :focus {
+    // Removese ugly grey outline in some browsers
     outline: 0px;
   }
 
@@ -75,6 +81,7 @@ const Graf = styled.p`
   font-weight: 400;
   flex: 1;
   font-size: ${p => p.theme.fontSizes.six};
+  margin-bottom: 0px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -100,10 +107,6 @@ const ClipCopyright = styled.span`
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.two};
   }
-`;
-const RestyledLink = styled(StyledLink)`
-  color: black;
-  text-decoration: underline;
 `;
 
 export default class LegalTermsOrBizCard extends Component {
@@ -148,7 +151,10 @@ export default class LegalTermsOrBizCard extends Component {
     // Styled as attribute for simplicity,
     // breaking it out above's a headache
     const linkOrTextForClips = currentCaller !== 'journalism'
-      ? <RestyledLink to="/journalism">clips</RestyledLink>
+      ? <StyledLink
+        style={{ color: 'black',
+          textDecoration: 'underline'
+        }}to="/journalism">clips</StyledLink>
       : 'clips';
 
     // The following HTML is span, not a <p>, b/c it's nested in

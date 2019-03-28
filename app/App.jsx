@@ -65,6 +65,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
     // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
+
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
   }
@@ -73,13 +74,16 @@ const GlobalStyle = createGlobalStyle`
     margin: 0px;
     padding: 0px;
     font-size: ${p => p.theme.fontSizes.twelve};
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 
     h1,
     h2,
     h3,
-    p {
+    p,
+    ul {
       margin: 0px;
     }
 
@@ -88,17 +92,15 @@ const GlobalStyle = createGlobalStyle`
       margin-left: 2px;
     }
 
-    h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-    }
-
     p {
-      font-family: 'Montserrat', sans-serif;
       font-size: ${p => p.theme.fontSizes.ten};
       margin-bottom: 10px;
       line-height: 1.5;
-      font-weight: 300;
+    }
+
+    ul {
+      padding: 0px;
+      list-style-type: none;
     }
   }
 
@@ -108,10 +110,11 @@ const GlobalStyle = createGlobalStyle`
     height: ${p => p.theme.pageHeight}px;
     
     @media(orientation:landscape) {
-      // Fix esoteric iOS 7 iPad bug
+      // Fix esoteric iOS 7 iPad bug:
       // https://stackoverflow.com/a/19449123
       // https://stackoverflow.com/q/19012135
       // https://krpano.com/ios/bugs/ios7-ipad-landscape/
+
       ${p => p.fixMobileSafariBugOn7 && 'position:fixed; bottom: 0;'};
     }
     
@@ -355,7 +358,6 @@ export default withRouter(App);
 
 // 2. Edit story
 // 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
-// 5. Screen image on home (Safari)
 
 // https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
 

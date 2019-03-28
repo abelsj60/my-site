@@ -5,7 +5,6 @@ import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
-import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
   margin: -5px 0px 5px -13px;
@@ -13,7 +12,7 @@ const Nav = styled.nav`
   display: flex;
   flex-shrink: 0;
 `;
-const StyledUL = styled(UnorderedList)`
+const StyledUL = styled.ul`
   display: flex;
   flex: 1;
 `;
