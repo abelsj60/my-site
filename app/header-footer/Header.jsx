@@ -165,10 +165,15 @@ export default class Header extends Component {
         >
           James Abels
         </NameAsLink>
-        <Motto hide={menuIsActive || homeIsActive}>
+        <Motto
+          hide={menuIsActive || homeIsActive}
+        >
           Narrative coding and other adventures
         </Motto>
-        <Nav home={homeIsActive} menu={menuIsActive}>
+        <Nav
+          home={homeIsActive}
+          menu={menuIsActive}
+        >
           <NavList>
             <Mapper
               mapData={headerLinks}
@@ -178,7 +183,9 @@ export default class Header extends Component {
                     link.path.includes(referrer.location);
 
                   return (
-                    <li key={idx}>
+                    <li
+                      key={idx}
+                    >
                       <RestyledLink
                         reverie={reverieIsActive}
                         active={
