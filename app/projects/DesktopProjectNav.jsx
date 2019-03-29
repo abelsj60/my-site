@@ -17,7 +17,7 @@ const StyledUL = styled.ul`
 `;
 const ListItem = styled.li`
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 `;
 const Graf = styled.p`

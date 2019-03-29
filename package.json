@@ -26,7 +26,6 @@
     "react-ga": "^2.5.7",
     "react-html-parser": "^2.0.2",
     "react-router-dom": "^4.3.1",
-    "react-transition-group": "^2.7.1",
     "simple-linear-scale": "^1.0.1",
     "styled-components": "^4.1.3",
     "volleyball": "^1.5.1",

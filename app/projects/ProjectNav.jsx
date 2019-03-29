@@ -16,7 +16,7 @@ const Group = styled.ul`
   `};
 
   ${p => p.isRight && css`
-    @media (min-width: ${p.theme.mediaQueries.narrowBreakTwo}) {
+    @media (min-width: ${p.theme.mediaQueries.narrowBreakThree}) {
       flex-direction: column;
       margin-top: 25px;
       padding: 0;
@@ -45,7 +45,7 @@ const Item = styled.li`
     margin-left: ${p => (!p.isRight ? '0px' : undefined)};
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }

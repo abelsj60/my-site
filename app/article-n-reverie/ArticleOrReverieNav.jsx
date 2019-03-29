@@ -10,7 +10,7 @@ const StyledUL = styled.ul`
 `;
 const NavigationDek = styled.p`
   color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
-  margin-bottom: ${p => (!p.menu ? '1px' : '0px')};
+  margin-bottom: ${p => (!p.menu ? '4px' : '0px')};
   font-size: ${p => p.theme.fontSizes.four};
   font-style: italic;
 
@@ -22,7 +22,7 @@ const NavigationHed = styled.p`
   color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
   font-size: ${p => (p.menu ? p.theme.fontSizes.fifteen : p.theme.fontSizes.eleven)};
   margin-top: -2px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   font-weight: 400;
 
   ${p => !p.menu && css`

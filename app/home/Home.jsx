@@ -44,25 +44,25 @@ const Motto = styled.p`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: ${p => p.theme.fontSizes.five};
-  margin-top: 65px;
+  margin-top: 70px;
   color: ${p => p.theme.colors.yellow};
   font-weight: 700;
 
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.fourteen};
-    margin-top: 95px;
+    margin-top: 100px;
     margin-left: 20px;
   }
 `;
 const BioBox = styled.div`
   width: 80%;
-  margin-top: 25px;
+  margin-top: 30px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
   z-index: 2;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-top: 40px;
+    margin-top: 50px;
     width: 360px;
   }
 `;

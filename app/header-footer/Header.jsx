@@ -46,25 +46,20 @@ const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
 `;
 const Motto = styled.p`
+  font-family: 'Aref Ruqaa', serif;
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
   font-style: italic;
-  font-size: ${p => p.theme.fontSizes.three};
-  margin-left: 10px;
-  margin-right: 15px;
-  margin-bottom: 0px;
-  min-width: 0px;
-
-  font-family: 'Aref Ruqaa', serif;
-  margin-top: -3px;
-  
+  font-size: ${p => p.theme.fontSizes.one};
+  margin: 0px 15px 2px 10px;
+  min-width: 0px;  
   // https://css-tricks.com/flexbox-truncated-text/
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    font-size: ${p => p.theme.fontSizes.seven};
+    font-size: ${p => p.theme.fontSizes.four};
     margin-left: 13px;
     margin-right: 0px;
   }
@@ -85,7 +80,7 @@ const Nav = styled.nav`
     }
   `};
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
     margin-right: ${p => (!p.home ? '15px' : undefined)};
   }
@@ -109,7 +104,7 @@ const Icon = styled.img`
   padding-left: 5px;
   padding-right: 5px;
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: none;
   }
 `;

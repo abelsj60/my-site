@@ -11,12 +11,12 @@ const Nav = styled.nav`
   max-width: 150px;
   display: flex;
   flex-shrink: 0;
-  position: relative; // For line
+  position: relative;
 `;
 const StyledUL = styled.ul`
   display: flex;
   flex: 1;
-  padding-bottom: 2px; // For line
+  padding-bottom: 2px;
 `;
 const ListItem = styled.li`
   flex: 1;
@@ -33,14 +33,13 @@ const Selector = styled.div`
 
 const Line = styled.div`
   position: absolute;
-  // width: 100%; // For line
   left: 0px;
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
   background-color: ${p => p.theme.colors.lightBlue};
-  width: 80%; // For line
-  margin-left: 16px; // For line
+  width: 80%;
+  margin-left: 15px;
 `;
 
 export default function ChapterNav(props) {

@@ -22,7 +22,7 @@ const Hed = styled.h3`
 `;
 const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.thirteen};
-  margin-top: 2px;
+  margin-top: 4px;
   margin-bottom: 15px;
   font-weight: 300;
 `;
@@ -33,7 +33,7 @@ const Images = styled.section`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
@@ -49,7 +49,7 @@ const Images = styled.section`
 const Figure = styled.figure`
   margin: 0px;
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     display: flex;
     flex-direction: column;
   }
@@ -61,7 +61,7 @@ const Caption = styled.figcaption`
   color: ${p => p.theme.colors.blue};
   font-weight: 300;
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-top: 0;
   }
 
@@ -79,7 +79,7 @@ const Image = styled.img`
   object-fit: cover;
   vertical-align: bottom;
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-right: 10px;
   }
 

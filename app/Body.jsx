@@ -85,8 +85,14 @@ export default class Body extends Component {
             () => <ReloadRoute {...this.props} bodyState={this.state} />
           }
         />
-        <Route exact path="/about" component={About} />
-        <Route component={NotFound} />
+        <Route
+          exact
+          path="/about"
+          component={About}
+        />
+        <Route
+          component={NotFound}
+        />
       </Switch>
     );
   }

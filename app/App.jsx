@@ -56,8 +56,8 @@ const fontSizes = {
 const mediaQueries = {
   tinyView: '390px',
   narrowBreakOne: '500px',
-  narrowBreakTwo: '651px',
-  narrowBreakThree: '705px',
+  narrowBreakTwo: '625px',
+  narrowBreakThree: '651px',
   desktopView: '848px',
   desktopWide: '1004px'
 };
@@ -93,7 +93,6 @@ const GlobalStyle = createGlobalStyle`
     }
 
     p {
-      font-size: ${p => p.theme.fontSizes.ten};
       margin-bottom: 10px;
       line-height: 1.5;
     }
