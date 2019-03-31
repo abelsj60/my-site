@@ -374,12 +374,16 @@ export default withRouter(App);
 // 5. Add filter to GA: https://neilpatel.com/blog/protect-analytics-from-hacking/
 // https://neilpatel.com/blog/8-google-analytics-features/
 
+// Footer line when showing image in Story
+// Blog ul formattingl
+
 // ---
 // https://codersblock.com/blog/creating-glow-effects-with-css/
 
 // https://www.kirupa.com/animations/creating_pulsing_circle_animation.htm
 // ! https://css-tricks.com/almanac/properties/a/animation/
 // https://tilomitra.github.io/infinite/
+// https://github.com/tholman/cursor-effects
 
 // When done:
 // 1. https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
