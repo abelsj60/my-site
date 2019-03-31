@@ -11,6 +11,7 @@ const Container = styled.footer`
   align-items: center;
   height: 55px;
   font-size: ${p => p.theme.fontSizes.one};
+  position: relative;
 
   @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     justify-content: flex-end;
@@ -22,7 +23,8 @@ const Line = styled.div`
   z-index: 0;
   left: 25px;
   right: 25px;
-  top: ${p => parseInt(p.theme.pageHeight) - 55}px;
+  top: 0px;
+  // top: ${p => parseInt(p.theme.pageHeight) - 55}px;
   margin: 0px;
   height: 1px;
   transform: scaleY(0.5);

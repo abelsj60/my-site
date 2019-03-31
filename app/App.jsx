@@ -68,6 +68,7 @@ const GlobalStyle = createGlobalStyle`
 
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
+    background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
   }
   
   body {
@@ -78,6 +79,8 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 300;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+    max-width: 1508px;
+    margin: 0 auto;
 
     h1,
     h2,
@@ -111,6 +114,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     height: ${p => p.theme.pageHeight}px;
+    position: relative;
     
     @media(orientation:landscape) {
       // Fix esoteric iOS 7 iPad bug:
@@ -158,6 +162,7 @@ class App extends Component {
     const hcForApp = new ClickHandling('app', this);
     const boundHandleClickForApp = hcForApp.boundHandleClick;
     const homeIsActive = location.type === 'home';
+    const reverieIsActive = location.type === 'reverie';
     const fixMobileSafariBugOn7 = isTablet
       && isMobileSafari
       && osVersion[0] === '7';
@@ -174,6 +179,7 @@ class App extends Component {
         <Fragment>
           <GlobalStyle
             home={homeIsActive}
+            reverie={reverieIsActive}
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
           />
           <Header
@@ -360,7 +366,6 @@ export default withRouter(App);
 // A. Edit story
 // B. Take pictures, write captions for Arrow, Slingshot, TMMnews
 
-// 1. max-height, max-width on pages
 // 2. Hosting:
 //  https://github.com/rafrex/spa-github-pages
 //  http://spa-github-pages.rafrex.com/

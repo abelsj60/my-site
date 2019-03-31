@@ -28,6 +28,7 @@ const Dek = styled.h2`
 `;
 const Graf = styled.p`
   margin-bottom: 10px;
+  margin-right: 0px;
 `;
 const Images = styled.section`
   display: flex;
