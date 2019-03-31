@@ -32,9 +32,18 @@ const Text = styled.section`
     margin-top: 0px;
   }
 
+  ul,
   ol {
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: ${p => p.theme.grafSpace.regular};
+  }
+
+  li {
     margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
   }
 `;
 const BylineOrDate = styled.p`

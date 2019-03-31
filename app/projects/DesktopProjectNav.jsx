@@ -2,8 +2,9 @@ import Mapper from '../shared/Mapper.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const StyledUL = styled.ul`
+const RestyledList = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
   margin-right: 25px;
@@ -60,7 +61,7 @@ export default function DesktopProjectNav(props) {
   }
 
   return (
-    <StyledUL menu={isMenu}>
+    <RestyledList menu={isMenu}>
       <Mapper
         mapData={finalData}
         render={
@@ -89,6 +90,6 @@ export default function DesktopProjectNav(props) {
           }
         }
       />
-    </StyledUL>
+    </RestyledList>
   );
 }

@@ -61,6 +61,9 @@ const mediaQueries = {
   desktopView: '848px',
   desktopWide: '1004px'
 };
+const grafSpace = {
+  regular: '15px'
+};
 const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
@@ -96,17 +99,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     p {
-      margin-bottom: 15px;
+      margin-bottom: ${p => p.theme.grafSpace.regular};
       line-height: 1.6;
-    }
-
-    // ul p {
-    //   line-height: 1.5;
-    // }
-
-    ul {
-      padding: 0px;
-      list-style-type: none;
     }
   }
 
@@ -142,13 +136,16 @@ class App extends Component {
     // ReactGA.pageview(window.location.pathname);
 
     this.state = {
-      currentCaller: location !== 'i' ? location : 'home',
+      currentCaller: location !== 'i'
+        ? location
+        : 'home',
       lastCaller: location !== 'reverie'
         ? location
         : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
-      height: window.innerHeight || document.documentElement.clientHeight,
+      height: window.innerHeight
+        || document.documentElement.clientHeight,
       showBusinessCard: false,
       showLegalTerms: false,
       showStoryText: true
@@ -170,6 +167,7 @@ class App extends Component {
     return (
       <ThemeProvider
         theme={{
+          grafSpace,
           colors,
           fontSizes,
           mediaQueries,

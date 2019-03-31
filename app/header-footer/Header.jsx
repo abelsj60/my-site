@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import Referrer from '../classes/Referrer.js';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const headerLinks = [
   { name: 'The story', path: '/chapter' },
@@ -85,7 +86,7 @@ const Nav = styled.nav`
     margin-right: ${p => (!p.home ? '15px' : undefined)};
   }
 `;
-const NavList = styled.ul`
+const NavList = styled(UnorderedList)`
   display: flex;
   justify-content: center;
   margin: 0px;

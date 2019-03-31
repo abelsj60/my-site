@@ -30,7 +30,7 @@ const Line = styled.div`
   transform: scaleY(0.5);
   background-color: ${p => p.theme.colors.lightPink};
 
-  @media(orientation: landscape) {
+  @media(min-width: ${p => p.theme.mediaQueries.desktopView}) {
     display: ${p => !p.showStoryText ? 'block' : ''};
   }
 `;

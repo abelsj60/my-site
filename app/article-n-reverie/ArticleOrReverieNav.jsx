@@ -3,8 +3,9 @@ import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const StyledUL = styled.ul`
+const RestyledList = styled(UnorderedList)`
   overflow: ${p => (!p.menu ? 'auto' : undefined) };
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;
@@ -66,7 +67,7 @@ export default function ArticleOrReverieNav(props) {
   const normalizedCurrentHed = normalize(currentHed);
 
   return (
-    <StyledUL menu={isMenu}>
+    <RestyledList menu={isMenu}>
       <Mapper
         mapData={data}
         render={
@@ -117,8 +118,6 @@ export default function ArticleOrReverieNav(props) {
           }
         }
       />
-    </StyledUL>
+    </RestyledList>
   );
 }
-
-//

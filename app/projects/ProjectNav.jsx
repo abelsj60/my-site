@@ -2,8 +2,9 @@ import Mapper from '../shared/Mapper.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const Group = styled.ul`
+const Group = styled(UnorderedList)`
   display: flex;
   margin: 0px;
   padding: 0px 0px ${p => !p.menu ? '0px' : '10px'} 0px;

@@ -15,10 +15,10 @@ Now, let's look at practical reality.
 
 The chapter icon (a filled-in circle image) is eight pixels by eight pixels and uses one color. This results in the following file sizes:
 
-* 1. SVG (Inkscape): 2 kilobytes
-* 2. SVG (Optimized): 722 bytes (Inkscape-specific data is stripped out)
-* 3. JPG: 966 bytes (Exported from a PNG using the worst quality setting in a Mac's "Preview" app)
-* 4. PNG: 674 bytes
+* SVG (Inkscape): 2 kilobytes
+* SVG (Optimized): 722 bytes (Inkscape-specific data is stripped out)
+* JPG: 966 bytes (Exported from a PNG using the worst quality setting in a Mac's "Preview" app)
+* PNG: 674 bytes
 
 I went with PNG, obviously. 
 

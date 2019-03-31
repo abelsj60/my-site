@@ -5,6 +5,7 @@ import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
   margin: -7px 0px 16px -13px;
@@ -13,7 +14,7 @@ const Nav = styled.nav`
   flex-shrink: 0;
   position: relative;
 `;
-const StyledUL = styled.ul`
+const StyledList = styled(UnorderedList)`
   display: flex;
   flex: 1;
   padding-bottom: 2px;
@@ -59,7 +60,7 @@ export default function ChapterNav(props) {
 
   return (
     <Nav>
-      <StyledUL>
+      <StyledList>
         <Mapper
           mapData={data}
           render={
@@ -89,7 +90,7 @@ export default function ChapterNav(props) {
             }
           }
         />
-      </StyledUL>
+      </StyledList>
       <Line />
     </Nav>
   );
