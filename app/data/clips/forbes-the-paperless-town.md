@@ -35,7 +35,7 @@ of the other newspapers in the area will probably step it up."
 
 That's what happened to the Post-Herald in Birmingham, Ala. Owned by E.W.
 Scripps Company, the 7,500 circulation afternoon daily closed in September 
-2005. 
+2005.
 
 "Certainly, losing a voice in the community has an impact, but that
 voice had become less influential as the paper had shrunk," says Tom

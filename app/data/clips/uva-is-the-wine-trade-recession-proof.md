@@ -140,4 +140,6 @@ customers to try new wines by educating them about new options. Right now,
 Wassmer is not measuring the return on investment, but he’s already
 optimistic about the low-cost video programming based on anecdotal
 feedback from customers. “It’s constantly a game of keeping your consumer
-excited and educated,” he said. And coming back for more.
+excited and educated,” he said. 
+
+And coming back for more.

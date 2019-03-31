@@ -93,9 +93,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     p {
-      margin-bottom: 10px;
-      line-height: 1.5;
+      margin-bottom: 15px;
+      line-height: 1.6;
     }
+
+    // ul p {
+    //   line-height: 1.5;
+    // }
 
     ul {
       padding: 0px;
@@ -353,22 +357,25 @@ class App extends Component {
 
 export default withRouter(App);
 
-// 2. Edit story
-// 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
+// A. Edit story
+// B. Take pictures, write captions for Arrow, Slingshot, TMMnews
 
-// https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
+// 1. max-height, max-width on pages
+// 2. Hosting:
+//  https://github.com/rafrex/spa-github-pages
+//  http://spa-github-pages.rafrex.com/
+// 3. Illustrator
+// 4. Analytics, a. find password/account, d. connect GA to acct.
+// 5. Add filter to GA: https://neilpatel.com/blog/protect-analytics-from-hacking/
+// https://neilpatel.com/blog/8-google-analytics-features/
 
+// ---
 // https://codersblock.com/blog/creating-glow-effects-with-css/
-// https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
 
 // https://www.kirupa.com/animations/creating_pulsing_circle_animation.htm
 // ! https://css-tricks.com/almanac/properties/a/animation/
 // https://tilomitra.github.io/infinite/
 
-// Illustrator
-// Analytics, a. find password/account, d. connect GA to acct.
-
-// Hosting?
-// ! https://github.com/rafrex/spa-github-pages
-// ! http://spa-github-pages.rafrex.com/
-
+// When done:
+// 1. https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
+// 2. Image loading...how to handle delays?
