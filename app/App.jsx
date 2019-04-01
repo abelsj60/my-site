@@ -148,10 +148,13 @@ class App extends Component {
         || document.documentElement.clientHeight,
       showBusinessCard: false,
       showLegalTerms: false,
-      showStoryText: true
+      showStoryText: true //,
+      // imagesReady: false
     };
 
+    this.loadImages = this.loadImages.bind(this);
     this.updateHeight = this.updateHeight.bind(this);
+
   }
 
   render() {
@@ -221,6 +224,36 @@ class App extends Component {
     return false;
   }
 
+  loadImages() {
+    const imageList = [
+      'https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png',
+      'https://user-images.githubusercontent.com/30417590/55294130-33436780-53cc-11e9-93cc-f61572bca6ef.png',
+      'https://user-images.githubusercontent.com/30417590/55294135-3c343900-53cc-11e9-8f9c-e66499ccd920.png',
+      'https://user-images.githubusercontent.com/30417590/55294138-43f3dd80-53cc-11e9-96c2-3c7f2977c24a.jpg'
+    ];
+    // let imagesLoaded = 0;
+    // const whenLoaded = () => {
+    //   imagesLoaded++;
+
+    //   if (imagesLoaded === imageList.length - 1) {
+    //     this.setState({ imagesReady: true });
+    //   }
+    // };
+
+    imageList.forEach(
+      (_image, index) => {
+        const img = new Image();
+        img.src = imageList[index];
+
+        // if (img.complete) {
+        //   whenLoaded();
+        // } else {
+        //   img.onload = () => whenLoaded();
+        // }
+      }
+    );
+  }
+
   componentDidMount() {
     if (!this.hasFlexbox()) {
       throw new Error("Browser doesn't support Flexbox");
@@ -229,6 +262,7 @@ class App extends Component {
     }
 
     window.addEventListener('resize', this.updateHeight);
+    this.loadImages();
   }
 
   componentWillUnmount() {
@@ -372,9 +406,6 @@ export default withRouter(App);
 // 5. Add filter to GA: https://neilpatel.com/blog/protect-analytics-from-hacking/
 // https://neilpatel.com/blog/8-google-analytics-features/
 
-// Footer line when showing image in Story
-// Blog ul formattingl
-
 // ---
 // https://codersblock.com/blog/creating-glow-effects-with-css/
 
@@ -386,3 +417,4 @@ export default withRouter(App);
 // When done:
 // 1. https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
 // 2. Image loading...how to handle delays?
+// https://www.photo-mark.com/notes/image-preloading/

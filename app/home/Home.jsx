@@ -107,10 +107,13 @@ const BoyInForeground = styled.img`
   display: block;
   width: 100%;
   height: 100%;
-  background-image: url(${p => p.srcImage});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  object-fit: cover; // Use if img is an <img>
+
+  // Use if img is a background-image in CSS
+  // background-image: url(${p => p.srcImage});
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center;
 `;
 const Portal = styled.div`
   position: absolute;
@@ -217,11 +220,6 @@ export default function Home(props) {
                 >
                 Narrative coding and other adventures
                 </Motto>
-                {/*<Line
-                  data-depth=".2"
-                  data-friction-x=".7"
-                  data-friction-y=".7"
-                />*/}
                 {/*<Ball
                   data-depth=".2"
                   data-friction-x=".7"
@@ -261,18 +259,18 @@ export default function Home(props) {
         <PictureBox>
           <BoyInForeground
             alt=""
-            srcImage="https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png"
+            src="https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png"
           />
           <Portal />
           <FantasyAsBackground
             alt=""
             inCity={inCity}
-            srcImage="https://user-images.githubusercontent.com/30417590/55294130-33436780-53cc-11e9-93cc-f61572bca6ef.png"
+            src="https://user-images.githubusercontent.com/30417590/55294130-33436780-53cc-11e9-93cc-f61572bca6ef.png"
           />
           <CityAsBackground
             alt=""
             inCity={inCity}
-            srcImage="https://user-images.githubusercontent.com/30417590/55294135-3c343900-53cc-11e9-8f9c-e66499ccd920.png"
+            src="https://user-images.githubusercontent.com/30417590/55294135-3c343900-53cc-11e9-8f9c-e66499ccd920.png"
           />
         </PictureBox>
       </RestyledMain>
