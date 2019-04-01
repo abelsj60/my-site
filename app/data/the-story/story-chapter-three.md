@@ -1,6 +1,6 @@
 ---
 title: 'The reality glitch'
-image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
+image: 'https://user-images.githubusercontent.com/30417590/55294138-43f3dd80-53cc-11e9-96c2-3c7f2977c24a.jpg'
 number: 3
 ---
 

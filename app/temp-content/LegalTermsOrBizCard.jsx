@@ -1,5 +1,4 @@
 import Clipboard from 'react-clipboard.js';
-import Graf from '../primitives/Graf.jsx';
 import StyledLink from '../primitives/StyledLink.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Component } from 'react';
@@ -13,18 +12,14 @@ const Container = styled.section`
   position: absolute;
   top: ${p => (!p.home ? '52px' : '0px')};
   bottom: ${p => !p.home ? '55px' : '0px'};
-  // top: 0px;
-  // bottom: 0px;
   width: 100%;
   background-color: ${p => !p.copying ? 'rgba(0, 0, 0, 0.7)' : 'rgba(253,17,114, 0.7)'};
   transition: background-color .75s;
   z-index: 1;
 
-  ${p =>
-    p.home
-    && css`
-      z-index: 1;
-      background-color: ${!p.copying ? 'rgba(0, 0, 0, 0.35)' : 'rgba(255,231,76, 0.25)'};`};
+  ${p => p.home && css`
+    z-index: 1;
+    background-color: ${!p.copying ? 'rgba(0, 0, 0, 0.35)' : 'rgba(255,231,76, 0.25)'};`};
 `;
 const CardHolder = styled.div`
   display: flex;
@@ -36,10 +31,10 @@ const InnerContainer = styled.div`
 const Card = styled.section`
   height: 160px;
   width: 275px;
-  background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
+  background-color: ${p => p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white};
   pointer-events: all;
 
-  @media (min-width: 400px) {
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     height: 200px;
     width: 350px;
   }
@@ -52,8 +47,8 @@ const CardContentArea = styled.div`
   box-shadow: 7px 7px 5px -1px rgba(0, 0, 0, 0.3);
 `;
 const StyledClipboardButton = styled(Clipboard)`
-  border: ${p => p.businessCard ? '1px solid #fd1172' : 'none'};
-  background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
+  border: ${p => p.businessCard ? `1px solid ${p.theme.colors.pink}` : 'none'};
+  background-color: ${p => p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white};
   padding: 0px;
   height: 85%;
   width: 90%;
@@ -61,7 +56,13 @@ const StyledClipboardButton = styled(Clipboard)`
   align-items: center;
   pointer-events: all;
 
+  :active {
+    // Ensures text is seen on button click in Safari
+    color: black;
+  }
+
   :focus {
+    // Removese ugly grey outline in some browsers
     outline: 0px;
   }
 
@@ -76,36 +77,35 @@ const StyledClipboardButton = styled(Clipboard)`
     transform: scale(0.5);
   }
 `;
-const RestyledGraf = styled(Graf)`
-  // height: 100%;
+const Graf = styled.p`
   font-weight: 400;
   flex: 1;
-  font-size: 1.3rem;
-  // margin-top: ${p => p.copying ? '0px' : '-4px'};
+  font-size: ${p => p.theme.fontSizes.six};
+  margin-bottom: 0px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (min-width: 400px) {
-  font-size: 1.5rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.ten};
   }
 `;
 const MyCopyright = styled.span`
-  font-size: 1.2rem;
+  font-size: ${p => p.theme.fontSizes.three};
   display: block;
   margin-bottom: 3px;
   font-family: 'Montserrat', sans-serif;
 
-  @media (min-width: 390px) {
-    font-size: 1.45rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.nine};
   }
 `;
 const ClipCopyright = styled.span`
-  font-size: .9rem;
+  font-size: ${p => p.theme.fontSizes.zero};
   font-style: italic;
   font-family: 'Montserrat', sans-serif;
 
-  @media (min-width: 390px) {
-    font-size: 1.15rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.two};
   }
 `;
 
@@ -151,11 +151,10 @@ export default class LegalTermsOrBizCard extends Component {
     // Styled as attribute for simplicity,
     // breaking it out above's a headache
     const linkOrTextForClips = currentCaller !== 'journalism'
-      ? <StyledLink style={{
-        color: 'black',
-        textDecoration: 'underline'
-      }} to="/journalism">
-      clips</StyledLink>
+      ? <StyledLink
+        style={{ color: 'black',
+          textDecoration: 'underline'
+        }}to="/journalism">clips</StyledLink>
       : 'clips';
 
     // The following HTML is span, not a <p>, b/c it's nested in
@@ -257,7 +256,7 @@ export default class LegalTermsOrBizCard extends Component {
                           }
                         }
                       >
-                        <RestyledGraf
+                        <Graf
                           key={cardText}
                           copying={
                             !showLegalTerms
@@ -265,7 +264,7 @@ export default class LegalTermsOrBizCard extends Component {
                           }
                         >
                           {cardText}
-                        </RestyledGraf>
+                        </Graf>
                       </StyledClipboardButton>
                     </CardContentArea>
                   </Card>

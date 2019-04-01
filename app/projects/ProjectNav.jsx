@@ -2,8 +2,9 @@ import Mapper from '../shared/Mapper.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const Group = styled.ul`
+const Group = styled(UnorderedList)`
   display: flex;
   margin: 0px;
   padding: 0px 0px ${p => !p.menu ? '0px' : '10px'} 0px;
@@ -13,31 +14,26 @@ const Group = styled.ul`
     margin-bottom: ${p.num !== 2 ? '15px' : undefined};
     padding-bottom: 0;
     max-width: 100%;
-    // flex-direction: row;
   `};
 
   ${p => p.isRight && css`
-    // border-top: 0.5px solid #e4e7ef;
-
-    @media (min-width: 652px) {
+    @media (min-width: ${p.theme.mediaQueries.narrowBreakThree}) {
       flex-direction: column;
-      margin-top: 26px;
+      margin-top: 25px;
       padding: 0;
       border: 0;
     }
 
-    @media (min-width: 848px) {
+    @media (min-width: ${p.theme.mediaQueries.desktopView}) {
       display: flex;
       flex-direction: row;
-      margin: 0;
-      // padding-top: ${!p.isMenu && p.isRight ? '10px' : '0px'};
-      // border-top: 0.5px solid #e4e7ef;
+      margin-top: 0;
     }
 
-    @media (min-width: 1026px) {
+    @media (min-width: ${p.theme.mediaQueries.desktopWide}) {
       flex-direction: column;
       justify-content: flex-start;
-      margin-top: 26px;
+      margin-top: 27px;
       padding: 0;
       border: 0;
     }
@@ -47,22 +43,20 @@ const Item = styled.li`
   margin-right: ${p => (p.padding ? '5px' : undefined)};
 
   &:first-child {
-    // margin-left: ${p => (!p.isRight ? '2px' : undefined)};
-    
     margin-left: ${p => (!p.isRight ? '0px' : undefined)};
   }
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-right: ${p => (p.padding ? '5px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '0px' : undefined)};
   }
 
-  @media (min-width: 1026px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
@@ -86,7 +80,7 @@ const Highlighter = styled.div`
   bottom: 0px;
   left: 0px;
   position: absolute;
-  background-color: #ffe74c;
+  background-color: ${p => p.theme.colors.yellow};
 `;
 
 export default function ProjectNav(props) {
@@ -109,7 +103,11 @@ export default function ProjectNav(props) {
   }
 
   return (
-    <Group isRight={isRight} menu={isMenu} num={num}>
+    <Group
+      isRight={isRight}
+      menu={isMenu}
+      num={num}
+    >
       <Mapper
         mapData={projectThumbnail}
         render={
@@ -120,18 +118,27 @@ export default function ProjectNav(props) {
 
             if (
               isMenu
-              && isActive
-              && indexForProjectPics === idx
+                && isActive
+                && indexForProjectPics === idx
             ) {
               highlightActiveThumbnail = true;
             }
 
             return (
-              <Item key={idx} isRight={isRight} padding={padding}>
-                <RestyledLink to={`/projects/${
-                  projectName.toLowerCase()
-                }/${thumbnailNumber}`}>
-                  <Image alt={`Thumbnail ${thumbnailNumber}`} src={thumb} />
+              <Item
+                key={idx}
+                isRight={isRight}
+                padding={padding}
+              >
+                <RestyledLink
+                  to={`/projects/${
+                    projectName.toLowerCase()
+                  }/${thumbnailNumber}`}
+                >
+                  <Image
+                    alt={`Thumbnail ${thumbnailNumber}`}
+                    src={thumb}
+                  />
                   {highlightActiveThumbnail && <Highlighter />}
                 </RestyledLink>
               </Item>

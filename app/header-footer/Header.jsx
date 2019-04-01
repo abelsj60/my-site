@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import Referrer from '../classes/Referrer.js';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
+import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const headerLinks = [
   { name: 'The story', path: '/chapter' },
@@ -16,24 +17,20 @@ const headerLinks = [
 ];
 
 const Container = styled.header`
-  background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? '#d2e7ff' : 'white')};
-  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? '#455057' : '#555F66')};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? p.theme.colors.reverieBlue : p.theme.colors.white)};
+  color: ${p => (p.home ? p.theme.colors.white : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
   flex-shrink: 0;
-  // z-index: 3;
-  // position: relative;
+  z-index: 2;
   height: 52px;
   display: flex;
   justify-content: ${p => (p.home ? 'center' : undefined)};
   align-items: center;
 `;
 const RestyledLink = styled(StyledLink)`
-  font-size: 1.25rem;
+  font-size: ${p => p.theme.fontSizes.four};
   font-weight: ${p => p.home ? 400 : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
-  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? '#455057' : '#555F66')};
-  // padding-top: 5px;
-  // padding-bottom: 5px;
-  // text-shadow: ${p => p.home ? '1px 1px rgba(0,0,0,.2)' : ''};
+  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
 
   font-family: ${p => !p.home ? "'Aref Ruqaa', serif" : ''};
   margin-top: -4px;
@@ -42,48 +39,30 @@ const RestyledLink = styled(StyledLink)`
     text-decoration: ${p => (p.active === 'active' ? 'underline' : undefined)};
   }
 
-  @media (min-width: 390px) {
-    font-size: ${p => !p.home ? '1.4rem' : '1.2rem'};
-    // font-size: ${p => p.home ? '1.35rem' : '1.3rem'};
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => !p.home ? p.theme.fontSizes.nine : p.theme.fontSizes.three};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
-  font-size: 1.2rem;
-  // font-weight: bold;
-  // padding-top: 0px;
-  // padding-bottom: 0px;
-
-  // font-family: 'Aref Ruqaa', serif;
-  // margin-top: -4px;
-
-  // @media (min-width: 390px) {
-  //   font-size: 1.3rem;
-  // }
 `;
 const Motto = styled.p`
+  font-family: 'Aref Ruqaa', serif;
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
   font-style: italic;
-  font-size: 1.2rem;
-  margin-left: 10px;
-  margin-right: 15px;
-  // padding-top: 2.1px;
-  min-width: 0px;
-
-  font-family: 'Aref Ruqaa', serif;
-  margin-top: -4px;
-  
+  font-size: ${p => p.theme.fontSizes.one};
+  margin: 0px 15px 2px 10px;
+  min-width: 0px;  
   // https://css-tricks.com/flexbox-truncated-text/
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @media (min-width: 390px) {
-    font-size: 1.3rem;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.four};
     margin-left: 13px;
     margin-right: 0px;
-    // padding-top: 0px;
   }
 `;
 const Nav = styled.nav`
@@ -92,23 +71,22 @@ const Nav = styled.nav`
   background-color: ${p => p.home ? 'rgba(0,0,0,0.25)' : undefined};
   border-radius: ${p => p.home ? '10px' : undefined};
   margin-top: -4px;
-  // font-style: ${p => p.home ? 'italic' : ''};
 
   ${p => p.menu && css`
     flex: 1;
     display: block;
 
-    @media (min-width: 390px) {
+    @media (min-width: ${p.theme.mediaQueries.tinyView}) {
       margin-left: 32px;
     }
   `};
 
-  @media (min-width: 705px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
     margin-right: ${p => (!p.home ? '15px' : undefined)};
   }
 `;
-const NavList = styled.ul`
+const NavList = styled(UnorderedList)`
   display: flex;
   justify-content: center;
   margin: 0px;
@@ -127,7 +105,7 @@ const Icon = styled.img`
   padding-left: 5px;
   padding-right: 5px;
 
-  @media (min-width: 705px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: none;
   }
 `;
@@ -183,10 +161,15 @@ export default class Header extends Component {
         >
           James Abels
         </NameAsLink>
-        <Motto hide={menuIsActive || homeIsActive}>
+        <Motto
+          hide={menuIsActive || homeIsActive}
+        >
           Narrative coding and other adventures
         </Motto>
-        <Nav home={homeIsActive} menu={menuIsActive}>
+        <Nav
+          home={homeIsActive}
+          menu={menuIsActive}
+        >
           <NavList>
             <Mapper
               mapData={headerLinks}
@@ -196,7 +179,9 @@ export default class Header extends Component {
                     link.path.includes(referrer.location);
 
                   return (
-                    <li key={idx}>
+                    <li
+                      key={idx}
+                    >
                       <RestyledLink
                         reverie={reverieIsActive}
                         active={
@@ -230,6 +215,7 @@ export default class Header extends Component {
       </Container>
     );
   }
+
   componentDidUpdate(prevProps) {
     const location = new Location(
       '/',

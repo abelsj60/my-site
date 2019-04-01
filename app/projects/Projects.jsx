@@ -1,6 +1,4 @@
 import DesktopProjectNav from './DesktopProjectNav.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
 import Mapper from '../shared/Mapper.jsx';
@@ -11,59 +9,68 @@ import React, { Fragment } from 'react';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
-const RestyledLeft = styled(Left)`
-  @media (min-width: 848px) {
-    // margin-left: 23px;
-  }
+const ProjectName = styled.h1`
+  font-size: ${p => p.theme.fontSizes.sixteen};
+  color: ${p => p.theme.colors.pink};
+  margin-top: -8px;
+`;
+const Hed = styled.h3`
+  font-size: ${p => p.theme.fontSizes.eight};
+  font-weight: 400;
+  color: ${p => p.theme.colors.blue};
+  margin-bottom: 8px;
+`;
+const Dek = styled.h2`
+  font-size: ${p => p.theme.fontSizes.thirteen};
+  margin-top: 4px;
+  margin-bottom: 15px;
+  font-weight: 300;
+`;
+const Graf = styled.p`
+  margin-bottom: 10px;
+  margin-right: 0px;
 `;
 const Images = styled.section`
   display: flex;
   flex-direction: column;
-  // margin-top: 10px;
-  margin-bottom: 1px;
 
-  // margin-left: 2px;
-  // padding: 10px;
-  // border: 0.5px solid #6e7dab;
-
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     flex-direction: column;
   }
 
-  @media (min-width: 1026px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
     flex-direction: row-reverse;
   }
 `;
 const Figure = styled.figure`
   margin: 0px;
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     display: flex;
     flex-direction: column;
   }
 `;
 const Caption = styled.figcaption`
   display: flex;
-  margin-top: 10px;
-  margin-bottom: 8px;
-  margin-right: 10px;
-  font-size: 1.4rem;
-  color: #6e7dab;
+  margin: 10px 10px 8px 0px;
+  font-size: ${p => p.theme.fontSizes.eight};
+  color: ${p => p.theme.colors.blue};
+  font-weight: 300;
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-top: 0;
   }
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-top: 10px;
   }
 
-  @media (min-width: 1026px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
     margin-top: 0;
   }
 `;
@@ -72,18 +79,16 @@ const Image = styled.img`
   max-width: 100%;
   object-fit: cover;
   vertical-align: bottom;
-  color: #455057;
-  font-size: 1.5rem;
 
-  @media (min-width: 651px) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-right: 10px;
   }
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-right: 0px;
   }
 
-  @media (min-width: 1026px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
     margin-right: 10px;
   }
 `;
@@ -121,30 +126,37 @@ export default function Projects(props) {
 
   return (
     <Main>
-      <RestyledLeft>
-        <DesktopProjectNav {...props} data={data} params={params} />
-      </RestyledLeft>
+      <Left>
+        <DesktopProjectNav
+          {...props}
+          data={data}
+          params={params}
+        />
+      </Left>
       <Right>
-        <MenuButton {...props} noOffset={true} />
+        <MenuButton
+          {...props}
+          noOffset={true}
+        />
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed b="5" c="pink" s="3" t="-8">
+          <ProjectName>
             {projectName}
-          </Hed>
+          </ProjectName>
           <section>
-            <Hed as="h2" normal b="15" s="1.7">
+            <Dek>
               {type}
-            </Hed>
+            </Dek>
             <Mapper
               mapData={mapData}
               render={
                 (proj, idx) => (
                   <Fragment key={idx}>
-                    <Hed as="h3" normal b="8" c="blue" s="1.4">
+                    <Hed>
                       {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
                     </Hed>
-                    <Graf b="10" t="0">
+                    <Graf>
                       {proj[keys[idx]]}
                     </Graf>
                   </Fragment>
@@ -168,5 +180,3 @@ export default function Projects(props) {
     </Main>
   );
 }
-
-//

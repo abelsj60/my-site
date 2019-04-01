@@ -1,35 +1,34 @@
-// import Hed from '../primitives/Hed.jsx';
-import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const StyledUL = styled(UnorderedList)`
+const RestyledList = styled(UnorderedList)`
   height: 100%;
   overflow: auto;
   margin-right: 25px;
   width: ${p => (!p.menu ? '327px' : undefined)};
 
-  ${p =>
-    p.menu
-    && css`
-      display: block;
-      max-width: 590px;
-      margin: 0;
-    `};
+  ${p => p.menu && css`
+    display: block;
+    max-width: 590px;
+    margin-right: 0;
+  `};
 `;
 const ListItem = styled.li`
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 `;
-const RestyledGraf = styled(Graf)`
-  font-size: 1.3rem;
+const Graf = styled.p`
+  font-size: ${p => p.theme.fontSizes.six};
+  color: ${p => p.theme.colors.blue};
+  margin-bottom: 9px;
+  font-weight: 400;
 
-  @media (min-width: 390px) {
-    font-size: ${p => (!p.menu ? '1.3rem' : '1.6rem')};
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => (p.menu && p.theme.fontSizes.twelve)};
   }
 `;
 
@@ -62,7 +61,7 @@ export default function DesktopProjectNav(props) {
   }
 
   return (
-    <StyledUL menu={isMenu}>
+    <RestyledList menu={isMenu}>
       <Mapper
         mapData={finalData}
         render={
@@ -71,18 +70,14 @@ export default function DesktopProjectNav(props) {
               projectName,
               type
             } = project.attributes;
-
             return (
               <ListItem key={idx}>
-                <RestyledGraf
-                  normal
-                  b="9"
-                  c="blue"
+                <Graf
                   menu={isMenu}
                   num={idx}
                 >
                   {`${projectName} | ${type}`}
-                </RestyledGraf>
+                </Graf>
                 <ProjectNav
                   {...props}
                   isActive={indexForProjectData === idx}
@@ -95,6 +90,6 @@ export default function DesktopProjectNav(props) {
           }
         }
       />
-    </StyledUL>
+    </RestyledList>
   );
 }

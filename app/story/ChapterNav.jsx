@@ -8,24 +8,39 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
-  margin-top: -5px;
-  margin-bottom: 5px;
-  margin-left: -13px; // Deliberately not flush
+  margin: -7px 0px 16px -13px;
   max-width: 150px;
   display: flex;
   flex-shrink: 0;
+  position: relative;
 `;
-const StyledUL = styled(UnorderedList)`
+const StyledList = styled(UnorderedList)`
   display: flex;
   flex: 1;
+  padding-bottom: 2px;
 `;
 const ListItem = styled.li`
   flex: 1;
 `;
+const SelectorContainer = styled.div`
+  padding-top: 8px;
+  padding-bottom: 8px;
+`;
 const Selector = styled.div`
-  height: 8px;
+  height: 7px;
   background: ${p => `url(${p.image})`} center no-repeat;
   background-size: contain;
+`;
+
+const Line = styled.div`
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  margin: 0px;
+  height: ${p => (!p.menu ? '1px' : '2px')};
+  background-color: ${p => p.theme.colors.lightBlue};
+  width: 80%;
+  margin-left: 15px;
 `;
 
 export default function ChapterNav(props) {
@@ -45,7 +60,7 @@ export default function ChapterNav(props) {
 
   return (
     <Nav>
-      <StyledUL>
+      <StyledList>
         <Mapper
           mapData={data}
           render={
@@ -62,26 +77,21 @@ export default function ChapterNav(props) {
               return (
                 <ListItem key={idx}>
                   <StyledLink to={`/chapter/${normalizedTitle}`}>
-                    <div
-                      style={{
-                        paddingTop: '8px',
-                        paddingBottom: '8px'
-                      }}>
+                    <SelectorContainer>
                       <Selector
                         image={dot}
                         item={itemIsActive}
                         num={idx}
-                        s="1.3"
-                        c="lightBlack"
                       />
-                    </div>
+                    </SelectorContainer>
                   </StyledLink>
                 </ListItem>
               );
             }
           }
         />
-      </StyledUL>
+      </StyledList>
+      <Line />
     </Nav>
   );
 }

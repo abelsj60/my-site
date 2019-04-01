@@ -6,10 +6,9 @@ import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
   min-height: 34px;
-  width: 60px;
-  // margin-left: ${p => p.noOffset !== 'active' ? '2px' : '2px'};
+  width: 52px;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
   }
 `;
@@ -19,22 +18,26 @@ const RestyledLink = styled(StyledLink)`
   margin-right: auto;
   margin-bottom: 13px;
   position: relative;
-  padding-bottom: 5px;
+  padding-bottom: 3px;
   justify-content: space-between;
 `;
 const Label = styled.p`
-  font-size: 1.2rem;
-  color: #6e7dab;
-  // transition: color 1s;
+  font-size: ${p => p.theme.fontSizes.two};
+  color: ${p => p.theme.colors.blue};
   margin: 0px;
   cursor: pointer;
   margin-top: -2px;
+  font-weight: 400;
+`;
+const IconContainer = styled.div`
+  margin-top: 2px; 
+  margin-bottom: 5px; 
+  display: flex; 
+  align-items: center;
 `;
 const Icon = styled.div`
-  height: 4px;
-  width: 8px;
-  align-self: center;
-  fill: #6e7dab;
+  height: 3px;
+  width: 7px;
   background: ${p => `url(${p.image})`} no-repeat;
   background-size: contain;
 `;
@@ -45,16 +48,7 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => (!p.menu && !p.reverie
-    ? '#e6f1ff'
-    : '#f1f3f7')};
-
-  // https://css-tricks.com/annoying-mobile-double-tap-link-issue/
-  // @media (hover) {
-  //   ${Container}:hover & {
-  //     height: 2px;
-  //   }
-  // }
+  background-color: ${p => p.theme.colors.lightBlue};
 `;
 
 export default function MenuButton(props) {
@@ -78,11 +72,28 @@ export default function MenuButton(props) {
   const text = isMenu ? 'Close' : 'Menu';
 
   return (
-    <Container offset={offsetIsActive} menu={menuIsActive}>
-      <RestyledLink to={link}>
-        <Label menu={isMenu} reverie={isReverie}>{text}</Label>
-        <Icon image={arrowIcon} />
-        <Line menu={isMenu} reverie={isReverie} />
+    <Container
+      offset={offsetIsActive}
+      menu={menuIsActive}
+    >
+      <RestyledLink
+        to={link}
+      >
+        <Label
+          menu={isMenu}
+          reverie={isReverie}
+        >
+          {text}
+        </Label>
+        <IconContainer>
+          <Icon
+            image={arrowIcon}
+          />
+        </IconContainer>
+        <Line
+          menu={isMenu}
+          reverie={isReverie}
+        />
       </RestyledLink>
     </Container>
   );

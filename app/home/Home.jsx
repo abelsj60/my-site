@@ -1,10 +1,7 @@
-import Graf from '../primitives/Graf.jsx';
-import Hed from '../primitives/Hed.jsx';
 import Main from '../primitives/Main.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Fragment } from 'react';
-import styled from 'styled-components';
-
+import styled, { keyframes } from 'styled-components';
 import bio from '../data/about/home-page-about.md';
 import shortBio from '../data/about/home-page-about-short.md';
 import ReactHtmlParser from 'react-html-parser';
@@ -14,9 +11,8 @@ const RestyledMain = styled(Main)`
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  background-color: transparent;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     flex-direction: column;
   }
 `;
@@ -26,100 +22,49 @@ const NameTag = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 2;
-  // margin-top: 10px;
   cursor: pointer;
-  // font-family: 'Aref Ruqaa', serif;
-
-  @media (min-width: 390px) {
-    // margin-top: 20px;
-  }
 `;
-const RestyledHed = styled(Hed)`
-  // font-family: inherit;
+const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
-  font-weight: 700;
+  font-size: 4.5rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-`;
-const RestyledGraf = styled(Graf)`
-  // font-family: inherit;
-  font-family: 'Aref Ruqaa', serif;
+  color: ${p => p.theme.colors.yellow};
   font-weight: 700;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.seventeen};
+  }
+`;
+const Motto = styled.p`
+  font-family: 'Aref Ruqaa', serif;
   margin-left: 18px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-`;
-const PictureBox = styled.div`
-  position: fixed;
-  top: 0px;
-  left: -.5px;
-  height: 101%;
-  width: 101%;
-  overflow: hidden;
-  z-index: -1;
-`;
-const Portal = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.15);
-  z-index: 1;
-`;
-const BoyInForeground = styled.img`
-  position: absolute;
-  // object-fit: cover;
-  // height: 100vh;
-  // min-width: 100vw;
-  z-index: 1;
-  pointer-events: none;
+  font-size: ${p => p.theme.fontSizes.five};
+  margin-top: 70px;
+  color: ${p => p.theme.colors.yellow};
+  font-weight: 700;
 
-  // https://stackoverflow.com/a/28439444
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-image: url(${p => p.srcImage});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-`;
-const FantasyAsBackground = styled(BoyInForeground)`
-  // position: unset;
-  // left: 0px;
-  opacity: ${p => (p.inCity ? '0' : '1')};
-  transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
-  transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
-  z-index: 0;
 
-  // display: block;
-  // width: 100%;
-  // height: 100%;
-
-  // background-image: url(${p => p.srcImage});
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // background-position: center;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.fourteen};
+    margin-top: 100px;
+    margin-left: 20px;
+  }
 `;
-const CityAsBackground = styled(FantasyAsBackground)`
-  // position: absolute;
-  opacity: ${p => (p.inCity ? '1' : '0')};
-  transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
-`;
-const BioContainer = styled.div`
+const BioBox = styled.div`
   width: 80%;
-  margin-top: 25px;
+  margin-top: 30px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
+  z-index: 2;
 
-  @media (min-width: 390px) {
-    margin-top: 40px;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    margin-top: 50px;
     width: 360px;
   }
-
-  // @media (min-width: 848px) {
-  //   width: 45%;
-  // }
 `;
 const Text = styled.section`
   overflow: auto;
@@ -127,14 +72,11 @@ const Text = styled.section`
   p {
     font-family: 'Aref Ruqaa', serif;
     font-weight: 700;
-    margin-top: 0px;
-    // margin-left: 2px;
     margin-bottom: 10px;
-    font-size: 1.2rem;
-    color: #ffe74c;
+    font-size: ${p => p.theme.fontSizes.three};
+    color: ${p => p.theme.colors.yellow};
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
     text-align: center;
-    // font-weight: 600; // Use if not Aref Ruqaa!
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -142,29 +84,89 @@ const Text = styled.section`
       margin-bottom: 0px;
     }
 
-    @media (min-width: 390px) {
-      // font-size: 1.4rem;
-      font-size: 1.6rem;
-    }
-    
+    @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+      font-size: ${p => p.theme.fontSizes.twelve};
+    } 
   }
 `;
-const Ball = styled.div`
-  position: absolute;
-  top: 185px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  box-shadow:
-      inset 0 0 50px #fff,      /* inner white */
-      inset 20px 0 80px #f0f,   /* inner left magenta short */
-      inset -20px 0 80px #0ff,  /* inner right cyan short */
-      inset 20px 0 300px #f0f,  /* inner left magenta broad */
-      inset -20px 0 300px #0ff, /* inner right cyan broad */
-      0 0 50px #fff,            /* outer white */
-      -10px 0 80px #f0f,        /* outer left magenta */
-      10px 0 80px #0ff;         /* outer right cyan */
+const PictureBox = styled.div`
+  position: fixed;
+  top: 0px;
+  left: -1px;
+  height: 101%;
+  width: 101%;
+  overflow: hidden;
+  z-index: 1;
 `;
+const BoyInForeground = styled.img`
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+
+  // https://stackoverflow.com/a/28439444
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // Use if img is an <img>
+
+  // Use if img is a background-image in CSS
+  // background-image: url(${p => p.srcImage});
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center;
+`;
+const Portal = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 1;
+`;
+const FantasyAsBackground = styled(BoyInForeground)`
+  opacity: ${p => (p.inCity ? '0' : '1')};
+  transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
+  transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 0;
+`;
+const CityAsBackground = styled(FantasyAsBackground)`
+  opacity: ${p => (p.inCity ? '1' : '0')};
+  transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
+`;
+
+// const PulseKeyframes = keyframes`
+//   0% {
+//     background-color: rgba(0,0,0,.1);
+//     box-shadow: 0 0 0 0 rgba(255,231,76, 0.2);
+//   }
+//   50% {
+//     background-color: rgba(0,0,0,0);
+//     box-shadow: 0 0 0 15px rgba(0,0,0, 0);
+//   }
+//   100% {
+//     background-color: rgba(0,0,0,0);
+//     box-shadow: 0 0 0 0 rgba(255,231,76, 0);
+//   }
+// `;
+// const Ball = styled.div`
+//   position: absolute;
+//   width: 5px;
+//   height: 5px;
+//   border-radius: 50%;
+//   margin-top: 227px;
+//   margin-left: 125px;
+//   // Easing function reference: https://easings.net/en
+//   animation: ${PulseKeyframes} 2.5s ease-out -10s infinite;
+//   padding: 7px;
+//   z-index: 3;
+
+//   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+//     width: 5px;
+//     height: 5px;
+//     margin-top: 368px;
+//     margin-left: 175px;
+//     padding: 10px;
+//   }
+// `;
 
 export default function Home(props) {
   const {
@@ -203,31 +205,22 @@ export default function Home(props) {
                 data-pointer-events={true}
                 tempContentIsOn={showBusinessCard || showLegalTerms}
               >
-                <RestyledHed
+                <Hed
                   normal
-                  c="yellow"
                   data-depth=".3"
                   data-friction-x=".7"
                   data-friction-y=".7"
-                  s="4.5"
-                  rS="6.5"
                 >
                 James Abels
-                </RestyledHed>
-                <RestyledGraf
-                  c="yellow"
+                </Hed>
+                <Motto
                   data-depth=".2"
                   data-friction-x=".9"
                   data-friction-y=".9"
-                  s="1.298"
-                  t="65"
-                  rS="1.9"
-                  rT="95"
-                  rL="20"
                 >
                 Narrative coding and other adventures
-                </RestyledGraf>
-                {/*<Line
+                </Motto>
+                {/*<Ball
                   data-depth=".2"
                   data-friction-x=".7"
                   data-friction-y=".7"
@@ -239,7 +232,7 @@ export default function Home(props) {
         <Parallax
           render={
             renderProps => (
-              <BioContainer
+              <BioBox
                 ref={
                   el => {
                     renderProps.scene = el;
@@ -259,24 +252,25 @@ export default function Home(props) {
                     )
                   )}
                 </Text>
-              </BioContainer>
+              </BioBox>
             )
           }
         />
         <PictureBox>
-          <BoyInForeground alt="" src="" srcImage="/foreground.png" />
+          <BoyInForeground
+            alt=""
+            src="https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png"
+          />
           <Portal />
           <FantasyAsBackground
             alt=""
             inCity={inCity}
-            src=""
-            srcImage="/background-fantasy.png"
+            src="https://user-images.githubusercontent.com/30417590/55294130-33436780-53cc-11e9-93cc-f61572bca6ef.png"
           />
           <CityAsBackground
             alt=""
             inCity={inCity}
-            src=""
-            srcImage="/background-city.png"
+            src="https://user-images.githubusercontent.com/30417590/55294135-3c343900-53cc-11e9-8f9c-e66499ccd920.png"
           />
         </PictureBox>
       </RestyledMain>

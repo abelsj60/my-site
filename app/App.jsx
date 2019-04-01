@@ -21,25 +21,75 @@ import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
 
+const colors = {
+  black: 'black',
+  blue: '#6e7dab',
+  lightBlack: '#455057',
+  lightBlue: '#e6f1ff',
+  lightPink: '#fd5198',
+  mediumBlack: '#555F66',
+  pink: '#fd1172',
+  reverieBlue: '#d2e7ff',
+  white: 'white',
+  yellow: '#ffe74c'
+};
+const fontSizes = {
+  zero: '.9rem',
+  one: '1.1rem',
+  two: '1.15rem',
+  three: '1.2rem',
+  four: '1.25rem',
+  five: '1.298rem',
+  six: '1.3rem',
+  seven: '1.35rem',
+  eight: '1.4rem',
+  nine: '1.45rem',
+  ten: '1.5rem',
+  eleven: '1.55rem',
+  twelve: '1.6rem',
+  thirteen: '1.7rem',
+  fourteen: '1.9rem',
+  fifteen: '2rem',
+  sixteen: '3.1rem',
+  seventeen: '6.5rem'
+};
+const mediaQueries = {
+  tinyView: '390px',
+  narrowBreakOne: '500px',
+  narrowBreakTwo: '625px',
+  narrowBreakThree: '651px',
+  desktopView: '848px',
+  desktopWide: '1004px'
+};
+const grafSpace = {
+  regular: '15px'
+};
 const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
     // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
+
     font-family: 'Montserrat', sans-serif;
-    font-size: 65%; // 62.5%
+    font-size: 62.5%;
+    background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
   }
   
   body {
     margin: 0px;
     padding: 0px;
-    font-size: 1.5rem;
+    font-size: ${p => p.theme.fontSizes.twelve};
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+    max-width: 1508px;
+    margin: 0 auto;
 
     h1,
     h2,
     h3,
-    p {
+    p,
+    ul {
       margin: 0px;
     }
 
@@ -48,15 +98,9 @@ const GlobalStyle = createGlobalStyle`
       margin-left: 2px;
     }
 
-    h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-    }
-
     p {
-      font-family: 'Montserrat', sans-serif;
-      line-height: 1.5;
-      font-weight: 300;
+      margin-bottom: ${p => p.theme.grafSpace.regular};
+      line-height: 1.6;
     }
   }
 
@@ -64,12 +108,14 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     height: ${p => p.theme.pageHeight}px;
+    position: relative;
     
     @media(orientation:landscape) {
-      // Fix esoteric iOS 7 iPad bug
+      // Fix esoteric iOS 7 iPad bug:
       // https://stackoverflow.com/a/19449123
       // https://stackoverflow.com/q/19012135
       // https://krpano.com/ios/bugs/ios7-ipad-landscape/
+
       ${p => p.fixMobileSafariBugOn7 && 'position:fixed; bottom: 0;'};
     }
     
@@ -89,23 +135,26 @@ class App extends Component {
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
-    this.ref = React.createRef();
-    // this.zoomIndicator = React.createRef();
-
     this.state = {
-      currentCaller: location,
+      currentCaller: location !== 'i'
+        ? location
+        : 'home',
       lastCaller: location !== 'reverie'
         ? location
         : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
-      height: window.innerHeight || document.documentElement.clientHeight,
+      height: window.innerHeight
+        || document.documentElement.clientHeight,
       showBusinessCard: false,
       showLegalTerms: false,
-      showStoryText: true
+      showStoryText: true //,
+      // imagesReady: false
     };
 
+    this.loadImages = this.loadImages.bind(this);
     this.updateHeight = this.updateHeight.bind(this);
+
   }
 
   render() {
@@ -113,33 +162,26 @@ class App extends Component {
     const hcForApp = new ClickHandling('app', this);
     const boundHandleClickForApp = hcForApp.boundHandleClick;
     const homeIsActive = location.type === 'home';
+    const reverieIsActive = location.type === 'reverie';
     const fixMobileSafariBugOn7 = isTablet
       && isMobileSafari
       && osVersion[0] === '7';
 
-    // console.log('zI window:', this.zoomIndicator.current && this.zoomIndicator.current.getBoundingClientRect());
-    // console.log('zI height:', this.zoomIndicator.current && this.zoomIndicator.current.offsetHeight);
-
     return (
       <ThemeProvider
         theme={{
+          grafSpace,
+          colors,
+          fontSizes,
+          mediaQueries,
           pageHeight: this.state.height.toString()
         }}
       >
         <Fragment>
           <GlobalStyle
             home={homeIsActive}
+            reverie={reverieIsActive}
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
-          />
-          <div style={{
-            position: 'absolute',
-            top: '0px',
-            left: '0px',
-            visibility: 'hidden',
-            height: '5px',
-            width: '5px'
-          }}
-          // ref={ref => this.zoomIndicator.current = ref}
           />
           <Header
             {...this.props}
@@ -182,6 +224,36 @@ class App extends Component {
     return false;
   }
 
+  loadImages() {
+    const imageList = [
+      'https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png',
+      'https://user-images.githubusercontent.com/30417590/55294130-33436780-53cc-11e9-93cc-f61572bca6ef.png',
+      'https://user-images.githubusercontent.com/30417590/55294135-3c343900-53cc-11e9-8f9c-e66499ccd920.png',
+      'https://user-images.githubusercontent.com/30417590/55294138-43f3dd80-53cc-11e9-96c2-3c7f2977c24a.jpg'
+    ];
+    // let imagesLoaded = 0;
+    // const whenLoaded = () => {
+    //   imagesLoaded++;
+
+    //   if (imagesLoaded === imageList.length - 1) {
+    //     this.setState({ imagesReady: true });
+    //   }
+    // };
+
+    imageList.forEach(
+      (_image, index) => {
+        const img = new Image();
+        img.src = imageList[index];
+
+        // if (img.complete) {
+        //   whenLoaded();
+        // } else {
+        //   img.onload = () => whenLoaded();
+        // }
+      }
+    );
+  }
+
   componentDidMount() {
     if (!this.hasFlexbox()) {
       throw new Error("Browser doesn't support Flexbox");
@@ -190,6 +262,7 @@ class App extends Component {
     }
 
     window.addEventListener('resize', this.updateHeight);
+    this.loadImages();
   }
 
   componentWillUnmount() {
@@ -199,11 +272,8 @@ class App extends Component {
 
   updateHeight() {
     if (
-      (
-        (this.state.height !== window.innerHeight)
+      (this.state.height !== window.innerHeight)
         || (this.state.height !== document.documentElement.clientHeight)
-      )
-    // && this.zoomIndicator.current.getBoundingClientRect().left === 0
     ) {
       // ReactGA.event({
       //   category: 'Re-calculate height',
@@ -300,22 +370,22 @@ class App extends Component {
       }
 
       if (
-        // '/chapter', '/projects', etc:
+        // '/chapter', '/projects', etc.
         !location.isTopLevel
-        // lastCaller was not '/i'. The app will
-        // run two re-renders after a <Redirect />
-        // moves us from '/i' to the next page's
-        // URL (see next statement). As a result,
-        // we filter one of the re-renders out so
-        // we don't tally the page URL twice:
-        && !location.isCalledAfterReload
-        // current window URL is not '/i'.
-        // Restate route occurs on the '/i' url.
-        // The app doesn't move to the next page's
-        // URL until a <Redirect /> loads it. This
-        // check blocks '/i' from being tallied
-        // by GA:
-        && window.location.pathname !== '/i'
+          // lastCaller was not '/i'. The app will
+          // run two re-renders after a <Redirect />
+          // moves us from '/i' to the next page's
+          // URL (see next statement). As a result,
+          // we filter one of the re-renders out so
+          // we don't tally the page URL twice:
+          && !location.isCalledAfterReload
+          // current window URL is not '/i'.
+          // Restate route occurs on the '/i' url.
+          // The app doesn't move to the next page's
+          // URL until a <Redirect /> loads it. This
+          // check blocks '/i' from being tallied
+          // by GA:
+          && window.location.pathname !== '/i'
       ) {
         // ReactGA.pageview(window.location.pathname);
       }
@@ -325,21 +395,26 @@ class App extends Component {
 
 export default withRouter(App);
 
-// 2. Edit story
-// 3. Take pictures, write captions for Arrow, Slingshot, TMMnews
-// 4. Fix styled-components attribute use / clean up CSS
+// A. Edit story
+// B. Take pictures, write captions for Arrow, Slingshot, TMMnews
 
+// 2. Hosting:
+//  https://github.com/rafrex/spa-github-pages
+//  http://spa-github-pages.rafrex.com/
+// 3. Illustrator
+// 4. Analytics, a. find password/account, d. connect GA to acct.
+// 5. Add filter to GA: https://neilpatel.com/blog/protect-analytics-from-hacking/
+// https://neilpatel.com/blog/8-google-analytics-features/
+
+// ---
 // https://codersblock.com/blog/creating-glow-effects-with-css/
-// https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
-// https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
 
 // https://www.kirupa.com/animations/creating_pulsing_circle_animation.htm
 // ! https://css-tricks.com/almanac/properties/a/animation/
+// https://tilomitra.github.io/infinite/
+// https://github.com/tholman/cursor-effects
 
-// Illustrator
-// Analytics, a. find password/account, b. set up ngrok, d. connect GA to acct.
-
-// Hosting?
-// ! https://github.com/rafrex/spa-github-pages
-// ! http://spa-github-pages.rafrex.com/
-
+// When done:
+// 1. https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
+// 2. Image loading...how to handle delays?
+// https://www.photo-mark.com/notes/image-preloading/

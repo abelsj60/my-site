@@ -1,6 +1,4 @@
 import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
-import Graf from '../primitives/Graf.jsx';
-import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';
@@ -11,35 +9,48 @@ import ReactHtmlParser from 'react-html-parser';
 import Right from '../primitives/Right.jsx';
 import styled from 'styled-components';
 
-const ReverieText = styled.section`
-  p {
-    font-size: 1.5rem;
-  }
+const Dek = styled.h2`
+  font-size: ${p => p.theme.fontSizes.seven};
+  color: ${p => p.theme.colors.pink};
+  font-weight: 400;
 
-  img,
-  p {
-    margin-top: 0px;
-  }
-
-  ol,
-  p {
-    margin-bottom: 10px;
-  }
-
-  ol {
-    margin-top: 10px;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+      font-size: ${p => p.theme.fontSizes.nine};
   }
 `;
-const ArticleText = styled.section`
+const Hed = styled.h1`
+  font-size: ${p => p.theme.fontSizes.sixteen};
+`;
+const Text = styled.section`
   p {
-    font-size: 1.5rem;
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  img {
     margin-top: 0px;
-    margin-bottom: 15px;
+  }
+
+  ul,
+  ol {
+    margin-top: 0px;
+    margin-bottom: ${p => p.theme.grafSpace.regular};
+  }
+
+  li {
+    margin-bottom: 10px;
 
     &:last-child {
       margin-bottom: 0px;
     }
   }
+`;
+const BylineOrDate = styled.p`
+  font-size: ${p => p.theme.fontSizes.three};
+  font-style: italic;
+  margin-top: 14px;
+  margin-bottom: 14px;
 `;
 
 export default function ArticleOrReverie(props) {
@@ -71,37 +82,36 @@ export default function ArticleOrReverie(props) {
     reverieOrPublicationAsDek = publication;
   }
 
-  const ArticleOrReverieText = isReverie
-    ? ReverieText
-    : ArticleText;
-
   return (
     <Main reverie={isReverie}>
       <Left reverie={isReverie}>
-        <ArticleOrReverieNav {...props} data={data} />
+        <ArticleOrReverieNav
+          {...props}
+          data={data}
+        />
       </Left>
       <Right>
         <MenuButton {...props} />
         <Overflow ref={
           ref => overflowRef.current = ref
         }>
-          <Hed as="h2" c="pink" s="1.35" bS="1.4" b="2">
+          <Dek>
             {reverieOrPublicationAsDek}
-          </Hed>
-          <Hed s="3">
+          </Dek>
+          <Hed>
             {headline}
           </Hed>
-          <Graf italic b="14" s="1.2" t="14">
+          <BylineOrDate>
             {bylineOrDate}
-          </Graf>
-          <ArticleOrReverieText>
+          </BylineOrDate>
+          <Text>
             {ReactHtmlParser(
               marked(
                 article.body,
                 { smartypants: true }
               )
             )}
-          </ArticleOrReverieText>
+          </Text>
         </Overflow>
       </Right>
     </Main>

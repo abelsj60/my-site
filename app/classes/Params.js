@@ -73,10 +73,10 @@ export default class Params {
         const paramAsIndex = parseInt(param) - 1;
         paramIsValid =
           paramAsIndex >= 0
-          && paramAsIndex <
-            searchData[0].attributes[
-              paramName
-            ].length;
+            && paramAsIndex <
+              searchData[0].attributes[
+                paramName
+              ].length;
         break;
       default:
         paramIsValid = false;

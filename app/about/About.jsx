@@ -1,5 +1,4 @@
 import bio from '../data/about/about.md';
-import Hed from '../primitives/Hed.jsx';
 import Left from '../primitives/Left.jsx';
 import linkedInIcon from '../../public/linked-in-icon.png';
 import Right from '../primitives/Right.jsx';
@@ -19,9 +18,14 @@ const Heading = styled.div`
   margin-bottom: 15px;
   justify-content: space-between;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     margin-bottom: 10px;
   }
+`;
+const Hed = styled.h1`
+  margin-top: -8px;
+  font-size: ${p => p.theme.fontSizes.sixteen};
+  color: ${p => p.theme.colors.pink};
 `;
 const ExternalLink = styled.a`
   margin-top: 6px;
@@ -31,9 +35,7 @@ const Text = styled.section`
   overflow: auto;
 
   p {
-    margin-top: 0px;
     margin-bottom: 10px;
-    font-size: 1.6rem;
 
     &:last-child {
       margin-bottom: 0px;
@@ -49,7 +51,7 @@ const Icon = styled.div`
   background-size: contain;
 `;
 const RestyledExternalLink = styled(ExternalLink)`
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     align-self: center;
   }
 `;
@@ -61,7 +63,7 @@ export default function About() {
       <Right>
         <Overflow>
           <Heading>
-            <Hed c="pink" s="3" t="-8">
+            <Hed>
             About
             </Hed>
             <RestyledExternalLink

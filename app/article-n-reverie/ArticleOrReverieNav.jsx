@@ -1,4 +1,3 @@
-import Graf from '../primitives/Graf.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';
@@ -6,35 +5,36 @@ import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const StyledUL = styled(UnorderedList)`
-  // height: 100%;
+const RestyledList = styled(UnorderedList)`
   overflow: ${p => (!p.menu ? 'auto' : undefined) };
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;
-const GrafAsDek = styled(Graf)`
-  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
-  margin-bottom: ${p => (!p.menu ? '1px' : undefined)};
+const NavigationDek = styled.p`
+  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
+  margin-bottom: ${p => (!p.menu ? '4px' : '0px')};
+  font-size: ${p => p.theme.fontSizes.four};
+  font-style: italic;
 
   &:first-child {
     margin-top: 0px;
   }
 `;
-const GrafAsHed = styled(Graf)`
-  color: ${p => (p.menu && !p.link ? 'black' : '#6e7dab')};
-  font-size: ${p => (p.menu ? '2rem' : '1.55rem')};
+const NavigationHed = styled.p`
+  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
+  font-size: ${p => (p.menu ? p.theme.fontSizes.fifteen : p.theme.fontSizes.eleven)};
   margin-top: -2px;
+  margin-bottom: 15px;
+  font-weight: 400;
 
-  ${p =>
-    !p.menu
-    && css`
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 300px;
-      white-space: nowrap;
-    `};
+  ${p => !p.menu && css`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+    white-space: nowrap;
+  `};
 
-  @media (min-width: 500px) {
-    font-size: ${p => (p.menu && '3rem')}
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    font-size: ${p => (p.menu && p.theme.fontSizes.sixteen)};
   }
 `;
 
@@ -67,7 +67,7 @@ export default function ArticleOrReverieNav(props) {
   const normalizedCurrentHed = normalize(currentHed);
 
   return (
-    <StyledUL menu={isMenu}>
+    <RestyledList menu={isMenu}>
       <Mapper
         mapData={data}
         render={
@@ -100,30 +100,24 @@ export default function ArticleOrReverieNav(props) {
             return (
               <li key={idx}>
                 <StyledLink to={articleLink}>
-                  <GrafAsDek
-                    italic
+                  <NavigationDek
                     link={linkIsActive}
                     menu={isMenu}
-                    s="1.25"
                   >
                     {dateOrPublicationFromItem}
-                  </GrafAsDek>
-                  <GrafAsHed
-                    b="10"
+                  </NavigationDek>
+                  <NavigationHed
                     link={linkIsActive}
                     menu={isMenu}
-                    t="0"
                   >
                     {headline}
-                  </GrafAsHed>
+                  </NavigationHed>
                 </StyledLink>
               </li>
             );
           }
         }
       />
-    </StyledUL>
+    </RestyledList>
   );
 }
-
-//

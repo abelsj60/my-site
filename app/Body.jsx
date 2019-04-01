@@ -45,6 +45,8 @@ export default class Body extends Component {
     const eventHandling = new ClickHandling('body', this);
     const boundHandleClickForBody = eventHandling.boundHandleClick;
 
+    // Optional params in React:
+    // https://stackoverflow.com/a/35604855
     return (
       <Switch>
         <Route
@@ -83,8 +85,14 @@ export default class Body extends Component {
             () => <ReloadRoute {...this.props} bodyState={this.state} />
           }
         />
-        <Route exact path="/about" component={About} />
-        <Route component={NotFound} />
+        <Route
+          exact
+          path="/about"
+          component={About}
+        />
+        <Route
+          component={NotFound}
+        />
       </Switch>
     );
   }

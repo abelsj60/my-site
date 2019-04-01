@@ -1,19 +1,19 @@
 import Button from '../shared/Button.jsx';
-import Graf from '../primitives/Graf.jsx';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
-  background-color: ${p => (p.home ? 'transparent' : p.reverie ? '#d2e7ff' : 'white')};
+  background-color: ${p => (p.home ? 'transparent' : p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white)};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
   align-items: center;
   height: 55px;
-  font-size: 1.1rem;
+  font-size: ${p => p.theme.fontSizes.one};
+  position: relative;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     justify-content: flex-end;
   }
 `;
@@ -21,25 +21,27 @@ const Line = styled.div`
   display: ${p => p.home || p.hide ? 'none' : ''};
   position: absolute;
   z-index: 0;
-  // width: 100%;
   left: 25px;
   right: 25px;
-  top: ${p => parseInt(p.theme.pageHeight) - 55}px;
-  // left: 0px;
+  top: 0px;
   margin: 0px;
   height: 1px;
   transform: scaleY(0.5);
-  background-color: #fd5198;
+  background-color: ${p => p.theme.colors.lightPink};
+
+  @media(min-width: ${p => p.theme.mediaQueries.desktopView}) {
+    display: ${p => !p.showStoryText ? 'block' : ''};
+  }
 `;
 const StoryButton = styled(Button)`
-  color: ${p => (!p.active ? '#ffe74c' : '#6e7dab')};
+  color: ${p => (!p.active ? p.theme.colors.yellow : p.theme.colors.blue)};
   margin-left: 25px;
-  background-color: ${p => (!p.active ? '#fd1172' : undefined)};
-  border: ${p => `1px solid ${!p.active ? '#fd1172' : '#e4e7ef'}`};
+  background-color: ${p => (!p.active ? p.theme.colors.pink : undefined)};
+  border: ${p => `1px solid ${!p.active ? p.theme.colors.pink : p.theme.colors.pink}`};
   width: 43px;
   padding: 7px;
 
-  @media (min-width: 848px) {
+  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
     display: none;
   }
 
@@ -54,15 +56,16 @@ const StoryButton = styled(Button)`
     transform: scale(0.5);
   }
 `;
-const RestyledGraf = styled(Graf)`
+const Graf = styled.p`
   cursor: pointer;
   margin-right: 20px;
-  color: ${p => (p.active ? '#fd1172' : '#6e7dab')};
+  margin-bottom: 0px;
+  color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.blue)};
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
   font-weight: 400;
-  // font-style: italic;
+  font-size: ${p => p.theme.fontSizes.one};
 `;
 const TextBox = styled.div`
   display: flex;
@@ -89,7 +92,7 @@ export default function FooterContainer(props) {
   // Remember: home is '/', not '/home'
   const whereItStarted =
     lastCaller !== 'home'
-    && lastCaller !== 'i'
+      && lastCaller !== 'i'
       ? `/${lastCaller}`
       : '/';
   const linkForReverie = isReverie
@@ -109,6 +112,7 @@ export default function FooterContainer(props) {
             || showBusinessCard
             || showLegalTerms
         }
+        showStoryText={showStoryText}
       />
       <StoryButton
         active={showStoryText}
@@ -129,16 +133,16 @@ export default function FooterContainer(props) {
 
           to={linkForReverie}
         >
-          <RestyledGraf
+          <Graf
             active={
               (isReverie && 'active')
-            || undefined
+                || undefined
             }
           >
             Reverie
-          </RestyledGraf>
+          </Graf>
         </StyledLink>
-        <RestyledGraf
+        <Graf
           active={showBusinessCard}
           onClick={
             () => {
@@ -147,15 +151,15 @@ export default function FooterContainer(props) {
           }
         >
           Contact
-        </RestyledGraf>
-        <RestyledGraf
+        </Graf>
+        <Graf
           active={showLegalTerms}
           onClick={
             () => boundHandleClickForApp('toggleLegalTerms')
           }
         >
           Legal
-        </RestyledGraf>
+        </Graf>
       </TextBox>
     </Container>
   );
