@@ -24,7 +24,6 @@ const Line = styled.div`
   left: 25px;
   right: 25px;
   top: 0px;
-  // top: ${p => parseInt(p.theme.pageHeight) - 55}px;
   margin: 0px;
   height: 1px;
   transform: scaleY(0.5);
