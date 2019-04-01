@@ -1,7 +1,7 @@
 import Main from '../primitives/Main.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Fragment } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled /*, { keyframes }*/ from 'styled-components';
 import bio from '../data/about/home-page-about.md';
 import shortBio from '../data/about/home-page-about-short.md';
 import ReactHtmlParser from 'react-html-parser';
