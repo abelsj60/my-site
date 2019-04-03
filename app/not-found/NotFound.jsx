@@ -20,7 +20,8 @@ const FailWhale = styled.section`
   background-color: cornflowerblue;
 `;
 
-export default function NotFound() {
+export default function NotFound(props) {
+  console.log('Not Found: ', props);
   return (
     <Main>
       <RestyledRight>
