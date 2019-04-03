@@ -11,11 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/bundle.js', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../bundle.js'));
+  console.log('d:', __dirname);
+  res.sendFile(path.join(__dirname, '../build/bundle.js'));
 });
 
 app.get('/bundle.js.map', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../bundle.js.map'));
+  res.sendFile(path.join(__dirname, '../build/bundle.js.map'));
 });
 
 app.get('*', (_req, res) => {
