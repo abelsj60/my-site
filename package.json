@@ -2,9 +2,12 @@
   "name": "my-site",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://abelsj60.github.io/my-site",
   "description": "Personal site",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server/index.js",
     "start:dev": "webpack --mode development -w & nodemon ./server/index.js"
