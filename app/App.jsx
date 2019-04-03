@@ -154,7 +154,6 @@ class App extends Component {
 
     this.loadImages = this.loadImages.bind(this);
     this.updateHeight = this.updateHeight.bind(this);
-
   }
 
   render() {
@@ -394,27 +393,3 @@ class App extends Component {
 }
 
 export default withRouter(App);
-
-// A. Edit story
-// B. Take pictures, write captions for Arrow, Slingshot, TMMnews
-
-// 2. Hosting:
-//  https://github.com/rafrex/spa-github-pages
-//  http://spa-github-pages.rafrex.com/
-// 3. Illustrator
-// 4. Analytics, a. find password/account, d. connect GA to acct.
-// 5. Add filter to GA: https://neilpatel.com/blog/protect-analytics-from-hacking/
-// https://neilpatel.com/blog/8-google-analytics-features/
-
-// ---
-// https://codersblock.com/blog/creating-glow-effects-with-css/
-
-// https://www.kirupa.com/animations/creating_pulsing_circle_animation.htm
-// ! https://css-tricks.com/almanac/properties/a/animation/
-// https://tilomitra.github.io/infinite/
-// https://github.com/tholman/cursor-effects
-
-// When done:
-// 1. https://jeremenichelli.io/2018/07/font-loading-strategy-single-page-applications/
-// 2. Image loading...how to handle delays?
-// https://www.photo-mark.com/notes/image-preloading/
