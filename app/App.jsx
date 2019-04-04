@@ -172,8 +172,8 @@ class App extends Component {
     console.log('Updated version');
     if (location.type === 'my-site') {
       // const referrer = new Referrer(this.props);
-      // const newPath = referrer.path.slice(7);
-      // console.log('GO!', newPath);
+      // const newPath = referrer.path.slice(8);
+      // console.log('GO!', referrer.path.slice(8));
       return <Redirect to={'/'} />;
     }
 

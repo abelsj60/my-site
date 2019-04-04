@@ -264,8 +264,8 @@ var App = function (_Component) {
       console.log('Updated version');
       if (location.type === 'my-site') {
         // const referrer = new Referrer(this.props);
-        // const newPath = referrer.path.slice(7);
-        // console.log('GO!', newPath);
+        // const newPath = referrer.path.slice(8);
+        // console.log('GO!', referrer.path.slice(8));
         return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
       }
 
