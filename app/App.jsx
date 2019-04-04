@@ -171,7 +171,7 @@ class App extends Component {
 
     console.log('Updated version');
     if (location.type === 'my-site') {
-      console.log('GO!');
+      console.log('GO!', location.type.split('/'));
       return <Redirect to={'/'} />;
     }
 
