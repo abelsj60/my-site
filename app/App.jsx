@@ -174,7 +174,7 @@ class App extends Component {
       const referrer = new Referrer(this.props);
       const newPath = referrer.path.slice(8);
       console.log('GO!', newPath);
-      return <Redirect to={'/'} />;
+      return <Redirect to={newPath} />;
     }
 
     return (
