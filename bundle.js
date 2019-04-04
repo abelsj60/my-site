@@ -259,6 +259,7 @@ var App = function (_Component) {
       var reverieIsActive = location.type === 'reverie';
       var fixMobileSafariBugOn7 = _reactDeviceDetect.isTablet && _reactDeviceDetect.isMobileSafari && _reactDeviceDetect.osVersion[0] === '7';
 
+      console.log('Updated version');
       if (location.type === 'my-site') {
         console.log('GO!');
         return _react2.default.createElement(Redirect, { to: '/' });

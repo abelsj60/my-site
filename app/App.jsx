@@ -168,6 +168,7 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
+    console.log('Updated version');
     if (location.type === 'my-site') {
       console.log('GO!');
       return <Redirect to={'/'} />;
