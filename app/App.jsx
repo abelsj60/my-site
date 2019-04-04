@@ -166,6 +166,8 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
+    console.log('gh-pages location 1:', location);
+
     return (
       <ThemeProvider
         theme={{
