@@ -17,6 +17,7 @@ import {
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';

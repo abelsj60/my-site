@@ -138,6 +138,8 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 var _Referrer = __webpack_require__(/*! ./classes/Referrer.js */ "./app/classes/Referrer.js");
 
 var _Referrer2 = _interopRequireDefault(_Referrer);
@@ -262,7 +264,7 @@ var App = function (_Component) {
       console.log('Updated version');
       if (location.type === 'my-site') {
         console.log('GO!');
-        return _react2.default.createElement(Redirect, { to: '/' });
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
       }
 
       return _react2.default.createElement(
