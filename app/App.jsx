@@ -168,6 +168,11 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
+    if (location.type === 'my-site') {
+      console.log('GO!');
+      return <Redirect to={'/'} />;
+    }
+
     return (
       <ThemeProvider
         theme={{
