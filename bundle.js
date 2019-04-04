@@ -230,6 +230,8 @@ var App = function (_Component) {
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
+    console.log('gh-pages location 1:', referrer);
+
     _this.state = {
       currentCaller: location !== 'i' ? location : 'home',
       lastCaller: location !== 'reverie' ? location : 'home',
@@ -256,8 +258,6 @@ var App = function (_Component) {
       var homeIsActive = location.type === 'home';
       var reverieIsActive = location.type === 'reverie';
       var fixMobileSafariBugOn7 = _reactDeviceDetect.isTablet && _reactDeviceDetect.isMobileSafari && _reactDeviceDetect.osVersion[0] === '7';
-
-      console.log('gh-pages location 1:', location);
 
       return _react2.default.createElement(
         _styledComponents.ThemeProvider,

@@ -135,6 +135,8 @@ class App extends Component {
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
+    console.log('gh-pages location 1:', referrer);
+
     this.state = {
       currentCaller: location !== 'i'
         ? location
@@ -165,8 +167,6 @@ class App extends Component {
     const fixMobileSafariBugOn7 = isTablet
       && isMobileSafari
       && osVersion[0] === '7';
-
-    console.log('gh-pages location 1:', location);
 
     return (
       <ThemeProvider
