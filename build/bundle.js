@@ -230,7 +230,7 @@ var App = function (_Component) {
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
-    console.log('gh-pages location 1:', referrer);
+    console.log('gh-pages initial referrer:', referrer);
 
     _this.state = {
       currentCaller: location !== 'i' ? location : 'home',
