@@ -37,6 +37,7 @@
         console.log('window.location.href:', window.location.href + 'build/bundle.js');
         console.log('window.location.pathname:', window.location.pathname);
         if (l.search) {
+          console.log('enger');
           var q = {};
           l.search.slice(1).split('&').forEach(function(v) {
             var a = v.split('=');
@@ -53,6 +54,7 @@
             );
           }
         }
+        console.log('exit');
       }(window.location))
     </script>
     <!-- End Single Page Apps for GitHub Pages -->
