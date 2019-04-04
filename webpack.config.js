@@ -1,3 +1,5 @@
+const Visualizer = require('webpack-visualizer-plugin');
+
 module.exports = {
   entry: [
     '@babel/polyfill',
@@ -49,5 +51,8 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new Visualizer()
+  ]
 };
