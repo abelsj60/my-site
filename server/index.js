@@ -7,23 +7,15 @@ const PORT = 3300;
 
 app.use(volleyball);
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../build')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/bundle.js', (_req, res) => {
-  console.log('d:', __dirname);
-  res.sendFile(path.join(__dirname, '../build/bundle.js'));
-});
-
-app.get('/bundle.js.map', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../build/bundle.js.map'));
-});
 
 app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.use((err, _req, res) => {
+app.use((err, req, res, next) => {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');
