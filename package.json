@@ -2,7 +2,7 @@
   "name": "my-site",
   "version": "0.75.0",
   "private": true,
-  "homepage": "https://abelsj60.github.io/my-site",
+  "homepage": "./",
   "description": "Personal site",
   "main": "index.js",
   "scripts": {
