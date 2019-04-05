@@ -1,6 +1,8 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const Visualizer = require('webpack-visualizer-plugin');
+
 module.exports = {
   entry: [
-    '@babel/polyfill',
     './app/index.js'
   ], // assumes your entry point is the index.js in the root of your project folder
   output: {
@@ -20,17 +22,15 @@ module.exports = {
             require('babel-plugin-transform-object-rest-spread')
           ],
           presets: [
-            'react',
-            'env'
-          ] // if you aren't using 'babel-preset-env', then omit the 'env'
+            '@babel/preset-react',
+            [
+              '@babel/preset-env', {
+                'modules': false,
+                'useBuiltIns': 'usage'
+              }
+            ]
+          ]
         }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
       },
       {
         test: /\.(png|jp(e*)g)$/,
@@ -49,5 +49,18 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          sourceMap: true, // enable source maps to map errors (stack traces) to modules
+          output: {
+            comments: false, // remove all comments
+          }
+        }
+      })
+    ]
+  },
+  plugins: [new Visualizer()]
 };

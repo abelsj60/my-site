@@ -1,4 +1,4 @@
-module.exports = (() => {
+export default (() => {
   const context = require.context('./', true, /\.md$/);
   const keys = context.keys();
 
