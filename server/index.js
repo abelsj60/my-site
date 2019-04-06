@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = 3300;
 
-// 1. gh-pages — index.html script, must point at /build/main.[hash].js b/c I don't control web server.
-// -Can add a /public folder to github pages if I want, as long as I add the path segment to the link urls 
+// 1. gh-pages — index.html script, must point at build/main.[hash].js (rel, no slash) b/c I don't control web server.
+// -Can add a public (rel, no slash) folder to github pages if I want, as long as I add the path segment to the link urls 
 // 2. localhost — index.html script, must point at /main.[hash].js b/c I do control it
 
 app.use(volleyball);
