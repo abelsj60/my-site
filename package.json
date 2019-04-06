@@ -16,7 +16,7 @@
     "start:nopack": "nodemon ./server/index.js"
   },
   "author": "James Abels",
-  "license": "SEE LICENSE IN license.txt",
+  "license": "SEE LICENSE",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "body-parser": "^1.18.3",

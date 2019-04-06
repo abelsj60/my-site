@@ -1,31 +1,33 @@
+const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 
 module.exports = {
   entry: [
     './app/index.js'
-  ], // assumes your entry point is the index.js in the root of your project folder
+  ],
   output: {
-    path: __dirname,
-    filename: './build/bundle.js' // assumes your bundle.js will also be in the root of your project folder
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].[contenthash].js'
   },
   devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           plugins: [
-            'babel-plugin-styled-components',
-            require('babel-plugin-transform-object-rest-spread')
+            'babel-plugin-styled-components' //,
+            // require('babel-plugin-transform-object-rest-spread')
           ],
           presets: [
             '@babel/preset-react',
             [
               '@babel/preset-env', {
-                'modules': false,
+                'modules': 'false',
+                'corejs': '2',
                 'useBuiltIns': 'usage'
               }
             ]
@@ -60,7 +62,10 @@ module.exports = {
           }
         }
       })
-    ]
+    ],
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: [new Visualizer()]
 };
