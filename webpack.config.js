@@ -63,10 +63,10 @@ module.exports = {
           }
         }
       })
-    ] //,
-    // splitChunks: {
-    //   chunks: 'all',
-    // }
+    ],
+    splitChunks: {
+      chunks: 'all',
+    }
   },
   plugins: [new Visualizer()]
 };
