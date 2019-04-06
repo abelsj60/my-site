@@ -5,9 +5,14 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = 3300;
 
-// 1. gh-pages — index.html script, must point at build/main.[hash].js (rel, no slash) b/c I don't control web server.
-// -Can add a public (rel, no slash) folder to github pages if I want, as long as I add the path segment to the link urls 
-// 2. localhost — index.html script, must point at /main.[hash].js b/c I do control it
+// 1. gh-pages — index.html <script src='build/main.[hash].js />
+// a. I can't set the static folder, so no absolute path
+// b. Must add build folder to path if not at root
+// c. Could add a public (rel, no slash) folder <link src='public/main...' />
+// 2. localhost — index.html <script src='/main.[hash].js' />
+// a. I can set the static folder, so need an absolute path
+// b. Don't use a /build folder in path b/c it's included in express.static
+// c. Same with /public items
 
 app.use(volleyball);
 app.use(express.static(path.join(__dirname, '../public')));
