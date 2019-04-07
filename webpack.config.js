@@ -144,7 +144,13 @@ module.exports = {
             version: '4.1.3',
             url: `https://unpkg.com/styled-components@${version}/dist/styled-components.min.js`,
             name: 'styled-components'
-          } //,
+          },
+          'marked': {
+            var: 'marked',
+            version: '0.5.1',
+            url: `https://unpkg.com/marked@${version}/marked.min.js`,
+            name: 'marked'
+          }
           // 'react-clipboard.js': {
           //   var: 'Clipboard',
           //   version: '2.0.6',
