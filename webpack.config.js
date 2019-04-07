@@ -4,6 +4,7 @@ const Visualizer = require('webpack-visualizer-plugin');
 const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 // const startupScript = require('./startup-script.js');
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
@@ -111,6 +112,15 @@ module.exports = {
       // inline: 'startup',
       // async: /\.js$/,
       defer: /\.js$/
-    })
+    }),
+    new DynamicCdnWebpackPlugin()
   ]
 };
+
+// if (modulePath === 'lodash') {
+//   return {
+//     name: 'lodash',
+//     url: 'https://unpkg.com/lodash@' + version + '/lodash.min.js',
+//     version: version, var: '_'
+//   };
+// }
