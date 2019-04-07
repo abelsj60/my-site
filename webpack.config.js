@@ -15,8 +15,8 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './app/index.js',
-    startup: './startup-script.js'
+    main: './app/index.js' //,
+    // startup: './startup-script.js'
   },
   // entry: [
   //   './app/index.js'
