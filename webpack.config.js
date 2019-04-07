@@ -150,6 +150,12 @@ module.exports = {
             version: '0.5.1',
             url: `https://unpkg.com/marked@${version}/marked.min.js`,
             name: 'marked'
+          },
+          'parallax-js': {
+            var: 'Parllax',
+            version: '3.1.0',
+            url: `https://unpkg.com/parallax-js@${version}/dist/parallax.min.js`,
+            name: 'parallax-js'
           }
           // 'react-clipboard.js': {
           //   var: 'Clipboard',
