@@ -156,6 +156,12 @@ module.exports = {
             version: '3.1.0',
             url: `https://unpkg.com/parallax-js@${version}/dist/parallax.min.js`,
             name: 'parallax-js'
+          },
+          'buffer': {
+            var: 'Buffer',
+            version: '4.9.1',
+            url: `https://unpkg.com/buffer@${version}/index.js`,
+            name: 'buffer'
           }
           // 'react-clipboard.js': {
           //   var: 'Clipboard',
