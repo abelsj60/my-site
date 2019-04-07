@@ -152,7 +152,7 @@ module.exports = {
             name: 'marked'
           },
           'parallax-js': {
-            var: 'Parllax',
+            var: 'Parallax',
             version: '3.1.0',
             url: `https://unpkg.com/parallax-js@${version}/dist/parallax.min.js`,
             name: 'parallax-js'
