@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link 
+      rel="stylesheet" 
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Aref+Ruqaa:400,700|Montserrat:light,300,400|Playfair+Display:black"
+    >
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no" />
+    <title>Abels | Narrative coding</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="author" description="James Abels">
+    <meta name="description" content="James Abels is a Web developer. Previously a lawyer, start-up founder, and reporter for Forbes.com, Mergermarket, and other publications, Abels now writes code for consumer technology projects.">
+    <meta name="robot" content="noimageindex">
+    <meta name="robots" content="noindex">
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafrex/spa-github-pages
+      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+      // ----------------------------------------------------------------------
+      // This script checks to see if a redirect is present in the query string
+      // and converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function(l) {
+        console.log('window.location.href:', window.location.href);
+        console.log('window.location.pathname:', window.location.pathname);
+        if (l.search) {
+          console.log('enter');
+          var q = {};
+          l.search.slice(1).split('&').forEach(function(v) {
+            var a = v.split('=');
+            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+          });
+          if (q.p !== undefined) {
+            const newUrl = l.pathname.slice(0, -1) + (q.p || '') +
+              (q.q ? ('?' + q.q) : '') +
+              l.hash;
+            console.log('oldUrl:', l.pathname);
+            console.log('newUrl:', newUrl);
+            window.history.replaceState(null, null,
+              newUrl
+            );
+          }
+        }
+        console.log('exit');
+      }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>This site requires JavaScript.</noscript>
+    <script type="text/javascript" src="https://unpkg.com/react@16.5.1/umd/react.production.min.js" defer></script>
+    <script type="text/javascript" src="https://unpkg.com/react-router-dom@4.3.1/umd/react-router-dom.min.js" defer></script>
+    <script type="text/javascript" src="https://unpkg.com/react-dom@16.5.1/umd/react-dom.production.min.js" defer></script>
+    <script type="text/javascript" src="https://unpkg.com/core-js@2.5.3/client/core.min.js" defer></script>
+    <script type="text/javascript" src="build/npm.react-html-parser.4b1b376ec9225dccbae8.js" defer></script>
+    <script type="text/javascript" src="build/npm.htmlparser2.427b67b1c1fc19a54c18.js" defer></script>
+    <script type="text/javascript" src="build/npm.react-router.e794f63a8a036b72ccb0.js" defer></script>
+    <script type="text/javascript" src="build/npm.entities.348145b2ef915d0dff77.js" defer></script>
+    <script type="text/javascript" src="build/npm.history.48f908925c64c2beaae0.js" defer></script>
+    <script type="text/javascript" src="build/npm.domutils.a349a91894066a8c94c5.js" defer></script>
+    <script type="text/javascript" src="build/npm.emotion.8b0d8dfcbcfce7649e0c.js" defer></script>
+    <script type="text/javascript" src="build/npm.domhandler.b4e86fbfa036c5600554.js" defer></script>
+    <script type="text/javascript" src="build/npm.prop-types.2c72c3525df0bdf9d265.js" defer></script>
+    <script type="text/javascript" src="build/npm.dom-serializer.3153891cbc4de3a3851a.js" defer></script>
+    <script type="text/javascript" src="build/npm.fbjs.e57f59dac03e8c8dafdf.js" defer></script>
+    <script type="text/javascript" src="build/npm.react-is.329867a316fc39bc78b8.js" defer></script>
+    <script type="text/javascript" src="build/npm.webpack.8f9c72f0e2ce1d4ef1cc.js" defer></script>
+    <script type="text/javascript" src="build/npm.base64-js.d96378f17b1a661b91a5.js" defer></script>
+    <script type="text/javascript" src="build/npm.buffer.2c306117d18a3b3d7ab8.js" defer></script>
+    <script type="text/javascript" src="build/npm.clipboard.46049297708ef43fe7a4.js" defer></script>
+    <script type="text/javascript" src="build/npm.domelementtype.648fbd2dd15a53766344.js" defer></script>
+    <script type="text/javascript" src="build/npm.events.d22c3e1c03fedb49bdc1.js" defer></script>
+    <script type="text/javascript" src="build/npm.hoist-non-react-statics.4dafeff7758993622186.js" defer></script>
+    <script type="text/javascript" src="build/npm.ieee754.58fa588cbc96555776c7.js" defer></script>
+    <script type="text/javascript" src="build/npm.inherits.0cf893be952cbbe65311.js" defer></script>
+    <script type="text/javascript" src="build/npm.invariant.6eee51b590a8227a7d9f.js" defer></script>
+    <script type="text/javascript" src="build/npm.isarray.17d07729387e1a3f7de7.js" defer></script>
+    <script type="text/javascript" src="build/npm.marked.929a25ea31d4d9408f79.js" defer></script>
+    <script type="text/javascript" src="build/npm.memoize-one.f834102857ea556b0f6c.js" defer></script>
+    <script type="text/javascript" src="build/npm.parallax-js.e81f7bdd4b87a1f07911.js" defer></script>
+    <script type="text/javascript" src="build/npm.process.5d435af027838baf3b7d.js" defer></script>
+    <script type="text/javascript" src="build/npm.react-clipboard.js.982ea99d67590ffdd1fd.js" defer></script>
+    <script type="text/javascript" src="build/npm.react-device-detect.27dffda0e7f2e50d9139.js" defer></script>
+    <script type="text/javascript" src="build/npm.resolve-pathname.13d45b029e790b6bc551.js" defer></script>
+    <script type="text/javascript" src="build/npm.safe-buffer.4af3e83f474b3ee42453.js" defer></script>
+    <script type="text/javascript" src="build/npm.string_decoder.2f09bb5548a59df20851.js" defer></script>
+    <script type="text/javascript" src="build/npm.styled-components.739235fcad0af3d088d1.js" defer></script>
+    <script type="text/javascript" src="build/npm.stylis-rule-sheet.872f81c7f02a05ba79fd.js" defer></script>
+    <script type="text/javascript" src="build/npm.stylis.edb8a198c26314b2afed.js" defer></script>
+    <script type="text/javascript" src="build/npm.value-equal.72a75dc2811ac6d2df0c.js" defer></script>
+    <script type="text/javascript" src="build/npm.warning.f509feba1f1aa1d0c48f.js" defer></script>
+    <script type="text/javascript" src="build/main.0fcc969aed6be64da06a.js" defer></script>
+  </body>
+</html>
+ 

@@ -113,7 +113,35 @@ module.exports = {
       // async: /\.js$/,
       defer: /\.js$/
     }),
-    new DynamicCdnWebpackPlugin()
+    new DynamicCdnWebpackPlugin({
+      verbose: true,
+      // only: ['react', 'react-router-dom'],
+      resolver: (name, version) => {
+        // console.log('name:', name);
+        // console.log('version:', version);
+        const options = {
+          'react': {
+            var: 'React',
+            version: '16.5.1',
+            url: `https://unpkg.com/react@${version}/umd/react.production.min.js`,
+            name: 'react'
+          },
+          'react-router-dom': {
+            var: 'ReactRouterDOM',
+            version: '4.3.1',
+            url: `https://unpkg.com/react-router-dom@${version}/umd/react-router-dom.min.js`,
+            name: 'ReactRouterDOM'
+          },
+          'react-dom': {
+            var: 'ReactDOM',
+            version: '16.5.1',
+            url: `https://unpkg.com/react-dom@${version}/umd/react-dom.production.min.js`,
+            name: 'ReactDOM'
+          }
+        };
+        return options[name];
+      }
+    })
   ]
 };
 
