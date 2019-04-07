@@ -100,12 +100,12 @@ module.exports = {
     new Visualizer(),
     new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
     new HtmlWebpackPlugin({
-      title: 'Abels | Narrative coding',
+      // title: 'Abels | Narrative coding',
       filename: './index.html',
-      'meta': {
-        'viewport': 'width=device-width, initial-scale=1, user-scalable=no'
-      },
       template: './template.html'
+      // 'meta': {
+      //   'viewport': 'width=device-width, initial-scale=1, user-scalable=no'
+      // }
     }),
     new ScriptExtHtmlWebpackPlugin({
       // inline: 'startup',
