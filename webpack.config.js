@@ -117,8 +117,8 @@ module.exports = {
       verbose: true,
       // only: ['react', 'react-router-dom'],
       resolver: (name, version) => {
-        // console.log('name:', name);
-        // console.log('version:', version);
+        console.log('NAME:', name);
+        console.log('VERSION:', version);
         const options = {
           'react': {
             var: 'React',
@@ -130,14 +130,28 @@ module.exports = {
             var: 'ReactRouterDOM',
             version: '4.3.1',
             url: `https://unpkg.com/react-router-dom@${version}/umd/react-router-dom.min.js`,
-            name: 'ReactRouterDOM'
+            name: 'react-router-dom'
           },
           'react-dom': {
             var: 'ReactDOM',
             version: '16.5.1',
+            // url: `https://unpkg.com/react-dom@${version}/umd/react-dom.development.js`,
             url: `https://unpkg.com/react-dom@${version}/umd/react-dom.production.min.js`,
-            name: 'ReactDOM'
-          }
+            name: 'react-dom'
+          },
+          'styled-components': {
+            var: 'styled',
+            version: '4.1.3',
+            url: `https://unpkg.com/styled-components@${version}/dist/styled-components.min.js`,
+            name: 'styled-components'
+          } //,
+          // 'react-clipboard.js': {
+          //   var: 'Clipboard',
+          //   version: '2.0.6',
+          //   url: `https://unpkg.com/react-clipboard.js@${version}/dist/react-clipboard.js`,
+          //   // url: `https://unpkg.com/react-clipboard.js@${version}/dist/react-clipboard.min.js`,
+          //   name: 'react-clipboard.js'
+          // }
         };
         return options[name];
       }
