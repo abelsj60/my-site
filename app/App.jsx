@@ -136,8 +136,6 @@ class App extends Component {
     // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
-    console.log('gh-pages initial referrer:', referrer);
-
     this.state = {
       currentCaller: location !== 'i'
         ? location
@@ -169,11 +167,7 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
-    console.log('Updated version');
     if (location.type === 'my-site') {
-      // const referrer = new Referrer(this.props);
-      // const newPath = referrer.path.slice(8);
-      // console.log('GO!', referrer.path.slice(8));
       return <Redirect to={'/'} />;
     }
 

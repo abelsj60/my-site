@@ -34,7 +34,7 @@ module.exports = {
             [
               '@babel/preset-env', {
                 'modules': 'false',
-                'corejs': '2',
+                'corejs': 2, // Configures corejs version, 3 breaks EVERYTHING
                 'useBuiltIns': 'usage'
               }
             ]

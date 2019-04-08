@@ -336,7 +336,6 @@ function (_Component) {
     var location = referrer.location; // ReactGA.initialize('tbd'); // Tallies initial request
     // ReactGA.pageview(window.location.pathname);
 
-    console.log('gh-pages initial referrer:', referrer);
     _this.state = {
       currentCaller: location !== 'i' ? location : 'home',
       lastCaller: location !== 'reverie' ? location : 'home',
@@ -363,12 +362,8 @@ function (_Component) {
       var homeIsActive = location.type === 'home';
       var reverieIsActive = location.type === 'reverie';
       var fixMobileSafariBugOn7 = react_device_detect__WEBPACK_IMPORTED_MODULE_18__["isTablet"] && react_device_detect__WEBPACK_IMPORTED_MODULE_18__["isMobileSafari"] && react_device_detect__WEBPACK_IMPORTED_MODULE_18__["osVersion"][0] === '7';
-      console.log('Updated version');
 
       if (location.type === 'my-site') {
-        // const referrer = new Referrer(this.props);
-        // const newPath = referrer.path.slice(8);
-        // console.log('GO!', referrer.path.slice(8));
         return react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_22__["Redirect"], {
           to: '/'
         });
@@ -5952,4 +5947,4 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF4AAABACAYAAACT
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.b6b9893075d31b95d20b.js.map
+//# sourceMappingURL=main.3004e2fb5a703cd2c6aa.js.map
