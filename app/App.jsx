@@ -21,6 +21,8 @@ import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
 
+ReactGA.initialize('UA-137902767-1');
+
 const colors = {
   black: 'black',
   blue: '#6e7dab',
@@ -133,8 +135,8 @@ class App extends Component {
     const { pathname, search } = window.location;
     const referrer = new Referrer(props);
     const location = referrer.location;
-    ReactGA.initialize('UA-137902767-1'); // Tallies initial request
-    ReactGA.pageview(pathname + search);
+    // ReactGA.initialize('UA-137902767-1');
+    ReactGA.pageview(pathname + search); // Tallies initial request
 
     this.state = {
       currentCaller: location !== 'i'
