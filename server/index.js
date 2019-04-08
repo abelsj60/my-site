@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = 3300;
 
-// 1. gh-pages — index.html <script src='/build/main.[hash].js />
-
 app.use(volleyball);
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../build')));
