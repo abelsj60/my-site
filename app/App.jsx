@@ -21,7 +21,7 @@ import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
 
-ReactGA.initialize('UA-137902767-1');
+ReactGA.initialize('UA-137902767-1', { debug: true });
 
 const colors = {
   black: 'black',
