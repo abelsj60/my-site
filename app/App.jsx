@@ -133,8 +133,6 @@ class App extends Component {
     const { pathname, search } = window.location;
     const referrer = new Referrer(props);
     const location = referrer.location;
-    // ReactGA.initialize('UA-137902767-1');
-    console.log('testing');
     ReactGA.initialize('UA-137902767-1', { debug: true });
     ReactGA.pageview(pathname + search); // Tallies initial request
 
@@ -265,8 +263,6 @@ class App extends Component {
 
     window.addEventListener('resize', this.updateHeight);
     this.loadImages();
-
-    console.log('Mounted');
   }
 
   componentWillUnmount() {

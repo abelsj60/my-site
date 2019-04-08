@@ -301,16 +301,16 @@ export default class LegalTermsOrBizCard extends Component {
       showLegalTerms
     } = this.props.appState;
     const {
-      showBusinessCard,
-      showLegalTerms
+      businessCardWasActive,
+      legalTermsWereActive
     } = prevProps.appState;
     const { pathname } = window.location;
 
-    if (showBusinessCard && !showBusinessCard) {
+    if (showBusinessCard && !businessCardWasActive) {
       ReactGA.modalview(
         pathname + '/businesscard'
       );
-    } else if (showLegalTerms && !showLegalTerms) {
+    } else if (showLegalTerms && !legalTermsWereActive) {
       ReactGA.modalview(
         pathname + '/legalTerms'
       );
