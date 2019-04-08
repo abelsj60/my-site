@@ -35,10 +35,10 @@
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
       (function(l) {
-        console.log('window.location.href:', window.location.href);
-        console.log('window.location.pathname:', window.location.pathname);
+        // console.log('window.location.href:', window.location.href);
+        // console.log('window.location.pathname:', window.location.pathname);
         if (l.search) {
-          console.log('enter');
+          // console.log('enter');
           var q = {};
           l.search.slice(1).split('&').forEach(function(v) {
             var a = v.split('=');
@@ -48,14 +48,14 @@
             const newUrl = l.pathname.slice(0, -1) + (q.p || '') +
               (q.q ? ('?' + q.q) : '') +
               l.hash;
-            console.log('oldUrl:', l.pathname);
-            console.log('newUrl:', newUrl);
+            // console.log('oldUrl:', l.pathname);
+            // console.log('newUrl:', newUrl);
             window.history.replaceState(null, null,
               newUrl
             );
           }
         }
-        console.log('exit');
+        // console.log('exit');
       }(window.location))
     </script>
     <!-- End Single Page Apps for GitHub Pages -->
@@ -63,39 +63,50 @@
   <body>
     <div id="app"></div>
     <noscript>This site requires JavaScript.</noscript>
-    
-    <script type="text/javascript" src="https://unpkg.com/react@16.5.1/umd/react.production.min.js" defer></script>
-    <script type="text/javascript" src="https://unpkg.com/react-router-dom@4.3.1/umd/react-router-dom.min.js" defer></script>
-    <script type="text/javascript" src="https://unpkg.com/react-dom@16.5.1/umd/react-dom.production.min.js" defer></script>
-    <script type="text/javascript" src="https://unpkg.com/styled-components@4.1.3/dist/styled-components.min.js" defer></script>
-    <script type="text/javascript" src="https://unpkg.com/marked@0.5.1/marked.min.js" defer></script>
-    <script type="text/javascript" src="https://unpkg.com/parallax-js@3.1.0/dist/parallax.min.js" defer></script>
-    <script type="text/javascript" src="https://unpkg.com/buffer@4.9.1/index.js" defer></script>
-    <script type="text/javascript" src="build/npm.core-js.fc8763499a1d996bab89.js" defer></script>
-    <script type="text/javascript" src="build/npm.react-html-parser.277d01c3ef763e0840d3.js" defer></script>
-    <script type="text/javascript" src="build/npm.htmlparser2.ba7e7f3459603b0e7d24.js" defer></script>
-    <script type="text/javascript" src="build/npm.react-router.da09c8f3f4a553013023.js" defer></script>
-    <script type="text/javascript" src="build/npm.entities.756018a6c2be7e7f8720.js" defer></script>
-    <script type="text/javascript" src="build/npm.history.a3a33c972daca218d95c.js" defer></script>
-    <script type="text/javascript" src="build/npm.domutils.9ab8c68ec66e654b481e.js" defer></script>
-    <script type="text/javascript" src="build/npm.domhandler.c7454418ca25450d1491.js" defer></script>
-    <script type="text/javascript" src="build/npm.prop-types.98a3f1aaa99988b44063.js" defer></script>
-    <script type="text/javascript" src="build/npm.dom-serializer.90b6a7640a0213c93d0a.js" defer></script>
-    <script type="text/javascript" src="build/npm.fbjs.9250a4b17d767d8f81f1.js" defer></script>
-    <script type="text/javascript" src="build/npm.clipboard.de99b4360ae12b9e5b77.js" defer></script>
-    <script type="text/javascript" src="build/npm.domelementtype.7cb0a5a02b6c9e0a96e4.js" defer></script>
-    <script type="text/javascript" src="build/npm.events.da702e2a24ee1702f145.js" defer></script>
-    <script type="text/javascript" src="build/npm.hoist-non-react-statics.49c08d350c7f5c62b1da.js" defer></script>
-    <script type="text/javascript" src="build/npm.inherits.32517043dd5e3e603bcc.js" defer></script>
-    <script type="text/javascript" src="build/npm.invariant.6799b5d2e55e1ae6f634.js" defer></script>
-    <script type="text/javascript" src="build/npm.react-clipboard.js.d485e0bc38220778c72d.js" defer></script>
-    <script type="text/javascript" src="build/npm.react-device-detect.7e518011fa0e7002c56a.js" defer></script>
-    <script type="text/javascript" src="build/npm.resolve-pathname.591a3ecb54623a31028d.js" defer></script>
-    <script type="text/javascript" src="build/npm.safe-buffer.146815eec5902adb74c7.js" defer></script>
-    <script type="text/javascript" src="build/npm.string_decoder.ad587dc5fd68b24cd2e4.js" defer></script>
-    <script type="text/javascript" src="build/npm.value-equal.a1b40d272dcf8023683c.js" defer></script>
-    <script type="text/javascript" src="build/npm.warning.c6f1ab698d7658f53822.js" defer></script>
-    <script type="text/javascript" src="build/main.f8205e9dad334a3be2b3.js" defer></script>
+    <script type="text/javascript" src="npm.core-js.78f1c496e2e8f3aca0f0.js" defer></script>
+    <script type="text/javascript" src="npm.react-html-parser.3f49d063610aeae40f89.js" defer></script>
+    <script type="text/javascript" src="npm.react-router.30a88dbf56ef7b38d647.js" defer></script>
+    <script type="text/javascript" src="npm.htmlparser2.2b8501508d47c0656dff.js" defer></script>
+    <script type="text/javascript" src="npm.entities.1196e1daf19c3949a82f.js" defer></script>
+    <script type="text/javascript" src="npm.history.026b6135fd7f1ff9ea1e.js" defer></script>
+    <script type="text/javascript" src="npm.domutils.32409599053babb3fadf.js" defer></script>
+    <script type="text/javascript" src="npm.react-router-dom.d61a16b4a342f638cb61.js" defer></script>
+    <script type="text/javascript" src="npm.emotion.42f50fb25120bee9c9e1.js" defer></script>
+    <script type="text/javascript" src="npm.domhandler.54f9f04310633079f53e.js" defer></script>
+    <script type="text/javascript" src="npm.prop-types.61f376cf81bd2d02e8ef.js" defer></script>
+    <script type="text/javascript" src="npm.dom-serializer.41e245f440a7a7663b1c.js" defer></script>
+    <script type="text/javascript" src="npm.fbjs.d0d5151b6a332e4fca01.js" defer></script>
+    <script type="text/javascript" src="npm.react-dom.ec6ddbdcbf223cda2a51.js" defer></script>
+    <script type="text/javascript" src="npm.react-is.21e7e25f2290c7d9c94a.js" defer></script>
+    <script type="text/javascript" src="npm.react.ed892a83b81b811f6621.js" defer></script>
+    <script type="text/javascript" src="npm.schedule.1d283179ab6130798255.js" defer></script>
+    <script type="text/javascript" src="npm.webpack.995ef9a13429a7c2e369.js" defer></script>
+    <script type="text/javascript" src="npm.base64-js.7a050a184139971ee271.js" defer></script>
+    <script type="text/javascript" src="npm.buffer.7de4865b38383c69c81f.js" defer></script>
+    <script type="text/javascript" src="npm.clipboard.f1ff31c5caf35fc3c4a4.js" defer></script>
+    <script type="text/javascript" src="npm.domelementtype.c9f5f38d9b8387e9df53.js" defer></script>
+    <script type="text/javascript" src="npm.events.dc543dd43eb94ea646b1.js" defer></script>
+    <script type="text/javascript" src="npm.hoist-non-react-statics.557e0244b025403ada01.js" defer></script>
+    <script type="text/javascript" src="npm.ieee754.2e31b9add0701a009f94.js" defer></script>
+    <script type="text/javascript" src="npm.inherits.39a09d9ff2e8b706e288.js" defer></script>
+    <script type="text/javascript" src="npm.invariant.d5723d2cbe0f8ab98202.js" defer></script>
+    <script type="text/javascript" src="npm.isarray.b7802ef42c05a345875f.js" defer></script>
+    <script type="text/javascript" src="npm.marked.c6c12219160d41660189.js" defer></script>
+    <script type="text/javascript" src="npm.memoize-one.5429ebc545387ddaee88.js" defer></script>
+    <script type="text/javascript" src="npm.object-assign.ca39c18437607f467be5.js" defer></script>
+    <script type="text/javascript" src="npm.parallax-js.d4fd404b56eb570b19c3.js" defer></script>
+    <script type="text/javascript" src="npm.process.e365f9953c9ca533c8fd.js" defer></script>
+    <script type="text/javascript" src="npm.react-clipboard.js.a41a48eeb8b8b9982a49.js" defer></script>
+    <script type="text/javascript" src="npm.react-device-detect.c5c99431ce03ffd74728.js" defer></script>
+    <script type="text/javascript" src="npm.resolve-pathname.2d197a357e034a0b6290.js" defer></script>
+    <script type="text/javascript" src="npm.safe-buffer.f235518eeb8b808b7c04.js" defer></script>
+    <script type="text/javascript" src="npm.string_decoder.42af63a47d37824d0170.js" defer></script>
+    <script type="text/javascript" src="npm.styled-components.1410a86e172a438f8570.js" defer></script>
+    <script type="text/javascript" src="npm.stylis-rule-sheet.97f1684f6ad9275594a7.js" defer></script>
+    <script type="text/javascript" src="npm.stylis.df40de798dc2c3daf2ad.js" defer></script>
+    <script type="text/javascript" src="npm.value-equal.9a8f11ee8019086db249.js" defer></script>
+    <script type="text/javascript" src="npm.warning.4da9868b6f9d051b6503.js" defer></script>
+    <script type="text/javascript" src="main.586204402e14261848eb.js" defer></script>
   </body>
 </html>
  

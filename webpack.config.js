@@ -5,23 +5,14 @@ const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
-// const startupScript = require('./startup-script.js');
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
-
-// entry: {
-//   app: './app/index.js',
-//   startup: startup
-// },
 
 module.exports = {
   entry: {
     main: './app/index.js' //,
     // startup: './startup-script.js'
   },
-  // entry: [
-  //   './app/index.js'
-  // ],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js'
@@ -115,10 +106,18 @@ module.exports = {
     }),
     new DynamicCdnWebpackPlugin({
       verbose: true,
-      // only: ['react', 'react-router-dom'],
+      exclude: [
+        'buffer',
+        'react',
+        'react-router-dom',
+        'react-dom',
+        'styled-components',
+        'marked',
+        'parallax-js'
+      ],
       resolver: (name, version) => {
-        console.log('NAME:', name);
-        console.log('VERSION:', version);
+        // console.log('NAME:', name);
+        // console.log('VERSION:', version);
         const options = {
           'react': {
             var: 'React',
@@ -163,24 +162,10 @@ module.exports = {
             url: `https://unpkg.com/buffer@${version}/index.js`,
             name: 'buffer'
           }
-          // 'react-clipboard.js': {
-          //   var: 'Clipboard',
-          //   version: '2.0.6',
-          //   url: `https://unpkg.com/react-clipboard.js@${version}/dist/react-clipboard.js`,
-          //   // url: `https://unpkg.com/react-clipboard.js@${version}/dist/react-clipboard.min.js`,
-          //   name: 'react-clipboard.js'
-          // }
         };
+
         return options[name];
       }
     })
   ]
 };
-
-// if (modulePath === 'lodash') {
-//   return {
-//     name: 'lodash',
-//     url: 'https://unpkg.com/lodash@' + version + '/lodash.min.js',
-//     version: version, var: '_'
-//   };
-// }
