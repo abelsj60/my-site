@@ -1,5 +1,5 @@
 import Referrer from './Referrer';
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 
 export default class ClickHandling {
   constructor(component, outsideThis) {
@@ -40,7 +40,7 @@ export default class ClickHandling {
   _handleClickForAppComponent() {
     return (updateValue, valueOne, valueTwo) => {
       const {
-        // currentCaller,
+        currentCaller,
         showBusinessCard,
         showLegalTerms,
         inCity,
@@ -48,9 +48,9 @@ export default class ClickHandling {
         isMenu
       } = this.state;
       const stateToUpdate = {};
-      // let category = '';
-      // let action = '';
-      // let label = '';
+      let category = '';
+      let action = '';
+      let label = '';
 
       switch (updateValue) {
         case 'toggleBusinessCard':
@@ -58,26 +58,26 @@ export default class ClickHandling {
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
-          // category = 'Business card';
-          // action = !showBusinessCard
-          //   ? 'Clicked to open'
-          //   : 'Clicked to close';
-          // label = showLegalTerms
-          //   ? 'Legal notice was open'
-          //   : '';
+          category = 'Business card';
+          action = !showBusinessCard
+            ? 'Clicked to open'
+            : 'Clicked to close';
+          label = showLegalTerms
+            ? 'Legal notice was open'
+            : '';
           break;
         case 'toggleLegalTerms':
           stateToUpdate.showLegalTerms = !showLegalTerms;
           if (showBusinessCard) {
             stateToUpdate.showBusinessCard = !showBusinessCard;
           }
-          // category = 'Legal terms';
-          // action = !showLegalTerms
-          //   ? 'Clicked to open'
-          //   : 'Clicked to close';
-          // label = showBusinessCard
-          //   ? 'Business card was open'
-          //   : '';
+          category = 'Legal terms';
+          action = !showLegalTerms
+            ? 'Clicked to open'
+            : 'Clicked to close';
+          label = showBusinessCard
+            ? 'Business card was open'
+            : '';
           break;
         case 'toggleStoryText':
           stateToUpdate.showStoryText = !showStoryText;
@@ -87,22 +87,22 @@ export default class ClickHandling {
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
-          // category = 'Show story text';
-          // action = showStoryText
-          //   ? 'Clicked to hide text'
-          //   : 'Clicked to show text';
-          // label = showBusinessCard
-          //   ? 'Business card was open'
-          //   : showLegalTerms
-          //     ? 'Legal notice was open'
-          //     : '';
+          category = 'Show story text';
+          action = showStoryText
+            ? 'Clicked to hide text'
+            : 'Clicked to show text';
+          label = showBusinessCard
+            ? 'Business card was open'
+            : showLegalTerms
+              ? 'Legal notice was open'
+              : '';
           break;
         case 'swapHomePageImage':
           stateToUpdate.inCity = !inCity;
-          // category = 'Swap home page background image';
-          // action = !inCity
-          //   ? 'Go to city realm'
-          //   : 'Go to fantasy realm';
+          category = 'Swap home page background image';
+          action = !inCity
+            ? 'Go to city realm'
+            : 'Go to fantasy realm';
           break;
         case 'setCallers':
           stateToUpdate.currentCaller = valueOne;
@@ -112,21 +112,21 @@ export default class ClickHandling {
           break;
         case 'toggleMenu':
           stateToUpdate.isMenu = !isMenu;
-          // category = 'Toggle menu';
-          // action = !isMenu
-          //   ? `Go to ${currentCaller} menu`
-          //   : `Leave ${currentCaller} menu`;
+          category = 'Toggle menu';
+          action = !isMenu
+            ? `Go to ${currentCaller} menu`
+            : `Leave ${currentCaller} menu`;
           break;
         default:
           break;
       }
 
       if (updateValue !== 'setCallers') {
-        // ReactGA.event({
-        //   category,
-        //   action,
-        //   label
-        // });
+        ReactGA.event({
+          category,
+          action,
+          label
+        });
       }
 
       return this.setState(() => stateToUpdate);

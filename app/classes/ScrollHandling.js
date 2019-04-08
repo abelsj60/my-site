@@ -1,4 +1,4 @@
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 
 export default class ScrollHandling {
   constructor(location) {
@@ -25,10 +25,10 @@ export default class ScrollHandling {
           : true;
 
         if (updateScrollTop) {
-          // ReactGA.event({
-          //   category: `Reset element top for ${this._type}`,
-          //   action: 'Swapping content set within location'
-          // });
+          ReactGA.event({
+            category: `Reset element top for ${this._type}`,
+            action: 'Swapping content set within location'
+          });
           overflowRef.current.scrollTop = 0;
         }
       }
@@ -39,10 +39,10 @@ export default class ScrollHandling {
     // Useing pageYOffset instead of scrollY
     // for cross-browser support, per MDN
     if (window.pageYOffset > 0) {
-      // ReactGA.event({
-      //   category: `Reset window top for ${this._type}`,
-      //   action: 'Changing location'
-      // });
+      ReactGA.event({
+        category: `Reset window top for ${this._type}`,
+        action: 'Changing location'
+      });
       window.scroll({
         top: 0,
         behavior: 'smooth'

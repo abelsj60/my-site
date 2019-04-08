@@ -2,7 +2,7 @@ import Clipboard from 'react-clipboard.js';
 import StyledLink from '../primitives/StyledLink.jsx';
 import Parallax from '../shared/Parallax.jsx';
 import React, { Component } from 'react';
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 import styled, { css } from 'styled-components';
 
 const Container = styled.section`
@@ -241,10 +241,10 @@ export default class LegalTermsOrBizCard extends Component {
                                 && this.timeoutId === null
                             ) {
                               // Technically runs after copy is made!
-                              // ReactGA.event({
-                              //   category: 'Copy email address',
-                              //   action: 'Start copier'
-                              // });
+                              ReactGA.event({
+                                category: 'Copy email address',
+                                action: 'Make copies'
+                              });
                               makeCopies();
                               this.timeoutId = setTimeout(
                                 () => {
@@ -275,6 +275,46 @@ export default class LegalTermsOrBizCard extends Component {
         </CardHolder>
       </Container>
     );
+  }
+
+  componentDidMount() {
+    const {
+      showBusinessCard,
+      showLegalTerms
+    } = this.props.appState;
+    const { pathname } = window.location;
+
+    if (showBusinessCard) {
+      ReactGA.pageview(
+        pathname + '/businesscard'
+      );
+    } else if (showLegalTerms) {
+      ReactGA.pageview(
+        pathname + '/legalTerms'
+      );
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      showBusinessCard,
+      showLegalTerms
+    } = this.props.appState;
+    const {
+      showBusinessCard,
+      showLegalTerms
+    } = prevProps.appState;
+    const { pathname } = window.location;
+
+    if (showBusinessCard && !showBusinessCard) {
+      ReactGA.modalview(
+        pathname + '/businesscard'
+      );
+    } else if (showLegalTerms && !showLegalTerms) {
+      ReactGA.modalview(
+        pathname + '/legalTerms'
+      );
+    }
   }
 
   // Not added to ClickHandling. Dealing w/'this'

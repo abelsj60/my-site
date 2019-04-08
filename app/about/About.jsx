@@ -6,7 +6,7 @@ import Main from '../primitives/Main.jsx';
 import marked from 'marked';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 
@@ -70,16 +70,13 @@ export default function About() {
               href="https://www.linkedin.com/in/jameserikabels"
               target="_blank"
             >
-              {
-              /*<ReactGA.OutboundLink
-              eventLabel="toLinkedIn"
-              to="https://www.linkedin.com/in/jameserikabels"
-              target="_blank">*/
-              }
-              <Icon src={linkedInIcon} />
-              {
-              /*</ReactGA.OutboundLink>*/
-              }
+              <ReactGA.OutboundLink
+                eventLabel="toLinkedIn"
+                to="https://www.linkedin.com/in/jameserikabels"
+                target="_blank"
+              >
+                <Icon src={linkedInIcon} />
+              </ReactGA.OutboundLink>
             </RestyledExternalLink>
           </Heading>
           <Text>

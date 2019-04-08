@@ -6,7 +6,7 @@ import {
   ThemeProvider
 } from 'styled-components';
 import Footer from './header-footer/Footer.jsx';
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
 import {
   isMobileSafari,
@@ -130,10 +130,11 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    const { pathname, search } = window.location;
     const referrer = new Referrer(props);
     const location = referrer.location;
-    // ReactGA.initialize('tbd'); // Tallies initial request
-    // ReactGA.pageview(window.location.pathname);
+    ReactGA.initialize('UA-137902767-1'); // Tallies initial request
+    ReactGA.pageview(pathname + search);
 
     this.state = {
       currentCaller: location !== 'i'
@@ -274,17 +275,14 @@ class App extends Component {
       (this.state.height !== window.innerHeight)
         || (this.state.height !== document.documentElement.clientHeight)
     ) {
-      // ReactGA.event({
-      //   category: 'Re-calculate height',
-      //   action: `Current height: ${
-      //     this.state.height
-      // } doesn't match new height: ${
-      //   window.innerHeight
-      //   ? window.innerHeight
-      //   : document.documentElement.clientHeight
-      // }`;
-      //   label:
-      // });
+      ReactGA.event({
+        category: 'State update',
+        action: "Current height doesn't match new height",
+        value: window.innerHeight
+          ? `{ old: ${this.state.height}, new: ${window.innerHeight} }`
+          : `{ old: ${this.state.height}, new: ${document.documentElement.clientHeight} }`,
+        label: 'Re-calculating height'
+      });
 
       this.setState({
         height: window.innerHeight
@@ -386,7 +384,13 @@ class App extends Component {
           // by GA:
           && window.location.pathname !== '/i'
       ) {
-        // ReactGA.pageview(window.location.pathname);
+        const {
+          pathname,
+          search
+        } = window.location;
+        ReactGA.pageview(
+          pathname + search
+        );
       }
     }
   }

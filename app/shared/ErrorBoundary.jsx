@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
@@ -79,16 +79,22 @@ export default class ErrorBoundary extends Component {
 
   // Catch errors re-render
   componentDidCatch(error, errorInfo) {
-    // const { initialLoad } = this.state;
+    const { initialLoad } = this.state;
     this.setState({
       hasError: true,
       error: error,
       errorInfo: errorInfo
     });
 
-  // ReactGA.exception({
-  //   description: `An error ${error} occurred. Initial load: ${initialLoad}. Info: ${errorInfo}`
-  // });
+    ReactGA.exception({
+      description: `An error ${
+        error
+      } occurred. Initial load: ${
+        initialLoad
+      }. Info: ${
+        errorInfo
+      }`
+    });
   }
 
   componentDidMount() {
