@@ -265,6 +265,8 @@ class App extends Component {
 
     window.addEventListener('resize', this.updateHeight);
     this.loadImages();
+
+    console.log('Mounted');
   }
 
   componentWillUnmount() {
