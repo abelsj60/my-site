@@ -48,7 +48,6 @@ const Motto = styled.p`
   color: ${p => p.theme.colors.yellow};
   font-weight: 700;
 
-
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.fourteen};
     margin-top: 100px;

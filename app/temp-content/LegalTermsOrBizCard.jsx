@@ -242,8 +242,8 @@ export default class LegalTermsOrBizCard extends Component {
                             ) {
                               // Technically runs after copy is made!
                               ReactGA.event({
-                                category: 'Copy email address',
-                                action: 'Make copies'
+                                category: 'Legal terms state',
+                                action: 'Copy email address'
                               });
                               makeCopies();
                               this.timeoutId = setTimeout(
@@ -286,11 +286,11 @@ export default class LegalTermsOrBizCard extends Component {
 
     if (showBusinessCard) {
       ReactGA.pageview(
-        pathname + '/businesscard'
+        `${pathname}businesscard`
       );
     } else if (showLegalTerms) {
       ReactGA.pageview(
-        pathname + '/legalTerms'
+        `${pathname}legalterms`
       );
     }
   }
@@ -308,11 +308,11 @@ export default class LegalTermsOrBizCard extends Component {
 
     if (showBusinessCard && !businessCardWasActive) {
       ReactGA.modalview(
-        pathname + '/businesscard'
+        `${pathname}businesscard`
       );
     } else if (showLegalTerms && !legalTermsWereActive) {
       ReactGA.modalview(
-        pathname + '/legalTerms'
+        `${pathname}legalterms`
       );
     }
   }

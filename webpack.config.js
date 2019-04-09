@@ -8,14 +8,19 @@ const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
 
+// Local needs '/'
+// GH needs '/build' and '/public'
+const publicPath = process.env.NODE_ENV === 'production' ? '/build/' : '/';
+const publicFilesPath = process.env.NODE_ENV === 'production' ? '/public/' : '/';
+
 module.exports = {
   entry: {
-    main: './app/index.js' //,
-    // startup: './startup-script.js'
+    main: './app/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    publicPath: publicPath
   },
   devtool: 'source-map',
   module: {
@@ -92,16 +97,12 @@ module.exports = {
     new Visualizer(),
     new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
     new HtmlWebpackPlugin({
-      // title: 'Abels | Narrative coding',
-      filename: './index.html',
-      template: './template.html'
-      // 'meta': {
-      //   'viewport': 'width=device-width, initial-scale=1, user-scalable=no'
-      // }
+      filename: '../index.html',
+      template: './template.html',
+      inject: 'head',
+      publicFilesPath: publicFilesPath
     }),
     new ScriptExtHtmlWebpackPlugin({
-      // inline: 'startup',
-      // async: /\.js$/,
       defer: /\.js$/
     }),
     new DynamicCdnWebpackPlugin({
@@ -116,8 +117,6 @@ module.exports = {
         'parallax-js'
       ],
       resolver: (name, version) => {
-        // console.log('NAME:', name);
-        // console.log('VERSION:', version);
         const options = {
           'react': {
             var: 'React',
@@ -134,7 +133,6 @@ module.exports = {
           'react-dom': {
             var: 'ReactDOM',
             version: '16.5.1',
-            // url: `https://unpkg.com/react-dom@${version}/umd/react-dom.development.js`,
             url: `https://unpkg.com/react-dom@${version}/umd/react-dom.production.min.js`,
             name: 'react-dom'
           },

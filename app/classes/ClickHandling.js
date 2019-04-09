@@ -58,10 +58,10 @@ export default class ClickHandling {
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
-          category = 'Business card';
+          category = 'App state';
           action = !showBusinessCard
-            ? 'Clicked to open'
-            : 'Clicked to close';
+            ? 'Open business card'
+            : 'Close business card';
           label = showLegalTerms
             ? 'Legal notice was open'
             : '';
@@ -71,10 +71,10 @@ export default class ClickHandling {
           if (showBusinessCard) {
             stateToUpdate.showBusinessCard = !showBusinessCard;
           }
-          category = 'Legal terms';
+          category = 'App state';
           action = !showLegalTerms
-            ? 'Clicked to open'
-            : 'Clicked to close';
+            ? 'Open legal terms'
+            : 'Close legal terms';
           label = showBusinessCard
             ? 'Business card was open'
             : '';
@@ -87,10 +87,10 @@ export default class ClickHandling {
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
-          category = 'Show story text';
+          category = 'App state';
           action = showStoryText
-            ? 'Clicked to hide text'
-            : 'Clicked to show text';
+            ? 'Hide story text'
+            : 'Close story text';
           label = showBusinessCard
             ? 'Business card was open'
             : showLegalTerms
@@ -99,10 +99,10 @@ export default class ClickHandling {
           break;
         case 'swapHomePageImage':
           stateToUpdate.inCity = !inCity;
-          category = 'Swap home page background image';
+          category = 'App state';
           action = !inCity
-            ? 'Go to city realm'
-            : 'Go to fantasy realm';
+            ? 'Enter city'
+            : 'Enter fantasy';
           break;
         case 'setCallers':
           stateToUpdate.currentCaller = valueOne;
@@ -112,10 +112,10 @@ export default class ClickHandling {
           break;
         case 'toggleMenu':
           stateToUpdate.isMenu = !isMenu;
-          category = 'Toggle menu';
+          category = 'App state';
           action = !isMenu
-            ? `Go to ${currentCaller} menu`
-            : `Leave ${currentCaller} menu`;
+            ? `Enter: ${currentCaller} menu`
+            : `Leave: ${currentCaller} menu`;
           break;
         default:
           break;

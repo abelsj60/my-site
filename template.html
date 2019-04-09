@@ -8,12 +8,12 @@
     >
     <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no" />
     <title>Abels | Narrative coding</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.publicFilesPath %>favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= htmlWebpackPlugin.options.publicFilesPath %>apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.options.publicFilesPath %>favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.publicFilesPath %>favicon-16x16.png">
+    <link rel="manifest" href="<%= htmlWebpackPlugin.options.publicFilesPath %>site.webmanifest">
+    <link rel="mask-icon" href="<%= htmlWebpackPlugin.options.publicFilesPath %>safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#9f00a7">
     <meta name="theme-color" content="#ffffff">
     <meta name="author" description="James Abels">
@@ -34,10 +34,7 @@
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
       (function(l) {
-        console.log('window.location.href:', window.location.href);
-        console.log('window.location.pathname:', window.location.pathname);
         if (l.search) {
-          console.log('enter');
           var q = {};
           l.search.slice(1).split('&').forEach(function(v) {
             var a = v.split('=');
@@ -47,14 +44,11 @@
             const newUrl = l.pathname.slice(0, -1) + (q.p || '') +
               (q.q ? ('?' + q.q) : '') +
               l.hash;
-            console.log('oldUrl:', l.pathname);
-            console.log('newUrl:', newUrl);
             window.history.replaceState(null, null,
               newUrl
             );
           }
         }
-        console.log('exit');
       }(window.location))
     </script>
     <!-- End Single Page Apps for GitHub Pages -->

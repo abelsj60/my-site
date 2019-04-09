@@ -130,11 +130,9 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const { pathname, search } = window.location;
     const referrer = new Referrer(props);
     const location = referrer.location;
     ReactGA.initialize('UA-137902767-1', { debug: true });
-    ReactGA.pageview(pathname + search); // Tallies initial request
 
     this.state = {
       currentCaller: location !== 'i'
@@ -255,6 +253,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const {
+      pathname,
+      search
+    } = window.location;
+    ReactGA.pageview(pathname + search); // Tallies initial request
+
     if (!this.hasFlexbox()) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera) {
@@ -275,13 +279,18 @@ class App extends Component {
       (this.state.height !== window.innerHeight)
         || (this.state.height !== document.documentElement.clientHeight)
     ) {
+      const {
+        pathname,
+        search
+      } = window.location;
+
       ReactGA.event({
-        category: 'State update',
-        action: "Current height doesn't match new height",
+        category: 'App state',
+        action: 'Re-calculate height',
         value: window.innerHeight
-          ? `{ old: ${this.state.height}, new: ${window.innerHeight} }`
-          : `{ old: ${this.state.height}, new: ${document.documentElement.clientHeight} }`,
-        label: 'Re-calculating height'
+          ? window.innerHeight
+          : document.documentElement.clientHeight,
+        label: `Page: ${pathname}${search}`
       });
 
       this.setState({

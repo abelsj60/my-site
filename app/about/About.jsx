@@ -71,7 +71,7 @@ export default function About() {
               target="_blank"
             >
               <ReactGA.OutboundLink
-                eventLabel="toLinkedIn"
+                eventLabel="To LinkedIn"
                 to="https://www.linkedin.com/in/jameserikabels"
                 target="_blank"
               >

@@ -26,8 +26,9 @@ export default class ScrollHandling {
 
         if (updateScrollTop) {
           ReactGA.event({
-            category: `Reset element top for ${this._type}`,
-            action: 'Swapping content set within location'
+            category: 'Scroll management',
+            action: `Reset top for ${this._type}`,
+            label: 'Swapping content'
           });
           overflowRef.current.scrollTop = 0;
         }
@@ -40,8 +41,9 @@ export default class ScrollHandling {
     // for cross-browser support, per MDN
     if (window.pageYOffset > 0) {
       ReactGA.event({
-        category: `Reset window top for ${this._type}`,
-        action: 'Changing location'
+        category: 'Scroll management',
+        action: `Reset window for ${this._type}`,
+        label: 'Changing location'
       });
       window.scroll({
         top: 0,
