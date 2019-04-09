@@ -1,10 +1,11 @@
-const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const Visualizer = require('webpack-visualizer-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const Visualizer = require('webpack-visualizer-plugin');
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
 
@@ -94,7 +95,8 @@ module.exports = {
     }
   },
   plugins: [
-    new Visualizer(),
+    // new Visualizer(),
+    new CleanWebpackPlugin(),
     new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
     new HtmlWebpackPlugin({
       filename: '../index.html',
