@@ -28,7 +28,7 @@ const RestyledRight = styled(Right)`
   bottom: 0px;
 `;
 const Chapter = styled.h2`
-  color: ${p => p.theme.colors.newBlue};
+  color: ${p => p.theme.colors.blue};
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.nine};
 `;

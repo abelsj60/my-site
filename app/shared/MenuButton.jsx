@@ -43,7 +43,7 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => !p.reverie ? p.theme.colors.newBlueThree : p.theme.colors.white };
+  background-color: ${p => !p.reverie ? p.theme.colors.blueTwo : p.theme.colors.white };
 `;
 
 export default function MenuButton(props) {

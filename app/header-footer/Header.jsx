@@ -19,7 +19,6 @@ const fontWeight = '500';
 
 const Container = styled.header`
   background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? p.theme.colors.reverieBlue : p.theme.colors.white)};
-  color: ${p => (p.home ? p.theme.colors.white : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
   color: ${p => p.theme.colors.white};
   flex-shrink: 0;
   z-index: 2;
@@ -35,14 +34,13 @@ const HeaderBackground = styled.div`
   width: 100%;
   height: 52px;
   left: 0px;
-  background-color: ${p => !p.home ? p.theme.colors.darkPinkThree : ''};
+  background-color: ${p => !p.home ? p.theme.colors.darkPink : ''};
   z-index: -1;
 `;
 const RestyledLink = styled(StyledLink)`
   font-size: ${p => p.theme.fontSizes.six};
   font-weight: ${p => p.home ? 400 : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
-  color: ${p => (p.home ? 'white' : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
   color: ${p => p.theme.colors.white};
   font-weight: ${fontWeight};
 

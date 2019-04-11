@@ -23,25 +23,14 @@ import { withRouter } from 'react-router';
 
 const colors = {
   black: 'black',
-  blue: '#6e7dab',
+  blue: '#008DD5',
+  blueTwo: '#B9DFF3',
   lightBlack: '#455057',
-  lightBlue: '#e6f1ff',
-  lightPink: '#fd5198',
-  mediumBlack: '#555F66',
   pink: '#fd1172',
   reverieBlue: '#d2e7ff',
   white: 'white',
   yellow: '#ffe74c',
-  newBlue: '#008DD5',
-  newBlueTwoB: '#31afd4',
-  slightBlue: '#73C0E8',
-  violet: '#540D6E',
-  purple: '#820263',
-  purpleTwo: '#4B1D3F',
-  darkPinkTwo: '#9E0059',
-  darkPinkThree: '#AF125A',
-  newBlueTwo: '#E7F4FB',
-  newBlueThree: '#B9DFF3'
+  darkPink: '#AF125A'
 };
 const fontSizes = {
   zero: '.9rem',
@@ -69,8 +58,7 @@ const mediaQueries = {
   narrowBreakOne: '500px',
   narrowBreakTwo: '690px',
   narrowBreakThree: '651px',
-  desktopView: '848px',
-  desktopWide: '1004px'
+  desktopView: '848px' // ! Probably not needed anymore...
 };
 const grafSpace = {
   regular: '18px'
@@ -94,8 +82,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 300;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    // max-width: 1508px; // Top size
-    // max-width: 700px; // Single-pane experiment
     margin: 0 auto;
 
     h1,

@@ -18,7 +18,7 @@ const ProjectName = styled.h1`
 const Hed = styled.h3`
   font-size: ${p => p.theme.fontSizes.eight};
   font-weight: 400;
-  color: ${p => p.theme.colors.newBlue};
+  color: ${p => p.theme.colors.blue};
   margin-bottom: 8px;
 `;
 const Dek = styled.h2`

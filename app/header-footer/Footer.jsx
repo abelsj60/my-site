@@ -29,7 +29,7 @@ const Line = styled.div`
 const StoryButton = styled(Button)`
   color: white;
   margin-left: 25px;
-  background-color: ${p => (!p.active ? p.theme.colors.pink : p.theme.colors.newBlue)};
+  background-color: ${p => (!p.active ? p.theme.colors.pink : p.theme.colors.blue)};
   width: 43px;
   padding: 7px;
 
@@ -48,7 +48,7 @@ const Graf = styled.p`
   cursor: pointer;
   margin-right: 20px;
   margin-bottom: 0px;
-  color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.newBlue)};
+  color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.blue)};
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;

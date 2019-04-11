@@ -242,7 +242,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html {\n    // Best practice to load fonts: \n    // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import\n\n    font-family: 'Montserrat', sans-serif;\n    font-size: 62.5%;\n    background-color: ", ";\n  }\n  \n  body {\n    margin: 0px;\n    padding: 0px;\n    font-size: ", ";\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 300;\n    -webkit-overflow-scrolling: touch;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n    // max-width: 1508px; // Top size\n    // max-width: 700px; // Single-pane experiment\n    margin: 0 auto;\n\n    h1,\n    h2,\n    h3,\n    p,\n    ul {\n      margin: 0px;\n    }\n\n    h1 {\n      font-family: 'Playfair Display', serif;\n      font-weight: 900;\n      margin-left: 2px;\n    }\n\n    p {\n      margin-bottom: ", ";\n      line-height: 1.6;\n    }\n  }\n\n  #app {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    height: ", "px;\n    position: relative;\n    \n    @media(orientation:landscape) {\n      // Fix esoteric iOS 7 iPad bug:\n      // https://stackoverflow.com/a/19449123\n      // https://stackoverflow.com/q/19012135\n      // https://krpano.com/ios/bugs/ios7-ipad-landscape/\n\n      ", ";\n    }\n    \n    ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html {\n    // Best practice to load fonts: \n    // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import\n\n    font-family: 'Montserrat', sans-serif;\n    font-size: 62.5%;\n    background-color: ", ";\n  }\n  \n  body {\n    margin: 0px;\n    padding: 0px;\n    font-size: ", ";\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 300;\n    -webkit-overflow-scrolling: touch;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n    margin: 0 auto;\n\n    h1,\n    h2,\n    h3,\n    p,\n    ul {\n      margin: 0px;\n    }\n\n    h1 {\n      font-family: 'Playfair Display', serif;\n      font-weight: 900;\n      margin-left: 2px;\n    }\n\n    p {\n      margin-bottom: ", ";\n      line-height: 1.6;\n    }\n  }\n\n  #app {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    height: ", "px;\n    position: relative;\n    \n    @media(orientation:landscape) {\n      // Fix esoteric iOS 7 iPad bug:\n      // https://stackoverflow.com/a/19449123\n      // https://stackoverflow.com/q/19012135\n      // https://krpano.com/ios/bugs/ios7-ipad-landscape/\n\n      ", ";\n    }\n    \n    ", ";\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -268,25 +268,14 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var colors = {
   black: 'black',
-  blue: '#6e7dab',
+  blue: '#008DD5',
+  blueTwo: '#B9DFF3',
   lightBlack: '#455057',
-  lightBlue: '#e6f1ff',
-  lightPink: '#fd5198',
-  mediumBlack: '#555F66',
   pink: '#fd1172',
   reverieBlue: '#d2e7ff',
   white: 'white',
   yellow: '#ffe74c',
-  newBlue: '#008DD5',
-  newBlueTwoB: '#31afd4',
-  slightBlue: '#73C0E8',
-  violet: '#540D6E',
-  purple: '#820263',
-  purpleTwo: '#4B1D3F',
-  darkPinkTwo: '#9E0059',
-  darkPinkThree: '#AF125A',
-  newBlueTwo: '#E7F4FB',
-  newBlueThree: '#B9DFF3'
+  darkPink: '#AF125A'
 };
 var fontSizes = {
   zero: '.9rem',
@@ -314,8 +303,8 @@ var mediaQueries = {
   narrowBreakOne: '500px',
   narrowBreakTwo: '690px',
   narrowBreakThree: '651px',
-  desktopView: '848px',
-  desktopWide: '1004px'
+  desktopView: '848px' // ! Probably not needed anymore...
+
 };
 var grafSpace = {
   regular: '18px'
@@ -976,7 +965,7 @@ var NavigationDek = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].p.
   displayName: "ArticleOrReverieNav__NavigationDek",
   componentId: "k2qkgh-1"
 })(["color:", ";margin-bottom:", ";font-size:", ";font-style:italic;&:first-child{margin-top:0px;}"], function (p) {
-  return p.menu && !p.link ? p.theme.colors.black : p.theme.colors.newBlue;
+  return p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue;
 }, function (p) {
   return !p.menu ? '4px' : '0px';
 }, function (p) {
@@ -986,7 +975,7 @@ var NavigationHed = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].p.
   displayName: "ArticleOrReverieNav__NavigationHed",
   componentId: "k2qkgh-2"
 })(["color:", ";font-size:", ";margin-top:-2px;margin-bottom:15px;font-weight:400;", ";@media (min-width:", "){font-size:", ";}"], function (p) {
-  return p.menu && !p.link ? p.theme.colors.black : p.theme.colors.newBlue;
+  return p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue;
 }, function (p) {
   return p.menu ? p.theme.fontSizes.fifteen : p.theme.fontSizes.eleven;
 }, function (p) {
@@ -3511,13 +3500,13 @@ var StoryButton = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["default
   displayName: "Footer__StoryButton",
   componentId: "sc-13gwbe8-2"
 })(["color:white;margin-left:25px;background-color:", ";width:43px;padding:7px;https://stackoverflow.com/a/18997800 &:after{position:absolute;top:0;left:0;width:200%;height:200%;border:1px #999 solid;;transform:scale(0.5);}"], function (p) {
-  return !p.active ? p.theme.colors.pink : p.theme.colors.newBlue;
+  return !p.active ? p.theme.colors.pink : p.theme.colors.blue;
 });
 var Graf = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].p.withConfig({
   displayName: "Footer__Graf",
   componentId: "sc-13gwbe8-3"
 })(["cursor:pointer;margin-right:20px;margin-bottom:0px;color:", ";padding-top:5px;padding-bottom:5px;padding-right:5px;font-weight:400;font-size:", ";"], function (p) {
-  return p.active ? p.theme.colors.pink : p.theme.colors.newBlue;
+  return p.active ? p.theme.colors.pink : p.theme.colors.blue;
 }, function (p) {
   return p.theme.fontSizes.one;
 });
@@ -3669,10 +3658,8 @@ var fontWeight = '500';
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].header.withConfig({
   displayName: "Header__Container",
   componentId: "sc-1rxr5md-0"
-})(["background-color:", ";color:", ";color:", ";flex-shrink:0;z-index:2;height:52px;display:flex;justify-content:", ";align-items:center;width:100%;max-width:75rem;"], function (p) {
+})(["background-color:", ";color:", ";flex-shrink:0;z-index:2;height:52px;display:flex;justify-content:", ";align-items:center;width:100%;max-width:75rem;"], function (p) {
   return p.home ? 'transparent' : p.reverie === 'active' ? p.theme.colors.reverieBlue : p.theme.colors.white;
-}, function (p) {
-  return p.home ? p.theme.colors.white : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack;
 }, function (p) {
   return p.theme.colors.white;
 }, function (p) {
@@ -3682,19 +3669,17 @@ var HeaderBackground = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"
   displayName: "Header__HeaderBackground",
   componentId: "sc-1rxr5md-1"
 })(["position:absolute;width:100%;height:52px;left:0px;background-color:", ";z-index:-1;"], function (p) {
-  return !p.home ? p.theme.colors.darkPinkThree : '';
+  return !p.home ? p.theme.colors.darkPink : '';
 });
 var RestyledLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_15__["default"])(_primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_16__["default"]).withConfig({
   displayName: "Header__RestyledLink",
   componentId: "sc-1rxr5md-2"
-})(["font-size:", ";font-weight:", ";margin-left:", ";color:", ";color:", ";font-weight:", ";&&{text-decoration:", ";}@media (min-width:", "){font-size:", ";}"], function (p) {
+})(["font-size:", ";font-weight:", ";margin-left:", ";color:", ";font-weight:", ";&&{text-decoration:", ";}@media (min-width:", "){font-size:", ";}"], function (p) {
   return p.theme.fontSizes.six;
 }, function (p) {
   return p.home ? 400 : '';
 }, function (p) {
   return p.num === 0 ? '0px' : '15px';
-}, function (p) {
-  return p.home ? 'white' : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack;
 }, function (p) {
   return p.theme.colors.white;
 }, fontWeight, function (p) {
@@ -4355,7 +4340,7 @@ var Graf = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].p.withConfi
 })(["font-size:", ";color:", ";margin-bottom:9px;font-weight:400;@media (min-width:", "){font-size:", ";}"], function (p) {
   return p.theme.fontSizes.six;
 }, function (p) {
-  return p.theme.colors.newBlue;
+  return p.theme.colors.blue;
 }, function (p) {
   return p.theme.mediaQueries.tinyView;
 }, function (p) {
@@ -4581,7 +4566,7 @@ var Hed = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].h3.withConf
 })(["font-size:", ";font-weight:400;color:", ";margin-bottom:8px;"], function (p) {
   return p.theme.fontSizes.eight;
 }, function (p) {
-  return p.theme.colors.newBlue;
+  return p.theme.colors.blue;
 });
 var Dek = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].h2.withConfig({
   displayName: "Projects__Dek",
@@ -5243,7 +5228,7 @@ var Line = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withCon
 })(["position:absolute;width:100%;left:0px;bottom:0px;margin:0px;height:", ";background-color:", ";"], function (p) {
   return !p.menu ? '1px' : '2px';
 }, function (p) {
-  return !p.reverie ? p.theme.colors.newBlueThree : p.theme.colors.white;
+  return !p.reverie ? p.theme.colors.blueTwo : p.theme.colors.white;
 });
 function MenuButton(props) {
   var _props$appState = props.appState,
@@ -5417,7 +5402,7 @@ var Line = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].div.withCon
 })(["position:absolute;left:0px;bottom:0px;margin:0px;height:", ";background-color:", ";width:80%;margin-left:15px;"], function (p) {
   return !p.menu ? '1px' : '2px';
 }, function (p) {
-  return p.theme.colors.newBlueThree;
+  return p.theme.colors.blueTwo;
 });
 function ChapterNav(props) {
   var bodyState = props.bodyState,
@@ -5500,7 +5485,7 @@ var Chapter = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].h2.withC
   displayName: "Story__Chapter",
   componentId: "sc-1gwc67d-2"
 })(["color:", ";font-weight:400;font-size:", ";"], function (p) {
-  return p.theme.colors.newBlue;
+  return p.theme.colors.blue;
 }, function (p) {
   return p.theme.fontSizes.nine;
 });
@@ -5958,4 +5943,4 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAAA/CAYAAACC
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.b5aa126e0cfdabb87e0b.js.map
+//# sourceMappingURL=main.c225d2cdd2f9f2d13b62.js.map

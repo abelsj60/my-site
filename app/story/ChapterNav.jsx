@@ -38,7 +38,7 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => p.theme.colors.newBlueThree};
+  background-color: ${p => p.theme.colors.blueTwo};
   width: 80%;
   margin-left: 15px;
 `;
