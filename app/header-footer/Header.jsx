@@ -123,49 +123,6 @@ const Icon = styled.img`
   }
 `;
 
-const NewIcon = styled.div`
-  position: relative;         
-  // margin-top:2%; 
-  border: 2px solid white;
-  border-radius: 2px; 
-  height: 36px; 
-  width:36px;
-  margin-right: 15px;
-
-  &:before {
-    border-bottom: 17px double white;
-    border-top: 6px solid white;    
-    content:"";
-    height: 5px; 
-    position: absolute; 
-    right:3px;  
-    top: 4px; 
-    width:30px;
-  }
-`;
-
-// body { padding: 5%; }
-
-// .btn { 
-//     position: relative;         
-//     margin-top:2%; 
-//     border: 2px solid black;
-//     border-radius: 2px; 
-//     height: 36px; 
-//     width:36px;  
-// }
-
-// #lines:before { 
-//     border-bottom: 17px double black;
-//     border-top: 6px solid black;    
-//     content:"";
-//     height: 5px; 
-//     position: absolute; 
-//     right:3px;  
-//     top: 4px; 
-//     width:30px; 
-// }
-
 export default class Header extends Component {
   constructor(props) {
     super(props);
@@ -192,8 +149,7 @@ export default class Header extends Component {
       : headerNavOpen;
 
     const referrer = new Referrer(this.props);
-    const hcForHeader = new ClickHandling(
-      'header',
+    const hcForHeader = new ClickHandling('header',
       this
     );
 

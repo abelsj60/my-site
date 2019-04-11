@@ -3746,28 +3746,6 @@ var Icon = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].img.withCo
 }, function (p) {
   return p.theme.mediaQueries.narrowBreakTwo;
 });
-var NewIcon = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].div.withConfig({
-  displayName: "Header__NewIcon",
-  componentId: "sc-1rxr5md-7"
-})(["position:relative;border:2px solid white;border-radius:2px;height:36px;width:36px;margin-right:15px;&:before{border-bottom:17px double white;border-top:6px solid white;content:\"\";height:5px;position:absolute;right:3px;top:4px;width:30px;}"]); // body { padding: 5%; }
-// .btn { 
-//     position: relative;         
-//     margin-top:2%; 
-//     border: 2px solid black;
-//     border-radius: 2px; 
-//     height: 36px; 
-//     width:36px;  
-// }
-// #lines:before { 
-//     border-bottom: 17px double black;
-//     border-top: 6px solid black;    
-//     content:"";
-//     height: 5px; 
-//     position: absolute; 
-//     right:3px;  
-//     top: 4px; 
-//     width:30px; 
-// }
 
 var Header =
 /*#__PURE__*/
@@ -5991,4 +5969,4 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAAA/CAYAAACC
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.03a779a3f2e25fb045cd.js.map
+//# sourceMappingURL=main.c0a1b00686650a50f29c.js.map
