@@ -10,11 +10,12 @@ const RestyledMain = styled(Main)`
     flex-direction: column;
   }
 `;
-const RestyledRight = styled(Right)`
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    margin-top: 10px;
-  }
-`;
+// DISABLED: 4/9/19 EXPERIMENT
+// const RestyledRight = styled(Right)`
+//   @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+//     margin-top: 10px;
+//   }
+// `;
 
 export default function Menu(props) {
   const {
@@ -34,10 +35,10 @@ export default function Menu(props) {
 
   return (
     <RestyledMain reverie={isReverie}>
-      <RestyledRight>
+      <Right>
         <MenuButton {...props} />
         <Overflow>{children}</Overflow>
-      </RestyledRight>
+      </Right>
     </RestyledMain>
   );
 }

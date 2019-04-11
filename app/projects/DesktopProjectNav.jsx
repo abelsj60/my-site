@@ -23,7 +23,7 @@ const ListItem = styled.li`
 `;
 const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
-  color: ${p => p.theme.colors.blue};
+  color: ${p => p.theme.colors.newBlue};
   margin-bottom: 9px;
   font-weight: 400;
 

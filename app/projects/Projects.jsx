@@ -13,21 +13,23 @@ const ProjectName = styled.h1`
   font-size: ${p => p.theme.fontSizes.sixteen};
   color: ${p => p.theme.colors.pink};
   margin-top: -8px;
+  margin-bottom: 4px;
 `;
 const Hed = styled.h3`
   font-size: ${p => p.theme.fontSizes.eight};
   font-weight: 400;
-  color: ${p => p.theme.colors.blue};
+  color: ${p => p.theme.colors.newBlue};
   margin-bottom: 8px;
 `;
 const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.thirteen};
-  margin-top: 4px;
-  margin-bottom: 15px;
+  // margin-top: 4px;
+  margin-bottom: ${p => p.theme.grafSpace.regular};
   font-weight: 300;
+  color: ${p => p.theme.colors.pink};
 `;
 const Graf = styled.p`
-  margin-bottom: 10px;
+  margin-bottom: ${p => p.theme.grafSpace.regular};
   margin-right: 0px;
 `;
 const Images = styled.section`
@@ -39,13 +41,15 @@ const Images = styled.section`
     justify-content: flex-end;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    flex-direction: column;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   flex-direction: column;
+  // }
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
-    flex-direction: row-reverse;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
+  //   flex-direction: row-reverse;
+  // }
 `;
 const Figure = styled.figure`
   margin: 0px;
@@ -58,21 +62,23 @@ const Figure = styled.figure`
 const Caption = styled.figcaption`
   display: flex;
   margin: 10px 10px 8px 0px;
-  font-size: ${p => p.theme.fontSizes.eight};
-  color: ${p => p.theme.colors.blue};
-  font-weight: 300;
+  font-size: ${p => p.theme.fontSizes.seven};
+  color: ${p => p.theme.colors.lightBlack};
+  // font-weight: 300;
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-top: 0;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    margin-top: 10px;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   margin-top: 10px;
+  // }
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
-    margin-top: 0;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
+  //   margin-top: 0;
+  // }
 `;
 const Image = styled.img`
   flex: 1;
@@ -84,13 +90,15 @@ const Image = styled.img`
     margin-right: 10px;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    margin-right: 0px;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   margin-right: 0px;
+  // }
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
-    margin-right: 10px;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
+  //   margin-right: 10px;
+  // }
 `;
 
 export default function Projects(props) {

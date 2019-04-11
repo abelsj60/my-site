@@ -8,7 +8,7 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
-  margin: -7px 0px 16px -13px;
+  margin: -6px 0px 22px -13px; // 16px
   max-width: 150px;
   display: flex;
   flex-shrink: 0;
@@ -38,7 +38,7 @@ const Line = styled.div`
   bottom: 0px;
   margin: 0px;
   height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => p.theme.colors.lightBlue};
+  background-color: ${p => p.theme.colors.newBlueThree};
   width: 80%;
   margin-left: 15px;
 `;

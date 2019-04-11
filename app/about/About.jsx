@@ -15,27 +15,24 @@ const RestyledLeft = styled(Left)`
 `;
 const Heading = styled.div`
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: ${p => p.theme.grafSpace.regular};;
   justify-content: space-between;
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    margin-bottom: 10px;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   margin-bottom: 10px;
+  // }
 `;
 const Hed = styled.h1`
   margin-top: -8px;
   font-size: ${p => p.theme.fontSizes.sixteen};
   color: ${p => p.theme.colors.pink};
 `;
-const ExternalLink = styled.a`
-  margin-top: 6px;
-  align-self: center;
-`;
 const Text = styled.section`
   overflow: auto;
 
   p {
-    margin-bottom: 10px;
+    margin-bottom: ${p => p.theme.grafSpace.regular};
 
     &:last-child {
       margin-bottom: 0px;
@@ -50,10 +47,8 @@ const Icon = styled.div`
   background: url(${p => p.src}) no-repeat;
   background-size: contain;
 `;
-const RestyledExternalLink = styled(ExternalLink)`
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    align-self: center;
-  }
+const IconContainer = styled.div`
+  margin-top: 6px;
 `;
 
 export default function About() {
@@ -66,10 +61,7 @@ export default function About() {
             <Hed>
             About
             </Hed>
-            <RestyledExternalLink
-              href="https://www.linkedin.com/in/jameserikabels"
-              target="_blank"
-            >
+            <IconContainer>
               <ReactGA.OutboundLink
                 eventLabel="To LinkedIn"
                 to="https://www.linkedin.com/in/jameserikabels"
@@ -77,7 +69,7 @@ export default function About() {
               >
                 <Icon src={linkedInIcon} />
               </ReactGA.OutboundLink>
-            </RestyledExternalLink>
+            </IconContainer>
           </Heading>
           <Text>
             {ReactHtmlParser(

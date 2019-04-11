@@ -11,15 +11,15 @@ const Container = styled.section`
   align-items: center;
   position: absolute;
   top: ${p => (!p.home ? '52px' : '0px')};
-  bottom: ${p => !p.home ? '55px' : '0px'};
+  bottom: ${p => !p.home ? '0px' : '0px'}; // 55px
   width: 100%;
-  background-color: ${p => !p.copying ? 'rgba(0, 0, 0, 0.7)' : 'rgba(253,17,114, 0.7)'};
+  background-color: ${p => !p.copying ? 'rgba(115,192,232, 0.7)' : 'rgba(253,17,114, 0.7)'};
   transition: background-color .75s;
   z-index: 1;
 
   ${p => p.home && css`
     z-index: 1;
-    background-color: ${!p.copying ? 'rgba(0, 0, 0, 0.35)' : 'rgba(255,231,76, 0.25)'};`};
+    background-color: ${!p.copying ? 'rgba(115,192,232, 0.35)' : 'rgba(255,231,76, 0.25)'};`};
 `;
 const CardHolder = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const InnerContainer = styled.div`
 const Card = styled.section`
   height: 160px;
   width: 275px;
-  background-color: ${p => p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white};
+  background-color: ${p => p.theme.colors.white};
   pointer-events: all;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
@@ -48,7 +48,7 @@ const CardContentArea = styled.div`
 `;
 const StyledClipboardButton = styled(Clipboard)`
   border: ${p => p.businessCard ? `1px solid ${p.theme.colors.pink}` : 'none'};
-  background-color: ${p => p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white};
+  background-color: ${p => p.theme.colors.white};
   padding: 0px;
   height: 85%;
   width: 90%;
@@ -78,7 +78,7 @@ const StyledClipboardButton = styled(Clipboard)`
   }
 `;
 const Graf = styled.p`
-  font-weight: 400;
+  font-weight: 500;
   flex: 1;
   font-size: ${p => p.theme.fontSizes.six};
   margin-bottom: 0px;
@@ -204,75 +204,87 @@ export default class LegalTermsOrBizCard extends Component {
           }
         }
       >
-        <CardHolder>
-          <Parallax
-            render={
-              renderProps => (
-                <InnerContainer
-                  home={homeIsActive}
-                  ref={
-                    ref => (renderProps.scene = ref)
-                  }
-                  onClick={
-                    event => event.stopPropagation()
-                  }
-                >
-                  <Card
-                    data-depth=".6"
-                    data-friction-x=".5"
-                    data-friction-y=".5"
-                    data-limit-x="2" // Value unclear
-                    data-limit-y="2" // Value unclear
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'absolute',
+            top: '0px',
+            bottom: '55px'
+          }}
+        >
+          <CardHolder>
+            <Parallax
+              render={
+                renderProps => (
+                  <InnerContainer
                     home={homeIsActive}
-                    reverie={reverieIsActive}
+                    ref={
+                      ref => (renderProps.scene = ref)
+                    }
+                    onClick={
+                      event => event.stopPropagation()
+                    }
                   >
-                    <CardContentArea>
-                      <StyledClipboardButton
-                        businessCard={showBusinessCard}
-                        data-clipboard-text={textToCopy}
-                        reverie={reverieIsActive}
-                        onSuccess={
-                          () => {
-                            // Use this.props... so the value's updateed
-                            // after the listener's added to Clipboard.
-                            // There's a problem w/'this' otherwise.
-                            if (
-                              this.props.appState.showBusinessCard
-                                && this.timeoutId === null
-                            ) {
-                              // Technically runs after copy is made!
-                              ReactGA.event({
-                                category: 'Legal terms state',
-                                action: 'Copy email address'
-                              });
-                              makeCopies();
-                              this.timeoutId = setTimeout(
-                                () => {
-                                  this.timeoutId = null;
-                                  makeCopies();
-                                }, 1150
-                              );
+                    <Card
+                      data-depth=".6"
+                      data-friction-x=".5"
+                      data-friction-y=".5"
+                      data-limit-x="2" // Value unclear
+                      data-limit-y="2" // Value unclear
+                      home={homeIsActive}
+                      reverie={reverieIsActive}
+                    >
+                      <CardContentArea>
+                        <StyledClipboardButton
+                          businessCard={showBusinessCard}
+                          data-clipboard-text={textToCopy}
+                          reverie={reverieIsActive}
+                          onSuccess={
+                            () => {
+                              // Use this.props... so the value's updateed
+                              // after the listener's added to Clipboard.
+                              // There's a problem w/'this' otherwise.
+                              if (
+                                this.props.appState.showBusinessCard
+                                  && this.timeoutId === null
+                              ) {
+                                // Technically runs after copy is made!
+                                ReactGA.event({
+                                  category: 'Legal terms state',
+                                  action: 'Copy email address'
+                                });
+                                makeCopies();
+                                this.timeoutId = setTimeout(
+                                  () => {
+                                    this.timeoutId = null;
+                                    makeCopies();
+                                  }, 1150
+                                );
+                              }
                             }
                           }
-                        }
-                      >
-                        <Graf
-                          key={cardText}
-                          copying={
-                            !showLegalTerms
-                            && copying
-                          }
                         >
-                          {cardText}
-                        </Graf>
-                      </StyledClipboardButton>
-                    </CardContentArea>
-                  </Card>
-                </InnerContainer>
-              )
-            }
-          />
-        </CardHolder>
+                          <Graf
+                            key={cardText}
+                            copying={
+                              !showLegalTerms
+                              && copying
+                            }
+                          >
+                            {cardText}
+                          </Graf>
+                        </StyledClipboardButton>
+                      </CardContentArea>
+                    </Card>
+                  </InnerContainer>
+                )
+              }
+            />
+          </CardHolder>
+        </div>
       </Container>
     );
   }

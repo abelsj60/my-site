@@ -10,8 +10,11 @@ export default styled.main`
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
+  width: 100%;
+  max-width: 70rem;
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    flex-direction: row;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   flex-direction: row;
+  // }
 `;

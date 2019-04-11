@@ -20,6 +20,7 @@ const Dek = styled.h2`
 `;
 const Hed = styled.h1`
   font-size: ${p => p.theme.fontSizes.sixteen};
+  margin-bottom: ${p => p.theme.grafSpace.regular};
 `;
 const Text = styled.section`
   p {
@@ -49,8 +50,8 @@ const Text = styled.section`
 const BylineOrDate = styled.p`
   font-size: ${p => p.theme.fontSizes.three};
   font-style: italic;
-  margin-top: 14px;
-  margin-bottom: 14px;
+  // margin-top: 14px;
+  margin-bottom: ${p => p.theme.grafSpace.regular};;
 `;
 
 export default function ArticleOrReverie(props) {
