@@ -17,11 +17,6 @@ const Heading = styled.div`
   display: flex;
   margin-bottom: ${p => p.theme.grafSpace.regular};;
   justify-content: space-between;
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   margin-bottom: 10px;
-  // }
 `;
 const Hed = styled.h1`
   margin-top: -8px;

@@ -11,7 +11,7 @@ const Container = styled.section`
   align-items: center;
   position: absolute;
   top: ${p => (!p.home ? '52px' : '0px')};
-  bottom: ${p => !p.home ? '0px' : '0px'}; // 55px
+  bottom: ${p => !p.home ? '0px' : '0px'};
   width: 100%;
   background-color: ${p => !p.copying ? 'rgba(115,192,232, 0.7)' : 'rgba(253,17,114, 0.7)'};
   transition: background-color .75s;

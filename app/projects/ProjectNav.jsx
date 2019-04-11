@@ -23,22 +23,6 @@ const Group = styled(UnorderedList)`
       padding: 0;
       border: 0;
     }
-
-    // DISABLED: 4/9/19 EXPERIMENT
-    // @media (min-width: ${p.theme.mediaQueries.desktopView}) {
-    //   display: flex;
-    //   flex-direction: row;
-    //   margin-top: 0;
-    // }
-
-    // DISABLED: 4/9/19 EXPERIMENT
-    // @media (min-width: ${p.theme.mediaQueries.desktopWide}) {
-    //   flex-direction: column;
-    //   justify-content: flex-start;
-    //   margin-top: 27px;
-    //   padding: 0;
-    //   border: 0;
-    // }
   `};
 `;
 const Item = styled.li`
@@ -52,18 +36,6 @@ const Item = styled.li`
     margin-right: ${p => (p.isRight ? '0px' : undefined)};
     margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
   }
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   margin-right: ${p => (p.padding ? '5px' : undefined)};
-  //   margin-bottom: ${p => (p.isRight ? '0px' : undefined)};
-  // }
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
-  //   margin-right: ${p => (p.isRight ? '0px' : undefined)};
-  //   margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
-  // }
 `;
 const RestyledLink = styled(StyledLink)`
   display: flex;

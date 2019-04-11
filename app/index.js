@@ -1,4 +1,3 @@
-
 import App from './App.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ErrorBoundary from './shared/ErrorBoundary.jsx';

@@ -10,12 +10,6 @@ const RestyledMain = styled(Main)`
     flex-direction: column;
   }
 `;
-// DISABLED: 4/9/19 EXPERIMENT
-// const RestyledRight = styled(Right)`
-//   @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-//     margin-top: 10px;
-//   }
-// `;
 
 export default function Menu(props) {
   const {

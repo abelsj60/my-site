@@ -61,7 +61,7 @@ const BioBox = styled.div`
   z-index: 2;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-top: 50px;
+    margin-top: 60px;
     width: 360px;
   }
 `;
@@ -69,8 +69,7 @@ const Text = styled.section`
   overflow: auto;
   
   p {
-    font-family: 'Aref Ruqaa', serif;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 10px;
     font-size: ${p => p.theme.fontSizes.three};
     color: ${p => p.theme.colors.yellow};
@@ -167,6 +166,7 @@ const CityAsBackground = styled(FantasyAsBackground)`
 //   }
 // `;
 
+console.log('IN HOME');
 export default function Home(props) {
   const {
     inCity,
@@ -219,11 +219,6 @@ export default function Home(props) {
                 >
                 Narrative coding and other adventures
                 </Motto>
-                {/*<Ball
-                  data-depth=".2"
-                  data-friction-x=".7"
-                  data-friction-y=".7"
-                />*/}
               </NameTag>
             )
           }

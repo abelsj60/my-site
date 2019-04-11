@@ -14,11 +14,6 @@ const Container = styled.footer`
   position: relative;
   width: 100%;
   max-width: 70rem;
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   justify-content: flex-end;
-  // }
 `;
 const Line = styled.div`
   display: ${p => p.home || p.hide ? 'none' : ''};
@@ -29,27 +24,14 @@ const Line = styled.div`
   top: 0px;
   margin: 0px;
   height: 1px;
-  // transform: scaleY(0.5);
   background-color: ${p => p.theme.colors.pink};
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media(min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   display: ${p => !p.showStoryText ? 'block' : ''};
-  // }
 `;
 const StoryButton = styled(Button)`
-  // color: ${p => (!p.active ? p.theme.colors.yellow : p.theme.colors.white)};
   color: white;
   margin-left: 25px;
   background-color: ${p => (!p.active ? p.theme.colors.pink : p.theme.colors.newBlue)};
-  // border: ${p => `1px solid ${!p.active ? p.theme.colors.pink : p.theme.colors.lightPink}`};
   width: 43px;
   padding: 7px;
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   display: none;
-  // }
 
   https://stackoverflow.com/a/18997800
   &:after {

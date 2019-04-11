@@ -23,7 +23,6 @@ const Hed = styled.h3`
 `;
 const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.thirteen};
-  // margin-top: 4px;
   margin-bottom: ${p => p.theme.grafSpace.regular};
   font-weight: 300;
   color: ${p => p.theme.colors.pink};
@@ -40,16 +39,6 @@ const Images = styled.section`
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   flex-direction: column;
-  // }
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
-  //   flex-direction: row-reverse;
-  // }
 `;
 const Figure = styled.figure`
   margin: 0px;
@@ -64,21 +53,10 @@ const Caption = styled.figcaption`
   margin: 10px 10px 8px 0px;
   font-size: ${p => p.theme.fontSizes.seven};
   color: ${p => p.theme.colors.lightBlack};
-  // font-weight: 300;
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-top: 0;
   }
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   margin-top: 10px;
-  // }
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
-  //   margin-top: 0;
-  // }
 `;
 const Image = styled.img`
   flex: 1;
@@ -89,16 +67,6 @@ const Image = styled.img`
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
     margin-right: 10px;
   }
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   margin-right: 0px;
-  // }
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopWide}) {
-  //   margin-right: 10px;
-  // }
 `;
 
 export default function Projects(props) {

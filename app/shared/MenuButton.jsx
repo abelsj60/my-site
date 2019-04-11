@@ -5,20 +5,13 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
-  // min-height: 34px;
-  min-height: 40px; // 34px
+  min-height: 40px;
   width: 52px;
-  
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   display: ${p => (p.menu !== 'active' ? 'none' : undefined)};
-  // }
 `;
 const RestyledLink = styled(StyledLink)`
   display: flex;
   flex-shrink: 0;
   margin-right: auto;
-  // margin-bottom: 40px; // 13px
   position: relative;
   padding-bottom: 3px;
   justify-content: space-between;

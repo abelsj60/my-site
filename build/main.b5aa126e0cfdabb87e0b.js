@@ -3927,7 +3927,7 @@ var Motto = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].p.withConf
 var BioBox = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
   displayName: "Home__BioBox",
   componentId: "navei3-4"
-})(["width:80%;margin-top:30px;display:", ";z-index:2;@media (min-width:", "){margin-top:50px;width:360px;}"], function (p) {
+})(["width:80%;margin-top:30px;display:", ";z-index:2;@media (min-width:", "){margin-top:60px;width:360px;}"], function (p) {
   return p.tempContentIsOn ? 'none' : 'flex';
 }, function (p) {
   return p.theme.mediaQueries.tinyView;
@@ -3935,7 +3935,7 @@ var BioBox = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withC
 var Text = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].section.withConfig({
   displayName: "Home__Text",
   componentId: "navei3-5"
-})(["overflow:auto;p{font-family:'Aref Ruqaa',serif;font-weight:700;margin-bottom:10px;font-size:", ";color:", ";text-shadow:1px 1px 2px rgba(0,0,0,.6);text-align:center;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;&:last-child{margin-bottom:0px;}@media (min-width:", "){font-size:", ";}}"], function (p) {
+})(["overflow:auto;p{font-weight:500;margin-bottom:10px;font-size:", ";color:", ";text-shadow:1px 1px 2px rgba(0,0,0,.6);text-align:center;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;&:last-child{margin-bottom:0px;}@media (min-width:", "){font-size:", ";}}"], function (p) {
   return p.theme.fontSizes.three;
 }, function (p) {
   return p.theme.colors.yellow;
@@ -4005,6 +4005,7 @@ var CityAsBackground = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["de
 //   }
 // `;
 
+console.log('IN HOME');
 function Home(props) {
   var _props$appState = props.appState,
       inCity = _props$appState.inCity,
@@ -4126,13 +4127,7 @@ var RestyledMain = Object(styled_components__WEBPACK_IMPORTED_MODULE_5__["defaul
   componentId: "sc-1i9zco4-0"
 })(["@media (min-width:", "){flex-direction:column;}"], function (p) {
   return p.theme.mediaQueries.desktopView;
-}); // DISABLED: 4/9/19 EXPERIMENT
-// const RestyledRight = styled(Right)`
-//   @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-//     margin-top: 10px;
-//   }
-// `;
-
+});
 function Menu(props) {
   var appState = props.appState,
       children = props.children;
@@ -5480,7 +5475,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_html_parser__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_html_parser__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _primitives_Right_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../primitives/Right.jsx */ "./app/primitives/Right.jsx");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
- // import Dek from '../primitives/Dek.jsx';
 
 
 
@@ -5964,4 +5958,4 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAAA/CAYAAACC
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.7aedc598b9bcd3518987.js.map
+//# sourceMappingURL=main.b5aa126e0cfdabb87e0b.js.map

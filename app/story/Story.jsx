@@ -1,5 +1,4 @@
 import ChapterNav from './ChapterNav.jsx';
-// import Dek from '../primitives/Dek.jsx';
 import Left from '../primitives/Left.jsx';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
@@ -16,12 +15,6 @@ const RestyledLeft = styled(Left)`
   padding: 0px 0px 25px 25px;
   margin-top: 25px;
   overflow: auto; // Needed by desktop Chrome for no known reason
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   max-width: 327px;
-  //   padding: 0px;
-  // }
 `;
 const RestyledRight = styled(Right)`
   display: ${p => (p.text !== 'hidden' ? 'none' : 'flex')};
@@ -33,12 +26,6 @@ const RestyledRight = styled(Right)`
   width: 100%;
   left: 0px;
   bottom: 0px;
-  
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   display: flex;
-  //   margin: 25px;
-  // }
 `;
 const Chapter = styled.h2`
   color: ${p => p.theme.colors.newBlue};

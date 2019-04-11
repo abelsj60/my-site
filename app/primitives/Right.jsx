@@ -5,9 +5,4 @@ export default styled.section`
   display: flex;
   flex-direction: column;
   overflow: auto;
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   margin-top: 25px;
-  // }
 `;

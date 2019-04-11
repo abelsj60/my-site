@@ -12,9 +12,4 @@ export default styled.main`
   flex-basis: auto;
   width: 100%;
   max-width: 70rem;
-
-  // DISABLED: 4/9/19 EXPERIMENT
-  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-  //   flex-direction: row;
-  // }
 `;

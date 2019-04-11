@@ -50,7 +50,6 @@ const Text = styled.section`
 const BylineOrDate = styled.p`
   font-size: ${p => p.theme.fontSizes.three};
   font-style: italic;
-  // margin-top: 14px;
   margin-bottom: ${p => p.theme.grafSpace.regular};;
 `;
 
