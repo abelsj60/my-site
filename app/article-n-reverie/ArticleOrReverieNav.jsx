@@ -10,7 +10,7 @@ const RestyledList = styled(UnorderedList)`
   width: ${p => (!p.menu ? '327px' : undefined)};
 `;
 const NavigationDek = styled.p`
-  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
+  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.newBlue)};
   margin-bottom: ${p => (!p.menu ? '4px' : '0px')};
   font-size: ${p => p.theme.fontSizes.four};
   font-style: italic;
@@ -20,7 +20,7 @@ const NavigationDek = styled.p`
   }
 `;
 const NavigationHed = styled.p`
-  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
+  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.newBlue)};
   font-size: ${p => (p.menu ? p.theme.fontSizes.fifteen : p.theme.fontSizes.eleven)};
   margin-top: -2px;
   margin-bottom: 15px;

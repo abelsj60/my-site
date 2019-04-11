@@ -14,35 +14,41 @@ const RestyledLeft = styled(Left)`
   flex-direction: column;
   flex: 1;
   padding: 0px 0px 25px 25px;
-  margin-top: 10px;
+  margin-top: 25px;
   overflow: auto; // Needed by desktop Chrome for no known reason
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    max-width: 327px;
-    padding: 0px;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   max-width: 327px;
+  //   padding: 0px;
+  // }
 `;
 const RestyledRight = styled(Right)`
   display: ${p => (p.text !== 'hidden' ? 'none' : 'flex')};
   flex: 1;
   overflow: hidden;
   margin: 0px;
-  position: relative;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
   
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    display: flex;
-    margin: 25px;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   display: flex;
+  //   margin: 25px;
+  // }
 `;
 const Chapter = styled.h2`
-  color: ${p => p.theme.colors.blue};
+  color: ${p => p.theme.colors.newBlue};
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.nine};
 `;
 const Title = styled.h1`
   font-size: ${p => p.theme.fontSizes.sixteen};
   color: ${p => p.theme.colors.pink};
-  margin-bottom: 12px;
+  margin-bottom: ${p => p.theme.grafSpace.regular};
 `;
 const Image = styled.img`
   // How to fill page with image: 
@@ -57,7 +63,7 @@ const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};
 
   p {
-    margin-bottom: 12px;
+    margin-bottom: ${p => p.theme.grafSpace.regular};
 
     &:last-child {
       margin-bottom: 0px;

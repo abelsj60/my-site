@@ -1,5 +1,5 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
+// const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
@@ -106,66 +106,66 @@ module.exports = {
     }),
     new ScriptExtHtmlWebpackPlugin({
       defer: /\.js$/
-    }),
-    new DynamicCdnWebpackPlugin({
-      verbose: true,
-      exclude: [
-        'buffer',
-        'react',
-        'react-router-dom',
-        'react-dom',
-        'styled-components',
-        'marked',
-        'parallax-js'
-      ],
-      resolver: (name, version) => {
-        const options = {
-          'react': {
-            var: 'React',
-            version: '16.5.1',
-            url: `https://unpkg.com/react@${version}/umd/react.production.min.js`,
-            name: 'react'
-          },
-          'react-router-dom': {
-            var: 'ReactRouterDOM',
-            version: '4.3.1',
-            url: `https://unpkg.com/react-router-dom@${version}/umd/react-router-dom.min.js`,
-            name: 'react-router-dom'
-          },
-          'react-dom': {
-            var: 'ReactDOM',
-            version: '16.5.1',
-            url: `https://unpkg.com/react-dom@${version}/umd/react-dom.production.min.js`,
-            name: 'react-dom'
-          },
-          'styled-components': {
-            var: 'styled',
-            version: '4.1.3',
-            url: `https://unpkg.com/styled-components@${version}/dist/styled-components.min.js`,
-            name: 'styled-components'
-          },
-          'marked': {
-            var: 'marked',
-            version: '0.5.1',
-            url: `https://unpkg.com/marked@${version}/marked.min.js`,
-            name: 'marked'
-          },
-          'parallax-js': {
-            var: 'Parallax',
-            version: '3.1.0',
-            url: `https://unpkg.com/parallax-js@${version}/dist/parallax.min.js`,
-            name: 'parallax-js'
-          },
-          'buffer': {
-            var: 'Buffer',
-            version: '4.9.1',
-            url: `https://unpkg.com/buffer@${version}/index.js`,
-            name: 'buffer'
-          }
-        };
+    }) //,
+    // new DynamicCdnWebpackPlugin({
+    //   verbose: true,
+    //   exclude: [
+    //     'buffer',
+    //     'react',
+    //     'react-router-dom',
+    //     'react-dom',
+    //     'styled-components',
+    //     'marked',
+    //     'parallax-js'
+    //   ],
+    //   resolver: (name, version) => {
+    //     const options = {
+    //       'react': {
+    //         var: 'React',
+    //         version: '16.5.1',
+    //         url: `https://unpkg.com/react@${version}/umd/react.production.min.js`,
+    //         name: 'react'
+    //       },
+    //       'react-router-dom': {
+    //         var: 'ReactRouterDOM',
+    //         version: '4.3.1',
+    //         url: `https://unpkg.com/react-router-dom@${version}/umd/react-router-dom.min.js`,
+    //         name: 'react-router-dom'
+    //       },
+    //       'react-dom': {
+    //         var: 'ReactDOM',
+    //         version: '16.5.1',
+    //         url: `https://unpkg.com/react-dom@${version}/umd/react-dom.production.min.js`,
+    //         name: 'react-dom'
+    //       },
+    //       'styled-components': {
+    //         var: 'styled',
+    //         version: '4.1.3',
+    //         url: `https://unpkg.com/styled-components@${version}/dist/styled-components.min.js`,
+    //         name: 'styled-components'
+    //       },
+    //       'marked': {
+    //         var: 'marked',
+    //         version: '0.5.1',
+    //         url: `https://unpkg.com/marked@${version}/marked.min.js`,
+    //         name: 'marked'
+    //       },
+    //       'parallax-js': {
+    //         var: 'Parallax',
+    //         version: '3.1.0',
+    //         url: `https://unpkg.com/parallax-js@${version}/dist/parallax.min.js`,
+    //         name: 'parallax-js'
+    //       },
+    //       'buffer': {
+    //         var: 'Buffer',
+    //         version: '4.9.1',
+    //         url: `https://unpkg.com/buffer@${version}/index.js`,
+    //         name: 'buffer'
+    //       }
+    //     };
 
-        return options[name];
-      }
-    })
+    //     return options[name];
+    //   }
+    // })
   ]
 };

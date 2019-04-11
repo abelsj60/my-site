@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
-  background-color: ${p => (p.home ? 'transparent' : p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white)};
+  background-color: ${p => (p.home || p.storyPicActive ? 'transparent' : p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white)};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
@@ -12,38 +12,44 @@ const Container = styled.footer`
   height: 55px;
   font-size: ${p => p.theme.fontSizes.one};
   position: relative;
+  width: 100%;
+  max-width: 70rem;
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    justify-content: flex-end;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   justify-content: flex-end;
+  // }
 `;
 const Line = styled.div`
   display: ${p => p.home || p.hide ? 'none' : ''};
   position: absolute;
-  z-index: 0;
+  z-index: 1;
   left: 25px;
   right: 25px;
   top: 0px;
   margin: 0px;
   height: 1px;
-  transform: scaleY(0.5);
-  background-color: ${p => p.theme.colors.lightPink};
+  // transform: scaleY(0.5);
+  background-color: ${p => p.theme.colors.pink};
 
-  @media(min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    display: ${p => !p.showStoryText ? 'block' : ''};
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media(min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   display: ${p => !p.showStoryText ? 'block' : ''};
+  // }
 `;
 const StoryButton = styled(Button)`
-  color: ${p => (!p.active ? p.theme.colors.yellow : p.theme.colors.blue)};
+  // color: ${p => (!p.active ? p.theme.colors.yellow : p.theme.colors.white)};
+  color: white;
   margin-left: 25px;
-  background-color: ${p => (!p.active ? p.theme.colors.pink : undefined)};
-  border: ${p => `1px solid ${!p.active ? p.theme.colors.pink : p.theme.colors.pink}`};
+  background-color: ${p => (!p.active ? p.theme.colors.pink : p.theme.colors.newBlue)};
+  // border: ${p => `1px solid ${!p.active ? p.theme.colors.pink : p.theme.colors.lightPink}`};
   width: 43px;
   padding: 7px;
 
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    display: none;
-  }
+  // DISABLED: 4/9/19 EXPERIMENT
+  // @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
+  //   display: none;
+  // }
 
   https://stackoverflow.com/a/18997800
   &:after {
@@ -60,7 +66,7 @@ const Graf = styled.p`
   cursor: pointer;
   margin-right: 20px;
   margin-bottom: 0px;
-  color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.blue)};
+  color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.newBlue)};
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
@@ -104,13 +110,12 @@ export default function FooterContainer(props) {
       home={isHome}
       story={isStory}
       reverie={isReverie}
+      storyPicActive={!showStoryText}
     >
       <Line
         home={isHome}
         hide={
-          (!showStoryText && !isReverie)
-            || showBusinessCard
-            || showLegalTerms
+          !showStoryText && !isReverie
         }
         showStoryText={showStoryText}
       />
