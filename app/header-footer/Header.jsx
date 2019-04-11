@@ -15,15 +15,12 @@ const headerLinks = [
   { name: 'Journalism', path: '/journalism' },
   { name: 'About', path: '/about' }
 ];
-
-const tempColor = 'white';
-const tempFont = "'Montserrat', sans-serif";
-const tempWeight = '500';
+const fontWeight = '500';
 
 const Container = styled.header`
   background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? p.theme.colors.reverieBlue : p.theme.colors.white)};
   color: ${p => (p.home ? p.theme.colors.white : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
-  color: ${tempColor};
+  color: ${p => p.theme.colors.white};
   flex-shrink: 0;
   z-index: 2;
   height: 52px;
@@ -33,36 +30,39 @@ const Container = styled.header`
   width: 100%;
   max-width: 75rem;
 `;
+const HeaderBackground = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 52px;
+  left: 0px;
+  background-color: ${p => !p.home ? p.theme.colors.darkPinkThree : ''};
+  z-index: -1;
+`;
 const RestyledLink = styled(StyledLink)`
-  font-size: ${p => p.theme.fontSizes.six}; // four
+  font-size: ${p => p.theme.fontSizes.six};
   font-weight: ${p => p.home ? 400 : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
   color: ${p => (p.home ? 'white' : p.reverie === 'active' ? p.theme.colors.lightBlack : p.theme.colors.mediumBlack)};
-  color: ${tempColor};
-  font-family: ${p => !p.home ? "'Aref Ruqaa', serif" : ''};
-  font-family: ${tempFont};
-  font-weight: ${tempWeight};
-  // margin-top: -4px;
+  color: ${p => p.theme.colors.white};
+  font-weight: ${fontWeight};
 
   && {
     text-decoration: ${p => (p.active === 'active' ? 'underline' : undefined)};
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    font-size: ${p => !p.home ? p.theme.fontSizes.six : p.theme.fontSizes.three}; // nine
+    font-size: ${p => !p.home ? p.theme.fontSizes.six : p.theme.fontSizes.three};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
 `;
 const Motto = styled.p`
-  font-family: 'Aref Ruqaa', serif;
-  font-family: ${tempFont};
-  font-weight: ${tempWeight};
+  font-weight: ${fontWeight};
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
   font-style: italic;
-  font-size: ${p => p.theme.fontSizes.two}; // one 
+  font-size: ${p => p.theme.fontSizes.two};
   margin: 1px 20px 0px 13px;
   min-width: 0px;  
   // https://css-tricks.com/flexbox-truncated-text/
@@ -72,9 +72,6 @@ const Motto = styled.p`
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.four};
-    // margin-left: 13px;
-    // margin-bottom: 2px;
-    // margin-top: 1px;
     margin-right: 0px;
   }
 `;
@@ -109,7 +106,6 @@ const NavList = styled(UnorderedList)`
 const Icon = styled.img`
   display: ${p => (p.home ? 'none' : undefined)};
   height: 22px;
-  // width: 17px;
   margin-left: auto;
   margin-right: 10px;
   cursor: pointer;
@@ -154,23 +150,13 @@ export default class Header extends Component {
     );
 
     const handleClickForHeader = hcForHeader.boundHandleClick;
-    // const reverieOrRegularMotto = referrer.location !== 'reverie'
-    //   ? 'Narrative coding and other adventures'
-    //   : "Let's take a flight of fancy";
 
     return (
       <Container
         home={homeIsActive}
         reverie={reverieIsActive}
       >
-        <div style={{
-          position: 'absolute',
-          width: '100%',
-          height: '52px',
-          left: '0px',
-          backgroundColor: '#AF125A', // #008DD5
-          zIndex: '-1'
-        }}></div>
+        <HeaderBackground home={homeIsActive}></HeaderBackground>
         <NameAsLink
           reverie={reverieIsActive}
           hide={
