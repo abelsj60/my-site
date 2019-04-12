@@ -11,8 +11,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // Local needs '/'
 // GH needs '/build' and '/public'
-const publicPath = process.env.NODE_ENV === 'production' ? '/build/' : '/';
-const publicFilesPath = process.env.NODE_ENV === 'production' ? '/public/' : '/';
+const buildPath = process.env.NODE_ENV === 'production' ? '/build/' : '/';
+const publicFilePath = process.env.NODE_ENV === 'production' ? '/public/' : '/';
 
 module.exports = {
   entry: {
@@ -21,7 +21,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js',
-    publicPath: publicPath
+    publicPath: buildPath
   },
   devtool: 'source-map',
   module: {
@@ -102,22 +102,21 @@ module.exports = {
       filename: '../index.html',
       template: './template.html',
       inject: 'head',
-      publicFilesPath: publicFilesPath
+      publicFilePath: publicFilePath
     }),
     new ScriptExtHtmlWebpackPlugin({
       defer: /\.js$/
     }),
     new DynamicCdnWebpackPlugin({
       verbose: true,
-      exclude: [
-        'buffer',
-        'react',
-        'react-router-dom',
-        'react-dom',
-        'styled-components',
-        'marked',
-        'parallax-js'
-      ],
+      // exclude: [
+      //   'react',
+      //   'react-router-dom',
+      //   'react-dom',
+      //   'styled-components',
+      //   'marked',
+      //   'parallax-js'
+      // ],
       resolver: (name, version) => {
         const options = {
           'react': {
@@ -155,12 +154,6 @@ module.exports = {
             version: '3.1.0',
             url: `https://unpkg.com/parallax-js@${version}/dist/parallax.min.js`,
             name: 'parallax-js'
-          },
-          'buffer': {
-            var: 'Buffer',
-            version: '4.9.1',
-            url: `https://unpkg.com/buffer@${version}/index.js`,
-            name: 'buffer'
           }
         };
 

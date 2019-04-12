@@ -75,7 +75,7 @@ const Motto = styled.p`
 `;
 const Nav = styled.nav`
   display: ${p => (p.home ? undefined : 'none')};
-  padding: ${p => p.home ? '7px 13px' : undefined};
+  padding: ${p => p.home ? '8px 15px' : undefined};
   background-color: ${p => p.home ? 'rgba(0,0,0,0.25)' : undefined};
   border-radius: ${p => p.home ? '10px' : undefined};
   margin-top: -1px;

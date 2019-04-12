@@ -72,7 +72,7 @@ const Text = styled.section`
     font-weight: 500;
     margin-bottom: 10px;
     font-size: ${p => p.theme.fontSizes.three};
-    color: ${p => p.theme.colors.yellow};
+    color: ${p => p.theme.colors.white};
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
     text-align: center;
     -webkit-font-smoothing: antialiased;

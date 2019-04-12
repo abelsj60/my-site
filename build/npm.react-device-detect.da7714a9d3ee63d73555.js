@@ -685,7 +685,7 @@ var CustomView = exports.CustomView = function CustomView(_ref12) {
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+module.exports = __webpack_require__(/*! react */ "react");
 
 /***/ }),
 /* 6 */
@@ -771,4 +771,4 @@ exports.default = function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=npm.react-device-detect.7e5161f1fb83db85641f.js.map
+//# sourceMappingURL=npm.react-device-detect.da7714a9d3ee63d73555.js.map

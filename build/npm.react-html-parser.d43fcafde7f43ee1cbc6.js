@@ -325,7 +325,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = StyleElementType;
 
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -375,7 +375,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = TagElementType;
 
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var _react = __webpack_require__(/*! react */ "react");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -890,4 +890,4 @@ function isValidTagOrAttributeName(tagName) {
 /***/ })
 
 }]);
-//# sourceMappingURL=npm.react-html-parser.eea98bdbeed09fb4d33f.js.map
+//# sourceMappingURL=npm.react-html-parser.d43fcafde7f43ee1cbc6.js.map
