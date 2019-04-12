@@ -1,14 +1,13 @@
 import ChapterNav from './ChapterNav.jsx';
-import Left from '../primitives/Left.jsx';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import Right from '../primitives/Right.jsx';
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
 
-const RestyledLeft = styled(Left)`
+const PictureHolder = styled.div`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   flex: 1;
@@ -16,7 +15,7 @@ const RestyledLeft = styled(Left)`
   margin-top: 25px;
   overflow: auto; // Needed by desktop Chrome for no known reason
 `;
-const RestyledRight = styled(Right)`
+const RestyledContentHolder = styled(ContentHolder)`
   display: ${p => (p.text !== 'hidden' ? 'none' : 'flex')};
   flex: 1;
   overflow: hidden;
@@ -35,7 +34,7 @@ const Chapter = styled.h2`
 const Title = styled.h1`
   font-size: ${p => p.theme.fontSizes.sixteen};
   color: ${p => p.theme.colors.pink};
-  margin-bottom: ${p => p.theme.grafSpace.regular};
+  margin-bottom: ${p => p.theme.bottomMargin.regular};
 `;
 const Image = styled.img`
   // How to fill page with image: 
@@ -50,7 +49,7 @@ const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};
 
   p {
-    margin-bottom: ${p => p.theme.grafSpace.regular};
+    margin-bottom: ${p => p.theme.bottomMargin.regular};
 
     &:last-child {
       margin-bottom: 0px;
@@ -80,7 +79,7 @@ export default function Story(props) {
 
   return (
     <Main>
-      <RestyledLeft as="section" text={textStatus}>
+      <PictureHolder as="section" text={textStatus}>
         <ChapterNav {...props} />
         <Overflow ref={
           ref => overflowRef.current = ref
@@ -100,10 +99,10 @@ export default function Story(props) {
             )}
           </StoryText>
         </Overflow>
-      </RestyledLeft>
-      <RestyledRight rightMargin text={textStatus}>
+      </PictureHolder>
+      <RestyledContentHolder rightMargin text={textStatus}>
         <Image alt="fantasy illustration" src={image} />
-      </RestyledRight>
+      </RestyledContentHolder>
     </Main>
   );
 }

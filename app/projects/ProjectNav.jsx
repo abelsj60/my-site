@@ -16,7 +16,7 @@ const Group = styled(UnorderedList)`
     max-width: 100%;
   `};
 
-  ${p => p.isRight && css`
+  ${p => p.isContentHolder && css`
     @media (min-width: ${p.theme.mediaQueries.narrowBreakThree}) {
       flex-direction: column;
       margin-top: 25px;
@@ -29,12 +29,12 @@ const Item = styled.li`
   margin-right: ${p => (p.padding ? '5px' : undefined)};
 
   &:first-child {
-    margin-left: ${p => (!p.isRight ? '0px' : undefined)};
+    margin-left: ${p => (!p.isContentHolder ? '0px' : undefined)};
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
-    margin-right: ${p => (p.isRight ? '0px' : undefined)};
-    margin-bottom: ${p => (p.isRight ? '5px' : undefined)};
+    margin-right: ${p => (p.isContentHolder ? '0px' : undefined)};
+    margin-bottom: ${p => (p.isContentHolder ? '5px' : undefined)};
   }
 `;
 const RestyledLink = styled(StyledLink)`
@@ -64,7 +64,7 @@ export default function ProjectNav(props) {
     appState,
     indexForProjectPics,
     isActive,
-    isRight,
+    isContentHolder,
     num,
     project
   } = props;
@@ -80,7 +80,7 @@ export default function ProjectNav(props) {
 
   return (
     <Group
-      isRight={isRight}
+      isContentHolder={isContentHolder}
       menu={isMenu}
       num={num}
     >
@@ -103,7 +103,7 @@ export default function ProjectNav(props) {
             return (
               <Item
                 key={idx}
-                isRight={isRight}
+                isContentHolder={isContentHolder}
                 padding={padding}
               >
                 <RestyledLink

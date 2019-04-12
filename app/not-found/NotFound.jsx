@@ -1,9 +1,9 @@
 import Main from '../primitives/Main.jsx';
 import React from 'react';
-import Right from '../primitives/Right.jsx';
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
 
-const RestyledRight = styled(Right)`
+const RestyledContentHolder = styled(ContentHolder)`
   flex: 1;
   margin-right: 25px;
 
@@ -24,12 +24,12 @@ export default function NotFound(props) {
   console.log('Not Found: ', props);
   return (
     <Main>
-      <RestyledRight>
+      <RestyledContentHolder>
         <Hed>
           Uh oh. Not found!
         </Hed>
         <FailWhale />
-      </RestyledRight>
+      </RestyledContentHolder>
     </Main>
   );
 }

@@ -1,7 +1,6 @@
 import bio from '../data/about/about.md';
-import Left from '../primitives/Left.jsx';
 import linkedInIcon from '../../public/linked-in-icon.png';
-import Right from '../primitives/Right.jsx';
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';
 import Overflow from '../primitives/Overflow.jsx';
@@ -10,12 +9,9 @@ import ReactGA from 'react-ga';
 import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
 
-const RestyledLeft = styled(Left)`
-  min-width: 327px;
-`;
 const Heading = styled.div`
   display: flex;
-  margin-bottom: ${p => p.theme.grafSpace.regular};;
+  margin-bottom: ${p => p.theme.bottomMargin.regular};;
   justify-content: space-between;
 `;
 const Hed = styled.h1`
@@ -27,7 +23,7 @@ const Text = styled.section`
   overflow: auto;
 
   p {
-    margin-bottom: ${p => p.theme.grafSpace.regular};
+    margin-bottom: ${p => p.theme.bottomMargin.regular};
 
     &:last-child {
       margin-bottom: 0px;
@@ -49,8 +45,7 @@ const IconContainer = styled.div`
 export default function About() {
   return (
     <Main>
-      <RestyledLeft />
-      <Right>
+      <ContentHolder>
         <Overflow>
           <Heading>
             <Hed>
@@ -75,7 +70,7 @@ export default function About() {
             )}
           </Text>
         </Overflow>
-      </Right>
+      </ContentHolder>
     </Main>
   );
 }

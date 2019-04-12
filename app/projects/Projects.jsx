@@ -1,12 +1,10 @@
-import DesktopProjectNav from './DesktopProjectNav.jsx';
-import Left from '../primitives/Left.jsx';
 import Main from '../primitives/Main.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React, { Fragment } from 'react';
-import Right from '../primitives/Right.jsx';
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
 
 const ProjectName = styled.h1`
@@ -23,12 +21,12 @@ const Hed = styled.h3`
 `;
 const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.thirteen};
-  margin-bottom: ${p => p.theme.grafSpace.regular};
+  margin-bottom: ${p => p.theme.bottomMargin.regular};
   font-weight: 300;
   color: ${p => p.theme.colors.pink};
 `;
 const Graf = styled.p`
-  margin-bottom: ${p => p.theme.grafSpace.regular};
+  margin-bottom: ${p => p.theme.bottomMargin.regular};
   margin-right: 0px;
 `;
 const Images = styled.section`
@@ -102,14 +100,7 @@ export default function Projects(props) {
 
   return (
     <Main>
-      <Left>
-        <DesktopProjectNav
-          {...props}
-          data={data}
-          params={params}
-        />
-      </Left>
-      <Right>
+      <ContentHolder>
         <MenuButton
           {...props}
           noOffset={true}
@@ -142,7 +133,7 @@ export default function Projects(props) {
             <Images>
               <ProjectNav
                 indexForProjectPics={indexForProjectPics}
-                isRight={true}
+                isContentHolder={true}
                 project={project}
               />
               <Figure>
@@ -152,7 +143,7 @@ export default function Projects(props) {
             </Images>
           </section>
         </Overflow>
-      </Right>
+      </ContentHolder>
     </Main>
   );
 }

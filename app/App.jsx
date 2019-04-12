@@ -23,14 +23,14 @@ import { withRouter } from 'react-router';
 
 const colors = {
   black: 'black',
-  blue: '#008DD5',
-  blueTwo: '#B9DFF3',
+  blue: '#008dd5',
+  blueTwo: '#b9dff3',
   lightBlack: '#455057',
   pink: '#fd1172',
   reverieBlue: '#d2e7ff',
   white: 'white',
   yellow: '#ffe74c',
-  darkPink: '#AF125A'
+  darkPink: '#af125a'
 };
 const fontSizes = {
   zero: '.9rem',
@@ -60,10 +60,9 @@ const mediaQueries = {
   narrowBreakThree: '651px',
   desktopView: '848px' // ! Probably not needed anymore...
 };
-const grafSpace = {
+const bottomMargin = {
   regular: '18px'
 };
-const tempBackgroundColor = 'white';
 const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
@@ -71,7 +70,7 @@ const GlobalStyle = createGlobalStyle`
 
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
-    background-color: ${p => p.reverie ? '#d2e7ff' : tempBackgroundColor};
+    background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
   }
   
   body {
@@ -99,7 +98,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     p {
-      margin-bottom: ${p => p.theme.grafSpace.regular};
+      margin-bottom: ${p => p.theme.bottomMargin.regular};
       line-height: 1.6;
     }
   }
@@ -169,7 +168,7 @@ class App extends Component {
     return (
       <ThemeProvider
         theme={{
-          grafSpace,
+          bottomMargin,
           colors,
           fontSizes,
           mediaQueries,

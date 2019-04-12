@@ -1,12 +1,11 @@
-import ArticleOrReverieNav from './ArticleOrReverieNav.jsx';
-import Left from '../primitives/Left.jsx';
+
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';
 import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import Right from '../primitives/Right.jsx';
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
 
 const Dek = styled.h2`
@@ -20,7 +19,7 @@ const Dek = styled.h2`
 `;
 const Hed = styled.h1`
   font-size: ${p => p.theme.fontSizes.sixteen};
-  margin-bottom: ${p => p.theme.grafSpace.regular};
+  margin-bottom: ${p => p.theme.bottomMargin.regular};
 `;
 const Text = styled.section`
   p {
@@ -36,7 +35,7 @@ const Text = styled.section`
   ul,
   ol {
     margin-top: 0px;
-    margin-bottom: ${p => p.theme.grafSpace.regular};
+    margin-bottom: ${p => p.theme.bottomMargin.regular};
   }
 
   li {
@@ -50,7 +49,7 @@ const Text = styled.section`
 const BylineOrDate = styled.p`
   font-size: ${p => p.theme.fontSizes.three};
   font-style: italic;
-  margin-bottom: ${p => p.theme.grafSpace.regular};;
+  margin-bottom: ${p => p.theme.bottomMargin.regular};;
 `;
 
 export default function ArticleOrReverie(props) {
@@ -84,13 +83,7 @@ export default function ArticleOrReverie(props) {
 
   return (
     <Main reverie={isReverie}>
-      <Left reverie={isReverie}>
-        <ArticleOrReverieNav
-          {...props}
-          data={data}
-        />
-      </Left>
-      <Right>
+      <ContentHolder>
         <MenuButton {...props} />
         <Overflow ref={
           ref => overflowRef.current = ref
@@ -113,7 +106,7 @@ export default function ArticleOrReverie(props) {
             )}
           </Text>
         </Overflow>
-      </Right>
+      </ContentHolder>
     </Main>
   );
 }

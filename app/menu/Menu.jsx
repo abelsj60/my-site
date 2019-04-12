@@ -1,7 +1,7 @@
 import Main from '../primitives/Main.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
-import Right from '../primitives/Right.jsx';
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -29,10 +29,10 @@ export default function Menu(props) {
 
   return (
     <RestyledMain reverie={isReverie}>
-      <Right>
+      <ContentHolder>
         <MenuButton {...props} />
         <Overflow>{children}</Overflow>
-      </Right>
+      </ContentHolder>
     </RestyledMain>
   );
 }
