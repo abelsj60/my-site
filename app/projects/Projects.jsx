@@ -27,10 +27,10 @@ const Dek = styled.h2`
 `;
 const Graf = styled.p`
   margin-right: 0px;
-  margin-bottom: ${p => p.num !== 2 ? p.theme.bottomMargin.regular : '10px'};
+  margin-bottom: ${p => p.num !== 2 ? p.theme.bottomMargin.regular : '15px'};
 `;
 const Figure = styled.figure`
-  padding-top: 10px;
+  padding-top: 15px;
   border-top: 1px solid ${p => p.theme.colors.blueTwo};
   display: flex;
   flex-direction: column;

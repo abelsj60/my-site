@@ -242,7 +242,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html {\n    // Best practice to load fonts: \n    // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import\n\n    font-family: 'Montserrat', sans-serif;\n    font-size: 62.5%;\n    background-color: ", ";\n  }\n  \n  body {\n    margin: 0px;\n    padding: 0px;\n    font-size: ", ";\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 300;\n    -webkit-overflow-scrolling: touch;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n    margin: 0 auto;\n\n    h1,\n    h2,\n    h3,\n    p,\n    ul {\n      margin: 0px;\n    }\n\n    h1 {\n      font-family: 'Playfair Display', serif;\n      font-weight: 900;\n      margin-left: 2px;\n    }\n\n    p {\n      margin-bottom: ", ";\n      line-height: 1.6;\n    }\n  }\n\n  #app {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    height: ", "px;\n    position: relative;\n    \n    @media(orientation:landscape) {\n      // Fix esoteric iOS 7 iPad bug:\n      // https://stackoverflow.com/a/19449123\n      // https://stackoverflow.com/q/19012135\n      // https://krpano.com/ios/bugs/ios7-ipad-landscape/\n\n      ", ";\n    }\n    \n    ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html {\n    // Best practice to load fonts: \n    // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import\n\n    font-family: 'Montserrat', sans-serif;\n    font-size: 62.5%;\n    background-color: ", ";\n  }\n  \n  body {\n    margin: 0px;\n    padding: 0px;\n    font-size: ", ";\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 300;\n    -webkit-overflow-scrolling: touch;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n\n    h1,\n    h2,\n    h3,\n    p,\n    ul {\n      margin: 0px;\n    }\n\n    h1 {\n      font-family: 'Playfair Display', serif;\n      font-weight: 900;\n      margin-left: 2px;\n    }\n\n    p {\n      margin-bottom: ", ";\n      line-height: 1.6;\n    }\n  }\n\n  #app {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    height: ", "px;\n    position: relative;\n    \n    @media(orientation:landscape) {\n      // Fix esoteric iOS 7 iPad bug:\n      // https://stackoverflow.com/a/19449123\n      // https://stackoverflow.com/q/19012135\n      // https://krpano.com/ios/bugs/ios7-ipad-landscape/\n\n      ", ";\n    }\n    \n    ", ";\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -302,7 +302,6 @@ var mediaQueries = {
   tinyViewTwo: '425px',
   narrowBreakOne: '500px',
   narrowBreakTwo: '690px',
-  narrowBreakThree: '651px',
   desktopView: '848px' // ! Probably not needed anymore...
 
 };
@@ -4528,12 +4527,12 @@ var Graf = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].p.withConf
   displayName: "Projects__Graf",
   componentId: "e6bzkp-3"
 })(["margin-right:0px;margin-bottom:", ";"], function (p) {
-  return p.num !== 2 ? p.theme.bottomMargin.regular : '10px';
+  return p.num !== 2 ? p.theme.bottomMargin.regular : '15px';
 });
 var Figure = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].figure.withConfig({
   displayName: "Projects__Figure",
   componentId: "e6bzkp-4"
-})(["padding-top:10px;border-top:1px solid ", ";display:flex;flex-direction:column;margin:0px;"], function (p) {
+})(["padding-top:15px;border-top:1px solid ", ";display:flex;flex-direction:column;margin:0px;"], function (p) {
   return p.theme.colors.blueTwo;
 });
 var Caption = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].figcaption.withConfig({
@@ -5876,4 +5875,4 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAAA/CAYAAACC
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.f3d958e622d235080487.js.map
+//# sourceMappingURL=main.1429c5c2bfccfec2e220.js.map

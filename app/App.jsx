@@ -57,7 +57,6 @@ const mediaQueries = {
   tinyViewTwo: '425px',
   narrowBreakOne: '500px',
   narrowBreakTwo: '690px',
-  narrowBreakThree: '651px',
   desktopView: '848px' // ! Probably not needed anymore...
 };
 const bottomMargin = {
@@ -81,7 +80,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 300;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    margin: 0 auto;
 
     h1,
     h2,
