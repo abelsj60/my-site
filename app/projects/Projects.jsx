@@ -26,45 +26,27 @@ const Dek = styled.h2`
   color: ${p => p.theme.colors.pink};
 `;
 const Graf = styled.p`
-  margin-bottom: ${p => p.theme.bottomMargin.regular};
   margin-right: 0px;
-`;
-const Images = styled.section`
-  display: flex;
-  flex-direction: column;
-
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-  }
+  margin-bottom: ${p => p.num !== 2 ? p.theme.bottomMargin.regular : '10px'};
 `;
 const Figure = styled.figure`
+  padding-top: 10px;
+  border-top: 1px solid ${p => p.theme.colors.blueTwo};
+  display: flex;
+  flex-direction: column;
   margin: 0px;
-
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
-    display: flex;
-    flex-direction: column;
-  }
 `;
 const Caption = styled.figcaption`
   display: flex;
-  margin: 10px 10px 8px 0px;
+  margin-bottom: 10px;
   font-size: ${p => p.theme.fontSizes.seven};
   color: ${p => p.theme.colors.lightBlack};
-
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
-    margin-top: 0;
-  }
 `;
 const Image = styled.img`
   flex: 1;
   max-width: 100%;
   object-fit: cover;
   vertical-align: bottom;
-
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
-    margin-right: 10px;
-  }
 `;
 
 export default function Projects(props) {
@@ -90,9 +72,9 @@ export default function Projects(props) {
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
   const mapData = [
-    { technologies },
     { contribution },
-    { description }
+    { description },
+    { technologies }
   ];
   const keys = mapData.map(
     item => Object.keys(item)[0]
@@ -123,24 +105,22 @@ export default function Projects(props) {
                     <Hed>
                       {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
                     </Hed>
-                    <Graf>
+                    <Graf num={idx}>
                       {proj[keys[idx]]}
                     </Graf>
                   </Fragment>
                 )
               }
             />
-            <Images>
-              <Figure>
-                <ProjectNav
-                  indexForProjectPics={indexForProjectPics}
-                  isProjectPage={true}
-                  project={project}
-                />
-                <Caption>{caption}</Caption>
-                <Image alt="mainPic" src={source} />
-              </Figure>
-            </Images>
+            <Figure>
+              <ProjectNav
+                indexForProjectPics={indexForProjectPics}
+                isProjectPage={true}
+                project={project}
+              />
+              <Caption>{caption}</Caption>
+              <Image alt="mainPic" src={source} />
+            </Figure>
           </section>
         </Overflow>
       </ContentHolder>

@@ -307,7 +307,7 @@ var mediaQueries = {
 
 };
 var bottomMargin = {
-  regular: '18px'
+  regular: '20px'
 };
 var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_16__["createGlobalStyle"])(_templateObject(), function (p) {
   return p.reverie ? '#d2e7ff' : 'white';
@@ -3144,7 +3144,7 @@ webpackContext.id = "./app/data/projects sync recursive \\.md$";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = {"attributes":{"projectName":"Arrow","type":"Personalize interactive video","technologies":"Cloud: AWS ∙ Language: PHP ∙ Transcoding: FFmpeg","contribution":"As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.","description":"Arrow makes it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.","captions":["Arrow caption one","Arrow caption two","Arrow caption three"],"projectThumbnail":["https://picsum.photos/217/?random","https://picsum.photos/217/?random","https://picsum.photos/217/?random"],"full":["https://picsum.photos/873/569/?random","https://picsum.photos/874/569/?random","https://picsum.photos/875/569/?random"]},"body":"","frontmatter":"{\n  projectName: 'Arrow',\n  type: 'Personalize interactive video',\n  technologies: 'Cloud: AWS ∙ Language: PHP ∙ Transcoding: FFmpeg',\n  contribution: \"As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.\",\n  description: 'Arrow makes it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.',\n  captions: [\n    'Arrow caption one',\n    'Arrow caption two',\n    'Arrow caption three'\n  ],\n  projectThumbnail: [\n    'https://picsum.photos/217/?random',\n    'https://picsum.photos/217/?random',\n    'https://picsum.photos/217/?random'\n  ],\n  full: [\n    'https://picsum.photos/873/569/?random',\n    'https://picsum.photos/874/569/?random',\n    'https://picsum.photos/875/569/?random'\n  ]\n}"}
+module.exports = {"attributes":{"projectName":"Arrow","type":"Personalize interactive video","technologies":"Cloud: AWS ∙ Language: PHP ∙ Transcoding: FFmpeg","contribution":"As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.","description":"Arrow makes it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.","captions":["Arrow caption one","Arrow caption two","Arrow caption three"],"projectThumbnail":["https://picsum.photos/217/180?random","https://picsum.photos/217/180?random","https://picsum.photos/217/180?random"],"full":["https://picsum.photos/873/569/?random","https://picsum.photos/874/569/?random","https://picsum.photos/875/569/?random"]},"body":"","frontmatter":"{\n  projectName: 'Arrow',\n  type: 'Personalize interactive video',\n  technologies: 'Cloud: AWS ∙ Language: PHP ∙ Transcoding: FFmpeg',\n  contribution: \"As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.\",\n  description: 'Arrow makes it easy for editors, salespeople and others to customize both content and interactive features on a one-to-one basis without help from a service provider.',\n  captions: [\n    'Arrow caption one',\n    'Arrow caption two',\n    'Arrow caption three'\n  ],\n  projectThumbnail: [\n    'https://picsum.photos/217/180?random',\n    'https://picsum.photos/217/180?random',\n    'https://picsum.photos/217/180?random'\n  ],\n  full: [\n    'https://picsum.photos/873/569/?random',\n    'https://picsum.photos/874/569/?random',\n    'https://picsum.photos/875/569/?random'\n  ]\n}"}
 
 /***/ }),
 
@@ -3186,7 +3186,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = {"attributes":{"projectName":"Slingshot","type":"Global software demos","technologies":"Cloud: AWS ∙ Language: PHP ∙ Broadcasting: PubNub / Websockets","contribution":"As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.","description":"Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible.","captions":["Slingshot caption one","Slingshot caption two","Slingshot caption three"],"projectThumbnail":["https://picsum.photos/217/?random","https://picsum.photos/217/?random","https://picsum.photos/217/?random"],"full":["https://picsum.photos/876/569/?random","https://picsum.photos/877/569/?random","https://picsum.photos/878/569/?random"]},"body":"","frontmatter":"{\n  projectName: 'Slingshot',\n  type: 'Global software demos',\n  technologies: 'Cloud: AWS ∙ Language: PHP ∙ Broadcasting: PubNub / Websockets',\n  contribution:\n    \"As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.\",\n  description:\n    'Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible.',\n  captions: [\n    'Slingshot caption one',\n    'Slingshot caption two',\n    'Slingshot caption three'\n  ],\n  projectThumbnail: [\n    'https://picsum.photos/217/?random',\n    'https://picsum.photos/217/?random',\n    'https://picsum.photos/217/?random'\n  ],\n  full: [\n    'https://picsum.photos/876/569/?random',\n    'https://picsum.photos/877/569/?random',\n    'https://picsum.photos/878/569/?random'\n  ]\n}"}
+module.exports = {"attributes":{"projectName":"Slingshot","type":"Global software demos","technologies":"Cloud: AWS ∙ Language: PHP ∙ Broadcasting: PubNub / Websockets","contribution":"As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.","description":"Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible.","captions":["Slingshot caption one","Slingshot caption two","Slingshot caption three"],"projectThumbnail":["https://picsum.photos/217/180?random","https://picsum.photos/217/180?random","https://picsum.photos/217/180?random"],"full":["https://picsum.photos/876/569/?random","https://picsum.photos/877/569/?random","https://picsum.photos/878/569/?random"]},"body":"","frontmatter":"{\n  projectName: 'Slingshot',\n  type: 'Global software demos',\n  technologies: 'Cloud: AWS ∙ Language: PHP ∙ Broadcasting: PubNub / Websockets',\n  contribution:\n    \"As Three Minute Media's founder, I oversaw platform development, managing our project lead and prioritizing features.\",\n  description:\n    'Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible. Unlike most presentation platforms, which prioritize slide/graphic design, SlingShot focuses on the choreography of live software demonstrations. It makes it easy for a presenter to give a non-linear presentation, switching between slides and live product features in order to tell the best story possible.',\n  captions: [\n    'Slingshot caption one',\n    'Slingshot caption two',\n    'Slingshot caption three'\n  ],\n  projectThumbnail: [\n    'https://picsum.photos/217/180?random',\n    'https://picsum.photos/217/180?random',\n    'https://picsum.photos/217/180?random'\n  ],\n  full: [\n    'https://picsum.photos/876/569/?random',\n    'https://picsum.photos/877/569/?random',\n    'https://picsum.photos/878/569/?random'\n  ]\n}"}
 
 /***/ }),
 
@@ -3197,7 +3197,7 @@ module.exports = {"attributes":{"projectName":"Slingshot","type":"Global softwar
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = {"attributes":{"projectName":"TMMnews","type":"Bespoke video news","technologies":"Cloud: WordPress ∙ Language: JavaScript, HTML, CSS","contribution":"News anchor, oversaw platform development, managed dev team, prioritized features.","description":"TMMnews is a custom WordPress theme that programmatically assembles news shows from individual video segments.","captions":["TMMnews caption one","TMMnews caption two","TMMnews caption three"],"projectThumbnail":["https://picsum.photos/217/?random","https://picsum.photos/217/?random","https://picsum.photos/217/?random"],"full":["https://picsum.photos/879/569/?random","https://picsum.photos/880/569/?random","https://picsum.photos/881/569/?random"]},"body":"","frontmatter":"{\n  projectName: 'TMMnews',\n  type: 'Bespoke video news',\n  technologies: 'Cloud: WordPress ∙ Language: JavaScript, HTML, CSS',\n  contribution:\n    'News anchor, oversaw platform development, managed dev team, prioritized features.',\n  description:\n  'TMMnews is a custom WordPress theme that programmatically assembles news shows from individual video segments.',\n  captions: [\n    'TMMnews caption one',\n    'TMMnews caption two',\n    'TMMnews caption three'\n  ],\n  projectThumbnail: [\n    'https://picsum.photos/217/?random',\n    'https://picsum.photos/217/?random',\n    'https://picsum.photos/217/?random'\n  ],\n  full: [\n    'https://picsum.photos/879/569/?random',\n    'https://picsum.photos/880/569/?random',\n    'https://picsum.photos/881/569/?random'\n  ]\n}"}
+module.exports = {"attributes":{"projectName":"TMMnews","type":"Bespoke video news","technologies":"Cloud: WordPress ∙ Language: JavaScript, HTML, CSS","contribution":"News anchor, oversaw platform development, managed dev team, prioritized features.","description":"TMMnews is a custom WordPress theme that programmatically assembles news shows from individual video segments.","captions":["TMMnews caption one","TMMnews caption two","TMMnews caption three"],"projectThumbnail":["https://picsum.photos/217/180?random","https://picsum.photos/217/180?random","https://picsum.photos/217/180?random"],"full":["https://picsum.photos/879/569/?random","https://picsum.photos/880/569/?random","https://picsum.photos/881/569/?random"]},"body":"","frontmatter":"{\n  projectName: 'TMMnews',\n  type: 'Bespoke video news',\n  technologies: 'Cloud: WordPress ∙ Language: JavaScript, HTML, CSS',\n  contribution:\n    'News anchor, oversaw platform development, managed dev team, prioritized features.',\n  description:\n  'TMMnews is a custom WordPress theme that programmatically assembles news shows from individual video segments.',\n  captions: [\n    'TMMnews caption one',\n    'TMMnews caption two',\n    'TMMnews caption three'\n  ],\n  projectThumbnail: [\n    'https://picsum.photos/217/180?random',\n    'https://picsum.photos/217/180?random',\n    'https://picsum.photos/217/180?random'\n  ],\n  full: [\n    'https://picsum.photos/879/569/?random',\n    'https://picsum.photos/880/569/?random',\n    'https://picsum.photos/881/569/?random'\n  ]\n}"}
 
 /***/ }),
 
@@ -4285,18 +4285,14 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 var RestyledList = Object(styled_components__WEBPACK_IMPORTED_MODULE_6__["default"])(_primitives_UnorderedList_jsx__WEBPACK_IMPORTED_MODULE_7__["default"]).withConfig({
   displayName: "MultiProjectNav__RestyledList",
   componentId: "gvpxwc-0"
-})(["height:100%;overflow:auto;margin-right:25px;width:", ";", ";"], function (p) {
+})(["height:100%;margin-right:25px;width:", ";", ";"], function (p) {
   return !p.menu ? '327px' : undefined;
 }, function (p) {
   return p.menu && Object(styled_components__WEBPACK_IMPORTED_MODULE_6__["css"])(["display:block;margin-right:0;"]);
 });
-var ListItem = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].li.withConfig({
-  displayName: "MultiProjectNav__ListItem",
-  componentId: "gvpxwc-1"
-})(["&:not(:last-child){margin-bottom:20px;}"]);
 var Graf = styled_components__WEBPACK_IMPORTED_MODULE_6__["default"].p.withConfig({
   displayName: "MultiProjectNav__Graf",
-  componentId: "gvpxwc-2"
+  componentId: "gvpxwc-1"
 })(["font-size:", ";color:", ";margin-bottom:9px;font-weight:400;@media (min-width:", "){font-size:", ";}"], function (p) {
   return p.theme.fontSizes.six;
 }, function (p) {
@@ -4337,7 +4333,7 @@ function DesktopProjectNav(props) {
       var _project$attributes = project.attributes,
           projectName = _project$attributes.projectName,
           type = _project$attributes.type;
-      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(ListItem, {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("li", {
         key: idx
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Graf, {
         menu: isMenu,
@@ -4378,26 +4374,20 @@ __webpack_require__.r(__webpack_exports__);
 var Group = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(_primitives_UnorderedList_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]).withConfig({
   displayName: "ProjectNav__Group",
   componentId: "sc-1lgrx38-0"
-})(["display:flex;margin:0px;padding:0px 0px ", " 0px;list-style-type:none;", ";", ";"], function (p) {
+})(["display:flex;margin:0px;padding:0px 0px ", " 0px;list-style-type:none;margin-bottom:", ";", ";"], function (p) {
   return !p.menu ? '0px' : '10px';
 }, function (p) {
-  return p.menu && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["margin-bottom:", ";padding-bottom:0;max-width:100%;"], p.num !== 2 ? '15px' : undefined);
+  return !p.menu ? '15px' : undefined;
 }, function (p) {
-  return p.isProjectPage && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["@media (min-width:", "){flex-direction:column;margin-top:25px;padding:0;border:0;}"], p.theme.mediaQueries.narrowBreakThree);
+  return p.menu && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["margin-bottom:", ";padding-bottom:0;max-width:100%;"], p.num !== 2 ? '20px' : undefined);
 });
 var Item = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].li.withConfig({
   displayName: "ProjectNav__Item",
   componentId: "sc-1lgrx38-1"
-})(["margin-right:", ";&:first-child{margin-left:", ";}@media (min-width:", "){margin-right:", ";margin-bottom:", ";}"], function (p) {
+})(["margin-right:", ";&:first-child{margin-left:", ";}"], function (p) {
   return p.padding ? '5px' : undefined;
 }, function (p) {
   return !p.isProjectPage ? '0px' : undefined;
-}, function (p) {
-  return p.theme.mediaQueries.narrowBreakThree;
-}, function (p) {
-  return p.isProjectPage ? '0px' : undefined;
-}, function (p) {
-  return p.isProjectPage ? '5px' : undefined;
 });
 var RestyledLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["default"])(_primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_3__["default"]).withConfig({
   displayName: "ProjectNav__RestyledLink",
@@ -4537,37 +4527,27 @@ var Dek = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].h2.withConf
 var Graf = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].p.withConfig({
   displayName: "Projects__Graf",
   componentId: "e6bzkp-3"
-})(["margin-bottom:", ";margin-right:0px;"], function (p) {
-  return p.theme.bottomMargin.regular;
-});
-var Images = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].section.withConfig({
-  displayName: "Projects__Images",
-  componentId: "e6bzkp-4"
-})(["display:flex;flex-direction:column;@media (min-width:", "){flex-direction:row-reverse;justify-content:flex-end;}"], function (p) {
-  return p.theme.mediaQueries.narrowBreakThree;
+})(["margin-right:0px;margin-bottom:", ";"], function (p) {
+  return p.num !== 2 ? p.theme.bottomMargin.regular : '10px';
 });
 var Figure = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].figure.withConfig({
   displayName: "Projects__Figure",
-  componentId: "e6bzkp-5"
-})(["margin:0px;@media (min-width:", "){display:flex;flex-direction:column;}"], function (p) {
-  return p.theme.mediaQueries.narrowBreakThree;
+  componentId: "e6bzkp-4"
+})(["padding-top:10px;border-top:1px solid ", ";display:flex;flex-direction:column;margin:0px;"], function (p) {
+  return p.theme.colors.blueTwo;
 });
 var Caption = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].figcaption.withConfig({
   displayName: "Projects__Caption",
-  componentId: "e6bzkp-6"
-})(["display:flex;margin:10px 10px 8px 0px;font-size:", ";color:", ";@media (min-width:", "){margin-top:0;}"], function (p) {
+  componentId: "e6bzkp-5"
+})(["display:flex;margin-bottom:10px;font-size:", ";color:", ";"], function (p) {
   return p.theme.fontSizes.seven;
 }, function (p) {
   return p.theme.colors.lightBlack;
-}, function (p) {
-  return p.theme.mediaQueries.narrowBreakThree;
 });
 var Image = styled_components__WEBPACK_IMPORTED_MODULE_13__["default"].img.withConfig({
   displayName: "Projects__Image",
-  componentId: "e6bzkp-7"
-})(["flex:1;max-width:100%;object-fit:cover;vertical-align:bottom;@media (min-width:", "){margin-right:10px;}"], function (p) {
-  return p.theme.mediaQueries.narrowBreakThree;
-});
+  componentId: "e6bzkp-6"
+})(["flex:1;max-width:100%;object-fit:cover;vertical-align:bottom;"]);
 function Projects(props) {
   var data = props.data,
       overflowRef = props.overflowRef,
@@ -4586,11 +4566,11 @@ function Projects(props) {
   var caption = captions[indexForProjectPics];
   var source = full[indexForProjectPics];
   var mapData = [{
-    technologies: technologies
-  }, {
     contribution: contribution
   }, {
     description: description
+  }, {
+    technologies: technologies
   }];
   var keys = mapData.map(function (item) {
     return Object.keys(item)[0];
@@ -4606,16 +4586,18 @@ function Projects(props) {
     render: function render(proj, idx) {
       return react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_11__["Fragment"], {
         key: idx
-      }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Hed, null, keys[idx][0].toUpperCase() + keys[idx].slice(1)), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Graf, null, proj[keys[idx]]));
+      }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Hed, null, keys[idx][0].toUpperCase() + keys[idx].slice(1)), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Graf, {
+        num: idx
+      }, proj[keys[idx]]));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Images, null, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Figure, null, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(_ProjectNav_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Figure, null, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(_ProjectNav_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
     indexForProjectPics: indexForProjectPics,
     isProjectPage: true,
     project: project
   }), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Caption, null, caption), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(Image, {
     alt: "mainPic",
     src: source
-  })))))));
+  }))))));
 }
 
 /***/ }),
@@ -5894,4 +5876,4 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAAA/CAYAAACC
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.bec7b04d77199158f2c2.js.map
+//# sourceMappingURL=main.f3d958e622d235080487.js.map

@@ -61,7 +61,7 @@ const mediaQueries = {
   desktopView: '848px' // ! Probably not needed anymore...
 };
 const bottomMargin = {
-  regular: '18px'
+  regular: '20px'
 };
 const GlobalStyle = createGlobalStyle`
   html {

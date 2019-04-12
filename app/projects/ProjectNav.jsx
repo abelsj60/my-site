@@ -9,20 +9,12 @@ const Group = styled(UnorderedList)`
   margin: 0px;
   padding: 0px 0px ${p => !p.menu ? '0px' : '10px'} 0px;
   list-style-type: none;
+  margin-bottom: ${p => !p.menu ? '15px' : undefined};
 
   ${p => p.menu && css`
-    margin-bottom: ${p.num !== 2 ? '15px' : undefined};
+    margin-bottom: ${p.num !== 2 ? '20px' : undefined};
     padding-bottom: 0;
     max-width: 100%;
-  `};
-
-  ${p => p.isProjectPage && css`
-    @media (min-width: ${p.theme.mediaQueries.narrowBreakThree}) {
-      flex-direction: column;
-      margin-top: 25px;
-      padding: 0;
-      border: 0;
-    }
   `};
 `;
 const Item = styled.li`
@@ -30,11 +22,6 @@ const Item = styled.li`
 
   &:first-child {
     margin-left: ${p => (!p.isProjectPage ? '0px' : undefined)};
-  }
-
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakThree}) {
-    margin-right: ${p => (p.isProjectPage ? '0px' : undefined)};
-    margin-bottom: ${p => (p.isProjectPage ? '5px' : undefined)};
   }
 `;
 const RestyledLink = styled(StyledLink)`

@@ -6,7 +6,6 @@ import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const RestyledList = styled(UnorderedList)`
   height: 100%;
-  overflow: auto;
   margin-right: 25px;
   width: ${p => (!p.menu ? '327px' : undefined)};
 
@@ -14,11 +13,6 @@ const RestyledList = styled(UnorderedList)`
     display: block;
     margin-right: 0;
   `};
-`;
-const ListItem = styled.li`
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
 `;
 const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
@@ -70,7 +64,7 @@ export default function DesktopProjectNav(props) {
               type
             } = project.attributes;
             return (
-              <ListItem key={idx}>
+              <li key={idx}>
                 <Graf
                   menu={isMenu}
                   num={idx}
@@ -84,7 +78,7 @@ export default function DesktopProjectNav(props) {
                   num={idx}
                   project={project}
                 />
-              </ListItem>
+              </li>
             );
           }
         }
