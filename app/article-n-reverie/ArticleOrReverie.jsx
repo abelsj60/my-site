@@ -1,4 +1,3 @@
-
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';
 import MenuButton from '../shared/MenuButton.jsx';

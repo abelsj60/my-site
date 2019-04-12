@@ -12,7 +12,6 @@ const RestyledList = styled(UnorderedList)`
 
   ${p => p.menu && css`
     display: block;
-    max-width: 590px;
     margin-right: 0;
   `};
 `;

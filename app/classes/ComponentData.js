@@ -1,7 +1,7 @@
 import ArticleOrReverie from '../article-n-reverie/ArticleOrReverie.jsx';
 import ArticleOrReverieNav from '../article-n-reverie/ArticleOrReverieNav.jsx';
 import Content from './Content.js';
-import DesktopProjectNav from '../projects/DesktopProjectNav.jsx';
+import MultiProjectNav from '../projects/MultiProjectNav.jsx';
 import Projects from '../projects/Projects.jsx';
 import React from 'react';
 import Story from '../story/Story.jsx';
@@ -37,12 +37,14 @@ export default class ComponentData {
         return undefined;
     }
 
-    return <Section
-      {...props}
-      data={contentData}
-      overflowRef={ref}
-      params={params}
-    />;
+    return (
+      <Section
+        {...props}
+        data={contentData}
+        overflowRef={ref}
+        params={params}
+      />
+    );
   }
 
   getMenuContent(props, params) {
@@ -56,7 +58,7 @@ export default class ComponentData {
         MenuContent = ArticleOrReverieNav;
         break;
       case 'projects':
-        MenuContent = DesktopProjectNav;
+        MenuContent = MultiProjectNav;
         break;
       case 'reverie':
         MenuContent = ArticleOrReverieNav;
@@ -65,6 +67,12 @@ export default class ComponentData {
         return undefined;
     }
 
-    return <MenuContent {...props} data={contentData} params={params} />;
+    return (
+      <MenuContent
+        {...props}
+        data={contentData}
+        params={params}
+      />
+    );
   }
 }

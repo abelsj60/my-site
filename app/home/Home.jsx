@@ -166,7 +166,6 @@ const CityAsBackground = styled(FantasyAsBackground)`
 //   }
 // `;
 
-console.log('IN HOME');
 export default function Home(props) {
   const {
     inCity,

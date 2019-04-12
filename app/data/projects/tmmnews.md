@@ -13,9 +13,9 @@
     'TMMnews caption three'
   ],
   projectThumbnail: [
-    'https://picsum.photos/202/175/?random',
-    'https://picsum.photos/203/175/?random',
-    'https://picsum.photos/204/175/?random'
+    'https://picsum.photos/217/?random',
+    'https://picsum.photos/217/?random',
+    'https://picsum.photos/217/?random'
   ],
   full: [
     'https://picsum.photos/879/569/?random',

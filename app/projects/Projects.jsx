@@ -131,12 +131,12 @@ export default function Projects(props) {
               }
             />
             <Images>
-              <ProjectNav
-                indexForProjectPics={indexForProjectPics}
-                isContentHolder={true}
-                project={project}
-              />
               <Figure>
+                <ProjectNav
+                  indexForProjectPics={indexForProjectPics}
+                  isProjectPage={true}
+                  project={project}
+                />
                 <Caption>{caption}</Caption>
                 <Image alt="mainPic" src={source} />
               </Figure>

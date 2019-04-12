@@ -13,9 +13,9 @@
     'Slingshot caption three'
   ],
   projectThumbnail: [
-    'https://picsum.photos/199/175/?random',
-    'https://picsum.photos/200/175/?random',
-    'https://picsum.photos/201/175/?random'
+    'https://picsum.photos/217/?random',
+    'https://picsum.photos/217/?random',
+    'https://picsum.photos/217/?random'
   ],
   full: [
     'https://picsum.photos/876/569/?random',

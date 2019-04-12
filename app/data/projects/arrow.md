@@ -11,9 +11,9 @@
     'Arrow caption three'
   ],
   projectThumbnail: [
-    'https://picsum.photos/196/175/?random',
-    'https://picsum.photos/197/175/?random',
-    'https://picsum.photos/198/175/?random'
+    'https://picsum.photos/217/?random',
+    'https://picsum.photos/217/?random',
+    'https://picsum.photos/217/?random'
   ],
   full: [
     'https://picsum.photos/873/569/?random',
