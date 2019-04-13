@@ -5,17 +5,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const mode = require('dotenv').config();
 // const Visualizer = require('webpack-visualizer-plugin');
+
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
 
-// Local needs '/'
-// GH needs '/build' and '/public'
-// const buildPath = process.env.NODE_ENV === 'production' ? '/build/' : '/';
-// const publicFilePath = process.env.NODE_ENV === 'production' ? '/public/' : '/';
+// Github pages gets production builds, local gets develpment builds.
+// If you need a development build on gh-pages, or a production build on local,
+// reset paths --> Local needs '/', GH needs '/build' and '/public'
 
-module.exports = () => {
+module.exports = (_env, argv) => {
   return {
     entry: {
       main: './app/index.js'
@@ -23,7 +22,7 @@ module.exports = () => {
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: '[name].[contenthash].js',
-      publicPath: process.env.NODE_ENV === 'development'
+      publicPath: argv.mode === 'development'
         ? '/'
         : '/build/'
     },
@@ -106,7 +105,7 @@ module.exports = () => {
         filename: '../index.html',
         template: './template.html',
         inject: 'head',
-        publicFilePath: process.env.NODE_ENV === 'development'
+        publicFilePath: argv.mode === 'development'
           ? '/'
           : '/public/'
       }),
@@ -119,7 +118,9 @@ module.exports = () => {
         // 'react',
         // 'react-router-dom',
         // 'react-dom',
-          'styled-components',
+          argv.mode === 'development'
+            ? 'styled-components'
+            : '',
         // 'marked',
         // 'parallax-js'
         ],
