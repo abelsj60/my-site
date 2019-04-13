@@ -5543,12 +5543,14 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_11__["default"].section.withConfig({
   displayName: "LegalTermsOrBizCard__Container",
   componentId: "sc-171ayyj-0"
-})(["display:flex;justify-content:center;align-items:center;position:absolute;top:", ";bottom:", ";width:100%;background-color:", ";transition:background-color .75s;z-index:1;"], function (p) {
+})(["display:flex;justify-content:center;align-items:center;position:absolute;top:", ";bottom:", ";width:100%;background-color:", ";transition:background-color .75s;z-index:1;", ";"], function (p) {
   return !p.home ? '52px' : '0px';
 }, function (p) {
   return !p.home ? '0px' : '0px';
 }, function (p) {
   return !p.copying ? 'rgba(115,192,232, 0.7)' : 'rgba(253,17,114, 0.7)';
+}, function (p) {
+  return p.home && Object(styled_components__WEBPACK_IMPORTED_MODULE_11__["css"])(["background-color:", ""], !p.copying ? 'rgba(115,192,232, 0.35)' : 'rgba(255,231,76, 0.25)');
 });
 var CardHolder = styled_components__WEBPACK_IMPORTED_MODULE_11__["default"].div.withConfig({
   displayName: "LegalTermsOrBizCard__CardHolder",
@@ -5931,4 +5933,4 @@ module.exports = ReactRouterDOM;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.6d2c68830999db3fbd7a.js.map
+//# sourceMappingURL=main.bd4251df9611571be7a0.js.map
