@@ -18,8 +18,7 @@ const Container = styled.section`
   z-index: 1;
 
   ${p => p.home && css`
-    z-index: 1;
-    background-color: ${!p.copying ? 'rgba(115,192,232, 0.35)' : 'rgba(255,231,76, 0.25)'};`};
+    background-color: ${!p.copying ? 'rgba(115,192,232, 0.35)' : 'rgba(255,231,76, 0.25)'}`};
 `;
 const CardHolder = styled.div`
   display: flex;

@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const Heading = styled.div`
   display: flex;
-  margin-bottom: ${p => p.theme.bottomMargin.regular};;
+  margin-bottom: ${p => p.theme.bottomMargin.regular};
   justify-content: space-between;
 `;
 const Hed = styled.h1`
