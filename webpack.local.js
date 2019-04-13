@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const mode = require('dotenv').config();
 // const Visualizer = require('webpack-visualizer-plugin');
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
@@ -15,7 +14,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // const buildPath = process.env.NODE_ENV === 'production' ? '/build/' : '/';
 // const publicFilePath = process.env.NODE_ENV === 'production' ? '/public/' : '/';
 
-module.exports = () => {
+module.exports = env => {
   return {
     entry: {
       main: './app/index.js'
@@ -23,7 +22,7 @@ module.exports = () => {
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: '[name].[contenthash].js',
-      publicPath: process.env.NODE_ENV === 'development'
+      publicPath: env === 'development'
         ? '/'
         : '/build/'
     },
@@ -106,7 +105,7 @@ module.exports = () => {
         filename: '../index.html',
         template: './template.html',
         inject: 'head',
-        publicFilePath: process.env.NODE_ENV === 'development'
+        publicFilePath: env === 'development'
           ? '/'
           : '/public/'
       }),

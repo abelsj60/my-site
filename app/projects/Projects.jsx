@@ -62,19 +62,20 @@ export default function Projects(props) {
 
   const {
     captions,
-    contribution,
-    description,
+    role,
+    story,
     full,
     projectName,
-    technologies,
+    tech,
     type
   } = project.attributes;
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
+  // Change the order to change the order of items on /projects
   const mapData = [
-    { contribution },
-    { description },
-    { technologies }
+    { story },
+    { role },
+    { tech }
   ];
   const keys = mapData.map(
     item => Object.keys(item)[0]
