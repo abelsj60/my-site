@@ -16,7 +16,6 @@ const headerLinks = [
   { name: 'About', path: '/about' }
 ];
 const fontWeight = '500';
-
 const Container = styled.header`
   background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? p.theme.colors.reverieBlue : p.theme.colors.white)};
   color: ${p => p.theme.colors.white};
@@ -39,7 +38,7 @@ const HeaderBackground = styled.div`
 `;
 const RestyledLink = styled(StyledLink)`
   font-size: ${p => p.theme.fontSizes.six};
-  font-weight: ${p => p.home ? 400 : ''};
+  font-weight: ${p => p.home ? '400' : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
   color: ${p => p.theme.colors.white};
   font-weight: ${fontWeight};

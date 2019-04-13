@@ -108,13 +108,13 @@ const GlobalStyle = createGlobalStyle`
     height: ${p => p.theme.pageHeight}px;
     position: relative;
     
-    @media(orientation:landscape) {
+    @media(orientation: landscape) {
       // Fix esoteric iOS 7 iPad bug:
       // https://stackoverflow.com/a/19449123
       // https://stackoverflow.com/q/19012135
       // https://krpano.com/ios/bugs/ios7-ipad-landscape/
 
-      ${p => p.fixMobileSafariBugOn7 && 'position:fixed; bottom: 0;'};
+      ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
     }
     
     ${p => p.home && css`
@@ -124,13 +124,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+console.log('process:', process.env.NODE_ENV);
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     const referrer = new Referrer(props);
     const location = referrer.location;
-    ReactGA.initialize('UA-137902767-1', { debug: true });
+    ReactGA.initialize('UA-137902767-1');
 
     this.state = {
       currentCaller: location !== 'i'
