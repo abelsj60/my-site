@@ -109,14 +109,14 @@ module.exports = {
     }),
     new DynamicCdnWebpackPlugin({
       verbose: true,
-      // exclude: [
-      //   'react',
-      //   'react-router-dom',
-      //   'react-dom',
-      //   'styled-components',
-      //   'marked',
-      //   'parallax-js'
-      // ],
+      exclude: [
+        // 'react',
+        // 'react-router-dom',
+        // 'react-dom',
+        'styled-components',
+        // 'marked',
+        // 'parallax-js'
+      ],
       resolver: (name, version) => {
         const options = {
           'react': {

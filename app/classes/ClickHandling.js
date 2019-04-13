@@ -125,7 +125,7 @@ export default class ClickHandling {
         ReactGA.event({
           category,
           action,
-          label
+          label: label ? label : null
         });
       }
 

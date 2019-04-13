@@ -132,7 +132,12 @@ class App extends Component {
 
     const referrer = new Referrer(props);
     const location = referrer.location;
+    const {
+      pathname,
+      search
+    } = window.location;
     ReactGA.initialize('UA-137902767-1');
+    ReactGA.pageview(pathname + search); // Tallies initial request
 
     this.state = {
       currentCaller: location !== 'i'
@@ -253,12 +258,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const {
-      pathname,
-      search
-    } = window.location;
-    ReactGA.pageview(pathname + search); // Tallies initial request
-
     if (!this.hasFlexbox()) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera) {
