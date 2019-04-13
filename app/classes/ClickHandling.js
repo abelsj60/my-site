@@ -172,6 +172,7 @@ export default class ClickHandling {
       if (!menuIsOpen) {
         toggleState.call(this);
         this.timeoutId = setTimeout(() => {
+          // Comment the next line out to suspend auto-close
           this.setState({ menuIsOpen: false });
         }, 5000);
       } else {

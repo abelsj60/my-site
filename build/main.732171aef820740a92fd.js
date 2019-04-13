@@ -321,7 +321,6 @@ var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_16__["create
 }, function (p) {
   return p.home && Object(styled_components__WEBPACK_IMPORTED_MODULE_16__["css"])(["width:100%;overflow:hidden;"]);
 });
-console.log('process:', "development");
 
 var App =
 /*#__PURE__*/
@@ -735,7 +734,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _public_linked_in_icon_png__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_public_linked_in_icon_png__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _primitives_ContentHolder_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../primitives/ContentHolder.jsx */ "./app/primitives/ContentHolder.jsx");
 /* harmony import */ var _primitives_Main_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../primitives/Main.jsx */ "./app/primitives/Main.jsx");
-/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! marked */ "marked");
+/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.js");
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(marked__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _primitives_Overflow_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../primitives/Overflow.jsx */ "./app/primitives/Overflow.jsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
@@ -1229,6 +1228,7 @@ function () {
         if (!menuIsOpen) {
           toggleState.call(_this3);
           _this3.timeoutId = setTimeout(function () {
+            // Comment the next line out to suspend auto-close
             _this3.setState({
               menuIsOpen: false
             });
@@ -3653,7 +3653,7 @@ var RestyledLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_15__["defau
   displayName: "Header__RestyledLink",
   componentId: "sc-1rxr5md-2"
 })(["font-size:", ";font-weight:", ";margin-left:", ";color:", ";font-weight:", ";&&{text-decoration:", ";}@media (min-width:", "){font-size:", ";}"], function (p) {
-  return p.theme.fontSizes.six;
+  return p.theme.fontSizes.one;
 }, function (p) {
   return p.home ? '400' : '';
 }, function (p) {
@@ -3670,13 +3670,17 @@ var RestyledLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_15__["defau
 var NameAsLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_15__["default"])(RestyledLink).withConfig({
   displayName: "Header__NameAsLink",
   componentId: "sc-1rxr5md-3"
-})(["display:", ";"], function (p) {
+})(["display:", ";font-size:", ";@media (min-width:", "){display:block;}"], function (p) {
   return p.hide === 'active' ? 'none' : undefined;
+}, function (p) {
+  return p.theme.fontSizes.six;
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
 });
-var Motto = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].p.withConfig({
+var Motto = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].span.withConfig({
   displayName: "Header__Motto",
   componentId: "sc-1rxr5md-4"
-})(["font-weight:", ";flex:1;display:", ";font-style:italic;font-size:", ";margin:1px 20px 0px 13px;min-width:0px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;@media (min-width:", "){font-size:", ";margin-right:0px;}"], fontWeight, function (p) {
+})(["font-weight:", ";flex:1;display:", ";font-style:italic;font-size:", ";margin:1px 20px 0px 13px;min-width:0px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;@media (min-width:", "){font-size:", ";margin-right:0px;}@media (min-width:", "){display:block;}"], fontWeight, function (p) {
   return p.hide ? 'none' : undefined;
 }, function (p) {
   return p.theme.fontSizes.two;
@@ -3684,11 +3688,13 @@ var Motto = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].p.withCon
   return p.theme.mediaQueries.tinyViewTwo;
 }, function (p) {
   return p.theme.fontSizes.four;
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
 });
 var Nav = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].nav.withConfig({
   displayName: "Header__Nav",
   componentId: "sc-1rxr5md-5"
-})(["display:", ";padding:", ";background-color:", ";border-radius:", ";margin-top:-1px;", ";@media (min-width:", "){display:block;margin-right:", ";}"], function (p) {
+})(["display:", ";padding:", ";background-color:", ";border-radius:", ";", ";@media (min-width:", "){display:block;margin-right:", ";}"], function (p) {
   return p.home ? undefined : 'none';
 }, function (p) {
   return p.home ? '8px 15px' : undefined;
@@ -3697,7 +3703,7 @@ var Nav = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].nav.withCon
 }, function (p) {
   return p.home ? '10px' : undefined;
 }, function (p) {
-  return p.menu && Object(styled_components__WEBPACK_IMPORTED_MODULE_15__["css"])(["flex:1;display:block;@media (min-width:", "){margin-left:32px;}"], p.theme.mediaQueries.tinyViewTwo);
+  return p.menu && Object(styled_components__WEBPACK_IMPORTED_MODULE_15__["css"])(["flex:1;display:block;@media (min-width:", "){margin-top:-1px;margin-left:37px;}"], p.theme.mediaQueries.tinyViewTwo);
 }, function (p) {
   return p.theme.mediaQueries.narrowBreakTwo;
 }, function (p) {
@@ -3706,7 +3712,9 @@ var Nav = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].nav.withCon
 var NavList = Object(styled_components__WEBPACK_IMPORTED_MODULE_15__["default"])(_primitives_UnorderedList_jsx__WEBPACK_IMPORTED_MODULE_17__["default"]).withConfig({
   displayName: "Header__NavList",
   componentId: "sc-1rxr5md-6"
-})(["display:flex;justify-content:center;margin:0px;padding:0px;list-style:none;"]);
+})(["display:flex;justify-content:center;margin:0px;padding:0px;list-style:none;margin-top:-3px;@media (min-width:", "){margin-top:0px;}"], function (p) {
+  return p.theme.mediaQueries.tinyViewTwo;
+});
 var Icon = styled_components__WEBPACK_IMPORTED_MODULE_15__["default"].img.withConfig({
   displayName: "Header__Icon",
   componentId: "sc-1rxr5md-7"
@@ -5877,17 +5885,6 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAAA/CAYAAACC
 
 /***/ }),
 
-/***/ "marked":
-/*!*************************!*\
-  !*** external "marked" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = marked;
-
-/***/ }),
-
 /***/ "parallax-js":
 /*!***************************!*\
   !*** external "Parallax" ***!
@@ -5933,4 +5930,4 @@ module.exports = ReactRouterDOM;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.bd4251df9611571be7a0.js.map
+//# sourceMappingURL=main.732171aef820740a92fd.js.map

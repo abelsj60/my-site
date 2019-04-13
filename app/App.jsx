@@ -124,8 +124,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-console.log('process:', process.env.NODE_ENV);
-
 class App extends Component {
   constructor(props) {
     super(props);

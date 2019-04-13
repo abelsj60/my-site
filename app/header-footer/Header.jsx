@@ -37,7 +37,7 @@ const HeaderBackground = styled.div`
   z-index: -1;
 `;
 const RestyledLink = styled(StyledLink)`
-  font-size: ${p => p.theme.fontSizes.six};
+  font-size: ${p => p.theme.fontSizes.one};
   font-weight: ${p => p.home ? '400' : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
   color: ${p => p.theme.colors.white};
@@ -53,8 +53,14 @@ const RestyledLink = styled(StyledLink)`
 `;
 const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.hide === 'active' ? 'none' : undefined)};
+  font-size: ${p => p.theme.fontSizes.six};
+
+  // Ensure motto shows when screen is expanded from small view
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    display: block;
+  }
 `;
-const Motto = styled.p`
+const Motto = styled.span`
   font-weight: ${fontWeight};
   flex: 1;
   display: ${p => (p.hide ? 'none' : undefined)};
@@ -71,20 +77,27 @@ const Motto = styled.p`
     font-size: ${p => p.theme.fontSizes.four};
     margin-right: 0px;
   }
+
+  // Ensure motto shows when screen is expanded from small view
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    display: block;
+  }
 `;
 const Nav = styled.nav`
   display: ${p => (p.home ? undefined : 'none')};
   padding: ${p => p.home ? '8px 15px' : undefined};
   background-color: ${p => p.home ? 'rgba(0,0,0,0.25)' : undefined};
   border-radius: ${p => p.home ? '10px' : undefined};
-  margin-top: -1px;
+  // margin-top: -1px;
 
   ${p => p.menu && css`
     flex: 1;
     display: block;
 
+    // Offset centering by right-side icon width (is five less than total)
     @media (min-width: ${p.theme.mediaQueries.tinyViewTwo}) {
-      margin-left: 32px;
+      margin-top: -1px;
+      margin-left: 37px;
     }
   `};
 
@@ -99,6 +112,11 @@ const NavList = styled(UnorderedList)`
   margin: 0px;
   padding: 0px;
   list-style: none;
+  margin-top: -3px; // Evens out top between nav and regular text on small view
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+    margin-top: 0px; // Reset top on > tiny views
+  }
 `;
 const Icon = styled.img`
   display: ${p => (p.home ? 'none' : undefined)};
