@@ -57,7 +57,7 @@ const NameAsLink = styled(RestyledLink)`
 
   // Ensure motto shows when screen is expanded from small view
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    display: block;
+    display: ${p => !p.home ? 'block' : ''};
   }
 `;
 const Motto = styled.span`
@@ -80,7 +80,7 @@ const Motto = styled.span`
 
   // Ensure motto shows when screen is expanded from small view
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    display: block;
+    display: ${p => !p.home ? 'block' : ''};
   }
 `;
 const Nav = styled.nav`
@@ -173,6 +173,7 @@ export default class Header extends Component {
       >
         <HeaderBackground home={homeIsActive}></HeaderBackground>
         <NameAsLink
+          home={homeIsActive}
           reverie={reverieIsActive}
           hide={
             ((menuIsActive || homeIsActive) && 'active')
@@ -183,6 +184,7 @@ export default class Header extends Component {
           James Abels
         </NameAsLink>
         <Motto
+          home={homeIsActive}
           hide={menuIsActive || homeIsActive}
         >
           Narrative coding and other adventures
