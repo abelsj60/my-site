@@ -3,11 +3,13 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
+import {
+  isIE
+} from 'react-device-detect';
 
 const Group = styled(UnorderedList)`
-  display: flex;
-  margin: 0px;
-  padding: 0px 0px ${p => !p.menu ? '0px' : '10px'} 0px;
+  display: flex; // See note above
+  ${isIE && 'flex-shrink: 0;'} // Ensures height is true on IE (empty space on top/bottom otherwise)
   list-style-type: none;
   margin-bottom: ${p => !p.menu ? '15px' : undefined};
 
@@ -17,31 +19,29 @@ const Group = styled(UnorderedList)`
     max-width: 100%;
   `};
 `;
-const Item = styled.li`
-  margin-right: ${p => (p.padding ? '5px' : undefined)};
+const ListItem = styled.li`
+  margin-right: ${p => (!p.lastItem ? '6px' : undefined)};
+  ${p => isIE && p.lastItem ? 'flex-shrink: 1.0275;' : ''} // Accounts for no { padding: 6px } on last image in IE 11
 
   &:first-child {
     margin-left: ${p => (!p.isProjectPage ? '0px' : undefined)};
   }
 `;
 const RestyledLink = styled(StyledLink)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
-  position: relative;
+  display: block; // Ensures proper placement of images wrapped by <a> in Safari 10, per CSS Tricks
+  position: relative; // Positions <Highlighter />
 `;
 const Image = styled.img`
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   max-width: 100%;
   vertical-align: bottom;
+  align-self: center; // Default is 'stretch', no good!
 `;
 const Highlighter = styled.div`
   width: 100%;
   height: 4px;
-  bottom: 0px;
   left: 0px;
+  bottom: 0px;
   position: absolute;
   background-color: ${p => p.theme.colors.yellow};
 `;
@@ -75,7 +75,7 @@ export default function ProjectNav(props) {
         mapData={projectThumbnail}
         render={
           (thumb, idx) => {
-            const padding = idx < 2;
+            const lastItem = idx > 1;
             const thumbnailNumber = idx + 1;
             let highlightActiveThumbnail;
 
@@ -88,10 +88,10 @@ export default function ProjectNav(props) {
             }
 
             return (
-              <Item
+              <ListItem
                 key={idx}
                 isProjectPage={isProjectPage}
-                padding={padding}
+                lastItem={lastItem}
               >
                 <RestyledLink
                   to={`/projects/${
@@ -104,7 +104,7 @@ export default function ProjectNav(props) {
                   />
                   {highlightActiveThumbnail && <Highlighter />}
                 </RestyledLink>
-              </Item>
+              </ListItem>
             );
           }
         }

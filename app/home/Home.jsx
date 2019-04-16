@@ -96,22 +96,20 @@ const PictureBox = styled.div`
   overflow: hidden;
   z-index: 1;
 `;
-const BoyInForeground = styled.img`
+const BoyInForeground = styled.div`
   position: absolute;
-  z-index: 2;
-  pointer-events: none;
-
-  // https://stackoverflow.com/a/28439444
   display: block;
+  background-image: url(${p => p.srcImage});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  // https://stackoverflow.com/a/28439444
   width: 100%;
   height: 100%;
-  object-fit: cover; // Use if img is an <img>
+  pointer-events: none;
+  z-index: 2;
 
-  // Use if img is a background-image in CSS
-  // background-image: url(${p => p.srcImage});
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // background-position: center;
+  // object-fit: cover; // Use if using <img>
 `;
 const Portal = styled.div`
   position: absolute;
@@ -121,12 +119,16 @@ const Portal = styled.div`
   z-index: 1;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
+  // NOTE: Scale may not be working
+
+  background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
   transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
+  background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
@@ -251,19 +253,16 @@ export default function Home(props) {
         />
         <PictureBox>
           <BoyInForeground
-            alt=""
-            src="https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png"
+            srcImage="https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png"
           />
           <Portal />
           <FantasyAsBackground
-            alt=""
             inCity={inCity}
-            src="https://user-images.githubusercontent.com/30417590/55294130-33436780-53cc-11e9-93cc-f61572bca6ef.png"
+            srcImage="https://user-images.githubusercontent.com/30417590/55294130-33436780-53cc-11e9-93cc-f61572bca6ef.png"
           />
           <CityAsBackground
-            alt=""
             inCity={inCity}
-            src="https://user-images.githubusercontent.com/30417590/55294135-3c343900-53cc-11e9-8f9c-e66499ccd920.png"
+            srcImage="https://user-images.githubusercontent.com/30417590/55294135-3c343900-53cc-11e9-8f9c-e66499ccd920.png"
           />
         </PictureBox>
       </RestyledMain>

@@ -1,3 +1,4 @@
+import { isIE } from 'react-device-detect';
 import Main from '../primitives/Main.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
@@ -35,6 +36,11 @@ const Figure = styled.figure`
   display: flex;
   flex-direction: column;
   margin: 0px;
+  flex-shrink: 0;
+
+  // PROBABLY DELETE WHEN DONE:
+  // Define width on IE/FF to expand main image properly
+  // ${(isIE) && 'width: 65rem;'}
 `;
 const Caption = styled.figcaption`
   display: flex;
@@ -43,9 +49,12 @@ const Caption = styled.figcaption`
   color: ${p => p.theme.colors.lightBlack};
 `;
 const Image = styled.img`
-  flex: 1;
+  // The main image should shrink proportionally, i.e.,
+  // don't scale and center it in the element 
+  width: 100%;
+  height: 100%;
   max-width: 100%;
-  object-fit: cover;
+  ${!isIE && 'flex: 1;'}
   vertical-align: bottom;
 `;
 
@@ -71,7 +80,7 @@ export default function Projects(props) {
   } = project.attributes;
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
-  // Change the order to change the order of items on /projects
+  // Change order to change item order
   const mapData = [
     { story },
     { role },
@@ -94,35 +103,33 @@ export default function Projects(props) {
           <ProjectName>
             {projectName}
           </ProjectName>
-          <section>
-            <Dek>
-              {type}
-            </Dek>
-            <Mapper
-              mapData={mapData}
-              render={
-                (proj, idx) => (
-                  <Fragment key={idx}>
-                    <Hed>
-                      {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
-                    </Hed>
-                    <Graf num={idx}>
-                      {proj[keys[idx]]}
-                    </Graf>
-                  </Fragment>
-                )
-              }
+          <Dek>
+            {type}
+          </Dek>
+          <Mapper
+            mapData={mapData}
+            render={
+              (proj, idx) => (
+                <Fragment key={idx}>
+                  <Hed>
+                    {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
+                  </Hed>
+                  <Graf num={idx}>
+                    {proj[keys[idx]]}
+                  </Graf>
+                </Fragment>
+              )
+            }
+          />
+          <Figure>
+            <ProjectNav
+              indexForProjectPics={indexForProjectPics}
+              isProjectPage={true}
+              project={project}
             />
-            <Figure>
-              <ProjectNav
-                indexForProjectPics={indexForProjectPics}
-                isProjectPage={true}
-                project={project}
-              />
-              <Caption>{caption}</Caption>
-              <Image alt="mainPic" src={source} />
-            </Figure>
-          </section>
+            <Caption>{caption}</Caption>
+            <Image alt="mainPic" src={source} />
+          </Figure>
         </Overflow>
       </ContentHolder>
     </Main>

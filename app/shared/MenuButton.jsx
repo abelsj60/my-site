@@ -34,7 +34,7 @@ const Icon = styled.div`
   height: 3px;
   width: 7px;
   background: ${p => `url(${p.image})`} no-repeat;
-  background-size: contain;
+  background-size: contain; // Must come after background rule
 `;
 const Line = styled.div`
   position: absolute;

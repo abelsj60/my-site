@@ -36,14 +36,22 @@ const Title = styled.h1`
   color: ${p => p.theme.colors.pink};
   margin-bottom: ${p => p.theme.bottomMargin.regular};
 `;
-const Image = styled.img`
-  // How to fill page with image: 
-  // https://stackoverflow.com/a/30794589
-  object-fit: cover;
-  overflow: hidden;
+const Image = styled.div`
+  // Ensure img top is TOP
   position: absolute;
+  top: 0px;
+  left: 0px;
+
+  // Use background-image to get proper 
+  // proportions on most browsers 
+  background-image: url(${p => p.src});
+  background-position: center;
+  background-size: cover;
   height: 100%;
   width: 100%;
+
+  // If moving to <img> --> May need to fill page:   
+  // https://stackoverflow.com/a/30794589
 `;
 const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};
@@ -72,18 +80,30 @@ export default function Story(props) {
     image,
     title
   } = chapter.attributes;
-  const chapterArray = ['one', 'two', 'three', 'four'];
+  const chapterArray = [
+    'one',
+    'two',
+    'three',
+    'four'
+  ];
   const textStatus = !showStoryText
     ? 'hidden'
-    : undefined;
+    : '';
 
   return (
     <Main>
-      <PictureHolder as="section" text={textStatus}>
-        <ChapterNav {...props} />
-        <Overflow ref={
-          ref => overflowRef.current = ref
-        }>
+      <PictureHolder
+        as="section"
+        text={textStatus}
+      >
+        <ChapterNav
+          {...props}
+        />
+        <Overflow
+          ref={
+            ref => overflowRef.current = ref
+          }
+        >
           <Chapter>
             Chapter {chapterArray[indexForChapterData]}
           </Chapter>
@@ -100,8 +120,13 @@ export default function Story(props) {
           </StoryText>
         </Overflow>
       </PictureHolder>
-      <RestyledContentHolder rightMargin text={textStatus}>
-        <Image alt="fantasy illustration" src={image} />
+      <RestyledContentHolder
+        rightMargin text={textStatus}
+      >
+        <Image
+          alt="fantasy illustration"
+          src={image}
+        />
       </RestyledContentHolder>
     </Main>
   );

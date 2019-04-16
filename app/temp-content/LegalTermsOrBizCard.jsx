@@ -10,8 +10,9 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: ${p => (!p.home ? '52px' : '0px')};
-  bottom: ${p => !p.home ? '0px' : '0px'};
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
   width: 100%;
   background-color: ${p => !p.copying ? 'rgba(115,192,232, 0.7)' : 'rgba(253,17,114, 0.7)'};
   transition: background-color .75s;
@@ -19,6 +20,16 @@ const Container = styled.section`
 
   ${p => p.home && css`
     background-color: ${!p.copying ? 'rgba(115,192,232, 0.35)' : 'rgba(255,231,76, 0.25)'}`};
+`;
+const CenterCardInMain = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 55px;
 `;
 const CardHolder = styled.div`
   display: flex;
@@ -203,17 +214,7 @@ export default class LegalTermsOrBizCard extends Component {
           }
         }
       >
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'absolute',
-            top: '0px',
-            bottom: '55px'
-          }}
-        >
+        <CenterCardInMain>
           <CardHolder>
             <Parallax
               render={
@@ -283,7 +284,7 @@ export default class LegalTermsOrBizCard extends Component {
               }
             />
           </CardHolder>
-        </div>
+        </CenterCardInMain>
       </Container>
     );
   }

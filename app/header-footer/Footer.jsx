@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
-  background-color: ${p => (p.home || p.storyPicActive ? 'transparent' : p.reverie ? p.theme.colors.reverieBlue : p.theme.colors.white)};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
@@ -32,17 +31,6 @@ const StoryButton = styled(Button)`
   background-color: ${p => (!p.active ? p.theme.colors.pink : p.theme.colors.blue)};
   width: 43px;
   padding: 7px;
-
-  https://stackoverflow.com/a/18997800
-  &:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    border: 1px #999 solid;;
-    transform: scale(0.5);
-  }
 `;
 const Graf = styled.p`
   cursor: pointer;
@@ -58,6 +46,11 @@ const Graf = styled.p`
 const TextBox = styled.div`
   display: flex;
   z-index: 1;
+
+  // Fix IE 11 so story button sits on left and nav items sit on right
+  // (Extra rules account for a problem with space-between)
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 export default function FooterContainer(props) {

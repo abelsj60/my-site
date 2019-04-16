@@ -21,6 +21,8 @@ const Hed = styled.h1`
   margin-bottom: ${p => p.theme.bottomMargin.regular};
 `;
 const Text = styled.section`
+  overflow: auto;
+
   p {
     &:last-child {
       margin-bottom: 0px;

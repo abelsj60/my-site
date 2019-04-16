@@ -17,13 +17,12 @@ const headerLinks = [
 ];
 const fontWeight = '500';
 const Container = styled.header`
-  background-color: ${p => (p.home ? 'transparent' : p.reverie === 'active' ? p.theme.colors.reverieBlue : p.theme.colors.white)};
   color: ${p => p.theme.colors.white};
   flex-shrink: 0;
   z-index: 2;
   height: 52px;
   display: flex;
-  justify-content: ${p => (p.home ? 'center' : undefined)};
+  justify-content: ${p => (p.home === 'active' ? 'center' : undefined)};
   align-items: center;
   width: 100%;
   max-width: 75rem;
@@ -32,13 +31,14 @@ const HeaderBackground = styled.div`
   position: absolute;
   width: 100%;
   height: 52px;
+  top: 0px;
   left: 0px;
-  background-color: ${p => !p.home ? p.theme.colors.darkPink : ''};
+  background-color: ${p => !p.hide ? p.theme.colors.darkPink : ''};
   z-index: -1;
 `;
 const RestyledLink = styled(StyledLink)`
   font-size: ${p => p.theme.fontSizes.one};
-  font-weight: ${p => p.home ? '400' : ''};
+  font-weight: ${p => p.home === 'active' ? '400' : ''};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
   color: ${p => p.theme.colors.white};
   font-weight: ${fontWeight};
@@ -48,7 +48,7 @@ const RestyledLink = styled(StyledLink)`
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    font-size: ${p => !p.home ? p.theme.fontSizes.six : p.theme.fontSizes.three};
+    font-size: ${p => p.home !== 'active' ? p.theme.fontSizes.six : p.theme.fontSizes.three};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
@@ -58,7 +58,7 @@ const NameAsLink = styled(RestyledLink)`
 const Motto = styled.span`
   font-weight: ${fontWeight};
   flex: 1;
-  display: ${p => (p.hide ? 'none' : undefined)};
+  display: ${p => (p.hide === 'active' ? 'none' : undefined)};
   font-style: italic;
   font-size: ${p => p.theme.fontSizes.two};
   margin: 1px 20px 0px 13px;
@@ -74,11 +74,12 @@ const Motto = styled.span`
   }
 `;
 const Nav = styled.nav`
-  display: ${p => (p.home ? undefined : 'none')};
-  padding: ${p => p.home ? '8px 15px' : undefined};
-  background-color: ${p => p.home ? 'rgba(0,0,0,0.25)' : undefined};
-  border-radius: ${p => p.home ? '10px' : undefined};
-  // margin-top: -1px;
+  display: ${p => (p.home === 'active' ? undefined : 'none')};
+  padding: ${p => p.home === 'active' ? '8px 15px' : undefined};
+  background-color: ${p => p.home === 'active' ? 'rgba(0,0,0,0.25)' : undefined};
+  border-radius: ${p => p.home === 'active' ? '10px' : undefined};
+
+  z-index: ${p => p.home === 'active' ? '3' : ''};
 
   ${p => p.menu && css`
     flex: 1;
@@ -93,7 +94,7 @@ const Nav = styled.nav`
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
-    margin-right: ${p => (!p.home ? '15px' : undefined)};
+    margin-right: ${p => (p.home !== 'active' ? '15px' : undefined)};
   }
 `;
 const NavList = styled(UnorderedList)`
@@ -140,14 +141,29 @@ export default class Header extends Component {
       appState
     } = this.props;
     const {
-      currentCaller
+      currentCaller,
+      showStoryText
     } = appState;
-    const menuIsActive = this.state.menuIsOpen;
-    const homeIsActive = currentCaller === 'home';
-    const reverieIsActive = currentCaller === 'reverie' ? 'active' : '';
-    const iconType = menuIsActive
-      ? headerNavClose
-      : headerNavOpen;
+    const menuIsOpen = this.state.menuIsOpen;
+    const homeIsActive =
+      currentCaller === 'home'
+        ? 'active'
+        : '';
+    const reverieIsActive =
+      currentCaller === 'reverie'
+        ? 'active'
+        : '';
+    const iconType =
+      menuIsOpen
+        ? headerNavClose
+        : headerNavOpen;
+    const hideBackground =
+      homeIsActive.length > 0
+        || (!showStoryText && !reverieIsActive);
+    const hideNameAndMotto =
+      menuIsOpen || homeIsActive.length > 0
+        ? 'active'
+        : '';
 
     const referrer = new Referrer(this.props);
     const hcForHeader = new ClickHandling('header',
@@ -161,25 +177,24 @@ export default class Header extends Component {
         home={homeIsActive}
         reverie={reverieIsActive}
       >
-        <HeaderBackground home={homeIsActive}></HeaderBackground>
+        <HeaderBackground
+          hide={hideBackground}
+        ></HeaderBackground>
         <NameAsLink
           reverie={reverieIsActive}
-          hide={
-            ((menuIsActive || homeIsActive) && 'active')
-              || undefined
-          }
+          hide={hideNameAndMotto}
           to={'/'}
         >
           James Abels
         </NameAsLink>
         <Motto
-          hide={menuIsActive || homeIsActive}
+          hide={hideNameAndMotto}
         >
           Narrative coding and other adventures
         </Motto>
         <Nav
           home={homeIsActive}
-          menu={menuIsActive}
+          menu={menuIsOpen}
         >
           <NavList>
             <Mapper
@@ -187,7 +202,9 @@ export default class Header extends Component {
               render={
                 (link, idx) => {
                   const pathIsActive =
-                    link.path.includes(referrer.location);
+                    link.path.includes(referrer.location)
+                      ? 'active'
+                      : '';
 
                   return (
                     <li
@@ -195,14 +212,8 @@ export default class Header extends Component {
                     >
                       <RestyledLink
                         reverie={reverieIsActive}
-                        active={
-                          (pathIsActive && 'active')
-                            || undefined
-                        }
-                        home={
-                          (homeIsActive && 'active')
-                            || undefined
-                        }
+                        active={pathIsActive}
+                        home={homeIsActive}
                         num={idx}
                         to={link.path}
                       >
@@ -217,7 +228,7 @@ export default class Header extends Component {
         </Nav>
         <Icon
           home={homeIsActive}
-          menu={menuIsActive}
+          menu={menuIsOpen}
           src={iconType}
           onClick={
             () => handleClickForHeader()

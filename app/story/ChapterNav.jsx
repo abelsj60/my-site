@@ -29,7 +29,7 @@ const SelectorContainer = styled.div`
 const Selector = styled.div`
   height: 7px;
   background: ${p => `url(${p.image})`} center no-repeat;
-  background-size: contain;
+  background-size: contain; // Must come after background rule
 `;
 
 const Line = styled.div`

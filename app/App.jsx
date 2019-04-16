@@ -21,6 +21,8 @@ import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import { withRouter } from 'react-router';
 
+// A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
+
 const colors = {
   black: 'black',
   blue: '#008dd5',
