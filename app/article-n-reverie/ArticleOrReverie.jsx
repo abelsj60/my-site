@@ -57,7 +57,6 @@ export default function ArticleOrReverie(props) {
   const {
     data,
     location,
-    overflowRef,
     params
   } = props;
   const currentPath = location.pathname.split('/');
@@ -86,9 +85,7 @@ export default function ArticleOrReverie(props) {
     <Main reverie={isReverie}>
       <ContentHolder>
         <MenuButton {...props} />
-        <Overflow ref={
-          ref => overflowRef.current = ref
-        }>
+        <Overflow>
           <Dek>
             {reverieOrPublicationAsDek}
           </Dek>

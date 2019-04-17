@@ -21,7 +21,10 @@ export default class ContentLoader extends Component {
       props
     );
 
-    this.overflowRef = React.createRef();
+    this.overflowRef =
+      location.type === 'chapter'
+        ? React.createRef()
+        : '';
 
     this.state = {
       isNotFound: !location.pathIsValid,
@@ -51,8 +54,7 @@ export default class ContentLoader extends Component {
     if (!needsRedirect && !isNotFound) {
       referrer = new Referrer(this.props);
       componentData = new ComponentData(
-        referrer.location,
-        this.props
+        referrer.location
       );
       location = new Location(
         referrer.pathToMatch,
@@ -124,10 +126,19 @@ export default class ContentLoader extends Component {
         this.props.boundHandleClickForBody
       );
 
-      // ContentLoader is still mounted on the /menu
-      // path, but it may not contain an overflowRef,
-      // so we filter it to prevent error
-      if (!location.params.isMenu) {
+      // The scrollTop reset is not currently applied to
+      // the '/projects', and '/journalism' routes because
+      // they can only be changed via '/menu'.
+
+      // It works for '/chapter', beause it's changed
+      // from the '/chapter' route.
+
+      // If you want to expand this to include the
+      // /projects and '/journalism', filter out
+      // '/menu' paths, as they don't have an
+      // overflowRef, so will kick an error.
+
+      if (location.type === 'chapter') {
         const scrollHandler = new ScrollHandling(location);
         scrollHandler.resetElementTop(
           this.overflowRef,

@@ -15,6 +15,7 @@ export default class ScrollHandling {
     return currentIndexForProjectData !== prevIndexForProjectData;
   }
 
+  // Only used by '/chapter'
   resetElementTop(overflowRef, prevProps) {
     const overflowRefExists = overflowRef.current !== null;
 

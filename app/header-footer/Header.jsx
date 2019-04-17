@@ -47,7 +47,7 @@ const RestyledLink = styled(StyledLink)`
     text-decoration: ${p => (p.active === 'active' ? 'underline' : undefined)};
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.home !== 'active' ? p.theme.fontSizes.six : p.theme.fontSizes.three};
   }
 `;
@@ -75,19 +75,17 @@ const Motto = styled.span`
 `;
 const Nav = styled.nav`
   display: ${p => (p.home === 'active' ? undefined : 'none')};
+  margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.home === 'active' ? '8px 15px' : undefined};
   background-color: ${p => p.home === 'active' ? 'rgba(0,0,0,0.25)' : undefined};
   border-radius: ${p => p.home === 'active' ? '10px' : undefined};
-
-  z-index: ${p => p.home === 'active' ? '3' : ''};
 
   ${p => p.menu && css`
     flex: 1;
     display: block;
 
     // Offset centering by right-side icon width (is five less than total)
-    @media (min-width: ${p.theme.mediaQueries.tinyViewTwo}) {
-      margin-top: -1px;
+    @media (min-width: ${p.theme.mediaQueries.tinyView}) {
       margin-left: 37px;
     }
   `};
@@ -103,11 +101,6 @@ const NavList = styled(UnorderedList)`
   margin: 0px;
   padding: 0px;
   list-style: none;
-  margin-top: -3px; // Evens out top between nav and regular text on small view
-
-  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    margin-top: 0px; // Reset top on > tiny views
-  }
 `;
 const Icon = styled.img`
   display: ${p => (p.home ? 'none' : undefined)};
@@ -179,7 +172,7 @@ export default class Header extends Component {
       >
         <HeaderBackground
           hide={hideBackground}
-        ></HeaderBackground>
+        />
         <NameAsLink
           reverie={reverieIsActive}
           hide={hideNameAndMotto}

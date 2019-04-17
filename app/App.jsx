@@ -68,7 +68,6 @@ const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
     // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
-
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
     background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};

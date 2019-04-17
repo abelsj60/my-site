@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import ReactGA from 'react-ga';
 import styled, { css } from 'styled-components';
 
-const Container = styled.section`
+const OuterContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,7 @@ const Container = styled.section`
   ${p => p.home && css`
     background-color: ${!p.copying ? 'rgba(115,192,232, 0.35)' : 'rgba(255,231,76, 0.25)'}`};
 `;
-const CenterCardInMain = styled.div`
+const CenteringContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -36,8 +36,7 @@ const CardHolder = styled.div`
   justifyContent: center;
 `;
 const InnerContainer = styled.div`
-  margin-top: ${p => (p.home ? '-135px' : undefined)};
-  `;
+`;
 const Card = styled.section`
   height: 160px;
   width: 275px;
@@ -197,7 +196,7 @@ export default class LegalTermsOrBizCard extends Component {
       : '';
 
     return (
-      <Container
+      <OuterContainer
         home={homeIsActive}
         copying={copying && !showLegalTerms}
         onClick={
@@ -214,13 +213,12 @@ export default class LegalTermsOrBizCard extends Component {
           }
         }
       >
-        <CenterCardInMain>
+        <CenteringContainer>
           <CardHolder>
             <Parallax
               render={
                 renderProps => (
                   <InnerContainer
-                    home={homeIsActive}
                     ref={
                       ref => (renderProps.scene = ref)
                     }
@@ -284,8 +282,8 @@ export default class LegalTermsOrBizCard extends Component {
               }
             />
           </CardHolder>
-        </CenterCardInMain>
-      </Container>
+        </CenteringContainer>
+      </OuterContainer>
     );
   }
 

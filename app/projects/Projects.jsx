@@ -54,14 +54,13 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   max-width: 100%;
-  ${!isIE && 'flex: 1;'}
+  ${!isIE && 'flex: 1;'} // Overflow shrinks in IE if this isn't set for at least one child
   vertical-align: bottom;
 `;
 
 export default function Projects(props) {
   const {
     data,
-    overflowRef,
     params
   } = props;
 
@@ -97,9 +96,7 @@ export default function Projects(props) {
           {...props}
           noOffset={true}
         />
-        <Overflow ref={
-          ref => overflowRef.current = ref
-        }>
+        <Overflow>
           <ProjectName>
             {projectName}
           </ProjectName>

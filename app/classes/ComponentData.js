@@ -41,6 +41,8 @@ export default class ComponentData {
       <Section
         {...props}
         data={contentData}
+        // Only valid if '/chapter',
+        // empty string otherwise
         overflowRef={ref}
         params={params}
       />

@@ -119,8 +119,6 @@ const Portal = styled.div`
   z-index: 1;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
-  // NOTE: Scale may not be working
-
   background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
