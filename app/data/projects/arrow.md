@@ -11,14 +11,14 @@
     'Arrow caption three'
   ],
   projectThumbnail: [
-    '/arrow-editor-thumb.png',
-    '/arrow-epm-thumb.png',
-    '/arrow-settings-thumb.png'
+    '/public/arrow-editor-thumb.png',
+    '/public/arrow-epm-thumb.png',
+    '/public/arrow-settings-thumb.png'
   ],
   full: [
-   '/arrow-editor-thumb.png',
-    '/arrow-epm-thumb.png',
-    '/arrow-settings-thumb.png'
+   '/public/arrow-editor-thumb.png',
+    '/public/arrow-epm-thumb.png',
+    '/public/arrow-settings-thumb.png'
   ],
   showTheseAttributes: [
     'story',

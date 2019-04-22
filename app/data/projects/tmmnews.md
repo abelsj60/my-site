@@ -13,14 +13,14 @@
     'TMMnews caption three'
   ],
   projectThumbnail: [
-    '/tmmnews-homepage-thumb.png',
-    '/tmmnews-homepage-thumb.png',
-    '/tmmnews-homepage-thumb.png'
+    '/public/tmmnews-homepage-thumb.png',
+    '/public/tmmnews-homepage-thumb.png',
+    '/public/tmmnews-homepage-thumb.png'
   ],
   full: [
-    '/tmmnews-homepage-thumb.png',
-    '/tmmnews-homepage-thumb.png',
-    '/tmmnews-homepage-thumb.png'
+    '/public/tmmnews-homepage-thumb.png',
+    '/public/tmmnews-homepage-thumb.png',
+    '/public/tmmnews-homepage-thumb.png'
   ],
   showTheseAttributes: [
     'story',
