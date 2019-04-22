@@ -13,14 +13,14 @@
     'Slingshot caption three'
   ],
   projectThumbnail: [
-    '/public/slingshot-remote-slides-thumb.png',
-    '/public/slingshot-remote-media-thumb.png',
-    '/public/slingshot-guest-media-highlighted-thumb.png'
+    '/slingshot-remote-slides-thumb.png',
+    '/slingshot-remote-media-thumb.png',
+    '/slingshot-guest-media-highlighted-thumb.png'
   ],
   full: [
-    '/public/slingshot-remote-slides-thumb.png',
-    '/public/slingshot-remote-media-thumb.png',
-    '/public/slingshot-guest-media-highlighted-thumb.png'
+    '/slingshot-remote-slides-thumb.png',
+    '/slingshot-remote-media-thumb.png',
+    '/slingshot-guest-media-highlighted-thumb.png'
   ],
   showTheseAttributes: [
     'story',

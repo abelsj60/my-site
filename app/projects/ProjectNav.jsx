@@ -13,14 +13,12 @@ const Group = styled(UnorderedList)`
   ${isIE && 'flex-shrink: 0;'} // Ensures height is true on IE (empty space on top/bottom otherwise)
 
 ${p => p.menu && css`
-    padding: 15px;
-    background-color: ${p.theme.colors.reverieBlue};
-    margin-bottom: ${!p.lastGroup ? '20px' : undefined};
+    margin-bottom: ${!p.lastGroup ? '30px' : undefined};
     max-width: 100%;
   `};
 `;
 const ListItem = styled.li`
-  margin-right: ${p => (!p.lastItem ? '15px' : undefined)}; // 6px
+  margin-right: ${p => (!p.lastItem ? '20px' : undefined)}; // 6px
   ${p => isIE && p.lastItem ? 'flex-shrink: 1.0275;' : ''} // Accounts for no { padding: 6px } on last image in IE 11
 
   &:first-child {

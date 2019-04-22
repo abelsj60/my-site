@@ -19,7 +19,7 @@ const Shelf = styled.div`
   // https://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
   flex-shrink: 0; 
   margin-right: 25px;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
   justify-content: space-between;
 `;
 const Hed = styled.h3`
@@ -135,7 +135,7 @@ export default function Projects(props) {
           />
           <Figure>
             <Hed>Featured image</Hed>
-            <Caption>{caption}</Caption>
+            <Graf>{caption}</Graf>
             <ImageHolder>
               <Image alt="mainPic" src={source} />
             </ImageHolder>

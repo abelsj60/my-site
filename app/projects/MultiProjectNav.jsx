@@ -17,7 +17,7 @@ const RestyledList = styled(UnorderedList)`
 const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
   color: ${p => p.theme.colors.blue};
-  margin-bottom: 5px;
+  margin-bottom: 13px;
   font-weight: 400;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
