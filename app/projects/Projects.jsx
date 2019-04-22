@@ -16,6 +16,8 @@ const ProjectName = styled.h1`
 `;
 const Shelf = styled.div`
   display: flex;
+  // https://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
+  flex-shrink: 0; 
   margin-right: 25px;
   margin-bottom: 24px;
   justify-content: space-between;
