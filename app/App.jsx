@@ -9,6 +9,8 @@ import Footer from './header-footer/Footer.jsx';
 import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
 import {
+  browserVersion,
+  isIE,
   isMobileSafari,
   isOpera,
   isTablet,
@@ -259,7 +261,7 @@ class App extends Component {
   componentDidMount() {
     if (!this.hasFlexbox()) {
       throw new Error("Browser doesn't support Flexbox");
-    } else if (isOpera) {
+    } else if (isOpera || (isIE && browserVersion <= 10)) {
       throw new Error("We don't currently support Opera");
     }
 

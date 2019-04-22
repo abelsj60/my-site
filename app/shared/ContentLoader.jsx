@@ -95,7 +95,9 @@ export default class ContentLoader extends Component {
           render={
             () => componentData.getSection(
               this.props,
-              this.overflowRef,
+              location.type === 'chapter'
+                ? this.overflowRef
+                : undefined,
               location.params
             )
           }

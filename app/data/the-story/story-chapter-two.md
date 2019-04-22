@@ -8,16 +8,22 @@ The boy woke at home the next day.
 
 The gold lamp sat on his bedside table. It glowed slightly purple. "What does that mean," he asked, hoping for a sign.
 
-None came. It was just a lamp. 
+The lamp's purple glow seemed to brighten for a moment. But nothing else happend and the boy decided he was wrong. 
 
 So he got on with life. He studied, became a lawyer, and then a journalist. He wrote about media, technology, and venture capital for Forbes and others.
 
-No matter what he did, he kept the lamp nearby. The boy loved its mystery. "Why do you get brighter when I tell stories," he'd wonder aloud sometimes. 
+No matter what he did, the boy kept the lamp nearby. He loved its mystery. 
 
-Best he didn't know. 
+"Why do you get brighter when I tell stories," he'd wonder aloud sometimes.
 
-Adventure demands the unknown. Thus, there was nothing holding him back the day he met a software developer and began to build two Web platforms. 
+But, the lamp never answered. It was, after all, just a lamp. And, anyway, it's best not to know. 
 
-One ran interactive video networks, the other, remote software demos, smooth like silk. He pitched them tirelessly. 
+Adventure demands the unknown. 
 
-But neither took, and he tired of the tale. As he did, the golden lamp's purple glow grew dim. Then he stretched one night, knocking it beneath its table, dark.
+So, there was nothing holding the boy back when he met a software developer. Fast friends, the two soon began building two software platforms for the Web. 
+
+One ran interactive video networks, the other, remote software demos, smooth as silk. The boy pitched them tirelessly in many different ways. 
+
+But neither took, and he wearied of the tale. 
+
+As he did, the lamp's purple glow grew dim. One night, while stretching, the boy knocked the lamp beneath its table, dark.

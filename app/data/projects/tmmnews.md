@@ -2,8 +2,8 @@
 {
   projectName: 'TMMnews',
   type: 'Bespoke video news',
-  tech: 'Cloud: WordPress ∙ Language: JavaScript, HTML, CSS',
-  role:
+  technologies: 'Cloud: WordPress ∙ Language: JavaScript, HTML, CSS',
+  responsibility:
     'News anchor, oversaw platform development, managed dev team, prioritized features.',
   story:
   'TMMnews is a custom WordPress theme that programmatically assembles news shows from individual video segments.',
@@ -13,14 +13,19 @@
     'TMMnews caption three'
   ],
   projectThumbnail: [
-    'https://picsum.photos/217/180?random',
-    'https://picsum.photos/217/180?random',
-    'https://picsum.photos/217/180?random'
+    '/tmmnews-homepage-thumb.png',
+    '/tmmnews-homepage-thumb.png',
+    '/tmmnews-homepage-thumb.png'
   ],
   full: [
-    'https://picsum.photos/879/569/?random',
-    'https://picsum.photos/880/569/?random',
-    'https://picsum.photos/881/569/?random'
+    '/tmmnews-homepage-thumb.png',
+    '/tmmnews-homepage-thumb.png',
+    '/tmmnews-homepage-thumb.png'
+  ],
+  showTheseAttributes: [
+    'story',
+    'responsibility',
+    'technologies'
   ]
 }
 ---

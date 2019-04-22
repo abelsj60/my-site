@@ -17,7 +17,7 @@ const RestyledList = styled(UnorderedList)`
 const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
   color: ${p => p.theme.colors.blue};
-  margin-bottom: 9px;
+  margin-bottom: 5px;
   font-weight: 400;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
@@ -29,32 +29,21 @@ export default function DesktopProjectNav(props) {
   const {
     appState,
     bodyState,
-    data,
-    location,
-    params
+    data
   } = props;
   const {
     isMenu
   } = appState;
 
-  let indexForProjectData;
-  let indexForProjectPics;
-  let finalData;
-
-  if (location.pathname.split('/')[2] !== 'menu') {
-    indexForProjectData = params.projectNameToIndex();
-    indexForProjectPics = params.projectThumbnailToIndex();
-    finalData = data.filter(
-      (_, index) => indexForProjectData !== index
-    );
-  } else {
-    indexForProjectData = bodyState.indexForProjectData;
-    indexForProjectPics = bodyState.indexForProjectPics;
-    finalData = data;
-  }
+  // Must use bodyState because the '/menu' url doesn't
+  // have the project and thumbnail number in it
+  const indexForProjectData = bodyState.indexForProjectData;
+  const finalData = data;
 
   return (
-    <RestyledList menu={isMenu}>
+    <RestyledList
+      menu={isMenu}
+    >
       <Mapper
         mapData={finalData}
         render={
@@ -63,20 +52,22 @@ export default function DesktopProjectNav(props) {
               projectName,
               type
             } = project.attributes;
+            const lastGroup = idx === finalData.length - 1;
+
             return (
-              <li key={idx}>
+              <li
+                key={idx}
+              >
                 <Graf
                   menu={isMenu}
-                  num={idx}
                 >
                   {`${projectName} | ${type}`}
                 </Graf>
                 <ProjectNav
                   {...props}
-                  isActive={indexForProjectData === idx}
-                  indexForProjectPics={indexForProjectPics}
-                  num={idx}
-                  project={project}
+                  activeGroup={indexForProjectData === idx} // active group
+                  lastGroup={lastGroup} // conditional CSS
+                  project={project} // attributes
                 />
               </li>
             );

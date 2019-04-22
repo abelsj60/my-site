@@ -7,24 +7,26 @@ number: 1
 
 The cardboard fort crumbled.
 
-A small fairy destroyed it after zipping through the wide-eyed boy's window with all the force of a cannonball. 
+A small fairy destroyed it after zipping through the wide-eyed boy's window with the force of a cannonball. 
 
 "Want to find a glowing purple lamp," she asked, beaming as she floated eye-level.
 
 "Of course," he said. "What do I do?"
 
-She laughed the sound of waves crashing ashore. Then she took his hand and flew them over the moon toward home — a land of grand adventure. 
+She laughed the sound of shells crashing to shore. Then she took his hand and flew them over the moon toward home — a land of grand adventure. 
 
-By day, they searched, soaring over pirate ships, chasing Jinns across sun-drenched sands. And, by night, they told amazing stories about their big adventures. 
+By day, they searched, soaring over pirate ships and chasing Jinns across sun-drenched sands. By night, they told amazing stories about big adventures. 
 
-Late one night, the fairy sighed. "You've grown up," she said. "Time to go home." 
+Then, late one night, the fairy sighed. 
 
-The boy started sniffling.
+"You're growing up," she said. "Time to go home." 
 
-She smiled kindly, then knocked twice on the floor between them. A door opened. She dove in and flew out with the very thing they'd sought! A golden lamp, etched by purple incantations. 
+The boy began to sniffle.
 
-"The adventure matters most," she told a fast fading boy. Then she read one aloud. 
+She smiled kindly, then knocked twice on the floor between them. A secret door in the floor opened. The fairy dove in, disappearing for what felt like eons. The boy's eyes were heavy when she flew out, clutching the very thing they'd sought — a golden lamp, etched by purple incantations. 
 
-"By bright day and black night, through tall tale and purple light, rub me twice and release my might, if..." Too late. 
+"The adventure matters most," she said as she read one aloud. 
+
+"In bright day and black night, through tall tale and purple light, rub me twice and release my might, if..." Too late. 
 
 He was out.

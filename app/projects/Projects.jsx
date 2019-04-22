@@ -14,6 +14,12 @@ const ProjectName = styled.h1`
   margin-top: -8px;
   margin-bottom: 4px;
 `;
+const Shelf = styled.div`
+  display: flex;
+  margin-right: 25px;
+  margin-bottom: 24px;
+  justify-content: space-between;
+`;
 const Hed = styled.h3`
   font-size: ${p => p.theme.fontSizes.eight};
   font-weight: 400;
@@ -28,11 +34,9 @@ const Dek = styled.h2`
 `;
 const Graf = styled.p`
   margin-right: 0px;
-  margin-bottom: ${p => p.num !== 2 ? p.theme.bottomMargin.regular : '15px'};
+  margin-bottom: ${p => !p.lastItem ? p.theme.bottomMargin.regular : '15px'};
 `;
 const Figure = styled.figure`
-  padding-top: 15px;
-  border-top: 1px solid ${p => p.theme.colors.blueTwo};
   display: flex;
   flex-direction: column;
   margin: 0px;
@@ -48,14 +52,20 @@ const Caption = styled.figcaption`
   font-size: ${p => p.theme.fontSizes.seven};
   color: ${p => p.theme.colors.lightBlack};
 `;
+const ImageHolder = styled.div`
+  padding: 15px;
+  background-color: ${p => p.theme.colors.reverieBlue};
+`;
 const Image = styled.img`
   // The main image should shrink proportionally, i.e.,
   // don't scale and center it in the element 
   width: 100%;
   height: 100%;
   max-width: 100%;
+  border: 2px solid #b9dff3;
+  box-sizing: border-box;
   ${!isIE && 'flex: 1;'} // Overflow shrinks in IE if this isn't set for at least one child
-  vertical-align: bottom;
+  vertical-align: top;
 `;
 
 export default function Projects(props) {
@@ -70,32 +80,33 @@ export default function Projects(props) {
 
   const {
     captions,
-    role,
-    story,
     full,
     projectName,
-    tech,
+    showTheseAttributes,
     type
   } = project.attributes;
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
-  // Change order to change item order
-  const mapData = [
-    { story },
-    { role },
-    { tech }
-  ];
-  const keys = mapData.map(
-    item => Object.keys(item)[0]
+
+  const keys = showTheseAttributes.map(
+    name => name
+  );
+  const attributeArray = keys.map(
+    name => project.attributes[name]
   );
 
   return (
     <Main>
       <ContentHolder>
-        <MenuButton
-          {...props}
-          noOffset={true}
-        />
+        <Shelf>
+          <MenuButton
+            {...props}
+          />
+          <ProjectNav
+            {...props}
+            project={project} // attributes
+          />
+        </Shelf>
         <Overflow>
           <ProjectName>
             {projectName}
@@ -104,28 +115,28 @@ export default function Projects(props) {
             {type}
           </Dek>
           <Mapper
-            mapData={mapData}
+            mapData={attributeArray}
             render={
-              (proj, idx) => (
-                <Fragment key={idx}>
-                  <Hed>
-                    {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
-                  </Hed>
-                  <Graf num={idx}>
-                    {proj[keys[idx]]}
-                  </Graf>
-                </Fragment>
-              )
+              (text, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <Hed>
+                      {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
+                    </Hed>
+                    <Graf>
+                      {text}
+                    </Graf>
+                  </Fragment>
+                );
+              }
             }
           />
           <Figure>
-            <ProjectNav
-              indexForProjectPics={indexForProjectPics}
-              isProjectPage={true}
-              project={project}
-            />
+            <Hed>Featured image</Hed>
             <Caption>{caption}</Caption>
-            <Image alt="mainPic" src={source} />
+            <ImageHolder>
+              <Image alt="mainPic" src={source} />
+            </ImageHolder>
           </Figure>
         </Overflow>
       </ContentHolder>

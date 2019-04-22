@@ -6,20 +6,30 @@ number: 4
 
 The Six train sped through darkness.
 
-The boy climbed out at Wall Street, and snaked through back alleys to Hanover Square. Magicians thronged the way.
+The young man climbed out at Wall Street. Modern magicians thronged the way as he snaked through back alleys toward Hanover Square. 
+
+A white tower soared skyward. 
 
 "Coding school," he said. 
 
-A white tower soared skyward. The boy logged into practical magic 11 flights up. Code covered computer screens across the floor. While smart and austere, the logic lacked something important.
+Eleven flights up, the young man logged into practical magic. 
 
-"Purpose," he thought.
+Computer code covered screens across the floor. It was smart and austere, but lacked something important. 
 
-Pixelated colors flooded the floor, stirring memories of impractical magic. "Software is a story," he said, as a blur zipped across the horizon. The city and its spires were drenched in warm autumn light. 
+"Purpose," he said, leaning intently toward the logic on screen.
 
-"Code the way to tell it," he added as he wrote a small recursive loop to screen.
+When he looked up, he stared out at a city drenched in warm autumn light. A small blur zipped across the horizon. The young man smiled to himself. 
 
-That night, a fairy darted inside the boy's room as he slept. She skid to a swift stop on the dark lamp beside him. "He does believe," she cried down its spout. 
+"Software is a story," he said. "Code the way to tell it."
 
-An angry blue bolt shot out. 
+Memories of impractical magic washed over him as code filled his screen in pixelated color. Time melted away.
 
-Then the gold grew warm and took on a purple glow...but, that's another story.
+Hours later, when the midnight bells rang, the young man was once again racing across far-off desert sands. Jinns, fairies, and golden lands lay just beyond his outstretched hands.
+
+Back home, a shining sprite hung happily over him as he slept. 
+
+An electric blue bolt greeted her as she landed atop the dark lamp by his side. Its gold metal grew warm and took on a bright neon glow. 
+
+Clear red rays then etched something to view.
+
+But, that's the start of another story...

@@ -55,8 +55,8 @@ const TextBox = styled.div`
 
 export default function FooterContainer(props) {
   const {
-    boundHandleClickForApp,
-    appState
+    appState,
+    boundHandleClickForApp
   } = props;
   const {
     currentCaller,

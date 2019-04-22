@@ -63,12 +63,10 @@ export default function MenuButton(props) {
     ? arrowDown
     : arrowUp;
   const menuIsActive = isMenu ? 'active' : undefined;
-  const offsetIsActive = props.noOffset ? 'active' : '';
   const text = isMenu ? 'Close' : 'Menu';
 
   return (
     <Container
-      offset={offsetIsActive}
       menu={menuIsActive}
     >
       <RestyledLink

@@ -7,24 +7,15 @@ import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
 
-const PictureHolder = styled.div`
+const RestyledContentHolder = styled(ContentHolder)`
   display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
   flex-direction: column;
   flex: 1;
-  padding: 0px 0px 25px 25px;
-  margin-top: 25px;
-  overflow: auto; // Needed by desktop Chrome for no known reason
 `;
-const RestyledContentHolder = styled(ContentHolder)`
+const PictureHolder = styled.section`
   display: ${p => (p.text !== 'hidden' ? 'none' : 'flex')};
-  flex: 1;
+  flex: 1; // Ensures element takes usual in doc (less confusing)
   overflow: hidden;
-  margin: 0px;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0px;
-  bottom: 0px;
 `;
 const Chapter = styled.h2`
   color: ${p => p.theme.colors.blue};
@@ -92,8 +83,7 @@ export default function Story(props) {
 
   return (
     <Main>
-      <PictureHolder
-        as="section"
+      <RestyledContentHolder
         text={textStatus}
       >
         <ChapterNav
@@ -119,15 +109,15 @@ export default function Story(props) {
             )}
           </StoryText>
         </Overflow>
-      </PictureHolder>
-      <RestyledContentHolder
+      </RestyledContentHolder>
+      <PictureHolder
         rightMargin text={textStatus}
       >
         <Image
           alt="fantasy illustration"
           src={image}
         />
-      </RestyledContentHolder>
+      </PictureHolder>
     </Main>
   );
 }

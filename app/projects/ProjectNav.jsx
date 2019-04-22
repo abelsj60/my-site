@@ -8,19 +8,19 @@ import {
 } from 'react-device-detect';
 
 const Group = styled(UnorderedList)`
+  max-width: 150px;
   display: flex; // See note above
   ${isIE && 'flex-shrink: 0;'} // Ensures height is true on IE (empty space on top/bottom otherwise)
-  list-style-type: none;
-  margin-bottom: ${p => !p.menu ? '15px' : undefined};
 
-  ${p => p.menu && css`
-    margin-bottom: ${p.num !== 2 ? '20px' : undefined};
-    padding-bottom: 0;
+${p => p.menu && css`
+    padding: 15px;
+    background-color: ${p.theme.colors.reverieBlue};
+    margin-bottom: ${!p.lastGroup ? '20px' : undefined};
     max-width: 100%;
   `};
 `;
 const ListItem = styled.li`
-  margin-right: ${p => (!p.lastItem ? '6px' : undefined)};
+  margin-right: ${p => (!p.lastItem ? '15px' : undefined)}; // 6px
   ${p => isIE && p.lastItem ? 'flex-shrink: 1.0275;' : ''} // Accounts for no { padding: 6px } on last image in IE 11
 
   &:first-child {
@@ -28,64 +28,56 @@ const ListItem = styled.li`
   }
 `;
 const RestyledLink = styled(StyledLink)`
+  border: 1px solid #b9dff3;
   display: block; // Ensures proper placement of images wrapped by <a> in Safari 10, per CSS Tricks
   position: relative; // Positions <Highlighter />
 `;
 const Image = styled.img`
   width: 100%;
   max-width: 100%;
-  vertical-align: bottom;
+  vertical-align: top;
   align-self: center; // Default is 'stretch', no good!
 `;
 const Highlighter = styled.div`
   width: 100%;
-  height: 4px;
+  height: ${p => p.isProjectPage ? '100%' : '4px'};
   left: 0px;
   bottom: 0px;
   position: absolute;
-  background-color: ${p => p.theme.colors.yellow};
+  background-color: ${p => p.isProjectPage ? 'rgba(115,192,232,0.2)' : p.theme.colors.yellow};
 `;
 
 export default function ProjectNav(props) {
   const {
+    activeGroup,
     appState,
-    indexForProjectPics,
-    isActive,
-    isProjectPage,
-    num,
+    bodyState,
+    lastGroup,
     project
   } = props;
   const {
     projectName,
     projectThumbnail
   } = project.attributes;
-  let isMenu;
-
-  if (appState) {
-    isMenu = appState.isMenu;
-  }
+  const indexForProjectPics = bodyState.indexForProjectPics;
+  const isProjectPage = activeGroup === undefined;
+  const isMenu = appState.isMenu;
 
   return (
     <Group
       isProjectPage={isProjectPage}
+      lastGroup={lastGroup}
       menu={isMenu}
-      num={num}
     >
       <Mapper
         mapData={projectThumbnail}
         render={
           (thumb, idx) => {
-            const lastItem = idx > 1;
             const thumbnailNumber = idx + 1;
-            let highlightActiveThumbnail;
-
-            if (
-              isMenu
-                && isActive
-                && indexForProjectPics === idx
-            ) {
-              highlightActiveThumbnail = true;
-            }
+            const lastItem = idx === projectThumbnail.length - 1;
+            const highlightThis =
+              (isProjectPage && indexForProjectPics === idx)
+                || (activeGroup && indexForProjectPics === idx);
 
             return (
               <ListItem
@@ -102,7 +94,10 @@ export default function ProjectNav(props) {
                     alt={`Thumbnail ${thumbnailNumber}`}
                     src={thumb}
                   />
-                  {highlightActiveThumbnail && <Highlighter />}
+                  {highlightThis &&
+                    <Highlighter
+                      isProjectPage={isProjectPage}
+                    />}
                 </RestyledLink>
               </ListItem>
             );
