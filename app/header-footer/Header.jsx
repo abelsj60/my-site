@@ -22,7 +22,7 @@ const Container = styled.header`
   z-index: 2;
   height: 52px;
   display: flex;
-  justify-content: ${p => (p.home === 'active' ? 'center' : undefined)};
+  justify-content: ${p => (p.isHome ? 'center' : undefined)};
   align-items: center;
   width: 100%;
   max-width: 75rem;
@@ -36,29 +36,37 @@ const HeaderBackground = styled.div`
   background-color: ${p => !p.hide ? p.theme.colors.darkPink : ''};
   z-index: -1;
 `;
-const RestyledLink = styled(StyledLink)`
+const RestyledLink = styled(
+  // Filter out home from StyledLink
+  // eslint-disable-next-line
+  ({ isHome, isActive, ...rest }) => <StyledLink {...rest} />
+)`
   font-size: ${p => p.theme.fontSizes.one};
-  font-weight: ${p => p.home === 'active' ? '400' : ''};
+  font-weight: ${p => p.isHome && '400'};
   margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
   color: ${p => p.theme.colors.white};
   font-weight: ${fontWeight};
 
   && {
-    text-decoration: ${p => (p.active === 'active' ? 'underline' : undefined)};
+    text-decoration: ${p => (p.isActive ? 'underline' : undefined)};
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    font-size: ${p => p.home !== 'active' ? p.theme.fontSizes.six : p.theme.fontSizes.three};
+    font-size: ${p => !p.isHome ? p.theme.fontSizes.six : p.theme.fontSizes.three};
   }
 `;
-const NameAsLink = styled(RestyledLink)`
-  display: ${p => (p.hide === 'active' ? 'none' : undefined)};
+const NameAsLink = styled(
+  // Filter out hide from RestyledLink
+  // eslint-disable-next-line
+  ({ hide, ...rest }) => <RestyledLink {...rest} />
+)`
+  display: ${p => (p.hide && 'none')};
   font-size: ${p => p.theme.fontSizes.six};
 `;
 const Motto = styled.span`
   font-weight: ${fontWeight};
   flex: 1;
-  display: ${p => (p.hide === 'active' ? 'none' : undefined)};
+  display: ${p => (p.hide && 'none')};
   font-style: italic;
   font-size: ${p => p.theme.fontSizes.two};
   margin: 1px 20px 0px 13px;
@@ -74,11 +82,11 @@ const Motto = styled.span`
   }
 `;
 const Nav = styled.nav`
-  display: ${p => (p.home === 'active' ? undefined : 'none')};
+  display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
-  padding: ${p => p.home === 'active' ? '8px 15px' : undefined};
-  background-color: ${p => p.home === 'active' ? 'rgba(0,0,0,0.25)' : undefined};
-  border-radius: ${p => p.home === 'active' ? '10px' : undefined};
+  padding: ${p => p.isHome && '8px 15px'};
+  background-color: ${p => p.isHome && 'rgba(0,0,0,0.25)'};
+  border-radius: ${p => p.isHome && '10px'};
 
   ${p => p.menu && css`
     flex: 1;
@@ -92,7 +100,7 @@ const Nav = styled.nav`
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
-    margin-right: ${p => (p.home !== 'active' ? '15px' : undefined)};
+    margin-right: ${p => (!p.isHome && '15px')};
   }
 `;
 const NavList = styled(UnorderedList)`
@@ -103,7 +111,7 @@ const NavList = styled(UnorderedList)`
   list-style: none;
 `;
 const Icon = styled.img`
-  display: ${p => (p.home ? 'none' : undefined)};
+  display: ${p => (p.isHome && 'none')};
   height: 22px;
   margin-left: auto;
   margin-right: 10px;
@@ -138,25 +146,15 @@ export default class Header extends Component {
       showStoryText
     } = appState;
     const menuIsOpen = this.state.menuIsOpen;
-    const homeIsActive =
-      currentCaller === 'home'
-        ? 'active'
-        : '';
-    const reverieIsActive =
-      currentCaller === 'reverie'
-        ? 'active'
-        : '';
+    const isHome = currentCaller === 'home';
+    const isReverie = currentCaller === 'reverie';
     const iconType =
       menuIsOpen
         ? headerNavClose
         : headerNavOpen;
-    const hideBackground =
-      homeIsActive.length > 0
-        || (!showStoryText && !reverieIsActive);
-    const hideNameAndMotto =
-      menuIsOpen || homeIsActive.length > 0
-        ? 'active'
-        : '';
+    const hideBackground = isHome
+        || (!showStoryText && !isReverie);
+    const hideNameAndMotto = menuIsOpen || isHome;
 
     const referrer = new Referrer(this.props);
     const hcForHeader = new ClickHandling('header',
@@ -167,14 +165,12 @@ export default class Header extends Component {
 
     return (
       <Container
-        home={homeIsActive}
-        reverie={reverieIsActive}
+        isHome={isHome}
       >
         <HeaderBackground
           hide={hideBackground}
         />
         <NameAsLink
-          reverie={reverieIsActive}
           hide={hideNameAndMotto}
           to={'/'}
         >
@@ -186,7 +182,7 @@ export default class Header extends Component {
           Narrative coding and other adventures
         </Motto>
         <Nav
-          home={homeIsActive}
+          isHome={isHome}
           menu={menuIsOpen}
         >
           <NavList>
@@ -194,19 +190,17 @@ export default class Header extends Component {
               mapData={headerLinks}
               render={
                 (link, idx) => {
-                  const pathIsActive =
-                    link.path.includes(referrer.location)
-                      ? 'active'
-                      : '';
+                  const isActive = link.path.includes(
+                    referrer.location
+                  );
 
                   return (
                     <li
                       key={idx}
                     >
                       <RestyledLink
-                        reverie={reverieIsActive}
-                        active={pathIsActive}
-                        home={homeIsActive}
+                        isActive={isActive}
+                        isHome={isHome}
                         num={idx}
                         to={link.path}
                       >
@@ -220,7 +214,7 @@ export default class Header extends Component {
           </NavList>
         </Nav>
         <Icon
-          home={homeIsActive}
+          isHome={isHome}
           menu={menuIsOpen}
           src={iconType}
           onClick={

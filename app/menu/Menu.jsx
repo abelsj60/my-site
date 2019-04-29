@@ -3,6 +3,7 @@ import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import React from 'react';
+import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
 const RestyledMain = styled(Main)`
@@ -30,7 +31,11 @@ export default function Menu(props) {
   return (
     <RestyledMain reverie={isReverie}>
       <ContentHolder>
-        <MenuButton {...props} />
+        <Shelf
+          height="19px"
+        >
+          <MenuButton {...props} />
+        </Shelf>
         <Overflow>{children}</Overflow>
       </ContentHolder>
     </RestyledMain>

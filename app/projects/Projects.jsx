@@ -1,11 +1,12 @@
 import { isIE } from 'react-device-detect';
 import Main from '../primitives/Main.jsx';
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React, { Fragment } from 'react';
-import ContentHolder from '../primitives/ContentHolder.jsx';
+import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
 const ProjectName = styled.h1`
@@ -13,14 +14,6 @@ const ProjectName = styled.h1`
   color: ${p => p.theme.colors.pink};
   margin-top: -8px;
   margin-bottom: 4px;
-`;
-const Shelf = styled.div`
-  display: flex;
-  // https://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
-  flex-shrink: 0; 
-  margin-right: 25px;
-  margin-bottom: 15px;
-  justify-content: space-between;
 `;
 const Hed = styled.h3`
   font-size: ${p => p.theme.fontSizes.eight};
@@ -41,8 +34,10 @@ const Graf = styled.p`
 const Figure = styled.figure`
   display: flex;
   flex-direction: column;
-  margin: 0px;
   flex-shrink: 0;
+  margin: 0px;
+  padding-top: 15px;
+  border-top: 1px solid ${p => p.theme.colors.blueTwo};
 
   // PROBABLY DELETE WHEN DONE:
   // Define width on IE/FF to expand main image properly
@@ -52,6 +47,7 @@ const Caption = styled.figcaption`
   display: flex;
   margin-bottom: 10px;
   font-size: ${p => p.theme.fontSizes.seven};
+  line-height: 1.5;
   color: ${p => p.theme.colors.lightBlack};
 `;
 const ImageHolder = styled.div`
@@ -64,10 +60,11 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   max-width: 100%;
-  border: 2px solid #b9dff3;
   box-sizing: border-box;
   ${!isIE && 'flex: 1;'} // Overflow shrinks in IE if this isn't set for at least one child
   vertical-align: top;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, .3);
+  // border: 2px solid #b9dff3;
 `;
 
 export default function Projects(props) {
@@ -90,17 +87,16 @@ export default function Projects(props) {
   const caption = captions[indexForProjectPics];
   const source = full[indexForProjectPics];
 
-  const keys = showTheseAttributes.map(
-    name => name
-  );
-  const attributeArray = keys.map(
+  const attributeArray = showTheseAttributes.map(
     name => project.attributes[name]
   );
 
   return (
     <Main>
       <ContentHolder>
-        <Shelf>
+        <Shelf
+          height="32px"
+        >
           <MenuButton
             {...props}
           />
@@ -123,7 +119,10 @@ export default function Projects(props) {
                 return (
                   <Fragment key={idx}>
                     <Hed>
-                      {keys[idx][0].toUpperCase() + keys[idx].slice(1)}
+                      {showTheseAttributes[idx][0]
+                        .toUpperCase()
+                        + showTheseAttributes[idx]
+                          .slice(1)}
                     </Hed>
                     <Graf>
                       {text}
@@ -134,10 +133,13 @@ export default function Projects(props) {
             }
           />
           <Figure>
-            <Hed>Featured image</Hed>
-            <Graf>{caption}</Graf>
+            {/*<Hed>Featured image</Hed>*/}
+            <Caption>{caption}</Caption>
             <ImageHolder>
-              <Image alt="mainPic" src={source} />
+              <Image
+                alt="mainPic"
+                src={source}
+              />
             </ImageHolder>
           </Figure>
         </Overflow>

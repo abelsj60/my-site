@@ -8,13 +8,15 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
-  margin: -6px 0px 22px -13px;
+  margin: -4px 0px 0px -15px;
   max-width: 150px;
   display: flex;
   flex-shrink: 0;
   position: relative;
 `;
 const StyledList = styled(UnorderedList)`
+  width: 150px;
+  height: 25px;
   display: flex;
   flex: 1;
   padding-bottom: 2px;
@@ -65,14 +67,13 @@ export default function ChapterNav(props) {
           mapData={data}
           render={
             (_chapter, idx) => {
-              const itemIsActive =
-                indexForChapterData === idx;
               const normalizedTitle = normalize(
                 data[idx].attributes.title
               );
-              const dot = itemIsActive
-                ? dotFull
-                : dotEmpty;
+              const dot =
+                indexForChapterData === idx
+                  ? dotFull
+                  : dotEmpty;
 
               return (
                 <ListItem key={idx}>
@@ -80,7 +81,6 @@ export default function ChapterNav(props) {
                     <SelectorContainer>
                       <Selector
                         image={dot}
-                        item={itemIsActive}
                         num={idx}
                       />
                     </SelectorContainer>

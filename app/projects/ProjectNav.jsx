@@ -1,4 +1,5 @@
 import Mapper from '../shared/Mapper.jsx';
+import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -8,33 +9,54 @@ import {
 } from 'react-device-detect';
 
 const Group = styled(UnorderedList)`
-  max-width: 150px;
+  flex: ${p => p.isProjectPage && '1'};
+  justify-content: ${p => p.isProjectPage && 'flex-end'};
+  margin-left: ${p => p.isProjectPage && '25px'};
   display: flex; // See note above
   ${isIE && 'flex-shrink: 0;'} // Ensures height is true on IE (empty space on top/bottom otherwise)
 
-${p => p.menu && css`
-    margin-bottom: ${!p.lastGroup ? '30px' : undefined};
+  ${p => p.menu && css`
+    margin-bottom: ${!p.lastGroup && '30px'};
     max-width: 100%;
   `};
 `;
 const ListItem = styled.li`
-  margin-right: ${p => (!p.lastItem ? '20px' : undefined)}; // 6px
-  ${p => isIE && p.lastItem ? 'flex-shrink: 1.0275;' : ''} // Accounts for no { padding: 6px } on last image in IE 11
-
+  height: 100%;
+  margin-right: ${p => !p.lastItem && '15px'};
+  ${p => isIE && p.lastItem && 'flex-shrink: 1.0275;'} // Accounts for no { padding: 6px } on last image in IE 11
+  
   &:first-child {
-    margin-left: ${p => (!p.isProjectPage ? '0px' : undefined)};
+    margin-left: ${p => !p.isProjectPage && '0px'};
+  }
+  
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    margin-right: ${p => !p.lastItem && !p.isProjectPage && '20px'};
   }
 `;
-const RestyledLink = styled(StyledLink)`
+const RestyledLink = styled(
+  // Filter out isProjectPage from StyledLink
+  // eslint-disable-next-line
+  ({ isProjectPage, ...rest }) => <StyledLink {...rest} />
+)`
+  max-height: ${p => p.isProjectPage && '15px'};
   border: 1px solid #b9dff3;
+  // box-shadow: 2px 4px 12px rgba(0, 0, 0, .3);
   display: block; // Ensures proper placement of images wrapped by <a> in Safari 10, per CSS Tricks
   position: relative; // Positions <Highlighter />
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    max-height: ${p => p.isProjectPage && 'unset'};
+  }
 `;
 const Image = styled.img`
-  width: 100%;
-  max-width: 100%;
+  max-height: ${p => p.isProjectPage ? '15px' : '155px'};;
+  max-width: ${p => !p.isProjectPage && '100%'};
   vertical-align: top;
   align-self: center; // Default is 'stretch', no good!
+  
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    max-height: ${p => p.isProjectPage && '30px'};
+  }
 `;
 const Highlighter = styled.div`
   width: 100%;
@@ -42,7 +64,7 @@ const Highlighter = styled.div`
   left: 0px;
   bottom: 0px;
   position: absolute;
-  background-color: ${p => p.isProjectPage ? 'rgba(115,192,232,0.2)' : p.theme.colors.yellow};
+  background-color: ${p => p.isProjectPage ? 'rgba(115, 192, 232, 0.3)' : p.theme.colors.yellow};
 `;
 
 export default function ProjectNav(props) {
@@ -84,12 +106,14 @@ export default function ProjectNav(props) {
                 lastItem={lastItem}
               >
                 <RestyledLink
+                  isProjectPage={isProjectPage}
                   to={`/projects/${
-                    projectName.toLowerCase()
+                    normalize(projectName)
                   }/${thumbnailNumber}`}
                 >
                   <Image
                     alt={`Thumbnail ${thumbnailNumber}`}
+                    isProjectPage={isProjectPage}
                     src={thumb}
                   />
                   {highlightThis &&

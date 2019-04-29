@@ -11,10 +11,7 @@ const RestyledMain = styled(Main)`
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-
-  @media (min-width: ${p => p.theme.mediaQueries.desktopView}) {
-    flex-direction: column;
-  }
+  flex-direction: column;
 `;
 const NameTag = styled.div`
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};

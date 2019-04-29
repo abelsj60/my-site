@@ -6,6 +6,7 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
+import Shelf from '../shared/Shelf.jsx';
 
 const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.seven};
@@ -14,7 +15,7 @@ const Dek = styled.h2`
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
       font-size: ${p => p.theme.fontSizes.nine};
-  }
+  }Shelf
 `;
 const Hed = styled.h1`
   font-size: ${p => p.theme.fontSizes.sixteen};
@@ -84,7 +85,13 @@ export default function ArticleOrReverie(props) {
   return (
     <Main reverie={isReverie}>
       <ContentHolder>
-        <MenuButton {...props} />
+        <Shelf
+          height="19px"
+        >
+          <MenuButton
+            {...props}
+          />
+        </Shelf>
         <Overflow>
           <Dek>
             {reverieOrPublicationAsDek}

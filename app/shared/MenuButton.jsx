@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
-  min-height: 40px;
+  min-width: 52px;
   width: 52px;
 `;
 const RestyledLink = styled(StyledLink)`
@@ -62,7 +62,7 @@ export default function MenuButton(props) {
   const arrowIcon = !isMenu
     ? arrowDown
     : arrowUp;
-  const menuIsActive = isMenu ? 'active' : undefined;
+  const menuIsActive = isMenu && 'active';
   const text = isMenu ? 'Close' : 'Menu';
 
   return (

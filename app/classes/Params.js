@@ -57,9 +57,9 @@ export default class Params {
     switch (typeof param) {
       case 'string':
         const paramTestResults = searchData.filter(
-          d => {
+          project => {
             const valueFromData = this._normalizeParam(
-              d.attributes[paramName]
+              project.attributes[paramName]
             );
             const paramToTest = this._normalizeParam(
               param
@@ -71,10 +71,15 @@ export default class Params {
         break;
       case 'number':
         const paramAsIndex = parseInt(param) - 1;
+        const projectIndex = searchData.findIndex(
+          project => this._normalizeParam(
+            project.attributes.projectName
+          ) === this._one
+        );
         paramIsValid =
           paramAsIndex >= 0
             && paramAsIndex <
-              searchData[0].attributes[
+              searchData[projectIndex].attributes[
                 paramName
               ].length;
         break;

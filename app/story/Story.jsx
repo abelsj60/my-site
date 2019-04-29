@@ -5,6 +5,7 @@ import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
+import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
@@ -86,9 +87,13 @@ export default function Story(props) {
       <RestyledContentHolder
         text={textStatus}
       >
-        <ChapterNav
-          {...props}
-        />
+        <Shelf
+          height="19px"
+        >
+          <ChapterNav
+            {...props}
+          />
+        </Shelf>
         <Overflow
           ref={
             ref => overflowRef.current = ref
