@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: When stumpy elements stump, one
+headline: Virtual reality is light on reality, one
 date: April 17, 2019
 slug: Virtual machines may lie, really
 ---

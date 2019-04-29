@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import ReactGA from 'react-ga';
 import styled, { css } from 'styled-components';
 
+const myEmailAddress = 'hello@jamesabels.net';
 const OuterContainer = styled.section`
   display: flex;
   justify-content: center;
@@ -182,7 +183,7 @@ export default class LegalTermsOrBizCard extends Component {
     // on a real route. It'd be hard to scrape w/o special effort.
     const cardText = showBusinessCard
       ? !copying
-        ? 'abelsj60@gmail.com'
+        ? myEmailAddress
         : 'Copied!'
       : legalNotice;
 
@@ -192,7 +193,7 @@ export default class LegalTermsOrBizCard extends Component {
     // share this component with legalTerms. Turns
     // out, it won't copy empty strings.
     const textToCopy = showBusinessCard
-      ? 'abelsj60@gmail.com'
+      ? myEmailAddress
       : '';
 
     return (

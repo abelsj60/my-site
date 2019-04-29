@@ -11,7 +11,7 @@
     responsibility: 
         'Inventor and lead developer',
     story: 
-        'With predictions of 200 million smart speaker owners by the end of 2019, voice assistants sit atop the digital frontier. These are some experiments with them.',
+        'With smark speker ownership set to crest 200 million by the end of 2019, voice assistants sit atop the digital frontier. These are some experiments with them.',
     captions: [
         'Washington Square is an experimental voice skill that connects strangers. It was the earliest stage start-up idea to make second-round interviews with Amazon for Alexa Accelerator II.',
         "G's Rules of Funny is a small trivia skill that teaches anyone to be funny. G, who wishes to remain nameless, is a N.Y.C. comic who has caused laughter from Capital Hill to Radio City Music Hall.",
