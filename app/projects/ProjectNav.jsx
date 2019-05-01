@@ -34,37 +34,27 @@ const ListItem = styled.li`
   }
 `;
 const RestyledLink = styled(
-  // Filter out isProjectPage from StyledLink
+  // Filter out highlightThis, isProjectPage from StyledLink
   // eslint-disable-next-line
-  ({ isProjectPage, ...rest }) => <StyledLink {...rest} />
+  ({ highlightThis, isProjectPage, ...rest }) => <StyledLink {...rest} />
 )`
-  max-height: ${p => p.isProjectPage && '15px'};
-  border: 1px solid #b9dff3;
-  // box-shadow: 2px 4px 12px rgba(0, 0, 0, .3);
-  display: block; // Ensures proper placement of images wrapped by <a> in Safari 10, per CSS Tricks
-  position: relative; // Positions <Highlighter />
+  height: ${p => p.isProjectPage && '15px'};
+  border: 1px solid ${p => p.highlightThis ? p.theme.colors.darkPinkTwo : p.theme.colors.blueTwo};
+  display: block; // Ensures the entire image beneath it is clickable in Safari 10+, per CSS Tricks
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    max-height: ${p => p.isProjectPage && 'unset'};
+    height: ${p => p.isProjectPage && '30px'};
   }
 `;
 const Image = styled.img`
-  max-height: ${p => p.isProjectPage ? '15px' : '155px'};;
-  max-width: ${p => !p.isProjectPage && '100%'};
+  max-height: 100%;
+  max-width: 100%;
   vertical-align: top;
-  align-self: center; // Default is 'stretch', no good!
+  // align-self: center; // Default is 'stretch', no good! (but it's not in a flex, so...?)
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     max-height: ${p => p.isProjectPage && '30px'};
   }
-`;
-const Highlighter = styled.div`
-  width: 100%;
-  height: ${p => p.isProjectPage ? '100%' : '4px'};
-  left: 0px;
-  bottom: 0px;
-  position: absolute;
-  background-color: ${p => p.isProjectPage ? 'rgba(115, 192, 232, 0.3)' : p.theme.colors.yellow};
 `;
 
 export default function ProjectNav(props) {
@@ -106,6 +96,7 @@ export default function ProjectNav(props) {
                 lastItem={lastItem}
               >
                 <RestyledLink
+                  highlightThis={highlightThis}
                   isProjectPage={isProjectPage}
                   to={`/projects/${
                     normalize(projectName)
@@ -116,10 +107,6 @@ export default function ProjectNav(props) {
                     isProjectPage={isProjectPage}
                     src={thumb}
                   />
-                  {highlightThis &&
-                    <Highlighter
-                      isProjectPage={isProjectPage}
-                    />}
                 </RestyledLink>
               </ListItem>
             );

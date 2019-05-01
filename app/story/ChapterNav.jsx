@@ -19,7 +19,6 @@ const StyledList = styled(UnorderedList)`
   height: 25px;
   display: flex;
   flex: 1;
-  padding-bottom: 2px;
 `;
 const ListItem = styled.li`
   flex: 1;

@@ -24,6 +24,11 @@ const Line = styled.div`
   margin: 0px;
   height: 1px;
   background-color: ${p => p.theme.colors.pink};
+
+  @media (min-width: ${p => p.theme.mediaQueries.desktop}) {
+    left: 5px;
+    right: 5px;
+  }
 `;
 const StoryButton = styled(Button)`
   color: white;
@@ -110,7 +115,6 @@ export default function FooterContainer(props) {
       />
       <TextBox>
         <StyledLink
-
           to={linkForReverie}
         >
           <Graf

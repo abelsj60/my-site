@@ -9,6 +9,7 @@ const RestyledContentHolder = styled(ContentHolder)`
   margin-right: 25px;
 `;
 const Hed = styled.h1`
+  color: ${p => p.theme.colors.pink};
   font-size: ${p => p.theme.fontSizes.sixteen};
   margin-bottom: 15px;
 `;
@@ -25,7 +26,7 @@ export default function NotFound(props) {
     <Main>
       <RestyledContentHolder>
         <Hed>
-          Uh oh. Not found!
+          Fizzzz, Pop!
         </Hed>
         <FailWhale
           image={antacid}

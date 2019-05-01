@@ -11,6 +11,7 @@ import Header from './header-footer/Header.jsx';
 import {
   browserVersion,
   isIE,
+  isMobile,
   isMobileSafari,
   isOpera,
   isTablet,
@@ -34,7 +35,8 @@ const colors = {
   reverieBlue: '#d2e7ff',
   white: 'white',
   yellow: '#ffe74c',
-  darkPink: '#af125a'
+  darkPink: '#af125a',
+  darkPinkTwo: '#bd3d78'
 };
 const fontSizes = {
   zero: '.9rem',
@@ -60,7 +62,8 @@ const mediaQueries = {
   tinyView: '390px',
   tinyViewTwo: '425px',
   narrowBreakOne: '500px',
-  narrowBreakTwo: '690px'
+  narrowBreakTwo: '690px',
+  desktop: '848px'
 };
 const bottomMargin = {
   regular: '20px'
@@ -136,6 +139,7 @@ class App extends Component {
       pathname,
       search
     } = window.location;
+    const isLandscape = window.innerWidth > window.innerHeight;
     ReactGA.initialize('UA-137902767-1');
     ReactGA.pageview(pathname + search); // Tallies initial request
 
@@ -148,6 +152,14 @@ class App extends Component {
         : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
+      // The 'resize' event triggered twice on landscape mode
+      // the height is taller on the first call than the
+      // second call. This prop ensures we get the second
+      // height, which is the correct one for our purposes.
+      waitingForLandscapeReRender: isLandscape,
+      orientation: isLandscape
+        ? 'landscape'
+        : 'portrait',
       height: window.innerHeight
         || document.documentElement.clientHeight,
       showBusinessCard: false,
@@ -241,9 +253,28 @@ class App extends Component {
   }
 
   updateHeight() {
+    // https://stackoverflow.com/a/37493832
+    const newOrientation = window.innerWidth > window.innerHeight
+      ? 'landscape'
+      : 'portrait';
+
+    // To update page height:
+    // We must be on a mobile devices,
+    // the orientation must have changed or
+    // we're waiting for the second call to the
+    // 'resize' event listener in landscape mode,
+    // AND the height just have changed.
+    // All of these checks are needed, as they're not alwys in sync.
+    // Also, we should, but don't, check for zoom — if the screen
+    // is zoomed, the page height would ideally not change when
+    // moving between portrait and landscape modes.
+
     if (
-      (this.state.height !== window.innerHeight)
-        || (this.state.height !== document.documentElement.clientHeight)
+      isMobile
+        && (newOrientation !== this.state.orientation
+        || this.state.waitingForLandscapeReRender)
+          && ((this.state.height !== window.innerHeight)
+          || (this.state.height !== document.documentElement.clientHeight))
     ) {
       const {
         pathname,
@@ -260,9 +291,16 @@ class App extends Component {
       });
 
       this.setState({
-        height: window.innerHeight
-          ? window.innerHeight
-          : document.documentElement.clientHeight
+        // We only cue a wait here if we're entering
+        // landscape mode.
+        waitingForLandscapeReRender:
+          newOrientation === 'landscape'
+            && this.state.orientation === 'portrait',
+        orientation: newOrientation,
+        height:
+          this.state.height !== window.innerHeight
+            ? window.innerHeight
+            : document.documentElement.clientHeight
       });
     }
   }

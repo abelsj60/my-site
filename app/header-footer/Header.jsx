@@ -157,9 +157,7 @@ export default class Header extends Component {
     const hideNameAndMotto = menuIsOpen || isHome;
 
     const referrer = new Referrer(this.props);
-    const hcForHeader = new ClickHandling('header',
-      this
-    );
+    const hcForHeader = new ClickHandling('header', this);
 
     const handleClickForHeader = hcForHeader.boundHandleClick;
 

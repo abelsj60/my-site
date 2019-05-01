@@ -6,13 +6,13 @@ import marked from 'marked';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import ReactGA from 'react-ga';
-import ReactHtmlParser from 'react-html-parser';
 import styled from 'styled-components';
+import ReactHtmlParser from 'react-html-parser';
+import Shelf from '../shared/Shelf.jsx';
 
-const Heading = styled.div`
-  display: flex;
-  margin-bottom: ${p => p.theme.bottomMargin.regular};
+const RestyledShelf = styled(Shelf)`
   justify-content: space-between;
+  margin-bottom: ${p => p.theme.bottomMargin.regular};
 `;
 const Hed = styled.h1`
   margin-top: -8px;
@@ -47,7 +47,7 @@ export default function About() {
     <Main>
       <ContentHolder>
         <Overflow>
-          <Heading>
+          <RestyledShelf>
             <Hed>
             About
             </Hed>
@@ -60,7 +60,7 @@ export default function About() {
                 <Icon src={linkedInIcon} />
               </ReactGA.OutboundLink>
             </IconContainer>
-          </Heading>
+          </RestyledShelf>
           <Text>
             {ReactHtmlParser(
               marked(

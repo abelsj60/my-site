@@ -51,7 +51,7 @@ const Caption = styled.figcaption`
   color: ${p => p.theme.colors.lightBlack};
 `;
 const ImageHolder = styled.div`
-  padding: 15px;
+  padding: 17px;
   background-color: ${p => p.theme.colors.reverieBlue};
 `;
 const Image = styled.img`
