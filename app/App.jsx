@@ -296,8 +296,8 @@ class App extends Component {
         waitingForLandscapeReRender:
           newOrientation === 'landscape'
             && this.state.orientation === 'portrait'
-              ? 'true'
-              : 'false',
+            ? 'true'
+            : 'false',
         orientation: newOrientation,
         height:
           this.state.height !== window.innerHeight
