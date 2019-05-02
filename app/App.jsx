@@ -140,6 +140,7 @@ class App extends Component {
       search
     } = window.location;
     const isLandscape = window.innerWidth > window.innerHeight;
+
     ReactGA.initialize('UA-137902767-1');
     ReactGA.pageview(pathname + search); // Tallies initial request
 
@@ -273,8 +274,8 @@ class App extends Component {
       isMobile
         && (newOrientation !== this.state.orientation
         || this.state.waitingForLandscapeReRender)
-          && ((this.state.height !== window.innerHeight)
-          || (this.state.height !== document.documentElement.clientHeight))
+          && (this.state.height !== window.innerHeight
+            || this.state.height !== document.documentElement.clientHeight)
     ) {
       const {
         pathname,
@@ -296,8 +297,8 @@ class App extends Component {
         waitingForLandscapeReRender:
           newOrientation === 'landscape'
             && this.state.orientation === 'portrait'
-            ? 'true'
-            : 'false',
+            ? true
+            : false,
         orientation: newOrientation,
         height:
           this.state.height !== window.innerHeight
