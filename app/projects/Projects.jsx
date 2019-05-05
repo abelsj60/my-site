@@ -96,6 +96,7 @@ export default function Projects(props) {
       <ContentHolder>
         <Shelf
           height="32px"
+          tinyHeight="20px"
         >
           <MenuButton
             {...props}

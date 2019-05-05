@@ -22,6 +22,7 @@ import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
+import TooSmallScreen from './temp-content/TooSmallScreen.jsx';
 import { withRouter } from 'react-router';
 
 // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
@@ -139,11 +140,15 @@ class App extends Component {
       pathname,
       search
     } = window.location;
-    const isLandscape = window.innerWidth > window.innerHeight;
+
+    // One way to block orientation change
+    // https://css-tricks.com/snippets/css/orientation-lock/
 
     ReactGA.initialize('UA-137902767-1');
     ReactGA.pageview(pathname + search); // Tallies initial request
 
+    this.isZooming = false; // Pinch zooming is occuring
+    this.resizeAfterTouch = false; // Consider pinch zoom on next resize
     this.state = {
       currentCaller: location !== 'i'
         ? location
@@ -153,22 +158,19 @@ class App extends Component {
         : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
-      // The 'resize' event triggered twice on landscape mode
-      // the height is taller on the first call than the
-      // second call. This prop ensures we get the second
-      // height, which is the correct one for our purposes.
-      waitingForLandscapeReRender: isLandscape,
-      orientation: isLandscape
-        ? 'landscape'
-        : 'portrait',
-      height: window.innerHeight
-        || document.documentElement.clientHeight,
+      height:
+        isMobile && !isMobileSafari
+          ? document.documentElement.clientHeight
+          : window.innerHeight,
       showBusinessCard: false,
       showLegalTerms: false,
-      showStoryText: true
+      showStoryText: true,
+      pinchZoomed: false
     };
 
-    this.updateHeight = this.updateHeight.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handleTouchEnd = this.handleTouchEnd.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
   }
 
   render() {
@@ -216,6 +218,7 @@ class App extends Component {
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
           />
+          <TooSmallScreen />
         </Fragment>
       </ThemeProvider>
     );
@@ -245,19 +248,107 @@ class App extends Component {
       throw new Error("We don't currently support Opera");
     }
 
-    window.addEventListener('resize', this.updateHeight);
+    window.addEventListener('resize', this.handleResize);
+    window.addEventListener('touchmove', this.handleTouchMove);
+    window.addEventListener('touchend', this.handleTouchEnd);
   }
 
   componentWillUnmount() {
     // It'll never be called, here as good practice
-    window.removeEventListener('resize', this.updateHeight);
+    window.removeEventListener('resize', this.handleResize);
+    window.addEventListener('touchmove', this.handleTouchMove);
+    window.addEventListener('touchend', this.handleTouchEnd);
   }
 
-  updateHeight() {
+  handleTouchMove(event) {
+    // Two fingers down, we're probably zooming
+    if (event.touches.length === 2) {
+      // Pinch zoom almost always moves the X, Y offset.
+      // This is a more effective check than trying to
+      // add pionts as coordinates or height/width.
+      if (
+        window.pageXOffset > 0
+          && window.pageYOffset > 0
+          && !this.state.pinchZoomed
+      ) {
+        // Set isZooming to true, if it isn't already
+        // (touchMove fires continuously)
+        if (!this.isZooming) {
+          this.isZooming = true;
+        }
+
+        this.setState({ pinchZoomed: true });
+      } else if (
+        // Hard to hit 0 on nose, so let's look for negatives.
+        window.pageXOffset <= 0
+          && window.pageYOffset <= 0
+          && this.state.pinchZoomed
+      ) {
+        // Reset pinchZoomed state when moving stops
+        this.setState({ pinchZoomed: false });
+      }
+    }
+  }
+
+  handleTouchEnd() {
+    // Touch is over, and we've been in a zooming state
+    if (this.isZooming) {
+      // Reset moving state
+      this.isZooming = false;
+      // Use docHeight for next resize
+      // This will be used at incorrect moments, on occasion.
+      // Mobile safari fires resize at the end of touchMove,
+      // sometimes, but not always. There is no apparent
+      // penalty to the odd misfire...
+      this.resizeAfterTouch = true;
+    }
+  }
+
+  handleResize() {
+    // On desktops, only resize if height is changing.
+    if (
+      !isMobile
+        && this.state.width !== window.innerWidth
+        && this.state.height === window.innerHeight
+    ) {
+      return false;
+    }
+
+    // Don't resize if we're in a zoomed state.
+    if (
+      this.state.pinchZoomed // && !this.narrowGuard
+    ) {
+      return false;
+    }
+
     // https://stackoverflow.com/a/37493832
-    const newOrientation = window.innerWidth > window.innerHeight
-      ? 'landscape'
-      : 'portrait';
+    // On mobile, we must account for browser differences.
+    // mobileSafari updates innerHeight on resize and changes
+    // to its chrome, mobile Chrome does not. In addition,
+    // if resize is called after touchMove, innerHeight is
+    // not updated correctly in safari, but clientHeight is.
+    // So we have an elaborate check to switch between them.
+    // a. clientHeight - mobile Chrome and after touchMove
+    // b. innerHeight - mobile Safari
+    const newHeight =
+      isMobile
+        && (!isMobileSafari || this.resizeAfterTouch)
+        ? document.documentElement.clientHeight
+        : window.innerHeight;
+    const {
+      pathname,
+      search
+    } = window.location;
+
+    // Toggle resizeAfterTouch now that it's been used
+    // (Really should only be used once.)
+    this.resizeAfterTouch =
+    this.resizeAfterTouch && false;
+
+    // Don't bother with a setState if height is unchanged
+    if (newHeight === this.state.height) {
+      return false;
+    }
 
     // To update page height:
     // We must be on a mobile devices,
@@ -266,46 +357,23 @@ class App extends Component {
     // 'resize' event listener in landscape mode,
     // AND the height just have changed.
     // All of these checks are needed, as they're not alwys in sync.
-    // Also, we should, but don't, check for zoom — if the screen
+    // Also, we should, but don't, check for zoom — if the screen
     // is zoomed, the page height would ideally not change when
     // moving between portrait and landscape modes.
 
-    if (
-      isMobile
-        && (newOrientation !== this.state.orientation
-        || this.state.waitingForLandscapeReRender)
-          && (this.state.height !== window.innerHeight
-            || this.state.height !== document.documentElement.clientHeight)
-    ) {
-      const {
-        pathname,
-        search
-      } = window.location;
+    ReactGA.event({
+      category: 'App state',
+      action: 'Re-calculate height',
+      value: newHeight,
+      label: `Page: ${pathname}${search}`
+    });
 
-      ReactGA.event({
-        category: 'App state',
-        action: 'Re-calculate height',
-        value: window.innerHeight
-          ? window.innerHeight
-          : document.documentElement.clientHeight,
-        label: `Page: ${pathname}${search}`
-      });
-
-      this.setState({
-        // We only cue a wait here if we're entering
-        // landscape mode.
-        waitingForLandscapeReRender:
-          newOrientation === 'landscape'
-            && this.state.orientation === 'portrait'
-            ? true
-            : false,
-        orientation: newOrientation,
-        height:
-          this.state.height !== window.innerHeight
-            ? window.innerHeight
-            : document.documentElement.clientHeight
-      });
-    }
+    this.setState(state => ({
+      height:
+        state.height !== newHeight
+          ? newHeight
+          : state.height
+    }));
   }
 
   componentDidUpdate(prevProps) {

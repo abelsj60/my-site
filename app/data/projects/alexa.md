@@ -5,7 +5,7 @@
     projectName: 
         'Alexa skills',
     type: 
-        'Start-up ideas and silly toys',
+        'Start-up ideas and fun toys',
     technologies: 
         'Cloud: AWS Lambda ∙ Language: Node.js, Javascript',
     responsibility: 

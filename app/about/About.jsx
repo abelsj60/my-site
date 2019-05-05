@@ -7,11 +7,10 @@ import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import ReactGA from 'react-ga';
 import ReactHtmlParser from 'react-html-parser';
+import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
-const Heading = styled.div`
-  display: flex;
-  margin-bottom: ${p => p.theme.bottomMargin.regular};
+const RestyledShelf = styled(Shelf)`
   justify-content: space-between;
 `;
 const Hed = styled.h1`
@@ -46,21 +45,23 @@ export default function About() {
   return (
     <Main>
       <ContentHolder>
-        <Overflow>
-          <Heading>
-            <Hed>
+        <RestyledShelf
+          height="27px"
+        >
+          <Hed>
             About
-            </Hed>
-            <IconContainer>
-              <ReactGA.OutboundLink
-                eventLabel="To LinkedIn"
-                to="https://www.linkedin.com/in/jameserikabels"
-                target="_blank"
-              >
-                <Icon src={linkedInIcon} />
-              </ReactGA.OutboundLink>
-            </IconContainer>
-          </Heading>
+          </Hed>
+          <IconContainer>
+            <ReactGA.OutboundLink
+              eventLabel="To LinkedIn"
+              to="https://www.linkedin.com/in/jameserikabels"
+              target="_blank"
+            >
+              <Icon src={linkedInIcon} />
+            </ReactGA.OutboundLink>
+          </IconContainer>
+        </RestyledShelf>
+        <Overflow>
           <Text>
             {ReactHtmlParser(
               marked(
