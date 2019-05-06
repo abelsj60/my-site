@@ -140,6 +140,10 @@ class App extends Component {
       pathname,
       search
     } = window.location;
+    const height =
+      isMobile && !isMobileSafari
+        ? document.documentElement.clientHeight
+        : window.innerHeight;
 
     // One way to block orientation change
     // https://css-tricks.com/snippets/css/orientation-lock/
@@ -158,14 +162,12 @@ class App extends Component {
         : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
-      height:
-        isMobile && !isMobileSafari
-          ? document.documentElement.clientHeight
-          : window.innerHeight,
+      height: height,
       showBusinessCard: false,
       showLegalTerms: false,
       showStoryText: true,
-      pinchZoomed: false
+      pinchZoomed: false,
+      tooNarrow: height < 350
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -218,7 +220,9 @@ class App extends Component {
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
           />
-          <TooSmallScreen />
+          <TooSmallScreen
+            tooNarrow={this.state.tooNarrow}
+          />
         </Fragment>
       </ThemeProvider>
     );
@@ -265,7 +269,7 @@ class App extends Component {
     if (event.touches.length === 2) {
       // Pinch zoom almost always moves the X, Y offset.
       // This is a more effective check than trying to
-      // add pionts as coordinates or height/width.
+      // add points as coordinates or height/width.
       if (
         window.pageXOffset > 0
           && window.pageYOffset > 0
@@ -314,39 +318,58 @@ class App extends Component {
       return false;
     }
 
-    // Don't resize if we're in a zoomed state.
-    if (
-      this.state.pinchZoomed // && !this.narrowGuard
-    ) {
-      return false;
-    }
-
-    // https://stackoverflow.com/a/37493832
-    // On mobile, we must account for browser differences.
-    // mobileSafari updates innerHeight on resize and changes
-    // to its chrome, mobile Chrome does not. In addition,
-    // if resize is called after touchMove, innerHeight is
-    // not updated correctly in safari, but clientHeight is.
-    // So we have an elaborate check to switch between them.
-    // a. clientHeight - mobile Chrome and after touchMove
-    // b. innerHeight - mobile Safari
-    const newHeight =
-      isMobile
-        && (!isMobileSafari || this.resizeAfterTouch)
-        ? document.documentElement.clientHeight
-        : window.innerHeight;
     const {
       pathname,
       search
     } = window.location;
 
-    // Toggle resizeAfterTouch now that it's been used
+    // Orientation change: https://stackoverflow.com/a/37493832
+
+    // On mobile, we must account for browser differences.
+    // Mobile Safari updates innerHeight on resize and changes
+    // to chrome, while mobile Chrome does not.
+
+    // In addition, if resize is called after touchMove, innerHeight
+    // is not updated correctly in Safari, but clientHeight is.
+
+    // So we use an elaborate check to switch between them:
+    //  a. clientHeight - mobile Chrome and after touchMove
+    //  b. innerHeight - mobile Safari
+
+    const newHeight =
+      isMobile
+        && (!isMobileSafari || this.resizeAfterTouch)
+        ? document.documentElement.clientHeight
+        : window.innerHeight;
+
+    // Don't resize if we're in a zoomed state.
+    if (
+      this.state.pinchZoomed && !this.state.tooNarrow
+    ) {
+      ReactGA.event({
+        category: 'App state',
+        action: 'Resized while pinchZoomed',
+        value: newHeight,
+        label: `Page: ${pathname}${search}`
+      });
+
+      return false;
+    }
+
+    // Toggle resizeAfterTouch now that it's been used.
     // (Really should only be used once.)
     this.resizeAfterTouch =
-    this.resizeAfterTouch && false;
+      this.resizeAfterTouch && false;
 
     // Don't bother with a setState if height is unchanged
     if (newHeight === this.state.height) {
+      ReactGA.event({
+        category: 'App state',
+        action: 'Resized w/o changing height',
+        value: newHeight,
+        label: `Page: ${pathname}${search}`
+      });
+
       return false;
     }
 
@@ -370,9 +393,14 @@ class App extends Component {
 
     this.setState(state => ({
       height:
+        // ? Is test needed anymore, w/earlier if to catch?
         state.height !== newHeight
           ? newHeight
-          : state.height
+          : state.height,
+      tooNarrow:
+        newHeight < 350
+          ? true
+          : false
     }));
   }
 

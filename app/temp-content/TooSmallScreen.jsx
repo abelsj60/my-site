@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import styled from 'styled-components';
 import {
   isMobile
@@ -20,38 +21,38 @@ const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.sixteen};
 `;
 
-// This component will NOT be show if the site's zoomed.
+// This component will NOT be shown if the site's zoomed.
 // I.e., if the user zooms, and twirls on a small device,
-// the zoom will show through.
+// the zoomed site will show if landscape's re-entered.
 
-// We can block by adding:
-//  this.narrowGuard =
-//    isMobile
-//      && window.innerWidth <= 320;
-// to App.jsx and
-//   '&& !this.narrowGuard'
-// to if (this.state.pinchZoomed) in handleResize.
+// Importantly, if the app's twirled when this component is
+// active, the regular site will be seen in portrait...
 
-// But, this introduces new scaling problems as the
-// message can be unnaturally large in landscape, and
-// we'll resize w/the wrong height in portrait.
+// This is allowed by the following test in handleResize:
+//  -this.state.pinchZoomed && !this.state.tooNarrow
 
-export default function() {
-  const height =
-    isMobile
-      ? document.documentElement.clientHeight
-      : window.innerHeight;
+export default function(props) {
+  const {
+    pathname,
+    search
+  } = window.location;
+  const { tooNarrow } = props;
 
-  if (
-    !isMobile
-      || height > 320
-  ) {
+  if (!isMobile || !tooNarrow) {
     return null;
   }
 
+  ReactGA.event({
+    category: 'App state',
+    action: 'Screen too narrow',
+    label: `Page: ${pathname}${search}`
+  });
+
   return (
     <FullPage>
-      <Text>Uh-oh. It's a little narrow in here. Try rotating your screen...</Text>
+      <Text>
+        Uh-oh. It's a little narrow in here. Try rotating your screen...
+      </Text>
     </FullPage>
   );
 }
