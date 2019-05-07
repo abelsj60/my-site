@@ -151,8 +151,9 @@ class App extends Component {
     ReactGA.initialize('UA-137902767-1');
     ReactGA.pageview(pathname + search); // Tallies initial request
 
-    this.isZooming = false; // Pinch zooming is occuring
-    this.resizeAfterTouch = false; // Consider pinch zoom on next resize
+    this.isZooming = false; // True when pinch zooming is on...!
+    this.resizeAfterTouch = false; // Resize w/clientHeight when true
+
     this.state = {
       currentCaller: location !== 'i'
         ? location
@@ -162,12 +163,12 @@ class App extends Component {
         : 'home',
       inCity: false,
       isMenu: referrer.isMenu(props),
-      height: height,
+      height: height, // Sets height of <main /> element
       showBusinessCard: false,
       showLegalTerms: false,
       showStoryText: true,
-      pinchZoomed: false,
-      tooNarrow: height < 350
+      pinchZoomed: false, // We're zoomed!
+      tooNarrow: height < 350 // Too narrow, rotate screen
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -230,6 +231,7 @@ class App extends Component {
 
   hasFlexbox() {
     // https://johanronsse.be/2016/01/03/simple-flexbox-check/
+
     const document = window.document.body
       || window.document.documentElement;
     const style = document.style;
@@ -258,63 +260,66 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    // It'll never be called, here as good practice
+    // These will never be called, here as good practice.
+
     window.removeEventListener('resize', this.handleResize);
     window.addEventListener('touchmove', this.handleTouchMove);
     window.addEventListener('touchend', this.handleTouchEnd);
   }
 
   handleTouchMove(event) {
-    // Two fingers down, we're probably zooming
+    // We're probably zooming if two fingers are down.
+
     if (event.touches.length === 2) {
+
       // Pinch zoom almost always moves the X, Y offset.
       // This is a more effective check than trying to
       // add points as coordinates or height/width.
+
       if (
         window.pageXOffset > 0
           && window.pageYOffset > 0
-          && !this.state.pinchZoomed
       ) {
-        // Set isZooming to true, if it isn't already
-        // (touchMove fires continuously)
         if (!this.isZooming) {
-          this.isZooming = true;
+          this.isZooming = true; // We're zooming
         }
 
-        this.setState({ pinchZoomed: true });
+        this.setState({ pinchZoomed: true }); // Set zoom state
       } else if (
-        // Hard to hit 0 on nose, so let's look for negatives.
+        // Hard to hit 0 on the nose, so
+        // let's look for negatives.
+
         window.pageXOffset <= 0
           && window.pageYOffset <= 0
           && this.state.pinchZoomed
       ) {
-        // Reset pinchZoomed state when moving stops
-        this.setState({ pinchZoomed: false });
+        this.setState({ pinchZoomed: false }); // Reset zoom state
       }
     }
   }
 
   handleTouchEnd() {
-    // Touch is over, and we've been in a zooming state
+    // Touch is over, and we've been zooming.
+    // Let's set some intermedia values for resizing.
+
     if (this.isZooming) {
-      // Reset moving state
-      this.isZooming = false;
-      // Use docHeight for next resize
-      // This will be used at incorrect moments, on occasion.
-      // Mobile safari fires resize at the end of touchMove,
-      // sometimes, but not always. There is no apparent
-      // penalty to the odd misfire...
-      this.resizeAfterTouch = true;
+      this.isZooming = false; // We're no longer zooming.
+      this.resizeAfterTouch = true; // Use docHeight on next resize.
     }
   }
 
   handleResize() {
-    // On desktops, only resize if height is changing.
-    if (
-      !isMobile
+    // On desktops, resize if height is changing.
+
+    if (!isMobile
         && this.state.width !== window.innerWidth
-        && this.state.height === window.innerHeight
-    ) {
+        && this.state.height === window.innerHeight) {
+      return false;
+    }
+
+    // Don't resize while zooming.
+
+    if (this.isZooming) {
       return false;
     }
 
@@ -326,26 +331,33 @@ class App extends Component {
     // Orientation change: https://stackoverflow.com/a/37493832
 
     // On mobile, we must account for browser differences.
-    // Mobile Safari updates innerHeight on resize and changes
-    // to chrome, while mobile Chrome does not.
+    // Mobile Safari updates innerHeight on resize and
+    // changes to UI chrome, while mobile Chrome
+    // does not. Also, after touchMove, Safari doesn't
+    // update innerHeight correctly, so we'll use
+    // clientHeight 'afterTouch'. Results:
 
-    // In addition, if resize is called after touchMove, innerHeight
-    // is not updated correctly in Safari, but clientHeight is.
-
-    // So we use an elaborate check to switch between them:
     //  a. clientHeight - mobile Chrome and after touchMove
     //  b. innerHeight - mobile Safari
 
     const newHeight =
       isMobile
-        && (!isMobileSafari || this.resizeAfterTouch)
+        && (!isMobileSafari
+            || this.resizeAfterTouch
+            || (this.state.tooNarrow && this.state.pinchZoomed))
         ? document.documentElement.clientHeight
         : window.innerHeight;
 
-    // Don't resize if we're in a zoomed state.
-    if (
-      this.state.pinchZoomed && !this.state.tooNarrow
-    ) {
+    // When zoomed, always resize when screen isn't too narrow.
+    // As a result, we can zoom in on the tooSmall landscape
+    // screen (), rotate to portrait, see the zoomed site,
+    // rotate back to landsape, and still see the zoom.
+
+    // Note: If user zooms in on tooSmall screen, nothing
+    // will be seen until rotation, which 'feels' right.
+
+    if (this.state.pinchZoomed
+          && !this.state.tooNarrow) {
       ReactGA.event({
         category: 'App state',
         action: 'Resized while pinchZoomed',
@@ -356,12 +368,8 @@ class App extends Component {
       return false;
     }
 
-    // Toggle resizeAfterTouch now that it's been used.
-    // (Really should only be used once.)
-    this.resizeAfterTouch =
-      this.resizeAfterTouch && false;
+    // Only resize when height changes.
 
-    // Don't bother with a setState if height is unchanged
     if (newHeight === this.state.height) {
       ReactGA.event({
         category: 'App state',
@@ -373,16 +381,18 @@ class App extends Component {
       return false;
     }
 
-    // To update page height:
-    // We must be on a mobile devices,
-    // the orientation must have changed or
-    // we're waiting for the second call to the
-    // 'resize' event listener in landscape mode,
-    // AND the height just have changed.
-    // All of these checks are needed, as they're not alwys in sync.
-    // Also, we should, but don't, check for zoom — if the screen
-    // is zoomed, the page height would ideally not change when
-    // moving between portrait and landscape modes.
+    // Ensure the window top at zero after resize change.
+    // (This trigers another resize if height changes.)
+
+    if (window.pageYOffset > 0) {
+      const scrollHandling = new ScrollHandling(location);
+      scrollHandling.resetWindowTop();
+    }
+
+    // Update page height when these factors are true:
+    //  a. mobile device
+    //  b. orientation change / pinch-zoom out
+    //  c. height change
 
     ReactGA.event({
       category: 'App state',
@@ -391,17 +401,21 @@ class App extends Component {
       label: `Page: ${pathname}${search}`
     });
 
-    this.setState(state => ({
-      height:
-        // ? Is test needed anymore, w/earlier if to catch?
-        state.height !== newHeight
-          ? newHeight
-          : state.height,
-      tooNarrow:
-        newHeight < 350
-          ? true
-          : false
-    }));
+    this.setState(
+      () => ({
+        height: newHeight,
+        tooNarrow:
+          newHeight < 350
+            ? true
+            : false
+      })
+    );
+
+    // We're done, toggle resizeAfterTouch.
+
+    if (this.resizeAfterTouch) {
+      this.resizeAfterTouch = false;
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -410,10 +424,6 @@ class App extends Component {
       this.props,
       prevProps
     );
-
-    // Ensure window top's at zero after orientation change
-    const scrollHandling = new ScrollHandling(location);
-    scrollHandling.resetWindowTop();
 
     if (location.justChanged) {
       const {
@@ -440,9 +450,10 @@ class App extends Component {
           && location.type !== 'reverie'
           && location.lastType !== 'reverie'
       ) {
-        // If you've hidden text, and gone to reverie, and
+        // If you've hidden text and gone to reverie, and
         // come back, the text will still be hidden. You
         // can remove the three &&'s above to change.
+
         handleClickForApp('toggleStoryText');
       }
 
@@ -451,13 +462,15 @@ class App extends Component {
         handleClickForApp('toggleMenu');
       }
 
-      /** Don't update callers on reload */
+      // Don't update callers on reload.
+
       if (!location.isReloading) {
         // Note: In some situations, the callers on state
         // will lag the reality of the application. In at
         // least some of these cases, the reason is that
-        // seState is asynchornous, meaning there is a
+        // seState is asynchronous, meaning there is a
         // lag in execution, leaving appState behind.
+
         // A partial fix is to move the callers out
         // of appState and treat them as class properties
         // instead. This raises the question — what is the
@@ -467,10 +480,12 @@ class App extends Component {
         // cause a re-render, shouldn't necessarily be
         // added to state. This rule might apply to the
         // callers, and isMenu (above).
+
         // As of 3/16, we are not addressing it. If you
         // want to restore scroll position, however you
         // may need to tackle this question as the values
         // and state changes will need up-to-date info.
+
         handleClickForApp(
           'setCallers',
           location.type,
@@ -479,21 +494,25 @@ class App extends Component {
       }
 
       if (
-        // '/chapter', '/projects', etc.
+        // '/chapter', '/projects', etc...
         !location.isTopLevel
+
           // lastCaller was not '/i'. The app will
           // run two re-renders after a <Redirect />
           // moves us from '/i' to the next page's
           // URL (see next statement). As a result,
           // we filter one of the re-renders out so
           // we don't tally the page URL twice:
+
           && !location.isCalledAfterReload
+
           // current window URL is not '/i'.
           // Restate route occurs on the '/i' url.
           // The app doesn't move to the next page's
           // URL until a <Redirect /> loads it. This
           // check blocks '/i' from being tallied
           // by GA:
+
           && window.location.pathname !== '/i'
       ) {
         const {
