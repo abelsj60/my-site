@@ -151,6 +151,7 @@ class App extends Component {
     ReactGA.initialize('UA-137902767-1');
     ReactGA.pageview(pathname + search); // Tallies initial request
 
+    this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.isZooming = false; // True when pinch zooming is on...!
     this.resizeAfterTouch = false; // Resize w/clientHeight when true
 
@@ -300,20 +301,26 @@ class App extends Component {
 
   handleTouchEnd() {
     // Touch is over, and we've been zooming.
-    // Let's set some intermedia values for resizing.
 
     if (this.isZooming) {
+      // Let's set intermediate values for resizing.
+
       this.isZooming = false; // We're no longer zooming.
       this.resizeAfterTouch = true; // Use docHeight on next resize.
     }
   }
 
   handleResize() {
+    clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout
+    this.resizeTimeoutId = setTimeout(() => this.updateHeight(), 50);
+  }
+
+  updateHeight() {
     // On desktops, resize if height is changing.
 
     if (!isMobile
-        && this.state.width !== window.innerWidth
-        && this.state.height === window.innerHeight) {
+      && this.state.width !== window.innerWidth
+      && this.state.height === window.innerHeight) {
       return false;
     }
 
