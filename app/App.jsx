@@ -168,7 +168,7 @@ class App extends Component {
       showBusinessCard: false,
       showLegalTerms: false,
       showStoryText: true,
-      pinchZoomed: false, // We're zoomed!
+      pinchZoomed: false, // We're zoomed! or not.
       tooNarrow: height < 350 // Too narrow, rotate screen
     };
 
@@ -264,8 +264,8 @@ class App extends Component {
     // These will never be called, here as good practice.
 
     window.removeEventListener('resize', this.handleResize);
-    window.addEventListener('touchmove', this.handleTouchMove);
-    window.addEventListener('touchend', this.handleTouchEnd);
+    window.removeEventListener('touchmove', this.handleTouchMove);
+    window.removeEventListener('touchend', this.handleTouchEnd);
   }
 
   handleTouchMove(event) {
@@ -292,7 +292,7 @@ class App extends Component {
 
         window.pageXOffset <= 0
           && window.pageYOffset <= 0
-          && this.state.pinchZoomed
+          && this.state.pinchZoomed // We only need to this once.
       ) {
         this.setState({ pinchZoomed: false }); // Reset zoom state
       }
@@ -300,7 +300,7 @@ class App extends Component {
   }
 
   handleTouchEnd() {
-    // Touch is over, and we've been zooming.
+    // Touch is over, have we been zooming?
 
     if (this.isZooming) {
       // Let's set intermediate values for resizing.
@@ -311,6 +311,8 @@ class App extends Component {
   }
 
   handleResize() {
+    // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
+
     clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout
     this.resizeTimeoutId = setTimeout(() => this.updateHeight(), 50);
   }
@@ -361,7 +363,8 @@ class App extends Component {
     // rotate back to landsape, and still see the zoom.
 
     // Note: If user zooms in on tooSmall screen, nothing
-    // will be seen until rotation, which 'feels' right.
+    // will be seen until after first rotation, which
+    // 'feels' right.
 
     if (this.state.pinchZoomed
           && !this.state.tooNarrow) {
@@ -472,6 +475,7 @@ class App extends Component {
       // Don't update callers on reload.
 
       if (!location.isReloading) {
+
         // Note: In some situations, the callers on state
         // will lag the reality of the application. In at
         // least some of these cases, the reason is that
@@ -502,6 +506,7 @@ class App extends Component {
 
       if (
         // '/chapter', '/projects', etc...
+
         !location.isTopLevel
 
           // lastCaller was not '/i'. The app will
