@@ -1,6 +1,6 @@
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
-import {
+import styled, {
   css,
   createGlobalStyle,
   ThemeProvider
@@ -69,10 +69,32 @@ const mediaQueries = {
 const bottomMargin = {
   regular: '20px'
 };
+const ZoomControl = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: ${p => p.theme.pageHeight}px;
+  position: relative;
+  
+  @media(orientation: landscape) {
+    // Fix esoteric iOS 7 iPad bug:
+    // https://stackoverflow.com/a/19449123
+    // https://stackoverflow.com/q/19012135
+    // https://krpano.com/ios/bugs/ios7-ipad-landscape/
+
+    ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
+  }
+  
+  ${p => p.home && css`
+    width: 100%;
+    overflow: hidden;
+  `};
+`;
 const GlobalStyle = createGlobalStyle`
   html {
     // Best practice to load fonts: 
     // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
+
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
     background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
@@ -106,28 +128,6 @@ const GlobalStyle = createGlobalStyle`
       line-height: 1.6;
     }
   }
-
-  #app {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: ${p => p.theme.pageHeight}px;
-    position: relative;
-    
-    @media(orientation: landscape) {
-      // Fix esoteric iOS 7 iPad bug:
-      // https://stackoverflow.com/a/19449123
-      // https://stackoverflow.com/q/19012135
-      // https://krpano.com/ios/bugs/ios7-ipad-landscape/
-
-      ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
-    }
-    
-    ${p => p.home && css`
-      width: 100%;
-      overflow: hidden;
-    `};
-  }
 `;
 
 class App extends Component {
@@ -160,15 +160,15 @@ class App extends Component {
       lastCaller: location !== 'reverie'
         ? location
         : 'home',
-      inCity: false,
-      isMenu: referrer.isMenu(props),
-      height: height, // Sets height of <main /> element
-      showBusinessCard: false,
-      showLegalTerms: false,
-      showStoryText: true,
+      inCity: false, // Fantasy image on home if false
+      isMenu: referrer.isMenu(props), // Menu page (/projects, /journalism, /reverie)
+      height: height, // Sets height of <main />
+      showBusinessCard: false, // Show business card
+      showLegalTerms: false, // Show legal terms
+      showStoryText: true, // Show story text, picture if false
       pinchZoomed: false, // We're zoomed! or not.
       tooNarrow: height < 350, // Too narrow, rotate screen
-      isZooming: false, // True when pinch zooming is on...!
+      isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false // Resize w/clientHeight when true
     };
 
@@ -197,44 +197,44 @@ class App extends Component {
           pageHeight: this.state.height.toString()
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%'
-          }}
-          onTouchMove={this.handleTouchMove}
-          onTouchEnd={this.handleTouchEnd}
-        >
+        {/* Use Fragment b/c ThemeProvider
+        only accepts one child. */}
+        <Fragment>
           <GlobalStyle
-            home={homeIsActive}
             reverie={reverieIsActive}
+          />
+          {/* Though an extra <div>, ZoomControl lets us add 'touch'
+            events to React (alt is to add them to the Window) */}
+          <ZoomControl
+            home={homeIsActive}
+            onTouchMove={this.handleTouchMove}
+            onTouchEnd={this.handleTouchEnd}
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
-          />
-          <Header
-            {...this.props}
-            appState={this.state}
-          />
-          <Body
-            {...this.props}
-            appState={this.state}
-            boundHandleClickForApp={boundHandleClickForApp}
-          />
-          <LegalTermsOrBizCard
-            {...this.props}
-            appState={this.state}
-            boundHandleClickForApp={boundHandleClickForApp}
-          />
-          <Footer
-            {...this.props}
-            appState={this.state}
-            boundHandleClickForApp={boundHandleClickForApp}
-          />
-          <TooSmallScreen
-            tooNarrow={this.state.tooNarrow}
-          />
-        </div>
+          >
+            <Header
+              {...this.props}
+              appState={this.state}
+            />
+            <Body
+              {...this.props}
+              appState={this.state}
+              boundHandleClickForApp={boundHandleClickForApp}
+            />
+            <LegalTermsOrBizCard
+              {...this.props}
+              appState={this.state}
+              boundHandleClickForApp={boundHandleClickForApp}
+            />
+            <Footer
+              {...this.props}
+              appState={this.state}
+              boundHandleClickForApp={boundHandleClickForApp}
+            />
+            <TooSmallScreen
+              tooNarrow={this.state.tooNarrow}
+            />
+          </ZoomControl>
+        </Fragment>
       </ThemeProvider>
     );
   }
@@ -264,12 +264,13 @@ class App extends Component {
       throw new Error("We don't currently support Opera");
     }
 
+    // Heard after all React handlers run
+    // https://fortes.com/2018/react-and-dom-events/
     window.addEventListener('resize', this.handleResize);
   }
 
   componentWillUnmount() {
-    // These will never be called, here as good practice.
-
+    // This will never be called, here as good practice.
     window.removeEventListener('resize', this.handleResize);
   }
 
@@ -281,10 +282,6 @@ class App extends Component {
       // Pinch zoom almost always moves the X, Y offset.
       // This is a more effective check than trying to
       // add points as coordinates or height/width.
-
-      if (!this.isZooming) {
-        this.isZooming = true; // We're zooming
-      }
 
       if (
         window.pageXOffset > 0
@@ -301,7 +298,6 @@ class App extends Component {
 
         window.pageXOffset <= 0
           && window.pageYOffset <= 0
-          // && this.state.pinchZoomed // We only need to this once.
       ) {
         this.setState({
           pinchZoomed: false, // Reset zoom state
@@ -315,11 +311,9 @@ class App extends Component {
   handleTouchEnd() {
     // Touch is over, have we been zooming?
 
-    if (this.isZooming) {
+    if (this.state.isZooming) {
       // Let's set intermediate values for resizing.
 
-      this.isZooming = false; // We're no longer zooming.
-      this.resizeAfterTouch = true; // Use docHeight on next resize.
       this.setState({
         isZooming: false
       });
@@ -335,8 +329,6 @@ class App extends Component {
 
   updateHeight() {
     // On desktops, resize if height is changing.
-
-    console.log('updateHeight');
 
     if (!isMobile
       && this.state.width !== window.innerWidth
@@ -395,19 +387,8 @@ class App extends Component {
         label: `Page: ${pathname}${search}`
       });
 
-      console.log('pinchZoom cancel', this.state);
       return false;
     }
-
-    // if (
-    //   (this.state.pinchZoomed
-    //     && this.state.tooNarrow
-    //     && this.state.isAfterTouch)
-    // ) {
-    //   console.log('pinchZoom reorient', this.state);
-    //   this.setState({ tooNarrow: false });
-    //   return false;
-    // }
 
     // Only resize when height changes.
 
@@ -441,8 +422,6 @@ class App extends Component {
       value: newHeight,
       label: `Page: ${pathname}${search}`
     });
-
-    console.log('set state:', this.state);
 
     this.setState(
       () => ({

@@ -200,7 +200,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  html {\n    // Best practice to load fonts: \n    // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import\n    font-family: 'Montserrat', sans-serif;\n    font-size: 62.5%;\n    background-color: ", ";\n  }\n  \n  body {\n    margin: 0px;\n    padding: 0px;\n    font-size: ", ";\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 300;\n    -webkit-overflow-scrolling: touch;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n\n    h1,\n    h2,\n    h3,\n    p,\n    ul {\n      margin: 0px;\n    }\n\n    h1 {\n      font-family: 'Playfair Display', serif;\n      font-weight: 900;\n      margin-left: 2px;\n    }\n\n    p {\n      margin-bottom: ", ";\n      line-height: 1.6;\n    }\n  }\n\n  #app {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    height: ", "px;\n    position: relative;\n    \n    @media(orientation: landscape) {\n      // Fix esoteric iOS 7 iPad bug:\n      // https://stackoverflow.com/a/19449123\n      // https://stackoverflow.com/q/19012135\n      // https://krpano.com/ios/bugs/ios7-ipad-landscape/\n\n      ", "\n    }\n    \n    ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  html {\n    // Best practice to load fonts: \n    // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import\n\n    font-family: 'Montserrat', sans-serif;\n    font-size: 62.5%;\n    background-color: ", ";\n  }\n  \n  body {\n    margin: 0px;\n    padding: 0px;\n    font-size: ", ";\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 300;\n    -webkit-overflow-scrolling: touch;\n    -webkit-tap-highlight-color: rgba(0,0,0,0);\n\n    h1,\n    h2,\n    h3,\n    p,\n    ul {\n      margin: 0px;\n    }\n\n    h1 {\n      font-family: 'Playfair Display', serif;\n      font-weight: 900;\n      margin-left: 2px;\n    }\n\n    p {\n      margin-bottom: ", ";\n      line-height: 1.6;\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -268,18 +268,22 @@ var mediaQueries = {
 var bottomMargin = {
   regular: '20px'
 };
+var ZoomControl = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "App__ZoomControl",
+  componentId: "sc-11u8va4-0"
+})(["display:flex;flex-direction:column;align-items:center;height:", "px;position:relative;@media(orientation:landscape){", "}", ";"], function (p) {
+  return p.theme.pageHeight;
+}, function (p) {
+  return p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;';
+}, function (p) {
+  return p.home && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["width:100%;overflow:hidden;"]);
+});
 var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["createGlobalStyle"])(_templateObject(), function (p) {
   return p.reverie ? '#d2e7ff' : 'white';
 }, function (p) {
   return p.theme.fontSizes.twelve;
 }, function (p) {
   return p.theme.bottomMargin.regular;
-}, function (p) {
-  return p.theme.pageHeight;
-}, function (p) {
-  return p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;';
-}, function (p) {
-  return p.home && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["width:100%;overflow:hidden;"]);
 });
 
 var App =
@@ -310,18 +314,23 @@ function (_Component) {
       currentCaller: location !== 'i' ? location : 'home',
       lastCaller: location !== 'reverie' ? location : 'home',
       inCity: false,
+      // Fantasy image on home if false
       isMenu: referrer.isMenu(props),
+      // Menu page (/projects, /journalism, /reverie)
       height: height,
-      // Sets height of <main /> element
+      // Sets height of <main />
       showBusinessCard: false,
+      // Show business card
       showLegalTerms: false,
+      // Show legal terms
       showStoryText: true,
+      // Show story text, picture if false
       pinchZoomed: false,
       // We're zoomed! or not.
       tooNarrow: height < 350,
       // Too narrow, rotate screen
       isZooming: false,
-      // True when pinch zooming is on...!
+      // True when pinch zooming is ongoing
       isAfterTouch: false // Resize w/clientHeight when true
 
     };
@@ -348,20 +357,14 @@ function (_Component) {
           mediaQueries: mediaQueries,
           pageHeight: this.state.height.toString()
         }
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
-        style: {
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '100%'
-        },
-        onTouchMove: this.handleTouchMove,
-        onTouchEnd: this.handleTouchEnd
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(GlobalStyle, {
+      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_9__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(GlobalStyle, {
+        reverie: reverieIsActive
+      }), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(ZoomControl, {
         home: homeIsActive,
-        reverie: reverieIsActive,
+        onTouchMove: this.handleTouchMove,
+        onTouchEnd: this.handleTouchEnd,
         fixMobileSafariBugOn7: fixMobileSafariBugOn7
-      }), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
+      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
         appState: this.state
       })), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_Body_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], _extends({}, this.props, {
         appState: this.state,
@@ -374,7 +377,7 @@ function (_Component) {
         boundHandleClickForApp: boundHandleClickForApp
       })), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_temp_content_TooSmallScreen_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], {
         tooNarrow: this.state.tooNarrow
-      })));
+      }))));
     }
   }, {
     key: "hasFlexbox",
@@ -396,14 +399,16 @@ function (_Component) {
         throw new Error("Browser doesn't support Flexbox");
       } else if (react_device_detect__WEBPACK_IMPORTED_MODULE_6__["isOpera"] || react_device_detect__WEBPACK_IMPORTED_MODULE_6__["isIE"] && react_device_detect__WEBPACK_IMPORTED_MODULE_6__["browserVersion"] <= 10) {
         throw new Error("We don't currently support Opera");
-      }
+      } // Heard after all React handlers run
+      // https://fortes.com/2018/react-and-dom-events/
+
 
       window.addEventListener('resize', this.handleResize);
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      // These will never be called, here as good practice.
+      // This will never be called, here as good practice.
       window.removeEventListener('resize', this.handleResize);
     }
   }, {
@@ -414,10 +419,6 @@ function (_Component) {
         // Pinch zoom almost always moves the X, Y offset.
         // This is a more effective check than trying to
         // add points as coordinates or height/width.
-        if (!this.isZooming) {
-          this.isZooming = true; // We're zooming
-        }
-
         if (window.pageXOffset > 0 && window.pageYOffset > 0) {
           this.setState({
             pinchZoomed: true,
@@ -426,27 +427,22 @@ function (_Component) {
           }); // Set zoom state
         } else if ( // Hard to hit 0 on the nose, so
         // let's look for negatives.
-        window.pageXOffset <= 0 && window.pageYOffset <= 0 // && this.state.pinchZoomed // We only need to this once.
-        ) {
-            this.setState({
-              pinchZoomed: false,
-              // Reset zoom state
-              isZooming: true,
-              isAfterTouch: true
-            });
-          }
+        window.pageXOffset <= 0 && window.pageYOffset <= 0) {
+          this.setState({
+            pinchZoomed: false,
+            // Reset zoom state
+            isZooming: true,
+            isAfterTouch: true
+          });
+        }
       }
     }
   }, {
     key: "handleTouchEnd",
     value: function handleTouchEnd() {
       // Touch is over, have we been zooming?
-      if (this.isZooming) {
+      if (this.state.isZooming) {
         // Let's set intermediate values for resizing.
-        this.isZooming = false; // We're no longer zooming.
-
-        this.resizeAfterTouch = true; // Use docHeight on next resize.
-
         this.setState({
           isZooming: false
         });
@@ -470,8 +466,6 @@ function (_Component) {
       var _this3 = this;
 
       // On desktops, resize if height is changing.
-      console.log('updateHeight');
-
       if (!react_device_detect__WEBPACK_IMPORTED_MODULE_6__["isMobile"] && this.state.width !== window.innerWidth && this.state.height === window.innerHeight) {
         return false;
       } // Don't resize while zooming.
@@ -508,18 +502,8 @@ function (_Component) {
           value: newHeight,
           label: "Page: ".concat(pathname).concat(search)
         });
-        console.log('pinchZoom cancel', this.state);
         return false;
-      } // if (
-      //   (this.state.pinchZoomed
-      //     && this.state.tooNarrow
-      //     && this.state.isAfterTouch)
-      // ) {
-      //   console.log('pinchZoom reorient', this.state);
-      //   this.setState({ tooNarrow: false });
-      //   return false;
-      // }
-      // Only resize when height changes.
+      } // Only resize when height changes.
 
 
       if (newHeight === this.state.height) {
@@ -549,7 +533,6 @@ function (_Component) {
         value: newHeight,
         label: "Page: ".concat(pathname).concat(search)
       });
-      console.log('set state:', this.state);
       this.setState(function () {
         return {
           height: newHeight,
@@ -5747,4 +5730,4 @@ module.exports = __webpack_require__(/*! ./app/index.js */"./app/index.js");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.5246623bed7c89e53657.js.map
+//# sourceMappingURL=main.e06519affbe0a344124f.js.map
