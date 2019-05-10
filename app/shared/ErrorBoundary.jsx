@@ -18,11 +18,10 @@ export default class ErrorBoundary extends Component {
     const { hasError, initialLoad } = this.state;
     const { children } = this.props;
     const errorText = initialLoad
-      ? `This site doesn't support your browser or there was an 
-      error. Please try back with a different browser. Modern 
-      versions of Chrome, Firefox, and Safari work best. In 
-      the meantime, here's the 4-1-1. Thanks!`
-      : 'So sorry, there was an error. Try again or come back later.';
+      ? `Oops. I don't support your browser yet. Please try back with a modern 
+      version of Chrome, Firefox, or Safari. Here's my 4-1-1 in the meantime. 
+      Thanks!`
+      : 'Error! Try again or come back later.';
 
     if (hasError) {
       return (
@@ -36,11 +35,13 @@ export default class ErrorBoundary extends Component {
           >
             <header
               style={{
-                backgroundColor: 'lightyellow',
+                backgroundColor: '#fd1172',
                 padding: '5px 25px'
               }}
             >
-              <p>{errorText}</p>
+              <p
+                style={{ color: 'white' }}
+              >{errorText}</p>
             </header>
             {initialLoad
               && <div
@@ -67,7 +68,7 @@ export default class ErrorBoundary extends Component {
                 marginTop: !initialLoad ? '25px' : ''
               }}
             >
-              Email: abelsj60__at__gmail.com
+              Contact: hello__at__jamesabels.net
             </footer>
           </div>
         </Fragment>

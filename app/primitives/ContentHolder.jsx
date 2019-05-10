@@ -4,5 +4,5 @@ export default styled.section`
   margin: 25px 0px 25px 25px;
   display: flex;
   flex-direction: column;
-  overflow: auto; // Needed by desktop Chrome for no known reason
+  // overflow: auto; // Needed by desktop Chrome for no known reason
 `;

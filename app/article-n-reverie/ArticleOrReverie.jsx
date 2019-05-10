@@ -47,6 +47,10 @@ const Text = styled.section`
       margin-bottom: 0px;
     }
   }
+
+  pre {
+    white-space: pre-wrap;
+  }
 `;
 const BylineOrDate = styled.p`
   font-size: ${p => p.theme.fontSizes.three};
