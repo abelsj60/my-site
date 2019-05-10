@@ -200,8 +200,8 @@ export default function Home(props) {
                 </Hed>
                 <Motto
                   data-depth=".2"
-                  data-friction-x=".9"
-                  data-friction-y=".9"
+                  data-friction-x=".4"
+                  data-friction-y=".4"
                 >
                 Narrative coding and other adventures
                 </Motto>

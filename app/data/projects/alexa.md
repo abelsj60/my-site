@@ -23,9 +23,14 @@
         'https://user-images.githubusercontent.com/30417590/56868582-39743600-69c2-11e9-84cc-0b6a3cf13378.png'
     ],
     full: [
-        'https://user-images.githubusercontent.com/30417590/56868551-a89d5a80-69c1-11e9-98c3-ce3824f012ed.png',
+        'https://user-images.githubusercontent.com/30417590/57550883-9d3d1e00-7335-11e9-94aa-ad21ede054ed.png',
         'https://user-images.githubusercontent.com/30417590/56870193-d1314e80-69d9-11e9-9ff7-63af134a50c6.png',
         'https://user-images.githubusercontent.com/30417590/56869785-17cf7a80-69d3-11e9-81d7-aefa52ffa98b.png'
+    ],
+    zoomed: [
+        'https://user-images.githubusercontent.com/30417590/57550273-e2f8e700-7333-11e9-8e0c-f40bfbde4163.png',
+        'https://user-images.githubusercontent.com/30417590/57550285-f1470300-7333-11e9-9068-bf3260ca39f5.png',
+        'https://user-images.githubusercontent.com/30417590/57550304-fefc8880-7333-11e9-8aff-4fb64309a649.png',
     ],
     showTheseAttributes: [
         'story',

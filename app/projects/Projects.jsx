@@ -82,10 +82,13 @@ export default function Projects(props) {
     full,
     projectName,
     showTheseAttributes,
-    type
+    type,
+    zoomed
   } = project.attributes;
   const caption = captions[indexForProjectPics];
-  const source = full[indexForProjectPics];
+  const source = !props.appState.pinchZoomed
+    ? full[indexForProjectPics]
+    : zoomed[indexForProjectPics];
 
   const attributeArray = showTheseAttributes.map(
     name => project.attributes[name]
