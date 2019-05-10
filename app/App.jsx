@@ -153,7 +153,7 @@ class App extends Component {
 
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.isZooming = false; // True when pinch zooming is on...!
-    this.resizeAfterTouch = false; // Resize w/clientHeight when true
+    this.isAfterTouch = false; // Resize w/clientHeight when true
 
     this.state = {
       currentCaller: location !== 'i'
@@ -306,7 +306,7 @@ class App extends Component {
       // Let's set intermediate values for resizing.
 
       this.isZooming = false; // We're no longer zooming.
-      this.resizeAfterTouch = true; // Use docHeight on next resize.
+      this.isAfterTouch = true; // Use docHeight on next resize.
     }
   }
 
@@ -352,7 +352,7 @@ class App extends Component {
     const newHeight =
       isMobile
         && (!isMobileSafari
-            || this.resizeAfterTouch
+            || this.isAfterTouch
             || (this.state.tooNarrow && this.state.pinchZoomed))
         ? document.documentElement.clientHeight
         : window.innerHeight;
@@ -421,10 +421,10 @@ class App extends Component {
       })
     );
 
-    // We're done, toggle resizeAfterTouch.
+    // We're done, toggle isAfterTouch.
 
-    if (this.resizeAfterTouch) {
-      this.resizeAfterTouch = false;
+    if (this.isAfterTouch) {
+      this.isAfterTouch = false;
     }
   }
 
