@@ -152,8 +152,6 @@ class App extends Component {
     ReactGA.pageview(pathname + search); // Tallies initial request
 
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
-    this.isZooming = false; // True when pinch zooming is on...!
-    this.resizeAfterTouch = false; // Resize w/clientHeight when true
 
     this.state = {
       currentCaller: location !== 'i'
@@ -169,7 +167,9 @@ class App extends Component {
       showLegalTerms: false,
       showStoryText: true,
       pinchZoomed: false, // We're zoomed! or not.
-      tooNarrow: height < 350 // Too narrow, rotate screen
+      tooNarrow: height < 350, // Too narrow, rotate screen
+      isZooming: false, // True when pinch zooming is on...!
+      isAfterTouch: false // Resize w/clientHeight when true
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -197,7 +197,16 @@ class App extends Component {
           pageHeight: this.state.height.toString()
         }}
       >
-        <Fragment>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%'
+          }}
+          onTouchMove={this.handleTouchMove}
+          onTouchEnd={this.handleTouchEnd}
+        >
           <GlobalStyle
             home={homeIsActive}
             reverie={reverieIsActive}
@@ -225,7 +234,7 @@ class App extends Component {
           <TooSmallScreen
             tooNarrow={this.state.tooNarrow}
           />
-        </Fragment>
+        </div>
       </ThemeProvider>
     );
   }
@@ -256,16 +265,12 @@ class App extends Component {
     }
 
     window.addEventListener('resize', this.handleResize);
-    window.addEventListener('touchmove', this.handleTouchMove);
-    window.addEventListener('touchend', this.handleTouchEnd);
   }
 
   componentWillUnmount() {
     // These will never be called, here as good practice.
 
     window.removeEventListener('resize', this.handleResize);
-    window.removeEventListener('touchmove', this.handleTouchMove);
-    window.removeEventListener('touchend', this.handleTouchEnd);
   }
 
   handleTouchMove(event) {
@@ -277,24 +282,32 @@ class App extends Component {
       // This is a more effective check than trying to
       // add points as coordinates or height/width.
 
+      if (!this.isZooming) {
+        this.isZooming = true; // We're zooming
+      }
+
       if (
         window.pageXOffset > 0
           && window.pageYOffset > 0
       ) {
-        if (!this.isZooming) {
-          this.isZooming = true; // We're zooming
-        }
-
-        this.setState({ pinchZoomed: true }); // Set zoom state
+        this.setState({
+          pinchZoomed: true,
+          isZooming: true,
+          isAfterTouch: true
+        }); // Set zoom state
       } else if (
         // Hard to hit 0 on the nose, so
         // let's look for negatives.
 
         window.pageXOffset <= 0
           && window.pageYOffset <= 0
-          && this.state.pinchZoomed // We only need to this once.
+          // && this.state.pinchZoomed // We only need to this once.
       ) {
-        this.setState({ pinchZoomed: false }); // Reset zoom state
+        this.setState({
+          pinchZoomed: false, // Reset zoom state
+          isZooming: true,
+          isAfterTouch: true
+        });
       }
     }
   }
@@ -307,6 +320,9 @@ class App extends Component {
 
       this.isZooming = false; // We're no longer zooming.
       this.resizeAfterTouch = true; // Use docHeight on next resize.
+      this.setState({
+        isZooming: false
+      });
     }
   }
 
@@ -320,6 +336,8 @@ class App extends Component {
   updateHeight() {
     // On desktops, resize if height is changing.
 
+    console.log('updateHeight');
+
     if (!isMobile
       && this.state.width !== window.innerWidth
       && this.state.height === window.innerHeight) {
@@ -328,7 +346,7 @@ class App extends Component {
 
     // Don't resize while zooming.
 
-    if (this.isZooming) {
+    if (this.state.isZooming) {
       return false;
     }
 
@@ -352,7 +370,7 @@ class App extends Component {
     const newHeight =
       isMobile
         && (!isMobileSafari
-            || this.resizeAfterTouch
+            || this.state.isAfterTouch
             || (this.state.tooNarrow && this.state.pinchZoomed))
         ? document.documentElement.clientHeight
         : window.innerHeight;
@@ -366,8 +384,10 @@ class App extends Component {
     // will be seen until after first rotation, which
     // 'feels' right.
 
-    if (this.state.pinchZoomed
-          && !this.state.tooNarrow) {
+    if (
+      this.state.pinchZoomed
+        && !this.state.tooNarrow
+    ) {
       ReactGA.event({
         category: 'App state',
         action: 'Resized while pinchZoomed',
@@ -375,8 +395,19 @@ class App extends Component {
         label: `Page: ${pathname}${search}`
       });
 
+      console.log('pinchZoom cancel', this.state);
       return false;
     }
+
+    // if (
+    //   (this.state.pinchZoomed
+    //     && this.state.tooNarrow
+    //     && this.state.isAfterTouch)
+    // ) {
+    //   console.log('pinchZoom reorient', this.state);
+    //   this.setState({ tooNarrow: false });
+    //   return false;
+    // }
 
     // Only resize when height changes.
 
@@ -411,21 +442,20 @@ class App extends Component {
       label: `Page: ${pathname}${search}`
     });
 
+    console.log('set state:', this.state);
+
     this.setState(
       () => ({
         height: newHeight,
         tooNarrow:
           newHeight < 350
             ? true
-            : false
+            : false,
+        isAfterTouch:
+          this.state.isAfterTouch
+            && false
       })
     );
-
-    // We're done, toggle resizeAfterTouch.
-
-    if (this.resizeAfterTouch) {
-      this.resizeAfterTouch = false;
-    }
   }
 
   componentDidUpdate(prevProps) {
