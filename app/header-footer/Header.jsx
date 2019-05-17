@@ -230,8 +230,16 @@ export default class Header extends Component {
       prevProps
     );
 
+    // Don't automatically close menu if
+    // entering or exiting /reverie.
+
+    const isOrWasReverie =
+      location.type === 'reverie'
+        || location.lastType === 'reverie';
+
     if (
       location.justChanged
+        && !isOrWasReverie
         && this.timeoutId !== undefined
     ) {
       const hcForApp = new ClickHandling('header', this);

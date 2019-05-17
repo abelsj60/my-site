@@ -1,5 +1,6 @@
 import Referrer from './Referrer';
 import ReactGA from 'react-ga';
+import Spell from '../classes/Spell.js';
 
 export default class ClickHandling {
   constructor(component, outsideThis) {
@@ -30,6 +31,8 @@ export default class ClickHandling {
       case 'header':
         selectedHandler = this._handleClickForHeader;
         break;
+      case 'home':
+        selectedHandler = this._handleClickForHome;
       default:
         break;
     }
@@ -45,6 +48,7 @@ export default class ClickHandling {
         showLegalTerms,
         inCity,
         showStoryText,
+        showPulsers,
         isMenu
       } = this.state;
       const stateToUpdate = {};
@@ -97,12 +101,19 @@ export default class ClickHandling {
               ? 'Legal notice was open'
               : '';
           break;
-        case 'swapHomePageImage':
+        case 'swapBackground':
           stateToUpdate.inCity = !inCity;
           category = 'App state';
           action = !inCity
             ? 'Enter city'
             : 'Enter fantasy';
+          break;
+        case 'togglePulsers':
+          stateToUpdate.showPulsers = !showPulsers;
+          category = 'App state';
+          action = showPulsers
+            ? 'Show magic UI'
+            : 'Hide magic UI';
           break;
         case 'setCallers':
           stateToUpdate.currentCaller = valueOne;
@@ -172,7 +183,7 @@ export default class ClickHandling {
       if (!menuIsOpen) {
         toggleState.call(this);
         this.timeoutId = setTimeout(() => {
-          // Comment the next line out to suspend auto-close
+          // Comment next line to suspend auto-close
           this.setState({ menuIsOpen: false });
         }, 5000);
       } else {
@@ -182,5 +193,44 @@ export default class ClickHandling {
         toggleState.call(this);
       }
     };
+  }
+
+  _handleClickForHome() {
+    return appStateUpdater =>
+      () => {
+        const stateToUpdate = {};
+        const { isCasting } = this.state;
+
+        if (!isCasting) {
+          const homeStateUpdater =
+              (keepCasting, makeMagic, score) =>
+                this.setState(
+                  () => {
+                    return {
+                      isCasting: keepCasting,
+                      castSpell: makeMagic,
+                      score: score // Track score to force re-render.
+                    };
+                  }
+                );
+                
+          if (this.spell !== undefined) {
+            delete this.spell;
+          }
+
+          const spell = new Spell(
+            homeStateUpdater, appStateUpdater
+          );
+          this.spell = spell; // Adds Spell to 'this' value on Home
+          this.spell.startCasting(); // Invokes Spell member from Home
+        } else if (this.spell) {
+          this.spell.cancelSpell();
+          // delete this.spell;
+        }
+
+        stateToUpdate.isCasting = !isCasting;
+        console.log('Surely, not here?');
+        return this.setState(stateToUpdate);
+      };
   }
 }

@@ -137,7 +137,6 @@ export default function Projects(props) {
             }
           />
           <Figure>
-            {/*<Hed>Featured image</Hed>*/}
             <Caption>{caption}</Caption>
             <ImageHolder>
               <Image

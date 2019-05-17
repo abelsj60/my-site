@@ -120,7 +120,7 @@ export default function FooterContainer(props) {
           <Graf
             active={
               (isReverie && 'active')
-                || undefined
+              || undefined
             }
           >
             Reverie
