@@ -24,9 +24,7 @@ const BoyInForeground = styled.div`
   height: 100%;
   pointer-events: none;
   z-index: 2;
-
   filter: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? p.theme.blur : 'blur(0)'};
-  // transition: ${p => !p.theme.blurForTempContent && '.5s'};
 
   // object-fit: cover; // Use if using <img>
 `;
@@ -86,10 +84,10 @@ export default function PictureBox(props) {
         castSpell={castSpell}
         onTransitionEnd={
           () => {
-            boundHandleClickForHome('toggleSpell');
             // Set transition to '1' after the first call,
             // so toggle won't re-run on the second call.
             trackTransitionEnd();
+            boundHandleClickForHome('toggleSpell');
           }
         }
         srcImage={bio.attributes.fantasyImage}
