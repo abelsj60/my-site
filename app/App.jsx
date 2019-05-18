@@ -37,7 +37,8 @@ const colors = {
   white: 'white',
   yellow: '#ffe74c',
   darkPink: '#af125a',
-  darkPinkTwo: '#bd3d78'
+  darkPinkTwo: '#bd3d78',
+  frostedBlue: '#4286f4'
 };
 const fontSizes = {
   zero: '.9rem',

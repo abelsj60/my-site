@@ -27,7 +27,7 @@ const Container = styled.div`
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
   font-size: 4.5rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
+  text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: ${p => p.theme.colors.yellow};
@@ -39,7 +39,7 @@ const Hed = styled.h1`
 `;
 const Motto = styled.p`
   font-family: 'Aref Ruqaa', serif;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
+  text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: ${p => p.theme.fontSizes.five};
@@ -95,7 +95,7 @@ const Text = styled.section`
 export default function NameTag(props) {
   const {
     appState,
-    castTheSpell,
+    boundHandleClickForHome,
     homeState
   } = props;
   const {
@@ -107,13 +107,11 @@ export default function NameTag(props) {
     castSpell
   } = homeState;
 
-  console.log('castSpell in nT:', castSpell);
-
   return (
     <Container
       castSpell={castSpell}
       onClick={
-        () => castTheSpell()
+        () => boundHandleClickForHome('toggleSpell')
       }
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >

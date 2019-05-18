@@ -27,34 +27,24 @@ const yellowPulse = keyframes`
     box-shadow: 0 0 0 0 rgba(255, 231, 76, 0);
   }
 `;
-const Container = styled.div`
+const CharmBox = styled.div`
   display: none;
   display: ${p => (p.tempContentIsOn || p.magicIsHappening ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: space-between;
-  width: 175px;
+  width: 195px;
   z-index: 2;
+  margin-top: 15px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    width: 215px;
+    width: 240px;
   }
 `;
-const Text = styled.p`
-  font-size: ${p => p.theme.fontSizes.fifteen};
-  color: ${p => p.theme.colors.white};
-  text-align: center;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
-  
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-top: 10px;
-    margin-bottom: 30px;
-  }
-`;
-const Pulsers = styled.div`
+const PulseBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const PulsingBall = styled.div`
+const Pulser = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${pinkPulse} infinite`)};
   border: 2px solid ${p => p.theme.colors.pink};
   background-color: rgba(0, 0, 0, .5);
@@ -73,7 +63,7 @@ const PulsingBall = styled.div`
     height: 50px;
   }
 `;
-const CenterPoint = styled.div`
+const InnerRing = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.14s ${yellowPulse} infinite`)};
   border: 2px solid ${p => p.isActive ? p.theme.colors.yellow : p.theme.colors.pink};
   height: 15px;
@@ -82,91 +72,94 @@ const CenterPoint = styled.div`
 `;
 const ProgressContainer = styled.div`
   height: 1px;
-  width: 50%;
+  width: 75%;
   align-self: center;
   background-color: rgba(0, 0, 0, .4);
-  margin-top: 28px;
+  margin-top: 30px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-top: 33px;
+    margin-top: 35px;
   }
 `;
 const ProgressBar = styled.div`
   width: ${p => p.barWidth}%;
   height: 100%;
-  background-color: yellow;
+  background-color: ${p => p.theme.colors.yellow};
   transition: width .5s ease-out;
 `;
 
-export default function PulseBox(props) {
-  // If isCasting is false, the PulseBox shouldn't be shown.
-
+export default function Charms(props) {
   if (!props.homeState.isCasting) {
     return null;
   }
 
   const {
     appState,
-    homeState,
-    spell
+    boundHandlePulser,
+    homeState
   } = props;
   const {
     showBusinessCard,
     showLegalTerms
   } = appState;
-  const { castSpell } = homeState;
-  const barWidth = spell.score * 20;
+  const {
+    activePulser,
+    castSpell,
+    score
+  } = homeState;
 
-  // const boundHandleClickForHome = new ClickHandling;
-  // boundHandleClickForHome('swapWorlds'); // Triggers change in /home
+  // Let's set up a progress bar.
+
+  const barWidth = score * 20;
+
+  // Which Pulser is active?
+
+  const isOne = activePulser === 1;
+  const isTwo = activePulser === 2;
+  const isThree = activePulser === 3;
 
   return (
-    <Container
+    <CharmBox
       magicIsHappening={castSpell} // Don't show while in progress
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >
-      <Text>
-          Cast A Spell
-      </Text>
-      <Pulsers>
-        <PulsingBall
-          isActive={spell.activePulser === 1}
+      <PulseBox>
+        <Pulser
+          isActive={isOne}
           onClick={
-            () => spell.handleClickOnPulser(1)
+            () => boundHandlePulser(isOne)
           }
         >
-          <CenterPoint
-            isActive={spell.activePulser === 1}
+          <InnerRing
+            isActive={isOne}
           />
-        </PulsingBall>
-        <PulsingBall
-          isActive={spell.activePulser === 2}
+        </Pulser>
+        <Pulser
+          isActive={isTwo}
           onClick={
-            () => spell.handleClickOnPulser(2)
+            () => boundHandlePulser(isTwo)
           }
         >
-          <CenterPoint
-            isActive={spell.activePulser === 2}
+          <InnerRing
+            isActive={isTwo}
           />
-        </PulsingBall>
-        <PulsingBall
-          isActive={spell.activePulser === 3}
+        </Pulser>
+        <Pulser
+          isActive={isThree}
           onClick={
-            () => spell.handleClickOnPulser(3)
+            () => boundHandlePulser(isThree)
           }
         >
-          <CenterPoint
-            isActive={spell.activePulser === 3}
+          <InnerRing
+            isActive={isThree}
           />
-        </PulsingBall>
-      </Pulsers>
+        </Pulser>
+      </PulseBox>
       <ProgressContainer>
         <ProgressBar
           barWidth={barWidth}
-        ></ProgressBar>
+        />
       </ProgressContainer>
-    </Container>
+    </CharmBox>
   );
 }
-
-

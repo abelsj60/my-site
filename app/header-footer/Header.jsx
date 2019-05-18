@@ -85,22 +85,26 @@ const Nav = styled.nav`
   display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '8px 15px'};
+  // Prevent occasional over-expansion
   background-color: ${p => p.isHome && 'rgba(0,0,0,0.25)'};
+  max-width: ${p => p.isHome && '269'}; 
   border-radius: ${p => p.isHome && '10px'};
-
-  ${p => p.menu && css`
+  
+  ${p => p.menu && css` // p.menu = headerMenu
     flex: 1;
     display: block;
-
+    
     // Offset centering by right-side icon width (is five less than total)
     @media (min-width: ${p.theme.mediaQueries.tinyView}) {
       margin-left: 37px;
     }
   `};
-
+    
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
     margin-right: ${p => (!p.isHome && '15px')};
+    // Prevent occasional over-expansion
+    max-width: ${p => p.isHome && '286px'};
   }
 `;
 const NavList = styled(UnorderedList)`

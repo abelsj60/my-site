@@ -1,20 +1,7 @@
 import bio from '../data/about/home-page-about.md';
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const colorKeyframes = keyframes`
-  0% {
-    background-color: rgba(0, 0, 0, 0.15);
-  }
-  
-  10% {
-    background-color: rgba(25, 220, 234, .15)
-  }
-    
-  100% {
-    background-color: rgba(178, 44, 255, .15);
-  }
-`;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -37,34 +24,24 @@ const BoyInForeground = styled.div`
   height: 100%;
   pointer-events: none;
   z-index: 2;
+
+  filter: ${p => p.isCasting && !p.castSpell ? 'blur(2px)' : 'blur(0)'};
+  transition: filter .5s;
+
   // object-fit: cover; // Use if using <img>
 `;
-const newKeyframes = keyframes`
-  0% {
-    background-position: 0% 7%;
-  }
-
-  50% {
-    background-position: 100% 94%;
-  }
-
-  100% {
-    background-position: 0% 7%;
-  }
-`;
 const Portal = styled.div`
-  background-color: rgba(0, 0, 0, 0.15);
-  animation: ${p => p.isCasting ? css`${colorKeyframes} 5s linear infinite alternate both` : ''};
-
   position: absolute;
   height: 100%;
   width: 100%;
   z-index: 1;
 
-  // background: ${p => p.isCasting && 'radial-gradient(circle farthest-side at bottom right, #ff0000, #ffa500, #ffff00, #00ff00, #0000ff, #ee82ee)'};
-  // background-size: 1000% 500%;
-  // opacity: .3;
-  // animation: ${p => p.isCasting && css`${newKeyframes} 30s ease-in-out infinite`};
+  // https://codersblock.com/blog/gradient-animation-trick/
+  background-image: linear-gradient(${p => css`${p.theme.colors.frostedBlue}, ${p.theme.colors.black}`});
+  opacity: ${p => p.isCasting && !p.castSpell ? '.4' : '.1'};
+  background-size: auto 200%;
+  background-position: ${p => p.isCasting && !p.castSpell ? '0 0' : '0 100%'};
+  transition: background-position 0.5s, opacity .25s;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
   background-image: url(${p => p.srcImage});
@@ -74,7 +51,7 @@ const FantasyAsBackground = styled(BoyInForeground)`
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
-  background-image: url(${p => p.srcImage});
+  backgrou2nd-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
@@ -82,8 +59,9 @@ const CityAsBackground = styled(FantasyAsBackground)`
 export default function PictureBox(props) {
   const {
     appState,
+    boundHandleClickForHome,
     homeState,
-    spell
+    trackTransitionEnd
   } = props;
   const {
     inCity
@@ -99,17 +77,27 @@ export default function PictureBox(props) {
         srcImage={bio.attributes.boyInForegroundImage}
       />
       <Portal
-        isCasting={isCasting && !castSpell}
+        isCasting={isCasting}
+        castSpell={castSpell}
       />
       <FantasyAsBackground
         inCity={inCity}
+        isCasting={isCasting}
+        castSpell={castSpell}
         onTransitionEnd={
-          () => spell.cleanupAfterCasting()
+          () => {
+            boundHandleClickForHome('toggleSpell');
+            // Set transition to '1' after the first call,
+            // so toggle won't re-run on the second call.
+            trackTransitionEnd();
+          }
         }
         srcImage={bio.attributes.fantasyImage}
       />
       <CityAsBackground
         inCity={inCity}
+        isCasting={isCasting}
+        castSpell={castSpell}
         srcImage={bio.attributes.cityImage}
       />
     </PictureHolder>

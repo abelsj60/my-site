@@ -1,6 +1,5 @@
 import Referrer from './Referrer';
 import ReactGA from 'react-ga';
-import Spell from '../classes/Spell.js';
 
 export default class ClickHandling {
   constructor(component, outsideThis) {
@@ -18,6 +17,9 @@ export default class ClickHandling {
     this.boundHandleClick = this._selectHandleClick(outsideThis);
   }
 
+  // Binds a handleClick function to boundHandleClick; this
+  // function will be invoked directly or passed as an arg.
+
   _selectHandleClick(outerThis) {
     let selectedHandler;
 
@@ -33,12 +35,18 @@ export default class ClickHandling {
         break;
       case 'home':
         selectedHandler = this._handleClickForHome;
+        break;
+      case 'pulser':
+        selectedHandler = this._handlePulser;
+        break;
       default:
         break;
     }
 
     return selectedHandler.call(outerThis, this);
   }
+
+  // Handles the appState.
 
   _handleClickForAppComponent() {
     return (updateValue, valueOne, valueTwo) => {
@@ -48,7 +56,6 @@ export default class ClickHandling {
         showLegalTerms,
         inCity,
         showStoryText,
-        showPulsers,
         isMenu
       } = this.state;
       const stateToUpdate = {};
@@ -108,13 +115,6 @@ export default class ClickHandling {
             ? 'Enter city'
             : 'Enter fantasy';
           break;
-        case 'togglePulsers':
-          stateToUpdate.showPulsers = !showPulsers;
-          category = 'App state';
-          action = showPulsers
-            ? 'Show magic UI'
-            : 'Hide magic UI';
-          break;
         case 'setCallers':
           stateToUpdate.currentCaller = valueOne;
           if (valueTwo !== 'reverie') {
@@ -136,13 +136,17 @@ export default class ClickHandling {
         ReactGA.event({
           category,
           action,
-          label: label ? label : null
+          label: label
+            ? label
+            : null
         });
       }
 
       return this.setState(() => stateToUpdate);
     };
   }
+
+  // Handles the bodyState onClick (links).
 
   _handleClickForBodyComponent(innerThis) {
     return (valueOne, valueTwo) => {
@@ -171,9 +175,15 @@ export default class ClickHandling {
     };
   }
 
+  // Handles the header onClick.
+
   _handleClickForHeader() {
     return () => {
       const { menuIsOpen } = this.state;
+
+      // Let's define a function w/the Header's 'this'
+      // value to control the header state.
+
       const toggleState = function() {
         this.setState({
           menuIsOpen: !menuIsOpen
@@ -181,6 +191,11 @@ export default class ClickHandling {
       };
 
       if (!menuIsOpen) {
+        // We'll use .call to invoke our function so
+        // as to ensure the 'this' value is right.
+        // Alternative: We could define it externally
+        // and pass it in.
+
         toggleState.call(this);
         this.timeoutId = setTimeout(() => {
           // Comment next line to suspend auto-close
@@ -190,47 +205,92 @@ export default class ClickHandling {
         clearTimeout(this.timeoutId);
         this.timeoutId = undefined;
 
+        // See comment above.
+
         toggleState.call(this);
       }
     };
   }
 
-  _handleClickForHome() {
-    return appStateUpdater =>
-      () => {
-        const stateToUpdate = {};
-        const { isCasting } = this.state;
+  // Handles the spell onClick, or following a click sequence.
 
-        if (!isCasting) {
-          const homeStateUpdater =
-              (keepCasting, makeMagic, score) =>
-                this.setState(
-                  () => {
-                    return {
-                      isCasting: keepCasting,
-                      castSpell: makeMagic,
-                      score: score // Track score to force re-render.
-                    };
-                  }
-                );
-                
-          if (this.spell !== undefined) {
-            delete this.spell;
+  _handleClickForHome() {
+    return updateValue => {
+      if (this.transition === 1) {
+        return null;
+      }
+
+      const { isCasting, pattern } = this.state;
+      const stateToUpdate = {};
+
+      switch (updateValue) {
+        case 'toggleSpell':
+          stateToUpdate.isCasting = !isCasting;
+
+          // If we're casting a spell, we need a full reset.
+
+          if (isCasting) {
+            // We'll reset the spell whenever we leave the Pulsers.
+            // We'll keep the same pattern as long was we don't
+            // unmount or successfully complete the spell.
+
+            stateToUpdate.activePulser = pattern[0];
+            stateToUpdate.castSpell = false;
+            stateToUpdate.score = 0;
           }
 
-          const spell = new Spell(
-            homeStateUpdater, appStateUpdater
-          );
-          this.spell = spell; // Adds Spell to 'this' value on Home
-          this.spell.startCasting(); // Invokes Spell member from Home
-        } else if (this.spell) {
-          this.spell.cancelSpell();
-          // delete this.spell;
+          break;
+        case 'castSpell':
+          // Let's first create a new spell for the return trip.
+          stateToUpdate.pattern = this.createSpellPattern();
+          stateToUpdate.castSpell = true;
+          break;
+      }
+
+      this.setState(stateToUpdate);
+    };
+  }
+
+  // Handles the Pulsers onClick.
+
+  _handlePulser() {
+    return isActive => {
+      const { score } = this.state;
+      const abracadabra = score + 1 === this.goal; // Magic!
+
+      // If the Pulser isn't active, or if it's tme for magic.
+
+      if (!isActive || isActive && abracadabra) {
+        // We can invoke ClickHandling with the proper 'this' b/c
+        // we invoked it w/Home's 'this' value via .call()
+
+        const hcForHome = new ClickHandling('home', this);
+        const boundHandleClickForHome = hcForHome.boundHandleClick;
+
+        if (isActive && abracadabra) {
+          // We store the background value in App so it's remembered
+          // as the user travels through the site.
+
+          this.props.boundHandleClickForApp('swapBackground');
+          boundHandleClickForHome('castSpell');
+        } else {
+          boundHandleClickForHome('toggleSpell');
         }
 
-        stateToUpdate.isCasting = !isCasting;
-        console.log('Surely, not here?');
-        return this.setState(stateToUpdate);
-      };
+        return null;
+      }
+
+      //  The Pulser is active, and the user isn't done yet.
+
+      this.setState(
+        state => {
+          const newScore = state.score += 1;
+          return {
+            score: newScore,
+            activePulser: state.pattern[newScore]
+          };
+        }
+      );
+    };
   }
 }
