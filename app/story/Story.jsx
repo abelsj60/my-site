@@ -41,6 +41,8 @@ const Image = styled.div`
   background-size: cover;
   height: 100%;
   width: 100%;
+  // If business card or legal terms are on screen, blur content:
+  filter: ${p => p.theme.blurForTempContent && p.theme.blur};
 
   // If moving to <img> --> May need to fill page:   
   // https://stackoverflow.com/a/30794589

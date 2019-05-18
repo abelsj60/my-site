@@ -70,6 +70,9 @@ const mediaQueries = {
 const bottomMargin = {
   regular: '20px'
 };
+const blurControl = {
+  regular: 'blur(2px)'
+};
 const ZoomControl = styled.div`
   display: flex;
   flex-direction: column;
@@ -195,7 +198,9 @@ class App extends Component {
           colors,
           fontSizes,
           mediaQueries,
-          pageHeight: this.state.height.toString()
+          pageHeight: this.state.height.toString(),
+          blur: blurControl.regular,
+          blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms
         }}
       >
         {/* Use Fragment b/c ThemeProvider

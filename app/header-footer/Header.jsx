@@ -89,6 +89,7 @@ const Nav = styled.nav`
   background-color: ${p => p.isHome && 'rgba(0,0,0,0.25)'};
   max-width: ${p => p.isHome && '269'}; 
   border-radius: ${p => p.isHome && '10px'};
+  position: relative;
   
   ${p => p.menu && css` // p.menu = headerMenu
     flex: 1;

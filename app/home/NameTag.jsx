@@ -27,7 +27,7 @@ const Container = styled.div`
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
   font-size: 4.5rem;
-  text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, .6);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: ${p => p.theme.colors.yellow};

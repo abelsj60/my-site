@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.main`
-  height: 0px; // Needed! https://moduscreate.com/blog/how-to-fix-overflow-issues-in-css-flex-layouts/
+  // Height of 0px: ! https://moduscreate.com/blog/how-to-fix-overflow-issues-in-css-flex-layouts/
+  height: 0px; 
   display: flex;
   height: ${p => parseInt(p.theme.pageHeight) - 107}px;
   flex-grow: 1;

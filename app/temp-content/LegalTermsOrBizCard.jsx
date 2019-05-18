@@ -1,12 +1,11 @@
 import Clipboard from 'react-clipboard.js';
 import StyledLink from '../primitives/StyledLink.jsx';
-import Parallax from '../shared/Parallax.jsx';
 import React, { Component } from 'react';
 import ReactGA from 'react-ga';
 import styled, { css } from 'styled-components';
 
 const myEmailAddress = 'hello@jamesabels.net';
-const OuterContainer = styled.section`
+const PageCover = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +21,7 @@ const OuterContainer = styled.section`
   ${p => p.home && css`
     background-color: ${!p.copying ? 'rgba(115,192,232, 0.35)' : 'rgba(255,231,76, 0.25)'}`};
 `;
-const CenteringContainer = styled.div`
+const CardHolder = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -32,29 +31,20 @@ const CenteringContainer = styled.div`
   left: 0px;
   bottom: 55px;
 `;
-const CardHolder = styled.div`
-  display: flex;
-  justifyContent: center;
-`;
-const InnerContainer = styled.div`
-`;
 const Card = styled.section`
   height: 160px;
   width: 275px;
   background-color: ${p => p.theme.colors.white};
   pointer-events: all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 7px 7px 5px -1px rgba(0, 0, 0, 0.3);
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     height: 200px;
     width: 350px;
   }
-`;
-const CardContentArea = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  box-shadow: 7px 7px 5px -1px rgba(0, 0, 0, 0.3);
 `;
 const StyledClipboardButton = styled(Clipboard)`
   border: ${p => p.businessCard ? `1px solid ${p.theme.colors.pink}` : 'none'};
@@ -76,7 +66,9 @@ const StyledClipboardButton = styled(Clipboard)`
     outline: 0px;
   }
 
-  https://stackoverflow.com/a/18997800
+  // .5px border line in older browsers:
+  // https://stackoverflow.com/a/18997800
+
   &:after {
     position: absolute;
     top: 0;
@@ -92,8 +84,6 @@ const Graf = styled.p`
   flex: 1;
   font-size: ${p => p.theme.fontSizes.six};
   margin-bottom: 0px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.ten};
@@ -124,7 +114,6 @@ export default class LegalTermsOrBizCard extends Component {
     super(props);
 
     this.timeoutId = null;
-
     this.state = {
       copying: false
     };
@@ -160,6 +149,7 @@ export default class LegalTermsOrBizCard extends Component {
 
     // Styled as attribute for simplicity,
     // breaking it out above's a headache
+
     const linkOrTextForClips = currentCaller !== 'journalism'
       ? <StyledLink
         style={{ color: 'black',
@@ -168,7 +158,8 @@ export default class LegalTermsOrBizCard extends Component {
       : 'clips';
 
     // The following HTML is span, not a <p>, b/c it's nested in
-    // a <p> (React doesn't allow <p> nesting, kicks a warning)
+    // a <p> (React doesn't allow <p> nesting, kicks a warning).
+
     const legalNotice =
       <span>
         <MyCopyright>
@@ -181,6 +172,7 @@ export default class LegalTermsOrBizCard extends Component {
 
     // Real email address shouldn't be a problem here b/c it isn't
     // on a real route. It'd be hard to scrape w/o special effort.
+
     const cardText = showBusinessCard
       ? !copying
         ? myEmailAddress
@@ -188,16 +180,17 @@ export default class LegalTermsOrBizCard extends Component {
       : legalNotice;
 
     // StyledClipboardButton triggers success handler
-    // AFTER it's copied something to the DOM. So, we
-    // need to prevent its operation if we want to
-    // share this component with legalTerms. Turns
-    // out, it won't copy empty strings.
+    // AFTER it's copied something to the DOM. We
+    // need to stop it from running if we want to
+    // share it with legalTerms. Turns out, it
+    // won't copy empty strings.
+
     const textToCopy = showBusinessCard
       ? myEmailAddress
       : '';
 
     return (
-      <OuterContainer
+      <PageCover
         home={homeIsActive}
         copying={copying && !showLegalTerms}
         onClick={
@@ -214,77 +207,58 @@ export default class LegalTermsOrBizCard extends Component {
           }
         }
       >
-        <CenteringContainer>
-          <CardHolder>
-            <Parallax
-              render={
-                renderProps => (
-                  <InnerContainer
-                    ref={
-                      ref => (renderProps.scene = ref)
-                    }
-                    onClick={
-                      event => event.stopPropagation()
-                    }
-                  >
-                    <Card
-                      data-depth=".6"
-                      data-friction-x=".5"
-                      data-friction-y=".5"
-                      data-limit-x="2" // Value unclear
-                      data-limit-y="2" // Value unclear
-                      home={homeIsActive}
-                      reverie={reverieIsActive}
-                    >
-                      <CardContentArea>
-                        <StyledClipboardButton
-                          businessCard={showBusinessCard}
-                          data-clipboard-text={textToCopy}
-                          reverie={reverieIsActive}
-                          onSuccess={
-                            () => {
-                              // Use this.props... so the value's updateed
-                              // after the listener's added to Clipboard.
-                              // There's a problem w/'this' otherwise.
-                              if (
-                                this.props.appState.showBusinessCard
-                                  && this.timeoutId === null
-                              ) {
-                                // Technically runs after copy is made!
-                                ReactGA.event({
-                                  category: 'Legal terms state',
-                                  action: 'Copy email address'
-                                });
-                                makeCopies();
-                                this.timeoutId = setTimeout(
-                                  () => {
-                                    this.timeoutId = null;
-                                    makeCopies();
-                                  }, 1150
-                                );
-                              }
-                            }
-                          }
-                        >
-                          <Graf
-                            key={cardText}
-                            copying={
-                              !showLegalTerms
-                              && copying
-                            }
-                          >
-                            {cardText}
-                          </Graf>
-                        </StyledClipboardButton>
-                      </CardContentArea>
-                    </Card>
-                  </InnerContainer>
-                )
+        <CardHolder>
+          <Card
+            home={homeIsActive}
+            reverie={reverieIsActive}
+            onClick={
+              event => event.stopPropagation()
+            }
+          >
+            <StyledClipboardButton
+              businessCard={showBusinessCard}
+              data-clipboard-text={textToCopy}
+              reverie={reverieIsActive}
+              onSuccess={
+                () => {
+                  // Must use 'this.props..' to get updated value
+                  // after adding the listener to the Clipboard.
+                  // There's a problem w/'this' otherwise.
+
+                  if (
+                    this.props.appState.showBusinessCard
+                      && this.timeoutId === null
+                  ) {
+                    // Technically runs after the copy is made.
+
+                    ReactGA.event({
+                      category: 'Legal terms state',
+                      action: 'Copy email address'
+                    });
+                    makeCopies();
+                    this.timeoutId = setTimeout(
+                      () => {
+                        this.timeoutId = null;
+                        makeCopies();
+                      }, 1150
+                    );
+                  }
+                }
               }
-            />
-          </CardHolder>
-        </CenteringContainer>
-      </OuterContainer>
+            >
+              <Graf
+                key={cardText}
+                copying={
+                  !showLegalTerms
+                    && copying
+                }
+              >
+                {cardText}
+              </Graf>
+            </StyledClipboardButton>
+          </Card>
+        </CardHolder>
+      </PageCover>
     );
   }
 
@@ -328,9 +302,9 @@ export default class LegalTermsOrBizCard extends Component {
     }
   }
 
-  // Not added to ClickHandling. Dealing w/'this'
-  // binding inside the class is nightmarish.
-  // K.I.S.S.
+  // Not added to ClickHandling. Dealing w/'this' binding
+  // inside the class is a nightmare. K.I.S.S.
+
   makeCopies() {
     const { copying } = this.state;
     this.setState(

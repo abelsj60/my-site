@@ -25,8 +25,8 @@ const BoyInForeground = styled.div`
   pointer-events: none;
   z-index: 2;
 
-  filter: ${p => p.isCasting && !p.castSpell ? 'blur(2px)' : 'blur(0)'};
-  transition: filter .5s;
+  filter: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? p.theme.blur : 'blur(0)'};
+  // transition: ${p => !p.theme.blurForTempContent && '.5s'};
 
   // object-fit: cover; // Use if using <img>
 `;

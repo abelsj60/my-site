@@ -27,6 +27,15 @@ const yellowPulse = keyframes`
     box-shadow: 0 0 0 0 rgba(255, 231, 76, 0);
   }
 `;
+const fadeIn = keyframes`
+  0% {
+    opacity: .15;
+  }
+
+  50% {
+    opacity: 1;
+  }
+`;
 const CharmBox = styled.div`
   display: none;
   display: ${p => (p.tempContentIsOn || p.magicIsHappening ? 'none' : 'flex')};
@@ -35,6 +44,7 @@ const CharmBox = styled.div`
   width: 195px;
   z-index: 2;
   margin-top: 15px;
+  animation: ${p => (p.isCasting && css`1s ${fadeIn} 1`)};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     width: 240px;
@@ -105,6 +115,7 @@ export default function Charms(props) {
   const {
     activePulser,
     castSpell,
+    isCasting,
     score
   } = homeState;
 
@@ -120,6 +131,7 @@ export default function Charms(props) {
 
   return (
     <CharmBox
+      isCasting={isCasting}
       magicIsHappening={castSpell} // Don't show while in progress
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >
