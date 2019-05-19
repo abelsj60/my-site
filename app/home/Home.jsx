@@ -18,9 +18,9 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
 
-    // 1. Goal is needed to cast a spell w/the Pulsers.
-    // 2. Transition is needed so the double firing of 'onTransitionEnd'
-    // doesn't toggle the Pulsers on and off in rapid succession.
+    // 1. this.goal defines when to cast a spell.
+    // 2. this.transition prevents 'onTransitionEnd' from
+    // toggling Pulsers on/off in rapid succession.
     this.goal = 5;
     this.transition = 0;
     // Create an initial spell pattern

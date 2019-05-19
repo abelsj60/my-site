@@ -39,7 +39,7 @@ const Portal = styled.div`
   opacity: ${p => p.isCasting && !p.castSpell ? '.4' : '.1'};
   background-size: auto 200%;
   background-position: ${p => p.isCasting && !p.castSpell ? '0 0' : '0 100%'};
-  transition: background-position 0.5s, opacity .25s;
+  transition: background-position 0.5s, opacity .25s cubic-bezier(0.215, 0.61, 0.355, 1);
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
   background-image: url(${p => p.srcImage});
@@ -86,6 +86,7 @@ export default function PictureBox(props) {
           () => {
             // Set transition to '1' after the first call,
             // so toggle won't re-run on the second call.
+
             trackTransitionEnd();
             boundHandleClickForHome('toggleSpell');
           }

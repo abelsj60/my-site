@@ -44,7 +44,7 @@ const CharmBox = styled.div`
   width: 195px;
   z-index: 2;
   margin-top: 15px;
-  animation: ${p => (p.isCasting && css`1s ${fadeIn} 1`)};
+  animation: ${p => (p.isCasting && css`1s ${fadeIn} 1 cubic-bezier(0.215, 0.61, 0.355, 1)`)};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     width: 240px;
