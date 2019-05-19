@@ -71,7 +71,7 @@ const bottomMargin = {
   regular: '20px'
 };
 const blurControl = {
-  regular: 'blur(2px)'
+  regular: 'blur(3px)'
 };
 const ZoomControl = styled.div`
   display: flex;

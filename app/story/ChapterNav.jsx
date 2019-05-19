@@ -86,8 +86,7 @@ export default function ChapterNav(props) {
                   </StyledLink>
                 </ListItem>
               );
-            }
-          }
+            }}
         />
       </StyledList>
       <Line />

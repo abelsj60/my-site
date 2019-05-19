@@ -1,4 +1,5 @@
 import React from 'react';
+import Mapper from '../shared/Mapper.jsx';
 import styled, { css, keyframes } from 'styled-components';
 
 const pinkPulse = keyframes`
@@ -80,15 +81,29 @@ const InnerRing = styled.div`
   width: 15px;
   border-radius: 50%;
 `;
+const FeedbackBox = styled.div`
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 35px;
+  margin-right: 35px;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    margin-top: 32px;
+  }
+`;
+const SpellText = styled.p`
+  font-size: ${p => p.theme.fontSizes.six};
+  color: ${p => p.theme.colors.yellow};
+  margin-bottom: 5px;
+`;
 const ProgressContainer = styled.div`
   height: 1px;
-  width: 75%;
+  width: 100%;
   align-self: center;
   background-color: rgba(0, 0, 0, .4);
-  margin-top: 30px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-top: 35px;
   }
 `;
 const ProgressBar = styled.div`
@@ -120,14 +135,7 @@ export default function Charms(props) {
   } = homeState;
 
   // Let's set up a progress bar.
-
   const barWidth = score * 20;
-
-  // Which Pulser is active?
-
-  const isOne = activePulser === 1;
-  const isTwo = activePulser === 2;
-  const isThree = activePulser === 3;
 
   return (
     <CharmBox
@@ -136,42 +144,39 @@ export default function Charms(props) {
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >
       <PulseBox>
-        <Pulser
-          isActive={isOne}
-          onClick={
-            () => boundHandlePulser(isOne)
-          }
-        >
-          <InnerRing
-            isActive={isOne}
-          />
-        </Pulser>
-        <Pulser
-          isActive={isTwo}
-          onClick={
-            () => boundHandlePulser(isTwo)
-          }
-        >
-          <InnerRing
-            isActive={isTwo}
-          />
-        </Pulser>
-        <Pulser
-          isActive={isThree}
-          onClick={
-            () => boundHandlePulser(isThree)
-          }
-        >
-          <InnerRing
-            isActive={isThree}
-          />
-        </Pulser>
-      </PulseBox>
-      <ProgressContainer>
-        <ProgressBar
-          barWidth={barWidth}
+        <Mapper
+          mapData={['one', 'two', 'three']}
+          render={
+            (_, idx)=> {
+              // Which Pulser is active?
+              const isActive = activePulser === idx + 1;
+
+              return (
+                <Pulser
+                  key={idx}
+                  isActive={isActive}
+                  onClick={
+                    () => boundHandlePulser(isActive)
+                  }
+                >
+                  <InnerRing
+                    isActive={isActive}
+                  />
+                </Pulser>
+              );
+            }}
         />
-      </ProgressContainer>
+      </PulseBox>
+      <FeedbackBox>
+        <SpellText>
+          Spell
+        </SpellText>
+        <ProgressContainer>
+          <ProgressBar
+            barWidth={barWidth}
+          />
+        </ProgressContainer>
+      </FeedbackBox>
     </CharmBox>
   );
 }

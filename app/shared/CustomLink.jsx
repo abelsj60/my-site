@@ -34,7 +34,7 @@ import { createPath } from 'history';
 // is clicked, the window instantly moves to the new location
 // and the link gets a 'to' prop representing where we Were.
 
-// *** ASIDE ***
+// *** END ASIDE ***
 
 // Note 1: /projects/menu is an exception to this rule. We DO want
 // to save /menu button toggles to history. The user expects it.

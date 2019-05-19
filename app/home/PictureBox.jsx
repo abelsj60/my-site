@@ -49,7 +49,7 @@ const FantasyAsBackground = styled(BoyInForeground)`
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
-  backgrou2nd-image: url(${p => p.srcImage});
+  background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
 `;
