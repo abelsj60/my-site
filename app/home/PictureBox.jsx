@@ -1,6 +1,6 @@
 import bio from '../data/about/home-page-about.md';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const PictureHolder = styled.div`
   position: fixed;
@@ -33,13 +33,8 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
-
-  // https://codersblock.com/blog/gradient-animation-trick/
-  background-image: linear-gradient(${p => css`${p.theme.colors.frostedBlue}, ${p.theme.colors.black}`});
-  opacity: ${p => p.isCasting && !p.castSpell ? '.4' : '.1'};
-  background-size: auto 200%;
-  background-position: ${p => p.isCasting && !p.castSpell ? '0 0' : '0 100%'};
-  transition: background-position 0.5s, opacity .25s cubic-bezier(0.215, 0.61, 0.355, 1);
+  background-color: ${p => p.theme.colors.black};
+  opacity: .1;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
   background-image: url(${p => p.srcImage});

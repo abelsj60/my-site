@@ -15,15 +15,6 @@ const blurInKeyframes = keyframes`
     opacity: 1;
   }
 `;
-const fadeIn = keyframes`
-  0% {
-    opacity: .15;
-  }
-
-  50% {
-    opacity: 1;
-  }
-`;
 const Container = styled.div`
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
   animation: ${p => p.castSpell && css`${blurInKeyframes} 1.215s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
@@ -67,8 +58,6 @@ const Text = styled.section`
   width: 80%;
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   z-index: 2;
-
-  // animation: ${p => (!p.isCasting && css`1s ${fadeIn} 1 cubic-bezier(0.215, 0.61, 0.355, 1)`)};
   
   @media (min-width: 338px) {
     width: 260px;

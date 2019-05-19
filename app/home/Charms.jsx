@@ -30,10 +30,10 @@ const yellowPulse = keyframes`
 `;
 const fadeIn = keyframes`
   0% {
-    opacity: .15;
+    opacity: .1;
   }
 
-  50% {
+  100% {
     opacity: 1;
   }
 `;
@@ -45,7 +45,7 @@ const CharmBox = styled.div`
   width: 195px;
   z-index: 2;
   margin-top: 15px;
-  animation: ${p => (p.isCasting && css`1s ${fadeIn} 1 cubic-bezier(0.215, 0.61, 0.355, 1)`)};
+  animation: ${p => (p.isCasting && css`.65s ${fadeIn} cubic-bezier(0.19, 1, 0.22, 1)`)};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     width: 240px;

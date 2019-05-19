@@ -87,7 +87,7 @@ const Nav = styled.nav`
   padding: ${p => p.isHome && '8px 15px'};
   // Prevent occasional over-expansion
   background-color: ${p => p.isHome && 'rgba(0,0,0,0.25)'};
-  max-width: ${p => p.isHome && '269'}; 
+  max-width: ${p => p.isHome && '269px'}; 
   border-radius: ${p => p.isHome && '10px'};
   position: relative;
   
@@ -100,6 +100,16 @@ const Nav = styled.nav`
       margin-left: 37px;
     }
   `};
+
+  // &::after {
+  //   content: "";
+  //   filter: blur(2px);
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  // }
     
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
@@ -188,6 +198,15 @@ export default class Header extends Component {
           isHome={isHome}
           menu={menuIsOpen}
         >
+          <div style={{
+            filter: 'blur(2px)',
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: '0px',
+            left: '0px',
+            zIndex: '-1'
+          }}></div>
           <NavList>
             <Mapper
               mapData={headerLinks}

@@ -14,12 +14,12 @@ const PageCover = styled.section`
   left: 0px;
   bottom: 0px;
   width: 100%;
-  background-color: ${p => !p.copying ? 'rgba(115,192,232, 0.7)' : 'rgba(253,17,114, 0.7)'};
+  background-color: ${p => !p.copying ? css`rgba(115, 192, 232, ${!p.home ? '.7' : '.2'})` : css`rgba(253, 17, 114, ${!p.home ? '.7' : '.2'})`};
   transition: background-color .75s;
   z-index: 1;
 
-  ${p => p.home && css`
-    background-color: ${!p.copying ? 'rgba(115,192,232, 0.35)' : 'rgba(255,231,76, 0.25)'}`};
+  // ${p => p.home && css`
+  //   background-color: ${!p.copying ? 'rgba(115, 192, 232, 0.35)' : 'rgba(253, 17, 114, 0.25)'}`};
 `;
 const CardHolder = styled.div`
   width: 100%;
@@ -27,7 +27,7 @@ const CardHolder = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 0px;
+  top: 0px; 
   left: 0px;
   bottom: 55px;
 `;
