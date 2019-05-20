@@ -47,6 +47,7 @@ const Line = styled.div`
 `;
 
 export default function MenuButton(props) {
+  const { boundHandleClickForApp } = props;
   const {
     isMenu,
     lastCaller,
@@ -65,9 +66,12 @@ export default function MenuButton(props) {
   const menuIsActive = isMenu && 'active';
   const text = isMenu ? 'Close' : 'Menu';
 
+  const eventListener = () => boundHandleClickForApp('toggleMenu');
+
   return (
     <Container
       menu={menuIsActive}
+      onClick={eventListener}
     >
       <RestyledLink
         to={link}

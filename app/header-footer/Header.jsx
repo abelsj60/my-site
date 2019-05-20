@@ -100,16 +100,6 @@ const Nav = styled.nav`
       margin-left: 37px;
     }
   `};
-
-  // &::after {
-  //   content: "";
-  //   filter: blur(2px);
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  // }
     
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
@@ -175,6 +165,7 @@ export default class Header extends Component {
     const hcForHeader = new ClickHandling('header', this);
 
     const handleClickForHeader = hcForHeader.boundHandleClick;
+    const eventListener = () => handleClickForHeader();
 
     return (
       <Container
@@ -198,15 +189,6 @@ export default class Header extends Component {
           isHome={isHome}
           menu={menuIsOpen}
         >
-          <div style={{
-            filter: 'blur(2px)',
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            top: '0px',
-            left: '0px',
-            zIndex: '-1'
-          }}></div>
           <NavList>
             <Mapper
               mapData={headerLinks}
@@ -239,9 +221,7 @@ export default class Header extends Component {
           isHome={isHome}
           menu={menuIsOpen}
           src={iconType}
-          onClick={
-            () => handleClickForHeader()
-          }
+          onClick={eventListener}
         />
       </Container>
     );

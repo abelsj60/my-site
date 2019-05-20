@@ -52,6 +52,8 @@ const StoryText = styled.section`
 
   p {
     margin-bottom: ${p => p.theme.bottomMargin.regular};
+    // Gets cut off in chrome (add saveSerifs to ContentHolder).
+    margin-left: 2px; 
 
     &:last-child {
       margin-bottom: 0px;
@@ -88,6 +90,7 @@ export default function Story(props) {
     <Main>
       <RestyledContentHolder
         text={textStatus}
+        saveSerifs={true}
       >
         <Shelf
           height="19px"

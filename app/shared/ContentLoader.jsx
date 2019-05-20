@@ -63,9 +63,13 @@ export default class ContentLoader extends Component {
     }
 
     return needsRedirect ? (
-      <Redirect to="/i" />
+      <Redirect
+        to="/i"
+      />
     ) : isNotFound ? (
-      <Redirect to="/not-found" />
+      <Redirect
+        to="/not-found"
+      />
     ) : (
       <Switch>
         <Route
@@ -76,11 +80,17 @@ export default class ContentLoader extends Component {
           render={
             () => {
               if (location.type === 'chapter') {
-                return <Redirect to="/not-found" />;
+                return (
+                  <Redirect
+                    to="/not-found"
+                  />
+                );
               }
 
               return (
-                <Menu {...this.props}>
+                <Menu
+                  {...this.props}
+                >
                   {componentData.getMenuContent(
                     this.props,
                     location.params
@@ -124,6 +134,7 @@ export default class ContentLoader extends Component {
 
       // Pass handleClick to save new path params
       // (converted to index) to bodyState
+
       state.rebuild(
         this.props.boundHandleClickForBody
       );

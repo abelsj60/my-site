@@ -12,13 +12,11 @@ New Jersey. For Buechel, the work has never been far from his mind.
 
 “To this day, you’ll see a piece of paper on his desk with a drawing on
 it,” says his son, Frederick Buechel Jr., M.D. That’s no surprise. His
-father is the co-inventor of one
-
-of the world’s best-known artificial knees. It was one of the first to
+father is the co-inventor of one of the world’s best-known artificial knees. It was one of the first to
 truly simulate the real thing — bending up and down while also twisting a
 little left and right as people walk. A version of it has been sold by
 DePuy Orthopaedics for more than 30 years. First known as the New Jersey
-Knee, it’s now called the N.J. LCS® Mobile Bearing Total Knee System.
+Knee, it’s now called the N.J. LCS Mobile Bearing Total Knee System.
 
 “You should allow the ligaments and muscles to act in their own normal
 way,” says Buechel Sr., 67.

@@ -21,13 +21,22 @@ export default class Home extends Component {
     // 1. this.goal defines when to cast a spell.
     // 2. this.transition prevents 'onTransitionEnd' from
     // toggling Pulsers on/off in rapid succession.
+
     this.goal = 5;
     this.transition = 0;
-    // Create an initial spell pattern
-    const pattern = this.createSpellPattern();
+
+    // Create an initial spell pattern. If we've gone
+    // to /reverie and come back, we'll use the last
+    // created spell pattern (stored on appState as
+    // a back-up). Otherwise, make a new one.
+
+    const pattern =
+      this.props.appState.spellPattern.length > 0
+        ? this.props.appState.spellPattern
+        : this.createSpellPattern();
 
     this.state = {
-      isCasting: false,
+      isCasting: this.props.appState.isCasting,
       castSpell: false,
       score: 0, // Used to select an active Pulser and cast spell
       pattern: pattern,

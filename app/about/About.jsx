@@ -23,6 +23,8 @@ const Text = styled.section`
 
   p {
     margin-bottom: ${p => p.theme.bottomMargin.regular};
+    // Gets cut off in chrome (add saveSerifs to ContentHolder)
+    margin-left: 2px; 
 
     &:last-child {
       margin-bottom: 0px;
@@ -44,7 +46,9 @@ const IconContainer = styled.div`
 export default function About() {
   return (
     <Main>
-      <ContentHolder>
+      <ContentHolder
+        saveSerifs={true}
+      >
         <RestyledShelf
           height="27px"
         >

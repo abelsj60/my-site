@@ -39,6 +39,39 @@ export default class Location {
     this.params = this._loadParams(prevProps);
   }
 
+  // Convenience method for easier logic in App cDU.
+
+  typeForUpdateInApp(props, prevProps) {
+    return this._normalizeReload('type', props, prevProps);
+  }
+
+  // Convenience method for easier logic in App cDU.
+
+  lastTypeForUpdateInApp(props, prevProps) {
+    return this._normalizeReload('lastType', props, prevProps);
+  }
+
+  _normalizeReload(str, props, prevProps) {
+    switch (str) {
+      case 'type':
+        const referrer = new Referrer(props);
+
+        if (referrer.location !== 'i') {
+          return referrer.location;
+        } else {
+          return referrer.getLocation(prevProps);
+        }
+      case 'lastType':
+        const lastReferrer = new Referrer(prevProps);
+
+        if (lastReferrer.location !== 'i') {
+          return lastReferrer.location;
+        } else {
+          return lastReferrer.getLocation(props);
+        }
+    }
+  }
+
   _loadParams(prevProps) {
     const type = this.type;
     const paramValues = this._matchPath.params;
@@ -169,6 +202,8 @@ export default class Location {
     return this.type === 'i'
       || this.lastType === 'i';
   }
+
+  // Convenience method to say we just did a reload through /i.
 
   get isCalledAfterReload() {
     return this.lastType === 'i';

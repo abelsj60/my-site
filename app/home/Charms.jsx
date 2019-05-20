@@ -150,14 +150,13 @@ export default function Charms(props) {
             (_, idx)=> {
               // Which Pulser is active?
               const isActive = activePulser === idx + 1;
+              const eventListener = () => boundHandlePulser(isActive);
 
               return (
                 <Pulser
                   key={idx}
                   isActive={isActive}
-                  onClick={
-                    () => boundHandlePulser(isActive)
-                  }
+                  onClick={eventListener}
                 >
                   <InnerRing
                     isActive={isActive}

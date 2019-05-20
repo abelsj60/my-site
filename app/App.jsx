@@ -173,7 +173,9 @@ class App extends Component {
       pinchZoomed: false, // We're zoomed! or not.
       tooNarrow: height < 350, // Too narrow, rotate screen
       isZooming: false, // True when pinch zooming is ongoing
-      isAfterTouch: false // Resize w/clientHeight when true
+      isAfterTouch: false, // Resize w/clientHeight when true
+      isCasting: false,
+      spellPattern: []
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -461,29 +463,58 @@ class App extends Component {
       const hcForApp = new ClickHandling('app', this);
       const handleClickForApp = hcForApp.boundHandleClick;
 
+      // Keep isCasting and storyText in sync when the location
+      // isn't reloading (redirecting w/n a section).
+
+      if (
+        !showStoryText
+          && !location.isReloading // Prevent calls to/for /i.
+      ) {
+        const typeForUpdate =
+          location.typeForUpdateInApp(
+            this.props,
+            prevProps
+          );
+        const lastTypeForUpdate =
+          location.lastTypeForUpdateInApp(
+            this.props,
+            prevProps
+          );
+        const goingToReverie = typeForUpdate === 'reverie';
+        const leavingReverie = lastTypeForUpdate === 'reverie';
+
+        const goingToStory = typeForUpdate === 'chapter';
+        const leavingStory = lastTypeForUpdate === 'chapter';
+
+        // We won't toggle the storyText if we're going to or
+        // coming from a /reverie.
+
+        if (
+          !(goingToReverie && leavingStory)
+              && !(leavingReverie && goingToStory)
+        ) {
+          handleClickForApp('toggleStoryText');
+        }
+      }
+
+      // Reset the businessCard if we leave a card by clicking
+      // a link in the header or footer or body.
+
       if (showBusinessCard) {
         handleClickForApp('toggleBusinessCard');
       }
+
+      // Reset the legalTerms if we leave them by clicking
+      // a link in the header or footer or body.
 
       if (showLegalTerms) {
         handleClickForApp('toggleLegalTerms');
       }
 
-      if (
-        !showStoryText
-          && !location.isReloading
-          && location.type !== 'reverie'
-          && location.lastType !== 'reverie'
-      ) {
-        // If you've hidden text and gone to reverie, and
-        // come back, the text will still be hidden. You
-        // can remove the three &&'s above to change.
-
-        handleClickForApp('toggleStoryText');
-      }
+      // Reset the menuState if we leave a menu by clicking
+      // clicking a link in the header or footer or body.
 
       if (isMenu !== referrer.isMenu(this.props)) {
-        // See note below.
         handleClickForApp('toggleMenu');
       }
 

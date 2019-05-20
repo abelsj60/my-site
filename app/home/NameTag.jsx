@@ -3,6 +3,7 @@ import marked from 'marked';
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
+import ReactGA from 'react-ga';
 
 const blurInKeyframes = keyframes`
   0% {
@@ -45,7 +46,7 @@ const Motto = styled.p`
   font-size: ${p => p.theme.fontSizes.five};
   color: ${p => p.theme.colors.yellow};
   font-weight: 700;
-  margin-top: -8px;
+  margin-top: -6px;
   margin-left: 16px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
@@ -104,15 +105,23 @@ export default function NameTag(props) {
   } = appState;
   const {
     isCasting,
-    castSpell
+    castSpell,
+    score
   } = homeState;
+
+  const eventListener = () => {
+    ReactGA.event({
+      category: 'Home state',
+      action: 'Spell toggled.',
+      label: `The score was ${score}.`
+    });
+    boundHandleClickForHome('toggleSpell');
+  };
 
   return (
     <Container
       castSpell={castSpell}
-      onClick={
-        () => boundHandleClickForHome('toggleSpell')
-      }
+      onClick={eventListener}
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >
       <Hed>

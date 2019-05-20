@@ -71,6 +71,9 @@ export default function FooterContainer(props) {
     showStoryText,
   } = appState;
 
+  const eventListenerToToggleBusinessCard = () => boundHandleClickForApp('toggleBusinessCard');
+  const eventListenerToToggleLegalTerms = () => boundHandleClickForApp('toggleLegalTerms');
+
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
@@ -128,19 +131,13 @@ export default function FooterContainer(props) {
         </StyledLink>
         <Graf
           active={showBusinessCard}
-          onClick={
-            () => {
-              boundHandleClickForApp('toggleBusinessCard');
-            }
-          }
+          onClick={eventListenerToToggleBusinessCard}
         >
           Contact
         </Graf>
         <Graf
           active={showLegalTerms}
-          onClick={
-            () => boundHandleClickForApp('toggleLegalTerms')
-          }
+          onClick={eventListenerToToggleLegalTerms}
         >
           Legal
         </Graf>

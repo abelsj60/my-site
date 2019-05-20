@@ -17,9 +17,6 @@ const PageCover = styled.section`
   background-color: ${p => !p.copying ? css`rgba(115, 192, 232, ${!p.home ? '.7' : '.2'})` : css`rgba(253, 17, 114, ${!p.home ? '.7' : '.2'})`};
   transition: background-color .75s;
   z-index: 1;
-
-  // ${p => p.home && css`
-  //   background-color: ${!p.copying ? 'rgba(115, 192, 232, 0.35)' : 'rgba(253, 17, 114, 0.25)'}`};
 `;
 const CardHolder = styled.div`
   width: 100%;
@@ -189,31 +186,30 @@ export default class LegalTermsOrBizCard extends Component {
       ? myEmailAddress
       : '';
 
+    const eventListener = () => {
+      if (showBusinessCard) {
+        boundHandleClickForApp(
+          'toggleBusinessCard'
+        );
+      } else {
+        boundHandleClickForApp(
+          'toggleLegalTerms'
+        );
+      }
+    };
+    const stopPropagation = event => event.stopPropagation();
+
     return (
       <PageCover
         home={homeIsActive}
         copying={copying && !showLegalTerms}
-        onClick={
-          () => {
-            if (showBusinessCard) {
-              boundHandleClickForApp(
-                'toggleBusinessCard'
-              );
-            } else {
-              boundHandleClickForApp(
-                'toggleLegalTerms'
-              );
-            }
-          }
-        }
+        onClick={eventListener}
       >
         <CardHolder>
           <Card
             home={homeIsActive}
             reverie={reverieIsActive}
-            onClick={
-              event => event.stopPropagation()
-            }
+            onClick={stopPropagation}
           >
             <StyledClipboardButton
               businessCard={showBusinessCard}

@@ -271,9 +271,20 @@ export default class ClickHandling {
           // We store the background value in App so it's remembered
           // as the user travels through the site.
 
+          ReactGA.event({
+            category: 'Home state',
+            action: 'Spell successful.'
+          });
+
           this.props.boundHandleClickForApp('swapBackground');
           boundHandleClickForHome('castSpell');
         } else {
+          ReactGA.event({
+            category: 'Home state',
+            action: 'Wrong Pulser clicked.',
+            label: `The score was ${score}.`
+          });
+
           boundHandleClickForHome('toggleSpell');
         }
 

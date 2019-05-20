@@ -6,6 +6,9 @@ import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React, { Fragment } from 'react';
+import {
+  isMobile
+} from 'react-device-detect';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
@@ -20,6 +23,8 @@ const Hed = styled.h3`
   font-weight: 400;
   color: ${p => p.theme.colors.blue};
   margin-bottom: 8px;
+  // Gets cut off in Chrome (no need to counteract in ContentHolder.)
+  margin-left: 2px; 
 `;
 const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.thirteen};
@@ -30,6 +35,8 @@ const Dek = styled.h2`
 const Graf = styled.p`
   margin-right: 0px;
   margin-bottom: ${p => !p.lastItem ? p.theme.bottomMargin.regular : '15px'};
+  // Gets cut off in Chrome (no need to counteract in ContentHolder.)
+  margin-left: 2px; 
 `;
 const Figure = styled.figure`
   display: flex;
@@ -56,7 +63,7 @@ const ImageHolder = styled.div`
 `;
 const Image = styled.img`
   // The main image should shrink proportionally, i.e.,
-  // don't scale and center it in the element 
+  // don't scale and center it w/n the element 
   width: 100%;
   height: 100%;
   max-width: 100%;
@@ -64,7 +71,6 @@ const Image = styled.img`
   ${!isIE && 'flex: 1;'} // Overflow shrinks in IE if this isn't set for at least one child
   vertical-align: top;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, .3);
-  // border: 2px solid #b9dff3;
 `;
 
 export default function Projects(props) {
@@ -86,9 +92,11 @@ export default function Projects(props) {
     zoomed
   } = project.attributes;
   const caption = captions[indexForProjectPics];
-  const source = !props.appState.pinchZoomed
-    ? full[indexForProjectPics]
-    : zoomed[indexForProjectPics];
+  // Get the larger res image if: a. desktop or b. pinchZoomed.
+  const source =
+    !isMobile || props.appState.pinchZooomed
+      ? zoomed[indexForProjectPics]
+      : full[indexForProjectPics];
 
   const attributeArray = showTheseAttributes.map(
     name => project.attributes[name]

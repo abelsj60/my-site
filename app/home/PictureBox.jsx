@@ -77,6 +77,7 @@ export default function PictureBox(props) {
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
+        srcImage={bio.attributes.fantasyImage}
         onTransitionEnd={
           () => {
             // Set transition to '1' after the first call,
@@ -86,7 +87,6 @@ export default function PictureBox(props) {
             boundHandleClickForHome('toggleSpell');
           }
         }
-        srcImage={bio.attributes.fantasyImage}
       />
       <CityAsBackground
         inCity={inCity}
