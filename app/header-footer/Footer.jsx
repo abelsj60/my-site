@@ -37,9 +37,12 @@ const StoryButton = styled(Button)`
   width: 43px;
   padding: 7px;
 `;
+const RestyledLink = styled(StyledLink)`
+  margin-right: 20px;
+`;
 const Graf = styled.p`
   cursor: pointer;
-  margin-right: 20px;
+  margin-right: ${p => !p.isLink ? '20px' : ''};
   margin-bottom: 0px;
   color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.blue)};
   padding-top: 5px;
@@ -78,15 +81,21 @@ export default function FooterContainer(props) {
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
 
-  // Remember: home is '/', not '/home'
-  const whereItStarted =
-    lastCaller !== 'home'
-      && lastCaller !== 'i'
-      ? `/${lastCaller}`
-      : '/';
-  const linkForReverie = isReverie
-    ? whereItStarted
-    : '/reverie';
+  const reverieLink =
+    isReverie
+      ? `/${
+        lastCaller !== 'home'
+          ? lastCaller
+          : '' // Add no text b/c 'home' is just a '/'
+      }`
+      : '/reverie';
+
+  const callerWillBe =
+    reverieLink.length > 1
+      ? reverieLink.slice(1)
+      : 'home'; // It's 'home' when the address is '/'
+  const eventListenerForStoryButton =
+      () => boundHandleClickForApp('toggleStoryText');
 
   return (
     <Container
@@ -104,9 +113,7 @@ export default function FooterContainer(props) {
       />
       <StoryButton
         active={showStoryText}
-        clickFunction={
-          () => boundHandleClickForApp('toggleStoryText')
-        }
+        clickFunction={eventListenerForStoryButton}
         className="story-button"
         conditional={true}
         show={isStory}
@@ -117,18 +124,21 @@ export default function FooterContainer(props) {
         }
       />
       <TextBox>
-        <StyledLink
-          to={linkForReverie}
+        <RestyledLink
+          to={reverieLink}
+          callerWillBe={callerWillBe}
+          boundHandleClickForApp={boundHandleClickForApp}
         >
           <Graf
             active={
               (isReverie && 'active')
               || undefined
             }
+            isLink={true}
           >
             Reverie
           </Graf>
-        </StyledLink>
+        </RestyledLink>
         <Graf
           active={showBusinessCard}
           onClick={eventListenerToToggleBusinessCard}

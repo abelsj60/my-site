@@ -50,23 +50,28 @@ export default function MenuButton(props) {
   const { boundHandleClickForApp } = props;
   const {
     isMenu,
-    lastCaller,
     currentCaller
   } = props.appState;
   const isReverie = currentCaller === 'reverie';
+
   const link =
     isReverie && isMenu
       ? '/reverie'
       : isMenu
-        ? `/${lastCaller}`
+        ? `/${currentCaller}`
         : `/${currentCaller}/menu`;
   const arrowIcon = !isMenu
     ? arrowDown
     : arrowUp;
   const menuIsActive = isMenu && 'active';
-  const text = isMenu ? 'Close' : 'Menu';
+  const text = isMenu
+    ? 'Close'
+    : 'Menu';
 
-  const eventListener = () => boundHandleClickForApp('toggleMenu');
+  const eventListener = event => {
+    event.stopPropagation();
+    boundHandleClickForApp('toggleMenu');
+  };
 
   return (
     <Container
@@ -86,7 +91,11 @@ export default function MenuButton(props) {
         </IconContainer>
         <Line
           menu={isMenu}
-          reverie={isReverie ? 'active' : ''}
+          reverie={
+            isReverie
+              ? 'active'
+              : ''
+          }
         />
       </RestyledLink>
     </Container>

@@ -41,31 +41,61 @@ import { createPath } from 'history';
 
 // Note 2: Home has its own quirks. Because it's a single '/',
 // it's found w/n every string with a '/'. We can deal w/this
-// by checking the length of the 'to' prop. iSayNoMatch if 1.
+// by checking the length of 'to' --> iSayNoMatch if 1.
 
-const Link = ({ to, replace, ...props }) => {
+// This component also updates appState as all navigation is
+// handled through links. App.cDU handles appState should
+// the back/forward buttons be used.
+
+const Link = ({
+  to,
+  replace,
+  boundHandleClickForApp,
+  callerWillBe,
+  ...props
+}) => {
   const { pathname } = window.location;
   const isMenu =
     pathname.includes('menu')
-    && pathname.split('/')[2] === 'menu'; // Ensures this is a /menu.
+      && pathname.split('/')[2] === 'menu'; // Ensures this is a /menu.
   const iSayNoMatch =
     window.location.pathname.includes(to)
       && !isMenu
       && to.length > 1;
+  const eventListenerToResetAppState =
+    () => {
+      // At present, MenuButton relies on
+      // propagation to fire (don't stop it!);
+
+      if (boundHandleClickForApp) {
+        boundHandleClickForApp(
+          'updateApp',
+          callerWillBe
+        );
+      }
+    };
 
   return (
     <Route
-      path={typeof to === 'string'
-        ? to
-        : createPath(to)}
+      path={
+        typeof to === 'string'
+          ? to
+          : createPath(to)
+      }
       exact
     >
-      {({ match }) =>
-        (<ReactRouterLink
-          {...props}
-          to={to}
-          replace={iSayNoMatch || replace || !!match}
-        />)}
+      {
+        ({ match }) => {
+          return (
+            <ReactRouterLink
+              {...props}
+              to={to}
+              replace={iSayNoMatch || replace || !!match}
+              onClick={eventListenerToResetAppState}
+            />
+          );
+        }
+      }
     </Route>
   );
 };

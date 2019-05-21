@@ -1,17 +1,17 @@
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
-const RestyledList = styled(UnorderedList)`
-  overflow: ${p => (!p.menu ? 'auto' : undefined) };
-  width: ${p => (!p.menu ? '327px' : undefined)};
-`;
+// const RestyledList = styled(UnorderedList)`
+//   overflow: ${p => (!p.menu ? 'auto' : undefined) };
+//   width: ${p => (!p.menu ? '327px' : undefined)};
+// `;
 const NavigationDek = styled.p`
-  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
-  margin-bottom: ${p => (!p.menu ? '4px' : '0px')};
+  color: ${p => (!p.link ? p.theme.colors.black : p.theme.colors.blue)};
+  margin-bottom: 0px;
   font-size: ${p => p.theme.fontSizes.four};
   font-style: italic;
 
@@ -20,35 +20,25 @@ const NavigationDek = styled.p`
   }
 `;
 const NavigationHed = styled.p`
-  color: ${p => (p.menu && !p.link ? p.theme.colors.black : p.theme.colors.blue)};
-  font-size: ${p => (p.menu ? p.theme.fontSizes.fifteen : p.theme.fontSizes.eleven)};
+  color: ${p => (!p.link ? p.theme.colors.black : p.theme.colors.blue)};
+  font-size: ${p => p.theme.fontSizes.fifteen};
   margin-top: -2px;
   margin-bottom: 15px;
   font-weight: 400;
 
-  ${p => !p.menu && css`
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 300px;
-    white-space: nowrap;
-  `};
-
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-    font-size: ${p => (p.menu && p.theme.fontSizes.sixteen)};
+    font-size: ${p => p.theme.fontSizes.sixteen};
   }
 `;
 
 export default function ArticleOrReverieNav(props) {
   const {
-    appState,
     bodyState,
+    boundHandleClickForApp,
     data,
     location,
     params
   } = props;
-  const {
-    isMenu
-  } = appState;
   const currentPath = location.pathname.split('/');
   const isReverie = currentPath[1] === 'reverie';
   let index;
@@ -63,11 +53,10 @@ export default function ArticleOrReverieNav(props) {
     }
   }
 
-  const currentHed = data[index].attributes.headline;
-  const normalizedCurrentHed = normalize(currentHed);
+  const currentHed = normalize(data[index].attributes.headline);
 
   return (
-    <RestyledList menu={isMenu}>
+    <UnorderedList>
       <Mapper
         mapData={data}
         render={
@@ -78,37 +67,42 @@ export default function ArticleOrReverieNav(props) {
               publication
             } = articleOrReverie.attributes;
 
-            const normalizedHedFromItem = normalize(headline);
-            const dateOrPublicationFromItem = !isReverie
-              ? publication
-              : date;
+            const hedFromItem = normalize(headline);
+            const dateOrPublicationFromItem =
+              !isReverie
+                ? publication
+                : date;
 
             const linkIsActive =
-              normalizedCurrentHed === normalizedHedFromItem;
-            const articleLink = isReverie
-              ? `/reverie/${
-                normalizedHedFromItem
-              }`
-              : `/journalism/${
-                normalize(
-                  dateOrPublicationFromItem
-                )
-              }/${
-                normalizedHedFromItem
-              }`;
+              currentHed === hedFromItem;
+            const articleLink =
+              isReverie
+                ? `/reverie/${
+                  hedFromItem
+                }`
+                : `/journalism/${
+                  normalize(
+                    dateOrPublicationFromItem
+                  )
+                }/${
+                  hedFromItem
+                }`;
 
             return (
-              <li key={idx}>
-                <StyledLink to={articleLink}>
+              <li
+                key={idx}
+              >
+                <StyledLink
+                  to={articleLink}
+                  boundHandleClickForApp={boundHandleClickForApp}
+                >
                   <NavigationDek
                     link={linkIsActive}
-                    menu={isMenu}
                   >
                     {dateOrPublicationFromItem}
                   </NavigationDek>
                   <NavigationHed
                     link={linkIsActive}
-                    menu={isMenu}
                   >
                     {headline}
                   </NavigationHed>
@@ -118,6 +112,6 @@ export default function ArticleOrReverieNav(props) {
           }
         }
       />
-    </RestyledList>
+    </UnorderedList>
   );
 }

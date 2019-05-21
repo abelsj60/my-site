@@ -144,7 +144,8 @@ export default class Header extends Component {
 
   render() {
     const {
-      appState
+      appState,
+      boundHandleClickForApp
     } = this.props;
     const {
       currentCaller,
@@ -165,7 +166,7 @@ export default class Header extends Component {
     const hcForHeader = new ClickHandling('header', this);
 
     const handleClickForHeader = hcForHeader.boundHandleClick;
-    const eventListener = () => handleClickForHeader();
+    const eventListenerHeaderMenu = () => handleClickForHeader();
 
     return (
       <Container
@@ -176,6 +177,8 @@ export default class Header extends Component {
         />
         <NameAsLink
           hide={hideNameAndMotto}
+          callerWillBe={'home'}
+          boundHandleClickForApp={boundHandleClickForApp}
           to={'/'}
         >
           James Abels
@@ -194,9 +197,10 @@ export default class Header extends Component {
               mapData={headerLinks}
               render={
                 (link, idx) => {
-                  const isActive = link.path.includes(
-                    referrer.location
-                  );
+                  const isActive =
+                    link.path.includes(
+                      referrer.location
+                    );
 
                   return (
                     <li
@@ -207,6 +211,8 @@ export default class Header extends Component {
                         isHome={isHome}
                         num={idx}
                         to={link.path}
+                        callerWillBe={link.path.slice(1)}
+                        boundHandleClickForApp={boundHandleClickForApp}
                       >
                         {link.name}
                       </RestyledLink>
@@ -221,13 +227,14 @@ export default class Header extends Component {
           isHome={isHome}
           menu={menuIsOpen}
           src={iconType}
-          onClick={eventListener}
+          onClick={eventListenerHeaderMenu}
         />
       </Container>
     );
   }
 
   componentDidUpdate(prevProps) {
+    const { currentCaller, lastCaller } = this.props.appState;
     const location = new Location(
       '/',
       this.props,
@@ -237,13 +244,13 @@ export default class Header extends Component {
     // Don't automatically close menu if
     // entering or exiting /reverie.
 
-    const isOrWasReverie =
-      location.type === 'reverie'
-        || location.lastType === 'reverie';
+    const isWasReverie =
+      currentCaller === 'reverie'
+        || lastCaller === 'reverie';
 
     if (
       location.justChanged
-        && !isOrWasReverie
+        && !isWasReverie
         && this.timeoutId !== undefined
     ) {
       const hcForApp = new ClickHandling('header', this);

@@ -20,8 +20,7 @@ const FailWhale = styled.section`
   background-size: contain; // Must come after background rule
 `;
 
-export default function NotFound(props) {
-  console.log('Not Found: ', props);
+export default function NotFound() {
   return (
     <Main>
       <RestyledContentHolder>

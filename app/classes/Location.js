@@ -31,53 +31,20 @@ export default class Location {
       { path: this._pathToMatch }
     ); // Normalizes params within class
 
-    this.type = referrer.location;
-    this.lastType = this._lastPath
+    this.caller = referrer.location;
+    this.lastCaller = this._lastPath
       && referrer.getLocation(prevProps);
     this.isExact = this._matchPath
       && this._matchPath.isExact;
     this.params = this._loadParams(prevProps);
   }
 
-  // Convenience method for easier logic in App cDU.
-
-  typeForUpdateInApp(props, prevProps) {
-    return this._normalizeReload('type', props, prevProps);
-  }
-
-  // Convenience method for easier logic in App cDU.
-
-  lastTypeForUpdateInApp(props, prevProps) {
-    return this._normalizeReload('lastType', props, prevProps);
-  }
-
-  _normalizeReload(str, props, prevProps) {
-    switch (str) {
-      case 'type':
-        const referrer = new Referrer(props);
-
-        if (referrer.location !== 'i') {
-          return referrer.location;
-        } else {
-          return referrer.getLocation(prevProps);
-        }
-      case 'lastType':
-        const lastReferrer = new Referrer(prevProps);
-
-        if (lastReferrer.location !== 'i') {
-          return lastReferrer.location;
-        } else {
-          return lastReferrer.getLocation(props);
-        }
-    }
-  }
-
   _loadParams(prevProps) {
-    const type = this.type;
+    const caller = this.caller;
     const paramValues = this._matchPath.params;
     let ParamsClass;
 
-    switch (type) {
+    switch (caller) {
       case 'chapter':
         ParamsClass = StoryParams;
         break;
@@ -96,7 +63,7 @@ export default class Location {
     }
 
     return new ParamsClass(
-      type,
+      caller,
       paramValues,
       prevProps
     );
@@ -113,7 +80,7 @@ export default class Location {
   get pathIsValid() {
     // Return statement:
     // 1. The path is a menu and the length is exactly 3
-    // 2. The path is of the right type (e.g. /chapter)
+    // 2. The path is of the right caller (e.g. /chapter)
     // 3. The path isn't too long (isExact doesn't check)
     // 4. The path has the proper number of params after
     // eliminating invalid entries (isExact can't know,
@@ -154,7 +121,7 @@ export default class Location {
     let contentMismatch;
     const { isMenu } = this.params;
 
-    switch (this.type) {
+    switch (this.caller) {
       case 'chapter':
         const currentChapter = this.params.title;
         const lastChapter = this.params.lastChapter;
@@ -191,25 +158,25 @@ export default class Location {
   get justChanged() {
     if (!this._lastPath) {
       throw new Error(
-        'Location.isChangingLocation() requires prevProps'
+        'Location.justChanged() requires prevProps'
       );
     }
 
     return this._currentPath !== this._lastPath;
   }
 
-  get isReloading() {
-    return this.type === 'i'
-      || this.lastType === 'i';
+  get _isCalledAfterReload() {
+    return this.lastCaller === 'i';
   }
 
-  // Convenience method to say we just did a reload through /i.
-
-  get isCalledAfterReload() {
-    return this.lastType === 'i';
+  get recordPageview() {
+    return this.justChanged
+      && !this._isTopLevel
+      && !this._isCalledAfterReload
+      && window.location.pathname !== '/i';
   }
 
-  get isTopLevel() {
+  get _isTopLevel() {
     const topLevels = [
       '/chapter',
       '/journalism',

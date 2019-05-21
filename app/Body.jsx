@@ -53,7 +53,11 @@ export default class Body extends Component {
           exact
           path="/"
           render={
-            () => <Home {...this.props} />
+            () => (
+              <Home
+                {...this.props}
+              />
+            )
           }
         />
         {[
@@ -82,7 +86,12 @@ export default class Body extends Component {
           exact
           path="/i"
           render={
-            () => <ReloadRoute {...this.props} bodyState={this.state} />
+            () => (
+              <ReloadRoute
+                {...this.props}
+                bodyState={this.state}
+              />
+            )
           }
         />
         <Route

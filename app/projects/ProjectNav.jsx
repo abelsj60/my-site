@@ -60,6 +60,7 @@ const Image = styled.img`
 export default function ProjectNav(props) {
   const {
     activeGroup,
+    boundHandleClickForApp,
     appState,
     bodyState,
     lastGroup,
@@ -101,6 +102,7 @@ export default function ProjectNav(props) {
                   to={`/projects/${
                     normalize(projectName)
                   }/${thumbnailNumber}`}
+                  boundHandleClickForApp={boundHandleClickForApp}
                 >
                   <Image
                     alt={`Thumbnail ${thumbnailNumber}`}
