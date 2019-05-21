@@ -446,19 +446,18 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // const { boundHandleClickForApp } = this.props;
     const location = new Location(
       '/',
       this.props,
       prevProps
     );
 
-    const hcForApp = new ClickHandling('app', this);
-    const boundHandleClickForApp = hcForApp.boundHandleClick;
-
     // Sync appState if back/forward button is used.
 
     window.onpopstate = () => {
+      const hcForApp = new ClickHandling('app', this);
+      const boundHandleClickForApp = hcForApp.boundHandleClick;
+
       boundHandleClickForApp('updateApp', location.caller);
     };
 
