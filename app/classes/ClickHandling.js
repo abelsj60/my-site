@@ -2,7 +2,7 @@ import Referrer from './Referrer';
 import ReactGA from 'react-ga';
 
 export default class ClickHandling {
-  constructor(component, outsideThis) {
+  constructor(component, outsideThis, props) {
     if (outsideThis.props.location === undefined) {
       throw new Error(
         'Caller must carry location.'
@@ -11,8 +11,9 @@ export default class ClickHandling {
 
     const referrer = new Referrer(outsideThis.props);
 
+    this._props = props;
     this._component = component;
-    this._referrer = referrer.location;
+    this._referrer = referrer;
 
     this.boundHandleClick = this._selectHandleClick(outsideThis);
   }
@@ -48,7 +49,7 @@ export default class ClickHandling {
 
   // Handles onClicks on App (top-level state).
 
-  _handleClickForAppComponent() {
+  _handleClickForAppComponent(self) {
     return (updateValue, value) => {
       const {
         currentCaller,
@@ -130,8 +131,8 @@ export default class ClickHandling {
           stateToUpdate.recordPageview = true;
           stateToUpdate.showBusinessCard = false;
           stateToUpdate.showLegalTerms = false;
-          if (isMenu) {
-            stateToUpdate.isMenu = false;
+          if (isMenu !== self._referrer.isMenu(this.props)) {
+            stateToUpdate.isMenu = !isMenu;
           }
           if (
             !(currentCaller === 'chapter' && value === 'reverie')
@@ -162,11 +163,11 @@ export default class ClickHandling {
 
   // Handles onClicks on Body (updates state for reloads).
 
-  _handleClickForBodyComponent(innerThis) {
+  _handleClickForBodyComponent(self) {
     return (valueOne, valueTwo) => {
       const stateToUpdate = {};
 
-      switch (innerThis._referrer) {
+      switch (self._referrer.location) {
         case 'chapter':
           stateToUpdate.indexForChapterData = valueOne;
           break;

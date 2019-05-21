@@ -52,6 +52,7 @@ const Link = ({
   replace,
   boundHandleClickForApp,
   callerWillBe,
+  isCalledByMenu,
   ...props
 }) => {
   const { pathname } = window.location;
@@ -62,15 +63,21 @@ const Link = ({
     window.location.pathname.includes(to)
       && !isMenu
       && to.length > 1;
-  const eventListenerToResetAppState =
-    () => {
-      // At present, MenuButton relies on
-      // propagation to fire (don't stop it!);
+  const eventListener =
+    event => {
+      event.stopPropagation();
 
-      if (boundHandleClickForApp) {
+      if (
+        boundHandleClickForApp
+          && !isCalledByMenu
+      ) {
         boundHandleClickForApp(
           'updateApp',
           callerWillBe
+        );
+      } else if (isCalledByMenu) {
+        boundHandleClickForApp(
+          'toggleMenu'
         );
       }
     };
@@ -91,7 +98,7 @@ const Link = ({
               {...props}
               to={to}
               replace={iSayNoMatch || replace || !!match}
-              onClick={eventListenerToResetAppState}
+              onClick={eventListener}
             />
           );
         }

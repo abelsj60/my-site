@@ -452,11 +452,13 @@ class App extends Component {
       prevProps
     );
 
-    // Sync appState if back/forward button is used.
+      // Sync appState if back/forward button is used.
 
     window.onpopstate = () => {
+      // const referrer = new Referrer(this.props);
       const hcForApp = new ClickHandling('app', this);
       const boundHandleClickForApp = hcForApp.boundHandleClick;
+      // console.log('isMenu:', referrer.isMenu(this.props));
 
       boundHandleClickForApp('updateApp', location.caller);
     };

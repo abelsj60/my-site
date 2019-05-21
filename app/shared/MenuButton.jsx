@@ -68,18 +68,14 @@ export default function MenuButton(props) {
     ? 'Close'
     : 'Menu';
 
-  const eventListener = event => {
-    event.stopPropagation();
-    boundHandleClickForApp('toggleMenu');
-  };
-
   return (
     <Container
       menu={menuIsActive}
-      onClick={eventListener}
     >
       <RestyledLink
         to={link}
+        isCalledByMenu="menu"
+        boundHandleClickForApp={boundHandleClickForApp}
       >
         <Label>
           {text}
