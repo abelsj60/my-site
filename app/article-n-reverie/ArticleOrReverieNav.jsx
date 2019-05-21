@@ -5,10 +5,6 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
-// const RestyledList = styled(UnorderedList)`
-//   overflow: ${p => (!p.menu ? 'auto' : undefined) };
-//   width: ${p => (!p.menu ? '327px' : undefined)};
-// `;
 const NavigationDek = styled.p`
   color: ${p => (!p.link ? p.theme.colors.black : p.theme.colors.blue)};
   margin-bottom: 0px;
