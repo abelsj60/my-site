@@ -65,17 +65,18 @@ const Link = ({
       && to.length > 1;
   const eventListener =
     event => {
+      if (!boundHandleClickForApp) {
+        return null;
+      }
+
       event.stopPropagation();
 
-      if (
-        boundHandleClickForApp
-          && !isCalledByMenu
-      ) {
+      if (!isCalledByMenu) {
         boundHandleClickForApp(
           'updateApp',
           callerWillBe
         );
-      } else if (isCalledByMenu) {
+      } else {
         boundHandleClickForApp(
           'toggleMenu'
         );
