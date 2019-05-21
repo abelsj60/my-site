@@ -46,10 +46,10 @@ export default class ClickHandling {
     return selectedHandler.call(outerThis, this);
   }
 
-  // Handles the appState.
+  // Handles onClicks on App (top-level state).
 
   _handleClickForAppComponent() {
-    return (updateValue, valueOne, valueTwo) => {
+    return (updateValue, value) => {
       const {
         currentCaller,
         showBusinessCard,
@@ -115,12 +115,6 @@ export default class ClickHandling {
             ? 'Enter city'
             : 'Enter fantasy';
           break;
-        case 'setCallers':
-          stateToUpdate.currentCaller = valueOne;
-          if (valueTwo !== 'reverie') {
-            stateToUpdate.lastCaller = valueTwo;
-          }
-          break;
         case 'toggleMenu':
           stateToUpdate.isMenu = !isMenu;
           category = 'App state';
@@ -128,11 +122,31 @@ export default class ClickHandling {
             ? `Enter: ${currentCaller} menu`
             : `Leave: ${currentCaller} menu`;
           break;
+        case 'updateApp':
+          if (value !== undefined) {
+            stateToUpdate.currentCaller = value;
+            stateToUpdate.lastCaller = currentCaller;
+          }
+          stateToUpdate.recordPageview = true;
+          stateToUpdate.showBusinessCard = false;
+          stateToUpdate.showLegalTerms = false;
+          if (isMenu) {
+            stateToUpdate.isMenu = false;
+          }
+          if (
+            !(currentCaller === 'chapter' && value === 'reverie')
+            && !(currentCaller === 'reverie' && value === 'chapter')
+          ) {
+            stateToUpdate.showStoryText = true;
+          }
+          category = 'App state';
+          action = 'Reset app';
+          break;
         default:
           break;
       }
 
-      if (updateValue !== 'setCallers') {
+      if (updateValue !== 'updateApp') {
         ReactGA.event({
           category,
           action,
@@ -146,7 +160,7 @@ export default class ClickHandling {
     };
   }
 
-  // Handles the bodyState onClick (links).
+  // Handles onClicks on Body (updates state for reloads).
 
   _handleClickForBodyComponent(innerThis) {
     return (valueOne, valueTwo) => {
@@ -175,7 +189,7 @@ export default class ClickHandling {
     };
   }
 
-  // Handles the header onClick.
+  // Handles onClicks on Header (header menu).
 
   _handleClickForHeader() {
     return () => {
@@ -212,7 +226,7 @@ export default class ClickHandling {
     };
   }
 
-  // Handles the spell onClick, or following a click sequence.
+  // Handles onClicks on Home (spell, part one).
 
   _handleClickForHome() {
     return updateValue => {
@@ -251,7 +265,7 @@ export default class ClickHandling {
     };
   }
 
-  // Handles the Pulsers onClick.
+  // Handles onClicks on Charms (spell, part two).
 
   _handlePulser() {
     return isActive => {

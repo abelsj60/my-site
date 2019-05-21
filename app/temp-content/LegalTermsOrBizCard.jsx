@@ -259,21 +259,16 @@ export default class LegalTermsOrBizCard extends Component {
   }
 
   componentDidMount() {
-    const {
-      showBusinessCard,
-      showLegalTerms
-    } = this.props.appState;
+    const { showBusinessCard } = this.props.appState;
     const { pathname } = window.location;
 
-    if (showBusinessCard) {
-      ReactGA.pageview(
-        `${pathname}businesscard`
-      );
-    } else if (showLegalTerms) {
-      ReactGA.pageview(
-        `${pathname}legalterms`
-      );
-    }
+    ReactGA.modalview(
+      `${pathname}${
+        showBusinessCard
+          ? 'businesscard'
+          : 'legalterms'
+      }`
+    );
   }
 
   componentDidUpdate(prevProps) {

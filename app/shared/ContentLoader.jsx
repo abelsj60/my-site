@@ -15,6 +15,7 @@ export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
+    const { currentCaller } = this.props.appState;
     const referrer = new Referrer(props);
     const location = new Location(
       referrer.pathToMatch,
@@ -22,7 +23,7 @@ export default class ContentLoader extends Component {
     );
 
     this.overflowRef =
-      location.type === 'chapter'
+      currentCaller === 'chapter'
         ? React.createRef()
         : '';
 
@@ -37,6 +38,7 @@ export default class ContentLoader extends Component {
       isNotFound,
       needsRedirect
     } = this.state;
+    const { currentCaller } = this.props.appState;
     let componentData;
     let location;
     let referrer;
@@ -74,12 +76,13 @@ export default class ContentLoader extends Component {
       <Switch>
         <Route
           exact
+          // Possible 'home' value isn't an issue b/c it never routes here.
           path={`/${
-            location.type
+            currentCaller
           }/menu`}
           render={
             () => {
-              if (location.type === 'chapter') {
+              if (currentCaller === 'chapter') {
                 return (
                   <Redirect
                     to="/not-found"
@@ -105,7 +108,7 @@ export default class ContentLoader extends Component {
           render={
             () => componentData.getSection(
               this.props,
-              location.type === 'chapter'
+              currentCaller === 'chapter'
                 ? this.overflowRef
                 : undefined,
               location.params
@@ -117,12 +120,15 @@ export default class ContentLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { currentCaller } = this.props.appState;
     const referrer = new Referrer(this.props);
     const location = new Location(
       referrer.pathToMatch,
       this.props,
       prevProps
     );
+
+    // Manage component state
 
     if (location.needsRedirect) {
       this.setState({ needsRedirect: true });
@@ -132,8 +138,7 @@ export default class ContentLoader extends Component {
         location
       );
 
-      // Pass handleClick to save new path params
-      // (converted to index) to bodyState
+      // Pass handleClick to update bodyState
 
       state.rebuild(
         this.props.boundHandleClickForBody
@@ -143,7 +148,7 @@ export default class ContentLoader extends Component {
       // the '/projects', and '/journalism' routes because
       // they can only be changed via '/menu'.
 
-      // It works for '/chapter', beause it's changed
+      // It works for '/chapter', because it's changed
       // from the '/chapter' route.
 
       // If you want to expand this to include the
@@ -151,8 +156,8 @@ export default class ContentLoader extends Component {
       // '/menu' paths, as they don't have an
       // overflowRef, so will kick an error.
 
-      if (location.type === 'chapter') {
-        const scrollHandler = new ScrollHandling(location);
+      if (currentCaller === 'chapter') {
+        const scrollHandler = new ScrollHandling(currentCaller);
         scrollHandler.resetElementTop(
           this.overflowRef,
           prevProps

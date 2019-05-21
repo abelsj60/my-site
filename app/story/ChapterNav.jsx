@@ -47,6 +47,7 @@ const Line = styled.div`
 export default function ChapterNav(props) {
   const {
     bodyState,
+    boundHandleClickForApp,
     data,
     location,
     params
@@ -75,8 +76,13 @@ export default function ChapterNav(props) {
                   : dotEmpty;
 
               return (
-                <ListItem key={idx}>
-                  <StyledLink to={`/chapter/${normalizedTitle}`}>
+                <ListItem
+                  key={idx}
+                >
+                  <StyledLink
+                    to={`/chapter/${normalizedTitle}`}
+                    boundHandleClickForApp={boundHandleClickForApp}
+                  >
                     <SelectorContainer>
                       <Selector
                         image={dot}

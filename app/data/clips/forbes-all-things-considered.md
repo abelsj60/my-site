@@ -13,7 +13,7 @@ programming to over 860 local radio stations — is struggling with the
 results of the Internet's ability to cheaply distribute content.
 
 Late last month, Kinsey Wilson joined NPR as senior vice president and
-general manager of NPR Digital Media from Gannet- owned USA Today, where
+general manager of NPR Digital Media from Gannet-owned USA Today, where
 he was executive editor. One early goal: to boost NPR's traffic, which
 comScore estimates at some 2.2 million unique visitors in September.
 Forbes.com talked with him about the future of public radio and the role

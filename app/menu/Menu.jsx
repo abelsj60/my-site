@@ -6,9 +6,7 @@ import React from 'react';
 import Shelf from '../shared/Shelf.jsx';
 
 export default function Menu(props) {
-  const {
-    children,
-  } = props;
+  const { children } = props;
 
   /** Props explanation
    *

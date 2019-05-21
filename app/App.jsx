@@ -175,7 +175,7 @@ class App extends Component {
       isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false, // Resize w/clientHeight when true
       isCasting: false,
-      spellPattern: []
+      spellPattern: [],
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -184,11 +184,10 @@ class App extends Component {
   }
 
   render() {
-    const location = new Location('/', this.props);
     const hcForApp = new ClickHandling('app', this);
     const boundHandleClickForApp = hcForApp.boundHandleClick;
-    const homeIsActive = location.type === 'home';
-    const reverieIsActive = location.type === 'reverie';
+    const homeIsActive = this.state.currentCaller === 'home';
+    const reverieIsActive = this.state.currentCaller === 'reverie';
     const fixMobileSafariBugOn7 = isTablet
       && isMobileSafari
       && osVersion[0] === '7';
@@ -222,6 +221,7 @@ class App extends Component {
             <Header
               {...this.props}
               appState={this.state}
+              boundHandleClickForApp={boundHandleClickForApp}
             />
             <Body
               {...this.props}
@@ -452,135 +452,23 @@ class App extends Component {
       prevProps
     );
 
-    if (location.justChanged) {
-      const {
-        isMenu,
-        showBusinessCard,
-        showLegalTerms,
-        showStoryText
-      } = this.state;
-      const referrer = new Referrer(prevProps);
+    // Sync appState if back/forward button is used.
+
+    window.onpopstate = () => {
       const hcForApp = new ClickHandling('app', this);
-      const handleClickForApp = hcForApp.boundHandleClick;
+      const boundHandleClickForApp = hcForApp.boundHandleClick;
 
-      // Keep isCasting and storyText in sync when the location
-      // isn't reloading (redirecting w/n a section).
+      boundHandleClickForApp('updateApp', location.caller);
+    };
 
-      if (
-        !showStoryText
-          && !location.isReloading // Prevent calls to/for /i.
-      ) {
-        const typeForUpdate =
-          location.typeForUpdateInApp(
-            this.props,
-            prevProps
-          );
-        const lastTypeForUpdate =
-          location.lastTypeForUpdateInApp(
-            this.props,
-            prevProps
-          );
-        const goingToReverie = typeForUpdate === 'reverie';
-        const leavingReverie = lastTypeForUpdate === 'reverie';
-
-        const goingToStory = typeForUpdate === 'chapter';
-        const leavingStory = lastTypeForUpdate === 'chapter';
-
-        // We won't toggle the storyText if we're going to or
-        // coming from a /reverie.
-
-        if (
-          !(goingToReverie && leavingStory)
-              && !(leavingReverie && goingToStory)
-        ) {
-          handleClickForApp('toggleStoryText');
-        }
-      }
-
-      // Reset the businessCard if we leave a card by clicking
-      // a link in the header or footer or body.
-
-      if (showBusinessCard) {
-        handleClickForApp('toggleBusinessCard');
-      }
-
-      // Reset the legalTerms if we leave them by clicking
-      // a link in the header or footer or body.
-
-      if (showLegalTerms) {
-        handleClickForApp('toggleLegalTerms');
-      }
-
-      // Reset the menuState if we leave a menu by clicking
-      // clicking a link in the header or footer or body.
-
-      if (isMenu !== referrer.isMenu(this.props)) {
-        handleClickForApp('toggleMenu');
-      }
-
-      // Don't update callers on reload.
-
-      if (!location.isReloading) {
-
-        // Note: In some situations, the callers on state
-        // will lag the reality of the application. In at
-        // least some of these cases, the reason is that
-        // seState is asynchronous, meaning there is a
-        // lag in execution, leaving appState behind.
-
-        // A partial fix is to move the callers out
-        // of appState and treat them as class properties
-        // instead. This raises the question — what is the
-        // line as to when to manage a property on state
-        // versus as non-state class properties. Properties
-        // that track something, but which don't have to
-        // cause a re-render, shouldn't necessarily be
-        // added to state. This rule might apply to the
-        // callers, and isMenu (above).
-
-        // As of 3/16, we are not addressing it. If you
-        // want to restore scroll position, however you
-        // may need to tackle this question as the values
-        // and state changes will need up-to-date info.
-
-        handleClickForApp(
-          'setCallers',
-          location.type,
-          location.lastType
-        );
-      }
-
-      if (
-        // '/chapter', '/projects', etc...
-
-        !location.isTopLevel
-
-          // lastCaller was not '/i'. The app will
-          // run two re-renders after a <Redirect />
-          // moves us from '/i' to the next page's
-          // URL (see next statement). As a result,
-          // we filter one of the re-renders out so
-          // we don't tally the page URL twice:
-
-          && !location.isCalledAfterReload
-
-          // current window URL is not '/i'.
-          // Restate route occurs on the '/i' url.
-          // The app doesn't move to the next page's
-          // URL until a <Redirect /> loads it. This
-          // check blocks '/i' from being tallied
-          // by GA:
-
-          && window.location.pathname !== '/i'
-      ) {
-        const {
-          pathname,
-          search
-        } = window.location;
-        ReactGA.pageview(
-          pathname + search
-        );
-      }
+    if (location.recordPageview) {
+      const {
+        pathname,
+        search
+      } = window.location;
+      ReactGA.pageview(
+        pathname + search
+      );
     }
   }
 }
