@@ -178,6 +178,7 @@ class App extends Component {
     this.handleResize = this.handleResize.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.handleBackAndForth = this.handleBackAndForth.bind(this);
   }
 
   render() {
@@ -203,12 +204,15 @@ class App extends Component {
       >
         {/* Use Fragment b/c ThemeProvider
         only accepts one child. */}
+
         <Fragment>
           <GlobalStyle
             reverie={reverieIsActive}
           />
+
           {/* Though an extra <div>, ZoomControl lets us add 'touch'
             events to React (alt is to add them to the Window) */}
+
           <ZoomControl
             home={homeIsActive}
             onTouchMove={this.handleTouchMove}
@@ -271,19 +275,23 @@ class App extends Component {
 
     // Heard after all React handlers run
     // https://fortes.com/2018/react-and-dom-events/
+
     window.addEventListener('resize', this.handleResize);
+    window.addEventListener('popstate', this.handleBackAndForth);
   }
 
   componentWillUnmount() {
+
     // This will never be called, here as good practice.
+
     window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('popstate', this.handleBackAndForth);
   }
 
   handleTouchMove(event) {
     // We're probably zooming if two fingers are down.
 
     if (event.touches.length === 2) {
-
       // Pinch zoom almost always moves the X, Y offset.
       // This is a more effective check than trying to
       // add points as coordinates or height/width.
@@ -442,32 +450,30 @@ class App extends Component {
     );
   }
 
+  handleBackAndForth() {
+    const location = new Location('/', this.props);
+    const hcForApp = new ClickHandling('app', this);
+    const boundHandleClickForApp = hcForApp.boundHandleClick;
+
+    // Always the caller.
+    // Update isMenu if it doesn't sync w/the window.
+
+    const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
+    const updateMenuForBackForthButton = isMenu !== this.state.isMenu;
+
+    boundHandleClickForApp(
+      'updateApp',
+      location.caller,
+      updateMenuForBackForthButton
+    );
+  }
+
   componentDidUpdate(prevProps) {
     const location = new Location(
       '/',
       this.props,
       prevProps
     );
-
-    // Sync appState if back/forward button is used.
-    // https://stackoverflow.com/a/51516034
-
-    window.onpopstate = () => {
-      const hcForApp = new ClickHandling('app', this);
-      const boundHandleClickForApp = hcForApp.boundHandleClick;
-
-      // Always the caller.
-      // Update isMenu if it doesn't sync w/the window.
-
-      const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
-      const updateMenuForBackForthButton = isMenu !== this.state.isMenu;
-
-      boundHandleClickForApp(
-        'updateApp',
-        location.caller,
-        updateMenuForBackForthButton
-      );
-    };
 
     if (location.recordPageview) {
       const {

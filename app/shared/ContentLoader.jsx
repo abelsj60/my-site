@@ -23,14 +23,20 @@ export default class ContentLoader extends Component {
       props
     );
 
-    // The overflowRef is only used by /chapter. We've included
-    // it by default to prevent a weird error when using the
-    // Back and Forth buttons. Basically, this component runs
-    // before App.cDU(). The currentCaller is temporarily out-
-    // of-sync, which kicks an error if this property is too
-    // specifically defined via a conditional.
+    // DO NOT USE currentCaller to avoid problems with back/forward.
 
-    this.overflowRef = React.createRef();
+    // If the user hits back/forward, currentCaller will be out-of-sync
+    // with props and the window until App.cDU runs. The same problem
+    // occurs with path matching for /menu. These values must be certain
+    // at the time of mounting, and can't wait for an update to AppState.
+
+    // (location.type caller as an alternative b/c it relies
+    // directly on props, which is always accurate.)
+
+    this.overflowRef =
+      location.caller === 'chapter'
+        ? React.createRef()
+        : {};
 
     this.state = {
       isNotFound: !location.pathIsValid,
@@ -43,7 +49,6 @@ export default class ContentLoader extends Component {
       isNotFound,
       needsRedirect
     } = this.state;
-    const { currentCaller } = this.props.appState;
     let componentData;
     let location;
     let referrer;
@@ -80,14 +85,15 @@ export default class ContentLoader extends Component {
     ) : (
       <Switch>
         <Route
-          exact
           // Possible 'home' value isn't an issue b/c it never routes here.
+
+          exact
           path={`/${
-            currentCaller
+            location.caller
           }/menu`}
           render={
             () => {
-              if (currentCaller === 'chapter') {
+              if (location.caller === 'chapter') {
                 return (
                   <Redirect
                     to="/not-found"
@@ -111,10 +117,14 @@ export default class ContentLoader extends Component {
         <Route
           path={referrer.finalPath}
           render={
-            () => componentData.getSection(
-              this.props,
-              this.overflowRef, // See note above
-              location.params
+            () => (
+              componentData.getSection(
+                this.props,
+                location.caller === 'chapter'
+                  ? this.overflowRef
+                  : undefined, // See note above
+                location.params
+              )
             )
           }
         />
@@ -136,6 +146,9 @@ export default class ContentLoader extends Component {
     if (location.needsRedirect) {
       this.setState({ needsRedirect: true });
     } else if (location.isSwappingContent) {
+      // Currently only used by /chapter, but
+      // it's designed for all content routes.
+
       const state = new State(
         this.props,
         location
@@ -159,7 +172,7 @@ export default class ContentLoader extends Component {
       // '/menu' paths, as they don't have an
       // overflowRef, so will kick an error.
 
-      if (currentCaller === 'chapter') {
+      if (location.caller === 'chapter') {
         const scrollHandler = new ScrollHandling(currentCaller);
         scrollHandler.resetElementTop(
           this.overflowRef,

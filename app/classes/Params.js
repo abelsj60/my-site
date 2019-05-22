@@ -3,20 +3,25 @@ import normalize from '../helpers/normalize.js';
 
 export default class Params {
   constructor(type, params, paramNames) {
+
     // Array.isArray() ensures nothing breaks when
     // Params() is called by location._loadParams
     // (super's not called, so the {} is empty)
+
     this._type = type;
-    this._paramNames = Array.isArray(paramNames)
-      ? paramNames
-      : [];
+    this._paramNames =
+      Array.isArray(paramNames)
+        ? paramNames
+        : [];
     this._one = params[this._paramNames[0]];
     this._two = params[this._paramNames[1]];
     this._expectedNumber = this._paramNames.length;
     this._validatedNumber =
       this._paramNames.filter(
+
         // Check this to assess their validity;
         // invalid params come back false
+
         p => this[p] !== false
       ).length;
 
@@ -26,9 +31,11 @@ export default class Params {
       this[this._paramNames[1]] !== false;
     this.areUndefined =
       this._paramNames.filter(
+
         // Check params, not 'this' b/c this[param]
         // is defined by matchPath(); we want to
         // tet the real-true original URL.
+
         p => params[p] === undefined
       );
     this.originalData = params;
@@ -44,6 +51,7 @@ export default class Params {
   }
 
   _validateParam(param, paramName) {
+
     // This function has to stand on its own in
     // order to avoid an infinit loop. Remember,
     // any call to this[param] runs through this
@@ -89,11 +97,13 @@ export default class Params {
     }
 
     // Return original to avoid problems
-    // with falsy should index be 0
+    // with falsy should index be 0.
+
     return paramIsValid && param;
   }
 
   _toIndex(paramName) {
+
     // The next two rely on ._validateParam(). As a,
     // result, it can't be used in ._validateParam()
     // to avoid an infinite loop.

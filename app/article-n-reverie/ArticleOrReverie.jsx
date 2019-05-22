@@ -68,6 +68,7 @@ export default function ArticleOrReverie(props) {
   const isReverie = currentPath[1] === 'reverie';
 
   const index = params.headlineToIndex();
+
   const article = data[index];
   const {
     date,

@@ -41,8 +41,7 @@ export default class ComponentData {
       <Section
         {...props}
         data={contentData}
-        // Only used by '/chapter', see
-        // note in ContentLoader for more.
+        // Only used by '/chapter'.
         overflowRef={ref}
         params={params}
       />

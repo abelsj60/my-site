@@ -60,13 +60,15 @@ export default function MenuButton(props) {
       : isMenu
         ? `/${currentCaller}`
         : `/${currentCaller}/menu`;
-  const arrowIcon = !isMenu
-    ? arrowDown
-    : arrowUp;
+  const arrowIcon =
+    !isMenu
+      ? arrowDown
+      : arrowUp;
   const menuIsActive = isMenu && 'active';
-  const text = isMenu
-    ? 'Close'
-    : 'Menu';
+  const text =
+    isMenu
+      ? 'Close'
+      : 'Menu';
 
   return (
     <Container

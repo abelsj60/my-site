@@ -67,9 +67,11 @@ export default class ClickHandling {
       switch (updateValue) {
         case 'toggleBusinessCard':
           stateToUpdate.showBusinessCard = !showBusinessCard;
+
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
+
           category = 'App state';
           action = !showBusinessCard
             ? 'Open business card'
@@ -80,9 +82,11 @@ export default class ClickHandling {
           break;
         case 'toggleLegalTerms':
           stateToUpdate.showLegalTerms = !showLegalTerms;
+
           if (showBusinessCard) {
             stateToUpdate.showBusinessCard = !showBusinessCard;
           }
+
           category = 'App state';
           action = !showLegalTerms
             ? 'Open legal terms'
@@ -93,12 +97,15 @@ export default class ClickHandling {
           break;
         case 'toggleStoryText':
           stateToUpdate.showStoryText = !showStoryText;
+
           if (showBusinessCard) {
             stateToUpdate.showBusinessCard = !showBusinessCard;
           }
+
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
+
           category = 'App state';
           action = showStoryText
             ? 'Hide story text'
@@ -128,18 +135,34 @@ export default class ClickHandling {
             stateToUpdate.currentCaller = valueOne;
             stateToUpdate.lastCaller = currentCaller;
           }
-          stateToUpdate.recordPageview = true;
+
           stateToUpdate.showBusinessCard = false;
           stateToUpdate.showLegalTerms = false;
+
+          // 1. If any link is clicked, other than a MenuButton,
+          // we'll rebuild the state and toggle the menu
+          // (this will turn it off it it's on, i.e., a header
+          // link was clicked instead of the MenuButton).
+
+          // 2. If the back or forward button is clicked,
+          // we'll rebuild the state and toggle the menu
+          // (this will turn it on/off based on the
+          // window.location).
+
           if (isMenu || valueTwo) {
             stateToUpdate.isMenu = !isMenu;
           }
+
+          // We'll always hide the illustration when switching sections,
+          // but not if going to or leaving /reverie.
+
           if (
             !(currentCaller === 'chapter' && valueOne === 'reverie')
             && !(currentCaller === 'reverie' && valueOne === 'chapter')
           ) {
             stateToUpdate.showStoryText = true;
           }
+
           category = 'App state';
           action = 'Reset app';
           break;
@@ -206,6 +229,7 @@ export default class ClickHandling {
       };
 
       if (!menuIsOpen) {
+
         // We'll use .call to invoke our function so
         // as to ensure the 'this' value is right.
         // Alternative: We could define it externally
@@ -213,7 +237,9 @@ export default class ClickHandling {
 
         toggleState.call(this);
         this.timeoutId = setTimeout(() => {
+
           // Comment next line to suspend auto-close
+
           this.setState({ menuIsOpen: false });
         }, 5000);
       } else {
@@ -245,6 +271,7 @@ export default class ClickHandling {
           // If we're casting a spell, we need a full reset.
 
           if (isCasting) {
+
             // We'll reset the spell whenever we leave the Charms.
 
             const newPattern = this.createSpellPattern();
@@ -257,7 +284,9 @@ export default class ClickHandling {
 
           break;
         case 'castSpell':
+
           // castSpell is used to control styling during the cast.
+
           stateToUpdate.castSpell = true;
           break;
       }
@@ -276,6 +305,7 @@ export default class ClickHandling {
       // If the Charm isn't active, or if it's tme for magic.
 
       if (!isActive || isActive && abracadabra) {
+
         // We can invoke ClickHandling with the proper 'this' b/c
         // we invoked it w/Home's 'this' value via .call()
 
@@ -283,6 +313,7 @@ export default class ClickHandling {
         const boundHandleClickForHome = hcForHome.boundHandleClick;
 
         if (isActive && abracadabra) {
+
           // We store the background value in App so it's remembered
           // as the user travels through the site.
 
