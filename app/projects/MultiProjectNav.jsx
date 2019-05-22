@@ -6,7 +6,7 @@ import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const RestyledList = styled(UnorderedList)`
   height: 100%;
-  margin-right: 25px;
+  // margin-right: 25px;
 `;
 const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.six};

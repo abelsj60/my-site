@@ -119,8 +119,8 @@ export default function FooterContainer(props) {
         show={isStory}
         text={
           showStoryText
-            ? 'Show'
-            : 'Hide'
+            ? 'Look'
+            : 'Read'
         }
       />
       <TextBox>
