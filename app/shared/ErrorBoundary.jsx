@@ -36,31 +36,47 @@ export default class ErrorBoundary extends Component {
             <header
               style={{
                 backgroundColor: '#fd1172',
-                padding: '5px 25px'
+                paddingBottom: '5px',
+                margin: '20px 25px',
+                padding: '20px 0px'
               }}
             >
               <p
-                style={{ color: 'white' }}
-              >{errorText}</p>
-            </header>
-            {initialLoad
-              && <div
                 style={{
-                  paddingLeft: '25px',
-                  paddingRight: '25px'
+                  color: 'white',
+                  margin: '0px 20px'
                 }}
               >
-                <h1>About</h1>
-                <p>James Abels is a NYC-based Web developer.</p>
-                <p>A lawyer and former start-up founder, Abels was a staff reporter for Forbes and Mergermarket
-            (then Pearson, now Acuris). He wrote about technology, digital media, venture capital, and
-            mergers and acquisitions.</p>
-                <p>Abels is available for front- and back-end technology projects, particularly those involving
-            creative consumer narratives.
-            He's currently working with Upendra Shardanand on a new type of media product for
-            Facebook Messenger, slated for soft launch in 2019.
-                </p>
-              </div>}
+                {errorText}
+              </p>
+            </header>
+            {initialLoad
+              && (
+                <div
+                  style={{
+                    paddingLeft: '25px',
+                    paddingRight: '25px'
+                  }}
+                >
+                  <h1>
+                    About
+                  </h1>
+                  <p>
+                    James Abels is a NYC-based Web developer.
+                  </p>
+                  <p>
+                    A lawyer and former start-up founder, Abels was a staff reporter for Forbes and Mergermarket
+                    (then Pearson, now Acuris). He wrote about technology, digital media, venture capital, and
+                    mergers and acquisitions.
+                  </p>
+                  <p>
+                    Abels is available for front- and back-end technology projects, particularly those involving
+                    creative consumer narratives.
+                    He's currently working with Upendra Shardanand on a new type of media product for
+                    Facebook Messenger, slated for soft launch in 2019.
+                  </p>
+                </div>
+              )}
             <footer
               style={{
                 paddingLeft: '25px',

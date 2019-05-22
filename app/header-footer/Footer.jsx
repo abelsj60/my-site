@@ -44,7 +44,7 @@ const Graf = styled.p`
   cursor: pointer;
   margin-right: ${p => !p.isLink ? '20px' : ''};
   margin-bottom: 0px;
-  color: ${p => (p.active ? p.theme.colors.pink : p.theme.colors.blue)};
+  color: ${p => (p.active ? p.theme.colors.pink : !p.home ? p.theme.colors.blue : p.theme.colors.white)};
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
@@ -135,6 +135,7 @@ export default function FooterContainer(props) {
               || undefined
             }
             isLink={true}
+            home={isHome}
           >
             Reverie
           </Graf>
@@ -142,12 +143,14 @@ export default function FooterContainer(props) {
         <Graf
           active={showBusinessCard}
           onClick={eventListenerToToggleBusinessCard}
+          home={isHome}
         >
           Contact
         </Graf>
         <Graf
           active={showLegalTerms}
           onClick={eventListenerToToggleLegalTerms}
+          home={isHome}
         >
           Legal
         </Graf>
