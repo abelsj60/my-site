@@ -11,21 +11,26 @@ import {
 import ScrollHandling from '../classes/ScrollHandling.js';
 import State from '../classes/State.js';
 
+// For future refactoring: https://stackoverflow.com/a/51753410
+
 export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
-    const { currentCaller } = this.props.appState;
     const referrer = new Referrer(props);
     const location = new Location(
       referrer.pathToMatch,
       props
     );
 
-    this.overflowRef =
-      currentCaller === 'chapter'
-        ? React.createRef()
-        : '';
+    // The overflowRef is only used by /chapter. We've included
+    // it by default to prevent a weird error when using the
+    // Back and Forth buttons. Basically, this component runs
+    // before App.cDU(). The currentCaller is temporarily out-
+    // of-sync, which kicks an error if this property is too
+    // specifically defined via a conditional.
+
+    this.overflowRef = React.createRef();
 
     this.state = {
       isNotFound: !location.pathIsValid,
@@ -108,9 +113,7 @@ export default class ContentLoader extends Component {
           render={
             () => componentData.getSection(
               this.props,
-              currentCaller === 'chapter'
-                ? this.overflowRef
-                : undefined,
+              this.overflowRef, // See note above
               location.params
             )
           }

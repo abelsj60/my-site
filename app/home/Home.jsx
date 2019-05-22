@@ -20,7 +20,7 @@ export default class Home extends Component {
 
     // 1. this.goal defines when to cast a spell.
     // 2. this.transition prevents 'onTransitionEnd' from
-    // toggling Pulsers on/off in rapid succession.
+    // toggling Charms on/off in rapid succession.
 
     this.goal = 5;
     this.transition = 0;
@@ -30,17 +30,14 @@ export default class Home extends Component {
     // created spell pattern (stored on appState as
     // a back-up). Otherwise, make a new one.
 
-    const pattern =
-      this.props.appState.spellPattern.length > 0
-        ? this.props.appState.spellPattern
-        : this.createSpellPattern();
+    const pattern = this.createSpellPattern();
 
     this.state = {
-      isCasting: this.props.appState.isCasting,
+      isCasting: false,
       castSpell: false,
-      score: 0, // Used to select an active Pulser and cast spell
+      score: 0, // Used to select an active Charm and cast spell
       pattern: pattern,
-      activePulser: pattern[0] // Initial Pulser is always [0].
+      activeCharm: pattern[0] // Initial Charm is always [0].
     };
 
     this.trackTransitionEnd = this.trackTransitionEnd.bind(this);
@@ -61,8 +58,8 @@ export default class Home extends Component {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
 
-    const hcPulser = new ClickHandling('pulser', this);
-    const boundHandlePulser = hcPulser.boundHandleClick;
+    const hcCharm = new ClickHandling('charm', this);
+    const boundHandleCharm = hcCharm.boundHandleClick;
 
     return (
       <RestyledMain>
@@ -74,7 +71,7 @@ export default class Home extends Component {
         <Charms
           {...this.props}
           homeState={this.state}
-          boundHandlePulser={boundHandlePulser}
+          boundHandleCharm={boundHandleCharm}
         />
         <PictureBox
           {...this.props}
@@ -92,7 +89,8 @@ export default class Home extends Component {
     for (let i = 0; i < this.goal; i++) {
       let randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
 
-      // Let's ensure our Pulser order isn't redundant.
+      // Let's ensure our Charm order isn't redundant.
+
       if (i > 0) {
         while (pattern[i - 1] === randomNum) {
           randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1;

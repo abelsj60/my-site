@@ -29,6 +29,7 @@ const Hed = styled.h3`
 const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.thirteen};
   margin-bottom: ${p => p.theme.bottomMargin.regular};
+  margin-left: 2px;
   font-weight: 300;
   color: ${p => p.theme.colors.pink};
 `;
@@ -92,7 +93,9 @@ export default function Projects(props) {
     zoomed
   } = project.attributes;
   const caption = captions[indexForProjectPics];
+
   // Get the larger res image if: a. desktop or b. pinchZoomed.
+
   const source =
     !isMobile || props.appState.pinchZooomed
       ? zoomed[indexForProjectPics]

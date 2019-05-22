@@ -7,20 +7,20 @@ import React from 'react';
 import Story from '../story/Story.jsx';
 
 export default class ComponentData {
-  constructor(type) {
-    const content = new Content(type);
+  constructor(caller) {
+    const content = new Content(caller);
 
-    this._type = type;
+    this._caller = caller;
     this._contentData = content.getContentData();
   }
 
   getSection(props, ref, params) {
-    const type = this._type;
+    const caller = this._caller;
     const contentData = this._contentData;
 
     let Section;
 
-    switch (type) {
+    switch (caller) {
       case 'chapter':
         Section = Story;
         break;
@@ -41,8 +41,8 @@ export default class ComponentData {
       <Section
         {...props}
         data={contentData}
-        // Only valid if '/chapter',
-        // empty string otherwise
+        // Only used by '/chapter', see
+        // note in ContentLoader for more.
         overflowRef={ref}
         params={params}
       />
@@ -50,12 +50,12 @@ export default class ComponentData {
   }
 
   getMenuContent(props, params) {
-    const type = this._type;
+    const caller = this._caller;
     const contentData = this._contentData;
 
     let MenuContent;
 
-    switch (type) {
+    switch (caller) {
       case 'journalism':
         MenuContent = ArticleOrReverieNav;
         break;

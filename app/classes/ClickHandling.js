@@ -37,8 +37,8 @@ export default class ClickHandling {
       case 'home':
         selectedHandler = this._handleClickForHome;
         break;
-      case 'pulser':
-        selectedHandler = this._handlePulser;
+      case 'charm':
+        selectedHandler = this._handleCharm;
         break;
       default:
         break;
@@ -49,8 +49,8 @@ export default class ClickHandling {
 
   // Handles onClicks on App (top-level state).
 
-  _handleClickForAppComponent(self) {
-    return (updateValue, value) => {
+  _handleClickForAppComponent() {
+    return (updateValue, valueOne, valueTwo) => {
       const {
         currentCaller,
         showBusinessCard,
@@ -124,19 +124,19 @@ export default class ClickHandling {
             : `Leave: ${currentCaller} menu`;
           break;
         case 'updateApp':
-          if (value !== undefined) {
-            stateToUpdate.currentCaller = value;
+          if (valueOne !== undefined) {
+            stateToUpdate.currentCaller = valueOne;
             stateToUpdate.lastCaller = currentCaller;
           }
           stateToUpdate.recordPageview = true;
           stateToUpdate.showBusinessCard = false;
           stateToUpdate.showLegalTerms = false;
-          if (isMenu !== self._referrer.isMenu(this.props)) {
+          if (isMenu || valueTwo) {
             stateToUpdate.isMenu = !isMenu;
           }
           if (
-            !(currentCaller === 'chapter' && value === 'reverie')
-            && !(currentCaller === 'reverie' && value === 'chapter')
+            !(currentCaller === 'chapter' && valueOne === 'reverie')
+            && !(currentCaller === 'reverie' && valueOne === 'chapter')
           ) {
             stateToUpdate.showStoryText = true;
           }
@@ -235,7 +235,7 @@ export default class ClickHandling {
         return null;
       }
 
-      const { isCasting, pattern } = this.state;
+      const { isCasting } = this.state;
       const stateToUpdate = {};
 
       switch (updateValue) {
@@ -245,19 +245,19 @@ export default class ClickHandling {
           // If we're casting a spell, we need a full reset.
 
           if (isCasting) {
-            // We'll reset the spell whenever we leave the Pulsers.
-            // We'll keep the same pattern as long was we don't
-            // unmount or successfully complete the spell.
+            // We'll reset the spell whenever we leave the Charms.
 
-            stateToUpdate.activePulser = pattern[0];
+            const newPattern = this.createSpellPattern();
+
+            stateToUpdate.pattern = newPattern;
+            stateToUpdate.activeCharm = newPattern[0];
             stateToUpdate.castSpell = false;
             stateToUpdate.score = 0;
           }
 
           break;
         case 'castSpell':
-          // Let's first create a new spell for the return trip.
-          stateToUpdate.pattern = this.createSpellPattern();
+          // castSpell is used to control styling during the cast.
           stateToUpdate.castSpell = true;
           break;
       }
@@ -268,12 +268,12 @@ export default class ClickHandling {
 
   // Handles onClicks on Charms (spell, part two).
 
-  _handlePulser() {
+  _handleCharm() {
     return isActive => {
       const { score } = this.state;
       const abracadabra = score + 1 === this.goal; // Magic!
 
-      // If the Pulser isn't active, or if it's tme for magic.
+      // If the Charm isn't active, or if it's tme for magic.
 
       if (!isActive || isActive && abracadabra) {
         // We can invoke ClickHandling with the proper 'this' b/c
@@ -296,7 +296,7 @@ export default class ClickHandling {
         } else {
           ReactGA.event({
             category: 'Home state',
-            action: 'Wrong Pulser clicked.',
+            action: 'Wrong Charm clicked.',
             label: `The score was ${score}.`
           });
 
@@ -306,14 +306,14 @@ export default class ClickHandling {
         return null;
       }
 
-      //  The Pulser is active, and the user isn't done yet.
+      //  The Charm is active, and the user isn't done yet.
 
       this.setState(
         state => {
           const newScore = state.score += 1;
           return {
             score: newScore,
-            activePulser: state.pattern[newScore]
+            activeCharm: state.pattern[newScore]
           };
         }
       );

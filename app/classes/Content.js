@@ -4,14 +4,14 @@ import reveries from '../data/reveries/index.js';
 import stories from '../data/the-story/index.js';
 
 export default class Content {
-  constructor(type) {
-    this.type = type;
+  constructor(caller) {
+    this.caller = caller;
   }
 
   getContentData() {
-    const type = this.type;
+    const caller = this.caller;
 
-    switch (type) {
+    switch (caller) {
       case 'chapter':
         return stories;
       case 'projects':

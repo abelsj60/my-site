@@ -4,13 +4,13 @@ export default class State {
   constructor(props, location) {
     const referrer = new Referrer(props);
 
-    this._referrer = referrer.location;
+    this._referrer = referrer;
     this._params = location.params;
   }
 
   getIndex(type) {
     const params = this._params;
-    const referrer = this._referrer;
+    const referrer = this._referrer.location;
 
     let index;
 
@@ -69,7 +69,7 @@ export default class State {
 
   _convertParamsToIndices() {
     const params = this._params;
-    const referrer = this._referrer;
+    const referrer = this._referrer.location;
 
     // Variables will only be -1 if explicitly set by a params method
     // Thus, single param routes will pass the rebuild test w/o fuss

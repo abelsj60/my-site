@@ -158,12 +158,11 @@ class App extends Component {
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
 
     this.state = {
-      currentCaller: location !== 'i'
-        ? location
-        : 'home',
-      lastCaller: location !== 'reverie'
-        ? location
-        : 'home',
+      currentCaller:
+        location !== 'i'
+          ? location
+          : 'home',
+      lastCaller: '',
       inCity: false, // Fantasy image on home if false
       isMenu: referrer.isMenu(props), // Menu page (/projects, /journalism, /reverie)
       height: height, // Sets height of <main />
@@ -173,9 +172,7 @@ class App extends Component {
       pinchZoomed: false, // We're zoomed! or not.
       tooNarrow: height < 350, // Too narrow, rotate screen
       isZooming: false, // True when pinch zooming is ongoing
-      isAfterTouch: false, // Resize w/clientHeight when true
-      isCasting: false,
-      spellPattern: [],
+      isAfterTouch: false // Resize w/clientHeight when true
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -453,12 +450,23 @@ class App extends Component {
     );
 
     // Sync appState if back/forward button is used.
+    // https://stackoverflow.com/a/51516034
 
     window.onpopstate = () => {
       const hcForApp = new ClickHandling('app', this);
       const boundHandleClickForApp = hcForApp.boundHandleClick;
 
-      boundHandleClickForApp('updateApp', location.caller);
+      // Always the caller.
+      // Update isMenu if it doesn't sync w/the window.
+
+      const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
+      const updateMenuForBackForthButton = isMenu !== this.state.isMenu;
+
+      boundHandleClickForApp(
+        'updateApp',
+        location.caller,
+        updateMenuForBackForthButton
+      );
     };
 
     if (location.recordPageview) {
@@ -466,9 +474,7 @@ class App extends Component {
         pathname,
         search
       } = window.location;
-      ReactGA.pageview(
-        pathname + search
-      );
+      ReactGA.pageview(pathname + search);
     }
   }
 }

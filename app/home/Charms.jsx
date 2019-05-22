@@ -37,7 +37,7 @@ const fadeIn = keyframes`
     opacity: 1;
   }
 `;
-const CharmBox = styled.div`
+const TreasureBox = styled.div`
   display: none;
   display: ${p => (p.tempContentIsOn || p.magicIsHappening ? 'none' : 'flex')};
   flex-direction: column;
@@ -51,11 +51,11 @@ const CharmBox = styled.div`
     width: 240px;
   }
 `;
-const PulseBox = styled.div`
+const CharmBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const Pulser = styled.div`
+const Charm = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${pinkPulse} infinite`)};
   border: 2px solid ${p => p.theme.colors.pink};
   background-color: rgba(0, 0, 0, .5);
@@ -81,7 +81,7 @@ const InnerRing = styled.div`
   width: 15px;
   border-radius: 50%;
 `;
-const FeedbackBox = styled.div`
+const SpellBox = styled.div`
   margin-top: 28px;
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@ const FeedbackBox = styled.div`
     margin-top: 32px;
   }
 `;
-const SpellText = styled.p`
+const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
   color: ${p => p.theme.colors.yellow};
   margin-bottom: 5px;
@@ -120,7 +120,7 @@ export default function Charms(props) {
 
   const {
     appState,
-    boundHandlePulser,
+    boundHandleCharm,
     homeState
   } = props;
   const {
@@ -128,32 +128,33 @@ export default function Charms(props) {
     showLegalTerms
   } = appState;
   const {
-    activePulser,
+    activeCharm,
     castSpell,
     isCasting,
     score
   } = homeState;
 
   // Let's set up a progress bar.
+
   const barWidth = score * 20;
 
   return (
-    <CharmBox
+    <TreasureBox
       isCasting={isCasting}
       magicIsHappening={castSpell} // Don't show while in progress
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >
-      <PulseBox>
+      <CharmBox>
         <Mapper
           mapData={['one', 'two', 'three']}
           render={
             (_, idx)=> {
-              // Which Pulser is active?
-              const isActive = activePulser === idx + 1;
-              const eventListener = () => boundHandlePulser(isActive);
+              // Which Charm is active?
+              const isActive = activeCharm === idx + 1;
+              const eventListener = () => boundHandleCharm(isActive);
 
               return (
-                <Pulser
+                <Charm
                   key={idx}
                   isActive={isActive}
                   onClick={eventListener}
@@ -161,21 +162,21 @@ export default function Charms(props) {
                   <InnerRing
                     isActive={isActive}
                   />
-                </Pulser>
+                </Charm>
               );
             }}
         />
-      </PulseBox>
-      <FeedbackBox>
-        <SpellText>
+      </CharmBox>
+      <SpellBox>
+        <Text>
           Spell
-        </SpellText>
+        </Text>
         <ProgressContainer>
           <ProgressBar
             barWidth={barWidth}
           />
         </ProgressContainer>
-      </FeedbackBox>
-    </CharmBox>
+      </SpellBox>
+    </TreasureBox>
   );
 }
