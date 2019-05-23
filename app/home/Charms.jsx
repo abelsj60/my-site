@@ -102,7 +102,7 @@ const ProgressContainer = styled.div`
   height: 1px;
   width: 100%;
   align-self: center;
-  background-color: rgba(0, 0, 0, .4);
+  background-color: rgba(0, 0, 0, .6);
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
   }
