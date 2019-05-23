@@ -22,7 +22,6 @@ import Location from './classes/Location.js';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
-import TooSmallScreen from './temp-content/TooSmallScreen.jsx';
 import { withRouter } from 'react-router';
 
 // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
@@ -144,6 +143,16 @@ class App extends Component {
       pathname,
       search
     } = window.location;
+
+    // Let's deal w/height.
+    //  1. Check value based on device type.
+    //  2. If the screen is landscape:
+    //    a. Set property on load,
+    //    b. Resize on orientation change due to updateHeight,
+    //    c. Keep resized height on subsequent orientation
+    //    changes by checking for this.minAllowedHeight
+    //    in updateHeight().
+
     const height =
       isMobile && !isMobileSafari
         ? document.documentElement.clientHeight
@@ -155,6 +164,7 @@ class App extends Component {
     ReactGA.initialize('UA-137902767-1');
     ReactGA.pageview(pathname + search); // Tallies initial request
 
+    this.minAllowedHeight = 350; // Lower limit for resizing
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
 
     this.state = {
@@ -170,7 +180,6 @@ class App extends Component {
       showLegalTerms: false, // Show legal terms
       showStoryText: true, // Show story text, picture if false
       pinchZoomed: false, // We're zoomed! or not.
-      tooNarrow: height < 350, // Too narrow, rotate screen
       isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false // Resize w/clientHeight when true
     };
@@ -238,9 +247,6 @@ class App extends Component {
               {...this.props}
               appState={this.state}
               boundHandleClickForApp={boundHandleClickForApp}
-            />
-            <TooSmallScreen
-              tooNarrow={this.state.tooNarrow}
             />
           </ZoomControl>
         </Fragment>
@@ -341,7 +347,7 @@ class App extends Component {
   }
 
   updateHeight() {
-    // On desktops, resize if height is changing.
+    // On desktops, only resize if height's changing.
 
     if (!isMobile
       && this.state.width !== window.innerWidth
@@ -349,7 +355,8 @@ class App extends Component {
       return false;
     }
 
-    // Don't resize while zooming.
+    // Don't resize while zooming (e.g., there may be
+    // a lag between isZooming and pinchZoomed).
 
     if (this.state.isZooming) {
       return false;
@@ -364,35 +371,23 @@ class App extends Component {
 
     // On mobile, we must account for browser differences.
     // Mobile Safari updates innerHeight on resize and
-    // changes to UI chrome, while mobile Chrome
-    // does not. Also, after touchMove, Safari doesn't
-    // update innerHeight correctly, so we'll use
-    // clientHeight 'afterTouch'. Results:
+    // UI changes but mobile Chrome does not. Also,
+    //  after touchMove, Safari doesn't update
+    // innerHeight correctly, so we'll use
+    // clientHeight 'isAfterTouch':
 
-    //  a. clientHeight - mobile Chrome and after touchMove
-    //  b. innerHeight - mobile Safari
+    //  a. clientHeight. Mobile Chrome and after touchMove
+    //  b. innerHeight. Mobile Safari
 
     const newHeight =
       isMobile
-        && (!isMobileSafari
-            || this.state.isAfterTouch
-            || (this.state.tooNarrow && this.state.pinchZoomed))
+        && (!isMobileSafari || this.state.isAfterTouch)
         ? document.documentElement.clientHeight
         : window.innerHeight;
 
-    // When zoomed, always resize when screen isn't too narrow.
-    // As a result, we can zoom in on the tooSmall landscape
-    // screen (), rotate to portrait, see the zoomed site,
-    // rotate back to landsape, and still see the zoom.
+    // Do not resize height while pinchZoomed.
 
-    // Note: If user zooms in on tooSmall screen, nothing
-    // will be seen until after first rotation, which
-    // 'feels' right.
-
-    if (
-      this.state.pinchZoomed
-        && !this.state.tooNarrow
-    ) {
+    if ( this.state.pinchZoomed) {
       ReactGA.event({
         category: 'App state',
         action: 'Resized while pinchZoomed',
@@ -403,12 +398,17 @@ class App extends Component {
       return false;
     }
 
-    // Only resize when height changes.
+    // Only resize when height changes, if it's > 350.
 
-    if (newHeight === this.state.height) {
+    if (
+      newHeight === this.state.height
+        || newHeight <= this.minAllowedHeight
+    ) {
       ReactGA.event({
         category: 'App state',
-        action: 'Resized w/o changing height',
+        action: `
+          Resized w/o changing height. Current: ${this.state.height}, new ${newHeight}
+        `,
         value: newHeight,
         label: `Page: ${pathname}${search}`
       });
@@ -426,8 +426,8 @@ class App extends Component {
 
     // Update page height when these factors are true:
     //  a. mobile device
-    //  b. orientation change / pinch-zoom out
-    //  c. height change
+    //  b. orientation change AND pinchZoom is off
+    //  c. height changes (we've already discarded newHeight <= 350)
 
     ReactGA.event({
       category: 'App state',
@@ -439,11 +439,7 @@ class App extends Component {
     this.setState(
       () => ({
         height: newHeight,
-        tooNarrow:
-          newHeight < 350
-            ? true
-            : false,
-        isAfterTouch:
+        isAfterTouch: // True until handleMove says otherwise.
           this.state.isAfterTouch
             && false
       })
