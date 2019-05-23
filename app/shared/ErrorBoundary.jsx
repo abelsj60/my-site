@@ -95,6 +95,7 @@ export default class ErrorBoundary extends Component {
   }
 
   // Catch errors re-render
+
   componentDidCatch(error, errorInfo) {
     const { initialLoad } = this.state;
     this.setState({
@@ -120,7 +121,10 @@ export default class ErrorBoundary extends Component {
   }
 
   handleLoad() {
-    const { initialLoad, hasError } = this.state;
+    const {
+      initialLoad,
+      hasError
+    } = this.state;
 
     if (initialLoad && !hasError) {
       this.setState({ initialLoad: false });

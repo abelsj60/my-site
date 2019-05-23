@@ -44,8 +44,9 @@ import { createPath } from 'history';
 // by checking the length of 'to' --> iSayNoMatch if 1.
 
 // This component also updates appState as all navigation is
-// handled through links. App.cDU handles appState should
-// the back/forward buttons be used.
+// handled through links. It updates state when called by
+// any link other than MenuButton. It also updates state
+// when called by an event listener on window ('popstate').
 
 const Link = ({
   to,

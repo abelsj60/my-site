@@ -37,7 +37,7 @@ const fadeIn = keyframes`
     opacity: 1;
   }
 `;
-const TreasureBox = styled.div`
+const Container = styled.div`
   display: none;
   display: ${p => (p.tempContentIsOn || p.magicIsHappening ? 'none' : 'flex')};
   flex-direction: column;
@@ -56,8 +56,8 @@ const CharmBox = styled.div`
   justify-content: space-between;
 `;
 const Charm = styled.div`
-  animation: ${p => (p.isActive && css`1.5s -.15s ${pinkPulse} infinite`)};
-  border: 2px solid ${p => p.theme.colors.pink};
+  animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? yellowPulse : pinkPulse} infinite`)};
+  border: 2px solid ${p => p.isReady && p.isActive ? p.theme.colors.yellow : p.theme.colors.pink};
   background-color: rgba(0, 0, 0, .5);
   width: 40px;
   height: 40px;
@@ -75,8 +75,8 @@ const Charm = styled.div`
   }
 `;
 const InnerRing = styled.div`
-  animation: ${p => (p.isActive && css`1.5s -.14s ${yellowPulse} infinite`)};
-  border: 2px solid ${p => p.isActive ? p.theme.colors.yellow : p.theme.colors.pink};
+  animation: ${p => (p.isActive && css`1.5s -.14s ${p.isReady && p.isActive ? pinkPulse : yellowPulse} infinite`)};
+  border: 2px solid ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
   height: 15px;
   width: 15px;
   border-radius: 50%;
@@ -94,7 +94,8 @@ const SpellBox = styled.div`
 `;
 const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
-  color: ${p => p.theme.colors.yellow};
+  color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
+  transition: color .5s ease-out;
   margin-bottom: 5px;
 `;
 const ProgressContainer = styled.div`
@@ -109,8 +110,8 @@ const ProgressContainer = styled.div`
 const ProgressBar = styled.div`
   width: ${p => p.barWidth}%;
   height: 100%;
-  background-color: ${p => p.theme.colors.yellow};
-  transition: width .5s ease-out;
+  background-color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
+  transition: width .5s ease-out, background-color .5s ease-out;
 `;
 
 export default function Charms(props) {
@@ -121,6 +122,7 @@ export default function Charms(props) {
   const {
     appState,
     boundHandleCharm,
+    goal,
     homeState
   } = props;
   const {
@@ -136,10 +138,11 @@ export default function Charms(props) {
 
   // Let's set up a progress bar.
 
-  const barWidth = score * 20;
+  const barWidth = score * (100 / (goal - 1));
+  const isReady = score === goal - 1;
 
   return (
-    <TreasureBox
+    <Container
       isCasting={isCasting}
       magicIsHappening={castSpell} // Don't show while in progress
       tempContentIsOn={showBusinessCard || showLegalTerms}
@@ -149,7 +152,6 @@ export default function Charms(props) {
           mapData={['one', 'two', 'three']}
           render={
             (_, idx)=> {
-              // Which Charm is active?
               const isActive = activeCharm === idx + 1;
               const eventListener = () => boundHandleCharm(isActive);
 
@@ -157,10 +159,12 @@ export default function Charms(props) {
                 <Charm
                   key={idx}
                   isActive={isActive}
+                  isReady={isReady}
                   onClick={eventListener}
                 >
                   <InnerRing
                     isActive={isActive}
+                    isReady={isReady}
                   />
                 </Charm>
               );
@@ -168,15 +172,18 @@ export default function Charms(props) {
         />
       </CharmBox>
       <SpellBox>
-        <Text>
+        <Text
+          isReady={isReady}
+        >
           Spell
         </Text>
         <ProgressContainer>
           <ProgressBar
             barWidth={barWidth}
+            isReady={isReady}
           />
         </ProgressContainer>
       </SpellBox>
-    </TreasureBox>
+    </Container>
   );
 }

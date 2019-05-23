@@ -70,6 +70,7 @@ export default class Home extends Component {
         />
         <Charms
           {...this.props}
+          goal={this.goal}
           homeState={this.state}
           boundHandleCharm={boundHandleCharm}
         />

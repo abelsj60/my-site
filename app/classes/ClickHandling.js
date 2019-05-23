@@ -229,7 +229,6 @@ export default class ClickHandling {
       };
 
       if (!menuIsOpen) {
-
         // We'll use .call to invoke our function so
         // as to ensure the 'this' value is right.
         // Alternative: We could define it externally
@@ -237,9 +236,7 @@ export default class ClickHandling {
 
         toggleState.call(this);
         this.timeoutId = setTimeout(() => {
-
           // Comment next line to suspend auto-close
-
           this.setState({ menuIsOpen: false });
         }, 5000);
       } else {
@@ -268,12 +265,9 @@ export default class ClickHandling {
         case 'toggleSpell':
           stateToUpdate.isCasting = !isCasting;
 
-          // If we're casting a spell, we need a full reset.
+          // Reset the spell whenever it ends.
 
           if (isCasting) {
-
-            // We'll reset the spell whenever we leave the Charms.
-
             const newPattern = this.createSpellPattern();
 
             stateToUpdate.pattern = newPattern;
@@ -284,8 +278,12 @@ export default class ClickHandling {
 
           break;
         case 'castSpell':
+          // The castSpell prop control styling during a turn.
+          // Note, the score never this the goal b/c we trigger
+          // the cast one before. DO NOT ADD 1 to score here.
 
-          // castSpell is used to control styling during the cast.
+          // In the current configuration, it noticeably
+          // slows down the background transition.
 
           stateToUpdate.castSpell = true;
           break;
@@ -302,10 +300,9 @@ export default class ClickHandling {
       const { score } = this.state;
       const abracadabra = score + 1 === this.goal; // Magic!
 
-      // If the Charm isn't active, or if it's tme for magic.
+      // The Charm isn't active, or it's time for magic.
 
       if (!isActive || isActive && abracadabra) {
-
         // We can invoke ClickHandling with the proper 'this' b/c
         // we invoked it w/Home's 'this' value via .call()
 
@@ -313,7 +310,6 @@ export default class ClickHandling {
         const boundHandleClickForHome = hcForHome.boundHandleClick;
 
         if (isActive && abracadabra) {
-
           // We store the background value in App so it's remembered
           // as the user travels through the site.
 

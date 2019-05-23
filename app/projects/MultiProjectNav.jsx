@@ -6,7 +6,6 @@ import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const RestyledList = styled(UnorderedList)`
   height: 100%;
-  // margin-right: 25px;
 `;
 const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
@@ -22,7 +21,8 @@ export default function DesktopProjectNav(props) {
   } = props;
 
   // Must use bodyState because the '/menu' url doesn't
-  // have the project and thumbnail number in it
+  // have the project and thumbnail number in it.
+
   const indexForProjectData = bodyState.indexForProjectData;
   const finalData = data;
 
