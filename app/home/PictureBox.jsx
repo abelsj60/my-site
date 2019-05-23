@@ -1,7 +1,8 @@
 import bio from '../data/about/home-page-about.md';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
+const largeScale = 1.15;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -39,14 +40,14 @@ const Portal = styled.div`
 const FantasyAsBackground = styled(BoyInForeground)`
   background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '0' : '1')};
-  transform: ${p => (p.inCity ? 'scale(1)' : 'scale(1.15)')};
+  transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
   transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
   background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '1' : '0')};
-  transform: ${p => (p.inCity ? 'scale(1.15)' : 'scale(1)')};
+  transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
 `;
 
 export default function PictureBox(props) {
@@ -61,7 +62,7 @@ export default function PictureBox(props) {
   } = appState;
   const {
     castSpell,
-    isCasting,
+    isCasting
   } = homeState;
 
   return (
