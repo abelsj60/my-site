@@ -215,18 +215,16 @@ class App extends Component {
           blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms
         }}
       >
-        {/* Use Fragment b/c ThemeProvider
-        only accepts one child. */}
-
-        <Fragment>
+        <Fragment
+          // Use Fragment b/c ThemeProvider only accepts one child.
+        >
           <GlobalStyle
             reverie={reverieIsActive}
           />
-
-          {/* Though an extra <div>, ZoomControl lets us add 'touch'
-            events to React (alt is to add them to the Window) */}
-
           <ZoomControl
+            // Though an extra <div>, ZoomControl lets us add 'touch'
+            // events to React (alt is to add them to the Window)
+
             home={homeIsActive}
             onTouchMove={this.handleTouchMove}
             onTouchEnd={this.handleTouchEnd}

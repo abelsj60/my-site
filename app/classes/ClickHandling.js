@@ -265,7 +265,7 @@ export default class ClickHandling {
         case 'toggleSpell':
           stateToUpdate.isCasting = !isCasting;
 
-          // Reset the spell whenever it ends.
+          // Reset the spell when it ends.
 
           if (isCasting) {
             const newPattern = this.createSpellPattern();
