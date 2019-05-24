@@ -164,7 +164,7 @@ class App extends Component {
     ReactGA.initialize('UA-137902767-1');
     ReactGA.pageview(pathname + search); // Tallies initial request
 
-    this.minAllowedHeight = 450; // Lower limit for resizing
+    this.minAllowedHeight = 430; // Lower limit for resizing
     this.defaultHeightWhenTooSmall = 568; // Arbitrary (full iPhone SE width)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
 

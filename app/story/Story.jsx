@@ -121,7 +121,7 @@ export default function Story(props) {
         </Overflow>
       </RestyledContentHolder>
       <PictureHolder
-        rightMargin text={textStatus}
+        text={textStatus}
       >
         <Image
           alt="fantasy illustration"

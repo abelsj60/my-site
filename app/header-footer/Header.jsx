@@ -166,7 +166,7 @@ export default class Header extends Component {
     const hcForHeader = new ClickHandling('header', this);
 
     const handleClickForHeader = hcForHeader.boundHandleClick;
-    const eventListenerHeaderMenu = () => handleClickForHeader();
+    const eventHandlerHeaderMenu = () => handleClickForHeader();
 
     return (
       <Container
@@ -227,7 +227,7 @@ export default class Header extends Component {
           isHome={isHome}
           menu={menuIsOpen}
           src={iconType}
-          onClick={eventListenerHeaderMenu}
+          onClick={eventHandlerHeaderMenu}
         />
       </Container>
     );

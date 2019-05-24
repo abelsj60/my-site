@@ -64,7 +64,7 @@ const Link = ({
     window.location.pathname.includes(to)
       && !isMenu
       && to.length > 1;
-  const eventListener =
+  const eventHandler =
     event => {
       if (!boundHandleClickForApp) {
         return null;
@@ -100,7 +100,7 @@ const Link = ({
               {...props}
               to={to}
               replace={iSayNoMatch || replace || !!match}
-              onClick={eventListener}
+              onClick={eventHandler}
             />
           );
         }

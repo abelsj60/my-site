@@ -80,7 +80,9 @@ export default function PictureBox(props) {
         castSpell={castSpell}
         srcImage={bio.attributes.fantasyImage}
         onTransitionEnd={
-          () => {
+          event => {
+            event.stopPropagation();
+
             // Set transition to '1' after the first call,
             // so toggle won't re-run on the second call.
 

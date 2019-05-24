@@ -24,6 +24,11 @@ export default class Home extends Component {
 
     this.goal = 5;
     this.transition = 0;
+    this.charmRefs = [
+      React.createRef(),
+      React.createRef(),
+      React.createRef()
+    ];
 
     // Create an initial spell pattern. If we've gone
     // to /reverie and come back, we'll use the last
@@ -37,10 +42,13 @@ export default class Home extends Component {
       castSpell: false,
       score: 0, // Used to select an active Charm and cast spell
       pattern: pattern,
-      activeCharm: pattern[0] // Initial Charm is always [0].
+      activeCharm: pattern[0], // Initial Charm is always [0].
+      eventType: 'click'
     };
 
     this.trackTransitionEnd = this.trackTransitionEnd.bind(this);
+    this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
+    this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
   }
 
   render() {
@@ -58,9 +66,6 @@ export default class Home extends Component {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
 
-    const hcCharm = new ClickHandling('charm', this);
-    const boundHandleCharm = hcCharm.boundHandleClick;
-
     return (
       <RestyledMain>
         <NameTag
@@ -72,7 +77,7 @@ export default class Home extends Component {
           {...this.props}
           goal={this.goal}
           homeState={this.state}
-          boundHandleCharm={boundHandleCharm}
+          charmRefs={this.charmRefs}
         />
         <PictureBox
           {...this.props}
@@ -111,6 +116,47 @@ export default class Home extends Component {
       this.transition = 1;
     } else {
       this.transition = 0;
+    }
+  }
+
+  eventHandlerForMouseDown(num) {
+    return () => {
+      if (this.state.eventType === 'click') {
+        const hcCharm = new ClickHandling('charm', this);
+        const boundHandleCharm = hcCharm.boundHandleClick;
+
+        boundHandleCharm(this.state.activeCharm === num);
+      } else if (this.state.eventType === 'touch') {
+        const hcHome = new ClickHandling('home', this);
+        const boundHandleClick = hcHome.boundHandleClick;
+
+        boundHandleClick('resetEventType');
+      }
+    };
+  }
+
+  eventHandlerForTouchStart(num) {
+    return () => {
+      const hcCharm = new ClickHandling('charm', this);
+      const boundHandleCharm = hcCharm.boundHandleClick;
+
+      this.setState({ eventType: 'touch' });
+      boundHandleCharm(this.state.activeCharm === num);
+    };
+  }
+
+  componentDidUpdate() {
+    // https://github.com/facebook/react/issues/9809#issuecomment-413978405
+
+    if (this.charmRefs[0].current) {
+      this.charmRefs.forEach(
+        (ref, idx) => {
+          if (!ref.current.onclick) {
+            ref.current.onmousedown = this.eventHandlerForMouseDown(idx + 1);
+            ref.current.ontouchstart = this.eventHandlerForTouchStart(idx + 1);
+          }
+        }
+      );
     }
   }
 }

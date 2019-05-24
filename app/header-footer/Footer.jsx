@@ -74,8 +74,8 @@ export default function FooterContainer(props) {
     showStoryText,
   } = appState;
 
-  const eventListenerToToggleBusinessCard = () => boundHandleClickForApp('toggleBusinessCard');
-  const eventListenerToToggleLegalTerms = () => boundHandleClickForApp('toggleLegalTerms');
+  const eventHandlerToToggleBusinessCard = () => boundHandleClickForApp('toggleBusinessCard');
+  const eventHandlerToToggleLegalTerms = () => boundHandleClickForApp('toggleLegalTerms');
 
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
@@ -94,7 +94,7 @@ export default function FooterContainer(props) {
     reverieLink.length > 1
       ? reverieLink.slice(1)
       : 'home'; // It's 'home' when the address is '/'
-  const eventListenerForStoryButton =
+  const eventHandlerForStoryButton =
       () => boundHandleClickForApp('toggleStoryText');
 
   return (
@@ -113,7 +113,7 @@ export default function FooterContainer(props) {
       />
       <StoryButton
         active={showStoryText}
-        clickFunction={eventListenerForStoryButton}
+        clickFunction={eventHandlerForStoryButton}
         className="story-button"
         conditional={true}
         show={isStory}
@@ -142,14 +142,14 @@ export default function FooterContainer(props) {
         </RestyledLink>
         <Graf
           active={showBusinessCard}
-          onClick={eventListenerToToggleBusinessCard}
+          onClick={eventHandlerToToggleBusinessCard}
           home={isHome}
         >
           Contact
         </Graf>
         <Graf
           active={showLegalTerms}
-          onClick={eventListenerToToggleLegalTerms}
+          onClick={eventHandlerToToggleLegalTerms}
           home={isHome}
         >
           Legal

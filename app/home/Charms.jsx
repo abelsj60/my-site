@@ -121,7 +121,7 @@ export default function Charms(props) {
 
   const {
     appState,
-    boundHandleCharm,
+    charmRefs,
     goal,
     homeState
   } = props;
@@ -153,14 +153,12 @@ export default function Charms(props) {
           render={
             (_, idx)=> {
               const isActive = activeCharm === idx + 1;
-              const eventListener = () => boundHandleCharm(isActive);
-
               return (
                 <Charm
                   key={idx}
                   isActive={isActive}
                   isReady={isReady}
-                  onClick={eventListener}
+                  ref={charmRefs[idx]}
                 >
                   <InnerRing
                     isActive={isActive}

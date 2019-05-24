@@ -106,10 +106,16 @@ export default function NameTag(props) {
   const {
     isCasting,
     castSpell,
+    eventType,
     score
   } = homeState;
 
-  const eventListener = () => {
+  const eventHandler = () => {
+    if (eventType === 'touch') {
+      boundHandleClickForHome('resetEventType');
+      return false;
+    }
+
     ReactGA.event({
       category: 'Home state',
       action: 'Spell toggled.',
@@ -121,7 +127,7 @@ export default function NameTag(props) {
   return (
     <Container
       castSpell={castSpell}
-      onClick={eventListener}
+      onClick={eventHandler}
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >
       <Hed>

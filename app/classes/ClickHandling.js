@@ -258,7 +258,7 @@ export default class ClickHandling {
         return null;
       }
 
-      const { isCasting } = this.state;
+      const { isCasting, eventType } = this.state;
       const stateToUpdate = {};
 
       switch (updateValue) {
@@ -286,7 +286,13 @@ export default class ClickHandling {
           // slows down the background transition.
 
           stateToUpdate.castSpell = true;
+
+          if (eventType === 'touch') {
+            stateToUpdate.eventType = 'click';
+          }
           break;
+        case 'resetEventType':
+          stateToUpdate.eventType = 'click';
       }
 
       this.setState(stateToUpdate);

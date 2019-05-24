@@ -186,7 +186,7 @@ export default class LegalTermsOrBizCard extends Component {
       ? myEmailAddress
       : '';
 
-    const eventListener = () => {
+    const eventHandler = () => {
       if (showBusinessCard) {
         boundHandleClickForApp(
           'toggleBusinessCard'
@@ -203,7 +203,7 @@ export default class LegalTermsOrBizCard extends Component {
       <PageCover
         home={homeIsActive}
         copying={copying && !showLegalTerms}
-        onClick={eventListener}
+        onClick={eventHandler}
       >
         <CardHolder>
           <Card
