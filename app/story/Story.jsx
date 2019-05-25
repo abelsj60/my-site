@@ -9,14 +9,21 @@ import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
-  display: ${p => (p.text === 'hidden' ? 'none' : 'flex')};
+  display: ${p => (p.showStoryText ? 'flex' : 'none')};
   flex-direction: column;
   flex: 1;
 `;
 const PictureHolder = styled.section`
-  display: ${p => (p.text !== 'hidden' ? 'none' : 'flex')};
-  flex: 1; // Ensures element takes usual in doc (less confusing)
-  overflow: hidden;
+  // Setting visibilty: 'hidden' is better than display: 'none' b/c
+  // it should ensure that we load the image in the background so
+  // it's instantly ready to go when the button's clicked.
+  // (Some browsers won't load an image when display's none.)
+  visibility: ${p => (p.showStoryText ? 'hidden' : 'visible')};
+  // Flex = 1 when 'visible' so element takes up space in dev tools.
+  // Otherwise, nothing highlights in dev tools, which looks weird.
+  // Flex = 0 when 'hidden' so it takes up no space on the page.
+  // Otherwise, it takes up a column of space beside the text.
+  flex: ${p => p.showStoryText ? '0' : '1'}; 
 `;
 const Chapter = styled.h2`
   color: ${p => p.theme.colors.blue};
@@ -64,32 +71,37 @@ const StoryText = styled.section`
 export default function Story(props) {
   const {
     appState,
-    data,
-    overflowRef,
-    params
+    contentState,
+    overflowRef
   } = props;
   const { showStoryText } = appState;
-  const indexForChapterData = params.titleToIndex();
-
-  const chapter = data[indexForChapterData];
+  const { finalData } = contentState;
   const {
     image,
+    number,
     title
-  } = chapter.attributes;
-  const chapterArray = [
-    'one',
-    'two',
-    'three',
-    'four'
-  ];
-  const textStatus = !showStoryText
-    ? 'hidden'
-    : '';
+  } = finalData.attributes;
+  let chapterNumber;
+
+  switch (number) {
+    case 1:
+      chapterNumber = 'one';
+      break;
+    case 2:
+      chapterNumber = 'two';
+      break;
+    case 3:
+      chapterNumber = 'three';
+      break;
+    default:
+      chapterNumber = 'four';
+      break;
+  }
 
   return (
     <Main>
       <RestyledContentHolder
-        text={textStatus}
+        showStoryText={showStoryText}
         saveSerifs={true}
       >
         <Shelf
@@ -100,12 +112,10 @@ export default function Story(props) {
           />
         </Shelf>
         <Overflow
-          ref={
-            ref => overflowRef.current = ref
-          }
+          ref={overflowRef}
         >
           <Chapter>
-            Chapter {chapterArray[indexForChapterData]}
+            Chapter {chapterNumber}
           </Chapter>
           <Title>
             {title}
@@ -113,7 +123,7 @@ export default function Story(props) {
           <StoryText>
             {ReactHtmlParser(
               marked(
-                chapter.body,
+                finalData.body,
                 { smartypants: true }
               )
             )}
@@ -121,7 +131,7 @@ export default function Story(props) {
         </Overflow>
       </RestyledContentHolder>
       <PictureHolder
-        text={textStatus}
+        showStoryText={showStoryText}
       >
         <Image
           alt="fantasy illustration"

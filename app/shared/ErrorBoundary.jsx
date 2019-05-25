@@ -19,8 +19,7 @@ export default class ErrorBoundary extends Component {
     const { children } = this.props;
     const errorText = initialLoad
       ? `Oops. I don't support your browser yet. Please try back with a modern 
-      version of Chrome, Firefox, or Safari. Here's my 4-1-1 in the meantime. 
-      Thanks!`
+      version of Chrome, Firefox, or Safari.`
       : 'Error! Try again or come back later.';
 
     if (hasError) {

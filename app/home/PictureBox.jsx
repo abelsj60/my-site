@@ -85,6 +85,7 @@ export default function PictureBox(props) {
 
             // Set transition to '1' after the first call,
             // so toggle won't re-run on the second call.
+            // (Two images = two transitionEnd events.)
 
             trackTransitionEnd();
             boundHandleClickForHome('toggleSpell');

@@ -30,32 +30,22 @@ const NavigationHed = styled.p`
 
 export default function ArticleOrReverieNav(props) {
   const {
-    bodyState,
-    boundHandleClickForApp,
-    data,
-    location,
-    params
+    contentState,
+    boundHandleClickForApp
   } = props;
-  const currentPath = location.pathname.split('/');
-  const isReverie = currentPath[1] === 'reverie';
-  let index;
+  const {
+    allContentData,
+    caller,
+    finalData
+  } = contentState;
 
-  if (currentPath[2] !== 'menu') {
-    index = params.headlineToIndex();
-  } else {
-    if (isReverie) {
-      index = bodyState.indexForReverieData;
-    } else {
-      index = bodyState.indexForArticleData;
-    }
-  }
-
-  const currentHed = normalize(data[index].attributes.headline);
+  const isReverie = caller === 'reverie';
+  const currentHed = normalize(finalData.attributes.headline);
 
   return (
     <UnorderedList>
       <Mapper
-        mapData={data}
+        mapData={allContentData}
         render={
           (articleOrReverie, idx) => {
             const {

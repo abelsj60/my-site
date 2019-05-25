@@ -42,7 +42,7 @@ export default class JournalismParams extends Params {
 
     if (
       this.publication
-      && headlineParamIsUndefined
+        && headlineParamIsUndefined
     ) {
       const firstHedToMatchPublication = this._searchData.find(
         a => this._normalizeParam(

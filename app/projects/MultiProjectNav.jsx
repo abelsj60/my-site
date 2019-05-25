@@ -15,28 +15,19 @@ const Graf = styled.p`
 `;
 
 export default function DesktopProjectNav(props) {
-  const {
-    bodyState,
-    data
-  } = props;
-
-  // Must use bodyState because the '/menu' url doesn't
-  // have the project and thumbnail number in it.
-
-  const indexForProjectData = bodyState.indexForProjectData;
-  const finalData = data;
+  const { contentState } = props;
+  const { allContentData } = contentState;
 
   return (
     <RestyledList>
       <Mapper
-        mapData={finalData}
+        mapData={allContentData}
         render={
-          (project, idx) => {
+          (mappedProject, idx) => {
             const {
               projectName,
               type
-            } = project.attributes;
-            const lastGroup = idx === finalData.length - 1;
+            } = mappedProject.attributes;
 
             return (
               <li
@@ -47,9 +38,8 @@ export default function DesktopProjectNav(props) {
                 </Graf>
                 <ProjectNav
                   {...props}
-                  activeGroup={indexForProjectData === idx} // active group
-                  lastGroup={lastGroup} // conditional CSS
-                  project={project} // attributes
+                  mappedProjectIndex={idx}
+                  mappedProject={mappedProject}
                 />
               </li>
             );

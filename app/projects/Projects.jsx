@@ -1,4 +1,5 @@
 import { isIE } from 'react-device-detect';
+import ImageLoader from '../shared/ImageLoader.jsx';
 import Main from '../primitives/Main.jsx';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Mapper from '../shared/Mapper.jsx';
@@ -63,27 +64,32 @@ const ImageHolder = styled.div`
   background-color: ${p => p.theme.colors.reverieBlue};
 `;
 const Image = styled.img`
+  opacity: ${p => p.imageLoaded ? '1' : '0'};
+  z-index: -1;
   // The main image should shrink proportionally, i.e.,
-  // don't scale and center it w/n the element 
+  // don't scale and center it w/n the element.
   width: 100%;
   height: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  ${!isIE && 'flex: 1;'} // Overflow shrinks in IE if this isn't set for at least one child
+  // Overflow shrinks in IE if flex isn't set for > 1 child
+  ${!isIE && 'flex: 1;'} // **DOUBLE CHECK!
   vertical-align: top;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, .3);
 `;
 
 export default function Projects(props) {
   const {
-    data,
-    params
+    appState,
+    boundHandleClickForContentLoader,
+    contentState
   } = props;
-
-  const indexForProjectData = params.projectNameToIndex();
-  const indexForProjectPics = params.projectThumbnailToIndex();
-  const project = data[indexForProjectData];
-
+  const { pinchZoomed } = appState;
+  const {
+    finalData,
+    imageLoaded,
+    thumbnailIndex
+  } = contentState;
   const {
     captions,
     full,
@@ -91,18 +97,19 @@ export default function Projects(props) {
     showTheseAttributes,
     type,
     zoomed
-  } = project.attributes;
-  const caption = captions[indexForProjectPics];
+  } = finalData.attributes;
+  const caption = captions[thumbnailIndex];
 
-  // Get the larger res image if: a. desktop or b. pinchZoomed.
+  // Larger res ('zoomed') image if:
+  //  a. desktop,
+  //  b. pinchZoomed.
 
   const source =
-    !isMobile || props.appState.pinchZooomed
-      ? zoomed[indexForProjectPics]
-      : full[indexForProjectPics];
-
+      !isMobile || pinchZoomed
+        ? zoomed[thumbnailIndex]
+        : full[thumbnailIndex];
   const attributeArray = showTheseAttributes.map(
-    name => project.attributes[name]
+    name => finalData.attributes[name]
   );
 
   return (
@@ -115,9 +122,12 @@ export default function Projects(props) {
           <MenuButton
             {...props}
           />
+          <ImageLoader
+            imageLoaded={imageLoaded}
+          />
           <ProjectNav
             {...props}
-            project={project} // attributes
+            imageLoaded={imageLoaded}
           />
         </Shelf>
         <Overflow>
@@ -136,8 +146,8 @@ export default function Projects(props) {
                     <Hed>
                       {showTheseAttributes[idx][0]
                         .toUpperCase()
-                        + showTheseAttributes[idx]
-                          .slice(1)}
+                          + showTheseAttributes[idx]
+                            .slice(1)}
                     </Hed>
                     <Graf>
                       {text}
@@ -148,11 +158,15 @@ export default function Projects(props) {
             }
           />
           <Figure>
-            <Caption>{caption}</Caption>
+            <Caption>
+              {caption}
+            </Caption>
             <ImageHolder>
               <Image
                 alt="mainPic"
                 src={source}
+                imageLoaded={imageLoaded}
+                onLoad={boundHandleClickForContentLoader}
               />
             </ImageHolder>
           </Figure>

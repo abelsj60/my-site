@@ -46,32 +46,26 @@ const Line = styled.div`
 
 export default function ChapterNav(props) {
   const {
-    bodyState,
     boundHandleClickForApp,
-    data,
-    location,
-    params
+    contentState
   } = props;
-  let indexForChapterData;
-
-  if (location.pathname.split('/')[2] !== 'menu') {
-    indexForChapterData = params.titleToIndex();
-  } else {
-    indexForChapterData = bodyState.indexForChapterData;
-  }
+  const {
+    allContentData,
+    chapterIndex
+  } = contentState;
 
   return (
     <Nav>
       <StyledList>
         <Mapper
-          mapData={data}
+          mapData={allContentData}
           render={
             (_chapter, idx) => {
               const normalizedTitle = normalize(
-                data[idx].attributes.title
+                allContentData[idx].attributes.title
               );
-              const dot =
-                indexForChapterData === idx
+              const dotType =
+                chapterIndex === idx
                   ? dotFull
                   : dotEmpty;
 
@@ -85,7 +79,7 @@ export default function ChapterNav(props) {
                   >
                     <SelectorContainer>
                       <Selector
-                        image={dot}
+                        image={dotType}
                         num={idx}
                       />
                     </SelectorContainer>

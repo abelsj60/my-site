@@ -59,33 +59,26 @@ const BylineOrDate = styled.p`
 `;
 
 export default function ArticleOrReverie(props) {
+  const { contentState } = props;
   const {
-    data,
-    location,
-    params
-  } = props;
-  const currentPath = location.pathname.split('/');
-  const isReverie = currentPath[1] === 'reverie';
-
-  const index = params.headlineToIndex();
-
-  const article = data[index];
+    caller,
+    finalData
+  } = contentState;
   const {
     date,
     headline,
     position,
     publication
-  } = article.attributes;
-  let bylineOrDate;
-  let reverieOrPublicationAsDek;
-
-  if (isReverie) {
-    bylineOrDate = date;
-    reverieOrPublicationAsDek = 'Reverie';
-  } else {
-    bylineOrDate = `by James Erik Abels | ${position}`;
-    reverieOrPublicationAsDek = publication;
-  }
+  } = finalData.attributes;
+  const isReverie = caller === 'reverie';
+  const publicationOrReverie =
+    caller !== 'reverie'
+      ? publication
+      : 'Reverie';
+  const bylineOrDate =
+    caller !== 'reverie'
+      ? `by James Erik Abels | ${position}`
+      : date;
 
   return (
     <Main
@@ -101,7 +94,7 @@ export default function ArticleOrReverie(props) {
         </Shelf>
         <Overflow>
           <Dek>
-            {reverieOrPublicationAsDek}
+            {publicationOrReverie}
           </Dek>
           <Hed>
             {headline}
@@ -112,7 +105,7 @@ export default function ArticleOrReverie(props) {
           <Text>
             {ReactHtmlParser(
               marked(
-                article.body,
+                finalData.body,
                 { smartypants: true }
               )
             )}

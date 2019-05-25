@@ -26,10 +26,10 @@ export default class ClickHandling {
 
     switch (this._component) {
       case 'app':
-        selectedHandler = this._handleClickForAppComponent;
+        selectedHandler = this._handleClickForApp;
         break;
       case 'body':
-        selectedHandler = this._handleClickForBodyComponent;
+        selectedHandler = this._handleClickForBody;
         break;
       case 'header':
         selectedHandler = this._handleClickForHeader;
@@ -40,6 +40,8 @@ export default class ClickHandling {
       case 'charm':
         selectedHandler = this._handleCharm;
         break;
+      case 'contentLoader':
+        selectedHandler = this._handleClickForContentLoader;
       default:
         break;
     }
@@ -49,7 +51,7 @@ export default class ClickHandling {
 
   // Handles onClicks on App (top-level state).
 
-  _handleClickForAppComponent() {
+  _handleClickForApp() {
     return (updateValue, valueOne, valueTwo) => {
       const {
         currentCaller,
@@ -186,7 +188,7 @@ export default class ClickHandling {
 
   // Handles onClicks on Body (updates state for reloads).
 
-  _handleClickForBodyComponent(self) {
+  _handleClickForBody(self) {
     return (valueOne, valueTwo) => {
       const stateToUpdate = {};
 
@@ -210,6 +212,21 @@ export default class ClickHandling {
       }
 
       return this.setState(stateToUpdate);
+    };
+  }
+
+  // Handles onClicks for ContentLoader, if 'projects'
+
+  _handleClickForContentLoader() {
+    return () => {
+      const {
+        caller,
+        imageLoaded
+      } = this.state;
+
+      if (caller === 'projects') {
+        this.setState({ imageLoaded: !imageLoaded });
+      }
     };
   }
 
@@ -278,12 +295,13 @@ export default class ClickHandling {
 
           break;
         case 'castSpell':
-          // The castSpell prop control styling during a turn.
-          // Note, the score never this the goal b/c we trigger
-          // the cast one before. DO NOT ADD 1 to score here.
+          // The castSpell prop controls styling during a turn.
+          // Note, the score never equals the goal b/c we cast
+          // at score + 1.
 
-          // In the current configuration, it noticeably
-          // slows down the background transition.
+          // Even so, DO NOT ADD 1 to score here. Anecdotally
+          // speaking, it noticeably slows down the
+          // background transition.
 
           stateToUpdate.castSpell = true;
 

@@ -56,7 +56,7 @@ module.exports = (_env, argv) => {
           }
         },
         {
-          test: /\.(png|jp(e*)g)$/,
+          test: /\.(gif|png|jp(e*)g)$/,
           loader: 'url-loader',
           options: {
             limit: 250000,

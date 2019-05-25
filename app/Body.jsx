@@ -42,8 +42,8 @@ export default class Body extends Component {
   }
 
   render() {
-    const eventHandling = new ClickHandling('body', this);
-    const boundHandleClickForBody = eventHandling.boundHandleClick;
+    const clickHandling = new ClickHandling('body', this);
+    const boundHandleClickForBody = clickHandling.boundHandleClick;
 
     // Optional params in React:
     // https://stackoverflow.com/a/35604855
