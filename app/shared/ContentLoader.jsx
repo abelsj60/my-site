@@ -88,8 +88,6 @@ export default class ContentLoader extends Component {
       thumbnailIndex: thumbnailIndex,
       headlineIndex: headlineIndex
     };
-
-    console.log('state:', this.state.caller, location.caller);
   }
 
   render() {
@@ -98,13 +96,7 @@ export default class ContentLoader extends Component {
       isNotFound,
       needsRedirect
     } = this.state;
-    let boundHandleClickForContentLoader;
     const referrer = new Referrer(this.props);
-
-    if (caller === 'projects') {
-      const clickHandling = new ClickHandling('contentLoader', this);
-      boundHandleClickForContentLoader = clickHandling.boundHandleClick;
-    }
 
     return needsRedirect
       ? (
@@ -151,6 +143,13 @@ export default class ContentLoader extends Component {
               render={
                 () => {
                   const PageContent = this.getPage(caller);
+                  let boundHandleClickForContentLoader;
+
+                  if (caller === 'projects') {
+                    const clickHandling = new ClickHandling('contentLoader', this);
+                    boundHandleClickForContentLoader = clickHandling.boundHandleClick;
+                  }
+
                   return (
                     <PageContent
                       {...this.props}
