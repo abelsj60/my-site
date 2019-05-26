@@ -62,14 +62,12 @@ const Image = styled.img`
 
 export default function ProjectNav(props) {
   const {
-    appState,
     boundHandleClickForApp,
     contentState,
     imageLoaded,
     mappedProject,
     mappedProjectIndex
   } = props;
-  const { isMenu } = appState;
   const {
     allContentData,
     finalData,
@@ -79,6 +77,7 @@ export default function ProjectNav(props) {
     projectName,
     projectThumbnail
   } = finalData.attributes;
+  const isMenu = mappedProjectIndex !== undefined;
 
   const finalGroup = isMenu
     && mappedProjectIndex === allContentData.length - 1;

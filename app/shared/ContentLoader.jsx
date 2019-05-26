@@ -146,8 +146,11 @@ export default class ContentLoader extends Component {
                   let boundHandleClickForContentLoader;
 
                   if (caller === 'projects') {
-                    const clickHandling = new ClickHandling('contentLoader', this);
-                    boundHandleClickForContentLoader = clickHandling.boundHandleClick;
+                    const clickHandling = new ClickHandling(
+                      'contentLoader', this
+                    );
+                    boundHandleClickForContentLoader =
+                      clickHandling.boundHandleClick;
                   }
 
                   return (
@@ -155,7 +158,9 @@ export default class ContentLoader extends Component {
                       {...this.props}
                       overflowRef={this.overflowRef}
                       contentState={this.state}
-                      boundHandleClickForContentLoader={boundHandleClickForContentLoader}
+                      boundHandleClickForContentLoader={
+                        boundHandleClickForContentLoader
+                      }
                     />
                   );
                 }
@@ -242,15 +247,15 @@ export default class ContentLoader extends Component {
       this.setState(stateToUpdate);
 
       // The scrollTop reset is not currently applied to
-      // the '/projects', and '/journalism' routes because
-      // they can only be changed via '/menu'.
+      // the /projects, and /journalism routes b/c
+      // they can only be changed via /menu.
 
-      // It works for '/chapter', because it's changed
-      // from the '/chapter' route.
+      // It works for /chapter, because it's changed
+      // from w/n the /chapter route.
 
       // If you want to expand this to include the
-      // /projects and '/journalism', filter out
-      // '/menu' paths, as they don't have an
+      // /projects and /journalism, filter out
+      // /menu paths, as they don't have an
       // overflowRef, so will kick an error.
 
       if (location.caller === 'chapter') {

@@ -8,14 +8,6 @@ import Shelf from '../shared/Shelf.jsx';
 export default function Menu(props) {
   const { children } = props;
 
-  /** Props explanation
-   *
-   * 1. props (above) go to <MenuButton />
-   * 2. { children } get props, params, and data
-   * from cD.getMenuContent(props, params)
-   * in Contentloader.jsx
-   */
-
   return (
     <Main>
       <ContentHolder>
@@ -26,7 +18,9 @@ export default function Menu(props) {
             {...props}
           />
         </Shelf>
-        <Overflow>{children}</Overflow>
+        <Overflow>
+          {children}
+        </Overflow>
       </ContentHolder>
     </Main>
   );

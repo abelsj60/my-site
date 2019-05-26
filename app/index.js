@@ -1,4 +1,3 @@
-// import '@babel/polyfill'; // Must be called before all code!
 import App from './App.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ErrorBoundary from './shared/ErrorBoundary.jsx';
