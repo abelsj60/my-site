@@ -43,7 +43,7 @@ export default class Home extends Component {
       score: 0, // Used to select an active Charm and cast spell
       pattern: pattern,
       activeCharm: pattern[0], // Initial Charm is always [0].
-      eventType: 'click'
+      eventType: 'click' // Event that triggered Charm
     };
 
     this.trackTransitionEnd = this.trackTransitionEnd.bind(this);
@@ -140,13 +140,34 @@ export default class Home extends Component {
       const hcCharm = new ClickHandling('charm', this);
       const boundHandleCharm = hcCharm.boundHandleClick;
 
+      // Update the eventType on State if the Charm was
+      // touched. This allows our onMouseDown listener
+      // to reject its call due to even propagation.
+
+      // There is a bug in React that prevents us from
+      // simply calling event.stopPropagation() here.
+
+      // Dan Abramov offers a solution, however, it
+      // does not seem to work cleanly here. I've
+      // come up w/my own hybridized approach.
+
+      // I add handlers as he suggests so as to avoid
+      // React's own propagation, then use State to
+      // reject calls to mouseDown handler touch.
+
+      // https://github.com/facebook/react/issues/9809#issuecomment-413978405
+
       this.setState({ eventType: 'touch' });
       boundHandleCharm(this.state.activeCharm === num);
     };
   }
 
   componentDidUpdate() {
-    // https://github.com/facebook/react/issues/9809#issuecomment-413978405
+    // Let's add our eventHandler whenever cDU runs as a result of
+    // toggling NameTag (which causes refs to be added to our
+    // charmsRef array mounting Charms.
+
+    // See full explanation in handleTouchStart.
 
     if (this.charmRefs[0].current) {
       this.charmRefs.forEach(

@@ -158,7 +158,7 @@ export default function Charms(props) {
                   key={idx}
                   isActive={isActive}
                   isReady={isReady}
-                  ref={charmRefs[idx]}
+                  ref={charmRefs[idx]} // Add a ref to each Charm when mounted
                 >
                   <InnerRing
                     isActive={isActive}

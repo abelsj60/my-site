@@ -305,10 +305,16 @@ export default class ClickHandling {
 
           stateToUpdate.castSpell = true;
 
+          // Reset the eventType to 'click' if it was
+          // last 'touch'-ed. This property prevents
+          // unexpected and unwanted propagation.
+
           if (eventType === 'touch') {
             stateToUpdate.eventType = 'click';
           }
           break;
+        case 'setTouchEvent':
+          stateToUpdate.eventType = 'touch';
         case 'resetEventType':
           stateToUpdate.eventType = 'click';
       }
