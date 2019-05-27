@@ -1,4 +1,5 @@
 import Button from '../shared/Button.jsx';
+import FooterAlert from './FooterAlert.jsx';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -122,6 +123,9 @@ export default function FooterContainer(props) {
             ? 'Look'
             : 'Read'
         }
+      />
+      <FooterAlert
+        {...props}
       />
       <TextBox>
         <RestyledLink

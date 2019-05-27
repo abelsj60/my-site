@@ -194,7 +194,10 @@ class App extends Component {
       showStoryText: true, // Show story text, picture if false
       pinchZoomed: false, // We're zoomed! or not.
       isZooming: false, // True when pinch zooming is ongoing
-      isAfterTouch: false // Resize w/clientHeight when true
+      isAfterTouch: false, // Resize w/clientHeight when true
+      footerAlert:
+        isMobileSafari
+          && height < this.minAllowedHeight
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -221,7 +224,10 @@ class App extends Component {
           mediaQueries,
           pageHeight: this.state.height.toString(),
           blur: blurControl.regular,
-          blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms
+          blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms,
+          // Small iPhones raise their app bar when touching the Footer area.
+          // This test adds instructions to use these buttons (slide up).
+          showFooterAlert: this.state.footerAlert
         }}
       >
         <Fragment
@@ -350,7 +356,7 @@ class App extends Component {
       this.isAfterTouchWhenScrollingPage = true;
       this.resizeTimeoutId2 = setTimeout(() => {
         this.isAfterTouchWhenScrollingPage = false;
-      }, 350);
+      }, 450);
     }
   }
 
@@ -437,11 +443,21 @@ class App extends Component {
       scrollHandling.resetWindowTop();
     }
 
+    // Manage FooterAlert on small iPhones
+
+    if (isMobileSafari) {
+      this.setState({
+        footerAlert: window.innerHeight < this.minAllowedHeight
+      });
+    }
+
     // Resize if height changes and newHeight > this.minAllowedHeight.
+    // Note, mobile Brave slips through this test on /home. The image
+    // 'resize' and Brave then resizes. No fix for now.
 
     if (
       newHeight === this.state.height
-        || !(newHeight > this.minAllowedHeight)
+        || this.minAllowedHeight > newHeight
     ) {
       ReactGA.event({
         category: 'App state',
