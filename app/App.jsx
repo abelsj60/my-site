@@ -445,7 +445,7 @@ class App extends Component {
 
     // Manage FooterAlert on small iPhones
 
-    if (isMobileSafari) {
+    if (isMobileSafari && window.navigator.standalone) {
       this.setState({
         footerAlert: window.innerHeight < this.minAllowedHeight
       });
