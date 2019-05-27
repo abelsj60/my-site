@@ -342,10 +342,6 @@ class App extends Component {
       // We prevent this by setting afterTouch in order to tell
       // updateHeight not to reset the scrollTop).
 
-      // this undesired resize (which causes a 'jump' by setting
-      // afterTouch to true b/c updateHeight won't reset the
-      // scrollTop when afterTouch is set to true).
-
       clearTimeout(this.resizeTimeoutId2); // Debounce!
       this.setState({ isAfterTouch: true });
       this.resizeTimeoutId2 = setTimeout(() => {
