@@ -195,6 +195,8 @@ class App extends Component {
       pinchZoomed: false, // We're zoomed! or not.
       isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false, // Resize w/clientHeight when true
+      // Small iPhones raise their app bar when touching the Footer area.
+      // This test adds instructions to use these buttons (slide up).
       footerAlert:
         isMobileSafari
           && height < this.minAllowedHeight
@@ -225,8 +227,6 @@ class App extends Component {
           pageHeight: this.state.height.toString(),
           blur: blurControl.regular,
           blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms,
-          // Small iPhones raise their app bar when touching the Footer area.
-          // This test adds instructions to use these buttons (slide up).
           showFooterAlert: this.state.footerAlert
         }}
       >
