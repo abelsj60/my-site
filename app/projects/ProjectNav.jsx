@@ -4,9 +4,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
-import {
-  isIE
-} from 'react-device-detect';
+import { isIE } from 'react-device-detect';
 
 const Group = styled(UnorderedList)`
   flex: ${p => p.imageLoaded && !p.isMenu && '1'};
@@ -53,7 +51,7 @@ const Image = styled.img`
   max-width: 100%;
   vertical-align: top;
   // Default is 'stretch', no good! (but it's not in a flex, so...?) **DOUBLE CHECK!
-  // align-self: center; 
+  align-self: center; 
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     max-height: ${p => !p.isMenu && '30px'};

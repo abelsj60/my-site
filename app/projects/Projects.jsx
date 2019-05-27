@@ -1,4 +1,3 @@
-import { isIE } from 'react-device-detect';
 import ImageLoader from '../shared/ImageLoader.jsx';
 import Main from '../primitives/Main.jsx';
 import ContentHolder from '../primitives/ContentHolder.jsx';
@@ -41,19 +40,11 @@ const Graf = styled.p`
   margin-left: 2px; 
 `;
 const Figure = styled.figure`
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
   margin: 0px;
   padding-top: 15px;
   border-top: 1px solid ${p => p.theme.colors.blueTwo};
-
-  // PROBABLY DELETE WHEN DONE:
-  // Define width on IE/FF to expand main image properly
-  // ${(isIE) && 'width: 65rem;'}
 `;
 const Caption = styled.figcaption`
-  display: flex;
   margin-bottom: 10px;
   font-size: ${p => p.theme.fontSizes.seven};
   line-height: 1.5;
@@ -65,15 +56,8 @@ const ImageHolder = styled.div`
 `;
 const Image = styled.img`
   opacity: ${p => p.imageLoaded ? '1' : '0'};
-  z-index: -1;
-  // The main image should shrink proportionally, i.e.,
-  // don't scale and center it w/n the element.
   width: 100%;
-  height: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  // Overflow shrinks in IE if flex isn't set for > 1 child
-  ${!isIE && 'flex: 1;'} // **DOUBLE CHECK!
+  height: auto;
   vertical-align: top;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, .3);
 `;
@@ -101,8 +85,8 @@ export default function Projects(props) {
   const caption = captions[thumbnailIndex];
 
   // Larger res ('zoomed') image if:
-  //  a. desktop,
-  //  b. pinchZoomed.
+  //  a. desktop
+  //  b. pinchZoomed
 
   const source =
       !isMobile || pinchZoomed

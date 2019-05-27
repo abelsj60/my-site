@@ -313,7 +313,7 @@ export default class ClickHandling {
             stateToUpdate.eventType = 'click';
           }
           break;
-        case 'setTouchEvent':
+        case 'setTouchEvent': // Not currently used, but valid
           stateToUpdate.eventType = 'touch';
         case 'resetEventType':
           stateToUpdate.eventType = 'click';

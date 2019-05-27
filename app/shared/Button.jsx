@@ -31,7 +31,9 @@ export default function Button(props) {
       className={className}
       onClick={clickFunction}
     >
-      <Text>{text}</Text>
+      <Text>
+        {text}
+      </Text>
     </Structure>
   );
 }
