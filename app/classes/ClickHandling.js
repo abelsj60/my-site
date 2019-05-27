@@ -156,11 +156,12 @@ export default class ClickHandling {
           }
 
           // We'll always hide the illustration when switching sections,
-          // but not if going to or leaving /reverie.
+          // but not if going to, leaving, or changing the /reverie.
 
           if (
-            !(currentCaller === 'chapter' && valueOne === 'reverie')
-            && !(currentCaller === 'reverie' && valueOne === 'chapter')
+            valueOne !== undefined // Undefined when switching reveries
+              && !(currentCaller === 'chapter' && valueOne === 'reverie')
+              && !(currentCaller === 'reverie' && valueOne === 'chapter')
           ) {
             stateToUpdate.showStoryText = true;
           }
@@ -330,7 +331,7 @@ export default class ClickHandling {
       const { score } = this.state;
       const abracadabra = score + 1 === this.goal; // Magic!
 
-      // The Charm isn't active, or it's time for magic.
+      // Either the Charm's inactive, or it's time for magic.
 
       if (!isActive || isActive && abracadabra) {
         // We can invoke ClickHandling with the proper 'this' b/c

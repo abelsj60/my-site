@@ -164,9 +164,14 @@ class App extends Component {
     ReactGA.initialize('UA-137902767-1');
     ReactGA.pageview(pathname + search); // Tallies initial request
 
-    this.minAllowedHeight = 430; // Lower limit for resizing
+    // Lower limit for resizing — (iPhone/SE form
+    // factor uses default height, wider phones
+    // use their true height).
+
+    this.minAllowedHeight = 324;
     this.defaultHeightWhenTooSmall = 568; // Arbitrary (full iPhone SE width)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
+    this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
 
     this.state = {
       currentCaller:
@@ -304,15 +309,17 @@ class App extends Component {
       // This is a more effective check than trying to
       // add points as coordinates or height/width.
 
+      const stateToUpdate = {
+        isAfterTouch: true,
+        isZooming: true
+      };
+
       if (
         window.pageXOffset > 0
           && window.pageYOffset > 0
       ) {
-        this.setState({
-          pinchZoomed: true,
-          isZooming: true,
-          isAfterTouch: true
-        }); // Set zoom state
+        stateToUpdate.pinchZoomed = true; // Set zoom state
+        this.setState(stateToUpdate);
       } else if (
         // Hard to hit 0 on the nose, so
         // let's look for negatives.
@@ -320,12 +327,30 @@ class App extends Component {
         window.pageXOffset <= 0
           && window.pageYOffset <= 0
       ) {
-        this.setState({
-          pinchZoomed: false, // Reset zoom state
-          isZooming: true,
-          isAfterTouch: true
-        });
+        stateToUpdate.pinchZoomed = false; // Set zoom state
+        this.setState(stateToUpdate);
       }
+    } else {
+      // Let's prevent a resize when an oversized page is being scrolled.
+
+      // This happens when the current screenHeight is too narrow. In
+      // this case, we'll use the default height. When a user scrolls
+      // in default height, a resize event might fire when the user
+      // reaches the top or bottom of the page. This can cause
+      // an undesired 'jump' up when scrolling downward.
+
+      // We prevent this by setting afterTouch in order to tell
+      // updateHeight not to reset the scrollTop).
+
+      // this undesired resize (which causes a 'jump' by setting
+      // afterTouch to true b/c updateHeight won't reset the
+      // scrollTop when afterTouch is set to true).
+
+      clearTimeout(this.resizeTimeoutId2); // Debounce!
+      this.setState({ isAfterTouch: true });
+      this.resizeTimeoutId2 = setTimeout(() => {
+        this.setState({ isAfterTouch: false });
+      }, 275);
     }
   }
 
@@ -400,11 +425,22 @@ class App extends Component {
       return false;
     }
 
-    // Only resize when height changes, if it's > 350.
+    // Ensure the window top at zero after resize change.
+    // (This trigers another resize if height changes.)
+
+    if (
+      window.pageYOffset > 0
+        && !this.state.isAfterTouch // Prevent resize when user scrolls oversized page.
+    ) {
+      const scrollHandling = new ScrollHandling(location);
+      scrollHandling.resetWindowTop();
+    }
+
+    // Resize if height changes and newHeight > this.minAllowedHeight.
 
     if (
       newHeight === this.state.height
-        || newHeight <= this.minAllowedHeight
+        || !(newHeight > this.minAllowedHeight)
     ) {
       ReactGA.event({
         category: 'App state',
@@ -416,14 +452,6 @@ class App extends Component {
       });
 
       return false;
-    }
-
-    // Ensure the window top at zero after resize change.
-    // (This trigers another resize if height changes.)
-
-    if (window.pageYOffset > 0) {
-      const scrollHandling = new ScrollHandling(location);
-      scrollHandling.resetWindowTop();
     }
 
     // Update page height when these factors are true:

@@ -247,10 +247,12 @@ export default class Header extends Component {
     const isWasReverie =
       currentCaller === 'reverie'
         || lastCaller === 'reverie';
+    const sameSection =
+      currentCaller === prevProps.appState.currentCaller;
 
     if (
       location.justChanged
-        && !isWasReverie
+        && (!isWasReverie && !sameSection)
         && this.timeoutId !== undefined
     ) {
       const hcForApp = new ClickHandling('header', this);

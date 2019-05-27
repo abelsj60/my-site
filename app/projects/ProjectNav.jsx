@@ -50,8 +50,6 @@ const Image = styled.img`
   max-height: 100%;
   max-width: 100%;
   vertical-align: top;
-  // Default is 'stretch', no good! (but it's not in a flex, so...?) **DOUBLE CHECK!
-  align-self: center; 
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     max-height: ${p => !p.isMenu && '30px'};
