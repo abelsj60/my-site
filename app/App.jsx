@@ -168,7 +168,7 @@ class App extends Component {
     // factor uses default height, wider phones
     // use their true height).
 
-    this.minAllowedHeight = 324;
+    this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px.
     this.defaultHeightWhenTooSmall = 568; // Arbitrary (iPhone SE height)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
@@ -356,7 +356,7 @@ class App extends Component {
       this.isAfterTouchWhenScrollingPage = true;
       this.resizeTimeoutId2 = setTimeout(() => {
         this.isAfterTouchWhenScrollingPage = false;
-      }, 450);
+      }, 500);
     }
   }
 
@@ -443,7 +443,7 @@ class App extends Component {
       scrollHandling.resetWindowTop();
     }
 
-    // Manage FooterAlert on small iPhones
+    // Manage FooterAlert on small iPhones.
 
     if (isMobileSafari && !window.navigator.standalone) {
       this.setState({
