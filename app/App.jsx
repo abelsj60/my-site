@@ -169,9 +169,13 @@ class App extends Component {
     // use their true height).
 
     this.minAllowedHeight = 324;
-    this.defaultHeightWhenTooSmall = 568; // Arbitrary (full iPhone SE width)
+    this.defaultHeightWhenTooSmall = 568; // Arbitrary (iPhone SE height)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
+    // Prevent resize when scrolling oversized page. Not using state
+    // b/c it causes overflowing divs (w/content in them) to 'jump'
+    // when scrolling.
+    this.isAfterTouchWhenScrollingPage = false;
 
     this.state = {
       currentCaller:
@@ -343,10 +347,10 @@ class App extends Component {
       // updateHeight not to reset the scrollTop).
 
       clearTimeout(this.resizeTimeoutId2); // Debounce!
-      this.setState({ isAfterTouch: true });
+      this.isAfterTouchWhenScrollingPage = true;
       this.resizeTimeoutId2 = setTimeout(() => {
-        this.setState({ isAfterTouch: false });
-      }, 275);
+        this.isAfterTouchWhenScrollingPage = false;
+      }, 350);
     }
   }
 
@@ -426,7 +430,8 @@ class App extends Component {
 
     if (
       window.pageYOffset > 0
-        && !this.state.isAfterTouch // Prevent resize when user scrolls oversized page.
+        // Prevent resize when user scrolls oversized page.
+        && !this.isAfterTouchWhenScrollingPage
     ) {
       const scrollHandling = new ScrollHandling(location);
       scrollHandling.resetWindowTop();
