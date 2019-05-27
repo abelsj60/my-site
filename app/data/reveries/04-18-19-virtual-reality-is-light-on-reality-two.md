@@ -13,7 +13,7 @@ React is a free javascript framework from Facebook that makes it easy for Web de
 
 React has a lot of opinions about how to program software.
 
-(It alos has an army of followers who have equally strong opinions about it. I'll belabor the whole thing as soon as I know enough to have an opinion about why it's so horrible to have an opinion.)
+(It also has an army of followers who have equally strong opinions about it. I'll belabor the whole thing as soon as I know enough to have an opinion about why it's so horrible to have an opinion.)
 
 Anyway, people refer to React's opinions as "the React way." 
 
