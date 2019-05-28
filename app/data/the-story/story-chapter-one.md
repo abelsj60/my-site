@@ -9,7 +9,7 @@ The cardboard fort crumbled.
 
 A small fairy destroyed it after zipping through the wide-eyed boy's window with the force of a cannonball. 
 
-"Want to find a glowing purple lamp," she asked, beaming as she floated eye-level.
+"Want to find a glowing gold lamp," she asked, beaming as she floated eye-level.
 
 "Of course," he said. "What do I do?"
 
@@ -23,10 +23,10 @@ Then, late one night, the fairy sighed.
 
 The boy began to sniffle.
 
-She smiled kindly, then knocked twice on the floor between them. A secret door in the floor opened. The fairy dove in, disappearing for what felt like eons. The boy's eyes were heavy when she flew out, clutching the very thing they'd sought — a golden lamp, etched by purple incantations. 
+She smiled kindly, then knocked twice on the floor between them. A secret door in the floor opened. The fairy dove in, disappearing for what seemed like hours. The boy's eyes were heavy when she flew out, clutching the very thing they'd sought — a gold lamp, etched by purple incantations. 
 
-"The adventure matters most," she said as she read one aloud. 
+"The adventure," she said. "It matters most." 
 
-"In bright day and black night, through tall tale and purple light, rub me twice and release my might, if..." Too late. 
+Then she read a spell aloud. "In bright day and black night, through tall tale and purple light, rub me twice and release my might, if..." 
 
-He was out.
+Too late. He was out.

@@ -16,7 +16,7 @@ Eleven flights up, the young man logged into practical magic.
 
 Computer code covered screens across the floor. It was smart and austere, but lacked something important. 
 
-"Purpose," he said, leaning intently toward the logic on screen.
+"Purpose," he said, leaning toward the logic on screen.
 
 When he looked up, he stared out at a city drenched in warm autumn light. A small blur zipped across the horizon. The young man smiled to himself. 
 
@@ -24,12 +24,8 @@ When he looked up, he stared out at a city drenched in warm autumn light. A smal
 
 Memories of impractical magic washed over him as code filled his screen in pixelated color. Time melted away.
 
-Hours later, when the midnight bells rang, the young man was once again racing across far-off desert sands. Jinns, fairies, and golden lands lay just beyond his outstretched hands.
+Hours later, a sprite hung happily over him as he dreamt of far-off lands, Jinns, fairies, and desert sands just within reach of his outstretched hands.
 
-Back home, a shining sprite hung happily over him as he slept. 
+Back home, the sprite landed astride the lamp beside him. 
 
-An electric blue bolt greeted her as she landed atop the dark lamp by his side. Its gold metal grew warm and took on a bright neon glow. 
-
-Clear red rays then etched something to view.
-
-But, that's the start of another story...
+Time again for adventure.
