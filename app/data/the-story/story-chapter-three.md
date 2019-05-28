@@ -30,6 +30,6 @@ The fairy yelled at the Jinn, banging its nose with a tiny fist. The Jinn roared
 
 Tension splintered. A strong purple glow lit the lamp, which lay forgotten on the floor. The room was bathed in color, charging it with the charm of possibility.
 
-And the young man woke with a start, the sound of a Jinn clapping thunder in his ears. A coding school Web site glowed on the computer beside him.
+The young man woke with a start, the sound of a Jinn clapping thunder in his ears. A coding school Web site glowed on the computer beside him.
 
 Fate, ever changing, was sealed anew.
