@@ -29,21 +29,19 @@ According to my eyes, there's a 17px gap between page content and the on-screen 
 
 So I added "refs" to my elements, and examined their .offsetWidth and .getBoundingClientRect() properties to determine their width. 
 
-Here's the problem — both properties reported that the offending element was correctly sized. 
-
-My eyes tell me this isn't true. Sigh.
+Here's the problem — both properties reported that the offending element was correctly sized. My eyes tell me this isn't true. Sigh.
 
 So what gives?! I'm not entirely sure.
 
-I thinkit's a painting problem. React generates HTML behind the scenes, imagines the results, then paints it to screen. The width is right at the time of generation. Unfortunately, React doesn't seem to see what happens AFTER the paint.
+I think it's a painting problem. React generates HTML behind the scenes, imagines the results, then paints it to screen. The width is right at the time of generation. Unfortunately, React doesn't seem to see what happens AFTER the paint.
 
 I'm pretty sure because someone on StackOverflow lead me to this [issue on the React development site](https://github.com/facebook/react/issues/2659). 
 
 Someone suggested trying to use requestAnimcationFrame() as an alternative. It runs after HTML has been painted to screen by the browser. 
 
-Suffice it to say, this didn't work. Neither did any of the other things I tried over the course of, what, a two week period of time. 
+Suffice it to say, this didn't work. Neither did any of the other things I tried over the course of, what, a two week period of time?
 
-Given the last post's conclusion on virtual machiens, I've decided to chalk this up to ghost in the machine.
+Given the last post's conclusion on virtual machines, I've decided to chalk this up to a ghost in the machine.
 
 After all, who you gonna call?
 
