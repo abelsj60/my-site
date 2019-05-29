@@ -6,7 +6,7 @@ number: 4
 
 The Six train sped through darkness.
 
-The young man climbed out at Wall Street. Modern magicians thronged the way as he snaked through back alleys toward Hanover Square. 
+The young man climbed out at Wall Street. Financial magicians thronged the way as he snaked through back alleys toward Hanover Square. 
 
 A white tower soared skyward. 
 
@@ -24,7 +24,7 @@ When he looked up, he stared out at a city drenched in warm autumn light. A smal
 
 Memories of impractical magic washed over him as code filled his screen in pixelated color. Time melted away.
 
-Hours later, a sprite hung happily over him as he dreamt of far-off lands, Jinns, fairies, and desert sands just within reach of his outstretched hands.
+Hours later, a sprite hung happily over him. He once again dreamed of far-off lands, Jinns, fairies, and desert sands just in reach of his outstretched hands.
 
 Back home, the sprite landed astride the lamp beside him. 
 

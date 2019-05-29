@@ -172,9 +172,11 @@ class App extends Component {
     this.defaultHeightWhenTooSmall = 568; // Arbitrary (iPhone SE height)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
+
     // Prevent resize when scrolling oversized page. Not using state
     // b/c it causes overflowing divs (w/content in them) to 'jump'
     // when scrolling.
+
     this.isAfterTouchWhenScrollingPage = false;
 
     this.state = {
@@ -227,7 +229,7 @@ class App extends Component {
           pageHeight: this.state.height.toString(),
           blur: blurControl.regular,
           blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms,
-          showFooterAlert: this.state.footerAlert
+          // showFooterAlert: this.state.footerAlert
         }}
       >
         <Fragment

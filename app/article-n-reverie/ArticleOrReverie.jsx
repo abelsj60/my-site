@@ -71,7 +71,7 @@ export default function ArticleOrReverie(props) {
     publication
   } = finalData.attributes;
   const isReverie = caller === 'reverie';
-  const publicationOrReverie =
+  const publicationOrReverieTag =
     caller !== 'reverie'
       ? publication
       : 'Reverie';
@@ -94,7 +94,7 @@ export default function ArticleOrReverie(props) {
         </Shelf>
         <Overflow>
           <Dek>
-            {publicationOrReverie}
+            {publicationOrReverieTag}
           </Dek>
           <Hed>
             {headline}
