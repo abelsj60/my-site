@@ -228,8 +228,7 @@ class App extends Component {
           mediaQueries,
           pageHeight: this.state.height.toString(),
           blur: blurControl.regular,
-          blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms,
-          // showFooterAlert: this.state.footerAlert
+          blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms
         }}
       >
         <Fragment

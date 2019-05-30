@@ -38,7 +38,7 @@ Methinks the virtual machine doth protest too much. Hard to tell because I can't
 
 Maybe I'm confronting the same situation here, my 13'ers little quirk.
 
-But...I've a feeling its a nonexistent problem.
+But...I've a feeling it's a nonexistent problem.
 
 Time'll tell.
 

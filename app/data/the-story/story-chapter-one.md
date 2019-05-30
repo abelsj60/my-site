@@ -23,7 +23,7 @@ Then, late one night, the fairy sighed.
 
 The boy began to sniffle.
 
-She smiled kindly, then knocked twice on the floor between them. A secret door in the floor opened. The fairy dove in, disappearing for what seemed like hours. The boy's eyes were heavy when she flew out, clutching the very thing they'd sought — a little gold lamp, etched by purple incantations. 
+She smiled kindly, then knocked twice on the floor between them. A secret door opened. The fairy dove in, disappearing for what seemed like hours. The boy's eyes were heavy when she flew out, clutching the very thing they'd sought — a little gold lamp, etched by purple incantations. 
 
 "The adventure," she said, "is what matters most." 
 
