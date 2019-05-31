@@ -1,4 +1,4 @@
-import bio from '../data/about/home-page-about.md';
+import bio from '../data/home/home.md';
 import marked from 'marked';
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
@@ -109,6 +109,14 @@ export default function NameTag(props) {
     eventType,
     score
   } = homeState;
+  const {
+    attributes,
+    body
+  } = bio;
+  const {
+    motto,
+    name
+  } = attributes;
 
   const eventHandler = () => {
     if (eventType === 'touch') {
@@ -131,10 +139,10 @@ export default function NameTag(props) {
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >
       <Hed>
-        James Abels
+        {name}
       </Hed>
       <Motto>
-        Narrative coding and other adventures
+        {motto}
       </Motto>
       <Text
         isCasting={isCasting}
@@ -143,7 +151,7 @@ export default function NameTag(props) {
       >
         {ReactHtmlParser(
           marked(
-            bio.body,
+            body,
             { smartypants: true }
           )
         )}

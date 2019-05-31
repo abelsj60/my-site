@@ -1,4 +1,4 @@
-import bio from '../data/about/home-page-about.md';
+import bio from '../data/home/home.md';
 import React from 'react';
 import styled, { css } from 'styled-components';
 

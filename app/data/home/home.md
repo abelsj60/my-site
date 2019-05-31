@@ -1,6 +1,8 @@
 ---
 page: home
-type: long-description
+type: home
+name: James Abels
+motto:  Narrative coding and other adventures
 updated: 11-23-18
 boyInForegroundImage: https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png
 zoomedBoyInForegroundImage: ''
