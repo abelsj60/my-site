@@ -218,7 +218,10 @@ class App extends Component {
   handlePasswordSubmit(event) {
     event.preventDefault();
 
-    if (this.state.password === 'enter') {
+    if (
+      this.state.password === 'enter'
+        || this.state.password === 'Enter'
+    ) {
       this.setState({ isValidUser: true });
     }
   }
@@ -237,9 +240,9 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
-    return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
-      ?
-      <PasswordLogin
+    return process.env.NODE_ENV !== 'development'
+      && !this.state.isValidUser
+      ? <PasswordLogin
         appState={this.state}
         handlePasswordEntry={this.handlePasswordEntry}
         handlePasswordSubmit={this.handlePasswordSubmit}

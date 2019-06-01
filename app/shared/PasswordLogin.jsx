@@ -12,45 +12,57 @@ const FormHolder = styled.div`
   align-items: center;
   background-color: #fd1172;
 `;
-const PasswordForm = styled.form`
+const Form = styled.form`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const Label = styled.label`
-  margin-right: 10px;
+  margin-bottom: 15px;
+  font-size: 20px;
   color: white;
 `;
-const Submit = styled.div`
-  margin-left: 10px;
+const PasswordInput = styled.input`
+  font-size: 16px;
 `;
+const Submit = styled.div`
+  margin-top: 15px;
+`;
+const Enter = styled.input``;
 
 export default function PasswordLogin(props) {
   // https://stackoverflow.com/a/36683831
 
   return (
     <FormHolder>
-      <PasswordForm
+      <Form
         action=""
         onSubmit={props.handlePasswordSubmit}
       >
-        <div>
+        <InputContainer>
           <Label>
             Password
           </Label>
-          <input
+          <PasswordInput
             autoFocus
             required
             type="text"
             value={props.appState.password}
             onChange={props.handlePasswordEntry}
           />
-        </div>
+        </InputContainer>
         <Submit>
-          <input
+          <Enter
             type="submit"
             value="Enter"
           />
         </Submit>
-      </PasswordForm>
+      </Form>
     </FormHolder>
   );
 }
