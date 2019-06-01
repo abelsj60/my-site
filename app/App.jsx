@@ -225,6 +225,7 @@ class App extends Component {
 
   handlePasswordEntry(event) {
     this.setState({ password: event.target.value });
+    this.setTimeout(() => this.updateHeight(), 500);
   }
 
   render() {

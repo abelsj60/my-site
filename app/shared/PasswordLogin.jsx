@@ -16,11 +16,11 @@ const PasswordForm = styled.form`
   display: flex;
 `;
 const Label = styled.label`
-  margin-right: 15px;
+  margin-right: 10px;
   color: white;
 `;
 const Submit = styled.div`
-  margin-left: 15px;
+  margin-left: 10px;
 `;
 
 export default function PasswordLogin(props) {
