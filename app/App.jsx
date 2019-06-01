@@ -19,6 +19,7 @@ import {
 } from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
+import PasswordLogin from './shared/PasswordLogin.jsx';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
@@ -201,13 +202,29 @@ class App extends Component {
       // This test adds instructions to use these buttons (slide up).
       footerAlert:
         isMobileSafari
-          && height < this.minAllowedHeight
+          && height < this.minAllowedHeight,
+      password: '',
+      isValidUser: false
     };
 
     this.handleResize = this.handleResize.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
+    this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
+    this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
+  }
+
+  handlePasswordSubmit(event) {
+    event.preventDefault();
+
+    if (this.state.password === 'enter') {
+      this.setState({ isValidUser: true });
+    }
+  }
+
+  handlePasswordEntry(event) {
+    this.setState({ password: event.target.value });
   }
 
   render() {
@@ -219,8 +236,14 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
-    return (
-      <ThemeProvider
+    return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
+      ?
+      <PasswordLogin
+        appState={this.state}
+        handlePasswordEntry={this.handlePasswordEntry}
+        handlePasswordSubmit={this.handlePasswordSubmit}
+      />
+      : <ThemeProvider
         theme={{
           bottomMargin,
           colors,
@@ -268,8 +291,7 @@ class App extends Component {
             />
           </ZoomControl>
         </Fragment>
-      </ThemeProvider>
-    );
+      </ThemeProvider>;
   }
 
   hasFlexbox() {

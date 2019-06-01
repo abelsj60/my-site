@@ -1,11 +1,9 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const Visualizer = require('webpack-visualizer-plugin');
 
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
@@ -14,7 +12,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // need a development build on gh-pages, or a production build on local,
 // reset paths --> Local needs '/', GH needs '/build/' and '/public/'
 
-module.exports = (_env, argv) => {
+
+module.exports = (env, argv) => {
   return {
     entry: [
       '@babel/polyfill',
@@ -38,8 +37,7 @@ module.exports = (_env, argv) => {
           loader: 'babel-loader',
           options: {
             plugins: [
-              'babel-plugin-styled-components'//,
-              // require('plugin-proposal-object-rest-spread')
+              'babel-plugin-styled-components'
             ],
             presets: [
               [
@@ -85,25 +83,10 @@ module.exports = (_env, argv) => {
         })
       ],
       splitChunks: {
-        chunks: 'all'//,
-        // maxInitialRequests: Infinity,
-        // minSize: 0,
-        // cacheGroups: {
-        //   vendor: {
-        //     test: /[\\/]node_modules[\\/]/,
-        //     name(module) {
-        //     // get the name. E.g. node_modules/packageName/not/this/part.js
-        //     // or node_modules/packageName
-        //       const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-        //       // npm package names are URL-safe, but some servers don't like @ symbols
-        //       return `npm.${packageName.replace('@', '')}`;
-        //     },
-        //   }
-        // }
+        chunks: 'all'
       }
     },
     plugins: [
-    // new Visualizer(),
       new CleanWebpackPlugin(),
       new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
       new HtmlWebpackPlugin({
@@ -116,62 +99,7 @@ module.exports = (_env, argv) => {
       }),
       new ScriptExtHtmlWebpackPlugin({
         defer: /\.js$/
-      }) //,
-      // new DynamicCdnWebpackPlugin({
-      //   verbose: true,
-      //   exclude: [
-      //     'react',
-      //     'react-router-dom',
-      //     'react-dom',
-      //     argv.mode === 'development'
-      //       ? 'styled-components'
-      //       : 'styled-components',
-      //     'marked',
-      //     'parallax-js'
-      //   ],
-      //   resolver: (name, version) => {
-      //     const options = {
-      //       'react': {
-      //         var: 'React',
-      //         version: '16.5.1',
-      //         url: `https://unpkg.com/react@${version}/umd/react.production.min.js`,
-      //         name: 'react'
-      //       },
-      //       'react-router-dom': {
-      //         var: 'ReactRouterDOM',
-      //         version: '4.3.1',
-      //         url: `https://unpkg.com/react-router-dom@${version}/umd/react-router-dom.min.js`,
-      //         name: 'react-router-dom'
-      //       },
-      //       'react-dom': {
-      //         var: 'ReactDOM',
-      //         version: '16.5.1',
-      //         url: `https://unpkg.com/react-dom@${version}/umd/react-dom.production.min.js`,
-      //         name: 'react-dom'
-      //       },
-      //       'styled-components': {
-      //         var: 'styled',
-      //         version: '4.1.3',
-      //         url: `https://unpkg.com/styled-components@${version}/dist/styled-components.min.js`,
-      //         name: 'styled-components'
-      //       },
-      //       'marked': {
-      //         var: 'marked',
-      //         version: '0.5.1',
-      //         url: `https://unpkg.com/marked@${version}/marked.min.js`,
-      //         name: 'marked'
-      //       },
-      //       'parallax-js': {
-      //         var: 'Parallax',
-      //         version: '3.1.0',
-      //         url: `https://unpkg.com/parallax-js@${version}/dist/parallax.min.js`,
-      //         name: 'parallax-js'
-      //       }
-      //     };
-
-      //     return options[name];
-      //   }
-      // })
+      })
     ]
   };
 };
