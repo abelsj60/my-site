@@ -204,7 +204,8 @@ class App extends Component {
         isMobileSafari
           && height < this.minAllowedHeight,
       password: '',
-      isValidUser: false
+      isValidUser: false,
+      wrongPassword: ''
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -223,12 +224,16 @@ class App extends Component {
         || this.state.password === 'Enter'
     ) {
       this.setState({ isValidUser: true });
+    } else {
+      this.setState({
+        wrongPassword: 'Incorrect',
+        password: ''
+      });
     }
   }
 
   handlePasswordEntry(event) {
     this.setState({ password: event.target.value });
-    this.setTimeout(() => this.updateHeight(), 500);
   }
 
   render() {
@@ -240,7 +245,7 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
-    return process.env.NODE_ENV !== 'development'
+    return process.env.NODE_ENV === 'development'
       && !this.state.isValidUser
       ? <PasswordLogin
         appState={this.state}

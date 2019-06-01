@@ -12,6 +12,11 @@ const FormHolder = styled.div`
   align-items: center;
   background-color: #fd1172;
 `;
+const Feedback = styled.p`
+  position: absolute;
+  font-size: 50px;
+  top: 25%;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -40,6 +45,9 @@ export default function PasswordLogin(props) {
 
   return (
     <FormHolder>
+      <Feedback>
+        {props.appState.wrongPassword}
+      </Feedback>
       <Form
         action=""
         onSubmit={props.handlePasswordSubmit}
