@@ -41,6 +41,7 @@ const Submit = styled.div`
 const Enter = styled.input``;
 
 export default function PasswordLogin(props) {
+  // Excellent primer on form use in React:
   // https://stackoverflow.com/a/36683831
 
   return (

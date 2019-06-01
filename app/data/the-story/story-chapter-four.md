@@ -26,6 +26,6 @@ Memories of impractical magic washed over him as code filled his screen in pixel
 
 Hours later, a sprite hung happily over him. He once again dreamed of far-off lands, Jinns, fairies, and desert sands now in reach of outstretched hands.
 
-Back home, the sprite floated atop the lamp beside him. 
+Back home, the sprite hovered above the lamp beside him. 
 
 Time again for adventure.

@@ -37,7 +37,7 @@ I think it's a painting problem. React generates HTML behind the scenes, imagine
 
 I'm pretty sure because someone on StackOverflow lead me to this [issue on the React development site](https://github.com/facebook/react/issues/2659). 
 
-Someone suggested trying to use requestAnimcationFrame() as an alternative. It runs after HTML has been painted to screen by the browser. 
+Someone suggested trying to use requestAnimationFrame() as an alternative. It runs after HTML has been painted to screen by the browser. 
 
 Suffice it to say, this didn't work. Neither did any of the other things I tried over the course of, what, a two week period of time?
 
