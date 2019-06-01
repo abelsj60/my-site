@@ -10,12 +10,14 @@ const FormHolder = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${p => p.theme.colors.pink};;
 `;
 const PasswordForm = styled.form`
   display: flex;
 `;
 const Label = styled.label`
   margin-right: 15px;
+  color: ${p => p.theme.colors.white};
 `;
 const Submit = styled.div`
   margin-left: 15px;
