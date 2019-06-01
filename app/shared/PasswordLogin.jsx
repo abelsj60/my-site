@@ -15,7 +15,7 @@ const FormHolder = styled.div`
 const Feedback = styled.p`
   position: absolute;
   font-size: 50px;
-  top: 25%;
+  top: 10%;
 `;
 const Form = styled.form`
   display: flex;
