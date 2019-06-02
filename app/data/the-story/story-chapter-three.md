@@ -28,10 +28,10 @@ All seemed lost. And then a small sprite blurred to a stop between them.
 
 She yelled at the Jinn, banging its nose with tiny fists. The Jinn roared with laughter as the young man stared slack jawed at the impossible sight. 
 
-Tension splintered. A strong purple glow lit the lamp, which lay forgotten on the floor. It charged the room with possibility, filling the young man with hopes and dreams of anything and everything. This was magic.
+A strong purple glow suddenly lit the lamp, which lay forgotton on the floor. 
 
-The Jinn — engorged on the moment — struck hands together. A spell was cast.
+It charged the room with possibility, filling the young man with hopes and dreams of anything and everything. This was magic.
 
-The young man started awake to the sound of thunder. A coding school Web site glowed on the computer beside him. 
+The Jinn drew it in, then struck hands together, shattering time. Sleep came to the young man as it crashed to the floor. He was startled awake hours later by thunder. A coding school Web site glowed on the computer beside him. 
 
-Ever-changing fate was sealed anew.
+Fate, ever-changing, was sealed anew.
