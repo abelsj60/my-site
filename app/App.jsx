@@ -58,7 +58,9 @@ const fontSizes = {
   fourteen: '1.9rem',
   fifteen: '2rem',
   sixteen: '3.1rem',
-  seventeen: '6.5rem'
+  seventeen: '6.5rem',
+  eighteen: '2.5rem',
+  nineteen: '1.745rem'
 };
 const mediaQueries = {
   tinyView: '390px',
@@ -325,7 +327,7 @@ class App extends Component {
     if (!this.hasFlexbox()) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {
-      throw new Error("We don't currently support Opera");
+      throw new Error("Uh oh. I don't currently support Opera or IE if it's less than 11.");
     }
 
     // Heard after all React handlers run

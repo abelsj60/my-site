@@ -43,15 +43,15 @@ const Motto = styled.p`
   text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: ${p => p.theme.fontSizes.five};
+  font-size: ${p => p.theme.fontSizes.nineteen};
   color: ${p => p.theme.colors.yellow};
   font-weight: 700;
   margin-top: -6px;
-  margin-left: 16px;
+  margin-left: 13px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-left: 24px;
-    font-size: ${p => p.theme.fontSizes.fourteen};
+    margin-left: 20px;
+    font-size: ${p => p.theme.fontSizes.eighteen};
   }
 `;
 const Text = styled.section`

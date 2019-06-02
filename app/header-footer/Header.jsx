@@ -186,7 +186,7 @@ export default class Header extends Component {
         <Motto
           hide={hideNameAndMotto}
         >
-          Narrative coding and other adventures
+          Amazing stories through code
         </Motto>
         <Nav
           isHome={isHome}
