@@ -10,7 +10,7 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const headerLinks = [
-  { name: 'The story', path: '/chapter' },
+  { name: 'A story', path: '/chapter' },
   { name: 'Projects', path: '/projects' },
   { name: 'Journalism', path: '/journalism' },
   { name: 'About', path: '/about' }

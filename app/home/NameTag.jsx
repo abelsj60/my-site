@@ -118,6 +118,10 @@ export default function NameTag(props) {
     name
   } = attributes;
 
+  const tagline = !isCasting || castSpell
+    ? motto
+    : 'Tap the active charms to cast a spell';
+
   const eventHandler = () => {
     if (eventType === 'touch') {
       boundHandleClickForHome('resetEventType');
@@ -142,7 +146,7 @@ export default function NameTag(props) {
         {name}
       </Hed>
       <Motto>
-        {motto}
+        {tagline}
       </Motto>
       <Text
         isCasting={isCasting}
