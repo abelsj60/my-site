@@ -50,8 +50,8 @@ const Motto = styled.p`
   margin-left: 16px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-left: 22px;
-    font-size: ${p => p.theme.fontSizes.eighteen};
+    margin-left: 18px;
+    font-size: ${p => !p.isCasting ? p.theme.fontSizes.eighteen : p.theme.fontSizes.eighteen};
   }
 `;
 const Text = styled.section`
@@ -122,9 +122,7 @@ export default function NameTag(props) {
     ? motto
     : 'Tap active charms to cast a spell';
 
-  const eventHandler = event => {
-    event.preventDefault();
-
+  const eventHandler = () => {
     if (eventType === 'touch') {
       boundHandleClickForHome('resetEventType');
       return false;

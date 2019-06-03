@@ -186,9 +186,7 @@ export default class LegalTermsOrBizCard extends Component {
       ? myEmailAddress
       : '';
 
-    const eventHandler = event => {
-      event.preventDefault();
-
+    const eventHandler = () => {
       if (showBusinessCard) {
         boundHandleClickForApp(
           'toggleBusinessCard'

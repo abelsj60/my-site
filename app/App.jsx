@@ -59,7 +59,7 @@ const fontSizes = {
   fifteen: '2rem',
   sixteen: '3.1rem',
   seventeen: '6.5rem',
-  eighteen: '2.3rem',
+  eighteen: '2.5rem',
   nineteen: '1.745rem'
 };
 const mediaQueries = {
