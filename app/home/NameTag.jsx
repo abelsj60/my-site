@@ -43,14 +43,14 @@ const Motto = styled.p`
   text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: ${p => p.theme.fontSizes.nineteen};
-  color: ${p => p.theme.colors.yellow};
+  font-size: ${p => p.theme.fontSizes.twelve};
+  color: ${p => !p.isCasting || p.castSpell ? p.theme.colors.yellow : p.theme.colors.white};
   font-weight: 700;
   margin-top: -6px;
-  margin-left: 13px;
+  margin-left: 16px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-left: 20px;
+    margin-left: 22px;
     font-size: ${p => p.theme.fontSizes.eighteen};
   }
 `;
@@ -120,7 +120,7 @@ export default function NameTag(props) {
 
   const tagline = !isCasting || castSpell
     ? motto
-    : 'Tap the active charms to cast a spell';
+    : 'Tap active charms to cast a spell';
 
   const eventHandler = () => {
     if (eventType === 'touch') {
@@ -145,7 +145,10 @@ export default function NameTag(props) {
       <Hed>
         {name}
       </Hed>
-      <Motto>
+      <Motto
+        isCasting={isCasting}
+        castSpell={castSpell}
+      >
         {tagline}
       </Motto>
       <Text
