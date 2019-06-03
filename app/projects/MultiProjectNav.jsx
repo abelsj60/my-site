@@ -7,9 +7,15 @@ import UnorderedList from '../primitives/UnorderedList.jsx';
 const RestyledList = styled(UnorderedList)`
   height: 100%;
 `;
+const Type = styled.p`
+  font-size: ${p => p.theme.fontSizes.three};
+  color: ${p => p.theme.colors.pink};
+  margin-bottom: 2px;
+  font-style: italic;
+`;
 const Graf = styled.p`
-  font-size: ${p => p.theme.fontSizes.six};
-  color: ${p => p.theme.colors.blue};
+  font-size: ${p => p.theme.fontSizes.ten};
+  color: ${p => p.theme.colors.black};
   margin-bottom: 13px;
   font-weight: 400;
 `;
@@ -25,6 +31,7 @@ export default function DesktopProjectNav(props) {
         render={
           (mappedProject, idx) => {
             const {
+              pitch,
               projectName,
               type
             } = mappedProject.attributes;
@@ -33,8 +40,11 @@ export default function DesktopProjectNav(props) {
               <li
                 key={idx}
               >
+                <Type>
+                  {type}
+                </Type>
                 <Graf>
-                  {`${projectName} | ${type}`}
+                  {`${projectName} | ${pitch}`}
                 </Graf>
                 <ProjectNav
                   {...props}

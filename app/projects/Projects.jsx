@@ -12,8 +12,14 @@ import {
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
+const Type = styled.p`
+  font-size: ${p => p.theme.fontSizes.three};
+  color:${p => p.theme.colors.lightBlack};
+  margin-bottom: 2px;
+  font-style: italic;
+`;
 const ProjectName = styled.h1`
-  font-size: ${p => p.theme.fontSizes.sixteen};
+  font-size: ${p => p.theme.fontSizes.twenty};
   color: ${p => p.theme.colors.pink};
   margin-top: -8px;
   margin-bottom: 4px;
@@ -77,6 +83,7 @@ export default function Projects(props) {
   const {
     captions,
     full,
+    pitch,
     projectName,
     showTheseAttributes,
     type,
@@ -115,11 +122,14 @@ export default function Projects(props) {
           />
         </Shelf>
         <Overflow>
+          <Type>
+            {type}
+          </Type>
           <ProjectName>
             {projectName}
           </ProjectName>
           <Dek>
-            {type}
+            {pitch}
           </Dek>
           <Mapper
             mapData={attributeArray}

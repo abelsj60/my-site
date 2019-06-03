@@ -15,7 +15,7 @@ const Dek = styled.h2`
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
       font-size: ${p => p.theme.fontSizes.nine};
-  }Shelf
+  }
 `;
 const Hed = styled.h1`
   font-size: ${p => p.theme.fontSizes.sixteen};

@@ -94,6 +94,7 @@ const SpellBox = styled.div`
 `;
 const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
+  // DELETE?
   // color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
   color: ${p => p.theme.colors.yellow};
   transition: color .5s ease-out;
@@ -111,6 +112,7 @@ const ProgressContainer = styled.div`
 const ProgressBar = styled.div`
   width: ${p => p.barWidth}%;
   height: 100%;
+  // DELETE?
   // background-color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
   background-color: ${p => p.theme.colors.yellow};
   transition: width .5s ease-out, background-color .5s ease-out;
