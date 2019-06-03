@@ -122,7 +122,9 @@ export default function NameTag(props) {
     ? motto
     : 'Tap active charms to cast a spell';
 
-  const eventHandler = () => {
+  const eventHandler = event => {
+    event.preventDefault();
+
     if (eventType === 'touch') {
       boundHandleClickForHome('resetEventType');
       return false;
@@ -133,6 +135,7 @@ export default function NameTag(props) {
       action: 'Spell toggled.',
       label: `The score was ${score}.`
     });
+
     boundHandleClickForHome('toggleSpell');
   };
 
