@@ -169,8 +169,6 @@ export default class Home extends Component {
 
     // See full explanation in handleTouchStart.
 
-    // TEST
-
     if (this.charmRefs[0].current) {
       this.charmRefs.forEach(
         (ref, idx) => {
