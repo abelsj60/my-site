@@ -21,6 +21,13 @@ const Hed = styled.h1`
 const Text = styled.section`
   overflow: auto;
 
+  blockquote {
+    margin: 0px 0px 30px 0px;
+    padding: 0px 20px 0px 20px;
+    color: ${p => p.theme.colors.lightBlack};
+    border-left: 15px solid ${p => p.theme.colors.lightBlack};
+  }
+
   p {
     margin-bottom: ${p => p.theme.bottomMargin.regular};
     // Gets cut off in chrome (add saveSerifs to ContentHolder)
