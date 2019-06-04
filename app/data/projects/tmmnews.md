@@ -6,7 +6,7 @@ projectName:
 pitch: 
   'Video news stories about media-tech'
 type:
-  'Oversight'
+  'Leadership'
 technologies: 
   'Cloud: WordPress ∙ Language: JavaScript, HTML, CSS'
 responsibility:

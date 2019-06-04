@@ -6,7 +6,7 @@ projectName:
 pitch: 
   'Easily direct global software demos'
 type:
-  'Oversight'
+  'Leadership'
 technologies: 
   'Cloud: AWS ∙ Language: PHP ∙ Broadcasting: PubNub / Websockets'
 responsibility:

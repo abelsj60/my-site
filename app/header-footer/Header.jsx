@@ -1,3 +1,4 @@
+import bio from '../data/home/home.md';
 import ClickHandling from '../classes/ClickHandling.js';
 import headerNavClose from '../../public/header-nav-open.png';
 import headerNavOpen from '../../public/header-nav-closed.png';
@@ -186,7 +187,7 @@ export default class Header extends Component {
         <Motto
           hide={hideNameAndMotto}
         >
-          Amazing stories through code
+          {bio.attributes.motto}
         </Motto>
         <Nav
           isHome={isHome}
