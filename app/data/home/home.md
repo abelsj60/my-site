@@ -12,4 +12,5 @@ cityImage: https://user-images.githubusercontent.com/30417590/55294135-3c343900-
 zoomedCityImage: ''
 ---
 
-I'm a Web developer and former start-up founder. I used to write about technology, digital media, and M&A as a staff reporter for Forbes and Mergermarket. Now I use code to tell compelling stories through design and function. Let's talk.
+I'm a Web developer and former start-up founder. I used to write about technology, digital media, and M&A as a staff reporter for Forbes and Mergermarket. Now I use code to tell clear & compelling stories through design and function.  
+Let's talk.
