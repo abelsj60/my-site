@@ -50,7 +50,7 @@ const Motto = styled.p`
   margin-left: 16px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-left: 15px;
+    margin-left: 10px;
     font-size: ${p => !p.isCasting ? p.theme.fontSizes.eighteen : p.theme.fontSizes.eighteen};
   }
 `;
