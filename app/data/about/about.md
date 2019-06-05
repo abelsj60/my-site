@@ -25,4 +25,4 @@ That's where I come in. Rather than just mechanically coding sites and software,
 
 As a lawyer, I told stories that made legal arguments. As a start-up founder, I told stories that pitched what we'd built. And as a journalist for Forbes and others, I wrote stories that gave insights into tech, digital media, and venture capital. 
 
-So that's my story. What's yours?
+That's my story. What's yours?
