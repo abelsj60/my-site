@@ -4,11 +4,9 @@ type: description
 updated: 11-11-18
 ---
 
-I'm James. I'm a Web developer. I tell stories, too.
+I'm James. I write code for sites and software. 
 
-Don't you? Stories are how you tell people about yourself, your products and services, and the world writ large. Stories define everything, especially software. 
-
-Consider this example:
+I tell stories, too. Don't you? Stories are how you tell people about yourself, your products and services, and the world writ large. Stories define everything, especially software. Consider this example:
 
 1. Microsoft sells Word by telling people they can write documents with it. 
     That pitch is a story.  
