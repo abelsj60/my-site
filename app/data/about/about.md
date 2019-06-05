@@ -4,8 +4,25 @@ type: description
 updated: 11-11-18
 ---
 
-James Abels is a NYC-based Web developer.
+I'm James. I'm a Web developer. I tell stories, too.
 
-A lawyer and former start-up founder, Abels was a staff reporter for Forbes and Mergermarket (then Pearson, now Acuris). He wrote about digital media, technology, venture capital, and mergers and acquisitions.
+Don't you? Stories are how you tell people about yourself, your products and services, and the world writ large. Stories define everything, especially software. 
 
-Abels is available for front- and back-end technology projects, particularly those involving creative consumer narratives. He's currently working with the founder of Colleague Zero, a new type of media product for Facebook Messenger, slated for soft launch in 2019.
+Consider this example:
+
+1. Microsoft sells Word by telling people they can write documents with it. 
+    That pitch is a story.  
+
+2. People write documents in Word in order to collect their thoughts. 
+    Those thoughts are a story.
+
+3. Once done, people decide whether to share their document. 
+    Their reason is a story.
+
+It's all a story, all the way down. 
+
+That's where I come in. Rather than just mechanically coding a site or software, I try to figure out — and keep sight of — the story that's driving it. Always have.
+
+As a lawyer, I told stories that made legal arguments. As a start-up founder, I told stories that pitched what we'd built. And as a journalist for Forbes and others, I wrote stories that gave insight into tech, digital media, and venture capital. 
+
+That's my story. What's yours?
