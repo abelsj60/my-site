@@ -52,6 +52,11 @@ const CityAsBackground = styled(FantasyAsBackground)`
 
 export default function PictureBox(props) {
   const {
+    boyInForegroundImage,
+    cityImage,
+    fantasyImage
+  } = bio.attributes;
+  const {
     appState,
     boundHandleClickForHome,
     homeState,
@@ -68,7 +73,7 @@ export default function PictureBox(props) {
   return (
     <PictureHolder>
       <BoyInForeground
-        srcImage={bio.attributes.boyInForegroundImage}
+        srcImage={boyInForegroundImage}
       />
       <Portal
         isCasting={isCasting}
@@ -78,7 +83,7 @@ export default function PictureBox(props) {
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
-        srcImage={bio.attributes.fantasyImage}
+        srcImage={fantasyImage}
         onTransitionEnd={
           event => {
             event.stopPropagation();
@@ -96,7 +101,7 @@ export default function PictureBox(props) {
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
-        srcImage={bio.attributes.cityImage}
+        srcImage={cityImage}
       />
     </PictureHolder>
   );
