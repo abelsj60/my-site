@@ -19,10 +19,10 @@ Consider this example:
 3. Once done, people decide whether to share their document. 
     Their reason is a story.
 
-It's all a story, all the way down. 
+It's all stories, all the way down. 
 
-That's where I come in. Rather than just mechanically coding a site or software, I try to figure out — and keep sight of — the story that's driving it. Always have.
+That's where I come in. Rather than just mechanically coding sites and software, I try to figure out — and keep sight of — the stories driving them. I always have.
 
-As a lawyer, I told stories that made legal arguments. As a start-up founder, I told stories that pitched what we'd built. And as a journalist for Forbes and others, I wrote stories that gave insight into tech, digital media, and venture capital. 
+As a lawyer, I told stories that made legal arguments. As a start-up founder, I told stories that pitched what we'd built. And as a journalist for Forbes and others, I wrote stories that gave insights into tech, digital media, and venture capital. 
 
 So that's my story. What's yours?
