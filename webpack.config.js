@@ -12,7 +12,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // need a development build on gh-pages, or a production build on local,
 // reset paths --> Local needs '/', GH needs '/build/' and '/public/'
 
-
 module.exports = (env, argv) => {
   return {
     entry: [

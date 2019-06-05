@@ -225,6 +225,8 @@ class App extends Component {
     if (
       this.state.password === 'enter'
         || this.state.password === 'Enter'
+        || this.state.password === 'illustrator'
+        || this.state.password === 'Illustrator'
     ) {
       this.setState({ isValidUser: true });
     } else {
