@@ -2,7 +2,7 @@
 page: home
 type: home
 name: James Abels
-motto: Coding beyond mechanics...
+motto: Code that's not just mechnical
 updated: 11-23-18
 boyInForegroundImage: https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png
 zoomedBoyInForegroundImage: ''
