@@ -27,8 +27,6 @@ a small exhaust-cleaning device that hangs beneath about 80 percent of
 automobiles. Each converter destroys about 98 percent of a car’s three
 most noxious emissions — simultaneously.
 
-Three-way catalytic converter
-
 “That was a phenomenon that no one else thought was possible,” says
 Mooney.
 

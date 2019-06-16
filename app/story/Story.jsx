@@ -13,27 +13,42 @@ const RestyledContentHolder = styled(ContentHolder)`
   flex-direction: column;
   flex: 1;
 `;
+const RestyledShelf = styled(Shelf)`
+  flex-direction: column;
+  align-items: center;
+`;
 const PictureHolder = styled.section`
   // Setting visibilty: 'hidden' is better than display: 'none' b/c
   // it should ensure that we load the image in the background so
   // it's instantly ready to go when the button's clicked.
   // (Some browsers won't load an image when display's none.)
   visibility: ${p => (p.showStoryText ? 'hidden' : 'visible')};
-  // Flex = 1 when 'visible' so element takes up space in dev tools.
+  // Flex = 1 when 'visible' so it 'takes' space when inspecting elements.
   // Otherwise, nothing highlights in dev tools, which looks weird.
   // Flex = 0 when 'hidden' so it takes up no space on the page.
   // Otherwise, it takes up a column of space beside the text.
   flex: ${p => p.showStoryText ? '0' : '1'}; 
 `;
 const Chapter = styled.h2`
-  color: ${p => p.theme.colors.blue};
+  color: ${p => p.theme.colors.lightBlack};
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.nine};
 `;
-const Title = styled.h1`
-  font-size: ${p => p.theme.fontSizes.sixteen};
-  color: ${p => p.theme.colors.pink};
-  margin-bottom: ${p => p.theme.bottomMargin.regular};
+const BookTitle = styled.h1`
+  font-family: 'Playfair Display',serif;
+  margin: 0px 0px 21px;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fd1172;
+  text-align: center;
+  max-width: 500px;
+`;
+const ChapterTitle = styled.h2`
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 3rem;
+  font-weight: 300;
+  margin-top: -8px;
+  color: ${p => p.theme.colors.blue};
 `;
 const Image = styled.div`
   // Ensure img top is TOP
@@ -81,6 +96,7 @@ export default function Story(props) {
     number,
     title
   } = finalData.attributes;
+  const bookTitle = 'The Magical Semi-Fictional Biography of a Real Boy';
   let chapterNumber;
 
   switch (number) {
@@ -104,22 +120,25 @@ export default function Story(props) {
         showStoryText={showStoryText}
         saveSerifs={true}
       >
-        <Shelf
-          height="19px"
+        <RestyledShelf
+          height="200px"
         >
+          <BookTitle>
+            {bookTitle}
+          </BookTitle>
           <ChapterNav
             {...props}
           />
-        </Shelf>
-        <Overflow
-          ref={overflowRef}
-        >
           <Chapter>
             Chapter {chapterNumber}
           </Chapter>
-          <Title>
+          <ChapterTitle>
             {title}
-          </Title>
+          </ChapterTitle>
+        </RestyledShelf>
+        <Overflow
+          ref={overflowRef}
+        >
           <StoryText>
             {ReactHtmlParser(
               marked(

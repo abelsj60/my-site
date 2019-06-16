@@ -29,7 +29,7 @@ face as they blend their businesses.
 
 And Chen is the perfect person to steer the conversation.
 
-A New Discipline
+**A New Discipline**
 
 Chen’s work and life focus on balance. He grew up in Taitung on the
 southeast coast of Taiwan. As a youth, he studied philosophy and the
@@ -93,12 +93,10 @@ management was good management,” Rivkin says.
 
 That may be changing, but can still be a hard sell.
 
-Defining the Eastern Paradox
+**Defining the Eastern Paradox**
 
-Easterners and Westerners think di erently.
-The Foxconn suicides were a somber reminder of that. Yet
-
-these di erences are often expressed more subtly than through questions
+Easterners and Westerners think differently.
+The Foxconn suicides were a somber reminder of that. Yet these differences are often expressed more subtly than through questions
 about workers’ rights.
 
 “Business [here] tends to be conducted less on the basis of merit and
@@ -133,7 +131,8 @@ As a result, Easterners and Westerners have good reason to adapt to one
 another.
 
 “If you don’t learn, there’s a penalty,” says Grayson. “You fail.”
-Measuring Ambiculturality
+
+**Measuring Ambiculturality**
 
 Given their philosophical di erences, how do Easterners and Westerners
 successfully combine their management strategies?
@@ -180,15 +179,14 @@ continues to thrive today. Competitive dynamics is the analysis of
 competition at the action and response level to predict how a firm will
 act or react toward opponents.
 
-An Eastern or Western Face?
+**An Eastern or Western Face?**
+
 All the signs suggest “ambicultural” will be as big a hit.
 
 The concept is not even a year old, yet management expertsare already
 starting to buzz about it.
 
-In March, an Asian edition of the Harvard Business Review
-
-translated the word into Chinese. Now, the editors of the U.S. edition are
+In March, an Asian edition of the Harvard Business Review translated the word into Chinese. Now, the editors of the U.S. edition are
 talking to Chen about producing their own story on it. And next year, many
 business students will study the term in the new edition of a well-known
 textbook on strategic management.

@@ -37,9 +37,7 @@ Freilich, a longtime Lopez collaborator who joined Seton Hall with him in
 as a visiting research professor. It’s hard to reliably control plasma.
 It’s hot — the sun and stars are made of it. And atoms like stability. On
 Earth, they don’t shift to plasma easily. Generally, a vacuum is needed to
-coax them. They shift to
-
-it more easily in miniature. At scales of a millimeter or less, chemical
+coax them. They shift to it more easily in miniature. At scales of a millimeter or less, chemical
 elements will become plasma in the open air and at a temperature cool
 enough to touch.
 

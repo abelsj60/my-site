@@ -27,9 +27,7 @@ harness these forces.
 The Young Developers program was designed to help by teaching students
 from disadvantaged areas to build mobile apps — a form of software — for
 smartphones and tablets. Each of its 12 lessons, which range from computer
-logic
-
-to user interfaces, includes a video lecture, in-class coding problem and
+logic to user interfaces, includes a video lecture, in-class coding problem and
 take-home lab. A \$250,000 corporate gift from AT&T paid for the
 curriculum, as well as smartphones and laptop-tablet hybrids running
 Microsoft Windows.

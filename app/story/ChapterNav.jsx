@@ -8,14 +8,14 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
-  margin: -4px 0px 0px -13px;
-  max-width: 150px;
+  max-width: 250px;
   display: flex;
   flex-shrink: 0;
   position: relative;
+  margin-bottom: 15px;
 `;
 const StyledList = styled(UnorderedList)`
-  width: 150px;
+  width: 250px;
   height: 25px;
   display: flex;
   flex: 1;
@@ -31,17 +31,6 @@ const Selector = styled.div`
   height: 7px;
   background: ${p => `url(${p.image})`} center no-repeat;
   background-size: contain; // Must come after background rule
-`;
-
-const Line = styled.div`
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  margin: 0px;
-  height: ${p => (!p.menu ? '1px' : '2px')};
-  background-color: ${p => p.theme.colors.blueTwo};
-  width: 80%;
-  margin-left: 15px;
 `;
 
 export default function ChapterNav(props) {
@@ -89,7 +78,6 @@ export default function ChapterNav(props) {
             }}
         />
       </StyledList>
-      <Line />
     </Nav>
   );
 }
