@@ -35,7 +35,6 @@ const Hed = styled.h3`
 const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.thirteen};
   margin-bottom: ${p => p.theme.bottomMargin.regular};
-  margin-left: 2px;
   font-weight: 300;
   color: ${p => p.theme.colors.pink};
 `;

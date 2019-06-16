@@ -18,11 +18,11 @@ const RestyledShelf = styled(Shelf)`
   align-items: center;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    height: 188px;
+    height: 105px;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-    height: 202px;
+    height: 120px;
   }
 `;
 const PictureHolder = styled.section`
@@ -64,6 +64,7 @@ const ChapterTitle = styled.h2`
   font-size: 3rem;
   font-weight: 300;
   margin-top: -8px;
+  margin-bottom: 10px;
   color: ${p => p.theme.colors.blue};
 `;
 const Image = styled.div`
@@ -137,7 +138,8 @@ export default function Story(props) {
         saveSerifs={true}
       >
         <RestyledShelf
-          tinyHeight="176px"
+          height="93px"
+          // height="120px"
         >
           <BookTitle>
             {bookTitle}
@@ -145,16 +147,16 @@ export default function Story(props) {
           <ChapterNav
             {...props}
           />
+        </RestyledShelf>
+        <Overflow
+          ref={overflowRef}
+        >
           <Chapter>
             Chapter {chapterNumber}
           </Chapter>
           <ChapterTitle>
             {title}
           </ChapterTitle>
-        </RestyledShelf>
-        <Overflow
-          ref={overflowRef}
-        >
           <StoryText>
             {ReactHtmlParser(
               marked(

@@ -12,6 +12,7 @@ const Dek = styled.h2`
   font-size: ${p => p.theme.fontSizes.seven};
   color: ${p => p.theme.colors.pink};
   font-weight: 400;
+  margin-left: 0px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
       font-size: ${p => p.theme.fontSizes.nine};

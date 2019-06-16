@@ -127,6 +127,10 @@ const GlobalStyle = createGlobalStyle`
     h1 {
       font-family: 'Playfair Display', serif;
       font-weight: 900;
+    }
+
+    h1,
+    h2 {
       margin-left: 2px;
     }
 
