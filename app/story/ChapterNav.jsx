@@ -8,11 +8,19 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const Nav = styled.nav`
-  max-width: 250px;
+  max-width: 200px;
   display: flex;
   flex-shrink: 0;
   position: relative;
   margin-bottom: 15px;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    max-width: 225px;
+  }
+
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    max-width: 250px;
+  }
 `;
 const StyledList = styled(UnorderedList)`
   width: 250px;

@@ -16,6 +16,14 @@ const RestyledContentHolder = styled(ContentHolder)`
 const RestyledShelf = styled(Shelf)`
   flex-direction: column;
   align-items: center;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    height: 188px;
+  }
+
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    height: 202px;
+  }
 `;
 const PictureHolder = styled.section`
   // Setting visibilty: 'hidden' is better than display: 'none' b/c
@@ -37,11 +45,19 @@ const Chapter = styled.h2`
 const BookTitle = styled.h1`
   font-family: 'Playfair Display',serif;
   margin: 0px 0px 21px;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 900;
   color: #fd1172;
   text-align: center;
   max-width: 500px;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: 2.5rem;
+  }
+
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    font-size: 3rem;
+  }
 `;
 const ChapterTitle = styled.h2`
   font-family: 'Aref Ruqaa', serif;
@@ -121,7 +137,7 @@ export default function Story(props) {
         saveSerifs={true}
       >
         <RestyledShelf
-          height="200px"
+          tinyHeight="176px"
         >
           <BookTitle>
             {bookTitle}
