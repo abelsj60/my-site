@@ -120,8 +120,8 @@ export default function FooterContainer(props) {
         show={isStory}
         text={
           showStoryText
-            ? 'Look'
-            : 'Read'
+            ? 'Image'
+            : 'Story'
         }
       />
       <FooterAlert

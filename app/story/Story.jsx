@@ -139,7 +139,6 @@ export default function Story(props) {
       >
         <RestyledShelf
           height="93px"
-          // height="120px"
         >
           <BookTitle>
             {bookTitle}
