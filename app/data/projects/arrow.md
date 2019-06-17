@@ -6,7 +6,7 @@ projectName:
 pitch: 
   'Simply personalize interactive video'
 type:
-  'Leadership'
+  'Founder'
 technologies: 
   'Cloud: AWS ∙ Language: PHP ∙ Transcoding: FFmpeg'
 responsibility: 
