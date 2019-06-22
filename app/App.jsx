@@ -61,7 +61,8 @@ const fontSizes = {
   seventeen: '6.5rem',
   eighteen: '2.5rem',
   nineteen: '1.745rem',
-  twenty: '4rem'
+  twenty: '4rem',
+  twentyOne: '1rem'
 };
 const mediaQueries = {
   tinyView: '390px',

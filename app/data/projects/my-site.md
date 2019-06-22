@@ -1,6 +1,6 @@
 ---
 number: 
-    5
+    2
 projectName: 
     'My site'
 pitch: 

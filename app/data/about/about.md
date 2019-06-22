@@ -21,6 +21,6 @@ It's all stories, all the way down.
 
 That's where I come in. Rather than just mechanically coding sites and software, I try to figure out — and keep sight of — the stories driving them. I always have.
 
-As a lawyer, I told stories that made legal arguments. As a start-up founder, I told stories that pitched what we'd built. And as a journalist for Forbes and others, I wrote stories that gave insights into tech, digital media, and venture capital. 
+As a start-up founder, I told stories that pitched what we'd built. As a journalist for Forbes and others, I wrote stories that gave insights into tech, digital media, and venture capital. And as a lawyer, I told stories that made legal arguments.
 
 So, that's my story. What's yours?

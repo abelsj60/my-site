@@ -2,7 +2,7 @@
 page: home
 type: home
 name: James Abels
-motto: Code beyond the mechanical...
+motto: Code beyond the mechanics...
 updated: 11-23-18
 boyInForegroundImage: https://user-images.githubusercontent.com/30417590/55294127-2c1c5980-53cc-11e9-9848-5295cd05a9cc.png
 zoomedBoyInForegroundImage: ''
@@ -12,5 +12,6 @@ cityImage: https://user-images.githubusercontent.com/30417590/55294135-3c343900-
 zoomedCityImage: ''
 ---
 
-I'm a Web developer and former start-up founder. I used to write about technology, digital media, and M&A as a staff reporter for Forbes and Mergermarket. Now I use code to tell clear & compelling stories through design and function.  
-Let's talk.
+Hi. I'm a Web developer, start-up founder, and story teller. I used to write about technology, digital media, and M&A 
+as a staff reporter for Forbes.com and Mergermarket. Now I use code to tell clear and compelling stories through design and
+function. Let's talk.

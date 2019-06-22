@@ -6,9 +6,9 @@ number: 3
 
 The young man's room twinkled one morning.
 
-Dust, scattered high by a broom, was catching the sun's pale winter light. The quiet was soon pierced by the hollow ring of the broom as it brushed metal. 
+Dust, scattered high by a broom, was catching the sun's pale winter light. The quiet was soon pierced by the hollow ring of the broom brushing metal. 
 
-The young man knelt, reaching to grab it.
+The young man knelt to grab it.
 
 "I forgot about you," he said, twice tracing the lamp's dusty etchings with a finger. Something about the motion made him feel light and excited.
 
@@ -34,4 +34,4 @@ It charged the room with possibility, filling the young man with hopes and dream
 
 The Jinn drew it in, then struck hands together, shattering time. Sleep came to the young man as it crashed to the floor. He was startled awake hours later by thunder. A coding school Web site glowed on the computer beside him. 
 
-Fate, ever-changing, was sealed anew.
+Fate, always changing, was sealed anew.

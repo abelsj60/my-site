@@ -11,10 +11,10 @@ import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
 const headerLinks = [
-  { name: 'A story', path: '/chapter' },
+  { name: 'About', path: '/about' },
   { name: 'Projects', path: '/projects' },
   { name: 'Journalism', path: '/journalism' },
-  { name: 'About', path: '/about' }
+  { name: 'A not-so-true story', path: '/chapter' }
 ];
 const fontWeight = '500';
 const Container = styled.header`
@@ -38,13 +38,13 @@ const HeaderBackground = styled.div`
   z-index: -1;
 `;
 const RestyledLink = styled(
-  // Filter out home from StyledLink
+  // Filter out isHome and isActive from StyledLink
   // eslint-disable-next-line
   ({ isHome, isActive, ...rest }) => <StyledLink {...rest} />
 )`
-  font-size: ${p => p.theme.fontSizes.one};
+  font-size: ${p => p.theme.fontSizes.twentyOne};
   font-weight: ${p => p.isHome && '400'};
-  margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
+  margin-left: ${p => (p.num === 0 ? '0px' : '10px')};
   color: ${p => p.theme.colors.white};
   font-weight: ${fontWeight};
 
@@ -53,6 +53,7 @@ const RestyledLink = styled(
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    margin-left: ${p => (p.num === 0 ? '0px' : '15px')};
     font-size: ${p => !p.isHome ? p.theme.fontSizes.six : p.theme.fontSizes.three};
   }
 `;
@@ -63,6 +64,10 @@ const NameAsLink = styled(
 )`
   display: ${p => (p.hide && 'none')};
   font-size: ${p => p.theme.fontSizes.six};
+  // We end up doubling up on this property b/c we need to set it to 15px for small 
+  // screens and can't unset the value as the screen gets bigger. As a result, we 
+  // inherit the value of 15px from RestyledLink, then eliminate it for this:
+  margin-left: 15px; 
 `;
 const Motto = styled.span`
   font-weight: ${fontWeight};
@@ -70,7 +75,7 @@ const Motto = styled.span`
   display: ${p => (p.hide && 'none')};
   font-style: italic;
   font-size: ${p => p.theme.fontSizes.two};
-  margin: 1px 20px 0px 13px;
+  margin: 1px 10px 0px 13px;
   min-width: 0px;  
   // https://css-tricks.com/flexbox-truncated-text/
   white-space: nowrap;
@@ -88,25 +93,26 @@ const Nav = styled.nav`
   padding: ${p => p.isHome && '8px 15px'};
   // Prevent occasional over-expansion
   background-color: ${p => p.isHome && 'rgba(0,0,0,0.25)'};
-  max-width: ${p => p.isHome && '269px'}; 
+  max-width: ${p => p.isHome && '350px'}; 
   border-radius: ${p => p.isHome && '10px'};
   position: relative;
+
   
   ${p => p.menu && css` // p.menu = headerMenu
     flex: 1;
     display: block;
     
     // Offset centering by right-side icon width (is five less than total)
-    @media (min-width: ${p.theme.mediaQueries.tinyView}) {
-      margin-left: 37px;
-    }
+    // @media (min-width: ${p.theme.mediaQueries.tinyView}) {
+    //   margin-left: 37px;
+    // }
   `};
     
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
     margin-right: ${p => (!p.isHome && '15px')};
     // Prevent occasional over-expansion
-    max-width: ${p => p.isHome && '286px'};
+    max-width: ${p => p.isHome && '350px'};
   }
 `;
 const NavList = styled(UnorderedList)`

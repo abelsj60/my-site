@@ -24,8 +24,8 @@ When he looked up, he stared out at a city drenched in warm autumn light. A smal
 
 Memories of impractical magic washed over him as code filled his screen in pixelated color. Time melted away.
 
-Hours later, a sprite hung happily over him. He once again dreamed of far-off lands, Jinns, fairies, and desert sands now in reach of outstretched hands.
+Hours later, the sprite hung over him. She felt her friend dreaming of far-off lands, Jinns, fairies, and desert sands once again in reach of his outstretched hands.
 
-Back home, the sprite hovered above the lamp beside him. 
+The sprite smiled as she flit above the lamp beside him. 
 
 Time again for adventure.

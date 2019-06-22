@@ -18,7 +18,7 @@ const RestyledLink = styled(StyledLink)`
 `;
 const Label = styled.p`
   font-size: ${p => p.theme.fontSizes.two};
-  color: ${p => p.theme.colors.lightBlack};
+  color: ${p => p.theme.colors.pink};
   margin: 0px;
   cursor: pointer;
   margin-top: -2px;
@@ -66,9 +66,9 @@ export default function MenuButton(props) {
       : arrowUp;
   const menuIsActive = isMenu && 'active';
   const text =
-    isMenu
-      ? 'Close'
-      : 'Menu';
+    !isMenu
+      ? 'See all'
+      : 'Close';
 
   return (
     <Container

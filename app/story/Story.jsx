@@ -18,11 +18,11 @@ const RestyledShelf = styled(Shelf)`
   align-items: center;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    height: 105px;
+    height: 130px;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-    height: 120px;
+    height: 145px;
   }
 `;
 const PictureHolder = styled.section`
@@ -44,7 +44,7 @@ const Chapter = styled.h2`
 `;
 const BookTitle = styled.h1`
   font-family: 'Playfair Display',serif;
-  margin: 0px 0px 21px;
+  margin: 0px 0px 10px;
   font-size: 2rem;
   font-weight: 900;
   color: #fd1172;
@@ -58,6 +58,13 @@ const BookTitle = styled.h1`
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
     font-size: 3rem;
   }
+`;
+const TagLine = styled.p`
+  font-style: italic;
+  font-size: 1.25rem;
+  color: ${p => p.theme.colors.blue};
+  text-align: center;
+  margin-bottom: 15px;
 `;
 const ChapterTitle = styled.h2`
   font-family: 'Aref Ruqaa', serif;
@@ -113,7 +120,9 @@ export default function Story(props) {
     number,
     title
   } = finalData.attributes;
-  const bookTitle = 'The Magical Semi-Fictional Biography of a Real Boy';
+  const bookTitle = 'The Magical Semi-Fictional Biography of a Real Boy (me)';
+  const dek = '(an experiment into combining on- and offline storytelling)';
+  const isCover = number === 1;
   let chapterNumber;
 
   switch (number) {
@@ -138,11 +147,14 @@ export default function Story(props) {
         saveSerifs={true}
       >
         <RestyledShelf
-          height="93px"
+          height="140px"
         >
           <BookTitle>
             {bookTitle}
           </BookTitle>
+          <TagLine>
+            {dek}
+          </TagLine>
           <ChapterNav
             {...props}
           />
@@ -150,10 +162,14 @@ export default function Story(props) {
         <Overflow
           ref={overflowRef}
         >
-          <Chapter>
+          <Chapter
+            isCover={isCover}
+          >
             Chapter {chapterNumber}
           </Chapter>
-          <ChapterTitle>
+          <ChapterTitle
+            isCover={isCover}
+          >
             {title}
           </ChapterTitle>
           <StoryText>

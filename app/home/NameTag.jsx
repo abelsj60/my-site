@@ -50,7 +50,7 @@ const Motto = styled.p`
   margin-left: 16px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-left: ${p => !p.isCasting || p.castSpell ? '20px' : '10px'};
+    margin-left: 10px;
     font-size: ${p => !p.isCasting ? p.theme.fontSizes.eighteen : p.theme.fontSizes.eighteen};
   }
 `;
@@ -65,7 +65,8 @@ const Text = styled.section`
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    width: 360px;
+    // width: 375px;
+    width: 55%;
   }
   
   p {
