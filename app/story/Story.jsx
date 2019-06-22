@@ -61,7 +61,7 @@ const BookTitle = styled.h1`
 `;
 const TagLine = styled.p`
   font-style: italic;
-  font-size: ${p => p.theme.fontSizes.four};
+  font-size: ${p => p.theme.fontSizes.twentyTwo};
   color: ${p => p.theme.colors.lightBlack};
   text-align: center;
   margin-bottom: 5px;
