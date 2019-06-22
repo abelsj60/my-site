@@ -121,7 +121,7 @@ export default function Story(props) {
     title
   } = finalData.attributes;
   const bookTitle = 'The Magical Semi-Fictional Biography of a Real Boy';
-  const dek = 'An online / offline experiment in storytelling';
+  const dek = 'An experiment in digital + traditional storytelling';
   const isCover = number === 1;
   let chapterNumber;
 
