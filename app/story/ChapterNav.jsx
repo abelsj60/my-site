@@ -12,7 +12,6 @@ const Nav = styled.nav`
   display: flex;
   flex-shrink: 0;
   position: relative;
-  margin-bottom: 15px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     max-width: 225px;
