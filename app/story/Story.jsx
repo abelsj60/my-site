@@ -17,12 +17,12 @@ const RestyledShelf = styled(Shelf)`
   flex-direction: column;
   align-items: center;
 
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    height: 130px;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+    height: 117px;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-    height: 145px;
+    height: 130px;
   }
 `;
 const PictureHolder = styled.section`
@@ -61,10 +61,10 @@ const BookTitle = styled.h1`
 `;
 const TagLine = styled.p`
   font-style: italic;
-  font-size: 1.25rem;
-  color: ${p => p.theme.colors.blue};
+  font-size: ${p => p.theme.fontSizes.four};
+  color: ${p => p.theme.colors.lightBlack};
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 `;
 const ChapterTitle = styled.h2`
   font-family: 'Aref Ruqaa', serif;
@@ -120,8 +120,8 @@ export default function Story(props) {
     number,
     title
   } = finalData.attributes;
-  const bookTitle = 'The Magical Semi-Fictional Biography of a Real Boy (me)';
-  const dek = '(an experiment into combining on- and offline storytelling)';
+  const bookTitle = 'The Magical Semi-Fictional Biography of a Real Boy';
+  const dek = 'An online/offline experiment in storytelling';
   const isCover = number === 1;
   let chapterNumber;
 
@@ -147,14 +147,14 @@ export default function Story(props) {
         saveSerifs={true}
       >
         <RestyledShelf
-          height="140px"
+          height="104px"
         >
-          <BookTitle>
-            {bookTitle}
-          </BookTitle>
           <TagLine>
             {dek}
           </TagLine>
+          <BookTitle>
+            {bookTitle}
+          </BookTitle>
           <ChapterNav
             {...props}
           />
