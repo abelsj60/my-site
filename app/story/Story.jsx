@@ -65,6 +65,10 @@ const TagLine = styled.p`
   color: ${p => p.theme.colors.lightBlack};
   text-align: center;
   margin-bottom: 5px;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+    font-size: ${p => p.theme.fontSizes.six};
+  }
 `;
 const ChapterTitle = styled.h2`
   font-family: 'Aref Ruqaa', serif;
