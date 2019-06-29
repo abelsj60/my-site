@@ -22,7 +22,7 @@ const RestyledShelf = styled(Shelf)`
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-    height: 130px;
+    height: 131px;
   }
 `;
 const PictureHolder = styled.section`
@@ -151,7 +151,7 @@ export default function Story(props) {
         saveSerifs={true}
       >
         <RestyledShelf
-          height="104px"
+          height="103px"
         >
           <TagLine>
             {dek}
