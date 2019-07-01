@@ -5,7 +5,7 @@ image: https://user-images.githubusercontent.com/30417590/55294138-43f3dd80-53cc
 number: 1
 ---
 
-The cardboard fort crumbled.
+The cardboard fort collapsed to the floor.
 
 A small fairy destroyed it after zipping through the wide-eyed boy's window with all the force of a cannonball. 
 
