@@ -4,7 +4,7 @@ type: description
 updated: 11-11-18
 ---
 
-I'm James. I write code for Web sites and software. 
+Hi! I'm James. I write code for Web sites and software. 
 
 I tell stories, too. Don't you? Stories are how you tell people about yourself, your products and services, and the world writ large. Stories define everything, especially software. Consider this example:
 
