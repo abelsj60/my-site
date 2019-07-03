@@ -233,6 +233,8 @@ class App extends Component {
         || this.state.password === 'Enter'
         || this.state.password === 'illustrator'
         || this.state.password === 'Illustrator'
+        || this.state.password === 'boom!'
+        || this.state.password === 'Boom!'
     ) {
       this.setState({ isValidUser: true });
     } else {
