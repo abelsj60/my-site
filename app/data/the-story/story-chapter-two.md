@@ -6,11 +6,13 @@ number: 2
 
 The boy woke at home the next day. 
 
-The gold lamp sat on his bedside table. He looked at it. "Why do you glow purple," he asked, hoping for a sign. There was none. 
+The gold lamp sat on his bedside table. He looked at it. 
 
-So he got on with life. He became a lawyer and then a journalist. He covered media, technology, and venture capital as a staff reporter Forbes and others.
+"Why do you glow purple," he asked, hoping for a sign. There was none. 
 
-No matter what he did, he kept the lamp nearby. 
+So he got on with life. He became a lawyer, then a journalist. He covered media, technology, and venture capital as a staff reporter for Forbes and others.
+
+But — no matter what he did — he kept the lamp nearby. 
 
 "Why do you get brighter when I tell stories," he'd ask aloud sometimes.
 

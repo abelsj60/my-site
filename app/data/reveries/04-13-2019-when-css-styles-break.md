@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: When styles break
+headline: When CSS styles break
 date: April 13, 2019
 slug: Styled components are unchangeable 
 ---

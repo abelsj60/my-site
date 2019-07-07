@@ -22,10 +22,10 @@ When he looked up, he stared out at a city drenched in warm autumn light. A smal
 
 "Software is a story," he said. "Code the way to tell it."
 
-Memories of impractical magic washed over him as code filled his screen in pixelated color. Time melted away.
+Memories of impractical magic washed over him as code filled his screen in pixelated color. 
 
-Hours later, the sprite hung over him. She felt her friend dreaming of far-off lands, Jinns, fairies, and desert sands once again in reach of his outstretched hands.
+Time melted away. Hours later, as the young man slept, the sprite hung over her old friend. She peeked into his dreams and spied far-off lands. There were Jinns, more fairies, and desert sands — all in reach of his outstretched hands.
 
-The sprite smiled as she flit above the lamp beside him. 
+Delighted, she flit above the gold lamp beside him. It bathed the room in purple light. "Yoohoo," she sang inside, a mischievious smile spreading across her face.
 
 Time again for adventure.

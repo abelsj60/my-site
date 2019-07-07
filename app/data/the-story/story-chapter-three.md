@@ -12,26 +12,30 @@ The young man knelt to grab it.
 
 "I forgot about you," he said, twice tracing the lamp's dusty etchings with a finger. Something about the motion made him feel light and excited.
 
-He was right to be giddy. Reality began to glitch. 
+He was right to be giddy. 
 
-Clear red rays shot between particles of dust, drawing a giant Jinn into view. 
+Reality began to glitch. Clear red rays shot between particles of dust, drawing a giant Jinn into view. 
 
-"You've forgotten my secret," it boomed. Menace filled the room. 
+"You've forgotten my secret," it boomed. 
 
-Impulse pulled the young man toward bedsheets while pride kept him still. 
+Menace filled the room. Impulse pulled the young man toward bedsheets while pride kept him still. 
 
-"I have not," he said, readying for a fight he couldn't win, but wouldn't duck. "I've rubbed you twice, I've released your might." The young man raised his fists.
+"I have not," he said, readying for a fight he couldn't win, but wouldn't duck. 
 
-The Jinn looked delighted. 
+"I've rubbed you twice, I've released your might!" The Jinn was unmoved. So the young man raised his fists, matching the electric blue sparks that now danced around the mysterious creature. 
 
-All seemed lost. And then a small sprite blurred to a stop between them. 
+All seemed lost. And then— 
 
-She yelled at the Jinn, banging its nose with tiny fists. The Jinn roared with laughter as the young man stared slack jawed at the impossible sight. 
+A little fairy blurred to an unexpected stop between them. 
+
+She yelled at the Jinn, banging its nose with a tiny fist. The Jinn, at first amazed, roared with laughter. The young man stared slack jawed at the impossible sight. 
 
 A strong purple glow suddenly lit the lamp, which lay forgotton on the floor. 
 
 It charged the room with possibility, filling the young man with hopes and dreams of anything and everything. This was magic.
 
-The Jinn drew it in, then struck hands together, shattering time. Sleep came to the young man as it crashed to the floor. He was startled awake hours later by thunder. A coding school Web site glowed on the computer beside him. 
+The Jinn drank it in — slaking an almost unquenchable thirst — then struck hands together. Sleep came to the young man as time shattered and crashed to the floor. He was startled awake hours later by the rumble of thunder. 
 
-Fate, always changing, was sealed anew.
+A coding school Web site glowed on the computer beside him. 
+
+Fate, ever changing, was sealed anew.

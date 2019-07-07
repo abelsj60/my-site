@@ -1,6 +1,6 @@
 ---
 3ype: reverie
-headline: The impossibility of Web images
+headline: A groan about Web image formats
 date: March 30, 2019
 slug: Randomly choosing Web images
 ---
@@ -26,10 +26,6 @@ So, firstly, knowing what's best upfront may be clearer with more knowledge and 
 
 Secondly, look at the SVG. It uses plain English to describe how images should look (like HTML does for Web pages). Its two kilobytes no matter the image's size. If it got bigger, this format would be great becuse the file would still be two kilobytes. In this case, the image is fixed at eight pixels, so I don't think it matters. 
 
-But, here's the bottom line — 
-
-When you factor all the variables in Google's article together, there's a lot of magic here. That's why my results don't follow the rules so well. It all comes down to trial and error. Kinda gives you the uncomfortable feeling that knowledge is overrated, right?
-
-Anyway, still owe a review on BrowserStack.
+Anyway, point is that it all basically came down to guessing. Who needs the article?
 
 -j

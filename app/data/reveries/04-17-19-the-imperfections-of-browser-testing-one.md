@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: Virtual reality is light on reality, one
+headline: The imperfections of browser testing, one
 date: April 17, 2019
 slug: Virtual machines may lie, really
 ---

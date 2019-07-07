@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: Virtual reality is light on reality, two
+headline: The imperfections of browser testing, two
 date: April 18, 2019
 slug: React lies too sometimes
 ---
@@ -43,6 +43,6 @@ Suffice it to say, this didn't work. Neither did any of the other things I tried
 
 Given the last post's conclusion on virtual machines, I've decided to chalk this up to a ghost in the machine.
 
-After all, who you gonna call?
+In other words, I give up. Who you gonna call?
 
 -j
