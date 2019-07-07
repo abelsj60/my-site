@@ -59,11 +59,10 @@ export default function PasswordLogin(props) {
             color: 'yellow'
           }}
         >
-          Welcome to my prototype site. As of 7/4/19, it's in the final stages of development! <br /><br /> The fantastically talented illustrator
-          is hard at work on the custom images. In the meantime, the home page, and story chapters make use of placeholder artwork
-          from Shutterstock. <br /><br /> Drop me a line (abelsj60__at__gmail.com) if you want me to holler when it's all done...or, if you've
-          got the password, feel free to check it out now! Just be sure to come back later this summer to see the finished
-          version — the artwork promises to out of this world.
+          Welcome to my prototype site. <br /><br /> As of 7/4/19, it's in the final stages of development! <br /><br /> The fantastically
+          talented illustrator is hard at work on the custom art. In the meantime, the home page, and story chapters use placeholder
+          images from Shutterstock. <br /><br /> If you've got the password, check it out, but be sure to come back later this summer.
+          <br /><br /> The final artwork will be out of this world!
         </p>
         <InputContainer>
           <Label>
