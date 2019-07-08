@@ -20,13 +20,13 @@ Reality began to glitch. Clear red rays shot between particles of dust, drawing 
 
 Menace filled the room. Impulse pulled the young man toward bedsheets while pride kept him still. 
 
-"I have not," he said, readying for a fight he couldn't win, but wouldn't duck. 
+"I have not," he said, memory stirring. "I've rubbed you twice, I've released your might!" 
 
-"I've rubbed you twice, I've released your might!" The Jinn was unmoved. So the young man raised his fists, matching the electric blue sparks that now danced around the mysterious creature. 
+The logic seemed sound, but the Jinn was unmoved. Blue sparks began dancing around the mysterious creature. So the young man raised his fists, ready for a fight he couldn't win, but wouldn't duck.
 
 All seemed lost. And then— 
 
-A little fairy blurred to an unexpected stop between them. 
+A little fairy blurred to an unexpected stop between them.
 
 She yelled at the Jinn, banging its nose with a tiny fist. The Jinn, at first amazed, roared with laughter. The young man stared slack jawed at the impossible sight. 
 
