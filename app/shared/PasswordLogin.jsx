@@ -70,9 +70,10 @@ export default function PasswordLogin(props) {
         <ExplanationText>
           Hi! Welcome to my prototype site. <br /><br /> As of 7/4/19, it's in the final
           stages of development! <br /><br /> A fantastically talented illustrator is
-          and chapter pages). <br /><br /> If you've got the password, check it out,
-          but be sure to come back later this summer when the
-          final artwork's done!
+          hard at work on custom art. In the meantime, it relies on placeholder
+          images from Shutterstock (on the home and chapter pages). <br /><br /> If
+          you've got the password, check it out, but be sure to come back later
+          this summer when the final artwork's done!
         </ExplanationText>
       </ExplanationContainer>
       <Form
