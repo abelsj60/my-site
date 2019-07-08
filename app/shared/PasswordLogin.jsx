@@ -8,6 +8,7 @@ const FormHolder = styled.div`
   left: 0px;
   right: 0px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #fd1172;
@@ -49,28 +50,29 @@ export default function PasswordLogin(props) {
       <Feedback>
         {props.appState.wrongPassword}
       </Feedback>
+      <div
+        style={{
+          maxHeight: '200px',
+          maxWidth: '300px',
+          overflow: 'scroll',
+          marginBotto: '15px'
+        }}
+      >
+        <p
+          style={{
+            color: 'yellow'
+          }}
+        >
+          Welcome to my prototype site. <br /><br /> As of 7/4/19, it's in the final stages of development! <br /><br /> The fantastically
+          talented illustrator is hard at work on custom art. In the meantime, the home page, and story chapters use placeholder
+          images from Shutterstock. <br /><br /> If you've got the password, check it out, but be sure to come back later this summer.
+          <br /><br /> The final artwork will be out of this world!
+        </p>
+      </div>
       <Form
         action=""
         onSubmit={props.handlePasswordSubmit}
       >
-        <div
-          style={{
-            maxHeight: '200px',
-            maxWidth: '300px',
-            overflow: 'scroll'
-          }}
-        >
-          <p
-            style={{
-              color: 'yellow'
-            }}
-          >
-            Welcome to my prototype site. <br /><br /> As of 7/4/19, it's in the final stages of development! <br /><br /> The fantastically
-            talented illustrator is hard at work on custom art. In the meantime, the home page, and story chapters use placeholder
-            images from Shutterstock. <br /><br /> If you've got the password, check it out, but be sure to come back later this summer.
-            <br /><br /> The final artwork will be out of this world!
-          </p>
-        </div>
         <InputContainer>
           <Label>
             Password
