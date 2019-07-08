@@ -7,7 +7,7 @@ number: 1
 
 The cardboard fort crumbled.
 
-It was destroyed by a small fairy zipping through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She looked the boy up and down, nodding.
+It was destroyed by a small fairy zipping through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She looked the boy up and down and nodded.
 
 "Want to find a magic lamp," she asked, floating eye-level. 
 
@@ -19,7 +19,7 @@ A coy grin spread across the fairy's bright face, filling the room with magic.
 
 It soon separated the boy from gravity's grasp. The sprite then raced to grab his hand before he could settle back to the floor. Out the window they went, flying high, over the moon, toward her home — a magical land of grand adventure. 
 
-By day, they searched for the magic lamp, soaring over pirate ships and chasing Jinns across sun-drenched sands. By night, they told amazing stories about the day's biggest adventures.
+By day, they searched for the magic lamp, soaring over pirate ships and chasing Jinns across sun-drenched sands. By night, they told amazing stories about the day's big adventures, each competing to tell taller tales. It was wonderful.
 
 Then, one night, when it was already late, the fairy sighed. 
 
