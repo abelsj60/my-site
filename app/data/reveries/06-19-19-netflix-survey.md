@@ -7,8 +7,7 @@ slug: Netflix wouldn't let me take its survey
 
 Netflix rejected me today.
 
-The company sent me a survey request today. I'd get a free month for every survey I take. I qualified for three daily surveys and
-would get a bonus month if I did them all. COOL!
+The company had just sent me a survey request. I'd get a free month for every survey I take. I qualified for three daily surveys and would get a bonus month if I did them all. COOL!
 
 Let's do it.
 
