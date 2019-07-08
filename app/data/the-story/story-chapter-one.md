@@ -17,7 +17,7 @@ The boy burst with delight.
 
 A coy grin spread across the fairy's bright face, filling the room with magic. 
 
-When it separated the boy from gravity's grasp, the sprite raced to grab his hand before he could settle back to the floor. Out the window they went, flying high, over the moon, toward her home — a magical land of grand adventure. 
+It soon separated the boy from gravity's grasp. The sprite then raced to grab his hand before he could settle back to the floor. Out the window they went, flying high, over the moon, toward her home — a magical land of grand adventure. 
 
 By day, they searched for the magic lamp, soaring over pirate ships and chasing Jinns across sun-drenched sands. By night, they told amazing stories about the day's biggest adventures.
 
