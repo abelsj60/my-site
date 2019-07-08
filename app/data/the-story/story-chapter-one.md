@@ -13,7 +13,7 @@ It was destroyed by a small fairy zipping through the wide-eyed boy's window wit
 
 The boy burst with delight.
 
-"Of course," he shreiked. "What should I do?"
+"Of course," he shrieked. "What should I do?"
 
 A coy grin spread across the fairy's bright face, filling the room with magic. 
 
