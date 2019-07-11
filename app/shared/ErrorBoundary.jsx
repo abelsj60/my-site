@@ -103,15 +103,17 @@ export default class ErrorBoundary extends Component {
       errorInfo: errorInfo
     });
 
-    ReactGA.exception({
-      description: `${
-        error
-      }. Initial load: ${
-        initialLoad
-      }. Info: ${
-        JSON.stringify(errorInfo)
-      }.`
-    });
+    if (process.env.NODE_ENV !== 'development') {
+      ReactGA.exception({
+        description: `${
+          error
+        }. Initial load: ${
+          initialLoad
+        }. Info: ${
+          JSON.stringify(errorInfo)
+        }.`
+      });
+    }
   }
 
   componentDidMount() {

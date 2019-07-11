@@ -11,7 +11,7 @@ export default styled(
   // https://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
   flex-shrink: 0; 
   margin-right: 25px;
-  margin-bottom: 24px; 
+  margin-bottom: 18px; 
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     height: ${p => p.height};

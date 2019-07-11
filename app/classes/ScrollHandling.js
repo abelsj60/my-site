@@ -17,11 +17,14 @@ export default class ScrollHandling {
           : true;
 
         if (updateScrollTop) {
-          ReactGA.event({
-            category: 'Scroll management',
-            action: `Reset top for ${this._caller}`,
-            label: 'Swapping content'
-          });
+          if (process.env.NODE_ENV !== 'development') {
+            ReactGA.event({
+              category: 'Scroll management',
+              action: `Reset top for ${this._caller}`,
+              label: 'Swapping content'
+            });
+          }
+
           overflowRef.current.scrollTop = 0;
         }
       }
@@ -33,11 +36,14 @@ export default class ScrollHandling {
     // for cross-browser support, per MDN
 
     if (window.pageYOffset > 0) {
-      ReactGA.event({
-        category: 'Scroll management',
-        action: `Reset window for ${this._caller}`,
-        label: 'Changing location'
-      });
+      if (process.env.NODE_ENV !== 'development') {
+        ReactGA.event({
+          category: 'Scroll management',
+          action: `Reset window for ${this._caller}`,
+          label: 'Changing location'
+        });
+      }
+
       window.scroll({
         top: 0,
         behavior: 'smooth'

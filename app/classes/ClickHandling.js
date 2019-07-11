@@ -174,13 +174,15 @@ export default class ClickHandling {
       }
 
       if (updateValue !== 'updateApp') {
-        ReactGA.event({
-          category,
-          action,
-          label: label
-            ? label
-            : null
-        });
+        if (process.env.NODE_ENV !== 'development') {
+          ReactGA.event({
+            category,
+            action,
+            label: label
+              ? label
+              : null
+          });
+        }
       }
 
       return this.setState(() => stateToUpdate);
@@ -344,19 +346,23 @@ export default class ClickHandling {
           // We store the background value in App so it's remembered
           // as the user travels through the site.
 
-          ReactGA.event({
-            category: 'Home state',
-            action: 'Spell successful.'
-          });
+          if (process.env.NODE_ENV !== 'development') {
+            ReactGA.event({
+              category: 'Home state',
+              action: 'Spell successful.'
+            });
+          }
 
           this.props.boundHandleClickForApp('swapBackground');
           boundHandleClickForHome('castSpell');
         } else {
-          ReactGA.event({
-            category: 'Home state',
-            action: 'Wrong Charm clicked.',
-            label: `The score was ${score}.`
-          });
+          if (process.env.NODE_ENV !== 'development') {
+            ReactGA.event({
+              category: 'Home state',
+              action: 'Wrong Charm clicked.',
+              label: `The score was ${score}.`
+            });
+          }
 
           boundHandleClickForHome('toggleSpell');
         }

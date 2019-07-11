@@ -35,7 +35,7 @@ const StoryButton = styled(Button)`
   color: white;
   margin-left: 25px;
   background-color: ${p => (!p.active ? p.theme.colors.pink : p.theme.colors.blue)};
-  width: 43px;
+  width: 65px;
   padding: 7px;
 `;
 const RestyledLink = styled(StyledLink)`
@@ -120,8 +120,8 @@ export default function FooterContainer(props) {
         show={isStory}
         text={
           showStoryText
-            ? 'Image'
-            : 'Story'
+            ? 'See it!'
+            : 'Read it!'
         }
       />
       <FooterAlert

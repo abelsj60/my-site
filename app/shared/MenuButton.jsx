@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.div`
-  min-width: 58px;
-  width: 58px;
+  min-width: 50px;
+  width: 50px;
 `;
 const RestyledLink = styled(StyledLink)`
   display: flex;
@@ -17,7 +17,7 @@ const RestyledLink = styled(StyledLink)`
   justify-content: space-between;
 `;
 const Label = styled.p`
-  font-size: ${p => p.theme.fontSizes.six};
+  font-size: ${p => p.theme.fontSizes.one};
   color: ${p => p.theme.colors.pink};
   margin: 0px;
   cursor: pointer;

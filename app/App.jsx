@@ -107,6 +107,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
     background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
+    height: 100vh; // Ensures iOS/mobile Safari 12 fills height on rotation change
   }
   
   body {
@@ -171,8 +172,10 @@ class App extends Component {
     // One way to block orientation change
     // https://css-tricks.com/snippets/css/orientation-lock/
 
-    ReactGA.initialize('UA-137902767-1');
-    ReactGA.pageview(pathname + search); // Tallies initial request
+    if (process.env.NODE_ENV !== 'development') {
+      ReactGA.initialize('UA-137902767-1');
+      ReactGA.pageview(pathname + search); // Tallies initial request
+    }
 
     // Lower limit for resizing — (iPhone/SE form
     // factor uses default height, wider phones
@@ -459,19 +462,22 @@ class App extends Component {
 
     const newHeight =
       isMobile
-        && (!isMobileSafari || this.state.isAfterTouch)
+        && (!isMobileSafari
+          || this.state.isAfterTouch)
         ? document.documentElement.clientHeight
         : window.innerHeight;
 
     // Do not resize height while pinchZoomed.
 
     if ( this.state.pinchZoomed) {
-      ReactGA.event({
-        category: 'App state',
-        action: 'Resized while pinchZoomed',
-        value: newHeight,
-        label: `Page: ${pathname}${search}`
-      });
+      if (process.env.NODE_ENV !== 'development') {
+        ReactGA.event({
+          category: 'App state',
+          action: 'Resized while pinchZoomed',
+          value: newHeight,
+          label: `Page: ${pathname}${search}`
+        });
+      }
 
       return false;
     }
@@ -479,18 +485,17 @@ class App extends Component {
     // Ensure the window top at zero after resize change.
     // (This trigers another resize if height changes.)
 
-    if (
-      window.pageYOffset > 0
+    if (window.pageYOffset > 0
         // Prevent resize when user scrolls oversized page.
-        && !this.isAfterTouchWhenScrollingPage
-    ) {
+        && !this.isAfterTouchWhenScrollingPage) {
       const scrollHandling = new ScrollHandling(location);
       scrollHandling.resetWindowTop();
     }
 
     // Manage FooterAlert on small iPhones.
 
-    if (isMobileSafari && !window.navigator.standalone) {
+    if (isMobileSafari
+        && !window.navigator.standalone) {
       this.setState({
         footerAlert: window.innerHeight < this.minAllowedHeight
       });
@@ -500,18 +505,18 @@ class App extends Component {
     // Note, mobile Brave slips through this test on /home. The image
     // 'resize' and Brave then resizes. No fix for now.
 
-    if (
-      newHeight === this.state.height
-        || this.minAllowedHeight > newHeight
-    ) {
-      ReactGA.event({
-        category: 'App state',
-        action: `
-          Resized w/o changing height. Current: ${this.state.height}, new ${newHeight}
-        `,
-        value: newHeight,
-        label: `Page: ${pathname}${search}`
-      });
+    if (newHeight === this.state.height
+        || this.minAllowedHeight > newHeight) {
+      if (process.env.NODE_ENV !== 'development') {
+        ReactGA.event({
+          category: 'App state',
+          action: `
+            Resized w/o changing height. Current: ${this.state.height}, new ${newHeight}
+          `,
+          value: newHeight,
+          label: `Page: ${pathname}${search}`
+        });
+      }
 
       return false;
     }
@@ -521,12 +526,14 @@ class App extends Component {
     //  b. orientation change AND pinchZoom is off
     //  c. height changes (we've already discarded newHeight <= 350)
 
-    ReactGA.event({
-      category: 'App state',
-      action: 'Re-calculate height',
-      value: newHeight,
-      label: `Page: ${pathname}${search}`
-    });
+    if (process.env.NODE_ENV !== 'development') {
+      ReactGA.event({
+        category: 'App state',
+        action: 'Re-calculate height',
+        value: newHeight,
+        label: `Page: ${pathname}${search}`
+      });
+    }
 
     this.setState(
       () => ({
@@ -557,18 +564,20 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const location = new Location(
-      '/',
-      this.props,
-      prevProps
-    );
+    if (process.env.NODE_ENV !== 'development') {
+      const location = new Location(
+        '/',
+        this.props,
+        prevProps
+      );
 
-    if (location.recordPageview) {
-      const {
-        pathname,
-        search
-      } = window.location;
-      ReactGA.pageview(pathname + search);
+      if (location.recordPageview) {
+        const {
+          pathname,
+          search
+        } = window.location;
+        ReactGA.pageview(pathname + search);
+      }
     }
   }
 }

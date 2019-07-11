@@ -129,11 +129,13 @@ export default function NameTag(props) {
       return false;
     }
 
-    ReactGA.event({
-      category: 'Home state',
-      action: 'Spell toggled.',
-      label: `The score was ${score}.`
-    });
+    if (process.env.NODE_ENV !== 'development') {
+      ReactGA.event({
+        category: 'Home state',
+        action: 'Spell toggled.',
+        label: `The score was ${score}.`
+      });
+    }
 
     boundHandleClickForHome('toggleSpell');
   };

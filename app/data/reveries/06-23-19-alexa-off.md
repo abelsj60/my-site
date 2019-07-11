@@ -13,6 +13,6 @@ I have an Echo Show 2. I got it as a freebie from Amazon because I published a s
 
 Like a lot of people, I think Alexa's cool, but I don't like wondering if she's listening even when she's not supposed to be. So here's what I did. I got a smartplug and named it "yourself." Then I plugged the Echo Show into it. Then I paired it with Alexa. It took about ten minutes. 
 
-Now I can say "Alexa, turn yourself off." And she does! I have an app on my phone to turn her on when I want her. It's very amusing. Thanks, John!
+Now I can say "Alexa, turn yourself off." And she does! Thanks, John!
 
 -j

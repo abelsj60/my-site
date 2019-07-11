@@ -227,10 +227,12 @@ export default class LegalTermsOrBizCard extends Component {
                   ) {
                     // Technically runs after the copy is made.
 
-                    ReactGA.event({
-                      category: 'Legal terms state',
-                      action: 'Copy email address'
-                    });
+                    if (process.env.NODE_ENV !== 'development') {
+                      ReactGA.event({
+                        category: 'Legal terms state',
+                        action: 'Copy email address'
+                      });
+                    }
                     makeCopies();
                     this.timeoutId = setTimeout(
                       () => {
@@ -262,13 +264,15 @@ export default class LegalTermsOrBizCard extends Component {
     const { showBusinessCard } = this.props.appState;
     const { pathname } = window.location;
 
-    ReactGA.modalview(
-      `${pathname}${
-        showBusinessCard
-          ? 'businesscard'
-          : 'legalterms'
-      }`
-    );
+    if (process.env.NODE_ENV !== 'development') {
+      ReactGA.modalview(
+        `${pathname}${
+          showBusinessCard
+            ? 'businesscard'
+            : 'legalterms'
+        }`
+      );
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -282,14 +286,16 @@ export default class LegalTermsOrBizCard extends Component {
     } = prevProps.appState;
     const { pathname } = window.location;
 
-    if (showBusinessCard && !businessCardWasActive) {
-      ReactGA.modalview(
-        `${pathname}businesscard`
-      );
-    } else if (showLegalTerms && !legalTermsWereActive) {
-      ReactGA.modalview(
-        `${pathname}legalterms`
-      );
+    if (process.env.NODE_ENV !== 'development') {
+      if (showBusinessCard && !businessCardWasActive) {
+        ReactGA.modalview(
+          `${pathname}businesscard`
+        );
+      } else if (showLegalTerms && !legalTermsWereActive) {
+        ReactGA.modalview(
+          `${pathname}legalterms`
+        );
+      }
     }
   }
 
