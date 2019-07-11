@@ -7,7 +7,7 @@ number: 1
 
 The cardboard fort crumbled.
 
-It was destroyed by a small fairy zipping through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She looked the boy up and down and nodded.
+It was destroyed by a small fairy as she zipped through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She looked the boy up and down and nodded.
 
 "Want to find a magic lamp," she asked, floating eye-level. 
 
