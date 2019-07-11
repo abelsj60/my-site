@@ -40,20 +40,17 @@ const RestyledLink = styled(
 )`
   height: ${p => !p.isMenu && '15px'};
   border: 1px solid ${p => p.highlightThis ? p.theme.colors.darkPinkTwo : p.theme.colors.blueTwo};
-  display: block; // Ensures the entire image beneath it is clickable in Safari 10+, per CSS Tricks
+  display: flex;
+  align-items: center; // Prevents image from stretching
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     height: ${p => !p.isMenu && '30px'};
   }
 `;
 const Image = styled.img`
-  max-height: 100%;
-  max-width: 100%;
   vertical-align: top;
-  
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    max-height: ${p => !p.isMenu && '30px'};
-  }
+  height: ${p => !p.isMenu && '100%'}; // Proper height on project page
+  width: ${p => p.isMenu && '100%'}; // Proper width in /menu
 `;
 
 export default function ProjectNav(props) {

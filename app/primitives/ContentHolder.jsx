@@ -9,4 +9,8 @@ export default styled.section`
   filter: ${p => p.theme.blurForTempContent && p.theme.blur};
   // Width runs forever right in IE w/o this.
   ${isIE && 'overflow: auto;'};
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+    margin: 25px 0px 25px ${p => !p.saveSerifs ? '25px' : '23px'};
+  }
 `;

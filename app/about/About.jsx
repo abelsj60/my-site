@@ -28,6 +28,14 @@ const Text = styled.section`
     border-left: 15px solid ${p => p.theme.colors.lightBlack};
   }
 
+  li {
+    margin-bottom: 6px;
+  }
+
+  li p {
+    margin-bottom: 6px;
+  }
+
   p {
     margin-bottom: ${p => p.theme.bottomMargin.regular};
     // Gets cut off in chrome (add saveSerifs to ContentHolder)

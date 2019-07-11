@@ -42,7 +42,7 @@ const Line = styled.div`
   left: 0px;
   bottom: 0px;
   margin: 0px;
-  height: ${p => (!p.menu ? '1px' : '2px')};
+  height: 1px;
   background-color: ${p => !p.reverie ? p.theme.colors.blueTwo : p.theme.colors.white };
 `;
 
