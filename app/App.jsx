@@ -70,6 +70,7 @@ const mediaQueries = {
   tinyViewTwo: '425px',
   narrowBreakOne: '500px',
   narrowBreakTwo: '690px',
+  narrowBreakTwoB: '691px',
   desktop: '848px'
 };
 const bottomMargin = {

@@ -187,7 +187,7 @@ const Icon = styled.img`
   padding-right: 5px;
   z-index: 1;
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwoB}) {
     display: none;
   }
 `;
