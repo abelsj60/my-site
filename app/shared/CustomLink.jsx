@@ -54,6 +54,7 @@ const Link = ({
   boundHandleClickForApp,
   callerWillBe,
   isCalledByMenu,
+  closeHeaderMenu,
   ...props
 }) => {
   const { pathname } = window.location;
@@ -77,6 +78,10 @@ const Link = ({
           'updateApp',
           callerWillBe
         );
+
+        if (closeHeaderMenu) {
+          closeHeaderMenu();
+        }
       } else {
         boundHandleClickForApp(
           'toggleMenu'

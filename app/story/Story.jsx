@@ -64,6 +64,7 @@ const TagLine = styled.p`
   font-size: ${p => p.theme.fontSizes.twentyTwo};
   color: ${p => p.theme.colors.lightBlack};
   text-align: center;
+  margin-top: -4px;
   margin-bottom: 5px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
