@@ -312,6 +312,8 @@ export default class Header extends Component {
   }
 
   closeHeaderMenu() {
+    clearTimeout(this.timeoutId);
+    this.timeoutId = undefined;
     this.setState({ menuIsOpen: false });
   }
 }
