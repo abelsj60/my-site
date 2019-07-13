@@ -108,7 +108,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
     background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
-    height: 100vh; // Ensures iOS/mobile Safari 12 fills height on rotation change
   }
   
   body {
@@ -458,19 +457,32 @@ class App extends Component {
     // innerHeight correctly, so we'll use
     // clientHeight 'isAfterTouch':
 
+    const toggleHtmlHeight = (mode) => {
+      if (mode === 'add') {
+        if (isMobileSafari && parseInt(osVersion) >= 12) {
+          document.getElementsByTagName('html')[0].style.height = '100vh';
+        }
+      } else if (mode === 'remove') {
+        if (isMobileSafari && parseInt(osVersion) >= 12) {
+          setTimeout(() => document.getElementsByTagName('html')[0].style.height = '', 250);
+        }
+      }
+    };
+
+    toggleHtmlHeight('add');
+
     //  a. clientHeight. Mobile Chrome and after touchMove
     //  b. innerHeight. Mobile Safari
 
-    const newHeight =
-      isMobile
+    const newHeight = isMobile
         && (!isMobileSafari
           || this.state.isAfterTouch)
-        ? document.documentElement.clientHeight
-        : window.innerHeight;
+      ? document.documentElement.clientHeight
+      : window.innerHeight;
 
     // Do not resize height while pinchZoomed.
 
-    if ( this.state.pinchZoomed) {
+    if (this.state.pinchZoomed) {
       if (process.env.NODE_ENV !== 'development') {
         ReactGA.event({
           category: 'App state',
@@ -480,6 +492,7 @@ class App extends Component {
         });
       }
 
+      toggleHtmlHeight('remove');
       return false;
     }
 
@@ -508,6 +521,7 @@ class App extends Component {
 
     if (newHeight === this.state.height
         || this.minAllowedHeight > newHeight) {
+
       if (process.env.NODE_ENV !== 'development') {
         ReactGA.event({
           category: 'App state',
@@ -519,6 +533,9 @@ class App extends Component {
         });
       }
 
+      // On orientation change, covers every section but /chapter
+      // (at least on iPhone)
+      toggleHtmlHeight('remove');
       return false;
     }
 
@@ -536,6 +553,9 @@ class App extends Component {
       });
     }
 
+    // On orientation change, covers /chapter b/c of hidden image
+    // (at least on iPhone)
+    toggleHtmlHeight('remove');
     this.setState(
       () => ({
         height: newHeight,

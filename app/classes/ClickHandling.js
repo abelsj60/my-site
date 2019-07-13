@@ -256,7 +256,7 @@ export default class ClickHandling {
 
         toggleState.call(this);
         this.timeoutId = setTimeout(() => {
-          // Comment next line to suspend auto-close
+          // Disable to suspend auto-close
           this.setState({ menuIsOpen: false });
         }, 5000);
       } else {
