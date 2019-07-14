@@ -13,4 +13,9 @@ export default styled.section`
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     margin: 25px 0px 25px ${p => !p.saveSerifs ? '25px' : '23px'};
   }
+
+  // Blur background when header menu is on and user is mobile
+  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    filter: ${p => p.theme.blurForHeaderMenu && p.theme.blur};
+  }
 `;

@@ -1,5 +1,4 @@
 import bio from '../data/home/home.md';
-import ClickHandling from '../classes/ClickHandling.js';
 import headerNavClose from '../../public/header-nav-open.png';
 import headerNavOpen from '../../public/header-nav-closed.png';
 import Mapper from '../shared/Mapper.jsx';
@@ -36,13 +35,23 @@ const HeaderBackground = styled.div`
   background-color: ${p => !p.hide ? p.theme.colors.darkPink : ''};
   z-index: -1;
 
-  // Control nav items when menu is, up to the break point
-  // Must come after all others so it controls in its limited circs
+  // Control nav items when menu is open, up to the break point
+  // Must come after all others so it controls in limited circs
+  // Makes top menu bar opaque and visiable if it's hidden
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    height: ${p => !p.isHome && p.menu && '100%'};
-    background-color: ${p => !p.isHome && p.menu && p.theme.colors.darkPink};
-
-    // background-color: ${p => !p.isHome && p.menu && 'rgba(175, 18, 90, .95)'};
+    background-color: ${p => p.hide && !p.isHome && p.menu && 'rgba(175, 18, 90, .8)'};
+  }
+`;
+const HeaderMenuBackground = styled.div`
+  // Control nav items when menu is open, up to the break point
+  // Must come after all others so it controls in limited circs
+  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    display: ${p => !p.menu ? 'none' : 'block'};
+    position: absolute;
+    top: 52px;
+    bottom: 0px;
+    width: 100%;
+    background-color: ${p => !p.isHome && p.menu && 'rgba(175, 18, 90, .8)'};
   }
 `;
 const RestyledLink = styled(
@@ -64,8 +73,8 @@ const RestyledLink = styled(
     font-size: ${p => p.isHome ? p.theme.fontSizes.three : p.theme.fontSizes.three};
   }
 
-  // Control nav items when menu is, up to the break point
-  // Must come after all others so it controls in its limited circs
+  // Control nav items when menu is open, up to the break point
+  // Must come after all others so it controls in limited circs
   @media (min-width: 0px) and (max-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.menu && p.theme.fontSizes.eighteen};
     margin-left: ${p => p.menu && '0px'};
@@ -139,8 +148,6 @@ const Nav = styled.nav`
     width: 100%;
     display: flex;
     justify-content: center;
-
-    // Offset centering by right-side icon width (is five less than total)
   `};
   }
 `;
@@ -151,27 +158,27 @@ const NavList = styled(UnorderedList)`
   padding: 0px;
   list-style: none;
 
-  // Control nav items when menu is, up to the break point
-  // Must come after all others so it controls in its limited circs
+  // Control nav items when menu is open, up to the break point
+  // Must come after all others so it controls in limited circs
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     ${p => p.menu && 'flex-direction: column;'}
   }
 
-  // Control nav items when menu is, up to the break point
-  // Must come after all others so it controls in its limited circs
+  // Control nav items when menu is open, up to the break point
+  // Must come after all others so it controls in limited circs
   @media (min-width: 0px) and (max-width: ${p => p.theme.mediaQueries.tinyView}) {
     height: ${p => !p.isHome && '300px'};
   }
 
-  // Control nav items when menu is, up to the break point
-  // Must come after all others so it controls in its limited circs
+  // Control nav items when menu is open, up to the break point
+  // Must come after all others so it controls in limited circs
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) and (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     height: ${p => !p.isHome && '450px'};
   }
 `;
 const ListItem = styled.li`
-  // Control nav items when menu is, up to the break point
-  // Must come after all others so it controls in its limited circs
+  // Control nav items when menu is open, up to the break point
+  // Must come after all others so it controls in limited circs
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     margin-top: ${p => !p.ishHome && p.menu ? 'auto' : '0px'};
     margin-bottom: ${p => !p.isHome && p.menu ? 'auto' : '0px'};
@@ -195,18 +202,6 @@ const Icon = styled.img`
 `;
 
 export default class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.timeoutId = undefined;
-
-    this.state = {
-      menuIsOpen: false
-    };
-
-    this.closeHeaderMenu = this.closeHeaderMenu.bind(this);
-  }
-
   render() {
     const {
       appState,
@@ -214,58 +209,58 @@ export default class Header extends Component {
     } = this.props;
     const {
       currentCaller,
+      headerMenuIsOpen,
       showStoryText
     } = appState;
-    const menuIsOpen = this.state.menuIsOpen;
     const isHome = currentCaller === 'home';
     const isReverie = currentCaller === 'reverie';
     const iconType =
-      menuIsOpen
+      headerMenuIsOpen
         ? headerNavClose
         : headerNavOpen;
     const hideBackground = isHome
         || (!showStoryText && !isReverie);
-    const hideNameAndMotto = menuIsOpen || isHome;
 
     const referrer = new Referrer(this.props);
-    const hcForHeader = new ClickHandling('header', this);
-
-    const handleClickForHeader = hcForHeader.boundHandleClick;
-    const eventHandlerHeaderMenu = () => handleClickForHeader();
+    const eventHandlerForHeaderMenu = () => boundHandleClickForApp('toggleHeaderMenu');
 
     return (
       <Container
         isHome={isHome}
       >
         <HeaderBackground
-          menu={menuIsOpen}
+          isHome={isHome}
+          menu={headerMenuIsOpen}
+          hide={hideBackground}
+        />
+        <HeaderMenuBackground
+          menu={headerMenuIsOpen}
           hide={hideBackground}
         />
         <NameAsLink
           isHome={isHome}
-          hide={hideNameAndMotto}
-          menu={menuIsOpen}
+          hide={isHome}
+          menu={headerMenuIsOpen}
           callerWillBe={'home'}
           boundHandleClickForApp={boundHandleClickForApp}
-          closeHeaderMenu={menuIsOpen && this.closeHeaderMenu}
           to={'/'}
         >
           James Abels
         </NameAsLink>
         <Motto
           isHome={isHome}
-          hide={hideNameAndMotto}
-          menu={menuIsOpen}
+          hide={isHome}
+          menu={headerMenuIsOpen}
         >
           {bio.attributes.motto}
         </Motto>
         <Nav
           isHome={isHome}
-          menu={menuIsOpen}
+          menu={headerMenuIsOpen}
         >
           <NavList
             isHome={isHome}
-            menu={menuIsOpen}
+            menu={headerMenuIsOpen}
           >
             <Mapper
               mapData={headerLinks}
@@ -282,17 +277,16 @@ export default class Header extends Component {
                       key={idx}
                       isHome={isHome}
                       lastItem={lastItem}
-                      menu={menuIsOpen}
+                      menu={headerMenuIsOpen}
                     >
                       <RestyledLink
                         isActive={isActive}
                         isHome={isHome}
-                        menu={menuIsOpen}
+                        menu={headerMenuIsOpen}
                         num={idx}
                         to={link.path}
                         callerWillBe={link.path.slice(1)}
                         boundHandleClickForApp={boundHandleClickForApp}
-                        closeHeaderMenu={menuIsOpen && this.closeHeaderMenu}
                       >
                         {link.name}
                       </RestyledLink>
@@ -305,17 +299,11 @@ export default class Header extends Component {
         </Nav>
         <Icon
           isHome={isHome}
-          menu={menuIsOpen}
+          menu={headerMenuIsOpen}
           src={iconType}
-          onClick={eventHandlerHeaderMenu}
+          onClick={eventHandlerForHeaderMenu}
         />
       </Container>
     );
-  }
-
-  closeHeaderMenu() {
-    clearTimeout(this.timeoutId);
-    this.timeoutId = undefined;
-    this.setState({ menuIsOpen: false });
   }
 }

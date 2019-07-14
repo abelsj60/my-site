@@ -185,6 +185,7 @@ class App extends Component {
     this.defaultHeightWhenTooSmall = 568; // Arbitrary (iPhone SE height)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
+    this.headerMenuTimeoutId = undefined;
 
     // Prevent resize when scrolling oversized page. Not using state
     // b/c it causes overflowing divs (w/content in them) to 'jump'
@@ -207,6 +208,7 @@ class App extends Component {
       showBusinessCard: false, // Show business card
       showLegalTerms: false, // Show legal terms
       showStoryText: true, // Show story text, picture if false
+      headerMenuIsOpen: false,
       pinchZoomed: false, // We're zoomed! or not.
       isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false, // Resize w/clientHeight when true
@@ -217,11 +219,12 @@ class App extends Component {
           && height < this.minAllowedHeight,
       password: '',
       isValidUser: false,
-      wrongPassword: ''
+      wrongPassword: '',
     };
 
     this.handleResize = this.handleResize.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
+    this.closeHeaderMenu = this.closeHeaderMenu.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
@@ -276,7 +279,10 @@ class App extends Component {
           mediaQueries,
           pageHeight: this.state.height.toString(),
           blur: blurControl.regular,
-          blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms
+          blurForTempContent:
+            this.state.showBusinessCard
+              || this.state.showLegalTerms,
+          blurForHeaderMenu: this.state.headerMenuIsOpen
         }}
       >
         <Fragment
@@ -317,6 +323,12 @@ class App extends Component {
           </ZoomControl>
         </Fragment>
       </ThemeProvider>;
+  }
+
+  closeHeaderMenu() {
+    clearTimeout(this.state.headerMenuTimeoutId);
+    this.state.headerMenuTimeoutId = undefined;
+    this.setState({ headerMenuIsOpen: false });
   }
 
   hasFlexbox() {
@@ -460,11 +472,17 @@ class App extends Component {
     const toggleHtmlHeight = mode => {
       if (mode === 'on') {
         if (isMobileSafari && parseInt(osVersion) >= 12) {
-          document.getElementsByTagName('html')[0].style.height = '100vh';
+          document.getElementsByTagName('html')[0]
+            .style
+            .height = '100vh';
         }
       } else if (mode === 'off') {
         if (isMobileSafari && parseInt(osVersion) >= 12) {
-          setTimeout(() => document.getElementsByTagName('html')[0].style.height = '', 250);
+          setTimeout(() => {
+            document.getElementsByTagName('html')[0]
+              .style
+              .height = '';
+          }, 250);
         }
       }
     };

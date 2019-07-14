@@ -31,9 +31,6 @@ export default class ClickHandling {
       case 'body':
         selectedHandler = this._handleClickForBody;
         break;
-      case 'header':
-        selectedHandler = this._handleClickForHeader;
-        break;
       case 'home':
         selectedHandler = this._handleClickForHome;
         break;
@@ -59,7 +56,8 @@ export default class ClickHandling {
         showLegalTerms,
         inCity,
         showStoryText,
-        isMenu
+        isMenu,
+        headerMenuIsOpen
       } = this.state;
       const stateToUpdate = {};
       let category = '';
@@ -132,12 +130,38 @@ export default class ClickHandling {
             ? `Enter: ${currentCaller} menu`
             : `Leave: ${currentCaller} menu`;
           break;
+        case 'toggleHeaderMenu':
+          stateToUpdate.headerMenuIsOpen = !headerMenuIsOpen;
+
+          if (!headerMenuIsOpen) {
+            this.headerMenuTimeoutId = setTimeout(() => {
+              // Disable to suspend auto-close
+              this.setState(
+                { headerMenuIsOpen: false },
+                () => {
+                  // Reset timeout after timeout successfully runs
+                  this.headerMenuTimeoutId = undefined;
+                });
+            }, 5000);
+          } else {
+            // Clear timeout if closing via the icon (img))
+            clearTimeout(this.headerMenuTimeoutId);
+            this.headerMenuTimeoutId = undefined;
+          }
+          break;
         case 'updateApp':
           if (valueOne !== undefined) {
             stateToUpdate.currentCaller = valueOne;
             stateToUpdate.lastCaller = currentCaller;
           }
 
+          // Clear timeout when clicking a link in the headerMenu
+          if (this.headerMenuTimeoutId) {
+            clearTimeout(this.headerMenuTimeoutId);
+            this.headerMenuTimeoutId = undefined;
+          }
+
+          stateToUpdate.headerMenuIsOpen = false;
           stateToUpdate.showBusinessCard = false;
           stateToUpdate.showLegalTerms = false;
 
@@ -229,43 +253,6 @@ export default class ClickHandling {
 
       if (caller === 'projects') {
         this.setState({ imageLoaded: !imageLoaded });
-      }
-    };
-  }
-
-  // Handles onClicks on Header (header menu).
-
-  _handleClickForHeader() {
-    return () => {
-      const { menuIsOpen } = this.state;
-
-      // Let's define a function w/the Header's 'this'
-      // value to control the header state.
-
-      const toggleState = function() {
-        this.setState({
-          menuIsOpen: !menuIsOpen
-        });
-      };
-
-      if (!menuIsOpen) {
-        // We'll use .call to invoke our function so
-        // as to ensure the 'this' value is right.
-        // Alternative: We could define it externally
-        // and pass it in.
-
-        toggleState.call(this);
-        this.timeoutId = setTimeout(() => {
-          // Disable to suspend auto-close
-          this.setState({ menuIsOpen: false });
-        }, 5000);
-      } else {
-        clearTimeout(this.timeoutId);
-        this.timeoutId = undefined;
-
-        // See comment above.
-
-        toggleState.call(this);
       }
     };
   }

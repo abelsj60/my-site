@@ -58,7 +58,7 @@ export default ({
   boundHandleClickForApp,
   callerWillBe,
   isCalledByMenu,
-  closeHeaderMenu,
+  // menu,
   ...props
 }) => {
   const { pathname } = window.location;
@@ -83,9 +83,9 @@ export default ({
           callerWillBe
         );
 
-        if (closeHeaderMenu) {
-          closeHeaderMenu();
-        }
+        // if (menu) {
+        //   boundHandleClickForApp('toggleHeaderMenu');
+        // }
       } else {
         boundHandleClickForApp(
           'toggleMenu'
