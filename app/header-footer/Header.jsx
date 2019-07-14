@@ -41,6 +41,8 @@ const HeaderBackground = styled.div`
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     height: ${p => !p.isHome && p.menu && '100%'};
     background-color: ${p => !p.isHome && p.menu && p.theme.colors.darkPink};
+
+    // background-color: ${p => !p.isHome && p.menu && 'rgba(175, 18, 90, .95)'};
   }
 `;
 const RestyledLink = styled(

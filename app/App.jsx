@@ -453,23 +453,23 @@ class App extends Component {
     // On mobile, we must account for browser differences.
     // Mobile Safari updates innerHeight on resize and
     // UI changes but mobile Chrome does not. Also,
-    //  after touchMove, Safari doesn't update
-    // innerHeight correctly, so we'll use
+    // after touchMove, Safari doesn't update
+    // innerHeight correctly, so we'll use/
     // clientHeight 'isAfterTouch':
 
-    const toggleHtmlHeight = (mode) => {
-      if (mode === 'add') {
+    const toggleHtmlHeight = mode => {
+      if (mode === 'on') {
         if (isMobileSafari && parseInt(osVersion) >= 12) {
           document.getElementsByTagName('html')[0].style.height = '100vh';
         }
-      } else if (mode === 'remove') {
+      } else if (mode === 'off') {
         if (isMobileSafari && parseInt(osVersion) >= 12) {
           setTimeout(() => document.getElementsByTagName('html')[0].style.height = '', 250);
         }
       }
     };
 
-    toggleHtmlHeight('add');
+    toggleHtmlHeight('on');
 
     //  a. clientHeight. Mobile Chrome and after touchMove
     //  b. innerHeight. Mobile Safari
@@ -492,7 +492,7 @@ class App extends Component {
         });
       }
 
-      toggleHtmlHeight('remove');
+      toggleHtmlHeight('off');
       return false;
     }
 
@@ -535,7 +535,7 @@ class App extends Component {
 
       // On orientation change, covers every section but /chapter
       // (at least on iPhone)
-      toggleHtmlHeight('remove');
+      toggleHtmlHeight('off');
       return false;
     }
 
@@ -555,7 +555,7 @@ class App extends Component {
 
     // On orientation change, covers /chapter b/c of hidden image
     // (at least on iPhone)
-    toggleHtmlHeight('remove');
+    toggleHtmlHeight('off');
     this.setState(
       () => ({
         height: newHeight,
