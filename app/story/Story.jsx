@@ -95,6 +95,11 @@ const Image = styled.div`
   // If business card or legal terms are on screen, blur content:
   filter: ${p => p.theme.blurForTempContent && p.theme.blur};
 
+  // Blur background when header menu is on and user is mobile
+  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    filter: ${p => p.theme.blurForHeaderMenu && p.theme.blur};
+  }
+
   // If moving to <img> --> May need to fill page:   
   // https://stackoverflow.com/a/30794589
 `;
