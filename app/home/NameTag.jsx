@@ -61,19 +61,38 @@ const Text = styled.section`
   z-index: 2;
   
   @media (min-width: 338px) {
-    width: 260px;
+    width: 75%;
+  }
+
+  @media (min-width: 387px) {
+    width: 70%;
+  }
+
+  @media (min-width: 390px) {
+    width: 85%;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    // width: 375px;
-    width: 55%;
+    width: 85%;
+  }
+
+  @media (min-width: 455px) {
+    width: 75%;
+  }
+
+  @media (min-width: 516px) {
+    width: 70%;
+  }
+
+  @media (min-width: 553px) {
+    width: 65%;
   }
   
   p {
     font-weight: 500;
     margin-bottom: 10px;
     font-size: ${p => p.theme.fontSizes.three};
-    color: ${p => p.theme.colors.white};
+    color: ${p => p.theme.colors.yellow};
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
     text-align: center;
     -webkit-font-smoothing: antialiased;

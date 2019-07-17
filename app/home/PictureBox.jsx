@@ -2,7 +2,7 @@ import bio from '../data/home/home.md';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const largeScale = 1.15;
+const largeScale = 1;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -25,7 +25,7 @@ const BoyInForeground = styled.div`
   height: 100%;
   pointer-events: none;
   z-index: 2;
-  filter: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? p.theme.blur : 'blur(0)'};
+  filter: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? p.theme.blur : ''};
 
   // object-fit: cover; // Use if using <img>
 `;
@@ -35,7 +35,7 @@ const Portal = styled.div`
   width: 100%;
   z-index: 1;
   background-color: ${p => p.theme.colors.black};
-  opacity: .1;
+  opacity: .25;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
   background-image: url(${p => p.srcImage});
@@ -52,7 +52,7 @@ const CityAsBackground = styled(FantasyAsBackground)`
 
 export default function PictureBox(props) {
   const {
-    boyInForegroundImage,
+    // boyInForegroundImage,
     cityImage,
     fantasyImage
   } = bio.attributes;
@@ -72,13 +72,10 @@ export default function PictureBox(props) {
 
   return (
     <PictureHolder>
-      <BoyInForeground
+      {/*<BoyInForeground
         srcImage={boyInForegroundImage}
-      />
-      <Portal
-        isCasting={isCasting}
-        castSpell={castSpell}
-      />
+      />*/}
+      <Portal />
       <FantasyAsBackground
         inCity={inCity}
         isCasting={isCasting}

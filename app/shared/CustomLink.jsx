@@ -58,7 +58,6 @@ export default ({
   boundHandleClickForApp,
   callerWillBe,
   isCalledByMenu,
-  // menu,
   ...props
 }) => {
   const { pathname } = window.location;
@@ -82,10 +81,6 @@ export default ({
           'updateApp',
           callerWillBe
         );
-
-        // if (menu) {
-        //   boundHandleClickForApp('toggleHeaderMenu');
-        // }
       } else {
         boundHandleClickForApp(
           'toggleMenu'

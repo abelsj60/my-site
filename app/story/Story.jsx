@@ -30,7 +30,8 @@ const PictureHolder = styled.section`
   // it should ensure that we load the image in the background so
   // it's instantly ready to go when the button's clicked.
   // (Some browsers won't load an image when display's none.)
-  visibility: ${p => (p.showStoryText ? 'hidden' : 'visible')};
+  // visibility: ${p => (p.showStoryText ? 'hidden' : 'visible')};
+  z-index: -1;
   // Flex = 1 when 'visible' so it 'takes' space when inspecting elements.
   // Otherwise, nothing highlights in dev tools, which looks weird.
   // Flex = 0 when 'hidden' so it takes up no space on the page.
@@ -38,7 +39,7 @@ const PictureHolder = styled.section`
   flex: ${p => p.showStoryText ? '0' : '1'}; 
 `;
 const Chapter = styled.h2`
-  color: ${p => p.theme.colors.lightBlack};
+  color: ${p => p.theme.colors.white};
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.nine};
 `;
@@ -47,7 +48,8 @@ const BookTitle = styled.h1`
   margin: 0px 0px 10px;
   font-size: 2rem;
   font-weight: 900;
-  color: #fd1172;
+  color: ${p => p.theme.colors.yellow};
+  // color: #fd1172;
   text-align: center;
   max-width: 500px;
 
@@ -62,7 +64,7 @@ const BookTitle = styled.h1`
 const TagLine = styled.p`
   font-style: italic;
   font-size: ${p => p.theme.fontSizes.twentyTwo};
-  color: ${p => p.theme.colors.lightBlack};
+  color: ${p => p.theme.colors.white};
   text-align: center;
   margin-top: -4px;
   margin-bottom: 5px;
@@ -79,11 +81,23 @@ const ChapterTitle = styled.h2`
   margin-bottom: 10px;
   color: ${p => p.theme.colors.blue};
 `;
+const Portal = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  background-color: ${p => p.theme.colors.black};
+  opacity: .25;
+`;
 const Image = styled.div`
   // Ensure img top is TOP
   position: absolute;
   top: 0px;
   left: 0px;
+
+  z-index: -1;
 
   // Use background-image to get proper 
   // proportions on most browsers 
@@ -93,7 +107,7 @@ const Image = styled.div`
   height: 100%;
   width: 100%;
   // If business card or legal terms are on screen, blur content:
-  filter: ${p => p.theme.blurForTempContent && p.theme.blur};
+  filter: ${p => p.showStoryText || p.theme.blurForTempContent ? p.theme.blur : ''};
 
   // Blur background when header menu is on and user is mobile
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
@@ -107,6 +121,7 @@ const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};
 
   p {
+    color: ${p => p.theme.colors.white};
     margin-bottom: ${p => p.theme.bottomMargin.regular};
     // Gets cut off in chrome (add saveSerifs to ContentHolder).
     margin-left: 2px; 
@@ -195,8 +210,10 @@ export default function Story(props) {
       <PictureHolder
         showStoryText={showStoryText}
       >
+        <Portal />
         <Image
           alt="fantasy illustration"
+          showStoryText={showStoryText}
           src={image}
         />
       </PictureHolder>
