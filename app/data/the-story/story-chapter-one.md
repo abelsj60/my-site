@@ -1,23 +1,23 @@
 ---
 title: 'A magic quest'
-image: https://user-images.githubusercontent.com/30417590/61186085-20793980-a62f-11e9-8764-ded0bd27a146.png
+image: https://user-images.githubusercontent.com/30417590/61419764-9dc1da00-a8cd-11e9-8eab-2951caa6f597.png
 # image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 1
 ---
 
 The cardboard fort crumbled.
 
-It was destroyed by a small fairy as she zipped through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She looked the boy up and down and nodded.
+A small fairy destroyed it after zipping through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She looked the boy up and down, then nodded.
 
-"Want to find a magic lamp," she asked cheerily, floating eye-level. 
+"Want to find a magic lamp," she asked, floating eye-level. 
 
 The boy burst with delight.
 
-"Of course," he shrieked. "What should I do?"
+"Of course," he shrieked. "What do I do?"
 
 A coy grin spread across the fairy's bright face, filling the room with magic. 
 
-It soon separated the boy from gravity's grasp. The sprite then raced to grab his hand before he could settle back to the floor. Out the window they went, flying high, over the moon, toward her home — a magical land of grand adventure. 
+It worked wonders. The boy began to float. The sprite then raced to grab his hand before he could settle back to the floor. Out the window they went, flying high over the moon toward her home — a magical land of grand adventure. 
 
 By day, they searched for the magic lamp, soaring over pirate ships and chasing Jinns across sun-drenched sands. By night, they told amazing stories about the day's big adventures, each competing to tell taller tales. It was wonderful.
 

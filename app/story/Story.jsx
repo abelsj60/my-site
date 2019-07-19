@@ -17,13 +17,13 @@ const RestyledShelf = styled(Shelf)`
   flex-direction: column;
   align-items: center;
 
-  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    height: 117px;
-  }
+  // @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+  //   height: 117px;
+  // }
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-    height: 131px;
-  }
+  // @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+  //   height: 131px;
+  // }
 `;
 const PictureHolder = styled.section`
   // Setting visibilty: 'hidden' is better than display: 'none' b/c
@@ -39,18 +39,26 @@ const PictureHolder = styled.section`
   flex: ${p => p.showStoryText ? '0' : '1'}; 
 `;
 const Chapter = styled.h2`
-  color: ${p => p.theme.colors.white};
+  // color: ${p => p.theme.colors.white};
+  // color: #d9e6fc;
+  color: #fff7c9;
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.nine};
+  // font-size: 1.6rem;
+  font-style: italic;
+  // text-shadow: 1px 1px 3px rgba(0, 0, 0, .8);
+  margin-bottom: 1px;
 `;
 const BookTitle = styled.h1`
   font-family: 'Playfair Display',serif;
-  margin: 0px 0px 10px;
+  margin: 0px auto 35px;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 600;
   color: ${p => p.theme.colors.yellow};
   // color: #fd1172;
+  // color: #fd2880;
   text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, .6);
   max-width: 500px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
@@ -58,16 +66,19 @@ const BookTitle = styled.h1`
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-    font-size: 3rem;
+    // font-size: 3rem;
+    font-size: 3.3rem;
   }
 `;
 const TagLine = styled.p`
   font-style: italic;
   font-size: ${p => p.theme.fontSizes.twentyTwo};
-  color: ${p => p.theme.colors.white};
+  // color: ${p => p.theme.colors.white};
+  color: #fff093;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, .6);
   text-align: center;
   margin-top: -4px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.six};
@@ -75,11 +86,18 @@ const TagLine = styled.p`
 `;
 const ChapterTitle = styled.h2`
   font-family: 'Aref Ruqaa', serif;
-  font-size: 3rem;
-  font-weight: 300;
+  // font-size: 3rem;
+  font-size: 3.3rem;
+  font-weight: 600;
   margin-top: -8px;
-  margin-bottom: 10px;
-  color: ${p => p.theme.colors.blue};
+  margin-bottom: 15px;
+  // color: ${p => p.theme.colors.blue};
+  color: ${p => p.theme.colors.yellow};
+  // color: #5492f5;
+  // text-shadow: 1px 1px 3px rgba(0, 0, 0, .7);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // font-weight: 900;
 `;
 const Portal = styled.div`
   position: absolute;
@@ -89,7 +107,9 @@ const Portal = styled.div`
   width: 100%;
   z-index: 0;
   background-color: ${p => p.theme.colors.black};
-  opacity: .25;
+  // background-color: #fd1172;
+  background-color: navy;
+  opacity: ${p => p.showStoryText ? '.3' : '0'};
 `;
 const Image = styled.div`
   // Ensure img top is TOP
@@ -122,7 +142,9 @@ const StoryText = styled.section`
 
   p {
     color: ${p => p.theme.colors.white};
+    // color: #fff7c9;
     margin-bottom: ${p => p.theme.bottomMargin.regular};
+    // text-shadow: 1px 1px 3px rgba(0, 0, 0, .8);
     // Gets cut off in chrome (add saveSerifs to ContentHolder).
     margin-left: 2px; 
 
@@ -172,14 +194,8 @@ export default function Story(props) {
         saveSerifs={true}
       >
         <RestyledShelf
-          height="103px"
+          height="18px"
         >
-          <TagLine>
-            {dek}
-          </TagLine>
-          <BookTitle>
-            {bookTitle}
-          </BookTitle>
           <ChapterNav
             {...props}
           />
@@ -187,6 +203,12 @@ export default function Story(props) {
         <Overflow
           ref={overflowRef}
         >
+          <TagLine>
+            {dek}
+          </TagLine>
+          <BookTitle>
+            {bookTitle}
+          </BookTitle>
           <Chapter
             isCover={isCover}
           >
@@ -210,7 +232,9 @@ export default function Story(props) {
       <PictureHolder
         showStoryText={showStoryText}
       >
-        <Portal />
+        <Portal
+          showStoryText={showStoryText}
+        />
         <Image
           alt="fantasy illustration"
           showStoryText={showStoryText}

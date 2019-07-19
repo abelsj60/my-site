@@ -44,7 +44,8 @@ const Motto = styled.p`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: ${p => p.theme.fontSizes.twelve};
-  color: ${p => !p.isCasting || p.castSpell ? p.theme.colors.yellow : p.theme.colors.white};
+  color: lemonchiffon;
+  // color: ${p => !p.isCasting || p.castSpell ? p.theme.colors.yellow : p.theme.colors.white};
   font-weight: 700;
   margin-top: -6px;
   margin-left: 16px;
@@ -92,7 +93,8 @@ const Text = styled.section`
     font-weight: 500;
     margin-bottom: 10px;
     font-size: ${p => p.theme.fontSizes.three};
-    color: ${p => p.theme.colors.yellow};
+    color: lemonchiffon;
+    // color: ${p => p.theme.colors.yellow};
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
     text-align: center;
     -webkit-font-smoothing: antialiased;
@@ -120,6 +122,7 @@ export default function NameTag(props) {
     homeState
   } = props;
   const {
+    inCity,
     showBusinessCard,
     showLegalTerms
   } = appState;
@@ -140,7 +143,9 @@ export default function NameTag(props) {
 
   const tagline = !isCasting || castSpell
     ? motto
-    : 'Tap active charms to cast a spell';
+    : !inCity
+      ? 'Tap the pulses to travel home'
+      : 'Tap the pulses for adventure';
 
   const eventHandler = () => {
     if (eventType === 'touch') {
