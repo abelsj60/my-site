@@ -279,11 +279,13 @@ class App extends Component {
           fontSizes,
           mediaQueries,
           pageHeight: this.state.height.toString(),
-          blur: !this.state.showStoryText
-            || (this.state.showStoryText && this.state.showBusinessCard)
-            || (this.state.showStoryText && this.state.showLegalTerms)
-            ? blurControl.regular
-            : blurControl.enhanced,
+          blur:
+            // !this.state.showStoryText
+            // || (this.state.showStoryText && this.state.showBusinessCard)
+            // || (this.state.showStoryText && this.state.showLegalTerms)
+            // ? blurControl.regular
+            // : blurControl.enhanced
+            blurControl.regular,
           blurForTempContent:
             this.state.showBusinessCard
               || this.state.showLegalTerms,
