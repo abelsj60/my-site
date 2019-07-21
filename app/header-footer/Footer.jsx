@@ -37,7 +37,7 @@ const StoryButton = styled(Button)`
   background-color: ${p => (!p.active ? 'rgba(253, 17, 114, .6)' : 'rgba(0, 141, 213, .6)')};
   width: 65px;
   padding: 7px;
-  border: 2px rgba(255, 255, 255, .2) solid;
+  border: 3px rgba(255, 255, 255, .1) solid;
 `;
 const RestyledLink = styled(StyledLink)`
   margin-right: 20px;
