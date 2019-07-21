@@ -19,7 +19,7 @@ const Type = styled.p`
   font-style: italic;
 `;
 const ProjectName = styled.h1`
-  font-size: ${p => p.theme.fontSizes.twenty};
+  font-size: ${p => p.theme.fontSizes.sixteen};
   color: ${p => p.theme.colors.pink};
   margin-top: -8px;
   margin-bottom: 4px;
