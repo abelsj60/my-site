@@ -241,7 +241,6 @@ export default class Header extends Component {
           isHome={isHome}
           hide={isHome}
           menu={headerMenuIsOpen}
-          callerWillBe={'home'}
           boundHandleClickForApp={boundHandleClickForApp}
           to={'/'}
         >
@@ -285,7 +284,6 @@ export default class Header extends Component {
                         menu={headerMenuIsOpen}
                         num={idx}
                         to={link.path}
-                        callerWillBe={link.path.slice(1)}
                         boundHandleClickForApp={boundHandleClickForApp}
                       >
                         {link.name}

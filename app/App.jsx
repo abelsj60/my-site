@@ -77,8 +77,7 @@ const bottomMargin = {
   regular: '20px'
 };
 const blurControl = {
-  regular: 'blur(3px)',
-  enhanced: 'blur(4px)'
+  regular: 'blur(3px)'
 };
 const ZoomControl = styled.div`
   display: flex;
@@ -279,13 +278,7 @@ class App extends Component {
           fontSizes,
           mediaQueries,
           pageHeight: this.state.height.toString(),
-          blur:
-            // !this.state.showStoryText
-            // || (this.state.showStoryText && this.state.showBusinessCard)
-            // || (this.state.showStoryText && this.state.showLegalTerms)
-            // ? blurControl.regular
-            // : blurControl.enhanced
-            blurControl.regular,
+          blur: blurControl.regular,
           blurForTempContent:
             this.state.showBusinessCard
               || this.state.showLegalTerms,

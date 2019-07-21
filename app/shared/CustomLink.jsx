@@ -56,11 +56,14 @@ export default ({
   to,
   replace,
   boundHandleClickForApp,
-  callerWillBe,
   isCalledByMenu,
   ...props
 }) => {
   const { pathname } = window.location;
+  const splitTheCaller = to.split('/');
+  const callerWillBe = splitTheCaller[1].length !== 0
+    ? splitTheCaller[1]
+    : 'home';
   const isMenu =
     pathname.includes('menu')
       && pathname.split('/')[2] === 'menu'; // Ensures this is a /menu.
@@ -68,6 +71,7 @@ export default ({
     window.location.pathname.includes(to)
       && !isMenu
       && to.length > 1;
+
   const eventHandler =
     event => {
       if (!boundHandleClickForApp) {
@@ -79,7 +83,9 @@ export default ({
       if (!isCalledByMenu) {
         boundHandleClickForApp(
           'updateApp',
-          callerWillBe
+          splitTheCaller.length === 2
+            ? callerWillBe
+            : undefined
         );
       } else {
         boundHandleClickForApp(

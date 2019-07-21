@@ -1,5 +1,5 @@
 import Button from '../shared/Button.jsx';
-import FooterAlert from './FooterAlert.jsx';
+// import FooterAlert from './FooterAlert.jsx';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -91,10 +91,6 @@ export default function FooterContainer(props) {
       }`
       : '/reverie';
 
-  const callerWillBe =
-    reverieLink.length > 1
-      ? reverieLink.slice(1)
-      : 'home'; // It's 'home' when the address is '/'
   const eventHandlerForStoryButton =
       () => boundHandleClickForApp('toggleStoryText');
 
@@ -124,13 +120,12 @@ export default function FooterContainer(props) {
             : 'Read it!'
         }
       />
-      <FooterAlert
+      {/*<FooterAlert
         {...props}
-      />
+      />*/}
       <TextBox>
         <RestyledLink
           to={reverieLink}
-          callerWillBe={callerWillBe}
           boundHandleClickForApp={boundHandleClickForApp}
         >
           <Graf

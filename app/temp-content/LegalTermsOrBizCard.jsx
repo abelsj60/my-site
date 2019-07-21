@@ -149,9 +149,13 @@ export default class LegalTermsOrBizCard extends Component {
 
     const linkOrTextForClips = currentCaller !== 'journalism'
       ? <StyledLink
-        style={{ color: 'black',
+        style={{
+          color: 'black',
           textDecoration: 'underline'
-        }}to="/journalism">clips</StyledLink>
+        }}
+        to="/journalism"
+        boundHandleClickForApp={boundHandleClickForApp}
+      >clips</StyledLink>
       : 'clips';
 
     // The following HTML is span, not a <p>, b/c it's nested in
@@ -217,9 +221,8 @@ export default class LegalTermsOrBizCard extends Component {
               reverie={reverieIsActive}
               onSuccess={
                 () => {
-                  // Must use 'this.props..' to get updated value
-                  // after adding the listener to the Clipboard.
-                  // There's a problem w/'this' otherwise.
+                  // Must wait to run onSuccess until after appState
+                  // is updated. Won't work otherwise.
 
                   if (
                     this.props.appState.showBusinessCard
