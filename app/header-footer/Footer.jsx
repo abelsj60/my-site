@@ -34,9 +34,10 @@ const Line = styled.div`
 const StoryButton = styled(Button)`
   color: white;
   margin-left: 25px;
-  background-color: ${p => (!p.active ? p.theme.colors.pink : p.theme.colors.blue)};
+  background-color: ${p => (!p.active ? 'rgba(253, 17, 114, .6)' : 'rgba(0, 141, 213, .6)')};
   width: 65px;
   padding: 7px;
+  border: 2px rgba(255, 255, 255, .2) solid;
 `;
 const RestyledLink = styled(StyledLink)`
   margin-right: 20px;
@@ -45,7 +46,7 @@ const Graf = styled.p`
   cursor: pointer;
   margin-right: ${p => !p.isLink ? '20px' : ''};
   margin-bottom: 0px;
-  color: ${p => (p.active ? p.theme.colors.pink : !p.home && !p.isStory ? p.theme.colors.blue : p.theme.colors.white)};
+  color: ${p => (p.active ? (!p.home && !p.isStory ? p.theme.colors.pink : p.theme.colors.yellow) : !p.home && !p.isStory ? p.theme.colors.blue : p.theme.colors.white)};
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
@@ -116,8 +117,8 @@ export default function FooterContainer(props) {
         show={isStory}
         text={
           showStoryText
-            ? 'See it!'
-            : 'Read it!'
+            ? 'Text off'
+            : 'Text on'
         }
       />
       {/*<FooterAlert
