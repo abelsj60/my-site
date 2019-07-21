@@ -24,7 +24,7 @@ When he looked up, he stared out at a city drenched in warm autumn light. A smal
 
 Memories of impractical magic washed over him as code filled his screen in pixelated color. 
 
-Time melted away. Hours later, as the young man slept, the fairy hung over her old friend. She peeked into his dreams and spied far-off lands. There were Jinns, and more fairies, and desert sands— all within reach of his outstretched hands.
+Time melted away. Hours later, as the young man slept, the fairy hung over her old friend. She peeked into his dreams and spied far-off lands. There were Jinns, and fairies, and desert sands— all within reach of his outstretched hands.
 
 Delighted, she flit to the gold lamp beside him. It bathed the room in purple light. "Yoo-hoo," she sang inside, a mischievious smile spreading across her face.
 
