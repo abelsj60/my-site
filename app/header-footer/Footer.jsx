@@ -34,10 +34,13 @@ const Line = styled.div`
 const StoryButton = styled(Button)`
   color: white;
   margin-left: 25px;
-  background-color: ${p => (!p.active ? 'rgba(253, 17, 114, .6)' : 'rgba(0, 141, 213, .6)')};
+  // background-color: ${p => (!p.active ? 'rgba(253, 17, 114, .6)' : 'rgba(0, 141, 213, .6)')};
+  background-color: ${p => (!p.active ? 'rgba(0, 0, 0, .2)' : 'rgba(0, 141, 213, .7)')};
+  // background-color: ${p => (p.active && 'rgba(0, 141, 213, .7)')};
   width: 63px;
   padding: 7px;
-  border: 2px rgba(255, 255, 255, .1) solid;
+  // border: 2px rgba(255, 255, 255, .1) solid;
+  border: 1px rgba(255, 255, 255, .6) solid;
 `;
 const RestyledLink = styled(StyledLink)`
   margin-right: 20px;
