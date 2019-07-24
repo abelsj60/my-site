@@ -23,18 +23,16 @@ export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
-    const { isMenu } = props.appState;
+    // DO NOT USE props.currentCaller or props.isMenu from to avoid problems
+    // with BACK/FORWARD. Both are out-of-date b/c the eventListener for
+    // BACK/FORWARD runs AFTER ContentLoader runs.
+
+    const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
     const referrer = new Referrer(props);
     const location = new Location(
       referrer.pathToMatch,
       props
     );
-
-    // DO NOT USE currentCaller to avoid problems with BACK/FORWARD:
-    // If the user hits back/forward, currentCaller will be out-of-sync
-    // with props and the window until App.cDU runs. The same problem
-    // occurs with path matching for /menu. These values must be certain
-    // at the time of mounting, and can't wait for an update to AppState.
 
     const content = new Content(location.caller);
     const allContentData = content.getContentData();
@@ -52,8 +50,9 @@ export default class ContentLoader extends Component {
         ? location.params.projectThumbnailToIndex()
         : 0;
     const headlineIndex =
-      !isMenu && location.caller === 'journalism'
-        || location.caller === 'reverie'
+      !isMenu
+        && (location.caller === 'journalism'
+          || location.caller === 'reverie')
         ? location.params.headlineToIndex()
         : 0;
     let dataIndex;

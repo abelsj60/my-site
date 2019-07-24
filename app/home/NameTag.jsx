@@ -17,6 +17,7 @@ const blurInKeyframes = keyframes`
   }
 `;
 const Container = styled.div`
+  margin-top: 5px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
   animation: ${p => p.castSpell && css`${blurInKeyframes} 1.215s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
   pointer-events: ${p => p.castSpell && 'none'};
@@ -24,6 +25,10 @@ const Container = styled.div`
   align-items: center;
   z-index: 2;
   cursor: pointer;
+
+  @media (min-height: 600px) {
+    margin-top: 15px;
+  }
 `;
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;

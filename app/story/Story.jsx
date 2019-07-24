@@ -111,19 +111,13 @@ const Portal = styled.div`
   background-color: navy;
   opacity: ${p => p.showStoryText ? '.3' : '0'};
 `;
-const Image = styled.div`
+const Image = styled.img`
   // Ensure img top is TOP
   position: absolute;
+  object-fit: cover;
   top: 0px;
   left: 0px;
-
   z-index: -1;
-
-  // Use background-image to get proper 
-  // proportions on most browsers 
-  background-image: url(${p => p.src});
-  background-position: center;
-  background-size: cover;
   height: 100%;
   width: 100%;
   // If business card or legal terms are on screen, blur content:
@@ -136,6 +130,12 @@ const Image = styled.div`
 
   // If moving to <img> --> May need to fill page:   
   // https://stackoverflow.com/a/30794589
+
+  // Use background-image to get proper 
+  // proportions on most browsers 
+  // background-image: url(${p => p.src});
+  // background-position: center;
+  // background-size: cover;
 `;
 const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};
@@ -163,6 +163,7 @@ export default function Story(props) {
   const { showStoryText } = appState;
   const { finalData } = contentState;
   const {
+    description,
     image,
     number,
     title
@@ -236,7 +237,7 @@ export default function Story(props) {
           showStoryText={showStoryText}
         />
         <Image
-          alt="fantasy illustration"
+          alt={description}
           showStoryText={showStoryText}
           src={image}
         />

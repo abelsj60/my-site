@@ -20,10 +20,10 @@ captions: [
     "An article page featuring one of the clips that I wrote as a staff reporter at Forbes. The component that creates this page is shared with Reverie, the site's blog, to make site maintenance easier."
 ]
 projectThumbnail: [
-    'https://user-images.githubusercontent.com/30417590/56870415-0ee3a680-69dd-11e9-84c2-0bf3898ac283.png',
-    'https://user-images.githubusercontent.com/30417590/56870414-0ee3a680-69dd-11e9-8ba8-442eb3acc890.png',
-    'https://user-images.githubusercontent.com/30417590/56870417-0ee3a680-69dd-11e9-9dc2-51f5c70dca4e.png',
-    'https://user-images.githubusercontent.com/30417590/56870416-0ee3a680-69dd-11e9-84d8-cd541f9d6930.png'
+    https://user-images.githubusercontent.com/30417590/61604947-6f1b6a80-ac11-11e9-9d24-2b8682e95a9b.png,
+    https://user-images.githubusercontent.com/30417590/61604963-82c6d100-ac11-11e9-8f23-9ae507e91909.png,
+    https://user-images.githubusercontent.com/30417590/61605169-40ea5a80-ac12-11e9-930f-007ef313fe26.png,
+    'https://user-images.githubusercontent.com/30417590/61605215-6bd4ae80-ac12-11e9-89f3-5849e1931f37.png'
 ]
 full: [
     'https://user-images.githubusercontent.com/30417590/56870415-0ee3a680-69dd-11e9-84c2-0bf3898ac283.png',

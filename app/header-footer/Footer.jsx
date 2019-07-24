@@ -37,7 +37,7 @@ const StoryButton = styled(Button)`
   // background-color: ${p => (!p.active ? 'rgba(253, 17, 114, .6)' : 'rgba(0, 141, 213, .6)')};
   background-color: ${p => (!p.active ? 'rgba(0, 0, 0, .2)' : 'rgba(0, 141, 213, .7)')};
   // background-color: ${p => (p.active && 'rgba(0, 141, 213, .7)')};
-  width: 63px;
+  width: 60px;
   padding: 7px;
   // border: 2px rgba(255, 255, 255, .1) solid;
   border: 1px rgba(255, 255, 255, .6) solid;

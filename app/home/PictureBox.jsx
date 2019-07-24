@@ -12,13 +12,10 @@ const PictureHolder = styled.div`
   overflow: hidden;
   z-index: 1;
 `;
-const BoyInForeground = styled.div`
+const BoyInForeground = styled.img`
   position: absolute;
   display: block;
-  background-image: url(${p => p.srcImage});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  object-fit: cover; // Use if using <img>
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -27,7 +24,11 @@ const BoyInForeground = styled.div`
   z-index: 2;
   filter: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? p.theme.blur : ''};
 
-  // object-fit: cover; // Use if using <img>
+  // Use if background image:
+  // background-image: url(${p => p.srcImage});
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
 `;
 const Portal = styled.div`
   position: absolute;
@@ -38,14 +39,14 @@ const Portal = styled.div`
   opacity: .3;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
-  background-image: url(${p => p.srcImage});
+  // background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
   transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
-  background-image: url(${p => p.srcImage});
+  // background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
 `;
@@ -53,6 +54,9 @@ const CityAsBackground = styled(FantasyAsBackground)`
 export default function PictureBox(props) {
   const {
     // boyInForegroundImage,
+    // descriptionBoy,
+    descriptionFantasy,
+    descriptionCity,
     cityImage,
     fantasyImage
   } = bio.attributes;
@@ -73,14 +77,16 @@ export default function PictureBox(props) {
   return (
     <PictureHolder>
       {/*<BoyInForeground
-        srcImage={boyInForegroundImage}
+        src={boyInForegroundImage}
+        alt={descriptionBoy}
       />*/}
       <Portal />
       <FantasyAsBackground
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
-        srcImage={fantasyImage}
+        src={fantasyImage}
+        alt={descriptionFantasy}
         onTransitionEnd={
           event => {
             event.stopPropagation();
@@ -98,7 +104,8 @@ export default function PictureBox(props) {
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
-        srcImage={cityImage}
+        src={cityImage}
+        alt={descriptionCity}
       />
     </PictureHolder>
   );
