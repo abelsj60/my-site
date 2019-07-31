@@ -41,6 +41,7 @@ const StoryButton = styled(Button)`
   padding: 7px;
   // border: 2px rgba(255, 255, 255, .1) solid;
   border: 1px rgba(255, 255, 255, .6) solid;
+  user-select: none;
 `;
 const RestyledLink = styled(StyledLink)`
   margin-right: 20px;
@@ -55,6 +56,7 @@ const Graf = styled.p`
   padding-right: 5px;
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.one};
+  user-select: none;
 `;
 const TextBox = styled.div`
   display: flex;

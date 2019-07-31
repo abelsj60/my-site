@@ -1,4 +1,5 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
@@ -98,6 +99,13 @@ module.exports = (env, argv) => {
       }),
       new ScriptExtHtmlWebpackPlugin({
         defer: /\.js$/
+      }),
+      new FileManagerPlugin({
+        onEnd: {
+          delete: [
+            './build/index.html'
+          ]
+        }
       })
     ]
   };
