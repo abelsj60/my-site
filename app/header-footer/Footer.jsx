@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
+const shadow = '2px 2px 2.5px rgba(0, 0, 0, .4)';
 const Container = styled.footer`
   flex-shrink: 0;
   display: flex;
@@ -41,6 +42,7 @@ const StoryButton = styled(Button)`
   padding: 7px;
   // border: 2px rgba(255, 255, 255, .1) solid;
   border: 1px rgba(255, 255, 255, .6) solid;
+  box-shadow: ${p => p.boxShadow && shadow};
   user-select: none;
 `;
 const RestyledLink = styled(StyledLink)`
@@ -57,6 +59,7 @@ const Graf = styled.p`
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.one};
   user-select: none;
+  text-shadow: ${p => p.textShadow && shadow};
 `;
 const TextBox = styled.div`
   display: flex;
@@ -75,6 +78,7 @@ export default function FooterContainer(props) {
   } = props;
   const {
     currentCaller,
+    headerMenuIsOpen,
     lastCaller,
     showBusinessCard,
     showLegalTerms,
@@ -87,6 +91,7 @@ export default function FooterContainer(props) {
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
+  const showTextShadow = !showStoryText && !showBusinessCard && !showLegalTerms && !isReverie && !headerMenuIsOpen;
 
   const reverieLink =
     isReverie
@@ -120,6 +125,7 @@ export default function FooterContainer(props) {
         className="story-button"
         conditional={true}
         show={isStory}
+        boxShadow={showTextShadow}
         text={
           showStoryText
             ? 'Text off'
@@ -142,6 +148,7 @@ export default function FooterContainer(props) {
             isLink={true}
             home={isHome}
             isStory={isStory}
+            textShadow={showTextShadow}
           >
             Reverie
           </Graf>
@@ -151,6 +158,7 @@ export default function FooterContainer(props) {
           onClick={eventHandlerToToggleBusinessCard}
           home={isHome}
           isStory={isStory}
+          textShadow={showTextShadow}
         >
           Contact
         </Graf>
@@ -159,6 +167,7 @@ export default function FooterContainer(props) {
           onClick={eventHandlerToToggleLegalTerms}
           home={isHome}
           isStory={isStory}
+          textShadow={showTextShadow}
         >
           Legal
         </Graf>

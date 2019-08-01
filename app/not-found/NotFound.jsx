@@ -1,4 +1,4 @@
-import antacid from '../../public/antacid.png';
+import antacid from '../../public/antacid.jpg';
 import Main from '../primitives/Main.jsx';
 import React from 'react';
 import ContentHolder from '../primitives/ContentHolder.jsx';

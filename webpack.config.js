@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
@@ -87,6 +88,7 @@ module.exports = (env, argv) => {
       }
     },
     plugins: [
+      new BundleAnalyzerPlugin(),
       new CleanWebpackPlugin(),
       new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
       new HtmlWebpackPlugin({

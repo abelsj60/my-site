@@ -15,6 +15,9 @@ const headerLinks = [
   { name: 'A not-so-true story', path: '/chapter' }
 ];
 const fontWeight = '500';
+const initialShadow = '2px 2px 2.5px';
+const textShadow = initialShadow + ' rgba(0, 0, 0, .4)';
+const iconShadow = initialShadow + ' rgba(0,0,0,.9)';
 const Container = styled.header`
   color: ${p => p.theme.colors.white};
   flex-shrink: 0;
@@ -63,6 +66,7 @@ const RestyledLink = styled(
   font-weight: ${p => p.isHome ? '400' : fontWeight};
   margin-left: ${p => (p.num === 0 ? '0px' : '10px')};
   color: ${p => p.theme.colors.white};
+  text-shadow: ${p => p.textShadow && textShadow};
 
   && {
     text-decoration: ${p => (p.isActive ? 'underline' : undefined)};
@@ -113,6 +117,7 @@ const Motto = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-shadow: ${p => p.textShadow && textShadow};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.four};
@@ -194,6 +199,7 @@ const Icon = styled.img`
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
+  filter: ${p => p.textShadow && `drop-shadow(${iconShadow})`};
   z-index: 1;
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwoB}) {
@@ -210,6 +216,8 @@ export default class Header extends Component {
     const {
       currentCaller,
       headerMenuIsOpen,
+      showBusinessCard,
+      showLegalTerms,
       showStoryText
     } = appState;
     const isHome = currentCaller === 'home';
@@ -218,8 +226,16 @@ export default class Header extends Component {
       headerMenuIsOpen
         ? headerNavClose
         : headerNavOpen;
+    // if (showStoryText) {
+    // } else {
+    //   iconType =
+    //     headerMenuIsOpen
+    //       ? headerNavClose
+    //       : headerNavOpenB;
+    // }
     const hideBackground = isHome
         || (!showStoryText && !isReverie);
+    const showTextShadow = !showStoryText && !showBusinessCard && !showLegalTerms && !isReverie && !headerMenuIsOpen;
 
     const referrer = new Referrer(this.props);
     const eventHandlerForHeaderMenu = () => boundHandleClickForApp('toggleHeaderMenu');
@@ -241,6 +257,7 @@ export default class Header extends Component {
           isHome={isHome}
           hide={isHome}
           menu={headerMenuIsOpen}
+          textShadow={showTextShadow}
           boundHandleClickForApp={boundHandleClickForApp}
           to={'/'}
         >
@@ -250,6 +267,7 @@ export default class Header extends Component {
           isHome={isHome}
           hide={isHome}
           menu={headerMenuIsOpen}
+          textShadow={showTextShadow}
         >
           {bio.attributes.motto}
         </Motto>
@@ -282,6 +300,7 @@ export default class Header extends Component {
                         isActive={isActive}
                         isHome={isHome}
                         menu={headerMenuIsOpen}
+                        textShadow={showTextShadow}
                         num={idx}
                         to={link.path}
                         boundHandleClickForApp={boundHandleClickForApp}
@@ -299,6 +318,7 @@ export default class Header extends Component {
           isHome={isHome}
           menu={headerMenuIsOpen}
           src={iconType}
+          textShadow={showTextShadow}
           onClick={eventHandlerForHeaderMenu}
         />
       </Container>
