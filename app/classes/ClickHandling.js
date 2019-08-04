@@ -130,6 +130,11 @@ export default class ClickHandling {
             ? `Enter: ${currentCaller} menu`
             : `Leave: ${currentCaller} menu`;
           break;
+        case 'toggleHomeAnimation':
+          stateToUpdate.homeAnimation = true;
+          category = 'App state';
+          action = 'Ran home animation';
+          break;
         case 'toggleHeaderMenu':
           stateToUpdate.headerMenuIsOpen = !headerMenuIsOpen;
 

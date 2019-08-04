@@ -24,6 +24,8 @@ export default class Home extends Component {
 
     this.goal = 5;
     this.transition = 0;
+    this.timeoutId = 0;
+    this.timeoutId2 = 0;
     this.charmRefs = [
       React.createRef(),
       React.createRef(),
@@ -43,15 +45,26 @@ export default class Home extends Component {
       score: 0, // Used to select an active Charm and cast spell
       pattern: pattern,
       activeCharm: pattern[0], // Initial Charm is always [0].
-      eventType: 'click' // Event that triggered Charm
+      eventType: 'click', // Event that triggered Charm
+      animate:
+        !this.props.appState.homeAnimation
+          ? 0
+          : 2
     };
 
+    this.handleAnimation = this.handleAnimation.bind(this);
     this.trackTransitionEnd = this.trackTransitionEnd.bind(this);
     this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
   }
 
+  handleAnimation(num) {
+    this.setState({ animate: num });
+  }
+
   render() {
+    const { appState, boundHandleClickForApp } = this.props;
+    const { homeAnimation, showBusinessCard, showLegalTerms } = appState;
     // const { pinchZoomed } = props.appState;
     // const foregroundImage = pinchZoomed
     //   ? bio.attributes.boyInForegroundImage
@@ -65,6 +78,34 @@ export default class Home extends Component {
 
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
+
+    if (
+      !homeAnimation
+        && !this.state.animate // Meaning 0
+    ) {
+      this.timeoutId = setTimeout(() => {
+        this.handleAnimation(1);
+        this.timeoutId2 = setTimeout(() => {
+          // Can't update state in Render. Must
+          // run in the Callback Queue.
+          boundHandleClickForApp('toggleHomeAnimation');
+          this.timeoutId = 0;
+          this.timeoutId2 = 0;
+          this.handleAnimation(2);
+        }, 3000);
+      }, 750);
+    }
+
+    if (
+      this.state.isCasting
+        || showBusinessCard
+        || showLegalTerms
+    ) {
+      // We don't clear this.timeoutId2 b/c
+      // we're not LEAVING the Component.
+      clearTimeout(this.timeoutId);
+      this.timeoutId = 0;
+    }
 
     return (
       <RestyledMain>
@@ -179,5 +220,10 @@ export default class Home extends Component {
         }
       );
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeoutId);
+    clearTimeout(this.timeoutId2);
   }
 }
