@@ -68,7 +68,7 @@ export default function About() {
           height="27px"
         >
           <Hed>
-            About
+            Hi! I'm James.
           </Hed>
           <IconContainer>
             <ReactGA.OutboundLink

@@ -35,7 +35,7 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-color: ${p => p.theme.colors.black};
+  background-color: midnightblue;
   opacity: .3;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`

@@ -4,8 +4,6 @@ type: description
 updated: 11-11-18
 ---
 
-Hi! I'm James. 
-
 I write code for Web sites and software. I tell stories, too. 
  
 That's important. Stories are how we tell people about ourselves, our products and services, and the world writ large. Stories define everything, especially software. Consider this:
@@ -25,4 +23,4 @@ That's where I come in. Rather than just mechanically coding sites and software,
 
 As a start-up founder, I told stories to pitch our software. As a reporter for Forbes, Mergermarket, and others, I wrote stories that gave insight into technology and venture capital. And as a lawyer, I told stories that made legal arguments. 
 
-So that's my story— and I'm stickin' to it! Now, what's yours?
+So that's my story— and I'll stick to it! Now, what's yours?
