@@ -60,7 +60,7 @@ const HeaderMenuBackground = styled.div`
 const RestyledLink = styled(
   // Filter out isHome and isActive from StyledLink
   // eslint-disable-next-line
-  ({ isHome, isActive, menu, ...rest }) => <StyledLink {...rest} />
+  ({ isHome, isActive, menu, textShadow, ...rest }) => <StyledLink {...rest} />
 )`
   font-size: ${p => p.theme.fontSizes.twentyOne};
   font-weight: ${p => p.isHome ? '400' : fontWeight};

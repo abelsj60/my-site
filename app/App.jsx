@@ -217,6 +217,7 @@ class App extends Component {
       footerAlert:
         isMobileSafari
           && height < this.minAllowedHeight,
+      homeAnimation: false,
       password: '',
       isValidUser: false,
       wrongPassword: '',

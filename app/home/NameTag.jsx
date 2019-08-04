@@ -16,9 +16,34 @@ const blurInKeyframes = keyframes`
     opacity: 1;
   }
 `;
+const heartbeatKeyframes = keyframes`
+  from {
+    transform: scale(1);
+    transform-origin: center center;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    transform: scale(1.03);
+    animation-timing-function: ease-in;
+  }
+  19% {
+    transform: scale(0.97);
+    animation-timing-function: ease-out;
+  }
+  35% {
+    transform: scale(1.05);
+    animation-timing-function: ease-in;
+  }
+  45% {
+    transform: scale(1);
+    animation-timing-function: ease-out;
+  }
+`;
+
 const Container = styled.div`
   margin-top: 5px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
+  animation: ${p => p.animate && css`1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
   animation: ${p => p.castSpell && css`${blurInKeyframes} 1.215s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
   pointer-events: ${p => p.castSpell && 'none'};
   flex-direction: column;
@@ -135,7 +160,8 @@ export default function NameTag(props) {
     isCasting,
     castSpell,
     eventType,
-    score
+    score,
+    animate
   } = homeState;
   const {
     attributes,
@@ -173,6 +199,7 @@ export default function NameTag(props) {
     <Container
       castSpell={castSpell}
       onClick={eventHandler}
+      animate={!isCasting && !castSpell && animate === 1}
       tempContentIsOn={showBusinessCard || showLegalTerms}
     >
       <Hed>
