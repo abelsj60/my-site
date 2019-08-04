@@ -82,29 +82,22 @@ export default class Home extends Component {
     if (
       !homeAnimation
         && !this.state.animate // Meaning 0
+        && (!showBusinessCard && !showLegalTerms)
     ) {
       this.timeoutId = setTimeout(() => {
         this.handleAnimation(1);
         this.timeoutId2 = setTimeout(() => {
           // Can't update state in Render. Must
           // run in the Callback Queue.
-          boundHandleClickForApp('toggleHomeAnimation');
+          this.handleAnimation(2);
+          // timeoutIds reset here (in 2nd timeout), in
+          // cDU (if tempContent is activated) or in
+          // cWU (if user leaves before it's done)
           this.timeoutId = 0;
           this.timeoutId2 = 0;
-          this.handleAnimation(2);
+          boundHandleClickForApp('toggleHomeAnimation');
         }, 3000);
       }, 750);
-    }
-
-    if (
-      this.state.isCasting
-        || showBusinessCard
-        || showLegalTerms
-    ) {
-      // We don't clear this.timeoutId2 b/c
-      // we're not LEAVING the Component.
-      clearTimeout(this.timeoutId);
-      this.timeoutId = 0;
     }
 
     return (
@@ -203,7 +196,7 @@ export default class Home extends Component {
     };
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     // Let's add our eventHandler whenever cDU runs as a result of
     // toggling NameTag (which causes refs to be added to our
     // charmsRef array mounting Charms.
@@ -220,10 +213,32 @@ export default class Home extends Component {
         }
       );
     }
+
+    if (
+      this.props.appState.showBusinessCard !== prevProps.appState.showBusinessCard
+        || this.props.appState.showLegalTerms !== prevProps.appState.showLegalTerms
+    ) {
+      if (this.state.animate < 2) {
+        [
+          this.timeoutId,
+          this.timeoutId2
+        ].forEach(id => {
+          clearTimeout(id);
+        });
+        this.timeoutId = 0;
+        this.timeoutId2 = 0;
+        this.handleAnimation(0);
+      }
+    }
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timeoutId);
-    clearTimeout(this.timeoutId2);
+    // Only need to check timeoutId b/c reset
+    // always occurs together and often in
+    // the 2nd timeout, not the first.
+    if (this.timeoutId > 0) {
+      clearTimeout(this.timeoutId);
+      clearTimeout(this.timeoutId2);
+    }
   }
 }
