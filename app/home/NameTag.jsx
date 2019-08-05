@@ -113,7 +113,7 @@ const Motto = styled.h2`
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     // margin-left: 13px;
     font-size: ${p => p.theme.fontSizes.eighteen};
-    margin-left: ${p => !p.isCasting || p.castSpell ? '22px' : '25px'};
+    margin-left: ${p => !p.isCasting || p.castSpell ? '22px' : '24px'};
   }
 `;
 const Text = styled.section`
