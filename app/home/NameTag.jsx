@@ -1,6 +1,6 @@
 import bio from '../data/home/home.md';
 import marked from 'marked';
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 import ReactGA from 'react-ga';
@@ -41,18 +41,44 @@ const heartbeatKeyframes = keyframes`
 `;
 
 const Container = styled.div`
-  margin-top: 5px;
-  display: ${p => (p.tempContentIsOn ? 'none' : 'flex')};
+  // margin-top: 17px;
+  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   animation: ${p => p.animate && css`1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
   animation: ${p => p.castSpell && css`${blurInKeyframes} 1.215s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
   pointer-events: ${p => p.castSpell && 'none'};
-  flex-direction: column;
-  align-items: center;
+  // flex-direction: column;
+  // align-items: center;
+  text-align: center;
   z-index: 2;
   cursor: pointer;
 
   @media (min-height: 600px) {
-    margin-top: 15px;
+    // margin-top: 15px;
+  }
+`;
+const Spacer = styled.div`
+  height: 30px;
+  width: 100%;
+  z-index: 3;
+
+  @media (min-height: 667px) and (min-width: 375px) {
+    height: 35px;
+  }
+
+  @media (min-height: 812px) and (min-width: 375px) {
+    height: 50px;
+  }
+
+  @media (min-height: 1023px) and (min-width: 1440px) {
+    height: 60px;
+  }
+
+  @media (min-height: 1366px) and (min-width: 1024px) {
+    height: 100px;
+  }
+
+  @media (min-height: 1900px) and (min-width: 2560px) {
+    height: 175px;
   }
 `;
 const Hed = styled.h1`
@@ -63,6 +89,9 @@ const Hed = styled.h1`
   -moz-osx-font-smoothing: grayscale;
   color: ${p => p.theme.colors.yellow};
   font-weight: 700;
+  line-height: 1;
+  margin-top: -17px;
+  margin-bottom: 10px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.seventeen};
@@ -73,50 +102,34 @@ const Motto = styled.p`
   text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: ${p => p.theme.fontSizes.twelve};
+  font-size: ${p => p.theme.fontSizes.thirteen};
   color: lemonchiffon;
   // color: ${p => !p.isCasting || p.castSpell ? p.theme.colors.yellow : p.theme.colors.white};
   font-weight: 700;
-  margin-top: -6px;
-  margin-left: 16px;
+  // margin-top: -5px;
+  margin-left: ${p => !p.isCasting || p.castSpell ? '16px' : '18px'};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-left: 10px;
-    font-size: ${p => !p.isCasting ? p.theme.fontSizes.eighteen : p.theme.fontSizes.eighteen};
+    // margin-left: 13px;
+    font-size: ${p => p.theme.fontSizes.eighteen};
   }
 `;
 const Text = styled.section`
   overflow: auto;
-  width: 80%;
+  // width: 80%;
+  max-width: 250px;
+  // text-align: center;
+  // margin-left: 5px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   z-index: 2;
-  
-  @media (min-width: 338px) {
-    width: 75%;
-  }
-
-  @media (min-width: 387px) {
-    width: 70%;
-  }
 
   @media (min-width: 390px) {
-    width: 85%;
+    max-width: 350px;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    width: 85%;
-  }
-
-  @media (min-width: 455px) {
-    width: 75%;
-  }
-
-  @media (min-width: 516px) {
-    width: 70%;
-  }
-
-  @media (min-width: 553px) {
-    width: 65%;
+    // max-width: 350px;
+    // margin-left: 10px;
   }
   
   p {
@@ -196,33 +209,36 @@ export default function NameTag(props) {
   };
 
   return (
-    <Container
-      castSpell={castSpell}
-      onClick={eventHandler}
-      animate={!isCasting && !castSpell && animate === 1}
-      tempContentIsOn={showBusinessCard || showLegalTerms}
-    >
-      <Hed>
-        {name}
-      </Hed>
-      <Motto
-        isCasting={isCasting}
+    <Fragment>
+      <Spacer />
+      <Container
         castSpell={castSpell}
-      >
-        {tagline}
-      </Motto>
-      <Text
-        isCasting={isCasting}
-        castSpell={castSpell}
+        onClick={eventHandler}
+        animate={!isCasting && !castSpell && animate === 1}
         tempContentIsOn={showBusinessCard || showLegalTerms}
       >
-        {ReactHtmlParser(
-          marked(
-            body,
-            { smartypants: true }
-          )
-        )}
-      </Text>
-    </Container>
+        <Hed>
+          {name}
+        </Hed>
+        <Motto
+          isCasting={isCasting}
+          castSpell={castSpell}
+        >
+          {tagline}
+        </Motto>
+        <Text
+          isCasting={isCasting}
+          castSpell={castSpell}
+          tempContentIsOn={showBusinessCard || showLegalTerms}
+        >
+          {ReactHtmlParser(
+            marked(
+              body,
+              { smartypants: true }
+            )
+          )}
+        </Text>
+      </Container>
+    </Fragment>
   );
 }
