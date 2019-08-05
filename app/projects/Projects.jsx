@@ -15,7 +15,7 @@ import styled from 'styled-components';
 const Type = styled.p`
   font-size: ${p => p.theme.fontSizes.three};
   color:${p => p.theme.colors.lightBlack};
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   font-style: italic;
 `;
 const ProjectName = styled.h1`
