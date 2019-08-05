@@ -65,7 +65,7 @@ export default function About() {
         saveSerifs={true}
       >
         <RestyledShelf
-          height="27px"
+          height="32px"
         >
           <Hed>
             Hi! I'm James

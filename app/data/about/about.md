@@ -23,4 +23,4 @@ That's where I come in. Rather than just mechanically coding sites and software,
 
 As a start-up founder, I told stories to pitch our software. As a reporter for Forbes, Mergermarket, and others, I wrote stories that gave insight into technology and venture capital. And as a lawyer, I told stories that made legal arguments. 
 
-So that's my story. Tell me yours!
+So that's my story. Now tell me yours!
