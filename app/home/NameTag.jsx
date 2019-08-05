@@ -97,7 +97,7 @@ const Hed = styled.h1`
     font-size: ${p => p.theme.fontSizes.seventeen};
   }
 `;
-const Motto = styled.p`
+const Motto = styled.h2`
   font-family: 'Aref Ruqaa', serif;
   text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, .6);
   -webkit-font-smoothing: antialiased;
@@ -108,15 +108,12 @@ const Motto = styled.p`
   font-weight: 700;
   // margin-top: -5px;
   margin-left: ${p => !p.isCasting || p.castSpell ? '16px' : '18px'};
+  margin-bottom: 20px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     // margin-left: 13px;
     font-size: ${p => p.theme.fontSizes.eighteen};
-  }
-
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    // margin-left: 25px;
-    margin-left: ${p => !p.isCasting || p.castSpell ? '23px' : '25px'};
+    margin-left: ${p => !p.isCasting || p.castSpell ? '22px' : '25px'};
   }
 `;
 const Text = styled.section`
