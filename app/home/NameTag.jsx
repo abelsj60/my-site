@@ -120,6 +120,7 @@ const Text = styled.section`
   max-width: 250px;
   // text-align: center;
   // margin-left: 5px;
+  margin-left: 17px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   z-index: 2;
 
