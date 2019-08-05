@@ -107,7 +107,7 @@ const Motto = styled.p`
   // color: ${p => !p.isCasting || p.castSpell ? p.theme.colors.yellow : p.theme.colors.white};
   font-weight: 700;
   // margin-top: -5px;
-  margin-left: ${p => !p.isCasting || p.castSpell ? '16px' : '20px'};
+  margin-left: ${p => !p.isCasting || p.castSpell ? '16px' : '18px'};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     // margin-left: 13px;
@@ -115,8 +115,8 @@ const Motto = styled.p`
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-left: 25px;
-    // margin-left: ${p => !p.isCasting || p.castSpell ? '16px' : '25px'};
+    // margin-left: 25px;
+    margin-left: ${p => !p.isCasting || p.castSpell ? '23px' : '25px'};
   }
 `;
 const Text = styled.section`
