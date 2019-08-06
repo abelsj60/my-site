@@ -19,8 +19,10 @@ That's important. Stories define everything. Consider this:
 
 It's all stories, all the way down. 
 
-That's where I come in. Rather than just mechanically coding sites and software, I try to figure out — and keep sight of — the stories driving them. I always have.
+That's where I come in. Rather than just mechanically coding sites and software, I try to figure out — and keep sight of — the stories that drive them. I always have.
 
-As a start-up founder, I told stories to pitch our software. As a reporter for Forbes, Mergermarket, and others, I wrote stories that gave insight into technology and venture capital. And as a lawyer, I told stories that made legal arguments. 
+As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And as a lawyer, I crafted stories that made legal arguments. 
 
-So that's my story. Now tell me yours!
+Like I said — stories all the way down. 
+
+That's mine. Tell me yours!
