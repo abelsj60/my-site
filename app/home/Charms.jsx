@@ -96,7 +96,8 @@ const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
   // DELETE?
   // color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
-  color: ${p => p.theme.colors.yellow};
+  color: ${p => p.theme.colors.black};
+  text-shadow: 1.5px 1px 2px white;
   transition: color .5s ease-out;
   margin-bottom: 5px;
 `;
@@ -114,7 +115,7 @@ const ProgressBar = styled.div`
   height: 100%;
   // DELETE?
   // background-color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
-  background-color: ${p => p.theme.colors.yellow};
+  background-color: ${p => p.theme.colors.white};
   transition: width .5s ease-out, background-color .5s ease-out;
 `;
 

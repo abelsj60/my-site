@@ -20,9 +20,9 @@ Unfortunately, I have several problems with your platform. This one involves yo
 7. Look around wildly to find the computer where Netflix.com is loaded. 
 8. Groan. 
 9. Ask the Gods why Netflix's developers don't disable these trailers when a video is being Cast.
-10. Futz with the Netflix site to silence the trailers, probably by slamming the spacebar twice (there are two).
+10. Futz with the Netflix site to silence the trailers, probably by slamming the spacebar twice to skip both of them.
 
-This whole thing is a very annoying usability problem. 
+The whole thing is very annoying. 
 
 I've begun to wonder if I should switch to Disney+ or CBS All Access. Well, no, not really...but "Star Trek: Picard." Can't say no to that...
 

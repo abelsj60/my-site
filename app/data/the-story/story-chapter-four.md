@@ -1,6 +1,6 @@
 ---
 title: 'Practical magic'
-image: 'https://user-images.githubusercontent.com/30417590/61580421-2617c900-aae0-11e9-9040-720f2ce47e99.jpg'
+image: https://user-images.githubusercontent.com/30417590/62591538-d5ed8480-b89d-11e9-9d97-3e6ff225904b.png
 description: 'xyz 4'
 number: 4
 ---

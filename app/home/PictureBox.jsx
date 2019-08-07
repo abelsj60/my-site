@@ -2,7 +2,7 @@ import bio from '../data/home/home.md';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const largeScale = 1.001;
+const largeScale = 1.2;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -35,26 +35,27 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-color: midnightblue;
-  opacity: .3;
+  background-color: ${p => p.theme.colors.pink};
+  opacity: .1;
+  // display: none;
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
   // background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '0' : '1')};
-  transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
-  transition: transform 1.75s, opacity 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+  transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
+  transition: transform 2.15s, opacity 2.25s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
   // background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '1' : '0')};
-  transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
+  transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
 `;
 
 export default function PictureBox(props) {
   const {
-    // boyInForegroundImage,
-    // descriptionBoy,
+    boyInForegroundImage,
+    descriptionBoy,
     descriptionFantasy,
     descriptionCity,
     cityImage,
@@ -76,10 +77,10 @@ export default function PictureBox(props) {
 
   return (
     <PictureHolder>
-      {/*<BoyInForeground
+      <BoyInForeground
         src={boyInForegroundImage}
         alt={descriptionBoy}
-      />*/}
+      />
       <Portal />
       <FantasyAsBackground
         inCity={inCity}

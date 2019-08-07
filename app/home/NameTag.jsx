@@ -44,7 +44,7 @@ const Container = styled.div`
   // margin-top: 17px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   animation: ${p => p.animate && css`1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
-  animation: ${p => p.castSpell && css`${blurInKeyframes} 1.215s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
+  animation: ${p => p.castSpell && css`${blurInKeyframes} 1.75s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
   pointer-events: ${p => p.castSpell && 'none'};
   // flex-direction: column;
   // align-items: center;
@@ -84,7 +84,7 @@ const Spacer = styled.div`
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
   font-size: 4.5rem;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, .6);
+  text-shadow: 2px 1.5px 5px black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: ${p => p.theme.colors.yellow};
@@ -99,11 +99,11 @@ const Hed = styled.h1`
 `;
 const Motto = styled.h2`
   font-family: 'Aref Ruqaa', serif;
-  text-shadow: 1.5px 1.5px 2px rgba(0, 0, 0, .6);
+  text-shadow: 1.5px 1px 2px white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: ${p => p.theme.fontSizes.thirteen};
-  color: lemonchiffon;
+  color: ${p => p.theme.colors.black};
   // color: ${p => !p.isCasting || p.castSpell ? p.theme.colors.yellow : p.theme.colors.white};
   font-weight: 700;
   // margin-top: -5px;
@@ -140,9 +140,8 @@ const Text = styled.section`
     font-weight: 500;
     margin-bottom: 10px;
     font-size: ${p => p.theme.fontSizes.three};
-    color: lemonchiffon;
-    // color: ${p => p.theme.colors.yellow};
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, .6);
+    color: ${p => p.theme.colors.black};
+    text-shadow: 1.5px 1px 2px white;
     text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
