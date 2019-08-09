@@ -35,7 +35,8 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-color: ${p => p.theme.colors.pink};
+  // background-color: ${p => p.theme.colors.pink};
+  background-color: midnightblue;
   opacity: .1;
   display: ${p => !p.isCasting || p.castSpell ? 'none' : 'block'};
 `;

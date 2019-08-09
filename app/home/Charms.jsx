@@ -58,7 +58,7 @@ const CharmBox = styled.div`
 const Charm = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? yellowPulse : pinkPulse} infinite`)};
   border: 2px solid ${p => p.isReady && p.isActive ? p.theme.colors.yellow : p.theme.colors.pink};
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .4);
   width: 40px;
   height: 40px;
   border-radius: 50%;
