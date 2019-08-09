@@ -2,7 +2,7 @@ import bio from '../data/home/home.md';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const largeScale = 1.2;
+const largeScale = 1.3;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -35,9 +35,9 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-color: ${p => p.theme.colors.pink};
+  background-color: ${p => p.theme.colors.black};
   opacity: .1;
-  // display: none;
+  display: ${p => !p.isCasting || p.castSpell ? 'none' : 'block'};
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
   // background-image: url(${p => p.srcImage});
@@ -81,7 +81,10 @@ export default function PictureBox(props) {
         src={boyInForegroundImage}
         alt={descriptionBoy}
       />
-      <Portal />
+      <Portal
+        isCasting={isCasting}
+        castSpell={castSpell}
+      />
       <FantasyAsBackground
         inCity={inCity}
         isCasting={isCasting}
