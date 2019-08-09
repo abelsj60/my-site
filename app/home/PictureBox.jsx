@@ -35,7 +35,7 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
-  background-color: ${p => p.theme.colors.black};
+  background-color: ${p => p.theme.colors.pink};
   opacity: .1;
   display: ${p => !p.isCasting || p.castSpell ? 'none' : 'block'};
 `;
@@ -43,11 +43,13 @@ const FantasyAsBackground = styled(BoyInForeground)`
   // background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
+  transform-origin: 50% 12%;
   transition: transform 2.15s, opacity 2.25s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
   // background-image: url(${p => p.srcImage});
+  // transform-origin: ${p => p.inCity ? 'bottom' : 'unset'};
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
 `;
