@@ -57,16 +57,16 @@ const Container = styled.div`
   }
 `;
 const Spacer = styled.div`
-  height: 30px;
+  height: 35px;
   width: 100%;
   z-index: 3;
 
   @media (min-height: 667px) and (min-width: 375px) {
-    height: 35px;
+    height: 45px;
   }
 
   @media (min-height: 812px) and (min-width: 375px) {
-    height: 50px;
+    height: 55px;
   }
 
   @media (min-height: 1023px) and (min-width: 1440px) {

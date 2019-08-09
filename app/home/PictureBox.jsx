@@ -41,7 +41,6 @@ const Portal = styled.div`
   display: ${p => !p.isCasting || p.castSpell ? 'none' : 'block'};
 `;
 const FantasyAsBackground = styled(BoyInForeground)`
-  // background-image: url(${p => p.srcImage});
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
   transform-origin: 50% 12%;
@@ -49,8 +48,6 @@ const FantasyAsBackground = styled(BoyInForeground)`
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
-  // background-image: url(${p => p.srcImage});
-  // transform-origin: ${p => p.inCity ? 'bottom' : 'unset'};
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
 `;

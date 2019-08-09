@@ -58,7 +58,7 @@ const CharmBox = styled.div`
 const Charm = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? yellowPulse : pinkPulse} infinite`)};
   border: 2px solid ${p => p.isReady && p.isActive ? p.theme.colors.yellow : p.theme.colors.pink};
-  background-color: rgba(0, 0, 0, .4);
+  background-color: rgba(0, 0, 0, .35);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -89,7 +89,7 @@ const SpellBox = styled.div`
   margin-right: 35px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-top: 32px;
+    // margin-top: 32px;
   }
 `;
 const Text = styled.p`
@@ -97,7 +97,7 @@ const Text = styled.p`
   // DELETE?
   // color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
   color: ${p => p.theme.colors.black};
-  text-shadow: 1.5px 1px 2px white;
+  // text-shadow: 1.5px 1px 2px white;
   transition: color .5s ease-out;
   margin-bottom: 5px;
 `;
@@ -115,7 +115,7 @@ const ProgressBar = styled.div`
   height: 100%;
   // DELETE?
   // background-color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
-  background-color: ${p => p.theme.colors.white};
+  background-color: ${p => p.theme.colors.yellow};
   transition: width .5s ease-out, background-color .5s ease-out;
 `;
 
