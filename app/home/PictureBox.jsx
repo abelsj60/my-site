@@ -2,7 +2,7 @@ import bio from '../data/home/home.md';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const largeScale = 1.34;
+const largeScale = 1.3;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;

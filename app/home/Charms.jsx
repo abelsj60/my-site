@@ -77,6 +77,7 @@ const Charm = styled.div`
 const InnerRing = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? pinkPulse : yellowPulse} infinite`)};
   border: 2px solid ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
+  // background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
   height: 15px;
   width: 15px;
   border-radius: 50%;
