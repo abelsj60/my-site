@@ -2,7 +2,7 @@ import bio from '../data/home/home.md';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const largeScale = 1.3;
+const largeScale = 1.34;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -43,13 +43,14 @@ const Portal = styled.div`
 const FantasyAsBackground = styled(BoyInForeground)`
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
-  transform-origin: 50% 12%;
-  transition: transform 2.15s, opacity 2.25s cubic-bezier(0.77, 0, 0.175, 1);
+  transform-origin: 50% 10%;
+  transition: transform 2.15s, opacity ${p => !p.inCity ? '.25s' : '1.85s'} cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
+  transition: transform 2.15s, opacity ${p => p.inCity ? '2.1s' : '1.15s'} cubic-bezier(0.77, 0, 0.175, 1);
 `;
 
 export default function PictureBox(props) {
