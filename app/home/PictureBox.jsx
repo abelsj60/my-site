@@ -43,8 +43,8 @@ const Portal = styled.div`
 const FantasyAsBackground = styled(BoyInForeground)`
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
-  transform-origin: 50% 10%;
-  transition: transform 2.15s, opacity ${p => !p.inCity ? '.25s' : '1.85s'} cubic-bezier(0.77, 0, 0.175, 1);
+  transform-origin: top;
+  transition: transform 2.15s, opacity ${p => !p.inCity ? '.1s' : '1.85s'} cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
