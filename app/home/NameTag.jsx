@@ -43,7 +43,7 @@ const heartbeatKeyframes = keyframes`
 const Container = styled.div`
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   animation: ${p => p.animate && css`1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
-  animation: ${p => p.castSpell && css`${blurInKeyframes} 1.54s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
+  animation: ${p => p.castSpell && css`${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
   pointer-events: ${p => p.castSpell && 'none'};
   text-align: center;
   z-index: 2;

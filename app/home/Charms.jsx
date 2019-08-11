@@ -2,7 +2,7 @@ import React from 'react';
 import Mapper from '../shared/Mapper.jsx';
 import styled, { css, keyframes } from 'styled-components';
 
-const pinkPulse = keyframes`
+const bigPinkPulse = keyframes`
   0% {
     box-shadow: 0 0 0 0 rgba(253, 17, 114, 1);
   }
@@ -14,6 +14,33 @@ const pinkPulse = keyframes`
   100% {
     transform: rotate(1turn);
     box-shadow: 0 0 0 0 rgba(253, 17, 114, 0);
+  }
+`;
+const pinkPulse = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(253, 17, 114, 1);
+  }
+
+  75% {
+    box-shadow: 0 0 0 15px rgba(253,17,114, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(253, 17, 114, 0);
+  }
+`;
+const bigYellowPulse = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 231, 76, 1);
+  }
+
+  75% {
+    box-shadow: 0 0 0 15px rgba(255, 231, 76, 0);
+  }
+
+  100% {
+    transform: rotate(1turn);
+    box-shadow: 0 0 0 0 rgba(255, 231, 76, 0);
   }
 `;
 const yellowPulse = keyframes`
@@ -57,7 +84,7 @@ const CharmBox = styled.div`
   justify-content: space-between;
 `;
 const Charm = styled.div`
-  animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? yellowPulse : pinkPulse} infinite`)};
+  animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? bigYellowPulse : bigPinkPulse} infinite`)};
   border: 2px dotted ${p => p.theme.colors.pink};
   width: 45px;
   height: 45px;
