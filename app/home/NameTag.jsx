@@ -41,20 +41,13 @@ const heartbeatKeyframes = keyframes`
 `;
 
 const Container = styled.div`
-  // margin-top: 17px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   animation: ${p => p.animate && css`1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
-  animation: ${p => p.castSpell && css`${blurInKeyframes} 1.75s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
+  animation: ${p => p.castSpell && css`${blurInKeyframes} ${!p.inCity ? '1.56s' : '1.55s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
   pointer-events: ${p => p.castSpell && 'none'};
-  // flex-direction: column;
-  // align-items: center;
   text-align: center;
   z-index: 2;
   cursor: pointer;
-
-  @media (min-height: 600px) {
-    // margin-top: 15px;
-  }
 `;
 const Spacer = styled.div`
   height: 35px;
@@ -104,24 +97,18 @@ const Motto = styled.h2`
   -moz-osx-font-smoothing: grayscale;
   font-size: ${p => p.theme.fontSizes.thirteen};
   color: ${p => p.theme.colors.black};
-  // color: ${p => !p.isCasting || p.castSpell ? p.theme.colors.yellow : p.theme.colors.white};
   font-weight: 700;
-  // margin-top: -5px;
   margin-left: ${p => !p.isCasting || p.castSpell ? '16px' : '18px'};
   margin-bottom: 20px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    // margin-left: 13px;
     font-size: ${p => p.theme.fontSizes.eighteen};
     margin-left: ${p => !p.isCasting || p.castSpell ? '22px' : '24px'};
   }
 `;
 const Text = styled.section`
   overflow: auto;
-  // width: 80%;
   max-width: 250px;
-  // text-align: center;
-  // margin-left: 5px;
   margin-left: 17px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   z-index: 2;
@@ -131,8 +118,6 @@ const Text = styled.section`
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    // max-width: 350px;
-    // margin-left: 10px;
     margin-left: 25px;
   }
   

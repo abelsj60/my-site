@@ -44,13 +44,13 @@ const FantasyAsBackground = styled(BoyInForeground)`
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
   transform-origin: 50% 5%;
-  transition: transform 2.15s, opacity ${p => !p.inCity ? '.1s' : '1.85s'} cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1.8s, opacity ${p => !p.inCity ? '.1s' : '1.35s'} cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
 const CityAsBackground = styled(FantasyAsBackground)`
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
-  transition: transform 2.15s, opacity ${p => p.inCity ? '2.1s' : '1.25s'} cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1.8s, opacity ${p => p.inCity ? '1.35s' : '1.2s'} cubic-bezier(0.77, 0, 0.175, 1);
 `;
 
 export default function PictureBox(props) {
