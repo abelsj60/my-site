@@ -12,6 +12,7 @@ const pinkPulse = keyframes`
   }
 
   100% {
+    transform: rotate(1turn);
     box-shadow: 0 0 0 0 rgba(253, 17, 114, 0);
   }
 `;
@@ -44,10 +45,10 @@ const Container = styled.div`
   justify-content: space-between;
   width: 195px;
   z-index: 2;
-  margin-top: 15px;
   animation: ${p => (p.isCasting && css`.65s ${fadeIn} cubic-bezier(0.19, 1, 0.22, 1)`)};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+    margin-top: 15px;
     width: 240px;
   }
 `;
@@ -57,10 +58,9 @@ const CharmBox = styled.div`
 `;
 const Charm = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? yellowPulse : pinkPulse} infinite`)};
-  border: 2px solid ${p => p.isReady && p.isActive ? p.theme.colors.yellow : p.theme.colors.pink};
-  background-color: rgba(0, 0, 0, .35);
-  width: 40px;
-  height: 40px;
+  border: 2px dotted ${p => p.theme.colors.pink};
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   z-index: 3;
   user-select: none;
@@ -68,37 +68,51 @@ const Charm = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  position: relative;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     width: 50px;
     height: 50px;
   }
 `;
+const InnerCharm = styled.div`
+  background-color: ${p => p.isReady && p.isActive ? 'rgba(255, 231, 76, .6)' : 'rgba(253, 17, 114, .6)'};
+  border-radius: 50%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+`;
 const InnerRing = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? pinkPulse : yellowPulse} infinite`)};
   border: 2px solid ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
-  // background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
-  height: 15px;
-  width: 15px;
+  background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
+  height: 14px;
+  width: 1px;
   border-radius: 50%;
+  z-index: 1;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    height: 19px;
+    width: 2px;
+  }
 `;
 const SpellBox = styled.div`
-  margin-top: 28px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   margin-left: 35px;
   margin-right: 35px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    // margin-top: 32px;
+    margin-top: 32px;
   }
 `;
 const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
-  // DELETE?
-  // color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
   color: ${p => p.theme.colors.black};
-  // text-shadow: 1.5px 1px 2px white;
+  text-shadow: 1.5px 1px 2px white;
   transition: color .5s ease-out;
   margin-bottom: 5px;
 `;
@@ -116,7 +130,7 @@ const ProgressBar = styled.div`
   height: 100%;
   // DELETE?
   // background-color: ${p => !p.isReady ? p.theme.colors.yellow : p.theme.colors.pink};
-  background-color: ${p => p.theme.colors.yellow};
+  background-color: ${p => p.theme.colors.white};
   transition: width .5s ease-out, background-color .5s ease-out;
 `;
 
@@ -166,6 +180,10 @@ export default function Charms(props) {
                   isReady={isReady}
                   ref={charmRefs[idx]} // Add a ref to each Charm when mounted
                 >
+                  <InnerCharm
+                    isActive={isActive}
+                    isReady={isReady}
+                  />
                   <InnerRing
                     isActive={isActive}
                     isReady={isReady}
@@ -179,7 +197,7 @@ export default function Charms(props) {
         <Text
           isReady={isReady}
         >
-          Spell ({`${score}/5`})
+          Cast spell in {5 - score}
         </Text>
         <ProgressContainer>
           <ProgressBar
