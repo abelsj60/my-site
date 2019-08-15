@@ -2,7 +2,7 @@ import bio from '../data/home/home.md';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const largeScale = 1.3;
+const largeScale = 1.35;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -40,17 +40,35 @@ const Portal = styled.div`
   opacity: .1;
   display: ${p => !p.isCasting || p.castSpell ? 'none' : 'block'};
 `;
-const FantasyAsBackground = styled(BoyInForeground)`
+const FantasyAsBackground = styled.img`
+  position: absolute;
+  display: block;
+  object-fit: cover; // Use if using <img>
+  // Scale image to fully fit element
+  // https://stackoverflow.com/a/28439444
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? p.theme.blur : ''};
   opacity: ${p => (p.inCity ? '0' : '1')};
   transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
   transform-origin: 50% 5%;
-  transition: transform 1.8s, opacity ${p => !p.inCity ? '.1s' : '1.35s'} cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1.75s, opacity ${p => !p.inCity ? '.1s' : '1.35s'} cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 0;
 `;
-const CityAsBackground = styled(FantasyAsBackground)`
+const CityAsBackground = styled.img`
+  position: absolute;
+  display: block;
+  object-fit: cover; // Use if using <img>
+  // Scale image to fully fit element
+  // https://stackoverflow.com/a/28439444
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? p.theme.blur : ''};
   opacity: ${p => (p.inCity ? '1' : '0')};
   transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
-  transition: transform 1.8s, opacity ${p => p.inCity ? '1.35s' : '1.2s'} cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1.75s, opacity ${p => p.inCity ? '1.35s' : '1.2s'} cubic-bezier(0.77, 0, 0.175, 1);
 `;
 
 export default function PictureBox(props) {
@@ -100,8 +118,10 @@ export default function PictureBox(props) {
             // so toggle won't re-run on the second call.
             // (Two images = two transitionEnd events.)
 
-            trackTransitionEnd();
-            boundHandleClickForHome('toggleSpell');
+            if (castSpell) {
+              trackTransitionEnd();
+              boundHandleClickForHome('toggleSpell');
+            }
           }
         }
       />

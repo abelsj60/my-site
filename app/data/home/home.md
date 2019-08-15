@@ -7,11 +7,11 @@ updated: 11-23-18
 descriptionBoy: 'boy description'
 descriptionFantasy: 'fantasy description'
 descriptionCity: 'city description'
-boyInForegroundImage: https://user-images.githubusercontent.com/30417590/63039622-b358fe00-be91-11e9-9586-15697df158a6.png
+boyInForegroundImage: https://user-images.githubusercontent.com/30417590/63110283-11044d80-bf59-11e9-981d-939d14c38029.png
 zoomedBoyInForegroundImage: ''
-fantasyImage: https://user-images.githubusercontent.com/30417590/63042097-4cd6de80-be97-11e9-8bee-52bf8fdd44ac.png
+fantasyImage: https://user-images.githubusercontent.com/30417590/63110285-11044d80-bf59-11e9-9e4e-0e08319f3436.png
 zoomedFantasyImage: ''
-cityImage: https://user-images.githubusercontent.com/30417590/63042426-f9b15b80-be97-11e9-8a81-53f065dbfaaf.png
+cityImage: https://user-images.githubusercontent.com/30417590/63110286-11044d80-bf59-11e9-992e-91d837d0d0c7.png
 zoomedCityImage: ''
 ---
 
