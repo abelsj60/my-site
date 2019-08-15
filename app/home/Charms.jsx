@@ -129,7 +129,7 @@ const InnerRing2 = styled(InnerRing)`
   animation: unset;
   background-color: unset;
   // box-shadow: 0px 0px 46px 5px rgba(0, 0, 0, .7);
-  // box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,.15);
+  box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,.15);
 `;
 const SpellBox = styled.div`
   margin-top: 20px;
