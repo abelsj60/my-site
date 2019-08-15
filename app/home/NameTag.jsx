@@ -42,6 +42,10 @@ const heartbeatKeyframes = keyframes`
 
 const Container = styled.div`
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
+  // The double animation prop works b/c heartbeat runs three times on load, then stops. It then
+  // effectively 'goes away' because p.animate is false. The blur in keyframes is then used when 
+  // a background change is triggered. This wouldn't work if the two were set to run 
+  // simultaneously — the second would overwrite the first.
   animation: ${p => p.animate && css`1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
   animation: ${p => p.castSpell && css`${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
   pointer-events: ${p => p.castSpell && 'none'};

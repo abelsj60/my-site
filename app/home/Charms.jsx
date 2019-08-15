@@ -74,7 +74,7 @@ const Container = styled.div`
   z-index: 2;
   animation: ${p => (p.isCasting && css`.65s ${fadeIn} cubic-bezier(0.19, 1, 0.22, 1)`)};
   
-  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 15px;
     width: 240px;
   }
@@ -104,6 +104,7 @@ const Charm = styled.div`
 `;
 const InnerCharm = styled.div`
   background-color: ${p => p.isReady && p.isActive ? 'rgba(255, 231, 76, .6)' : 'rgba(253, 17, 114, .6)'};
+  box-shadow: 0px 0px 22px -8px rgba(0, 0, 0, .8);
   border-radius: 50%;
   position: absolute;
   top: 0px;
@@ -113,17 +114,22 @@ const InnerCharm = styled.div`
 `;
 const InnerRing = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? pinkPulse : yellowPulse} infinite`)};
-  border: 2px solid ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
   background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
-  height: 14px;
-  width: 1px;
+  height: 18px;
+  width: 5px;
   border-radius: 50%;
   z-index: 1;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    height: 19px;
-    width: 2px;
+    height: 23px;
+    width: 6px;
   }
+`;
+const InnerRing2 = styled(InnerRing)`
+  animation: unset;
+  background-color: unset;
+  // box-shadow: 0px 0px 46px 5px rgba(0, 0, 0, .7);
+  // box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,.15);
 `;
 const SpellBox = styled.div`
   margin-top: 20px;
@@ -212,7 +218,12 @@ export default function Charms(props) {
                   <InnerRing
                     isActive={isActive}
                     isReady={isReady}
-                  />
+                  >
+                    <InnerRing2
+                      isActive={isActive}
+                      isReady={isReady}
+                    />
+                  </InnerRing>
                 </Charm>
               );
             }}
@@ -222,7 +233,7 @@ export default function Charms(props) {
         <Text
           isReady={isReady}
         >
-          Cast spell in {5 - score}
+          Cast spell in {5 - score}...
         </Text>
         <ProgressContainer>
           <ProgressBar

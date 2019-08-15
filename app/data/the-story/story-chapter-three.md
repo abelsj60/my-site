@@ -1,6 +1,6 @@
 ---
 title: 'The reality glitch'
-image: https://user-images.githubusercontent.com/30417590/62591442-91fa7f80-b89d-11e9-97c8-73079f989d59.png
+image: https://user-images.githubusercontent.com/30417590/63044728-d50bb280-be9c-11e9-8b3f-fc4c86315fee.png
 description: 'xyz 3'
 number: 3
 ---

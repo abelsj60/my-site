@@ -6,9 +6,9 @@ const largeScale = 1.3;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
-  left: -1px;
-  height: 101%;
-  width: 101%;
+  left: 0px;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   z-index: 1;
 `;

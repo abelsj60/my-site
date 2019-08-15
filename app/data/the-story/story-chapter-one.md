@@ -1,6 +1,6 @@
 ---
 title: 'A magic quest'
-image: https://user-images.githubusercontent.com/30417590/62591399-77c0a180-b89d-11e9-9771-e22507133a05.png
+image: https://user-images.githubusercontent.com/30417590/63044693-c1604c00-be9c-11e9-8bae-91864d375867.png
 description: 'xyz 1'
 # image: '/fantasy-scene-with-blue-dragon-treasure-chest-and-pile-of-golden-coins-d-illustration-707801968.jpg'
 number: 1
