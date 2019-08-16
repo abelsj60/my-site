@@ -108,7 +108,7 @@ const Portal = styled.div`
   z-index: 0;
   background-color: ${p => p.theme.colors.black};
   // background-color: #fd1172;
-  background-color: navy;
+  background-color: midnightblue;
   opacity: ${p => p.showStoryText ? '.3' : '0'};
 `;
 const Image = styled.img`
@@ -118,21 +118,25 @@ const Image = styled.img`
   top: 0px;
   left: 0px;
   z-index: -1;
+  // May need to fill page:   
+  // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  transform: ${p => p.showStoryText ? 'scale(1.1)' : 'scale(1)'};
-  transition: .65s transform ease-in-out;
+  transform: ${p => p.showStoryText ? 'scale(1.04)' : 'scale(1)'};
+  // Slight different in filter and transform timing so the filter is
+  // kinda, sorta finished before the transform is completed
+  transition: .33s filter ease-in-out, .35s transform ease-in-out;
 
-  // If business card or legal terms are on screen, blur content:
-  filter: ${p => p.showStoryText || p.theme.blurForTempContent ? p.theme.blur : ''};
+  // Blur content if text is turned off, or if the business card 
+  // or legal terms are on screen. We do blur(0) so we get the
+  // transition effect on mobile, which seems to disregard
+  // gong from blurred to unblurred without it:
+  filter: ${p => p.showStoryText || p.theme.blurForTempContent ? p.theme.blur : 'blur(0)'};
 
   // Blur background when header menu is on and user is mobile
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     filter: ${p => p.theme.blurForHeaderMenu && p.theme.blur};
   }
-
-  // If moving to <img> --> May need to fill page:   
-  // https://stackoverflow.com/a/30794589
 
   // Use background-image to get proper 
   // proportions on most browsers 

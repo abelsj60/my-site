@@ -144,6 +144,7 @@ const SpellBox = styled.div`
 `;
 const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
+  font-weight: 400;
   color: ${p => p.theme.colors.black};
   // text-shadow: 1.5px 1px 2px white;
   transition: color .5s ease-out;
