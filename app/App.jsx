@@ -219,6 +219,7 @@ class App extends Component {
         isMobileSafari
           && height < this.minAllowedHeight,
       homeAnimation: false,
+      animateImageBlur: false, // Animate blur/transform on story images
       password: '',
       isValidUser: false,
       wrongPassword: '',

@@ -125,7 +125,7 @@ const Image = styled.img`
   transform: ${p => p.showStoryText ? 'scale(1.04)' : 'scale(1)'};
   // Slight different in filter and transform timing so the filter is
   // kinda, sorta finished before the transform is completed
-  transition: .33s filter ease-in-out, .35s transform ease-in-out;
+  transition: ${p => p.animateImageBlur && '.33s filter ease-in-out, .35s transform ease-in-out'};
 
   // Blur content if text is turned off, or if the business card 
   // or legal terms are on screen. We do blur(0) so we get the
@@ -167,7 +167,7 @@ export default function Story(props) {
     contentState,
     overflowRef
   } = props;
-  const { showStoryText } = appState;
+  const { showStoryText, animateImageBlur } = appState;
   const { finalData } = contentState;
   const {
     description,
@@ -241,6 +241,7 @@ export default function Story(props) {
         <Image
           alt={description}
           showStoryText={showStoryText}
+          animateImageBlur={animateImageBlur}
           src={image}
         />
       </PictureHolder>

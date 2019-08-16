@@ -66,6 +66,7 @@ export default class ClickHandling {
 
       switch (updateValue) {
         case 'toggleBusinessCard':
+          stateToUpdate.animateImageBlur = false;
           stateToUpdate.showBusinessCard = !showBusinessCard;
 
           if (showLegalTerms) {
@@ -81,6 +82,7 @@ export default class ClickHandling {
             : '';
           break;
         case 'toggleLegalTerms':
+          stateToUpdate.animateImageBlur = false;
           stateToUpdate.showLegalTerms = !showLegalTerms;
 
           if (showBusinessCard) {
@@ -96,6 +98,7 @@ export default class ClickHandling {
             : '';
           break;
         case 'toggleStoryText':
+          stateToUpdate.animateImageBlur = true;
           stateToUpdate.showStoryText = !showStoryText;
 
           if (showBusinessCard) {
@@ -136,6 +139,7 @@ export default class ClickHandling {
           action = 'Ran home animation';
           break;
         case 'toggleHeaderMenu':
+          stateToUpdate.animateImageBlur = false;
           stateToUpdate.headerMenuIsOpen = !headerMenuIsOpen;
 
           if (!headerMenuIsOpen) {
