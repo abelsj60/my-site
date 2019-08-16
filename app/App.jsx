@@ -77,13 +77,14 @@ const bottomMargin = {
   regular: '20px'
 };
 const blurControl = {
-  regular: 'blur(3px)'
+  regular: 'blur(4px)'
 };
 const ZoomControl = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   height: ${p => p.theme.pageHeight}px;
+  overflow: hidden;
   position: relative;
   
   @media(orientation: landscape) {

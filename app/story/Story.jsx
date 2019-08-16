@@ -120,6 +120,9 @@ const Image = styled.img`
   z-index: -1;
   height: 100%;
   width: 100%;
+  transform: ${p => p.showStoryText ? 'scale(1.1)' : 'scale(1)'};
+  transition: .65s transform ease-in-out;
+
   // If business card or legal terms are on screen, blur content:
   filter: ${p => p.showStoryText || p.theme.blurForTempContent ? p.theme.blur : ''};
 
@@ -170,7 +173,6 @@ export default function Story(props) {
   } = finalData.attributes;
   const bookTitle = 'The Magical, Semi-Fictional Biography of a Real Boy';
   const dek = 'An experiment in digital + traditional storytelling';
-  const isCover = number === 1;
   let chapterNumber;
 
   switch (number) {
@@ -210,14 +212,10 @@ export default function Story(props) {
           <BookTitle>
             {bookTitle}
           </BookTitle>
-          <Chapter
-            isCover={isCover}
-          >
+          <Chapter>
             Chapter {chapterNumber}
           </Chapter>
-          <ChapterTitle
-            isCover={isCover}
-          >
+          <ChapterTitle>
             {title}
           </ChapterTitle>
           <StoryText>
