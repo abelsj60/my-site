@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 import ReactGA from 'react-ga';
+import { cover } from 'intrinsic-scale';
 
 const blurInKeyframes = keyframes`
   0% {
@@ -54,28 +55,12 @@ const Container = styled.div`
   cursor: pointer;
 `;
 const Spacer = styled.div`
-  height: 35px;
+  height: ${p => (p.spacerHeight + 5) + 'px'};
   width: 100%;
   z-index: 3;
 
-  @media (min-height: 667px) and (min-width: 375px) {
-    height: 45px;
-  }
-
-  @media (min-height: 812px) and (min-width: 375px) {
-    height: 55px;
-  }
-
-  @media (min-height: 1023px) and (min-width: 1440px) {
-    height: 60px;
-  }
-
-  @media (min-height: 1366px) and (min-width: 1024px) {
-    height: 100px;
-  }
-
-  @media (min-height: 1900px) and (min-width: 2560px) {
-    height: 175px;
+  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
+    height: ${p => p.spacerHeight + 'px'};
   }
 `;
 const Hed = styled.h1`
@@ -200,9 +185,27 @@ export default function NameTag(props) {
     boundHandleClickForHome('toggleSpell');
   };
 
+  const fullHeight = appState.height;
+  const coveredImageValues = cover(window.innerWidth, fullHeight, 2131, 1244);
+  const height = coveredImageValues.height;
+  const y = coveredImageValues.y;
+
+  let spacerHeight = Math.floor((fullHeight * (14.4 / 100) - 52));
+
+  if (Math.floor(y) < 0) {
+    const newHeight = height - (y * -1);
+    const tempSpacerHeight = newHeight * (14.4 / 100) - 52;
+    const diffForHeight = tempSpacerHeight - spacerHeight;
+
+    const changedPosition = (y * -1) - diffForHeight;
+    spacerHeight = Math.floor(spacerHeight - changedPosition);
+  }
+
   return (
     <Fragment>
-      <Spacer />
+      <Spacer
+        spacerHeight={spacerHeight}
+      />
       <Container
         castSpell={castSpell}
         onClick={eventHandler}

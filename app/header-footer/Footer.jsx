@@ -91,7 +91,14 @@ export default function FooterContainer(props) {
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
-  const showTextShadow = !showStoryText && !showBusinessCard && !showLegalTerms && !isReverie && !headerMenuIsOpen;
+  const showTextShadow = (isHome
+    && !showBusinessCard
+    && !showLegalTerms)
+    || (!showStoryText
+      && !showBusinessCard
+      && !showLegalTerms
+      && !isReverie
+      && !headerMenuIsOpen);
 
   const reverieLink =
     isReverie

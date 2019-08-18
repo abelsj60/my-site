@@ -132,8 +132,8 @@ const Nav = styled.nav`
   display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '8px 15px'};
-  // Prevent occasional over-expansion
   background-color: ${p => p.isHome && 'rgba(0,0,0,0.25)'};
+  // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
   border-radius: ${p => p.isHome && '10px'};
   position: relative;
@@ -235,7 +235,18 @@ export default class Header extends Component {
     // }
     const hideBackground = isHome
         || (!showStoryText && !isReverie);
-    const showTextShadow = !showStoryText && !showBusinessCard && !showLegalTerms && !isReverie && !headerMenuIsOpen;
+    // const showTextShadow = isHome
+    //   && !showBusinessCard
+    //   && !showLegalTerms;
+
+    const showTextShadow = (isHome
+      && !showBusinessCard
+      && !showLegalTerms)
+      || (!showStoryText
+        && !showBusinessCard
+        && !showLegalTerms
+        && !isReverie
+        && !headerMenuIsOpen);
 
     const referrer = new Referrer(this.props);
     const eventHandlerForHeaderMenu = () => boundHandleClickForApp('toggleHeaderMenu');

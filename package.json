@@ -24,6 +24,7 @@
     "copy-webpack-plugin": "^4.5.2",
     "core-js": "^2.6.9",
     "express": "^4.17.1",
+    "intrinsic-scale": "^3.0.4",
     "marked": "^0.7.0",
     "react": "^16.5.1",
     "react-clipboard.js": "^2.0.13",
