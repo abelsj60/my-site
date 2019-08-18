@@ -231,7 +231,7 @@ class App extends Component {
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
     this.closeHeaderMenu = this.closeHeaderMenu.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
-    this.resetSpacerHeight = this.resetSpacerHeight.bind(this);
+    this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
@@ -443,7 +443,7 @@ class App extends Component {
 
     clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout
     this.resizeTimeoutId = setTimeout(() => {
-      this.resetSpacerHeight();
+      this.updateSpacerHeight();
       this.updateHeight();
     }, 50);
   }
@@ -639,7 +639,7 @@ class App extends Component {
     return Math.ceil(spacerHeight);
   }
 
-  resetSpacerHeight() {
+  updateSpacerHeight() {
     if (!isMobile
       && this.state.width !== window.innerWidth
       && this.state.height === window.innerHeight) {
