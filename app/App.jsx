@@ -440,9 +440,10 @@ class App extends Component {
 
   handleResize() {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
-
+    // console.log('called handleResize');
     clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout
     this.resizeTimeoutId = setTimeout(() => {
+      // console.log('timeout handleResize');
       this.updateSpacerHeight();
       this.updateHeight();
     }, 50);
@@ -621,7 +622,7 @@ class App extends Component {
     // 14.4 is an arbitrary value (found via trial-n-error)
     // 52 is the height of the header in pixels
     const calcSpacerHeight = (heightVal, percentage) => heightVal * (percentage / 100) - 52;
-    let spacerHeight = calcSpacerHeight(appHeight, 14.4);
+    let spacerHeight = Math.ceil(calcSpacerHeight(appHeight, 14.4));
 
     // yImageTop < 0 when the image 'zooms' (the window's
     // width has grown beyond the image's max width, so
@@ -632,19 +633,17 @@ class App extends Component {
       const newSpacerHeight = calcSpacerHeight(newHeight, 15.1);
       const spacerHeightDifference = newSpacerHeight - spacerHeight;
       const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
+      const finalValue = Math.ceil(spacerHeight - changedPosition);
 
-      spacerHeight = spacerHeight - changedPosition;
+      spacerHeight = finalValue >= 15 ? finalValue : 15;
     }
 
-    return Math.ceil(spacerHeight);
+    return spacerHeight;
   }
 
   updateSpacerHeight() {
-    if (!isMobile
-      && this.state.width !== window.innerWidth
-      && this.state.height === window.innerHeight) {
-      this.setState({ spacerHeight: this.calculateSpacerHeight() });
-    }
+    const spacerHeight = this.calculateSpacerHeight();
+    this.setState({ spacerHeight });
   }
 
   componentDidUpdate(prevProps) {
