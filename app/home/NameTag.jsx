@@ -4,7 +4,6 @@ import React, { Fragment } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 import ReactGA from 'react-ga';
-import { cover } from 'intrinsic-scale';
 
 const blurInKeyframes = keyframes`
   0% {
@@ -144,7 +143,8 @@ export default function NameTag(props) {
   const {
     inCity,
     showBusinessCard,
-    showLegalTerms
+    showLegalTerms,
+    spacerHeight
   } = appState;
   const {
     isCasting,
@@ -184,22 +184,6 @@ export default function NameTag(props) {
 
     boundHandleClickForHome('toggleSpell');
   };
-
-  const fullHeight = appState.height;
-  const coveredImageValues = cover(window.innerWidth, fullHeight, 2131, 1244);
-  const height = coveredImageValues.height;
-  const y = coveredImageValues.y;
-
-  let spacerHeight = Math.floor((fullHeight * (14.4 / 100) - 52));
-
-  if (Math.floor(y) < 0) {
-    const newHeight = height - (y * -1);
-    const tempSpacerHeight = newHeight * (14.4 / 100) - 52;
-    const diffForHeight = tempSpacerHeight - spacerHeight;
-
-    const changedPosition = (y * -1) - diffForHeight;
-    spacerHeight = Math.floor(spacerHeight - changedPosition);
-  }
 
   return (
     <Fragment>

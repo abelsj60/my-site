@@ -1,5 +1,6 @@
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
+import { cover } from 'intrinsic-scale';
 import styled, {
   css,
   createGlobalStyle,
@@ -159,11 +160,11 @@ class App extends Component {
     // Let's deal w/height.
     //  1. Check value based on device type.
     //  2. If the screen is landscape:
-    //    a. Set property on load,
-    //    b. Resize on orientation change due to updateHeight,
+    //    a. Set property on initial load,
+    //    b. Resize on orientation change via updateHeight(),
     //    c. Keep resized height on subsequent orientation
-    //    changes by checking for this.minAllowedHeight
-    //    in updateHeight().
+    //    changes by rejecting w/n updateHeight() when
+    //    this.minAllowedHeight > newHeight.
 
     const height =
       isMobile && !isMobileSafari
@@ -223,12 +224,14 @@ class App extends Component {
       password: '',
       isValidUser: false,
       wrongPassword: '',
+      spacerHeight: 0
     };
 
     this.handleResize = this.handleResize.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
     this.closeHeaderMenu = this.closeHeaderMenu.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.resetSpacerHeight = this.resetSpacerHeight.bind(this);
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
@@ -439,7 +442,10 @@ class App extends Component {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
 
     clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout
-    this.resizeTimeoutId = setTimeout(() => this.updateHeight(), 50);
+    this.resizeTimeoutId = setTimeout(() => {
+      this.resetSpacerHeight();
+      this.updateHeight();
+    }, 50);
   }
 
   updateHeight() {
@@ -603,6 +609,42 @@ class App extends Component {
       location.caller,
       updateMenuForBackForthButton
     );
+  }
+
+  calculateSpacerHeight() {
+    const appHeight = this.state.height;
+    const objectFitCoverVals = cover(window.innerWidth, appHeight, 2131, 1244);
+    const imageHeight = objectFitCoverVals.height;
+    const yImageTop = objectFitCoverVals.y;
+    const makePositive = val => val * -1;
+
+    // 14.4 is an arbitrary value (found via trial-n-error)
+    // 52 is the height of the header in pixels
+    const calcSpacerHeight = heightVal => heightVal * (14.4 / 100) - 52;
+    let spacerHeight = calcSpacerHeight(appHeight);
+
+    // yImageTop < 0 when the image 'zooms' (the window's
+    // width has grown beyond the image's max width, so
+    // we cut off the top and bottom and zoom in.)
+
+    if (Math.floor(yImageTop) < 0) {
+      const newHeight = imageHeight - (makePositive(yImageTop));
+      const newSpacerHeight = calcSpacerHeight(newHeight);
+      const spacerHeightDifference = newSpacerHeight - spacerHeight;
+      const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
+
+      spacerHeight = spacerHeight - changedPosition;
+    }
+
+    return Math.ceil(spacerHeight);
+  }
+
+  resetSpacerHeight() {
+    if (!isMobile
+      && this.state.width !== window.innerWidth
+      && this.state.height === window.innerHeight) {
+      this.setState({ spacerHeight: this.calculateSpacerHeight() });
+    }
   }
 
   componentDidUpdate(prevProps) {

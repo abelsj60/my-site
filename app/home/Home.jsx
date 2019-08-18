@@ -38,6 +38,8 @@ export default class Home extends Component {
     // a back-up). Otherwise, make a new one.
 
     const pattern = this.createSpellPattern();
+    const { homeAnimation, height } = this.props.appState;
+    this.props.boundHandleClickForApp('updateSpacerHeight', height);
 
     this.state = {
       isCasting: false,
@@ -47,7 +49,7 @@ export default class Home extends Component {
       activeCharm: pattern[0], // Initial Charm is always [0].
       eventType: 'click', // Event that triggered Charm
       animate:
-        !this.props.appState.homeAnimation
+        !homeAnimation
           ? 0
           : 2
     };
