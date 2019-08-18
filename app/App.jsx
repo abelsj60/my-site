@@ -620,8 +620,8 @@ class App extends Component {
 
     // 14.4 is an arbitrary value (found via trial-n-error)
     // 52 is the height of the header in pixels
-    const calcSpacerHeight = heightVal => heightVal * (14.4 / 100) - 52;
-    let spacerHeight = calcSpacerHeight(appHeight);
+    const calcSpacerHeight = (heightVal, percentage) => heightVal * (percentage / 100) - 52;
+    let spacerHeight = calcSpacerHeight(appHeight, 14.4);
 
     // yImageTop < 0 when the image 'zooms' (the window's
     // width has grown beyond the image's max width, so
@@ -629,7 +629,7 @@ class App extends Component {
 
     if (Math.floor(yImageTop) < 0) {
       const newHeight = imageHeight - (makePositive(yImageTop));
-      const newSpacerHeight = calcSpacerHeight(newHeight);
+      const newSpacerHeight = calcSpacerHeight(newHeight, 15.1);
       const spacerHeightDifference = newSpacerHeight - spacerHeight;
       const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
 
