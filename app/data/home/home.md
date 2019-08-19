@@ -7,7 +7,7 @@ updated: 11-23-18
 descriptionBoy: 'boy description'
 descriptionFantasy: 'fantasy description'
 descriptionCity: 'city description'
-boyInForegroundImage: https://user-images.githubusercontent.com/30417590/63110283-11044d80-bf59-11e9-981d-939d14c38029.png
+boyInForegroundImage: https://user-images.githubusercontent.com/30417590/63287633-d1a36d00-c288-11e9-8bc3-1808b0bf5900.png
 zoomedBoyInForegroundImage: ''
 fantasyImage: https://user-images.githubusercontent.com/30417590/63110285-11044d80-bf59-11e9-9e4e-0e08319f3436.png
 zoomedFantasyImage: ''
