@@ -26,6 +26,8 @@ const Line = styled.div`
   margin: 0px;
   height: 1px;
   background-color: ${p => p.theme.colors.pink};
+  opacity: ${p => (p.showStoryText ? '1' : '0')};
+  transition: ${p => !p.headerMenuIsOpen && 'opacity .165s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.desktop}) {
     left: 5px;
@@ -41,6 +43,7 @@ const StoryButton = styled(Button)`
   border: 1px rgba(255, 255, 255, .6) solid;
   box-shadow: ${p => p.boxShadow && shadow};
   user-select: none;
+  transition: ${p => !p.headerMenuIsOpen && 'background-color .14s, box-shadow .14s'};
 `;
 const RestyledLink = styled(StyledLink)`
   margin-right: 20px;
@@ -57,6 +60,7 @@ const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.one};
   user-select: none;
   text-shadow: ${p => p.textShadow && shadow};
+  transition: ${p => !p.headerMenuIsOpen && !p.home && 'text-shadow .165s'};
 `;
 const TextBox = styled.div`
   display: flex;
@@ -133,6 +137,7 @@ export default function FooterContainer(props) {
         className="story-button"
         conditional={true}
         show={isStory}
+        headerMenuIsOpen={headerMenuIsOpen}
         boxShadow={showTextShadow}
         text={
           showStoryText
@@ -154,6 +159,7 @@ export default function FooterContainer(props) {
             home={isHome}
             isStory={isStory}
             textShadow={showTextShadow}
+            headerMenuIsOpen={headerMenuIsOpen}
           >
             Reverie
           </Graf>
@@ -164,6 +170,7 @@ export default function FooterContainer(props) {
           home={isHome}
           isStory={isStory}
           textShadow={showTextShadow}
+          headerMenuIsOpen={headerMenuIsOpen}
         >
           Contact
         </Graf>
@@ -173,6 +180,7 @@ export default function FooterContainer(props) {
           home={isHome}
           isStory={isStory}
           textShadow={showTextShadow}
+          headerMenuIsOpen={headerMenuIsOpen}
         >
           Legal
         </Graf>

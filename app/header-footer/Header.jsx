@@ -37,8 +37,10 @@ const HeaderBackground = styled.div`
   top: 0px;
   left: 0px;
   background-color: ${p => !p.hide ? p.theme.colors.darkPink : ''};
+  opacity: ${p => !p.hide || p.menu ? '1' : '0'};
+  transition: ${p => !p.isHome && !p.menu && 'opacity .165s'};
   z-index: -1;
-
+  
   // Control nav items when menu is open, up to the break point
   // Must come after all others so it controls in limited circs
   // Makes top menu bar opaque and visiable if it's hidden
@@ -68,6 +70,7 @@ const RestyledLink = styled(
   margin-left: ${p => (p.num === 0 ? '0px' : '10px')};
   color: ${p => p.theme.colors.white};
   text-shadow: ${p => p.textShadow && textShadow};
+  transition: ${p => !p.menu && !p.isHome && 'text-shadow .165s'};
 
   && {
     text-decoration: ${p => (p.isActive ? 'underline' : undefined)};
@@ -119,6 +122,7 @@ const Motto = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   text-shadow: ${p => p.textShadow && textShadow};
+  transition: ${p => !p.menu && !p.isHome && 'text-shadow .165s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.four};
