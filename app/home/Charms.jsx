@@ -78,6 +78,11 @@ const Container = styled.div`
     margin-top: 15px;
     width: 240px;
   }
+
+  @media (min-width: ${p => p.theme.mediaQueries.huge}) {
+    margin-top: 25px;
+    width: 330px;
+  }
 `;
 const CharmBox = styled.div`
   display: flex;
@@ -101,6 +106,11 @@ const Charm = styled.div`
     width: 50px;
     height: 50px;
   }
+
+  @media (min-width: ${p => p.theme.mediaQueries.huge}) {
+    width: 75px;
+    height: 75px;
+  }
 `;
 const InnerCharm = styled.div`
   background-color: ${p => p.isReady && p.isActive ? 'rgba(255, 231, 76, .6)' : 'rgba(253, 17, 114, .6)'};
@@ -112,7 +122,7 @@ const InnerCharm = styled.div`
   height: 100%;
   width: 100%;
 `;
-const InnerRing = styled.div`
+const InnerEye = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? pinkPulse : yellowPulse} infinite`)};
   background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
   height: 18px;
@@ -124,12 +134,18 @@ const InnerRing = styled.div`
     height: 23px;
     width: 6px;
   }
+
+  @media (min-width: ${p => p.theme.mediaQueries.huge}) {
+    height: 35px;
+    width: 8px;
+  }
 `;
-const InnerRing2 = styled(InnerRing)`
-  animation: unset;
-  background-color: unset;
-  // box-shadow: 0px 0px 46px 5px rgba(0, 0, 0, .7);
+const InnerEyeShadow = styled.div`
+  border-radius: 50%;
   box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,.15);
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 `;
 const SpellBox = styled.div`
   margin-top: 20px;
@@ -146,7 +162,6 @@ const Text = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
   font-weight: 400;
   color: ${p => p.theme.colors.black};
-  // text-shadow: 1.5px 1px 2px white;
   transition: color .5s ease-out;
   margin-bottom: 5px;
 `;
@@ -154,15 +169,12 @@ const ProgressContainer = styled.div`
   height: 1px;
   width: 100%;
   align-self: center;
-  background-color: ${p => p.theme.colors.black};
-  
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-  }
+  background-color: ${p => p.theme.colors.white};
 `;
 const ProgressBar = styled.div`
   width: ${p => p.barWidth}%;
   height: 100%;
-  background-color: ${p => p.theme.colors.white};
+  background-color: ${p => p.theme.colors.black};
   transition: width .5s ease-out, background-color .5s ease-out;
 `;
 
@@ -216,15 +228,15 @@ export default function Charms(props) {
                     isActive={isActive}
                     isReady={isReady}
                   />
-                  <InnerRing
+                  <InnerEye
                     isActive={isActive}
                     isReady={isReady}
                   >
-                    <InnerRing2
+                    <InnerEyeShadow
                       isActive={isActive}
                       isReady={isReady}
                     />
-                  </InnerRing>
+                  </InnerEye>
                 </Charm>
               );
             }}

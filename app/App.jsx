@@ -72,7 +72,8 @@ const mediaQueries = {
   narrowBreakOne: '500px',
   narrowBreakTwo: '690px',
   narrowBreakTwoB: '691px',
-  desktop: '848px'
+  desktop: '848px',
+  huge: '1920px'
 };
 const bottomMargin = {
   regular: '20px'
