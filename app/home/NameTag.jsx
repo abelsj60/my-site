@@ -1,4 +1,5 @@
 import bio from '../data/home/home.md';
+import FitText from '@kennethormandy/react-fittext';
 import marked from 'marked';
 import React, { Fragment } from 'react';
 import styled, { css, keyframes } from 'styled-components';
@@ -52,30 +53,26 @@ const Container = styled.div`
   text-align: center;
   z-index: 2;
   cursor: pointer;
+  ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`}
 `;
 const Spacer = styled.div`
-  height: ${p => (p.spacerHeight + 5) + 'px'};
+  height: ${p => p.spacerHeight + 'px'};
   width: 100%;
   z-index: 3;
-
-  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    height: ${p => p.spacerHeight + 'px'};
-  }
 `;
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
-  font-size: 4.5rem;
   text-shadow: 2px 1.5px 5px black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: ${p => p.theme.colors.yellow};
   font-weight: 700;
   line-height: 1;
-  margin-top: -17px;
+  margin-top: -9px;
   margin-bottom: 10px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    font-size: ${p => p.theme.fontSizes.seventeen};
+    margin-top: -17px;
   }
 `;
 const Motto = styled.h2`
@@ -83,36 +80,20 @@ const Motto = styled.h2`
   text-shadow: 1.5px 1px 2px white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: ${p => p.theme.fontSizes.thirteen};
   color: ${p => p.theme.colors.black};
   font-weight: 700;
-  margin-left: ${p => !p.isCasting || p.castSpell ? '16px' : '18px'};
-  margin-bottom: 20px;
-  
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    font-size: ${p => p.theme.fontSizes.eighteen};
-    margin-left: ${p => !p.isCasting || p.castSpell ? '22px' : '24px'};
-  }
+  margin-left: .95em;
+  margin-bottom: 17px;
 `;
 const Text = styled.section`
   overflow: auto;
-  max-width: 250px;
-  margin-left: 17px;
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   z-index: 2;
-
-  @media (min-width: 390px) {
-    max-width: 350px;
-  }
-
-  @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-    margin-left: 25px;
-  }
   
   p {
     font-weight: 500;
+    margin-left: 1.7em;
     margin-bottom: 10px;
-    font-size: ${p => p.theme.fontSizes.three};
     color: ${p => p.theme.colors.black};
     text-shadow: 1.5px 1px 2px white;
     text-align: center;
@@ -122,10 +103,6 @@ const Text = styled.section`
     &:last-child {
       margin-bottom: 0px;
     }
-
-    @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-      font-size: ${p => p.theme.fontSizes.twelve};
-    } 
   }
 
   // At bottom to override media queries. Otherwise,
@@ -144,7 +121,8 @@ export default function NameTag(props) {
     inCity,
     showBusinessCard,
     showLegalTerms,
-    spacerHeight
+    spacerHeight,
+    nameTagWidth
   } = appState;
   const {
     isCasting,
@@ -193,29 +171,38 @@ export default function NameTag(props) {
       <Container
         castSpell={castSpell}
         onClick={eventHandler}
+        nameTagWidth={nameTagWidth}
         animate={!isCasting && !castSpell && animate === 1}
         tempContentIsOn={showBusinessCard || showLegalTerms}
       >
-        <Hed>
-          {name}
-        </Hed>
-        <Motto
-          isCasting={isCasting}
-          castSpell={castSpell}
-        >
-          {tagline}
-        </Motto>
+        <FitText compressor={1.15}>
+          <Hed>
+            {name}
+          </Hed>
+        </FitText>
+        <FitText compressor={2.3}>
+          <Motto
+            isCasting={isCasting}
+            castSpell={castSpell}
+          >
+            {tagline}
+          </Motto>
+        </FitText>
         <Text
           isCasting={isCasting}
           castSpell={castSpell}
           tempContentIsOn={showBusinessCard || showLegalTerms}
         >
-          {ReactHtmlParser(
-            marked(
-              body,
-              { smartypants: true }
-            )
-          )}
+          <FitText compressor={2.5}>
+            <Fragment>
+              {ReactHtmlParser(
+                marked(
+                  body,
+                  { smartypants: true }
+                )
+              )}
+            </Fragment>
+          </FitText>
         </Text>
       </Container>
     </Fragment>

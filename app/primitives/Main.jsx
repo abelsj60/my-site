@@ -9,5 +9,5 @@ export default styled.main`
   flex-shrink: 0;
   flex-basis: auto;
   width: 100%;
-  max-width: 70rem;
+  max-width: ${p => !p.home ? '70rem' : ''};
 `;

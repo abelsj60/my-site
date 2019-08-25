@@ -1,6 +1,7 @@
 import bio from '../data/home/home.md';
 import headerNavClose from '../../public/header-nav-open.png';
 import headerNavOpen from '../../public/header-nav-closed.png';
+import { cover } from 'intrinsic-scale';
 import Mapper from '../shared/Mapper.jsx';
 import React, { Component } from 'react';
 import Referrer from '../classes/Referrer.js';
@@ -24,7 +25,7 @@ const Container = styled.header`
   z-index: 2;
   height: 52px;
   display: flex;
-  justify-content: ${p => (p.isHome ? 'center' : undefined)};
+  justify-content: ${p => p.isHome && 'center'};
   align-items: center;
   width: 100%;
   max-width: 75rem;
@@ -131,12 +132,16 @@ const Motto = styled.span`
 const Nav = styled.nav`
   display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
-  padding: ${p => p.isHome && '8px 15px'};
-  background-color: ${p => p.isHome && 'rgba(0,0,0,0.25)'};
+  padding: ${p => p.isHome && '6px 12px'};
+  background-color: ${p => p.opaqueBackground && 'rgba(0, 0, 0, .125)'};
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
-  border-radius: ${p => p.isHome && '10px'};
+  // border-radius: ${p => p.isHome && '8px'};
   position: relative;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    background-color: ${p => !p.opaqueBackground && 'unset'};
+  }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
@@ -216,9 +221,11 @@ export default class Header extends Component {
     const {
       currentCaller,
       headerMenuIsOpen,
+      height,
       showBusinessCard,
       showLegalTerms,
-      showStoryText
+      showStoryText,
+      spacerHeight
     } = appState;
     const isHome = currentCaller === 'home';
     const isReverie = currentCaller === 'reverie';
@@ -226,30 +233,22 @@ export default class Header extends Component {
       headerMenuIsOpen
         ? headerNavClose
         : headerNavOpen;
-    // if (showStoryText) {
-    // } else {
-    //   iconType =
-    //     headerMenuIsOpen
-    //       ? headerNavClose
-    //       : headerNavOpenB;
-    // }
     const hideBackground = isHome
         || (!showStoryText && !isReverie);
-    // const showTextShadow = isHome
-    //   && !showBusinessCard
-    //   && !showLegalTerms;
-
-    const showTextShadow = (isHome
-      && !showBusinessCard
-      && !showLegalTerms)
-      || (!showStoryText
+    const showTextShadow = 
+      !showStoryText
         && !showBusinessCard
         && !showLegalTerms
         && !isReverie
-        && !headerMenuIsOpen);
-
+        && !headerMenuIsOpen;
+    const coverVals = cover(window.innerWidth, height, 2131, 1244);
     const referrer = new Referrer(this.props);
     const eventHandlerForHeaderMenu = () => boundHandleClickForApp('toggleHeaderMenu');
+    const opaqueBackground = 
+      isHome
+        && (coverVals.y < 0 || spacerHeight < 20)
+        && !showBusinessCard
+        && !showLegalTerms;
 
     return (
       <Container
@@ -285,6 +284,7 @@ export default class Header extends Component {
         <Nav
           isHome={isHome}
           menu={headerMenuIsOpen}
+          opaqueBackground={opaqueBackground}
         >
           <NavList
             isHome={isHome}

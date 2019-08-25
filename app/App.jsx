@@ -166,10 +166,11 @@ class App extends Component {
     //    changes by rejecting w/n updateHeight() when
     //    this.minAllowedHeight > newHeight.
 
-    const height =
+    const pageHeight =
       isMobile && !isMobileSafari
         ? document.documentElement.clientHeight
         : window.innerHeight;
+    const coverVals = cover(window.innerWidth, pageHeight, 2131, 1244);
 
     // One way to block orientation change
     // https://css-tricks.com/snippets/css/orientation-lock/
@@ -183,8 +184,11 @@ class App extends Component {
     // factor uses default height, wider phones
     // use their true height).
 
-    this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px.
-    this.defaultHeightWhenTooSmall = 568; // Arbitrary (iPhone SE height)
+    this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
+    this.defaultHeightWhenTooSmall = 
+      isMobile && !isMobileSafari
+      ? document.documentElement.clientHeight
+      : window.innerHeight; // Arbitrary (iPhone SE height)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
     this.headerMenuTimeoutId = undefined;
@@ -194,7 +198,6 @@ class App extends Component {
     // when scrolling.
 
     this.isAfterTouchWhenScrollingPage = false;
-
     this.state = {
       currentCaller:
         location !== 'i'
@@ -204,8 +207,8 @@ class App extends Component {
       inCity: false, // Fantasy image on home if false
       isMenu: referrer.isMenu(props), // Menu page (/projects, /journalism, /reverie)
       height: // Sets height of <main />
-        height > this.minAllowedHeight
-          ? height
+        pageHeight > this.minAllowedHeight
+          ? pageHeight
           : this.defaultHeightWhenTooSmall,
       showBusinessCard: false, // Show business card
       showLegalTerms: false, // Show legal terms
@@ -216,15 +219,13 @@ class App extends Component {
       isAfterTouch: false, // Resize w/clientHeight when true
       // Small iPhones raise their app bar when touching the Footer area.
       // This test adds instructions to use these buttons (slide up).
-      footerAlert:
-        isMobileSafari
-          && height < this.minAllowedHeight,
       homeAnimation: false,
       animateImageBlur: false, // Animate blur/transform on story images
       password: '',
       isValidUser: false,
       wrongPassword: '',
-      spacerHeight: 0
+      spacerHeight: 0,
+      nameTagWidth: Math.floor(.27 * coverVals.width) // Orig. dimensions: 1349 / 5115
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -233,6 +234,7 @@ class App extends Component {
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
+    this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
   }
@@ -300,7 +302,6 @@ class App extends Component {
           <ZoomControl
             // Though an extra <div>, ZoomControl lets us add 'touch'
             // events to React (alt is to add them to the Window)
-
             home={homeIsActive}
             onTouchMove={this.handleTouchMove}
             onTouchEnd={this.handleTouchEnd}
@@ -445,6 +446,7 @@ class App extends Component {
     this.resizeTimeoutId = setTimeout(() => {
       // console.log('timeout handleResize');
       this.updateSpacerHeight();
+      this.updateNameTagWidth();
       this.updateHeight();
     }, 50);
   }
@@ -534,22 +536,11 @@ class App extends Component {
       scrollHandling.resetWindowTop();
     }
 
-    // Manage FooterAlert on small iPhones.
-
-    if (isMobileSafari
-        && !window.navigator.standalone) {
-      this.setState({
-        footerAlert: window.innerHeight < this.minAllowedHeight
-      });
-    }
-
     // Resize if height changes and newHeight > this.minAllowedHeight.
     // Note, mobile Brave slips through this test on /home. The image
     // 'resize' and Brave then resizes. No fix for now.
 
-    if (newHeight === this.state.height
-        || this.minAllowedHeight > newHeight) {
-
+    if (newHeight === this.state.height) {
       if (process.env.NODE_ENV !== 'development') {
         ReactGA.event({
           category: 'App state',
@@ -586,7 +577,10 @@ class App extends Component {
     toggleHtmlHeight('off');
     this.setState(
       () => ({
-        height: newHeight,
+        height: 
+          this.minAllowedHeight < newHeight 
+            ? newHeight 
+            : this.minAllowedHeight,
         isAfterTouch: // True until handleMove says otherwise.
           this.state.isAfterTouch
             && false
@@ -619,10 +613,10 @@ class App extends Component {
     const yImageTop = objectFitCoverVals.y;
     const makePositive = val => val * -1;
 
-    // 14.4 is an arbitrary value (found via trial-n-error)
-    // 52 is the height of the header in pixels
+    // 1. 14.2 & 14.6 are arbitrary values (trial-n-error)
+    // 2. 52px is the height of the header in pixels
     const calcSpacerHeight = (heightVal, percentage) => heightVal * (percentage / 100) - 52;
-    let spacerHeight = Math.ceil(calcSpacerHeight(appHeight, 14.4));
+    let spacerHeight = Math.ceil(calcSpacerHeight(appHeight, 14.2));
 
     // yImageTop < 0 when the image 'zooms' (the window's
     // width has grown beyond the image's max width, so
@@ -630,20 +624,38 @@ class App extends Component {
 
     if (Math.floor(yImageTop) < 0) {
       const newHeight = imageHeight - (makePositive(yImageTop));
-      const newSpacerHeight = calcSpacerHeight(newHeight, 15.1);
+      const newSpacerHeight = calcSpacerHeight(newHeight, 14.6);
       const spacerHeightDifference = newSpacerHeight - spacerHeight;
       const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
       const finalValue = Math.ceil(spacerHeight - changedPosition);
 
-      spacerHeight = finalValue >= 15 ? finalValue : 15;
+      spacerHeight = finalValue;
     }
 
-    return spacerHeight;
+    return spacerHeight >= 15 ? spacerHeight : 15;
+  }
+
+  calculateNameTagWidth() {
+    const coverVals = cover(
+      window.innerWidth,
+      this.state.height,
+      2131,
+      1244
+    );
+
+    return Math.floor(.27 * coverVals.width);
   }
 
   updateSpacerHeight() {
-    const spacerHeight = this.calculateSpacerHeight();
-    this.setState({ spacerHeight });
+    this.setState({ spacerHeight: this.calculateSpacerHeight() });
+  }
+
+  updateNameTagWidth() {
+    const nameTagWidth = this.calculateNameTagWidth();
+
+    if (nameTagWidth !== this.state.nameTagWidth) {
+      this.setState({ nameTagWidth })
+    }
   }
 
   componentDidUpdate(prevProps) {

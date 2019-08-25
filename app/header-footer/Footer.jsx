@@ -1,5 +1,5 @@
 import Button from '../shared/Button.jsx';
-// import FooterAlert from './FooterAlert.jsx';
+import { cover } from 'intrinsic-scale';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -35,12 +35,9 @@ const Line = styled.div`
 const StoryButton = styled(Button)`
   color: white;
   margin-left: 25px;
-  // background-color: ${p => (!p.active ? 'rgba(253, 17, 114, .6)' : 'rgba(0, 141, 213, .6)')};
   background-color: ${p => (!p.active ? 'rgba(0, 0, 0, .2)' : 'rgba(0, 141, 213, .7)')};
-  // background-color: ${p => (p.active && 'rgba(0, 141, 213, .7)')};
   width: 60px;
   padding: 7px;
-  // border: 2px rgba(255, 255, 255, .1) solid;
   border: 1px rgba(255, 255, 255, .6) solid;
   box-shadow: ${p => p.boxShadow && shadow};
   user-select: none;
@@ -79,6 +76,7 @@ export default function FooterContainer(props) {
   const {
     currentCaller,
     headerMenuIsOpen,
+    height,
     lastCaller,
     showBusinessCard,
     showLegalTerms,
@@ -91,21 +89,24 @@ export default function FooterContainer(props) {
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
-  const showTextShadow = (isHome
-    && !showBusinessCard
-    && !showLegalTerms)
-    || (!showStoryText
+  const coverVals = cover(window.innerWidth, height, 2131, 1244);
+  const showTextShadow =
+    isHome 
       && !showBusinessCard
       && !showLegalTerms
-      && !isReverie
-      && !headerMenuIsOpen);
+      && coverVals.y < 0
+        || (!showStoryText
+        && !showBusinessCard
+        && !showLegalTerms
+        && !isReverie
+        && !headerMenuIsOpen);
 
   const reverieLink =
     isReverie
       ? `/${
         lastCaller !== 'home'
           ? lastCaller
-          : '' // Add no text b/c 'home' is just a '/'
+          : '' // No text b/c 'home' is '/'
       }`
       : '/reverie';
 
@@ -139,9 +140,6 @@ export default function FooterContainer(props) {
             : 'Text on'
         }
       />
-      {/*<FooterAlert
-        {...props}
-      />*/}
       <TextBox>
         <RestyledLink
           to={reverieLink}

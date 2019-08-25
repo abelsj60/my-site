@@ -103,7 +103,7 @@ export default class Home extends Component {
     }
 
     return (
-      <RestyledMain>
+      <RestyledMain home={true}>
         <NameTag
           {...this.props}
           homeState={this.state}

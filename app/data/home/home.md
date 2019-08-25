@@ -15,4 +15,4 @@ cityImage: https://user-images.githubusercontent.com/30417590/63110286-11044d80-
 zoomedCityImage: ''
 ---
 
-I write code that tells clear & compelling stories. Let's talk about yours.
+I write code that tells clear and compelling stories. Let's talk about yours.
