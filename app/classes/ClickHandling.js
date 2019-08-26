@@ -138,7 +138,7 @@ export default class ClickHandling {
             : `Leave: ${currentCaller} menu`;
           break;
         case 'toggleHomeAnimation':
-          stateToUpdate.homeAnimation = true;
+          stateToUpdate.homeAnimation = 'done';
           category = 'App state';
           action = 'Ran home animation';
           break;
@@ -316,10 +316,9 @@ export default class ClickHandling {
             stateToUpdate.eventType = 'click';
           }
           break;
-        case 'setTouchEvent': // Not currently used, but valid
-          stateToUpdate.eventType = 'touch';
         case 'resetEventType':
           stateToUpdate.eventType = 'click';
+          break;
       }
 
       this.setState(stateToUpdate);

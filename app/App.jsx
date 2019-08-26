@@ -220,7 +220,7 @@ class App extends Component {
       isAfterTouch: false, // Resize w/clientHeight when true
       // Small iPhones raise their app bar when touching the Footer area.
       // This test adds instructions to use these buttons (slide up).
-      homeAnimation: false,
+      homeAnimation: 'run', // To be run, set to 'done' onAnimationEnd
       animateImageBlur: false, // Animate blur/transform on story images
       password: '',
       isValidUser: false,

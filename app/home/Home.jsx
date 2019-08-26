@@ -23,9 +23,6 @@ export default class Home extends Component {
     // toggling Charms on/off in rapid succession.
 
     this.goal = 5;
-    this.transition = 0;
-    this.timeoutId = 0;
-    this.timeoutId2 = 0;
     this.charmRefs = [
       React.createRef(),
       React.createRef(),
@@ -47,60 +44,19 @@ export default class Home extends Component {
       score: 0, // Used to select an active Charm and cast spell
       pattern: pattern,
       activeCharm: pattern[0], // Initial Charm is always [0].
-      eventType: 'click', // Event that triggered Charm
-      animate:
-        !homeAnimation
-          ? 0
-          : 2
+      eventType: 'click' // Event that triggered Charm
     };
 
-    this.handleAnimation = this.handleAnimation.bind(this);
-    this.trackTransitionEnd = this.trackTransitionEnd.bind(this);
     this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
-  }
-
-  handleAnimation(num) {
-    this.setState({ animate: num });
   }
 
   render() {
     const { appState, boundHandleClickForApp } = this.props;
     const { homeAnimation, showBusinessCard, showLegalTerms } = appState;
-    // const { pinchZoomed } = props.appState;
-    // const foregroundImage = pinchZoomed
-    //   ? bio.attributes.boyInForegroundImage
-    //   : bio.attributes.zoomedBoyInForegroundImage;
-    // const fantasyImage = pinchZoomed
-    //   ? bio.attributes.fantasyImage
-    //   : bio.attributes.zoomedFantasyImage;
-    // const cityImage = pinchZoomed
-    //   ? bio.attributes.cityImage
-    //   : bio.attributes.zoomedCityImage;
 
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
-
-    if (
-      !homeAnimation
-        && !this.state.animate // Meaning 0
-        && (!showBusinessCard && !showLegalTerms)
-    ) {
-      this.timeoutId = setTimeout(() => {
-        this.handleAnimation(1);
-        this.timeoutId2 = setTimeout(() => {
-          // Can't update state in Render. Must
-          // run in the Callback Queue.
-          this.handleAnimation(2);
-          // timeoutIds reset here (in 2nd timeout), in
-          // cDU (if tempContent is activated) or in
-          // cWU (if user leaves before it's done)
-          this.timeoutId = 0;
-          this.timeoutId2 = 0;
-          boundHandleClickForApp('toggleHomeAnimation');
-        }, 3000);
-      }, 750);
-    }
 
     return (
       <RestyledMain home={true}>
@@ -118,7 +74,6 @@ export default class Home extends Component {
         <PictureBox
           {...this.props}
           homeState={this.state}
-          trackTransitionEnd={this.trackTransitionEnd}
           boundHandleClickForHome={boundHandleClickForHome}
         />
       </RestyledMain>
@@ -145,28 +100,23 @@ export default class Home extends Component {
     return pattern;
   }
 
-  trackTransitionEnd() {
-    // Track the two firings of 'onTransitionEnd'.
-
-    if (this.transition === 0) {
-      this.transition = 1;
-    } else {
-      this.transition = 0;
-    }
-  }
-
   eventHandlerForMouseDown(num) {
     return () => {
-      if (this.state.eventType === 'click') {
+      const { activeCharm, eventType } = this.state;
+  
+      if (eventType === 'click') {
         const hcCharm = new ClickHandling('charm', this);
         const boundHandleCharm = hcCharm.boundHandleClick;
 
-        boundHandleCharm(this.state.activeCharm === num);
-      } else if (this.state.eventType === 'touch') {
+        boundHandleCharm(activeCharm === num);
+      } else if (eventType === 'touch') {
+        // Resets event type to 'click' if a mouse suddenly works
         const hcHome = new ClickHandling('home', this);
         const boundHandleClick = hcHome.boundHandleClick;
+        const boundHandleCharm = hcCharm.boundHandleClick;
 
         boundHandleClick('resetEventType');
+        boundHandleCharm(activeCharm === num); // Async/other probs?
       }
     };
   }
@@ -214,33 +164,6 @@ export default class Home extends Component {
           }
         }
       );
-    }
-
-    if (
-      this.props.appState.showBusinessCard !== prevProps.appState.showBusinessCard
-        || this.props.appState.showLegalTerms !== prevProps.appState.showLegalTerms
-    ) {
-      if (this.state.animate < 2) {
-        [
-          this.timeoutId,
-          this.timeoutId2
-        ].forEach(id => {
-          clearTimeout(id);
-        });
-        this.timeoutId = 0;
-        this.timeoutId2 = 0;
-        this.handleAnimation(0);
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    // Only need to check timeoutId b/c reset
-    // always occurs together and often in
-    // the 2nd timeout, not the first.
-    if (this.timeoutId > 0) {
-      clearTimeout(this.timeoutId);
-      clearTimeout(this.timeoutId2);
     }
   }
 }
