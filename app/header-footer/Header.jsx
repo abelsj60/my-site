@@ -38,7 +38,7 @@ const HeaderBackground = styled.div`
   left: 0px;
   background-color: ${p => !p.hide ? p.theme.colors.darkPink : ''};
   opacity: ${p => !p.hide || p.menu ? '1' : '0'};
-  transition: ${p => !p.isHome && !p.menu && 'opacity .165s'};
+  transition: ${p => p.isStory && !p.menu && 'opacity .165s'};
   z-index: -1;
   
   // Control nav items when menu is open, up to the break point
@@ -233,6 +233,7 @@ export default class Header extends Component {
     } = appState;
     const isHome = currentCaller === 'home';
     const isReverie = currentCaller === 'reverie';
+    const isStory = currentCaller == 'chapter';
     const iconType =
       headerMenuIsOpen
         ? headerNavClose
@@ -260,6 +261,7 @@ export default class Header extends Component {
       >
         <HeaderBackground
           isHome={isHome}
+          isStory={isStory}
           menu={headerMenuIsOpen}
           hide={hideBackground}
         />
