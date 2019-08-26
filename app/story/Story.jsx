@@ -9,21 +9,16 @@ import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
-  display: ${p => (p.showStoryText ? 'flex' : 'none')};
+  opacity: ${p => (p.showStoryText ? '1' : '0')};
+  transition: opacity .165s;
+  pointer-events: ${p => !p.showStoryText && 'none'};
   flex-direction: column;
   flex: 1;
+  min-width: 100%;
 `;
 const RestyledShelf = styled(Shelf)`
   flex-direction: column;
   align-items: center;
-
-  // @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
-  //   height: 117px;
-  // }
-
-  // @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-  //   height: 131px;
-  // }
 `;
 const PictureHolder = styled.section`
   // Setting visibilty: 'hidden' is better than display: 'none' b/c
@@ -39,14 +34,10 @@ const PictureHolder = styled.section`
   flex: ${p => p.showStoryText ? '0' : '1'}; 
 `;
 const Chapter = styled.h2`
-  // color: ${p => p.theme.colors.white};
-  // color: #d9e6fc;
   color: #fff7c9;
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.nine};
-  // font-size: 1.6rem;
   font-style: italic;
-  // text-shadow: 1px 1px 3px rgba(0, 0, 0, .8);
   margin-bottom: 1px;
 `;
 const BookTitle = styled.h1`
@@ -55,8 +46,6 @@ const BookTitle = styled.h1`
   font-size: 2rem;
   font-weight: 600;
   color: ${p => p.theme.colors.yellow};
-  // color: #fd1172;
-  // color: #fd2880;
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, .6);
   max-width: 500px;
@@ -66,14 +55,12 @@ const BookTitle = styled.h1`
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
-    // font-size: 3rem;
     font-size: 3.3rem;
   }
 `;
 const TagLine = styled.p`
   font-style: italic;
   font-size: ${p => p.theme.fontSizes.twentyTwo};
-  // color: ${p => p.theme.colors.white};
   color: #fff093;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, .6);
   text-align: center;
@@ -86,18 +73,13 @@ const TagLine = styled.p`
 `;
 const ChapterTitle = styled.h2`
   font-family: 'Aref Ruqaa', serif;
-  // font-size: 3rem;
   font-size: 3.3rem;
   font-weight: 600;
   margin-top: -8px;
   margin-bottom: 15px;
-  // color: ${p => p.theme.colors.blue};
   color: ${p => p.theme.colors.yellow};
-  // color: #5492f5;
-  // text-shadow: 1px 1px 3px rgba(0, 0, 0, .7);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // font-weight: 900;
 `;
 const Portal = styled.div`
   position: absolute;
@@ -107,9 +89,9 @@ const Portal = styled.div`
   width: 100%;
   z-index: 0;
   background-color: ${p => p.theme.colors.black};
-  // background-color: #fd1172;
   background-color: midnightblue;
   opacity: ${p => p.showStoryText ? '.3' : '0'};
+  transition: opacity .165s;
 `;
 const Image = styled.img`
   // Ensure img top is TOP
@@ -117,23 +99,24 @@ const Image = styled.img`
   object-fit: cover;
   top: 0px;
   left: 0px;
-  z-index: -1;
+  z-index: -2;
   // May need to fill page:   
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  transform: ${p => p.showStoryText ? 'scale(1.04)' : 'scale(1)'};
-  // Slight different in filter and transform timing so the filter is
-  // kinda, sorta finished before the transform is completed
-  transition: ${p => p.animateImageBlur && '.33s filter ease-in-out, .35s transform ease-in-out'};
-
   // Blur content if text is turned off, or if the business card 
   // or legal terms are on screen. We do blur(0) so we get the
   // transition effect on mobile, which seems to disregard
   // gong from blurred to unblurred without it:
-  filter: ${p => p.showStoryText || p.theme.blurForTempContent ? p.theme.blur : 'blur(0)'};
+  // filter: ${p => p.showStoryText || p.theme.blurForTempContent ? p.theme.blur : 'blur(0)'};
+  // transition: ${p => !p.headerMenuIsOpen && 'filter .155s'};
 
-  // Blur background when header menu is on and user is mobile
+  // opacity: ${p => p.showStoryText ? '0' : '1'};
+  // transition: ${p => !p.headerMenuIsOpen && 'opacity .1s'};
+
+  // Only blur background when user is mobile
+  // The mediaQ ensures the blur goes away if the full-screen menu is
+  // turned off when the user increases the browser window's width
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     filter: ${p => p.theme.blurForHeaderMenu && p.theme.blur};
   }
@@ -144,14 +127,26 @@ const Image = styled.img`
   // background-position: center;
   // background-size: cover;
 `;
+const BlurredImage = styled.img`
+  // Ensure img top is TOP
+  position: absolute;
+  object-fit: cover;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  // May need to fill page:   
+  // https://stackoverflow.com/a/30794589
+  height: 100%;
+  width: 100%;
+  opacity: ${p => !p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen? '0' : '1'};
+  transition: opacity .165s;
+`;
 const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};
 
   p {
     color: ${p => p.theme.colors.white};
-    // color: #fff7c9;
     margin-bottom: ${p => p.theme.bottomMargin.regular};
-    // text-shadow: 1px 1px 3px rgba(0, 0, 0, .8);
     // Gets cut off in chrome (add saveSerifs to ContentHolder).
     margin-left: 2px; 
 
@@ -167,9 +162,16 @@ export default function Story(props) {
     contentState,
     overflowRef
   } = props;
-  const { showStoryText, animateImageBlur } = appState;
+  const {
+    headerMenuIsOpen,
+    showStoryText,
+    showBusinessCard,
+    showLegalTerms,
+    animateImageBlur
+  } = appState;
   const { finalData } = contentState;
   const {
+    blurredImage,
     description,
     image,
     number,
@@ -238,10 +240,18 @@ export default function Story(props) {
         <Portal
           showStoryText={showStoryText}
         />
+        <BlurredImage 
+            alt={description}
+            showStoryText={showStoryText}
+            animateImageBlur={animateImageBlur}
+            headerMenuIsOpen={headerMenuIsOpen}
+            showBusinessCard={showBusinessCard}
+            showLegalTerms={showLegalTerms}
+            src={blurredImage}
+        />
         <Image
           alt={description}
           showStoryText={showStoryText}
-          animateImageBlur={animateImageBlur}
           src={image}
         />
       </PictureHolder>

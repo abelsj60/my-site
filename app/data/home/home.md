@@ -7,12 +7,18 @@ updated: 11-23-18
 descriptionBoy: 'boy description'
 descriptionFantasy: 'fantasy description'
 descriptionCity: 'city description'
-boyInForegroundImage: https://user-images.githubusercontent.com/30417590/63287633-d1a36d00-c288-11e9-8bc3-1808b0bf5900.png
+descriptionBoyBlurred: 'blurred boy'
+descriptionFantasyBlurred: 'blurred fantasy'
+descriptionCityBlurred: 'blurred city'
+boyInForegroundImage: 'https://user-images.githubusercontent.com/30417590/63287633-d1a36d00-c288-11e9-8bc3-1808b0bf5900.png'
+cityImage: 'https://user-images.githubusercontent.com/30417590/63110286-11044d80-bf59-11e9-992e-91d837d0d0c7.png'
+fantasyImage: 'https://user-images.githubusercontent.com/30417590/63110285-11044d80-bf59-11e9-9e4e-0e08319f3436.png'
 zoomedBoyInForegroundImage: ''
-fantasyImage: https://user-images.githubusercontent.com/30417590/63110285-11044d80-bf59-11e9-9e4e-0e08319f3436.png
-zoomedFantasyImage: ''
-cityImage: https://user-images.githubusercontent.com/30417590/63110286-11044d80-bf59-11e9-992e-91d837d0d0c7.png
 zoomedCityImage: ''
+zoomedFantasyImage: ''
+boyInForegroundImageBlurred: 'https://user-images.githubusercontent.com/30417590/63667659-a3e78800-c7a2-11e9-88ea-b593a5481d17.png'
+cityImageBlurred: 'https://user-images.githubusercontent.com/30417590/63664327-1866fa80-c794-11e9-89cd-bf3544c1ccfc.png'
+fantasyImageBlurred: 'https://user-images.githubusercontent.com/30417590/63658897-3d4f7380-c77c-11e9-8611-9d64766ab426.png'
 ---
 
 I write code that tells clear and compelling stories. Let's talk about yours.

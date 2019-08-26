@@ -215,7 +215,7 @@ export default function Charms(props) {
         <Mapper
           mapData={['one', 'two', 'three']}
           render={
-            (_, idx)=> {
+            (_, idx) => {
               const isActive = activeCharm === idx + 1;
               return (
                 <Charm

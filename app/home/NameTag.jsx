@@ -47,8 +47,8 @@ const Container = styled.div`
   // effectively 'goes away' because p.animate is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
   // simultaneously — the second would overwrite the first.
-  animation: ${p => p.animate && css`1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
-  animation: ${p => p.castSpell && css`${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`} ;
+  ${p => p.animate && css`animation: 1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
+  ${p => p.castSpell && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
   pointer-events: ${p => p.castSpell && 'none'};
   text-align: center;
   z-index: 2;
@@ -114,10 +114,12 @@ const Text = styled.section`
 export default function NameTag(props) {
   const {
     appState,
+    boundHandleClickForApp,
     boundHandleClickForHome,
     homeState
   } = props;
   const {
+    homeAnimation,
     inCity,
     showBusinessCard,
     showLegalTerms,
@@ -162,6 +164,13 @@ export default function NameTag(props) {
 
     boundHandleClickForHome('toggleSpell');
   };
+  const animationHandler = event => {
+    event.preventDefault();
+
+    if (homeAnimation === 'run') {
+      boundHandleClickForApp('toggleHomeAnimation')
+    }
+  }
 
   return (
     <Fragment>
@@ -169,11 +178,12 @@ export default function NameTag(props) {
         spacerHeight={spacerHeight}
       />
       <Container
-        castSpell={castSpell}
+        castSpell={castSpell} // For text blur
         onClick={eventHandler}
         nameTagWidth={nameTagWidth}
-        animate={!isCasting && !castSpell && animate === 1}
+        animate={homeAnimation === 'run'} // For heartbeat
         tempContentIsOn={showBusinessCard || showLegalTerms}
+        onAnimationEnd={animationHandler.bind(null)}
       >
         <FitText compressor={1.15}>
           <Hed>
