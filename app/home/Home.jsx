@@ -18,11 +18,7 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
 
-    // 1. this.goal defines when to cast a spell.
-    // 2. this.transition prevents 'onTransitionEnd' from
-    // toggling Charms on/off in rapid succession.
-
-    this.goal = 5;
+    this.goal = 5; // Cast spell
     this.charmRefs = [
       React.createRef(),
       React.createRef(),
@@ -36,6 +32,8 @@ export default class Home extends Component {
 
     const pattern = this.createSpellPattern();
     const { homeAnimation, height } = this.props.appState;
+    const loadImages = homeAnimation === 'run';
+    const finishedLoading = homeAnimation === 'done';
     this.props.boundHandleClickForApp('updateSpacerHeight', height);
 
     this.state = {
@@ -43,12 +41,40 @@ export default class Home extends Component {
       castSpell: false,
       score: 0, // Used to select an active Charm and cast spell
       pattern: pattern,
-      activeCharm: pattern[0], // Initial Charm is always [0].
-      eventType: 'click' // Event that triggered Charm
+      activeCharm: pattern[0], // Initial Charm is always [0]
+      eventType: 'click', // Type of event triggered Charm,
+      loadBoy: loadImages, // Show blurredBoy
+      loadFantasy: loadImages, // Show blurredFantasy
+      finishedLoadingBoy: finishedLoading, // Boy loaded
+      finishLoadingFantasy: finishedLoading // Fantasy loaded
     };
 
+    this.handleInitialLoad = this.handleInitialLoad.bind(this);
     this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
+  }
+
+  handleInitialLoad(type) {
+    const stateToUpdate = {}
+
+    switch(type) {
+      case 'boy':
+        stateToUpdate.loadBoy = false;
+        break;
+      case 'fantasy':
+        stateToUpdate.loadFantasy = false;
+        break;
+      case 'finishedLoadingBoy': 
+        stateToUpdate.finishedLoadingBoy = true;
+        break;
+      case 'finishedLoadingFantasy':
+        stateToUpdate.finishedLoadingFantasy = true;
+        break;
+      default:
+        break;
+    }
+
+    this.setState(stateToUpdate)
   }
 
   render() {
@@ -74,6 +100,7 @@ export default class Home extends Component {
         <PictureBox
           {...this.props}
           homeState={this.state}
+          handleInitialLoad={this.handleInitialLoad}
           boundHandleClickForHome={boundHandleClickForHome}
         />
       </RestyledMain>

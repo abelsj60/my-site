@@ -47,7 +47,7 @@ const Container = styled.div`
   // effectively 'goes away' because p.animate is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
   // simultaneously — the second would overwrite the first.
-  ${p => p.animate && css`animation: 1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
+  ${p => p.animate && css`animation: 1.15s .17s ease-in-out ${heartbeatKeyframes} 3 both`};
   ${p => p.castSpell && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
   pointer-events: ${p => p.castSpell && 'none'};
   text-align: center;
@@ -130,6 +130,10 @@ export default function NameTag(props) {
     isCasting,
     castSpell,
     eventType,
+    finishedLoadingBoy,
+    finishedLoadingFantasy,
+    loadBoy,
+    loadFantasy,
     score,
     animate
   } = homeState;
@@ -181,7 +185,11 @@ export default function NameTag(props) {
         castSpell={castSpell} // For text blur
         onClick={eventHandler}
         nameTagWidth={nameTagWidth}
-        animate={homeAnimation === 'run'} // For heartbeat
+        animate={
+          finishedLoadingBoy
+            && finishedLoadingFantasy
+            && homeAnimation === 'run'
+        } // For heartbeat
         tempContentIsOn={showBusinessCard || showLegalTerms}
         onAnimationEnd={animationHandler.bind(null)}
       >

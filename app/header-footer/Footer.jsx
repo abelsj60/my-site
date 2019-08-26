@@ -26,7 +26,7 @@ const Line = styled.div`
   margin: 0px;
   height: 1px;
   background-color: ${p => p.theme.colors.pink};
-  opacity: ${p => (p.showStoryText ? '1' : '0')};
+  opacity: ${p => (p.showStoryText || !p.hide ? '1' : '0')};
   transition: ${p => !p.headerMenuIsOpen && 'opacity .165s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.desktop}) {

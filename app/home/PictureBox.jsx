@@ -12,7 +12,7 @@ const PictureHolder = styled.div`
   overflow: hidden;
   z-index: 1;
 `;
-const BoyInForegroundBlurred = styled.img`
+const BlurredBoyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
@@ -22,10 +22,10 @@ const BoyInForegroundBlurred = styled.img`
   height: 100%;
   pointer-events: none;
   z-index: 3;
-  opacity: ${p => p.theme.blurForTempContent ? '1' : '0'};
-  transition: opacity .175s;
+  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || p.theme.blurForTempContent ? '1' : '0'};
+  transition: ${p => !p.finishedLoadingBoy && !p.boyIsLoading && !p.fantasyIsLoadingy && 'opacity .5s;'}
 `;
-const BoyInForeground = styled.img`
+const BoyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
@@ -35,12 +35,7 @@ const BoyInForeground = styled.img`
   height: 100%;
   pointer-events: none;
   z-index: 2;
-
-  // Use if background image:
-  // background-image: url(${p => p.srcImage});
-  // background-size: cover;
-  // background-position: center;
-  // background-repeat: no-repeat;
+  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading ? '0' : '1'};
 `;
 const Portal = styled.div`
   position: absolute;
@@ -49,8 +44,9 @@ const Portal = styled.div`
   z-index: 1;
   opacity: .1;
   display: ${p => !p.isCasting || p.castSpell ? 'none' : 'block'};
+  display: none;
 `;
-const FantasyAsBackgroundBlurred = styled.img`
+const BlurredFantasyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
@@ -59,12 +55,12 @@ const FantasyAsBackgroundBlurred = styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
-  transition: opacity .175s;
+  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
+  transition: ${p => !p.finishedLoadingFantasy && !p.boyIsLoading && !p.fantasyIsLoadingy && 'opacity .5s;'}
   z-index: ${p => !p.inCity && !p.castSpell ? '0' : '-2'};
   ${p => (p.castSpell || p.inCity) && 'display: none;'}
 `;
-const FantasyAsBackground = styled.img`
+const FantasyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
@@ -73,13 +69,13 @@ const FantasyAsBackground = styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: ${p => (p.inCity ? '0' : '1')};
-  transform: ${p => (p.inCity ? css`scale(${largeScale})` : 'scale(1)')};
+  opacity: ${p => p.inCity ? '0' : '1'};
+  transform: ${p => p.inCity ? css`scale(${largeScale})` : 'scale(1)'};
   transform-origin: 50% 5%;
   transition: transform 1.75s, opacity ${p => !p.inCity ? '1.35s' : '1.35s'} cubic-bezier(0.77, 0, 0.175, 1);
   z-index: ${p => !p.inCity && !p.castSpell ? '-1' : '-3'};
 `;
-const CityBackgroundBlurred = styled.img`
+const BlurredCityImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
@@ -89,11 +85,10 @@ const CityBackgroundBlurred = styled.img`
   height: 100%;
   pointer-events: none;
   opacity: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
-  transition: opacity .175s;
   z-index: ${p => !p.inCity && !p.castSpell ? '-2' : '0'};
   ${p => (p.castSpell || !p.inCity) && 'display: none;'}
 `;
-const CityAsBackground = styled.img`
+const CityImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
@@ -102,8 +97,8 @@ const CityAsBackground = styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: ${p => (p.inCity ? '1' : '0')};
-  transform: ${p => (p.inCity ? 'scale(1)' : css`scale(${largeScale})`)};
+  opacity: ${p => p.inCity ? '1' : '0'};
+  transform: ${p => p.inCity ? 'scale(1)' : css`scale(${largeScale})`};
   transition: transform 1.75s, opacity ${p => p.inCity ? '1.35s' : '1.35s'} cubic-bezier(0.77, 0, 0.175, 1);
   z-index: ${p => !p.inCity && !p.castSpell ? '-3' : '-1'};
 `;
@@ -123,6 +118,7 @@ export default function PictureBox(props) {
   const {
     appState,
     boundHandleClickForHome,
+    handleInitialLoad,
     homeState
   } = props;
   const {
@@ -130,7 +126,11 @@ export default function PictureBox(props) {
   } = appState;
   const {
     castSpell,
-    isCasting
+    isCasting,
+    finishedLoadingBoy,
+    finishedLoadingFantasy,
+    loadBoy,
+    loadFantasy
   } = homeState;
 
   const transitionHandler = function(magicState, activeBackground, event) {
@@ -147,39 +147,53 @@ export default function PictureBox(props) {
 
   return (
     <PictureHolder>
-      <BoyInForegroundBlurred
+      <BlurredBoyImage
+        boyIsLoading={loadBoy}
+        fantasyIsLoading={loadFantasy}
+        finishedLoadingBoy={finishedLoadingBoy}
+        finishedLoadingFantasy={finishedLoadingFantasy}
         src={boyInForegroundImageBlurred}
         alt={descriptionBoy}
+        onTransitionEnd={() => handleInitialLoad('finishedLoadingBoy')}
       />
-      <BoyInForeground
+      <BoyImage
         src={boyInForegroundImage}
         alt={descriptionBoy}
+        boyIsLoading={loadBoy}
+        fantasyIsLoading={loadFantasy}
+        onLoad={() => handleInitialLoad('boy')}
       />
       <Portal
         isCasting={isCasting}
         castSpell={castSpell}
       />
-      <FantasyAsBackgroundBlurred 
+      <BlurredFantasyImage 
         src={fantasyImageBlurred}
+        finishedLoadingBoy={finishedLoadingBoy}
+        finishedLoadingFantasy={finishedLoadingFantasy}
+        boyIsLoading={loadBoy}
+        fantasyIsLoading={loadFantasy}
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
+        onTransitionEnd={() => handleInitialLoad('finishedLoadingFantasy')}
       />
-      <FantasyAsBackground
+      <FantasyImage
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
         src={fantasyImage}
         alt={descriptionFantasy}
+        onLoad={() => handleInitialLoad('fantasy')}
         onTransitionEnd={transitionHandler.bind(null, castSpell, inCity)}
       />
-      <CityBackgroundBlurred 
+      <BlurredCityImage 
         src={cityImageBlurred}
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
       />
-      <CityAsBackground
+      <CityImage
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}

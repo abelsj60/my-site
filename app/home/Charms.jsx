@@ -56,23 +56,14 @@ const yellowPulse = keyframes`
     box-shadow: 0 0 0 0 rgba(255, 231, 76, 0);
   }
 `;
-const fadeIn = keyframes`
-  0% {
-    opacity: .1;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`;
 const Container = styled.div`
   display: none;
   display: ${p => (p.tempContentIsOn || p.magicIsHappening ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: space-between;
-  width: 195px;
+  margin-top: 6px;
+  width: 200px;
   z-index: 2;
-  animation: ${p => (p.isCasting && css`.65s ${fadeIn} cubic-bezier(0.19, 1, 0.22, 1)`)};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 15px;
@@ -148,7 +139,7 @@ const InnerEyeShadow = styled.div`
   z-index: 1;
 `;
 const SpellBox = styled.div`
-  margin-top: 20px;
+  margin-top: 18px;
   display: flex;
   flex-direction: column;
   margin-left: 35px;
