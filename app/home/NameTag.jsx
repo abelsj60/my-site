@@ -1,5 +1,6 @@
 import bio from '../data/home/home.md';
 import FitText from '@kennethormandy/react-fittext';
+import Loader from '../shared/Loader.jsx';
 import marked from 'marked';
 import React, { Fragment } from 'react';
 import styled, { css, keyframes } from 'styled-components';
@@ -44,10 +45,10 @@ const heartbeatKeyframes = keyframes`
 const Container = styled.div`
   display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   // The double animation prop works b/c heartbeat runs three times on load, then stops. It then
-  // effectively 'goes away' because p.animate is false. The blur in keyframes is then used when 
+  // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
   // simultaneously — the second would overwrite the first.
-  ${p => p.animate && css`animation: 1.15s .17s ease-in-out ${heartbeatKeyframes} 3 both`};
+  ${p => p.heartbeat && css`animation: 1.1s .17s ease-in-out ${heartbeatKeyframes} 3 both`};
   ${p => p.castSpell && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
   pointer-events: ${p => p.castSpell && 'none'};
   text-align: center;
@@ -121,6 +122,7 @@ export default function NameTag(props) {
   const {
     homeAnimation,
     inCity,
+    finishedHomePageLoad,
     showBusinessCard,
     showLegalTerms,
     spacerHeight,
@@ -185,15 +187,21 @@ export default function NameTag(props) {
         castSpell={castSpell} // For text blur
         onClick={eventHandler}
         nameTagWidth={nameTagWidth}
-        animate={
+        heartbeat={
           finishedLoadingBoy
             && finishedLoadingFantasy
             && homeAnimation === 'run'
-        } // For heartbeat
+        }
         tempContentIsOn={showBusinessCard || showLegalTerms}
+        onAnimationStart={event => {
+          event.preventDefault();
+          if (!loadBoy && !loadFantasy) {
+            boundHandleClickForApp('finishedHomePageLoad')
+          }
+        }}
         onAnimationEnd={animationHandler.bind(null)}
       >
-        <FitText compressor={1.15}>
+        <FitText compressor={1.154}>
           <Hed>
             {name}
           </Hed>
@@ -207,10 +215,10 @@ export default function NameTag(props) {
           </Motto>
         </FitText>
         <Text
-          isCasting={isCasting}
-          castSpell={castSpell}
-          tempContentIsOn={showBusinessCard || showLegalTerms}
-        >
+            isCasting={isCasting}
+            castSpell={castSpell}
+            tempContentIsOn={showBusinessCard || showLegalTerms}
+          >
           <FitText compressor={2.5}>
             <Fragment>
               {ReactHtmlParser(
@@ -222,6 +230,10 @@ export default function NameTag(props) {
             </Fragment>
           </FitText>
         </Text>
+        <Loader
+          show={loadBoy || loadFantasy}
+          done={finishedHomePageLoad}
+        />
       </Container>
     </Fragment>
   );

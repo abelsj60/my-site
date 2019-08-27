@@ -1,4 +1,5 @@
 import ImageLoader from '../shared/ImageLoader.jsx';
+import Loader from '../shared/Loader.jsx';
 import Main from '../primitives/Main.jsx';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Mapper from '../shared/Mapper.jsx';
@@ -112,8 +113,9 @@ export default function Projects(props) {
           <MenuButton
             {...props}
           />
-          <ImageLoader
-            imageLoaded={imageLoaded}
+          <Loader
+            done={imageLoaded}
+            img={true}
           />
           <ProjectNav
             {...props}

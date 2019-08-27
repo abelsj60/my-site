@@ -221,6 +221,7 @@ class App extends Component {
       // Small iPhones raise their app bar when touching the Footer area.
       // This test adds instructions to use these buttons (slide up).
       homeAnimation: 'run', // To be run, set to 'done' onAnimationEnd
+      finishedHomePageLoad: false,
       animateImageBlur: false, // Animate blur/transform on story images
       password: '',
       isValidUser: false,
@@ -358,6 +359,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // REmove hang on message once we're loading (see index.html)
+    const element = document.getElementById('hang-on');
+    element.parentNode.removeChild(element);
+
     if (!this.hasFlexbox()) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {

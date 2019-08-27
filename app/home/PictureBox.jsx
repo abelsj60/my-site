@@ -23,7 +23,7 @@ const BlurredBoyImage = styled.img`
   pointer-events: none;
   z-index: 3;
   opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || p.theme.blurForTempContent ? '1' : '0'};
-  transition: ${p => !p.finishedLoadingBoy && !p.boyIsLoading && !p.fantasyIsLoadingy && 'opacity .5s;'}
+  transition: ${p => !p.finishedHomePageLoad && 'opacity .75s'};
 `;
 const BoyImage = styled.img`
   position: absolute;
@@ -56,9 +56,9 @@ const BlurredFantasyImage = styled.img`
   height: 100%;
   pointer-events: none;
   opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
-  transition: ${p => !p.finishedLoadingFantasy && !p.boyIsLoading && !p.fantasyIsLoadingy && 'opacity .5s;'}
+  transition: ${p => !p.finishedHomePageLoad && 'opacity .5s'};
   z-index: ${p => !p.inCity && !p.castSpell ? '0' : '-2'};
-  ${p => (p.castSpell || p.inCity) && 'display: none;'}
+  ${p => (p.castSpell || p.inCity) && 'display: none'};
 `;
 const FantasyImage = styled.img`
   position: absolute;
@@ -69,7 +69,7 @@ const FantasyImage = styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: ${p => p.inCity ? '0' : '1'};
+  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || p.inCity ? '0' : '1'};
   transform: ${p => p.inCity ? css`scale(${largeScale})` : 'scale(1)'};
   transform-origin: 50% 5%;
   transition: transform 1.75s, opacity ${p => !p.inCity ? '1.35s' : '1.35s'} cubic-bezier(0.77, 0, 0.175, 1);
@@ -122,6 +122,8 @@ export default function PictureBox(props) {
     homeState
   } = props;
   const {
+    finishedHomePageLoad,
+    homeAnimation,
     inCity
   } = appState;
   const {
@@ -152,6 +154,8 @@ export default function PictureBox(props) {
         fantasyIsLoading={loadFantasy}
         finishedLoadingBoy={finishedLoadingBoy}
         finishedLoadingFantasy={finishedLoadingFantasy}
+        finishedHomePageLoad={finishedHomePageLoad}
+        homeAnimation={homeAnimation !== 'run'}
         src={boyInForegroundImageBlurred}
         alt={descriptionBoy}
         onTransitionEnd={() => handleInitialLoad('finishedLoadingBoy')}
@@ -161,6 +165,7 @@ export default function PictureBox(props) {
         alt={descriptionBoy}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
+        finishedHomePageLoad={finishedHomePageLoad}
         onLoad={() => handleInitialLoad('boy')}
       />
       <Portal
@@ -171,6 +176,7 @@ export default function PictureBox(props) {
         src={fantasyImageBlurred}
         finishedLoadingBoy={finishedLoadingBoy}
         finishedLoadingFantasy={finishedLoadingFantasy}
+        finishedHomePageLoad={finishedHomePageLoad}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
         inCity={inCity}

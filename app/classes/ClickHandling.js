@@ -142,6 +142,11 @@ export default class ClickHandling {
           category = 'App state';
           action = 'Ran home animation';
           break;
+        case 'finishedHomePageLoad':
+          stateToUpdate.finishedHomePageLoad = true;
+          category = 'App state';
+          action = 'Finished home page loading';
+          break;
         case 'toggleHeaderMenu':
           stateToUpdate.animateImageBlur = false;
           stateToUpdate.headerMenuIsOpen = !headerMenuIsOpen;

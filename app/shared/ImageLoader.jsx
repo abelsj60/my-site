@@ -10,18 +10,18 @@ const Container = styled.div`
 const Loader = styled.div`
   width: 100%;
   height: 100%;
-  background-image: url(${loader});
+  background-image: url(${p => p.image});
   background-size: cover;
 `;
 
 export default function ImageLoader(props) {
-  if (props.imageLoaded) {
-    return null;
-  }
+  const image = props.image ? props.image : loader;
 
   return (
     <Container>
-      <Loader />
+      <Loader 
+        image={image}
+      />
     </Container>
   );
 }

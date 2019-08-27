@@ -31,9 +31,11 @@ export default class Home extends Component {
     // a back-up). Otherwise, make a new one.
 
     const pattern = this.createSpellPattern();
-    const { homeAnimation, height } = this.props.appState;
-    const loadImages = homeAnimation === 'run';
-    const finishedLoading = homeAnimation === 'done';
+    const {
+      finishedHomePageLoad,
+      homeAnimation,
+      height 
+    } = this.props.appState;
     this.props.boundHandleClickForApp('updateSpacerHeight', height);
 
     this.state = {
@@ -43,10 +45,10 @@ export default class Home extends Component {
       pattern: pattern,
       activeCharm: pattern[0], // Initial Charm is always [0]
       eventType: 'click', // Type of event triggered Charm,
-      loadBoy: loadImages, // Show blurredBoy
-      loadFantasy: loadImages, // Show blurredFantasy
-      finishedLoadingBoy: finishedLoading, // Boy loaded
-      finishLoadingFantasy: finishedLoading // Fantasy loaded
+      loadBoy: !finishedHomePageLoad, // Show blurredBoy
+      loadFantasy: !finishedHomePageLoad, // Show blurredFantasy
+      finishedLoadingBoy: finishedHomePageLoad, // Boy loaded
+      finishedLoadingFantasy: finishedHomePageLoad // Fantasy loaded
     };
 
     this.handleInitialLoad = this.handleInitialLoad.bind(this);
@@ -64,7 +66,7 @@ export default class Home extends Component {
       case 'fantasy':
         stateToUpdate.loadFantasy = false;
         break;
-      case 'finishedLoadingBoy': 
+      case 'finishedLoadingBoy':
         stateToUpdate.finishedLoadingBoy = true;
         break;
       case 'finishedLoadingFantasy':
