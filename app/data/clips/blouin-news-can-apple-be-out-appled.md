@@ -31,8 +31,7 @@ invented both markets from whole cloth.
 
 But, things have changed. The world watched Apple’s incredible magic trick
 twice now. So, a lot of equally wealthy and intelligent companies have
-invested a lot of money in following suit. This is especially clear in
-
+invested a lot of money in following suit. This is especially clear in 
 the arena of “wearable computers.”
 
 In 2012, a lot of people decided these devices were the best way to

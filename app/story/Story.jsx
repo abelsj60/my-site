@@ -1,4 +1,5 @@
 import ChapterNav from './ChapterNav.jsx';
+import ImageLoader from './ImageLoader.jsx';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
@@ -198,6 +199,7 @@ export default function Story(props) {
 
   return (
     <Main>
+      <ImageLoader />
       <RestyledContentHolder
         showStoryText={showStoryText}
         saveSerifs={true}
