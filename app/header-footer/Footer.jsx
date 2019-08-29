@@ -26,9 +26,9 @@ const Line = styled.div`
   margin: 0px;
   height: 1px;
   background-color: ${p => p.theme.colors.pink};
-  opacity: ${p => (p.showStoryText || !p.hide ? '1' : '0')};
-  transition: ${p => !p.headerMenuIsOpen && 'opacity .165s'};
-
+  opacity: ${p => !p.hide ? '1' : '0'};
+  transition: ${p => p.animateImageBlur && 'opacity .165s'};
+  
   @media (min-width: ${p => p.theme.mediaQueries.desktop}) {
     left: 5px;
     right: 5px;
@@ -37,13 +37,13 @@ const Line = styled.div`
 const StoryButton = styled(Button)`
   color: white;
   margin-left: 25px;
-  background-color: ${p => (!p.active ? 'rgba(0, 0, 0, .2)' : 'rgba(0, 141, 213, .7)')};
+  background-color: ${p => (!p.active ? 'rgba(0, 0, 0, .2)' : 'rgba(0, 141, 213, .5)')};
   width: 60px;
   padding: 7px;
   border: 1px rgba(255, 255, 255, .6) solid;
   box-shadow: ${p => p.boxShadow && shadow};
   user-select: none;
-  transition: ${p => !p.headerMenuIsOpen && 'background-color .14s, box-shadow .14s'};
+  transition: ${p => p.animateImageBlur && 'background-color .14s'};
 `;
 const RestyledLink = styled(StyledLink)`
   margin-right: 20px;
@@ -60,7 +60,6 @@ const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.one};
   user-select: none;
   text-shadow: ${p => p.textShadow && shadow};
-  transition: ${p => !p.headerMenuIsOpen && !p.home && 'text-shadow .165s'};
 `;
 const TextBox = styled.div`
   display: flex;
@@ -78,6 +77,7 @@ export default function FooterContainer(props) {
     boundHandleClickForApp
   } = props;
   const {
+    animateImageBlur,
     currentCaller,
     headerMenuIsOpen,
     height,
@@ -126,10 +126,8 @@ export default function FooterContainer(props) {
     >
       <Line
         home={isHome}
-        hide={
-          !showStoryText && !isReverie
-        }
-        showStoryText={showStoryText}
+        hide={!showStoryText && !isReverie}
+        animateImageBlur={animateImageBlur}
       />
       <StoryButton
         active={showStoryText}
@@ -138,6 +136,7 @@ export default function FooterContainer(props) {
         conditional={true}
         show={isStory}
         headerMenuIsOpen={headerMenuIsOpen}
+        animateImageBlur={animateImageBlur}
         boxShadow={showTextShadow}
         text={
           showStoryText

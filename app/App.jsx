@@ -1,3 +1,4 @@
+import bio from './data/home/home.md';
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
@@ -21,6 +22,7 @@ import {
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import PasswordLogin from './shared/PasswordLogin.jsx';
+import preloadBigImages from './helpers/preloadBigImages';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
@@ -151,6 +153,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    const images = preloadBigImages();
     const referrer = new Referrer(props);
     const location = referrer.location;
     const {
@@ -222,12 +225,13 @@ class App extends Component {
       // This test adds instructions to use these buttons (slide up).
       homeAnimation: 'run', // To be run, set to 'done' onAnimationEnd
       finishedHomePageLoad: false,
-      animateImageBlur: false, // Animate blur/transform on story images
+      animateImageBlur: location === 'chapter', // Animate blur/transform on story images
       password: '',
       isValidUser: false,
       wrongPassword: '',
       spacerHeight: 0,
-      nameTagWidth: Math.floor(.27 * coverVals.width) // Orig. dimensions: 1349 / 5115
+      nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
+      images: images
     };
 
     this.handleResize = this.handleResize.bind(this);

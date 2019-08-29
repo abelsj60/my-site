@@ -38,7 +38,7 @@ const HeaderBackground = styled.div`
   left: 0px;
   background-color: ${p => !p.hide ? p.theme.colors.darkPink : ''};
   opacity: ${p => !p.hide || p.menu ? '1' : '0'};
-  transition: ${p => p.isStory && !p.menu && 'opacity .165s'};
+  transition: ${p => p.animateImageBlur && 'opacity .165s'};
   z-index: -1;
   
   // Control nav items when menu is open, up to the break point
@@ -70,7 +70,6 @@ const RestyledLink = styled(
   margin-left: ${p => (p.num === 0 ? '0px' : '10px')};
   color: ${p => p.theme.colors.white};
   text-shadow: ${p => p.textShadow && textShadow};
-  transition: ${p => !p.menu && !p.isHome && 'text-shadow .165s'};
 
   && {
     text-decoration: ${p => (p.isActive ? 'underline' : undefined)};
@@ -93,11 +92,7 @@ const RestyledLink = styled(
     margin-left: ${p => p.menu && '0px'};
   }
 `;
-const NameAsLink = styled(
-  // Filter out hide from RestyledLink
-  // eslint-disable-next-line
-  ({ hide, ...rest }) => <RestyledLink {...rest} />
-)`
+const NameAsLink = styled(RestyledLink)`
   display: ${p => (p.isHome && 'none')};
   font-size: ${p => p.theme.fontSizes.six};
   // We end up doubling up on this property b/c we need to set it to 15px for small 
@@ -122,7 +117,6 @@ const Motto = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   text-shadow: ${p => p.textShadow && textShadow};
-  transition: ${p => !p.menu && !p.isHome && 'text-shadow .165s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.four};
@@ -223,6 +217,7 @@ export default class Header extends Component {
       boundHandleClickForApp
     } = this.props;
     const {
+      animateImageBlur,
       currentCaller,
       headerMenuIsOpen,
       height,
@@ -264,6 +259,7 @@ export default class Header extends Component {
           isStory={isStory}
           menu={headerMenuIsOpen}
           hide={hideBackground}
+          animateImageBlur={animateImageBlur}
         />
         <HeaderMenuBackground
           menu={headerMenuIsOpen}
@@ -271,7 +267,6 @@ export default class Header extends Component {
         />
         <NameAsLink
           isHome={isHome}
-          hide={isHome}
           menu={headerMenuIsOpen}
           textShadow={showTextShadow}
           boundHandleClickForApp={boundHandleClickForApp}

@@ -5,28 +5,22 @@ export default class ScrollHandling {
     this._caller = currentCaller;
   }
 
-  // Only used by '/chapter'
-
+  // Only used by '/chapter' at present
   resetElementTop(overflowRef, prevProps) {
+    // B/c it doesn't exist on first render of this.state.needsRedirect
     const overflowRefExists = overflowRef.current !== null;
 
     if (overflowRefExists) {
       if (overflowRef.current.scrollTop !== 0) {
-        const updateScrollTop = this._caller === 'projects'
-          ? this._swappingProjects(prevProps)
-          : true;
-
-        if (updateScrollTop) {
-          if (process.env.NODE_ENV !== 'development') {
-            ReactGA.event({
-              category: 'Scroll management',
-              action: `Reset top for ${this._caller}`,
-              label: 'Swapping content'
-            });
-          }
-
-          overflowRef.current.scrollTop = 0;
+        if (process.env.NODE_ENV !== 'development') {
+          ReactGA.event({
+            category: 'Scroll management',
+            action: `Reset top for ${this._caller}`,
+            label: 'Swapping content'
+          });
         }
+
+        overflowRef.current.scrollTop = 0;
       }
     }
   }

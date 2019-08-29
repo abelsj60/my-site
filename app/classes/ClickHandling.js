@@ -51,6 +51,7 @@ export default class ClickHandling {
   _handleClickForApp() {
     return (updateValue, valueOne, valueTwo) => {
       const {
+        animateImageBlur,
         currentCaller,
         showBusinessCard,
         showLegalTerms,
@@ -169,6 +170,14 @@ export default class ClickHandling {
           break;
         case 'updateApp':
           if (valueOne !== undefined) {
+            if (currentCaller === 'chapter') {
+              stateToUpdate.animateImageBlur = false;
+            }
+
+            if (valueOne === 'chapter') {
+              stateToUpdate.animateImageBlur = true;
+            }
+
             stateToUpdate.currentCaller = valueOne;
             stateToUpdate.lastCaller = currentCaller;
           }

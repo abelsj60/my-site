@@ -105,15 +105,12 @@ const CityImage = styled.img`
 
 export default function PictureBox(props) {
   const {
-    boyInForegroundImage,
-    boyInForegroundImageBlurred,
     cityImage,
     cityImageBlurred,
     descriptionBoy,
     descriptionFantasy,
     descriptionCity,
-    fantasyImage,
-    fantasyImageBlurred
+    preloadTheseImages
   } = bio.attributes;
   const {
     appState,
@@ -124,6 +121,7 @@ export default function PictureBox(props) {
   const {
     finishedHomePageLoad,
     homeAnimation,
+    images,
     inCity
   } = appState;
   const {
@@ -135,7 +133,12 @@ export default function PictureBox(props) {
     loadFantasy
   } = homeState;
 
-  const transitionHandler = function(magicState, activeBackground, event) {
+  const imageNames = preloadTheseImages.map(name => name);
+  const bigBoySrc = images[imageNames[0]].src;
+  const bigFantasySrc = images[imageNames[2]].src;
+  const blurredBoySrc = images[imageNames[1]].src;
+  const blurredFantasySrc = images[imageNames[3]].src;
+  const transitionHandler = function(event, magicState, activeBackground) {
     event.preventDefault();
 
     if (
@@ -156,12 +159,12 @@ export default function PictureBox(props) {
         finishedLoadingFantasy={finishedLoadingFantasy}
         finishedHomePageLoad={finishedHomePageLoad}
         homeAnimation={homeAnimation !== 'run'}
-        src={boyInForegroundImageBlurred}
+        src={blurredBoySrc}
         alt={descriptionBoy}
         onTransitionEnd={() => handleInitialLoad('finishedLoadingBoy')}
       />
       <BoyImage
-        src={boyInForegroundImage}
+        src={bigBoySrc}
         alt={descriptionBoy}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
@@ -173,7 +176,7 @@ export default function PictureBox(props) {
         castSpell={castSpell}
       />
       <BlurredFantasyImage 
-        src={fantasyImageBlurred}
+        src={blurredFantasySrc}
         finishedLoadingBoy={finishedLoadingBoy}
         finishedLoadingFantasy={finishedLoadingFantasy}
         finishedHomePageLoad={finishedHomePageLoad}
@@ -188,10 +191,14 @@ export default function PictureBox(props) {
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
-        src={fantasyImage}
+        src={bigFantasySrc}
         alt={descriptionFantasy}
         onLoad={() => handleInitialLoad('fantasy')}
-        onTransitionEnd={transitionHandler.bind(null, castSpell, inCity)}
+        onTransitionEnd={event => transitionHandler(
+          event,
+          castSpell,
+          inCity
+        )}
       />
       <BlurredCityImage 
         src={cityImageBlurred}
@@ -205,7 +212,11 @@ export default function PictureBox(props) {
         castSpell={castSpell}
         src={cityImage}
         alt={descriptionCity}
-        onTransitionEnd={transitionHandler.bind(null, castSpell, !inCity)}
+        onTransitionEnd={event => transitionHandler(
+          event,
+          castSpell,
+          !inCity
+        )}
       />
     </PictureHolder>
   );

@@ -1,5 +1,4 @@
 import ChapterNav from './ChapterNav.jsx';
-import ImageLoader from './ImageLoader.jsx';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
@@ -140,7 +139,7 @@ const BlurredImage = styled.img`
   height: 100%;
   width: 100%;
   opacity: ${p => !p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen? '0' : '1'};
-  transition: opacity .165s;
+  transition: ${p => p.animateImageBlur && 'opacity .165s'};
 `;
 const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};
@@ -165,6 +164,7 @@ export default function Story(props) {
   } = props;
   const {
     headerMenuIsOpen,
+    images,
     showStoryText,
     showBusinessCard,
     showLegalTerms,
@@ -172,14 +172,14 @@ export default function Story(props) {
   } = appState;
   const { finalData } = contentState;
   const {
-    blurredImage,
     description,
-    image,
     number,
     title
   } = finalData.attributes;
   const bookTitle = 'The Magical, Semi-Fictional Biography of a Real Boy';
   const dek = 'An experiment in digital + traditional storytelling';
+  const bigImageSrc = images[`chapter-${number}-main`].src;
+  const blurredImageSrc = images[`chapter-${number}-blurred`].src;
   let chapterNumber;
 
   switch (number) {
@@ -199,7 +199,6 @@ export default function Story(props) {
 
   return (
     <Main>
-      <ImageLoader />
       <RestyledContentHolder
         showStoryText={showStoryText}
         saveSerifs={true}
@@ -249,12 +248,12 @@ export default function Story(props) {
             headerMenuIsOpen={headerMenuIsOpen}
             showBusinessCard={showBusinessCard}
             showLegalTerms={showLegalTerms}
-            src={blurredImage}
+            src={blurredImageSrc}
         />
         <Image
           alt={description}
           showStoryText={showStoryText}
-          src={image}
+          src={bigImageSrc}
         />
       </PictureHolder>
     </Main>
