@@ -36,8 +36,8 @@ const HeaderBackground = styled.div`
   height: 52px;
   top: 0px;
   left: 0px;
-  background-color: ${p => !p.hide ? p.theme.colors.darkPink : ''};
-  opacity: ${p => !p.hide || p.menu ? '1' : '0'};
+  background-color: ${p => p.theme.colors.darkPink};
+  opacity: ${p => !p.hide ? '1' : '0'};
   transition: ${p => p.animateImageBlur && 'opacity .165s'};
   z-index: -1;
   
@@ -45,7 +45,7 @@ const HeaderBackground = styled.div`
   // Must come after all others so it controls in limited circs
   // Makes top menu bar opaque and visiable if it's hidden
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    background-color: ${p => p.hide && !p.isHome && p.menu && 'rgba(175, 18, 90, .8)'};
+    background-color: ${p => p.hide && !p.isHom && 'rgba(175, 18, 90, .8)'};
   }
 `;
 const HeaderMenuBackground = styled.div`
@@ -234,7 +234,7 @@ export default class Header extends Component {
         ? headerNavClose
         : headerNavOpen;
     const hideBackground = isHome
-        || (!showStoryText && !isReverie);
+        || (!showStoryText && !isReverie && !headerMenuIsOpen);
     const showTextShadow = 
       !showStoryText
         && !showBusinessCard
@@ -257,7 +257,6 @@ export default class Header extends Component {
         <HeaderBackground
           isHome={isHome}
           isStory={isStory}
-          menu={headerMenuIsOpen}
           hide={hideBackground}
           animateImageBlur={animateImageBlur}
         />

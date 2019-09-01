@@ -65,9 +65,19 @@ export default class ClickHandling {
       let action = '';
       let label = '';
 
+      if (
+        animateImageBlur
+          && updateValue !== 'toggleStoryText' 
+      ) {
+        // Turn off animateImageBlur if we're not toggling storyText
+        // or returning to /chapter from /reverie (this controls
+        // the fading of HTML elements via CSS in /chapter)
+
+        stateToUpdate.animateImageBlur = false;
+      }
+
       switch (updateValue) {
         case 'toggleBusinessCard':
-          stateToUpdate.animateImageBlur = false;
           stateToUpdate.showBusinessCard = !showBusinessCard;
 
           if (showLegalTerms) {
@@ -83,7 +93,6 @@ export default class ClickHandling {
             : '';
           break;
         case 'toggleLegalTerms':
-          stateToUpdate.animateImageBlur = false;
           stateToUpdate.showLegalTerms = !showLegalTerms;
 
           if (showBusinessCard) {
@@ -99,8 +108,11 @@ export default class ClickHandling {
             : '';
           break;
         case 'toggleStoryText':
-          stateToUpdate.animateImageBlur = true;
           stateToUpdate.showStoryText = !showStoryText;
+
+          if (!animateImageBlur) {
+            stateToUpdate.animateImageBlur = true;
+          }
 
           if (showBusinessCard) {
             stateToUpdate.showBusinessCard = !showBusinessCard;
@@ -149,7 +161,6 @@ export default class ClickHandling {
           action = 'Finished home page loading';
           break;
         case 'toggleHeaderMenu':
-          stateToUpdate.animateImageBlur = false;
           stateToUpdate.headerMenuIsOpen = !headerMenuIsOpen;
 
           if (!headerMenuIsOpen) {
@@ -170,14 +181,6 @@ export default class ClickHandling {
           break;
         case 'updateApp':
           if (valueOne !== undefined) {
-            if (currentCaller === 'chapter') {
-              stateToUpdate.animateImageBlur = false;
-            }
-
-            if (valueOne === 'chapter') {
-              stateToUpdate.animateImageBlur = true;
-            }
-
             stateToUpdate.currentCaller = valueOne;
             stateToUpdate.lastCaller = currentCaller;
           }

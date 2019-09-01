@@ -225,7 +225,7 @@ class App extends Component {
       // This test adds instructions to use these buttons (slide up).
       homeAnimation: 'run', // To be run, set to 'done' onAnimationEnd
       finishedHomePageLoad: false,
-      animateImageBlur: location === 'chapter', // Animate blur/transform on story images
+      animateImageBlur: false, // Animate blur/transform on story images
       password: '',
       isValidUser: false,
       wrongPassword: '',

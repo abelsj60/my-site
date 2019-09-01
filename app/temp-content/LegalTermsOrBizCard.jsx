@@ -63,6 +63,7 @@ const StyledClipboardButton = styled(Clipboard)`
     outline: 0px;
   }
 
+
   // .5px border line in older browsers:
   // https://stackoverflow.com/a/18997800
 
@@ -73,7 +74,6 @@ const StyledClipboardButton = styled(Clipboard)`
     width: 200%;
     height: 200%;
     border: 1px #999 solid;;
-    transform: scale(0.5);
   }
 `;
 const Graf = styled.p`

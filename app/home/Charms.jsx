@@ -57,7 +57,6 @@ const yellowPulse = keyframes`
   }
 `;
 const Container = styled.div`
-  display: none;
   display: ${p => (p.tempContentIsOn || p.magicIsHappening ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: space-between;

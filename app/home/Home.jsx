@@ -56,6 +56,33 @@ export default class Home extends Component {
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
   }
 
+  render() {
+    const hcForHome = new ClickHandling('home', this);
+    const boundHandleClickForHome = hcForHome.boundHandleClick;
+
+    return (
+      <RestyledMain home={true}>
+        <NameTag
+          {...this.props}
+          homeState={this.state}
+          boundHandleClickForHome={boundHandleClickForHome}
+        />
+          <Charms
+            {...this.props}
+            goal={this.goal}
+            homeState={this.state}
+            charmRefs={this.charmRefs}
+          />
+        <PictureBox
+          {...this.props}
+          homeState={this.state}
+          handleInitialLoad={this.handleInitialLoad}
+          boundHandleClickForHome={boundHandleClickForHome}
+        />
+      </RestyledMain>
+    );
+  }
+
   handleInitialLoad(type) {
     const stateToUpdate = {}
 
@@ -77,36 +104,6 @@ export default class Home extends Component {
     }
 
     this.setState(stateToUpdate)
-  }
-
-  render() {
-    const { appState, boundHandleClickForApp } = this.props;
-    const { homeAnimation, showBusinessCard, showLegalTerms } = appState;
-
-    const hcForHome = new ClickHandling('home', this);
-    const boundHandleClickForHome = hcForHome.boundHandleClick;
-
-    return (
-      <RestyledMain home={true}>
-        <NameTag
-          {...this.props}
-          homeState={this.state}
-          boundHandleClickForHome={boundHandleClickForHome}
-        />
-        <Charms
-          {...this.props}
-          goal={this.goal}
-          homeState={this.state}
-          charmRefs={this.charmRefs}
-        />
-        <PictureBox
-          {...this.props}
-          homeState={this.state}
-          handleInitialLoad={this.handleInitialLoad}
-          boundHandleClickForHome={boundHandleClickForHome}
-        />
-      </RestyledMain>
-    );
   }
 
   createSpellPattern() {

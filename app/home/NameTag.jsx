@@ -43,7 +43,6 @@ const heartbeatKeyframes = keyframes`
 `;
 
 const Container = styled.div`
-  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   // The double animation prop works b/c heartbeat runs three times on load, then stops. It then
   // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
@@ -54,7 +53,7 @@ const Container = styled.div`
   text-align: center;
   z-index: 2;
   cursor: pointer;
-  ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`}
+  ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
 `;
 const Spacer = styled.div`
   height: ${p => p.spacerHeight + 'px'};
@@ -75,6 +74,10 @@ const Hed = styled.h1`
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: -17px;
   }
+
+  ::selection {
+    background-color: transparent;
+  }
 `;
 const Motto = styled.h2`
   font-family: 'Aref Ruqaa', serif;
@@ -85,6 +88,10 @@ const Motto = styled.h2`
   font-weight: 700;
   margin-left: .95em;
   margin-bottom: 17px;
+
+  ::selection {
+    background-color: transparent;
+  }
 `;
 const Text = styled.section`
   overflow: auto;
@@ -100,9 +107,9 @@ const Text = styled.section`
     text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    &:last-child {
-      margin-bottom: 0px;
+    
+    ::selection {
+      background-color: transparent;
     }
   }
 
@@ -183,58 +190,58 @@ export default function NameTag(props) {
       <Spacer
         spacerHeight={spacerHeight}
       />
-      <Container
-        castSpell={castSpell} // For text blur
-        onClick={eventHandler}
-        nameTagWidth={nameTagWidth}
-        heartbeat={
-          finishedLoadingBoy
-            && finishedLoadingFantasy
-            && homeAnimation === 'run'
-        }
-        tempContentIsOn={showBusinessCard || showLegalTerms}
-        onAnimationStart={event => {
-          event.preventDefault();
-          if (!loadBoy && !loadFantasy) {
-            boundHandleClickForApp('finishedHomePageLoad')
+        <Container
+          castSpell={castSpell} // For text blur
+          onClick={eventHandler}
+          nameTagWidth={nameTagWidth}
+          heartbeat={
+            finishedLoadingBoy
+              && finishedLoadingFantasy
+              && homeAnimation === 'run'
           }
-        }}
-        onAnimationEnd={animationHandler.bind(null)}
-      >
-        <FitText compressor={1.154}>
-          <Hed>
-            {name}
-          </Hed>
-        </FitText>
-        <FitText compressor={2.3}>
-          <Motto
-            isCasting={isCasting}
-            castSpell={castSpell}
-          >
-            {tagline}
-          </Motto>
-        </FitText>
-        <Text
-            isCasting={isCasting}
-            castSpell={castSpell}
-            tempContentIsOn={showBusinessCard || showLegalTerms}
-          >
-          <FitText compressor={2.5}>
-            <Fragment>
-              {ReactHtmlParser(
-                marked(
-                  body,
-                  { smartypants: true }
-                )
-              )}
-            </Fragment>
+          tempContentIsOn={showBusinessCard || showLegalTerms}
+          onAnimationStart={event => {
+            event.preventDefault();
+            if (!loadBoy && !loadFantasy) {
+              boundHandleClickForApp('finishedHomePageLoad')
+            }
+          }}
+          onAnimationEnd={animationHandler.bind(null)}
+        >
+          <FitText compressor={1.154}>
+            <Hed>
+              {name}
+            </Hed>
           </FitText>
-        </Text>
-        <Loader
-          show={loadBoy || loadFantasy}
-          done={finishedHomePageLoad}
-        />
-      </Container>
+          <FitText compressor={2.3}>
+            <Motto
+              isCasting={isCasting}
+              castSpell={castSpell}
+            >
+              {tagline}
+            </Motto>
+          </FitText>
+            <Text
+                isCasting={isCasting}
+                castSpell={castSpell}
+                tempContentIsOn={showBusinessCard || showLegalTerms}
+              >
+              <FitText compressor={2.5}>
+                  <Fragment>
+                    {ReactHtmlParser(
+                      marked(
+                        body,
+                        { smartypants: true }
+                      )
+                    )}
+                  </Fragment>
+              </FitText>
+            </Text>
+          <Loader
+            show={loadBoy || loadFantasy}
+            done={finishedHomePageLoad}
+          />
+        </Container>
     </Fragment>
   );
 }

@@ -56,7 +56,9 @@ const BlurredFantasyImage = styled.img`
   height: 100%;
   pointer-events: none;
   opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
+  // Note: Only one transition resolves true at a time
   transition: ${p => !p.finishedHomePageLoad && 'opacity .5s'};
+  transition: ${p => (p.finishedHomePageLoad && !p.castSpell) ? 'opacity .12s' : ''};
   z-index: ${p => !p.inCity && !p.castSpell ? '0' : '-2'};
   ${p => (p.castSpell || p.inCity) && 'display: none'};
 `;
@@ -84,7 +86,8 @@ const BlurredCityImage = styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: ${p => (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
+  opacity: ${p => p.isCasting && !p.castSpell? '1' : '0'};
+  transition: ${p => p.finishedHomePageLoad && !p.castSpell ? 'opacity .12s' : ''};
   z-index: ${p => !p.inCity && !p.castSpell ? '-2' : '0'};
   ${p => (p.castSpell || !p.inCity) && 'display: none;'}
 `;
@@ -205,6 +208,7 @@ export default function PictureBox(props) {
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
+        finishedHomePageLoad={finishedHomePageLoad}
       />
       <CityImage
         inCity={inCity}
