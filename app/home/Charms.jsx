@@ -57,20 +57,20 @@ const yellowPulse = keyframes`
   }
 `;
 const Container = styled.div`
-  display: ${p => (p.tempContentIsOn || p.magicIsHappening ? 'none' : 'flex')};
+  display: ${p => (p.tempContentIsOn || !p.isCasting || p.castSpell ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 6px;
+  margin-top: 5px;
   width: 200px;
   z-index: 2;
+  opacity: ${p => p.fadeIn || p.nowShowing ? '1' : '0' };
+  transition: opacity 1s;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-top: 15px;
     width: 240px;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.huge}) {
-    margin-top: 25px;
     width: 330px;
   }
 `;
@@ -169,15 +169,12 @@ const ProgressBar = styled.div`
 `;
 
 export default function Charms(props) {
-  if (!props.homeState.isCasting) {
-    return null;
-  }
-
   const {
     appState,
     charmRefs,
     goal,
-    homeState
+    homeState,
+    resetFadeIn
   } = props;
   const {
     showBusinessCard,
@@ -186,7 +183,9 @@ export default function Charms(props) {
   const {
     activeCharm,
     castSpell,
+    fadeIn,
     isCasting,
+    nowShowing,
     score
   } = homeState;
 
@@ -197,9 +196,12 @@ export default function Charms(props) {
 
   return (
     <Container
+      fadeIn={fadeIn}
       isCasting={isCasting}
-      magicIsHappening={castSpell} // Don't show while in progress
+      castSpell={castSpell} // Don't show while in progress
       tempContentIsOn={showBusinessCard || showLegalTerms}
+      nowShowing={nowShowing === 'charms'}
+      onTransitionEnd={() => resetFadeIn()}
     >
       <CharmBox>
         <Mapper

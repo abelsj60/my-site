@@ -79,6 +79,10 @@ const Hed = styled.h1`
     background-color: transparent;
   }
 `;
+const VariableContent = styled.div`
+  opacity: ${p => p.fadeIn || (isCasting && p.nowShowing) ? '1' : '0'};
+  transition: opacity 1s;
+`;
 const Motto = styled.h2`
   font-family: 'Aref Ruqaa', serif;
   text-shadow: 1.5px 1px 2px white;
@@ -88,6 +92,8 @@ const Motto = styled.h2`
   font-weight: 700;
   margin-left: .95em;
   margin-bottom: 17px;
+  opacity: ${p => p.fadeIn || (isCasting && p.nowShowing) ? '1' : '0'};
+  transition: opacity 1s;
 
   ::selection {
     background-color: transparent;
@@ -95,8 +101,10 @@ const Motto = styled.h2`
 `;
 const Text = styled.section`
   overflow: auto;
-  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
+  display: ${p => (p.tempContentIsOn || p.isCasting ? 'none' : 'block')};
   z-index: 2;
+  opacity: ${p => p.fadeIn || (p.nowShowing && !p.isCasting) ? '1' : '0'};
+  transition: opacity 1s;
   
   p {
     font-weight: 500;
@@ -112,11 +120,6 @@ const Text = styled.section`
       background-color: transparent;
     }
   }
-
-  // At bottom to override media queries. Otherwise,
-  // they invalidate the 'display: none' value.
-
-  display: ${p => p.isCasting && !p.castSpell ? 'none' : ''};
 `;
 
 export default function NameTag(props) {
@@ -124,7 +127,10 @@ export default function NameTag(props) {
     appState,
     boundHandleClickForApp,
     boundHandleClickForHome,
-    homeState
+    charmRefs,
+    charmRefs,
+    homeState,
+    resetFadeIn
   } = props;
   const {
     homeAnimation,
@@ -139,12 +145,13 @@ export default function NameTag(props) {
     isCasting,
     castSpell,
     eventType,
+    fadeIn,
     finishedLoadingBoy,
     finishedLoadingFantasy,
     loadBoy,
     loadFantasy,
-    score,
-    animate
+    nowShowing,
+    score
   } = homeState;
   const {
     attributes,
@@ -155,11 +162,12 @@ export default function NameTag(props) {
     name
   } = attributes;
 
-  const tagline = !isCasting || castSpell
-    ? motto
-    : !inCity
-      ? 'Tap the pulses to travel home'
-      : 'Tap the pulses for adventure';
+  const tagline = 
+    !isCasting || castSpell
+      ? motto
+      : !inCity
+        ? 'Tap the pulses to travel home'
+        : 'Tap the pulses for adventure';
 
   const eventHandler = () => {
     if (eventType === 'touch') {
@@ -191,6 +199,7 @@ export default function NameTag(props) {
         spacerHeight={spacerHeight}
       />
         <Container
+          fadeIn={fadeIn}
           castSpell={castSpell} // For text blur
           onClick={eventHandler}
           nameTagWidth={nameTagWidth}
@@ -213,19 +222,32 @@ export default function NameTag(props) {
               {name}
             </Hed>
           </FitText>
-          <FitText compressor={2.3}>
-            <Motto
-              isCasting={isCasting}
-              castSpell={castSpell}
-            >
-              {tagline}
-            </Motto>
-          </FitText>
-            <Text
+          <VariableContent
+            id="variableContent"
+            
+          >
+            <FitText compressor={2.3}>
+              <Motto
                 isCasting={isCasting}
                 castSpell={castSpell}
-                tempContentIsOn={showBusinessCard || showLegalTerms}
+                nowShowing={
+                  nowShowing === '' 
+                    || (nowShowing === 'charms') 
+                    || (nowShowing === 'bioText')
+                }
+                fadeIn={fadeIn}
               >
+                {tagline}
+              </Motto>
+            </FitText>
+            <Text
+              isCasting={isCasting}
+              castSpell={castSpell}
+              finishedHomePageLoad={finishedHomePageLoad}
+              tempContentIsOn={showBusinessCard || showLegalTerms}
+              nowShowing={nowShowing === 'bioText' || nowShowing === ''}
+              onTransitionEnd={() => resetFadeIn()}
+            >
               <FitText compressor={2.5}>
                   <Fragment>
                     {ReactHtmlParser(
@@ -237,11 +259,15 @@ export default function NameTag(props) {
                   </Fragment>
               </FitText>
             </Text>
-          <Loader
-            show={loadBoy || loadFantasy}
-            done={finishedHomePageLoad}
-          />
-        </Container>
+            <Charms
+              {...props}
+            />
+          </VariableContent>
+        <Loader
+          show={loadBoy || loadFantasy}
+          done={finishedHomePageLoad}
+        />
+      </Container>
     </Fragment>
   );
 }

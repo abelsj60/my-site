@@ -291,16 +291,31 @@ export default class ClickHandling {
 
   _handleClickForHome() {
     return updateValue => {
-      if (this.transition === 1) {
-        return null;
-      }
-
-      const { isCasting, eventType } = this.state;
+      const { isCasting, eventType, nowShowing } = this.state;
       const stateToUpdate = {};
 
       switch (updateValue) {
         case 'toggleSpell':
           stateToUpdate.isCasting = !isCasting;
+          console.log('isCasting:', isCasting);
+
+          if (this.fadeInTimeout !== 0) {
+            clearTimeout(this.fadeInTimeout);
+            this.fadeInTimeout = 0;
+            stateToUpdate.fadeIn = false;
+          }
+
+          this.fadeInTimeout = setTimeout(() => {
+            console.log('Run timeout');
+            this.setState({ 
+              fadeIn: true,
+              nowShowing:
+                nowShowing === 'bioText'
+                  || nowShowing === ''
+                    ? 'charms'
+                    : 'bioText'
+            })
+          }, 5);
 
           // Reset the spell when it ends.
 
@@ -309,8 +324,10 @@ export default class ClickHandling {
 
             stateToUpdate.pattern = newPattern;
             stateToUpdate.activeCharm = newPattern[0];
-            stateToUpdate.castSpell = false;
+            stateToUpdate.castSpell = false; // NEEDED ???
             stateToUpdate.score = 0;
+            // stateToUpdate.fadeIn = false;
+            // stateToUpdate.nowShowing = 'bioText'
           }
 
           break;

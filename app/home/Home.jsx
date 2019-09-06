@@ -37,6 +37,7 @@ export default class Home extends Component {
       height 
     } = this.props.appState;
     this.props.boundHandleClickForApp('updateSpacerHeight', height);
+    this.fadeInTimeout = 0;
 
     this.state = {
       isCasting: false,
@@ -48,12 +49,23 @@ export default class Home extends Component {
       loadBoy: !finishedHomePageLoad, // Show blurredBoy
       loadFantasy: !finishedHomePageLoad, // Show blurredFantasy
       finishedLoadingBoy: finishedHomePageLoad, // Boy loaded
-      finishedLoadingFantasy: finishedHomePageLoad // Fantasy loaded
+      finishedLoadingFantasy: finishedHomePageLoad, // Fantasy loaded
+      fadeIn: false,
+      nowShowing: ''
     };
 
+    this.resetFadeIn = this.resetFadeIn.bind(this);
     this.handleInitialLoad = this.handleInitialLoad.bind(this);
     this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
+  }
+
+  resetFadeIn(val) {
+    if (this.state.fadeIn) {
+      console.log('Reset');
+      this.fadeInTimeout = 0;
+      this.setState({ fadeIn: false });
+    }
   }
 
   render() {
@@ -64,15 +76,19 @@ export default class Home extends Component {
       <RestyledMain home={true}>
         <NameTag
           {...this.props}
+          goal={this.goal}
           homeState={this.state}
+          charmRefs={this.charmRefs}
+          resetFadeIn={this.resetFadeIn}
           boundHandleClickForHome={boundHandleClickForHome}
         />
-          <Charms
-            {...this.props}
-            goal={this.goal}
-            homeState={this.state}
-            charmRefs={this.charmRefs}
-          />
+        {/*<Charms
+          {...this.props}
+          goal={this.goal}
+          homeState={this.state}
+          resetFadeIn={this.resetFadeIn}
+          charmRefs={this.charmRefs}
+        />*/}
         <PictureBox
           {...this.props}
           homeState={this.state}

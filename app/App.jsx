@@ -21,6 +21,7 @@ import {
 } from 'react-device-detect';
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
+import objectFitImages from 'object-fit-images';
 import PasswordLogin from './shared/PasswordLogin.jsx';
 import preloadBigImages from './helpers/preloadBigImages';
 import React, { Fragment, Component } from 'react';
@@ -344,19 +345,27 @@ class App extends Component {
     this.setState({ headerMenuIsOpen: false });
   }
 
-  hasFlexbox() {
+  hasStyle(type) {
     // https://johanronsse.be/2016/01/03/simple-flexbox-check/
 
     const document = window.document.body
       || window.document.documentElement;
-    const style = document.style;
+    const documentStyle = document.style;
 
-    if (
-      style.webkitFlexWrap === ''
-        || style.msFlexWrap === ''
-        || style.flexWrap === ''
-    ) {
-      return true;
+    if (type === 'flexbox') {
+      if (
+        documentStyle.webkitFlexWrap === ''
+          || documentStyle.msFlexWrap === ''
+          || documentStyle.flexWrap === ''
+      ) {
+        return true;
+      }
+    }
+
+    if (type === 'object-fit') {
+      if (documentStyle.objectFit === '') {
+        return true;
+      }
     }
 
     return false;
@@ -367,10 +376,14 @@ class App extends Component {
     const element = document.getElementById('hang-on');
     element.parentNode.removeChild(element);
 
-    if (!this.hasFlexbox()) {
+    if (!this.hasStyle('flexbox')) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {
       throw new Error("Uh oh. I don't currently support Opera or IE if it's less than 11.");
+    }
+
+    if (!this.hasStyle('object-fit')) {
+      objectFitImages();
     }
 
     // Heard after all React handlers run

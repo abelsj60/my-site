@@ -16,6 +16,7 @@ const BlurredBoyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -29,6 +30,7 @@ const BoyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -50,6 +52,7 @@ const BlurredFantasyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -58,7 +61,7 @@ const BlurredFantasyImage = styled.img`
   opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
   // Note: Only one transition resolves true at a time
   transition: ${p => !p.finishedHomePageLoad && 'opacity .5s'};
-  transition: ${p => (p.finishedHomePageLoad && !p.castSpell) ? 'opacity .12s' : ''};
+  transition: ${p => (p.finishedHomePageLoad && !p.castSpell) ? 'opacity .15s' : ''};
   z-index: ${p => !p.inCity && !p.castSpell ? '0' : '-2'};
   ${p => (p.castSpell || p.inCity) && 'display: none'};
 `;
@@ -66,6 +69,7 @@ const FantasyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -81,6 +85,7 @@ const BlurredCityImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -95,6 +100,7 @@ const CityImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -158,10 +164,7 @@ export default function PictureBox(props) {
       <BlurredBoyImage
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
-        finishedLoadingBoy={finishedLoadingBoy}
-        finishedLoadingFantasy={finishedLoadingFantasy}
         finishedHomePageLoad={finishedHomePageLoad}
-        homeAnimation={homeAnimation !== 'run'}
         src={blurredBoySrc}
         alt={descriptionBoy}
         onTransitionEnd={() => handleInitialLoad('finishedLoadingBoy')}
@@ -171,7 +174,6 @@ export default function PictureBox(props) {
         alt={descriptionBoy}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
-        finishedHomePageLoad={finishedHomePageLoad}
         onLoad={() => handleInitialLoad('boy')}
       />
       <Portal
@@ -180,8 +182,6 @@ export default function PictureBox(props) {
       />
       <BlurredFantasyImage 
         src={blurredFantasySrc}
-        finishedLoadingBoy={finishedLoadingBoy}
-        finishedLoadingFantasy={finishedLoadingFantasy}
         finishedHomePageLoad={finishedHomePageLoad}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
@@ -192,7 +192,6 @@ export default function PictureBox(props) {
       />
       <FantasyImage
         inCity={inCity}
-        isCasting={isCasting}
         castSpell={castSpell}
         src={bigFantasySrc}
         alt={descriptionFantasy}
@@ -212,7 +211,6 @@ export default function PictureBox(props) {
       />
       <CityImage
         inCity={inCity}
-        isCasting={isCasting}
         castSpell={castSpell}
         src={cityImage}
         alt={descriptionCity}
