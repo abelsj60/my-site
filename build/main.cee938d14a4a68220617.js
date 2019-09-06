@@ -1473,23 +1473,39 @@ function () {
       return function (updateValue) {
         var _this4$state = _this4.state,
             isCasting = _this4$state.isCasting,
-            eventType = _this4$state.eventType;
+            eventType = _this4$state.eventType,
+            nowShowing = _this4$state.nowShowing;
         var stateToUpdate = {};
 
         switch (updateValue) {
           case 'toggleSpell':
             stateToUpdate.isCasting = !isCasting;
-            stateToUpdate.bioTextOn = false; // Reset the spell when it ends.
+            console.log('isCasting:', isCasting);
+
+            if (_this4.fadeInTimeout !== 0) {
+              clearTimeout(_this4.fadeInTimeout);
+              _this4.fadeInTimeout = 0;
+              stateToUpdate.fadeIn = false;
+            }
+
+            _this4.fadeInTimeout = setTimeout(function () {
+              console.log('Run timeout');
+
+              _this4.setState({
+                fadeIn: true,
+                nowShowing: nowShowing === 'bioText' || nowShowing === '' ? 'charms' : 'bioText'
+              });
+            }, 5); // Reset the spell when it ends.
 
             if (isCasting) {
               var newPattern = _this4.createSpellPattern();
 
               stateToUpdate.pattern = newPattern;
               stateToUpdate.activeCharm = newPattern[0];
-              stateToUpdate.castSpell = false;
-              stateToUpdate.score = 0;
-              stateToUpdate.bioTextOn = true;
-              stateToUpdate.unmountText = false;
+              stateToUpdate.castSpell = false; // NEEDED ???
+
+              stateToUpdate.score = 0; // stateToUpdate.fadeIn = false;
+              // stateToUpdate.nowShowing = 'bioText'
             }
 
             break;
@@ -4082,14 +4098,633 @@ function prelodBigImages() {
 
 /***/ }),
 
+/***/ "./app/home/Charms.jsx":
+/*!*****************************!*\
+  !*** ./app/home/Charms.jsx ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Charms; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/Mapper.jsx */ "./app/shared/Mapper.jsx");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+
+
+
+var bigPinkPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(253,17,114,1);}75%{box-shadow:0 0 0 15px rgba(253,17,114,0);}100%{transform:rotate(1turn);box-shadow:0 0 0 0 rgba(253,17,114,0);}"]);
+var pinkPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(253,17,114,1);}75%{box-shadow:0 0 0 15px rgba(253,17,114,0);}100%{box-shadow:0 0 0 0 rgba(253,17,114,0);}"]);
+var bigYellowPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(255,231,76,1);}75%{box-shadow:0 0 0 15px rgba(255,231,76,0);}100%{transform:rotate(1turn);box-shadow:0 0 0 0 rgba(255,231,76,0);}"]);
+var yellowPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(255,231,76,1);}75%{box-shadow:0 0 0 15px rgba(255,231,76,0);}100%{box-shadow:0 0 0 0 rgba(255,231,76,0);}"]);
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__Container",
+  componentId: "sc-1w1k612-0"
+})(["display:", ";flex-direction:column;justify-content:space-between;margin-top:5px;width:200px;z-index:2;opacity:", ";transition:opacity 1s;@media (min-width:", "){width:240px;}@media (min-width:", "){width:330px;}"], function (p) {
+  return p.tempContentIsOn || !p.isCasting || p.castSpell ? 'none' : 'flex';
+}, function (p) {
+  return p.fadeIn || p.nowShowing ? '1' : '0';
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.mediaQueries.huge;
+});
+var CharmBox = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__CharmBox",
+  componentId: "sc-1w1k612-1"
+})(["display:flex;justify-content:space-between;"]);
+var Charm = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__Charm",
+  componentId: "sc-1w1k612-2"
+})(["animation:", ";border:2px dotted ", ";width:45px;height:45px;border-radius:50%;z-index:3;user-select:none;display:flex;justify-content:center;align-items:center;cursor:pointer;position:relative;@media (min-width:", "){width:50px;height:50px;}@media (min-width:", "){width:75px;height:75px;}"], function (p) {
+  return p.isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["1.5s -.15s ", " infinite"], p.isReady && p.isActive ? bigYellowPulse : bigPinkPulse);
+}, function (p) {
+  return p.theme.colors.pink;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.mediaQueries.huge;
+});
+var InnerCharm = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__InnerCharm",
+  componentId: "sc-1w1k612-3"
+})(["background-color:", ";box-shadow:0px 0px 22px -8px rgba(0,0,0,.8);border-radius:50%;position:absolute;top:0px;left:0px;height:100%;width:100%;"], function (p) {
+  return p.isReady && p.isActive ? 'rgba(255, 231, 76, .6)' : 'rgba(253, 17, 114, .6)';
+});
+var InnerEye = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__InnerEye",
+  componentId: "sc-1w1k612-4"
+})(["animation:", ";background-color:", ";height:18px;width:5px;border-radius:50%;z-index:1;@media (min-width:", "){height:23px;width:6px;}@media (min-width:", "){height:35px;width:8px;}"], function (p) {
+  return p.isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["1.5s -.15s ", " infinite"], p.isReady && p.isActive ? pinkPulse : yellowPulse);
+}, function (p) {
+  return p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.mediaQueries.huge;
+});
+var InnerEyeShadow = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__InnerEyeShadow",
+  componentId: "sc-1w1k612-5"
+})(["border-radius:50%;box-shadow:inset 0px 0px 2px 1px rgba(0,0,0,.15);height:100%;width:100%;z-index:1;"]);
+var SpellBox = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__SpellBox",
+  componentId: "sc-1w1k612-6"
+})(["margin-top:18px;display:flex;flex-direction:column;margin-left:35px;margin-right:35px;@media (min-width:", "){margin-top:32px;}"], function (p) {
+  return p.theme.mediaQueries.tinyView;
+});
+var Text = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].p.withConfig({
+  displayName: "Charms__Text",
+  componentId: "sc-1w1k612-7"
+})(["font-size:", ";font-weight:400;color:", ";transition:color .5s ease-out;margin-bottom:5px;"], function (p) {
+  return p.theme.fontSizes.six;
+}, function (p) {
+  return p.theme.colors.black;
+});
+var ProgressContainer = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__ProgressContainer",
+  componentId: "sc-1w1k612-8"
+})(["height:1px;width:100%;align-self:center;background-color:", ";"], function (p) {
+  return p.theme.colors.white;
+});
+var ProgressBar = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__ProgressBar",
+  componentId: "sc-1w1k612-9"
+})(["width:", "%;height:100%;background-color:", ";transition:width .5s ease-out,background-color .5s ease-out;"], function (p) {
+  return p.barWidth;
+}, function (p) {
+  return p.theme.colors.black;
+});
+function Charms(props) {
+  var appState = props.appState,
+      charmRefs = props.charmRefs,
+      goal = props.goal,
+      homeState = props.homeState,
+      resetFadeIn = props.resetFadeIn;
+  var showBusinessCard = appState.showBusinessCard,
+      showLegalTerms = appState.showLegalTerms;
+  var activeCharm = homeState.activeCharm,
+      castSpell = homeState.castSpell,
+      fadeIn = homeState.fadeIn,
+      isCasting = homeState.isCasting,
+      nowShowing = homeState.nowShowing,
+      score = homeState.score; // Let's set up a progress bar.
+
+  var barWidth = score * (100 / (goal - 1));
+  var isReady = score === goal - 1;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
+    fadeIn: fadeIn,
+    isCasting: isCasting,
+    castSpell: castSpell // Don't show while in progress
+    ,
+    tempContentIsOn: showBusinessCard || showLegalTerms,
+    nowShowing: nowShowing === 'charms',
+    onTransitionEnd: function onTransitionEnd() {
+      return resetFadeIn();
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CharmBox, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    mapData: ['one', 'two', 'three'],
+    render: function render(_, idx) {
+      var isActive = activeCharm === idx + 1;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Charm, {
+        key: idx,
+        isActive: isActive,
+        isReady: isReady,
+        ref: charmRefs[idx] // Add a ref to each Charm when mounted
+
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerCharm, {
+        isActive: isActive,
+        isReady: isReady
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerEye, {
+        isActive: isActive,
+        isReady: isReady
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerEyeShadow, {
+        isActive: isActive,
+        isReady: isReady
+      })));
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SpellBox, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Text, {
+    isReady: isReady
+  }, "Cast spell in ", 5 - score, "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ProgressContainer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ProgressBar, {
+    barWidth: barWidth,
+    isReady: isReady
+  }))));
+}
+
+/***/ }),
+
 /***/ "./app/home/Home.jsx":
 /*!***************************!*\
   !*** ./app/home/Home.jsx ***!
   \***************************/
 /*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Home; });
+/* harmony import */ var _Charms_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Charms.jsx */ "./app/home/Charms.jsx");
+/* harmony import */ var _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../classes/ClickHandling.js */ "./app/classes/ClickHandling.js");
+/* harmony import */ var _primitives_Main_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../primitives/Main.jsx */ "./app/primitives/Main.jsx");
+/* harmony import */ var _NameTag_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NameTag.jsx */ "./app/home/NameTag.jsx");
+/* harmony import */ var _NameTag_jsx__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_NameTag_jsx__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _PictureBox_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PictureBox.jsx */ "./app/home/PictureBox.jsx");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+var RestyledMain = Object(styled_components__WEBPACK_IMPORTED_MODULE_6__["default"])(_primitives_Main_jsx__WEBPACK_IMPORTED_MODULE_2__["default"]).withConfig({
+  displayName: "Home__RestyledMain",
+  componentId: "navei3-0"
+})(["justify-content:flex-start;align-items:center;overflow:hidden;flex-direction:column;position:relative;"]);
+
+var Home =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Home, _Component);
+
+  function Home(props) {
+    var _this;
+
+    _classCallCheck(this, Home);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Home).call(this, props));
+    _this.goal = 5; // Cast spell
+
+    _this.charmRefs = [react__WEBPACK_IMPORTED_MODULE_4___default.a.createRef(), react__WEBPACK_IMPORTED_MODULE_4___default.a.createRef(), react__WEBPACK_IMPORTED_MODULE_4___default.a.createRef()]; // Create an initial spell pattern. If we've gone
+    // to /reverie and come back, we'll use the last
+    // created spell pattern (stored on appState as
+    // a back-up). Otherwise, make a new one.
+
+    var pattern = _this.createSpellPattern();
+
+    var _this$props$appState = _this.props.appState,
+        finishedHomePageLoad = _this$props$appState.finishedHomePageLoad,
+        homeAnimation = _this$props$appState.homeAnimation,
+        height = _this$props$appState.height;
+
+    _this.props.boundHandleClickForApp('updateSpacerHeight', height);
+
+    _this.fadeInTimeout = 0;
+    _this.state = {
+      isCasting: false,
+      castSpell: false,
+      score: 0,
+      // Used to select an active Charm and cast spell
+      pattern: pattern,
+      activeCharm: pattern[0],
+      // Initial Charm is always [0]
+      eventType: 'click',
+      // Type of event triggered Charm,
+      loadBoy: !finishedHomePageLoad,
+      // Show blurredBoy
+      loadFantasy: !finishedHomePageLoad,
+      // Show blurredFantasy
+      finishedLoadingBoy: finishedHomePageLoad,
+      // Boy loaded
+      finishedLoadingFantasy: finishedHomePageLoad,
+      // Fantasy loaded
+      fadeIn: false,
+      nowShowing: ''
+    };
+    _this.resetFadeIn = _this.resetFadeIn.bind(_assertThisInitialized(_this));
+    _this.handleInitialLoad = _this.handleInitialLoad.bind(_assertThisInitialized(_this));
+    _this.eventHandlerForMouseDown = _this.eventHandlerForMouseDown.bind(_assertThisInitialized(_this));
+    _this.eventHandlerForTouchStart = _this.eventHandlerForTouchStart.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Home, [{
+    key: "resetFadeIn",
+    value: function resetFadeIn(val) {
+      if (this.state.fadeIn) {
+        console.log('Reset');
+        this.fadeInTimeout = 0;
+        this.setState({
+          fadeIn: false
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var hcForHome = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__["default"]('home', this);
+      var boundHandleClickForHome = hcForHome.boundHandleClick;
+      return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(RestyledMain, {
+        home: true
+      }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_NameTag_jsx__WEBPACK_IMPORTED_MODULE_3___default.a, _extends({}, this.props, {
+        goal: this.goal,
+        homeState: this.state,
+        charmRefs: this.charmRefs,
+        resetFadeIn: this.resetFadeIn,
+        boundHandleClickForHome: boundHandleClickForHome
+      })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_Charms_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], _extends({}, this.props, {
+        goal: this.goal,
+        homeState: this.state,
+        resetFadeIn: this.resetFadeIn,
+        charmRefs: this.charmRefs
+      })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_PictureBox_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
+        homeState: this.state,
+        handleInitialLoad: this.handleInitialLoad,
+        boundHandleClickForHome: boundHandleClickForHome
+      })));
+    }
+  }, {
+    key: "handleInitialLoad",
+    value: function handleInitialLoad(type) {
+      var stateToUpdate = {};
+
+      switch (type) {
+        case 'boy':
+          stateToUpdate.loadBoy = false;
+          break;
+
+        case 'fantasy':
+          stateToUpdate.loadFantasy = false;
+          break;
+
+        case 'finishedLoadingBoy':
+          stateToUpdate.finishedLoadingBoy = true;
+          break;
+
+        case 'finishedLoadingFantasy':
+          stateToUpdate.finishedLoadingFantasy = true;
+          break;
+
+        default:
+          break;
+      }
+
+      this.setState(stateToUpdate);
+    }
+  }, {
+    key: "createSpellPattern",
+    value: function createSpellPattern() {
+      var pattern = [];
+
+      for (var i = 0; i < this.goal; i++) {
+        var randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1; // Let's ensure our Charm order isn't redundant.
+
+        if (i > 0) {
+          while (pattern[i - 1] === randomNum) {
+            randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+          }
+        }
+
+        pattern.push(randomNum);
+      }
+
+      return pattern;
+    }
+  }, {
+    key: "eventHandlerForMouseDown",
+    value: function eventHandlerForMouseDown(num) {
+      var _this2 = this;
+
+      return function () {
+        var _this2$state = _this2.state,
+            activeCharm = _this2$state.activeCharm,
+            eventType = _this2$state.eventType;
+
+        if (eventType === 'click') {
+          var _hcCharm = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__["default"]('charm', _this2);
+
+          var boundHandleCharm = _hcCharm.boundHandleClick;
+          boundHandleCharm(activeCharm === num);
+        } else if (eventType === 'touch') {
+          // Resets event type to 'click' if a mouse suddenly works
+          var hcHome = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__["default"]('home', _this2);
+          var boundHandleClick = hcHome.boundHandleClick;
+          var _boundHandleCharm = hcCharm.boundHandleClick;
+          boundHandleClick('resetEventType');
+
+          _boundHandleCharm(activeCharm === num); // Async/other probs?
+
+        }
+      };
+    }
+  }, {
+    key: "eventHandlerForTouchStart",
+    value: function eventHandlerForTouchStart(num) {
+      var _this3 = this;
+
+      return function () {
+        var hcCharm = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__["default"]('charm', _this3);
+        var boundHandleCharm = hcCharm.boundHandleClick; // Update the eventType on State if the Charm was
+        // touched. This allows our onMouseDown listener
+        // to reject its call due to even propagation.
+        // There is a bug in React that prevents us from
+        // simply calling event.stopPropagation() here.
+        // Dan Abramov offers a solution, however, it
+        // does not seem to work cleanly here. I've
+        // come up w/my own hybridized approach.
+        // I add handlers as he suggests so as to avoid
+        // React's own propagation, then use State to
+        // reject calls to mouseDown handler touch.
+        // https://github.com/facebook/react/issues/9809#issuecomment-413978405
+
+        _this3.setState({
+          eventType: 'touch'
+        });
+
+        boundHandleCharm(_this3.state.activeCharm === num);
+      };
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this4 = this;
+
+      // Let's add our eventHandler whenever cDU runs as a result of
+      // toggling NameTag (which causes refs to be added to our
+      // charmsRef array mounting Charms.
+      // See full explanation in handleTouchStart.
+      if (this.charmRefs[0].current) {
+        this.charmRefs.forEach(function (ref, idx) {
+          if (!ref.current.onclick) {
+            ref.current.onmousedown = _this4.eventHandlerForMouseDown(idx + 1);
+            ref.current.ontouchstart = _this4.eventHandlerForTouchStart(idx + 1);
+          }
+        });
+      }
+    }
+  }]);
+
+  return Home;
+}(react__WEBPACK_IMPORTED_MODULE_4__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./app/home/NameTag.jsx":
+/*!******************************!*\
+  !*** ./app/home/NameTag.jsx ***!
+  \******************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/james/Desktop/foundations/jamesabels.net/app/home/Home.jsx: Unexpected token (62:10)\n\n\u001b[0m \u001b[90m 60 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 61 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 62 | \u001b[39m      \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39msetState({ unmountText\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 63 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 64 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 65 | \u001b[39m  render() {\u001b[0m\n    at Object.raise (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:6325:17)\n    at Object.unexpected (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:7642:16)\n    at Object.parseClassMemberWithIsStatic (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10772:12)\n    at Object.parseClassMember (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10668:10)\n    at /Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10623:14\n    at Object.withTopicForbiddingContext (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9702:14)\n    at Object.parseClassBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10600:10)\n    at Object.parseClass (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10574:22)\n    at Object.parseExportDefaultExpression (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10999:19)\n    at Object.parseExport (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10905:31)\n    at Object.parseStatementContent (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9933:27)\n    at Object.parseStatement (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9829:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10405:25)\n    at Object.parseBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10392:10)\n    at Object.parseTopLevel (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9758:10)\n    at Object.parse (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:11270:17)\n    at parse (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:11306:38)\n    at parser (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\n    at runSync (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at /Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transform.js:34:34\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/james/Desktop/foundations/jamesabels.net/app/home/NameTag.jsx: Identifier 'charmRefs' has already been declared (131:4)\n\n\u001b[0m \u001b[90m 129 | \u001b[39m    boundHandleClickForHome\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 130 | \u001b[39m    charmRefs\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 131 | \u001b[39m    charmRefs\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 132 | \u001b[39m    homeState\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 133 | \u001b[39m    resetFadeIn\u001b[0m\n\u001b[0m \u001b[90m 134 | \u001b[39m  } \u001b[33m=\u001b[39m props\u001b[33m;\u001b[39m\u001b[0m\n    at Object.raise (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:6325:17)\n    at ScopeHandler.checkRedeclarationInScope (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:3759:12)\n    at ScopeHandler.declareName (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:3725:12)\n    at Object.checkLVal (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8021:22)\n    at Object.checkLVal (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8037:16)\n    at Object.parseVarId (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10502:10)\n    at Object.parseVar (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10477:12)\n    at Object.parseVarStatement (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10299:10)\n    at Object.parseStatementContent (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9896:21)\n    at Object.parseStatement (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9829:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10405:25)\n    at Object.parseBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10392:10)\n    at Object.parseBlock (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10376:10)\n    at Object.parseFunctionBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9424:24)\n    at Object.parseFunctionBodyAndFinish (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9394:10)\n    at /Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10535:12\n    at Object.withTopicForbiddingContext (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9702:14)\n    at Object.parseFunction (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10534:10)\n    at Object.parseExportDefaultExpression (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10997:19)\n    at Object.parseExport (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10905:31)\n    at Object.parseStatementContent (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9933:27)\n    at Object.parseStatement (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9829:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10405:25)\n    at Object.parseBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10392:10)\n    at Object.parseTopLevel (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9758:10)\n    at Object.parse (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:11270:17)\n    at parse (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:11306:38)\n    at parser (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\n    at runSync (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at /Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transform.js:34:34\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
+
+/***/ }),
+
+/***/ "./app/home/PictureBox.jsx":
+/*!*********************************!*\
+  !*** ./app/home/PictureBox.jsx ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PictureBox; });
+/* harmony import */ var _data_home_home_md__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../data/home/home.md */ "./app/data/home/home.md");
+/* harmony import */ var _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_data_home_home_md__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+
+
+
+var largeScale = 1.35;
+var PictureHolder = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "PictureBox__PictureHolder",
+  componentId: "sc-1oco850-0"
+})(["position:fixed;top:0px;left:0px;height:100%;width:100%;overflow:hidden;z-index:1;"]);
+var BlurredBoyImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].img.withConfig({
+  displayName: "PictureBox__BlurredBoyImage",
+  componentId: "sc-1oco850-1"
+})(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;z-index:3;opacity:", ";transition:", ";"], function (p) {
+  return p.boyIsLoading || p.fantasyIsLoading || p.theme.blurForTempContent ? '1' : '0';
+}, function (p) {
+  return !p.finishedHomePageLoad && 'opacity .75s';
+});
+var BoyImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].img.withConfig({
+  displayName: "PictureBox__BoyImage",
+  componentId: "sc-1oco850-2"
+})(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;z-index:2;opacity:", ";"], function (p) {
+  return p.boyIsLoading || p.fantasyIsLoading ? '0' : '1';
+});
+var Portal = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "PictureBox__Portal",
+  componentId: "sc-1oco850-3"
+})(["position:absolute;height:100%;width:100%;z-index:1;opacity:.1;display:", ";display:none;"], function (p) {
+  return !p.isCasting || p.castSpell ? 'none' : 'block';
+});
+var BlurredFantasyImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].img.withConfig({
+  displayName: "PictureBox__BlurredFantasyImage",
+  componentId: "sc-1oco850-4"
+})(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;opacity:", ";transition:", ";transition:", ";z-index:", ";", ";"], function (p) {
+  return p.boyIsLoading || p.fantasyIsLoading || p.isCasting && !p.castSpell || p.theme.blurForTempContent ? '1' : '0';
+}, function (p) {
+  return !p.finishedHomePageLoad && 'opacity .5s';
+}, function (p) {
+  return p.finishedHomePageLoad && !p.castSpell ? 'opacity .15s' : '';
+}, function (p) {
+  return !p.inCity && !p.castSpell ? '0' : '-2';
+}, function (p) {
+  return (p.castSpell || p.inCity) && 'display: none';
+});
+var FantasyImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].img.withConfig({
+  displayName: "PictureBox__FantasyImage",
+  componentId: "sc-1oco850-5"
+})(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;opacity:", ";transform:", ";transform-origin:50% 5%;transition:transform 1.75s,opacity ", " cubic-bezier(0.77,0,0.175,1);z-index:", ";"], function (p) {
+  return p.boyIsLoading || p.fantasyIsLoading || p.inCity ? '0' : '1';
+}, function (p) {
+  return p.inCity ? Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["scale(", ")"], largeScale) : 'scale(1)';
+}, function (p) {
+  return !p.inCity ? '1.35s' : '1.35s';
+}, function (p) {
+  return !p.inCity && !p.castSpell ? '-1' : '-3';
+});
+var BlurredCityImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].img.withConfig({
+  displayName: "PictureBox__BlurredCityImage",
+  componentId: "sc-1oco850-6"
+})(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;opacity:", ";transition:", ";z-index:", ";", ""], function (p) {
+  return p.isCasting && !p.castSpell ? '1' : '0';
+}, function (p) {
+  return p.finishedHomePageLoad && !p.castSpell ? 'opacity .12s' : '';
+}, function (p) {
+  return !p.inCity && !p.castSpell ? '-2' : '0';
+}, function (p) {
+  return (p.castSpell || !p.inCity) && 'display: none;';
+});
+var CityImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].img.withConfig({
+  displayName: "PictureBox__CityImage",
+  componentId: "sc-1oco850-7"
+})(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;opacity:", ";transform:", ";transition:transform 1.75s,opacity ", " cubic-bezier(0.77,0,0.175,1);z-index:", ";"], function (p) {
+  return p.inCity ? '1' : '0';
+}, function (p) {
+  return p.inCity ? 'scale(1)' : Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["scale(", ")"], largeScale);
+}, function (p) {
+  return p.inCity ? '1.35s' : '1.35s';
+}, function (p) {
+  return !p.inCity && !p.castSpell ? '-3' : '-1';
+});
+function PictureBox(props) {
+  var _bio$attributes = _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.attributes,
+      cityImage = _bio$attributes.cityImage,
+      cityImageBlurred = _bio$attributes.cityImageBlurred,
+      descriptionBoy = _bio$attributes.descriptionBoy,
+      descriptionFantasy = _bio$attributes.descriptionFantasy,
+      descriptionCity = _bio$attributes.descriptionCity,
+      preloadTheseImages = _bio$attributes.preloadTheseImages;
+  var appState = props.appState,
+      boundHandleClickForHome = props.boundHandleClickForHome,
+      handleInitialLoad = props.handleInitialLoad,
+      homeState = props.homeState;
+  var finishedHomePageLoad = appState.finishedHomePageLoad,
+      homeAnimation = appState.homeAnimation,
+      images = appState.images,
+      inCity = appState.inCity;
+  var castSpell = homeState.castSpell,
+      isCasting = homeState.isCasting,
+      finishedLoadingBoy = homeState.finishedLoadingBoy,
+      finishedLoadingFantasy = homeState.finishedLoadingFantasy,
+      loadBoy = homeState.loadBoy,
+      loadFantasy = homeState.loadFantasy;
+  var imageNames = preloadTheseImages.map(function (name) {
+    return name;
+  });
+  var bigBoySrc = images[imageNames[0]].src;
+  var bigFantasySrc = images[imageNames[2]].src;
+  var blurredBoySrc = images[imageNames[1]].src;
+  var blurredFantasySrc = images[imageNames[3]].src;
+
+  var transitionHandler = function transitionHandler(event, magicState, activeBackground) {
+    event.preventDefault();
+
+    if (magicState && activeBackground && event.propertyName === 'transform') {
+      boundHandleClickForHome('toggleSpell');
+    }
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(PictureHolder, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(BlurredBoyImage, {
+    boyIsLoading: loadBoy,
+    fantasyIsLoading: loadFantasy,
+    finishedHomePageLoad: finishedHomePageLoad,
+    src: blurredBoySrc,
+    alt: descriptionBoy,
+    onTransitionEnd: function onTransitionEnd() {
+      return handleInitialLoad('finishedLoadingBoy');
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(BoyImage, {
+    src: bigBoySrc,
+    alt: descriptionBoy,
+    boyIsLoading: loadBoy,
+    fantasyIsLoading: loadFantasy,
+    onLoad: function onLoad() {
+      return handleInitialLoad('boy');
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Portal, {
+    isCasting: isCasting,
+    castSpell: castSpell
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(BlurredFantasyImage, {
+    src: blurredFantasySrc,
+    finishedHomePageLoad: finishedHomePageLoad,
+    boyIsLoading: loadBoy,
+    fantasyIsLoading: loadFantasy,
+    inCity: inCity,
+    isCasting: isCasting,
+    castSpell: castSpell,
+    onTransitionEnd: function onTransitionEnd() {
+      return handleInitialLoad('finishedLoadingFantasy');
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FantasyImage, {
+    inCity: inCity,
+    castSpell: castSpell,
+    src: bigFantasySrc,
+    alt: descriptionFantasy,
+    onLoad: function onLoad() {
+      return handleInitialLoad('fantasy');
+    },
+    onTransitionEnd: function onTransitionEnd(event) {
+      return transitionHandler(event, castSpell, inCity);
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(BlurredCityImage, {
+    src: cityImageBlurred,
+    inCity: inCity,
+    isCasting: isCasting,
+    castSpell: castSpell,
+    finishedHomePageLoad: finishedHomePageLoad
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CityImage, {
+    inCity: inCity,
+    castSpell: castSpell,
+    src: cityImage,
+    alt: descriptionCity,
+    onTransitionEnd: function onTransitionEnd(event) {
+      return transitionHandler(event, castSpell, !inCity);
+    }
+  }));
+}
 
 /***/ }),
 
@@ -6182,4 +6817,4 @@ module.exports = __webpack_require__(/*! ./app/index.js */"./app/index.js");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.cf9edde6f852d210182c.js.map
+//# sourceMappingURL=main.cee938d14a4a68220617.js.map

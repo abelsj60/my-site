@@ -79,10 +79,6 @@ const Hed = styled.h1`
     background-color: transparent;
   }
 `;
-const VariableContent = styled.div`
-  opacity: ${p => p.fadeIn || (isCasting && p.nowShowing) ? '1' : '0'};
-  transition: opacity 1s;
-`;
 const Motto = styled.h2`
   font-family: 'Aref Ruqaa', serif;
   text-shadow: 1.5px 1px 2px white;
@@ -92,8 +88,8 @@ const Motto = styled.h2`
   font-weight: 700;
   margin-left: .95em;
   margin-bottom: 17px;
-  opacity: ${p => p.fadeIn || (isCasting && p.nowShowing) ? '1' : '0'};
-  transition: opacity 1s;
+  // opacity: ${p => p.fadeIn || (p.isCasting && p.nowShowing) ? '1' : '0'};
+  // transition: opacity 1s;
 
   ::selection {
     background-color: transparent;
@@ -127,8 +123,6 @@ export default function NameTag(props) {
     appState,
     boundHandleClickForApp,
     boundHandleClickForHome,
-    charmRefs,
-    charmRefs,
     homeState,
     resetFadeIn
   } = props;
@@ -222,52 +216,45 @@ export default function NameTag(props) {
               {name}
             </Hed>
           </FitText>
-          <VariableContent
-            id="variableContent"
-            
-          >
-            <FitText compressor={2.3}>
-              <Motto
-                isCasting={isCasting}
-                castSpell={castSpell}
-                nowShowing={
-                  nowShowing === '' 
-                    || (nowShowing === 'charms') 
-                    || (nowShowing === 'bioText')
-                }
-                fadeIn={fadeIn}
-              >
-                {tagline}
-              </Motto>
-            </FitText>
-            <Text
+          <FitText compressor={2.3}>
+            <Motto
               isCasting={isCasting}
               castSpell={castSpell}
-              finishedHomePageLoad={finishedHomePageLoad}
-              tempContentIsOn={showBusinessCard || showLegalTerms}
-              nowShowing={nowShowing === 'bioText' || nowShowing === ''}
-              onTransitionEnd={() => resetFadeIn()}
+              nowShowing={
+                nowShowing === '' 
+                  || (nowShowing === 'charms') 
+                  || (nowShowing === 'bioText')
+              }
+              fadeIn={fadeIn}
             >
-              <FitText compressor={2.5}>
-                  <Fragment>
-                    {ReactHtmlParser(
-                      marked(
-                        body,
-                        { smartypants: true }
-                      )
-                    )}
-                  </Fragment>
-              </FitText>
-            </Text>
-            <Charms
-              {...props}
-            />
-          </VariableContent>
-        <Loader
-          show={loadBoy || loadFantasy}
-          done={finishedHomePageLoad}
-        />
-      </Container>
+              {tagline}
+            </Motto>
+          </FitText>
+          <Text
+            isCasting={isCasting}
+            castSpell={castSpell}
+            finishedHomePageLoad={finishedHomePageLoad}
+            tempContentIsOn={showBusinessCard || showLegalTerms}
+            nowShowing={nowShowing === 'bioText' || nowShowing === ''}
+            onTransitionEnd={() => resetFadeIn()}
+          >
+            <FitText compressor={2.5}>
+                <Fragment>
+                  {ReactHtmlParser(
+                    marked(
+                      body,
+                      { smartypants: true }
+                    )
+                  )}
+                </Fragment>
+            </FitText>
+          </Text>
+          <Loader
+            show={loadBoy || loadFantasy}
+            done={finishedHomePageLoad}
+          />
+          
+        </Container>
     </Fragment>
   );
 }

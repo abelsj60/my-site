@@ -82,13 +82,13 @@ export default class Home extends Component {
           resetFadeIn={this.resetFadeIn}
           boundHandleClickForHome={boundHandleClickForHome}
         />
-        {/*<Charms
+        <Charms
           {...this.props}
           goal={this.goal}
           homeState={this.state}
           resetFadeIn={this.resetFadeIn}
           charmRefs={this.charmRefs}
-        />*/}
+        />
         <PictureBox
           {...this.props}
           homeState={this.state}

@@ -1471,26 +1471,41 @@ function () {
       var _this4 = this;
 
       return function (updateValue) {
-        if (_this4.transition === 1) {
-          return null;
-        }
-
         var _this4$state = _this4.state,
             isCasting = _this4$state.isCasting,
-            eventType = _this4$state.eventType;
+            eventType = _this4$state.eventType,
+            nowShowing = _this4$state.nowShowing;
         var stateToUpdate = {};
 
         switch (updateValue) {
           case 'toggleSpell':
-            stateToUpdate.isCasting = !isCasting; // Reset the spell when it ends.
+            stateToUpdate.isCasting = !isCasting;
+            console.log('isCasting:', isCasting);
+
+            if (_this4.fadeInTimeout !== 0) {
+              clearTimeout(_this4.fadeInTimeout);
+              _this4.fadeInTimeout = 0;
+              stateToUpdate.fadeIn = false;
+            }
+
+            _this4.fadeInTimeout = setTimeout(function () {
+              console.log('Run timeout');
+
+              _this4.setState({
+                fadeIn: true,
+                nowShowing: nowShowing === 'bioText' || nowShowing === '' ? 'charms' : 'bioText'
+              });
+            }, 5); // Reset the spell when it ends.
 
             if (isCasting) {
               var newPattern = _this4.createSpellPattern();
 
               stateToUpdate.pattern = newPattern;
               stateToUpdate.activeCharm = newPattern[0];
-              stateToUpdate.castSpell = false;
-              stateToUpdate.score = 0;
+              stateToUpdate.castSpell = false; // NEEDED ???
+
+              stateToUpdate.score = 0; // stateToUpdate.fadeIn = false;
+              // stateToUpdate.nowShowing = 'bioText'
             }
 
             break;
@@ -4088,9 +4103,155 @@ function prelodBigImages() {
   !*** ./app/home/Charms.jsx ***!
   \*****************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/james/Desktop/foundations/jamesabels.net/app/home/Charms.jsx: 'return' outside of function (213:2)\n\n\u001b[0m \u001b[90m 211 | \u001b[39m  \u001b[36mconst\u001b[39m isReady \u001b[33m=\u001b[39m score \u001b[33m===\u001b[39m goal \u001b[33m-\u001b[39m \u001b[35m1\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 212 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 213 | \u001b[39m  \u001b[36mreturn\u001b[39m (\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 214 | \u001b[39m    \u001b[33m<\u001b[39m\u001b[33mCSSTransition\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 215 | \u001b[39m      \u001b[36min\u001b[39m\u001b[33m=\u001b[39m{isCasting}\u001b[0m\n\u001b[0m \u001b[90m 216 | \u001b[39m      timeout\u001b[33m=\u001b[39m{\u001b[35m200\u001b[39m}\u001b[0m\n    at Object.raise (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:6325:17)\n    at Object.parseReturnStatement (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10190:12)\n    at Object.parseStatementContent (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9877:21)\n    at Object.parseStatement (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9829:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10405:25)\n    at Object.parseBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10392:10)\n    at Object.parseTopLevel (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9758:10)\n    at Object.parse (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:11270:17)\n    at parse (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:11306:38)\n    at parser (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\n    at runSync (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at /Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transform.js:34:34\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Charms; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/Mapper.jsx */ "./app/shared/Mapper.jsx");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+
+
+
+var bigPinkPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(253,17,114,1);}75%{box-shadow:0 0 0 15px rgba(253,17,114,0);}100%{transform:rotate(1turn);box-shadow:0 0 0 0 rgba(253,17,114,0);}"]);
+var pinkPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(253,17,114,1);}75%{box-shadow:0 0 0 15px rgba(253,17,114,0);}100%{box-shadow:0 0 0 0 rgba(253,17,114,0);}"]);
+var bigYellowPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(255,231,76,1);}75%{box-shadow:0 0 0 15px rgba(255,231,76,0);}100%{transform:rotate(1turn);box-shadow:0 0 0 0 rgba(255,231,76,0);}"]);
+var yellowPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(255,231,76,1);}75%{box-shadow:0 0 0 15px rgba(255,231,76,0);}100%{box-shadow:0 0 0 0 rgba(255,231,76,0);}"]);
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__Container",
+  componentId: "sc-1w1k612-0"
+})(["display:", ";flex-direction:column;justify-content:space-between;margin-top:5px;width:200px;z-index:2;opacity:", ";transition:opacity 1s;@media (min-width:", "){width:240px;}@media (min-width:", "){width:330px;}"], function (p) {
+  return p.tempContentIsOn || !p.isCasting || p.castSpell ? 'none' : 'flex';
+}, function (p) {
+  return p.fadeIn || p.nowShowing ? '1' : '0';
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.mediaQueries.huge;
+});
+var CharmBox = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__CharmBox",
+  componentId: "sc-1w1k612-1"
+})(["display:flex;justify-content:space-between;"]);
+var Charm = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__Charm",
+  componentId: "sc-1w1k612-2"
+})(["animation:", ";border:2px dotted ", ";width:45px;height:45px;border-radius:50%;z-index:3;user-select:none;display:flex;justify-content:center;align-items:center;cursor:pointer;position:relative;@media (min-width:", "){width:50px;height:50px;}@media (min-width:", "){width:75px;height:75px;}"], function (p) {
+  return p.isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["1.5s -.15s ", " infinite"], p.isReady && p.isActive ? bigYellowPulse : bigPinkPulse);
+}, function (p) {
+  return p.theme.colors.pink;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.mediaQueries.huge;
+});
+var InnerCharm = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__InnerCharm",
+  componentId: "sc-1w1k612-3"
+})(["background-color:", ";box-shadow:0px 0px 22px -8px rgba(0,0,0,.8);border-radius:50%;position:absolute;top:0px;left:0px;height:100%;width:100%;"], function (p) {
+  return p.isReady && p.isActive ? 'rgba(255, 231, 76, .6)' : 'rgba(253, 17, 114, .6)';
+});
+var InnerEye = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__InnerEye",
+  componentId: "sc-1w1k612-4"
+})(["animation:", ";background-color:", ";height:18px;width:5px;border-radius:50%;z-index:1;@media (min-width:", "){height:23px;width:6px;}@media (min-width:", "){height:35px;width:8px;}"], function (p) {
+  return p.isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["1.5s -.15s ", " infinite"], p.isReady && p.isActive ? pinkPulse : yellowPulse);
+}, function (p) {
+  return p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.mediaQueries.huge;
+});
+var InnerEyeShadow = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__InnerEyeShadow",
+  componentId: "sc-1w1k612-5"
+})(["border-radius:50%;box-shadow:inset 0px 0px 2px 1px rgba(0,0,0,.15);height:100%;width:100%;z-index:1;"]);
+var SpellBox = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__SpellBox",
+  componentId: "sc-1w1k612-6"
+})(["margin-top:18px;display:flex;flex-direction:column;margin-left:35px;margin-right:35px;@media (min-width:", "){margin-top:32px;}"], function (p) {
+  return p.theme.mediaQueries.tinyView;
+});
+var Text = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].p.withConfig({
+  displayName: "Charms__Text",
+  componentId: "sc-1w1k612-7"
+})(["font-size:", ";font-weight:400;color:", ";transition:color .5s ease-out;margin-bottom:5px;"], function (p) {
+  return p.theme.fontSizes.six;
+}, function (p) {
+  return p.theme.colors.black;
+});
+var ProgressContainer = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__ProgressContainer",
+  componentId: "sc-1w1k612-8"
+})(["height:1px;width:100%;align-self:center;background-color:", ";"], function (p) {
+  return p.theme.colors.white;
+});
+var ProgressBar = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+  displayName: "Charms__ProgressBar",
+  componentId: "sc-1w1k612-9"
+})(["width:", "%;height:100%;background-color:", ";transition:width .5s ease-out,background-color .5s ease-out;"], function (p) {
+  return p.barWidth;
+}, function (p) {
+  return p.theme.colors.black;
+});
+function Charms(props) {
+  var appState = props.appState,
+      charmRefs = props.charmRefs,
+      goal = props.goal,
+      homeState = props.homeState,
+      resetFadeIn = props.resetFadeIn;
+  var showBusinessCard = appState.showBusinessCard,
+      showLegalTerms = appState.showLegalTerms;
+  var activeCharm = homeState.activeCharm,
+      castSpell = homeState.castSpell,
+      fadeIn = homeState.fadeIn,
+      isCasting = homeState.isCasting,
+      nowShowing = homeState.nowShowing,
+      score = homeState.score; // Let's set up a progress bar.
+
+  var barWidth = score * (100 / (goal - 1));
+  var isReady = score === goal - 1;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
+    fadeIn: fadeIn,
+    isCasting: isCasting,
+    castSpell: castSpell // Don't show while in progress
+    ,
+    tempContentIsOn: showBusinessCard || showLegalTerms,
+    nowShowing: nowShowing === 'charms',
+    onTransitionEnd: function onTransitionEnd() {
+      return resetFadeIn();
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CharmBox, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    mapData: ['one', 'two', 'three'],
+    render: function render(_, idx) {
+      var isActive = activeCharm === idx + 1;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Charm, {
+        key: idx,
+        isActive: isActive,
+        isReady: isReady,
+        ref: charmRefs[idx] // Add a ref to each Charm when mounted
+
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerCharm, {
+        isActive: isActive,
+        isReady: isReady
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerEye, {
+        isActive: isActive,
+        isReady: isReady
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerEyeShadow, {
+        isActive: isActive,
+        isReady: isReady
+      })));
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SpellBox, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Text, {
+    isReady: isReady
+  }, "Cast spell in ", 5 - score, "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ProgressContainer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ProgressBar, {
+    barWidth: barWidth,
+    isReady: isReady
+  }))));
+}
 
 /***/ }),
 
@@ -4171,6 +4332,7 @@ function (_Component) {
 
     _this.props.boundHandleClickForApp('updateSpacerHeight', height);
 
+    _this.fadeInTimeout = 0;
     _this.state = {
       isCasting: false,
       castSpell: false,
@@ -4187,9 +4349,12 @@ function (_Component) {
       // Show blurredFantasy
       finishedLoadingBoy: finishedHomePageLoad,
       // Boy loaded
-      finishedLoadingFantasy: finishedHomePageLoad // Fantasy loaded
-
+      finishedLoadingFantasy: finishedHomePageLoad,
+      // Fantasy loaded
+      fadeIn: false,
+      nowShowing: ''
     };
+    _this.resetFadeIn = _this.resetFadeIn.bind(_assertThisInitialized(_this));
     _this.handleInitialLoad = _this.handleInitialLoad.bind(_assertThisInitialized(_this));
     _this.eventHandlerForMouseDown = _this.eventHandlerForMouseDown.bind(_assertThisInitialized(_this));
     _this.eventHandlerForTouchStart = _this.eventHandlerForTouchStart.bind(_assertThisInitialized(_this));
@@ -4197,6 +4362,17 @@ function (_Component) {
   }
 
   _createClass(Home, [{
+    key: "resetFadeIn",
+    value: function resetFadeIn(val) {
+      if (this.state.fadeIn) {
+        console.log('Reset');
+        this.fadeInTimeout = 0;
+        this.setState({
+          fadeIn: false
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var hcForHome = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__["default"]('home', this);
@@ -4207,10 +4383,12 @@ function (_Component) {
         goal: this.goal,
         homeState: this.state,
         charmRefs: this.charmRefs,
+        resetFadeIn: this.resetFadeIn,
         boundHandleClickForHome: boundHandleClickForHome
       })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_Charms_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], _extends({}, this.props, {
         goal: this.goal,
         homeState: this.state,
+        resetFadeIn: this.resetFadeIn,
         charmRefs: this.charmRefs
       })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_PictureBox_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
         homeState: this.state,
@@ -4414,18 +4592,19 @@ var Motto = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].h2.withCon
 var Text = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].section.withConfig({
   displayName: "NameTag__Text",
   componentId: "sc-1tuguaa-4"
-})(["overflow:auto;display:", ";z-index:2;p{font-weight:500;margin-left:1.7em;margin-bottom:10px;color:", ";text-shadow:1.5px 1px 2px white;text-align:center;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;::selection{background-color:transparent;}}display:", ";"], function (p) {
-  return p.tempContentIsOn ? 'none' : 'block';
+})(["overflow:auto;display:", ";z-index:2;opacity:", ";transition:opacity 1s;p{font-weight:500;margin-left:1.7em;margin-bottom:10px;color:", ";text-shadow:1.5px 1px 2px white;text-align:center;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;::selection{background-color:transparent;}}"], function (p) {
+  return p.tempContentIsOn || p.isCasting ? 'none' : 'block';
+}, function (p) {
+  return p.fadeIn || p.nowShowing && !p.isCasting ? '1' : '0';
 }, function (p) {
   return p.theme.colors.black;
-}, function (p) {
-  return p.isCasting && !p.castSpell ? 'none' : '';
 });
 function NameTag(props) {
   var appState = props.appState,
       boundHandleClickForApp = props.boundHandleClickForApp,
       boundHandleClickForHome = props.boundHandleClickForHome,
-      homeState = props.homeState;
+      homeState = props.homeState,
+      resetFadeIn = props.resetFadeIn;
   var homeAnimation = appState.homeAnimation,
       inCity = appState.inCity,
       finishedHomePageLoad = appState.finishedHomePageLoad,
@@ -4436,10 +4615,12 @@ function NameTag(props) {
   var isCasting = homeState.isCasting,
       castSpell = homeState.castSpell,
       eventType = homeState.eventType,
+      fadeIn = homeState.fadeIn,
       finishedLoadingBoy = homeState.finishedLoadingBoy,
       finishedLoadingFantasy = homeState.finishedLoadingFantasy,
       loadBoy = homeState.loadBoy,
       loadFantasy = homeState.loadFantasy,
+      nowShowing = homeState.nowShowing,
       score = homeState.score;
   var attributes = _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.attributes,
       body = _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.body;
@@ -4469,6 +4650,7 @@ function NameTag(props) {
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Spacer, {
     spacerHeight: spacerHeight
   }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Container, {
+    fadeIn: fadeIn,
     castSpell: castSpell // For text blur
     ,
     onClick: eventHandler,
@@ -4489,11 +4671,18 @@ function NameTag(props) {
     compressor: 2.3
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Motto, {
     isCasting: isCasting,
-    castSpell: castSpell
+    castSpell: castSpell,
+    nowShowing: nowShowing === '' || nowShowing === 'charms' || nowShowing === 'bioText',
+    fadeIn: fadeIn
   }, tagline)), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Text, {
     isCasting: isCasting,
     castSpell: castSpell,
-    tempContentIsOn: showBusinessCard || showLegalTerms
+    finishedHomePageLoad: finishedHomePageLoad,
+    tempContentIsOn: showBusinessCard || showLegalTerms,
+    nowShowing: nowShowing === 'bioText' || nowShowing === '',
+    onTransitionEnd: function onTransitionEnd() {
+      return resetFadeIn();
+    }
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_1___default.a, {
     compressor: 2.5
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4__["Fragment"], null, react_html_parser__WEBPACK_IMPORTED_MODULE_6___default()(marked__WEBPACK_IMPORTED_MODULE_3___default()(body, {
@@ -4557,7 +4746,7 @@ var BlurredFantasyImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["defaul
 }, function (p) {
   return !p.finishedHomePageLoad && 'opacity .5s';
 }, function (p) {
-  return p.finishedHomePageLoad && !p.castSpell ? 'opacity .12s' : '';
+  return p.finishedHomePageLoad && !p.castSpell ? 'opacity .15s' : '';
 }, function (p) {
   return !p.inCity && !p.castSpell ? '0' : '-2';
 }, function (p) {
@@ -6787,4 +6976,4 @@ module.exports = __webpack_require__(/*! ./app/index.js */"./app/index.js");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.c4041ae1667f15ccbf47.js.map
+//# sourceMappingURL=main.8c61388070961a3462bd.js.map
