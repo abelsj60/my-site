@@ -97,6 +97,7 @@ const Image = styled.img`
   // Ensure img top is TOP
   position: absolute;
   object-fit: cover;
+  font-family: 'object-fit: cover;';
   top: 0px;
   left: 0px;
   z-index: -2;
@@ -131,6 +132,7 @@ const BlurredImage = styled.img`
   // Ensure img top is TOP
   position: absolute;
   object-fit: cover;
+  font-family: 'object-fit: cover;';
   top: 0px;
   left: 0px;
   z-index: -1;
