@@ -1,6 +1,8 @@
+import FitText from '@kennethormandy/react-fittext';
 import React from 'react';
 import Mapper from '../shared/Mapper.jsx';
 import styled, { css, keyframes } from 'styled-components';
+import SubHed from './SubHed.jsx';
 
 const bigPinkPulse = keyframes`
   0% {
@@ -56,16 +58,25 @@ const yellowPulse = keyframes`
     box-shadow: 0 0 0 0 rgba(255, 231, 76, 0);
   }
 `;
-const Container = styled.div`
-  display: ${p => (p.tempContentIsOn || !p.isCasting || p.castSpell ? 'none' : 'flex')};
+
+const OuterContainer = styled.div`
+  visibility: ${p => (p.tempContentIsOn || !p.isCasting || p.castSpell ? 'hidden' : '')};
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 2;
+  opacity: ${p => p.fadeIn || p.nowShowing ? '1' : '.1' };
+  transition: opacity .21s ease-in-out;
+  ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
+`;
+const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-top: 5px;
   width: 200px;
-  z-index: 2;
-  opacity: ${p => p.fadeIn || p.nowShowing ? '1' : '0' };
-  transition: opacity 1s;
-  
+  margin-left: auto;
+  margin-right: auto;
+
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     width: 240px;
   }
@@ -102,7 +113,7 @@ const Charm = styled.div`
     height: 75px;
   }
 `;
-const InnerCharm = styled.div`
+const CharmShadow = styled.div`
   background-color: ${p => p.isReady && p.isActive ? 'rgba(255, 231, 76, .6)' : 'rgba(253, 17, 114, .6)'};
   box-shadow: 0px 0px 22px -8px rgba(0, 0, 0, .8);
   border-radius: 50%;
@@ -112,7 +123,7 @@ const InnerCharm = styled.div`
   height: 100%;
   width: 100%;
 `;
-const InnerEye = styled.div`
+const Eye = styled.div`
   animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? pinkPulse : yellowPulse} infinite`)};
   background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
   height: 18px;
@@ -130,14 +141,14 @@ const InnerEye = styled.div`
     width: 8px;
   }
 `;
-const InnerEyeShadow = styled.div`
+const EyeShadow = styled.div`
   border-radius: 50%;
   box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,.15);
   height: 100%;
   width: 100%;
   z-index: 1;
 `;
-const SpellBox = styled.div`
+const Dashboard = styled.div`
   margin-top: 18px;
   display: flex;
   flex-direction: column;
@@ -148,20 +159,20 @@ const SpellBox = styled.div`
     margin-top: 32px;
   }
 `;
-const Text = styled.p`
+const Score = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
   font-weight: 400;
   color: ${p => p.theme.colors.black};
   transition: color .5s ease-out;
   margin-bottom: 5px;
 `;
-const ProgressContainer = styled.div`
+const OuterBar = styled.div`
   height: 1px;
   width: 100%;
   align-self: center;
   background-color: ${p => p.theme.colors.white};
 `;
-const ProgressBar = styled.div`
+const InnerBar = styled.div`
   width: ${p => p.barWidth}%;
   height: 100%;
   background-color: ${p => p.theme.colors.black};
@@ -177,6 +188,8 @@ export default function Charms(props) {
     resetFadeIn
   } = props;
   const {
+    inCity,
+    nameTagWidth,
     showBusinessCard,
     showLegalTerms
   } = appState;
@@ -195,58 +208,72 @@ export default function Charms(props) {
   const isReady = score === goal - 1;
 
   return (
-    <Container
+    <OuterContainer
       fadeIn={fadeIn}
       isCasting={isCasting}
       castSpell={castSpell} // Don't show while in progress
       tempContentIsOn={showBusinessCard || showLegalTerms}
       nowShowing={nowShowing === 'charms'}
+      nameTagWidth={nameTagWidth}
       onTransitionEnd={() => resetFadeIn()}
     >
-      <CharmBox>
-        <Mapper
-          mapData={['one', 'two', 'three']}
-          render={
-            (_, idx) => {
-              const isActive = activeCharm === idx + 1;
-              return (
-                <Charm
-                  key={idx}
-                  isActive={isActive}
-                  isReady={isReady}
-                  ref={charmRefs[idx]} // Add a ref to each Charm when mounted
-                >
-                  <InnerCharm
+      <FitText
+        compressor={2.3}
+      >
+        <SubHed
+          marginLeft="1.17em"
+        >
+          {!inCity
+            ? "Tap the pulses to travel home"
+            : "Tap the pulses for adventure"}
+        </SubHed>
+      </FitText>
+      <InnerContainer>
+        <CharmBox>
+          <Mapper
+            mapData={['one', 'two', 'three']}
+            render={
+              (_, idx) => {
+                const isActive = activeCharm === idx + 1;
+                return (
+                  <Charm
+                    key={idx}
                     isActive={isActive}
                     isReady={isReady}
-                  />
-                  <InnerEye
-                    isActive={isActive}
-                    isReady={isReady}
+                    ref={charmRefs[idx]} // Add a ref to each Charm when mounted
                   >
-                    <InnerEyeShadow
+                    <CharmShadow
                       isActive={isActive}
                       isReady={isReady}
                     />
-                  </InnerEye>
-                </Charm>
-              );
-            }}
-        />
-      </CharmBox>
-      <SpellBox>
-        <Text
-          isReady={isReady}
-        >
-          Cast spell in {5 - score}...
-        </Text>
-        <ProgressContainer>
-          <ProgressBar
-            barWidth={barWidth}
-            isReady={isReady}
+                    <Eye
+                      isActive={isActive}
+                      isReady={isReady}
+                    >
+                      <EyeShadow
+                        isActive={isActive}
+                        isReady={isReady}
+                      />
+                    </Eye>
+                  </Charm>
+                );
+              }}
           />
-        </ProgressContainer>
-      </SpellBox>
-    </Container>
+        </CharmBox>
+        <Dashboard>
+          <Score
+            isReady={isReady}
+          >
+            Cast spell in {5 - score}...
+          </Score>
+          <OuterBar>
+            <InnerBar
+              barWidth={barWidth}
+              isReady={isReady}
+            />
+          </OuterBar>
+        </Dashboard>
+      </InnerContainer>
+    </OuterContainer>
   );
 }

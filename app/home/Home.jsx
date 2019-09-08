@@ -33,7 +33,6 @@ export default class Home extends Component {
     const pattern = this.createSpellPattern();
     const {
       finishedHomePageLoad,
-      homeAnimation,
       height 
     } = this.props.appState;
     this.props.boundHandleClickForApp('updateSpacerHeight', height);
@@ -51,7 +50,8 @@ export default class Home extends Component {
       finishedLoadingBoy: finishedHomePageLoad, // Boy loaded
       finishedLoadingFantasy: finishedHomePageLoad, // Fantasy loaded
       fadeIn: false,
-      nowShowing: ''
+      nowShowing: '',
+      fadeInDone: false
     };
 
     this.resetFadeIn = this.resetFadeIn.bind(this);
@@ -60,25 +60,17 @@ export default class Home extends Component {
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
   }
 
-  resetFadeIn(val) {
-    if (this.state.fadeIn) {
-      console.log('Reset');
-      this.fadeInTimeout = 0;
-      this.setState({ fadeIn: false });
-    }
-  }
-
   render() {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
 
     return (
-      <RestyledMain home={true}>
+      <RestyledMain 
+        home={true}
+      >
         <NameTag
           {...this.props}
-          goal={this.goal}
           homeState={this.state}
-          charmRefs={this.charmRefs}
           resetFadeIn={this.resetFadeIn}
           boundHandleClickForHome={boundHandleClickForHome}
         />
@@ -86,8 +78,8 @@ export default class Home extends Component {
           {...this.props}
           goal={this.goal}
           homeState={this.state}
-          resetFadeIn={this.resetFadeIn}
           charmRefs={this.charmRefs}
+          resetFadeIn={this.resetFadeIn}
         />
         <PictureBox
           {...this.props}
@@ -97,6 +89,16 @@ export default class Home extends Component {
         />
       </RestyledMain>
     );
+  }
+
+  resetFadeIn() {
+    if (this.state.fadeIn) {
+      this.fadeInTimeout = 0;
+      this.setState({
+        fadeIn: false,
+        fadeInDone: true
+      });
+    }
   }
 
   handleInitialLoad(type) {

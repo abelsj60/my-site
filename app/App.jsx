@@ -1,4 +1,3 @@
-import bio from './data/home/home.md';
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
@@ -67,7 +66,8 @@ const fontSizes = {
   nineteen: '1.745rem',
   twenty: '4rem',
   twentyOne: '1rem',
-  twentyTwo: '1.13rem'
+  twentyTwo: '1.13rem',
+  twentyThree: '1.36rem'
 };
 const mediaQueries = {
   tinyView: '390px',

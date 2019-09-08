@@ -164,29 +164,27 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _data_home_home_md__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data/home/home.md */ "./app/data/home/home.md");
-/* harmony import */ var _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_data_home_home_md__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Body_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Body.jsx */ "./app/Body.jsx");
-/* harmony import */ var _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./classes/ClickHandling.js */ "./app/classes/ClickHandling.js");
-/* harmony import */ var intrinsic_scale__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! intrinsic-scale */ "./node_modules/intrinsic-scale/dist/intrinsic-scale.common-js.js");
-/* harmony import */ var intrinsic_scale__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(intrinsic_scale__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var _header_footer_Footer_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./header-footer/Footer.jsx */ "./app/header-footer/Footer.jsx");
-/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
-/* harmony import */ var _header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./header-footer/Header.jsx */ "./app/header-footer/Header.jsx");
-/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-device-detect */ "./node_modules/react-device-detect/dist/index.js");
-/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_device_detect__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _temp_content_LegalTermsOrBizCard_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./temp-content/LegalTermsOrBizCard.jsx */ "./app/temp-content/LegalTermsOrBizCard.jsx");
-/* harmony import */ var _classes_Location_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./classes/Location.js */ "./app/classes/Location.js");
-/* harmony import */ var object_fit_images__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! object-fit-images */ "./node_modules/object-fit-images/dist/ofi.common-js.js");
-/* harmony import */ var object_fit_images__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(object_fit_images__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _shared_PasswordLogin_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./shared/PasswordLogin.jsx */ "./app/shared/PasswordLogin.jsx");
-/* harmony import */ var _helpers_preloadBigImages__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./helpers/preloadBigImages */ "./app/helpers/preloadBigImages.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _classes_Referrer_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./classes/Referrer.js */ "./app/classes/Referrer.js");
-/* harmony import */ var _classes_ScrollHandling_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./classes/ScrollHandling.js */ "./app/classes/ScrollHandling.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _Body_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Body.jsx */ "./app/Body.jsx");
+/* harmony import */ var _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./classes/ClickHandling.js */ "./app/classes/ClickHandling.js");
+/* harmony import */ var intrinsic_scale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! intrinsic-scale */ "./node_modules/intrinsic-scale/dist/intrinsic-scale.common-js.js");
+/* harmony import */ var intrinsic_scale__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(intrinsic_scale__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _header_footer_Footer_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./header-footer/Footer.jsx */ "./app/header-footer/Footer.jsx");
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
+/* harmony import */ var _header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./header-footer/Header.jsx */ "./app/header-footer/Header.jsx");
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-device-detect */ "./node_modules/react-device-detect/dist/index.js");
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_device_detect__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _temp_content_LegalTermsOrBizCard_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./temp-content/LegalTermsOrBizCard.jsx */ "./app/temp-content/LegalTermsOrBizCard.jsx");
+/* harmony import */ var _classes_Location_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./classes/Location.js */ "./app/classes/Location.js");
+/* harmony import */ var object_fit_images__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! object-fit-images */ "./node_modules/object-fit-images/dist/ofi.common-js.js");
+/* harmony import */ var object_fit_images__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(object_fit_images__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _shared_PasswordLogin_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./shared/PasswordLogin.jsx */ "./app/shared/PasswordLogin.jsx");
+/* harmony import */ var _helpers_preloadBigImages__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./helpers/preloadBigImages */ "./app/helpers/preloadBigImages.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _classes_Referrer_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./classes/Referrer.js */ "./app/classes/Referrer.js");
+/* harmony import */ var _classes_ScrollHandling_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./classes/ScrollHandling.js */ "./app/classes/ScrollHandling.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -218,7 +216,6 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 
@@ -274,7 +271,8 @@ var fontSizes = {
   nineteen: '1.745rem',
   twenty: '4rem',
   twentyOne: '1rem',
-  twentyTwo: '1.13rem'
+  twentyTwo: '1.13rem',
+  twentyThree: '1.36rem'
 };
 var mediaQueries = {
   tinyView: '390px',
@@ -291,7 +289,7 @@ var bottomMargin = {
 var blurControl = {
   regular: 'blur(4px)'
 };
-var ZoomControl = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
+var ZoomControl = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
   displayName: "App__ZoomControl",
   componentId: "sc-11u8va4-0"
 })(["display:flex;flex-direction:column;align-items:center;height:", "px;overflow:hidden;position:relative;@media(orientation:landscape){", "}", ";"], function (p) {
@@ -299,9 +297,9 @@ var ZoomControl = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.
 }, function (p) {
   return p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;';
 }, function (p) {
-  return p.home && Object(styled_components__WEBPACK_IMPORTED_MODULE_4__["css"])(["width:100%;overflow:hidden;"]);
+  return p.home && Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["css"])(["width:100%;overflow:hidden;"]);
 });
-var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_4__["createGlobalStyle"])(_templateObject(), function (p) {
+var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["createGlobalStyle"])(_templateObject(), function (p) {
   return p.reverie ? '#d2e7ff' : 'white';
 }, function (p) {
   return p.theme.fontSizes.twelve;
@@ -320,8 +318,8 @@ function (_Component) {
     _classCallCheck(this, App);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    var images = Object(_helpers_preloadBigImages__WEBPACK_IMPORTED_MODULE_13__["default"])();
-    var referrer = new _classes_Referrer_js__WEBPACK_IMPORTED_MODULE_15__["default"](props);
+    var images = Object(_helpers_preloadBigImages__WEBPACK_IMPORTED_MODULE_12__["default"])();
+    var referrer = new _classes_Referrer_js__WEBPACK_IMPORTED_MODULE_14__["default"](props);
     var location = referrer.location;
     var _window$location = window.location,
         pathname = _window$location.pathname,
@@ -334,8 +332,8 @@ function (_Component) {
     //    changes by rejecting w/n updateHeight() when
     //    this.minAllowedHeight > newHeight.
 
-    var pageHeight = react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobile"] && !react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobileSafari"] ? document.documentElement.clientHeight : window.innerHeight;
-    var coverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_3__["cover"])(window.innerWidth, pageHeight, 2131, 1244); // One way to block orientation change
+    var pageHeight = react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobile"] && !react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobileSafari"] ? document.documentElement.clientHeight : window.innerHeight;
+    var coverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_2__["cover"])(window.innerWidth, pageHeight, 2131, 1244); // One way to block orientation change
     // https://css-tricks.com/snippets/css/orientation-lock/
 
     if (false) {} // Lower limit for resizing — (iPhone/SE form
@@ -345,7 +343,7 @@ function (_Component) {
 
     _this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
 
-    _this.defaultHeightWhenTooSmall = react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobile"] && !react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobileSafari"] ? document.documentElement.clientHeight : window.innerHeight; // Arbitrary (iPhone SE height)
+    _this.defaultHeightWhenTooSmall = react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobile"] && !react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobileSafari"] ? document.documentElement.clientHeight : window.innerHeight; // Arbitrary (iPhone SE height)
 
     _this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
 
@@ -431,12 +429,12 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var hcForApp = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_2__["default"]('app', this);
+      var hcForApp = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__["default"]('app', this);
       var boundHandleClickForApp = hcForApp.boundHandleClick;
       var homeIsActive = this.state.currentCaller === 'home';
       var reverieIsActive = this.state.currentCaller === 'reverie';
-      var fixMobileSafariBugOn7 = react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isTablet"] && react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobileSafari"] && react_device_detect__WEBPACK_IMPORTED_MODULE_8__["osVersion"][0] === '7';
-      return  false ? undefined : react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(styled_components__WEBPACK_IMPORTED_MODULE_4__["ThemeProvider"], {
+      var fixMobileSafariBugOn7 = react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isTablet"] && react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobileSafari"] && react_device_detect__WEBPACK_IMPORTED_MODULE_7__["osVersion"][0] === '7';
+      return  false ? undefined : react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(styled_components__WEBPACK_IMPORTED_MODULE_3__["ThemeProvider"], {
         theme: {
           bottomMargin: bottomMargin,
           colors: colors,
@@ -447,26 +445,26 @@ function (_Component) {
           blurForTempContent: this.state.showBusinessCard || this.state.showLegalTerms,
           blurForHeaderMenu: this.state.headerMenuIsOpen
         }
-      }, react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_14__["Fragment"] // Use Fragment b/c ThemeProvider only accepts one child.
-      , null, react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(GlobalStyle, {
+      }, react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_13__["Fragment"] // Use Fragment b/c ThemeProvider only accepts one child.
+      , null, react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(GlobalStyle, {
         reverie: reverieIsActive
-      }), react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(ZoomControl // Though an extra <div>, ZoomControl lets us add 'touch'
+      }), react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(ZoomControl // Though an extra <div>, ZoomControl lets us add 'touch'
       // events to React (alt is to add them to the Window)
       , {
         home: homeIsActive,
         onTouchMove: this.handleTouchMove,
         onTouchEnd: this.handleTouchEnd,
         fixMobileSafariBugOn7: fixMobileSafariBugOn7
-      }, react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(_header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, this.props, {
+      }, react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(_header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, this.props, {
         appState: this.state,
         boundHandleClickForApp: boundHandleClickForApp
-      })), react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(_Body_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, this.props, {
+      })), react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(_Body_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], _extends({}, this.props, {
         appState: this.state,
         boundHandleClickForApp: boundHandleClickForApp
-      })), react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(_temp_content_LegalTermsOrBizCard_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, this.props, {
+      })), react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(_temp_content_LegalTermsOrBizCard_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], _extends({}, this.props, {
         appState: this.state,
         boundHandleClickForApp: boundHandleClickForApp
-      })), react__WEBPACK_IMPORTED_MODULE_14___default.a.createElement(_header_footer_Footer_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
+      })), react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(_header_footer_Footer_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, this.props, {
         appState: this.state,
         boundHandleClickForApp: boundHandleClickForApp
       })))));
@@ -510,12 +508,12 @@ function (_Component) {
 
       if (!this.hasStyle('flexbox')) {
         throw new Error("Browser doesn't support Flexbox");
-      } else if (react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isOpera"] || react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isIE"] && react_device_detect__WEBPACK_IMPORTED_MODULE_8__["browserVersion"] <= 10) {
+      } else if (react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isOpera"] || react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isIE"] && react_device_detect__WEBPACK_IMPORTED_MODULE_7__["browserVersion"] <= 10) {
         throw new Error("Uh oh. I don't currently support Opera or IE if it's less than 11.");
       }
 
       if (!this.hasStyle('object-fit')) {
-        object_fit_images__WEBPACK_IMPORTED_MODULE_11___default()();
+        object_fit_images__WEBPACK_IMPORTED_MODULE_10___default()();
       } // Heard after all React handlers run
       // https://fortes.com/2018/react-and-dom-events/
 
@@ -608,7 +606,7 @@ function (_Component) {
       var _this4 = this;
 
       // On desktops, only resize if height's changing.
-      if (!react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobile"] && this.state.width !== window.innerWidth && this.state.height === window.innerHeight) {
+      if (!react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobile"] && this.state.width !== window.innerWidth && this.state.height === window.innerHeight) {
         return false;
       } // Don't resize while zooming (e.g., there may be
       // a lag between isZooming and pinchZoomed).
@@ -630,11 +628,11 @@ function (_Component) {
 
       var toggleHtmlHeight = function toggleHtmlHeight(mode) {
         if (mode === 'on') {
-          if (react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobileSafari"] && parseInt(react_device_detect__WEBPACK_IMPORTED_MODULE_8__["osVersion"]) >= 12) {
+          if (react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobileSafari"] && parseInt(react_device_detect__WEBPACK_IMPORTED_MODULE_7__["osVersion"]) >= 12) {
             document.getElementsByTagName('html')[0].style.height = '100vh';
           }
         } else if (mode === 'off') {
-          if (react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobileSafari"] && parseInt(react_device_detect__WEBPACK_IMPORTED_MODULE_8__["osVersion"]) >= 12) {
+          if (react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobileSafari"] && parseInt(react_device_detect__WEBPACK_IMPORTED_MODULE_7__["osVersion"]) >= 12) {
             setTimeout(function () {
               document.getElementsByTagName('html')[0].style.height = '';
             }, 250);
@@ -645,7 +643,7 @@ function (_Component) {
       toggleHtmlHeight('on'); //  a. clientHeight. Mobile Chrome and after touchMove
       //  b. innerHeight. Mobile Safari
 
-      var newHeight = react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobile"] && (!react_device_detect__WEBPACK_IMPORTED_MODULE_8__["isMobileSafari"] || this.state.isAfterTouch) ? document.documentElement.clientHeight : window.innerHeight; // Do not resize height while pinchZoomed.
+      var newHeight = react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobile"] && (!react_device_detect__WEBPACK_IMPORTED_MODULE_7__["isMobileSafari"] || this.state.isAfterTouch) ? document.documentElement.clientHeight : window.innerHeight; // Do not resize height while pinchZoomed.
 
       if (this.state.pinchZoomed) {
         if (false) {}
@@ -658,7 +656,7 @@ function (_Component) {
 
       if (window.pageYOffset > 0 // Prevent resize when user scrolls oversized page.
       && !this.isAfterTouchWhenScrollingPage) {
-        var scrollHandling = new _classes_ScrollHandling_js__WEBPACK_IMPORTED_MODULE_16__["default"](location);
+        var scrollHandling = new _classes_ScrollHandling_js__WEBPACK_IMPORTED_MODULE_15__["default"](location);
         scrollHandling.resetWindowTop();
       } // Resize if height changes and newHeight > this.minAllowedHeight.
       // Note, mobile Brave slips through this test on /home. The image
@@ -694,8 +692,8 @@ function (_Component) {
   }, {
     key: "handleBackAndForth",
     value: function handleBackAndForth() {
-      var location = new _classes_Location_js__WEBPACK_IMPORTED_MODULE_10__["default"]('/', this.props);
-      var hcForApp = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_2__["default"]('app', this);
+      var location = new _classes_Location_js__WEBPACK_IMPORTED_MODULE_9__["default"]('/', this.props);
+      var hcForApp = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__["default"]('app', this);
       var boundHandleClickForApp = hcForApp.boundHandleClick; // Always the caller.
       // Update isMenu if it doesn't sync w/the window.
 
@@ -707,7 +705,7 @@ function (_Component) {
     key: "calculateSpacerHeight",
     value: function calculateSpacerHeight() {
       var appHeight = this.state.height;
-      var objectFitCoverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_3__["cover"])(window.innerWidth, appHeight, 2131, 1244);
+      var objectFitCoverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_2__["cover"])(window.innerWidth, appHeight, 2131, 1244);
       var imageHeight = objectFitCoverVals.height;
       var yImageTop = objectFitCoverVals.y;
 
@@ -739,7 +737,7 @@ function (_Component) {
   }, {
     key: "calculateNameTagWidth",
     value: function calculateNameTagWidth() {
-      var coverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_3__["cover"])(window.innerWidth, this.state.height, 2131, 1244);
+      var coverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_2__["cover"])(window.innerWidth, this.state.height, 2131, 1244);
       return Math.floor(.27 * coverVals.width);
     }
   }, {
@@ -768,9 +766,9 @@ function (_Component) {
   }]);
 
   return App;
-}(react__WEBPACK_IMPORTED_MODULE_14__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_13__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_17__["withRouter"])(App));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_16__["withRouter"])(App));
 
 /***/ }),
 
@@ -975,7 +973,7 @@ var Text = styled_components__WEBPACK_IMPORTED_MODULE_10__["default"].section.wi
 var Icon = styled_components__WEBPACK_IMPORTED_MODULE_10__["default"].div.withConfig({
   displayName: "About__Icon",
   componentId: "sc-1ye68oq-3"
-})(["height:20px;width:30px;margin-bottom:6px;margin-right:2px;background:url(", ") no-repeat;background-size:contain;"], function (p) {
+})(["height:20px;width:20px;margin-bottom:6px;margin-right:1px;background:url(", ") no-repeat;background-size:contain;"], function (p) {
   return p.src;
 });
 var IconContainer = styled_components__WEBPACK_IMPORTED_MODULE_10__["default"].div.withConfig({
@@ -1470,7 +1468,7 @@ function () {
     value: function _handleClickForHome() {
       var _this4 = this;
 
-      return function (updateValue) {
+      return function (updateValue, propName) {
         var _this4$state = _this4.state,
             isCasting = _this4$state.isCasting,
             eventType = _this4$state.eventType,
@@ -1479,23 +1477,31 @@ function () {
 
         switch (updateValue) {
           case 'toggleSpell':
+            // Note: We 'toggleSpell' after the spell is cast
+            // in order to reset it's state. The alternative
+            // is to toggle this stuff from the 'castSpell'
+            // case, but that duplicates logic... 
             stateToUpdate.isCasting = !isCasting;
-            console.log('isCasting:', isCasting);
+            _this4.fadeInTimeoutId = 0;
+            stateToUpdate.fadeIn = false;
+            stateToUpdate.fadeInDone = false; // Not if the spell's running,
+            // AKA castSpell
 
-            if (_this4.fadeInTimeout !== 0) {
-              clearTimeout(_this4.fadeInTimeout);
-              _this4.fadeInTimeout = 0;
-              stateToUpdate.fadeIn = false;
-            }
+            if (propName !== 'transform') {
+              _this4.fadeInTimeout = setTimeout(function () {
+                _this4.setState({
+                  fadeIn: true,
+                  nowShowing: nowShowing === 'bioText' || nowShowing === '' ? 'charms' : 'bioText'
+                });
+              }, 5);
+            } // Update nowShowing when calling after
+            // the spell is cast
 
-            _this4.fadeInTimeout = setTimeout(function () {
-              console.log('Run timeout');
 
-              _this4.setState({
-                fadeIn: true,
-                nowShowing: nowShowing === 'bioText' || nowShowing === '' ? 'charms' : 'bioText'
-              });
-            }, 5); // Reset the spell when it ends.
+            if (propName === 'transform') {
+              stateToUpdate.nowShowing = nowShowing === 'bioText' || nowShowing === '' ? 'charms' : 'bioText';
+            } // Reset the spell when it ends.
+
 
             if (isCasting) {
               var newPattern = _this4.createSpellPattern();
@@ -1504,8 +1510,7 @@ function () {
               stateToUpdate.activeCharm = newPattern[0];
               stateToUpdate.castSpell = false; // NEEDED ???
 
-              stateToUpdate.score = 0; // stateToUpdate.fadeIn = false;
-              // stateToUpdate.nowShowing = 'bioText'
+              stateToUpdate.score = 0;
             }
 
             break;
@@ -1514,12 +1519,9 @@ function () {
             // The castSpell prop controls styling during a turn.
             // Note, the score never equals the goal b/c we cast
             // at score + 1.
-            // Even so, DO NOT ADD 1 to score here. Anecdotally
-            // speaking, it noticeably slows down the
-            // background transition.
             stateToUpdate.castSpell = true; // Reset the eventType to 'click' if it was
-            // last 'touch'-ed. This property prevents
-            // unexpected and unwanted propagation.
+            // 'touch'-ed. This prevents unexpected
+            // and unwanted propagation.
 
             if (eventType === 'touch') {
               stateToUpdate.eventType = 'click';
@@ -4108,38 +4110,49 @@ function prelodBigImages() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Charms; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/Mapper.jsx */ "./app/shared/Mapper.jsx");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @kennethormandy/react-fittext */ "./node_modules/@kennethormandy/react-fittext/lib/FitText.js");
+/* harmony import */ var _kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/Mapper.jsx */ "./app/shared/Mapper.jsx");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _SubHed_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SubHed.jsx */ "./app/home/SubHed.jsx");
 
 
 
-var bigPinkPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(253,17,114,1);}75%{box-shadow:0 0 0 15px rgba(253,17,114,0);}100%{transform:rotate(1turn);box-shadow:0 0 0 0 rgba(253,17,114,0);}"]);
-var pinkPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(253,17,114,1);}75%{box-shadow:0 0 0 15px rgba(253,17,114,0);}100%{box-shadow:0 0 0 0 rgba(253,17,114,0);}"]);
-var bigYellowPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(255,231,76,1);}75%{box-shadow:0 0 0 15px rgba(255,231,76,0);}100%{transform:rotate(1turn);box-shadow:0 0 0 0 rgba(255,231,76,0);}"]);
-var yellowPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(255,231,76,1);}75%{box-shadow:0 0 0 15px rgba(255,231,76,0);}100%{box-shadow:0 0 0 0 rgba(255,231,76,0);}"]);
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "Charms__Container",
+
+
+var bigPinkPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(253,17,114,1);}75%{box-shadow:0 0 0 15px rgba(253,17,114,0);}100%{transform:rotate(1turn);box-shadow:0 0 0 0 rgba(253,17,114,0);}"]);
+var pinkPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(253,17,114,1);}75%{box-shadow:0 0 0 15px rgba(253,17,114,0);}100%{box-shadow:0 0 0 0 rgba(253,17,114,0);}"]);
+var bigYellowPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(255,231,76,1);}75%{box-shadow:0 0 0 15px rgba(255,231,76,0);}100%{transform:rotate(1turn);box-shadow:0 0 0 0 rgba(255,231,76,0);}"]);
+var yellowPulse = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["keyframes"])(["0%{box-shadow:0 0 0 0 rgba(255,231,76,1);}75%{box-shadow:0 0 0 15px rgba(255,231,76,0);}100%{box-shadow:0 0 0 0 rgba(255,231,76,0);}"]);
+var OuterContainer = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__OuterContainer",
   componentId: "sc-1w1k612-0"
-})(["display:", ";flex-direction:column;justify-content:space-between;margin-top:5px;width:200px;z-index:2;opacity:", ";transition:opacity 1s;@media (min-width:", "){width:240px;}@media (min-width:", "){width:330px;}"], function (p) {
-  return p.tempContentIsOn || !p.isCasting || p.castSpell ? 'none' : 'flex';
+})(["visibility:", ";display:flex;flex-direction:column;justify-content:space-between;z-index:2;opacity:", ";transition:opacity .21s ease-in-out;", ";"], function (p) {
+  return p.tempContentIsOn || !p.isCasting || p.castSpell ? 'hidden' : '';
 }, function (p) {
-  return p.fadeIn || p.nowShowing ? '1' : '0';
+  return p.fadeIn || p.nowShowing ? '1' : '.1';
 }, function (p) {
+  return p.nameTagWidth && "width: ".concat(p.nameTagWidth, "px");
+});
+var InnerContainer = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__InnerContainer",
+  componentId: "sc-1w1k612-1"
+})(["display:flex;flex-direction:column;margin-top:5px;width:200px;margin-left:auto;margin-right:auto;@media (min-width:", "){width:240px;}@media (min-width:", "){width:330px;}"], function (p) {
   return p.theme.mediaQueries.tinyView;
 }, function (p) {
   return p.theme.mediaQueries.huge;
 });
-var CharmBox = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
+var CharmBox = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
   displayName: "Charms__CharmBox",
-  componentId: "sc-1w1k612-1"
-})(["display:flex;justify-content:space-between;"]);
-var Charm = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "Charms__Charm",
   componentId: "sc-1w1k612-2"
+})(["display:flex;justify-content:space-between;"]);
+var Charm = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__Charm",
+  componentId: "sc-1w1k612-3"
 })(["animation:", ";border:2px dotted ", ";width:45px;height:45px;border-radius:50%;z-index:3;user-select:none;display:flex;justify-content:center;align-items:center;cursor:pointer;position:relative;@media (min-width:", "){width:50px;height:50px;}@media (min-width:", "){width:75px;height:75px;}"], function (p) {
-  return p.isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["1.5s -.15s ", " infinite"], p.isReady && p.isActive ? bigYellowPulse : bigPinkPulse);
+  return p.isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["css"])(["1.5s -.15s ", " infinite"], p.isReady && p.isActive ? bigYellowPulse : bigPinkPulse);
 }, function (p) {
   return p.theme.colors.pink;
 }, function (p) {
@@ -4147,17 +4160,17 @@ var Charm = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withCo
 }, function (p) {
   return p.theme.mediaQueries.huge;
 });
-var InnerCharm = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "Charms__InnerCharm",
-  componentId: "sc-1w1k612-3"
+var CharmShadow = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__CharmShadow",
+  componentId: "sc-1w1k612-4"
 })(["background-color:", ";box-shadow:0px 0px 22px -8px rgba(0,0,0,.8);border-radius:50%;position:absolute;top:0px;left:0px;height:100%;width:100%;"], function (p) {
   return p.isReady && p.isActive ? 'rgba(255, 231, 76, .6)' : 'rgba(253, 17, 114, .6)';
 });
-var InnerEye = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "Charms__InnerEye",
-  componentId: "sc-1w1k612-4"
+var Eye = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__Eye",
+  componentId: "sc-1w1k612-5"
 })(["animation:", ";background-color:", ";height:18px;width:5px;border-radius:50%;z-index:1;@media (min-width:", "){height:23px;width:6px;}@media (min-width:", "){height:35px;width:8px;}"], function (p) {
-  return p.isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["1.5s -.15s ", " infinite"], p.isReady && p.isActive ? pinkPulse : yellowPulse);
+  return p.isActive && Object(styled_components__WEBPACK_IMPORTED_MODULE_3__["css"])(["1.5s -.15s ", " infinite"], p.isReady && p.isActive ? pinkPulse : yellowPulse);
 }, function (p) {
   return p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow;
 }, function (p) {
@@ -4165,33 +4178,33 @@ var InnerEye = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.wit
 }, function (p) {
   return p.theme.mediaQueries.huge;
 });
-var InnerEyeShadow = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "Charms__InnerEyeShadow",
-  componentId: "sc-1w1k612-5"
-})(["border-radius:50%;box-shadow:inset 0px 0px 2px 1px rgba(0,0,0,.15);height:100%;width:100%;z-index:1;"]);
-var SpellBox = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "Charms__SpellBox",
+var EyeShadow = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__EyeShadow",
   componentId: "sc-1w1k612-6"
+})(["border-radius:50%;box-shadow:inset 0px 0px 2px 1px rgba(0,0,0,.15);height:100%;width:100%;z-index:1;"]);
+var Dashboard = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__Dashboard",
+  componentId: "sc-1w1k612-7"
 })(["margin-top:18px;display:flex;flex-direction:column;margin-left:35px;margin-right:35px;@media (min-width:", "){margin-top:32px;}"], function (p) {
   return p.theme.mediaQueries.tinyView;
 });
-var Text = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].p.withConfig({
-  displayName: "Charms__Text",
-  componentId: "sc-1w1k612-7"
+var Score = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].p.withConfig({
+  displayName: "Charms__Score",
+  componentId: "sc-1w1k612-8"
 })(["font-size:", ";font-weight:400;color:", ";transition:color .5s ease-out;margin-bottom:5px;"], function (p) {
   return p.theme.fontSizes.six;
 }, function (p) {
   return p.theme.colors.black;
 });
-var ProgressContainer = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "Charms__ProgressContainer",
-  componentId: "sc-1w1k612-8"
+var OuterBar = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__OuterBar",
+  componentId: "sc-1w1k612-9"
 })(["height:1px;width:100%;align-self:center;background-color:", ";"], function (p) {
   return p.theme.colors.white;
 });
-var ProgressBar = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].div.withConfig({
-  displayName: "Charms__ProgressBar",
-  componentId: "sc-1w1k612-9"
+var InnerBar = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div.withConfig({
+  displayName: "Charms__InnerBar",
+  componentId: "sc-1w1k612-10"
 })(["width:", "%;height:100%;background-color:", ";transition:width .5s ease-out,background-color .5s ease-out;"], function (p) {
   return p.barWidth;
 }, function (p) {
@@ -4203,7 +4216,9 @@ function Charms(props) {
       goal = props.goal,
       homeState = props.homeState,
       resetFadeIn = props.resetFadeIn;
-  var showBusinessCard = appState.showBusinessCard,
+  var inCity = appState.inCity,
+      nameTagWidth = appState.nameTagWidth,
+      showBusinessCard = appState.showBusinessCard,
       showLegalTerms = appState.showLegalTerms;
   var activeCharm = homeState.activeCharm,
       castSpell = homeState.castSpell,
@@ -4214,43 +4229,48 @@ function Charms(props) {
 
   var barWidth = score * (100 / (goal - 1));
   var isReady = score === goal - 1;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(OuterContainer, {
     fadeIn: fadeIn,
     isCasting: isCasting,
     castSpell: castSpell // Don't show while in progress
     ,
     tempContentIsOn: showBusinessCard || showLegalTerms,
     nowShowing: nowShowing === 'charms',
+    nameTagWidth: nameTagWidth,
     onTransitionEnd: function onTransitionEnd() {
       return resetFadeIn();
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CharmBox, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_0___default.a, {
+    compressor: 2.3
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_SubHed_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    marginLeft: "1.17em"
+  }, !inCity ? "Tap the pulses to travel home" : "Tap the pulses for adventure")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(InnerContainer, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CharmBox, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     mapData: ['one', 'two', 'three'],
     render: function render(_, idx) {
       var isActive = activeCharm === idx + 1;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Charm, {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Charm, {
         key: idx,
         isActive: isActive,
         isReady: isReady,
         ref: charmRefs[idx] // Add a ref to each Charm when mounted
 
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerCharm, {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CharmShadow, {
         isActive: isActive,
         isReady: isReady
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerEye, {
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Eye, {
         isActive: isActive,
         isReady: isReady
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerEyeShadow, {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(EyeShadow, {
         isActive: isActive,
         isReady: isReady
       })));
     }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SpellBox, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Text, {
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Dashboard, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Score, {
     isReady: isReady
-  }, "Cast spell in ", 5 - score, "..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ProgressContainer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ProgressBar, {
+  }, "Cast spell in ", 5 - score, "..."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(OuterBar, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(InnerBar, {
     barWidth: barWidth,
     isReady: isReady
-  }))));
+  })))));
 }
 
 /***/ }),
@@ -4327,7 +4347,6 @@ function (_Component) {
 
     var _this$props$appState = _this.props.appState,
         finishedHomePageLoad = _this$props$appState.finishedHomePageLoad,
-        homeAnimation = _this$props$appState.homeAnimation,
         height = _this$props$appState.height;
 
     _this.props.boundHandleClickForApp('updateSpacerHeight', height);
@@ -4352,7 +4371,8 @@ function (_Component) {
       finishedLoadingFantasy: finishedHomePageLoad,
       // Fantasy loaded
       fadeIn: false,
-      nowShowing: ''
+      nowShowing: '',
+      fadeInDone: false
     };
     _this.resetFadeIn = _this.resetFadeIn.bind(_assertThisInitialized(_this));
     _this.handleInitialLoad = _this.handleInitialLoad.bind(_assertThisInitialized(_this));
@@ -4362,17 +4382,6 @@ function (_Component) {
   }
 
   _createClass(Home, [{
-    key: "resetFadeIn",
-    value: function resetFadeIn(val) {
-      if (this.state.fadeIn) {
-        console.log('Reset');
-        this.fadeInTimeout = 0;
-        this.setState({
-          fadeIn: false
-        });
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var hcForHome = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_1__["default"]('home', this);
@@ -4380,21 +4389,30 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(RestyledMain, {
         home: true
       }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_NameTag_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, this.props, {
-        goal: this.goal,
         homeState: this.state,
-        charmRefs: this.charmRefs,
         resetFadeIn: this.resetFadeIn,
         boundHandleClickForHome: boundHandleClickForHome
       })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_Charms_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], _extends({}, this.props, {
         goal: this.goal,
         homeState: this.state,
-        resetFadeIn: this.resetFadeIn,
-        charmRefs: this.charmRefs
+        charmRefs: this.charmRefs,
+        resetFadeIn: this.resetFadeIn
       })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_PictureBox_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
         homeState: this.state,
         handleInitialLoad: this.handleInitialLoad,
         boundHandleClickForHome: boundHandleClickForHome
       })));
+    }
+  }, {
+    key: "resetFadeIn",
+    value: function resetFadeIn() {
+      if (this.state.fadeIn) {
+        this.fadeInTimeout = 0;
+        this.setState({
+          fadeIn: false,
+          fadeInDone: true
+        });
+      }
     }
   }, {
     key: "handleInitialLoad",
@@ -4543,10 +4561,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(marked__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var react_html_parser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-html-parser */ "./node_modules/react-html-parser/lib/index.js");
-/* harmony import */ var react_html_parser__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_html_parser__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
+/* harmony import */ var react_html_parser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-html-parser */ "./node_modules/react-html-parser/lib/index.js");
+/* harmony import */ var react_html_parser__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_html_parser__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _SubHed_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SubHed.jsx */ "./app/home/SubHed.jsx");
 
 
 
@@ -4555,48 +4574,49 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var blurInKeyframes = Object(styled_components__WEBPACK_IMPORTED_MODULE_5__["keyframes"])(["0%{filter:blur(12px);opacity:0;}100%{filter:blur(0px);opacity:1;}"]);
-var heartbeatKeyframes = Object(styled_components__WEBPACK_IMPORTED_MODULE_5__["keyframes"])(["from{transform:scale(1);transform-origin:center center;animation-timing-function:ease-out;}10%{transform:scale(1.03);animation-timing-function:ease-in;}19%{transform:scale(0.97);animation-timing-function:ease-out;}35%{transform:scale(1.05);animation-timing-function:ease-in;}45%{transform:scale(1);animation-timing-function:ease-out;}"]);
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div.withConfig({
-  displayName: "NameTag__Container",
+
+var blurInKeyframes = Object(styled_components__WEBPACK_IMPORTED_MODULE_7__["keyframes"])(["0%{filter:blur(12px);opacity:0;}100%{filter:blur(0px);opacity:1;}"]);
+var heartbeatKeyframes = Object(styled_components__WEBPACK_IMPORTED_MODULE_7__["keyframes"])(["from{transform:scale(1);transform-origin:center center;animation-timing-function:ease-out;}10%{transform:scale(1.03);animation-timing-function:ease-in;}19%{transform:scale(0.97);animation-timing-function:ease-out;}35%{transform:scale(1.05);animation-timing-function:ease-in;}45%{transform:scale(1);animation-timing-function:ease-out;}"]);
+var OuterContainer = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div.withConfig({
+  displayName: "NameTag__OuterContainer",
   componentId: "sc-1tuguaa-0"
-})(["", ";", ";pointer-events:", ";text-align:center;z-index:2;cursor:pointer;", ";"], function (p) {
-  return p.heartbeat && Object(styled_components__WEBPACK_IMPORTED_MODULE_5__["css"])(["animation:1.1s .17s ease-in-out ", " 3 both"], heartbeatKeyframes);
+})(["display:", ";", ";", ";pointer-events:", ";text-align:center;z-index:2;", ";"], function (p) {
+  return p.tempContentIsOn ? 'none' : 'block';
 }, function (p) {
-  return p.castSpell && Object(styled_components__WEBPACK_IMPORTED_MODULE_5__["css"])(["animation:", " ", " cubic-bezier(0.550,0.085,0.680,0.530) both"], blurInKeyframes, !p.inCity ? '1.52s' : '1.5s');
+  return p.heartbeat && Object(styled_components__WEBPACK_IMPORTED_MODULE_7__["css"])(["animation:1.1s .17s ease-in-out ", " 3 both"], heartbeatKeyframes);
+}, function (p) {
+  return p.castSpell && Object(styled_components__WEBPACK_IMPORTED_MODULE_7__["css"])(["animation:", " ", " cubic-bezier(0.550,0.085,0.680,0.530) both"], blurInKeyframes, !p.inCity ? '1.52s' : '1.5s');
 }, function (p) {
   return p.castSpell && 'none';
 }, function (p) {
   return p.nameTagWidth && "width: ".concat(p.nameTagWidth, "px");
 });
-var Spacer = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div.withConfig({
+var Spacer = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div.withConfig({
   displayName: "NameTag__Spacer",
   componentId: "sc-1tuguaa-1"
 })(["height:", ";width:100%;z-index:3;"], function (p) {
   return p.spacerHeight + 'px';
 });
-var Hed = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].h1.withConfig({
+var Hed = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].h1.withConfig({
   displayName: "NameTag__Hed",
   componentId: "sc-1tuguaa-2"
-})(["font-family:'Aref Ruqaa',serif;text-shadow:2px 1.5px 5px black;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:", ";font-weight:700;line-height:1;margin-top:-9px;margin-bottom:10px;@media (min-width:", "){margin-top:-17px;}::selection{background-color:transparent;}"], function (p) {
+})(["font-family:'Aref Ruqaa',serif;text-shadow:2px 1.5px 5px black;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:", ";font-weight:700;line-height:1;margin-top:-9px;margin-bottom:10px;cursor:pointer;@media (min-width:", "){margin-top:-17px;}::selection{background-color:transparent;}"], function (p) {
   return p.theme.colors.yellow;
 }, function (p) {
   return p.theme.mediaQueries.tinyView;
 });
-var Motto = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].h2.withConfig({
-  displayName: "NameTag__Motto",
+var InnerContainer = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].div.withConfig({
+  displayName: "NameTag__InnerContainer",
   componentId: "sc-1tuguaa-3"
-})(["font-family:'Aref Ruqaa',serif;text-shadow:1.5px 1px 2px white;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:", ";font-weight:700;margin-left:.95em;margin-bottom:17px;::selection{background-color:transparent;}"], function (p) {
-  return p.theme.colors.black;
+})(["opacity:", ";display:", ";transition:opacity .18s ease-in-out;"], function (p) {
+  return p.fadeIn || p.nowShowing || p.castSpell ? '1' : '.1';
+}, function (p) {
+  return p.isCasting && !p.castSpell ? 'none' : 'block';
 });
-var Text = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].section.withConfig({
-  displayName: "NameTag__Text",
+var Pitch = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].section.withConfig({
+  displayName: "NameTag__Pitch",
   componentId: "sc-1tuguaa-4"
-})(["overflow:auto;display:", ";z-index:2;opacity:", ";transition:opacity 1s;p{font-weight:500;margin-left:1.7em;margin-bottom:10px;color:", ";text-shadow:1.5px 1px 2px white;text-align:center;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;::selection{background-color:transparent;}}"], function (p) {
-  return p.tempContentIsOn || p.isCasting ? 'none' : 'block';
-}, function (p) {
-  return p.fadeIn || p.nowShowing && !p.isCasting ? '1' : '0';
-}, function (p) {
+})(["overflow:auto;z-index:2;p{font-weight:500;margin-left:1.7em;margin-bottom:10px;color:", ";text-shadow:1.5px 1px 2px white;text-align:center;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}"], function (p) {
   return p.theme.colors.black;
 });
 function NameTag(props) {
@@ -4606,7 +4626,6 @@ function NameTag(props) {
       homeState = props.homeState,
       resetFadeIn = props.resetFadeIn;
   var homeAnimation = appState.homeAnimation,
-      inCity = appState.inCity,
       finishedHomePageLoad = appState.finishedHomePageLoad,
       showBusinessCard = appState.showBusinessCard,
       showLegalTerms = appState.showLegalTerms,
@@ -4626,17 +4645,18 @@ function NameTag(props) {
       body = _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.body;
   var motto = attributes.motto,
       name = attributes.name;
-  var tagline = !isCasting || castSpell ? motto : !inCity ? 'Tap the pulses to travel home' : 'Tap the pulses for adventure';
 
   var eventHandler = function eventHandler() {
-    if (eventType === 'touch') {
-      boundHandleClickForHome('resetEventType');
-      return false;
+    if (finishedHomePageLoad) {
+      if (eventType === 'touch') {
+        boundHandleClickForHome('resetEventType');
+        return false;
+      }
+
+      if (false) {}
+
+      boundHandleClickForHome('toggleSpell');
     }
-
-    if (false) {}
-
-    boundHandleClickForHome('toggleSpell');
   };
 
   var animationHandler = function animationHandler(event) {
@@ -4649,11 +4669,9 @@ function NameTag(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Spacer, {
     spacerHeight: spacerHeight
-  }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Container, {
-    fadeIn: fadeIn,
+  }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(OuterContainer, {
     castSpell: castSpell // For text blur
     ,
-    onClick: eventHandler,
     nameTagWidth: nameTagWidth,
     heartbeat: finishedLoadingBoy && finishedLoadingFantasy && homeAnimation === 'run',
     tempContentIsOn: showBusinessCard || showLegalTerms,
@@ -4667,27 +4685,31 @@ function NameTag(props) {
     onAnimationEnd: animationHandler.bind(null)
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_1___default.a, {
     compressor: 1.154
-  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Hed, null, name)), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    compressor: 2.3
-  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Motto, {
-    isCasting: isCasting,
-    castSpell: castSpell,
-    nowShowing: nowShowing === '' || nowShowing === 'charms' || nowShowing === 'bioText',
-    fadeIn: fadeIn
-  }, tagline)), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Text, {
-    isCasting: isCasting,
-    castSpell: castSpell,
-    finishedHomePageLoad: finishedHomePageLoad,
+  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Hed, {
+    onClick: eventHandler
+  }, name)), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(InnerContainer, {
     tempContentIsOn: showBusinessCard || showLegalTerms,
-    nowShowing: nowShowing === 'bioText' || nowShowing === '',
+    fadeIn: fadeIn,
+    isCasting: isCasting,
+    castSpell: castSpell,
+    nowShowing: nowShowing === '' || nowShowing === 'bioText',
     onTransitionEnd: function onTransitionEnd() {
       return resetFadeIn();
     }
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    compressor: 2.3
+  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_SubHed_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    marginLeft: ".9em"
+  }, motto)), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Pitch, {
+    isCasting: isCasting,
+    castSpell: castSpell,
+    finishedHomePageLoad: finishedHomePageLoad,
+    tempContentIsOn: showBusinessCard || showLegalTerms
+  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_1___default.a, {
     compressor: 2.5
-  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4__["Fragment"], null, react_html_parser__WEBPACK_IMPORTED_MODULE_6___default()(marked__WEBPACK_IMPORTED_MODULE_3___default()(body, {
+  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_4__["Fragment"], null, react_html_parser__WEBPACK_IMPORTED_MODULE_5___default()(marked__WEBPACK_IMPORTED_MODULE_3___default()(body, {
     smartypants: true
-  }))))), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_shared_Loader_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  })))))), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_shared_Loader_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     show: loadBoy || loadFantasy,
     done: finishedHomePageLoad
   })));
@@ -4721,10 +4743,14 @@ var PictureHolder = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].di
 var BlurredBoyImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].img.withConfig({
   displayName: "PictureBox__BlurredBoyImage",
   componentId: "sc-1oco850-1"
-})(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;z-index:3;opacity:", ";transition:", ";"], function (p) {
-  return p.boyIsLoading || p.fantasyIsLoading || p.theme.blurForTempContent ? '1' : '0';
+})(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;z-index:3;opacity:", ";transition:", ";@media (min-width:", "){opacity:", ";}"], function (p) {
+  return p.boyIsLoading || p.fantasyIsLoading || p.theme.blurForTempContent || p.isCasting ? '1' : '0';
 }, function (p) {
   return !p.finishedHomePageLoad && 'opacity .75s';
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.isCasting && '0';
 });
 var BoyImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"].img.withConfig({
   displayName: "PictureBox__BoyImage",
@@ -4744,9 +4770,9 @@ var BlurredFantasyImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["defaul
 })(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;opacity:", ";transition:", ";transition:", ";z-index:", ";", ";"], function (p) {
   return p.boyIsLoading || p.fantasyIsLoading || p.isCasting && !p.castSpell || p.theme.blurForTempContent ? '1' : '0';
 }, function (p) {
-  return !p.finishedHomePageLoad && 'opacity .5s';
+  return !p.finishedHomePageLoad && 'opacity .5s ease-in-out';
 }, function (p) {
-  return p.finishedHomePageLoad && !p.castSpell ? 'opacity .15s' : '';
+  return p.finishedHomePageLoad && !p.castSpell ? Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["opacity ", ""], !p.isCasting ? '.235s' : '.225s') : '';
 }, function (p) {
   return !p.inCity && !p.castSpell ? '0' : '-2';
 }, function (p) {
@@ -4770,7 +4796,7 @@ var BlurredCityImage = styled_components__WEBPACK_IMPORTED_MODULE_2__["default"]
 })(["position:absolute;display:block;object-fit:cover;font-family:'object-fit: cover;';width:100%;height:100%;pointer-events:none;opacity:", ";transition:", ";z-index:", ";", ""], function (p) {
   return p.isCasting && !p.castSpell ? '1' : '0';
 }, function (p) {
-  return p.finishedHomePageLoad && !p.castSpell ? 'opacity .12s' : '';
+  return p.finishedHomePageLoad && !p.castSpell ? Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["css"])(["opacity ", ""], !p.isCasting ? '.235s' : '.225s') : '';
 }, function (p) {
   return !p.inCity && !p.castSpell ? '-2' : '0';
 }, function (p) {
@@ -4801,13 +4827,10 @@ function PictureBox(props) {
       handleInitialLoad = props.handleInitialLoad,
       homeState = props.homeState;
   var finishedHomePageLoad = appState.finishedHomePageLoad,
-      homeAnimation = appState.homeAnimation,
       images = appState.images,
       inCity = appState.inCity;
   var castSpell = homeState.castSpell,
       isCasting = homeState.isCasting,
-      finishedLoadingBoy = homeState.finishedLoadingBoy,
-      finishedLoadingFantasy = homeState.finishedLoadingFantasy,
       loadBoy = homeState.loadBoy,
       loadFantasy = homeState.loadFantasy;
   var imageNames = preloadTheseImages.map(function (name) {
@@ -4818,21 +4841,22 @@ function PictureBox(props) {
   var blurredBoySrc = images[imageNames[1]].src;
   var blurredFantasySrc = images[imageNames[3]].src;
 
-  var transitionHandler = function transitionHandler(event, magicState, activeBackground) {
+  var transitionHandler = function transitionHandler(event, spellState, activeBackground) {
     event.preventDefault();
 
-    if (magicState && activeBackground && event.propertyName === 'transform') {
-      boundHandleClickForHome('toggleSpell');
+    if (spellState && activeBackground && event.propertyName === 'transform') {
+      boundHandleClickForHome('toggleSpell', event.propertyName);
     }
   };
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(PictureHolder, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(BlurredBoyImage, {
+    isCasting: isCasting,
     boyIsLoading: loadBoy,
     fantasyIsLoading: loadFantasy,
     finishedHomePageLoad: finishedHomePageLoad,
     src: blurredBoySrc,
     alt: descriptionBoy,
-    onTransitionEnd: function onTransitionEnd() {
+    onLoad: function onLoad() {
       return handleInitialLoad('finishedLoadingBoy');
     }
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(BoyImage, {
@@ -4873,7 +4897,8 @@ function PictureBox(props) {
     inCity: inCity,
     isCasting: isCasting,
     castSpell: castSpell,
-    finishedHomePageLoad: finishedHomePageLoad
+    finishedHomePageLoad: finishedHomePageLoad // better spot?
+
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CityImage, {
     inCity: inCity,
     castSpell: castSpell,
@@ -4884,6 +4909,28 @@ function PictureBox(props) {
     }
   }));
 }
+
+/***/ }),
+
+/***/ "./app/home/SubHed.jsx":
+/*!*****************************!*\
+  !*** ./app/home/SubHed.jsx ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].h2.withConfig({
+  displayName: "SubHed",
+  componentId: "sc-1rejtdv-0"
+})(["font-family:'Aref Ruqaa',serif;text-shadow:1.5px 1px 2px white;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:", ";font-weight:700;margin-left:", ";margin-bottom:17px;"], function (p) {
+  return p.theme.colors.black;
+}, function (p) {
+  return p.marginLeft;
+}));
 
 /***/ }),
 
@@ -6612,6 +6659,184 @@ function Story(props) {
 
 /***/ }),
 
+/***/ "./app/temp-content/BusinessCard.jsx":
+/*!*******************************************!*\
+  !*** ./app/temp-content/BusinessCard.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BusinessCard; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+
+
+var BoyImage = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].img.withConfig({
+  displayName: "BusinessCard__BoyImage",
+  componentId: "sc-1yqsfk9-0"
+})(["position:absolute;top:0px;left:0px;height:100%;pointer-events:none;"]);
+var InfoContainer = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div.withConfig({
+  displayName: "BusinessCard__InfoContainer",
+  componentId: "sc-1yqsfk9-1"
+})(["position:absolute;top:4.5rem;right:1.5rem;color:", ";@media (min-width:", "){right:2.1rem;}"], function (p) {
+  return p.theme.colors.white;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+});
+var Name = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h1.withConfig({
+  displayName: "BusinessCard__Name",
+  componentId: "sc-1yqsfk9-2"
+})(["border-bottom:1px solid white;padding-bottom:6px;font-size:", ";@media (min-width:", "){font-size:", ";}"], function (p) {
+  return p.theme.fontSizes.fifteen;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.fontSizes.eighteen;
+});
+var Pitch = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h2.withConfig({
+  displayName: "BusinessCard__Pitch",
+  componentId: "sc-1yqsfk9-3"
+})(["padding-top:5px;font-size:", ";@media (min-width:", "){font-size:", ";}"], function (p) {
+  return p.theme.fontSizes.zero;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.fontSizes.twentyThree;
+});
+var Email = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].p.withConfig({
+  displayName: "BusinessCard__Email",
+  componentId: "sc-1yqsfk9-4"
+})(["position:absolute;bottom:0rem;right:1.5rem;color:", ";font-size:", ";@media (min-width:", "){font-size:", ";}"], function (p) {
+  return p.theme.colors.white;
+}, function (p) {
+  return p.theme.fontSizes.one;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.fontSizes.eight;
+});
+function BusinessCard() {
+  var src = 'https://user-images.githubusercontent.com/30417590/64480217-8696be80-d191-11e9-994f-b8bd71243766.png';
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BoyImage, {
+    src: src
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InfoContainer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Name, null, "James Abels"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Pitch, null, "Let's code your story")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Email, null, "hello@jamesabels.net"));
+}
+
+/***/ }),
+
+/***/ "./app/temp-content/LegalTerms.jsx":
+/*!*****************************************!*\
+  !*** ./app/temp-content/LegalTerms.jsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LegalTerms; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../primitives/StyledLink.jsx */ "./app/primitives/StyledLink.jsx");
+
+
+
+var VerticleLine = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div.withConfig({
+  displayName: "LegalTerms__VerticleLine",
+  componentId: "sc-182jt2m-0"
+})(["width:", ";height:100%;position:absolute;left:", ";top:0px;background-color:", ";"], function (p) {
+  return p.width;
+}, function (p) {
+  return p.left;
+}, function (p) {
+  return p.theme.colors.yellow;
+});
+var HorizontalLine = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].div.withConfig({
+  displayName: "LegalTerms__HorizontalLine",
+  componentId: "sc-182jt2m-1"
+})(["width:100%;height:", ";position:absolute;bottom:", ";left:0px;background-color:", ";"], function (p) {
+  return p.height;
+}, function (p) {
+  return p.bottom;
+}, function (p) {
+  return p.theme.colors.yellow;
+});
+var Legal = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].h1.withConfig({
+  displayName: "LegalTerms__Legal",
+  componentId: "sc-182jt2m-2"
+})(["position:absolute;right:2rem;bottom:1rem;color:", ";font-size:2.25rem;"], function (p) {
+  return p.theme.colors.yellow;
+});
+var MyCopyright = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].span.withConfig({
+  displayName: "LegalTerms__MyCopyright",
+  componentId: "sc-182jt2m-3"
+})(["display:block;margin-bottom:5px;font-size:", ";font-family:'Montserrat',sans-serif;font-weight:700;@media (min-width:", "){margin-bottom:12px;font-size:", ";}"], function (p) {
+  return p.theme.fontSizes.zero;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.fontSizes.eight;
+});
+var ClipCopyright = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].span.withConfig({
+  displayName: "LegalTerms__ClipCopyright",
+  componentId: "sc-182jt2m-4"
+})(["font-size:", ";font-family:'Montserrat',sans-serif;@media (min-width:", "){font-size:", ";;}"], function (p) {
+  return p.theme.fontSizes.zero;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.fontSizes.one;
+});
+function LegalTerms(props) {
+  // Styled as attribute for simplicity,
+  // breaking it out above's a headache
+  var linkOrTextForClips = props.appState.currentCaller !== 'journalism' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    style: {
+      color: 'white',
+      textDecoration: 'underline'
+    },
+    to: "/journalism",
+    boundHandleClickForApp: props.boundHandleClickForApp
+  }, "clips") : 'clips'; // The following HTML is span, not a <p>, b/c it's nested in
+  // a <p> (React doesn't allow <p> nesting, kicks a warning).
+
+  var legalNotice = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      position: 'absolute',
+      color: 'white',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100%',
+      width: '100%',
+      paddingLeft: '2.25rem',
+      boxSizing: 'border-box'
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MyCopyright, null, "\xA9 ", new Date().getFullYear(), ", James Abels. All rights reserved."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ClipCopyright, null, "All ", linkOrTextForClips, " owned by their respective publisher."));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VerticleLine, {
+    width: "1px",
+    left: "1.25rem"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VerticleLine, {
+    width: "1px",
+    left: "1.75rem"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VerticleLine, {
+    width: "1px",
+    left: "2.25rem"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HorizontalLine, {
+    height: "1px",
+    bottom: "5.5rem"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HorizontalLine, {
+    height: "1px",
+    bottom: "4.85rem"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Legal, null, "Legal"), legalNotice);
+}
+
+/***/ }),
+
 /***/ "./app/temp-content/LegalTermsOrBizCard.jsx":
 /*!**************************************************!*\
   !*** ./app/temp-content/LegalTermsOrBizCard.jsx ***!
@@ -6622,9 +6847,8 @@ function Story(props) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LegalTermsOrBizCard; });
-/* harmony import */ var react_clipboard_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-clipboard.js */ "./node_modules/react-clipboard.js/dist/react-clipboard.js");
-/* harmony import */ var react_clipboard_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_clipboard_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../primitives/StyledLink.jsx */ "./app/primitives/StyledLink.jsx");
+/* harmony import */ var _BusinessCard_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BusinessCard.jsx */ "./app/temp-content/BusinessCard.jsx");
+/* harmony import */ var _LegalTerms_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LegalTerms.jsx */ "./app/temp-content/LegalTerms.jsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
@@ -6639,9 +6863,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -6652,13 +6876,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var myEmailAddress = 'hello@jamesabels.net';
-var PageCover = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].section.withConfig({
-  displayName: "LegalTermsOrBizCard__PageCover",
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].section.withConfig({
+  displayName: "LegalTermsOrBizCard__Container",
   componentId: "sc-171ayyj-0"
-})(["display:flex;justify-content:center;align-items:center;position:absolute;top:0px;left:0px;bottom:0px;width:100%;background-color:", ";transition:background-color .75s;z-index:1;"], function (p) {
-  return !p.copying ? Object(styled_components__WEBPACK_IMPORTED_MODULE_4__["css"])(["rgba(115,192,232,", ")"], !p.home ? '.7' : '.2') : Object(styled_components__WEBPACK_IMPORTED_MODULE_4__["css"])(["rgba(253,17,114,", ")"], !p.home ? '.7' : '.2');
-});
+})(["display:flex;justify-content:center;align-items:center;position:absolute;top:0px;left:0px;bottom:0px;width:100%;background-color:", ";z-index:1;"], Object(styled_components__WEBPACK_IMPORTED_MODULE_4__["css"])(["rgba(115,192,232,", ")}"], function (p) {
+  return !p.homeIsActive ? '.7' : '.2';
+}));
 var CardHolder = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.withConfig({
   displayName: "LegalTermsOrBizCard__CardHolder",
   componentId: "sc-171ayyj-1"
@@ -6666,48 +6889,10 @@ var CardHolder = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].div.w
 var Card = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].section.withConfig({
   displayName: "LegalTermsOrBizCard__Card",
   componentId: "sc-171ayyj-2"
-})(["height:160px;width:275px;background-color:", ";pointer-events:all;display:flex;justify-content:center;align-items:center;box-shadow:7px 7px 5px -1px rgba(0,0,0,0.3);@media (min-width:", "){height:200px;width:350px;}"], function (p) {
-  return p.theme.colors.white;
+})(["height:160px;width:275px;background-color:", ";box-shadow:7px 7px 5px -1px rgba(0,0,0,0.3);position:relative;@media (min-width:", "){height:200px;width:350px;}"], function (p) {
+  return p.showBusinessCard ? p.theme.colors.pink : p.theme.colors.pink;
 }, function (p) {
   return p.theme.mediaQueries.tinyView;
-});
-var StyledClipboardButton = Object(styled_components__WEBPACK_IMPORTED_MODULE_4__["default"])(react_clipboard_js__WEBPACK_IMPORTED_MODULE_0___default.a).withConfig({
-  displayName: "LegalTermsOrBizCard__StyledClipboardButton",
-  componentId: "sc-171ayyj-3"
-})(["border:", ";background-color:", ";padding:0px;height:85%;width:90%;display:flex;align-items:center;pointer-events:all;:active{color:black;}:focus{outline:0px;}&:after{position:absolute;top:0;left:0;width:200%;height:200%;border:1px #999 solid;;}"], function (p) {
-  return p.businessCard ? "1px solid ".concat(p.theme.colors.pink) : 'none';
-}, function (p) {
-  return p.theme.colors.white;
-});
-var Graf = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].p.withConfig({
-  displayName: "LegalTermsOrBizCard__Graf",
-  componentId: "sc-171ayyj-4"
-})(["font-weight:500;flex:1;font-size:", ";margin-bottom:0px;@media (min-width:", "){font-size:", ";}"], function (p) {
-  return p.theme.fontSizes.six;
-}, function (p) {
-  return p.theme.mediaQueries.tinyView;
-}, function (p) {
-  return p.theme.fontSizes.ten;
-});
-var MyCopyright = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].span.withConfig({
-  displayName: "LegalTermsOrBizCard__MyCopyright",
-  componentId: "sc-171ayyj-5"
-})(["font-size:", ";display:block;margin-bottom:3px;font-family:'Montserrat',sans-serif;@media (min-width:", "){font-size:", ";}"], function (p) {
-  return p.theme.fontSizes.three;
-}, function (p) {
-  return p.theme.mediaQueries.tinyView;
-}, function (p) {
-  return p.theme.fontSizes.nine;
-});
-var ClipCopyright = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].span.withConfig({
-  displayName: "LegalTermsOrBizCard__ClipCopyright",
-  componentId: "sc-171ayyj-6"
-})(["font-size:", ";font-style:italic;font-family:'Montserrat',sans-serif;@media (min-width:", "){font-size:", ";}"], function (p) {
-  return p.theme.fontSizes.zero;
-}, function (p) {
-  return p.theme.mediaQueries.tinyView;
-}, function (p) {
-  return p.theme.fontSizes.two;
 });
 
 var LegalTermsOrBizCard =
@@ -6715,59 +6900,26 @@ var LegalTermsOrBizCard =
 function (_Component) {
   _inherits(LegalTermsOrBizCard, _Component);
 
-  function LegalTermsOrBizCard(props) {
-    var _this;
-
+  function LegalTermsOrBizCard() {
     _classCallCheck(this, LegalTermsOrBizCard);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(LegalTermsOrBizCard).call(this, props));
-    _this.timeoutId = null;
-    _this.state = {
-      copying: false
-    };
-    _this.makeCopies = _this.makeCopies.bind(_assertThisInitialized(_this));
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(LegalTermsOrBizCard).apply(this, arguments));
   }
 
   _createClass(LegalTermsOrBizCard, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       if (!this.props.appState.showBusinessCard && !this.props.appState.showLegalTerms) return null;
-      var makeCopies = this.makeCopies,
-          state = this.state;
-      var copying = state.copying;
       var _this$props = this.props,
           appState = _this$props.appState,
           boundHandleClickForApp = _this$props.boundHandleClickForApp;
       var showBusinessCard = appState.showBusinessCard,
-          showLegalTerms = appState.showLegalTerms,
           currentCaller = appState.currentCaller;
       var homeIsActive = currentCaller === 'home';
-      var reverieIsActive = currentCaller === 'reverie'; // Styled as attribute for simplicity,
-      // breaking it out above's a headache
 
-      var linkOrTextForClips = currentCaller !== 'journalism' ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        style: {
-          color: 'black',
-          textDecoration: 'underline'
-        },
-        to: "/journalism",
-        boundHandleClickForApp: boundHandleClickForApp
-      }, "clips") : 'clips'; // The following HTML is span, not a <p>, b/c it's nested in
-      // a <p> (React doesn't allow <p> nesting, kicks a warning).
-
-      var legalNotice = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(MyCopyright, null, "\xA9 ", new Date().getFullYear(), ", James Abels. All rights reserved."), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ClipCopyright, null, "(All ", linkOrTextForClips, " owned by their respective publisher.)")); // Real email address shouldn't be a problem here b/c it isn't
-      // on a real route. It'd be hard to scrape w/o special effort.
-
-      var cardText = showBusinessCard ? !copying ? myEmailAddress : 'Copied!' : legalNotice; // StyledClipboardButton triggers success handler
-      // AFTER it's copied something to the DOM. We
-      // need to stop it from running if we want to
-      // share it with legalTerms. Turns out, it
-      // won't copy empty strings.
-
-      var textToCopy = showBusinessCard ? myEmailAddress : '';
+      var stopPropagation = function stopPropagation(event) {
+        return event.stopPropagation();
+      };
 
       var eventHandler = function eventHandler() {
         if (showBusinessCard) {
@@ -6777,40 +6929,13 @@ function (_Component) {
         }
       };
 
-      var stopPropagation = function stopPropagation(event) {
-        return event.stopPropagation();
-      };
-
-      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(PageCover, {
-        home: homeIsActive,
-        copying: copying && !showLegalTerms,
+      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Container, {
+        homeIsActive: homeIsActive,
         onClick: eventHandler
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CardHolder, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Card, {
-        home: homeIsActive,
-        reverie: reverieIsActive,
+        showBusinessCard: showBusinessCard,
         onClick: stopPropagation
-      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(StyledClipboardButton, {
-        businessCard: showBusinessCard,
-        "data-clipboard-text": textToCopy,
-        reverie: reverieIsActive,
-        onSuccess: function onSuccess() {
-          // Must wait to run onSuccess until after appState
-          // is updated. Won't work otherwise.
-          if (_this2.props.appState.showBusinessCard && _this2.timeoutId === null) {
-            // Technically runs after the copy is made.
-            if (false) {}
-
-            makeCopies();
-            _this2.timeoutId = setTimeout(function () {
-              _this2.timeoutId = null;
-              makeCopies();
-            }, 1150);
-          }
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Graf, {
-        key: cardText,
-        copying: !showLegalTerms && copying
-      }, cardText)))));
+      }, showBusinessCard ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_BusinessCard_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], this.props) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_LegalTerms_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], this.props))));
     }
   }, {
     key: "componentDidMount",
@@ -6832,16 +6957,6 @@ function (_Component) {
       var pathname = window.location.pathname;
 
       if (false) {}
-    } // Not added to ClickHandling. Dealing w/'this' binding
-    // inside the class is a nightmare. K.I.S.S.
-
-  }, {
-    key: "makeCopies",
-    value: function makeCopies() {
-      var copying = this.state.copying;
-      this.setState({
-        copying: !copying
-      });
     }
   }]);
 
@@ -6947,7 +7062,7 @@ module.exports = "data:image/gif;base64,R0lGODlhGAAYAPeeAP39/fz8/Pf4+ODi4+/w8crN
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAUCAYAAACaq43EAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAO6QAADukBDjNCHAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANpSURBVEiJpZRbaFxVGIW/f89MbtU0VLCIpmkyE4iWmQlKFOmb1mJE8K2UKrlgaaUWG1ofvIBarA8tiDeIFLTJSVWkCoJIRFMoCj6o9SGZVKlzYqrB+qA0MW0uk8yc5YOZ6UyaYjIuOLD3Wv+/1j57n7Mt4fmDQDulyEo8n+qKHcsTrX3jmwOX6wXaEL/J6WCqo/kryoQD2g3uUziyIf8Ax8zYXqiSLHDBJ4gPR8ajGwNne03mJb3zt5YbHAbIRdyPo7saJvNkvH/MN9M9+Xni5PnNENZIV2wAYBTOxj3/UxS6HxgoJ9itpigyF7kEbLz31ER1gTSaZPxZTug1wSXGRfhhb/RvzLyZuczn8X5/T7Lf7wPWtVRHv/zfwckB/+XZ2Uxv0ht7eKXCkY7oc4KjmBoD7OuKuantH+2wXLnB4fxA4sZIxnoWqnQIbHx5Ydzz28ESYFMYNy9W1fVsOXXu7ZmZmuz6UO7JQFbwMhcMkeM2zHoQd2AI8ME+ng7c8QvdjfMOkC1oG7IbAAxuMRe0ASqNth4n6gsz2GPzVS21YTVIHLjK624F9hlmz5jZC7PTaojMT23KObffpNZalxuKvZmuDCM7YehVjAkwgN1gv0h25Jr9MRtIdTZ9B5Dw/G1XBf2R6owdBUh66cdktmF2Sg/6T8UyRd3DQHfcS59YV2f73UhXdLc521fsP50LbUl1Rfuuf0LXx/B47IOb6iceqKmzrUkvfTBxMn1nse7gLUk7VvU7rQkvWTA5UX8A8UogqyGw9+Je+pG8LJv9WViLi3vpdxWol6V9BqgN5c4lBtKPl5N71/GzEYmnFY48lOqKHQlwOx0czusjHckZM+QM6xZ2SGh4SXsH9AWyneUEZyrXb0JcTD3670042tk0IqwBqfBiCDnAVGGnzewKgKSLCtz3FO3AmuBUgbGwjBWHS/0KZ6xAUwtVwWs4921ZgWtdX36Q6mp+8XIQ3pfqiA7+V1Nrv78VEV/Z0D2xpmCAC92N86tpWsxW/gT8vpJmsqE1B68W4Yr5NhmxlTShXavyAAhncrfH3/+18EFYLtu8/MIsRrZq4UxorjK1YokFbyD3+mqCBwNnZyy7WOKNeLbED00KnU54fpY5AKqd2WULFq+IUDzh+ZcAJEIG35QuhslE49hfeP4SoeAfCl5gBmMESQ4AAAAASUVORK5CYII="
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAA/CAYAAABXXxDfAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAftSURBVGiB7Zt/bFPXFcc/59rOD6AtRAPK1ECDkwINcRgEKvpjQLtqRRMwscIfqxJD144pFI1NVbdJ24S0tlInVWsrbXSCNiSsXZepK5s2FQooFZvWrSIVcTAKxEkgWcfKRkrXQhLHfmd/+EeMCc57nZ2ZkY8U5Z73zjnvfPWur++771pIY0OzujoGQ+tReVBgGXAz6CWQM4oeEOPaE6idezI97lpEUg1f06k7ULMbWJghJoKye/Kkwm+/s7F0ILfl5ZakeN+erq8g+gugKM3nElAIuNKOHw0z/ECHf8H5HNeYMwzE7/jlwvtQqUeYGfCXTw70eAuMJcsUfRmIxn1qCvD8emVLi/t/UXg2kA3N6jo50HWMZFeXI+p2f7n9oTkfjhZQ1RhaLfA6UBw7olsD/oqfjU+52cV0DIbWM/IZ78skHKDdX/6mII8lbEW+v6FZ0z8S1wQGlQcThog8nUl4gra6uQ1AEEBg1smhnjtzWGPOMIIsTRhRt7xhK0pERUj6ihVdmsk9XzGgs+LtS8e/OvcDu4GWJd2Jtqp8NuuVjQMmNoEBoNDJZ9eITkkaop9ku7DxwICcibddnRe7F9sNVKEm0RZMb9YrGwcMIvsTRtRY37ATtPDV7pko6+OmQuRATqrLMUajpgmIAAjir2oMrc4YsUONCesuINbthQNt/nnv57rQXGDaN5d1oOyO2y6B16sbux5GVdKdF77aPdN3a/c+RNfEDw1HxXx3/MrNLgKwvLmv+OLA0B+BJSnngij71BBCmSLC0nhXHxnoVOoDm7w7x7fk7JG8u5W7+0pcnqFm4D4bcRGQxwN+7/O5Ky33mEQj+Ehpf8nsvgdQqVc4exV/RdgfNabmWhcOac/zCTY0q+vkUM+dGo3WIOYW1PoEzGkjkbeu1cFtgjRGvfP5xpKfH/WEi6Z+QeCLKlSLUgbcGD89gHAe1TOicgIjf3UPcLh1i/ejsfLGxO9Q4yvrqlXkZidFiTAU1vDe0VZzFjV0VVii61TE9pRZsM57Bj9qbN1SMwwx0cPF07aq6hMCs8aKTyGMygEVXmj3ew9dzckNUF3W9ajCi4I6yA8oFGjBvcDa9FOW0YPAHGc5heGim2YAT/v2dt8Tjloviurtn6J7FiC6RmBN9Z7OgxGX1Adry0PpTvHRXsuc50/Uq7elH6psDhYAcz5lwtuqG0NbsKzDItyecuIvINuNJcvU7SkJ1HmNZ/BCAcJMtVwLVK0VKN8EfgskF1ZV5H6XcnS0meto62+/UeTdzAXqZIEf2FTzsSJPZXIQdAHgj5vrdKQNyDERtrXVef90WdBD0ArDwLn4XwdwBHihcndfiXEP1YvwHWAKyk0C+6qbOte21VUkn0OuEK/C/vY6765MxX7u5c7pUZfYFX+x3e99JpODr6lzDSoJwVOTJ0R3RouGtgc3VoZtXguIzVmAJ31NHa+Iut5QpBooUJVfLmroWXxsc9lpSJnk5BsKPwrUVdQ7FZ5KoG5+T2S46F5VTsQPTbNMNLnYmq/id7X7y3+YjUTBR0r71Yif+JMrsLqqqXMF5Il4sehOMQ95Bi9szWb+43Xeo8BPk9eDbZAn4ts2VQRRXQeyfXJx4drE93w2EWTk3YLKlyqbg1Py5m1LYFPF73KZv83vPeVrDL0DLAeKzEDhPXkjPp15L3XcUOR2PaqYjfF5iIfYV1sXyK+ixYMvBTdWOlo4VTgkMfEYkeq86PbpVO0JLSl0e9oUeRb0DmAGMC3+fznoc66BwvcWNnb7nOQVlbZEWy3NP/ELm04tEOFg2qwzAnzIyIgNUGGwDi9q6Kqwm9sogaQhMj+vxK9saXEbNc3E7jLAaSxWl8zuKw74y0s8gxcmCbIG6Iuf/4wl+prd9w2uMOdGLJ2aV+L7e2/5OomXpsoHVpTPBzaX73971aoIQOuWmuE2v/f3SGQF8E8AhMWnBrr9V8uZSuvZuR9D8knrhrwSryrJ73cRffz4w+V9o/kF6ub3IPq9kTi1Ny/YIRZwMW7dmDfiqxp65iee4hTOTpv9t9cy+UeLwnuBfwEgLF7U0HOrvStpYrrsyRvxiLV8xNBkV78a8Tn/wYRtXRZvj7wRbwylibaICWTyHfGTpJ8Ksx1f02lArlDLmjZi6JgbJAAsNLl8ZkiJt0neiMdIshZBo5lckyEqST/F/lphMt5pwP8TE+KvVybEX69MiL9ecbaSoyrVTaFvRZEV2SqgqqFnPibyBMrd2cppF0fifXu7VsVWV7KIK7pTVFZmNadNHHX7qNALcnFsT/uIyomxvXKDI/HB2vKQEJmXuln5vyXQM3ebZbhLlH3ZymkXxwNem3/e+y7LOpK1CnaIdby2/M9qGPddnBOjvV1WtrS4+3tnP29h3ZWtAqqbuu5W1SdRFmQrp10ciT/fW3q/oPWaxa08qvpj4i8SxhtH3b7AuI8Bf89qBcIfsprPAY7Et9beevbflstriWTtlxWBuvKnopZrFtCYrZx2cTzgnd5cNuiJWGfG9rRPcHPZPxDG3DqWbSZG+1REec7XGMq4hybqbPPiDF9jqH9ML2WSg5yj8ZivMfQ1G37JPT8x8SLDKdvlJsX/7CFcsWdm+vRzVn9vaZTYT1ANI+/ebGEJQzY9wyn3oYgrfwqbibABsKKuV0B6nBQYQy6qJT9JP/r2qlURUZ4l9j7dIfpuwYB5y47nEJE3Ud5zfg3CCs/8B77mwc0VWngBAAAAAElFTkSuQmCC"
 
 /***/ }),
 
@@ -6976,4 +7091,4 @@ module.exports = __webpack_require__(/*! ./app/index.js */"./app/index.js");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.8c61388070961a3462bd.js.map
+//# sourceMappingURL=main.378e3279aba83ad9f871.js.map

@@ -270,6 +270,169 @@ var unitlessKeys = {
 
 /***/ }),
 
+/***/ "./node_modules/@kennethormandy/react-fittext/lib/FitText.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@kennethormandy/react-fittext/lib/FitText.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _lodash = __webpack_require__(/*! lodash.debounce */ "./node_modules/lodash.debounce/index.js");
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * React FitText
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * https://github.com/kennethormandy/react-fittext
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Kenneth Ormandy
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * A rewrite of https://github.com/gianu/react-fittext (MIT)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * …which is based on the FitText jQuery plugin
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * http://github.com/davatron5000/FitText.js
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+var FitText = function (_React$Component) {
+  _inherits(FitText, _React$Component);
+
+  function FitText(props) {
+    _classCallCheck(this, FitText);
+
+    var _this = _possibleConstructorReturn(this, (FitText.__proto__ || Object.getPrototypeOf(FitText)).call(this, props));
+
+    var defaultFontSize = props.defaultFontSize;
+
+    if (typeof props.defaultFontSize === 'number') {
+      defaultFontSize = props.defaultFontSize + 'px';
+    }
+
+    _this.state = {
+      fontSize: defaultFontSize
+    };
+
+    _this._onBodyResize = _this._onBodyResize.bind(_this);
+    _this._parentNode = null;
+    return _this;
+  }
+
+  _createClass(FitText, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      // When a new parent ID is passed in, or the new parentNode
+      // is available, run resize again
+      if (this.props.parent !== prevProps.parent) {
+        this._onBodyResize();
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (0 >= this.props.compressor) {
+        console.warn('Warning: The compressor should be greater than 0.');
+      }
+
+      if (this.props.parent) {
+        this._parentNode = typeof this.props.parent === 'string' ? document.getElementById(this.props.parent) : this.props.parent;
+      }
+
+      window.addEventListener('resize', (0, _lodash2.default)(this._onBodyResize, this.props.debounce));
+      this._onBodyResize();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      window.removeEventListener('resize', (0, _lodash2.default)(this._onBodyResize, this.props.debounce));
+    }
+  }, {
+    key: '_getFontSize',
+    value: function _getFontSize(value) {
+      var props = this.props;
+
+      return Math.max(Math.min(value / (props.compressor * 10), props.maxFontSize), props.minFontSize);
+    }
+  }, {
+    key: '_onBodyResize',
+    value: function _onBodyResize() {
+      if (this.element && this.element.offsetWidth) {
+        var value = this.element.offsetWidth;
+
+        if (this.props.vertical) {
+          var parent = this._parentNode || this.element.parentNode;
+          value = parent.offsetHeight;
+        }
+
+        var newFontSize = this._getFontSize(value);
+
+        this.setState({
+          fontSize: newFontSize + 'px'
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        {
+          ref: function ref(el) {
+            return _this2.element = el;
+          },
+          style: { fontSize: this.state.fontSize } },
+        this.props.children
+      );
+    }
+  }]);
+
+  return FitText;
+}(_react2.default.Component);
+
+FitText.defaultProps = {
+  compressor: 1.0,
+  debounce: 100,
+  defaultFontSize: 'inherit',
+  minFontSize: Number.NEGATIVE_INFINITY,
+  maxFontSize: Number.POSITIVE_INFINITY
+};
+
+FitText.propTypes = {
+  children: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.string]),
+  compressor: _propTypes2.default.number,
+  debounce: _propTypes2.default.number,
+  defaultFontSize: _propTypes2.default.string,
+  minFontSize: _propTypes2.default.number,
+  maxFontSize: _propTypes2.default.number,
+  parent: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.object])
+};
+
+exports.default = FitText;
+
+/***/ }),
+
 /***/ "./node_modules/base64-js/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
@@ -2232,989 +2395,6 @@ function isnan (val) {
 }
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
-/***/ "./node_modules/clipboard/dist/clipboard.js":
-/*!**************************************************!*\
-  !*** ./node_modules/clipboard/dist/clipboard.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*!
- * clipboard.js v2.0.4
- * https://zenorocha.github.io/clipboard.js
- * 
- * Licensed MIT © Zeno Rocha
- */
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else {}
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _clipboardAction = __webpack_require__(1);
-
-var _clipboardAction2 = _interopRequireDefault(_clipboardAction);
-
-var _tinyEmitter = __webpack_require__(3);
-
-var _tinyEmitter2 = _interopRequireDefault(_tinyEmitter);
-
-var _goodListener = __webpack_require__(4);
-
-var _goodListener2 = _interopRequireDefault(_goodListener);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/**
- * Base class which takes one or more elements, adds event listeners to them,
- * and instantiates a new `ClipboardAction` on each click.
- */
-var Clipboard = function (_Emitter) {
-    _inherits(Clipboard, _Emitter);
-
-    /**
-     * @param {String|HTMLElement|HTMLCollection|NodeList} trigger
-     * @param {Object} options
-     */
-    function Clipboard(trigger, options) {
-        _classCallCheck(this, Clipboard);
-
-        var _this = _possibleConstructorReturn(this, (Clipboard.__proto__ || Object.getPrototypeOf(Clipboard)).call(this));
-
-        _this.resolveOptions(options);
-        _this.listenClick(trigger);
-        return _this;
-    }
-
-    /**
-     * Defines if attributes would be resolved using internal setter functions
-     * or custom functions that were passed in the constructor.
-     * @param {Object} options
-     */
-
-
-    _createClass(Clipboard, [{
-        key: 'resolveOptions',
-        value: function resolveOptions() {
-            var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-            this.action = typeof options.action === 'function' ? options.action : this.defaultAction;
-            this.target = typeof options.target === 'function' ? options.target : this.defaultTarget;
-            this.text = typeof options.text === 'function' ? options.text : this.defaultText;
-            this.container = _typeof(options.container) === 'object' ? options.container : document.body;
-        }
-
-        /**
-         * Adds a click event listener to the passed trigger.
-         * @param {String|HTMLElement|HTMLCollection|NodeList} trigger
-         */
-
-    }, {
-        key: 'listenClick',
-        value: function listenClick(trigger) {
-            var _this2 = this;
-
-            this.listener = (0, _goodListener2.default)(trigger, 'click', function (e) {
-                return _this2.onClick(e);
-            });
-        }
-
-        /**
-         * Defines a new `ClipboardAction` on each click event.
-         * @param {Event} e
-         */
-
-    }, {
-        key: 'onClick',
-        value: function onClick(e) {
-            var trigger = e.delegateTarget || e.currentTarget;
-
-            if (this.clipboardAction) {
-                this.clipboardAction = null;
-            }
-
-            this.clipboardAction = new _clipboardAction2.default({
-                action: this.action(trigger),
-                target: this.target(trigger),
-                text: this.text(trigger),
-                container: this.container,
-                trigger: trigger,
-                emitter: this
-            });
-        }
-
-        /**
-         * Default `action` lookup function.
-         * @param {Element} trigger
-         */
-
-    }, {
-        key: 'defaultAction',
-        value: function defaultAction(trigger) {
-            return getAttributeValue('action', trigger);
-        }
-
-        /**
-         * Default `target` lookup function.
-         * @param {Element} trigger
-         */
-
-    }, {
-        key: 'defaultTarget',
-        value: function defaultTarget(trigger) {
-            var selector = getAttributeValue('target', trigger);
-
-            if (selector) {
-                return document.querySelector(selector);
-            }
-        }
-
-        /**
-         * Returns the support of the given action, or all actions if no action is
-         * given.
-         * @param {String} [action]
-         */
-
-    }, {
-        key: 'defaultText',
-
-
-        /**
-         * Default `text` lookup function.
-         * @param {Element} trigger
-         */
-        value: function defaultText(trigger) {
-            return getAttributeValue('text', trigger);
-        }
-
-        /**
-         * Destroy lifecycle.
-         */
-
-    }, {
-        key: 'destroy',
-        value: function destroy() {
-            this.listener.destroy();
-
-            if (this.clipboardAction) {
-                this.clipboardAction.destroy();
-                this.clipboardAction = null;
-            }
-        }
-    }], [{
-        key: 'isSupported',
-        value: function isSupported() {
-            var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['copy', 'cut'];
-
-            var actions = typeof action === 'string' ? [action] : action;
-            var support = !!document.queryCommandSupported;
-
-            actions.forEach(function (action) {
-                support = support && !!document.queryCommandSupported(action);
-            });
-
-            return support;
-        }
-    }]);
-
-    return Clipboard;
-}(_tinyEmitter2.default);
-
-/**
- * Helper function to retrieve attribute value.
- * @param {String} suffix
- * @param {Element} element
- */
-
-
-function getAttributeValue(suffix, element) {
-    var attribute = 'data-clipboard-' + suffix;
-
-    if (!element.hasAttribute(attribute)) {
-        return;
-    }
-
-    return element.getAttribute(attribute);
-}
-
-module.exports = Clipboard;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _select = __webpack_require__(2);
-
-var _select2 = _interopRequireDefault(_select);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Inner class which performs selection from either `text` or `target`
- * properties and then executes copy or cut operations.
- */
-var ClipboardAction = function () {
-    /**
-     * @param {Object} options
-     */
-    function ClipboardAction(options) {
-        _classCallCheck(this, ClipboardAction);
-
-        this.resolveOptions(options);
-        this.initSelection();
-    }
-
-    /**
-     * Defines base properties passed from constructor.
-     * @param {Object} options
-     */
-
-
-    _createClass(ClipboardAction, [{
-        key: 'resolveOptions',
-        value: function resolveOptions() {
-            var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-            this.action = options.action;
-            this.container = options.container;
-            this.emitter = options.emitter;
-            this.target = options.target;
-            this.text = options.text;
-            this.trigger = options.trigger;
-
-            this.selectedText = '';
-        }
-
-        /**
-         * Decides which selection strategy is going to be applied based
-         * on the existence of `text` and `target` properties.
-         */
-
-    }, {
-        key: 'initSelection',
-        value: function initSelection() {
-            if (this.text) {
-                this.selectFake();
-            } else if (this.target) {
-                this.selectTarget();
-            }
-        }
-
-        /**
-         * Creates a fake textarea element, sets its value from `text` property,
-         * and makes a selection on it.
-         */
-
-    }, {
-        key: 'selectFake',
-        value: function selectFake() {
-            var _this = this;
-
-            var isRTL = document.documentElement.getAttribute('dir') == 'rtl';
-
-            this.removeFake();
-
-            this.fakeHandlerCallback = function () {
-                return _this.removeFake();
-            };
-            this.fakeHandler = this.container.addEventListener('click', this.fakeHandlerCallback) || true;
-
-            this.fakeElem = document.createElement('textarea');
-            // Prevent zooming on iOS
-            this.fakeElem.style.fontSize = '12pt';
-            // Reset box model
-            this.fakeElem.style.border = '0';
-            this.fakeElem.style.padding = '0';
-            this.fakeElem.style.margin = '0';
-            // Move element out of screen horizontally
-            this.fakeElem.style.position = 'absolute';
-            this.fakeElem.style[isRTL ? 'right' : 'left'] = '-9999px';
-            // Move element to the same position vertically
-            var yPosition = window.pageYOffset || document.documentElement.scrollTop;
-            this.fakeElem.style.top = yPosition + 'px';
-
-            this.fakeElem.setAttribute('readonly', '');
-            this.fakeElem.value = this.text;
-
-            this.container.appendChild(this.fakeElem);
-
-            this.selectedText = (0, _select2.default)(this.fakeElem);
-            this.copyText();
-        }
-
-        /**
-         * Only removes the fake element after another click event, that way
-         * a user can hit `Ctrl+C` to copy because selection still exists.
-         */
-
-    }, {
-        key: 'removeFake',
-        value: function removeFake() {
-            if (this.fakeHandler) {
-                this.container.removeEventListener('click', this.fakeHandlerCallback);
-                this.fakeHandler = null;
-                this.fakeHandlerCallback = null;
-            }
-
-            if (this.fakeElem) {
-                this.container.removeChild(this.fakeElem);
-                this.fakeElem = null;
-            }
-        }
-
-        /**
-         * Selects the content from element passed on `target` property.
-         */
-
-    }, {
-        key: 'selectTarget',
-        value: function selectTarget() {
-            this.selectedText = (0, _select2.default)(this.target);
-            this.copyText();
-        }
-
-        /**
-         * Executes the copy operation based on the current selection.
-         */
-
-    }, {
-        key: 'copyText',
-        value: function copyText() {
-            var succeeded = void 0;
-
-            try {
-                succeeded = document.execCommand(this.action);
-            } catch (err) {
-                succeeded = false;
-            }
-
-            this.handleResult(succeeded);
-        }
-
-        /**
-         * Fires an event based on the copy operation result.
-         * @param {Boolean} succeeded
-         */
-
-    }, {
-        key: 'handleResult',
-        value: function handleResult(succeeded) {
-            this.emitter.emit(succeeded ? 'success' : 'error', {
-                action: this.action,
-                text: this.selectedText,
-                trigger: this.trigger,
-                clearSelection: this.clearSelection.bind(this)
-            });
-        }
-
-        /**
-         * Moves focus away from `target` and back to the trigger, removes current selection.
-         */
-
-    }, {
-        key: 'clearSelection',
-        value: function clearSelection() {
-            if (this.trigger) {
-                this.trigger.focus();
-            }
-
-            window.getSelection().removeAllRanges();
-        }
-
-        /**
-         * Sets the `action` to be performed which can be either 'copy' or 'cut'.
-         * @param {String} action
-         */
-
-    }, {
-        key: 'destroy',
-
-
-        /**
-         * Destroy lifecycle.
-         */
-        value: function destroy() {
-            this.removeFake();
-        }
-    }, {
-        key: 'action',
-        set: function set() {
-            var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'copy';
-
-            this._action = action;
-
-            if (this._action !== 'copy' && this._action !== 'cut') {
-                throw new Error('Invalid "action" value, use either "copy" or "cut"');
-            }
-        }
-
-        /**
-         * Gets the `action` property.
-         * @return {String}
-         */
-        ,
-        get: function get() {
-            return this._action;
-        }
-
-        /**
-         * Sets the `target` property using an element
-         * that will be have its content copied.
-         * @param {Element} target
-         */
-
-    }, {
-        key: 'target',
-        set: function set(target) {
-            if (target !== undefined) {
-                if (target && (typeof target === 'undefined' ? 'undefined' : _typeof(target)) === 'object' && target.nodeType === 1) {
-                    if (this.action === 'copy' && target.hasAttribute('disabled')) {
-                        throw new Error('Invalid "target" attribute. Please use "readonly" instead of "disabled" attribute');
-                    }
-
-                    if (this.action === 'cut' && (target.hasAttribute('readonly') || target.hasAttribute('disabled'))) {
-                        throw new Error('Invalid "target" attribute. You can\'t cut text from elements with "readonly" or "disabled" attributes');
-                    }
-
-                    this._target = target;
-                } else {
-                    throw new Error('Invalid "target" value, use a valid Element');
-                }
-            }
-        }
-
-        /**
-         * Gets the `target` property.
-         * @return {String|HTMLElement}
-         */
-        ,
-        get: function get() {
-            return this._target;
-        }
-    }]);
-
-    return ClipboardAction;
-}();
-
-module.exports = ClipboardAction;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-function select(element) {
-    var selectedText;
-
-    if (element.nodeName === 'SELECT') {
-        element.focus();
-
-        selectedText = element.value;
-    }
-    else if (element.nodeName === 'INPUT' || element.nodeName === 'TEXTAREA') {
-        var isReadOnly = element.hasAttribute('readonly');
-
-        if (!isReadOnly) {
-            element.setAttribute('readonly', '');
-        }
-
-        element.select();
-        element.setSelectionRange(0, element.value.length);
-
-        if (!isReadOnly) {
-            element.removeAttribute('readonly');
-        }
-
-        selectedText = element.value;
-    }
-    else {
-        if (element.hasAttribute('contenteditable')) {
-            element.focus();
-        }
-
-        var selection = window.getSelection();
-        var range = document.createRange();
-
-        range.selectNodeContents(element);
-        selection.removeAllRanges();
-        selection.addRange(range);
-
-        selectedText = selection.toString();
-    }
-
-    return selectedText;
-}
-
-module.exports = select;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-function E () {
-  // Keep this empty so it's easier to inherit from
-  // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
-}
-
-E.prototype = {
-  on: function (name, callback, ctx) {
-    var e = this.e || (this.e = {});
-
-    (e[name] || (e[name] = [])).push({
-      fn: callback,
-      ctx: ctx
-    });
-
-    return this;
-  },
-
-  once: function (name, callback, ctx) {
-    var self = this;
-    function listener () {
-      self.off(name, listener);
-      callback.apply(ctx, arguments);
-    };
-
-    listener._ = callback
-    return this.on(name, listener, ctx);
-  },
-
-  emit: function (name) {
-    var data = [].slice.call(arguments, 1);
-    var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
-    var i = 0;
-    var len = evtArr.length;
-
-    for (i; i < len; i++) {
-      evtArr[i].fn.apply(evtArr[i].ctx, data);
-    }
-
-    return this;
-  },
-
-  off: function (name, callback) {
-    var e = this.e || (this.e = {});
-    var evts = e[name];
-    var liveEvents = [];
-
-    if (evts && callback) {
-      for (var i = 0, len = evts.length; i < len; i++) {
-        if (evts[i].fn !== callback && evts[i].fn._ !== callback)
-          liveEvents.push(evts[i]);
-      }
-    }
-
-    // Remove event from queue to prevent memory leak
-    // Suggested by https://github.com/lazd
-    // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
-
-    (liveEvents.length)
-      ? e[name] = liveEvents
-      : delete e[name];
-
-    return this;
-  }
-};
-
-module.exports = E;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var is = __webpack_require__(5);
-var delegate = __webpack_require__(6);
-
-/**
- * Validates all params and calls the right
- * listener function based on its target type.
- *
- * @param {String|HTMLElement|HTMLCollection|NodeList} target
- * @param {String} type
- * @param {Function} callback
- * @return {Object}
- */
-function listen(target, type, callback) {
-    if (!target && !type && !callback) {
-        throw new Error('Missing required arguments');
-    }
-
-    if (!is.string(type)) {
-        throw new TypeError('Second argument must be a String');
-    }
-
-    if (!is.fn(callback)) {
-        throw new TypeError('Third argument must be a Function');
-    }
-
-    if (is.node(target)) {
-        return listenNode(target, type, callback);
-    }
-    else if (is.nodeList(target)) {
-        return listenNodeList(target, type, callback);
-    }
-    else if (is.string(target)) {
-        return listenSelector(target, type, callback);
-    }
-    else {
-        throw new TypeError('First argument must be a String, HTMLElement, HTMLCollection, or NodeList');
-    }
-}
-
-/**
- * Adds an event listener to a HTML element
- * and returns a remove listener function.
- *
- * @param {HTMLElement} node
- * @param {String} type
- * @param {Function} callback
- * @return {Object}
- */
-function listenNode(node, type, callback) {
-    node.addEventListener(type, callback);
-
-    return {
-        destroy: function() {
-            node.removeEventListener(type, callback);
-        }
-    }
-}
-
-/**
- * Add an event listener to a list of HTML elements
- * and returns a remove listener function.
- *
- * @param {NodeList|HTMLCollection} nodeList
- * @param {String} type
- * @param {Function} callback
- * @return {Object}
- */
-function listenNodeList(nodeList, type, callback) {
-    Array.prototype.forEach.call(nodeList, function(node) {
-        node.addEventListener(type, callback);
-    });
-
-    return {
-        destroy: function() {
-            Array.prototype.forEach.call(nodeList, function(node) {
-                node.removeEventListener(type, callback);
-            });
-        }
-    }
-}
-
-/**
- * Add an event listener to a selector
- * and returns a remove listener function.
- *
- * @param {String} selector
- * @param {String} type
- * @param {Function} callback
- * @return {Object}
- */
-function listenSelector(selector, type, callback) {
-    return delegate(document.body, selector, type, callback);
-}
-
-module.exports = listen;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-/**
- * Check if argument is a HTML element.
- *
- * @param {Object} value
- * @return {Boolean}
- */
-exports.node = function(value) {
-    return value !== undefined
-        && value instanceof HTMLElement
-        && value.nodeType === 1;
-};
-
-/**
- * Check if argument is a list of HTML elements.
- *
- * @param {Object} value
- * @return {Boolean}
- */
-exports.nodeList = function(value) {
-    var type = Object.prototype.toString.call(value);
-
-    return value !== undefined
-        && (type === '[object NodeList]' || type === '[object HTMLCollection]')
-        && ('length' in value)
-        && (value.length === 0 || exports.node(value[0]));
-};
-
-/**
- * Check if argument is a string.
- *
- * @param {Object} value
- * @return {Boolean}
- */
-exports.string = function(value) {
-    return typeof value === 'string'
-        || value instanceof String;
-};
-
-/**
- * Check if argument is a function.
- *
- * @param {Object} value
- * @return {Boolean}
- */
-exports.fn = function(value) {
-    var type = Object.prototype.toString.call(value);
-
-    return type === '[object Function]';
-};
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var closest = __webpack_require__(7);
-
-/**
- * Delegates event to a selector.
- *
- * @param {Element} element
- * @param {String} selector
- * @param {String} type
- * @param {Function} callback
- * @param {Boolean} useCapture
- * @return {Object}
- */
-function _delegate(element, selector, type, callback, useCapture) {
-    var listenerFn = listener.apply(this, arguments);
-
-    element.addEventListener(type, listenerFn, useCapture);
-
-    return {
-        destroy: function() {
-            element.removeEventListener(type, listenerFn, useCapture);
-        }
-    }
-}
-
-/**
- * Delegates event to a selector.
- *
- * @param {Element|String|Array} [elements]
- * @param {String} selector
- * @param {String} type
- * @param {Function} callback
- * @param {Boolean} useCapture
- * @return {Object}
- */
-function delegate(elements, selector, type, callback, useCapture) {
-    // Handle the regular Element usage
-    if (typeof elements.addEventListener === 'function') {
-        return _delegate.apply(null, arguments);
-    }
-
-    // Handle Element-less usage, it defaults to global delegation
-    if (typeof type === 'function') {
-        // Use `document` as the first parameter, then apply arguments
-        // This is a short way to .unshift `arguments` without running into deoptimizations
-        return _delegate.bind(null, document).apply(null, arguments);
-    }
-
-    // Handle Selector-based usage
-    if (typeof elements === 'string') {
-        elements = document.querySelectorAll(elements);
-    }
-
-    // Handle Array-like based usage
-    return Array.prototype.map.call(elements, function (element) {
-        return _delegate(element, selector, type, callback, useCapture);
-    });
-}
-
-/**
- * Finds closest match and invokes callback.
- *
- * @param {Element} element
- * @param {String} selector
- * @param {String} type
- * @param {Function} callback
- * @return {Function}
- */
-function listener(element, selector, type, callback) {
-    return function(e) {
-        e.delegateTarget = closest(e.target, selector);
-
-        if (e.delegateTarget) {
-            callback.call(element, e);
-        }
-    }
-}
-
-module.exports = delegate;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-var DOCUMENT_NODE_TYPE = 9;
-
-/**
- * A polyfill for Element.matches()
- */
-if (typeof Element !== 'undefined' && !Element.prototype.matches) {
-    var proto = Element.prototype;
-
-    proto.matches = proto.matchesSelector ||
-                    proto.mozMatchesSelector ||
-                    proto.msMatchesSelector ||
-                    proto.oMatchesSelector ||
-                    proto.webkitMatchesSelector;
-}
-
-/**
- * Finds the closest parent that matches a selector.
- *
- * @param {Element} element
- * @param {String} selector
- * @return {Function}
- */
-function closest (element, selector) {
-    while (element && element.nodeType !== DOCUMENT_NODE_TYPE) {
-        if (typeof element.matches === 'function' &&
-            element.matches(selector)) {
-          return element;
-        }
-        element = element.parentNode;
-    }
-}
-
-module.exports = closest;
-
-
-/***/ })
-/******/ ]);
-});
 
 /***/ }),
 
@@ -17619,6 +16799,395 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
+/***/ "./node_modules/lodash.debounce/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash.debounce/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as the `TypeError` message for "Functions" methods. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        result = wait - timeSinceLastCall;
+
+    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = debounce;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./node_modules/marked/lib/marked.js":
 /*!*******************************************!*\
   !*** ./node_modules/marked/lib/marked.js ***!
@@ -21007,329 +20576,6 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-
-/***/ }),
-
-/***/ "./node_modules/react-clipboard.js/dist/react-clipboard.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/react-clipboard.js/dist/react-clipboard.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory(__webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js"), __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"), __webpack_require__(/*! react */ "./node_modules/react/index.js"), __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
-	else {}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_clipboard__, __WEBPACK_EXTERNAL_MODULE_prop_types__, __WEBPACK_EXTERNAL_MODULE_react__, __WEBPACK_EXTERNAL_MODULE_react_dom__) {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./index.js");
-/******/ })
-/************************************************************************/
-/******/ ({
-
-/***/ "./index.js":
-/*!******************!*\
-  !*** ./index.js ***!
-  \******************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "prop-types");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-var ClipboardButton =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(ClipboardButton, _React$Component);
-
-  function ClipboardButton() {
-    _classCallCheck(this, ClipboardButton);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(ClipboardButton).apply(this, arguments));
-  }
-
-  _createClass(ClipboardButton, [{
-    key: "propsWith",
-    value: function propsWith(regexp) {
-      var remove = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var object = {};
-      Object.keys(this.props).forEach(function (key) {
-        if (key.search(regexp) !== -1) {
-          var objectKey = remove ? key.replace(regexp, '') : key;
-          object[objectKey] = this.props[key];
-        }
-      }, this);
-      return object;
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.clipboard && this.clipboard.destroy();
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      // Support old API by trying to assign this.props.options first;
-      var options = this.props.options || this.propsWith(/^option-/, true);
-      var element = react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.findDOMNode(this.element);
-
-      var Clipboard = __webpack_require__(/*! clipboard */ "clipboard");
-
-      this.clipboard = new Clipboard(element, options);
-      var callbacks = this.propsWith(/^on/, true);
-      Object.keys(callbacks).forEach(function (callback) {
-        this.clipboard.on(callback.toLowerCase(), this.props['on' + callback]);
-      }, this);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      var attributes = _objectSpread({
-        title: this.props.title || '',
-        type: this.getType(),
-        className: this.props.className || '',
-        style: this.props.style || {},
-        ref: function ref(element) {
-          return _this.element = element;
-        },
-        onClick: this.props.onClick
-      }, this.propsWith(/^data-/), this.propsWith(/^button-/, true));
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(this.getComponent(), attributes, this.props.children);
-    }
-  }, {
-    key: "getType",
-    value: function getType() {
-      if (this.getComponent() === 'button' || this.getComponent() === 'input') {
-        return this.props.type || 'button';
-      } else {
-        return undefined;
-      }
-    }
-  }, {
-    key: "getComponent",
-    value: function getComponent() {
-      return this.props.component || 'button';
-    }
-  }]);
-
-  return ClipboardButton;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-_defineProperty(ClipboardButton, "propTypes", {
-  options: function options(props, propName, componentName) {
-    var options = props[propName];
-
-    if (options && _typeof(options) !== 'object' || Array.isArray(options)) {
-      return new Error("Invalid props '".concat(propName, "' supplied to '").concat(componentName, "'. ") + "'".concat(propName, "' is not an object."));
-    }
-
-    if (props['option-text'] !== undefined) {
-      var optionText = props['option-text'];
-
-      if (typeof optionText !== 'function') {
-        return new Error("Invalid props 'option-text' supplied to '".concat(componentName, "'. ") + "'option-text' is not a function.");
-      }
-    }
-  },
-  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  type: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  style: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.object,
-  component: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any,
-  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.any
-});
-
-_defineProperty(ClipboardButton, "defaultProps", {
-  onClick: function onClick() {}
-  /* Returns a object with all props that fulfill a certain naming pattern
-   *
-   * @param {RegExp} regexp - Regular expression representing which pattern
-   *                          you'll be searching for.
-   * @param {Boolean} remove - Determines if the regular expression should be
-   *                           removed when transmitting the key from the props
-   *                           to the new object.
-   *
-   * e.g:
-   *
-   * // Considering:
-   * // this.props = {option-foo: 1, onBar: 2, data-foobar: 3 data-baz: 4};
-   *
-   * // *RegExps not using // so that this comment doesn't break up
-   * this.propsWith(option-*, true); // returns {foo: 1}
-   * this.propsWith(on*, true); // returns {Bar: 2}
-   * this.propsWith(data-*); // returns {data-foobar: 1, data-baz: 4}
-   */
-
-});
-
-/* harmony default export */ __webpack_exports__["default"] = (ClipboardButton);
-
-/***/ }),
-
-/***/ "clipboard":
-/*!********************************************************************************************************!*\
-  !*** external {"root":"ClipboardJS","amd":"clipboard","commonjs":"clipboard","commonjs2":"clipboard"} ***!
-  \********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_clipboard__;
-
-/***/ }),
-
-/***/ "prop-types":
-/*!*********************************************************************************************************!*\
-  !*** external {"root":"PropTypes","amd":"prop-types","commonjs":"prop-types","commonjs2":"prop-types"} ***!
-  \*********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_prop_types__;
-
-/***/ }),
-
-/***/ "react":
-/*!**************************************************************************************!*\
-  !*** external {"root":"React","amd":"react","commonjs":"react","commonjs2":"react"} ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_react__;
-
-/***/ }),
-
-/***/ "react-dom":
-/*!*****************************************************************************************************!*\
-  !*** external {"root":"ReactDOM","amd":"react-dom","commonjs":"react-dom","commonjs2":"react-dom"} ***!
-  \*****************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_react_dom__;
-
-/***/ })
-
-/******/ });
-});
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9SZWFjdENsaXBib2FyZC93ZWJwYWNrL3VuaXZlcnNhbE1vZHVsZURlZmluaXRpb24iLCJ3ZWJwYWNrOi8vUmVhY3RDbGlwYm9hcmQvd2VicGFjay9ib290c3RyYXAiLCJ3ZWJwYWNrOi8vUmVhY3RDbGlwYm9hcmQvLi9pbmRleC5qcyIsIndlYnBhY2s6Ly9SZWFjdENsaXBib2FyZC9leHRlcm5hbCB7XCJyb290XCI6XCJDbGlwYm9hcmRKU1wiLFwiYW1kXCI6XCJjbGlwYm9hcmRcIixcImNvbW1vbmpzXCI6XCJjbGlwYm9hcmRcIixcImNvbW1vbmpzMlwiOlwiY2xpcGJvYXJkXCJ9Iiwid2VicGFjazovL1JlYWN0Q2xpcGJvYXJkL2V4dGVybmFsIHtcInJvb3RcIjpcIlByb3BUeXBlc1wiLFwiYW1kXCI6XCJwcm9wLXR5cGVzXCIsXCJjb21tb25qc1wiOlwicHJvcC10eXBlc1wiLFwiY29tbW9uanMyXCI6XCJwcm9wLXR5cGVzXCJ9Iiwid2VicGFjazovL1JlYWN0Q2xpcGJvYXJkL2V4dGVybmFsIHtcInJvb3RcIjpcIlJlYWN0XCIsXCJhbWRcIjpcInJlYWN0XCIsXCJjb21tb25qc1wiOlwicmVhY3RcIixcImNvbW1vbmpzMlwiOlwicmVhY3RcIn0iLCJ3ZWJwYWNrOi8vUmVhY3RDbGlwYm9hcmQvZXh0ZXJuYWwge1wicm9vdFwiOlwiUmVhY3RET01cIixcImFtZFwiOlwicmVhY3QtZG9tXCIsXCJjb21tb25qc1wiOlwicmVhY3QtZG9tXCIsXCJjb21tb25qczJcIjpcInJlYWN0LWRvbVwifSJdLCJuYW1lcyI6WyJDbGlwYm9hcmRCdXR0b24iLCJyZWdleHAiLCJyZW1vdmUiLCJvYmplY3QiLCJPYmplY3QiLCJrZXlzIiwicHJvcHMiLCJmb3JFYWNoIiwia2V5Iiwic2VhcmNoIiwib2JqZWN0S2V5IiwicmVwbGFjZSIsImNsaXBib2FyZCIsImRlc3Ryb3kiLCJvcHRpb25zIiwicHJvcHNXaXRoIiwiZWxlbWVudCIsIlJlYWN0RE9NIiwiZmluZERPTU5vZGUiLCJDbGlwYm9hcmQiLCJyZXF1aXJlIiwiY2FsbGJhY2tzIiwiY2FsbGJhY2siLCJvbiIsInRvTG93ZXJDYXNlIiwiYXR0cmlidXRlcyIsInRpdGxlIiwidHlwZSIsImdldFR5cGUiLCJjbGFzc05hbWUiLCJzdHlsZSIsInJlZiIsIm9uQ2xpY2siLCJSZWFjdCIsImNyZWF0ZUVsZW1lbnQiLCJnZXRDb21wb25lbnQiLCJjaGlsZHJlbiIsInVuZGVmaW5lZCIsImNvbXBvbmVudCIsIkNvbXBvbmVudCIsInByb3BOYW1lIiwiY29tcG9uZW50TmFtZSIsIkFycmF5IiwiaXNBcnJheSIsIkVycm9yIiwib3B0aW9uVGV4dCIsIlByb3BUeXBlcyIsInN0cmluZyIsImFueSJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsQ0FBQztBQUNELE87QUNWQTtBQUNBOztBQUVBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTs7O0FBR0E7QUFDQTs7QUFFQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBLGtEQUEwQyxnQ0FBZ0M7QUFDMUU7QUFDQTs7QUFFQTtBQUNBO0FBQ0E7QUFDQSxnRUFBd0Qsa0JBQWtCO0FBQzFFO0FBQ0EseURBQWlELGNBQWM7QUFDL0Q7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLGlEQUF5QyxpQ0FBaUM7QUFDMUUsd0hBQWdILG1CQUFtQixFQUFFO0FBQ3JJO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0EsbUNBQTJCLDBCQUEwQixFQUFFO0FBQ3ZELHlDQUFpQyxlQUFlO0FBQ2hEO0FBQ0E7QUFDQTs7QUFFQTtBQUNBLDhEQUFzRCwrREFBK0Q7O0FBRXJIO0FBQ0E7OztBQUdBO0FBQ0E7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7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Q0FBLHdEOzs7Ozs7Ozs7OztBQ0FBLG1EOzs7Ozs7Ozs7OztBQ0FBLHVEIiwiZmlsZSI6InJlYWN0LWNsaXBib2FyZC5qcyIsInNvdXJjZXNDb250ZW50IjpbIihmdW5jdGlvbiB3ZWJwYWNrVW5pdmVyc2FsTW9kdWxlRGVmaW5pdGlvbihyb290LCBmYWN0b3J5KSB7XG5cdGlmKHR5cGVvZiBleHBvcnRzID09PSAnb2JqZWN0JyAmJiB0eXBlb2YgbW9kdWxlID09PSAnb2JqZWN0Jylcblx0XHRtb2R1bGUuZXhwb3J0cyA9IGZhY3RvcnkocmVxdWlyZShcImNsaXBib2FyZFwiKSwgcmVxdWlyZShcInByb3AtdHlwZXNcIiksIHJlcXVpcmUoXCJyZWFjdFwiKSwgcmVxdWlyZShcInJlYWN0LWRvbVwiKSk7XG5cdGVsc2UgaWYodHlwZW9mIGRlZmluZSA9PT0gJ2Z1bmN0aW9uJyAmJiBkZWZpbmUuYW1kKVxuXHRcdGRlZmluZShbXCJjbGlwYm9hcmRcIiwgXCJwcm9wLXR5cGVzXCIsIFwicmVhY3RcIiwgXCJyZWFjdC1kb21cIl0sIGZhY3RvcnkpO1xuXHRlbHNlIGlmKHR5cGVvZiBleHBvcnRzID09PSAnb2JqZWN0Jylcblx0XHRleHBvcnRzW1wiUmVhY3RDbGlwYm9hcmRcIl0gPSBmYWN0b3J5KHJlcXVpcmUoXCJjbGlwYm9hcmRcIiksIHJlcXVpcmUoXCJwcm9wLXR5cGVzXCIpLCByZXF1aXJlKFwicmVhY3RcIiksIHJlcXVpcmUoXCJyZWFjdC1kb21cIikpO1xuXHRlbHNlXG5cdFx0cm9vdFtcIlJlYWN0Q2xpcGJvYXJkXCJdID0gZmFjdG9yeShyb290W1wiQ2xpcGJvYXJkSlNcIl0sIHJvb3RbXCJQcm9wVHlwZXNcIl0sIHJvb3RbXCJSZWFjdFwiXSwgcm9vdFtcIlJlYWN0RE9NXCJdKTtcbn0pKHRoaXMsIGZ1bmN0aW9uKF9fV0VCUEFDS19FWFRFUk5BTF9NT0RVTEVfY2xpcGJvYXJkX18sIF9fV0VCUEFDS19FWFRFUk5BTF9NT0RVTEVfcHJvcF90eXBlc19fLCBfX1dFQlBBQ0tfRVhURVJOQUxfTU9EVUxFX3JlYWN0X18sIF9fV0VCUEFDS19FWFRFUk5BTF9NT0RVTEVfcmVhY3RfZG9tX18pIHtcbnJldHVybiAiLCIgXHQvLyBUaGUgbW9kdWxlIGNhY2hlXG4gXHR2YXIgaW5zdGFsbGVkTW9kdWxlcyA9IHt9O1xuXG4gXHQvLyBUaGUgcmVxdWlyZSBmdW5jdGlvblxuIFx0ZnVuY3Rpb24gX193ZWJwYWNrX3JlcXVpcmVfXyhtb2R1bGVJZCkge1xuXG4gXHRcdC8vIENoZWNrIGlmIG1vZHVsZSBpcyBpbiBjYWNoZVxuIFx0XHRpZihpbnN0YWxsZWRNb2R1bGVzW21vZHVsZUlkXSkge1xuIFx0XHRcdHJldHVybiBpbnN0YWxsZWRNb2R1bGVzW21vZHVsZUlkXS5leHBvcnRzO1xuIFx0XHR9XG4gXHRcdC8vIENyZWF0ZSBhIG5ldyBtb2R1bGUgKGFuZCBwdXQgaXQgaW50byB0aGUgY2FjaGUpXG4gXHRcdHZhciBtb2R1bGUgPSBpbnN0YWxsZWRNb2R1bGVzW21vZHVsZUlkXSA9IHtcbiBcdFx0XHRpOiBtb2R1bGVJZCxcbiBcdFx0XHRsOiBmYWxzZSxcbiBcdFx0XHRleHBvcnRzOiB7fVxuIFx0XHR9O1xuXG4gXHRcdC8vIEV4ZWN1dGUgdGhlIG1vZHVsZSBmdW5jdGlvblxuIFx0XHRtb2R1bGVzW21vZHVsZUlkXS5jYWxsKG1vZHVsZS5leHBvcnRzLCBtb2R1bGUsIG1vZHVsZS5leHBvcnRzLCBfX3dlYnBhY2tfcmVxdWlyZV9fKTtcblxuIFx0XHQvLyBGbGFnIHRoZSBtb2R1bGUgYXMgbG9hZGVkXG4gXHRcdG1vZHVsZS5sID0gdHJ1ZTtcblxuIFx0XHQvLyBSZXR1cm4gdGhlIGV4cG9ydHMgb2YgdGhlIG1vZHVsZVxuIFx0XHRyZXR1cm4gbW9kdWxlLmV4cG9ydHM7XG4gXHR9XG5cblxuIFx0Ly8gZXhwb3NlIHRoZSBtb2R1bGVzIG9iamVjdCAoX193ZWJwYWNrX21vZHVsZXNfXylcbiBcdF9fd2VicGFja19yZXF1aXJlX18ubSA9IG1vZHVsZXM7XG5cbiBcdC8vIGV4cG9zZSB0aGUgbW9kdWxlIGNhY2hlXG4gXHRfX3dlYnBhY2tfcmVxdWlyZV9fLmMgPSBpbnN0YWxsZWRNb2R1bGVzO1xuXG4gXHQvLyBkZWZpbmUgZ2V0dGVyIGZ1bmN0aW9uIGZvciBoYXJtb255IGV4cG9ydHNcbiBcdF9fd2VicGFja19yZXF1aXJlX18uZCA9IGZ1bmN0aW9uKGV4cG9ydHMsIG5hbWUsIGdldHRlcikge1xuIFx0XHRpZighX193ZWJwYWNrX3JlcXVpcmVfXy5vKGV4cG9ydHMsIG5hbWUpKSB7XG4gXHRcdFx0T2JqZWN0LmRlZmluZVByb3BlcnR5KGV4cG9ydHMsIG5hbWUsIHsgZW51bWVyYWJsZTogdHJ1ZSwgZ2V0OiBnZXR0ZXIgfSk7XG4gXHRcdH1cbiBcdH07XG5cbiBcdC8vIGRlZmluZSBfX2VzTW9kdWxlIG9uIGV4cG9ydHNcbiBcdF9fd2VicGFja19yZXF1aXJlX18uciA9IGZ1bmN0aW9uKGV4cG9ydHMpIHtcbiBcdFx0aWYodHlwZW9mIFN5bWJvbCAhPT0gJ3VuZGVmaW5lZCcgJiYgU3ltYm9sLnRvU3RyaW5nVGFnKSB7XG4gXHRcdFx0T2JqZWN0LmRlZmluZVByb3BlcnR5KGV4cG9ydHMsIFN5bWJvbC50b1N0cmluZ1RhZywgeyB2YWx1ZTogJ01vZHVsZScgfSk7XG4gXHRcdH1cbiBcdFx0T2JqZWN0LmRlZmluZVByb3BlcnR5KGV4cG9ydHMsICdfX2VzTW9kdWxlJywgeyB2YWx1ZTogdHJ1ZSB9KTtcbiBcdH07XG5cbiBcdC8vIGNyZWF0ZSBhIGZha2UgbmFtZXNwYWNlIG9iamVjdFxuIFx0Ly8gbW9kZSAmIDE6IHZhbHVlIGlzIGEgbW9kdWxlIGlkLCByZXF1aXJlIGl0XG4gXHQvLyBtb2RlICYgMjogbWVyZ2UgYWxsIHByb3BlcnRpZXMgb2YgdmFsdWUgaW50byB0aGUgbnNcbiBcdC8vIG1vZGUgJiA0OiByZXR1cm4gdmFsdWUgd2hlbiBhbHJlYWR5IG5zIG9iamVjdFxuIFx0Ly8gbW9kZSAmIDh8MTogYmVoYXZlIGxpa2UgcmVxdWlyZVxuIFx0X193ZWJwYWNrX3JlcXVpcmVfXy50ID0gZnVuY3Rpb24odmFsdWUsIG1vZGUpIHtcbiBcdFx0aWYobW9kZSAmIDEpIHZhbHVlID0gX193ZWJwYWNrX3JlcXVpcmVfXyh2YWx1ZSk7XG4gXHRcdGlmKG1vZGUgJiA4KSByZXR1cm4gdmFsdWU7XG4gXHRcdGlmKChtb2RlICYgNCkgJiYgdHlwZW9mIHZhbHVlID09PSAnb2JqZWN0JyAmJiB2YWx1ZSAmJiB2YWx1ZS5fX2VzTW9kdWxlKSByZXR1cm4gdmFsdWU7XG4gXHRcdHZhciBucyA9IE9iamVjdC5jcmVhdGUobnVsbCk7XG4gXHRcdF9fd2VicGFja19yZXF1aXJlX18ucihucyk7XG4gXHRcdE9iamVjdC5kZWZpbmVQcm9wZXJ0eShucywgJ2RlZmF1bHQnLCB7IGVudW1lcmFibGU6IHRydWUsIHZhbHVlOiB2YWx1ZSB9KTtcbiBcdFx0aWYobW9kZSAmIDIgJiYgdHlwZW9mIHZhbHVlICE9ICdzdHJpbmcnKSBmb3IodmFyIGtleSBpbiB2YWx1ZSkgX193ZWJwYWNrX3JlcXVpcmVfXy5kKG5zLCBrZXksIGZ1bmN0aW9uKGtleSkgeyByZXR1cm4gdmFsdWVba2V5XTsgfS5iaW5kKG51bGwsIGtleSkpO1xuIFx0XHRyZXR1cm4gbnM7XG4gXHR9O1xuXG4gXHQvLyBnZXREZWZhdWx0RXhwb3J0IGZ1bmN0aW9uIGZvciBjb21wYXRpYmlsaXR5IHdpdGggbm9uLWhhcm1vbnkgbW9kdWxlc1xuIFx0X193ZWJwYWNrX3JlcXVpcmVfXy5uID0gZnVuY3Rpb24obW9kdWxlKSB7XG4gXHRcdHZhciBnZXR0ZXIgPSBtb2R1bGUgJiYgbW9kdWxlLl9fZXNNb2R1bGUgP1xuIFx0XHRcdGZ1bmN0aW9uIGdldERlZmF1bHQoKSB7IHJldHVybiBtb2R1bGVbJ2RlZmF1bHQnXTsgfSA6XG4gXHRcdFx0ZnVuY3Rpb24gZ2V0TW9kdWxlRXhwb3J0cygpIHsgcmV0dXJuIG1vZHVsZTsgfTtcbiBcdFx0X193ZWJwYWNrX3JlcXVpcmVfXy5kKGdldHRlciwgJ2EnLCBnZXR0ZXIpO1xuIFx0XHRyZXR1cm4gZ2V0dGVyO1xuIFx0fTtcblxuIFx0Ly8gT2JqZWN0LnByb3RvdHlwZS5oYXNPd25Qcm9wZXJ0eS5jYWxsXG4gXHRfX3dlYnBhY2tfcmVxdWlyZV9fLm8gPSBmdW5jdGlvbihvYmplY3QsIHByb3BlcnR5KSB7IHJldHVybiBPYmplY3QucHJvdG90eXBlLmhhc093blByb3BlcnR5LmNhbGwob2JqZWN0LCBwcm9wZXJ0eSk7IH07XG5cbiBcdC8vIF9fd2VicGFja19wdWJsaWNfcGF0aF9fXG4gXHRfX3dlYnBhY2tfcmVxdWlyZV9fLnAgPSBcIlwiO1xuXG5cbiBcdC8vIExvYWQgZW50cnkgbW9kdWxlIGFuZCByZXR1cm4gZXhwb3J0c1xuIFx0cmV0dXJuIF9fd2VicGFja19yZXF1aXJlX18oX193ZWJwYWNrX3JlcXVpcmVfXy5zID0gXCIuL2luZGV4LmpzXCIpO1xuIiwiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCBSZWFjdERPTSBmcm9tICdyZWFjdC1kb20nO1xuaW1wb3J0IFByb3BUeXBlcyBmcm9tICdwcm9wLXR5cGVzJztcblxuY2xhc3MgQ2xpcGJvYXJkQnV0dG9uIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50IHtcbiAgc3RhdGljIHByb3BUeXBlcyA9IHtcbiAgICBvcHRpb25zOiBmdW5jdGlvbihwcm9wcywgcHJvcE5hbWUsIGNvbXBvbmVudE5hbWUpIHtcbiAgICAgIGNvbnN0IG9wdGlvbnMgPSBwcm9wc1twcm9wTmFtZV07XG4gICAgICBpZiAob3B0aW9ucyAmJiB0eXBlb2Ygb3B0aW9ucyAhPT0gJ29iamVjdCcgfHwgQXJyYXkuaXNBcnJheShvcHRpb25zKSkge1xuICAgICAgICByZXR1cm4gbmV3IEVycm9yKGBJbnZhbGlkIHByb3BzICcke3Byb3BOYW1lfScgc3VwcGxpZWQgdG8gJyR7Y29tcG9uZW50TmFtZX0nLiBgICtcbiAgICAgICAgYCcke3Byb3BOYW1lfScgaXMgbm90IGFuIG9iamVjdC5gKTtcbiAgICAgIH1cblxuICAgICAgaWYgKHByb3BzWydvcHRpb24tdGV4dCddICE9PSB1bmRlZmluZWQpIHtcbiAgICAgICAgY29uc3Qgb3B0aW9uVGV4dCA9IHByb3BzWydvcHRpb24tdGV4dCddO1xuICAgICAgICBpZiAodHlwZW9mIG9wdGlvblRleHQgIT09ICdmdW5jdGlvbicpIHtcbiAgICAgICAgICByZXR1cm4gbmV3IEVycm9yKGBJbnZhbGlkIHByb3BzICdvcHRpb24tdGV4dCcgc3VwcGxpZWQgdG8gJyR7Y29tcG9uZW50TmFtZX0nLiBgICtcbiAgICAgICAgICBgJ29wdGlvbi10ZXh0JyBpcyBub3QgYSBmdW5jdGlvbi5gKTtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH0sXG4gICAgdGl0bGU6IFByb3BUeXBlcy5zdHJpbmcsXG4gICAgdHlwZTogUHJvcFR5cGVzLnN0cmluZyxcbiAgICBjbGFzc05hbWU6IFByb3BUeXBlcy5zdHJpbmcsXG4gICAgc3R5bGU6IFByb3BUeXBlcy5vYmplY3QsXG4gICAgY29tcG9uZW50OiBQcm9wVHlwZXMuYW55LFxuICAgIGNoaWxkcmVuOiBQcm9wVHlwZXMuYW55LFxuICB9XG5cbiAgc3RhdGljIGRlZmF1bHRQcm9wcyA9IHtcbiAgICBvbkNsaWNrOiBmdW5jdGlvbigpIHt9LFxuICB9XG5cbiAgLyogUmV0dXJucyBhIG9iamVjdCB3aXRoIGFsbCBwcm9wcyB0aGF0IGZ1bGZpbGwgYSBjZXJ0YWluIG5hbWluZyBwYXR0ZXJuXG4gICAqXG4gICAqIEBwYXJhbSB7UmVnRXhwfSByZWdleHAgLSBSZWd1bGFyIGV4cHJlc3Npb24gcmVwcmVzZW50aW5nIHdoaWNoIHBhdHRlcm5cbiAgICogICAgICAgICAgICAgICAgICAgICAgICAgIHlvdSdsbCBiZSBzZWFyY2hpbmcgZm9yLlxuICAgKiBAcGFyYW0ge0Jvb2xlYW59IHJlbW92ZSAtIERldGVybWluZXMgaWYgdGhlIHJlZ3VsYXIgZXhwcmVzc2lvbiBzaG91bGQgYmVcbiAgICogICAgICAgICAgICAgICAgICAgICAgICAgICByZW1vdmVkIHdoZW4gdHJhbnNtaXR0aW5nIHRoZSBrZXkgZnJvbSB0aGUgcHJvcHNcbiAgICogICAgICAgICAgICAgICAgICAgICAgICAgICB0byB0aGUgbmV3IG9iamVjdC5cbiAgICpcbiAgICogZS5nOlxuICAgKlxuICAgKiAvLyBDb25zaWRlcmluZzpcbiAgICogLy8gdGhpcy5wcm9wcyA9IHtvcHRpb24tZm9vOiAxLCBvbkJhcjogMiwgZGF0YS1mb29iYXI6IDMgZGF0YS1iYXo6IDR9O1xuICAgKlxuICAgKiAvLyAqUmVnRXhwcyBub3QgdXNpbmcgLy8gc28gdGhhdCB0aGlzIGNvbW1lbnQgZG9lc24ndCBicmVhayB1cFxuICAgKiB0aGlzLnByb3BzV2l0aChvcHRpb24tKiwgdHJ1ZSk7IC8vIHJldHVybnMge2ZvbzogMX1cbiAgICogdGhpcy5wcm9wc1dpdGgob24qLCB0cnVlKTsgLy8gcmV0dXJucyB7QmFyOiAyfVxuICAgKiB0aGlzLnByb3BzV2l0aChkYXRhLSopOyAvLyByZXR1cm5zIHtkYXRhLWZvb2JhcjogMSwgZGF0YS1iYXo6IDR9XG4gICAqL1xuICBwcm9wc1dpdGgocmVnZXhwLCByZW1vdmU9ZmFsc2UpIHtcbiAgICBjb25zdCBvYmplY3QgPSB7fTtcblxuICAgIE9iamVjdC5rZXlzKHRoaXMucHJvcHMpLmZvckVhY2goZnVuY3Rpb24oa2V5KSB7XG4gICAgICBpZiAoa2V5LnNlYXJjaChyZWdleHApICE9PSAtMSkge1xuICAgICAgICBjb25zdCBvYmplY3RLZXkgPSByZW1vdmUgPyBrZXkucmVwbGFjZShyZWdleHAsICcnKSA6IGtleTtcbiAgICAgICAgb2JqZWN0W29iamVjdEtleV0gPSB0aGlzLnByb3BzW2tleV07XG4gICAgICB9XG4gICAgfSwgdGhpcyk7XG5cbiAgICByZXR1cm4gb2JqZWN0O1xuICB9XG5cbiAgY29tcG9uZW50V2lsbFVubW91bnQoKSB7XG4gICAgdGhpcy5jbGlwYm9hcmQgJiYgdGhpcy5jbGlwYm9hcmQuZGVzdHJveSgpO1xuICB9XG5cbiAgY29tcG9uZW50RGlkTW91bnQoKSB7XG4gICAgLy8gU3VwcG9ydCBvbGQgQVBJIGJ5IHRyeWluZyB0byBhc3NpZ24gdGhpcy5wcm9wcy5vcHRpb25zIGZpcnN0O1xuICAgIGNvbnN0IG9wdGlvbnMgPSB0aGlzLnByb3BzLm9wdGlvbnMgfHwgdGhpcy5wcm9wc1dpdGgoL15vcHRpb24tLywgdHJ1ZSk7XG4gICAgY29uc3QgZWxlbWVudCA9IFJlYWN0RE9NLmZpbmRET01Ob2RlKHRoaXMuZWxlbWVudCk7XG4gICAgY29uc3QgQ2xpcGJvYXJkID0gcmVxdWlyZSgnY2xpcGJvYXJkJyk7XG4gICAgdGhpcy5jbGlwYm9hcmQgPSBuZXcgQ2xpcGJvYXJkKGVsZW1lbnQsIG9wdGlvbnMpO1xuXG4gICAgY29uc3QgY2FsbGJhY2tzID0gdGhpcy5wcm9wc1dpdGgoL15vbi8sIHRydWUpO1xuICAgIE9iamVjdC5rZXlzKGNhbGxiYWNrcykuZm9yRWFjaChmdW5jdGlvbihjYWxsYmFjaykge1xuICAgICAgdGhpcy5jbGlwYm9hcmQub24oY2FsbGJhY2sudG9Mb3dlckNhc2UoKSwgdGhpcy5wcm9wc1snb24nICsgY2FsbGJhY2tdKTtcbiAgICB9LCB0aGlzKTtcbiAgfVxuXG4gIHJlbmRlcigpIHtcbiAgICBjb25zdCBhdHRyaWJ1dGVzID0ge1xuICAgICAgdGl0bGU6IHRoaXMucHJvcHMudGl0bGUgfHwgJycsXG4gICAgICB0eXBlOiB0aGlzLmdldFR5cGUoKSxcbiAgICAgIGNsYXNzTmFtZTogdGhpcy5wcm9wcy5jbGFzc05hbWUgfHwgJycsXG4gICAgICBzdHlsZTogdGhpcy5wcm9wcy5zdHlsZSB8fCB7fSxcbiAgICAgIHJlZjogZWxlbWVudCA9PiB0aGlzLmVsZW1lbnQgPSBlbGVtZW50LFxuICAgICAgb25DbGljazogdGhpcy5wcm9wcy5vbkNsaWNrLFxuICAgICAgLi4udGhpcy5wcm9wc1dpdGgoL15kYXRhLS8pLFxuICAgICAgLi4udGhpcy5wcm9wc1dpdGgoL15idXR0b24tLywgdHJ1ZSksXG4gICAgfTtcblxuICAgIHJldHVybiBSZWFjdC5jcmVhdGVFbGVtZW50KFxuICAgICAgdGhpcy5nZXRDb21wb25lbnQoKSxcbiAgICAgIGF0dHJpYnV0ZXMsXG4gICAgICB0aGlzLnByb3BzLmNoaWxkcmVuXG4gICAgKTtcbiAgfVxuXG4gIGdldFR5cGUoKSB7XG4gICAgaWYgKHRoaXMuZ2V0Q29tcG9uZW50KCkgPT09ICdidXR0b24nIHx8IHRoaXMuZ2V0Q29tcG9uZW50KCkgPT09ICdpbnB1dCcpIHtcbiAgICAgIHJldHVybiB0aGlzLnByb3BzLnR5cGUgfHwgJ2J1dHRvbic7XG4gICAgfVxuICAgIGVsc2Uge1xuICAgICAgcmV0dXJuIHVuZGVmaW5lZDtcbiAgICB9XG4gIH1cblxuICBnZXRDb21wb25lbnQoKSB7XG4gICAgcmV0dXJuIHRoaXMucHJvcHMuY29tcG9uZW50IHx8ICdidXR0b24nO1xuICB9XG59XG5cbmV4cG9ydCBkZWZhdWx0IENsaXBib2FyZEJ1dHRvbjtcbiIsIm1vZHVsZS5leHBvcnRzID0gX19XRUJQQUNLX0VYVEVSTkFMX01PRFVMRV9jbGlwYm9hcmRfXzsiLCJtb2R1bGUuZXhwb3J0cyA9IF9fV0VCUEFDS19FWFRFUk5BTF9NT0RVTEVfcHJvcF90eXBlc19fOyIsIm1vZHVsZS5leHBvcnRzID0gX19XRUJQQUNLX0VYVEVSTkFMX01PRFVMRV9yZWFjdF9fOyIsIm1vZHVsZS5leHBvcnRzID0gX19XRUJQQUNLX0VYVEVSTkFMX01PRFVMRV9yZWFjdF9kb21fXzsiXSwic291cmNlUm9vdCI6IiJ9
 
 /***/ }),
 
@@ -58694,4 +57940,4 @@ module.exports = function(originalModule) {
 /***/ })
 
 }]);
-//# sourceMappingURL=vendors~main.a6c0b4fbfde83dc55dae.js.map
+//# sourceMappingURL=vendors~main.88b76ad6fafe614e2f90.js.map
