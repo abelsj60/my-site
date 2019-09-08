@@ -16,19 +16,25 @@ const BlurredBoyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
   height: 100%;
   pointer-events: none;
   z-index: 3;
-  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || p.theme.blurForTempContent ? '1' : '0'};
+  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || p.theme.blurForTempContent || p.isCasting ? '1' : '0'};
   transition: ${p => !p.finishedHomePageLoad && 'opacity .75s'};
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    opacity: ${p => p.isCasting && '0'};
+  }
 `;
 const BoyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -50,6 +56,7 @@ const BlurredFantasyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -57,8 +64,8 @@ const BlurredFantasyImage = styled.img`
   pointer-events: none;
   opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
   // Note: Only one transition resolves true at a time
-  transition: ${p => !p.finishedHomePageLoad && 'opacity .5s'};
-  transition: ${p => (p.finishedHomePageLoad && !p.castSpell) ? 'opacity .12s' : ''};
+  transition: ${p => !p.finishedHomePageLoad && 'opacity .5s ease-in-out'};
+  transition: ${p => (p.finishedHomePageLoad && !p.castSpell) ? css`opacity ${!p.isCasting ? '.235s' : '.225s'}` : ''};
   z-index: ${p => !p.inCity && !p.castSpell ? '0' : '-2'};
   ${p => (p.castSpell || p.inCity) && 'display: none'};
 `;
@@ -66,6 +73,7 @@ const FantasyImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -81,13 +89,14 @@ const BlurredCityImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
   height: 100%;
   pointer-events: none;
   opacity: ${p => p.isCasting && !p.castSpell? '1' : '0'};
-  transition: ${p => p.finishedHomePageLoad && !p.castSpell ? 'opacity .12s' : ''};
+  transition: ${p => (p.finishedHomePageLoad && !p.castSpell) ? css`opacity ${!p.isCasting ? '.235s' : '.225s'}` : ''};
   z-index: ${p => !p.inCity && !p.castSpell ? '-2' : '0'};
   ${p => (p.castSpell || !p.inCity) && 'display: none;'}
 `;
@@ -95,6 +104,7 @@ const CityImage = styled.img`
   position: absolute;
   display: block;
   object-fit: cover; // Use if using <img>
+  font-family: 'object-fit: cover;';
   // Scale image to fully fit element
   // https://stackoverflow.com/a/28439444
   width: 100%;
@@ -123,15 +133,12 @@ export default function PictureBox(props) {
   } = props;
   const {
     finishedHomePageLoad,
-    homeAnimation,
     images,
     inCity
   } = appState;
   const {
     castSpell,
     isCasting,
-    finishedLoadingBoy,
-    finishedLoadingFantasy,
     loadBoy,
     loadFantasy
   } = homeState;
@@ -141,37 +148,34 @@ export default function PictureBox(props) {
   const bigFantasySrc = images[imageNames[2]].src;
   const blurredBoySrc = images[imageNames[1]].src;
   const blurredFantasySrc = images[imageNames[3]].src;
-  const transitionHandler = function(event, magicState, activeBackground) {
+  const transitionHandler = function(event, spellState, activeBackground) {
     event.preventDefault();
 
     if (
-      magicState
+      spellState
         && activeBackground
         && event.propertyName === 'transform'
     ) {
-      boundHandleClickForHome('toggleSpell');
+      boundHandleClickForHome('toggleSpell', event.propertyName);
     }
   }
 
   return (
     <PictureHolder>
       <BlurredBoyImage
+        isCasting={isCasting}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
-        finishedLoadingBoy={finishedLoadingBoy}
-        finishedLoadingFantasy={finishedLoadingFantasy}
         finishedHomePageLoad={finishedHomePageLoad}
-        homeAnimation={homeAnimation !== 'run'}
         src={blurredBoySrc}
         alt={descriptionBoy}
-        onTransitionEnd={() => handleInitialLoad('finishedLoadingBoy')}
+        onLoad={() => handleInitialLoad('finishedLoadingBoy')}
       />
       <BoyImage
         src={bigBoySrc}
         alt={descriptionBoy}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
-        finishedHomePageLoad={finishedHomePageLoad}
         onLoad={() => handleInitialLoad('boy')}
       />
       <Portal
@@ -180,8 +184,6 @@ export default function PictureBox(props) {
       />
       <BlurredFantasyImage 
         src={blurredFantasySrc}
-        finishedLoadingBoy={finishedLoadingBoy}
-        finishedLoadingFantasy={finishedLoadingFantasy}
         finishedHomePageLoad={finishedHomePageLoad}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
@@ -192,7 +194,6 @@ export default function PictureBox(props) {
       />
       <FantasyImage
         inCity={inCity}
-        isCasting={isCasting}
         castSpell={castSpell}
         src={bigFantasySrc}
         alt={descriptionFantasy}
@@ -208,11 +209,10 @@ export default function PictureBox(props) {
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
-        finishedHomePageLoad={finishedHomePageLoad}
+        finishedHomePageLoad={finishedHomePageLoad} // better spot?
       />
       <CityImage
         inCity={inCity}
-        isCasting={isCasting}
         castSpell={castSpell}
         src={cityImage}
         alt={descriptionCity}

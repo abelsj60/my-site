@@ -48,9 +48,9 @@ const Text = styled.section`
 `;
 const Icon = styled.div`
   height: 20px;
-  width: 30px;
+  width: 20px;
   margin-bottom: 6px;
-  margin-right: 2px;
+  margin-right: 1px;
   background: url(${p => p.src}) no-repeat;
   background-size: contain;
 `;

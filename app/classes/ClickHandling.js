@@ -290,17 +290,48 @@ export default class ClickHandling {
   // Handles onClicks on Home (spell, part one).
 
   _handleClickForHome() {
-    return updateValue => {
-      if (this.transition === 1) {
-        return null;
-      }
-
-      const { isCasting, eventType } = this.state;
+    return (updateValue, propName) => {
+      const { isCasting, eventType, nowShowing } = this.state;
       const stateToUpdate = {};
 
       switch (updateValue) {
         case 'toggleSpell':
+          // Note: We 'toggleSpell' after the spell is cast
+          // in order to reset it's state. The alternative
+          // is to toggle this stuff from the 'castSpell'
+          // case, but that duplicates logic... 
+
           stateToUpdate.isCasting = !isCasting;
+          this.fadeInTimeoutId = 0;
+          stateToUpdate.fadeIn = false;
+          stateToUpdate.fadeInDone = false;
+
+          // Not if the spell's running,
+          // AKA castSpell
+
+          if (propName !== 'transform') {
+            this.fadeInTimeout = setTimeout(() => {
+              this.setState({ 
+                fadeIn: true,
+                nowShowing:
+                  nowShowing === 'bioText'
+                    || nowShowing === ''
+                      ? 'charms'
+                      : 'bioText'
+              })
+            }, 5);
+          }
+
+          // Update nowShowing when calling after
+          // the spell is cast
+
+          if (propName === 'transform') {
+            stateToUpdate.nowShowing = 
+              nowShowing === 'bioText'
+                || nowShowing === ''
+                  ? 'charms'
+                  : 'bioText';
+          }
 
           // Reset the spell when it ends.
 
@@ -309,7 +340,7 @@ export default class ClickHandling {
 
             stateToUpdate.pattern = newPattern;
             stateToUpdate.activeCharm = newPattern[0];
-            stateToUpdate.castSpell = false;
+            stateToUpdate.castSpell = false; // NEEDED ???
             stateToUpdate.score = 0;
           }
 
@@ -319,15 +350,11 @@ export default class ClickHandling {
           // Note, the score never equals the goal b/c we cast
           // at score + 1.
 
-          // Even so, DO NOT ADD 1 to score here. Anecdotally
-          // speaking, it noticeably slows down the
-          // background transition.
-
           stateToUpdate.castSpell = true;
 
           // Reset the eventType to 'click' if it was
-          // last 'touch'-ed. This property prevents
-          // unexpected and unwanted propagation.
+          // 'touch'-ed. This prevents unexpected
+          // and unwanted propagation.
 
           if (eventType === 'touch') {
             stateToUpdate.eventType = 'click';

@@ -3,9 +3,10 @@ import FitText from '@kennethormandy/react-fittext';
 import Loader from '../shared/Loader.jsx';
 import marked from 'marked';
 import React, { Fragment } from 'react';
-import styled, { css, keyframes } from 'styled-components';
 import ReactHtmlParser from 'react-html-parser';
 import ReactGA from 'react-ga';
+import styled, { css, keyframes } from 'styled-components';
+import SubHed from './SubHed.jsx';
 
 const blurInKeyframes = keyframes`
   0% {
@@ -42,7 +43,8 @@ const heartbeatKeyframes = keyframes`
   }
 `;
 
-const Container = styled.div`
+const OuterContainer = styled.div`
+  display: ${p => p.tempContentIsOn ? 'none' : 'block'};
   // The double animation prop works b/c heartbeat runs three times on load, then stops. It then
   // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
@@ -52,7 +54,6 @@ const Container = styled.div`
   pointer-events: ${p => p.castSpell && 'none'};
   text-align: center;
   z-index: 2;
-  cursor: pointer;
   ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
 `;
 const Spacer = styled.div`
@@ -70,7 +71,8 @@ const Hed = styled.h1`
   line-height: 1;
   margin-top: -9px;
   margin-bottom: 10px;
-
+  cursor: pointer;
+  
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: -17px;
   }
@@ -79,23 +81,13 @@ const Hed = styled.h1`
     background-color: transparent;
   }
 `;
-const Motto = styled.h2`
-  font-family: 'Aref Ruqaa', serif;
-  text-shadow: 1.5px 1px 2px white;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: ${p => p.theme.colors.black};
-  font-weight: 700;
-  margin-left: .95em;
-  margin-bottom: 17px;
-
-  ::selection {
-    background-color: transparent;
-  }
+const InnerContainer = styled.div`
+  opacity: ${p => p.fadeIn || p.nowShowing || p.castSpell ? '1' : '.1'};
+  display: ${p => p.isCasting && !p.castSpell ? 'none' : 'block'};
+  transition: opacity .18s ease-in-out;
 `;
-const Text = styled.section`
+const Pitch = styled.section`
   overflow: auto;
-  display: ${p => (p.tempContentIsOn ? 'none' : 'block')};
   z-index: 2;
   
   p {
@@ -107,16 +99,7 @@ const Text = styled.section`
     text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
-    ::selection {
-      background-color: transparent;
-    }
   }
-
-  // At bottom to override media queries. Otherwise,
-  // they invalidate the 'display: none' value.
-
-  display: ${p => p.isCasting && !p.castSpell ? 'none' : ''};
 `;
 
 export default function NameTag(props) {
@@ -124,11 +107,11 @@ export default function NameTag(props) {
     appState,
     boundHandleClickForApp,
     boundHandleClickForHome,
-    homeState
+    homeState,
+    resetFadeIn
   } = props;
   const {
     homeAnimation,
-    inCity,
     finishedHomePageLoad,
     showBusinessCard,
     showLegalTerms,
@@ -139,12 +122,13 @@ export default function NameTag(props) {
     isCasting,
     castSpell,
     eventType,
+    fadeIn,
     finishedLoadingBoy,
     finishedLoadingFantasy,
     loadBoy,
     loadFantasy,
-    score,
-    animate
+    nowShowing,
+    score
   } = homeState;
   const {
     attributes,
@@ -155,27 +139,23 @@ export default function NameTag(props) {
     name
   } = attributes;
 
-  const tagline = !isCasting || castSpell
-    ? motto
-    : !inCity
-      ? 'Tap the pulses to travel home'
-      : 'Tap the pulses for adventure';
-
   const eventHandler = () => {
-    if (eventType === 'touch') {
-      boundHandleClickForHome('resetEventType');
-      return false;
+    if (finishedHomePageLoad) {
+      if (eventType === 'touch') {
+        boundHandleClickForHome('resetEventType');
+        return false;
+      }
+  
+      if (process.env.NODE_ENV !== 'development') {
+        ReactGA.event({
+          category: 'Home state',
+          action: 'Spell toggled.',
+          label: `The score was ${score}.`
+        });
+      }
+  
+      boundHandleClickForHome('toggleSpell');
     }
-
-    if (process.env.NODE_ENV !== 'development') {
-      ReactGA.event({
-        category: 'Home state',
-        action: 'Spell toggled.',
-        label: `The score was ${score}.`
-      });
-    }
-
-    boundHandleClickForHome('toggleSpell');
   };
   const animationHandler = event => {
     event.preventDefault();
@@ -190,58 +170,74 @@ export default function NameTag(props) {
       <Spacer
         spacerHeight={spacerHeight}
       />
-        <Container
-          castSpell={castSpell} // For text blur
-          onClick={eventHandler}
-          nameTagWidth={nameTagWidth}
-          heartbeat={
-            finishedLoadingBoy
-              && finishedLoadingFantasy
-              && homeAnimation === 'run'
+      <OuterContainer
+        castSpell={castSpell} // For text blur
+        nameTagWidth={nameTagWidth}
+        heartbeat={
+          finishedLoadingBoy
+            && finishedLoadingFantasy
+            && homeAnimation === 'run'
+        }
+        tempContentIsOn={showBusinessCard || showLegalTerms}
+        onAnimationStart={event => {
+          event.preventDefault();
+          if (!loadBoy && !loadFantasy) {
+            boundHandleClickForApp('finishedHomePageLoad')
           }
-          tempContentIsOn={showBusinessCard || showLegalTerms}
-          onAnimationStart={event => {
-            event.preventDefault();
-            if (!loadBoy && !loadFantasy) {
-              boundHandleClickForApp('finishedHomePageLoad')
-            }
-          }}
-          onAnimationEnd={animationHandler.bind(null)}
+        }}
+        onAnimationEnd={animationHandler.bind(null)}
+      >
+        <FitText
+          compressor={1.154}
         >
-          <FitText compressor={1.154}>
-            <Hed>
-              {name}
-            </Hed>
-          </FitText>
-          <FitText compressor={2.3}>
-            <Motto
-              isCasting={isCasting}
-              castSpell={castSpell}
+          <Hed
+            onClick={eventHandler}
+          >
+            {name}
+          </Hed>
+        </FitText>
+        <InnerContainer
+          tempContentIsOn={showBusinessCard || showLegalTerms}
+          fadeIn={fadeIn}
+          isCasting={isCasting}
+          castSpell={castSpell}
+          nowShowing={nowShowing === '' || nowShowing === 'bioText'}
+          onTransitionEnd={() => resetFadeIn()}
+        >
+          <FitText
+            compressor={2.3}
+          >
+            <SubHed
+              marginLeft=".9em"
             >
-              {tagline}
-            </Motto>
+              {motto}
+            </SubHed>
           </FitText>
-            <Text
-                isCasting={isCasting}
-                castSpell={castSpell}
-                tempContentIsOn={showBusinessCard || showLegalTerms}
-              >
-              <FitText compressor={2.5}>
-                  <Fragment>
-                    {ReactHtmlParser(
-                      marked(
-                        body,
-                        { smartypants: true }
-                      )
-                    )}
-                  </Fragment>
-              </FitText>
-            </Text>
-          <Loader
-            show={loadBoy || loadFantasy}
-            done={finishedHomePageLoad}
-          />
-        </Container>
+          <Pitch
+            isCasting={isCasting}
+            castSpell={castSpell}
+            finishedHomePageLoad={finishedHomePageLoad}
+            tempContentIsOn={showBusinessCard || showLegalTerms}
+          >
+            <FitText
+             compressor={2.5}
+            >
+              <Fragment>
+                {ReactHtmlParser(
+                  marked(
+                    body,
+                    { smartypants: true }
+                  )
+                )}
+              </Fragment>
+            </FitText>
+          </Pitch>
+        </InnerContainer>
+        <Loader
+          show={loadBoy || loadFantasy}
+          done={finishedHomePageLoad}
+        />
+      </OuterContainer>
     </Fragment>
   );
 }
