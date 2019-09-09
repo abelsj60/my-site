@@ -47,8 +47,8 @@ const Email = styled.p`
   }
 `;
 
-export default function BusinessCard() {
-  const src = 'https://user-images.githubusercontent.com/30417590/64480217-8696be80-d191-11e9-994f-b8bd71243766.png';
+export default function BusinessCard(props) {
+  const src = props.appState.images.businessCardImage.src;
 
   return (
     <Fragment>

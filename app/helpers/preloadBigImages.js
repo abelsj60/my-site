@@ -23,5 +23,10 @@ export default function prelodBigImages() {
         images[name] = image;
     });
 
+    const businessCardSrc = 'https://user-images.githubusercontent.com/30417590/64480217-8696be80-d191-11e9-994f-b8bd71243766.png';
+    const businessCardImage = new Image();
+    businessCardImage.src = businessCardSrc;
+    images.businessCardImage = businessCardImage;
+
     return images;
 }

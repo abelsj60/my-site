@@ -1,4 +1,4 @@
-import Button from '../shared/Button.jsx';
+import Button from './Button.jsx';
 import { cover } from 'intrinsic-scale';
 import React from 'react';
 import styled from 'styled-components';
@@ -33,17 +33,6 @@ const Line = styled.div`
     left: 5px;
     right: 5px;
   }
-`;
-const StoryButton = styled(Button)`
-  color: white;
-  margin-left: 25px;
-  background-color: ${p => (!p.active ? 'rgba(0, 0, 0, .2)' : 'rgba(0, 141, 213, .5)')};
-  width: 60px;
-  padding: 7px;
-  border: 1px rgba(255, 255, 255, .6) solid;
-  box-shadow: ${p => p.boxShadow && shadow};
-  user-select: none;
-  transition: ${p => p.animateImageBlur && 'background-color .14s'};
 `;
 const RestyledLink = styled(StyledLink)`
   margin-right: 20px;
@@ -129,13 +118,9 @@ export default function FooterContainer(props) {
         hide={!showStoryText && !isReverie}
         animateImageBlur={animateImageBlur}
       />
-      <StoryButton
-        active={showStoryText}
+      <Button
+        showStoryText={showStoryText}
         clickFunction={eventHandlerForStoryButton}
-        className="story-button"
-        conditional={true}
-        show={isStory}
-        headerMenuIsOpen={headerMenuIsOpen}
         animateImageBlur={animateImageBlur}
         boxShadow={showTextShadow}
         text={

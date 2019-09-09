@@ -164,8 +164,8 @@ export default class ClickHandling {
           stateToUpdate.headerMenuIsOpen = !headerMenuIsOpen;
 
           if (!headerMenuIsOpen) {
+            // Disable setTimeout to suspend auto-close
             this.headerMenuTimeoutId = setTimeout(() => {
-              // Disable to suspend auto-close
               this.setState(
                 { headerMenuIsOpen: false },
                 () => {

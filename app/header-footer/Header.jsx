@@ -34,42 +34,41 @@ const HeaderBackground = styled.div`
   position: absolute;
   width: 100%;
   height: 52px;
-  top: 0px;
+  top: ${p => !p.menu ? '0px' : '52px'};
+  bottom: ${p => p.menu && '0px'};
+  width: ${p => p.menu && '100%'};
   left: 0px;
-  background-color: ${p => p.theme.colors.darkPink};
+  // No background on home, translucent if
+  // menu is open, dark pink if it isn't
+  background-color: ${p => !p.isHome ? p.menu ? 'rgba(175, 18, 90, .8)' : p.theme.colors.darkPink : ''};
   opacity: ${p => !p.hide ? '1' : '0'};
   transition: ${p => p.animateImageBlur && 'opacity .165s'};
   z-index: -1;
   
-  // Control nav items when menu is open, up to the break point
-  // Must come after all others so it controls in limited circs
-  // Makes top menu bar opaque and visiable if it's hidden
+  // Control color when menu is open, up to the break point (not /home)
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    background-color: ${p => p.hide && !p.isHom && 'rgba(175, 18, 90, .8)'};
-  }
-`;
-const HeaderMenuBackground = styled.div`
-  // Control nav items when menu is open, up to the break point
-  // Must come after all others so it controls in limited circs
-  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    display: ${p => !p.menu ? 'none' : 'block'};
-    position: absolute;
-    top: 52px;
-    bottom: 0px;
-    width: 100%;
-    background-color: ${p => !p.isHome && p.menu && 'rgba(175, 18, 90, .8)'};
+    background-color: ${p => p.hide && !p.isHome && 'rgba(175, 18, 90, .8)'};
   }
 `;
 const RestyledLink = styled(
   // Filter out isHome and isActive from StyledLink
   // eslint-disable-next-line
-  ({ isHome, isActive, menu, textShadow, ...rest }) => <StyledLink {...rest} />
+  ({
+    animateImageBlur,
+    isHome,
+    isActive,
+    menu,
+    textShadow,
+    nameAsLink,
+    ...rest
+  }) => <StyledLink {...rest} />
 )`
   font-size: ${p => p.theme.fontSizes.twentyOne};
   font-weight: ${p => p.isHome ? '400' : fontWeight};
   margin-left: ${p => (p.num === 0 ? '0px' : '10px')};
   color: ${p => p.theme.colors.white};
   text-shadow: ${p => p.textShadow && textShadow};
+  transition: ${p => p.animateImageBlur && 'text-shadow .165s'};
 
   && {
     text-decoration: ${p => (p.isActive ? 'underline' : undefined)};
@@ -81,15 +80,14 @@ const RestyledLink = styled(
   }
 
   // Control nav items when menu is open, up to the break point
-  // Must come after all others so it controls in limited circs
   @media (min-width: 0px) and (max-width: ${p => p.theme.mediaQueries.tinyView}) {
-    font-size: ${p => p.menu && p.theme.fontSizes.eighteen};
-    margin-left: ${p => p.menu && '0px'};
+    font-size: ${p => !p.nameAsLink && p.menu && p.theme.fontSizes.eighteen};
+    margin-left: ${p => !p.nameAsLink && p.menu && '0px'};
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) and (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    font-size: ${p => p.menu && p.theme.fontSizes.twenty};
-    margin-left: ${p => p.menu && '0px'};
+    font-size: ${p => !p.nameAsLink && p.menu && p.theme.fontSizes.twenty};
+    margin-left: ${p => !p.nameAsLink && p.menu && '0px'};
   }
 `;
 const NameAsLink = styled(RestyledLink)`
@@ -117,6 +115,7 @@ const Motto = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   text-shadow: ${p => p.textShadow && textShadow};
+  transition: ${p => p.animateImageBlur && 'text-shadow .165s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.four};
@@ -131,14 +130,13 @@ const Nav = styled.nav`
   display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '6px 12px'};
-  background-color: ${p => p.opaqueBackground && 'rgba(0, 0, 0, .125)'};
+  background-color: ${p => p.frost && 'rgba(0, 0, 0, .125)'};
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
-  // border-radius: ${p => p.isHome && '8px'};
   position: relative;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    background-color: ${p => !p.opaqueBackground && 'unset'};
+    background-color: ${p => !p.frost && 'unset'};
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
@@ -150,46 +148,28 @@ const Nav = styled.nav`
 
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     ${p => p.menu && css` // p.menu = headerMenu
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+      background-color:  rgba(175, 18, 90, .8);
+      position: fixed;
+      top: 54px;
+      bottom: 0px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
   `};
   }
 `;
 const NavList = styled(UnorderedList)`
   display: flex;
   justify-content: center;
-  margin: ${p => !p.isHome && 'auto'} 0px ${p => !p.isHome && 'auto'} 0px;
-  padding: 0px;
-  list-style: none;
+  margin: ${p => !p.menu ? css`${!p.isHome && 'auto'} 0px ${!p.isHome && 'auto'} 0px}` : ''};
+  justify-content: ${p => p.menu && 'space-evenly'};
 
   // Control nav items when menu is open, up to the break point
-  // Must come after all others so it controls in limited circs
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    ${p => p.menu && 'flex-direction: column;'}
-  }
-
-  // Control nav items when menu is open, up to the break point
-  // Must come after all others so it controls in limited circs
-  @media (min-width: 0px) and (max-width: ${p => p.theme.mediaQueries.tinyView}) {
-    height: ${p => !p.isHome && '300px'};
-  }
-
-  // Control nav items when menu is open, up to the break point
-  // Must come after all others so it controls in limited circs
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) and (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    height: ${p => !p.isHome && '450px'};
-  }
-`;
-const ListItem = styled.li`
-  // Control nav items when menu is open, up to the break point
-  // Must come after all others so it controls in limited circs
-  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    margin-top: ${p => !p.ishHome && p.menu ? 'auto' : '0px'};
-    margin-bottom: ${p => !p.isHome && p.menu ? 'auto' : '0px'};
+    ${p => p.menu && css` // p.menu = headerMenu
+      flex-direction: column;
+      margin-bottom: 55px;
+    `};
   }
 `;
 const Icon = styled.img`
@@ -244,7 +224,7 @@ export default class Header extends Component {
     const coverVals = cover(window.innerWidth, height, 2131, 1244);
     const referrer = new Referrer(this.props);
     const eventHandlerForHeaderMenu = () => boundHandleClickForApp('toggleHeaderMenu');
-    const opaqueBackground = 
+    const frost = 
       isHome
         && (coverVals.y < 0 || spacerHeight < 20)
         && !showBusinessCard
@@ -260,14 +240,12 @@ export default class Header extends Component {
           hide={hideBackground}
           animateImageBlur={animateImageBlur}
         />
-        <HeaderMenuBackground
-          menu={headerMenuIsOpen}
-          hide={hideBackground}
-        />
         <NameAsLink
           isHome={isHome}
+          nameAsLink={true}
           menu={headerMenuIsOpen}
           textShadow={showTextShadow}
+          animateImageBlur={animateImageBlur}
           boundHandleClickForApp={boundHandleClickForApp}
           to={'/'}
         >
@@ -278,13 +256,14 @@ export default class Header extends Component {
           hide={isHome}
           menu={headerMenuIsOpen}
           textShadow={showTextShadow}
+          animateImageBlur={animateImageBlur}
         >
           {bio.attributes.motto}
         </Motto>
         <Nav
           isHome={isHome}
           menu={headerMenuIsOpen}
-          opaqueBackground={opaqueBackground}
+          frost={frost}
         >
           <NavList
             isHome={isHome}
@@ -298,14 +277,10 @@ export default class Header extends Component {
                     link.path.includes(
                       referrer.location
                     );
-                  const lastItem = idx === headerLinks.length - 1;
 
                   return (
-                    <ListItem
+                    <li
                       key={idx}
-                      isHome={isHome}
-                      lastItem={lastItem}
-                      menu={headerMenuIsOpen}
                     >
                       <RestyledLink
                         isActive={isActive}
@@ -314,11 +289,12 @@ export default class Header extends Component {
                         textShadow={showTextShadow}
                         num={idx}
                         to={link.path}
+                        animateImageBlur={animateImageBlur}
                         boundHandleClickForApp={boundHandleClickForApp}
                       >
                         {link.name}
                       </RestyledLink>
-                    </ListItem>
+                    </li>
                   );
                 }
               }

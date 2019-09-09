@@ -140,7 +140,8 @@ export default function PictureBox(props) {
     castSpell,
     isCasting,
     loadBoy,
-    loadFantasy
+    loadFantasy,
+    nowShowing
   } = homeState;
 
   const imageNames = preloadTheseImages.map(name => name);
@@ -190,7 +191,15 @@ export default function PictureBox(props) {
         inCity={inCity}
         isCasting={isCasting}
         castSpell={castSpell}
-        onTransitionEnd={() => handleInitialLoad('finishedLoadingFantasy')}
+        onTransitionEnd={() => {
+          if (!finishedHomePageLoad) {
+            handleInitialLoad('finishedLoadingFantasy');
+          }
+
+          if (nowShowing !== '') {
+            console.log('Better transition point? -->', nowShowing);
+          }
+      }}
       />
       <FantasyImage
         inCity={inCity}

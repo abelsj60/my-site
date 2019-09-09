@@ -1,4 +1,3 @@
-import ImageLoader from '../shared/ImageLoader.jsx';
 import Loader from '../shared/Loader.jsx';
 import Main from '../primitives/Main.jsx';
 import ContentHolder from '../primitives/ContentHolder.jsx';
