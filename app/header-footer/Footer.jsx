@@ -123,6 +123,7 @@ export default function FooterContainer(props) {
         clickFunction={eventHandlerForStoryButton}
         animateImageBlur={animateImageBlur}
         boxShadow={showTextShadow}
+        isStory={isStory}
         text={
           showStoryText
             ? 'Text off'

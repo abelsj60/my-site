@@ -79,7 +79,7 @@ export default class ClickHandling {
       switch (updateValue) {
         case 'toggleBusinessCard':
           stateToUpdate.showBusinessCard = !showBusinessCard;
-
+          
           if (showLegalTerms) {
             stateToUpdate.showLegalTerms = !showLegalTerms;
           }
@@ -94,7 +94,7 @@ export default class ClickHandling {
           break;
         case 'toggleLegalTerms':
           stateToUpdate.showLegalTerms = !showLegalTerms;
-
+          
           if (showBusinessCard) {
             stateToUpdate.showBusinessCard = !showBusinessCard;
           }
@@ -291,66 +291,55 @@ export default class ClickHandling {
 
   _handleClickForHome() {
     return (updateValue, propName) => {
-      const { isCasting, eventType, nowShowing } = this.state;
+      const {
+        isCasting,
+        eventType,
+        movement,
+        pattern,
+        spellLevel
+      } = this.state;
       const stateToUpdate = {};
 
       switch (updateValue) {
         case 'toggleSpell':
-          // Note: We 'toggleSpell' after the spell is cast
-          // in order to reset it's state. The alternative
-          // is to toggle this stuff from the 'castSpell'
-          // case, but that duplicates logic... 
+          // Note: We toggleSpell after the spell is cast in
+          // order to reset it's state. The alternative is
+          // to toggle this stuff from the castSpell
+          // case, but that duplicates logic.
 
           stateToUpdate.isCasting = !isCasting;
-          this.fadeInTimeoutId = 0;
-          stateToUpdate.fadeIn = false;
-          stateToUpdate.fadeInDone = false;
+          stateToUpdate.movement =
+            movement === 'enter'
+              ? 'exit'
+              : 'enter';
 
-          // Not if the spell's running,
-          // AKA castSpell
-
-          if (propName !== 'transform') {
-            this.fadeInTimeout = setTimeout(() => {
-              this.setState({ 
-                fadeIn: true,
-                nowShowing:
-                  nowShowing === 'bioText'
-                    || nowShowing === ''
-                      ? 'charms'
-                      : 'bioText'
-              })
-            }, 5);
+          if(spellLevel < 1) {
+            stateToUpdate.spellLevel = 1;
+          } else {
+            stateToUpdate.spellLevel = 3;
           }
 
-          // Update nowShowing when calling after
-          // the spell is cast
+          // Reset spell after background transform
 
           if (propName === 'transform') {
-            stateToUpdate.nowShowing = 
-              nowShowing === 'bioText'
-                || nowShowing === ''
-                  ? 'charms'
-                  : 'bioText';
-          }
+            // The spellLevel is only reset to 0 after
+            // casting. It otherwise ends at 4 and
+            // restarts at 1.
 
-          // Reset the spell when it ends.
-
-          if (isCasting) {
-            const newPattern = this.createSpellPattern();
-
-            stateToUpdate.pattern = newPattern;
-            stateToUpdate.activeCharm = newPattern[0];
-            stateToUpdate.castSpell = false; // NEEDED ???
             stateToUpdate.score = 0;
+            stateToUpdate.movement = '';
+            stateToUpdate.spellLevel = 0;
           }
 
           break;
         case 'castSpell':
-          // The castSpell prop controls styling during a turn.
-          // Note, the score never equals the goal b/c we cast
-          // at score + 1.
-
-          stateToUpdate.castSpell = true;
+          // Note, the score never equals the goal 
+          // b/c we cast at score + 1.
+          
+          stateToUpdate.spellLevel = 5;
+          stateToUpdate.pattern = this.createSpellPattern();
+          stateToUpdate.activeCharm = stateToUpdate.pattern[0];
+          stateToUpdate.score = 0;
 
           // Reset the eventType to 'click' if it was
           // 'touch'-ed. This prevents unexpected
@@ -359,6 +348,7 @@ export default class ClickHandling {
           if (eventType === 'touch') {
             stateToUpdate.eventType = 'click';
           }
+
           break;
         case 'resetEventType':
           stateToUpdate.eventType = 'click';
@@ -396,8 +386,8 @@ export default class ClickHandling {
             });
           }
 
-          this.props.boundHandleClickForApp('swapBackground');
           boundHandleClickForHome('castSpell');
+          this.props.boundHandleClickForApp('swapBackground');
         } else {
           if (process.env.NODE_ENV !== 'development') {
             ReactGA.event({

@@ -1,8 +1,13 @@
 import bio from '../data/home/home.md';
-import React from 'react';
-import styled, { css } from 'styled-components';
+import BlurredCityBackground from './BlurredCityBackground.jsx';
+import BoyForeground from './BoyForeground.jsx';
+import BlurredBoyForeground from './BlurredBoyForeground.jsx';
+import BlurredFantasyBackground from './BlurredFantasyBackground.jsx';
+import CityBackground from './CityBackground.jsx';
+import FantasyBackground from './FantasyBackground.jsx';
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
 
-const largeScale = 1.35;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -11,109 +16,6 @@ const PictureHolder = styled.div`
   width: 100%;
   overflow: hidden;
   z-index: 1;
-`;
-const BlurredBoyImage = styled.img`
-  position: absolute;
-  display: block;
-  object-fit: cover; // Use if using <img>
-  font-family: 'object-fit: cover;';
-  // Scale image to fully fit element
-  // https://stackoverflow.com/a/28439444
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 3;
-  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || p.theme.blurForTempContent || p.isCasting ? '1' : '0'};
-  transition: ${p => !p.finishedHomePageLoad && 'opacity .75s'};
-
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    opacity: ${p => p.isCasting && '0'};
-  }
-`;
-const BoyImage = styled.img`
-  position: absolute;
-  display: block;
-  object-fit: cover; // Use if using <img>
-  font-family: 'object-fit: cover;';
-  // Scale image to fully fit element
-  // https://stackoverflow.com/a/28439444
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 2;
-  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading ? '0' : '1'};
-`;
-const Portal = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  opacity: .1;
-  display: ${p => !p.isCasting || p.castSpell ? 'none' : 'block'};
-  display: none;
-`;
-const BlurredFantasyImage = styled.img`
-  position: absolute;
-  display: block;
-  object-fit: cover; // Use if using <img>
-  font-family: 'object-fit: cover;';
-  // Scale image to fully fit element
-  // https://stackoverflow.com/a/28439444
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || (p.isCasting && !p.castSpell) || p.theme.blurForTempContent ? '1' : '0'};
-  // Note: Only one transition resolves true at a time
-  transition: ${p => !p.finishedHomePageLoad && 'opacity .5s ease-in-out'};
-  transition: ${p => (p.finishedHomePageLoad && !p.castSpell) ? css`opacity ${!p.isCasting ? '.235s' : '.225s'}` : ''};
-  z-index: ${p => !p.inCity && !p.castSpell ? '0' : '-2'};
-  ${p => (p.castSpell || p.inCity) && 'display: none'};
-`;
-const FantasyImage = styled.img`
-  position: absolute;
-  display: block;
-  object-fit: cover; // Use if using <img>
-  font-family: 'object-fit: cover;';
-  // Scale image to fully fit element
-  // https://stackoverflow.com/a/28439444
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading || p.inCity ? '0' : '1'};
-  transform: ${p => p.inCity ? css`scale(${largeScale})` : 'scale(1)'};
-  transform-origin: 50% 5%;
-  transition: transform 1.75s, opacity ${p => !p.inCity ? '1.35s' : '1.35s'} cubic-bezier(0.77, 0, 0.175, 1);
-  z-index: ${p => !p.inCity && !p.castSpell ? '-1' : '-3'};
-`;
-const BlurredCityImage = styled.img`
-  position: absolute;
-  display: block;
-  object-fit: cover; // Use if using <img>
-  font-family: 'object-fit: cover;';
-  // Scale image to fully fit element
-  // https://stackoverflow.com/a/28439444
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: ${p => p.isCasting && !p.castSpell? '1' : '0'};
-  transition: ${p => (p.finishedHomePageLoad && !p.castSpell) ? css`opacity ${!p.isCasting ? '.235s' : '.225s'}` : ''};
-  z-index: ${p => !p.inCity && !p.castSpell ? '-2' : '0'};
-  ${p => (p.castSpell || !p.inCity) && 'display: none;'}
-`;
-const CityImage = styled.img`
-  position: absolute;
-  display: block;
-  object-fit: cover; // Use if using <img>
-  font-family: 'object-fit: cover;';
-  // Scale image to fully fit element
-  // https://stackoverflow.com/a/28439444
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: ${p => p.inCity ? '1' : '0'};
-  transform: ${p => p.inCity ? 'scale(1)' : css`scale(${largeScale})`};
-  transition: transform 1.75s, opacity ${p => p.inCity ? '1.35s' : '1.35s'} cubic-bezier(0.77, 0, 0.175, 1);
-  z-index: ${p => !p.inCity && !p.castSpell ? '-3' : '-1'};
 `;
 
 export default function PictureBox(props) {
@@ -129,7 +31,8 @@ export default function PictureBox(props) {
     appState,
     boundHandleClickForHome,
     handleInitialLoad,
-    homeState
+    homeState,
+    setSpellLevels
   } = props;
   const {
     finishedHomePageLoad,
@@ -137,11 +40,11 @@ export default function PictureBox(props) {
     inCity
   } = appState;
   const {
-    castSpell,
     isCasting,
+    spellLevel,
     loadBoy,
     loadFantasy,
-    nowShowing
+    movement
   } = homeState;
 
   const imageNames = preloadTheseImages.map(name => name);
@@ -149,11 +52,12 @@ export default function PictureBox(props) {
   const bigFantasySrc = images[imageNames[2]].src;
   const blurredBoySrc = images[imageNames[1]].src;
   const blurredFantasySrc = images[imageNames[3]].src;
-  const transitionHandler = function(event, spellState, activeBackground) {
+  // Trigger toggle after castSpell transform
+  const transitionHandler = function(event, penultimateSpellLevel, activeBackground) {
     event.preventDefault();
 
     if (
-      spellState
+      penultimateSpellLevel
         && activeBackground
         && event.propertyName === 'transform'
     ) {
@@ -163,74 +67,104 @@ export default function PictureBox(props) {
 
   return (
     <PictureHolder>
-      <BlurredBoyImage
+      <BlurredBoyForeground
         isCasting={isCasting}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
         finishedHomePageLoad={finishedHomePageLoad}
+        enter={movement === 'enter'}
+        exit={movement === 'exit'}
+        spellLevel={spellLevel}
         src={blurredBoySrc}
         alt={descriptionBoy}
         onLoad={() => handleInitialLoad('finishedLoadingBoy')}
       />
-      <BoyImage
+      <BoyForeground
         src={bigBoySrc}
         alt={descriptionBoy}
         boyIsLoading={loadBoy}
         fantasyIsLoading={loadFantasy}
         onLoad={() => handleInitialLoad('boy')}
       />
-      <Portal
-        isCasting={isCasting}
-        castSpell={castSpell}
-      />
-      <BlurredFantasyImage 
-        src={blurredFantasySrc}
-        finishedHomePageLoad={finishedHomePageLoad}
-        boyIsLoading={loadBoy}
-        fantasyIsLoading={loadFantasy}
-        inCity={inCity}
-        isCasting={isCasting}
-        castSpell={castSpell}
-        onTransitionEnd={() => {
-          if (!finishedHomePageLoad) {
-            handleInitialLoad('finishedLoadingFantasy');
-          }
+      {(!inCity || inCity && spellLevel > 0) &&
+        <Fragment>
+          <BlurredFantasyBackground
+            src={blurredFantasySrc}
+            finishedHomePageLoad={finishedHomePageLoad}
+            boyIsLoading={loadBoy}
+            fantasyIsLoading={loadFantasy}
+            inCity={inCity}
+            enter={movement === 'enter'}
+            exit={movement === 'exit'}
+            spellLevel={spellLevel}
+            isCasting={isCasting}
+            onTransitionEnd={() => {
+              if (!finishedHomePageLoad) {
+                handleInitialLoad('finishedLoadingFantasy');
+              }
 
-          if (nowShowing !== '') {
-            console.log('Better transition point? -->', nowShowing);
-          }
-      }}
-      />
-      <FantasyImage
-        inCity={inCity}
-        castSpell={castSpell}
-        src={bigFantasySrc}
-        alt={descriptionFantasy}
-        onLoad={() => handleInitialLoad('fantasy')}
-        onTransitionEnd={event => transitionHandler(
-          event,
-          castSpell,
-          inCity
-        )}
-      />
-      <BlurredCityImage 
-        src={cityImageBlurred}
-        inCity={inCity}
-        isCasting={isCasting}
-        castSpell={castSpell}
-        finishedHomePageLoad={finishedHomePageLoad} // better spot?
-      />
-      <CityImage
-        inCity={inCity}
-        castSpell={castSpell}
-        src={cityImage}
-        alt={descriptionCity}
-        onTransitionEnd={event => transitionHandler(
-          event,
-          castSpell,
-          !inCity
-        )}
-      />
+              if (movement === 'enter') {
+                setSpellLevels.three();
+              }
+
+              if (movement === 'exit') {
+                setSpellLevels.one();
+              }
+            }}
+        />
+        <FantasyBackground
+          inCity={inCity}
+          spellLevel={spellLevel}
+          boyIsLoading={loadBoy}
+          fantasyIsLoading={loadFantasy}
+          src={bigFantasySrc}
+          alt={descriptionFantasy}
+          onLoad={() => handleInitialLoad('fantasy')}
+          // Trigger toggle after castSpell transform
+          onTransitionEnd={event => transitionHandler(
+            event,
+            spellLevel > 4,
+            inCity
+          )}
+        />
+      </Fragment>}
+      {(inCity || !inCity && spellLevel > 0) && 
+        <Fragment>
+          <BlurredCityBackground
+          src={cityImageBlurred}
+          inCity={inCity}
+          isCasting={isCasting}
+          enter={movement === 'enter'}
+          exit={movement === 'exit'}
+          finishedHomePageLoad={finishedHomePageLoad} // better spot?
+          spellLevel={spellLevel}
+          onTransitionEnd={() => {
+            if (!finishedHomePageLoad) {
+              handleInitialLoad('finishedLoadingFantasy');
+            }
+
+            if (movement === 'enter') {
+              setSpellLevels.three();
+            }
+
+            if (movement === 'exit') {
+              setSpellLevels.one();
+            }
+          }}
+        />
+        <CityBackground
+          inCity={inCity}
+          spellLevel={spellLevel}
+          src={cityImage}
+          alt={descriptionCity}
+          // Trigger toggle after castSpell transform
+          onTransitionEnd={event => transitionHandler(
+            event,
+            spellLevel > 4 ,
+            !inCity
+          )}
+        />
+      </Fragment>}
     </PictureHolder>
   );
 }

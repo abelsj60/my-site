@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Structure = styled.button`
+  display: ${p => !p.isStory ? 'none' : ''};
   margin-left: 25px;
   width: 69px;
   padding: 7px 0px;
@@ -42,6 +43,7 @@ export default function Button(props) {
     boxShadow,
     className,
     clickFunction,
+    isStory,
     showStoryText,
     text
   } = props;
@@ -50,6 +52,7 @@ export default function Button(props) {
     <Structure
       boxShadow={boxShadow}
       className={className}
+      isStory={isStory}
       animateImageBlur={animateImageBlur}
       onClick={clickFunction}
     >

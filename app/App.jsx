@@ -217,6 +217,8 @@ class App extends Component {
           : this.defaultHeightWhenTooSmall,
       showBusinessCard: false, // Show business card
       showLegalTerms: false, // Show legal terms
+      tempContentLevel: 0,
+      tempContentType: '',
       showStoryText: true, // Show story text, picture if false
       headerMenuIsOpen: false,
       pinchZoomed: false, // We're zoomed! or not.
@@ -244,6 +246,17 @@ class App extends Component {
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
+
+    this.setTempContentLevel = this.setTempContentLevel.bind(this);
+    this.setTempContentType = this.setTempContentType.bind(this);
+  }
+
+  setTempContentLevel(num) {
+    this.setState({ tempContentLevel: num });
+  }
+
+  setTempContentType(str) {
+    this.setState({ tempContentType: str });
   }
 
   handlePasswordSubmit(event) {
@@ -327,6 +340,8 @@ class App extends Component {
             <LegalTermsOrBizCard
               {...this.props}
               appState={this.state}
+              setTempContentType={this.setTempContentType}
+              setTempContentLevel={this.setTempContentLevel}
               boundHandleClickForApp={boundHandleClickForApp}
             />
             <Footer
