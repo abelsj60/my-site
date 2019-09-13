@@ -50,8 +50,8 @@ const OuterContainer = styled.div`
   // a background change is triggered. This wouldn't work if the two were set to run 
   // simultaneously — the second would overwrite the first.
   ${p => p.heartbeat && css`animation: 1.1s .17s ease-in-out ${heartbeatKeyframes} 3 both`};
-  ${p => p.castSpell && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
-  pointer-events: ${p => p.castSpell && 'none'};
+  ${p => p.spellLevel === 5 && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
+  pointer-events: ${p => p.spellLevel === 5 && 'none'};
   text-align: center;
   z-index: 2;
   ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
@@ -72,19 +72,16 @@ const Hed = styled.h1`
   margin-top: -9px;
   margin-bottom: 10px;
   cursor: pointer;
+  user-select: none;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: -17px;
   }
-
-  ::selection {
-    background-color: transparent;
-  }
 `;
 const InnerContainer = styled.div`
-  opacity: ${p => p.fadeIn || p.nowShowing || p.castSpell ? '1' : '.1'};
-  display: ${p => p.isCasting && !p.castSpell ? 'none' : 'block'};
-  transition: opacity .18s ease-in-out;
+  transition: opacity .335s ease-in;
+  display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
+  opacity: ${p => p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1) ? '0' : '1'};
 `;
 const Pitch = styled.section`
   overflow: auto;
@@ -108,7 +105,7 @@ export default function NameTag(props) {
     boundHandleClickForApp,
     boundHandleClickForHome,
     homeState,
-    resetFadeIn
+    setSpellLevels
   } = props;
   const {
     homeAnimation,
@@ -120,14 +117,13 @@ export default function NameTag(props) {
   } = appState;
   const {
     isCasting,
-    castSpell,
     eventType,
-    fadeIn,
     finishedLoadingBoy,
     finishedLoadingFantasy,
+    spellLevel,
     loadBoy,
     loadFantasy,
-    nowShowing,
+    movement,
     score
   } = homeState;
   const {
@@ -140,7 +136,10 @@ export default function NameTag(props) {
   } = attributes;
 
   const eventHandler = () => {
-    if (finishedHomePageLoad) {
+    if (
+      finishedHomePageLoad
+        && (spellLevel === 0 || spellLevel === 4)
+    ) {
       if (eventType === 'touch') {
         boundHandleClickForHome('resetEventType');
         return false;
@@ -171,8 +170,8 @@ export default function NameTag(props) {
         spacerHeight={spacerHeight}
       />
       <OuterContainer
-        castSpell={castSpell} // For text blur
         nameTagWidth={nameTagWidth}
+        spellLevel={spellLevel}
         heartbeat={
           finishedLoadingBoy
             && finishedLoadingFantasy
@@ -198,11 +197,19 @@ export default function NameTag(props) {
         </FitText>
         <InnerContainer
           tempContentIsOn={showBusinessCard || showLegalTerms}
-          fadeIn={fadeIn}
+          spellLevel={spellLevel}
           isCasting={isCasting}
-          castSpell={castSpell}
-          nowShowing={nowShowing === '' || nowShowing === 'bioText'}
-          onTransitionEnd={() => resetFadeIn()}
+          enter={movement === 'enter'}
+          exit={movement === 'exit'}
+          onTransitionEnd={() => {
+            if (movement === 'enter') {
+              setSpellLevels.two();
+            }
+
+            if (movement === 'exit') {
+              setSpellLevels.resetSpell();
+            }
+          }}
         >
           <FitText
             compressor={2.3}
@@ -215,7 +222,7 @@ export default function NameTag(props) {
           </FitText>
           <Pitch
             isCasting={isCasting}
-            castSpell={castSpell}
+            spellLevel={spellLevel}
             finishedHomePageLoad={finishedHomePageLoad}
             tempContentIsOn={showBusinessCard || showLegalTerms}
           >

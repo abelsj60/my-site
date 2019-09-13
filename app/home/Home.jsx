@@ -40,7 +40,6 @@ export default class Home extends Component {
 
     this.state = {
       isCasting: false,
-      castSpell: false,
       score: 0, // Used to select an active Charm and cast spell
       pattern: pattern,
       activeCharm: pattern[0], // Initial Charm is always [0]
@@ -49,20 +48,69 @@ export default class Home extends Component {
       loadFantasy: !finishedHomePageLoad, // Show blurredFantasy
       finishedLoadingBoy: finishedHomePageLoad, // Boy loaded
       finishedLoadingFantasy: finishedHomePageLoad, // Fantasy loaded
-      fadeIn: false,
-      nowShowing: '',
-      fadeInDone: false
+      movement: '', // Set to 'enter' by ClickHandling on 1st pass
+      spellLevel: 0
     };
 
-    this.resetFadeIn = this.resetFadeIn.bind(this);
     this.handleInitialLoad = this.handleInitialLoad.bind(this);
     this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
+    this.setSpellLevelZero = this.setSpellLevelZero.bind(this);
+    this.setSpellLevelOne = this.setSpellLevelOne.bind(this);
+    this.setSpellLevelTwo = this.setSpellLevelTwo.bind(this);
+    this.setSpellLevelThree = this.setSpellLevelThree.bind(this);
+    this.setSpellLevelFour = this.setSpellLevelFour.bind(this);
+    this.resetSpell = this.resetSpell.bind(this);
+  }
+
+  setSpellLevel(val) {
+    // Doesn't need to be bound in constructor b/c the
+    // calling values are bound (creating a closure)
+    this.setState({ spellLevel: val });
+  }
+
+  setSpellLevelZero() {
+    this.setSpellLevel(0);
+  }
+
+  setSpellLevelOne() {
+    this.setSpellLevel(1);
+  }
+
+  setSpellLevelTwo() {
+    this.setSpellLevel(2);
+  }
+
+  setSpellLevelThree() {
+    this.setSpellLevel(3);
+  }
+
+  setSpellLevelFour() {
+    this.setSpellLevel(4);
+  }
+
+  resetSpell() {
+    const newPattern = this.createSpellPattern();
+    this.setState({
+      spellLevel: 0,
+      movement: '',
+      pattern: newPattern,
+      activeCharm: newPattern[0],
+      score: 0
+  });
   }
 
   render() {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
+    const setSpellLevels = {
+      zero: () => this.setSpellLevelZero(),
+      one: () => this.setSpellLevelOne(),
+      two: () => this.setSpellLevelTwo(),
+      three: () => this.setSpellLevelThree(),
+      four: () => this.setSpellLevelFour(),
+      resetSpell: () => this.resetSpell()
+    }
 
     return (
       <RestyledMain 
@@ -71,34 +119,25 @@ export default class Home extends Component {
         <NameTag
           {...this.props}
           homeState={this.state}
-          resetFadeIn={this.resetFadeIn}
           boundHandleClickForHome={boundHandleClickForHome}
+          setSpellLevels={setSpellLevels}
         />
         <Charms
           {...this.props}
           goal={this.goal}
           homeState={this.state}
           charmRefs={this.charmRefs}
-          resetFadeIn={this.resetFadeIn}
+          setSpellLevels={setSpellLevels}
         />
         <PictureBox
           {...this.props}
           homeState={this.state}
           handleInitialLoad={this.handleInitialLoad}
           boundHandleClickForHome={boundHandleClickForHome}
+          setSpellLevels={setSpellLevels}
         />
       </RestyledMain>
     );
-  }
-
-  resetFadeIn() {
-    if (this.state.fadeIn) {
-      this.fadeInTimeout = 0;
-      this.setState({
-        fadeIn: false,
-        fadeInDone: true
-      });
-    }
   }
 
   handleInitialLoad(type) {

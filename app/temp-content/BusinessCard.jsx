@@ -44,6 +44,7 @@ const Email = styled.p`
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.eight};
+    right: 2.1rem;
   }
 `;
 

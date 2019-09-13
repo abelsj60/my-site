@@ -60,13 +60,12 @@ const yellowPulse = keyframes`
 `;
 
 const OuterContainer = styled.div`
-  visibility: ${p => (p.tempContentIsOn || !p.isCasting || p.castSpell ? 'hidden' : '')};
-  display: flex;
+  display: ${p => p.spellLevel < 5  && !p.tempContentIsOn ? 'flex' : 'none'};
   flex-direction: column;
   justify-content: space-between;
   z-index: 2;
-  opacity: ${p => p.fadeIn || p.nowShowing ? '1' : '.1' };
-  transition: opacity .21s ease-in-out;
+  opacity: ${p => (p.enter && p.spellLevel >= 3 )|| (p.exit && p.spellLevel > 3) ? '1' : '0'};
+  transition: opacity .535s ease-in;
   ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
 `;
 const InnerContainer = styled.div`
@@ -90,7 +89,8 @@ const CharmBox = styled.div`
   justify-content: space-between;
 `;
 const Charm = styled.div`
-  animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? bigYellowPulse : bigPinkPulse} infinite`)};
+  // Separate p.enter and p.exit checks so the animation starts on spellLevel 4 and runs through the onExit fadeOut (otherwise, it ends onExit. Awkward).
+  animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${p.isReady ? bigYellowPulse : bigPinkPulse} infinite`)};
   border: 2px dotted ${p => p.theme.colors.pink};
   width: 45px;
   height: 45px;
@@ -124,7 +124,8 @@ const CharmShadow = styled.div`
   width: 100%;
 `;
 const Eye = styled.div`
-  animation: ${p => (p.isActive && css`1.5s -.15s ${p.isReady && p.isActive ? pinkPulse : yellowPulse} infinite`)};
+  // Separate p.enter and p.exit checks so the animation starts on spellLevel 4 and runs through the onExit fadeOut (otherwise, it ends onExit. Awkward).
+  animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${p.isReady ? pinkPulse : yellowPulse} infinite`)};
   background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
   height: 18px;
   width: 5px;
@@ -185,7 +186,7 @@ export default function Charms(props) {
     charmRefs,
     goal,
     homeState,
-    resetFadeIn
+    setSpellLevels
   } = props;
   const {
     inCity,
@@ -195,10 +196,9 @@ export default function Charms(props) {
   } = appState;
   const {
     activeCharm,
-    castSpell,
-    fadeIn,
     isCasting,
-    nowShowing,
+    spellLevel,
+    movement,
     score
   } = homeState;
 
@@ -209,13 +209,21 @@ export default function Charms(props) {
 
   return (
     <OuterContainer
-      fadeIn={fadeIn}
+      spellLevel={spellLevel}
+      enter={movement === 'enter'}
+      exit={movement === 'exit'}
       isCasting={isCasting}
-      castSpell={castSpell} // Don't show while in progress
       tempContentIsOn={showBusinessCard || showLegalTerms}
-      nowShowing={nowShowing === 'charms'}
       nameTagWidth={nameTagWidth}
-      onTransitionEnd={() => resetFadeIn()}
+      onTransitionEnd={() => {
+        if (movement === 'enter') {
+          setSpellLevels.four();
+        }
+
+        if (movement === 'exit') {
+          setSpellLevels.two();
+        }
+      }}
     >
       <FitText
         compressor={2.3}
@@ -239,19 +247,27 @@ export default function Charms(props) {
                   <Charm
                     key={idx}
                     isActive={isActive}
+                    spellLevel={spellLevel}
+                    enter={movement === 'enter'}
+                    exit={movement === 'exit'}
                     isReady={isReady}
                     ref={charmRefs[idx]} // Add a ref to each Charm when mounted
                   >
                     <CharmShadow
                       isActive={isActive}
+                      spellLevel={spellLevel}
                       isReady={isReady}
                     />
                     <Eye
                       isActive={isActive}
+                      spellLevel={spellLevel}
+                      enter={movement === 'enter'}
+                      exit={movement === 'exit'}
                       isReady={isReady}
                     >
                       <EyeShadow
                         isActive={isActive}
+                        spellLevel={spellLevel}
                         isReady={isReady}
                       />
                     </Eye>
