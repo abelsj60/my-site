@@ -22,7 +22,7 @@ const Structure = styled.button`
 const Cover = styled.div`
   background-color: ${p => p.theme.colors.black};
   opacity: ${p => !p.showStoryText ? '.2' : '.125'};
-  transition: ${p => p.animateImageBlur && 'opacity .165s'};
+  transition: ${p => p.animateImageBlur && 'opacity .35s'};
   position: absolute;
   height: 100%;
   width: 100%;

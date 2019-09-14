@@ -181,6 +181,10 @@ const InnerBar = styled.div`
 `;
 
 export default function Charms(props) {
+  if (props.homeState.spellLevel < 2) {
+    return null;
+  }
+
   const {
     appState,
     charmRefs,

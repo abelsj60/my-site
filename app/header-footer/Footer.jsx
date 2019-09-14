@@ -1,7 +1,7 @@
 import Button from './Button.jsx';
 import { cover } from 'intrinsic-scale';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const shadow = '2px 2px 2.5px rgba(0, 0, 0, .4)';
@@ -17,7 +17,7 @@ const Container = styled.footer`
   max-width: 70rem;
 `;
 const Line = styled.div`
-  display: ${p => p.home || p.hide ? 'none' : ''};
+  display: ${p => p.home ? 'none' : ''};
   position: absolute;
   z-index: 1;
   left: 25px;
@@ -27,7 +27,7 @@ const Line = styled.div`
   height: 1px;
   background-color: ${p => p.theme.colors.pink};
   opacity: ${p => !p.hide ? '1' : '0'};
-  transition: ${p => p.animateImageBlur && 'opacity .165s'};
+  transition: ${p => p.animateImageBlur && css`opacity ${p.showStoryText ? '.35s' : '.15s'}`};
   
   @media (min-width: ${p => p.theme.mediaQueries.desktop}) {
     left: 5px;

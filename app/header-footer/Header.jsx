@@ -42,7 +42,7 @@ const HeaderBackground = styled.div`
   // menu is open, dark pink if it isn't
   background-color: ${p => !p.isHome ? p.menu ? 'rgba(175, 18, 90, .8)' : p.theme.colors.darkPink : ''};
   opacity: ${p => !p.hide ? '1' : '0'};
-  transition: ${p => p.animateImageBlur && 'opacity .165s'};
+  transition: ${p => p.animateImageBlur && css`opacity ${p.showStoryText ? '.35s' : '.15s'}`};
   z-index: -1;
   
   // Control color when menu is open, up to the break point (not /home)
@@ -68,7 +68,7 @@ const RestyledLink = styled(
   margin-left: ${p => (p.num === 0 ? '0px' : '10px')};
   color: ${p => p.theme.colors.white};
   text-shadow: ${p => p.textShadow && textShadow};
-  transition: ${p => p.animateImageBlur && 'text-shadow .165s'};
+  transition: ${p => p.animateImageBlur && 'text-shadow .35s'};
 
   && {
     text-decoration: ${p => (p.isActive ? 'underline' : undefined)};
@@ -115,7 +115,7 @@ const Motto = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   text-shadow: ${p => p.textShadow && textShadow};
-  transition: ${p => p.animateImageBlur && 'text-shadow .165s'};
+  transition: ${p => p.animateImageBlur && 'text-shadow .35s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.four};

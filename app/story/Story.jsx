@@ -6,11 +6,11 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => (p.showStoryText ? '1' : '0')};
-  transition: opacity .165s;
+  transition: opacity ${p => p.showStoryText ? '.35s' : '.15s'};
   pointer-events: ${p => !p.showStoryText && 'none'};
   flex-direction: column;
   flex: 1;
@@ -21,17 +21,7 @@ const RestyledShelf = styled(Shelf)`
   align-items: center;
 `;
 const PictureHolder = styled.section`
-  // Setting visibilty: 'hidden' is better than display: 'none' b/c
-  // it should ensure that we load the image in the background so
-  // it's instantly ready to go when the button's clicked.
-  // (Some browsers won't load an image when display's none.)
-  // visibility: ${p => (p.showStoryText ? 'hidden' : 'visible')};
   z-index: -1;
-  // Flex = 1 when 'visible' so it 'takes' space when inspecting elements.
-  // Otherwise, nothing highlights in dev tools, which looks weird.
-  // Flex = 0 when 'hidden' so it takes up no space on the page.
-  // Otherwise, it takes up a column of space beside the text.
-  flex: ${p => p.showStoryText ? '0' : '1'}; 
 `;
 const Chapter = styled.h2`
   color: #fff7c9;
@@ -91,7 +81,7 @@ const Portal = styled.div`
   background-color: ${p => p.theme.colors.black};
   background-color: midnightblue;
   opacity: ${p => p.showStoryText ? '.3' : '0'};
-  transition: opacity .165s;
+  transition: opacity .35s;
 `;
 const Image = styled.img`
   // Ensure img top is TOP
@@ -105,15 +95,6 @@ const Image = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  // Blur content if text is turned off, or if the business card 
-  // or legal terms are on screen. We do blur(0) so we get the
-  // transition effect on mobile, which seems to disregard
-  // gong from blurred to unblurred without it:
-  // filter: ${p => p.showStoryText || p.theme.blurForTempContent ? p.theme.blur : 'blur(0)'};
-  // transition: ${p => !p.headerMenuIsOpen && 'filter .155s'};
-
-  // opacity: ${p => p.showStoryText ? '0' : '1'};
-  // transition: ${p => !p.headerMenuIsOpen && 'opacity .1s'};
 
   // Only blur background when user is mobile
   // The mediaQ ensures the blur goes away if the full-screen menu is
@@ -121,12 +102,6 @@ const Image = styled.img`
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     filter: ${p => p.theme.blurForHeaderMenu && p.theme.blur};
   }
-
-  // Use background-image to get proper 
-  // proportions on most browsers 
-  // background-image: url(${p => p.src});
-  // background-position: center;
-  // background-size: cover;
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
@@ -141,7 +116,7 @@ const BlurredImage = styled.img`
   height: 100%;
   width: 100%;
   opacity: ${p => !p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen? '0' : '1'};
-  transition: ${p => p.animateImageBlur && 'opacity .165s'};
+  transition: ${p => p.animateImageBlur && 'opacity .35s'};
 `;
 const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};

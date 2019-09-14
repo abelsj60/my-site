@@ -55,7 +55,6 @@ export default class Home extends Component {
     this.handleInitialLoad = this.handleInitialLoad.bind(this);
     this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
-    this.setSpellLevelZero = this.setSpellLevelZero.bind(this);
     this.setSpellLevelOne = this.setSpellLevelOne.bind(this);
     this.setSpellLevelTwo = this.setSpellLevelTwo.bind(this);
     this.setSpellLevelThree = this.setSpellLevelThree.bind(this);
@@ -67,10 +66,6 @@ export default class Home extends Component {
     // Doesn't need to be bound in constructor b/c the
     // calling values are bound (creating a closure)
     this.setState({ spellLevel: val });
-  }
-
-  setSpellLevelZero() {
-    this.setSpellLevel(0);
   }
 
   setSpellLevelOne() {
@@ -97,14 +92,13 @@ export default class Home extends Component {
       pattern: newPattern,
       activeCharm: newPattern[0],
       score: 0
-  });
+    });
   }
 
   render() {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
     const setSpellLevels = {
-      zero: () => this.setSpellLevelZero(),
       one: () => this.setSpellLevelOne(),
       two: () => this.setSpellLevelTwo(),
       three: () => this.setSpellLevelThree(),
@@ -250,3 +244,28 @@ export default class Home extends Component {
     }
   }
 }
+
+// SPELL PROCESS:
+// 1. Movement is '' on initial load
+// 2. Movement becomes 'enter' and spellLevel is 1 on first click
+// 3. spellLevel 1 transitions NameTag Bio to 0 (previously 1)
+// 4. spellLevel 1 becomes 2 onTransitionEnd for Home/NameTag/InnerContainer (opacity)
+// 5. spellLevel 2 sets display: none for Home/NameTag/InnerContainer
+// 6. spellLevel 2 transitions opacity to 1 for BlurredFantasyImage
+// 7. spellLevel 2 becomes 3 onTransitionEnd for PictureBox/BlurredFantasyImage (opacity)
+// 8. spellLevel 3 transitions opacity to 1 for Charms/OuterContainer (previously: 0)
+// 9. spellLevel 3 becomes 4 onTransitionEnd for Charms/OuterContainer (opacity)
+// --
+// 10. Movement becomes 'exit' and spellLevel 4 becomes 3 on click
+// 11. spellLevel 3 transitions Charms to 0 (previously 1)
+// 12. spellLevel 3 becomes 2 onTransitionEnd for Charms/OuterContainer (opacity)
+// 13. spellLevel 2 sets display: block for Home/NameTag/InnerContainer
+// 14. spellLevel 2 transtions opacity to 0 for PictureBox/BlurredFantasyImage
+// 15. spellLevel 2 becomes 1 onTransitionEnd for PictureBox/BlurredFantasyImage (opacity)
+// 16. spellLevel 1 transitions opacity to 1 for Home/NameTag/InnerContainer
+// 17. spellLevel becomes 0 onTransitionEnd for Home/NameTag/InnerContainer (opacity)
+// 18. Movement is reset to '' onTransitionEnd in PictureBox/FantasyImage or PictureBox/CityImage (opacity)
+// --
+// 18. spellLevel becomes 5 when the spell is cast
+// 19. spellLevel is reset to 0 onTransitionEnd in PictureBox/CityImage (transform)
+// 20. Movement is reset to '' onTransitionEnd in pictureBox/CityImage (transform)
