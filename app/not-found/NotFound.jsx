@@ -15,24 +15,23 @@ const Hed = styled.h1`
   color: ${p => p.theme.colors.white};
   font-size: ${p => p.theme.fontSizes.twenty};
   text-shadow: 3px 2px 2.5px rgba(0, 0, 0, .4);
+  margin-right: 20px;
 
-  @media (min-width: 555px) {
-    margin-right: 20px;
+  @media (min-width: 559px) {
   }
 `;
 const Jinn = styled.img`
-  object-fit: contain;
-  max-width: 100%;
-  margin-right: 25px;
   margin-bottom: auto;
+  pointer-events: none;
 
-  @media (min-width: 555px) {
+  @media (min-width: 554px) {
     margin-bottom: unset;
   }
 `;
 
-export default function NotFound() {
-  const src = 'https://user-images.githubusercontent.com/30417590/64972267-ff270a80-d876-11e9-8af9-552472d29216.png';
+export default function NotFound(props) {
+  const src = props.appState.images.notFoundImage.src;
+
   return (
     <Main>
       <RestyledContentHolder>
@@ -40,6 +39,11 @@ export default function NotFound() {
           Not found.
         </Hed>
         <Jinn
+          style={{
+            height: 'auto',
+            width: '100%',
+            maxWidth: '310px'
+          }}
           alt="404"
           src={src}
         />

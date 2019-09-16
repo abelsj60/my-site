@@ -101,7 +101,13 @@ export default class Body extends Component {
           component={About}
         />
         <Route
-          component={NotFound}
+          render={
+            () => (
+              <NotFound 
+                {...this.props}
+              />
+            )
+          }
         />
       </Switch>
     );
