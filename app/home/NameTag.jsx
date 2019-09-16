@@ -49,7 +49,7 @@ const OuterContainer = styled.div`
   // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
   // simultaneously — the second would overwrite the first.
-  ${p => p.heartbeat && css`animation: 1.1s .17s ease-in-out ${heartbeatKeyframes} 3 both`};
+  ${p => p.heartbeat && css`animation: 1.15s ${p.delayHeartbeat ? '.825s' : '.6s'} ease-in-out ${heartbeatKeyframes} 3 both`};
   ${p => p.spellLevel === 5 && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
   pointer-events: ${p => p.spellLevel === 5 && 'none'};
   text-align: center;
@@ -148,7 +148,9 @@ export default function NameTag(props) {
           });
         }
 
-        boundHandleClickForHome('toggleSpell');
+        if (heartbeat > 2) {
+          boundHandleClickForHome('toggleSpell');
+        }
       }
     };
   const onAnimationEndHandler =
@@ -156,6 +158,9 @@ export default function NameTag(props) {
       event.preventDefault()
       boundHandleClickForApp('updateHeartbeat');
     };
+
+  // if (finishedHomePage && heartbeat === 1) delay .5s;
+  console.log('test:', finishedHomePageLoad, heartbeat);
 
   return (
     <Fragment>
@@ -165,8 +170,17 @@ export default function NameTag(props) {
       <OuterContainer
         nameTagWidth={nameTagWidth}
         spellLevel={spellLevel}
-        heartbeat={heartbeat > 0 && heartbeat < 2}
+        heartbeat={heartbeat > 0 && heartbeat < 3}
+        delayHeartbeat={finishedHomePageLoad && heartbeat > 1 && heartbeat < 3}
         tempContentIsOn={showBusinessCard || showLegalTerms}
+        onAnimationStart={event => {
+          if (
+            event.animationName === 'cHArim' 
+              && !finishedHomePageLoad
+          ) {
+            boundHandleClickForApp('finishedHomePageLoad')
+          }
+        }}
         onAnimationEnd={event => onAnimationEndHandler(event)}
       >
         <FitText

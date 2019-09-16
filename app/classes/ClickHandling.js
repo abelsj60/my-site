@@ -53,6 +53,7 @@ export default class ClickHandling {
       const {
         animateImageBlur,
         currentCaller,
+        finishedHomePageLoad,
         heartbeat,
         showBusinessCard,
         showLegalTerms,
@@ -154,9 +155,8 @@ export default class ClickHandling {
         case 'updateHeartbeat':
             if (heartbeat < 1) {
               stateToUpdate.heartbeat = 1;
-              stateToUpdate.finishedHomePageLoad = true;
             } else {
-              stateToUpdate.heartbeat = 2;
+              stateToUpdate.heartbeat = 3;
             }
             break;
         case 'finishedHomePageLoad':
@@ -199,9 +199,8 @@ export default class ClickHandling {
           stateToUpdate.showBusinessCard = false;
           stateToUpdate.showLegalTerms = false;
 
-          if (stateToUpdate.heartbeat = 1) {
+          if (heartbeat === 1) {
             stateToUpdate.heartbeat = 2;
-            stateToUpdate.finishedHomePageLoad = true;
           }
 
           // 1. If any link is clicked, other than a MenuButton,
