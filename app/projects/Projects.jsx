@@ -61,7 +61,6 @@ const ImageHolder = styled.div`
 `;
 const MainImage = styled.img`
   opacity: ${p => p.imageLoaded ? '1' : '0'};
-  transition: ${p => p.imageLoaded && 'opacity .35s ease-in'};
   width: 100%;
   height: auto;
   vertical-align: top;

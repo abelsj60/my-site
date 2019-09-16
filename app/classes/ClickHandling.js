@@ -199,6 +199,11 @@ export default class ClickHandling {
           stateToUpdate.showBusinessCard = false;
           stateToUpdate.showLegalTerms = false;
 
+          if (stateToUpdate.heartbeat = 1) {
+            stateToUpdate.heartbeat = 2;
+            stateToUpdate.finishedHomePageLoad = true;
+          }
+
           // 1. If any link is clicked, other than a MenuButton,
           // we'll rebuild the state and toggle the menu
           // (this will turn it off it it's on, i.e., a header
