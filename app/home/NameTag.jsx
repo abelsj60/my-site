@@ -159,9 +159,6 @@ export default function NameTag(props) {
       boundHandleClickForApp('updateHeartbeat');
     };
 
-  // if (finishedHomePage && heartbeat === 1) delay .5s;
-  console.log('test:', finishedHomePageLoad, heartbeat);
-
   return (
     <Fragment>
       <Spacer
