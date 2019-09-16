@@ -225,7 +225,7 @@ class App extends Component {
       pinchZoomed: false, // We're zoomed! or not.
       isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false, // Resize w/clientHeight when true
-      heartbeat: alreadyLoaded ? 2 : 0, // 0 = not run, 1 = run, 2 = nevermore
+      heartbeat: alreadyLoaded ? 3 : 0, // 0 = not ready, 1 = ready (images loaded), 2 = run w/delay (left early), 3 = nevermore
       finishedHomePageLoad: alreadyLoaded,
       animateImageBlur: false, // Animate blur/transform on story images
       password: '',
