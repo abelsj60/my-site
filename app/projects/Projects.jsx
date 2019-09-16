@@ -59,9 +59,9 @@ const ImageHolder = styled.div`
   padding: 15px;
   background-color: ${p => p.theme.colors.reverieBlue};
 `;
-const Image = styled.img`
+const MainImage = styled.img`
   opacity: ${p => p.imageLoaded ? '1' : '0'};
-  transition: ${p => p.imageLoaded && 'opacity .4s ease-in-out'};
+  transition: ${p => p.imageLoaded && 'opacity .35s ease-in'};
   width: 100%;
   height: auto;
   vertical-align: top;
@@ -157,7 +157,7 @@ export default function Projects(props) {
               {caption}
             </Caption>
             <ImageHolder>
-              <Image
+              <MainImage
                 alt="mainPic"
                 src={source}
                 imageLoaded={imageLoaded}

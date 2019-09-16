@@ -276,7 +276,7 @@ export default class ClickHandling {
     };
   }
 
-  // Handles onClicks for ContentLoader, if 'projects'
+  // Handles onClicks for ContentLoader (/projects only)
 
   _handleClickForContentLoader() {
     return () => {
@@ -285,8 +285,8 @@ export default class ClickHandling {
         imageLoaded
       } = this.state;
 
-      if (caller === 'projects') {
-        this.setState({ imageLoaded: !imageLoaded });
+      if (caller === 'projects' && !imageLoaded) {
+        this.setState({ imageLoaded: true });
       }
     };
   }

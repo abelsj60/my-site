@@ -16,6 +16,7 @@ import {
 import ScrollHandling from '../classes/ScrollHandling.js';
 import State from '../classes/State.js';
 import Story from '../story/Story.jsx';
+import testImage from '../helpers/testImage.js';
 
 // For future refactoring: https://stackoverflow.com/a/51753410
 
@@ -78,7 +79,8 @@ export default class ContentLoader extends Component {
     this.state = {
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,
-      imageLoaded: false,
+      imageLoaded: location.caller === 'projects' 
+        && testImage(finalData.attributes.full[thumbnailIndex]),
       allContentData: allContentData,
       finalData: finalData,
       caller: location.caller,
@@ -232,7 +234,7 @@ export default class ContentLoader extends Component {
           stateToUpdate.projectIndex = projectIndex;
           stateToUpdate.thumbnailIndex = thumbnailIndex;
           stateToUpdate.finalData = allContentData[projectIndex];
-          stateToUpdate.imageLoaded = false;
+          stateToUpdate.imageLoaded = testImage(allContentData[projectIndex].attributes.full[thumbnailIndex]);
           break;
         default:
           const headlineIndex = location.params.headlineToIndex();

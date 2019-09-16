@@ -3,6 +3,7 @@ import stories from '../data/the-story/index.js';
 
 export default function prelodBigImages() {
   const images = {};
+  images.alreadyLoaded = [];
 
   stories.forEach(chapter => {
     const imageA = new Image();
@@ -18,24 +19,23 @@ export default function prelodBigImages() {
     image.src = home.attributes[name];
     images[name] = image;
 
-    if (images.alreadyLoaded === undefined) {
-      images.alreadyLoaded = [];
-    }
-
     if (image.complete) {
       images.alreadyLoaded.push(1);
     }
   });
-  
-  const businessCardSrc = 'https://user-images.githubusercontent.com/30417590/64480217-8696be80-d191-11e9-994f-b8bd71243766.png';
-  const notFoundSrc = 'https://user-images.githubusercontent.com/30417590/64972267-ff270a80-d876-11e9-8af9-552472d29216.png';
-  const businessCardImage = new Image();
-  const notFoundImage = new Image();
 
-  businessCardImage.src = businessCardSrc;
-  notFoundImage.src = notFoundSrc;
-  images.businessCardImage = businessCardImage;
-  images.notFoundImage = notFoundImage;
+  [
+    'https://user-images.githubusercontent.com/30417590/64480217-8696be80-d191-11e9-994f-b8bd71243766.png',
+    'https://user-images.githubusercontent.com/30417590/64972267-ff270a80-d876-11e9-8af9-552472d29216.png'
+  ].forEach((src, idx) => {
+    const image = new Image();
+    image.src = src;
+    images[
+      idx < 1
+        ? 'businessCardImage' 
+        : 'notFoundImage'
+    ] = image;
+  });
 
   return images;
 }
