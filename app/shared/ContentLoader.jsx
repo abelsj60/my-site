@@ -79,7 +79,8 @@ export default class ContentLoader extends Component {
     this.state = {
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,
-      imageLoaded: location.caller === 'projects' 
+      imageLoaded: location.caller === 'projects'
+        && !location.needsRedirect
         && testImage(finalData.attributes.full[thumbnailIndex]),
       allContentData: allContentData,
       finalData: finalData,
