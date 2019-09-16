@@ -20,10 +20,10 @@ boyInForegroundImageBlurred: 'https://user-images.githubusercontent.com/30417590
 cityImageBlurred: 'https://user-images.githubusercontent.com/30417590/63664327-1866fa80-c794-11e9-89cd-bf3544c1ccfc.png'
 fantasyImageBlurred: 'https://user-images.githubusercontent.com/30417590/63658897-3d4f7380-c77c-11e9-8611-9d64766ab426.png'
 preloadTheseImages: [
-    boyInForegroundImage,
-    boyInForegroundImageBlurred,
-    fantasyImage,
-    fantasyImageBlurred
+  boyInForegroundImage,
+  boyInForegroundImageBlurred,
+  fantasyImage,
+  fantasyImageBlurred
 ]
 ---
 

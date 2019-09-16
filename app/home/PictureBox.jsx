@@ -30,9 +30,10 @@ export default function PictureBox(props) {
   const {
     appState,
     boundHandleClickForHome,
-    handleInitialLoad,
+    boundHandleClickForApp,
     homeState,
-    setSpellLevels
+    setSpellLevels,
+    setLoadLevels
   } = props;
   const {
     finishedHomePageLoad,
@@ -40,10 +41,8 @@ export default function PictureBox(props) {
     inCity
   } = appState;
   const {
-    isCasting,
     spellLevel,
-    loadBoy,
-    loadFantasy,
+    loadLevel,
     movement
   } = homeState;
 
@@ -52,7 +51,8 @@ export default function PictureBox(props) {
   const bigFantasySrc = images[imageNames[2]].src;
   const blurredBoySrc = images[imageNames[1]].src;
   const blurredFantasySrc = images[imageNames[3]].src;
-  // Trigger toggle after castSpell transform
+
+  // Trigger toggle after we swap backgrounds
   const transitionHandler = function(event, penultimateSpellLevel, activeBackground) {
     event.preventDefault();
 
@@ -68,103 +68,90 @@ export default function PictureBox(props) {
   return (
     <PictureHolder>
       <BlurredBoyForeground
-        isCasting={isCasting}
-        boyIsLoading={loadBoy}
-        fantasyIsLoading={loadFantasy}
         finishedHomePageLoad={finishedHomePageLoad}
         enter={movement === 'enter'}
         exit={movement === 'exit'}
+        loadLevelBlurs={setLoadLevels.sum().blurs}
+        loadLevelAll={setLoadLevels.sum().all}
         spellLevel={spellLevel}
         src={blurredBoySrc}
         alt={descriptionBoy}
-        onLoad={() => handleInitialLoad('finishedLoadingBoy')}
+        onLoad={() => setLoadLevels.one()}
+        onTransitionEnd={() => {
+          setLoadLevels.three();
+          if (setLoadLevels.sum().all === 6) {
+            setTimeout(() => {
+              boundHandleClickForApp('updateHeartbeat');
+            }, 500);
+          }
+        }}
       />
       <BoyForeground
         src={bigBoySrc}
         alt={descriptionBoy}
-        boyIsLoading={loadBoy}
-        fantasyIsLoading={loadFantasy}
-        onLoad={() => handleInitialLoad('boy')}
+        loadLevelAll={setLoadLevels.sum().all}
+        finishedHomePageLoad={finishedHomePageLoad}
+        onLoad={() => setLoadLevels.five()}
       />
-      {(!inCity || inCity && spellLevel > 0) &&
+      {(!inCity || (inCity && spellLevel > 0)) &&
         <Fragment>
           <BlurredFantasyBackground
             src={blurredFantasySrc}
             finishedHomePageLoad={finishedHomePageLoad}
-            boyIsLoading={loadBoy}
-            fantasyIsLoading={loadFantasy}
             inCity={inCity}
             enter={movement === 'enter'}
             exit={movement === 'exit'}
             spellLevel={spellLevel}
-            isCasting={isCasting}
+            loadLevelBlurs={setLoadLevels.sum().blurs}
+            loadLevelAll={setLoadLevels.sum().all}
+            loadLevelFantasy={loadLevel[3] > 0}
+            onLoad={() => setLoadLevels.two()}
             onTransitionEnd={() => {
-              if (!finishedHomePageLoad) {
-                handleInitialLoad('finishedLoadingFantasy');
-              }
-
-              if (movement === 'enter') {
-                setSpellLevels.three();
-              }
-
-              if (movement === 'exit') {
-                setSpellLevels.one();
-              }
+              setLoadLevels.four();
+              setSpellLevels.three(movement === 'enter', 'BlurredFantasy');
+              setSpellLevels.one(movement === 'exit', 'BlurredFantasy');
             }}
-        />
-        <FantasyBackground
-          inCity={inCity}
-          spellLevel={spellLevel}
-          boyIsLoading={loadBoy}
-          fantasyIsLoading={loadFantasy}
-          src={bigFantasySrc}
-          alt={descriptionFantasy}
-          onLoad={() => handleInitialLoad('fantasy')}
-          // Trigger toggle after castSpell transform
-          onTransitionEnd={event => transitionHandler(
-            event,
-            spellLevel > 4,
-            inCity
-          )}
-        />
-      </Fragment>}
-      {(inCity || !inCity && spellLevel > 0) && 
+          />
+          <FantasyBackground
+            inCity={inCity}
+            finishedHomePageLoad={finishedHomePageLoad}
+            src={bigFantasySrc}
+            alt={descriptionFantasy}
+            onLoad={() => setLoadLevels.six()}
+            spellLevel={spellLevel}
+            loadLevelAll={setLoadLevels.sum().all}
+            // Trigger toggle after backgrounds are swapped
+            onTransitionEnd={
+              event => transitionHandler(event, spellLevel > 4, inCity)
+            }
+          />
+        </Fragment>
+      }
+      {(inCity || (!inCity && spellLevel > 0)) && 
         <Fragment>
           <BlurredCityBackground
-          src={cityImageBlurred}
-          inCity={inCity}
-          isCasting={isCasting}
-          enter={movement === 'enter'}
-          exit={movement === 'exit'}
-          finishedHomePageLoad={finishedHomePageLoad} // better spot?
-          spellLevel={spellLevel}
-          onTransitionEnd={() => {
-            if (!finishedHomePageLoad) {
-              handleInitialLoad('finishedLoadingFantasy');
+            src={cityImageBlurred}
+            inCity={inCity}
+            enter={movement === 'enter'}
+            exit={movement === 'exit'}
+            spellLevel={spellLevel}
+            onTransitionEnd={() => {
+              setSpellLevels.three(movement === 'enter', 'BlurredCity');
+              setSpellLevels.one(movement === 'exit', 'BlurredCity');
+            }}
+          />
+          <CityBackground
+            inCity={inCity}
+            spellLevel={spellLevel}
+            src={cityImage}
+            alt={descriptionCity}
+            // Trigger toggle after backgrounds are swapped
+            onTransitionEnd={
+              event => transitionHandler(event, spellLevel > 4, !inCity)
             }
-
-            if (movement === 'enter') {
-              setSpellLevels.three();
-            }
-
-            if (movement === 'exit') {
-              setSpellLevels.one();
-            }
-          }}
-        />
-        <CityBackground
-          inCity={inCity}
-          spellLevel={spellLevel}
-          src={cityImage}
-          alt={descriptionCity}
-          // Trigger toggle after castSpell transform
-          onTransitionEnd={event => transitionHandler(
-            event,
-            spellLevel > 4 ,
-            !inCity
-          )}
-        />
-      </Fragment>}
+          />
+        </Fragment>
+      }
     </PictureHolder>
   );
 }

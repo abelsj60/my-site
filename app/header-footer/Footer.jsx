@@ -25,7 +25,7 @@ const Line = styled.div`
   top: 0px;
   margin: 0px;
   height: 1px;
-  background-color: ${p => p.theme.colors.pink};
+  background-color: ${p => !p.isNotFound ? p.theme.colors.pink : p.theme.colors.white};
   opacity: ${p => !p.hide ? '1' : '0'};
   transition: ${p => p.animateImageBlur && css`opacity ${p.showStoryText ? '.35s' : '.15s'}`};
   
@@ -41,7 +41,7 @@ const Graf = styled.p`
   cursor: pointer;
   margin-right: ${p => !p.isLink ? '20px' : ''};
   margin-bottom: 0px;
-  color: ${p => (p.active ? (!p.home && !p.isStory ? p.theme.colors.pink : p.theme.colors.yellow) : !p.home && !p.isStory ? p.theme.colors.blue : p.theme.colors.white)};
+  color: ${p => (p.active ? (!p.home && !p.isStory && !p.isNotFound ? p.theme.colors.pink : p.theme.colors.yellow) : !p.home && !p.isStory && !p.isNotFound ? p.theme.colors.blue : p.theme.colors.white)};
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 5px;
@@ -82,6 +82,7 @@ export default function FooterContainer(props) {
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
+  const isNotFound = currentCaller === 'not-found';
   const coverVals = cover(window.innerWidth, height, 2131, 1244);
   const showTextShadow =
     isHome 
@@ -104,7 +105,7 @@ export default function FooterContainer(props) {
       : '/reverie';
 
   const eventHandlerForStoryButton =
-      () => boundHandleClickForApp('toggleStoryText');
+    () => boundHandleClickForApp('toggleStoryText');
 
   return (
     <Container
@@ -115,6 +116,7 @@ export default function FooterContainer(props) {
     >
       <Line
         home={isHome}
+        isNotFound={isNotFound}
         hide={!showStoryText && !isReverie}
         animateImageBlur={animateImageBlur}
       />
@@ -143,6 +145,7 @@ export default function FooterContainer(props) {
             isLink={true}
             home={isHome}
             isStory={isStory}
+            isNotFound={isNotFound}
             textShadow={showTextShadow}
             headerMenuIsOpen={headerMenuIsOpen}
           >
@@ -154,6 +157,7 @@ export default function FooterContainer(props) {
           onClick={eventHandlerToToggleBusinessCard}
           home={isHome}
           isStory={isStory}
+          isNotFound={isNotFound}
           textShadow={showTextShadow}
           headerMenuIsOpen={headerMenuIsOpen}
         >
@@ -164,6 +168,7 @@ export default function FooterContainer(props) {
           onClick={eventHandlerToToggleLegalTerms}
           home={isHome}
           isStory={isStory}
+          isNotFound={isNotFound}
           textShadow={showTextShadow}
           headerMenuIsOpen={headerMenuIsOpen}
         >

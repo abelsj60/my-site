@@ -12,7 +12,7 @@ export default styled.img`
   height: 100%;
   pointer-events: none;
   opacity: ${p => (p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2) || p.theme.blurForTempContent ? '1' : '0'};
-  transition: ${p => (p.finishedHomePageLoad && p.spellLevel > 0) ? 'opacity .55s ease-in' : ''};
+  transition: ${p => p.spellLevel > 0 ? 'opacity .55s ease-in' : ''};
   z-index: ${p => !p.inCity && p.spellLevel < 5  ? '-1' : '1'};
   ${p => (p.spellLevel === 5  || !p.inCity) && 'display: none;'}
 `;

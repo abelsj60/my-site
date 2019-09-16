@@ -65,7 +65,7 @@ const OuterContainer = styled.div`
   justify-content: space-between;
   z-index: 2;
   opacity: ${p => (p.enter && p.spellLevel >= 3 )|| (p.exit && p.spellLevel > 3) ? '1' : '0'};
-  transition: opacity .535s ease-in;
+  transition: opacity ${p => p.enter ? '.65s' : '.45s'} ease-in;
   ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
 `;
 const InnerContainer = styled.div`
@@ -188,7 +188,6 @@ export default function Charms(props) {
   const {
     appState,
     charmRefs,
-    goal,
     homeState,
     setSpellLevels
   } = props;
@@ -200,7 +199,7 @@ export default function Charms(props) {
   } = appState;
   const {
     activeCharm,
-    isCasting,
+    goal,
     spellLevel,
     movement,
     score
@@ -216,17 +215,11 @@ export default function Charms(props) {
       spellLevel={spellLevel}
       enter={movement === 'enter'}
       exit={movement === 'exit'}
-      isCasting={isCasting}
       tempContentIsOn={showBusinessCard || showLegalTerms}
       nameTagWidth={nameTagWidth}
       onTransitionEnd={() => {
-        if (movement === 'enter') {
-          setSpellLevels.four();
-        }
-
-        if (movement === 'exit') {
-          setSpellLevels.two();
-        }
+        setSpellLevels.four(movement === 'enter', 'OuterContainer');
+        setSpellLevels.two(movement === 'exit', 'OuterContainer');
       }}
     >
       <FitText

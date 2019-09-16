@@ -113,7 +113,7 @@ const GlobalStyle = createGlobalStyle`
 
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
-    background-color: ${p => p.reverie ? '#d2e7ff' : 'white'};
+    background-color: ${p => p.reverie ? '#d2e7ff' : p.notFound ? '#fd1172' : 'white'};
   }
   
   body {
@@ -157,10 +157,13 @@ class App extends Component {
     const images = preloadBigImages();
     const referrer = new Referrer(props);
     const location = referrer.location;
-    const {
-      pathname,
-      search
-    } = window.location;
+    const { pathname, search } = window.location;
+    // Prevent loading animation and transitions when using the same tab
+    // But, new tabs will always run the animation and transitions...
+    // This may be a problem with gh-pages, look into later...
+    const alreadyLoaded = images.alreadyLoaded.reduce(
+      (accum, currentVal) => accum + currentVal, 0
+    ) > 3;
 
     // Let's deal w/height.
     //  1. Check value based on device type.
@@ -190,7 +193,7 @@ class App extends Component {
     // use their true height).
 
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
-    this.defaultHeightWhenTooSmall = 
+    this.defaultHeightWhenTooSmall =
       isMobile && !isMobileSafari
       ? document.documentElement.clientHeight
       : window.innerHeight; // Arbitrary (iPhone SE height)
@@ -217,22 +220,18 @@ class App extends Component {
           : this.defaultHeightWhenTooSmall,
       showBusinessCard: false, // Show business card
       showLegalTerms: false, // Show legal terms
-      tempContentLevel: 0,
-      tempContentType: '',
       showStoryText: true, // Show story text, picture if false
       headerMenuIsOpen: false,
       pinchZoomed: false, // We're zoomed! or not.
       isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false, // Resize w/clientHeight when true
-      // Small iPhones raise their app bar when touching the Footer area.
-      // This test adds instructions to use these buttons (slide up).
-      homeAnimation: 'run', // To be run, set to 'done' onAnimationEnd
-      finishedHomePageLoad: false,
+      heartbeat: alreadyLoaded ? 2 : 0, // 0 = not run, 1 = run, 2 = nevermore
+      finishedHomePageLoad: alreadyLoaded,
       animateImageBlur: false, // Animate blur/transform on story images
       password: '',
       isValidUser: false,
       wrongPassword: '',
-      spacerHeight: 0,
+      spacerHeight: 0, // Set by 'handleResize', so must run here. Used by Home/NameTag.
       nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
       images: images
     };
@@ -246,17 +245,6 @@ class App extends Component {
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
-
-    this.setTempContentLevel = this.setTempContentLevel.bind(this);
-    this.setTempContentType = this.setTempContentType.bind(this);
-  }
-
-  setTempContentLevel(num) {
-    this.setState({ tempContentLevel: num });
-  }
-
-  setTempContentType(str) {
-    this.setState({ tempContentType: str });
   }
 
   handlePasswordSubmit(event) {
@@ -288,6 +276,7 @@ class App extends Component {
     const boundHandleClickForApp = hcForApp.boundHandleClick;
     const homeIsActive = this.state.currentCaller === 'home';
     const reverieIsActive = this.state.currentCaller === 'reverie';
+    const isNotFound = this.state.currentCaller === 'not-found';
     const fixMobileSafariBugOn7 = isTablet
       && isMobileSafari
       && osVersion[0] === '7';
@@ -318,6 +307,7 @@ class App extends Component {
         >
           <GlobalStyle
             reverie={reverieIsActive}
+            notFound={isNotFound}
           />
           <ZoomControl
             // Though an extra <div>, ZoomControl lets us add 'touch'
@@ -340,8 +330,6 @@ class App extends Component {
             <LegalTermsOrBizCard
               {...this.props}
               appState={this.state}
-              setTempContentType={this.setTempContentType}
-              setTempContentLevel={this.setTempContentLevel}
               boundHandleClickForApp={boundHandleClickForApp}
             />
             <Footer
@@ -409,9 +397,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-
     // This will never be called, here as good practice.
-
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('popstate', this.handleBackAndForth);
   }

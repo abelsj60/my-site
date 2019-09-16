@@ -53,6 +53,7 @@ export default class ClickHandling {
       const {
         animateImageBlur,
         currentCaller,
+        heartbeat,
         showBusinessCard,
         showLegalTerms,
         inCity,
@@ -150,11 +151,14 @@ export default class ClickHandling {
             ? `Enter: ${currentCaller} menu`
             : `Leave: ${currentCaller} menu`;
           break;
-        case 'toggleHomeAnimation':
-          stateToUpdate.homeAnimation = 'done';
-          category = 'App state';
-          action = 'Ran home animation';
-          break;
+        case 'updateHeartbeat':
+            if (heartbeat < 1) {
+              stateToUpdate.heartbeat = 1;
+              stateToUpdate.finishedHomePageLoad = true;
+            } else {
+              stateToUpdate.heartbeat = 2;
+            }
+            break;
         case 'finishedHomePageLoad':
           stateToUpdate.finishedHomePageLoad = true;
           category = 'App state';
@@ -292,7 +296,6 @@ export default class ClickHandling {
   _handleClickForHome() {
     return (updateValue, propName) => {
       const {
-        isCasting,
         eventType,
         movement,
         pattern,
@@ -302,12 +305,9 @@ export default class ClickHandling {
 
       switch (updateValue) {
         case 'toggleSpell':
-          // Note: We toggleSpell after the spell is cast in
-          // order to reset it's state. The alternative is
-          // to toggle this stuff from the castSpell
-          // case, but that duplicates logic.
+          // Note: We toggleSpell after the spell
+          // is cast in order to reset its state.
 
-          stateToUpdate.isCasting = !isCasting;
           stateToUpdate.movement =
             movement === 'enter'
               ? 'exit'
@@ -332,7 +332,7 @@ export default class ClickHandling {
           }
 
           break;
-        case 'castSpell':
+        case 'cast':
           // Note, the score never equals the goal 
           // b/c we cast at score + 1.
           
@@ -363,8 +363,9 @@ export default class ClickHandling {
 
   _handleCharm() {
     return isActive => {
-      const { score } = this.state;
-      const abracadabra = score + 1 === this.goal; // Magic!
+      const { goal, score } = this.state;
+      const abracadabra = score + 1 === goal; // Magic!
+      const { boundHandleClickForApp } = this.props;
 
       // Either the Charm's inactive, or it's time for magic.
 
@@ -386,8 +387,8 @@ export default class ClickHandling {
             });
           }
 
-          boundHandleClickForHome('castSpell');
-          this.props.boundHandleClickForApp('swapBackground');
+          boundHandleClickForHome('cast');
+          boundHandleClickForApp('swapBackground');
         } else {
           if (process.env.NODE_ENV !== 'development') {
             ReactGA.event({

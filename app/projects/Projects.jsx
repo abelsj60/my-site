@@ -61,6 +61,7 @@ const ImageHolder = styled.div`
 `;
 const Image = styled.img`
   opacity: ${p => p.imageLoaded ? '1' : '0'};
+  transition: ${p => p.imageLoaded && 'opacity .4s ease-in-out'};
   width: 100%;
   height: auto;
   vertical-align: top;
@@ -95,9 +96,9 @@ export default function Projects(props) {
   //  b. pinchZoomed
 
   const source =
-      !isMobile || pinchZoomed
-        ? zoomed[thumbnailIndex]
-        : full[thumbnailIndex];
+    !isMobile || pinchZoomed
+      ? zoomed[thumbnailIndex]
+      : full[thumbnailIndex];
   const attributeArray = showTheseAttributes.map(
     name => finalData.attributes[name]
   );

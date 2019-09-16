@@ -18,48 +18,103 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.goal = 5; // Cast spell
     this.charmRefs = [
       React.createRef(),
       React.createRef(),
       React.createRef()
     ];
-
     // Create an initial spell pattern. If we've gone
     // to /reverie and come back, we'll use the last
     // created spell pattern (stored on appState as
     // a back-up). Otherwise, make a new one.
-
-    const pattern = this.createSpellPattern();
-    const {
-      finishedHomePageLoad,
-      height 
-    } = this.props.appState;
-    this.props.boundHandleClickForApp('updateSpacerHeight', height);
-    this.fadeInTimeout = 0;
+    const initialPattern = this.createSpellPattern();
+    this.props.boundHandleClickForApp(
+      'updateSpacerHeight',
+      this.props.appState.height
+    );
 
     this.state = {
-      isCasting: false,
+      goal: 5,
       score: 0, // Used to select an active Charm and cast spell
-      pattern: pattern,
-      activeCharm: pattern[0], // Initial Charm is always [0]
-      eventType: 'click', // Type of event triggered Charm,
-      loadBoy: !finishedHomePageLoad, // Show blurredBoy
-      loadFantasy: !finishedHomePageLoad, // Show blurredFantasy
-      finishedLoadingBoy: finishedHomePageLoad, // Boy loaded
-      finishedLoadingFantasy: finishedHomePageLoad, // Fantasy loaded
-      movement: '', // Set to 'enter' by ClickHandling on 1st pass
+      pattern: initialPattern, // arr
+      activeCharm: initialPattern[0],
+      eventType: 'click', // Type of event triggered Charm
+      movement: '', // 'enter' = Charms / 'exit' = NameTag
+      loadLevel: [0, 0, 0, 0], // [bBoy, bFant., boy, fant.], [2, 2, 1, 1] for initial load, [1, 1, 1, 1] after traveling (disregarded)
       spellLevel: 0
     };
 
-    this.handleInitialLoad = this.handleInitialLoad.bind(this);
     this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
     this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
+    this.setLoadLevelOne = this.setLoadLevelOne.bind(this);
+    this.setLoadLevelTwo = this.setLoadLevelTwo.bind(this);
+    this.setLoadLevelThree = this.setLoadLevelThree.bind(this);
+    this.setLoadLevelFour = this.setLoadLevelFour.bind(this);
+    this.setLoadLevelFive = this.setLoadLevelFive.bind(this);
+    this.setLoadLevelSix = this.setLoadLevelSix.bind(this);
+    this.sumLoadLevels = this.sumLoadLevels.bind(this);
     this.setSpellLevelOne = this.setSpellLevelOne.bind(this);
     this.setSpellLevelTwo = this.setSpellLevelTwo.bind(this);
     this.setSpellLevelThree = this.setSpellLevelThree.bind(this);
     this.setSpellLevelFour = this.setSpellLevelFour.bind(this);
     this.resetSpell = this.resetSpell.bind(this);
+  }
+
+  setLoadLevel(idx) {
+    // Doesn't need to be bound in constructor b/c the
+    // calling values are bound (creating a closure)
+
+    if (this.state.loadLevel[idx] < 2) {
+      const newArr = [].concat(this.state.loadLevel);
+      const lastValue = newArr[idx];
+      newArr[idx] = lastValue + 1;
+      this.setState({ loadLevel: newArr });
+    }
+  }
+
+  setLoadLevelOne() {
+    // onLoad/blurredBoy
+    this.setLoadLevel(0);
+  }
+
+  setLoadLevelTwo() {
+    // onLoad/blurredFantasy
+    this.setLoadLevel(1);
+  }
+
+  setLoadLevelThree() {
+    // onTransitionEnd/blurredBoy
+    this.setLoadLevel(0);
+  }
+
+  setLoadLevelFour() {
+    // onTransitionEnd/blurredFantasy
+    this.setLoadLevel(1);
+  }
+
+  setLoadLevelFive() {
+    // onLoad/boy
+    this.setLoadLevel(2);
+  }
+
+  setLoadLevelSix() {
+    // onLoad/fantasy
+    this.setLoadLevel(3);
+  }
+
+  sumLoadLevels() {
+    const blurs =
+      this.state.loadLevel[0]
+        + this.state.loadLevel[1];
+    const full =
+      this.state.loadLevel[2]
+        + this.state.loadLevel[3];
+
+    return {
+      blurs,
+      full,
+      all: blurs + full
+    }
   }
 
   setSpellLevel(val) {
@@ -68,43 +123,72 @@ export default class Home extends Component {
     this.setState({ spellLevel: val });
   }
 
-  setSpellLevelOne() {
-    this.setSpellLevel(1);
+  setSpellLevelOne(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'BlurredFantasy' || caller === 'BlurredCity') {
+      // PictureBox --> onTransitionEnd
+      this.setSpellLevel(1);
+    }
   }
 
-  setSpellLevelTwo() {
-    this.setSpellLevel(2);
+  setSpellLevelTwo(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'OuterContainer' || caller === 'InnerContainer') {
+      // a. Charms, b. NameTag --> onTransitionEnd
+      this.setSpellLevel(2);
+    };
   }
 
-  setSpellLevelThree() {
-    this.setSpellLevel(3);
+  setSpellLevelThree(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'BlurredFantasy' || caller === 'BlurredCity') {
+      // PictureBox --> onTransitionEnd
+      this.setSpellLevel(3);
+    }
   }
 
-  setSpellLevelFour() {
-    this.setSpellLevel(4);
+  setSpellLevelFour(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'OuterContainer') {
+      // Charms --> onTransitionEnd
+      this.setSpellLevel(4);
+    }
   }
 
-  resetSpell() {
-    const newPattern = this.createSpellPattern();
-    this.setState({
-      spellLevel: 0,
-      movement: '',
-      pattern: newPattern,
-      activeCharm: newPattern[0],
-      score: 0
-    });
+  resetSpell(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'InnerContainer') {
+      // NameTag --> onTransitionEnd
+      const newPattern = this.createSpellPattern();
+      this.setState({
+        spellLevel: 0,
+        movement: '',
+        pattern: newPattern,
+        activeCharm: newPattern[0],
+        score: 0
+      });
+    }
   }
 
   render() {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
     const setSpellLevels = {
-      one: () => this.setSpellLevelOne(),
-      two: () => this.setSpellLevelTwo(),
-      three: () => this.setSpellLevelThree(),
-      four: () => this.setSpellLevelFour(),
-      resetSpell: () => this.resetSpell()
-    }
+      one: (v, c) => this.setSpellLevelOne(v, c),
+      two: (v, c) => this.setSpellLevelTwo(v, c),
+      three: (v, c) => this.setSpellLevelThree(v, c),
+      four: (v, c) => this.setSpellLevelFour(v, c),
+      reset: (v, c) => this.resetSpell(v, c)
+    };
+    const setLoadLevels = {
+      one: () => this.setLoadLevelOne(),
+      two: () => this.setLoadLevelTwo(),
+      three: () => this.setLoadLevelThree(),
+      four: () => this.setLoadLevelFour(),
+      five: () => this.setLoadLevelFive(),
+      six: () => this.setLoadLevelSix(),
+      sum: () => this.sumLoadLevels()
+    };
 
     return (
       <RestyledMain 
@@ -115,10 +199,10 @@ export default class Home extends Component {
           homeState={this.state}
           boundHandleClickForHome={boundHandleClickForHome}
           setSpellLevels={setSpellLevels}
+          setLoadLevels={setLoadLevels}
         />
         <Charms
           {...this.props}
-          goal={this.goal}
           homeState={this.state}
           charmRefs={this.charmRefs}
           setSpellLevels={setSpellLevels}
@@ -126,41 +210,18 @@ export default class Home extends Component {
         <PictureBox
           {...this.props}
           homeState={this.state}
-          handleInitialLoad={this.handleInitialLoad}
           boundHandleClickForHome={boundHandleClickForHome}
           setSpellLevels={setSpellLevels}
+          setLoadLevels={setLoadLevels}
         />
       </RestyledMain>
     );
   }
 
-  handleInitialLoad(type) {
-    const stateToUpdate = {}
-
-    switch(type) {
-      case 'boy':
-        stateToUpdate.loadBoy = false;
-        break;
-      case 'fantasy':
-        stateToUpdate.loadFantasy = false;
-        break;
-      case 'finishedLoadingBoy':
-        stateToUpdate.finishedLoadingBoy = true;
-        break;
-      case 'finishedLoadingFantasy':
-        stateToUpdate.finishedLoadingFantasy = true;
-        break;
-      default:
-        break;
-    }
-
-    this.setState(stateToUpdate)
-  }
-
   createSpellPattern() {
     const pattern = [];
 
-    for (let i = 0; i < this.goal; i++) {
+    for (let i = 0; i < 5; i++) {
       let randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
 
       // Let's ensure our Charm order isn't redundant.

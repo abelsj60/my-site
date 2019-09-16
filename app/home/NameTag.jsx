@@ -79,9 +79,9 @@ const Hed = styled.h1`
   }
 `;
 const InnerContainer = styled.div`
-  transition: opacity .335s ease-in;
+  transition: opacity ${p => p.loadLevelAll < 6 ? '.55s' : p.enter ? '.45s' : '.65s'} ease-in;
   display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
-  opacity: ${p => p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1) ? '0' : '1'};
+  opacity: ${p => (!p.finishedHomePageLoad && p.loadLevelAll < 6) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
 `;
 const Pitch = styled.section`
   overflow: auto;
@@ -105,10 +105,11 @@ export default function NameTag(props) {
     boundHandleClickForApp,
     boundHandleClickForHome,
     homeState,
-    setSpellLevels
+    setSpellLevels,
+    setLoadLevels
   } = props;
   const {
-    homeAnimation,
+    heartbeat,
     finishedHomePageLoad,
     showBusinessCard,
     showLegalTerms,
@@ -116,13 +117,8 @@ export default function NameTag(props) {
     nameTagWidth
   } = appState;
   const {
-    isCasting,
     eventType,
-    finishedLoadingBoy,
-    finishedLoadingFantasy,
     spellLevel,
-    loadBoy,
-    loadFantasy,
     movement,
     score
   } = homeState;
@@ -135,34 +131,31 @@ export default function NameTag(props) {
     name
   } = attributes;
 
-  const eventHandler = () => {
-    if (
-      finishedHomePageLoad
-        && (spellLevel === 0 || spellLevel === 4)
-    ) {
-      if (eventType === 'touch') {
-        boundHandleClickForHome('resetEventType');
-        return false;
-      }
-  
-      if (process.env.NODE_ENV !== 'development') {
-        ReactGA.event({
-          category: 'Home state',
-          action: 'Spell toggled.',
-          label: `The score was ${score}.`
-        });
-      }
-  
-      boundHandleClickForHome('toggleSpell');
-    }
-  };
-  const animationHandler = event => {
-    event.preventDefault();
+  const eventHandler =
+    () => {
+      // ? Need: finishedHomePageLoad && 
+      if (spellLevel === 0 || spellLevel === 4) {
+        if (eventType === 'touch') {
+          boundHandleClickForHome('resetEventType');
+          return false;
+        }
+    
+        if (process.env.NODE_ENV !== 'development') {
+          ReactGA.event({
+            category: 'Home state',
+            action: 'Spell toggled.',
+            label: `The score was ${score}.`
+          });
+        }
 
-    if (homeAnimation === 'run') {
-      boundHandleClickForApp('toggleHomeAnimation')
-    }
-  }
+        boundHandleClickForHome('toggleSpell');
+      }
+    };
+  const onAnimationEndHandler =
+    event => {
+      event.preventDefault()
+      boundHandleClickForApp('updateHeartbeat');
+    };
 
   return (
     <Fragment>
@@ -172,19 +165,9 @@ export default function NameTag(props) {
       <OuterContainer
         nameTagWidth={nameTagWidth}
         spellLevel={spellLevel}
-        heartbeat={
-          finishedLoadingBoy
-            && finishedLoadingFantasy
-            && homeAnimation === 'run'
-        }
+        heartbeat={heartbeat > 0 && heartbeat < 2}
         tempContentIsOn={showBusinessCard || showLegalTerms}
-        onAnimationStart={event => {
-          event.preventDefault();
-          if (!loadBoy && !loadFantasy) {
-            boundHandleClickForApp('finishedHomePageLoad')
-          }
-        }}
-        onAnimationEnd={animationHandler.bind(null)}
+        onAnimationEnd={event => onAnimationEndHandler(event)}
       >
         <FitText
           compressor={1.154}
@@ -197,18 +180,14 @@ export default function NameTag(props) {
         </FitText>
         <InnerContainer
           tempContentIsOn={showBusinessCard || showLegalTerms}
+          loadLevelAll={setLoadLevels.sum().all}
           spellLevel={spellLevel}
-          isCasting={isCasting}
+          finishedHomePageLoad={finishedHomePageLoad}
           enter={movement === 'enter'}
           exit={movement === 'exit'}
           onTransitionEnd={() => {
-            if (movement === 'enter') {
-              setSpellLevels.two();
-            }
-
-            if (movement === 'exit') {
-              setSpellLevels.resetSpell();
-            }
+            setSpellLevels.two(movement === 'enter', 'InnerContainer');
+            setSpellLevels.reset(movement === 'exit', 'InnerContainer');
           }}
         >
           <FitText
@@ -220,12 +199,7 @@ export default function NameTag(props) {
               {motto}
             </SubHed>
           </FitText>
-          <Pitch
-            isCasting={isCasting}
-            spellLevel={spellLevel}
-            finishedHomePageLoad={finishedHomePageLoad}
-            tempContentIsOn={showBusinessCard || showLegalTerms}
-          >
+          <Pitch>
             <FitText
              compressor={2.5}
             >
@@ -241,7 +215,7 @@ export default function NameTag(props) {
           </Pitch>
         </InnerContainer>
         <Loader
-          show={loadBoy || loadFantasy}
+          show={setLoadLevels.sum().all < 6}
           done={finishedHomePageLoad}
         />
       </OuterContainer>

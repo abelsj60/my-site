@@ -11,6 +11,7 @@ export default styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: ${p => p.boyIsLoading || p.fantasyIsLoading ? '0' : '1'};
+  opacity: ${p => !p.finishedHomePageLoad && p.loadLevelAll < 6 ? '0' : '1'};
+  transition: ${p => !p.finishedHomePageLoad && 'opacity 1s ease-in'};
   z-index: 2;
 `;

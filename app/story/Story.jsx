@@ -95,13 +95,6 @@ const Image = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-
-  // Only blur background when user is mobile
-  // The mediaQ ensures the blur goes away if the full-screen menu is
-  // turned off when the user increases the browser window's width
-  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    filter: ${p => p.theme.blurForHeaderMenu && p.theme.blur};
-  }
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
@@ -117,6 +110,12 @@ const BlurredImage = styled.img`
   width: 100%;
   opacity: ${p => !p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen? '0' : '1'};
   transition: ${p => p.animateImageBlur && 'opacity .35s'};
+
+  // The mediaQ ensures the blur goes away if the full-screen menu is
+  // turned on when the user increases the browser window's width
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    opacity: ${p => !p.showStoryText && p.theme.blurForHeaderMenu && '0'};
+  }
 `;
 const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};

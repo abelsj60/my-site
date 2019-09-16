@@ -38,16 +38,16 @@ const HeaderBackground = styled.div`
   bottom: ${p => p.menu && '0px'};
   width: ${p => p.menu && '100%'};
   left: 0px;
-  // No background on home, translucent if
-  // menu is open, dark pink if it isn't
+  // No background on home, translucent if menu is open, dark pink if it isn't
   background-color: ${p => !p.isHome ? p.menu ? 'rgba(175, 18, 90, .8)' : p.theme.colors.darkPink : ''};
   opacity: ${p => !p.hide ? '1' : '0'};
   transition: ${p => p.animateImageBlur && css`opacity ${p.showStoryText ? '.35s' : '.15s'}`};
   z-index: -1;
-  
-  // Control color when menu is open, up to the break point (not /home)
-  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    background-color: ${p => p.hide && !p.isHome && 'rgba(175, 18, 90, .8)'};
+
+  // The mediaQ ensures the background goes away if the full-screen menu
+  // is turned on when the user increases the browser window's width
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    opacity: ${p => !p.showStoryText && p.theme.blurForHeaderMenu && '0'};
   }
 `;
 const RestyledLink = styled(
@@ -238,6 +238,7 @@ export default class Header extends Component {
           isHome={isHome}
           isStory={isStory}
           hide={hideBackground}
+          showStoryText={showStoryText}
           animateImageBlur={animateImageBlur}
         />
         <NameAsLink
