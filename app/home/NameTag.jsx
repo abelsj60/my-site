@@ -1,4 +1,4 @@
-import bio from '../data/home/home.md';
+import home from '../data/home/home.md';
 import FitText from '@kennethormandy/react-fittext';
 import Loader from '../shared/Loader.jsx';
 import marked from 'marked';
@@ -73,6 +73,8 @@ const Hed = styled.h1`
   margin-bottom: 10px;
   cursor: pointer;
   user-select: none;
+  opacity: ${p => !p.finishedHomePageLoad && p.loadLevelBlurs < 2 ? '0' : '1'};
+  transition: ${p => p.loadLevelAll < 6 && 'opacity 1s ease-in'};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: -17px;
@@ -125,7 +127,7 @@ export default function NameTag(props) {
   const {
     attributes,
     body
-  } = bio;
+  } = home;
   const {
     motto,
     name
@@ -185,6 +187,9 @@ export default function NameTag(props) {
         >
           <Hed
             onClick={eventHandler}
+            loadLevelBlurs={setLoadLevels.sum().blurs}
+            loadLevelAll={setLoadLevels.sum().all}
+            finishedHomePageLoad={finishedHomePageLoad}
           >
             {name}
           </Hed>
