@@ -231,8 +231,9 @@ export default function NameTag(props) {
           </Pitch>
         </InnerContainer>
         <Loader
-          show={setLoadLevels.sum().all < 6}
+          img={true}
           done={finishedHomePageLoad}
+          show={setLoadLevels.sum().all < 6}
         />
       </OuterContainer>
     </Fragment>

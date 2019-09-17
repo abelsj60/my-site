@@ -15,9 +15,9 @@ const loaderKeyframes = keyframes`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-left: ${p => p.mLeftAuto ? 'auto' : ''};
   opacity: ${p => p.show ? '1' : '0'};
-  transition: opacity .165s;
+  transition: opacity .2s;
 `;
 const Elements = styled.div`
   width: ${p => p.width ? css`${p.width}px` : '125px'};
@@ -43,21 +43,27 @@ export default function Loader(props) {
     return null;
   }
 
-  return !props.img 
-    ? (
-      <Container
-        show={props.show}
-      >
-        <Elements
-          width={props.width}
-        >
-          <Text>
-            Loading...
-          </Text>
-          <LoadingBar>
-            <ProgressBar />
-          </LoadingBar>
-        </Elements>
-      </Container>
-    ) : <ImageLoader />;
+  return (
+    <Container
+      show={props.show}
+      mLeftAuto={props.mLeftAuto}
+    >
+      {
+        props.img ? (
+          <ImageLoader />
+        ) : (
+          <Elements
+            width={props.width}
+          >
+            <Text>
+              Loading...
+            </Text>
+            <LoadingBar>
+              <ProgressBar />
+            </LoadingBar>
+          </Elements>
+        )
+      }
+    </Container>
+  );
 }

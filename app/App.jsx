@@ -113,7 +113,8 @@ const GlobalStyle = createGlobalStyle`
 
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
-    background-color: ${p => p.reverie ? '#d2e7ff' : p.notFound ? '#fd1172' : 'white'};
+    background-color: ${p => p.reverie ? '#d2e7ff' : p.notFound ? '#fd1172' : ''};
+
   }
   
   body {
@@ -375,10 +376,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // REmove hang on message once we're loading (see index.html)
-    const element = document.getElementById('hang-on');
-    element.parentNode.removeChild(element);
-
     if (!this.hasStyle('flexbox')) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {

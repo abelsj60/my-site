@@ -113,8 +113,10 @@ export default function Projects(props) {
             {...props}
           />
           <Loader
-            done={imageLoaded}
             img={true}
+            show={true}
+            mLeftAuto={true}
+            done={imageLoaded}
           />
           <ProjectNav
             {...props}

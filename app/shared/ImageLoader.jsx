@@ -5,7 +5,6 @@ import styled from 'styled-components';
 const Container = styled.div`
   height: 16px;
   width: 16px;
-  margin-left: auto;
 `;
 const Loader = styled.div`
   width: 100%;
