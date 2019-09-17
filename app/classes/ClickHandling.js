@@ -52,7 +52,9 @@ export default class ClickHandling {
     return (updateValue, valueOne, valueTwo) => {
       const {
         animateImageBlur,
+        chapter,
         currentCaller,
+        showDelay,
         finishedHomePageLoad,
         heartbeat,
         showBusinessCard,
@@ -63,6 +65,25 @@ export default class ClickHandling {
         headerMenuIsOpen
       } = this.state;
       const stateToUpdate = {};
+      const toggleStoryTextSequence = () => {
+        if (showDelay) {
+          stateToUpdate.showDelay = !showDelay;
+        }
+
+        stateToUpdate.showStoryText = !showStoryText;
+
+        if (!animateImageBlur) {
+          stateToUpdate.animateImageBlur = true;
+        }
+
+        if (showBusinessCard) {
+          stateToUpdate.showBusinessCard = !showBusinessCard;
+        }
+
+        if (showLegalTerms) {
+          stateToUpdate.showLegalTerms = !showLegalTerms;
+        }
+      };
       let category = '';
       let action = '';
       let label = '';
@@ -110,19 +131,7 @@ export default class ClickHandling {
             : '';
           break;
         case 'toggleStoryText':
-          stateToUpdate.showStoryText = !showStoryText;
-
-          if (!animateImageBlur) {
-            stateToUpdate.animateImageBlur = true;
-          }
-
-          if (showBusinessCard) {
-            stateToUpdate.showBusinessCard = !showBusinessCard;
-          }
-
-          if (showLegalTerms) {
-            stateToUpdate.showLegalTerms = !showLegalTerms;
-          }
+          toggleStoryTextSequence();
 
           category = 'App state';
           action = showStoryText
@@ -133,6 +142,17 @@ export default class ClickHandling {
             : showLegalTerms
               ? 'Legal notice was open'
               : '';
+          break;
+        case 'setChapter':
+          stateToUpdate.chapter = valueOne;
+
+          if (valueTwo) {
+            toggleStoryTextSequence();
+          }
+
+          break;
+        case 'toggleShowDelay':
+          stateToUpdate.showDelay = !showDelay;
           break;
         case 'swapBackground':
           stateToUpdate.inCity = !inCity;
@@ -226,6 +246,17 @@ export default class ClickHandling {
               && !(currentCaller === 'reverie' && valueOne === 'chapter')
           ) {
             stateToUpdate.showStoryText = true;
+          }
+
+          if (showDelay && valueOne !== 'chapter') {
+              stateToUpdate.showDelay = !showDelay;
+          }
+
+          if (
+            valueOne !== 'chapter' 
+              && (chapter > 0 || chapter < 0)
+          ) {
+              stateToUpdate.chapter = 0;
           }
 
           category = 'App state';

@@ -234,7 +234,9 @@ class App extends Component {
       wrongPassword: '',
       spacerHeight: 0, // Set by 'handleResize', so must run here. Used by Home/NameTag.
       nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
-      images: images
+      images: images,
+      chapter: 0,
+      showDelay: false
     };
 
     this.handleResize = this.handleResize.bind(this);

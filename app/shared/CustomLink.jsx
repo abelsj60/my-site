@@ -1,6 +1,6 @@
+import { createPath } from 'history';
 import React from 'react';
 import { Route, Link as ReactRouterLink } from 'react-router-dom';
-import { createPath } from 'history';
 
 // This code comes courtesy of: https://stackoverflow.com/a/51580782
 // See also: https://github.com/ReactTraining/history/issues/470

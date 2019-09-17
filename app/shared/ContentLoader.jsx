@@ -70,6 +70,18 @@ export default class ContentLoader extends Component {
 
     const finalData = allContentData[dataIndex];
 
+    if (location.caller === 'chapter' && chapterIndex > -1) {
+      const { appState, boundHandleClickForApp } = props;
+      const { images } = appState;
+      let number = chapterIndex + 1;
+
+      if (!images[`chapter-${number}-main`].complete) {
+        number = number * -1;
+      }
+
+      boundHandleClickForApp('setChapter', number);
+    }
+
     this.overflowRef =
       location.caller === 'chapter'
         ? React.createRef()
@@ -194,7 +206,8 @@ export default class ContentLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { currentCaller } = this.props.appState;
+    const { appState, boundHandleClickForApp } = this.props;
+    const { currentCaller, images } = appState;
     const referrer = new Referrer(this.props);
     const location = new Location(
       referrer.pathToMatch,
@@ -221,9 +234,16 @@ export default class ContentLoader extends Component {
       switch (caller) {
         case 'chapter':
           const titleIndex = location.params.titleToIndex();
+          const chapterData = allContentData[titleIndex];
+          let number = chapterData.attributes.number;
+
+          if (!images[`chapter-${number}-main`].complete) {
+            number = number * -1;
+          }
 
           stateToUpdate.chapterIndex = titleIndex;
-          stateToUpdate.finalData = allContentData[titleIndex];
+          stateToUpdate.finalData = chapterData;
+          boundHandleClickForApp('setChapter', number);
           break;
         case 'projects':
           const projectIndex = location.params.projectNameToIndex();

@@ -1,5 +1,6 @@
 import Button from './Button.jsx';
 import { cover } from 'intrinsic-scale';
+import Loader from '../shared/Loader.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -67,7 +68,9 @@ export default function FooterContainer(props) {
   } = props;
   const {
     animateImageBlur,
+    chapter,
     currentCaller,
+    showDelay,
     headerMenuIsOpen,
     height,
     lastCaller,
@@ -104,8 +107,13 @@ export default function FooterContainer(props) {
       }`
       : '/reverie';
 
-  const eventHandlerForStoryButton =
-    () => boundHandleClickForApp('toggleStoryText');
+  const eventHandlerForStoryButton = () => {
+      if (chapter < 0) {
+        boundHandleClickForApp('toggleShowDelay');
+      } else {
+        boundHandleClickForApp('toggleStoryText');
+      }
+    };
 
   return (
     <Container
@@ -132,16 +140,26 @@ export default function FooterContainer(props) {
             : 'Text on'
         }
       />
+      {isStory && (
+        <div
+          style={{
+            marginLeft: '15px'
+          }}
+        >
+          <Loader
+            img={true}
+            done={!showStoryText}
+            show={showDelay}
+          />
+        </div>
+      )}
       <TextBox>
         <RestyledLink
           to={reverieLink}
           boundHandleClickForApp={boundHandleClickForApp}
         >
           <Graf
-            active={
-              (isReverie && 'active')
-              || undefined
-            }
+            active={isReverie}
             isLink={true}
             home={isHome}
             isStory={isStory}

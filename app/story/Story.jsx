@@ -135,10 +135,13 @@ const StoryText = styled.section`
 export default function Story(props) {
   const {
     appState,
+    boundHandleClickForApp,
     contentState,
     overflowRef
   } = props;
   const {
+    chapter,
+    showDelay,
     headerMenuIsOpen,
     images,
     showStoryText,
@@ -172,6 +175,8 @@ export default function Story(props) {
       chapterNumber = 'four';
       break;
   }
+
+  // console.log('complete in story:', images[`chapter-${number}-main`].complete);
 
   return (
     <Main>
@@ -230,6 +235,11 @@ export default function Story(props) {
           alt={description}
           showStoryText={showStoryText}
           src={bigImageSrc}
+          onLoad={() => {
+            if (chapter < 0) {
+              boundHandleClickForApp('setChapter', number, showDelay);
+            }
+          }}
         />
       </PictureHolder>
     </Main>
