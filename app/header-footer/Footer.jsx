@@ -70,11 +70,11 @@ export default function FooterContainer(props) {
     animateImageBlur,
     chapter,
     currentCaller,
-    showDelay,
     headerMenuIsOpen,
     height,
     lastCaller,
     showBusinessCard,
+    showDelay,
     showLegalTerms,
     showStoryText,
   } = appState;
@@ -135,9 +135,11 @@ export default function FooterContainer(props) {
         boxShadow={showTextShadow}
         isStory={isStory}
         text={
-          showStoryText
-            ? 'Text off'
-            : 'Text on'
+          !showStoryText
+            ? 'Text on'
+            : !showDelay
+              ? 'Text off'
+              : 'Cancel'
         }
       />
       {isStory && (
