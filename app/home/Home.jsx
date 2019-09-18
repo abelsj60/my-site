@@ -126,7 +126,7 @@ export default class Home extends Component {
   setSpellLevelOne(isValid, caller) {
     if (!isValid) return null;
     if (caller === 'BlurredFantasy' || caller === 'BlurredCity') {
-      // PictureBox --> onTransitionEnd
+      // onTransitionEnd
       this.setSpellLevel(1);
     }
   }
@@ -134,7 +134,7 @@ export default class Home extends Component {
   setSpellLevelTwo(isValid, caller) {
     if (!isValid) return null;
     if (caller === 'OuterContainer' || caller === 'InnerContainer') {
-      // a. Charms, b. NameTag --> onTransitionEnd
+      // a. Charms/OuterContainer, b. NameTag/InnerContainer --> onTransitionEnd
       this.setSpellLevel(2);
     };
   }
@@ -142,7 +142,7 @@ export default class Home extends Component {
   setSpellLevelThree(isValid, caller) {
     if (!isValid) return null;
     if (caller === 'BlurredFantasy' || caller === 'BlurredCity') {
-      // PictureBox --> onTransitionEnd
+      // onTransitionEnd
       this.setSpellLevel(3);
     }
   }

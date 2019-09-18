@@ -55,7 +55,7 @@ export default class State {
     return index && index !== -1 ? index : 0;
   }
 
-  rebuild(setState) {
+  rebuildBody(setState) {
     const indices = this._convertParamsToIndices();
 
     // Only -1 if explicitly set by a params method
@@ -65,6 +65,37 @@ export default class State {
     ) {
       setState(indices.one, indices.two);
     }
+  }
+
+  _illustrationIsComplete(images) {
+    const titleIndex = this.getIndex('chapter');
+    const isComplete = 
+      images[
+        `chapter-${titleIndex + 1}-main`
+      ].complete;
+      
+    return !isComplete
+      ? (titleIndex + 1) * -1
+      : titleIndex + 1
+  }
+
+  checkIllustrationStatus(type, images) {
+    if (type === 'external') {
+      // Can only be called if /chapter...
+      return this._illustrationIsComplete(images);
+    } else {
+      const { currentCaller, images } = this._props.appState;
+
+      if (currentCaller === 'chapter') {
+        return this._illustrationIsComplete(images);
+      }
+
+      return 0;
+    }
+  }
+
+  resetChapter(setState) {
+    setState('setChapter', this.checkIllustrationStatus());
   }
 
   _convertParamsToIndices() {

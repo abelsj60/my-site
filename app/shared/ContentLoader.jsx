@@ -70,18 +70,6 @@ export default class ContentLoader extends Component {
 
     const finalData = allContentData[dataIndex];
 
-    if (location.caller === 'chapter' && chapterIndex > -1) {
-      const { appState, boundHandleClickForApp } = props;
-      const { images } = appState;
-      let number = chapterIndex + 1;
-
-      if (!images[`chapter-${number}-main`].complete) {
-        number = number * -1;
-      }
-
-      boundHandleClickForApp('setChapter', number);
-    }
-
     this.overflowRef =
       location.caller === 'chapter'
         ? React.createRef()
@@ -156,7 +144,7 @@ export default class ContentLoader extends Component {
                   const PageContent = this.getPage(caller);
                   let boundHandleClickForContentLoader;
 
-                  if (caller === 'projects') {
+                  if (caller === 'projects' || caller === 'chapter') {
                     const clickHandling = new ClickHandling(
                       'contentLoader', this
                     );
@@ -206,8 +194,12 @@ export default class ContentLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { appState, boundHandleClickForApp } = this.props;
-    const { currentCaller, images } = appState;
+    const {
+      appState,
+      boundHandleClickForApp,
+      boundHandleClickForBody
+    } = this.props;
+    const { currentCaller } = appState;
     const referrer = new Referrer(this.props);
     const location = new Location(
       referrer.pathToMatch,
@@ -224,8 +216,7 @@ export default class ContentLoader extends Component {
         allContentData,
         caller
       } = this.state;
-      const { boundHandleClickForBody } = this.props;
-      const bodyState = new State(
+      const state = new State(
         this.props,
         location
       );
@@ -235,15 +226,9 @@ export default class ContentLoader extends Component {
         case 'chapter':
           const titleIndex = location.params.titleToIndex();
           const chapterData = allContentData[titleIndex];
-          let number = chapterData.attributes.number;
-
-          if (!images[`chapter-${number}-main`].complete) {
-            number = number * -1;
-          }
 
           stateToUpdate.chapterIndex = titleIndex;
           stateToUpdate.finalData = chapterData;
-          boundHandleClickForApp('setChapter', number);
           break;
         case 'projects':
           const projectIndex = location.params.projectNameToIndex();
@@ -261,8 +246,12 @@ export default class ContentLoader extends Component {
           stateToUpdate.finalData = allContentData[headlineIndex];
           break;
       }
-
-      bodyState.rebuild(boundHandleClickForBody);
+      
+      // Update bodyState
+      state.rebuildBody(boundHandleClickForBody);
+      // Update appState to track illus. loadStatus w/n ContentLoader
+      state.resetChapter(boundHandleClickForApp);
+      // Update Component state (this)
       this.setState(stateToUpdate);
 
       // The scrollTop reset is not currently applied to

@@ -256,7 +256,7 @@ export default class ClickHandling {
             valueOne !== 'chapter' 
               && (chapter > 0 || chapter < 0)
           ) {
-              stateToUpdate.chapter = 0;
+            stateToUpdate.chapter = 0;
           }
 
           category = 'App state';
@@ -315,14 +315,7 @@ export default class ClickHandling {
 
   _handleClickForContentLoader() {
     return () => {
-      const {
-        caller,
-        imageLoaded
-      } = this.state;
-
-      if (caller === 'projects' && !imageLoaded) {
-        this.setState({ imageLoaded: true });
-      }
+      this.setState({ imageLoaded: true });
     };
   }
 

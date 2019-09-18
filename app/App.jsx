@@ -26,6 +26,7 @@ import preloadBigImages from './helpers/preloadBigImages';
 import React, { Fragment, Component } from 'react';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
+import State from './classes/State.js';
 import { withRouter } from 'react-router';
 
 // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
@@ -154,10 +155,22 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    const { pathname, search } = window.location;
     const images = preloadBigImages();
     const referrer = new Referrer(props);
-    const location = referrer.location;
-    const { pathname, search } = window.location;
+    const location = new Location(
+      referrer.pathToMatch, 
+      { location: { pathname: pathname } }
+    );
+    let illustrationComplete;
+
+    if (location.caller === 'chapter') {
+      const state = new State(
+        { location: { pathname: pathname } }, 
+        location
+      );
+      illustrationComplete = state.checkIllustrationStatus('external', images);
+    }
     // Prevent loading animation and transitions when using the same tab
     // But, new tabs will always run the animation and transitions...
     // This may be a problem with gh-pages, look into later...
@@ -208,8 +221,8 @@ class App extends Component {
     this.isAfterTouchWhenScrollingPage = false;
     this.state = {
       currentCaller:
-        location !== 'i'
-          ? location
+        location.caller !== 'i'
+          ? location.caller
           : 'home',
       lastCaller: '',
       inCity: false, // Fantasy image on home if false
@@ -234,7 +247,9 @@ class App extends Component {
       spacerHeight: 0, // Set by 'handleResize', so must run here. Used by Home/NameTag.
       nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
       images: images,
-      chapter: 0,
+      chapter: illustrationComplete
+        ? illustrationComplete 
+        : 0,
       showDelay: false
     };
 

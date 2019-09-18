@@ -18,9 +18,8 @@ export default class ErrorBoundary extends Component {
     const { hasError, initialLoad } = this.state;
     const { children } = this.props;
     const errorText = initialLoad
-      ? `Oops. I don't support your browser yet. Please try back with a modern 
-      version of Chrome, Firefox, or Safari.`
-      : 'Error! Try again or come back later.';
+      ? "Error. Please use Chrome, Firefox, or Safari."
+      : "Error. Something's wrong. Please try again.";
 
     if (hasError) {
       return (
@@ -37,7 +36,7 @@ export default class ErrorBoundary extends Component {
                 backgroundColor: '#fd1172',
                 paddingBottom: '5px',
                 margin: '20px 25px',
-                padding: '20px 0px'
+                padding: '15px 0px'
               }}
             >
               <p
@@ -61,18 +60,37 @@ export default class ErrorBoundary extends Component {
                     About
                   </h1>
                   <p>
-                    James Abels is a NYC-based Web developer.
+                    I write code for Web sites and software. I tell stories, too. 
                   </p>
                   <p>
-                    A lawyer and former start-up founder, Abels was a staff reporter for Forbes and Mergermarket
-                    (then Pearson, now Acuris). He wrote about technology, digital media, venture capital, and
-                    mergers and acquisitions.
+                    That's important. Stories define everything. Consider this:
                   </p>
                   <p>
-                    Abels is available for front- and back-end technology projects, particularly those involving
-                    creative consumer narratives.
-                    He's currently working with Upendra Shardanand on a new type of media product for
-                    Facebook Messenger, slated for soft launch in 2019.
+                    1. Microsoft sells Word by telling people they can write things with it.
+                        That pitch is a story.
+                  </p>
+                  <p>
+                    2. People use Word to collect and organize their thoughts. 
+                        Those thoughts are a story.
+                  </p>
+                  <p>
+                    3. Word saves these thoughts to a 'document'. 
+                        That file name tells a story.
+                  </p>
+                  <p>
+                    It's all stories, all the way down. 
+                  </p>
+                  <p>
+                    That's where I come in. Rather than just mechanically coding sites and software, I try to figure out — and keep sight of — the stories that drive them. I always have.
+                  </p>
+                  <p>
+                    As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And as a lawyer, I crafted stories that made legal arguments. 
+                  </p>
+                  <p>
+                    Like I said — stories all the way down. 
+                  </p>
+                  <p>
+                    That's mine. What's yours?
                   </p>
                 </div>
               )}
@@ -83,7 +101,7 @@ export default class ErrorBoundary extends Component {
                 marginTop: !initialLoad ? '25px' : ''
               }}
             >
-              Contact: hello__at__jamesabels.net
+              Say hello__@__jamesabels.net
             </footer>
           </div>
         </Fragment>

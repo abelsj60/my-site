@@ -6,7 +6,7 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => (p.showStoryText ? '1' : '0')};
@@ -78,9 +78,8 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 0;
-  background-color: ${p => p.theme.colors.black};
   background-color: midnightblue;
-  opacity: ${p => p.showStoryText ? '.3' : '0'};
+  opacity: ${p => p.showStoryText ? '.35' : '0'};
   transition: opacity .35s;
 `;
 const Image = styled.img`
@@ -136,6 +135,7 @@ export default function Story(props) {
   const {
     appState,
     boundHandleClickForApp,
+    boundHandleClickForContentLoader,
     contentState,
     overflowRef
   } = props;
@@ -149,7 +149,7 @@ export default function Story(props) {
     showLegalTerms,
     animateImageBlur
   } = appState;
-  const { finalData } = contentState;
+  const { finalData, imageLoaded } = contentState;
   const {
     description,
     number,
@@ -219,6 +219,7 @@ export default function Story(props) {
       >
         <Portal
           showStoryText={showStoryText}
+          imageLoaded={imageLoaded}
         />
         <BlurredImage 
             alt={description}
@@ -228,6 +229,7 @@ export default function Story(props) {
             showBusinessCard={showBusinessCard}
             showLegalTerms={showLegalTerms}
             src={blurredImageSrc}
+            onLoad={boundHandleClickForContentLoader}
         />
         <Image
           alt={description}

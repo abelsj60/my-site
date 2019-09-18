@@ -39,6 +39,7 @@ export default class NotFound extends Component {
             Not found.
           </Hed>
           <Jinn
+            // Inline styles used to allocate img space on load
             style={{
               height: 'auto',
               width: '100%',
