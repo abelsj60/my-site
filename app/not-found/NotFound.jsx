@@ -1,5 +1,5 @@
 import Main from '../primitives/Main.jsx';
-import React from 'react';
+import React, { Component } from 'react';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
 
@@ -29,25 +29,30 @@ const Jinn = styled.img`
   }
 `;
 
-export default function NotFound(props) {
-  const src = props.appState.images.notFoundImage.src;
+export default class NotFound extends Component {
+  render() {
+    const src = this.props.appState.images.notFoundImage.src;
+    return (
+      <Main>
+        <RestyledContentHolder>
+          <Hed>
+            Not found.
+          </Hed>
+          <Jinn
+            style={{
+              height: 'auto',
+              width: '100%',
+              maxWidth: '310px'
+            }}
+            alt="404"
+            src={src}
+          />
+        </RestyledContentHolder>
+      </Main>
+    );
+  }
 
-  return (
-    <Main>
-      <RestyledContentHolder>
-        <Hed>
-          Not found.
-        </Hed>
-        <Jinn
-          style={{
-            height: 'auto',
-            width: '100%',
-            maxWidth: '310px'
-          }}
-          alt="404"
-          src={src}
-        />
-      </RestyledContentHolder>
-    </Main>
-  );
+  componentDidMount() {
+    this.props.boundHandleClickForApp('updateApp', 'not-found');
+  }
 }

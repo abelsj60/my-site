@@ -75,6 +75,8 @@ const Hed = styled.h1`
   user-select: none;
   opacity: ${p => !p.finishedHomePageLoad && p.loadLevelBlurs < 2 ? '0' : '1'};
   transition: ${p => p.loadLevelAll < 6 && 'opacity 1s ease-in'};
+  // opacity: ${p => !p.finishedHomePageLoad && p.loadLevelAll < 6 ? '0' : '1'};
+  // transition: opacity 1s ease-in;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: -17px;

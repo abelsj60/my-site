@@ -114,9 +114,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
     background-color: ${p => p.reverie ? '#d2e7ff' : p.notFound ? '#fd1172' : ''};
-
   }
-  
+
   body {
     margin: 0px;
     padding: 0px;
