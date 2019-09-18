@@ -113,9 +113,9 @@ export default function Projects(props) {
             {...props}
           />
           <Loader
-            img={true}
+            spinner={true}
             show={true}
-            mLeftAuto={true}
+            marginLeft="auto"
             done={imageLoaded}
           />
           <ProjectNav

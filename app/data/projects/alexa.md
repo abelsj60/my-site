@@ -16,7 +16,7 @@ story:
 captions: [
     'Washington Square is an experimental voice skill that connects strangers. It was the earliest stage start-up idea to make second-round interviews with Amazon for Alexa Accelerator II.',
     "G's Rules of Funny is a small trivia skill that teaches anyone to be funny. G, who wishes to remain nameless, is a N.Y.C. comic who has caused laughter from Capital Hill to Radio City Music Hall.",
-    "Take on G picks up where G's Rules of Funny left off. It's a small trivia game that asks players a set of nonsensical, irrelvant, and perplexing questions. Can you get beat G like he beat Ninja Gaidan?"
+    "Take on G picks up where G's Rules of Funny left off. This trivia game asks players nonsensical, irrelevant, and perplexing questions. Can you get beat G as easily as he beat Ninja Gaidan?"
 ]
 projectThumbnail: [
     'https://user-images.githubusercontent.com/30417590/56868552-a89d5a80-69c1-11e9-9d2f-edbb585499f4.png',

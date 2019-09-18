@@ -143,17 +143,15 @@ export default function FooterContainer(props) {
         }
       />
       {isStory && (
-        <div
-          style={{
-            marginLeft: '15px'
-          }}
-        >
-          <Loader
-            img={true}
-            done={!showStoryText}
-            show={showDelay}
-          />
-        </div>
+        <Loader
+          marginBottom="2"
+          marginLeft="20"
+          fontSize="small"
+          white={true}
+          smallFont={true}
+          done={!showStoryText}
+          show={showDelay}
+        />
       )}
       <TextBox>
         <RestyledLink

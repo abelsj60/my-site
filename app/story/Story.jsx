@@ -176,8 +176,6 @@ export default function Story(props) {
       break;
   }
 
-  // console.log('complete in story:', images[`chapter-${number}-main`].complete);
-
   return (
     <Main>
       <RestyledContentHolder
