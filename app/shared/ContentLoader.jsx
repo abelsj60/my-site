@@ -23,69 +23,39 @@ export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
-    // DO NOT USE props.currentCaller or props.isMenu from to avoid problems
-    // with BACK/FORWARD. Both are out-of-date b/c the eventListener for
+    // DO NOT USE props.currentCaller or props.isMenu to avoid problems
+    // w/BACK/FORWARD. Both are out-of-date b/c the eventListener for
     // BACK/FORWARD runs AFTER ContentLoader runs.
 
-    const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
+    const isMenu = window.location.pathname.split('/')
+      .indexOf('menu') === 2;
     const referrer = new Referrer(props);
-    const location = new Location(
-      referrer.pathToMatch,
-      props
-    );
-
+    const location = new Location(referrer.pathToMatch, props);
+    const state = new State(props, location);
     const content = new Content(location.caller);
     const allContentData = content.getContentData();
-
-    const chapterIndex =
-      !isMenu && location.caller === 'chapter'
-        ? location.params.titleToIndex()
-        : 0;
-    const projectIndex =
-      !isMenu && location.caller === 'projects'
-        ? location.params.projectNameToIndex()
-        : 0;
-    const thumbnailIndex =
-      !isMenu && location.caller === 'projects'
-        ? location.params.projectThumbnailToIndex()
-        : 0;
-    const headlineIndex =
-      !isMenu
-        && (location.caller === 'journalism'
-          || location.caller === 'reverie')
-        ? location.params.headlineToIndex()
-        : 0;
-    let dataIndex;
-
-    switch (location.caller) {
-      case 'chapter':
-        dataIndex = chapterIndex;
-        break;
-      case 'projects':
-        dataIndex = projectIndex;
-        break;
-      default:
-        dataIndex = headlineIndex;
-    }
-
-    const finalData = allContentData[dataIndex];
 
     this.overflowRef =
       location.caller === 'chapter'
         ? React.createRef()
         : {};
 
+    // Don't need to store publication here.
+    // The Clip list is a single level, meaning that 
+    // we don't use publication to sort.
+    // Instead, publication will show the starting
+    // index item as a default when needed.
+
     this.state = {
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,
       imageLoaded: false,
       allContentData: allContentData,
-      finalData: finalData,
       caller: location.caller,
-      chapterIndex: chapterIndex,
-      projectIndex: projectIndex,
-      thumbnailIndex: thumbnailIndex,
-      headlineIndex: headlineIndex
+      chapterIndex: !isMenu ? state.getIndex('chapter') : 0,
+      projectIndex: !isMenu ? state.getIndex('project'): 0,
+      thumbnailIndex: !isMenu ? state.getIndex('projectPics') : 0,
+      headlineIndex: !isMenu ? state.getIndex('article') : 0
     };
   }
 
@@ -148,8 +118,7 @@ export default class ContentLoader extends Component {
                     const clickHandling = new ClickHandling(
                       'contentLoader', this
                     );
-                    boundHandleClickForContentLoader =
-                      clickHandling.boundHandleClick;
+                    boundHandleClickForContentLoader = clickHandling.boundHandleClick;
                   }
 
                   return (
@@ -157,9 +126,7 @@ export default class ContentLoader extends Component {
                       {...this.props}
                       overflowRef={this.overflowRef}
                       contentState={this.state}
-                      boundHandleClickForContentLoader={
-                        boundHandleClickForContentLoader
-                      }
+                      boundHandleClickForContentLoader={boundHandleClickForContentLoader}
                     />
                   );
                 }
@@ -201,77 +168,31 @@ export default class ContentLoader extends Component {
     } = this.props;
     const { currentCaller } = appState;
     const referrer = new Referrer(this.props);
-    const location = new Location(
-      referrer.pathToMatch,
-      this.props,
-      prevProps
-    );
+    const location = new Location(referrer.pathToMatch, this.props, prevProps);
 
-    // Manage component state
 
     if (location.needsRedirect) {
       this.setState({ needsRedirect: true });
     } else if (location.isSwappingContent) {
-      const {
-        allContentData,
-        caller
-      } = this.state;
-      const state = new State(
-        this.props,
-        location
-      );
-      const stateToUpdate = {};
+      const state = new State(this.props, location);
+      const clickHandling = new ClickHandling('contentLoader', this);
+      const boundHandleClickForContentLoader = clickHandling.boundHandleClick;
 
-      switch (caller) {
-        case 'chapter':
-          const titleIndex = location.params.titleToIndex();
-          const chapterData = allContentData[titleIndex];
-
-          stateToUpdate.chapterIndex = titleIndex;
-          stateToUpdate.finalData = chapterData;
-          break;
-        case 'projects':
-          const projectIndex = location.params.projectNameToIndex();
-          const thumbnailIndex = location.params.projectThumbnailToIndex();
-
-          stateToUpdate.projectIndex = projectIndex;
-          stateToUpdate.thumbnailIndex = thumbnailIndex;
-          stateToUpdate.finalData = allContentData[projectIndex];
-          stateToUpdate.imageLoaded = false;
-          break;
-        default:
-          const headlineIndex = location.params.headlineToIndex();
-
-          stateToUpdate.headlineIndex = headlineIndex;
-          stateToUpdate.finalData = allContentData[headlineIndex];
-          break;
-      }
-      
-      // Update bodyState
       state.rebuildBody(boundHandleClickForBody);
-      // Update appState to track illus. loadStatus w/n ContentLoader
-      state.resetChapter(boundHandleClickForApp);
-      // Update Component state (this)
-      this.setState(stateToUpdate);
+      state.resetIllustrationState(boundHandleClickForApp);
+      state.rebuildContentLoader(boundHandleClickForContentLoader);
 
       // The scrollTop reset is not currently applied to
       // the /projects, and /journalism routes b/c
       // they can only be changed via /menu.
-
-      // It works for /chapter, because it's changed
-      // from w/n the /chapter route.
-
       // If you want to expand this to include the
-      // /projects and /journalism, filter out
-      // /menu paths, as they don't have an
-      // overflowRef, so will kick an error.
+      // /projects and /journalism, remember to 
+      // filter /menu paths, as they don't have an
+      // overflowRef, and so will kick an error.
 
       if (location.caller === 'chapter') {
         const scrollHandler = new ScrollHandling(currentCaller);
-        scrollHandler.resetElementTop(
-          this.overflowRef,
-          prevProps
-        );
+        scrollHandler.resetElementTop(this.overflowRef, prevProps);
       }
     }
   }

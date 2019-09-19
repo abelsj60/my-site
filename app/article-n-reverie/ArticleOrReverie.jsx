@@ -62,15 +62,16 @@ const BylineOrDate = styled.p`
 export default function ArticleOrReverie(props) {
   const { contentState } = props;
   const {
+    allContentData,
+    headlineIndex,
     caller,
-    finalData
   } = contentState;
   const {
     date,
     headline,
     position,
     publication
-  } = finalData.attributes;
+  } = allContentData[headlineIndex].attributes;
   const isReverie = caller === 'reverie';
   const publicationOrReverieTag =
     caller !== 'reverie'
@@ -104,12 +105,7 @@ export default function ArticleOrReverie(props) {
             {bylineOrDate}
           </BylineOrDate>
           <Text>
-            {ReactHtmlParser(
-              marked(
-                finalData.body,
-                { smartypants: true }
-              )
-            )}
+            {ReactHtmlParser(marked(allContentData[headlineIndex].body, { smartypants: true }))}
           </Text>
         </Overflow>
       </ContentHolder>

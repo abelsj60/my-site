@@ -57,6 +57,7 @@ export default class ClickHandling {
         showDelay,
         finishedHomePageLoad,
         heartbeat,
+        images,
         showBusinessCard,
         showLegalTerms,
         inCity,
@@ -190,8 +191,7 @@ export default class ClickHandling {
           if (!headerMenuIsOpen) {
             // Disable setTimeout to suspend auto-close
             this.headerMenuTimeoutId = setTimeout(() => {
-              this.setState(
-                { headerMenuIsOpen: false },
+              this.setState({ headerMenuIsOpen: false },
                 () => {
                   // Reset timeout after timeout successfully runs
                   this.headerMenuTimeoutId = undefined;
@@ -259,6 +259,30 @@ export default class ClickHandling {
             stateToUpdate.chapter = 0;
           }
 
+          // Remove the loading sequence after 
+          // images load. Can prevent user from
+          // ever seeing heartbeat if he loads
+          // clicks around, doesn't go to /home,
+          // then reloads and goes /home. Eh?
+          if (!finishedHomePageLoad) {
+            let alreadyLoaded = 0;
+            [
+              'boyInForegroundImage',
+              'boyInForegroundImageBlurred',
+              'fantasyImage',
+              'fantasyImageBlurred'
+            ].forEach(name => {
+              if (images[name].complete) {
+                alreadyLoaded++;
+              }
+            });
+
+            if (alreadyLoaded > 3) {
+              stateToUpdate.heartbeat = 1;
+              stateToUpdate.finishedHomePageLoad = true;
+            }
+          }
+
           category = 'App state';
           action = 'Reset app';
           break;
@@ -314,8 +338,52 @@ export default class ClickHandling {
   // Handles onClicks for ContentLoader (/projects only)
 
   _handleClickForContentLoader() {
-    return () => {
-      this.setState({ imageLoaded: true });
+    return (type, valueOne, valueTwo) => {
+      const stateToUpdate = {};
+      const { allContentData, caller } = this.state;
+
+      switch(type) {
+        case 'imageLoader':
+          stateToUpdate.imageLoaded = true;
+          break;
+        case 'updateState':
+          if (caller === 'chapter') {
+            const titleIndex = valueOne;
+            stateToUpdate.indexForChapterData = titleIndex;
+            const chapterData = allContentData[titleIndex];
+    
+            stateToUpdate.chapterIndex = titleIndex;
+            stateToUpdate.finalData = chapterData;
+          }
+
+          if (caller === 'projects') {
+            const projectIndex = valueOne;
+            const thumbnailIndex = valueTwo;
+    
+            stateToUpdate.projectIndex = projectIndex;
+            stateToUpdate.thumbnailIndex = thumbnailIndex;
+            stateToUpdate.finalData = allContentData[projectIndex];
+            stateToUpdate.imageLoaded = false;
+          }
+
+          if (caller === 'journalism') {
+            const headlineIndex = valueTwo;
+  
+            stateToUpdate.headlineIndex = headlineIndex;
+            stateToUpdate.finalData = allContentData[headlineIndex];
+          }
+          
+          if (caller === 'reverie') {
+            const headlineIndex = valueOne;
+
+            stateToUpdate.headlineIndex = headlineIndex;
+            stateToUpdate.finalData = allContentData[headlineIndex];
+          }
+
+          break;
+      }
+
+      this.setState(stateToUpdate);
     };
   }
 
@@ -326,7 +394,6 @@ export default class ClickHandling {
       const {
         eventType,
         movement,
-        pattern,
         spellLevel
       } = this.state;
       const stateToUpdate = {};

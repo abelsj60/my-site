@@ -160,6 +160,7 @@ export default function NameTag(props) {
   const onAnimationEndHandler =
     event => {
       event.preventDefault()
+      // Set hertbeat to 3
       boundHandleClickForApp('updateHeartbeat');
     };
 
@@ -176,7 +177,7 @@ export default function NameTag(props) {
         tempContentIsOn={showBusinessCard || showLegalTerms}
         onAnimationStart={event => {
           if (
-            event.animationName === 'cHArim' 
+            event.animationName === 'cHArim' // Class created by StyledComponents
               && !finishedHomePageLoad
           ) {
             boundHandleClickForApp('finishedHomePageLoad')
@@ -222,12 +223,7 @@ export default function NameTag(props) {
              compressor={2.5}
             >
               <Fragment>
-                {ReactHtmlParser(
-                  marked(
-                    body,
-                    { smartypants: true }
-                  )
-                )}
+                {ReactHtmlParser(marked(body, { smartypants: true }))}
               </Fragment>
             </FitText>
           </Pitch>

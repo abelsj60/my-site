@@ -28,10 +28,7 @@ export default class Home extends Component {
     // created spell pattern (stored on appState as
     // a back-up). Otherwise, make a new one.
     const initialPattern = this.createSpellPattern();
-    this.props.boundHandleClickForApp(
-      'updateSpacerHeight',
-      this.props.appState.height
-    );
+    this.props.boundHandleClickForApp('updateSpacerHeight', this.props.appState.height);
 
     this.state = {
       goal: 5,

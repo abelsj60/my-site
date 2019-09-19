@@ -12,7 +12,7 @@ const Structure = styled.button`
   background-color: unset;
   border: 1px rgba(255, 255, 255, .6) solid;
   box-shadow: ${p => p.boxShadow && '2px 2px 2.5px rgba(0, 0, 0, .4)'};
-  transition: ${p => p.animateImageBlur && 'box-shadow .15s'};
+  transition: box-shadow .35s;
   user-select: none;
 
   :focus {

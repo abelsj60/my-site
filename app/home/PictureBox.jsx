@@ -80,6 +80,7 @@ export default function PictureBox(props) {
         onTransitionEnd={() => {
           setLoadLevels.three();
           if (setLoadLevels.sum().all === 6) {
+            // Set heartbeat to 1
             boundHandleClickForApp('updateHeartbeat');
           }
         }}

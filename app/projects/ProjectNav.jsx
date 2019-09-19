@@ -63,13 +63,13 @@ export default function ProjectNav(props) {
   } = props;
   const {
     allContentData,
-    finalData,
+    projectIndex,
     thumbnailIndex
   } = contentState;
   const {
     projectName,
     projectThumbnail
-  } = finalData.attributes;
+  } = allContentData[projectIndex].attributes;
   const isMenu = mappedProjectIndex !== undefined;
 
   const finalGroup = isMenu

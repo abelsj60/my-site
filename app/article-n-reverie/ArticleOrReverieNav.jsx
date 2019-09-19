@@ -36,11 +36,11 @@ export default function ArticleOrReverieNav(props) {
   const {
     allContentData,
     caller,
-    finalData
+    headlineIndex
   } = contentState;
 
   const isReverie = caller === 'reverie';
-  const currentHed = normalize(finalData.attributes.headline);
+  const currentHed = normalize(allContentData[headlineIndex].attributes.headline);
 
   return (
     <UnorderedList>

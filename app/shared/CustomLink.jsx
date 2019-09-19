@@ -81,16 +81,13 @@ export default ({
       event.stopPropagation();
 
       if (!isCalledByMenu) {
-        boundHandleClickForApp(
-          'updateApp',
+        boundHandleClickForApp('updateApp', 
           splitTheCaller.length === 2
             ? callerWillBe
             : undefined
         );
       } else {
-        boundHandleClickForApp(
-          'toggleMenu'
-        );
+        boundHandleClickForApp('toggleMenu');
       }
     };
 

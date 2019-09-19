@@ -50,6 +50,7 @@ const Graf = styled.p`
   font-size: ${p => p.theme.fontSizes.one};
   user-select: none;
   text-shadow: ${p => p.textShadow && shadow};
+  transition: text-shadow .35s;
 `;
 const TextBox = styled.div`
   display: flex;
@@ -92,11 +93,13 @@ export default function FooterContainer(props) {
       && !showBusinessCard
       && !showLegalTerms
       && coverVals.y < 0
-        || (!showStoryText
-        && !showBusinessCard
-        && !showLegalTerms
-        && !isReverie
-        && !headerMenuIsOpen);
+        || (
+          !showStoryText
+            && !showBusinessCard
+            && !showLegalTerms
+            && !isReverie
+            && !headerMenuIsOpen
+          );
 
   const reverieLink =
     isReverie
@@ -166,6 +169,7 @@ export default function FooterContainer(props) {
             isNotFound={isNotFound}
             textShadow={showTextShadow}
             headerMenuIsOpen={headerMenuIsOpen}
+            animateImageBlur={animateImageBlur}
           >
             Reverie
           </Graf>
@@ -178,6 +182,7 @@ export default function FooterContainer(props) {
           isNotFound={isNotFound}
           textShadow={showTextShadow}
           headerMenuIsOpen={headerMenuIsOpen}
+          animateImageBlur={animateImageBlur}
         >
           Contact
         </Graf>
@@ -189,6 +194,7 @@ export default function FooterContainer(props) {
           isNotFound={isNotFound}
           textShadow={showTextShadow}
           headerMenuIsOpen={headerMenuIsOpen}
+          animateImageBlur={animateImageBlur}
         >
           Legal
         </Graf>

@@ -58,13 +58,9 @@ export default class LegalTermsOrBizCard extends Component {
     const stopPropagation = event => event.stopPropagation();
     const eventHandler = () => {
       if (showBusinessCard) {
-        boundHandleClickForApp(
-          'toggleBusinessCard'
-        );
+        boundHandleClickForApp('toggleBusinessCard');
       } else {
-        boundHandleClickForApp(
-          'toggleLegalTerms'
-        );
+        boundHandleClickForApp('toggleLegalTerms');
       }
     };
     
@@ -121,13 +117,9 @@ export default class LegalTermsOrBizCard extends Component {
 
     if (process.env.NODE_ENV !== 'development') {
       if (showBusinessCard && !businessCardWasActive) {
-        ReactGA.modalview(
-          `${pathname}businesscard`
-        );
+        ReactGA.modalview(`${pathname}businesscard`);
       } else if (showLegalTerms && !legalTermsWereActive) {
-        ReactGA.modalview(
-          `${pathname}legalterms`
-        );
+        ReactGA.modalview(`${pathname}legalterms`);
       }
     }
   }

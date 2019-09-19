@@ -11,10 +11,7 @@ export default class StoryParams extends Params {
   }
 
   get title() {
-    return this._validateParam(
-      this._one,
-      this._paramNames[0]
-    );
+    return this._validateParam(this._one, this._paramNames[0]);
   }
 
   titleToIndex() {

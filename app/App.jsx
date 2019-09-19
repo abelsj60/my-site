@@ -162,14 +162,17 @@ class App extends Component {
       referrer.pathToMatch, 
       { location: { pathname: pathname } }
     );
-    let illustrationComplete;
+    let illustrationState;
 
+    // Check status of illustration for appState.chapter
+    // Also updated in ReloadRoute (for section shifts)
+    // and in contentLoader.cDU for swapped content
     if (location.caller === 'chapter') {
       const state = new State(
         { location: { pathname: pathname } }, 
         location
       );
-      illustrationComplete = state.checkIllustrationStatus('external', images);
+      illustrationState = state.checkIllustrationState(images, true);
     }
     // Prevent loading animation and transitions when using the same tab
     // But, new tabs will always run the animation and transitions...
@@ -238,7 +241,7 @@ class App extends Component {
       pinchZoomed: false, // We're zoomed! or not.
       isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false, // Resize w/clientHeight when true
-      heartbeat: alreadyLoaded ? 3 : 0, // 0 = not ready, 1 = ready (images loaded), 2 = run w/delay (left early), 3 = nevermore
+      heartbeat: alreadyLoaded ? 3 : 0, // 0 = not ready, 1 = ready (images loaded), 2 = run w/delay (left early), 3 = nevermore (b/c it ran in the past)
       finishedHomePageLoad: alreadyLoaded,
       animateImageBlur: false, // Animate blur/transform on story images
       password: '',
@@ -247,8 +250,8 @@ class App extends Component {
       spacerHeight: 0, // Set by 'handleResize', so must run here. Used by Home/NameTag.
       nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
       images: images,
-      chapter: illustrationComplete
-        ? illustrationComplete 
+      chapter: illustrationState
+        ? illustrationState 
         : 0,
       showDelay: false
     };
@@ -277,10 +280,7 @@ class App extends Component {
     ) {
       this.setState({ isValidUser: true });
     } else {
-      this.setState({
-        wrongPassword: 'Incorrect',
-        password: ''
-      });
+      this.setState({ wrongPassword: 'Incorrect', password: '' });
     }
   }
 
@@ -469,10 +469,7 @@ class App extends Component {
 
     if (this.state.isZooming) {
       // Let's set intermediate values for resizing.
-
-      this.setState({
-        isZooming: false
-      });
+      this.setState({ isZooming: false });
     }
   }
 
@@ -636,11 +633,7 @@ class App extends Component {
     const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
     const updateMenuForBackForthButton = isMenu !== this.state.isMenu;
 
-    boundHandleClickForApp(
-      'updateApp',
-      location.caller,
-      updateMenuForBackForthButton
-    );
+    boundHandleClickForApp('updateApp', location.caller, updateMenuForBackForthButton);
   }
 
   calculateSpacerHeight() {
@@ -673,13 +666,7 @@ class App extends Component {
   }
 
   calculateNameTagWidth() {
-    const coverVals = cover(
-      window.innerWidth,
-      this.state.height,
-      2131,
-      1244
-    );
-
+    const coverVals = cover(window.innerWidth, this.state.height, 2131, 1244);
     return Math.floor(.27 * coverVals.width);
   }
 
@@ -697,11 +684,7 @@ class App extends Component {
 
   componentDidUpdate(prevProps) {
     if (process.env.NODE_ENV !== 'development') {
-      const location = new Location(
-        '/',
-        this.props,
-        prevProps
-      );
+      const location = new Location('/', this.props, prevProps);
 
       if (location.recordPageview) {
         const {

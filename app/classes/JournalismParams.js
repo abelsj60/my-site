@@ -14,17 +14,11 @@ export default class JournalismParams extends Params {
   }
 
   get publication() {
-    return this._validateParam(
-      this._one,
-      this._paramNames[0]
-    );
+    return this._validateParam(this._one, this._paramNames[0]);
   }
 
   get headline() {
-    return this._validateParam(
-      this._two,
-      this._paramNames[1]
-    );
+    return this._validateParam(this._two, this._paramNames[1]);
   }
 
   publicationToIndex() {
@@ -45,9 +39,7 @@ export default class JournalismParams extends Params {
         && headlineParamIsUndefined
     ) {
       const firstHedToMatchPublication = this._searchData.find(
-        a => this._normalizeParam(
-          a.attributes.publication
-        ) === this.publication
+        a => this._normalizeParam(a.attributes.publication) === this.publication
       ).attributes.headline;
 
       return this._searchData.findIndex(

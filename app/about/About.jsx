@@ -82,12 +82,7 @@ export default function About() {
         </RestyledShelf>
         <Overflow>
           <Text>
-            {ReactHtmlParser(
-              marked(
-                bio.body,
-                { smartypants: true }
-              )
-            )}
+            {ReactHtmlParser(marked(bio.body, { smartypants: true }))}
           </Text>
         </Overflow>
       </ContentHolder>

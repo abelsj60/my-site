@@ -73,11 +73,12 @@ const InnerContainer = styled.div`
   flex-direction: column;
   margin-top: 5px;
   width: 200px;
-  margin-left: auto;
-  margin-right: auto;
+  align-self: center;
+  margin-left: 1.17em;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     width: 240px;
+    margin-left: 1.6em;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.huge}) {
@@ -153,8 +154,7 @@ const Dashboard = styled.div`
   margin-top: 18px;
   display: flex;
   flex-direction: column;
-  margin-left: 35px;
-  margin-right: 35px;
+  align-self: center;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 32px;

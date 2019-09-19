@@ -11,10 +11,7 @@ export default class ReverieParams extends Params {
   }
 
   get headline() {
-    return this._validateParam(
-      this._one,
-      this._paramNames[0]
-    );
+    return this._validateParam(this._one, this._paramNames[0]);
   }
 
   headlineToIndex() {

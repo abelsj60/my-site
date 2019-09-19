@@ -4,10 +4,13 @@ export default class State {
   constructor(props, location) {
     const referrer = new Referrer(props);
 
+    this._props = props;
     this._referrer = referrer;
     this._params = location.params;
   }
 
+  // A convenience method for the constructor in
+  // Body and ContentLoader for initial state
   getIndex(type) {
     const params = this._params;
     const referrer = this._referrer.location;
@@ -55,49 +58,62 @@ export default class State {
     return index && index !== -1 ? index : 0;
   }
 
+  _indicesAreGreaterThanOrEqualToZero(indices) {
+    return indices.one !== -1 && indices.two !== -1;
+  }
+
   rebuildBody(setState) {
     const indices = this._convertParamsToIndices();
 
     // Only -1 if explicitly set by a params method
-    if (
-      indices.one !== -1
-        && indices.two !== -1
-    ) {
+    if (this._indicesAreGreaterThanOrEqualToZero(indices)) {
       setState(indices.one, indices.two);
     }
   }
 
-  _illustrationIsComplete(images) {
-    const titleIndex = this.getIndex('chapter');
-    const isComplete = 
+  rebuildContentLoader(setState) {
+    const indices = this._convertParamsToIndices();
+
+    // Only -1 if explicitly set by a params method
+    if (this._indicesAreGreaterThanOrEqualToZero(indices)) {
+      setState('updateState', indices.one, indices.two);
+    }
+  }
+
+  _illustrationState(images) {
+    const titleIndex = this._convertParamsToIndices().one > -1
+      ? this._convertParamsToIndices().one
+      : 0;
+    const state =
       images[
         `chapter-${titleIndex + 1}-main`
       ].complete;
-      
-    return !isComplete
+
+    return !state
       ? (titleIndex + 1) * -1
       : titleIndex + 1
   }
 
-  checkIllustrationStatus(type, images) {
-    if (type === 'external') {
+  checkIllustrationState(images, external) {
+    if (external) {
       // Can only be called if /chapter...
-      return this._illustrationIsComplete(images);
+      return this._illustrationState(images);
     } else {
       const { currentCaller, images } = this._props.appState;
 
       if (currentCaller === 'chapter') {
-        return this._illustrationIsComplete(images);
+        return this._illustrationState(images);
       }
 
       return 0;
     }
   }
 
-  resetChapter(setState) {
-    setState('setChapter', this.checkIllustrationStatus());
+  resetIllustrationState(setState) {
+    setState('setChapter', this.checkIllustrationState());
   }
 
+  // Returns: { one: val, two: val }
   _convertParamsToIndices() {
     const params = this._params;
     const referrer = this._referrer.location;

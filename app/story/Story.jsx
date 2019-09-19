@@ -149,16 +149,21 @@ export default function Story(props) {
     showLegalTerms,
     animateImageBlur
   } = appState;
-  const { finalData, imageLoaded } = contentState;
+  const {
+    allContentData,
+    chapterIndex,
+    imageLoaded
+  } = contentState;
   const {
     description,
     number,
     title
-  } = finalData.attributes;
+  } = allContentData[chapterIndex].attributes;
   const bookTitle = 'The Magical, Semi-Fictional Biography of a Real Boy';
   const dek = 'An experiment in digital + traditional storytelling';
   const bigImageSrc = images[`chapter-${number}-main`].src;
   const blurredImageSrc = images[`chapter-${number}-blurred`].src;
+  const onLoadHandler = () => boundHandleClickForContentLoader('imageLoader');
   let chapterNumber;
 
   switch (number) {
@@ -205,12 +210,7 @@ export default function Story(props) {
             {title}
           </ChapterTitle>
           <StoryText>
-            {ReactHtmlParser(
-              marked(
-                finalData.body,
-                { smartypants: true }
-              )
-            )}
+            {ReactHtmlParser(marked(allContentData[chapterIndex].body, { smartypants: true }))}
           </StoryText>
         </Overflow>
       </RestyledContentHolder>
@@ -229,7 +229,7 @@ export default function Story(props) {
             showBusinessCard={showBusinessCard}
             showLegalTerms={showLegalTerms}
             src={blurredImageSrc}
-            onLoad={boundHandleClickForContentLoader}
+            onLoad={onLoadHandler}
         />
         <Image
           alt={description}

@@ -75,8 +75,9 @@ export default function Projects(props) {
   } = props;
   const { pinchZoomed } = appState;
   const {
-    finalData,
+    allContentData,
     imageLoaded,
+    projectIndex,
     thumbnailIndex
   } = contentState;
   const {
@@ -87,7 +88,7 @@ export default function Projects(props) {
     showTheseAttributes,
     type,
     zoomed
-  } = finalData.attributes;
+  } = allContentData[projectIndex].attributes;
   const caption = captions[thumbnailIndex];
 
   // Larger res ('zoomed') image if:
@@ -99,8 +100,9 @@ export default function Projects(props) {
       ? zoomed[thumbnailIndex]
       : full[thumbnailIndex];
   const attributeArray = showTheseAttributes.map(
-    name => finalData.attributes[name]
+    name => allContentData[projectIndex].attributes[name]
   );
+  const onLoadHandler = () => boundHandleClickForContentLoader('imageLoader');
 
   return (
     <Main>
@@ -140,10 +142,11 @@ export default function Projects(props) {
                 return (
                   <Fragment key={idx}>
                     <Hed>
-                      {showTheseAttributes[idx][0]
-                        .toUpperCase()
-                          + showTheseAttributes[idx]
-                            .slice(1)}
+                      {
+                        showTheseAttributes[idx][0]
+                          .toUpperCase() + showTheseAttributes[idx]
+                          .slice(1)
+                      }
                     </Hed>
                     <Graf>
                       {text}
@@ -162,7 +165,7 @@ export default function Projects(props) {
                 alt="mainPic"
                 src={source}
                 imageLoaded={imageLoaded}
-                onLoad={boundHandleClickForContentLoader}
+                onLoad={onLoadHandler}
               />
             </ImageHolder>
           </Figure>

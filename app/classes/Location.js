@@ -157,9 +157,7 @@ export default class Location {
 
   get justChanged() {
     if (!this._lastPath) {
-      throw new Error(
-        'Location.justChanged() requires prevProps'
-      );
+      throw new Error('Location.justChanged() requires prevProps');
     }
 
     return this._currentPath !== this._lastPath;
