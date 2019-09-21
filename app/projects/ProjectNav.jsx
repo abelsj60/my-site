@@ -7,8 +7,8 @@ import UnorderedList from '../primitives/UnorderedList.jsx';
 import { isIE } from 'react-device-detect';
 
 const Group = styled(UnorderedList)`
-  flex: ${p => p.imageLoaded && !p.isMenu && '1'};
-  justify-content: ${p => p.imageLoaded && !p.isMenu && 'flex-end'};
+  flex: ${p => p.imageLoaded > 1 && !p.isMenu && '1'};
+  justify-content: ${p => p.imageLoaded > 1 && !p.isMenu && 'flex-end'};
   margin-left: ${p => !p.isMenu && '15px'};
   display: flex; // See note above
   // Ensures height is true on IE (empty space on top/bottom otherwise)

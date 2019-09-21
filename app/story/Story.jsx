@@ -7,6 +7,10 @@ import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
+import fallbackBlurOne from '../../public/jea-story-chapter-one-50blur-3px.png';
+import fallbackBlurTwo from '../../public/jea-story-chapter-two-50blur-3px.png';
+import fallbackBlurThree from '../../public/jea-story-chapter-three-50blur-3px.png';
+import fallbackBlurFour from '../../public/jea-story-chapter-four-50blur-3px.png';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => (p.showStoryText ? '1' : '0')};
@@ -89,14 +93,13 @@ const Image = styled.img`
   font-family: 'object-fit: cover;';
   top: 0px;
   left: 0px;
-  z-index: -2;
+  z-index: -3;
   // May need to fill page:   
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
 `;
-const BlurredImage = styled.img`
-  // Ensure img top is TOP
+const BlurredFallback = styled.img`
   position: absolute;
   object-fit: cover;
   font-family: 'object-fit: cover;';
@@ -107,7 +110,22 @@ const BlurredImage = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => !p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen? '0' : '1'};
+  opacity: ${p => p.imageLoaded < 1 || (!p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen) ? '1' : '0'};
+  transition: ${p => p.imageLoaded < 2 ? 'opacity .5s' : p.animateImageBlur ? 'opacity .35s' : ''};
+`;
+const BlurredImage = styled.img`
+  // Ensure img top is TOP
+  position: absolute;
+  object-fit: cover;
+  font-family: 'object-fit: cover;';
+  top: 0px;
+  left: 0px;
+  z-index: -2;
+  // May need to fill page:   
+  // https://stackoverflow.com/a/30794589
+  height: 100%;
+  width: 100%;
+  opacity: ${p => p.imageLoaded < 1 || (!p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen) ? '0' : '1'};
   transition: ${p => p.animateImageBlur && 'opacity .35s'};
 
   // The mediaQ ensures the blur goes away if the full-screen menu is
@@ -163,21 +181,35 @@ export default function Story(props) {
   const dek = 'An experiment in digital + traditional storytelling';
   const bigImageSrc = images[`chapter-${number}-main`].src;
   const blurredImageSrc = images[`chapter-${number}-blurred`].src;
-  const onLoadHandler = () => boundHandleClickForContentLoader('imageLoader');
+  const onLoadHandler = () => { // 0 --> 1
+    if (imageLoaded < 1) {
+      boundHandleClickForContentLoader('imageLoader', 1)
+    }
+  };
+  const onTransitionEndHandler = () => { // 1 --> 2
+    if (imageLoaded < 2) {
+      boundHandleClickForContentLoader('imageLoader', 2)
+    }
+  };
   let chapterNumber;
+  let fallbackBlur;
 
   switch (number) {
     case 1:
       chapterNumber = 'one';
+      fallbackBlur = fallbackBlurOne;
       break;
     case 2:
       chapterNumber = 'two';
+      fallbackBlur = fallbackBlurTwo;
       break;
     case 3:
       chapterNumber = 'three';
+      fallbackBlur = fallbackBlurThree;
       break;
     default:
       chapterNumber = 'four';
+      fallbackBlur = fallbackBlurFour;
       break;
   }
 
@@ -221,15 +253,29 @@ export default function Story(props) {
           showStoryText={showStoryText}
           imageLoaded={imageLoaded}
         />
-        <BlurredImage 
-            alt={description}
+        {imageLoaded < 2 &&
+          <BlurredFallback 
+            src={fallbackBlur}
+            alt="blurred fallback"
+            imageLoaded={imageLoaded}
             showStoryText={showStoryText}
             animateImageBlur={animateImageBlur}
             headerMenuIsOpen={headerMenuIsOpen}
             showBusinessCard={showBusinessCard}
             showLegalTerms={showLegalTerms}
-            src={blurredImageSrc}
-            onLoad={onLoadHandler}
+            onTransitionEnd={onTransitionEndHandler}
+          />
+        }
+        <BlurredImage 
+          alt={description}
+          src={blurredImageSrc}
+          imageLoaded={imageLoaded}
+          showStoryText={showStoryText}
+          animateImageBlur={animateImageBlur}
+          headerMenuIsOpen={headerMenuIsOpen}
+          showBusinessCard={showBusinessCard}
+          showLegalTerms={showLegalTerms}
+          onLoad={onLoadHandler}
         />
         <Image
           alt={description}

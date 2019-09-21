@@ -211,8 +211,8 @@ class App extends Component {
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
     this.defaultHeightWhenTooSmall =
       isMobile && !isMobileSafari
-      ? document.documentElement.clientHeight
-      : window.innerHeight; // Arbitrary (iPhone SE height)
+        ? document.documentElement.clientHeight
+        : window.innerHeight; // Arbitrary (iPhone SE height)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
     this.headerMenuTimeoutId = undefined;

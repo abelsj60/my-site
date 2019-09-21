@@ -278,6 +278,8 @@ export default class ClickHandling {
             });
 
             if (alreadyLoaded > 3) {
+              // ? Revisit: https://stackoverflow.com/a/7809413
+
               stateToUpdate.heartbeat = 1;
               stateToUpdate.finishedHomePageLoad = true;
             }
@@ -340,44 +342,37 @@ export default class ClickHandling {
   _handleClickForContentLoader() {
     return (type, valueOne, valueTwo) => {
       const stateToUpdate = {};
-      const { allContentData, caller } = this.state;
+      const { caller } = this.state;
 
       switch(type) {
         case 'imageLoader':
-          stateToUpdate.imageLoaded = true;
+          stateToUpdate.imageLoaded = valueOne;
           break;
         case 'updateState':
           if (caller === 'chapter') {
-            const titleIndex = valueOne;
-            stateToUpdate.indexForChapterData = titleIndex;
-            const chapterData = allContentData[titleIndex];
-    
-            stateToUpdate.chapterIndex = titleIndex;
-            stateToUpdate.finalData = chapterData;
+          const blurredIllustrationState = 
+            this.props.appState.images[
+              `chapter-${valueOne + 1}-blurred`
+            ].complete
+              ? 2
+              : 0
+            stateToUpdate.chapterIndex = valueOne;
+            stateToUpdate.imageLoaded = blurredIllustrationState;
           }
 
           if (caller === 'projects') {
-            const projectIndex = valueOne;
-            const thumbnailIndex = valueTwo;
-    
-            stateToUpdate.projectIndex = projectIndex;
-            stateToUpdate.thumbnailIndex = thumbnailIndex;
-            stateToUpdate.finalData = allContentData[projectIndex];
+            stateToUpdate.projectIndex = valueOne;
+            stateToUpdate.thumbnailIndex = valueTwo;
             stateToUpdate.imageLoaded = false;
+            stateToUpdate.imageLoaded = 0;
           }
 
           if (caller === 'journalism') {
-            const headlineIndex = valueTwo;
-  
-            stateToUpdate.headlineIndex = headlineIndex;
-            stateToUpdate.finalData = allContentData[headlineIndex];
+            stateToUpdate.headlineIndex = valueTwo;
           }
           
           if (caller === 'reverie') {
-            const headlineIndex = valueOne;
-
-            stateToUpdate.headlineIndex = headlineIndex;
-            stateToUpdate.finalData = allContentData[headlineIndex];
+            stateToUpdate.headlineIndex = valueOne;
           }
 
           break;

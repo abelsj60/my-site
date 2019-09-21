@@ -102,7 +102,10 @@ export default function Projects(props) {
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
-  const onLoadHandler = () => boundHandleClickForContentLoader('imageLoader');
+  const onLoadMainImageHandler = () => boundHandleClickForContentLoader('imageLoader', 1);
+  const onTransitionEndForLoader = () => boundHandleClickForContentLoader('imageLoader', 2);
+  // const testImg = new Image();
+  // testImg.src = source;
 
   return (
     <Main>
@@ -116,9 +119,10 @@ export default function Projects(props) {
           />
           <Loader
             spinner={true}
-            show={true}
             marginLeft="auto"
-            done={imageLoaded}
+            show={imageLoaded < 1}
+            done={imageLoaded > 1}
+            forTransition={onTransitionEndForLoader}
           />
           <ProjectNav
             {...props}
@@ -165,7 +169,7 @@ export default function Projects(props) {
                 alt="mainPic"
                 src={source}
                 imageLoaded={imageLoaded}
-                onLoad={onLoadHandler}
+                onLoad={onLoadMainImageHandler}
               />
             </ImageHolder>
           </Figure>

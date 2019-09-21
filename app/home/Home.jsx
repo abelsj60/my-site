@@ -326,4 +326,4 @@ export default class Home extends Component {
 // --
 // 18. spellLevel becomes 5 when the spell is cast
 // 19. spellLevel is reset to 0 onTransitionEnd in PictureBox/CityImage (transform)
-// 20. Movement is reset to '' onTransitionEnd in pictureBox/CityImage (transform)
+// 20. Movement is reset to '' onTransitionEnd in PictureBox/FantasyImage (transform)

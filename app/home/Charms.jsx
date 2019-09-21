@@ -207,6 +207,11 @@ export default function Charms(props) {
 
   // Let's set up a progress bar.
 
+  const onTransitionEndHandler =
+    () => {
+      setSpellLevels.four(movement === 'enter', 'OuterContainer');
+      setSpellLevels.two(movement === 'exit', 'OuterContainer');
+    };
   const barWidth = score * (100 / (goal - 1));
   const isReady = score === goal - 1;
 
@@ -217,10 +222,7 @@ export default function Charms(props) {
       exit={movement === 'exit'}
       tempContentIsOn={showBusinessCard || showLegalTerms}
       nameTagWidth={nameTagWidth}
-      onTransitionEnd={() => {
-        setSpellLevels.four(movement === 'enter', 'OuterContainer');
-        setSpellLevels.two(movement === 'exit', 'OuterContainer');
-      }}
+      onTransitionEnd={onTransitionEndHandler}
     >
       <FitText
         compressor={2.3}
@@ -228,9 +230,11 @@ export default function Charms(props) {
         <SubHed
           marginLeft="1.17em"
         >
-          {!inCity
-            ? "Tap the pulses to travel home"
-            : "Tap the pulses for adventure"}
+          {
+            !inCity
+              ? "Tap the pulses to travel home"
+              : "Tap the pulses for adventure"
+          }
         </SubHed>
       </FitText>
       <InnerContainer>

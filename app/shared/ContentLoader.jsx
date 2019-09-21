@@ -34,6 +34,10 @@ export default class ContentLoader extends Component {
     const state = new State(props, location);
     const content = new Content(location.caller);
     const allContentData = content.getContentData();
+    const checkStateOfBlurredIllustration = 
+      location.caller === 'chapter'
+        && !isMenu
+        && referrer.path.split('/').length > 2;
 
     this.overflowRef =
       location.caller === 'chapter'
@@ -49,13 +53,22 @@ export default class ContentLoader extends Component {
     this.state = {
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,
-      imageLoaded: false,
+      imageLoaded: 
+        checkStateOfBlurredIllustration
+          ? props.appState.images[
+              `chapter-${state.getIndex('chapter') + 1}-blurred`
+            ].complete
+              ? 2
+              : 0
+          : location.caller === 'projects'
+            ? 0
+            : -1,
       allContentData: allContentData,
       caller: location.caller,
-      chapterIndex: !isMenu ? state.getIndex('chapter') : 0,
-      projectIndex: !isMenu ? state.getIndex('project'): 0,
-      thumbnailIndex: !isMenu ? state.getIndex('projectPics') : 0,
-      headlineIndex: !isMenu ? state.getIndex('article') : 0
+      chapterIndex: state.getIndex('chapter'),
+      projectIndex: state.getIndex('project'),
+      thumbnailIndex: state.getIndex('projectPics'),
+      headlineIndex: state.getIndex('article')
     };
   }
 

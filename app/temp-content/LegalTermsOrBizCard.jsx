@@ -55,8 +55,8 @@ export default class LegalTermsOrBizCard extends Component {
       currentCaller
     } = appState;
     const homeIsActive = currentCaller === 'home';
-    const stopPropagation = event => event.stopPropagation();
-    const eventHandler = () => {
+    const stopOnClickPropagation = event => event.stopPropagation();
+    const onClickHandler = () => {
       if (showBusinessCard) {
         boundHandleClickForApp('toggleBusinessCard');
       } else {
@@ -67,12 +67,12 @@ export default class LegalTermsOrBizCard extends Component {
     return (
       <Container
         homeIsActive={homeIsActive}
-        onClick={eventHandler}
+        onClick={onClickHandler}
       >
         <CardHolder>
           <Card
             showBusinessCard={showBusinessCard}
-            onClick={stopPropagation}
+            onClick={stopOnClickPropagation}
           >
             {showBusinessCard ? (
               <BusinessCard 

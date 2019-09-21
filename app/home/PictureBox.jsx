@@ -53,17 +53,45 @@ export default function PictureBox(props) {
   const blurredFantasySrc = images[imageNames[3]].src;
 
   // Trigger toggle after we swap backgrounds
-  const transitionHandler = function(event, penultimateSpellLevel, activeBackground) {
-    event.preventDefault();
+  // Requires a closure to pass all params...
+  const regularBackgroundOnTransitionEndHandler =
+    (penultimateSpellLevel, activeBackground) => event => {
+      event.preventDefault();
 
-    if (
-      penultimateSpellLevel
-        && activeBackground
-        && event.propertyName === 'transform'
-    ) {
-      boundHandleClickForHome('toggleSpell', event.propertyName);
-    }
-  }
+      if (
+        penultimateSpellLevel // Psst. Second to last...
+          && activeBackground
+          && event.propertyName === 'transform'
+      ) {
+        boundHandleClickForHome('toggleSpell', event.propertyName);
+      }
+    };
+  const blurredBoyOnLoadHandler =
+    () => setLoadLevels.one();
+  const regularBoyOnLoadHandler =
+    () => setLoadLevels.five();
+  const blurredFantasyOnLoadHandler =
+    () => setLoadLevels.two();
+  const regularFantasyOnLoadHandler =
+    () => setLoadLevels.six();
+  const blurredBoyOnTransitionEndHandler =
+    () => {
+      setLoadLevels.three();
+      if (setLoadLevels.sum().all === 6) {
+        boundHandleClickForApp('updateHeartbeat'); // --> 1
+      }
+    };
+  const blurredFantasyOnTransitionEndHandler =
+    () => {
+      setLoadLevels.four();
+      setSpellLevels.three(movement === 'enter', 'BlurredFantasy');
+      setSpellLevels.one(movement === 'exit', 'BlurredFantasy');
+    };
+  const blurredCityOnTransitionEndHandler =
+    () => {
+      setSpellLevels.three(movement === 'enter', 'BlurredCity');
+      setSpellLevels.one(movement === 'exit', 'BlurredCity');
+    };
 
   return (
     <PictureHolder>
@@ -76,21 +104,15 @@ export default function PictureBox(props) {
         spellLevel={spellLevel}
         src={blurredBoySrc}
         alt={descriptionBoy}
-        onLoad={() => setLoadLevels.one()}
-        onTransitionEnd={() => {
-          setLoadLevels.three();
-          if (setLoadLevels.sum().all === 6) {
-            // Set heartbeat to 1
-            boundHandleClickForApp('updateHeartbeat');
-          }
-        }}
+        onLoad={blurredBoyOnLoadHandler}
+        onTransitionEnd={blurredBoyOnTransitionEndHandler}
       />
       <BoyForeground
         src={bigBoySrc}
         alt={descriptionBoy}
         loadLevelAll={setLoadLevels.sum().all}
         finishedHomePageLoad={finishedHomePageLoad}
-        onLoad={() => setLoadLevels.five()}
+        onLoad={regularBoyOnLoadHandler}
       />
       {(!inCity || (inCity && spellLevel > 0)) &&
         <Fragment>
@@ -104,25 +126,19 @@ export default function PictureBox(props) {
             loadLevelBlurs={setLoadLevels.sum().blurs}
             loadLevelAll={setLoadLevels.sum().all}
             loadLevelFantasy={loadLevel[3] > 0}
-            onLoad={() => setLoadLevels.two()}
-            onTransitionEnd={() => {
-              setLoadLevels.four();
-              setSpellLevels.three(movement === 'enter', 'BlurredFantasy');
-              setSpellLevels.one(movement === 'exit', 'BlurredFantasy');
-            }}
+            onLoad={blurredFantasyOnLoadHandler}
+            onTransitionEnd={blurredFantasyOnTransitionEndHandler}
           />
           <FantasyBackground
             inCity={inCity}
             finishedHomePageLoad={finishedHomePageLoad}
             src={bigFantasySrc}
             alt={descriptionFantasy}
-            onLoad={() => setLoadLevels.six()}
             spellLevel={spellLevel}
             loadLevelAll={setLoadLevels.sum().all}
+            onLoad={regularFantasyOnLoadHandler}
             // Trigger toggle after backgrounds are swapped
-            onTransitionEnd={
-              event => transitionHandler(event, spellLevel > 4, inCity)
-            }
+            onTransitionEnd={regularBackgroundOnTransitionEndHandler(spellLevel > 4, inCity)}
           />
         </Fragment>
       }
@@ -134,10 +150,7 @@ export default function PictureBox(props) {
             enter={movement === 'enter'}
             exit={movement === 'exit'}
             spellLevel={spellLevel}
-            onTransitionEnd={() => {
-              setSpellLevels.three(movement === 'enter', 'BlurredCity');
-              setSpellLevels.one(movement === 'exit', 'BlurredCity');
-            }}
+            onTransitionEnd={blurredCityOnTransitionEndHandler}
           />
           <CityBackground
             inCity={inCity}
@@ -145,9 +158,7 @@ export default function PictureBox(props) {
             src={cityImage}
             alt={descriptionCity}
             // Trigger toggle after backgrounds are swapped
-            onTransitionEnd={
-              event => transitionHandler(event, spellLevel > 4, !inCity)
-            }
+            onTransitionEnd={regularBackgroundOnTransitionEndHandler(spellLevel > 4, !inCity)}
           />
         </Fragment>
       }

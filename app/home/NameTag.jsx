@@ -135,10 +135,12 @@ export default function NameTag(props) {
     name
   } = attributes;
 
-  const eventHandler =
+  const onClickHandler =
     () => {
-      // ? Need: finishedHomePageLoad && 
-      if (spellLevel === 0 || spellLevel === 4) {
+      if (
+        heartbeat > 2 // Ends at 3
+          && (spellLevel === 0 || spellLevel === 4)
+      ) {
         if (eventType === 'touch') {
           boundHandleClickForHome('resetEventType');
           return false;
@@ -152,16 +154,27 @@ export default function NameTag(props) {
           });
         }
 
-        if (heartbeat > 2) {
-          boundHandleClickForHome('toggleSpell');
-        }
+        boundHandleClickForHome('toggleSpell');
+      }
+    };
+  const onAnimationStartHandler =
+    event => {
+      if (
+        event.animationName === 'cHArim' // StyledComponents className
+          && !finishedHomePageLoad
+      ) {
+        boundHandleClickForApp('finishedHomePageLoad')
       }
     };
   const onAnimationEndHandler =
     event => {
       event.preventDefault()
-      // Set hertbeat to 3
-      boundHandleClickForApp('updateHeartbeat');
+      boundHandleClickForApp('updateHeartbeat'); // --> 3
+    };
+  const onTransitionEndHandler = 
+    () => {
+      setSpellLevels.two(movement === 'enter', 'InnerContainer');
+      setSpellLevels.reset(movement === 'exit', 'InnerContainer');
     };
 
   return (
@@ -175,21 +188,14 @@ export default function NameTag(props) {
         heartbeat={heartbeat > 0 && heartbeat < 3}
         delayHeartbeat={finishedHomePageLoad && heartbeat > 1 && heartbeat < 3}
         tempContentIsOn={showBusinessCard || showLegalTerms}
-        onAnimationStart={event => {
-          if (
-            event.animationName === 'cHArim' // Class created by StyledComponents
-              && !finishedHomePageLoad
-          ) {
-            boundHandleClickForApp('finishedHomePageLoad')
-          }
-        }}
-        onAnimationEnd={event => onAnimationEndHandler(event)}
+        onAnimationStart={onAnimationStartHandler}
+        onAnimationEnd={onAnimationEndHandler}
       >
         <FitText
           compressor={1.154}
         >
           <Hed
-            onClick={eventHandler}
+            onClick={onClickHandler}
             loadLevelBlurs={setLoadLevels.sum().blurs}
             loadLevelAll={setLoadLevels.sum().all}
             finishedHomePageLoad={finishedHomePageLoad}
@@ -204,10 +210,7 @@ export default function NameTag(props) {
           finishedHomePageLoad={finishedHomePageLoad}
           enter={movement === 'enter'}
           exit={movement === 'exit'}
-          onTransitionEnd={() => {
-            setSpellLevels.two(movement === 'enter', 'InnerContainer');
-            setSpellLevels.reset(movement === 'exit', 'InnerContainer');
-          }}
+          onTransitionEnd={onTransitionEndHandler}
         >
           <FitText
             compressor={2.3}

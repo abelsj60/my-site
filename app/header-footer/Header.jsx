@@ -223,7 +223,7 @@ export default class Header extends Component {
         && !headerMenuIsOpen;
     const coverVals = cover(window.innerWidth, height, 2131, 1244);
     const referrer = new Referrer(this.props);
-    const eventHandlerForHeaderMenu = () => boundHandleClickForApp('toggleHeaderMenu');
+    const onClickMenuHandler = () => boundHandleClickForApp('toggleHeaderMenu');
     const frost = 
       isHome
         && (coverVals.y < 0 || spacerHeight < 20)
@@ -307,7 +307,7 @@ export default class Header extends Component {
           menu={headerMenuIsOpen}
           src={iconType}
           textShadow={showTextShadow}
-          onClick={eventHandlerForHeaderMenu}
+          onClick={onClickMenuHandler}
         />
       </Container>
     );

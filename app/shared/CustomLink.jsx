@@ -72,7 +72,7 @@ export default ({
       && !isMenu
       && to.length > 1;
 
-  const eventHandler =
+  const onClickHandler =
     event => {
       if (!boundHandleClickForApp) {
         return null;
@@ -107,7 +107,7 @@ export default ({
               {...props}
               to={to}
               replace={iSayNoMatch || replace || !!match}
-              onClick={eventHandler}
+              onClick={onClickHandler}
             />
           );
         }

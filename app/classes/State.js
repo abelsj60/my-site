@@ -55,9 +55,10 @@ export default class State {
         break;
     }
 
-    return index && index !== -1 ? index : 0;
+    return index && index > -1 ? index : 0;
   }
 
+  // Filters out naked calls to, e.g., /chapter
   _indicesAreGreaterThanOrEqualToZero(indices) {
     return indices.one !== -1 && indices.two !== -1;
   }

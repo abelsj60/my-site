@@ -80,8 +80,8 @@ export default function FooterContainer(props) {
     showStoryText,
   } = appState;
 
-  const eventHandlerToToggleBusinessCard = () => boundHandleClickForApp('toggleBusinessCard');
-  const eventHandlerToToggleLegalTerms = () => boundHandleClickForApp('toggleLegalTerms');
+  const onClickContactHandler = () => boundHandleClickForApp('toggleBusinessCard');
+  const onClickLegalHandler = () => boundHandleClickForApp('toggleLegalTerms');
 
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
@@ -176,7 +176,7 @@ export default function FooterContainer(props) {
         </RestyledLink>
         <Graf
           active={showBusinessCard}
-          onClick={eventHandlerToToggleBusinessCard}
+          onClick={onClickContactHandler}
           home={isHome}
           isStory={isStory}
           isNotFound={isNotFound}
@@ -188,7 +188,7 @@ export default function FooterContainer(props) {
         </Graf>
         <Graf
           active={showLegalTerms}
-          onClick={eventHandlerToToggleLegalTerms}
+          onClick={onClickLegalHandler}
           home={isHome}
           isStory={isStory}
           isNotFound={isNotFound}

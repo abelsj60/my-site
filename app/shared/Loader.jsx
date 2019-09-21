@@ -12,6 +12,14 @@ const loaderKeyframes = keyframes`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: ${p => p.marginLeft && css`${p.marginLeft.length <= 2 ? p.marginLeft + 'px' : p.marginLeft}`};
+  opacity: ${p => p.show ? '1' : '0'};
+  transition: opacity .2s;
+  width: ${p => p.cWidth && css`${p.cWidth}px`};
+`;
 const ImgContainer = styled.div`
   height: 16px;
   width: 16px;
@@ -21,14 +29,6 @@ const ImgLoader = styled.div`
   height: 100%;
   background-image: url(${p => p.spinner});
   background-size: cover;
-`;
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-left: ${p => p.marginLeft && css`${p.marginLeft.length <= 2 ? p.marginLeft + 'px' : p.marginLeft}`};
-  opacity: ${p => p.show ? '1' : '0'};
-  transition: opacity .2s;
-  width: ${p => p.cWidth && css`${p.cWidth}px`};
 `;
 const Text = styled.p`
   color: ${p => !p.white ? p.theme.colors.black : p.theme.colors.white};
@@ -56,6 +56,7 @@ export default function Loader(props) {
       show={props.show}
       cWidth={props.cWidth}
       marginLeft={props.marginLeft}
+      onTransitionEnd={props.forTransition}
     >
       {
         props.spinner ? (

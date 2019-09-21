@@ -16,7 +16,7 @@ fantasyImage: 'https://user-images.githubusercontent.com/30417590/63110285-11044
 zoomedBoyInForegroundImage: ''
 zoomedCityImage: ''
 zoomedFantasyImage: ''
-boyInForegroundImageBlurred: 'https://user-images.githubusercontent.com/30417590/63667659-a3e78800-c7a2-11e9-88ea-b593a5481d17.png'
+boyInForegroundImageBlurred: 'https://user-images.githubusercontent.com/30417590/65292407-4afedb80-db25-11e9-894f-7d34e463bdf9.png'
 cityImageBlurred: 'https://user-images.githubusercontent.com/30417590/63664327-1866fa80-c794-11e9-89cd-bf3544c1ccfc.png'
 fantasyImageBlurred: 'https://user-images.githubusercontent.com/30417590/63658897-3d4f7380-c77c-11e9-8611-9d64766ab426.png'
 preloadTheseImages: [
