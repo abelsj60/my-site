@@ -57,6 +57,7 @@ export default ({
   replace,
   boundHandleClickForApp,
   isCalledByMenu,
+  isStory,
   ...props
 }) => {
   const { pathname } = window.location;
