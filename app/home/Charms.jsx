@@ -1,3 +1,4 @@
+import eventManagement from '../helpers/eventManagement.js';
 import FitText from '@kennethormandy/react-fittext';
 import React from 'react';
 import Mapper from '../shared/Mapper.jsx';
@@ -155,6 +156,7 @@ const Dashboard = styled.div`
   display: flex;
   flex-direction: column;
   align-self: center;
+  width: 100px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 32px;
@@ -208,9 +210,10 @@ export default function Charms(props) {
   // Let's set up a progress bar.
 
   const onTransitionEndHandler =
-    () => {
-      setSpellLevels.four(movement === 'enter', 'OuterContainer');
+    event => {
+      eventManagement(event);
       setSpellLevels.two(movement === 'exit', 'OuterContainer');
+      setSpellLevels.four(movement === 'enter', 'OuterContainer');
     };
   const barWidth = score * (100 / (goal - 1));
   const isReady = score === goal - 1;
@@ -281,7 +284,7 @@ export default function Charms(props) {
           <Score
             isReady={isReady}
           >
-            Cast spell in {5 - score}...
+            Cast spell in {goal - score}...
           </Score>
           <OuterBar>
             <InnerBar

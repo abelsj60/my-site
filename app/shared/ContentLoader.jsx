@@ -26,7 +26,6 @@ export default class ContentLoader extends Component {
     // DO NOT USE props.currentCaller or props.isMenu to avoid problems
     // w/BACK/FORWARD. Both are out-of-date b/c the eventListener for
     // BACK/FORWARD runs AFTER ContentLoader runs.
-
     const isMenu = window.location.pathname.split('/')
       .indexOf('menu') === 2;
     const referrer = new Referrer(props);
@@ -174,19 +173,17 @@ export default class ContentLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      appState,
-      boundHandleClickForApp,
-      boundHandleClickForBody
-    } = this.props;
-    const { currentCaller } = appState;
     const referrer = new Referrer(this.props);
     const location = new Location(referrer.pathToMatch, this.props, prevProps);
-
 
     if (location.needsRedirect) {
       this.setState({ needsRedirect: true });
     } else if (location.isSwappingContent) {
+      const {
+        appState,
+        boundHandleClickForApp,
+        boundHandleClickForBody
+      } = this.props;
       const state = new State(this.props, location);
       const clickHandling = new ClickHandling('contentLoader', this);
       const boundHandleClickForContentLoader = clickHandling.boundHandleClick;
@@ -204,6 +201,7 @@ export default class ContentLoader extends Component {
       // overflowRef, and so will kick an error.
 
       if (location.caller === 'chapter') {
+        const { currentCaller } = appState;
         const scrollHandler = new ScrollHandling(currentCaller);
         scrollHandler.resetElementTop(this.overflowRef, prevProps);
       }

@@ -36,30 +36,43 @@ const Line = styled.div`
   }
 `;
 const RestyledLink = styled(StyledLink)`
-  margin-right: 20px;
+  margin-right: 13px;
+  
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    margin-right: 20px;
+  }
 `;
 const Graf = styled.p`
   cursor: pointer;
-  margin-right: ${p => !p.isLink ? '20px' : ''};
+  margin-right: ${p => p.smallMarginRight && css`${p.smallMarginRight}px`}};
   margin-bottom: 0px;
   color: ${p => (p.active ? (!p.home && !p.isStory && !p.isNotFound ? p.theme.colors.pink : p.theme.colors.yellow) : !p.home && !p.isStory && !p.isNotFound ? p.theme.colors.blue : p.theme.colors.white)};
   padding-top: 5px;
   padding-bottom: 5px;
-  padding-right: 5px;
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.one};
   user-select: none;
   text-shadow: ${p => p.textShadow && shadow};
   transition: text-shadow .35s;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    padding-right: 5px;
+    margin-right: ${p => !p.isLink && '20px'};
+  }
 `;
 const TextBox = styled.div`
   display: flex;
   z-index: 1;
-
+  margin-right: 25px;
+  
   // Fix IE 11 so story button sits on left and nav items sit on right
   // (Extra rules account for a problem with space-between)
   flex: 1;
   justify-content: flex-end;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    margin-right: 0px;
+  }
 `;
 
 export default function FooterContainer(props) {
@@ -149,16 +162,22 @@ export default function FooterContainer(props) {
         <Loader
           marginBottom="2"
           marginLeft="20"
+          smallMarginLeft="10"
+          smallMarginRight="17"
           fontSize="small"
+          maxWidth="33"
           white={true}
           smallFont={true}
-          done={!showStoryText}
+          done={!showStoryText} // Turn off when not /chapter
           show={showDelay}
         />
       )}
-      <TextBox>
+      <TextBox
+        isStory={isStory}
+      >
         <RestyledLink
           to={reverieLink}
+          isStory={isStory}
           boundHandleClickForApp={boundHandleClickForApp}
         >
           <Graf
@@ -183,6 +202,7 @@ export default function FooterContainer(props) {
           textShadow={showTextShadow}
           headerMenuIsOpen={headerMenuIsOpen}
           animateImageBlur={animateImageBlur}
+          smallMarginRight="13"
         >
           Contact
         </Graf>

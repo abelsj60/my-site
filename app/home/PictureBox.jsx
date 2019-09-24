@@ -4,6 +4,7 @@ import BoyForeground from './BoyForeground.jsx';
 import BlurredBoyForeground from './BlurredBoyForeground.jsx';
 import BlurredFantasyBackground from './BlurredFantasyBackground.jsx';
 import CityBackground from './CityBackground.jsx';
+import eventManagement from '../helpers/eventManagement.js';
 import FantasyBackground from './FantasyBackground.jsx';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
@@ -56,7 +57,7 @@ export default function PictureBox(props) {
   // Requires a closure to pass all params...
   const regularBackgroundOnTransitionEndHandler =
     (penultimateSpellLevel, activeBackground) => event => {
-      event.preventDefault();
+      eventManagement(event);
 
       if (
         penultimateSpellLevel // Psst. Second to last...
@@ -67,15 +68,28 @@ export default function PictureBox(props) {
       }
     };
   const blurredBoyOnLoadHandler =
-    () => setLoadLevels.one();
+    event => {
+      eventManagement(event);
+      setLoadLevels.one()
+    };
   const regularBoyOnLoadHandler =
-    () => setLoadLevels.five();
+    event => {
+      eventManagement(event);
+      setLoadLevels.five()
+    };
   const blurredFantasyOnLoadHandler =
-    () => setLoadLevels.two();
+    event => {
+      eventManagement(event);
+      setLoadLevels.two()
+    };
   const regularFantasyOnLoadHandler =
-    () => setLoadLevels.six();
+    event => {
+      eventManagement(event);
+      setLoadLevels.six()
+    };
   const blurredBoyOnTransitionEndHandler =
-    () => {
+    event => {
+      eventManagement(event);
       setLoadLevels.three();
       if (setLoadLevels.sum().all === 6) {
         boundHandleClickForApp('updateHeartbeat'); // --> 1
@@ -83,12 +97,14 @@ export default function PictureBox(props) {
     };
   const blurredFantasyOnTransitionEndHandler =
     () => {
+      eventManagement(event);
       setLoadLevels.four();
       setSpellLevels.three(movement === 'enter', 'BlurredFantasy');
       setSpellLevels.one(movement === 'exit', 'BlurredFantasy');
     };
   const blurredCityOnTransitionEndHandler =
     () => {
+      eventManagement(event);
       setSpellLevels.three(movement === 'enter', 'BlurredCity');
       setSpellLevels.one(movement === 'exit', 'BlurredCity');
     };

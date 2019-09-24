@@ -15,10 +15,16 @@ const loaderKeyframes = keyframes`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: ${p => p.marginLeft && css`${p.marginLeft.length <= 2 ? p.marginLeft + 'px' : p.marginLeft}`};
+  margin-left: ${p => p.smallMarginLeft && css`${p.smallMarginLeft.includes('auto') ?  p.smallMarginLeft : p.smallMarginLeft + 'px'}`};
+  margin-right: ${p => p.smallMarginRight && css`${p.smallMarginRight.includes('auto') ?  p.smallMarginRight : p.smallMarginRight + 'px'}`};
   opacity: ${p => p.show ? '1' : '0'};
   transition: opacity .2s;
   width: ${p => p.cWidth && css`${p.cWidth}px`};
+  max-width: ${p => p.maxWidth && css`${p.maxWidth}px`};
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    margin-left: ${p => p.marginLeft && css`${p.marginLeft.length <= 2 ? p.marginLeft + 'px' : p.marginLeft}`};
+  }
 `;
 const ImgContainer = styled.div`
   height: 16px;
@@ -33,7 +39,7 @@ const ImgLoader = styled.div`
 const Text = styled.p`
   color: ${p => !p.white ? p.theme.colors.black : p.theme.colors.white};
   margin-bottom: ${p => p.marginBottom + 'px'};
-  font-size: ${p => !p.smallFont ? p.theme.fontSizes.six : p.theme.fontSizes.one };
+  font-size: ${p => p.smallFont ? p.theme.fontSizes.zero : p.theme.fontSizes.six };
 `;
 const LoadingBar = styled.div`
   height: 1px;
@@ -43,7 +49,7 @@ const ProgressBar = styled.div`
   width: 100%;
   height: 1px;
   background-color: ${p => !p.white ? p.theme.colors.black : p.theme.colors.white};
-  animation: ${css`1.25s ${loaderKeyframes} infinite`}; 
+  animation: ${p => p.show && css`1.25s ${loaderKeyframes} infinite`}; 
 `;
 
 export default function Loader(props) {
@@ -55,8 +61,11 @@ export default function Loader(props) {
     <Container
       show={props.show}
       cWidth={props.cWidth}
+      maxWidth={props.maxWidth}
       marginLeft={props.marginLeft}
       onTransitionEnd={props.forTransition}
+      smallMarginLeft={props.smallMarginLeft}
+      smallMarginRight={props.smallMarginRight}
     >
       {
         props.spinner ? (

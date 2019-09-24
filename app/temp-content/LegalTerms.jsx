@@ -27,8 +27,8 @@ const Legal = styled.h1`
 `;
 const MyCopyright = styled.span`
   display: block;
-  margin-bottom: 5px;
-  font-size: ${p => p.theme.fontSizes.zero};
+  margin-bottom: 6px;
+  font-size: ${p => p.theme.fontSizes.one};
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 

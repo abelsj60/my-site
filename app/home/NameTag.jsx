@@ -1,4 +1,5 @@
 import home from '../data/home/home.md';
+import eventManagement from '../helpers/eventManagement.js';
 import FitText from '@kennethormandy/react-fittext';
 import Loader from '../shared/Loader.jsx';
 import marked from 'marked';
@@ -136,7 +137,8 @@ export default function NameTag(props) {
   } = attributes;
 
   const onClickHandler =
-    () => {
+    event => {
+      eventManagement(event);
       if (
         heartbeat > 2 // Ends at 3
           && (spellLevel === 0 || spellLevel === 4)
@@ -159,6 +161,7 @@ export default function NameTag(props) {
     };
   const onAnimationStartHandler =
     event => {
+      eventManagement(event);
       if (
         event.animationName === 'cHArim' // StyledComponents className
           && !finishedHomePageLoad
@@ -168,11 +171,12 @@ export default function NameTag(props) {
     };
   const onAnimationEndHandler =
     event => {
-      event.preventDefault()
+      eventManagement(event);
       boundHandleClickForApp('updateHeartbeat'); // --> 3
     };
   const onTransitionEndHandler = 
-    () => {
+    event => {
+      eventManagement(event);
       setSpellLevels.two(movement === 'enter', 'InnerContainer');
       setSpellLevels.reset(movement === 'exit', 'InnerContainer');
     };

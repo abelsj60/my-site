@@ -17,8 +17,6 @@ const RestyledContentHolder = styled(ContentHolder)`
   transition: opacity ${p => p.showStoryText ? '.35s' : '.15s'};
   pointer-events: ${p => !p.showStoryText && 'none'};
   flex-direction: column;
-  flex: 1;
-  min-width: 100%;
 `;
 const RestyledShelf = styled(Shelf)`
   flex-direction: column;
