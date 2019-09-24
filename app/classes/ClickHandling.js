@@ -259,32 +259,6 @@ export default class ClickHandling {
             stateToUpdate.chapter = 0;
           }
 
-          // Remove the loading sequence after 
-          // images load. Can prevent user from
-          // ever seeing heartbeat if he loads
-          // clicks around, doesn't go to /home,
-          // then reloads and goes /home. Eh?
-          if (!finishedHomePageLoad) {
-            let alreadyLoaded = 0;
-            [
-              'boyInForegroundImage',
-              'boyInForegroundImageBlurred',
-              'fantasyImage',
-              'fantasyImageBlurred'
-            ].forEach(name => {
-              if (images[name].complete) {
-                alreadyLoaded++;
-              }
-            });
-
-            if (alreadyLoaded > 3) {
-              // ? Revisit: https://stackoverflow.com/a/7809413
-
-              stateToUpdate.heartbeat = 1;
-              stateToUpdate.finishedHomePageLoad = true;
-            }
-          }
-
           category = 'App state';
           action = 'Reset app';
           break;

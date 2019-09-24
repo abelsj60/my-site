@@ -87,6 +87,7 @@ export default function Loader(props) {
               white={props.white}
             >
               <ProgressBar 
+                show={props.show}
                 white={props.white}
               />
             </LoadingBar>

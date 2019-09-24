@@ -1,4 +1,5 @@
 import ChapterNav from './ChapterNav.jsx';
+import eventManagement from '../helpers/eventManagement.js';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
@@ -179,12 +180,14 @@ export default function Story(props) {
   const dek = 'An experiment in digital + traditional storytelling';
   const bigImageSrc = images[`chapter-${number}-main`].src;
   const blurredImageSrc = images[`chapter-${number}-blurred`].src;
-  const onLoadHandler = () => { // 0 --> 1
+  const onLoadHandler = event => { // 0 --> 1
+    eventManagement(event);
     if (imageLoaded < 1) {
       boundHandleClickForContentLoader('imageLoader', 1)
     }
   };
-  const onTransitionEndHandler = () => { // 1 --> 2
+  const onTransitionEndHandler = event => { // 1 --> 2
+    eventManagement(event);
     if (imageLoaded < 2) {
       boundHandleClickForContentLoader('imageLoader', 2)
     }

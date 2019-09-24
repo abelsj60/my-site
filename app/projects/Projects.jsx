@@ -1,3 +1,4 @@
+import eventManagement from '../helpers/eventManagement.js';
 import Loader from '../shared/Loader.jsx';
 import Main from '../primitives/Main.jsx';
 import ContentHolder from '../primitives/ContentHolder.jsx';
@@ -57,6 +58,7 @@ const Caption = styled.figcaption`
 `;
 const ImageHolder = styled.div`
   padding: 15px;
+  min-height: 155px;
   background-color: ${p => p.theme.colors.reverieBlue};
 `;
 const MainImage = styled.img`
@@ -102,10 +104,14 @@ export default function Projects(props) {
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
-  const onLoadMainImageHandler = () => boundHandleClickForContentLoader('imageLoader', 1);
-  const onTransitionEndForLoader = () => boundHandleClickForContentLoader('imageLoader', 2);
-  // const testImg = new Image();
-  // testImg.src = source;
+  const onLoadMainImageHandler = event => {
+    eventManagement(event);
+    boundHandleClickForContentLoader('imageLoader', 1)
+  };
+  const onTransitionEndForLoader = event => {
+    eventManagement(event);
+    boundHandleClickForContentLoader('imageLoader', 2)
+  };
 
   return (
     <Main>
