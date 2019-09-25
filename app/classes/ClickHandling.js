@@ -51,30 +51,30 @@ export default class ClickHandling {
   _handleClickForApp() {
     return (updateValue, valueOne, valueTwo) => {
       const {
-        animateImageBlur,
+        illustrationLevel,
         chapter,
         currentCaller,
-        showDelay,
-        finishedHomePageLoad,
+        lastCaller,
+        illustrationDelay,
         heartbeat,
-        images,
+        illustrationDirection,
         showBusinessCard,
         showLegalTerms,
         inCity,
-        showStoryText,
         isMenu,
         headerMenuIsOpen
       } = this.state;
       const stateToUpdate = {};
       const toggleStoryTextSequence = () => {
-        if (showDelay) {
-          stateToUpdate.showDelay = !showDelay;
+        if (illustrationDelay) {
+          stateToUpdate.illustrationDelay = !illustrationDelay;
         }
 
-        stateToUpdate.showStoryText = !showStoryText;
-
-        if (!animateImageBlur) {
-          stateToUpdate.animateImageBlur = true;
+        if (illustrationLevel === 0) {
+          stateToUpdate.illustrationLevel = 1;
+        } else {
+          stateToUpdate.illustrationLevel = 2; // 3 --> 2
+          stateToUpdate.illustrationDirection = 'exit'
         }
 
         if (showBusinessCard) {
@@ -88,17 +88,6 @@ export default class ClickHandling {
       let category = '';
       let action = '';
       let label = '';
-
-      if (
-        animateImageBlur
-          && updateValue !== 'toggleStoryText' 
-      ) {
-        // Turn off animateImageBlur if we're not toggling storyText
-        // or returning to /chapter from /reverie (this controls
-        // the fading of HTML elements via CSS in /chapter)
-
-        stateToUpdate.animateImageBlur = false;
-      }
 
       switch (updateValue) {
         case 'toggleBusinessCard':
@@ -135,7 +124,7 @@ export default class ClickHandling {
           toggleStoryTextSequence();
 
           category = 'App state';
-          action = showStoryText
+          action = illustrationLevel > 0
             ? 'Hide story text'
             : 'Close story text';
           label = showBusinessCard
@@ -143,6 +132,13 @@ export default class ClickHandling {
             : showLegalTerms
               ? 'Legal notice was open'
               : '';
+          break;
+        case 'updateStoryAnimation':
+          stateToUpdate.illustrationLevel = valueOne;
+          
+          if (valueOne === 0) {
+            stateToUpdate.illustrationDirection = 'enter';
+          }
           break;
         case 'setChapter':
           stateToUpdate.chapter = valueOne;
@@ -153,7 +149,7 @@ export default class ClickHandling {
 
           break;
         case 'toggleShowDelay':
-          stateToUpdate.showDelay = !showDelay;
+          stateToUpdate.illustrationDelay = !illustrationDelay;
           break;
         case 'swapBackground':
           stateToUpdate.inCity = !inCity;
@@ -237,26 +233,28 @@ export default class ClickHandling {
             stateToUpdate.isMenu = !isMenu;
           }
 
+          if (illustrationDelay && valueOne !== 'chapter') {
+            stateToUpdate.illustrationDelay = !illustrationDelay;
+          }
+
           // We'll always hide the illustration when switching sections,
           // but not if going to, leaving, or changing the /reverie.
 
           if (
-            valueOne !== undefined // Undefined when switching reveries
-              && !(currentCaller === 'chapter' && valueOne === 'reverie')
-              && !(currentCaller === 'reverie' && valueOne === 'chapter')
+            (valueOne !== 'chapter' && valueOne !== 'reverie')
+              && !(lastCaller === 'chapter' && currentCaller === 'reverie')
           ) {
-            stateToUpdate.showStoryText = true;
-          }
+            if (illustrationLevel) {
+              if (illustrationDirection !== 'exit') {
+                stateToUpdate.illustrationDirection = 'enter';
+              }
 
-          if (showDelay && valueOne !== 'chapter') {
-              stateToUpdate.showDelay = !showDelay;
-          }
+              stateToUpdate.illustrationLevel = 0;
+            }
 
-          if (
-            valueOne !== 'chapter' 
-              && (chapter > 0 || chapter < 0)
-          ) {
-            stateToUpdate.chapter = 0;
+            if (chapter > 0 || chapter < 0) {
+              stateToUpdate.chapter = 0;
+            }
           }
 
           category = 'App state';
@@ -324,12 +322,12 @@ export default class ClickHandling {
           break;
         case 'updateState':
           if (caller === 'chapter') {
-          const blurredIllustrationState = 
-            this.props.appState.images[
-              `chapter-${valueOne + 1}-blurred`
-            ].complete
-              ? 2
-              : 0
+            const blurredIllustrationState = 
+              this.props.appState.images[
+                `chapter-${valueOne + 1}-blurred`
+              ].complete
+                ? 2
+                : 0
             stateToUpdate.chapterIndex = valueOne;
             stateToUpdate.imageLoaded = blurredIllustrationState;
           }
@@ -337,7 +335,6 @@ export default class ClickHandling {
           if (caller === 'projects') {
             stateToUpdate.projectIndex = valueOne;
             stateToUpdate.thumbnailIndex = valueTwo;
-            stateToUpdate.imageLoaded = false;
             stateToUpdate.imageLoaded = 0;
           }
 
@@ -346,7 +343,7 @@ export default class ClickHandling {
           }
           
           if (caller === 'reverie') {
-            stateToUpdate.headlineIndex = valueOne;
+            stateToUpdate.reverieIndex = valueOne;
           }
 
           break;

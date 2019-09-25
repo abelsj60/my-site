@@ -1,5 +1,6 @@
 import Button from './Button.jsx';
 import { cover } from 'intrinsic-scale';
+import eventManagement from '../helpers/eventManagement.js';
 import Loader from '../shared/Loader.jsx';
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -27,17 +28,20 @@ const Line = styled.div`
   margin: 0px;
   height: 1px;
   background-color: ${p => !p.isNotFound ? p.theme.colors.pink : p.theme.colors.white};
-  opacity: ${p => !p.hide ? '1' : '0'};
-  transition: ${p => p.animateImageBlur && css`opacity ${p.showStoryText ? '.35s' : '.15s'}`};
+  opacity: ${p => p.isReverie || (p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1) ? '1' : '0'};
+  transition: ${p => p.illustrationLevel > 0  && p.illustrationLevel < 3 && 'opacity .35s'};
   
   @media (min-width: ${p => p.theme.mediaQueries.desktop}) {
     left: 5px;
     right: 5px;
   }
 `;
-const RestyledLink = styled(StyledLink)`
+const RestyledLink = styled(({
+  isStory,
+  ...rest
+}) => <StyledLink {...rest} />)`
   margin-right: 13px;
-  
+    
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-right: 20px;
   }
@@ -52,8 +56,8 @@ const Graf = styled.p`
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.one};
   user-select: none;
-  text-shadow: ${p => p.textShadow && shadow};
-  transition: text-shadow .35s;
+  text-shadow: ${p => !p.isReverie && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && ((p.home && p.coverValY < 0) || p.illustrationLevel >= 2) && shadow};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && '.35s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     padding-right: 5px;
@@ -81,39 +85,41 @@ export default function FooterContainer(props) {
     boundHandleClickForApp
   } = props;
   const {
-    animateImageBlur,
+    illustrationLevel,
     chapter,
     currentCaller,
     headerMenuIsOpen,
     height,
+    illustrationDirection,
     lastCaller,
     showBusinessCard,
-    showDelay,
+    illustrationDelay,
     showLegalTerms,
-    showStoryText,
   } = appState;
 
-  const onClickContactHandler = () => boundHandleClickForApp('toggleBusinessCard');
-  const onClickLegalHandler = () => boundHandleClickForApp('toggleLegalTerms');
+  const onClickContactHandler = event => {
+    eventManagement(event);
+    boundHandleClickForApp('toggleBusinessCard');
+  };
+  const onClickLegalHandler = event => {
+    eventManagement(event);
+    boundHandleClickForApp('toggleLegalTerms');
+  };
+  const eventHandlerForStoryButton = event => {
+    eventManagement(event);
+
+    if (chapter < 0) {
+      boundHandleClickForApp('toggleShowDelay');
+    } else {
+      boundHandleClickForApp('toggleStoryText');
+    }
+  };
 
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
   const isNotFound = currentCaller === 'not-found';
   const coverVals = cover(window.innerWidth, height, 2131, 1244);
-  const showTextShadow =
-    isHome 
-      && !showBusinessCard
-      && !showLegalTerms
-      && coverVals.y < 0
-        || (
-          !showStoryText
-            && !showBusinessCard
-            && !showLegalTerms
-            && !isReverie
-            && !headerMenuIsOpen
-          );
-
   const reverieLink =
     isReverie
       ? `/${
@@ -123,39 +129,33 @@ export default function FooterContainer(props) {
       }`
       : '/reverie';
 
-  const eventHandlerForStoryButton = () => {
-      if (chapter < 0) {
-        boundHandleClickForApp('toggleShowDelay');
-      } else {
-        boundHandleClickForApp('toggleStoryText');
-      }
-    };
-
   return (
     <Container
-      home={isHome}
       story={isStory}
-      reverie={isReverie}
-      storyPicActive={!showStoryText}
     >
       <Line
         home={isHome}
         isNotFound={isNotFound}
-        hide={!showStoryText && !isReverie}
-        animateImageBlur={animateImageBlur}
+        hide={illustrationLevel}
+        isReverie={isReverie}
+        illustrationLevel={illustrationLevel}
+        illustrationDirection={illustrationDirection}
       />
       <Button
-        showStoryText={showStoryText}
+        isReverie={isReverie}
+        headerMenuIsOpen={headerMenuIsOpen}
         clickFunction={eventHandlerForStoryButton}
-        animateImageBlur={animateImageBlur}
-        boxShadow={showTextShadow}
+        illustrationLevel={illustrationLevel}
+        showBusinessCard={showBusinessCard}
+        showLegalTerms={showLegalTerms}
+        illustrationDirection={illustrationDirection}
         isStory={isStory}
         text={
-          !showStoryText
-            ? 'Text on'
-            : !showDelay
-              ? 'Text off'
-              : 'Cancel'
+          illustrationDelay
+            ? 'Cancel'
+            : illustrationDirection === 'enter' && illustrationLevel > 0
+              ? 'Text on'
+              : 'Text off'
         }
       />
       {isStory && (
@@ -168,8 +168,8 @@ export default function FooterContainer(props) {
           maxWidth="33"
           white={true}
           smallFont={true}
-          done={!showStoryText} // Turn off when not /chapter
-          show={showDelay}
+          // done={!illustrationDelay} // Snappier when disabled...
+          show={illustrationDelay}
         />
       )}
       <TextBox
@@ -181,40 +181,52 @@ export default function FooterContainer(props) {
           boundHandleClickForApp={boundHandleClickForApp}
         >
           <Graf
+            coverValsY={coverVals.y}
             active={isReverie}
             isLink={true}
             home={isHome}
             isStory={isStory}
             isNotFound={isNotFound}
-            textShadow={showTextShadow}
+            isReverie={isReverie}
+            showBusinessCard={showBusinessCard}
+            showLegalTerms={showLegalTerms}
             headerMenuIsOpen={headerMenuIsOpen}
-            animateImageBlur={animateImageBlur}
+            illustrationLevel={illustrationLevel}
+            illustrationDirection={illustrationDirection}
           >
             Reverie
           </Graf>
         </RestyledLink>
         <Graf
+          coverValsY={coverVals.y}
           active={showBusinessCard}
           onClick={onClickContactHandler}
           home={isHome}
           isStory={isStory}
+          isReverie={isReverie}
           isNotFound={isNotFound}
-          textShadow={showTextShadow}
+          showBusinessCard={showBusinessCard}
+          showLegalTerms={showLegalTerms}
           headerMenuIsOpen={headerMenuIsOpen}
-          animateImageBlur={animateImageBlur}
+          illustrationLevel={illustrationLevel}
+          illustrationDirection={illustrationDirection}
           smallMarginRight="13"
         >
           Contact
         </Graf>
         <Graf
+          coverValsY={coverVals.y}
           active={showLegalTerms}
           onClick={onClickLegalHandler}
+          isReverie={isReverie}
+          showBusinessCard={showBusinessCard}
+          showLegalTerms={showLegalTerms}
           home={isHome}
           isStory={isStory}
           isNotFound={isNotFound}
-          textShadow={showTextShadow}
           headerMenuIsOpen={headerMenuIsOpen}
-          animateImageBlur={animateImageBlur}
+          illustrationLevel={illustrationLevel}
+          illustrationDirection={illustrationDirection}
         >
           Legal
         </Graf>

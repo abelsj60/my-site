@@ -29,7 +29,6 @@ const MyCopyright = styled.span`
   display: block;
   margin-bottom: 6px;
   font-size: ${p => p.theme.fontSizes.one};
-  font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
@@ -39,7 +38,6 @@ const MyCopyright = styled.span`
 `;
 const ClipCopyright = styled.span`
   font-size: ${p => p.theme.fontSizes.zero};
-  font-family: 'Montserrat', sans-serif;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.one};;

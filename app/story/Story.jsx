@@ -14,9 +14,9 @@ import fallbackBlurThree from '../../public/jea-story-chapter-three-50blur-3px.p
 import fallbackBlurFour from '../../public/jea-story-chapter-four-50blur-3px.png';
 
 const RestyledContentHolder = styled(ContentHolder)`
-  opacity: ${p => (p.showStoryText ? '1' : '0')};
-  transition: opacity ${p => p.showStoryText ? '.35s' : '.15s'};
-  pointer-events: ${p => !p.showStoryText && 'none'};
+  opacity: ${p => !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
+  pointer-events: ${p => p.illustrationLevel >  0 && 'none'};
   flex-direction: column;
 `;
 const RestyledShelf = styled(Shelf)`
@@ -37,7 +37,7 @@ const BookTitle = styled.h1`
   font-family: 'Playfair Display',serif;
   margin: 0px auto 35px;
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
   color: ${p => p.theme.colors.yellow};
   text-align: center;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, .6);
@@ -82,8 +82,8 @@ const Portal = styled.div`
   width: 100%;
   z-index: 0;
   background-color: midnightblue;
-  opacity: ${p => p.showStoryText ? '.35' : '0'};
-  transition: opacity .35s;
+  opacity: ${p => (p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 1) ? '0' : '.35'};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
 `;
 const Image = styled.img`
   // Ensure img top is TOP
@@ -109,8 +109,8 @@ const BlurredFallback = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => p.imageLoaded < 1 || (!p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen) ? '1' : '0'};
-  transition: ${p => p.imageLoaded < 2 ? 'opacity .5s' : p.animateImageBlur ? 'opacity .35s' : ''};
+  opacity: ${p => p.imageLoaded < 1 || (p.illustrationLevel >= 2 && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen) ? '1' : '0'};
+  transition: ${p => p.imageLoaded < 2 ? 'opacity .5s' : p.illustrationLevel > 0 && p.illustrationLevel < 3 && p.illustrationLevel < 3 ? 'opacity .35s' : ''};
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
@@ -124,13 +124,13 @@ const BlurredImage = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => p.imageLoaded < 1 || (!p.showStoryText && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen) ? '0' : '1'};
-  transition: ${p => p.animateImageBlur && 'opacity .35s'};
+  opacity: ${p => p.imageLoaded < 1 || !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && (((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'}; // or < 2
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .5s ease-in'};
 
   // The mediaQ ensures the blur goes away if the full-screen menu is
   // turned on when the user increases the browser window's width
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    opacity: ${p => !p.showStoryText && p.theme.blurForHeaderMenu && '0'};
+    opacity: ${p => p.illustrationLevel > 0 && p.theme.blurForHeaderMenu && '0'};
   }
 `;
 const StoryText = styled.section`
@@ -158,13 +158,13 @@ export default function Story(props) {
   } = props;
   const {
     chapter,
-    showDelay,
+    illustrationDelay,
     headerMenuIsOpen,
+    illustrationDirection,
     images,
-    showStoryText,
     showBusinessCard,
     showLegalTerms,
-    animateImageBlur
+    illustrationLevel
   } = appState;
   const {
     allContentData,
@@ -180,18 +180,32 @@ export default function Story(props) {
   const dek = 'An experiment in digital + traditional storytelling';
   const bigImageSrc = images[`chapter-${number}-main`].src;
   const blurredImageSrc = images[`chapter-${number}-blurred`].src;
-  const onLoadHandler = event => { // 0 --> 1
+  const onLoadBlurredImageHandler = event => { // 0 --> 1
     eventManagement(event);
     if (imageLoaded < 1) {
       boundHandleClickForContentLoader('imageLoader', 1)
     }
   };
-  const onTransitionEndHandler = event => { // 1 --> 2
+  const onTransitionEndEndRestyledContentHolderHandler = event => {
+    eventManagement(event);
+    boundHandleClickForApp('updateStoryAnimation', illustrationDirection === 'enter' ? 2 : 0);
+  };
+  const onTransitionEndBlurredFallbackImageHandler = event => { // 1 --> 2
     eventManagement(event);
     if (imageLoaded < 2) {
       boundHandleClickForContentLoader('imageLoader', 2)
     }
   };
+  const onTransitionEndBlurredImageHandler = event => {
+    eventManagement(event);
+    boundHandleClickForApp('updateStoryAnimation', illustrationDirection === 'enter' ? 3 : 1);
+  }
+  const onLoadImageHandler = event => {
+    eventManagement(event);
+    if (chapter < 0) {
+      boundHandleClickForApp('setChapter', number, illustrationDelay);
+    }
+  }
   let chapterNumber;
   let fallbackBlur;
 
@@ -217,8 +231,13 @@ export default function Story(props) {
   return (
     <Main>
       <RestyledContentHolder
-        showStoryText={showStoryText}
         saveSerifs={true}
+        showLegalTerms={showLegalTerms}
+        illustrationLevel={illustrationLevel}
+        headerMenuIsOpen={headerMenuIsOpen}
+        showBusinessCard={showBusinessCard}
+        illustrationDirection={illustrationDirection}
+        onTransitionEnd={onTransitionEndEndRestyledContentHolderHandler}
       >
         <RestyledShelf
           height="18px"
@@ -247,46 +266,41 @@ export default function Story(props) {
           </StoryText>
         </Overflow>
       </RestyledContentHolder>
-      <PictureHolder
-        showStoryText={showStoryText}
-      >
+      <PictureHolder>
         <Portal
-          showStoryText={showStoryText}
           imageLoaded={imageLoaded}
+          illustrationLevel={illustrationLevel}
+          illustrationDirection={illustrationDirection}
         />
         {imageLoaded < 2 &&
           <BlurredFallback 
             src={fallbackBlur}
             alt="blurred fallback"
             imageLoaded={imageLoaded}
-            showStoryText={showStoryText}
-            animateImageBlur={animateImageBlur}
+            showLegalTerms={showLegalTerms}
+            illustrationLevel={illustrationLevel}
             headerMenuIsOpen={headerMenuIsOpen}
             showBusinessCard={showBusinessCard}
-            showLegalTerms={showLegalTerms}
-            onTransitionEnd={onTransitionEndHandler}
+            illustrationDirection={illustrationDirection}
+            onTransitionEnd={onTransitionEndBlurredFallbackImageHandler}
           />
         }
         <BlurredImage 
           alt={description}
           src={blurredImageSrc}
           imageLoaded={imageLoaded}
-          showStoryText={showStoryText}
-          animateImageBlur={animateImageBlur}
+          showLegalTerms={showLegalTerms}
+          onLoad={onLoadBlurredImageHandler}
+          illustrationLevel={illustrationLevel}
           headerMenuIsOpen={headerMenuIsOpen}
           showBusinessCard={showBusinessCard}
-          showLegalTerms={showLegalTerms}
-          onLoad={onLoadHandler}
+          illustrationDirection={illustrationDirection}
+          onTransitionEnd={onTransitionEndBlurredImageHandler}
         />
         <Image
           alt={description}
-          showStoryText={showStoryText}
           src={bigImageSrc}
-          onLoad={() => {
-            if (chapter < 0) {
-              boundHandleClickForApp('setChapter', number, showDelay);
-            }
-          }}
+          onLoad={onLoadImageHandler}
         />
       </PictureHolder>
     </Main>

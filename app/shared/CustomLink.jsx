@@ -57,7 +57,6 @@ export default ({
   replace,
   boundHandleClickForApp,
   isCalledByMenu,
-  isStory,
   ...props
 }) => {
   const { pathname } = window.location;
@@ -73,24 +72,18 @@ export default ({
       && !isMenu
       && to.length > 1;
 
-  const onClickHandler =
-    event => {
-      if (!boundHandleClickForApp) {
-        return null;
-      }
+  const onClickHandler = event => {
+    if (!boundHandleClickForApp) {
+      return null;
+    }
 
-      event.stopPropagation();
-
-      if (!isCalledByMenu) {
-        boundHandleClickForApp('updateApp', 
-          splitTheCaller.length === 2
-            ? callerWillBe
-            : undefined
-        );
-      } else {
-        boundHandleClickForApp('toggleMenu');
-      }
-    };
+    event.stopPropagation();
+    if (!isCalledByMenu) {
+      boundHandleClickForApp('updateApp', splitTheCaller.length === 2 ? callerWillBe : undefined);
+    } else {
+      boundHandleClickForApp('toggleMenu');
+    }
+  };
 
   return (
     <Route
