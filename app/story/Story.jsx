@@ -188,7 +188,7 @@ export default function Story(props) {
   };
   const onTransitionEndEndRestyledContentHolderHandler = event => {
     eventManagement(event);
-    boundHandleClickForApp('updateStoryAnimation', illustrationDirection === 'enter' ? 2 : 0);
+    boundHandleClickForApp('updateIllustrationState', illustrationDirection === 'enter' ? 2 : 0);
   };
   const onTransitionEndBlurredFallbackImageHandler = event => { // 1 --> 2
     eventManagement(event);
@@ -198,7 +198,7 @@ export default function Story(props) {
   };
   const onTransitionEndBlurredImageHandler = event => {
     eventManagement(event);
-    boundHandleClickForApp('updateStoryAnimation', illustrationDirection === 'enter' ? 3 : 1);
+    boundHandleClickForApp('updateIllustrationState', illustrationDirection === 'enter' ? 3 : 1);
   }
   const onLoadImageHandler = event => {
     eventManagement(event);

@@ -133,12 +133,17 @@ export default class ClickHandling {
               ? 'Legal notice was open'
               : '';
           break;
-        case 'updateStoryAnimation':
+        case 'updateIllustrationState':
           stateToUpdate.illustrationLevel = valueOne;
           
           if (valueOne === 0) {
             stateToUpdate.illustrationDirection = 'enter';
           }
+          category = 'App state';
+          action = `Update illustration state: ${valueOne}`;
+          label = valueOne !== 0
+            ? illustrationDirection
+            : 'enter';
           break;
         case 'setChapter':
           stateToUpdate.chapter = valueOne;
@@ -147,9 +152,16 @@ export default class ClickHandling {
             toggleStoryTextSequence();
           }
 
+          category = 'App state';
+          action = `Update chapter illustration status: ${valueOne}`;
+          label = valueOne > 0
+            ? 'loaded'
+            : 'not-loaded';
           break;
         case 'toggleShowDelay':
           stateToUpdate.illustrationDelay = !illustrationDelay;
+          category = 'App state';
+          action = `Delay illustration until loaded`;
           break;
         case 'swapBackground':
           stateToUpdate.inCity = !inCity;
@@ -170,12 +182,14 @@ export default class ClickHandling {
             : `Leave: ${currentCaller} menu`;
           break;
         case 'updateHeartbeat':
-            if (heartbeat < 1) {
-              stateToUpdate.heartbeat = 1;
-            } else {
-              stateToUpdate.heartbeat = 3;
-            }
-            break;
+          if (heartbeat < 1) {
+            stateToUpdate.heartbeat = 1;
+          } else {
+            stateToUpdate.heartbeat = 3;
+          }
+          category = 'App state';
+          action = 'Update NameTag Heartbeat';
+          break;
         case 'finishedHomePageLoad':
           stateToUpdate.finishedHomePageLoad = true;
           category = 'App state';
@@ -198,6 +212,12 @@ export default class ClickHandling {
             clearTimeout(this.headerMenuTimeoutId);
             this.headerMenuTimeoutId = undefined;
           }
+
+          category = 'App state';
+          action = 'Toggle header menu';
+          label = !headerMenuIsOpen
+            ? 'Will open'
+            : 'will close';
           break;
         case 'updateApp':
           if (valueOne !== undefined) {
