@@ -1,3 +1,15 @@
+import ArefRuqaaLatin700Woff from '../assets/fonts/aref-ruqaa-v8-latin/aref-ruqaa-v8-latin-700.woff';
+import ArefRuqaaLatin700Woff2 from '../assets/fonts/aref-ruqaa-v8-latin/aref-ruqaa-v8-latin-700.woff2';
+import Montserrat300Woff from '../assets/fonts/montserrat-v14-latin/montserrat-v14-latin-300.woff';
+import Montserrat300Woff2 from '../assets/fonts/montserrat-v14-latin/montserrat-v14-latin-300.woff';
+import MontserratRegularWoff from '../assets/fonts/montserrat-v14-latin/montserrat-v14-latin-regular.woff';
+import MontserratRegularWoff2 from '../assets/fonts/montserrat-v14-latin/montserrat-v14-latin-regular.woff';
+import Montserrat500Woff from '../assets/fonts/montserrat-v14-latin/montserrat-v14-latin-500.woff';
+import Montserrat500Woff2 from '../assets/fonts/montserrat-v14-latin/montserrat-v14-latin-500.woff';
+import PlayfairDisplay700Woff from '../assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-700.woff';
+import PlayfairDisplay700Woff2 from '../assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-700.woff2';
+import PlayfairDisplay900Woff from '../assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-900.woff';
+import PlayfairDisplay900Woff2 from '../assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-900.woff2';
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
@@ -108,12 +120,62 @@ const ZoomControl = styled.div`
   `};
 `;
 const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Aref Ruqaa';
+    font-style: normal;
+    font-weight: 700;
+    src:
+      url('${ArefRuqaaLatin700Woff2}') format('woff2'),
+      url('${ArefRuqaaLatin700Woff}') format('woff');
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    src:
+      url('${Montserrat300Woff2}') format('woff2'),
+      url('${Montserrat300Woff}') format('woff');
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    src:
+      url('${MontserratRegularWoff2}') format('woff2'),
+      url('${MontserratRegularWoff}') format('woff');
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    src:
+      url('${Montserrat500Woff2}') format('woff2'),
+      url('${Montserrat500Woff}') format('woff');
+  }
+  @font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 700;
+    src:
+      url('${PlayfairDisplay700Woff2}') format('woff2'),
+      url('${PlayfairDisplay700Woff}') format('woff');
+  }
+  @font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 900;
+    src:
+      url('${PlayfairDisplay900Woff2}') format('woff2'),
+      url('${PlayfairDisplay900Woff}') format('woff');
+  }
+
   html {
     // Best practice to load fonts: 
     // https://stackoverflow.com/questions/12316501/including-google-web-fonts-link-or-import
 
     font-family: 'Montserrat', sans-serif;
     font-size: 62.5%;
+    font-weight: 300;
     background-color: ${p => p.reverie ? '#d2e7ff' : p.notFound ? '#fd1172' : ''};
   }
 
@@ -121,8 +183,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0px;
     padding: 0px;
     font-size: ${p => p.theme.fontSizes.twelve};
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 
@@ -236,14 +296,15 @@ class App extends Component {
           : this.defaultHeightWhenTooSmall,
       showBusinessCard: false, // Show business card
       showLegalTerms: false, // Show legal terms
-      showStoryText: true, // Show story text, picture if false
       headerMenuIsOpen: false,
       pinchZoomed: false, // We're zoomed! or not.
       isZooming: false, // True when pinch zooming is ongoing
       isAfterTouch: false, // Resize w/clientHeight when true
       heartbeat: alreadyLoaded ? 3 : 0, // 0 = not ready, 1 = ready (images loaded), 2 = run w/delay (left early), 3 = nevermore (b/c it ran in the past)
       finishedHomePageLoad: alreadyLoaded,
-      animateImageBlur: false, // Animate blur/transform on story images
+      illustrationLevel: 0, // Animate blur/transform on story images
+      illustrationDirection: 'enter',
+      illustrationDelay: false,
       password: '',
       isValidUser: false,
       wrongPassword: '',
@@ -251,9 +312,8 @@ class App extends Component {
       nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
       images: images,
       chapter: illustrationState
-        ? illustrationState 
-        : 0,
-      showDelay: false
+        ? illustrationState
+        : 0
     };
 
     this.handleResize = this.handleResize.bind(this);

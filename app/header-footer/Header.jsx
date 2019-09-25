@@ -1,4 +1,5 @@
 import bio from '../data/home/home.md';
+import eventManagement from '../helpers/eventManagement';
 import headerNavClose from '../../public/header-nav-open.png';
 import headerNavOpen from '../../public/header-nav-closed.png';
 import { cover } from 'intrinsic-scale';
@@ -40,26 +41,30 @@ const HeaderBackground = styled.div`
   left: 0px;
   // No background on home, translucent if menu is open, dark pink if it isn't
   background-color: ${p => !p.isHome ? p.menu ? 'rgba(175, 18, 90, .8)' : p.theme.colors.darkPink : ''};
-  opacity: ${p => !p.hide ? '1' : '0'};
-  transition: ${p => p.animateImageBlur && css`opacity ${p.showStoryText ? '.35s' : '.15s'}`};
+  opacity: ${p => p.headerMenuIsOpen || p.isReverie || ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity .35s`};
   z-index: -1;
 
   // The mediaQ ensures the background goes away if the full-screen menu
   // is turned on when the user increases the browser window's width
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    opacity: ${p => !p.showStoryText && p.theme.blurForHeaderMenu && '0'};
+    opacity: ${p => p.illustrationLevel > 0 && p.theme.blurForHeaderMenu && '0'};
   }
 `;
 const RestyledLink = styled(
   // Filter out isHome and isActive from StyledLink
   // eslint-disable-next-line
   ({
-    animateImageBlur,
+    illustrationLevel,
+    headerMenuIsOpen,
     isHome,
     isActive,
+    isReverie,
     menu,
     textShadow,
     nameAsLink,
+    showBusinessCard,
+    showLegalTerms,
     ...rest
   }) => <StyledLink {...rest} />
 )`
@@ -67,8 +72,8 @@ const RestyledLink = styled(
   font-weight: ${p => p.isHome ? '400' : fontWeight};
   margin-left: ${p => (p.num === 0 ? '0px' : '10px')};
   color: ${p => p.theme.colors.white};
-  text-shadow: ${p => p.textShadow && textShadow};
-  transition: ${p => p.animateImageBlur && 'text-shadow .35s'};
+  text-shadow: ${p => !p.isReverie && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && p.illustrationLevel >= 2 ? textShadow : ''};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'text-shadow .35s'};
 
   && {
     text-decoration: ${p => (p.isActive ? 'underline' : undefined)};
@@ -114,8 +119,8 @@ const Motto = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: ${p => p.textShadow && textShadow};
-  transition: ${p => p.animateImageBlur && 'text-shadow .35s'};
+  text-shadow: ${p => !p.isReverie && !p.showBusinessCard && !p.showLegalTerms && p.illustrationLevel >= 2 && !p.headerMenuIsOpen ? textShadow : ''};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'text-shadow .35s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.four};
@@ -130,14 +135,10 @@ const Nav = styled.nav`
   display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '6px 12px'};
-  background-color: ${p => p.frost && 'rgba(0, 0, 0, .125)'};
+  background-color: ${p => p.isHome && (p.coverValY || p.spacerHeight) && !p.showBusinessCard && !p.showLegalTerms && 'rgba(0, 0, 0, .125)'};
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
   position: relative;
-
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    background-color: ${p => !p.frost && 'unset'};
-  }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: block;
@@ -182,7 +183,7 @@ const Icon = styled.img`
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
-  filter: ${p => p.textShadow && `drop-shadow(${iconShadow})`};
+  filter: ${p => !p.isReverie && !p.showBusinessCard && !p.showLegalTerms && p.illustrationLevel >= 2 && !p.headerMenuIsOpen && css`drop-shadow(${iconShadow})`};
   z-index: 1;
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwoB}) {
@@ -197,13 +198,13 @@ export default class Header extends Component {
       boundHandleClickForApp
     } = this.props;
     const {
-      animateImageBlur,
+      illustrationLevel,
       currentCaller,
       headerMenuIsOpen,
       height,
+      illustrationDirection,
       showBusinessCard,
       showLegalTerms,
-      showStoryText,
       spacerHeight
     } = appState;
     const isHome = currentCaller === 'home';
@@ -213,22 +214,12 @@ export default class Header extends Component {
       headerMenuIsOpen
         ? headerNavClose
         : headerNavOpen;
-    const hideBackground = isHome
-        || (!showStoryText && !isReverie && !headerMenuIsOpen);
-    const showTextShadow = 
-      !showStoryText
-        && !showBusinessCard
-        && !showLegalTerms
-        && !isReverie
-        && !headerMenuIsOpen;
     const coverVals = cover(window.innerWidth, height, 2131, 1244);
     const referrer = new Referrer(this.props);
-    const onClickMenuHandler = () => boundHandleClickForApp('toggleHeaderMenu');
-    const frost = 
-      isHome
-        && (coverVals.y < 0 || spacerHeight < 20)
-        && !showBusinessCard
-        && !showLegalTerms;
+    const onClickMenuHandler = event => {
+      eventManagement(event);
+      boundHandleClickForApp('toggleHeaderMenu');
+    };
 
     return (
       <Container
@@ -237,34 +228,44 @@ export default class Header extends Component {
         <HeaderBackground
           isHome={isHome}
           isStory={isStory}
-          hide={hideBackground}
-          showStoryText={showStoryText}
-          animateImageBlur={animateImageBlur}
+          isReverie={isReverie}
+          headerMenuIsOpen={headerMenuIsOpen}
+          illustrationLevel={illustrationLevel}
+          illustrationDirection={illustrationDirection}
         />
         <NameAsLink
           isHome={isHome}
           nameAsLink={true}
+          isReverie={isReverie}
           menu={headerMenuIsOpen}
-          textShadow={showTextShadow}
-          animateImageBlur={animateImageBlur}
+          showBusinessCard={showBusinessCard}
+          showLegalTerms={showLegalTerms}
+          headerMenuIsOpen={headerMenuIsOpen}
+          illustrationLevel={illustrationLevel}
           boundHandleClickForApp={boundHandleClickForApp}
           to={'/'}
         >
           James Abels
         </NameAsLink>
         <Motto
-          isHome={isHome}
           hide={isHome}
+          isHome={isHome}
+          isReverie={isReverie}
           menu={headerMenuIsOpen}
-          textShadow={showTextShadow}
-          animateImageBlur={animateImageBlur}
+          showBusinessCard={showBusinessCard}
+          showLegalTerms={showLegalTerms}
+          headerMenuIsOpen={headerMenuIsOpen}
+          illustrationLevel={illustrationLevel}
         >
           {bio.attributes.motto}
         </Motto>
         <Nav
           isHome={isHome}
           menu={headerMenuIsOpen}
-          frost={frost}
+          coverValY={coverVals.y < 0}
+          spacerHeight={spacerHeight < 20}
+          showBusinessCard={showBusinessCard}
+          showLegalTerms={showLegalTerms}
         >
           <NavList
             isHome={isHome}
@@ -286,11 +287,14 @@ export default class Header extends Component {
                       <RestyledLink
                         isActive={isActive}
                         isHome={isHome}
+                        isReverie={isReverie}
                         menu={headerMenuIsOpen}
-                        textShadow={showTextShadow}
                         num={idx}
                         to={link.path}
-                        animateImageBlur={animateImageBlur}
+                        illustrationLevel={illustrationLevel}
+                        showBusinessCard={showBusinessCard}
+                        showLegalTerms={showLegalTerms}
+                        headerMenuIsOpen={headerMenuIsOpen}
                         boundHandleClickForApp={boundHandleClickForApp}
                       >
                         {link.name}
@@ -306,7 +310,10 @@ export default class Header extends Component {
           isHome={isHome}
           menu={headerMenuIsOpen}
           src={iconType}
-          textShadow={showTextShadow}
+          illustrationLevel={illustrationLevel}
+          showBusinessCard={showBusinessCard}
+          showLegalTerms={showLegalTerms}
+          headerMenuIsOpen={headerMenuIsOpen}
           onClick={onClickMenuHandler}
         />
       </Container>

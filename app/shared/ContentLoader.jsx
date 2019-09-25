@@ -67,7 +67,8 @@ export default class ContentLoader extends Component {
       chapterIndex: state.getIndex('chapter'),
       projectIndex: state.getIndex('project'),
       thumbnailIndex: state.getIndex('projectPics'),
-      headlineIndex: state.getIndex('article')
+      headlineIndex: state.getIndex('article'),
+      reverieIndex: state.getIndex('reverie')
     };
   }
 

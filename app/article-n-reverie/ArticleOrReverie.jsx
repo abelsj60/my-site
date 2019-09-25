@@ -64,15 +64,16 @@ export default function ArticleOrReverie(props) {
   const {
     allContentData,
     headlineIndex,
+    reverieIndex,
     caller,
   } = contentState;
+  const isReverie = caller === 'reverie';
   const {
     date,
     headline,
     position,
     publication
-  } = allContentData[headlineIndex].attributes;
-  const isReverie = caller === 'reverie';
+  } = allContentData[!isReverie ? headlineIndex : reverieIndex].attributes;
   const publicationOrReverieTag =
     caller !== 'reverie'
       ? publication
