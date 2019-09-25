@@ -228,7 +228,7 @@ export default function Story(props) {
       break;
   }
 
-  console.log('TEST!');
+  console.log('TEST AGAIN!');
 
   return (
     <Main>
