@@ -228,8 +228,6 @@ export default function Story(props) {
       break;
   }
 
-  console.log('TEST AGAIN!');
-
   return (
     <Main>
       <RestyledContentHolder
