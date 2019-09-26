@@ -122,7 +122,6 @@ export default class ClickHandling {
           break;
         case 'toggleStoryText':
           toggleStoryTextSequence();
-
           category = 'App state';
           action = illustrationLevel > 0
             ? 'Hide story text'
@@ -139,6 +138,7 @@ export default class ClickHandling {
           if (valueOne === 0) {
             stateToUpdate.illustrationDirection = 'enter';
           }
+
           category = 'App state';
           action = `Update illustration state: ${valueOne}`;
           label = valueOne !== 0
@@ -187,6 +187,7 @@ export default class ClickHandling {
           } else {
             stateToUpdate.heartbeat = 3;
           }
+
           category = 'App state';
           action = 'Update NameTag Heartbeat';
           break;
@@ -261,11 +262,11 @@ export default class ClickHandling {
           // but not if going to, leaving, or changing the /reverie.
 
           if (
-            (valueOne !== 'chapter' && valueOne !== 'reverie')
-              && !(lastCaller === 'chapter' && currentCaller === 'reverie')
+            (currentCaller === 'chapter' && valueOne !== 'reverie')
+              || (currentCaller === 'reverie' && (valueOne !== 'chapter' && valueOne !== undefined))
           ) {
-            if (illustrationLevel) {
-              if (illustrationDirection !== 'exit') {
+            if (illustrationLevel > 0) {
+              if (illustrationDirection !== 'enter') {
                 stateToUpdate.illustrationDirection = 'enter';
               }
 

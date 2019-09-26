@@ -61,9 +61,10 @@ export default ({
 }) => {
   const { pathname } = window.location;
   const splitTheCaller = to.split('/');
-  const callerWillBe = splitTheCaller[1].length !== 0
-    ? splitTheCaller[1]
-    : 'home';
+  const callerWillBe =
+    splitTheCaller[1].length > 0 // Word length, array length, i.e., 'chapter'
+      ? splitTheCaller[1]
+      : 'home';
   const isMenu =
     pathname.includes('menu')
       && pathname.split('/')[2] === 'menu'; // Ensures this is a /menu.
@@ -73,15 +74,18 @@ export default ({
       && to.length > 1;
 
   const onClickHandler = event => {
+    event.stopPropagation();
+
     if (!boundHandleClickForApp) {
       return null;
     }
 
-    event.stopPropagation();
-    if (!isCalledByMenu) {
-      boundHandleClickForApp('updateApp', splitTheCaller.length === 2 ? callerWillBe : undefined);
-    } else {
+    if (isCalledByMenu) {
       boundHandleClickForApp('toggleMenu');
+    } else {
+      // This will identify a section change, as opposed to a content swap.
+      // Only section changes get a valueOne for update b/c the callers aren't changing.
+      boundHandleClickForApp('updateApp', splitTheCaller.length === 2 ? callerWillBe : undefined); // Array length, i.e., ["", "chapter"]
     }
   };
 
