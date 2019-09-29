@@ -10,7 +10,7 @@ export default function ReloadRoute(props) {
   const { indexForChapterData } = props.bodyState;
   const reload = new Reload(props);
 
-  // Update appState.chapter when link
+  // Update appStateillustrationState when link
   // points to /chapter
   if (currentCaller === 'chapter') {
     let number = indexForChapterData + 1;
@@ -25,7 +25,7 @@ export default function ReloadRoute(props) {
 
     // Note: Duplicated by State.rebuildApp, but 
     // it breaks here. Refactor at a later date.
-    boundHandleClickForApp('setChapter', number);
+    boundHandleClickForApp('updateIllustrationState', number);
   }
 
   return <Redirect to={reload.path} />;

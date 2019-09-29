@@ -22,17 +22,46 @@ import stories from '../data/the-story/index.js';
 // All images will be treated as having the original dimensions: 
 // a. 768-1440-1x --> 768x1440
 // b. 768-1440-2x --> 1536x2880
-// 
+
 // OPTION 2
 // 1 set of 2x images for all supported sizes
 // Each image should be be full height of screen
 // Each image should be >= the largest width at that height
 // -Ie, no image should be < one of the widths at that height
-//
 
 export default function prelodBigImages() {
   const images = {};
   images.alreadyLoaded = [];
+
+  // For height
+
+  // const pixelDensity = Math.ceil(window.devicePixelDensity);
+  // const pixelDensity = window.devicePixelDensity;
+  const width = window.screen.width;
+  const height = window.screen.height; // use availHeight instead?
+  const imageDimensions = [
+    [1028, 600],
+    [1366, 797],
+    [1600, 900], // Cut
+    [1645, 960],
+    [1755, 1024],
+    [1921, 1121], // Cut
+    [1947, 1136],
+    [2048, 1195], // Cut
+    [2056, 1200],
+    [2194, 1280], // Cut (plus add?)
+    [2632, 1536],
+    [3840, 2241],
+    [5116, 2985], // Cut
+    [5120, 2988],
+    [7680, 4481]
+  ].find((dimension, idx, arr) => {
+    if (idx < arr.length - 1) {
+      return dimension[0] >= width && dimension[1] >= height;
+    }
+
+    return dimension; // default
+  });
 
   stories.forEach(chapter => {
     const imageA = new Image();
@@ -41,6 +70,9 @@ export default function prelodBigImages() {
     imageB.src = chapter.attributes.blurredImage;
     images[`chapter-${chapter.attributes.number}-main`] = imageA;
     images[`chapter-${chapter.attributes.number}-blurred`] = imageB;
+
+    // const newSource = `chapter-${chapter.attributes.number}-${imageDimensions[0]}-${imageDimensions[1]}-main`;
+    // chapter.attributes[newSource]
   });
 
   home.attributes.preloadTheseImages.forEach(name => {
@@ -48,6 +80,7 @@ export default function prelodBigImages() {
     image.src = home.attributes[name];
     images[name] = image;
 
+    // Poor man's test for cached images
     if (image.complete) {
       images.alreadyLoaded.push(1);
     }

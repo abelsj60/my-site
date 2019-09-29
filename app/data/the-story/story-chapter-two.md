@@ -1,6 +1,6 @@
 ---
 title: 'True adventure'
-image: 'https://user-images.githubusercontent.com/30417590/65457097-cd82e600-de18-11e9-96c4-591da3d26789.jpg'
+image: 'https://user-images.githubusercontent.com/30417590/63110322-24afb400-bf59-11e9-8a70-7b412538f349.png'
 blurredImage: 'https://user-images.githubusercontent.com/30417590/63657618-11c78b80-c772-11e9-99e9-ae7358492d50.png'
 description: 'xyz 2'
 number: 2

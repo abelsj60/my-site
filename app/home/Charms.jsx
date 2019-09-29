@@ -209,7 +209,7 @@ export default function Charms(props) {
 
   // Let's set up a progress bar.
 
-  const onTransitionEndHandler =
+  const onTransitionEndForOuterContainer =
     event => {
       eventManagement(event);
       setSpellLevels.two(movement === 'exit', 'OuterContainer');
@@ -225,7 +225,7 @@ export default function Charms(props) {
       exit={movement === 'exit'}
       tempContentIsOn={showBusinessCard || showLegalTerms}
       nameTagWidth={nameTagWidth}
-      onTransitionEnd={onTransitionEndHandler}
+      onTransitionEnd={onTransitionEndForOuterContainer}
     >
       <FitText
         compressor={2.3}

@@ -145,8 +145,8 @@ export default class ClickHandling {
             ? illustrationDirection
             : 'enter';
           break;
-        case 'setChapter':
-          stateToUpdate.chapter = valueOne;
+        case 'updateIllustrationState':
+          stateToUpdateillustrationState = valueOne;
 
           if (valueTwo) {
             toggleStoryTextSequence();
@@ -274,7 +274,7 @@ export default class ClickHandling {
             }
 
             if (chapter > 0 || chapter < 0) {
-              stateToUpdate.chapter = 0;
+              stateToUpdateillustrationState = 0;
             }
           }
 
@@ -349,7 +349,7 @@ export default class ClickHandling {
               ].complete
                 ? 2
                 : 0
-            stateToUpdate.chapterIndex = valueOne;
+            stateToUpdateillustrationStateIndex = valueOne;
             stateToUpdate.imageLoaded = blurredIllustrationState;
           }
 

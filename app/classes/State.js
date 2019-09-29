@@ -111,7 +111,7 @@ export default class State {
   }
 
   resetIllustrationState(setState) {
-    setState('setChapter', this.checkIllustrationState());
+    setState('updateIllustrationState', this.checkIllustrationState());
   }
 
   // Returns: { one: val, two: val }

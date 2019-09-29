@@ -224,7 +224,7 @@ class App extends Component {
     );
     let illustrationState;
 
-    // Check status of illustration for appState.chapter
+    // Check status of illustration for appStateillustrationState
     // Also updated in ReloadRoute (for section shifts)
     // and in contentLoader.cDU for swapped content
     if (location.caller === 'chapter') {
@@ -288,32 +288,36 @@ class App extends Component {
           ? location.caller
           : 'home',
       lastCaller: '',
-      inCity: false, // Fantasy image on home if false
-      isMenu: referrer.isMenu(props), // Menu page (/projects, /journalism, /reverie)
-      height: // Sets height of <main />
+      inCity: false, // false = fantasy, true = city
+      isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie
+      height: // Height for <main /> element
         pageHeight > this.minAllowedHeight
           ? pageHeight
           : this.defaultHeightWhenTooSmall,
       showBusinessCard: false, // Show business card
       showLegalTerms: false, // Show legal terms
-      headerMenuIsOpen: false,
-      pinchZoomed: false, // We're zoomed! or not.
-      isZooming: false, // True when pinch zooming is ongoing
-      isAfterTouch: false, // Resize w/clientHeight when true
-      heartbeat: alreadyLoaded ? 3 : 0, // 0 = not ready, 1 = ready (images loaded), 2 = run w/delay (left early), 3 = nevermore (b/c it ran in the past)
+      headerMenuIsOpen: false, // Show header menu
+      pinchZoomed: false, // Zoomed! (Or not.)
+      isZooming: false, // True when usere is pinch zooming
+      isAfterTouch: false, // Resize using clientHeight when true
+      heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
+        alreadyLoaded
+          ? 3
+          : 0,
       finishedHomePageLoad: alreadyLoaded,
-      illustrationLevel: 0, // Animate blur/transform on story images
-      illustrationDirection: 'enter',
-      illustrationDelay: false,
-      password: '',
-      isValidUser: false,
-      wrongPassword: '',
-      spacerHeight: 0, // Set by 'handleResize', so must run here. Used by Home/NameTag.
+      password: '', // to be removed
+      isValidUser: false, // to be removed
+      wrongPassword: '', // to be removed
+      spacerHeight: 0, // Set by 'handleResize', so must live here. Used by Home/NameTag.
       nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
-      images: images,
-      chapter: illustrationState
-        ? illustrationState
-        : 0
+      images: images, // preloaded big images (minimize time to display b/c of loading)
+      illustrationLevel: 0, // Control illustration transitions (header, main, and footer)
+      illustrationDirection: 'enter', // Properly interpret illustrationLevel 
+      illustrationDelay: false, // Control illustration loader on /chapter pages
+      illustrationState: // 0 is n/a, + is loaded, and - is loading...
+        illustrationState
+          ? illustrationState
+          : 0
     };
 
     this.handleResize = this.handleResize.bind(this);

@@ -81,7 +81,7 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 0;
-  background-color: midnightblue;
+  background-color: navy;
   opacity: ${p => (p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 1) ? '0' : '.35'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
 `;
@@ -180,30 +180,30 @@ export default function Story(props) {
   const dek = 'An experiment in digital + traditional storytelling';
   const bigImageSrc = images[`chapter-${number}-main`].src;
   const blurredImageSrc = images[`chapter-${number}-blurred`].src;
-  const onLoadBlurredImageHandler = event => { // 0 --> 1
+  const onLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
     if (imageLoaded < 1) {
       boundHandleClickForContentLoader('imageLoader', 1)
     }
   };
-  const onTransitionEndEndRestyledContentHolderHandler = event => {
+  const onTransitionEndForRestyledContentHolder = event => {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationState', illustrationDirection === 'enter' ? 2 : 0);
   };
-  const onTransitionEndBlurredFallbackImageHandler = event => { // 1 --> 2
+  const onTransitionEndForBlurredFallbackImage = event => { // 1 --> 2
     eventManagement(event);
     if (imageLoaded < 2) {
       boundHandleClickForContentLoader('imageLoader', 2)
     }
   };
-  const onTransitionEndBlurredImageHandler = event => {
+  const onTransitionEndForBlurredImage = event => {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationState', illustrationDirection === 'enter' ? 3 : 1);
   }
-  const onLoadImageHandler = event => {
+  const onLoadForMainImage = event => {
     eventManagement(event);
     if (chapter < 0) {
-      boundHandleClickForApp('setChapter', number, illustrationDelay);
+      boundHandleClickForApp('updateIllustrationState', number, illustrationDelay);
     }
   }
   let chapterNumber;
@@ -237,7 +237,7 @@ export default function Story(props) {
         headerMenuIsOpen={headerMenuIsOpen}
         showBusinessCard={showBusinessCard}
         illustrationDirection={illustrationDirection}
-        onTransitionEnd={onTransitionEndEndRestyledContentHolderHandler}
+        onTransitionEnd={onTransitionEndForRestyledContentHolder}
       >
         <RestyledShelf
           height="18px"
@@ -282,7 +282,7 @@ export default function Story(props) {
             headerMenuIsOpen={headerMenuIsOpen}
             showBusinessCard={showBusinessCard}
             illustrationDirection={illustrationDirection}
-            onTransitionEnd={onTransitionEndBlurredFallbackImageHandler}
+            onTransitionEnd={onTransitionEndForBlurredFallbackImage}
           />
         }
         <BlurredImage 
@@ -290,17 +290,17 @@ export default function Story(props) {
           src={blurredImageSrc}
           imageLoaded={imageLoaded}
           showLegalTerms={showLegalTerms}
-          onLoad={onLoadBlurredImageHandler}
+          onLoad={onLoadForBlurredImage}
           illustrationLevel={illustrationLevel}
           headerMenuIsOpen={headerMenuIsOpen}
           showBusinessCard={showBusinessCard}
           illustrationDirection={illustrationDirection}
-          onTransitionEnd={onTransitionEndBlurredImageHandler}
+          onTransitionEnd={onTransitionEndForBlurredImage}
         />
         <Image
           alt={description}
           src={bigImageSrc}
-          onLoad={onLoadImageHandler}
+          onLoad={onLoadForMainImage}
         />
       </PictureHolder>
     </Main>

@@ -136,7 +136,7 @@ export default function NameTag(props) {
     name
   } = attributes;
 
-  const onClickHandler =
+  const onClickForHed =
     event => {
       eventManagement(event);
       if (
@@ -159,7 +159,7 @@ export default function NameTag(props) {
         boundHandleClickForHome('toggleSpell');
       }
     };
-  const onAnimationStartHandler =
+  const onAnimationStartForHeartbeat =
     event => {
       eventManagement(event);
       if (
@@ -169,12 +169,12 @@ export default function NameTag(props) {
         boundHandleClickForApp('finishedHomePageLoad')
       }
     };
-  const onAnimationEndHandler =
+  const onAnimationEndForHeartbeat =
     event => {
       eventManagement(event);
       boundHandleClickForApp('updateHeartbeat'); // --> 3
     };
-  const onTransitionEndHandler = 
+  const onTransitionEndForInnerContainer = 
     event => {
       eventManagement(event);
       setSpellLevels.two(movement === 'enter', 'InnerContainer');
@@ -192,14 +192,14 @@ export default function NameTag(props) {
         heartbeat={heartbeat > 0 && heartbeat < 3}
         delayHeartbeat={finishedHomePageLoad && heartbeat > 1 && heartbeat < 3}
         tempContentIsOn={showBusinessCard || showLegalTerms}
-        onAnimationStart={onAnimationStartHandler}
-        onAnimationEnd={onAnimationEndHandler}
+        onAnimationStart={onAnimationStartForHeartbeat}
+        onAnimationEnd={onAnimationEndForHeartbeat}
       >
         <FitText
           compressor={1.154}
         >
           <Hed
-            onClick={onClickHandler}
+            onClick={onClickForHed}
             loadLevelBlurs={setLoadLevels.sum().blurs}
             loadLevelAll={setLoadLevels.sum().all}
             finishedHomePageLoad={finishedHomePageLoad}
@@ -214,7 +214,7 @@ export default function NameTag(props) {
           finishedHomePageLoad={finishedHomePageLoad}
           enter={movement === 'enter'}
           exit={movement === 'exit'}
-          onTransitionEnd={onTransitionEndHandler}
+          onTransitionEnd={onTransitionEndForInnerContainer}
         >
           <FitText
             compressor={2.3}
