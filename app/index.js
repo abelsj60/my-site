@@ -4,9 +4,6 @@ import ErrorBoundary from './shared/ErrorBoundary.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'matchmedia-polyfill';
-import 'matchmedia-polyfill/matchMedia.addListener';
-
 ReactDOM.render(
   <Router>
     <ErrorBoundary>
