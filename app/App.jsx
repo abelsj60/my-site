@@ -37,7 +37,6 @@ import PasswordLogin from './shared/PasswordLogin.jsx';
 import preloadBigImages from './helpers/preloadBigImages';
 import React, { Fragment, Component } from 'react';
 import ReactGA from 'react-ga';
-import ReactResizeDetector from 'react-resize-detector';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import State from './classes/State.js';
@@ -386,14 +385,6 @@ class App extends Component {
             notFound={isNotFound}
             reverie={reverieIsActive}
           />
-          {/*<ReactResizeDetector
-            handleWidth
-            handleHeight
-            onResize={(width, height) => {
-              // console.log('width:', width);
-              console.log('height:', height);
-            }}
-          />*/}
           <ZoomControl
             // Though an extra <div>, ZoomControl lets us add 'touch'
             // events to React (alt is to add them to the Window)
@@ -476,14 +467,14 @@ class App extends Component {
     // We're probably zooming if two fingers are down.
 
     if (event.touches.length === 2) {
-      // Pinch zoom almost always moves the X, Y offset.
-      // This is a more effective check than trying to
-      // add points as coordinates or height/width.
-
       const stateToUpdate = {
         isAfterTouch: true,
         isZooming: true
       };
+
+      // Pinch zoom almost always moves the X, Y offset.
+      // This is a more effective check than trying to
+      // add points as coordinates or height/width.
 
       if (window.pageXOffset > 0 && window.pageYOffset > 0) {
         stateToUpdate.pinchZoomed = true; // Set zoom state
@@ -533,13 +524,9 @@ class App extends Component {
   }
 
   updateHeight() {
-    // On desktops, only resize if height's changing.
+    // On desktops, only resize if height's changing
 
-    if (
-      !isMobile
-        && this.state.width !== window.innerWidth
-        && this.state.height === window.innerHeight
-    ) {
+    if (!isMobile && this.state.height === window.innerHeight) {
       return false;
     }
 
@@ -547,6 +534,21 @@ class App extends Component {
     // a lag between isZooming and pinchZoomed).
 
     if (this.state.isZooming) {
+      return false;
+    }
+
+    // Do not resize height while pinchZoomed.
+
+    if (this.state.pinchZoomed) {
+      if (process.env.NODE_ENV !== 'development') {
+        ReactGA.event({
+          category: 'App state',
+          action: 'Resized while pinchZoomed',
+          value: newHeight,
+          label: `Page: ${pathname}${search}`
+        });
+      }
+
       return false;
     }
 
@@ -586,23 +588,6 @@ class App extends Component {
     const newHeight = isMobile && (!isMobileSafari || this.state.isAfterTouch)
       ? document.documentElement.clientHeight
       : window.innerHeight;
-    // console.log('newHeight:', newHeight);
-
-    // Do not resize height while pinchZoomed.
-
-    if (this.state.pinchZoomed) {
-      if (process.env.NODE_ENV !== 'development') {
-        ReactGA.event({
-          category: 'App state',
-          action: 'Resized while pinchZoomed',
-          value: newHeight,
-          label: `Page: ${pathname}${search}`
-        });
-      }
-
-      toggleHtmlHeight('off');
-      return false;
-    }
 
     // Ensure the window top at zero after resize change.
     // (This trigers another resize if height changes.)
@@ -649,10 +634,15 @@ class App extends Component {
 
     // On orientation change, covers /chapter b/c of hidden image
     // (at least on iPhone)
+
     toggleHtmlHeight('off');
+
     this.setState(() => ({
-      height: this.minAllowedHeight < newHeight ? newHeight : this.minAllowedHeight,
-      isAfterTouch: this.state.isAfterTouch && false // True until handleMove says otherwise.
+      height: this.minAllowedHeight < newHeight
+        ? newHeight
+        : this.minAllowedHeight,
+      // Reset (true until handleMove says otherwise)
+      isAfterTouch: this.state.isAfterTouch && false
     }));
   }
 
@@ -665,35 +655,34 @@ class App extends Component {
     // Update isMenu if it doesn't sync w/the window.
 
     const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
-    const updateMenuForBackForthButton = isMenu !== this.state.isMenu;
+    const updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
 
-    boundHandleClickForApp('updateApp', location.caller, updateMenuForBackForthButton);
+    boundHandleClickForApp('updateApp', location.caller, updateMenuForBackAndForthButton);
   }
 
   calculateSpacerHeight() {
     const appHeight = this.state.height;
     const objectFitCoverVals = cover(window.innerWidth, appHeight, 2131, 1244);
-    const imageHeight = objectFitCoverVals.height;
     const yImageTop = objectFitCoverVals.y;
     const makePositive = val => val * -1;
 
     // 1. 14.2 & 14.6 are arbitrary values (trial-n-error)
     // 2. 52px is the height of the header in pixels
-    const calcSpacerHeight = (heightVal, percentage) => heightVal * (percentage / 100) - 52;
-    let spacerHeight = Math.ceil(calcSpacerHeight(appHeight, 14.2));
+
+    const mathForSpacer = (heightVal, percentage) => heightVal * (percentage / 100) - 52;
+    let spacerHeight = Math.ceil(mathForSpacer(appHeight, 14.9)); // 14.2
 
     // yImageTop < 0 when the image 'zooms' (the window's
     // width has grown beyond the image's max width, so
     // we cut off the top and bottom and zoom in.)
 
     if (Math.floor(yImageTop) < 0) {
-      const newHeight = imageHeight - (makePositive(yImageTop));
-      const newSpacerHeight = calcSpacerHeight(newHeight, 14.6);
+      const newHeight = objectFitCoverVals.height - (makePositive(yImageTop));
+      const newSpacerHeight = mathForSpacer(newHeight, 15); // 14.6
       const spacerHeightDifference = newSpacerHeight - spacerHeight;
       const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
-      const finalValue = Math.ceil(spacerHeight - changedPosition);
 
-      spacerHeight = finalValue;
+      spacerHeight = Math.ceil(spacerHeight - changedPosition);
     }
 
     return spacerHeight >= 15 ? spacerHeight : 15;
@@ -705,7 +694,11 @@ class App extends Component {
   }
 
   updateSpacerHeight() {
-    this.setState({ spacerHeight: this.calculateSpacerHeight() });
+    const spacerHeight = this.calculateSpacerHeight();
+
+    if (spacerHeight !== this.state.spacerHeight) {
+      this.setState({ spacerHeight });
+    }
   }
 
   updateNameTagWidth() {

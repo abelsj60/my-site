@@ -188,18 +188,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var intrinsic_scale__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(intrinsic_scale__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var _header_footer_Footer_jsx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./header-footer/Footer.jsx */ "./app/header-footer/Footer.jsx");
-/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
-/* harmony import */ var _header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./header-footer/Header.jsx */ "./app/header-footer/Header.jsx");
-/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-device-detect */ "./node_modules/react-device-detect/dist/index.js");
-/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_device_detect__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _temp_content_LegalTermsOrBizCard_jsx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./temp-content/LegalTermsOrBizCard.jsx */ "./app/temp-content/LegalTermsOrBizCard.jsx");
-/* harmony import */ var _classes_Location_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./classes/Location.js */ "./app/classes/Location.js");
-/* harmony import */ var object_fit_images__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! object-fit-images */ "./node_modules/object-fit-images/dist/ofi.common-js.js");
-/* harmony import */ var object_fit_images__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(object_fit_images__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _shared_PasswordLogin_jsx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./shared/PasswordLogin.jsx */ "./app/shared/PasswordLogin.jsx");
-/* harmony import */ var _helpers_preloadBigImages__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./helpers/preloadBigImages */ "./app/helpers/preloadBigImages.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var _header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./header-footer/Header.jsx */ "./app/header-footer/Header.jsx");
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-device-detect */ "./node_modules/react-device-detect/dist/index.js");
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(react_device_detect__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _temp_content_LegalTermsOrBizCard_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./temp-content/LegalTermsOrBizCard.jsx */ "./app/temp-content/LegalTermsOrBizCard.jsx");
+/* harmony import */ var _classes_Location_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./classes/Location.js */ "./app/classes/Location.js");
+/* harmony import */ var object_fit_images__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! object-fit-images */ "./node_modules/object-fit-images/dist/ofi.common-js.js");
+/* harmony import */ var object_fit_images__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(object_fit_images__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _shared_PasswordLogin_jsx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./shared/PasswordLogin.jsx */ "./app/shared/PasswordLogin.jsx");
+/* harmony import */ var _helpers_preloadBigImages__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./helpers/preloadBigImages */ "./app/helpers/preloadBigImages.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
 /* harmony import */ var _classes_Referrer_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./classes/Referrer.js */ "./app/classes/Referrer.js");
 /* harmony import */ var _classes_ScrollHandling_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./classes/ScrollHandling.js */ "./app/classes/ScrollHandling.js");
 /* harmony import */ var _classes_State_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./classes/State.js */ "./app/classes/State.js");
@@ -353,9 +353,9 @@ function (_Component) {
     var _window$location = window.location,
         pathname = _window$location.pathname,
         search = _window$location.search;
-    var images = Object(_helpers_preloadBigImages__WEBPACK_IMPORTED_MODULE_21__["default"])();
+    var images = Object(_helpers_preloadBigImages__WEBPACK_IMPORTED_MODULE_20__["default"])();
     var referrer = new _classes_Referrer_js__WEBPACK_IMPORTED_MODULE_23__["default"](props);
-    var location = new _classes_Location_js__WEBPACK_IMPORTED_MODULE_18__["default"](referrer.pathToMatch, {
+    var location = new _classes_Location_js__WEBPACK_IMPORTED_MODULE_17__["default"](referrer.pathToMatch, {
       location: {
         pathname: pathname
       }
@@ -387,7 +387,7 @@ function (_Component) {
     //    changes by rejecting w/n updateHeight() when
     //    this.minAllowedHeight > newHeight.
 
-    var pageHeight = react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobile"] && !react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobileSafari"] ? document.documentElement.clientHeight : window.innerHeight;
+    var pageHeight = react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobile"] && !react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobileSafari"] ? document.documentElement.clientHeight : window.innerHeight;
     var coverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_11__["cover"])(window.innerWidth, pageHeight, 2131, 1244); // One way to block orientation change
     // https://css-tricks.com/snippets/css/orientation-lock/
 
@@ -396,68 +396,61 @@ function (_Component) {
     // use their true height).
 
 
-    _this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
+    _this.defaultHeightWhenTooSmall = react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobile"] && !react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobileSafari"] ? document.documentElement.clientHeight : window.innerHeight; // Arbitrary (iPhone SE height)
 
-    _this.defaultHeightWhenTooSmall = react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobile"] && !react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobileSafari"] ? document.documentElement.clientHeight : window.innerHeight; // Arbitrary (iPhone SE height)
+    _this.headerMenuTimeoutId = undefined;
+    _this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
 
     _this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
 
     _this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
-
-    _this.headerMenuTimeoutId = undefined; // Prevent resize when scrolling oversized page. Not using state
+    // Prevent resize when scrolling oversized page. Not using state
     // b/c it causes overflowing divs (w/content in them) to 'jump'
     // when scrolling.
 
     _this.isAfterTouchWhenScrollingPage = false;
     _this.state = {
       currentCaller: location.caller !== 'i' ? location.caller : 'home',
-      lastCaller: '',
+      finishedHomePageLoad: alreadyLoaded,
+      heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
+      alreadyLoaded ? 3 : 0,
+      height: // Height for <main /> element
+      pageHeight > _this.minAllowedHeight ? pageHeight : _this.defaultHeightWhenTooSmall,
+      illustrationDelay: false,
+      // Control illustration loader on /chapter pages
+      illustrationDirection: 'enter',
+      // Properly interpret illustrationLevel 
+      illustrationLevel: 0,
+      // Control illustration transitions (header, main, and footer)
+      illustrationState: // 0 is n/a, + is loaded, and - is loading...
+      illustrationState ? illustrationState : 0,
+      images: images,
+      // preloaded big images (minimize time to display b/c of loading)
       inCity: false,
       // false = fantasy, true = city
       isMenu: referrer.isMenu(props),
       // /projects, /journalism, /reverie
-      height: // Height for <main /> element
-      pageHeight > _this.minAllowedHeight ? pageHeight : _this.defaultHeightWhenTooSmall,
-      showBusinessCard: false,
-      // Show business card
-      showLegalTerms: false,
-      // Show legal terms
-      headerMenuIsOpen: false,
-      // Show header menu
-      tempContent: 0,
-      // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
-      pinchZoomed: false,
-      // Zoomed! (Or not.)
-      isZooming: false,
-      // True when usere is pinch zooming
       isAfterTouch: false,
       // Resize using clientHeight when true
-      heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
-      alreadyLoaded ? 3 : 0,
-      finishedHomePageLoad: alreadyLoaded,
-      password: '',
-      // to be removed
       isValidUser: false,
       // to be removed
-      wrongPassword: '',
-      // to be removed
-      spacerHeight: 0,
-      // Set by 'handleResize', so must live here. Used by Home/NameTag.
+      isZooming: false,
+      // True when usere is pinch zooming
+      lastCaller: '',
       nameTagWidth: Math.floor(.27 * coverVals.width),
       // Orig. dimensions: 1349 / 5115
-      images: images,
-      // preloaded big images (minimize time to display b/c of loading)
-      illustrationLevel: 0,
-      // Control illustration transitions (header, main, and footer)
-      illustrationDirection: 'enter',
-      // Properly interpret illustrationLevel 
-      illustrationDelay: false,
-      // Control illustration loader on /chapter pages
-      illustrationState: // 0 is n/a, + is loaded, and - is loading...
-      illustrationState ? illustrationState : 0
+      password: '',
+      // to be removed
+      pinchZoomed: false,
+      // Zoomed! (Or not.)
+      spacerHeight: 0,
+      // Set by 'handleResize', so must live here. Used by Home/NameTag.
+      tempContent: 0,
+      // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
+      wrongPassword: '' // to be removed
+
     };
     _this.handleBackAndForth = _this.handleBackAndForth.bind(_assertThisInitialized(_this));
-    _this.closeHeaderMenu = _this.closeHeaderMenu.bind(_assertThisInitialized(_this));
     _this.handlePasswordEntry = _this.handlePasswordEntry.bind(_assertThisInitialized(_this));
     _this.handlePasswordSubmit = _this.handlePasswordSubmit.bind(_assertThisInitialized(_this));
     _this.handleResize = _this.handleResize.bind(_assertThisInitialized(_this));
@@ -471,16 +464,17 @@ function (_Component) {
   _createClass(App, [{
     key: "handlePasswordSubmit",
     value: function handlePasswordSubmit(event) {
+      var password = this.state.password;
       event.preventDefault();
 
-      if (this.state.password === 'enter' || this.state.password === 'Enter' || this.state.password === 'illustrator' || this.state.password === 'Illustrator' || this.state.password === 'boom!' || this.state.password === 'Boom!') {
+      if (password === 'enter' || password === 'Enter' || password === 'illustrator' || password === 'Illustrator' || password === 'boom!' || password === 'Boom!') {
         this.setState({
           isValidUser: true
         });
       } else {
         this.setState({
-          wrongPassword: 'Incorrect',
-          password: ''
+          password: '',
+          wrongPassword: 'Incorrect'
         });
       }
     }
@@ -499,52 +493,42 @@ function (_Component) {
       var homeIsActive = this.state.currentCaller === 'home';
       var reverieIsActive = this.state.currentCaller === 'reverie';
       var isNotFound = this.state.currentCaller === 'not-found';
-      var fixMobileSafariBugOn7 = react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isTablet"] && react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobileSafari"] && react_device_detect__WEBPACK_IMPORTED_MODULE_16__["osVersion"][0] === '7';
-      return  false ? undefined : react__WEBPACK_IMPORTED_MODULE_22___default.a.createElement(styled_components__WEBPACK_IMPORTED_MODULE_12__["ThemeProvider"], {
+      var fixMobileSafariBugOn7 = react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isTablet"] && react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobileSafari"] && react_device_detect__WEBPACK_IMPORTED_MODULE_15__["osVersion"][0] === '7';
+      return  false ? undefined : react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(styled_components__WEBPACK_IMPORTED_MODULE_12__["ThemeProvider"], {
         theme: {
           bottomMargin: bottomMargin,
           colors: colors,
           fontSizes: fontSizes,
           mediaQueries: mediaQueries,
-          pageHeight: this.state.height.toString(),
           blur: blurControl.regular,
-          blurForTempContent: this.state.showBusinessCard // this.state.tempContent > 0
-          || this.state.showLegalTerms,
-          blurForHeaderMenu: this.state.headerMenuIsOpen
+          blurForTempContent: this.state.tempContent > 0,
+          isHeaderMenu: this.state.tempContent === 3,
+          pageHeight: this.state.height.toString()
         }
-      }, react__WEBPACK_IMPORTED_MODULE_22___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_22__["Fragment"] // Use Fragment b/c ThemeProvider only accepts one child.
-      , null, react__WEBPACK_IMPORTED_MODULE_22___default.a.createElement(GlobalStyle, {
-        reverie: reverieIsActive,
-        notFound: isNotFound
-      }), react__WEBPACK_IMPORTED_MODULE_22___default.a.createElement(ZoomControl // Though an extra <div>, ZoomControl lets us add 'touch'
+      }, react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_21__["Fragment"] // Use Fragment b/c ThemeProvider only accepts one child.
+      , null, react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(GlobalStyle, {
+        notFound: isNotFound,
+        reverie: reverieIsActive
+      }), react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(ZoomControl // Though an extra <div>, ZoomControl lets us add 'touch'
       // events to React (alt is to add them to the Window)
       , {
+        fixMobileSafariBugOn7: fixMobileSafariBugOn7,
         home: homeIsActive,
         onTouchMove: this.handleTouchMove,
-        onTouchEnd: this.handleTouchEnd,
-        fixMobileSafariBugOn7: fixMobileSafariBugOn7
-      }, react__WEBPACK_IMPORTED_MODULE_22___default.a.createElement(_header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_15__["default"], _extends({}, this.props, {
+        onTouchEnd: this.handleTouchEnd
+      }, react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(_header_footer_Header_jsx__WEBPACK_IMPORTED_MODULE_14__["default"], _extends({}, this.props, {
         appState: this.state,
         boundHandleClickForApp: boundHandleClickForApp
-      })), react__WEBPACK_IMPORTED_MODULE_22___default.a.createElement(_Body_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, this.props, {
+      })), react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(_Body_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, this.props, {
         appState: this.state,
         boundHandleClickForApp: boundHandleClickForApp
-      })), react__WEBPACK_IMPORTED_MODULE_22___default.a.createElement(_temp_content_LegalTermsOrBizCard_jsx__WEBPACK_IMPORTED_MODULE_17__["default"], _extends({}, this.props, {
+      })), react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(_temp_content_LegalTermsOrBizCard_jsx__WEBPACK_IMPORTED_MODULE_16__["default"], _extends({}, this.props, {
         appState: this.state,
         boundHandleClickForApp: boundHandleClickForApp
-      })), react__WEBPACK_IMPORTED_MODULE_22___default.a.createElement(_header_footer_Footer_jsx__WEBPACK_IMPORTED_MODULE_13__["default"], _extends({}, this.props, {
+      })), react__WEBPACK_IMPORTED_MODULE_21___default.a.createElement(_header_footer_Footer_jsx__WEBPACK_IMPORTED_MODULE_13__["default"], _extends({}, this.props, {
         appState: this.state,
         boundHandleClickForApp: boundHandleClickForApp
       })))));
-    }
-  }, {
-    key: "closeHeaderMenu",
-    value: function closeHeaderMenu() {
-      clearTimeout(this.state.headerMenuTimeoutId);
-      this.state.headerMenuTimeoutId = undefined;
-      this.setState({
-        headerMenuIsOpen: false
-      });
     }
   }, {
     key: "hasStyle",
@@ -572,12 +556,12 @@ function (_Component) {
     value: function componentDidMount() {
       if (!this.hasStyle('flexbox')) {
         throw new Error("Browser doesn't support Flexbox");
-      } else if (react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isOpera"] || react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isIE"] && react_device_detect__WEBPACK_IMPORTED_MODULE_16__["browserVersion"] <= 10) {
+      } else if (react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isOpera"] || react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isIE"] && react_device_detect__WEBPACK_IMPORTED_MODULE_15__["browserVersion"] <= 10) {
         throw new Error("Uh oh. I don't currently support Opera or IE if it's less than 11.");
       }
 
       if (!this.hasStyle('object-fit')) {
-        object_fit_images__WEBPACK_IMPORTED_MODULE_19___default()();
+        object_fit_images__WEBPACK_IMPORTED_MODULE_18___default()();
       } // Heard after all React handlers run
       // https://fortes.com/2018/react-and-dom-events/
 
@@ -599,21 +583,19 @@ function (_Component) {
 
       // We're probably zooming if two fingers are down.
       if (event.touches.length === 2) {
-        // Pinch zoom almost always moves the X, Y offset.
-        // This is a more effective check than trying to
-        // add points as coordinates or height/width.
         var stateToUpdate = {
           isAfterTouch: true,
           isZooming: true
-        };
+        }; // Pinch zoom almost always moves the X, Y offset.
+        // This is a more effective check than trying to
+        // add points as coordinates or height/width.
 
         if (window.pageXOffset > 0 && window.pageYOffset > 0) {
           stateToUpdate.pinchZoomed = true; // Set zoom state
 
           this.setState(stateToUpdate);
-        } else if ( // Hard to hit 0 on the nose, so
-        // let's look for negatives.
-        window.pageXOffset <= 0 && window.pageYOffset <= 0) {
+        } else if (window.pageXOffset <= 0 && window.pageYOffset <= 0) {
+          // Hard to hit 0 on the nose, so we look for negatives.
           stateToUpdate.pinchZoomed = false; // Set zoom state
 
           this.setState(stateToUpdate);
@@ -652,11 +634,9 @@ function (_Component) {
       var _this3 = this;
 
       // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
-      // console.log('called handleResize');
-      clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout
+      clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout (aka, debounce)
 
       this.resizeTimeoutId = setTimeout(function () {
-        // console.log('timeout handleResize');
         _this3.updateSpacerHeight();
 
         _this3.updateNameTagWidth();
@@ -669,14 +649,21 @@ function (_Component) {
     value: function updateHeight() {
       var _this4 = this;
 
-      // On desktops, only resize if height's changing.
-      if (!react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobile"] && this.state.width !== window.innerWidth && this.state.height === window.innerHeight) {
+      // On desktops, only resize if height's changing
+      if (!react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobile"] && this.state.height === window.innerHeight) {
         return false;
       } // Don't resize while zooming (e.g., there may be
       // a lag between isZooming and pinchZoomed).
 
 
       if (this.state.isZooming) {
+        return false;
+      } // Do not resize height while pinchZoomed.
+
+
+      if (this.state.pinchZoomed) {
+        if (false) {}
+
         return false;
       }
 
@@ -692,11 +679,11 @@ function (_Component) {
 
       var toggleHtmlHeight = function toggleHtmlHeight(mode) {
         if (mode === 'on') {
-          if (react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobileSafari"] && parseInt(react_device_detect__WEBPACK_IMPORTED_MODULE_16__["osVersion"]) >= 12) {
+          if (react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobileSafari"] && parseInt(react_device_detect__WEBPACK_IMPORTED_MODULE_15__["osVersion"]) >= 12) {
             document.getElementsByTagName('html')[0].style.height = '100vh';
           }
         } else if (mode === 'off') {
-          if (react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobileSafari"] && parseInt(react_device_detect__WEBPACK_IMPORTED_MODULE_16__["osVersion"]) >= 12) {
+          if (react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobileSafari"] && parseInt(react_device_detect__WEBPACK_IMPORTED_MODULE_15__["osVersion"]) >= 12) {
             setTimeout(function () {
               document.getElementsByTagName('html')[0].style.height = '';
             }, 250);
@@ -707,24 +694,16 @@ function (_Component) {
       toggleHtmlHeight('on'); //  a. clientHeight. Mobile Chrome and after touchMove
       //  b. innerHeight. Mobile Safari
 
-      var newHeight = react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobile"] && (!react_device_detect__WEBPACK_IMPORTED_MODULE_16__["isMobileSafari"] || this.state.isAfterTouch) ? document.documentElement.clientHeight : window.innerHeight; // Do not resize height while pinchZoomed.
-
-      if (this.state.pinchZoomed) {
-        if (false) {}
-
-        toggleHtmlHeight('off');
-        return false;
-      } // Ensure the window top at zero after resize change.
+      var newHeight = react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobile"] && (!react_device_detect__WEBPACK_IMPORTED_MODULE_15__["isMobileSafari"] || this.state.isAfterTouch) ? document.documentElement.clientHeight : window.innerHeight; // Ensure the window top at zero after resize change.
       // (This trigers another resize if height changes.)
+      // Prevent resize when user scrolls oversized page.
 
-
-      if (window.pageYOffset > 0 // Prevent resize when user scrolls oversized page.
-      && !this.isAfterTouchWhenScrollingPage) {
+      if (window.pageYOffset > 0 && !this.isAfterTouchWhenScrollingPage) {
         var scrollHandling = new _classes_ScrollHandling_js__WEBPACK_IMPORTED_MODULE_24__["default"](location);
         scrollHandling.resetWindowTop();
       } // Resize if height changes and newHeight > this.minAllowedHeight.
       // Note, mobile Brave slips through this test on /home. The image
-      // 'resize' and Brave then resizes. No fix for now.
+      // resizes and Brave then resizes. No fix for now.
 
 
       if (newHeight === this.state.height) {
@@ -748,29 +727,28 @@ function (_Component) {
       this.setState(function () {
         return {
           height: _this4.minAllowedHeight < newHeight ? newHeight : _this4.minAllowedHeight,
-          isAfterTouch: // True until handleMove says otherwise.
-          _this4.state.isAfterTouch && false
+          // Reset (true until handleMove says otherwise)
+          isAfterTouch: _this4.state.isAfterTouch && false
         };
       });
     }
   }, {
     key: "handleBackAndForth",
     value: function handleBackAndForth() {
-      var location = new _classes_Location_js__WEBPACK_IMPORTED_MODULE_18__["default"]('/', this.props);
+      var location = new _classes_Location_js__WEBPACK_IMPORTED_MODULE_17__["default"]('/', this.props);
       var hcForApp = new _classes_ClickHandling_js__WEBPACK_IMPORTED_MODULE_10__["default"]('app', this);
       var boundHandleClickForApp = hcForApp.boundHandleClick; // Always the caller.
       // Update isMenu if it doesn't sync w/the window.
 
       var isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
-      var updateMenuForBackForthButton = isMenu !== this.state.isMenu;
-      boundHandleClickForApp('updateApp', location.caller, updateMenuForBackForthButton);
+      var updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
+      boundHandleClickForApp('updateApp', location.caller, updateMenuForBackAndForthButton);
     }
   }, {
     key: "calculateSpacerHeight",
     value: function calculateSpacerHeight() {
       var appHeight = this.state.height;
       var objectFitCoverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_11__["cover"])(window.innerWidth, appHeight, 2131, 1244);
-      var imageHeight = objectFitCoverVals.height;
       var yImageTop = objectFitCoverVals.y;
 
       var makePositive = function makePositive(val) {
@@ -779,21 +757,22 @@ function (_Component) {
       // 2. 52px is the height of the header in pixels
 
 
-      var calcSpacerHeight = function calcSpacerHeight(heightVal, percentage) {
+      var mathForSpacer = function mathForSpacer(heightVal, percentage) {
         return heightVal * (percentage / 100) - 52;
       };
 
-      var spacerHeight = Math.ceil(calcSpacerHeight(appHeight, 14.2)); // yImageTop < 0 when the image 'zooms' (the window's
+      var spacerHeight = Math.ceil(mathForSpacer(appHeight, 14.9)); // 14.2
+      // yImageTop < 0 when the image 'zooms' (the window's
       // width has grown beyond the image's max width, so
       // we cut off the top and bottom and zoom in.)
 
       if (Math.floor(yImageTop) < 0) {
-        var newHeight = imageHeight - makePositive(yImageTop);
-        var newSpacerHeight = calcSpacerHeight(newHeight, 14.6);
+        var newHeight = objectFitCoverVals.height - makePositive(yImageTop);
+        var newSpacerHeight = mathForSpacer(newHeight, 15); // 14.6
+
         var spacerHeightDifference = newSpacerHeight - spacerHeight;
         var changedPosition = makePositive(yImageTop) - spacerHeightDifference;
-        var finalValue = Math.ceil(spacerHeight - changedPosition);
-        spacerHeight = finalValue;
+        spacerHeight = Math.ceil(spacerHeight - changedPosition);
       }
 
       return spacerHeight >= 15 ? spacerHeight : 15;
@@ -807,9 +786,13 @@ function (_Component) {
   }, {
     key: "updateSpacerHeight",
     value: function updateSpacerHeight() {
-      this.setState({
-        spacerHeight: this.calculateSpacerHeight()
-      });
+      var spacerHeight = this.calculateSpacerHeight();
+
+      if (spacerHeight !== this.state.spacerHeight) {
+        this.setState({
+          spacerHeight: spacerHeight
+        });
+      }
     }
   }, {
     key: "updateNameTagWidth",
@@ -830,7 +813,7 @@ function (_Component) {
   }]);
 
   return App;
-}(react__WEBPACK_IMPORTED_MODULE_22__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_21__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_26__["withRouter"])(App));
 
@@ -1053,8 +1036,8 @@ function About() {
     height: "32px"
   }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Hed, null, "Hi! I'm James"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(IconContainer, null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_ga__WEBPACK_IMPORTED_MODULE_7__["default"].OutboundLink, {
     eventLabel: "To LinkedIn",
-    to: "https://www.linkedin.com/in/jameserikabels",
-    target: "_blank"
+    target: "_blank",
+    to: "https://www.linkedin.com/in/jameserikabels"
   }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Icon, {
     src: _public_linked_in_icon_png__WEBPACK_IMPORTED_MODULE_1___default.a
   })))), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_primitives_Overflow_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Text, null, react_html_parser__WEBPACK_IMPORTED_MODULE_8___default()(marked__WEBPACK_IMPORTED_MODULE_4___default()(_data_about_about_md__WEBPACK_IMPORTED_MODULE_0___default.a.body, {
@@ -1132,16 +1115,16 @@ var BylineOrDate = styled_components__WEBPACK_IMPORTED_MODULE_7__["default"].p.w
 function ArticleOrReverie(props) {
   var contentState = props.contentState;
   var allContentData = contentState.allContentData,
+      caller = contentState.caller,
       headlineIndex = contentState.headlineIndex,
-      reverieIndex = contentState.reverieIndex,
-      caller = contentState.caller;
-  var isReverie = caller === 'reverie';
-  var _allContentData$attri = allContentData[!isReverie ? headlineIndex : reverieIndex].attributes,
+      reverieIndex = contentState.reverieIndex;
+  var _allContentData$attri = allContentData[caller !== 'reverie' ? headlineIndex : reverieIndex].attributes,
       date = _allContentData$attri.date,
       headline = _allContentData$attri.headline,
       position = _allContentData$attri.position,
       publication = _allContentData$attri.publication;
-  var publicationOrReverieTag = caller !== 'reverie' ? publication : 'Reverie';
+  var isReverie = caller === 'reverie';
+  var publicationOrReverieTag = !isReverie ? publication : 'Reverie';
   var bylineOrDate = caller !== 'reverie' ? "by James Erik Abels | ".concat(position) : date;
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_primitives_Main_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
     reverie: isReverie
@@ -1198,8 +1181,8 @@ var NavigationHed = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].p.
   return p.theme.fontSizes.sixteen;
 });
 function ArticleOrReverieNav(props) {
-  var contentState = props.contentState,
-      boundHandleClickForApp = props.boundHandleClickForApp;
+  var boundHandleClickForApp = props.boundHandleClickForApp,
+      contentState = props.contentState;
   var allContentData = contentState.allContentData,
       caller = contentState.caller,
       headlineIndex = contentState.headlineIndex,
@@ -1220,8 +1203,8 @@ function ArticleOrReverieNav(props) {
       return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", {
         key: idx
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        to: articleLink,
-        boundHandleClickForApp: boundHandleClickForApp
+        boundHandleClickForApp: boundHandleClickForApp,
+        to: articleLink
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(NavigationDek, {
         link: linkIsActive
       }, dateOrPublicationFromItem), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(NavigationHed, {
@@ -1312,19 +1295,17 @@ function () {
 
       return function (updateValue, valueOne, valueTwo) {
         var _this$state = _this.state,
-            illustrationLevel = _this$state.illustrationLevel,
             chapter = _this$state.chapter,
             currentCaller = _this$state.currentCaller,
-            lastCaller = _this$state.lastCaller,
             illustrationDelay = _this$state.illustrationDelay,
-            heartbeat = _this$state.heartbeat,
             illustrationDirection = _this$state.illustrationDirection,
+            illustrationLevel = _this$state.illustrationLevel,
+            heartbeat = _this$state.heartbeat,
             showBusinessCard = _this$state.showBusinessCard,
             showLegalTerms = _this$state.showLegalTerms,
             tempContent = _this$state.tempContent,
             inCity = _this$state.inCity,
-            isMenu = _this$state.isMenu,
-            headerMenuIsOpen = _this$state.headerMenuIsOpen;
+            isMenu = _this$state.isMenu;
         var stateToUpdate = {};
 
         var toggleStoryTextSequence = function toggleStoryTextSequence() {
@@ -1333,19 +1314,16 @@ function () {
           }
 
           if (illustrationLevel === 0) {
-            stateToUpdate.illustrationLevel = 1;
+            // Already 'enter' (default/reset to 'enter' by 'updateApp')
+            stateToUpdate.illustrationLevel = 1; // 0 --> 1
           } else {
             stateToUpdate.illustrationLevel = 2; // 3 --> 2
 
             stateToUpdate.illustrationDirection = 'exit';
           }
 
-          if (showBusinessCard) {
-            stateToUpdate.showBusinessCard = !showBusinessCard;
-          }
-
-          if (showLegalTerms) {
-            stateToUpdate.showLegalTerms = !showLegalTerms;
+          if (tempContent > 0) {
+            stateToUpdate.tempContent = 0;
           }
         };
 
@@ -1355,42 +1333,31 @@ function () {
 
         switch (updateValue) {
           case 'toggleTempContent':
-            console.log('tempContent:', tempContent);
-            console.log('valueOne:', valueOne);
-
             if (tempContent > 0 && tempContent - valueOne === 0) {
               stateToUpdate.tempContent = 0;
             } else {
               stateToUpdate.tempContent = valueOne;
             }
 
+            if (tempContent < 3 && valueOne === 3) {
+              // Disable setTimeout to suspend auto-close
+              _this.headerMenuTimeoutId = setTimeout(function () {
+                _this.setState({
+                  tempContent: 0
+                }, function () {
+                  // Reset timeout after timeout successfully runs
+                  _this.headerMenuTimeoutId = undefined;
+                });
+              }, 5000);
+            } else {
+              // Clear timeout if closing via the icon (img))
+              clearTimeout(_this.headerMenuTimeoutId);
+              _this.headerMenuTimeoutId = undefined;
+            }
+
             category = 'App state';
             action = tempContent - valueOne === 0 ? "Close ".concat(tempContent === 1 ? 'business card' : tempContent === 2 ? 'legal terms' : 'header menu') : "Open ".concat(valueOne === 1 ? 'business card' : valueOne === 2 ? 'legal terms' : 'header menu');
             label = tempContent - valueOne === 0 ? 'Temp content was toggled off' : "Temp content was swapped from ".concat(tempContent === 1 ? 'business card' : tempContent === 2 ? 'legal terms' : 'header menu');
-            break;
-
-          case 'toggleBusinessCard':
-            stateToUpdate.showBusinessCard = !showBusinessCard;
-
-            if (showLegalTerms) {
-              stateToUpdate.showLegalTerms = !showLegalTerms;
-            }
-
-            category = 'App state';
-            action = !showBusinessCard ? 'Open business card' : 'Close business card';
-            label = showLegalTerms ? 'Legal notice was open' : '';
-            break;
-
-          case 'toggleLegalTerms':
-            stateToUpdate.showLegalTerms = !showLegalTerms;
-
-            if (showBusinessCard) {
-              stateToUpdate.showBusinessCard = !showBusinessCard;
-            }
-
-            category = 'App state';
-            action = !showLegalTerms ? 'Open legal terms' : 'Close legal terms';
-            label = showBusinessCard ? 'Business card was open' : '';
             break;
 
           case 'toggleStoryText':
@@ -1400,7 +1367,8 @@ function () {
             label = showBusinessCard ? 'Business card was open' : showLegalTerms ? 'Legal notice was open' : '';
             break;
 
-          case 'updateIllustrationState':
+          case 'updateIllustrationLevel':
+            // Tracked by app so header/footer can respond
             stateToUpdate.illustrationLevel = valueOne;
 
             if (valueOne === 0) {
@@ -1413,7 +1381,7 @@ function () {
             break;
 
           case 'updateIllustrationState':
-            stateToUpdateillustrationState = valueOne;
+            stateToUpdate.illustrationState = valueOne;
 
             if (valueTwo) {
               toggleStoryTextSequence();
@@ -1424,7 +1392,7 @@ function () {
             label = valueOne > 0 ? 'loaded' : 'not-loaded';
             break;
 
-          case 'toggleShowDelay':
+          case 'toggleIllustrationDelay':
             stateToUpdate.illustrationDelay = !illustrationDelay;
             category = 'App state';
             action = "Delay illustration until loaded";
@@ -1464,30 +1432,6 @@ function () {
             action = 'Finished home page loading';
             break;
 
-          case 'toggleHeaderMenu':
-            stateToUpdate.headerMenuIsOpen = !headerMenuIsOpen;
-
-            if (!headerMenuIsOpen) {
-              // Disable setTimeout to suspend auto-close
-              _this.headerMenuTimeoutId = setTimeout(function () {
-                _this.setState({
-                  headerMenuIsOpen: false
-                }, function () {
-                  // Reset timeout after timeout successfully runs
-                  _this.headerMenuTimeoutId = undefined;
-                });
-              }, 5000);
-            } else {
-              // Clear timeout if closing via the icon (img))
-              clearTimeout(_this.headerMenuTimeoutId);
-              _this.headerMenuTimeoutId = undefined;
-            }
-
-            category = 'App state';
-            action = 'Toggle header menu';
-            label = !headerMenuIsOpen ? 'Will open' : 'will close';
-            break;
-
           case 'updateApp':
             if (valueOne !== undefined) {
               stateToUpdate.currentCaller = valueOne;
@@ -1500,9 +1444,7 @@ function () {
               _this.headerMenuTimeoutId = undefined;
             }
 
-            stateToUpdate.headerMenuIsOpen = false;
-            stateToUpdate.showBusinessCard = false;
-            stateToUpdate.showLegalTerms = false;
+            stateToUpdate.tempContent = 0;
 
             if (heartbeat === 1) {
               stateToUpdate.heartbeat = 2;
@@ -1518,7 +1460,8 @@ function () {
 
             if (isMenu || valueTwo) {
               stateToUpdate.isMenu = !isMenu;
-            }
+            } // Reset illustrationDelay when leaving /chapter
+
 
             if (illustrationDelay && valueOne !== 'chapter') {
               stateToUpdate.illustrationDelay = !illustrationDelay;
@@ -1535,8 +1478,8 @@ function () {
                 stateToUpdate.illustrationLevel = 0;
               }
 
-              if (chapter > 0 || chapter < 0) {
-                stateToUpdateillustrationState = 0;
+              if (chapter !== 0) {
+                stateToUpdate.illustrationState = 0;
               }
             }
 
@@ -1610,7 +1553,7 @@ function () {
           case 'updateState':
             if (caller === 'chapter') {
               var blurredIllustrationState = _this3.props.appState.images["chapter-".concat(valueOne + 1, "-blurred")].complete ? 2 : 0;
-              stateToUpdateillustrationStateIndex = valueOne;
+              stateToUpdate.chapterIndex = valueOne;
               stateToUpdate.imageLoaded = blurredIllustrationState;
             }
 
@@ -3768,7 +3711,7 @@ var Structure = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].button
 })(["display:", ";margin-left:25px;width:69px;padding:7px 0px;text-align:center;cursor:pointer;position:relative;background-color:unset;border:1px rgba(255,255,255,.6) solid;box-shadow:", ";transition:", ";user-select:none;z-index:0;:focus{outline:0;}"], function (p) {
   return !p.isStory ? 'none' : '';
 }, function (p) {
-  return p.tempContent < 1 && !p.headerMenuIsOpen && p.illustrationLevel >= 2 && '2px 2px 2.5px rgba(0, 0, 0, .4)';
+  return p.tempContent < 1 && p.illustrationLevel >= 2 && '2px 2px 2.5px rgba(0, 0, 0, .4)';
 }, function (p) {
   return p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'box-shadow .35s' : '';
 });
@@ -3791,22 +3734,18 @@ var Text = styled_components__WEBPACK_IMPORTED_MODULE_1__["default"].p.withConfi
   return p.theme.fontSizes.one;
 });
 function Button(props) {
-  var illustrationLevel = props.illustrationLevel,
-      headerMenuIsOpen = props.headerMenuIsOpen,
-      className = props.className,
+  var className = props.className,
       clickFunction = props.clickFunction,
+      illustrationLevel = props.illustrationLevel,
       isStory = props.isStory,
       tempContent = props.tempContent,
       text = props.text;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Structure, {
     className: className,
-    isStory: isStory,
-    headerMenuIsOpen: headerMenuIsOpen // showBusinessCard={showBusinessCard}
-    // showLegalTerms={showLegalTerms}
-    ,
-    tempContent: tempContent,
     illustrationLevel: illustrationLevel,
-    onClick: clickFunction
+    isStory: isStory,
+    onClick: clickFunction,
+    tempContent: tempContent
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Cover, {
     illustrationLevel: illustrationLevel
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Text, null, text));
@@ -3888,7 +3827,7 @@ var Graf = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].p.withConfi
 }, function (p) {
   return p.theme.fontSizes.one;
 }, function (p) {
-  return !p.isReverie && p.tempContent < 1 && !p.headerMenuIsOpen && (p.home && p.coverValY < 0 || p.illustrationLevel >= 2) && shadow;
+  return !p.isReverie && p.tempContent < 1 && (p.home && p.coverValY < 0 || p.illustrationLevel >= 2) && shadow;
 }, function (p) {
   return p.illustrationLevel > 0 && p.illustrationLevel < 3 && '.35s';
 }, function (p) {
@@ -3905,33 +3844,30 @@ var TextBox = styled_components__WEBPACK_IMPORTED_MODULE_5__["default"].div.with
 function FooterContainer(props) {
   var appState = props.appState,
       boundHandleClickForApp = props.boundHandleClickForApp;
-  var illustrationLevel = appState.illustrationLevel,
-      chapter = appState.chapter,
-      currentCaller = appState.currentCaller,
-      headerMenuIsOpen = appState.headerMenuIsOpen,
+  var currentCaller = appState.currentCaller,
       height = appState.height,
-      illustrationDirection = appState.illustrationDirection,
-      lastCaller = appState.lastCaller,
       illustrationDelay = appState.illustrationDelay,
+      illustrationDirection = appState.illustrationDirection,
+      illustrationLevel = appState.illustrationLevel,
+      illustrationState = appState.illustrationState,
+      lastCaller = appState.lastCaller,
       tempContent = appState.tempContent;
 
   var onClickContactHandler = function onClickContactHandler(event) {
-    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(event); // boundHandleClickForApp('toggleBusinessCard');
-
+    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(event);
     boundHandleClickForApp('toggleTempContent', 1);
   };
 
   var onClickLegalHandler = function onClickLegalHandler(event) {
-    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(event); // boundHandleClickForApp('toggleLegalTerms');
-
+    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(event);
     boundHandleClickForApp('toggleTempContent', 2);
   };
 
   var eventHandlerForStoryButton = function eventHandlerForStoryButton(event) {
     Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_2__["default"])(event);
 
-    if (chapter < 0) {
-      boundHandleClickForApp('toggleShowDelay');
+    if (illustrationState < 0) {
+      boundHandleClickForApp('toggleIllustrationDelay');
     } else {
       boundHandleClickForApp('toggleStoryText');
     }
@@ -3942,88 +3878,76 @@ function FooterContainer(props) {
   var isHome = currentCaller === 'home';
   var isNotFound = currentCaller === 'not-found';
   var coverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_1__["cover"])(window.innerWidth, height, 2131, 1244);
-  var reverieLink = isReverie ? "/".concat(lastCaller !== 'home' ? lastCaller : '' // No text b/c 'home' is '/'
-  ) : '/reverie';
+  var reverieLink = isReverie ? "/".concat(lastCaller !== 'home' ? lastCaller : '') // No text b/c 'home' is '/'
+  : '/reverie';
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Container, {
     story: isStory
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Line, {
     home: isHome,
-    isNotFound: isNotFound,
     hide: illustrationLevel,
-    isReverie: isReverie,
     illustrationLevel: illustrationLevel,
-    illustrationDirection: illustrationDirection
-  }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_Button_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    isReverie: isReverie,
-    headerMenuIsOpen: headerMenuIsOpen,
-    clickFunction: eventHandlerForStoryButton,
-    illustrationLevel: illustrationLevel,
-    tempContent: tempContent // showBusinessCard={showBusinessCard}
-    // showLegalTerms={showLegalTerms}
-    ,
     illustrationDirection: illustrationDirection,
+    isNotFound: isNotFound,
+    isReverie: isReverie
+  }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_Button_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    clickFunction: eventHandlerForStoryButton,
+    illustrationDirection: illustrationDirection,
+    illustrationLevel: illustrationLevel,
+    isReverie: isReverie,
     isStory: isStory,
+    tempContent: tempContent,
     text: illustrationDelay ? 'Cancel' : illustrationDirection === 'enter' && illustrationLevel > 0 ? 'Text on' : 'Text off'
-  }), isStory && react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_shared_Loader_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), isStory && react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_shared_Loader_jsx__WEBPACK_IMPORTED_MODULE_3__["default"] // done={!illustrationDelay} // Snappier when disabled...
+  , {
+    fontSize: "small",
     marginBottom: "2",
     marginLeft: "20",
+    maxWidth: "33",
     smallMarginLeft: "10",
     smallMarginRight: "17",
-    fontSize: "small",
-    maxWidth: "33",
-    white: true,
-    smallFont: true // done={!illustrationDelay} // Snappier when disabled...
-    ,
-    show: illustrationDelay
+    show: illustrationDelay,
+    smallFont: true,
+    white: true
   }), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(TextBox, {
     isStory: isStory
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(RestyledLink, {
-    to: reverieLink,
+    boundHandleClickForApp: boundHandleClickForApp,
     isStory: isStory,
-    boundHandleClickForApp: boundHandleClickForApp
+    to: reverieLink
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Graf, {
-    coverValsY: coverVals.y,
     active: isReverie,
-    isLink: true,
-    home: isHome,
-    isStory: isStory,
-    isNotFound: isNotFound,
-    isReverie: isReverie // showBusinessCard={showBusinessCard}
-    // showLegalTerms={showLegalTerms}
-    ,
-    tempContent: tempContent,
-    headerMenuIsOpen: headerMenuIsOpen,
-    illustrationLevel: illustrationLevel,
-    illustrationDirection: illustrationDirection
-  }, "Reverie")), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Graf, {
     coverValsY: coverVals.y,
-    active: tempContent === 1,
-    onClick: onClickContactHandler,
     home: isHome,
-    isStory: isStory,
-    isReverie: isReverie,
-    isNotFound: isNotFound // showBusinessCard={showBusinessCard}
-    // showLegalTerms={showLegalTerms}
-    ,
-    tempContent: tempContent,
-    headerMenuIsOpen: headerMenuIsOpen,
     illustrationLevel: illustrationLevel,
     illustrationDirection: illustrationDirection,
-    smallMarginRight: "13"
-  }, "Contact"), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Graf, {
+    isLink: true,
+    isNotFound: isNotFound,
+    isReverie: isReverie,
+    isStory: isStory,
+    tempContent: tempContent
+  }, "Reverie")), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Graf, {
+    active: tempContent === 1,
     coverValsY: coverVals.y,
-    active: tempContent === 2,
-    onClick: onClickLegalHandler,
-    isReverie: isReverie // showBusinessCard={showBusinessCard}
-    // showLegalTerms={showLegalTerms}
-    ,
-    tempContent: tempContent,
     home: isHome,
+    illustrationLevel: illustrationLevel,
+    illustrationDirection: illustrationDirection,
+    isNotFound: isNotFound,
+    isReverie: isReverie,
+    isStory: isStory,
+    onClick: onClickContactHandler,
+    smallMarginRight: "13",
+    tempContent: tempContent
+  }, "Contact"), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Graf, {
+    active: tempContent === 2,
+    coverValsY: coverVals.y,
+    home: isHome,
+    illustrationLevel: illustrationLevel,
+    illustrationDirection: illustrationDirection,
+    isReverie: isReverie,
     isStory: isStory,
     isNotFound: isNotFound,
-    headerMenuIsOpen: headerMenuIsOpen,
-    illustrationLevel: illustrationLevel,
-    illustrationDirection: illustrationDirection
+    onClick: onClickLegalHandler,
+    tempContent: tempContent
   }, "Legal")));
 }
 
@@ -4034,9 +3958,329 @@ function FooterContainer(props) {
   !*** ./app/header-footer/Header.jsx ***!
   \**************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/james/Desktop/foundations/jamesabels.net/app/header-footer/Header.jsx: Unexpected token, expected \",\" (69:4)\n\n\u001b[0m \u001b[90m 67 | \u001b[39m    \u001b[90m// showLegalTerms,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 68 | \u001b[39m    tempContent\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 69 | \u001b[39m    \u001b[33m...\u001b[39mrest\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 70 | \u001b[39m  }) \u001b[33m=>\u001b[39m \u001b[33m<\u001b[39m\u001b[33mStyledLink\u001b[39m {\u001b[33m...\u001b[39mrest} \u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 71 | \u001b[39m)\u001b[32m`\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 72 | \u001b[39m\u001b[32m  font-size: ${p => p.theme.fontSizes.twentyOne};\u001b[39m\u001b[0m\n    at Object.raise (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:6325:17)\n    at Object.unexpected (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:7642:16)\n    at Object.expect (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:7628:28)\n    at Object.parseObj (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9150:14)\n    at Object.parseExprAtom (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8784:28)\n    at Object.parseExprAtom (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:3601:20)\n    at Object.parseExprSubscripts (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8412:23)\n    at Object.parseMaybeUnary (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8392:21)\n    at Object.parseExprOps (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8267:23)\n    at Object.parseMaybeConditional (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8240:23)\n    at Object.parseMaybeAssign (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8187:21)\n    at Object.parseParenAndDistinguishExpression (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8978:28)\n    at Object.parseExprAtom (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8762:21)\n    at Object.parseExprAtom (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:3601:20)\n    at Object.parseExprSubscripts (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8412:23)\n    at Object.parseMaybeUnary (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8392:21)\n    at Object.parseExprOps (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8267:23)\n    at Object.parseMaybeConditional (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8240:23)\n    at Object.parseMaybeAssign (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8187:21)\n    at Object.parseExprListItem (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9491:18)\n    at Object.parseCallExpressionArguments (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8621:22)\n    at Object.parseSubscript (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8514:29)\n    at Object.parseSubscripts (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8433:19)\n    at Object.parseExprSubscripts (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8422:17)\n    at Object.parseMaybeUnary (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8392:21)\n    at Object.parseExprOps (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8267:23)\n    at Object.parseMaybeConditional (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8240:23)\n    at Object.parseMaybeAssign (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:8187:21)\n    at Object.parseVar (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10480:26)\n    at Object.parseVarStatement (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10299:10)\n    at Object.parseStatementContent (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9896:21)\n    at Object.parseStatement (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9829:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10405:25)\n    at Object.parseBlockBody (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:10392:10)\n    at Object.parseTopLevel (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:9758:10)\n    at Object.parse (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:11270:17)\n    at parse (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/parser/lib/index.js:11306:38)\n    at parser (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\n    at runSync (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at /Users/james/Desktop/foundations/jamesabels.net/node_modules/@babel/core/lib/transform.js:34:34");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Header; });
+/* harmony import */ var _data_home_home_md__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../data/home/home.md */ "./app/data/home/home.md");
+/* harmony import */ var _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_data_home_home_md__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers_eventManagement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/eventManagement */ "./app/helpers/eventManagement.js");
+/* harmony import */ var _public_header_nav_open_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../public/header-nav-open.png */ "./public/header-nav-open.png");
+/* harmony import */ var _public_header_nav_open_png__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_public_header_nav_open_png__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _public_header_nav_closed_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../public/header-nav-closed.png */ "./public/header-nav-closed.png");
+/* harmony import */ var _public_header_nav_closed_png__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_public_header_nav_closed_png__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var intrinsic_scale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! intrinsic-scale */ "./node_modules/intrinsic-scale/dist/intrinsic-scale.common-js.js");
+/* harmony import */ var intrinsic_scale__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(intrinsic_scale__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/Mapper.jsx */ "./app/shared/Mapper.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _classes_Referrer_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../classes/Referrer.js */ "./app/classes/Referrer.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../primitives/StyledLink.jsx */ "./app/primitives/StyledLink.jsx");
+/* harmony import */ var _primitives_UnorderedList_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../primitives/UnorderedList.jsx */ "./app/primitives/UnorderedList.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+
+
+
+
+
+
+var headerLinks = [{
+  name: 'About',
+  path: '/about'
+}, {
+  name: 'Projects',
+  path: '/projects'
+}, {
+  name: 'Journalism',
+  path: '/journalism'
+}, {
+  name: 'A not-so-true story',
+  path: '/chapter'
+}];
+var fontWeight = '500';
+var initialShadow = '2px 2px 2.5px';
+var textShadow = initialShadow + ' rgba(0, 0, 0, .4)';
+var iconShadow = initialShadow + ' rgba(0,0,0,.9)';
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].header.withConfig({
+  displayName: "Header__Container",
+  componentId: "sc-1rxr5md-0"
+})(["color:", ";flex-shrink:0;z-index:2;height:52px;display:flex;justify-content:", ";align-items:center;width:100%;max-width:75rem;"], function (p) {
+  return p.theme.colors.white;
+}, function (p) {
+  return p.isHome && 'center';
+});
+var HeaderBackground = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].div.withConfig({
+  displayName: "Header__HeaderBackground",
+  componentId: "sc-1rxr5md-1"
+})(["position:absolute;width:100%;height:52px;top:0px;bottom:", ";width:", ";left:0px;background-color:", ";opacity:", ";transition:", ";z-index:-1;@media (min-width:", "){opacity:", ";}"], function (p) {
+  return p.tempContent === 3 && '0px';
+}, function (p) {
+  return p.tempContent === 3 && '100%';
+}, function (p) {
+  return !p.isHome ? p.tempContent === 3 ? 'rgba(175, 18, 90, .8)' : p.theme.colors.darkPink : '';
+}, function (p) {
+  return p.tempContent === 3 || p.isReverie || p.illustrationDirection === 'exit' && p.illustrationLevel < 2 || p.illustrationDirection === 'enter' && p.illustrationLevel < 1 ? '1' : '0';
+}, function (p) {
+  return p.illustrationLevel > 0 && p.illustrationLevel < 3 && Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["css"])(["opacity .35s"]);
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
+}, function (p) {
+  return p.illustrationLevel > 0 && p.theme.blurForTempContent && '0';
+});
+var RestyledLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["default"])( // Filter out isHome and isActive from StyledLink
+// eslint-disable-next-line
+function (_ref) {
+  var illustrationLevel = _ref.illustrationLevel,
+      isHome = _ref.isHome,
+      isActive = _ref.isActive,
+      isReverie = _ref.isReverie,
+      menu = _ref.menu,
+      nameAsLink = _ref.nameAsLink,
+      tempContent = _ref.tempContent,
+      textShadow = _ref.textShadow,
+      rest = _objectWithoutProperties(_ref, ["illustrationLevel", "isHome", "isActive", "isReverie", "menu", "nameAsLink", "tempContent", "textShadow"]);
+
+  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], rest);
+}).withConfig({
+  displayName: "Header__RestyledLink",
+  componentId: "sc-1rxr5md-2"
+})(["font-size:", ";font-weight:", ";margin-left:", ";color:", ";text-shadow:", ";transition:", ";&&{text-decoration:", ";}@media (min-width:", "){margin-left:", ";font-size:", ";}@media (min-width:0px) and (max-width:", "){font-size:", ";margin-left:", ";}@media (min-width:", ") and (max-width:", "){font-size:", ";margin-left:", ";}"], function (p) {
+  return p.theme.fontSizes.twentyOne;
+}, function (p) {
+  return p.isHome ? '400' : fontWeight;
+}, function (p) {
+  return p.num === 0 ? '0px' : '10px';
+}, function (p) {
+  return p.theme.colors.white;
+}, function (p) {
+  return !p.isReverie && p.tempContent < 1 && p.illustrationLevel >= 2 ? textShadow : '';
+}, function (p) {
+  return p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'text-shadow .35s';
+}, function (p) {
+  return p.isActive ? 'underline' : undefined;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.num === 0 ? '0px' : '15px';
+}, function (p) {
+  return p.isHome ? p.theme.fontSizes.three : p.theme.fontSizes.three;
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.eighteen;
+}, function (p) {
+  return !p.nameAsLink && p.tempContent === 3 && '0px';
+}, function (p) {
+  return p.theme.mediaQueries.tinyView;
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
+}, function (p) {
+  return !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.twenty;
+}, function (p) {
+  return !p.nameAsLink && p.tempContent === 3 && '0px';
+});
+var NameAsLink = Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["default"])(RestyledLink).withConfig({
+  displayName: "Header__NameAsLink",
+  componentId: "sc-1rxr5md-3"
+})(["display:", ";font-size:", ";margin-left:15px;@media (max-width:", "){z-index:", ";}"], function (p) {
+  return p.isHome && 'none';
+}, function (p) {
+  return p.theme.fontSizes.six;
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
+}, function (p) {
+  return p.tempContent === 3 && '1';
+});
+var Motto = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].span.withConfig({
+  displayName: "Header__Motto",
+  componentId: "sc-1rxr5md-4"
+})(["font-weight:", ";flex:1;display:", ";font-style:italic;font-size:", ";margin:1px 10px 0px 13px;min-width:0px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:", ";transition:", ";@media (min-width:", "){font-size:", ";margin-right:0px;}@media (max-width:", "){z-index:", ";}"], fontWeight, function (p) {
+  return p.isHome && 'none';
+}, function (p) {
+  return p.theme.fontSizes.two;
+}, function (p) {
+  return !p.isReverie && p.tempContent < 1 && p.illustrationLevel >= 2 ? textShadow : '';
+}, function (p) {
+  return p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'text-shadow .35s';
+}, function (p) {
+  return p.theme.mediaQueries.tinyViewTwo;
+}, function (p) {
+  return p.theme.fontSizes.four;
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
+}, function (p) {
+  return p.tempContent === 3 && '1';
+});
+var Nav = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].nav.withConfig({
+  displayName: "Header__Nav",
+  componentId: "sc-1rxr5md-5"
+})(["display:", ";margin-top:-2px;padding:", ";background-color:", ";max-width:", ";position:relative;@media (min-width:", "){display:block;margin-right:", ";max-width:", ";}@media (max-width:", "){", ";}"], function (p) {
+  return !p.isHome && 'none';
+}, function (p) {
+  return p.isHome && '6px 12px';
+}, function (p) {
+  return p.isHome && (p.coverValY || p.spacerHeight) && p.tempContent < 1 && 'rgba(0, 0, 0, .125)';
+}, function (p) {
+  return p.isHome && '350px';
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
+}, function (p) {
+  return !p.isHome && '15px';
+}, function (p) {
+  return p.isHome && '350px';
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
+}, function (p) {
+  return p.tempContent === 3 && Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["css"])(["background-color:rgba(175,18,90,.8);position:fixed;top:54px;bottom:0px;width:100%;display:flex;justify-content:center;"]);
+});
+var NavList = Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["default"])(_primitives_UnorderedList_jsx__WEBPACK_IMPORTED_MODULE_10__["default"]).withConfig({
+  displayName: "Header__NavList",
+  componentId: "sc-1rxr5md-6"
+})(["display:flex;justify-content:center;margin:", ";justify-content:", ";@media (max-width:", "){", ";}"], function (p) {
+  return p.tempContent !== 3 ? Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["css"])(["", " 0px ", " 0px}"], !p.isHome && 'auto', !p.isHome && 'auto') : '';
+}, function (p) {
+  return p.tempContent === 3 && 'space-evenly';
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwo;
+}, function (p) {
+  return p.tempContent === 3 && Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["css"])(["flex-direction:column;margin-bottom:55px;"]);
+});
+var Icon = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].img.withConfig({
+  displayName: "Header__Icon",
+  componentId: "sc-1rxr5md-7"
+})(["display:", ";height:22px;margin-left:auto;margin-right:10px;cursor:pointer;padding-top:5px;padding-bottom:5px;padding-left:5px;padding-right:5px;filter:", ";z-index:1;@media (min-width:", "){display:none;}"], function (p) {
+  return p.isHome && 'none';
+}, function (p) {
+  return !p.isReverie && p.tempContent < 1 && p.illustrationLevel >= 2 && Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["css"])(["drop-shadow(", ")"], iconShadow);
+}, function (p) {
+  return p.theme.mediaQueries.narrowBreakTwoB;
+});
+
+var Header =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Header, _Component);
+
+  function Header() {
+    _classCallCheck(this, Header);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Header).apply(this, arguments));
+  }
+
+  _createClass(Header, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          appState = _this$props.appState,
+          boundHandleClickForApp = _this$props.boundHandleClickForApp;
+      var currentCaller = appState.currentCaller,
+          height = appState.height,
+          illustrationDirection = appState.illustrationDirection,
+          illustrationLevel = appState.illustrationLevel,
+          spacerHeight = appState.spacerHeight,
+          tempContent = appState.tempContent;
+      var isHome = currentCaller === 'home';
+      var isReverie = currentCaller === 'reverie';
+      var isStory = currentCaller == 'chapter';
+      var menuIcon = tempContent === 3 ? _public_header_nav_open_png__WEBPACK_IMPORTED_MODULE_2___default.a : _public_header_nav_closed_png__WEBPACK_IMPORTED_MODULE_3___default.a;
+      var coverVals = Object(intrinsic_scale__WEBPACK_IMPORTED_MODULE_4__["cover"])(window.innerWidth, height, 2131, 1244);
+      var referrer = new _classes_Referrer_js__WEBPACK_IMPORTED_MODULE_7__["default"](this.props);
+
+      var onClickMenuHandler = function onClickMenuHandler(event) {
+        Object(_helpers_eventManagement__WEBPACK_IMPORTED_MODULE_1__["default"])(event);
+        boundHandleClickForApp('toggleTempContent', 3);
+      };
+
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Container, {
+        isHome: isHome
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(HeaderBackground, {
+        isHome: isHome,
+        isStory: isStory,
+        isReverie: isReverie,
+        illustrationLevel: illustrationLevel,
+        illustrationDirection: illustrationDirection,
+        tempContent: tempContent
+      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(NameAsLink, {
+        boundHandleClickForApp: boundHandleClickForApp,
+        illustrationLevel: illustrationLevel,
+        isHome: isHome,
+        isReverie: isReverie,
+        nameAsLink: true,
+        tempContent: tempContent,
+        to: '/'
+      }, "James Abels"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Motto, {
+        hide: isHome,
+        illustrationLevel: illustrationLevel,
+        isHome: isHome,
+        isReverie: isReverie,
+        tempContent: tempContent
+      }, _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.attributes.motto), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Nav, {
+        coverValY: coverVals.y < 0,
+        isHome: isHome,
+        spacerHeight: spacerHeight < 20,
+        tempContent: tempContent
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(NavList, {
+        isHome: isHome,
+        tempContent: tempContent
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        mapData: headerLinks,
+        render: function render(link, idx) {
+          var isActive = link.path.includes(referrer.location);
+          return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("li", {
+            key: idx
+          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(RestyledLink, {
+            boundHandleClickForApp: boundHandleClickForApp,
+            illustrationLevel: illustrationLevel,
+            isActive: isActive,
+            isHome: isHome,
+            isReverie: isReverie,
+            num: idx,
+            tempContent: tempContent,
+            to: link.path
+          }, link.name));
+        }
+      }))), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Icon, {
+        illustrationLevel: illustrationLevel,
+        isHome: isHome,
+        src: menuIcon,
+        onClick: onClickMenuHandler,
+        tempContent: tempContent
+      }));
+    }
+  }]);
+
+  return Header;
+}(react__WEBPACK_IMPORTED_MODULE_6__["Component"]);
+
+
 
 /***/ }),
 
@@ -4142,7 +4386,7 @@ function prelodBigImages() {
   _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.attributes.preloadTheseImages.forEach(function (name) {
     var image = new Image();
     image.src = _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.attributes[name];
-    images[name] = image; // Poor man's test for cached images
+    images[name] = image; // A poor man's test for cached images
 
     if (image.complete) {
       images.alreadyLoaded.push(1);
@@ -4304,7 +4548,7 @@ var OuterContainer = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].d
   displayName: "Charms__OuterContainer",
   componentId: "sc-1w1k612-0"
 })(["display:", ";flex-direction:column;justify-content:space-between;z-index:2;opacity:", ";transition:opacity ", " ease-in;", ";"], function (p) {
-  return p.spellLevel < 5 && !p.tempContentIsOn ? 'flex' : 'none';
+  return p.spellLevel < 5 && p.tempContent < 1 ? 'flex' : 'none';
 }, function (p) {
   return p.enter && p.spellLevel >= 3 || p.exit && p.spellLevel > 3 ? '1' : '0';
 }, function (p) {
@@ -4397,13 +4641,12 @@ function Charms(props) {
       setSpellLevels = props.setSpellLevels;
   var inCity = appState.inCity,
       nameTagWidth = appState.nameTagWidth,
-      showBusinessCard = appState.showBusinessCard,
-      showLegalTerms = appState.showLegalTerms;
+      tempContent = appState.tempContent;
   var activeCharm = homeState.activeCharm,
       goal = homeState.goal,
-      spellLevel = homeState.spellLevel,
       movement = homeState.movement,
-      score = homeState.score; // Let's set up a progress bar.
+      score = homeState.score,
+      spellLevel = homeState.spellLevel; // Let's set up a progress bar.
 
   var onTransitionEndForOuterContainer = function onTransitionEndForOuterContainer(event) {
     Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_0__["default"])(event);
@@ -4414,12 +4657,12 @@ function Charms(props) {
   var barWidth = score * (100 / (goal - 1));
   var isReady = score === goal - 1;
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(OuterContainer, {
-    spellLevel: spellLevel,
     enter: movement === 'enter',
     exit: movement === 'exit',
-    tempContentIsOn: showBusinessCard || showLegalTerms,
     nameTagWidth: nameTagWidth,
-    onTransitionEnd: onTransitionEndForOuterContainer
+    onTransitionEnd: onTransitionEndForOuterContainer,
+    spellLevel: spellLevel,
+    tempContent: tempContent
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_1___default.a, {
     compressor: 2.3
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_SubHed_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -4429,28 +4672,28 @@ function Charms(props) {
     render: function render(_, idx) {
       var isActive = activeCharm === idx + 1;
       return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Charm, {
-        key: idx,
-        isActive: isActive,
-        spellLevel: spellLevel,
         enter: movement === 'enter',
         exit: movement === 'exit',
+        isActive: isActive,
         isReady: isReady,
+        key: idx,
         ref: charmRefs[idx] // Add a ref to each Charm when mounted
-
+        ,
+        spellLevel: spellLevel
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CharmShadow, {
         isActive: isActive,
-        spellLevel: spellLevel,
-        isReady: isReady
+        isReady: isReady,
+        spellLevel: spellLevel
       }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Eye, {
-        isActive: isActive,
-        spellLevel: spellLevel,
         enter: movement === 'enter',
         exit: movement === 'exit',
-        isReady: isReady
+        isActive: isActive,
+        isReady: isReady,
+        spellLevel: spellLevel
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(EyeShadow, {
         isActive: isActive,
-        spellLevel: spellLevel,
-        isReady: isReady
+        isReady: isReady,
+        spellLevel: spellLevel
       })));
     }
   })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Dashboard, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Score, {
@@ -4590,18 +4833,18 @@ function (_Component) {
     _this.props.boundHandleClickForApp('updateSpacerHeight', _this.props.appState.height);
 
     _this.state = {
-      goal: 5,
-      score: 0,
-      // Used to select an active Charm and cast spell
-      pattern: initialPattern,
-      // arr
       activeCharm: initialPattern[0],
       eventType: 'click',
       // Type of event triggered Charm
-      movement: '',
-      // 'enter' = Charms / 'exit' = NameTag
+      goal: 5,
       loadLevel: [0, 0, 0, 0],
       // [bBoy, bFant., boy, fant.], [2, 2, 1, 1] for initial load, [1, 1, 1, 1] after traveling (disregarded)
+      movement: '',
+      // 'enter' = Charms / 'exit' = NameTag
+      pattern: initialPattern,
+      // arr
+      score: 0,
+      // Used to select an active Charm and cast spell
       spellLevel: 0
     };
     _this.eventHandlerForMouseDown = _this.eventHandlerForMouseDown.bind(_assertThisInitialized(_this));
@@ -4677,9 +4920,9 @@ function (_Component) {
       var blurs = this.state.loadLevel[0] + this.state.loadLevel[1];
       var full = this.state.loadLevel[2] + this.state.loadLevel[3];
       return {
+        all: blurs + full,
         blurs: blurs,
-        full: full,
-        all: blurs + full
+        full: full
       };
     }
   }, {
@@ -4742,11 +4985,11 @@ function (_Component) {
         // NameTag --> onTransitionEnd
         var newPattern = this.createSpellPattern();
         this.setState({
-          spellLevel: 0,
+          activeCharm: newPattern[0],
           movement: '',
           pattern: newPattern,
-          activeCharm: newPattern[0],
-          score: 0
+          score: 0,
+          spellLevel: 0
         });
       }
     }
@@ -4800,19 +5043,19 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(RestyledMain, {
         home: true
       }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_NameTag_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, this.props, {
-        homeState: this.state,
         boundHandleClickForHome: boundHandleClickForHome,
-        setSpellLevels: setSpellLevels,
-        setLoadLevels: setLoadLevels
-      })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_Charms_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], _extends({}, this.props, {
         homeState: this.state,
+        setLoadLevels: setLoadLevels,
+        setSpellLevels: setSpellLevels
+      })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_Charms_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], _extends({}, this.props, {
         charmRefs: this.charmRefs,
+        homeState: this.state,
         setSpellLevels: setSpellLevels
       })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_PictureBox_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, this.props, {
-        homeState: this.state,
         boundHandleClickForHome: boundHandleClickForHome,
-        setSpellLevels: setSpellLevels,
-        setLoadLevels: setLoadLevels
+        homeState: this.state,
+        setLoadLevels: setLoadLevels,
+        setSpellLevels: setSpellLevels
       })));
     }
   }, {
@@ -4980,7 +5223,7 @@ var OuterContainer = styled_components__WEBPACK_IMPORTED_MODULE_8__["default"].d
   displayName: "NameTag__OuterContainer",
   componentId: "sc-1tuguaa-0"
 })(["display:", ";", ";", ";pointer-events:", ";text-align:center;z-index:2;", ";"], function (p) {
-  return p.tempContentIsOn ? 'none' : 'block';
+  return p.tempContent > 0 ? 'none' : 'block';
 }, function (p) {
   return p.heartbeat && Object(styled_components__WEBPACK_IMPORTED_MODULE_8__["css"])(["animation:1.15s ", " ease-in-out ", " 3 both"], p.delayHeartbeat ? '.825s' : '.6s', heartbeatKeyframes);
 }, function (p) {
@@ -5031,26 +5274,24 @@ function NameTag(props) {
       homeState = props.homeState,
       setSpellLevels = props.setSpellLevels,
       setLoadLevels = props.setLoadLevels;
-  var heartbeat = appState.heartbeat,
-      finishedHomePageLoad = appState.finishedHomePageLoad,
-      showBusinessCard = appState.showBusinessCard,
-      showLegalTerms = appState.showLegalTerms,
+  var finishedHomePageLoad = appState.finishedHomePageLoad,
+      heartbeat = appState.heartbeat,
+      nameTagWidth = appState.nameTagWidth,
       spacerHeight = appState.spacerHeight,
-      nameTagWidth = appState.nameTagWidth;
+      tempContent = appState.tempContent;
   var eventType = homeState.eventType,
-      spellLevel = homeState.spellLevel,
       movement = homeState.movement,
-      score = homeState.score;
+      score = homeState.score,
+      spellLevel = homeState.spellLevel;
   var attributes = _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.attributes,
       body = _data_home_home_md__WEBPACK_IMPORTED_MODULE_0___default.a.body;
   var motto = attributes.motto,
       name = attributes.name;
 
   var onClickForHed = function onClickForHed(event) {
-    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event);
+    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event); // Ends at 3
 
-    if (heartbeat > 2 // Ends at 3
-    && (spellLevel === 0 || spellLevel === 4)) {
+    if (heartbeat > 2 && (spellLevel === 0 || spellLevel === 4)) {
       if (eventType === 'touch') {
         boundHandleClickForHome('resetEventType');
         return false;
@@ -5063,10 +5304,9 @@ function NameTag(props) {
   };
 
   var onAnimationStartForHeartbeat = function onAnimationStartForHeartbeat(event) {
-    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event);
+    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event); // StyledComponents className
 
-    if (event.animationName === 'cHArim' // StyledComponents className
-    && !finishedHomePageLoad) {
+    if (event.animationName === 'cHArim' && !finishedHomePageLoad) {
       boundHandleClickForApp('finishedHomePageLoad');
     }
   };
@@ -5085,28 +5325,27 @@ function NameTag(props) {
   return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Spacer, {
     spacerHeight: spacerHeight
   }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(OuterContainer, {
-    nameTagWidth: nameTagWidth,
-    spellLevel: spellLevel,
-    heartbeat: heartbeat > 0 && heartbeat < 3,
     delayHeartbeat: finishedHomePageLoad && heartbeat > 1 && heartbeat < 3,
-    tempContentIsOn: showBusinessCard || showLegalTerms,
+    heartbeat: heartbeat > 0 && heartbeat < 3,
+    nameTagWidth: nameTagWidth,
+    onAnimationEnd: onAnimationEndForHeartbeat,
     onAnimationStart: onAnimationStartForHeartbeat,
-    onAnimationEnd: onAnimationEndForHeartbeat
+    spellLevel: spellLevel,
+    tempContent: tempContent
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_2___default.a, {
     compressor: 1.154
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Hed, {
-    onClick: onClickForHed,
+    finishedHomePageLoad: finishedHomePageLoad,
     loadLevelBlurs: setLoadLevels.sum().blurs,
     loadLevelAll: setLoadLevels.sum().all,
-    finishedHomePageLoad: finishedHomePageLoad
+    onClick: onClickForHed
   }, name)), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(InnerContainer, {
-    tempContentIsOn: showBusinessCard || showLegalTerms,
-    loadLevelAll: setLoadLevels.sum().all,
-    spellLevel: spellLevel,
-    finishedHomePageLoad: finishedHomePageLoad,
     enter: movement === 'enter',
     exit: movement === 'exit',
-    onTransitionEnd: onTransitionEndForInnerContainer
+    finishedHomePageLoad: finishedHomePageLoad,
+    loadLevelAll: setLoadLevels.sum().all,
+    onTransitionEnd: onTransitionEndForInnerContainer,
+    spellLevel: spellLevel
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_kennethormandy_react_fittext__WEBPACK_IMPORTED_MODULE_2___default.a, {
     compressor: 2.3
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_SubHed_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -5116,8 +5355,8 @@ function NameTag(props) {
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, react_html_parser__WEBPACK_IMPORTED_MODULE_6___default()(marked__WEBPACK_IMPORTED_MODULE_4___default()(body, {
     smartypants: true
   })))))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_shared_Loader_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    marginBottom: "7",
     done: finishedHomePageLoad,
+    marginBottom: "7",
     show: setLoadLevels.sum().all < 6
   })));
 }
@@ -5217,14 +5456,14 @@ function PictureBox(props) {
     }
   };
 
-  var onTransitionEndForBlurredFantasy = function onTransitionEndForBlurredFantasy() {
+  var onTransitionEndForBlurredFantasy = function onTransitionEndForBlurredFantasy(event) {
     Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_6__["default"])(event);
     setLoadLevels.four();
     setSpellLevels.three(movement === 'enter', 'BlurredFantasy');
     setSpellLevels.one(movement === 'exit', 'BlurredFantasy');
   };
 
-  var onTransitionEndForBlurredCity = function onTransitionEndForBlurredCity() {
+  var onTransitionEndForBlurredCity = function onTransitionEndForBlurredCity(event) {
     Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_6__["default"])(event);
     setSpellLevels.three(movement === 'enter', 'BlurredCity');
     setSpellLevels.one(movement === 'exit', 'BlurredCity');
@@ -5236,66 +5475,66 @@ function PictureBox(props) {
     return function (event) {
       Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_6__["default"])(event);
 
-      if (penultimateSpellLevel // Psst. Second to last...
-      && activeBackground && event.propertyName === 'transform') {
+      if (penultimateSpellLevel && activeBackground && event.propertyName === 'transform') {
         boundHandleClickForHome('toggleSpell', event.propertyName);
       }
     };
   };
 
   return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(PictureHolder, null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_BlurredBoyForeground_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    finishedHomePageLoad: finishedHomePageLoad,
+    alt: descriptionBoy,
     enter: movement === 'enter',
     exit: movement === 'exit',
+    finishedHomePageLoad: finishedHomePageLoad,
     loadLevelBlurs: setLoadLevels.sum().blurs,
     loadLevelAll: setLoadLevels.sum().all,
-    spellLevel: spellLevel,
-    src: blurredBoySrc,
-    alt: descriptionBoy,
     onLoad: onLoadForBlurredBoy,
-    onTransitionEnd: onTransitionEndForBlurredBoy
+    onTransitionEnd: onTransitionEndForBlurredBoy,
+    spellLevel: spellLevel,
+    src: blurredBoySrc
   }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_BoyForeground_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    src: bigBoySrc,
     alt: descriptionBoy,
-    loadLevelAll: setLoadLevels.sum().all,
     finishedHomePageLoad: finishedHomePageLoad,
-    onLoad: onLoadForBoy
+    loadLevelAll: setLoadLevels.sum().all,
+    onLoad: onLoadForBoy,
+    src: bigBoySrc
   }), (!inCity || inCity && spellLevel > 0) && react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_BlurredFantasyBackground_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    src: blurredFantasySrc,
+    enter: movement === 'enter',
+    exit: movement === 'exit',
     finishedHomePageLoad: finishedHomePageLoad,
     inCity: inCity,
-    enter: movement === 'enter',
-    exit: movement === 'exit',
-    spellLevel: spellLevel,
-    loadLevelBlurs: setLoadLevels.sum().blurs,
     loadLevelAll: setLoadLevels.sum().all,
+    loadLevelBlurs: setLoadLevels.sum().blurs,
     loadLevelFantasy: loadLevel[3] > 0,
     onLoad: onLoadForBlurredFantasy,
-    onTransitionEnd: onTransitionEndForBlurredFantasy
-  }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_FantasyBackground_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    inCity: inCity,
-    finishedHomePageLoad: finishedHomePageLoad,
-    src: bigFantasySrc,
-    alt: descriptionFantasy,
+    onTransitionEnd: onTransitionEndForBlurredFantasy,
     spellLevel: spellLevel,
+    src: blurredFantasySrc
+  }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_FantasyBackground_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    alt: descriptionFantasy,
+    finishedHomePageLoad: finishedHomePageLoad,
+    inCity: inCity,
     loadLevelAll: setLoadLevels.sum().all,
     onLoad: onLoadForFantasy // Trigger toggle after backgrounds are swapped
     ,
-    onTransitionEnd: onTransitionEndForBackgroundImages(spellLevel > 4, inCity)
+    onTransitionEnd: onTransitionEndForBackgroundImages(spellLevel > 4, inCity),
+    spellLevel: spellLevel,
+    src: bigFantasySrc
   })), (inCity || !inCity && spellLevel > 0) && react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_8__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_BlurredCityBackground_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    src: cityImageBlurred,
-    inCity: inCity,
+    alt: "",
     enter: movement === 'enter',
     exit: movement === 'exit',
-    spellLevel: spellLevel,
-    onTransitionEnd: onTransitionEndForBlurredCity
-  }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_CityBackground_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     inCity: inCity,
+    onTransitionEnd: onTransitionEndForBlurredCity,
     spellLevel: spellLevel,
-    src: cityImage,
-    alt: descriptionCity // Trigger toggle after backgrounds are swapped
+    src: cityImageBlurred
+  }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_CityBackground_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    alt: descriptionCity,
+    inCity: inCity // Trigger toggle after backgrounds are swapped
     ,
-    onTransitionEnd: onTransitionEndForBackgroundImages(spellLevel > 4, !inCity)
+    onTransitionEnd: onTransitionEndForBackgroundImages(spellLevel > 4, !inCity),
+    spellLevel: spellLevel,
+    src: cityImage
   })));
 }
 
@@ -5339,6 +5578,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var matchmedia_polyfill__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! matchmedia-polyfill */ "./node_modules/matchmedia-polyfill/matchMedia.js");
+/* harmony import */ var matchmedia_polyfill__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(matchmedia_polyfill__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var matchmedia_polyfill_matchMedia_addListener__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! matchmedia-polyfill/matchMedia.addListener */ "./node_modules/matchmedia-polyfill/matchMedia.addListener.js");
+/* harmony import */ var matchmedia_polyfill_matchMedia_addListener__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(matchmedia_polyfill_matchMedia_addListener__WEBPACK_IMPORTED_MODULE_6__);
+
+
 
 
 
@@ -5453,8 +5698,8 @@ function (_Component) {
       , {
         style: {
           height: 'auto',
-          width: '100%',
-          maxWidth: '310px'
+          maxWidth: '310px',
+          width: '100%'
         },
         alt: "404",
         src: src
@@ -5491,7 +5736,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].section.withConfig({
   displayName: "ContentHolder",
   componentId: "sc-1g8tkhf-0"
-})(["margin:18px 0px 18px ", ";display:flex;flex-direction:column;filter:", ";", ";@media (min-width:", "){margin:25px 0px 25px ", ";}@media (max-width:", "){filter:", ";}"], function (p) {
+})(["margin:18px 0px 18px ", ";display:flex;flex-direction:column;filter:", ";", ";@media (min-width:", "){margin:25px 0px 25px ", ";}@media (min-width:", "){filter:", "}"], function (p) {
   return !p.saveSerifs ? '25px' : '23px';
 }, function (p) {
   return p.theme.blurForTempContent && p.theme.blur;
@@ -5502,7 +5747,7 @@ __webpack_require__.r(__webpack_exports__);
 }, function (p) {
   return p.theme.mediaQueries.narrowBreakTwo;
 }, function (p) {
-  return p.theme.blurForHeaderMenu && p.theme.blur;
+  return p.theme.isHeaderMenu && 'unset';
 }));
 
 /***/ }),
@@ -5641,8 +5886,8 @@ function DesktopProjectNav(props) {
       return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", {
         key: idx
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Type, null, type), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Graf, null, "".concat(projectName, " | ").concat(pitch)), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_ProjectNav_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, props, {
-        mappedProjectIndex: idx,
-        mappedProject: mappedProject
+        mappedProject: mappedProject,
+        mappedProjectIndex: idx
       })));
     }
   }));
@@ -5750,18 +5995,18 @@ function ProjectNav(props) {
   var finalGroup = isMenu && mappedProjectIndex === allContentData.length - 1;
   var useThisData = !isMenu ? projectThumbnail : mappedProject.attributes.projectThumbnail;
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Group, {
-    isMenu: isMenu,
     finalGroup: finalGroup,
-    imageLoaded: imageLoaded
+    imageLoaded: imageLoaded,
+    isMenu: isMenu
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_shared_Mapper_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], {
     mapData: useThisData,
     render: function render(thumb, idx) {
       var isActive = isMenu && projectName === mappedProject.attributes.projectName;
       var highlightThis = !isMenu && thumbnailIndex === idx || isActive && thumbnailIndex === idx;
       return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ListItem, {
-        key: idx,
+        finalThumbnail: idx === useThisData.length - 1,
         isMenu: isMenu,
-        finalThumbnail: idx === useThisData.length - 1
+        key: idx
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(RestyledLink, {
         highlightThis: highlightThis,
         isMenu: isMenu,
@@ -5969,8 +6214,7 @@ function ReloadRoute(props) {
   var boundHandleClickForApp = props.boundHandleClickForApp;
   var currentCaller = props.appState.currentCaller;
   var indexForChapterData = props.bodyState.indexForChapterData;
-  var reload = new _classes_Reload_js__WEBPACK_IMPORTED_MODULE_2__["default"](props); // Update appStateillustrationState when link
-  // points to /chapter
+  var reload = new _classes_Reload_js__WEBPACK_IMPORTED_MODULE_2__["default"](props); // Update appStateillustrationState when link points to /chapter
 
   if (currentCaller === 'chapter') {
     var number = indexForChapterData + 1;
@@ -6071,7 +6315,6 @@ function (_Component) {
     var state = new _classes_State_js__WEBPACK_IMPORTED_MODULE_12__["default"](props, location);
     var content = new _classes_Content_js__WEBPACK_IMPORTED_MODULE_3__["default"](location.caller);
     var allContentData = content.getContentData();
-    var checkStateOfBlurredIllustration = location.caller === 'chapter' && !isMenu && referrer.path.split('/').length > 2;
     _this.overflowRef = location.caller === 'chapter' ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createRef() : {}; // Don't need to store publication here.
     // The Clip list is a single level, meaning that 
     // we don't use publication to sort.
@@ -6079,16 +6322,17 @@ function (_Component) {
     // index item as a default when needed.
 
     _this.state = {
-      isNotFound: !location.pathIsValid,
-      needsRedirect: location.needsRedirect,
-      imageLoaded: checkStateOfBlurredIllustration ? props.appState.images["chapter-".concat(state.getIndex('chapter') + 1, "-blurred")].complete ? 2 : 0 : location.caller === 'projects' ? 0 : -1,
       allContentData: allContentData,
       caller: location.caller,
       chapterIndex: state.getIndex('chapter'),
-      projectIndex: state.getIndex('project'),
-      thumbnailIndex: state.getIndex('projectPics'),
       headlineIndex: state.getIndex('article'),
-      reverieIndex: state.getIndex('reverie')
+      imageLoaded: // -1 = n/a, 0 = not loaded, 1 = loaded, ready for transition, 2 = done
+      location.caller === 'chapter' ? props.appState.images["chapter-".concat(state.getIndex('chapter') + 1, "-blurred")].complete ? 2 : 0 : location.caller === 'projects' ? 0 : -1,
+      isNotFound: !location.pathIsValid,
+      needsRedirect: location.needsRedirect,
+      projectIndex: state.getIndex('project'),
+      reverieIndex: state.getIndex('reverie'),
+      thumbnailIndex: state.getIndex('projectPics')
     };
     return _this;
   }
@@ -6136,9 +6380,9 @@ function (_Component) {
           }
 
           return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(PageContent, _extends({}, _this2.props, {
-            overflowRef: _this2.overflowRef,
+            boundHandleClickForContentLoader: boundHandleClickForContentLoader,
             contentState: _this2.state,
-            boundHandleClickForContentLoader: boundHandleClickForContentLoader
+            overflowRef: _this2.overflowRef
           }));
         }
       }));
@@ -6278,16 +6522,16 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 //    to 'pop' in the App Component.
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var to = _ref.to,
-      replace = _ref.replace,
-      boundHandleClickForApp = _ref.boundHandleClickForApp,
+  var boundHandleClickForApp = _ref.boundHandleClickForApp,
       isCalledByMenu = _ref.isCalledByMenu,
-      props = _objectWithoutProperties(_ref, ["to", "replace", "boundHandleClickForApp", "isCalledByMenu"]);
+      replace = _ref.replace,
+      to = _ref.to,
+      props = _objectWithoutProperties(_ref, ["boundHandleClickForApp", "isCalledByMenu", "replace", "to"]);
 
   var pathname = window.location.pathname;
-  var splitTheCaller = to.split('/');
-  var callerWillBe = splitTheCaller[1].length > 0 // Word length, array length, i.e., 'chapter'
-  ? splitTheCaller[1] : 'home';
+  var splitTheCaller = to.split('/'); // Word length, array length, i.e., 'chapter'
+
+  var callerWillBe = splitTheCaller[1].length > 0 ? splitTheCaller[1] : 'home';
   var isMenu = pathname.includes('menu') && pathname.split('/')[2] === 'menu'; // Ensures this is a /menu.
 
   var iSayNoMatch = window.location.pathname.includes(to) && !isMenu && to.length > 1;
@@ -6309,14 +6553,14 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
   };
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: typeof to === 'string' ? to : Object(history__WEBPACK_IMPORTED_MODULE_0__["createPath"])(to),
-    exact: true
+    exact: true,
+    path: typeof to === 'string' ? to : Object(history__WEBPACK_IMPORTED_MODULE_0__["createPath"])(to)
   }, function (_ref2) {
     var match = _ref2.match;
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], _extends({}, props, {
-      to: to,
+      onClick: onClickHandler,
       replace: iSayNoMatch || replace || !!match,
-      onClick: onClickHandler
+      to: to
     }));
   });
 });
@@ -6390,16 +6634,16 @@ function (_Component) {
       if (hasError) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           style: {
-            maxWidth: '1078px',
             marginLeft: 'auto',
-            marginRight: 'auto'
+            marginRight: 'auto',
+            maxWidth: '1078px'
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           style: {
             backgroundColor: '#fd1172',
-            paddingBottom: '5px',
             margin: '20px 25px',
-            padding: '15px 0px'
+            padding: '15px 0px',
+            paddingBottom: '5px'
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           style: {
@@ -6413,9 +6657,9 @@ function (_Component) {
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "I write code for Web sites and software. I tell stories, too."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "That's important. Stories define everything. Consider this:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "1. Microsoft sells Word by telling people they can write things with it. That pitch is a story."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "2. People use Word to collect and organize their thoughts. Those thoughts are a story."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "3. Word saves these thoughts to a 'document'. That file name tells a story."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "It's all stories, all the way down."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "That's where I come in. Rather than just mechanically coding sites and software, I try to figure out \u2014 and keep sight of \u2014\xA0the stories that drive them. I always have."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And as a lawyer, I crafted stories that made legal arguments."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Like I said \u2014 stories all the way down."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "That's mine. What's yours?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
           style: {
+            marginTop: !initialLoad ? '25px' : '',
             paddingLeft: '25px',
-            paddingRight: '25px',
-            marginTop: !initialLoad ? '25px' : ''
+            paddingRight: '25px'
           }
         }, "Say\xA0hello__@__jamesabels.net")));
       }
@@ -6428,9 +6672,9 @@ function (_Component) {
     value: function componentDidCatch(error, errorInfo) {
       var initialLoad = this.state.initialLoad;
       this.setState({
-        hasError: true,
         error: error,
-        errorInfo: errorInfo
+        errorInfo: errorInfo,
+        hasError: true
       });
 
       if (false) {}
@@ -6445,8 +6689,8 @@ function (_Component) {
     key: "handleLoad",
     value: function handleLoad() {
       var _this$state2 = this.state,
-          initialLoad = _this$state2.initialLoad,
-          hasError = _this$state2.hasError;
+          hasError = _this$state2.hasError,
+          initialLoad = _this$state2.initialLoad;
 
       if (initialLoad && !hasError) {
         this.setState({
@@ -6541,19 +6785,19 @@ function Loader(props) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Container, {
-    show: props.show,
     cWidth: props.cWidth,
     maxWidth: props.maxWidth,
     marginLeft: props.marginLeft,
     onTransitionEnd: props.forTransition,
+    show: props.show,
     smallMarginLeft: props.smallMarginLeft,
     smallMarginRight: props.smallMarginRight
   }, props.spinner ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ImgContainer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ImgLoader, {
     spinner: _public_image_loader_gif__WEBPACK_IMPORTED_MODULE_1___default.a
   })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Text, {
-    white: props.white,
+    marginBottom: props.marginBottom,
     smallFont: props.smallFont,
-    marginBottom: props.marginBottom
+    white: props.white
   }, "Loading..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LoadingBar, {
     white: props.white
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ProgressBar, {
@@ -6650,9 +6894,9 @@ function MenuButton(props) {
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Container, {
     menu: menuIsActive
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(RestyledLink, {
-    to: link,
+    boundHandleClickForApp: boundHandleClickForApp,
     isCalledByMenu: "menu",
-    boundHandleClickForApp: boundHandleClickForApp
+    to: link
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Label, null, text), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(IconContainer, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Icon, {
     image: arrowIcon
   })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Line, {
@@ -6845,8 +7089,8 @@ function ChapterNav(props) {
       return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(ListItem, {
         key: idx
       }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        to: "/chapter/".concat(normalizedTitle),
-        boundHandleClickForApp: boundHandleClickForApp
+        boundHandleClickForApp: boundHandleClickForApp,
+        to: "/chapter/".concat(normalizedTitle)
       }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(SelectorContainer, null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Selector, {
         image: dotType,
         num: idx
@@ -6906,7 +7150,7 @@ var RestyledContentHolder = Object(styled_components__WEBPACK_IMPORTED_MODULE_9_
   displayName: "Story__RestyledContentHolder",
   componentId: "sc-1gwc67d-0"
 })(["opacity:", ";transition:", ";pointer-events:", ";flex-direction:column;"], function (p) {
-  return !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && (p.illustrationDirection === 'exit' && p.illustrationLevel < 2 || p.illustrationDirection === 'enter' && p.illustrationLevel < 1) ? '1' : '0';
+  return p.tempContent !== 3 && (p.illustrationDirection === 'exit' && p.illustrationLevel < 2 || p.illustrationDirection === 'enter' && p.illustrationLevel < 1) ? '1' : '0';
 }, function (p) {
   return p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s';
 }, function (p) {
@@ -6968,21 +7212,21 @@ var BlurredFallback = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].
   displayName: "Story__BlurredFallback",
   componentId: "sc-1gwc67d-9"
 })(["position:absolute;object-fit:cover;font-family:'object-fit: cover;';top:0px;left:0px;z-index:-1;height:100%;width:100%;opacity:", ";transition:", ";"], function (p) {
-  return p.imageLoaded < 1 || p.illustrationLevel >= 2 && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen ? '1' : '0';
+  return p.imageLoaded < 1 || p.tempContent < 1 && (p.illustrationDirection === 'exit' && p.illustrationLevel > 2 || p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) ? '1' : '0';
 }, function (p) {
-  return p.imageLoaded < 2 ? 'opacity .5s' : p.illustrationLevel > 0 && p.illustrationLevel < 3 && p.illustrationLevel < 3 ? 'opacity .35s' : '';
+  return p.imageLoaded < 2 ? 'opacity .5s' : p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'opacity .35s' : '';
 });
 var BlurredImage = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].img.withConfig({
   displayName: "Story__BlurredImage",
   componentId: "sc-1gwc67d-10"
 })(["position:absolute;object-fit:cover;font-family:'object-fit: cover;';top:0px;left:0px;z-index:-2;height:100%;width:100%;opacity:", ";transition:", ";@media (min-width:", "){opacity:", ";}"], function (p) {
-  return p.imageLoaded < 1 || !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && (p.illustrationDirection === 'exit' && p.illustrationLevel > 2 || p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) ? '0' : '1';
+  return p.imageLoaded < 1 || p.tempContent < 1 && (p.illustrationDirection === 'exit' && p.illustrationLevel > 2 || p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) ? '0' : '1';
 }, function (p) {
   return p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .5s ease-in';
 }, function (p) {
   return p.theme.mediaQueries.narrowBreakTwo;
 }, function (p) {
-  return p.illustrationLevel > 0 && p.theme.blurForHeaderMenu && '0';
+  return p.illustrationLevel > 0 && p.theme.blurForTempContent && '0';
 });
 var StoryText = styled_components__WEBPACK_IMPORTED_MODULE_9__["default"].section.withConfig({
   displayName: "Story__StoryText",
@@ -7000,14 +7244,12 @@ function Story(props) {
       boundHandleClickForContentLoader = props.boundHandleClickForContentLoader,
       contentState = props.contentState,
       overflowRef = props.overflowRef;
-  var chapter = appState.chapter,
-      illustrationDelay = appState.illustrationDelay,
-      headerMenuIsOpen = appState.headerMenuIsOpen,
+  var illustrationDelay = appState.illustrationDelay,
       illustrationDirection = appState.illustrationDirection,
+      illustrationLevel = appState.illustrationLevel,
+      illustrationState = appState.illustrationState,
       images = appState.images,
-      showBusinessCard = appState.showBusinessCard,
-      showLegalTerms = appState.showLegalTerms,
-      illustrationLevel = appState.illustrationLevel;
+      tempContent = appState.tempContent;
   var allContentData = contentState.allContentData,
       chapterIndex = contentState.chapterIndex,
       imageLoaded = contentState.imageLoaded;
@@ -7029,9 +7271,17 @@ function Story(props) {
     }
   };
 
+  var onLoadForMainImage = function onLoadForMainImage(event) {
+    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event);
+
+    if (illustrationState < 0) {
+      boundHandleClickForApp('updateIllustrationState', number, illustrationDelay);
+    }
+  };
+
   var onTransitionEndForRestyledContentHolder = function onTransitionEndForRestyledContentHolder(event) {
     Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event);
-    boundHandleClickForApp('updateIllustrationState', illustrationDirection === 'enter' ? 2 : 0);
+    boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 2 : 0);
   };
 
   var onTransitionEndForBlurredFallbackImage = function onTransitionEndForBlurredFallbackImage(event) {
@@ -7045,15 +7295,7 @@ function Story(props) {
 
   var onTransitionEndForBlurredImage = function onTransitionEndForBlurredImage(event) {
     Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event);
-    boundHandleClickForApp('updateIllustrationState', illustrationDirection === 'enter' ? 3 : 1);
-  };
-
-  var onLoadForMainImage = function onLoadForMainImage(event) {
-    Object(_helpers_eventManagement_js__WEBPACK_IMPORTED_MODULE_1__["default"])(event);
-
-    if (chapter < 0) {
-      boundHandleClickForApp('updateIllustrationState', number, illustrationDelay);
-    }
+    boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
   };
 
   var chapterNumber;
@@ -7082,12 +7324,9 @@ function Story(props) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_primitives_Main_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(RestyledContentHolder, {
-    saveSerifs: true,
-    showLegalTerms: showLegalTerms,
-    illustrationLevel: illustrationLevel,
-    headerMenuIsOpen: headerMenuIsOpen,
-    showBusinessCard: showBusinessCard,
     illustrationDirection: illustrationDirection,
+    illustrationLevel: illustrationLevel,
+    saveSerifs: true,
     onTransitionEnd: onTransitionEndForRestyledContentHolder
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(RestyledShelf, {
     height: "18px"
@@ -7096,34 +7335,30 @@ function Story(props) {
   }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(TagLine, null, dek), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(BookTitle, null, bookTitle), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Chapter, null, "Chapter ", chapterNumber), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(ChapterTitle, null, title), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(StoryText, null, react_html_parser__WEBPACK_IMPORTED_MODULE_6___default()(marked__WEBPACK_IMPORTED_MODULE_2___default()(allContentData[chapterIndex].body, {
     smartypants: true
   }))))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(PictureHolder, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Portal, {
-    imageLoaded: imageLoaded,
     illustrationLevel: illustrationLevel,
-    illustrationDirection: illustrationDirection
-  }), imageLoaded < 2 && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(BlurredFallback, {
-    src: fallbackBlur,
-    alt: "blurred fallback",
-    imageLoaded: imageLoaded,
-    showLegalTerms: showLegalTerms,
-    illustrationLevel: illustrationLevel,
-    headerMenuIsOpen: headerMenuIsOpen,
-    showBusinessCard: showBusinessCard,
     illustrationDirection: illustrationDirection,
-    onTransitionEnd: onTransitionEndForBlurredFallbackImage
+    imageLoaded: imageLoaded
+  }), imageLoaded < 2 && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(BlurredFallback, {
+    alt: "blurred fallback",
+    illustrationDirection: illustrationDirection,
+    illustrationLevel: illustrationLevel,
+    imageLoaded: imageLoaded,
+    onTransitionEnd: onTransitionEndForBlurredFallbackImage,
+    src: fallbackBlur,
+    tempContent: tempContent
   }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(BlurredImage, {
     alt: description,
-    src: blurredImageSrc,
     imageLoaded: imageLoaded,
-    showLegalTerms: showLegalTerms,
-    onLoad: onLoadForBlurredImage,
-    illustrationLevel: illustrationLevel,
-    headerMenuIsOpen: headerMenuIsOpen,
-    showBusinessCard: showBusinessCard,
     illustrationDirection: illustrationDirection,
-    onTransitionEnd: onTransitionEndForBlurredImage
+    illustrationLevel: illustrationLevel,
+    onLoad: onLoadForBlurredImage,
+    onTransitionEnd: onTransitionEndForBlurredImage,
+    src: blurredImageSrc,
+    tempContent: tempContent
   }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Image, {
     alt: description,
-    src: bigImageSrc,
-    onLoad: onLoadForMainImage
+    onLoad: onLoadForMainImage,
+    src: bigImageSrc
   })));
 }
 
@@ -7264,12 +7499,12 @@ function LegalTerms(props) {
   // Styled as attribute for simplicity,
   // breaking it out above's a headache
   var linkOrTextForClips = props.appState.currentCaller !== 'journalism' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_primitives_StyledLink_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    boundHandleClickForApp: props.boundHandleClickForApp,
     style: {
       color: 'white',
       textDecoration: 'underline'
     },
-    to: "/journalism",
-    boundHandleClickForApp: props.boundHandleClickForApp
+    to: "/journalism"
   }, "clips") : 'clips'; // The following HTML is span, not a <p>, b/c it's nested in
   // a <p> (React doesn't allow <p> nesting, kicks a warning).
 
@@ -7288,20 +7523,20 @@ function LegalTerms(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MyCopyright, null, "\xA9 ", new Date().getFullYear(), ", James Abels. All rights reserved."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ClipCopyright, null, "All ", linkOrTextForClips, " owned by their respective publisher."));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VerticleLine, {
-    width: "1px",
-    left: "1.25rem"
+    left: "1.25rem",
+    width: "1px"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VerticleLine, {
-    width: "1px",
-    left: "1.75rem"
+    left: "1.75rem",
+    width: "1px"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VerticleLine, {
-    width: "1px",
-    left: "2.25rem"
+    left: "2.25rem",
+    width: "1px"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HorizontalLine, {
-    height: "1px",
-    bottom: "5.5rem"
+    bottom: "5.5rem",
+    height: "1px"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HorizontalLine, {
-    height: "1px",
-    bottom: "4.85rem"
+    bottom: "4.85rem",
+    height: "1px"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Legal, null, "Legal"), legalNotice);
 }
 
@@ -7360,7 +7595,7 @@ var Card = styled_components__WEBPACK_IMPORTED_MODULE_4__["default"].section.wit
   displayName: "LegalTermsOrBizCard__Card",
   componentId: "sc-171ayyj-2"
 })(["height:160px;width:275px;background-color:", ";box-shadow:7px 7px 5px -1px rgba(0,0,0,0.3);position:relative;@media (min-width:", "){height:200px;width:350px;}"], function (p) {
-  return p.showBusinessCard ? p.theme.colors.pink : p.theme.colors.pink;
+  return p.theme.colors.pink;
 }, function (p) {
   return p.theme.mediaQueries.tinyView;
 });
@@ -7379,19 +7614,14 @@ function (_Component) {
   _createClass(LegalTermsOrBizCard, [{
     key: "render",
     value: function render() {
-      // if (
-      //   !this.props.appState.showBusinessCard
-      //     && !this.props.appState.showLegalTerms
-      // ) return null;
-      if (this.props.appState.tempContent < 1) {
+      if (this.props.appState.tempContent < 1 || this.props.appState.tempContent > 2) {
         return null;
       }
 
       var _this$props = this.props,
           appState = _this$props.appState,
           boundHandleClickForApp = _this$props.boundHandleClickForApp;
-      var showBusinessCard = appState.showBusinessCard,
-          currentCaller = appState.currentCaller,
+      var currentCaller = appState.currentCaller,
           tempContent = appState.tempContent;
       var homeIsActive = currentCaller === 'home';
 
@@ -7401,10 +7631,8 @@ function (_Component) {
 
       var onClickHandler = function onClickHandler() {
         if (tempContent === 1) {
-          // boundHandleClickForApp('toggleBusinessCard');
           boundHandleClickForApp('toggleTempContent', 1);
         } else {
-          // boundHandleClickForApp('toggleLegalTerms');
           boundHandleClickForApp('toggleTempContent', 2);
         }
       };
@@ -7413,15 +7641,15 @@ function (_Component) {
         homeIsActive: homeIsActive,
         onClick: onClickHandler
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(CardHolder, null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Card, {
-        showBusinessCard: showBusinessCard,
-        tempContent: tempContent,
-        onClick: stopOnClickPropagation
+        onClick: stopOnClickPropagation,
+        tempContent: tempContent
       }, tempContent === 1 ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_BusinessCard_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], this.props) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_LegalTerms_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], this.props))));
-    }
+    } // Needed ? Or handled in clickHandling?
+
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var showBusinessCard = this.props.appState.showBusinessCard;
+      var tempContent = this.props.appState.tempContent;
       var pathname = window.location.pathname;
 
       if (false) {}
@@ -7429,14 +7657,8 @@ function (_Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this$props$appState = this.props.appState,
-          showBusinessCard = _this$props$appState.showBusinessCard,
-          showLegalTerms = _this$props$appState.showLegalTerms,
-          tempContent = _this$props$appState.tempContent;
-      var _prevProps$appState = prevProps.appState,
-          businessCardWasActive = _prevProps$appState.businessCardWasActive,
-          legalTermsWereActive = _prevProps$appState.legalTermsWereActive,
-          lastTempContent = _prevProps$appState.lastTempContent;
+      var tempContent = this.props.appState.tempContent;
+      var lastTempContent = prevProps.appState.lastTempContent;
       var pathname = window.location.pathname;
 
       if (false) {}
@@ -7593,6 +7815,28 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE
 
 /***/ }),
 
+/***/ "./public/header-nav-closed.png":
+/*!**************************************!*\
+  !*** ./public/header-nav-closed.png ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAA1CAYAAADh5qNwAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuQwAALkMBFaxbiwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKCSURBVGiB7Zk/axRBGId/40VIY4iCkFNBzuOMhSBoZ2EhfgBPsM+3kIiFoFE7wcJop+TUEFBLI3YWQuwvYhFSaWxiIRokp3ksbhc3l51bZ27uX9ynnczze2dv8u4yI+Xk5OTk/A8Ao0Ch33UkAQrAaLu/2ZPhaEhaAC4DJlxpfgAXJD2T9KtTUZUmS8D5INW513AWeBvVcTGU9B1/eQOcCSLOzj0JLCSyl4LtGOAc29mKwipBAnbmHQUeAr9bcsPuFGCRnWxG4YcCZRwE7gA/U7JehchoDTyV8uRifkTF7Pd07wOuAN8s/i3gdOg1xeHzltCYdWDK0TkVzWvHvIszq6W3Mi1ps834AUkTjs5iNM9GQ9I1R6cbwGzGU5109FUyfPe7tZZkEUXgu6WAuqdz2eLbAA67+ly3n4wxa5LuWYZfuPoy5t01xnzydLoBjLP9n7sOzABFT18xml9PONeBcR+f99uZZpebkPTSGPPR15PinZRUlfTFGPMolHfo6cmXN1CWVJK0aoxZ6UVm1wDGgCctHa0GjPW7Nm+Ap5ZWXet3bV4AZcuCYo51K9v5PeVAKWN8KBe1mjE+nA0DmLNsvcf9rs2bqPvVWhY01+3u16v3VElSWdKKMSZrW+akkX/7JYIH+ivdC+C2pavd9PTNWHy3QtduK6BI8/QojWVP5weLbwM4EnoNaQU8sBQQc8LRdzzDN9uttcQFVGgeYLZj2tF5NcPXcH1Qrp9JNyTtbTP+VdKao/NzNM/GiKTrjs5/g/6f0Ia/lABep4T18ix9MURGMmz33XowOPdT7wlxPwVcioSDcpNY7VRWAJ4zQHe+0S830olkKG/nc3JycnJ2DX8AhegvLjR++EIAAAAASUVORK5CYII="
+
+/***/ }),
+
+/***/ "./public/header-nav-open.png":
+/*!************************************!*\
+  !*** ./public/header-nav-open.png ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAA1CAYAAADh5qNwAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuQwAALkMBFaxbiwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAATiSURBVGiB3ZpdaB5VEIbnmNjGSv8igqkSm8Ta1gqpCrZVK63kzsZasSgVJFf2Rqko1EaFClp/8MKftooggiRqEa0UtVYFBZFiBXMhpI1gSHKhQWgiiJbP1HyPF2eWbDZ7dvfsftmEvjfJ5sy8M7NndnfOTERKArC9LFulAGgEBubaj5oCeACLdWXYu6gMIyKyTX9eGCkI1APjulOn5tqfmgDYyhSqwFWzbbOM9NsW+t2IyJ0l2HQDaADqCnL8wnQcL8hXBzQUJfgY2AmYHPrXMBMVYElOfzqAD4H6PPphoh3BQw7c4an7eExQADs9eW4BvlPdu/0icJOeDDn0NXBTRr1vHUH1ZtS/XncmwKk8GeMivz3iVFWNrUrQWQpMOIL6E7g4Qfdq4C1gMqLnlSlZAjsR49yEGl8RI3+/IyCng8DlwIvY5y6KL2oakBpsj7lzAf5RZ5aH5HtTgnotJLsYeAL4yyFbBW6seVBq/EiKo2NAF/ateTZFdgQwKj+WInvEx0/fj2+3iEwkrDeKyBUicquIXJbC1Swi7SLSpHounBeRpz189AvKGDMkIu+kiH0i06uIJGwXkY9SZN42xvyakS8fgCbgb0ea9KvM6ZR0CtCXIn8OuNLXR+/azxgzKiKvO5aPAq0isjYj3Q3AShE56lh/xRjzm6eL+QAsizzc/cAB3cVHM+5SgEdU74DyBBgDlpUSUCiwLmAfsFqvW4E9wGDIsSFgL3Czrm/Q6+GQzKDqtSrPauXtKjUgNV4HbAZeitzhAAeBBQ7dhcChGJ1+5dtMwdOBTyCXAp3YKmI0IaUORvTasBV2W+TvhxM4xrCl2IPUOg01bR4CPgX+TXAiwBCwUHWXAO9F1nvRowewgOnp6sJ/wPfYquO6PEHUA1uAl4GBDAaj2Bviet8h0xuS2ZfDxoD6twXX2Qrbl9sFfMBUkyQvNihnW4pc8GLYWNDeONbvXUBjEFAn+XbEhcDZjhS5jlB61woDQGd4t9YB3diDWLUAcdadalG5TQVsVbH+dpPWKAVWALuB48SfbZIQfqZ6HDLvFnimKurXbmLOcZkALGLqNf5HBqPDTH/7Rc9VPUy9/RqwR5A0jDP1el+aK5CEAOuA27AHwmjrK4xDEb0W7DPWEvn7mwkcI9gb2YnjIz4rANYD+4G+GKcOozsWo9cAvBGj06d860sLIuJYtPZrxhan4Y/psMpsxL7lNul1OOUGVa9Zeeam9iO5St+TkFJxeJj5UKUDLzgcfA7/785KDSgOz5cVUBO2exSH0yoTV7XH4SeVP+NYP0eOKUmeqcd+EVnkWFsLrBGRzzJyHQOuFZE1jvVLROQpT//8AKzC3XUN0I09D2VBO/Bkisx5vVGZ4btTz4qIs10sIuMiMioiJ0XkbArXiIj8LCK/q54L9SLyTHYXPYB/h9ZVIgV4NSSbpUObaSjhG9SXMcaSeun3pQS1NUYnqZd+otYBXXhTD/LPp75xBNWTUT86n/qRWsyngHuUMM8k8TFHUPd68oQniTv8IphJVnTmG3dQrACLc/pTfOZLbabz0VbB5wX5Uqfzid8pY0zFGDNZxAmZWV0cK0JmjJk0xlSKcBQGto0VoEqOKca8A9Onij+UYXPW/41H0/crvSyUevMK2EYj5GkZz1cAy4Ezc+1HzQHcVZat/wEAObyw/uqVnQAAAABJRU5ErkJggg=="
+
+/***/ }),
+
 /***/ "./public/image-loader.gif":
 /*!*********************************!*\
   !*** ./public/image-loader.gif ***!
@@ -7684,4 +7928,4 @@ module.exports = __webpack_require__(/*! ./app/index.js */"./app/index.js");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.0424e1d084679ec2f1cb.js.map
+//# sourceMappingURL=main.4edad39cea5d483df6a3.js.map

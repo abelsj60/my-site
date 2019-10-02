@@ -35,7 +35,6 @@ const HeaderBackground = styled.div`
   position: absolute;
   width: 100%;
   height: 52px;
-  // top: ${p => p.tempContent === 3 ? '0px' : '52px'};
   top: 0px;
   bottom: ${p => p.tempContent === 3 && '0px'};
   width: ${p => p.tempContent === 3 && '100%'};
