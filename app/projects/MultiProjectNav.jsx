@@ -48,8 +48,8 @@ export default function DesktopProjectNav(props) {
                 </Graf>
                 <ProjectNav
                   {...props}
-                  mappedProjectIndex={idx}
                   mappedProject={mappedProject}
+                  mappedProjectIndex={idx}
                 />
               </li>
             );

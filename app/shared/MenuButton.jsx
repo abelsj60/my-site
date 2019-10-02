@@ -53,31 +53,23 @@ export default function MenuButton(props) {
     currentCaller
   } = props.appState;
   const isReverie = currentCaller === 'reverie';
-
-  const link =
-    isReverie && isMenu
-      ? '/reverie'
-      : isMenu
-        ? `/${currentCaller}`
-        : `/${currentCaller}/menu`;
-  const arrowIcon =
-    !isMenu
-      ? arrowDown
-      : arrowUp;
+  const link = isReverie && isMenu
+    ? '/reverie'
+    : isMenu
+      ? `/${currentCaller}`
+      : `/${currentCaller}/menu`;
+  const arrowIcon = !isMenu ? arrowDown : arrowUp;
   const menuIsActive = isMenu && 'active';
-  const text =
-    !isMenu
-      ? 'See all'
-      : 'Close';
+  const text = !isMenu ? 'See all' : 'Close';
 
   return (
     <Container
       menu={menuIsActive}
     >
       <RestyledLink
-        to={link}
-        isCalledByMenu="menu"
         boundHandleClickForApp={boundHandleClickForApp}
+        isCalledByMenu="menu"
+        to={link}
       >
         <Label>
           {text}

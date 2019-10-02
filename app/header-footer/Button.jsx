@@ -11,7 +11,7 @@ const Structure = styled.button`
   position: relative;
   background-color: unset; // otherwise, button grey
   border: 1px rgba(255, 255, 255, .6) solid;
-  box-shadow: ${p => !p.showBusinessCard && !p.showLegalTerms && p.illustrationLevel >= 2 && !p.headerMenuIsOpen && '2px 2px 2.5px rgba(0, 0, 0, .4)'};
+  box-shadow: ${p => p.tempContent < 1 && p.illustrationLevel >= 2 && '2px 2px 2.5px rgba(0, 0, 0, .4)'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'box-shadow .35s' : ''};
   user-select: none;
   z-index: 0;
@@ -40,25 +40,21 @@ const Text = styled.p`
 
 export default function Button(props) {
   const {
-    illustrationLevel,
-    headerMenuIsOpen,
     className,
     clickFunction,
+    illustrationLevel,
     isStory,
-    showBusinessCard,
-    showLegalTerms,
+    tempContent,
     text
   } = props;
 
   return (
     <Structure
       className={className}
-      isStory={isStory}
-      headerMenuIsOpen={headerMenuIsOpen}
-      showBusinessCard={showBusinessCard}
-      showLegalTerms={showLegalTerms}
       illustrationLevel={illustrationLevel}
+      isStory={isStory}
       onClick={clickFunction}
+      tempContent={tempContent}
     >
       <Cover
         illustrationLevel={illustrationLevel}

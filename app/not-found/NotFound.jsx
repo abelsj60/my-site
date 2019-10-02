@@ -42,8 +42,8 @@ export default class NotFound extends Component {
             // Inline styles used to allocate img space on load
             style={{
               height: 'auto',
-              width: '100%',
-              maxWidth: '310px'
+              maxWidth: '310px',
+              width: '100%'
             }}
             alt="404"
             src={src}

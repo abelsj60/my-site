@@ -51,18 +51,17 @@ export default class ClickHandling {
   _handleClickForApp() {
     return (updateValue, valueOne, valueTwo) => {
       const {
-        illustrationLevel,
         chapter,
         currentCaller,
-        lastCaller,
         illustrationDelay,
-        heartbeat,
         illustrationDirection,
+        illustrationLevel,
+        heartbeat,
         showBusinessCard,
         showLegalTerms,
+        tempContent,
         inCity,
-        isMenu,
-        headerMenuIsOpen
+        isMenu
       } = this.state;
       const stateToUpdate = {};
       const toggleStoryTextSequence = () => {
@@ -71,18 +70,15 @@ export default class ClickHandling {
         }
 
         if (illustrationLevel === 0) {
-          stateToUpdate.illustrationLevel = 1;
+          // Already 'enter' (default/reset to 'enter' by 'updateApp')
+          stateToUpdate.illustrationLevel = 1; // 0 --> 1
         } else {
           stateToUpdate.illustrationLevel = 2; // 3 --> 2
           stateToUpdate.illustrationDirection = 'exit'
         }
 
-        if (showBusinessCard) {
-          stateToUpdate.showBusinessCard = !showBusinessCard;
-        }
-
-        if (showLegalTerms) {
-          stateToUpdate.showLegalTerms = !showLegalTerms;
+        if (tempContent > 0) {
+          stateToUpdate.tempContent = 0;
         }
       };
       let category = '';
@@ -90,35 +86,51 @@ export default class ClickHandling {
       let label = '';
 
       switch (updateValue) {
-        case 'toggleBusinessCard':
-          stateToUpdate.showBusinessCard = !showBusinessCard;
-          
-          if (showLegalTerms) {
-            stateToUpdate.showLegalTerms = !showLegalTerms;
+        case 'toggleTempContent':
+          if (tempContent > 0 && tempContent - valueOne === 0) {
+            stateToUpdate.tempContent = 0;
+          } else {
+            stateToUpdate.tempContent = valueOne;
           }
-
-          category = 'App state';
-          action = !showBusinessCard
-            ? 'Open business card'
-            : 'Close business card';
-          label = showLegalTerms
-            ? 'Legal notice was open'
-            : '';
-          break;
-        case 'toggleLegalTerms':
-          stateToUpdate.showLegalTerms = !showLegalTerms;
-          
-          if (showBusinessCard) {
-            stateToUpdate.showBusinessCard = !showBusinessCard;
+          if (tempContent < 3 && valueOne === 3) {
+            // Disable setTimeout to suspend auto-close
+            this.headerMenuTimeoutId = setTimeout(() => {
+              this.setState({ tempContent: 0 },
+                () => {
+                  // Reset timeout after timeout successfully runs
+                  this.headerMenuTimeoutId = undefined;
+                });
+            }, 5000);
+          } else {
+            // Clear timeout if closing via the icon (img))
+            clearTimeout(this.headerMenuTimeoutId);
+            this.headerMenuTimeoutId = undefined;
           }
-
           category = 'App state';
-          action = !showLegalTerms
-            ? 'Open legal terms'
-            : 'Close legal terms';
-          label = showBusinessCard
-            ? 'Business card was open'
-            : '';
+          action = tempContent - valueOne === 0
+            ? `Close ${
+                tempContent === 1
+                  ? 'business card'
+                  : tempContent === 2
+                    ? 'legal terms'
+                    : 'header menu'
+              }`
+            : `Open ${
+                valueOne === 1
+                  ? 'business card'
+                  : valueOne === 2
+                    ? 'legal terms'
+                    : 'header menu'
+                }`;
+          label = tempContent - valueOne === 0
+            ? 'Temp content was toggled off'
+            : `Temp content was swapped from ${
+              tempContent === 1
+                ? 'business card'
+                : tempContent === 2
+                  ? 'legal terms'
+                  : 'header menu'
+              }`;
           break;
         case 'toggleStoryText':
           toggleStoryTextSequence();
@@ -132,7 +144,8 @@ export default class ClickHandling {
               ? 'Legal notice was open'
               : '';
           break;
-        case 'updateIllustrationState':
+        case 'updateIllustrationLevel':
+          // Tracked by app so header/footer can respond
           stateToUpdate.illustrationLevel = valueOne;
           
           if (valueOne === 0) {
@@ -146,7 +159,7 @@ export default class ClickHandling {
             : 'enter';
           break;
         case 'updateIllustrationState':
-          stateToUpdateillustrationState = valueOne;
+          stateToUpdate.illustrationState = valueOne;
 
           if (valueTwo) {
             toggleStoryTextSequence();
@@ -158,7 +171,7 @@ export default class ClickHandling {
             ? 'loaded'
             : 'not-loaded';
           break;
-        case 'toggleShowDelay':
+        case 'toggleIllustrationDelay':
           stateToUpdate.illustrationDelay = !illustrationDelay;
           category = 'App state';
           action = `Delay illustration until loaded`;
@@ -196,30 +209,6 @@ export default class ClickHandling {
           category = 'App state';
           action = 'Finished home page loading';
           break;
-        case 'toggleHeaderMenu':
-          stateToUpdate.headerMenuIsOpen = !headerMenuIsOpen;
-
-          if (!headerMenuIsOpen) {
-            // Disable setTimeout to suspend auto-close
-            this.headerMenuTimeoutId = setTimeout(() => {
-              this.setState({ headerMenuIsOpen: false },
-                () => {
-                  // Reset timeout after timeout successfully runs
-                  this.headerMenuTimeoutId = undefined;
-                });
-            }, 5000);
-          } else {
-            // Clear timeout if closing via the icon (img))
-            clearTimeout(this.headerMenuTimeoutId);
-            this.headerMenuTimeoutId = undefined;
-          }
-
-          category = 'App state';
-          action = 'Toggle header menu';
-          label = !headerMenuIsOpen
-            ? 'Will open'
-            : 'will close';
-          break;
         case 'updateApp':
           if (valueOne !== undefined) {
             stateToUpdate.currentCaller = valueOne;
@@ -232,9 +221,7 @@ export default class ClickHandling {
             this.headerMenuTimeoutId = undefined;
           }
 
-          stateToUpdate.headerMenuIsOpen = false;
-          stateToUpdate.showBusinessCard = false;
-          stateToUpdate.showLegalTerms = false;
+          stateToUpdate.tempContent = 0;
 
           if (heartbeat === 1) {
             stateToUpdate.heartbeat = 2;
@@ -254,6 +241,7 @@ export default class ClickHandling {
             stateToUpdate.isMenu = !isMenu;
           }
 
+          // Reset illustrationDelay when leaving /chapter
           if (illustrationDelay && valueOne !== 'chapter') {
             stateToUpdate.illustrationDelay = !illustrationDelay;
           }
@@ -273,8 +261,8 @@ export default class ClickHandling {
               stateToUpdate.illustrationLevel = 0;
             }
 
-            if (chapter > 0 || chapter < 0) {
-              stateToUpdateillustrationState = 0;
+            if (chapter !== 0) {
+              stateToUpdate.illustrationState = 0;
             }
           }
 
@@ -349,7 +337,7 @@ export default class ClickHandling {
               ].complete
                 ? 2
                 : 0
-            stateToUpdateillustrationStateIndex = valueOne;
+            stateToUpdate.chapterIndex = valueOne;
             stateToUpdate.imageLoaded = blurredIllustrationState;
           }
 

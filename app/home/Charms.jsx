@@ -61,7 +61,7 @@ const yellowPulse = keyframes`
 `;
 
 const OuterContainer = styled.div`
-  display: ${p => p.spellLevel < 5  && !p.tempContentIsOn ? 'flex' : 'none'};
+  display: ${p => p.spellLevel < 5  && p.tempContent < 1 ? 'flex' : 'none'};
   flex-direction: column;
   justify-content: space-between;
   z-index: 2;
@@ -196,36 +196,34 @@ export default function Charms(props) {
   const {
     inCity,
     nameTagWidth,
-    showBusinessCard,
-    showLegalTerms
+    tempContent
   } = appState;
   const {
     activeCharm,
     goal,
-    spellLevel,
     movement,
-    score
+    score,
+    spellLevel
   } = homeState;
 
   // Let's set up a progress bar.
 
-  const onTransitionEndForOuterContainer =
-    event => {
-      eventManagement(event);
-      setSpellLevels.two(movement === 'exit', 'OuterContainer');
-      setSpellLevels.four(movement === 'enter', 'OuterContainer');
-    };
+  const onTransitionEndForOuterContainer = event => {
+    eventManagement(event);
+    setSpellLevels.two(movement === 'exit', 'OuterContainer');
+    setSpellLevels.four(movement === 'enter', 'OuterContainer');
+  };
   const barWidth = score * (100 / (goal - 1));
   const isReady = score === goal - 1;
 
   return (
     <OuterContainer
-      spellLevel={spellLevel}
       enter={movement === 'enter'}
       exit={movement === 'exit'}
-      tempContentIsOn={showBusinessCard || showLegalTerms}
       nameTagWidth={nameTagWidth}
       onTransitionEnd={onTransitionEndForOuterContainer}
+      spellLevel={spellLevel}
+      tempContent={tempContent}
     >
       <FitText
         compressor={2.3}
@@ -249,30 +247,30 @@ export default function Charms(props) {
                 const isActive = activeCharm === idx + 1;
                 return (
                   <Charm
-                    key={idx}
-                    isActive={isActive}
-                    spellLevel={spellLevel}
                     enter={movement === 'enter'}
                     exit={movement === 'exit'}
+                    isActive={isActive}
                     isReady={isReady}
+                    key={idx}
                     ref={charmRefs[idx]} // Add a ref to each Charm when mounted
+                    spellLevel={spellLevel}
                   >
                     <CharmShadow
                       isActive={isActive}
-                      spellLevel={spellLevel}
                       isReady={isReady}
+                      spellLevel={spellLevel}
                     />
                     <Eye
-                      isActive={isActive}
-                      spellLevel={spellLevel}
                       enter={movement === 'enter'}
                       exit={movement === 'exit'}
+                      isActive={isActive}
                       isReady={isReady}
+                      spellLevel={spellLevel}
                     >
                       <EyeShadow
                         isActive={isActive}
-                        spellLevel={spellLevel}
                         isReady={isReady}
+                        spellLevel={spellLevel}
                       />
                     </Eye>
                   </Charm>

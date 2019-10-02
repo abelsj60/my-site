@@ -29,7 +29,7 @@ const CardHolder = styled.div`
 const Card = styled.section`
   height: 160px;
   width: 275px;
-  background-color: ${p => p.showBusinessCard ? p.theme.colors.pink : p.theme.colors.pink};
+  background-color: ${p => p.theme.colors.pink};
   box-shadow: 7px 7px 5px -1px rgba(0, 0, 0, 0.3);
   position: relative;
 
@@ -41,26 +41,25 @@ const Card = styled.section`
 
 export default class LegalTermsOrBizCard extends Component {
   render() {
-    if (
-      !this.props.appState.showBusinessCard
-        && !this.props.appState.showLegalTerms
-    ) return null;
+    if (this.props.appState.tempContent < 1 || this.props.appState.tempContent > 2) {
+      return null;
+    }
 
     const {
       appState,
       boundHandleClickForApp
     } = this.props;
     const {
-      showBusinessCard,
-      currentCaller
+      currentCaller,
+      tempContent
     } = appState;
     const homeIsActive = currentCaller === 'home';
     const stopOnClickPropagation = event => event.stopPropagation();
     const onClickHandler = () => {
-      if (showBusinessCard) {
-        boundHandleClickForApp('toggleBusinessCard');
+      if (tempContent === 1) {
+        boundHandleClickForApp('toggleTempContent', 1);
       } else {
-        boundHandleClickForApp('toggleLegalTerms');
+        boundHandleClickForApp('toggleTempContent', 2);
       }
     };
     
@@ -71,10 +70,10 @@ export default class LegalTermsOrBizCard extends Component {
       >
         <CardHolder>
           <Card
-            showBusinessCard={showBusinessCard}
             onClick={stopOnClickPropagation}
+            tempContent={tempContent}
           >
-            {showBusinessCard ? (
+            {tempContent === 1 ? (
               <BusinessCard 
                 {...this.props}
               />
@@ -89,36 +88,31 @@ export default class LegalTermsOrBizCard extends Component {
     );
   }
 
+  // Needed ? Or handled in clickHandling?
   componentDidMount() {
-    const { showBusinessCard } = this.props.appState;
+    const { tempContent } = this.props.appState;
     const { pathname } = window.location;
 
     if (process.env.NODE_ENV !== 'development') {
       ReactGA.modalview(
         `${pathname}${
-          showBusinessCard
-            ? 'businesscard'
-            : 'legalterms'
+          tempContent === 1
+            ? 'Switch to business card'
+            : 'Switch to terms'
         }`
       );
     }
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      showBusinessCard,
-      showLegalTerms
-    } = this.props.appState;
-    const {
-      businessCardWasActive,
-      legalTermsWereActive
-    } = prevProps.appState;
+    const { tempContent } = this.props.appState;
+    const { lastTempContent } = prevProps.appState;
     const { pathname } = window.location;
 
     if (process.env.NODE_ENV !== 'development') {
-      if (showBusinessCard && !businessCardWasActive) {
+      if (tempContent === 1 && lastTempContent === 0) {
         ReactGA.modalview(`${pathname}businesscard`);
-      } else if (showLegalTerms && !legalTermsWereActive) {
+      } else if (tempContent === 2 && lastTempContent === 0) {
         ReactGA.modalview(`${pathname}legalterms`);
       }
     }

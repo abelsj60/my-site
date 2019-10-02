@@ -59,11 +59,11 @@ export default function Loader(props) {
 
   return (
     <Container
-      show={props.show}
       cWidth={props.cWidth}
       maxWidth={props.maxWidth}
       marginLeft={props.marginLeft}
       onTransitionEnd={props.forTransition}
+      show={props.show}
       smallMarginLeft={props.smallMarginLeft}
       smallMarginRight={props.smallMarginRight}
     >
@@ -77,9 +77,9 @@ export default function Loader(props) {
         ) : (
           <div>
             <Text
-              white={props.white}
-              smallFont={props.smallFont}
               marginBottom={props.marginBottom}
+              smallFont={props.smallFont}
+              white={props.white}
             >
               Loading...
             </Text>

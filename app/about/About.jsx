@@ -73,8 +73,8 @@ export default function About() {
           <IconContainer>
             <ReactGA.OutboundLink
               eventLabel="To LinkedIn"
-              to="https://www.linkedin.com/in/jameserikabels"
               target="_blank"
+              to="https://www.linkedin.com/in/jameserikabels"
             >
               <Icon src={linkedInIcon} />
             </ReactGA.OutboundLink>

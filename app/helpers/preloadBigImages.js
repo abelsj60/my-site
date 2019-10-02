@@ -37,30 +37,42 @@ export default function prelodBigImages() {
 
   // const pixelDensity = Math.ceil(window.devicePixelDensity);
   // const pixelDensity = window.devicePixelDensity;
-  const width = window.screen.width;
-  const height = window.screen.height; // use availHeight instead?
-  const imageDimensions = [
-    [1028, 600],
-    [1366, 797],
-    [1600, 900], // Cut
-    [1645, 960],
-    [1755, 1024],
-    [1921, 1121], // Cut
-    [1947, 1136],
-    [2048, 1195], // Cut
-    [2056, 1200],
-    [2194, 1280], // Cut (plus add?)
-    [2632, 1536],
-    [3840, 2241],
-    [5116, 2985], // Cut
-    [5120, 2988],
-    [7680, 4481]
-  ].find((dimension, idx, arr) => {
+  const deviceWidth = window.screen.width;
+  const deviceHeight = window.screen.height; // use availHeight instead?
+  const imageWidth = [
+    960,
+    1024,
+    1080,
+    1136,
+    1200,
+    1280,
+    1334,
+    1440,
+    1536,
+    1600,
+    1792,
+    1921,
+    2048,
+    2160,
+    2304,
+    2436,
+    2560,
+    2688,
+    2736,
+    2880,
+    3000,
+    3840,
+    4096,
+    5120,
+    7680
+  ].find((imgWidth, idx, arr) => {
     if (idx < arr.length - 1) {
-      return dimension[0] >= width && dimension[1] >= height;
+      // (origHeight / origWidth) * imgWidth = imgHeight
+      const imgHeight = Math.ceil((2985 / 5116) * imgWidth); 
+      return imgWidth >= deviceWidth && imgHeight >= deviceHeight;
     }
 
-    return dimension; // default
+    return width; // default size when nothing fits
   });
 
   stories.forEach(chapter => {
@@ -70,9 +82,7 @@ export default function prelodBigImages() {
     imageB.src = chapter.attributes.blurredImage;
     images[`chapter-${chapter.attributes.number}-main`] = imageA;
     images[`chapter-${chapter.attributes.number}-blurred`] = imageB;
-
-    // const newSource = `chapter-${chapter.attributes.number}-${imageDimensions[0]}-${imageDimensions[1]}-main`;
-    // chapter.attributes[newSource]
+    // const newSource = `chapter-${chapter.attributes.number}-imc-main-${imageWidth}.jpg`;
   });
 
   home.attributes.preloadTheseImages.forEach(name => {
@@ -80,7 +90,7 @@ export default function prelodBigImages() {
     image.src = home.attributes[name];
     images[name] = image;
 
-    // Poor man's test for cached images
+    // A poor man's test for cached images
     if (image.complete) {
       images.alreadyLoaded.push(1);
     }

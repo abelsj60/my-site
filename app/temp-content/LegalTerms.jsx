@@ -48,20 +48,19 @@ export default function LegalTerms(props) {
     // Styled as attribute for simplicity,
     // breaking it out above's a headache
 
-    const linkOrTextForClips =
-      props.appState.currentCaller !== 'journalism'
-        ? (
-          <StyledLink
-            style={{
-              color: 'white',
-              textDecoration: 'underline'
-            }}
-            to="/journalism"
-            boundHandleClickForApp={props.boundHandleClickForApp}
-          >
-            clips
-          </StyledLink>
-        ) : 'clips';
+    const linkOrTextForClips = props.appState.currentCaller !== 'journalism'
+      ? (
+        <StyledLink
+          boundHandleClickForApp={props.boundHandleClickForApp}
+          style={{
+            color: 'white',
+            textDecoration: 'underline'
+          }}
+          to="/journalism"
+        >
+          clips
+        </StyledLink>
+      ) : 'clips';
 
     // The following HTML is span, not a <p>, b/c it's nested in
     // a <p> (React doesn't allow <p> nesting, kicks a warning).
@@ -94,24 +93,24 @@ export default function LegalTerms(props) {
     return (
       <Fragment>
         <VerticleLine
-          width="1px"
           left="1.25rem"
+          width="1px"
         />
         <VerticleLine
-          width="1px"
           left="1.75rem"
+          width="1px"
         />
         <VerticleLine
-          width="1px"
           left="2.25rem"
+          width="1px"
         />
         <HorizontalLine 
-          height="1px"
           bottom="5.5rem"
+          height="1px"
         />
         <HorizontalLine 
-          height="1px"
           bottom="4.85rem"
+          height="1px"
         />
         <Legal>
           Legal

@@ -26,17 +26,17 @@ export default class ErrorBoundary extends Component {
         <Fragment>
           <div
             style={{
-              maxWidth: '1078px',
               marginLeft: 'auto',
-              marginRight: 'auto'
+              marginRight: 'auto',
+              maxWidth: '1078px'
             }}
           >
             <header
               style={{
                 backgroundColor: '#fd1172',
-                paddingBottom: '5px',
                 margin: '20px 25px',
-                padding: '15px 0px'
+                padding: '15px 0px',
+                paddingBottom: '5px'
               }}
             >
               <p
@@ -96,9 +96,9 @@ export default class ErrorBoundary extends Component {
               )}
             <footer
               style={{
+                marginTop: !initialLoad ? '25px' : '',
                 paddingLeft: '25px',
-                paddingRight: '25px',
-                marginTop: !initialLoad ? '25px' : ''
+                paddingRight: '25px'
               }}
             >
               Say hello__@__jamesabels.net
@@ -116,20 +116,14 @@ export default class ErrorBoundary extends Component {
   componentDidCatch(error, errorInfo) {
     const { initialLoad } = this.state;
     this.setState({
-      hasError: true,
       error: error,
-      errorInfo: errorInfo
+      errorInfo: errorInfo,
+      hasError: true
     });
 
     if (process.env.NODE_ENV !== 'development') {
       ReactGA.exception({
-        description: `${
-          error
-        }. Initial load: ${
-          initialLoad
-        }. Info: ${
-          JSON.stringify(errorInfo)
-        }.`
+        description: `${error}. Initial load: ${initialLoad}. Info: ${JSON.stringify(errorInfo)}.`
       });
     }
   }
@@ -141,8 +135,8 @@ export default class ErrorBoundary extends Component {
 
   handleLoad() {
     const {
-      initialLoad,
-      hasError
+      hasError,
+      initialLoad
     } = this.state;
 
     if (initialLoad && !hasError) {

@@ -71,45 +71,34 @@ export default function ProjectNav(props) {
     projectThumbnail
   } = allContentData[projectIndex].attributes;
   const isMenu = mappedProjectIndex !== undefined;
-
-  const finalGroup = isMenu
-    && mappedProjectIndex === allContentData.length - 1;
-  const useThisData = !isMenu
-    ? projectThumbnail
-    : mappedProject.attributes.projectThumbnail;
+  const finalGroup = isMenu && mappedProjectIndex === allContentData.length - 1;
+  const useThisData = !isMenu ? projectThumbnail : mappedProject.attributes.projectThumbnail;
 
   return (
     <Group
-      isMenu={isMenu}
       finalGroup={finalGroup}
       imageLoaded={imageLoaded}
+      isMenu={isMenu}
     >
       <Mapper
         mapData={useThisData}
         render={
           (thumb, idx) => {
-            const isActive = isMenu
-              && projectName === mappedProject.attributes.projectName;
-            const highlightThis =
-              (!isMenu && thumbnailIndex === idx)
-                || (isActive && thumbnailIndex === idx);
+            const isActive = isMenu && projectName === mappedProject.attributes.projectName;
+            const highlightThis = (!isMenu && thumbnailIndex === idx) || (isActive && thumbnailIndex === idx);
 
             return (
               <ListItem
-                key={idx}
-                isMenu={isMenu}
                 finalThumbnail={idx === useThisData.length - 1}
+                isMenu={isMenu}
+                key={idx}
               >
                 <RestyledLink
                   highlightThis={highlightThis}
                   isMenu={isMenu}
-                  to={`/projects/${
-                    normalize(
-                      !isMenu
-                        ? projectName
-                        : mappedProject.attributes.projectName
-                    )
-                  }/${idx + 1}`}
+                  to={`/projects/${normalize(
+                    !isMenu ? projectName : mappedProject.attributes.projectName
+                  )}/${idx + 1}`}
                   boundHandleClickForApp={boundHandleClickForApp}
                 >
                   <Image

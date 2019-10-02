@@ -31,13 +31,13 @@ export default class Home extends Component {
     this.props.boundHandleClickForApp('updateSpacerHeight', this.props.appState.height);
 
     this.state = {
-      goal: 5,
-      score: 0, // Used to select an active Charm and cast spell
-      pattern: initialPattern, // arr
       activeCharm: initialPattern[0],
       eventType: 'click', // Type of event triggered Charm
-      movement: '', // 'enter' = Charms / 'exit' = NameTag
+      goal: 5,
       loadLevel: [0, 0, 0, 0], // [bBoy, bFant., boy, fant.], [2, 2, 1, 1] for initial load, [1, 1, 1, 1] after traveling (disregarded)
+      movement: '', // 'enter' = Charms / 'exit' = NameTag
+      pattern: initialPattern, // arr
+      score: 0, // Used to select an active Charm and cast spell
       spellLevel: 0
     };
 
@@ -100,17 +100,13 @@ export default class Home extends Component {
   }
 
   sumLoadLevels() {
-    const blurs =
-      this.state.loadLevel[0]
-        + this.state.loadLevel[1];
-    const full =
-      this.state.loadLevel[2]
-        + this.state.loadLevel[3];
+    const blurs = this.state.loadLevel[0] + this.state.loadLevel[1];
+    const full = this.state.loadLevel[2] + this.state.loadLevel[3];
 
     return {
+      all: blurs + full,
       blurs,
-      full,
-      all: blurs + full
+      full
     }
   }
 
@@ -158,11 +154,11 @@ export default class Home extends Component {
       // NameTag --> onTransitionEnd
       const newPattern = this.createSpellPattern();
       this.setState({
-        spellLevel: 0,
+        activeCharm: newPattern[0],
         movement: '',
         pattern: newPattern,
-        activeCharm: newPattern[0],
-        score: 0
+        score: 0,
+        spellLevel: 0
       });
     }
   }
@@ -193,23 +189,23 @@ export default class Home extends Component {
       >
         <NameTag
           {...this.props}
-          homeState={this.state}
           boundHandleClickForHome={boundHandleClickForHome}
-          setSpellLevels={setSpellLevels}
+          homeState={this.state}
           setLoadLevels={setLoadLevels}
+          setSpellLevels={setSpellLevels}
         />
         <Charms
           {...this.props}
-          homeState={this.state}
           charmRefs={this.charmRefs}
+          homeState={this.state}
           setSpellLevels={setSpellLevels}
         />
         <PictureBox
           {...this.props}
-          homeState={this.state}
           boundHandleClickForHome={boundHandleClickForHome}
-          setSpellLevels={setSpellLevels}
+          homeState={this.state}
           setLoadLevels={setLoadLevels}
+          setSpellLevels={setSpellLevels}
         />
       </RestyledMain>
     );

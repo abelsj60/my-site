@@ -14,7 +14,7 @@ import fallbackBlurThree from '../../public/jea-story-chapter-three-50blur-3px.p
 import fallbackBlurFour from '../../public/jea-story-chapter-four-50blur-3px.png';
 
 const RestyledContentHolder = styled(ContentHolder)`
-  opacity: ${p => !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
+  opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
   pointer-events: ${p => p.illustrationLevel >  0 && 'none'};
   flex-direction: column;
@@ -109,8 +109,9 @@ const BlurredFallback = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => p.imageLoaded < 1 || (p.illustrationLevel >= 2 && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen) ? '1' : '0'};
-  transition: ${p => p.imageLoaded < 2 ? 'opacity .5s' : p.illustrationLevel > 0 && p.illustrationLevel < 3 && p.illustrationLevel < 3 ? 'opacity .35s' : ''};
+  // Let's emulate all <BlurredImage /> logic in case it doesn't load (<BlurredFallback /> will work just as the <BlurredImage /> would) 
+  opacity: ${p => p.imageLoaded < 1 || p.tempContent < 1 && (((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '1' : '0'};
+  transition: ${p => p.imageLoaded < 2 ? 'opacity .5s' : p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'opacity .35s' : ''};
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
@@ -124,13 +125,13 @@ const BlurredImage = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => p.imageLoaded < 1 || !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && (((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'}; // or < 2
+  opacity: ${p => p.imageLoaded < 1 || p.tempContent < 1 && (((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .5s ease-in'};
 
   // The mediaQ ensures the blur goes away if the full-screen menu is
   // turned on when the user increases the browser window's width
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    opacity: ${p => p.illustrationLevel > 0 && p.theme.blurForHeaderMenu && '0'};
+    opacity: ${p => p.illustrationLevel > 0 && p.theme.blurForTempContent && '0'};
   }
 `;
 const StoryText = styled.section`
@@ -157,14 +158,12 @@ export default function Story(props) {
     overflowRef
   } = props;
   const {
-    chapter,
     illustrationDelay,
-    headerMenuIsOpen,
     illustrationDirection,
+    illustrationLevel,
+    illustrationState,
     images,
-    showBusinessCard,
-    showLegalTerms,
-    illustrationLevel
+    tempContent
   } = appState;
   const {
     allContentData,
@@ -186,9 +185,15 @@ export default function Story(props) {
       boundHandleClickForContentLoader('imageLoader', 1)
     }
   };
+  const onLoadForMainImage = event => {
+    eventManagement(event);
+    if (illustrationState < 0) {
+      boundHandleClickForApp('updateIllustrationState', number, illustrationDelay);
+    }
+  };
   const onTransitionEndForRestyledContentHolder = event => {
     eventManagement(event);
-    boundHandleClickForApp('updateIllustrationState', illustrationDirection === 'enter' ? 2 : 0);
+    boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 2 : 0);
   };
   const onTransitionEndForBlurredFallbackImage = event => { // 1 --> 2
     eventManagement(event);
@@ -198,14 +203,8 @@ export default function Story(props) {
   };
   const onTransitionEndForBlurredImage = event => {
     eventManagement(event);
-    boundHandleClickForApp('updateIllustrationState', illustrationDirection === 'enter' ? 3 : 1);
-  }
-  const onLoadForMainImage = event => {
-    eventManagement(event);
-    if (chapter < 0) {
-      boundHandleClickForApp('updateIllustrationState', number, illustrationDelay);
-    }
-  }
+    boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
+  };
   let chapterNumber;
   let fallbackBlur;
 
@@ -231,12 +230,9 @@ export default function Story(props) {
   return (
     <Main>
       <RestyledContentHolder
-        saveSerifs={true}
-        showLegalTerms={showLegalTerms}
-        illustrationLevel={illustrationLevel}
-        headerMenuIsOpen={headerMenuIsOpen}
-        showBusinessCard={showBusinessCard}
         illustrationDirection={illustrationDirection}
+        illustrationLevel={illustrationLevel}
+        saveSerifs={true}
         onTransitionEnd={onTransitionEndForRestyledContentHolder}
       >
         <RestyledShelf
@@ -268,39 +264,35 @@ export default function Story(props) {
       </RestyledContentHolder>
       <PictureHolder>
         <Portal
-          imageLoaded={imageLoaded}
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
+          imageLoaded={imageLoaded}
         />
         {imageLoaded < 2 &&
           <BlurredFallback 
-            src={fallbackBlur}
             alt="blurred fallback"
-            imageLoaded={imageLoaded}
-            showLegalTerms={showLegalTerms}
-            illustrationLevel={illustrationLevel}
-            headerMenuIsOpen={headerMenuIsOpen}
-            showBusinessCard={showBusinessCard}
             illustrationDirection={illustrationDirection}
+            illustrationLevel={illustrationLevel}
+            imageLoaded={imageLoaded}
             onTransitionEnd={onTransitionEndForBlurredFallbackImage}
+            src={fallbackBlur}
+            tempContent={tempContent}
           />
         }
         <BlurredImage 
           alt={description}
-          src={blurredImageSrc}
           imageLoaded={imageLoaded}
-          showLegalTerms={showLegalTerms}
-          onLoad={onLoadForBlurredImage}
-          illustrationLevel={illustrationLevel}
-          headerMenuIsOpen={headerMenuIsOpen}
-          showBusinessCard={showBusinessCard}
           illustrationDirection={illustrationDirection}
+          illustrationLevel={illustrationLevel}
+          onLoad={onLoadForBlurredImage}
           onTransitionEnd={onTransitionEndForBlurredImage}
+          src={blurredImageSrc}
+          tempContent={tempContent}
         />
         <Image
           alt={description}
-          src={bigImageSrc}
           onLoad={onLoadForMainImage}
+          src={bigImageSrc}
         />
       </PictureHolder>
     </Main>

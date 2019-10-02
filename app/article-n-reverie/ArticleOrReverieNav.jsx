@@ -30,8 +30,8 @@ const NavigationHed = styled.p`
 
 export default function ArticleOrReverieNav(props) {
   const {
-    contentState,
-    boundHandleClickForApp
+    boundHandleClickForApp,
+    contentState
   } = props;
   const {
     allContentData,
@@ -39,9 +39,10 @@ export default function ArticleOrReverieNav(props) {
     headlineIndex,
     reverieIndex,
   } = contentState;
-
   const isReverie = caller === 'reverie';
-  const currentHed = normalize(allContentData[!isReverie ? headlineIndex : reverieIndex].attributes.headline);
+  const currentHed = normalize(
+    allContentData[!isReverie ? headlineIndex : reverieIndex].attributes.headline
+  );
 
   return (
     <UnorderedList>
@@ -54,35 +55,22 @@ export default function ArticleOrReverieNav(props) {
               headline,
               publication
             } = articleOrReverie.attributes;
-
             const hedFromItem = normalize(headline);
-            const dateOrPublicationFromItem =
-              !isReverie
-                ? publication
-                : date;
-
-            const linkIsActive =
-              currentHed === hedFromItem;
-            const articleLink =
-              isReverie
-                ? `/reverie/${
-                  hedFromItem
-                }`
-                : `/journalism/${
-                  normalize(
+            const dateOrPublicationFromItem = !isReverie ? publication : date;
+            const linkIsActive = currentHed === hedFromItem;
+            const articleLink = isReverie
+                ? `/reverie/${hedFromItem}`
+                : `/journalism/${normalize(
                     dateOrPublicationFromItem
-                  )
-                }/${
-                  hedFromItem
-                }`;
+                  )}/${hedFromItem}`;
 
             return (
               <li
                 key={idx}
               >
                 <StyledLink
-                  to={articleLink}
                   boundHandleClickForApp={boundHandleClickForApp}
+                  to={articleLink}
                 >
                   <NavigationDek
                     link={linkIsActive}

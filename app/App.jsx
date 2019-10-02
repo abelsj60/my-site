@@ -10,6 +10,7 @@ import PlayfairDisplay700Woff from '../assets/fonts/playfair-display-v15-latin/p
 import PlayfairDisplay700Woff2 from '../assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-700.woff2';
 import PlayfairDisplay900Woff from '../assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-900.woff';
 import PlayfairDisplay900Woff2 from '../assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-900.woff2';
+
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
@@ -19,7 +20,6 @@ import styled, {
   ThemeProvider
 } from 'styled-components';
 import Footer from './header-footer/Footer.jsx';
-import ReactGA from 'react-ga';
 import Header from './header-footer/Header.jsx';
 import {
   browserVersion,
@@ -36,6 +36,8 @@ import objectFitImages from 'object-fit-images';
 import PasswordLogin from './shared/PasswordLogin.jsx';
 import preloadBigImages from './helpers/preloadBigImages';
 import React, { Fragment, Component } from 'react';
+import ReactGA from 'react-ga';
+import ReactResizeDetector from 'react-resize-detector';
 import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import State from './classes/State.js';
@@ -249,11 +251,9 @@ class App extends Component {
     //    c. Keep resized height on subsequent orientation
     //    changes by rejecting w/n updateHeight() when
     //    this.minAllowedHeight > newHeight.
-
-    const pageHeight =
-      isMobile && !isMobileSafari
-        ? document.documentElement.clientHeight
-        : window.innerHeight;
+    const pageHeight = isMobile && !isMobileSafari
+      ? document.documentElement.clientHeight
+      : window.innerHeight;
     const coverVals = cover(window.innerWidth, pageHeight, 2131, 1244);
 
     // One way to block orientation change
@@ -267,84 +267,83 @@ class App extends Component {
     // Lower limit for resizing — (iPhone/SE form
     // factor uses default height, wider phones
     // use their true height).
-
+    this.defaultHeightWhenTooSmall = isMobile && !isMobileSafari
+      ? document.documentElement.clientHeight
+      : window.innerHeight; // Arbitrary (iPhone SE height)
+    this.headerMenuTimeoutId = undefined;
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
-    this.defaultHeightWhenTooSmall =
-      isMobile && !isMobileSafari
-        ? document.documentElement.clientHeight
-        : window.innerHeight; // Arbitrary (iPhone SE height)
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
-    this.headerMenuTimeoutId = undefined;
 
     // Prevent resize when scrolling oversized page. Not using state
     // b/c it causes overflowing divs (w/content in them) to 'jump'
     // when scrolling.
-
     this.isAfterTouchWhenScrollingPage = false;
+
     this.state = {
       currentCaller:
         location.caller !== 'i'
           ? location.caller
           : 'home',
-      lastCaller: '',
-      inCity: false, // false = fantasy, true = city
-      isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie
+      finishedHomePageLoad: alreadyLoaded,
+      heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
+        alreadyLoaded
+        ? 3
+        : 0,
       height: // Height for <main /> element
         pageHeight > this.minAllowedHeight
           ? pageHeight
           : this.defaultHeightWhenTooSmall,
-      showBusinessCard: false, // Show business card
-      showLegalTerms: false, // Show legal terms
-      headerMenuIsOpen: false, // Show header menu
-      pinchZoomed: false, // Zoomed! (Or not.)
-      isZooming: false, // True when usere is pinch zooming
-      isAfterTouch: false, // Resize using clientHeight when true
-      heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
-        alreadyLoaded
-          ? 3
-          : 0,
-      finishedHomePageLoad: alreadyLoaded,
-      password: '', // to be removed
-      isValidUser: false, // to be removed
-      wrongPassword: '', // to be removed
-      spacerHeight: 0, // Set by 'handleResize', so must live here. Used by Home/NameTag.
-      nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
-      images: images, // preloaded big images (minimize time to display b/c of loading)
-      illustrationLevel: 0, // Control illustration transitions (header, main, and footer)
-      illustrationDirection: 'enter', // Properly interpret illustrationLevel 
       illustrationDelay: false, // Control illustration loader on /chapter pages
+      illustrationDirection: 'enter', // Properly interpret illustrationLevel 
+      illustrationLevel: 0, // Control illustration transitions (header, main, and footer)
       illustrationState: // 0 is n/a, + is loaded, and - is loading...
         illustrationState
-          ? illustrationState
-          : 0
+        ? illustrationState
+        : 0,
+      images: images, // preloaded big images (minimize time to display b/c of loading)
+      inCity: false, // false = fantasy, true = city
+      isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie
+      isAfterTouch: false, // Resize using clientHeight when true
+      isValidUser: false, // to be removed
+      isZooming: false, // True when usere is pinch zooming
+      lastCaller: '',
+      nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
+      password: '', // to be removed
+      pinchZoomed: false, // Zoomed! (Or not.)
+      spacerHeight: 0, // Set by 'handleResize', so must live here. Used by Home/NameTag.
+      tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
+      wrongPassword: '' // to be removed
     };
 
-    this.handleResize = this.handleResize.bind(this);
-    this.handleTouchEnd = this.handleTouchEnd.bind(this);
-    this.closeHeaderMenu = this.closeHeaderMenu.bind(this);
-    this.handleTouchMove = this.handleTouchMove.bind(this);
-    this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
-    this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handleTouchEnd = this.handleTouchEnd.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
+    this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
   }
 
   handlePasswordSubmit(event) {
+    const { password } = this.state;
     event.preventDefault();
 
     if (
-      this.state.password === 'enter'
-        || this.state.password === 'Enter'
-        || this.state.password === 'illustrator'
-        || this.state.password === 'Illustrator'
-        || this.state.password === 'boom!'
-        || this.state.password === 'Boom!'
+      password === 'enter'
+        || password === 'Enter'
+        || password === 'illustrator'
+        || password === 'Illustrator'
+        || password === 'boom!'
+        || password === 'Boom!'
     ) {
       this.setState({ isValidUser: true });
     } else {
-      this.setState({ wrongPassword: 'Incorrect', password: '' });
+      this.setState({ 
+        password: '',
+        wrongPassword: 'Incorrect'
+    });
     }
   }
 
@@ -362,8 +361,7 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
-    return process.env.NODE_ENV !== 'development'
-      && !this.state.isValidUser
+    return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
       ? <PasswordLogin
         appState={this.state}
         handlePasswordEntry={this.handlePasswordEntry}
@@ -375,28 +373,34 @@ class App extends Component {
           colors,
           fontSizes,
           mediaQueries,
-          pageHeight: this.state.height.toString(),
           blur: blurControl.regular,
-          blurForTempContent:
-            this.state.showBusinessCard
-              || this.state.showLegalTerms,
-          blurForHeaderMenu: this.state.headerMenuIsOpen
+          blurForTempContent: this.state.tempContent > 0,
+          isHeaderMenu: this.state.tempContent === 3,
+          pageHeight: this.state.height.toString()
         }}
       >
         <Fragment
           // Use Fragment b/c ThemeProvider only accepts one child.
         >
           <GlobalStyle
-            reverie={reverieIsActive}
             notFound={isNotFound}
+            reverie={reverieIsActive}
           />
+          {/*<ReactResizeDetector
+            handleWidth
+            handleHeight
+            onResize={(width, height) => {
+              // console.log('width:', width);
+              console.log('height:', height);
+            }}
+          />*/}
           <ZoomControl
             // Though an extra <div>, ZoomControl lets us add 'touch'
             // events to React (alt is to add them to the Window)
+            fixMobileSafariBugOn7={fixMobileSafariBugOn7}
             home={homeIsActive}
             onTouchMove={this.handleTouchMove}
             onTouchEnd={this.handleTouchEnd}
-            fixMobileSafariBugOn7={fixMobileSafariBugOn7}
           >
             <Header
               {...this.props}
@@ -423,25 +427,14 @@ class App extends Component {
       </ThemeProvider>;
   }
 
-  closeHeaderMenu() {
-    clearTimeout(this.state.headerMenuTimeoutId);
-    this.state.headerMenuTimeoutId = undefined;
-    this.setState({ headerMenuIsOpen: false });
-  }
-
   hasStyle(type) {
     // https://johanronsse.be/2016/01/03/simple-flexbox-check/
 
-    const document = window.document.body
-      || window.document.documentElement;
+    const document = window.document.body || window.document.documentElement;
     const documentStyle = document.style;
 
     if (type === 'flexbox') {
-      if (
-        documentStyle.webkitFlexWrap === ''
-          || documentStyle.msFlexWrap === ''
-          || documentStyle.flexWrap === ''
-      ) {
+      if (documentStyle.webkitFlexWrap === '' || documentStyle.msFlexWrap === '' || documentStyle.flexWrap === '') {
         return true;
       }
     }
@@ -492,19 +485,11 @@ class App extends Component {
         isZooming: true
       };
 
-      if (
-        window.pageXOffset > 0
-          && window.pageYOffset > 0
-      ) {
+      if (window.pageXOffset > 0 && window.pageYOffset > 0) {
         stateToUpdate.pinchZoomed = true; // Set zoom state
         this.setState(stateToUpdate);
-      } else if (
-        // Hard to hit 0 on the nose, so
-        // let's look for negatives.
-
-        window.pageXOffset <= 0
-          && window.pageYOffset <= 0
-      ) {
+      } else if (window.pageXOffset <= 0 && window.pageYOffset <= 0) {
+        // Hard to hit 0 on the nose, so we look for negatives.
         stateToUpdate.pinchZoomed = false; // Set zoom state
         this.setState(stateToUpdate);
       }
@@ -539,10 +524,8 @@ class App extends Component {
 
   handleResize() {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
-    // console.log('called handleResize');
-    clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout
+    clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout (aka, debounce)
     this.resizeTimeoutId = setTimeout(() => {
-      // console.log('timeout handleResize');
       this.updateSpacerHeight();
       this.updateNameTagWidth();
       this.updateHeight();
@@ -552,9 +535,11 @@ class App extends Component {
   updateHeight() {
     // On desktops, only resize if height's changing.
 
-    if (!isMobile
-      && this.state.width !== window.innerWidth
-      && this.state.height === window.innerHeight) {
+    if (
+      !isMobile
+        && this.state.width !== window.innerWidth
+        && this.state.height === window.innerHeight
+    ) {
       return false;
     }
 
@@ -582,16 +567,12 @@ class App extends Component {
     const toggleHtmlHeight = mode => {
       if (mode === 'on') {
         if (isMobileSafari && parseInt(osVersion) >= 12) {
-          document.getElementsByTagName('html')[0]
-            .style
-            .height = '100vh';
+          document.getElementsByTagName('html')[0].style.height = '100vh';
         }
       } else if (mode === 'off') {
         if (isMobileSafari && parseInt(osVersion) >= 12) {
           setTimeout(() => {
-            document.getElementsByTagName('html')[0]
-              .style
-              .height = '';
+            document.getElementsByTagName('html')[0].style.height = '';
           }, 250);
         }
       }
@@ -602,11 +583,10 @@ class App extends Component {
     //  a. clientHeight. Mobile Chrome and after touchMove
     //  b. innerHeight. Mobile Safari
 
-    const newHeight = isMobile
-        && (!isMobileSafari
-          || this.state.isAfterTouch)
+    const newHeight = isMobile && (!isMobileSafari || this.state.isAfterTouch)
       ? document.documentElement.clientHeight
       : window.innerHeight;
+    // console.log('newHeight:', newHeight);
 
     // Do not resize height while pinchZoomed.
 
@@ -627,24 +607,21 @@ class App extends Component {
     // Ensure the window top at zero after resize change.
     // (This trigers another resize if height changes.)
 
-    if (window.pageYOffset > 0
-        // Prevent resize when user scrolls oversized page.
-        && !this.isAfterTouchWhenScrollingPage) {
+    // Prevent resize when user scrolls oversized page.
+    if (window.pageYOffset > 0 && !this.isAfterTouchWhenScrollingPage) {
       const scrollHandling = new ScrollHandling(location);
       scrollHandling.resetWindowTop();
     }
 
     // Resize if height changes and newHeight > this.minAllowedHeight.
     // Note, mobile Brave slips through this test on /home. The image
-    // 'resize' and Brave then resizes. No fix for now.
+    // resizes and Brave then resizes. No fix for now.
 
     if (newHeight === this.state.height) {
       if (process.env.NODE_ENV !== 'development') {
         ReactGA.event({
           category: 'App state',
-          action: `
-            Resized w/o changing height. Current: ${this.state.height}, new ${newHeight}
-          `,
+          action: `Resized w/o changing height. Current: ${this.state.height}, new ${newHeight}`,
           value: newHeight,
           label: `Page: ${pathname}${search}`
         });
@@ -673,17 +650,10 @@ class App extends Component {
     // On orientation change, covers /chapter b/c of hidden image
     // (at least on iPhone)
     toggleHtmlHeight('off');
-    this.setState(
-      () => ({
-        height: 
-          this.minAllowedHeight < newHeight 
-            ? newHeight 
-            : this.minAllowedHeight,
-        isAfterTouch: // True until handleMove says otherwise.
-          this.state.isAfterTouch
-            && false
-      })
-    );
+    this.setState(() => ({
+      height: this.minAllowedHeight < newHeight ? newHeight : this.minAllowedHeight,
+      isAfterTouch: this.state.isAfterTouch && false // True until handleMove says otherwise.
+    }));
   }
 
   handleBackAndForth() {

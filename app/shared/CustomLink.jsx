@@ -53,25 +53,18 @@ import { Route, Link as ReactRouterLink } from 'react-router-dom';
 //    to 'pop' in the App Component.
 
 export default ({
-  to,
-  replace,
   boundHandleClickForApp,
   isCalledByMenu,
+  replace,
+  to,
   ...props
 }) => {
   const { pathname } = window.location;
   const splitTheCaller = to.split('/');
-  const callerWillBe =
-    splitTheCaller[1].length > 0 // Word length, array length, i.e., 'chapter'
-      ? splitTheCaller[1]
-      : 'home';
-  const isMenu =
-    pathname.includes('menu')
-      && pathname.split('/')[2] === 'menu'; // Ensures this is a /menu.
-  const iSayNoMatch =
-    window.location.pathname.includes(to)
-      && !isMenu
-      && to.length > 1;
+  // Word length, array length, i.e., 'chapter'
+  const callerWillBe = splitTheCaller[1].length > 0 ? splitTheCaller[1] : 'home';
+  const isMenu = pathname.includes('menu') && pathname.split('/')[2] === 'menu'; // Ensures this is a /menu.
+  const iSayNoMatch = window.location.pathname.includes(to) && !isMenu && to.length > 1;
 
   const onClickHandler = event => {
     event.stopPropagation();
@@ -91,21 +84,17 @@ export default ({
 
   return (
     <Route
-      path={
-        typeof to === 'string'
-          ? to
-          : createPath(to)
-      }
       exact
+      path={typeof to === 'string' ? to : createPath(to)}
     >
       {
         ({ match }) => {
           return (
             <ReactRouterLink
               {...props}
-              to={to}
-              replace={iSayNoMatch || replace || !!match}
               onClick={onClickHandler}
+              replace={iSayNoMatch || replace || !!match}
+              to={to}
             />
           );
         }

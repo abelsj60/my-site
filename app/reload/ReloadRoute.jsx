@@ -10,16 +10,11 @@ export default function ReloadRoute(props) {
   const { indexForChapterData } = props.bodyState;
   const reload = new Reload(props);
 
-  // Update appStateillustrationState when link
-  // points to /chapter
+  // Update appStateillustrationState when link points to /chapter
   if (currentCaller === 'chapter') {
     let number = indexForChapterData + 1;
 
-    if (
-      !props.appState.images[
-        `chapter-${number}-main`
-      ].complete
-    ) {
+    if (!props.appState.images[`chapter-${number}-main`].complete) {
       number = number * -1;
     }
 

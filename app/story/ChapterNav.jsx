@@ -57,9 +57,7 @@ export default function ChapterNav(props) {
           mapData={allContentData}
           render={
             (_chapter, idx) => {
-              const normalizedTitle = normalize(
-                allContentData[idx].attributes.title
-              );
+              const normalizedTitle = normalize(allContentData[idx].attributes.title);
               const dotType =
                 chapterIndex === idx
                   ? dotFull
@@ -70,8 +68,8 @@ export default function ChapterNav(props) {
                   key={idx}
                 >
                   <StyledLink
-                    to={`/chapter/${normalizedTitle}`}
                     boundHandleClickForApp={boundHandleClickForApp}
+                    to={`/chapter/${normalizedTitle}`}
                   >
                     <SelectorContainer>
                       <Selector

@@ -2,6 +2,7 @@
 title: 'A magic quest'
 image: 'https://user-images.githubusercontent.com/30417590/63110316-21b4c380-bf59-11e9-957d-eff23fc175c3.png'
 blurredImage: 'https://user-images.githubusercontent.com/30417590/63657612-ffe5e880-c771-11e9-8d1c-8e7bc403d1c0.png'
+imageTest: 'test-the-${variable}-now'
 description: 'xyz 1'
 number: 1
 ---

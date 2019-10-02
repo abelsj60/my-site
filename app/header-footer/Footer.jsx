@@ -56,7 +56,7 @@ const Graf = styled.p`
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.one};
   user-select: none;
-  text-shadow: ${p => !p.isReverie && !p.showBusinessCard && !p.showLegalTerms && !p.headerMenuIsOpen && ((p.home && p.coverValY < 0) || p.illustrationLevel >= 2) && shadow};
+  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && ((p.home && p.coverValY < 0) || p.illustrationLevel >= 2) && shadow};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && '.35s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
@@ -85,31 +85,29 @@ export default function FooterContainer(props) {
     boundHandleClickForApp
   } = props;
   const {
-    illustrationLevel,
-    chapter,
     currentCaller,
-    headerMenuIsOpen,
     height,
-    illustrationDirection,
-    lastCaller,
-    showBusinessCard,
     illustrationDelay,
-    showLegalTerms,
+    illustrationDirection,
+    illustrationLevel,
+    illustrationState,
+    lastCaller,
+    tempContent
   } = appState;
 
   const onClickContactHandler = event => {
     eventManagement(event);
-    boundHandleClickForApp('toggleBusinessCard');
+    boundHandleClickForApp('toggleTempContent', 1);
   };
   const onClickLegalHandler = event => {
     eventManagement(event);
-    boundHandleClickForApp('toggleLegalTerms');
+    boundHandleClickForApp('toggleTempContent', 2);
   };
   const eventHandlerForStoryButton = event => {
     eventManagement(event);
 
-    if (chapter < 0) {
-      boundHandleClickForApp('toggleShowDelay');
+    if (illustrationState < 0) {
+      boundHandleClickForApp('toggleIllustrationDelay');
     } else {
       boundHandleClickForApp('toggleStoryText');
     }
@@ -120,13 +118,7 @@ export default function FooterContainer(props) {
   const isHome = currentCaller === 'home';
   const isNotFound = currentCaller === 'not-found';
   const coverVals = cover(window.innerWidth, height, 2131, 1244);
-  const reverieLink =
-    isReverie
-      ? `/${
-        lastCaller !== 'home'
-          ? lastCaller
-          : '' // No text b/c 'home' is '/'
-      }`
+  const reverieLink = isReverie ? `/${lastCaller !== 'home' ? lastCaller : ''}` // No text b/c 'home' is '/'
       : '/reverie';
 
   return (
@@ -135,21 +127,19 @@ export default function FooterContainer(props) {
     >
       <Line
         home={isHome}
-        isNotFound={isNotFound}
         hide={illustrationLevel}
-        isReverie={isReverie}
         illustrationLevel={illustrationLevel}
         illustrationDirection={illustrationDirection}
+        isNotFound={isNotFound}
+        isReverie={isReverie}
       />
       <Button
-        isReverie={isReverie}
-        headerMenuIsOpen={headerMenuIsOpen}
         clickFunction={eventHandlerForStoryButton}
-        illustrationLevel={illustrationLevel}
-        showBusinessCard={showBusinessCard}
-        showLegalTerms={showLegalTerms}
         illustrationDirection={illustrationDirection}
+        illustrationLevel={illustrationLevel}
+        isReverie={isReverie}
         isStory={isStory}
+        tempContent={tempContent}
         text={
           illustrationDelay
             ? 'Cancel'
@@ -160,73 +150,67 @@ export default function FooterContainer(props) {
       />
       {isStory && (
         <Loader
+          // done={!illustrationDelay} // Snappier when disabled...
+          fontSize="small"
           marginBottom="2"
           marginLeft="20"
+          maxWidth="33"
           smallMarginLeft="10"
           smallMarginRight="17"
-          fontSize="small"
-          maxWidth="33"
-          white={true}
-          smallFont={true}
-          // done={!illustrationDelay} // Snappier when disabled...
           show={illustrationDelay}
+          smallFont={true}
+          white={true}
         />
       )}
       <TextBox
         isStory={isStory}
       >
         <RestyledLink
-          to={reverieLink}
-          isStory={isStory}
           boundHandleClickForApp={boundHandleClickForApp}
+          isStory={isStory}
+          to={reverieLink}
         >
           <Graf
-            coverValsY={coverVals.y}
             active={isReverie}
-            isLink={true}
+            coverValsY={coverVals.y}
             home={isHome}
-            isStory={isStory}
-            isNotFound={isNotFound}
-            isReverie={isReverie}
-            showBusinessCard={showBusinessCard}
-            showLegalTerms={showLegalTerms}
-            headerMenuIsOpen={headerMenuIsOpen}
             illustrationLevel={illustrationLevel}
             illustrationDirection={illustrationDirection}
+            isLink={true}
+            isNotFound={isNotFound}
+            isReverie={isReverie}
+            isStory={isStory}
+            tempContent={tempContent}
           >
             Reverie
           </Graf>
         </RestyledLink>
         <Graf
+          active={tempContent === 1}
           coverValsY={coverVals.y}
-          active={showBusinessCard}
-          onClick={onClickContactHandler}
           home={isHome}
-          isStory={isStory}
-          isReverie={isReverie}
-          isNotFound={isNotFound}
-          showBusinessCard={showBusinessCard}
-          showLegalTerms={showLegalTerms}
-          headerMenuIsOpen={headerMenuIsOpen}
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
+          isNotFound={isNotFound}
+          isReverie={isReverie}
+          isStory={isStory}
+          onClick={onClickContactHandler}
           smallMarginRight="13"
+          tempContent={tempContent}
         >
           Contact
         </Graf>
         <Graf
+          active={tempContent === 2}
           coverValsY={coverVals.y}
-          active={showLegalTerms}
-          onClick={onClickLegalHandler}
-          isReverie={isReverie}
-          showBusinessCard={showBusinessCard}
-          showLegalTerms={showLegalTerms}
           home={isHome}
-          isStory={isStory}
-          isNotFound={isNotFound}
-          headerMenuIsOpen={headerMenuIsOpen}
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
+          isReverie={isReverie}
+          isStory={isStory}
+          isNotFound={isNotFound}
+          onClick={onClickLegalHandler}
+          tempContent={tempContent}
         >
           Legal
         </Graf>

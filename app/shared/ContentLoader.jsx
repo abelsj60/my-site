@@ -33,10 +33,6 @@ export default class ContentLoader extends Component {
     const state = new State(props, location);
     const content = new Content(location.caller);
     const allContentData = content.getContentData();
-    const checkStateOfBlurredIllustration = 
-      location.caller === 'chapter'
-        && !isMenu
-        && referrer.path.split('/').length > 2;
 
     this.overflowRef =
       location.caller === 'chapter'
@@ -50,10 +46,12 @@ export default class ContentLoader extends Component {
     // index item as a default when needed.
 
     this.state = {
-      isNotFound: !location.pathIsValid,
-      needsRedirect: location.needsRedirect,
-      imageLoaded: 
-        checkStateOfBlurredIllustration
+      allContentData: allContentData,
+      caller: location.caller,
+      chapterIndex: state.getIndex('chapter'),
+      headlineIndex: state.getIndex('article'),
+      imageLoaded: // -1 = n/a, 0 = not loaded, 1 = loaded, ready for transition, 2 = done
+        location.caller === 'chapter'
           ? props.appState.images[
               `chapter-${state.getIndex('chapter') + 1}-blurred`
             ].complete
@@ -62,13 +60,11 @@ export default class ContentLoader extends Component {
           : location.caller === 'projects'
             ? 0
             : -1,
-      allContentData: allContentData,
-      caller: location.caller,
-      chapterIndex: state.getIndex('chapter'),
+      isNotFound: !location.pathIsValid,
+      needsRedirect: location.needsRedirect,
       projectIndex: state.getIndex('project'),
-      thumbnailIndex: state.getIndex('projectPics'),
-      headlineIndex: state.getIndex('article'),
-      reverieIndex: state.getIndex('reverie')
+      reverieIndex: state.getIndex('reverie'),
+      thumbnailIndex: state.getIndex('projectPics')
     };
   }
 
@@ -128,18 +124,16 @@ export default class ContentLoader extends Component {
                   let boundHandleClickForContentLoader;
 
                   if (caller === 'projects' || caller === 'chapter') {
-                    const clickHandling = new ClickHandling(
-                      'contentLoader', this
-                    );
+                    const clickHandling = new ClickHandling('contentLoader', this);
                     boundHandleClickForContentLoader = clickHandling.boundHandleClick;
                   }
 
                   return (
                     <PageContent
                       {...this.props}
-                      overflowRef={this.overflowRef}
-                      contentState={this.state}
                       boundHandleClickForContentLoader={boundHandleClickForContentLoader}
+                      contentState={this.state}
+                      overflowRef={this.overflowRef}
                     />
                   );
                 }

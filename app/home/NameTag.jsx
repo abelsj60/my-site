@@ -45,7 +45,7 @@ const heartbeatKeyframes = keyframes`
 `;
 
 const OuterContainer = styled.div`
-  display: ${p => p.tempContentIsOn ? 'none' : 'block'};
+  display: ${p => p.tempContent > 0 ? 'none' : 'block'};
   // The double animation prop works b/c heartbeat runs three times on load, then stops. It then
   // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
@@ -114,18 +114,17 @@ export default function NameTag(props) {
     setLoadLevels
   } = props;
   const {
-    heartbeat,
     finishedHomePageLoad,
-    showBusinessCard,
-    showLegalTerms,
+    heartbeat,
+    nameTagWidth,
     spacerHeight,
-    nameTagWidth
+    tempContent
   } = appState;
   const {
     eventType,
-    spellLevel,
     movement,
-    score
+    score,
+    spellLevel
   } = homeState;
   const {
     attributes,
@@ -139,10 +138,8 @@ export default function NameTag(props) {
   const onClickForHed =
     event => {
       eventManagement(event);
-      if (
-        heartbeat > 2 // Ends at 3
-          && (spellLevel === 0 || spellLevel === 4)
-      ) {
+      // Ends at 3
+      if (heartbeat > 2 && (spellLevel === 0 || spellLevel === 4)) {
         if (eventType === 'touch') {
           boundHandleClickForHome('resetEventType');
           return false;
@@ -162,10 +159,8 @@ export default function NameTag(props) {
   const onAnimationStartForHeartbeat =
     event => {
       eventManagement(event);
-      if (
-        event.animationName === 'cHArim' // StyledComponents className
-          && !finishedHomePageLoad
-      ) {
+      // StyledComponents className
+      if ( event.animationName === 'cHArim' && !finishedHomePageLoad) {
         boundHandleClickForApp('finishedHomePageLoad')
       }
     };
@@ -187,34 +182,33 @@ export default function NameTag(props) {
         spacerHeight={spacerHeight}
       />
       <OuterContainer
-        nameTagWidth={nameTagWidth}
-        spellLevel={spellLevel}
-        heartbeat={heartbeat > 0 && heartbeat < 3}
         delayHeartbeat={finishedHomePageLoad && heartbeat > 1 && heartbeat < 3}
-        tempContentIsOn={showBusinessCard || showLegalTerms}
-        onAnimationStart={onAnimationStartForHeartbeat}
+        heartbeat={heartbeat > 0 && heartbeat < 3}
+        nameTagWidth={nameTagWidth}
         onAnimationEnd={onAnimationEndForHeartbeat}
+        onAnimationStart={onAnimationStartForHeartbeat}
+        spellLevel={spellLevel}
+        tempContent={tempContent}
       >
         <FitText
           compressor={1.154}
         >
           <Hed
-            onClick={onClickForHed}
+            finishedHomePageLoad={finishedHomePageLoad}
             loadLevelBlurs={setLoadLevels.sum().blurs}
             loadLevelAll={setLoadLevels.sum().all}
-            finishedHomePageLoad={finishedHomePageLoad}
+            onClick={onClickForHed}
           >
             {name}
           </Hed>
         </FitText>
         <InnerContainer
-          tempContentIsOn={showBusinessCard || showLegalTerms}
-          loadLevelAll={setLoadLevels.sum().all}
-          spellLevel={spellLevel}
-          finishedHomePageLoad={finishedHomePageLoad}
           enter={movement === 'enter'}
           exit={movement === 'exit'}
+          finishedHomePageLoad={finishedHomePageLoad}
+          loadLevelAll={setLoadLevels.sum().all}
           onTransitionEnd={onTransitionEndForInnerContainer}
+          spellLevel={spellLevel}
         >
           <FitText
             compressor={2.3}
@@ -230,14 +224,16 @@ export default function NameTag(props) {
              compressor={2.5}
             >
               <Fragment>
-                {ReactHtmlParser(marked(body, { smartypants: true }))}
+                {ReactHtmlParser(marked(
+                  body, { smartypants: true }
+                ))}
               </Fragment>
             </FitText>
           </Pitch>
         </InnerContainer>
         <Loader
-          marginBottom="7"
           done={finishedHomePageLoad}
+          marginBottom="7"
           show={setLoadLevels.sum().all < 6}
         />
       </OuterContainer>
