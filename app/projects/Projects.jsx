@@ -75,7 +75,6 @@ export default function Projects(props) {
     boundHandleClickForContentLoader,
     contentState
   } = props;
-  const { pinchZoomed } = appState;
   const {
     allContentData,
     imageLoaded,
@@ -91,20 +90,20 @@ export default function Projects(props) {
     type,
     zoomed
   } = allContentData[projectIndex].attributes;
+  const { pinchZoomed } = appState;
   const caption = captions[thumbnailIndex];
 
   // Larger res ('zoomed') image if:
   //  a. desktop
   //  b. pinchZoomed
 
-  const source =
-    !isMobile || pinchZoomed
-      ? zoomed[thumbnailIndex]
-      : full[thumbnailIndex];
+  const source = !isMobile || pinchZoomed
+    ? zoomed[thumbnailIndex]
+    : full[thumbnailIndex];
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
-  const onLoadMainImageHandler = event => {
+  const onLoadMainImage = event => {
     eventManagement(event);
     boundHandleClickForContentLoader('imageLoader', 1)
   };
@@ -175,7 +174,7 @@ export default function Projects(props) {
                 alt="mainPic"
                 src={source}
                 imageLoaded={imageLoaded}
-                onLoad={onLoadMainImageHandler}
+                onLoad={onLoadMainImage}
               />
             </ImageHolder>
           </Figure>

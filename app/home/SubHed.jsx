@@ -8,5 +8,9 @@ export default styled.h2`
   color: ${p => p.theme.colors.black};
   font-weight: 700;
   margin-left: ${p => p.marginLeft};
-  margin-bottom: 17px;
+  margin-bottom: 5px;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView} and min-height: 640px) {
+    margin-bottom: 17px;
+  }
 `;

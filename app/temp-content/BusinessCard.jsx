@@ -29,7 +29,7 @@ const Name = styled.h1`
 `;
 const Pitch = styled.h2`
   padding-top: 5px;
-  font-size: ${p => p.theme.fontSizes.one};
+  font-size: ${p => p.theme.fontSizes.zero};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.twentyThree};

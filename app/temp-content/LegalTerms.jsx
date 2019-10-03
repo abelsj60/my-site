@@ -29,10 +29,11 @@ const MyCopyright = styled.span`
   display: block;
   margin-bottom: 6px;
   font-size: ${p => p.theme.fontSizes.one};
-  font-weight: 700;
+  font-weight: 400;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-bottom: 12px;
+    font-weight: 700;
     font-size: ${p => p.theme.fontSizes.eight};
   }
 `;

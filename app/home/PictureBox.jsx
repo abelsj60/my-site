@@ -88,7 +88,7 @@ export default function PictureBox(props) {
     setSpellLevels.one(movement === 'exit', 'BlurredCity');
   };
   // Trigger toggle after we swap backgrounds
-  // Requires a closure to pass all params...
+  // Requires a closure to pass all params
   const onTransitionEndForBackgroundImages =
     (penultimateSpellLevel, activeBackground) => event => {
       eventManagement(event);

@@ -42,8 +42,6 @@ import ScrollHandling from './classes/ScrollHandling.js';
 import State from './classes/State.js';
 import { withRouter } from 'react-router';
 
-// A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
-
 const colors = {
   black: 'black',
   blue: '#008dd5',
@@ -418,28 +416,8 @@ class App extends Component {
       </ThemeProvider>;
   }
 
-  hasStyle(type) {
-    // https://johanronsse.be/2016/01/03/simple-flexbox-check/
-
-    const document = window.document.body || window.document.documentElement;
-    const documentStyle = document.style;
-
-    if (type === 'flexbox') {
-      if (documentStyle.webkitFlexWrap === '' || documentStyle.msFlexWrap === '' || documentStyle.flexWrap === '') {
-        return true;
-      }
-    }
-
-    if (type === 'object-fit') {
-      if (documentStyle.objectFit === '') {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
   componentDidMount() {
+    // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
     if (!this.hasStyle('flexbox')) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {
@@ -461,6 +439,29 @@ class App extends Component {
     // This will never be called, here as good practice.
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('popstate', this.handleBackAndForth);
+  }
+
+
+
+  hasStyle(type) {
+    // https://johanronsse.be/2016/01/03/simple-flexbox-check/
+    const documentStyle = window.document.body
+      ? window.document.body.style
+      : window.document.documentElement.style;
+
+    if (type === 'flexbox') {
+      if (documentStyle.webkitFlexWrap === '' || documentStyle.msFlexWrap === '' || documentStyle.flexWrap === '') {
+        return true;
+      }
+    }
+
+    if (type === 'object-fit') {
+      if (documentStyle.objectFit === '') {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   handleTouchMove(event) {
@@ -524,31 +525,22 @@ class App extends Component {
   }
 
   updateHeight() {
-    // On desktops, only resize if height's changing
+    // Reject 1: On desktops, only resize if height's changing
 
     if (!isMobile && this.state.height === window.innerHeight) {
       return false;
     }
 
-    // Don't resize while zooming (e.g., there may be
-    // a lag between isZooming and pinchZoomed).
+    // Reject 2: Don't resize while zooming (there's a lag
+    // between this.state.isZooming and this.state.pinchZoomed).
 
     if (this.state.isZooming) {
       return false;
     }
 
-    // Do not resize height while pinchZoomed.
+    // Reject 3: Do not resize while pinchZoomed.
 
     if (this.state.pinchZoomed) {
-      if (process.env.NODE_ENV !== 'development') {
-        ReactGA.event({
-          category: 'App state',
-          action: 'Resized while pinchZoomed',
-          value: newHeight,
-          label: `Page: ${pathname}${search}`
-        });
-      }
-
       return false;
     }
 
@@ -556,6 +548,28 @@ class App extends Component {
       pathname,
       search
     } = window.location;
+
+    // iOS 12 introduced a strange new behavior. On orientation change, 
+    // the screen collapsed in between the first and second setStates.
+    // Remember, in iOS, resize fires on orientation change, then AGAIN
+    // afer the bottom menu bar is added to screen. This on/off function 
+    // ensures that the app's height will occupy the entire screen during 
+    // the update phase. Trust me, it works.
+
+    const toggleHtmlElementHeight = mode => {
+      if (isMobileSafari && parseInt(osVersion) >= 12) {
+        if (mode === 'on') {
+          document.getElementsByTagName('html')[0].style.height = '100vh';
+        } else if (mode === 'off') {
+          // setTimeout ensures that elementHeight has time to do its work
+          setTimeout(() => {
+            document.getElementsByTagName('html')[0].style.height = '';
+          }, 250);
+        }
+      }
+    };
+
+    toggleHtmlElementHeight('on');
 
     // Orientation change: https://stackoverflow.com/a/37493832
 
@@ -566,30 +580,14 @@ class App extends Component {
     // innerHeight correctly, so we'll use/
     // clientHeight 'isAfterTouch':
 
-    const toggleHtmlHeight = mode => {
-      if (mode === 'on') {
-        if (isMobileSafari && parseInt(osVersion) >= 12) {
-          document.getElementsByTagName('html')[0].style.height = '100vh';
-        }
-      } else if (mode === 'off') {
-        if (isMobileSafari && parseInt(osVersion) >= 12) {
-          setTimeout(() => {
-            document.getElementsByTagName('html')[0].style.height = '';
-          }, 250);
-        }
-      }
-    };
-
-    toggleHtmlHeight('on');
-
-    //  a. clientHeight. Mobile Chrome and after touchMove
+    //  a. clientHeight. Mobile Chrome or after touchMove everywhere
     //  b. innerHeight. Mobile Safari
 
     const newHeight = isMobile && (!isMobileSafari || this.state.isAfterTouch)
       ? document.documentElement.clientHeight
       : window.innerHeight;
 
-    // Ensure the window top at zero after resize change.
+    // Ensure the window top is at zero after resize change.
     // (This trigers another resize if height changes.)
 
     // Prevent resize when user scrolls oversized page.
@@ -614,7 +612,7 @@ class App extends Component {
 
       // On orientation change, covers every section but /chapter
       // (at least on iPhone)
-      toggleHtmlHeight('off');
+      toggleHtmlElementHeight('off');
       return false;
     }
 
@@ -627,7 +625,7 @@ class App extends Component {
       ReactGA.event({
         category: 'App state',
         action: 'Re-calculate height',
-        value: newHeight,
+        value: `newHeight: ${newHeight}, oldHeight: ${this.state.height}`,
         label: `Page: ${pathname}${search}`
       });
     }
@@ -635,7 +633,7 @@ class App extends Component {
     // On orientation change, covers /chapter b/c of hidden image
     // (at least on iPhone)
 
-    toggleHtmlHeight('off');
+    toggleHtmlElementHeight('off');
 
     this.setState(() => ({
       height: this.minAllowedHeight < newHeight
@@ -652,7 +650,7 @@ class App extends Component {
     const boundHandleClickForApp = hcForApp.boundHandleClick;
 
     // Always the caller.
-    // Update isMenu if it doesn't sync w/the window.
+    // Update isMenu if it isn't synced w/window.location.pathname.
 
     const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
     const updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
@@ -666,7 +664,7 @@ class App extends Component {
     const yImageTop = objectFitCoverVals.y;
     const makePositive = val => val * -1;
 
-    // 1. 14.2 & 14.6 are arbitrary values (trial-n-error)
+    // 1. 14.9 & 15 are arbitrary values (trial-n-error)
     // 2. 52px is the height of the header in pixels
 
     const mathForSpacer = (heightVal, percentage) => heightVal * (percentage / 100) - 52;
@@ -685,7 +683,9 @@ class App extends Component {
       spacerHeight = Math.ceil(spacerHeight - changedPosition);
     }
 
-    return spacerHeight >= 15 ? spacerHeight : 15;
+    return spacerHeight >= 15
+      ? spacerHeight
+      : 15;
   }
 
   calculateNameTagWidth() {

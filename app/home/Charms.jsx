@@ -206,13 +206,12 @@ export default function Charms(props) {
     spellLevel
   } = homeState;
 
-  // Let's set up a progress bar.
-
   const onTransitionEndForOuterContainer = event => {
     eventManagement(event);
     setSpellLevels.two(movement === 'exit', 'OuterContainer');
     setSpellLevels.four(movement === 'enter', 'OuterContainer');
   };
+  // Let's set up a progress bar.
   const barWidth = score * (100 / (goal - 1));
   const isReady = score === goal - 1;
 

@@ -23,10 +23,12 @@ export default class Home extends Component {
       React.createRef(),
       React.createRef()
     ];
+
     // Create an initial spell pattern. If we've gone
     // to /reverie and come back, we'll use the last
     // created spell pattern (stored on appState as
     // a back-up). Otherwise, make a new one.
+
     const initialPattern = this.createSpellPattern();
     this.props.boundHandleClickForApp('updateSpacerHeight', this.props.appState.height);
 
@@ -55,6 +57,74 @@ export default class Home extends Component {
     this.setSpellLevelThree = this.setSpellLevelThree.bind(this);
     this.setSpellLevelFour = this.setSpellLevelFour.bind(this);
     this.resetSpell = this.resetSpell.bind(this);
+  }
+
+  render() {
+    const hcForHome = new ClickHandling('home', this);
+    const boundHandleClickForHome = hcForHome.boundHandleClick;
+    const setSpellLevels = {
+      one: (v, c) => this.setSpellLevelOne(v, c),
+      two: (v, c) => this.setSpellLevelTwo(v, c),
+      three: (v, c) => this.setSpellLevelThree(v, c),
+      four: (v, c) => this.setSpellLevelFour(v, c),
+      reset: (v, c) => this.resetSpell(v, c)
+    };
+    const setLoadLevels = {
+      one: () => this.setLoadLevelOne(),
+      two: () => this.setLoadLevelTwo(),
+      three: () => this.setLoadLevelThree(),
+      four: () => this.setLoadLevelFour(),
+      five: () => this.setLoadLevelFive(),
+      six: () => this.setLoadLevelSix(),
+      sum: () => this.sumLoadLevels()
+    };
+
+    return (
+      <RestyledMain 
+        home={true}
+      >
+        <NameTag
+          {...this.props}
+          boundHandleClickForHome={boundHandleClickForHome}
+          homeState={this.state}
+          setLoadLevels={setLoadLevels}
+          setSpellLevels={setSpellLevels}
+        />
+        <Charms
+          {...this.props}
+          charmRefs={this.charmRefs}
+          homeState={this.state}
+          setSpellLevels={setSpellLevels}
+        />
+        <PictureBox
+          {...this.props}
+          boundHandleClickForHome={boundHandleClickForHome}
+          homeState={this.state}
+          setLoadLevels={setLoadLevels}
+          setSpellLevels={setSpellLevels}
+        />
+      </RestyledMain>
+    );
+  }
+
+  createSpellPattern() {
+    const pattern = [];
+
+    for (let i = 0; i < 5; i++) {
+      let randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+
+      // Let's ensure our Charm order isn't redundant.
+
+      if (i > 0) {
+        while (pattern[i - 1] === randomNum) {
+          randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+        }
+      }
+
+      pattern.push(randomNum);
+    }
+
+    return pattern;
   }
 
   setLoadLevel(idx) {
@@ -161,74 +231,6 @@ export default class Home extends Component {
         spellLevel: 0
       });
     }
-  }
-
-  render() {
-    const hcForHome = new ClickHandling('home', this);
-    const boundHandleClickForHome = hcForHome.boundHandleClick;
-    const setSpellLevels = {
-      one: (v, c) => this.setSpellLevelOne(v, c),
-      two: (v, c) => this.setSpellLevelTwo(v, c),
-      three: (v, c) => this.setSpellLevelThree(v, c),
-      four: (v, c) => this.setSpellLevelFour(v, c),
-      reset: (v, c) => this.resetSpell(v, c)
-    };
-    const setLoadLevels = {
-      one: () => this.setLoadLevelOne(),
-      two: () => this.setLoadLevelTwo(),
-      three: () => this.setLoadLevelThree(),
-      four: () => this.setLoadLevelFour(),
-      five: () => this.setLoadLevelFive(),
-      six: () => this.setLoadLevelSix(),
-      sum: () => this.sumLoadLevels()
-    };
-
-    return (
-      <RestyledMain 
-        home={true}
-      >
-        <NameTag
-          {...this.props}
-          boundHandleClickForHome={boundHandleClickForHome}
-          homeState={this.state}
-          setLoadLevels={setLoadLevels}
-          setSpellLevels={setSpellLevels}
-        />
-        <Charms
-          {...this.props}
-          charmRefs={this.charmRefs}
-          homeState={this.state}
-          setSpellLevels={setSpellLevels}
-        />
-        <PictureBox
-          {...this.props}
-          boundHandleClickForHome={boundHandleClickForHome}
-          homeState={this.state}
-          setLoadLevels={setLoadLevels}
-          setSpellLevels={setSpellLevels}
-        />
-      </RestyledMain>
-    );
-  }
-
-  createSpellPattern() {
-    const pattern = [];
-
-    for (let i = 0; i < 5; i++) {
-      let randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-
-      // Let's ensure our Charm order isn't redundant.
-
-      if (i > 0) {
-        while (pattern[i - 1] === randomNum) {
-          randomNum = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-        }
-      }
-
-      pattern.push(randomNum);
-    }
-
-    return pattern;
   }
 
   eventHandlerForMouseDown(num) {

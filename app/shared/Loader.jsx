@@ -1,5 +1,5 @@
 import React from 'react';
-import spinner from '../../public/image-loader.gif';
+import spinner from '../../assets/images/spinner.gif';
 import styled, { css, keyframes } from 'styled-components';
 
 const loaderKeyframes = keyframes`

@@ -1,7 +1,7 @@
 import bio from '../data/home/home.md';
 import eventManagement from '../helpers/eventManagement';
-import headerNavClose from '../../public/header-nav-open.png';
-import headerNavOpen from '../../public/header-nav-closed.png';
+import headerNavClose from '../../assets/images/header-nav-open.png';
+import headerNavOpen from '../../assets/images/header-nav-closed.png';
 import { cover } from 'intrinsic-scale';
 import Mapper from '../shared/Mapper.jsx';
 import React, { Component } from 'react';

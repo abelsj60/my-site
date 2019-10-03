@@ -38,9 +38,9 @@ const RestyledLink = styled(
   // eslint-disable-next-line
   ({ highlightThis, isMenu, ...rest }) => <StyledLink {...rest} />
 )`
+  display: flex;
   height: ${p => !p.isMenu && '15px'};
   border: 1px solid ${p => p.highlightThis ? p.theme.colors.darkPinkTwo : p.theme.colors.blueTwo};
-  display: flex;
   align-items: center; // Prevents image from stretching
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {

@@ -35,8 +35,7 @@ export default class ErrorBoundary extends Component {
               style={{
                 backgroundColor: '#fd1172',
                 margin: '20px 25px',
-                padding: '15px 0px',
-                paddingBottom: '5px'
+                padding: '15px 0px'
               }}
             >
               <p
@@ -56,7 +55,11 @@ export default class ErrorBoundary extends Component {
                     paddingRight: '25px'
                   }}
                 >
-                  <h1>
+                  <h1
+                    style={{
+                      marginBottom: '20px'
+                    }}
+                  >
                     About
                   </h1>
                   <p>

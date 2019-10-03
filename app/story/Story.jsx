@@ -8,10 +8,10 @@ import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
-import fallbackBlurOne from '../../public/jea-story-chapter-one-50blur-3px.png';
-import fallbackBlurTwo from '../../public/jea-story-chapter-two-50blur-3px.png';
-import fallbackBlurThree from '../../public/jea-story-chapter-three-50blur-3px.png';
-import fallbackBlurFour from '../../public/jea-story-chapter-four-50blur-3px.png';
+import fallbackBlurOne from '../../assets/images/jea-story-chapter-one-50blur-3px.png';
+import fallbackBlurTwo from '../../assets/images/jea-story-chapter-two-50blur-3px.png';
+import fallbackBlurThree from '../../assets/images/jea-story-chapter-three-50blur-3px.png';
+import fallbackBlurFour from '../../assets/images/jea-story-chapter-four-50blur-3px.png';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};

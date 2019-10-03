@@ -15,7 +15,7 @@ export default styled.img`
   transition: ${p => !p.finishedHomePageLoad || (p.spellLevel > 0 && p.spellLevel < 5) ? 'opacity 1s ease-in' : ''};
   z-index: 3;
 
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView} and min-height: 640px) {
     opacity: ${p => p.spellLevel > 0 ? 0 : '' };
     transition: ${p => p.spellLevel > 0 && 'unset'};
   }
