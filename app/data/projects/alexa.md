@@ -39,9 +39,9 @@ partialUrls: [
   'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/alexa-take-on-g-main-imc-q91'
 ]
 newThumbnails: [
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-wsq-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-gs-rules-of-funny-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-take-on-g-thumbnail-imc-q100/91'
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-wsq-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-gs-rules-of-funny-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-take-on-g-thumbnail-imc-q100:91'
 ]
 biggestThumbnail: 804
 showTheseAttributes: [

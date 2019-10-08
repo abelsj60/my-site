@@ -49,11 +49,11 @@ partialUrls: [
   https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/slingshot-guest-stage-highlight-main-imc-q91
 ]
 newThumbnails: [
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-remote-slides-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-slides-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-remote-stage-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-stage-no-highlight-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-stage-highlight-thumbnail-imc-q100/91'
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-remote-slides-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-slides-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-remote-stage-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-stage-no-highlight-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-stage-highlight-thumbnail-imc-q100:91'
 ]
 biggestThumbnail: 448
 showTheseAttributes: [

@@ -49,11 +49,11 @@ partialUrls: [
   'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/arrow-control-main-imc-q91'
 ]
 newThumbnails: [
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-editor-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-dev-module-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-epm-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-settings-thumbnail-imc-q100/91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-control-thumbnail-imc-q100/91'
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-editor-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-dev-module-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-epm-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-settings-thumbnail-imc-q100:91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-control-thumbnail-imc-q100:91'
 ]
 biggestThumbnail: 448
 showTheseAttributes: [
