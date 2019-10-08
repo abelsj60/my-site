@@ -73,19 +73,15 @@ export default function prelodBigImages() {
 
   stories.forEach(chapter => {
     const {
-      blurredImage,
-      image,
       number,
       rootImageUrl
     } = chapter.attributes;
     const imageA = new Image();
     const imageB = new Image();
-    imageA.src = image;
-    imageB.src = blurredImage;
-    const newSource1 = `${rootImageUrl}/chapter-${number}/chapter-${number}-imc-main-q90-${imageWidth}.jpg`;
-    const newSource2 = `${rootImageUrl}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-3.jpg`;
-    console.log('chapter newSource 1:', newSource1);
-    console.log('chapter newSource 2:', newSource2);
+    const illSource = `/chapter-${number}/chapter-${number}-imc-main-q90-${imageWidth}.jpg`;
+    const blurredSource = `/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-3.jpg`;
+    imageA.src = illSource;
+    imageB.src = blurredSource;
     images[`chapter-${number}-main`] = imageA;
     images[`chapter-${number}-blurred`] = imageB;
   });
@@ -95,8 +91,7 @@ export default function prelodBigImages() {
     let source;
 
     if (url.includes('boy') && !url.includes('blur') && imageWidth >= 2880) {
-      source = `${url}/boy-imc-main-q90-2736.jpg`;
-      console.log('source boy special:', source);
+      source = `/${url}/boy-imc-main-q90-2736.png`;
     } else {
       const filePrefix = url.includes('boy')
         ? 'boy'
@@ -104,17 +99,14 @@ export default function prelodBigImages() {
           ? 'forrest'
           : 'nyc';
       if (url.includes('blur')) {
-        source = `${url}/${filePrefix}-ink-blur-0x15-3.jpg`;
-        console.log('home source blur:', source);
+        source = `/${url}/${filePrefix}-ink-blur-0x15-3.${url.includes('boy') ? 'png' : 'jpg'}`;
       } else {
-        source = `${url}/${filePrefix}-imc-main-q90-${imageWidth}.jpg`;
-        console.log('home source main:', source);
+        source = `/${url}/${filePrefix}-imc-main-q90-${imageWidth}.${url.includes('boy') ? 'png' : 'jpg'}`;
       }
     }
 
-    // image.src = home.attributes[url]; // OLD
     image.src = source;
-    images[imageNames[idx]] = image;
+    images[home.attributes.imageNames[idx]] = image;
 
     // A poor man's test for cached images
     if (image.width + image.height > 0) {
@@ -123,14 +115,14 @@ export default function prelodBigImages() {
   });
 
   // Note: Full-size image, should be converted and optimized at later date...
-  // https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/business-card/business-card-teen-imc-q91-656-4x.jpg
+  // /business-card/business-card-teen-imc-q91-656-4x.jpg
   
   // Note: Full-size image, should be converted and optimized at later date...
-  // https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/not-found/not-found-jinni-imc-q91-1240-4x.jpg
+  // /not-found/not-found-jinni-imc-q91-1240-4x.jpg
 
   [
-    'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/business-card/business-card-teen-imc-q91-656-4x.jpg',
-    'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/not-found/not-found-jinni-imc-q91-1240-4x.jpg'
+    `/business-card/business-card-teen-imc-q91-656-4x.jpg`,
+    `/not-found/not-found-jinni-imc-q91-1240-4x.jpg`
   ].forEach((src, idx) => {
     const image = new Image();
     image.src = src;

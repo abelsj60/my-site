@@ -2,7 +2,7 @@
 title: 'True adventure'
 image: 'https://user-images.githubusercontent.com/30417590/63110322-24afb400-bf59-11e9-8a70-7b412538f349.png'
 blurredImage: 'https://user-images.githubusercontent.com/30417590/63657618-11c78b80-c772-11e9-99e9-ae7358492d50.png'
-rootImageUrl: 'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images'
+rootImageUrl: 'assets/images'
 description: 'xyz 2'
 number: 2
 ---

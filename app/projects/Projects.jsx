@@ -7,9 +7,6 @@ import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React, { Fragment } from 'react';
-import {
-  isMobile
-} from 'react-device-detect';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
@@ -71,7 +68,6 @@ const MainImage = styled.img`
 
 export default function Projects(props) {
   const {
-    appState,
     boundHandleClickForContentLoader,
     contentState
   } = props;
@@ -83,25 +79,15 @@ export default function Projects(props) {
   } = contentState;
   const {
     captions,
-    // full,
-    partialUrls,
+    mainImages,
     pitch,
     projectName,
     showTheseAttributes,
-    type,
-    // zoomed
+    type
   } = allContentData[projectIndex].attributes;
-  const { pinchZoomed } = appState;
   const caption = captions[thumbnailIndex];
 
-  // Larger res ('zoomed') image if:
-  //  a. desktop
-  //  b. pinchZoomed
-
-  // const source = !isMobile || pinchZoomed
-  //   ? zoomed[thumbnailIndex]
-  //   : full[thumbnailIndex];
-  const newSource = partialUrls[thumbnailIndex];
+  const filePrefix = mainImages[thumbnailIndex];
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
@@ -174,12 +160,11 @@ export default function Projects(props) {
             <ImageHolder>
               <MainImage
                 alt="mainPic"
-                // src={source}
-                src={`${newSource}-625-1x.jpg`}
+                src={`${filePrefix}-625-1x.jpg`}
                 srcSet={
-                  `${newSource}-1250-2x.jpg 2x`,
-                  `${newSource}-1875-3x.jpg 3x`,
-                  `${newSource}-2500-4x.jpg 4x`
+                  `${filePrefix}-1250-2x.jpg 2x`,
+                  `${filePrefix}-1875-3x.jpg 3x`,
+                  `${filePrefix}-2500-4x.jpg 4x`
                 }
                 imageLoaded={imageLoaded}
                 onLoad={onLoadMainImage}

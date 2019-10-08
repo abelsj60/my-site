@@ -46,10 +46,10 @@ export default function PictureBox(props) {
   } = homeState;
 
   const bigBoySrc = images[imageNames[0]].src;
-  const bigForrestSrc = images[imageNames[1]].src;
-  const bigNycSrc = images[imageNames[2]].src;
-  const blurredBoySrc = images[imageNames[3]].src;
-  const blurredForrestSrc = images[imageNames[4]].src;
+  const blurredBoySrc = images[imageNames[1]].src;
+  const bigForrestSrc = images[imageNames[2]].src;
+  const blurredForrestSrc = images[imageNames[3]].src;
+  const bigNycSrc = images[imageNames[4]].src;
   const blurredNycSrc = images[imageNames[5]].src;
 
   const onLoadForBlurredBoy = event => {
@@ -158,7 +158,7 @@ export default function PictureBox(props) {
             inCity={inCity}
             onTransitionEnd={onTransitionEndForBlurredCity}
             spellLevel={spellLevel}
-            src={bigNycSrc}
+            src={blurredNycSrc}
           />
           <CityBackground
             alt={descriptionCity}
@@ -166,7 +166,7 @@ export default function PictureBox(props) {
             // Trigger toggle after backgrounds are swapped
             onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, !inCity)}
             spellLevel={spellLevel}
-            src={blurredNycSrc}
+            src={bigNycSrc}
           />
         </Fragment>
       }

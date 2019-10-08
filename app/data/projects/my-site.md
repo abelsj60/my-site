@@ -1,56 +1,37 @@
 ---
 number: 
-    2
+  2
 projectName: 
-    'My site'
+  'My site'
 pitch: 
-    'A personal site about stories and code'
+  'A personal site about stories and code'
 type:
   'Coding'
 technologies: 
-    'Cloud: Github Pages ∙ Language: Javascript, HTML, CSS ∙ Framework: React'
+  'Cloud: Github Pages ∙ Language: Javascript, HTML, CSS ∙ Framework: React'
 responsibility: 
-    'Creator and developer'
+  'Creator and developer'
 story: 
-    'My site is a Single Page Application masquerading as a Web site. It explores the intersection between storytelling and hand-crafted code. Built with ❤️ in N.Y.C.'
+  'My site is a Single Page Application masquerading as a Web site. It explores the intersection between storytelling and hand-crafted code. Built with ❤️ in N.Y.C.'
 captions: [
-    "Floating text gives an overview about me, and a big, bold illustration teases the site's main story.",
-    'The story of my life, featuring magical creatures, custom illustrations, and wide-eyed enthusiasm.',
-    "A project page showcasing the software I oversaw as founder of Three Minute Media. A menu button and thumbnails are stored on the shelf above the content so they're easily accessible.",
-    "An article page featuring one of the clips that I wrote as a staff reporter at Forbes. The component that creates this page is shared with Reverie, the site's blog, to make site maintenance easier."
+  "Floating text gives an overview about me, and a big, bold illustration teases the site's main story.",
+  'The story of my life, featuring magical creatures, custom illustrations, and wide-eyed enthusiasm.',
+  "A project page showcasing the software I oversaw as founder of Three Minute Media. A menu button and thumbnails are stored on the shelf above the content so they're easily accessible.",
+  "An article page featuring one of the clips that I wrote as a staff reporter at Forbes. The component that creates this page is shared with Reverie, the site's blog, to make site maintenance easier."
+]
+mainImages: [
+  '/alexa/alexa-wsq-main-imc-q91',
+  '/alexa/alexa-gs-rules-of-funny-main-imc-q91',
+  '/alexa/alexa-take-on-g-main-imc-q91'
 ]
 projectThumbnail: [
-    https://user-images.githubusercontent.com/30417590/61604947-6f1b6a80-ac11-11e9-9d24-2b8682e95a9b.png,
-    https://user-images.githubusercontent.com/30417590/61604963-82c6d100-ac11-11e9-8f23-9ae507e91909.png,
-    https://user-images.githubusercontent.com/30417590/61605169-40ea5a80-ac12-11e9-930f-007ef313fe26.png,
-    'https://user-images.githubusercontent.com/30417590/61605215-6bd4ae80-ac12-11e9-89f3-5849e1931f37.png'
+  '/alexa/thumbs/alexa-wsq-thumbnail-imc-q100:91',
+  '/alexa/thumbs/alexa-gs-rules-of-funny-thumbnail-imc-q100:91',
+  '/alexa/thumbs/alexa-take-on-g-thumbnail-imc-q100:91'
 ]
-full: [
-    'https://user-images.githubusercontent.com/30417590/56870415-0ee3a680-69dd-11e9-84c2-0bf3898ac283.png',
-    'https://user-images.githubusercontent.com/30417590/56870414-0ee3a680-69dd-11e9-8ba8-442eb3acc890.png',
-    'https://user-images.githubusercontent.com/30417590/56870417-0ee3a680-69dd-11e9-9dc2-51f5c70dca4e.png',
-    'https://user-images.githubusercontent.com/30417590/56870416-0ee3a680-69dd-11e9-84d8-cd541f9d6930.png'
-]
-zoomed: [
-    'https://user-images.githubusercontent.com/30417590/57550562-cd37f180-7334-11e9-8a5b-8f15e0e5dac9.png',
-    'https://user-images.githubusercontent.com/30417590/57550611-eb055680-7334-11e9-8a21-c5b885b73678.png',
-    'https://user-images.githubusercontent.com/30417590/57550639-f5bfeb80-7334-11e9-9ad2-cf351f8d6937.png',
-    'https://user-images.githubusercontent.com/30417590/57550666-02444400-7335-11e9-8bd2-3616e11dc77e.png'
-]
-partialUrls: [
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/alexa-wsq-main-imc-q91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/alexa-gs-rules-of-funny-main-imc-q91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/alexa-take-on-g-main-imc-q91'
-]
-newThumbnails: [
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-wsq-thumbnail-imc-q100:91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-gs-rules-of-funny-thumbnail-imc-q100:91',
-  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-take-on-g-thumbnail-imc-q100:91'
-]
-biggestThumbnail: 0
 showTheseAttributes: [
-    'story',
-    'responsibility',
-    'technologies'
+  'story',
+  'responsibility',
+  'technologies'
 ]
 ---
