@@ -1,7 +1,7 @@
 import bio from '../data/home/home.md';
 import eventManagement from '../helpers/eventManagement';
-import headerNavClose from '../../assets/images/header-nav-open.png';
-import headerNavOpen from '../../assets/images/header-nav-closed.png';
+import headerNavClose from '../../assets/images/convert-to-data-uri/header-nav-open-88-@4x.png';
+import headerNavOpen from '../../assets/images/convert-to-data-uri/header-nav-closed-88-@4x.png';
 import { cover } from 'intrinsic-scale';
 import Mapper from '../shared/Mapper.jsx';
 import React, { Component } from 'react';
@@ -19,7 +19,7 @@ const headerLinks = [
 const fontWeight = '500';
 const initialShadow = '2px 2px 2.5px';
 const textShadow = initialShadow + ' rgba(0, 0, 0, .4)';
-const iconShadow = initialShadow + ' rgba(0,0,0,.9)';
+const iconShadow = initialShadow + ' rgba(0, 0, 0, .9)';
 const Container = styled.header`
   color: ${p => p.theme.colors.white};
   flex-shrink: 0;
@@ -55,6 +55,7 @@ const RestyledLink = styled(
   // Filter out isHome and isActive from StyledLink
   // eslint-disable-next-line
   ({
+    illustrationDirection,
     illustrationLevel,
     isHome,
     isActive,
@@ -70,7 +71,7 @@ const RestyledLink = styled(
   font-weight: ${p => p.isHome ? '400' : fontWeight};
   margin-left: ${p => (p.num === 0 ? '0px' : '10px')};
   color: ${p => p.theme.colors.white};
-  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && p.illustrationLevel >= 2 ? textShadow : ''};
+  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) ? textShadow : ''};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'text-shadow .35s'};
 
   && {
@@ -117,7 +118,7 @@ const Motto = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && p.illustrationLevel >= 2 ? textShadow : ''};
+  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) ? textShadow : ''};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'text-shadow .35s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
@@ -177,11 +178,9 @@ const Icon = styled.img`
   margin-left: auto;
   margin-right: 10px;
   cursor: pointer;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  filter: ${p => !p.isReverie && p.tempContent < 1 && p.illustrationLevel >= 2 && css`drop-shadow(${iconShadow})`};
+  padding: 5px;
+  filter: ${p => !p.isReverie && p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) && css`drop-shadow(${iconShadow})`};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`filter .35s`};
   z-index: 1;
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwoB}) {
@@ -222,12 +221,13 @@ export default class Header extends Component {
           isHome={isHome}
           isStory={isStory}
           isReverie={isReverie}
-          illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
+          illustrationLevel={illustrationLevel}
           tempContent={tempContent}
         />
         <NameAsLink
           boundHandleClickForApp={boundHandleClickForApp}
+          illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           isHome={isHome}
           isReverie={isReverie}
@@ -239,6 +239,7 @@ export default class Header extends Component {
         </NameAsLink>
         <Motto
           hide={isHome}
+          illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           isHome={isHome}
           isReverie={isReverie}
@@ -268,6 +269,7 @@ export default class Header extends Component {
                     >
                       <RestyledLink
                         boundHandleClickForApp={boundHandleClickForApp}
+                        illustrationDirection={illustrationDirection}
                         illustrationLevel={illustrationLevel}
                         isActive={isActive}
                         isHome={isHome}
@@ -286,6 +288,7 @@ export default class Header extends Component {
           </NavList>
         </Nav>
         <Icon
+          illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           isHome={isHome}
           src={menuIcon}

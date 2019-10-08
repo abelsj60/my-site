@@ -83,12 +83,13 @@ export default function Projects(props) {
   } = contentState;
   const {
     captions,
-    full,
+    // full,
+    partialUrls,
     pitch,
     projectName,
     showTheseAttributes,
     type,
-    zoomed
+    // zoomed
   } = allContentData[projectIndex].attributes;
   const { pinchZoomed } = appState;
   const caption = captions[thumbnailIndex];
@@ -97,9 +98,10 @@ export default function Projects(props) {
   //  a. desktop
   //  b. pinchZoomed
 
-  const source = !isMobile || pinchZoomed
-    ? zoomed[thumbnailIndex]
-    : full[thumbnailIndex];
+  // const source = !isMobile || pinchZoomed
+  //   ? zoomed[thumbnailIndex]
+  //   : full[thumbnailIndex];
+  const newSource = partialUrls[thumbnailIndex];
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
@@ -172,7 +174,13 @@ export default function Projects(props) {
             <ImageHolder>
               <MainImage
                 alt="mainPic"
-                src={source}
+                // src={source}
+                src={`${newSource}-625-1x.jpg`}
+                srcSet={
+                  `${newSource}-1250-2x.jpg 2x`,
+                  `${newSource}-1875-3x.jpg 3x`,
+                  `${newSource}-2500-4x.jpg 4x`
+                }
                 imageLoaded={imageLoaded}
                 onLoad={onLoadMainImage}
               />

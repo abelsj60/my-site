@@ -1,14 +1,14 @@
 import React from 'react';
-import spinner from '../../assets/images/spinner.gif';
+import spinner from '../../assets/images/convert-to-data-uri/spinner.gif';
 import styled, { css, keyframes } from 'styled-components';
 
 const loaderKeyframes = keyframes`
   0% {
-    width: 0%;
+    transform: scaleX(0);
   }
 
   100% {
-    width: 100%;
+    transform: scaleX(-1);
   }
 `;
 
@@ -42,12 +42,15 @@ const Text = styled.p`
   font-size: ${p => p.smallFont ? p.theme.fontSizes.zero : p.theme.fontSizes.six };
 `;
 const LoadingBar = styled.div`
+  position: relative;
   height: 1px;
   background-color: ${p => !p.white ? p.theme.colors.white : p.theme.colors.black };
 `;
 const ProgressBar = styled.div`
+  position: absolute;
   width: 100%;
   height: 1px;
+  will-change: transform;
   background-color: ${p => !p.white ? p.theme.colors.black : p.theme.colors.white};
   animation: ${p => p.show && css`1.25s ${loaderKeyframes} infinite`}; 
 `;

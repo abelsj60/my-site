@@ -56,7 +56,7 @@ const Graf = styled.p`
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.one};
   user-select: none;
-  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && ((p.home && p.coverValY < 0) || p.illustrationLevel >= 2) && shadow};
+  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && ((p.home && p.coverValY < 0) || ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2))) && shadow};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && '.35s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {

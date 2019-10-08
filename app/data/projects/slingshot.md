@@ -41,6 +41,21 @@ zoomed: [
   'https://user-images.githubusercontent.com/30417590/57549304-30278980-7331-11e9-8285-eeb1110c89c7.png',
   'https://user-images.githubusercontent.com/30417590/57549331-40d7ff80-7331-11e9-8dbd-c82a0653cc0f.png'
 ]
+partialUrls: [
+  https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/slingshot-remote-slides-main-imc-q91,
+  https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/slingshot-guest-slides-main-imc-q91,
+  https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/slingshot-remote-stage-main-imc-q91,
+  https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/slingshot-guest-stage-no-highlight-main-imc-q91,
+  https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/slingshot-guest-stage-highlight-main-imc-q91
+]
+newThumbnails: [
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-remote-slides-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-slides-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-remote-stage-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-stage-no-highlight-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/slingshot/thumbs/slingshot-guest-stage-highlight-thumbnail-imc-q100/91'
+]
+biggestThumbnail: 448
 showTheseAttributes: [
   'story',
   'responsibility',

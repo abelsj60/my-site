@@ -41,6 +41,21 @@ zoomed: [
   'https://user-images.githubusercontent.com/30417590/57548863-06219780-7330-11e9-85c1-f612060534a8.png',
   'https://user-images.githubusercontent.com/30417590/57548888-16397700-7330-11e9-8349-1b4d818fbddd.png'
 ]
+partialUrls: [
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/arrow-editor-main-imc-q91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/arrow-dev-module-main-imc-q91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/arrow-epm-main-imc-q91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/arrow-settings-main-imc-q91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/arrow-control-main-imc-q91'
+]
+newThumbnails: [
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-editor-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-dev-module-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-epm-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-settings-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/arrow/thumbs/arrow-control-thumbnail-imc-q100/91'
+]
+biggestThumbnail: 448
 showTheseAttributes: [
   'story',
   'responsibility',

@@ -21,12 +21,10 @@ const PictureHolder = styled.div`
 
 export default function PictureBox(props) {
   const {
-    cityImage,
-    cityImageBlurred,
     descriptionBoy,
     descriptionFantasy,
     descriptionCity,
-    preloadTheseImages
+    imageNames
   } = bio.attributes;
   const {
     appState,
@@ -47,11 +45,12 @@ export default function PictureBox(props) {
     movement
   } = homeState;
 
-  const imageNames = preloadTheseImages.map(name => name);
   const bigBoySrc = images[imageNames[0]].src;
-  const bigFantasySrc = images[imageNames[2]].src;
-  const blurredBoySrc = images[imageNames[1]].src;
-  const blurredFantasySrc = images[imageNames[3]].src;
+  const bigForrestSrc = images[imageNames[1]].src;
+  const bigNycSrc = images[imageNames[2]].src;
+  const blurredBoySrc = images[imageNames[3]].src;
+  const blurredForrestSrc = images[imageNames[4]].src;
+  const blurredNycSrc = images[imageNames[5]].src;
 
   const onLoadForBlurredBoy = event => {
     eventManagement(event);
@@ -114,9 +113,12 @@ export default function PictureBox(props) {
       />
       <BoyForeground
         alt={descriptionBoy}
+        enter={movement === 'enter'}
+        exit={movement === 'exit'}
         finishedHomePageLoad={finishedHomePageLoad}
         loadLevelAll={setLoadLevels.sum().all}
         onLoad={onLoadForBoy}
+        spellLevel={spellLevel}
         src={bigBoySrc}
       />
       {(!inCity || (inCity && spellLevel > 0)) &&
@@ -132,7 +134,7 @@ export default function PictureBox(props) {
             onLoad={onLoadForBlurredFantasy}
             onTransitionEnd={onTransitionEndForBlurredFantasy}
             spellLevel={spellLevel}
-            src={blurredFantasySrc}
+            src={blurredForrestSrc}
           />
           <FantasyBackground
             alt={descriptionFantasy}
@@ -143,7 +145,7 @@ export default function PictureBox(props) {
             // Trigger toggle after backgrounds are swapped
             onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, inCity)}
             spellLevel={spellLevel}
-            src={bigFantasySrc}
+            src={bigForrestSrc}
           />
         </Fragment>
       }
@@ -156,7 +158,7 @@ export default function PictureBox(props) {
             inCity={inCity}
             onTransitionEnd={onTransitionEndForBlurredCity}
             spellLevel={spellLevel}
-            src={cityImageBlurred}
+            src={bigNycSrc}
           />
           <CityBackground
             alt={descriptionCity}
@@ -164,7 +166,7 @@ export default function PictureBox(props) {
             // Trigger toggle after backgrounds are swapped
             onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, !inCity)}
             spellLevel={spellLevel}
-            src={cityImage}
+            src={blurredNycSrc}
           />
         </Fragment>
       }

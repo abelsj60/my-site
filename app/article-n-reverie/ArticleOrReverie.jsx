@@ -31,6 +31,10 @@ const Text = styled.section`
     }
   }
 
+  strong {
+    font-weight: 500;
+  }
+
   img {
     margin-top: 0px;
   }

@@ -8,10 +8,10 @@ import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
-import fallbackBlurOne from '../../assets/images/jea-story-chapter-one-50blur-3px.png';
-import fallbackBlurTwo from '../../assets/images/jea-story-chapter-two-50blur-3px.png';
-import fallbackBlurThree from '../../assets/images/jea-story-chapter-three-50blur-3px.png';
-import fallbackBlurFour from '../../assets/images/jea-story-chapter-four-50blur-3px.png';
+import fallbackBlurOne from '../../assets/images/convert-to-data-uri/jea-story-chapter-one-50blur-3px.png';
+import fallbackBlurTwo from '../../assets/images/convert-to-data-uri/jea-story-chapter-two-50blur-3px.png';
+import fallbackBlurThree from '../../assets/images/convert-to-data-uri/jea-story-chapter-three-50blur-3px.png';
+import fallbackBlurFour from '../../assets/images/convert-to-data-uri/jea-story-chapter-four-50blur-3px.png';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
@@ -109,9 +109,11 @@ const BlurredFallback = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  // Let's emulate all <BlurredImage /> logic in case it doesn't load (<BlurredFallback /> will work just as the <BlurredImage /> would) 
-  opacity: ${p => p.imageLoaded < 1 || p.tempContent < 1 && (((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '1' : '0'};
-  transition: ${p => p.imageLoaded < 2 ? 'opacity .5s' : p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'opacity .35s' : ''};
+  // Theoretically, the <BlurredImage /> might not be in before someone clicks the story button.
+  // This means, that BlurredFallback would have to transition to and from the illustration.
+  // BUT, it's not able to do that at this time. May address in the future.
+  opacity: ${p => p.imageLoaded < 1 ? '1' : '0'};
+  transition: ${p => p.imageLoaded < 2 ? 'opacity .5s' : ''};
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
@@ -121,17 +123,17 @@ const BlurredImage = styled.img`
   top: 0px;
   left: 0px;
   z-index: -2;
-  // May need to fill page:   
+  // May need to fill page:
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => p.imageLoaded < 1 || p.tempContent < 1 && (((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'};
-  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .5s ease-in'};
+  opacity: ${p => p.imageLoaded < 1 || (p.tempContent < 1 && ((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s ease-in'};
 
-  // The mediaQ ensures the blur goes away if the full-screen menu is
+  // The mediaQ ensures the blur goes away if the full-screen header menu is
   // turned on when the user increases the browser window's width
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    opacity: ${p => p.illustrationLevel > 0 && p.theme.blurForTempContent && '0'};
+    opacity: ${p => p.illustrationLevel > 0 && p.theme.blurForTempContent && p.tempContent === 3 ? '0' : ''};
   }
 `;
 const StoryText = styled.section`
@@ -182,6 +184,7 @@ export default function Story(props) {
   const onLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
     if (imageLoaded < 1) {
+      // refers to BlurredImage, not the full illustration
       boundHandleClickForContentLoader('imageLoader', 1)
     }
   };
@@ -198,6 +201,7 @@ export default function Story(props) {
   const onTransitionEndForBlurredFallbackImage = event => { // 1 --> 2
     eventManagement(event);
     if (imageLoaded < 2) {
+      // refers to BlurredImage, not the full illustration
       boundHandleClickForContentLoader('imageLoader', 2)
     }
   };
@@ -268,7 +272,7 @@ export default function Story(props) {
           illustrationDirection={illustrationDirection}
           imageLoaded={imageLoaded}
         />
-        {imageLoaded < 2 &&
+        {imageLoaded < 2 && // refers to blurred image
           <BlurredFallback 
             alt="blurred fallback"
             illustrationDirection={illustrationDirection}

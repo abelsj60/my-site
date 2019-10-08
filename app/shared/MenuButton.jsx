@@ -1,5 +1,5 @@
-import arrowUp from '../../assets/images/arrow-up.png';
-import arrowDown from '../../assets/images/arrow-down.png';
+import arrowUp from '../../assets/images/convert-to-data-uri/arrow-up-28-@4x.png';
+import arrowDown from '../../assets/images/convert-to-data-uri/arrow-down-28-@4x.png';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -18,11 +18,11 @@ const RestyledLink = styled(StyledLink)`
 `;
 const Label = styled.p`
   font-size: ${p => p.theme.fontSizes.one};
-  color: ${p => p.theme.colors.pink};
+  color: ${p => p.theme.colors.lightBlack};
   margin: 0px;
   cursor: pointer;
   margin-top: -2px;
-  font-weight: 400;
+  font-weight: 300;
 `;
 const IconContainer = styled.div`
   margin-top: 2px; 

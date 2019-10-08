@@ -37,6 +37,17 @@ zoomed: [
     'https://user-images.githubusercontent.com/30417590/57550639-f5bfeb80-7334-11e9-9ad2-cf351f8d6937.png',
     'https://user-images.githubusercontent.com/30417590/57550666-02444400-7335-11e9-8bd2-3616e11dc77e.png'
 ]
+partialUrls: [
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/alexa-wsq-main-imc-q91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/alexa-gs-rules-of-funny-main-imc-q91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/alexa-take-on-g-main-imc-q91'
+]
+newThumbnails: [
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-wsq-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-gs-rules-of-funny-thumbnail-imc-q100/91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/alexa/thumbs/alexa-take-on-g-thumbnail-imc-q100/91'
+]
+biggestThumbnail: 0
 showTheseAttributes: [
     'story',
     'responsibility',

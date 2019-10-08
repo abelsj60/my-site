@@ -11,12 +11,14 @@ export default styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: ${p => (!p.finishedHomePageLoad && p.loadLevelBlurs >= 2 && p.loadLevelAll < 6) || p.theme.blurForTempContent || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? '1' : '0'};
+  // Opacity is 1 on small screens so as to deal with overlap of charms and the foregroundBoy image
+  // We rely on !p.finishedHomePageLoad to ensure the associated test only runs on initialLoad. It should not be considered thereafter.
+  opacity: ${p => (!p.finishedHomePageLoad && p.loadLevelBlurs >= 2 && p.loadLevelAll < 6) || ((p.enter && p.spellLevel > 1) || (p.exit && p.spellLevel > 2)) || p.theme.blurForTempContent ? '1' : '0'};
   transition: ${p => !p.finishedHomePageLoad || (p.spellLevel > 0 && p.spellLevel < 5) ? 'opacity 1s ease-in' : ''};
   z-index: 3;
 
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView} and min-height: 640px) {
-    opacity: ${p => p.spellLevel > 0 ? 0 : '' };
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    opacity: ${p => p.spellLevel > 0 ? '0' : '' };
     transition: ${p => p.spellLevel > 0 && 'unset'};
   }
 `;

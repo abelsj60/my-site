@@ -67,12 +67,15 @@ export default function ProjectNav(props) {
     thumbnailIndex
   } = contentState;
   const {
+    biggestThumbnail,
+    newThumbnails,
     projectName,
-    projectThumbnail
+    // projectThumbnail
   } = allContentData[projectIndex].attributes;
   const isMenu = mappedProjectIndex !== undefined;
   const finalGroup = isMenu && mappedProjectIndex === allContentData.length - 1;
-  const useThisData = !isMenu ? projectThumbnail : mappedProject.attributes.projectThumbnail;
+  // const useThisData = !isMenu ? projectThumbnail : mappedProject.attributes.projectThumbnail;
+  const useThisData = !isMenu ? newThumbnails : mappedProject.attributes.newThumbnails;
 
   return (
     <Group
@@ -104,7 +107,13 @@ export default function ProjectNav(props) {
                   <Image
                     alt={`Thumbnail ${idx + 1}`}
                     isMenu={isMenu}
-                    src={thumb}
+                    // src={thumb}
+                    src={`${thumb}-${biggestThumbnail - ((biggestThumbnail / 4 * 3))}-1x.jpg`}
+                    srcSet={
+                      `${thumb}-${biggestThumbnail - ((biggestThumbnail / 4 * 2))}-2x.jpg 2x`,
+                      `${thumb}-${biggestThumbnail - ((biggestThumbnail / 4))}-3x.jpg 3x`,
+                      `${thumb}-${biggestThumbnail}-4x.jpg 4x`
+                    }
                   />
                 </RestyledLink>
               </ListItem>

@@ -5,28 +5,19 @@ import styled from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
   flex: 1;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  flex-direction: row;
   align-items: center;
-  margin-right: 25px;
 `;
 const Hed = styled.h1`
   color: ${p => p.theme.colors.white};
   font-size: ${p => p.theme.fontSizes.twenty};
-  text-shadow: 3px 2px 2.5px rgba(0, 0, 0, .4);
-  margin-right: 20px;
-
-  @media (min-width: 559px) {
-  }
+  margin-top: 5px;
+  margin-right: 20px; // Centers text on hat sanati
+  // text-shadow: 3px 2px 2.5px rgba(0, 0, 0, .4);
 `;
 const Jinn = styled.img`
-  margin-bottom: auto;
   pointer-events: none;
-
-  @media (min-width: 554px) {
-    margin-bottom: unset;
-  }
 `;
 
 export default class NotFound extends Component {
@@ -35,19 +26,19 @@ export default class NotFound extends Component {
     return (
       <Main>
         <RestyledContentHolder>
-          <Hed>
-            Not found.
-          </Hed>
-          <Jinn
-            // Inline styles used to allocate img space on load
-            style={{
-              height: 'auto',
-              maxWidth: '310px',
-              width: '100%'
-            }}
-            alt="404"
-            src={src}
-          />
+            <Jinn
+              // Inline styles used to allocate img space on load
+              style={{
+                height: 'auto',
+                maxWidth: '310px',
+                width: '100%'
+              }}
+              alt="404"
+              src={src}
+            />
+            <Hed>
+              Not found
+            </Hed>
         </RestyledContentHolder>
       </Main>
     );

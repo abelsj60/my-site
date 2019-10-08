@@ -11,6 +11,7 @@ export default styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
+  // We rely on !p.finishedHomePageLoad to ensure the associated test only runs on initialLoad. It should not be considered thereafter.
   opacity: ${p => (!p.finishedHomePageLoad && p.loadLevelAll < 6) || p.inCity ? '0' : '1'};
   transform: ${p => p.inCity ? 'scale(1.35)' : 'scale(1)'};
   transform-origin: 50% 5%;

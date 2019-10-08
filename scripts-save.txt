@@ -1,48 +1,38 @@
-1. Writing an Image, Multiple Times, https://www.imagemagick.org/Usage/files/#write
+1. Convert png, resize, and write multiple times: https://www.imagemagick.org/Usage/files/#write
 
-  magick convert JA_ILL_02_v01.tif   -gravity  center   -crop  5116x2985+0+0 \
-    \( +clone   -resize  7680   -quality 85   +write  chapter-2-imc-main-q85-7680.jpg   +delete \) \
-    \( +clone   -resize  5120   -quality 85   +write  chapter-2-imc-main-q85-5120.jpg   +delete \) \
-    \( +clone   -resize  4096   -quality 85   +write  chapter-2-imc-main-q85-4096.jpg   +delete \) \
-    \( +clone   -resize  3840   -quality 85   +write  chapter-2-imc-main-q85-3840.jpg   +delete \) \
-    \( +clone   -resize  3000   -quality 85   +write  chapter-2-imc-main-q85-3000.jpg   +delete \) \
-    \( +clone   -resize  2880   -quality 85   +write  chapter-2-imc-main-q85-2880.jpg   +delete \) \
-    \( +clone   -resize  2736   -quality 85   +write  chapter-2-imc-main-q85-2736.jpg   +delete \) \
-    \( +clone   -resize  2688   -quality 85   +write  chapter-2-imc-main-q85-2688.jpg   +delete \) \
-    \( +clone   -resize  2560   -quality 85   +write  chapter-2-imc-main-q85-2560.jpg   +delete \) \
-    \( +clone   -resize  2436   -quality 85   +write  chapter-2-imc-main-q85-2436.jpg   +delete \) \
-    \( +clone   -resize  2304   -quality 85   +write  chapter-2-imc-main-q85-2304.jpg   +delete \) \
-    \( +clone   -resize  2160   -quality 85   +write  chapter-2-imc-main-q85-2160.jpg   +delete \) \
-    \( +clone   -resize  2048   -quality 85   +write  chapter-2-imc-main-q85-2048.jpg   +delete \) \
-    \( +clone   -resize  1921   -quality 85   +write  chapter-2-imc-main-q85-1921.jpg   +delete \) \
-    \( +clone   -resize  1792   -quality 85   +write  chapter-2-imc-main-q85-1792.jpg   +delete \) \
-    \( +clone   -resize  1600   -quality 85   +write  chapter-2-imc-main-q85-1600.jpg   +delete \) \
-    \( +clone   -resize  1536   -quality 85   +write  chapter-2-imc-main-q85-1536.jpg   +delete \) \
-    \( +clone   -resize  1440   -quality 85   +write  chapter-2-imc-main-q85-1440.jpg   +delete \) \
-    \( +clone   -resize  1334   -quality 85   +write  chapter-2-imc-main-q85-1334.jpg   +delete \) \
-    \( +clone   -resize  1280   -quality 85   +write  chapter-2-imc-main-q85-1280.jpg   +delete \) \
-    \( +clone   -resize  1200   -quality 85   +write  chapter-2-imc-main-q85-1200.jpg   +delete \) \
-    \( +clone   -resize  1366   -quality 85   +write  chapter-2-imc-main-q85-1366.jpg   +delete \) \
-    \( +clone   -resize  1080   -quality 85   +write  chapter-2-imc-main-q85-1080.jpg   +delete \) \
-    \( +clone   -resize  1024   -quality 85   +write  chapter-2-imc-main-q85-1024.jpg   +delete \) \
-    \( +clone   -resize  960    -quality 85   +write  chapter-2-imc-main-q85-960.jpg    +delete \) \
-    \( +clone   -resize  768    -quality 85   +write  chapter-2-imc-main-q85-768.jpg    +delete \) \
-                -resize  640    -quality 85   +write  chapter-2-imc-main-q85-640.jpg
+  magick convert JA_ILL_HP_OL_v05.png   -gravity  center   -crop  5116x2985+0+0 \
+    \( +clone   -resize  7680   -quality 90   +write  chapter-2-imc-main-q90-7680.jpg   +delete \) \
+    \( +clone   -resize  5120   -quality 90   +write  chapter-2-imc-main-q90-5120.jpg   +delete \) \
+    \( +clone   -resize  4096   -quality 90   +write  chapter-2-imc-main-q90-4096.jpg   +delete \) \
+    \( +clone   -resize  3840   -quality 90   +write  chapter-2-imc-main-q90-3840.jpg   +delete \) \
+    \( +clone   -resize  3000   -quality 90   +write  chapter-2-imc-main-q90-3000.jpg   +delete \) \
+    \( +clone   -resize  2880   -quality 90   +write  chapter-2-imc-main-q90-2880.jpg   +delete \) \
+    \( +clone   -resize  2736   -quality 90   +write  chapter-2-imc-main-q90-2736.jpg   +delete \) \
+    \( +clone   -resize  2688   -quality 90   +write  chapter-2-imc-main-q90-2688.jpg   +delete \) \
+    \( +clone   -resize  2560   -quality 90   +write  chapter-2-imc-main-q90-2560.jpg   +delete \) \
+    \( +clone   -resize  2436   -quality 90   +write  chapter-2-imc-main-q90-2436.jpg   +delete \) \
+    \( +clone   -resize  2304   -quality 90   +write  chapter-2-imc-main-q90-2304.jpg   +delete \) \
+    \( +clone   -resize  2160   -quality 90   +write  chapter-2-imc-main-q90-2160.jpg   +delete \) \
+    \( +clone   -resize  2048   -quality 90   +write  chapter-2-imc-main-q90-2048.jpg   +delete \) \
+    \( +clone   -resize  1921   -quality 90   +write  chapter-2-imc-main-q90-1921.jpg   +delete \) \
+    \( +clone   -resize  1792   -quality 90   +write  chapter-2-imc-main-q90-1792.jpg   +delete \) \
+    \( +clone   -resize  1600   -quality 90   +write  chapter-2-imc-main-q90-1600.jpg   +delete \) \
+    \( +clone   -resize  1536   -quality 90   +write  chapter-2-imc-main-q90-1536.jpg   +delete \) \
+    \( +clone   -resize  1440   -quality 90   +write  chapter-2-imc-main-q90-1440.jpg   +delete \) \
+    \( +clone   -resize  1334   -quality 90   +write  chapter-2-imc-main-q90-1334.jpg   +delete \) \
+    \( +clone   -resize  1280   -quality 90   +write  chapter-2-imc-main-q90-1280.jpg   +delete \) \
+    \( +clone   -resize  1200   -quality 90   +write  chapter-2-imc-main-q90-1200.jpg   +delete \) \
+    \( +clone   -resize  1366   -quality 90   +write  chapter-2-imc-main-q90-1366.jpg   +delete \) \
+    \( +clone   -resize  1080   -quality 90   +write  chapter-2-imc-main-q90-1080.jpg   +delete \) \
+    \( +clone   -resize  1024   -quality 90   +write  chapter-2-imc-main-q90-1024.jpg   +delete \) \
+    \( +clone   -resize  960    -quality 90   +write  chapter-2-imc-main-q90-960.jpg    +delete \) \
+    \( +clone   -resize  768    -quality 90   +write  chapter-2-imc-main-q90-768.jpg    +delete \) \
+                -resize  640    -quality 90   +write  chapter-2-imc-main-q90-640.jpg
 
-2. Convert all in directory from jpg to png
-
-Mogrify -- in-place batch processing, https://www.imagemagick.org/Usage/basics/#mogrify
+2. Convert every file in the directory from jpg to webp: https://www.imagemagick.org/Usage/basics/#mogrify
 
   magick mogrify -path jpg-to-webp -format webp -quality 95 *.jpg
 
-3. Blurring Images, https://www.imagemagick.org/Usage/blur/
+3. Blur every image in directory, can pair with conversion and maybe mogrify: https://www.imagemagick.org/Usage/blur/
 
   magick mogrify -path blurred -blur 0x100 *.jpg
-  magick convert -blur 0x3
-
-  This is ineffective:
-
-    magick convert chapter-2-5120-2985-imc-blurred.jpg    \
-      \( +clone -resize  3840x2241   -quality 50   +write  chapter-2-3840-2241-imc-blurred.jpg +delete \) \
-
-  It's more effective to make a single image that works, then conver to different sizes (using script 1)

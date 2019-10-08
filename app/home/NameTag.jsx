@@ -46,13 +46,14 @@ const heartbeatKeyframes = keyframes`
 
 const OuterContainer = styled.div`
   display: ${p => p.tempContent > 0 ? 'none' : 'block'};
+  will-change: ${p => p.heartbeat < 3 ? 'transform' : p.spellLevel === 5 ? 'filter, opacity' : ''};
   // The double animation prop works b/c heartbeat runs three times on load, then stops. It then
   // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
   // simultaneously — the second would overwrite the first.
-  ${p => p.heartbeat && css`animation: 1.1s ${p.delayHeartbeat ? '.825s' : '.6s'} ease-in-out ${heartbeatKeyframes} 3 both`};
+  ${p => p.heartbeat > 0 && p.heartbeat < 3 && css`animation: 1.15s .85s ease-in-out ${heartbeatKeyframes} 3 both`};
   ${p => p.spellLevel === 5 && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
-  transform: translate3d(0);
+  transform: translate3d(1,1,1);
   pointer-events: ${p => p.spellLevel === 5 && 'none'};
   text-align: center;
   z-index: 2;
@@ -75,6 +76,7 @@ const Hed = styled.h1`
   margin-bottom: 10px;
   cursor: pointer;
   user-select: none;
+  // We rely on !p.finishedHomePageLoad to ensure the associated test only runs on initialLoad. It should not be considered thereafter.
   opacity: ${p => !p.finishedHomePageLoad && p.loadLevelBlurs < 2 ? '0' : '1'};
   transition: ${p => p.loadLevelAll < 6 && 'opacity 1s ease-in'};
   
@@ -89,12 +91,13 @@ const InnerContainer = styled.div`
 `;
 const Pitch = styled.section`
   overflow: auto;
+  margin: 10px 0px;
   z-index: 2;
   
   p {
     font-weight: 500;
     margin-left: 1.7em;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     color: ${p => p.theme.colors.black};
     text-shadow: 1.5px 1px 2px white;
     text-align: center;
@@ -177,9 +180,11 @@ export default function NameTag(props) {
         spacerHeight={spacerHeight}
       />
       <OuterContainer
-        delayHeartbeat={finishedHomePageLoad && heartbeat > 1 && heartbeat < 3}
-        heartbeat={heartbeat > 0 && heartbeat < 3}
+        // delayHeartbeat={finishedHomePageLoad && heartbeat > 1 && heartbeat < 3}
+        // heartbeat={heartbeat > 0 && heartbeat < 3}
+        heartbeat={heartbeat}
         nameTagWidth={nameTagWidth}
+        loadLevelAll={setLoadLevels.sum().all}
         onAnimationEnd={onAnimationEndForHeartbeat}
         onAnimationStart={onAnimationStartForHeartbeat}
         spellLevel={spellLevel}

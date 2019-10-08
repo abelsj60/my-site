@@ -2,15 +2,15 @@ import home from '../data/home/home.md';
 import stories from '../data/the-story/index.js';
 
 // Create multiple images
-// The first set will have a 1x in their name
+// The first set will have a 1x in their img
 // Each image should be be full height of screen
 // Each image should be >= the largest width at that height
 // -Ie, no image should be < one of the widths at that height
-// The second set will have a 2x in their name
+// The second set will have a 2x in their img
 // These images will be used when the pixel density is > 1
 // Each of these images will be double the size of each original image 
 // This means a second set of images must be created, at double the size of the first set
-// This set will have a 2x in their name
+// This set will have a 2x in their img
 // When selecting images:
 // a. Determine pixel density — will be i) 1x or ii) 2x if density is > 1 (window.devicePixelRatio)
 // b. Check the screen height
@@ -18,7 +18,7 @@ import stories from '../data/the-story/index.js';
 // d. Check if the screen width is <= the image width
 // e. If the width meets the test, use it
 // f. If the width does not meet the test, try again.
-// Build the name, add the generic key to the object, and pair it with the selected file
+// Build the img, add the generic key to the object, and pair it with the selected file
 // All images will be treated as having the original dimensions: 
 // a. 768-1440-1x --> 768x1440
 // b. 768-1440-2x --> 1536x2880
@@ -33,10 +33,6 @@ export default function prelodBigImages() {
   const images = {};
   images.alreadyLoaded = [];
 
-  // For height
-
-  // const pixelDensity = Math.ceil(window.devicePixelDensity);
-  // const pixelDensity = window.devicePixelDensity;
   const deviceWidth = window.screen.width;
   const deviceHeight = window.screen.height; // use availHeight instead?
   const imageWidth = [
@@ -63,12 +59,12 @@ export default function prelodBigImages() {
     3000,
     3840,
     4096,
-    5120,
-    7680
+    // 5120,
+    // 7680
   ].find((imgWidth, idx, arr) => {
     if (idx < arr.length - 1) {
-      // (origHeight / origWidth) * imgWidth = imgHeight
-      const imgHeight = Math.ceil((2985 / 5116) * imgWidth); 
+      // Equation: (origHeight / origWidth) * imgWidth = imgHeight
+      const imgHeight = Math.ceil((2985 / 5116) * imgWidth);
       return imgWidth >= deviceWidth && imgHeight >= deviceHeight;
     }
 
@@ -76,29 +72,65 @@ export default function prelodBigImages() {
   });
 
   stories.forEach(chapter => {
+    const {
+      blurredImage,
+      image,
+      number,
+      rootImageUrl
+    } = chapter.attributes;
     const imageA = new Image();
     const imageB = new Image();
-    imageA.src = chapter.attributes.image;
-    imageB.src = chapter.attributes.blurredImage;
-    images[`chapter-${chapter.attributes.number}-main`] = imageA;
-    images[`chapter-${chapter.attributes.number}-blurred`] = imageB;
-    // const newSource = `chapter-${chapter.attributes.number}-imc-main-${imageWidth}.jpg`;
+    imageA.src = image;
+    imageB.src = blurredImage;
+    const newSource1 = `${rootImageUrl}/chapter-${number}/chapter-${number}-imc-main-q90-${imageWidth}.jpg`;
+    const newSource2 = `${rootImageUrl}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-3.jpg`;
+    console.log('chapter newSource 1:', newSource1);
+    console.log('chapter newSource 2:', newSource2);
+    images[`chapter-${number}-main`] = imageA;
+    images[`chapter-${number}-blurred`] = imageB;
   });
 
-  home.attributes.preloadTheseImages.forEach(name => {
+  home.attributes.preloadUrls.forEach((url, idx) => {
     const image = new Image();
-    image.src = home.attributes[name];
-    images[name] = image;
+    let source;
+
+    if (url.includes('boy') && !url.includes('blur') && imageWidth >= 2880) {
+      source = `${url}/boy-imc-main-q90-2736.jpg`;
+      console.log('source boy special:', source);
+    } else {
+      const filePrefix = url.includes('boy')
+        ? 'boy'
+        : url.includes('forrest')
+          ? 'forrest'
+          : 'nyc';
+      if (url.includes('blur')) {
+        source = `${url}/${filePrefix}-ink-blur-0x15-3.jpg`;
+        console.log('home source blur:', source);
+      } else {
+        source = `${url}/${filePrefix}-imc-main-q90-${imageWidth}.jpg`;
+        console.log('home source main:', source);
+      }
+    }
+
+    // image.src = home.attributes[url]; // OLD
+    image.src = source;
+    images[imageNames[idx]] = image;
 
     // A poor man's test for cached images
-    if (image.complete) {
+    if (image.width + image.height > 0) {
       images.alreadyLoaded.push(1);
-    }
+    } 
   });
 
+  // Note: Full-size image, should be converted and optimized at later date...
+  // https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/business-card/business-card-teen-imc-q91-656-4x.jpg
+  
+  // Note: Full-size image, should be converted and optimized at later date...
+  // https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/not-found/not-found-jinni-imc-q91-1240-4x.jpg
+
   [
-    'https://user-images.githubusercontent.com/30417590/64480217-8696be80-d191-11e9-994f-b8bd71243766.png',
-    'https://user-images.githubusercontent.com/30417590/64972267-ff270a80-d876-11e9-8af9-552472d29216.png'
+    'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/business-card/business-card-teen-imc-q91-656-4x.jpg',
+    'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/not-found/not-found-jinni-imc-q91-1240-4x.jpg'
   ].forEach((src, idx) => {
     const image = new Image();
     image.src = src;

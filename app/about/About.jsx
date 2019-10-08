@@ -1,5 +1,5 @@
 import bio from '../data/about/about.md';
-import linkedInIcon from '../../assets/images/linked-in-icon.png';
+import linkedInIcon from '../../assets/images/convert-to-data-uri/linked-in-icon-80-@4x.png';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Main from '../primitives/Main.jsx';
 import marked from 'marked';

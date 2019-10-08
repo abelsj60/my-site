@@ -1,5 +1,5 @@
-import dotFull from '../../assets/images/dot-full.png';
-import dotEmpty from '../../assets/images/dot-empty.png';
+import dotFull from '../../assets/images/convert-to-data-uri/dot-full-32-@4x.png';
+import dotEmpty from '../../assets/images/convert-to-data-uri/dot-empty-32-@4x.png';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';

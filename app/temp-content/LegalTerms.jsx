@@ -33,7 +33,7 @@ const MyCopyright = styled.span`
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-bottom: 12px;
-    font-weight: 700;
+    font-weight: 500;
     font-size: ${p => p.theme.fontSizes.eight};
   }
 `;

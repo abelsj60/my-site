@@ -11,8 +11,8 @@ const Structure = styled.button`
   position: relative;
   background-color: unset; // otherwise, button grey
   border: 1px rgba(255, 255, 255, .6) solid;
-  box-shadow: ${p => p.tempContent < 1 && p.illustrationLevel >= 2 && '2px 2px 2.5px rgba(0, 0, 0, .4)'};
-  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'box-shadow .35s' : ''};
+  box-shadow: ${p => p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) && '2px 2px 2.5px rgba(0, 0, 0, .3)'};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'box-shadow .5s' : ''};
   user-select: none;
   z-index: 0;
 
@@ -42,6 +42,7 @@ export default function Button(props) {
   const {
     className,
     clickFunction,
+    illustrationDirection,
     illustrationLevel,
     isStory,
     tempContent,
@@ -51,6 +52,7 @@ export default function Button(props) {
   return (
     <Structure
       className={className}
+      illustrationDirection={illustrationDirection}
       illustrationLevel={illustrationLevel}
       isStory={isStory}
       onClick={clickFunction}

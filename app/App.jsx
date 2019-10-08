@@ -416,33 +416,6 @@ class App extends Component {
       </ThemeProvider>;
   }
 
-  componentDidMount() {
-    // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
-    if (!this.hasStyle('flexbox')) {
-      throw new Error("Browser doesn't support Flexbox");
-    } else if (isOpera || (isIE && browserVersion <= 10)) {
-      throw new Error("Uh oh. I don't currently support Opera or IE if it's less than 11.");
-    }
-
-    if (!this.hasStyle('object-fit')) {
-      objectFitImages();
-    }
-
-    // Heard after all React handlers run
-    // https://fortes.com/2018/react-and-dom-events/
-
-    window.addEventListener('resize', this.handleResize);
-    window.addEventListener('popstate', this.handleBackAndForth);
-  }
-
-  componentWillUnmount() {
-    // This will never be called, here as good practice.
-    window.removeEventListener('resize', this.handleResize);
-    window.removeEventListener('popstate', this.handleBackAndForth);
-  }
-
-
-
   hasStyle(type) {
     // https://johanronsse.be/2016/01/03/simple-flexbox-check/
     const documentStyle = window.document.body
@@ -709,6 +682,25 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
+    if (!this.hasStyle('flexbox')) {
+      throw new Error("Browser doesn't support Flexbox");
+    } else if (isOpera || (isIE && browserVersion <= 10)) {
+      throw new Error("Uh oh. I don't currently support Opera or IE if it's less than 11.");
+    }
+
+    if (!this.hasStyle('object-fit')) {
+      objectFitImages();
+    }
+
+    // Heard after all React handlers run
+    // https://fortes.com/2018/react-and-dom-events/
+
+    window.addEventListener('resize', this.handleResize);
+    window.addEventListener('popstate', this.handleBackAndForth);
+  }
+
   componentDidUpdate(prevProps) {
     if (process.env.NODE_ENV !== 'development') {
       const location = new Location('/', this.props, prevProps);
@@ -721,6 +713,12 @@ class App extends Component {
         ReactGA.pageview(pathname + search);
       }
     }
+  }
+
+  componentWillUnmount() {
+    // This will never be called, here as good practice.
+    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('popstate', this.handleBackAndForth);
   }
 }
 

@@ -72,12 +72,13 @@ const OuterContainer = styled.div`
 const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 10px;
   width: 200px;
   align-self: center;
   margin-left: 1.17em;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    margin-top: 17px;
     width: 240px;
     margin-left: 1.6em;
   }
@@ -92,7 +93,8 @@ const CharmBox = styled.div`
 `;
 const Charm = styled.div`
   // Separate p.enter and p.exit checks so the animation starts on spellLevel 4 and runs through the onExit fadeOut (otherwise, it ends onExit. Awkward).
-  animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${p.isReady ? bigYellowPulse : bigPinkPulse} infinite`)};
+  animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${p.isReady ? bigPinkPulse : bigPinkPulse} infinite`)};
+  will-change: box-shadow, transform;
   border: 2px dotted ${p => p.theme.colors.pink};
   width: 45px;
   height: 45px;
@@ -128,6 +130,7 @@ const CharmShadow = styled.div`
 const Eye = styled.div`
   // Separate p.enter and p.exit checks so the animation starts on spellLevel 4 and runs through the onExit fadeOut (otherwise, it ends onExit. Awkward).
   animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${p.isReady ? pinkPulse : yellowPulse} infinite`)};
+  will-change: box-shadow, transform;
   background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
   height: 18px;
   width: 5px;

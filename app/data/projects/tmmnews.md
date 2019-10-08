@@ -33,6 +33,17 @@ zoomed: [
   'https://user-images.githubusercontent.com/30417590/57549491-b17f1c00-7331-11e9-9345-32768b78d652.png',
   'https://user-images.githubusercontent.com/30417590/57549513-bc39b100-7331-11e9-886e-3b473660e926.png',
 ]
+partialUrls: [
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/tmmnews/tmmnews-home-page-main-imc-q91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/tmmnews/tmmnews-anchoring-main-imc-q91',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/tmmnews/tmmnews-first-live-main-imc-q91'
+]
+newThumbnails: [
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/tmmnews/tmmnews-homepage-thumb-ink-220.png',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/tmmnews/tmmnews-anchoring-main-thumb-ink-220.png',
+  'https://github.com/abelsj60/jamesabels.net/blob/gh-pages/assets/images/tmmnews/tmmnews-first-live-thumb-ink-220.png'
+]
+biggestThumbnail: 880
 showTheseAttributes: [
   'story',
   'responsibility',
