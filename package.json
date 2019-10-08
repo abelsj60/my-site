@@ -1,8 +1,8 @@
 {
-  "name": "my-site",
+  "name": "jamesabels.net",
   "version": "0.75.0",
   "private": true,
-  "homepage": "https://abelsj60.github.io/my-site",
+  "homepage": "https://jamesabels.net",
   "sideEffects": false,
   "description": "Personal site",
   "main": "index.js",

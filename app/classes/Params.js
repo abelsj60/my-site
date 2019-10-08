@@ -78,12 +78,9 @@ export default class Params {
         const projectIndex = searchData.findIndex(
           project => this._normalizeParam(project.attributes.projectName) === this._one
         );
-        paramIsValid =
-          paramAsIndex >= 0
-            && paramAsIndex <
-              searchData[projectIndex].attributes[
-                paramName
-              ].length;
+        if (projectIndex >= 0) {
+          paramIsValid = paramAsIndex < searchData[projectIndex].attributes[paramName].length;
+        }
         break;
       default:
         paramIsValid = false;

@@ -36,3 +36,4 @@
 3. Blur every image in directory, can pair with conversion and maybe mogrify: https://www.imagemagick.org/Usage/blur/
 
   magick mogrify -path blurred -blur 0x100 *.jpg
+  

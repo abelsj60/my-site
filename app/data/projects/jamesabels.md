@@ -2,9 +2,9 @@
 number: 
   2
 projectName: 
-  'My site'
+  'My personal site'
 pitch: 
-  'A personal site about stories and code'
+  'An illustrated site about stories and code'
 type:
   'Coding'
 technologies: 

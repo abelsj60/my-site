@@ -122,7 +122,7 @@ export default function prelodBigImages() {
 
   [
     `/business-card/business-card-teen-imc-q91-656-4x.jpg`,
-    `/not-found/not-found-jinni-imc-q91-1240-4x.jpg`
+    `/not-found/not-found-jinni-imc-q100:91-4x.jpg`
   ].forEach((src, idx) => {
     const image = new Image();
     image.src = src;
