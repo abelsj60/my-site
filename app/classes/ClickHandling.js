@@ -400,7 +400,7 @@ export default class ClickHandling {
         case 'cast':
           // Note, the score never equals the goal 
           // b/c we cast at score + 1.
-          
+
           stateToUpdate.spellLevel = 5;
           stateToUpdate.pattern = this.createSpellPattern();
           stateToUpdate.activeCharm = stateToUpdate.pattern[0];

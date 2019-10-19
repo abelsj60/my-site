@@ -113,6 +113,7 @@ export default function Projects(props) {
           <Loader
             spinner={true}
             marginLeft="auto"
+            smallMarginLeft="auto"
             show={imageLoaded < 1}
             done={imageLoaded > 1}
             forTransition={onTransitionEndForLoader}

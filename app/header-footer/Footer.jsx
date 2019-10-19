@@ -6,7 +6,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
-const shadow = '2px 2px 2.5px rgba(0, 0, 0, .4)';
 const Container = styled.footer`
   flex-shrink: 0;
   display: flex;
@@ -40,28 +39,24 @@ const RestyledLink = styled(({
   isStory,
   ...rest
 }) => <StyledLink {...rest} />)`
-  margin-right: 13px;
-    
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-right: 20px;
-  }
+  margin-right: 20px;
 `;
 const Graf = styled.p`
   cursor: pointer;
-  margin-right: ${p => p.smallMarginRight && css`${p.smallMarginRight}px`}};
+  margin-right: ${p => !p.isLink && !p.marginRight && '20px'}; // marginRight default is undefined/falsy
   margin-bottom: 0px;
   color: ${p => (p.active ? (!p.home && !p.isStory && !p.isNotFound ? p.theme.colors.pink : p.theme.colors.yellow) : !p.home && !p.isStory && !p.isNotFound ? p.theme.colors.blue : p.theme.colors.white)};
   padding-top: 5px;
   padding-bottom: 5px;
   font-weight: 400;
-  font-size: ${p => p.theme.fontSizes.one};
+  font-size: ${p => p.theme.fontSizes.zero};
   user-select: none;
-  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && ((p.home && p.coverValY < 0) || ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2))) && shadow};
+  text-shadow: ${p => !p.isReverie && p.tempContent < 1 && ((p.home && p.coverValY < 0) || ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2))) && '2px 2px 2.5px rgba(0, 0, 0, .4)'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && '.35s'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.one};
     padding-right: 5px;
-    margin-right: ${p => !p.isLink && '20px'};
   }
 `;
 const TextBox = styled.div`
@@ -195,7 +190,6 @@ export default function FooterContainer(props) {
           isReverie={isReverie}
           isStory={isStory}
           onClick={onClickContactHandler}
-          smallMarginRight="13"
           tempContent={tempContent}
         >
           Contact
@@ -209,6 +203,7 @@ export default function FooterContainer(props) {
           isReverie={isReverie}
           isStory={isStory}
           isNotFound={isNotFound}
+          marginRight="none"
           onClick={onClickLegalHandler}
           tempContent={tempContent}
         >

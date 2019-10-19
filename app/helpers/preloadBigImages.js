@@ -51,6 +51,9 @@ export default function prelodBigImages() {
     imageB.src = blurredSource;
     images[`chapter-${number}-main`] = imageA;
     images[`chapter-${number}-blurred`] = imageB;
+
+    // localStorage.setItem(`chapter-${number}-main`, illSource);
+    // localStorage.setItem(`chapter-${number}-blurred`, blurredSource);
   });
 
   home.attributes.preloadUrls.forEach((path, idx) => {
@@ -80,10 +83,12 @@ export default function prelodBigImages() {
     image.src = source;
     images[home.attributes.imageNames[idx]] = image;
 
+    // localStorage.setItem(home.attributes.imageNames[idx], source);
+
     // A poor man's test for cached images, works better than .complete (sometimes wrong)
     if (image.width + image.height > 0) {
       images.alreadyLoaded.push(1);
-    } 
+    }
   });
 
   // Note: Full-size image, should be converted and optimized at later date...
@@ -103,6 +108,8 @@ export default function prelodBigImages() {
         ? 'businessCardImage' 
         : 'notFoundImage'
     ] = image;
+
+    // localStorage.setItem(idx < 1 ? 'businessCardImage' : 'notFoundImage', src);
   });
 
   return images;

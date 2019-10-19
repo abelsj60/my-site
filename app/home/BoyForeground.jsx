@@ -12,7 +12,7 @@ export default styled.img`
   height: 100%;
   pointer-events: none;
   // We rely on !p.finishedHomePageLoad to ensure the associated test only runs on initialLoad. It should not be considered thereafter.
-  opacity: ${p => (!p.finishedHomePageLoad && p.loadLevelAll < 6) || ((p.enter && p.spellLevel > 1) || (p.exit && p.spellLevel > 2)) ? '0' : '1'};
+  opacity: ${p => (!p.finishedHomePageLoad && p.loadLevelAll < 6 ? '0' : '1')};
   transition: ${p => css`opacity ${!p.finishedHomePageLoad ? '.7s ease-in' : p.enter ? '1.1s ease-in' : '.9s ease-out'}`};
   z-index: 2;
 

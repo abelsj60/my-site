@@ -16,7 +16,8 @@ const Group = styled(UnorderedList)`
 
   ${p => p.isMenu && css`
     margin-bottom: ${!p.finalGroup && '30px'};
-    max-width: 100%;
+    // Prevent popping out of container if images are larger (hi dpi)
+    max-width: 100%; 
   `};
 `;
 const ListItem = styled.li`

@@ -23,7 +23,7 @@ const Container = styled.div`
   max-width: ${p => p.maxWidth && css`${p.maxWidth}px`};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-left: ${p => p.marginLeft && css`${p.marginLeft.length <= 2 ? p.marginLeft + 'px' : p.marginLeft}`};
+    margin-left: ${p => p.marginLeft && css`${p.marginLeft.includes('auto') ? p.marginLeft : p.marginLeft + 'px'}`};
   }
 `;
 const ImgContainer = styled.div`
