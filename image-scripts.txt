@@ -1,0 +1,115 @@
+1. Convert png, resize, and write multiple times: https://www.imagemagick.org/Usage/files/#write
+
+  a. Export cropped .tif from Gimp (5116 x 2985)
+  b. Convert cropped .tif to jpg at q100
+
+    - JPGs
+      -convert chapter-2-gimp-cropped-5116.tif -colorspace RGB -quality 100 -colorspace sRGB chapter-2-gimp-cropped-q100-5116.jpg
+    
+    - Boy.png
+      -No need to convert. Use batch 3 command to produce properly sized pngs.
+
+  c. Batch 1
+
+    - Why is the -colorspace setting used? The color washes out without it. Graininess may appear w/o it, too.
+      -Resizing with Colorspace Correction: https://www.imagemagick.org/Usage/resize/
+
+    - See also discussion in Image Magick docs about needing to convert sRGB colorspace to RGB when resizing .jpg.
+    - Prep large and small images separately b/c the detail is better at large sizes when starting w/q100 .jpg.
+      -Why? -\o/- 
+
+    convert chapter-2-gimp-cropped-q100-5116.jpg   -colorspace  RGB  \
+      \( +clone   -resize  7680   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-7680.jpg   +delete \) \
+      \( +clone   -resize  5120   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-5120.jpg   +delete \) \
+      \( +clone   -resize  4096   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-4096.jpg   +delete \) \
+      \( +clone   -resize  3840   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-3840.jpg   +delete \) \
+      \( +clone   -resize  3000   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-3000.jpg   +delete \) \
+                  -resize  2880   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-2880.jpg
+
+  d. Batch 2
+
+    - See note above as to why the second batch.
+
+    convert chapter-2-gimp-cropped-5116.tif   -colorspace  RGB  \
+      \( +clone   -resize  1334   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1334.jpg   +delete \) \
+      \( +clone   -resize  1280   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1280.jpg   +delete \) \
+      \( +clone   -resize  1200   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1200.jpg   +delete \) \
+      \( +clone   -resize  1366   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1366.jpg   +delete \) \
+      \( +clone   -resize  1080   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1080.jpg   +delete \) \
+      \( +clone   -resize  1024   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1024.jpg   +delete \) \
+      \( +clone   -resize  960    -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-960.jpg    +delete \) \
+      \( +clone   -resize  768    -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-768.jpg    +delete \) \
+                  -resize  640    -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-640.jpg
+
+  c. Batch 3 (boy.png)
+
+    - Do not convert colorspaces with this .png. It darkens image colors in an unpleasant way. 
+    - Dither 2880+ w/pngquant or ImageOptim API to shrink file: https://imageoptim.com/online 
+    - Substitute 3000 for 2880. There seems to be a significant upgrade as to looks w/3000.
+
+    convert boy-gimp-cropped-5116.png   \
+        \( +clone   -resize  7680   +write  boy-imc-main-101419-7680.png   +delete \) \
+        \( +clone   -resize  5120   +write  boy-imc-main-101419-5120.png   +delete \) \
+        \( +clone   -resize  4096   +write  boy-imc-main-101419-4096.png   +delete \) \
+        \( +clone   -resize  3840   +write  boy-imc-main-101419-3840.png   +delete \) \
+        \( +clone   -resize  3000   +write  boy-imc-main-101419-3000.png   +delete \) \
+        \( +clone   -resize  2880   +write  boy-imc-main-101419-2880.png   +delete \) \
+        \( +clone   -resize  1334   +write  boy-imc-main-101419-1334.png   +delete \) \
+        \( +clone   -resize  1280   +write  boy-imc-main-101419-1280.png   +delete \) \
+        \( +clone   -resize  1200   +write  boy-imc-main-101419-1200.png   +delete \) \
+        \( +clone   -resize  1366   +write  boy-imc-main-101419-1366.png   +delete \) \
+        \( +clone   -resize  1080   +write  boy-imc-main-101419-1080.png   +delete \) \
+        \( +clone   -resize  1024   +write  boy-imc-main-101419-1024.png   +delete \) \
+        \( +clone   -resize  960    +write  boy-imc-main-101419-960.png    +delete \) \
+        \( +clone   -resize  768    +write  boy-imc-main-101419-768.png    +delete \) \
+                    -resize  640    +write  boy-imc-main-101419-640.png
+
+2. To convert images to webp: https://www.imagemagick.org/Usage/basics/#mogrify (Needed?)
+
+  mogrify -path jpg-to-webp -format webp -quality 95 *.jpg
+
+  - May want to install Google's own command-line tools for this.
+
+3. Blurs 
+
+  a. Export from Inkscape at dpi of 3 pixels (160 x 93) w/blur 15x15 via blur filter (color profile?)
+    -Color profile seems off, but images produced have less banding and better quality than coming out of GIMP. 
+      -Why? -\o/-
+
+  b. Blur every image in directory, can pair with conversion and maybe mogrify: https://www.imagemagick.org/Usage/blur/
+
+    - mogrify -path blurred -blur 0x100 *.jpg
+
+4. Fallbacks
+
+  Export from Inkscape at dpi 2 pixels (53 x 31) w/blur 50x50 via blur filter 
+    - Color profile seems off, but images produced have less banding and better quality than coming out of GIMP. Why? -\o/-
+
+5. Use an image CDN? Contact: kornel@imageoptim.com
+
+6. Business card
+
+  convert  teen-fairy-ink-640.png  -colorspace RGB  -quality 90  -colorspace sRGB  teen-fairy-img-q90-640-4x.jpg
+
+7. Legal terms
+
+  convert  jinni-ink-1240.png  -colorspace RGB  -quality 90  -colorspace sRGB  jinni-img-q90-1240-4x.jpg
+
+8. Projects
+
+  4x = 2500
+  3x = 1875
+  2x = 1250
+  1x = 625
+
+  convert alexa-gs-rules-of-funny-2500.png  -colorspace RGB   \
+        \( +clone   -resize  2500   -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-2500-4x.jpg   +delete \) \
+        \( +clone   -resize  1875   -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-1875-3x.jpg   +delete \) \
+        \( +clone   -resize  1250   -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-1250-2x.jpg   +delete \) \
+                    -resize  625    -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-625-1x.jpg
+
+  ...or use XNConvert
+
+9. Projects thumbnails
+
+  use XNConvert

@@ -222,6 +222,8 @@ export default class Home extends Component {
     if (!isValid) return null;
     if (caller === 'InnerContainer') {
       // NameTag --> onTransitionEnd
+      // Only called when spell is incomplete, i.e., on 'exit'
+      // Typically, reset when the spell's actually cast
       const newPattern = this.createSpellPattern();
       this.setState({
         activeCharm: newPattern[0],
@@ -249,7 +251,7 @@ export default class Home extends Component {
         const boundHandleCharm = hcCharm.boundHandleClick;
 
         boundHandleClick('resetEventType');
-        boundHandleCharm(activeCharm === num); // Async/other probs?
+        boundHandleCharm(activeCharm === num);
       }
     };
   }
@@ -316,7 +318,7 @@ export default class Home extends Component {
 // 11. spellLevel 3 transitions Charms to 0 (previously 1)
 // 12. spellLevel 3 becomes 2 onTransitionEnd for Charms/OuterContainer (opacity)
 // 13. spellLevel 2 sets display: block for Home/NameTag/InnerContainer
-// 14. spellLevel 2 transtions opacity to 0 for PictureBox/BlurredFantasyImage
+// 14. spellLevel 2 transitions opacity to 0 for PictureBox/BlurredFantasyImage
 // 15. spellLevel 2 becomes 1 onTransitionEnd for PictureBox/BlurredFantasyImage (opacity)
 // 16. spellLevel 1 transitions opacity to 1 for Home/NameTag/InnerContainer
 // 17. spellLevel becomes 0 onTransitionEnd for Home/NameTag/InnerContainer (opacity)

@@ -39,8 +39,8 @@ const HeaderBackground = styled.div`
   bottom: ${p => p.tempContent === 3 && '0px'};
   width: ${p => p.tempContent === 3 && '100%'};
   left: 0px;
-  // No background on home, translucent if menu is open, dark pink if it isn't
-  background-color: ${p => !p.isHome ? p.tempContent === 3 ? 'rgba(175, 18, 90, .8)' : p.theme.colors.darkPink : ''};
+  // No background on home, translucent if menu is open when the storyIllustration is shown, otherwise dark pink
+  background-color: ${p => p.isHome ? '' : p.tempContent === 3 && p.illustrationLevel === 3 ? 'rgba(175, 18, 90, .8)' : p.theme.colors.darkPink};
   opacity: ${p => p.tempContent === 3 || p.isReverie || ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity .35s`};
   z-index: -1;
@@ -204,7 +204,6 @@ export default class Header extends Component {
     } = appState;
     const isHome = currentCaller === 'home';
     const isReverie = currentCaller === 'reverie';
-    const isStory = currentCaller == 'chapter';
     const menuIcon = tempContent === 3 ? headerNavClose : headerNavOpen;
     const coverVals = cover(window.innerWidth, height, 2131, 1244);
     const referrer = new Referrer(this.props);
@@ -219,7 +218,6 @@ export default class Header extends Component {
       >
         <HeaderBackground
           isHome={isHome}
-          isStory={isStory}
           isReverie={isReverie}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}

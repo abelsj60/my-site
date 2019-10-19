@@ -32,20 +32,20 @@ const pinkPulse = keyframes`
     box-shadow: 0 0 0 0 rgba(253, 17, 114, 0);
   }
 `;
-const bigYellowPulse = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 231, 76, 1);
-  }
+// const bigYellowPulse = keyframes`
+//   0% {
+//     box-shadow: 0 0 0 0 rgba(255, 231, 76, 1);
+//   }
 
-  75% {
-    box-shadow: 0 0 0 15px rgba(255, 231, 76, 0);
-  }
+//   75% {
+//     box-shadow: 0 0 0 15px rgba(255, 231, 76, 0);
+//   }
 
-  100% {
-    transform: rotate(1turn);
-    box-shadow: 0 0 0 0 rgba(255, 231, 76, 0);
-  }
-`;
+//   100% {
+//     transform: rotate(1turn);
+//     box-shadow: 0 0 0 0 rgba(255, 231, 76, 0);
+//   }
+// `;
 const yellowPulse = keyframes`
   0% {
     box-shadow: 0 0 0 0 rgba(255, 231, 76, 1);
@@ -61,7 +61,7 @@ const yellowPulse = keyframes`
 `;
 
 const OuterContainer = styled.div`
-  display: ${p => p.spellLevel < 5  && p.tempContent < 1 ? 'flex' : 'none'};
+  display: ${p => p.spellLevel < 5 && p.tempContent < 1 ? 'flex' : 'none'};
   flex-direction: column;
   justify-content: space-between;
   z-index: 2;
@@ -169,7 +169,6 @@ const Score = styled.p`
   font-size: ${p => p.theme.fontSizes.six};
   font-weight: 400;
   color: ${p => p.theme.colors.black};
-  transition: color .5s ease-out;
   margin-bottom: 5px;
 `;
 const OuterBar = styled.div`
@@ -182,7 +181,9 @@ const InnerBar = styled.div`
   width: ${p => p.barWidth}%;
   height: 100%;
   background-color: ${p => p.theme.colors.black};
-  transition: width .5s ease-out, background-color .5s ease-out;
+  // No onTransitionEnd handler in which to cancel propagation
+  // Filtering event out of OuterContainer w/event.propertyName check
+  transition: width .5s ease-out;
 `;
 
 export default function Charms(props) {
@@ -211,8 +212,12 @@ export default function Charms(props) {
 
   const onTransitionEndForOuterContainer = event => {
     eventManagement(event);
-    setSpellLevels.two(movement === 'exit', 'OuterContainer');
-    setSpellLevels.four(movement === 'enter', 'OuterContainer');
+
+    // Filter, it's also called by 'width'.
+    if (event.propertyName === 'opacity') { 
+      setSpellLevels.two(movement === 'exit', 'OuterContainer');
+      setSpellLevels.four(movement === 'enter', 'OuterContainer');
+    }
   };
   // Let's set up a progress bar.
   const barWidth = score * (100 / (goal - 1));

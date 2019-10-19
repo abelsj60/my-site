@@ -53,7 +53,7 @@ const OuterContainer = styled.div`
   // simultaneously — the second would overwrite the first.
   ${p => p.heartbeat > 0 && p.heartbeat < 3 && css`animation: 1.15s .85s ease-in-out ${heartbeatKeyframes} 3 both`};
   ${p => p.spellLevel === 5 && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
-  transform: translate3d(1,1,1);
+  transform: translate3d(1, 1, 1);
   pointer-events: ${p => p.spellLevel === 5 && 'none'};
   text-align: center;
   z-index: 2;
@@ -85,8 +85,8 @@ const Hed = styled.h1`
   }
 `;
 const InnerContainer = styled.div`
-  transition: opacity ${p => p.loadLevelAll < 6 ? '.55s' : p.enter ? '.45s' : '.65s'} ease-in;
   display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
+  transition: opacity ${p => p.loadLevelAll < 6 ? '.55s' : p.enter ? '.45s' : '.65s'} ease-in;
   opacity: ${p => (!p.finishedHomePageLoad && p.loadLevelAll < 6) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
 `;
 const Pitch = styled.section`
@@ -139,8 +139,8 @@ export default function NameTag(props) {
 
   const onClickForHed = event => {
     eventManagement(event);
-    // Ends at 3
-    if (heartbeat > 2 && (spellLevel === 0 || spellLevel === 4)) {
+    // Heartbeat ends at 3, set in PictureBox.onTransitionEndForBlurredBoy
+    if (finishedHomePageLoad && heartbeat > 2 && (spellLevel === 0 || spellLevel === 4)) {
       if (eventType === 'touch') {
         boundHandleClickForHome('resetEventType');
         return false;
@@ -155,13 +155,6 @@ export default function NameTag(props) {
       }
 
       boundHandleClickForHome('toggleSpell');
-    }
-  };
-  const onAnimationStartForHeartbeat = event => {
-    eventManagement(event);
-    // StyledComponents className
-    if (event.animationName === 'eXUabX' && !finishedHomePageLoad) {
-      boundHandleClickForApp('finishedHomePageLoad')
     }
   };
   const onAnimationEndForHeartbeat = event => {
@@ -180,13 +173,10 @@ export default function NameTag(props) {
         spacerHeight={spacerHeight}
       />
       <OuterContainer
-        // delayHeartbeat={finishedHomePageLoad && heartbeat > 1 && heartbeat < 3}
-        // heartbeat={heartbeat > 0 && heartbeat < 3}
         heartbeat={heartbeat}
         nameTagWidth={nameTagWidth}
         loadLevelAll={setLoadLevels.sum().all}
         onAnimationEnd={onAnimationEndForHeartbeat}
-        onAnimationStart={onAnimationStartForHeartbeat}
         spellLevel={spellLevel}
         tempContent={tempContent}
       >

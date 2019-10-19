@@ -19,14 +19,14 @@ captions: [
   "In 2011, TMM was asked to contribute to New York City's FIRST Robotics Competition. A team of ten media professionals volunteered to run a three-hour live Internet broadcast of the event."
 ]
 mainImages: [
-  '/tmmnews/tmmnews-homepage-main-imc-q91',
-  '/tmmnews/tmmnews-anchoring-main-imc-q91',
-  '/tmmnews/tmmnews-first-live-main-imc-q91'
+  '/tmmnews/tmmnews-home-page-xnc',
+  '/tmmnews/tmmnews-anchoring-xnc',
+  '/tmmnews/tmmnews-first-live-xnc'
 ]
 projectThumbnail: [
-  '/tmmnews/thumbs/tmmnews-homepage-thumbnail-imc-q100:91',
-  '/tmmnews/thumbs/tmmnews-anchoring-thumbnail-imc-q100:91',
-  '/tmmnews/thumbs/tmmnews-first-live-thumbnail-imc-q100:91'
+  '/tmmnews/thumbs/tmmnews-home-page-xnc-q90',
+  '/tmmnews/thumbs/tmmnews-anchoring-xnc-q90',
+  '/tmmnews/thumbs/tmmnews-first-live-xnc-q90'
 ]
 showTheseAttributes: [
   'story',

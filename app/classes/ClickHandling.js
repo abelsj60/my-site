@@ -195,6 +195,8 @@ export default class ClickHandling {
             : `Leave: ${currentCaller} menu`;
           break;
         case 'updateHeartbeat':
+          stateToUpdate.finishedHomePageLoad = true;
+
           if (heartbeat < 1) {
             stateToUpdate.heartbeat = 1;
           } else {
@@ -202,12 +204,10 @@ export default class ClickHandling {
           }
 
           category = 'App state';
-          action = 'Update NameTag Heartbeat';
-          break;
-        case 'finishedHomePageLoad':
-          stateToUpdate.finishedHomePageLoad = true;
-          category = 'App state';
-          action = 'Finished home page loading';
+          action = 'Update Heartbeat';
+          label = stateToUpdate.finishedHomePageLoad 
+            ? 'Finished home page load'
+            : 'Finished heartbeat';
           break;
         case 'updateApp':
           if (valueOne !== undefined) {
@@ -382,19 +382,15 @@ export default class ClickHandling {
               ? 'exit'
               : 'enter';
 
-          if(spellLevel < 1) {
+          if(spellLevel < 1) { // i.e., 0
             stateToUpdate.spellLevel = 1;
-          } else {
+          } else { // i.e., 4
             stateToUpdate.spellLevel = 3;
           }
 
-          // Reset spell after background transform
+          // Reset spell after it's cast (background = 'transform')
 
           if (propName === 'transform') {
-            // The spellLevel is only reset to 0 after
-            // casting. It otherwise ends at 4 and
-            // restarts at 1.
-
             stateToUpdate.score = 0;
             stateToUpdate.movement = '';
             stateToUpdate.spellLevel = 0;

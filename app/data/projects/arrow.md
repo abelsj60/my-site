@@ -21,18 +21,18 @@ captions: [
   "Live controls modified media after deployment. Like Settings, they were dynamically generated from an Encapsulated Presentation Module, making Arrow a true end-to-end publishing system."
 ]
 mainImages: [
-  '/arrow/arrow-editor-main-imc-q91',
-  '/arrow/arrow-dev-module-main-imc-q91',
-  '/arrow/arrow-epm-main-imc-q91',
-  '/arrow/arrow-settings-main-imc-q91',
-  '/arrow/arrow-control-main-imc-q91'
+  '/arrow/arrow-editor-xnc',
+  '/arrow/arrow-dev-module-xnc',
+  '/arrow/arrow-epm-xnc',
+  '/arrow/arrow-settings-xnc',
+  '/arrow/arrow-control-xnc'
 ]
 projectThumbnail: [
-  '/arrow/thumbs/arrow-editor-thumbnail-imc-q100:91',
-  '/arrow/thumbs/arrow-dev-module-thumbnail-imc-q100:91',
-  '/arrow/thumbs/arrow-epm-thumbnail-imc-q100:91',
-  '/arrow/thumbs/arrow-settings-thumbnail-imc-q100:91',
-  '/arrow/thumbs/arrow-control-thumbnail-imc-q100:91'
+  '/arrow/thumbs/arrow-editor-xnc-q90',
+  '/arrow/thumbs/arrow-dev-module-xnc-q90',
+  '/arrow/thumbs/arrow-epm-xnc-q90',
+  '/arrow/thumbs/arrow-settings-xnc-q90',
+  '/arrow/thumbs/arrow-control-xnc-q90'
 ]
 showTheseAttributes: [
   'story',

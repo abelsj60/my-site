@@ -71,7 +71,7 @@ const fontSizes = {
   twelve: '1.6rem',
   thirteen: '1.7rem',
   fourteen: '1.9rem',
-  fifteen: '2rem',
+  fifteen: '2.2rem',
   sixteen: '3.1rem',
   seventeen: '6.5rem',
   eighteen: '2.5rem',
@@ -79,7 +79,11 @@ const fontSizes = {
   twenty: '4rem',
   twentyOne: '1rem',
   twentyTwo: '1.13rem',
-  twentyThree: '1.36rem'
+  twentyThree: '1.36rem',
+  twentyFour: '2.75rem',
+  twentyFive: '1.14rem',
+  twentySix: '1.455rem',
+  twentySeven: '1.395rem'
 };
 const mediaQueries = {
   tinyView: '390px',
@@ -272,9 +276,8 @@ class App extends Component {
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
 
-    // Prevent resize when scrolling oversized page. Not using state
-    // b/c it causes overflowing divs (w/content in them) to 'jump'
-    // when scrolling.
+    // Prevent resize when scrolling oversized page. Not using state b/c it causes
+    // overflowing divs (w/content in them) to 'jump' when scrolling.
     this.isAfterTouchWhenScrollingPage = false;
 
     this.state = {
@@ -282,11 +285,11 @@ class App extends Component {
         location.caller !== 'i'
           ? location.caller
           : 'home',
-      finishedHomePageLoad: alreadyLoaded,
+      finishedHomePageLoad: false,
       heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
         alreadyLoaded
-        ? 3
-        : 0,
+          ? 3
+          : 0,
       height: // Height for <main /> element
         pageHeight > this.minAllowedHeight
           ? pageHeight
@@ -296,8 +299,8 @@ class App extends Component {
       illustrationLevel: 0, // Control illustration transitions (header, main, and footer)
       illustrationState: // 0 is n/a, + is loaded, and - is loading...
         illustrationState
-        ? illustrationState
-        : 0,
+          ? illustrationState
+          : 0,
       images: images, // preloaded big images (minimize time to display b/c of loading)
       inCity: false, // false = fantasy, true = city
       isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie

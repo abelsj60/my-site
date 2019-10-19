@@ -54,25 +54,26 @@ export default function PictureBox(props) {
 
   const onLoadForBlurredBoy = event => {
     eventManagement(event);
-    setLoadLevels.one()
+    setLoadLevels.one();
   };
   const onLoadForBoy = event => {
     eventManagement(event);
-    setLoadLevels.five()
+    setLoadLevels.five();
   };
   const onLoadForBlurredFantasy = event => {
     eventManagement(event);
-    setLoadLevels.two()
+    setLoadLevels.two();
   };
   const onLoadForFantasy = event => {
     eventManagement(event);
-    setLoadLevels.six()
+    setLoadLevels.six();
   };
   const onTransitionEndForBlurredBoy = event => {
     eventManagement(event);
     setLoadLevels.three();
     if (setLoadLevels.sum().all === 6) {
-      boundHandleClickForApp('updateHeartbeat'); // --> 1
+      // Sets heartbeat = 1, finishedHomePageLoad = true
+      boundHandleClickForApp('updateHeartbeat');
     }
   };
   const onTransitionEndForBlurredFantasy = event => {

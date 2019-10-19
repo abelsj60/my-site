@@ -1,7 +1,5 @@
 ---
 title: 'The reality glitch'
-image: 'https://user-images.githubusercontent.com/30417590/63284751-41fac000-c282-11e9-9014-01670d4872f9.png'
-blurredImage: 'https://user-images.githubusercontent.com/30417590/63657624-1f7d1100-c772-11e9-8424-151e0223d6cd.png'
 rootImageUrl: 'assets/images'
 description: 'xyz 3'
 number: 3

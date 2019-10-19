@@ -160,12 +160,13 @@ export default function Projects(props) {
             <ImageHolder>
               <MainImage
                 alt="mainPic"
-                src={`${filePrefix}-625-1x.jpg`}
+                src={`${filePrefix}-q95-625-1x.jpg`}
                 srcSet={
-                  `${filePrefix}-1250-2x.jpg 2x`,
-                  `${filePrefix}-1875-3x.jpg 3x`,
-                  `${filePrefix}-2500-4x.jpg 4x`
+                  `${filePrefix}-q50-1250-2x.jpg 1250w`,
+                  `${filePrefix}-q50-1875-3x.jpg 1875w`,
+                  `${filePrefix}-q50-2500-4x.jpg 2500w`
                 }
+                sizes="620px"
                 imageLoaded={imageLoaded}
                 onLoad={onLoadMainImage}
               />
