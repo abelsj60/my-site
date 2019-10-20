@@ -267,12 +267,21 @@ export default function Story(props) {
         </Overflow>
       </RestyledContentHolder>
       <PictureHolder>
-        <Portal
+        <Portal // z-index: 0
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
           imageLoaded={imageLoaded}
         />
-        <BlurredImage
+        <BlurredFallback // z-index: -1
+          alt="blurred fallback"
+          illustrationDirection={illustrationDirection}
+          illustrationLevel={illustrationLevel}
+          imageLoaded={imageLoaded}
+          onTransitionEnd={onTransitionEndForBlurredFallbackImage}
+          src={fallbackBlur}
+          tempContent={tempContent}
+        />
+        <BlurredImage // z-index: -2
           alt={description}
           imageLoaded={imageLoaded}
           illustrationDirection={illustrationDirection}
@@ -282,16 +291,7 @@ export default function Story(props) {
           src={blurredImageSrc}
           tempContent={tempContent}
         />
-        <BlurredFallback // Always active when mounted, managed by opacity.
-          alt="blurred fallback"
-          illustrationDirection={illustrationDirection}
-          illustrationLevel={illustrationLevel}
-          imageLoaded={imageLoaded}
-          onTransitionEnd={onTransitionEndForBlurredFallbackImage}
-          src={fallbackBlur}
-          tempContent={tempContent}
-        />
-        <Image
+        <Image // z-index -3
           alt={description}
           onLoad={onLoadForMainImage}
           src={bigImageSrc}

@@ -195,7 +195,7 @@ export default class ClickHandling {
             : `Leave: ${currentCaller} menu`;
           break;
         case 'updateHeartbeat':
-          stateToUpdate.finishedHomePageLoad = true;
+          stateToUpdate.homePageLoaded = true;
 
           if (heartbeat < 1) {
             stateToUpdate.heartbeat = 1;
@@ -205,7 +205,7 @@ export default class ClickHandling {
 
           category = 'App state';
           action = 'Update Heartbeat';
-          label = stateToUpdate.finishedHomePageLoad 
+          label = stateToUpdate.homePageLoaded 
             ? 'Finished home page load'
             : 'Finished heartbeat';
           break;

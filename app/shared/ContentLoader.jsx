@@ -26,8 +26,8 @@ export default class ContentLoader extends Component {
     // DO NOT USE props.currentCaller or props.isMenu to avoid problems
     // w/BACK/FORWARD. Both are out-of-date b/c the eventListener for
     // BACK/FORWARD runs AFTER ContentLoader runs.
-    const isMenu = window.location.pathname.split('/')
-      .indexOf('menu') === 2;
+    // const isMenu = window.location.pathname.split('/')
+    //   .indexOf('menu') === 2;
     const referrer = new Referrer(props);
     const location = new Location(referrer.pathToMatch, props);
     const state = new State(props, location);
@@ -51,9 +51,7 @@ export default class ContentLoader extends Component {
       chapterIndex: state.getIndex('chapter'),
       headlineIndex: state.getIndex('article'),
       imageLoaded: // -1 = n/a, 0 = not loaded, 1 = loaded, ready for transition, 2 = done
-        location.caller === 'chapter' || location.caller === 'projects'
-          ? 0
-          : -1,
+        location.caller === 'chapter' || location.caller === 'projects' ? 0 : -1,
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,
       projectIndex: state.getIndex('project'),

@@ -103,7 +103,7 @@ export default function FooterContainer(props) {
 
     if (illustrationState < 0) {
       boundHandleClickForApp('toggleIllustrationDelay');
-    } else {
+    } else if (illustrationLevel === 0 || illustrationLevel === 3) {
       boundHandleClickForApp('toggleStoryText');
     }
   };

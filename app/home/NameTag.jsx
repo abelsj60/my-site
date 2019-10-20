@@ -77,8 +77,8 @@ const Hed = styled.h1`
   margin-bottom: 10px;
   cursor: pointer;
   user-select: none;
-  // We rely on !p.finishedHomePageLoad to ensure the associated test only runs on initialLoad. It should not be considered thereafter.
-  opacity: ${p => !p.finishedHomePageLoad && p.loadLevelBlurs < 2 ? '0' : '1'};
+  // We rely on !p.homePageLoaded to ensure the associated test only runs on initialLoad. It should not be considered thereafter.
+  opacity: ${p => !p.homePageLoaded && p.loadLevelBlurs < 2 ? '0' : '1'};
   transition: ${p => p.loadLevelAll < 6 && 'opacity 1s ease-in'};
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
@@ -88,7 +88,7 @@ const Hed = styled.h1`
 const InnerContainer = styled.div`
   display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
   transition: opacity ${p => p.loadLevelAll < 6 ? '.55s' : p.enter ? '.45s' : '.65s'} ease-in;
-  opacity: ${p => (!p.finishedHomePageLoad && p.loadLevelAll < 6) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
+  opacity: ${p => (!p.homePageLoaded && p.loadLevelAll < 6) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
 `;
 const Pitch = styled.section`
   overflow: auto;
@@ -117,7 +117,7 @@ export default function NameTag(props) {
     setLoadLevels
   } = props;
   const {
-    finishedHomePageLoad,
+    homePageLoaded,
     heartbeat,
     nameTagWidth,
     spacerHeight,
@@ -141,7 +141,7 @@ export default function NameTag(props) {
   const onClickForHed = event => {
     eventManagement(event);
     // Heartbeat ends at 3, set in PictureBox.onTransitionEndForBlurredBoy
-    if (finishedHomePageLoad && heartbeat > 2 && (spellLevel === 0 || spellLevel === 4)) {
+    if (homePageLoaded && heartbeat > 2 && (spellLevel === 0 || spellLevel === 4)) {
       if (eventType === 'touch') {
         boundHandleClickForHome('resetEventType');
         return false;
@@ -187,7 +187,7 @@ export default function NameTag(props) {
           compressor={1.154}
         >
           <Hed
-            finishedHomePageLoad={finishedHomePageLoad}
+            homePageLoaded={homePageLoaded}
             loadLevelBlurs={setLoadLevels.sum().blurs}
             loadLevelAll={setLoadLevels.sum().all}
             onClick={onClickForHed}
@@ -198,7 +198,7 @@ export default function NameTag(props) {
         <InnerContainer
           enter={movement === 'enter'}
           exit={movement === 'exit'}
-          finishedHomePageLoad={finishedHomePageLoad}
+          homePageLoaded={homePageLoaded}
           loadLevelAll={setLoadLevels.sum().all}
           onTransitionEnd={onTransitionEndForInnerContainer}
           spellLevel={spellLevel}
@@ -225,7 +225,7 @@ export default function NameTag(props) {
           </Pitch>
         </InnerContainer>
         <Loader
-          done={finishedHomePageLoad}
+          done={homePageLoaded}
           marginBottom="7"
           show={setLoadLevels.sum().all < 6}
         />

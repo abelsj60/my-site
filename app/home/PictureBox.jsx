@@ -35,7 +35,7 @@ export default function PictureBox(props) {
     setLoadLevels
   } = props;
   const {
-    finishedHomePageLoad,
+    homePageLoaded,
     images,
     inCity
   } = appState;
@@ -72,7 +72,7 @@ export default function PictureBox(props) {
     eventManagement(event);
     setLoadLevels.three();
     if (setLoadLevels.sum().all === 6) {
-      // Sets heartbeat = 1, finishedHomePageLoad = true
+      // Sets heartbeat = 1, homePageLoaded = true
       boundHandleClickForApp('updateHeartbeat');
     }
   };
@@ -100,11 +100,12 @@ export default function PictureBox(props) {
 
   return (
     <PictureHolder>
+      {/* 'BlurredBoyFallback' */}
       <BlurredBoyForeground
         alt={descriptionBoy}
         enter={movement === 'enter'}
         exit={movement === 'exit'}
-        finishedHomePageLoad={finishedHomePageLoad}
+        homePageLoaded={homePageLoaded}
         loadLevelBlurs={setLoadLevels.sum().blurs}
         loadLevelAll={setLoadLevels.sum().all}
         onLoad={onLoadForBlurredBoy}
@@ -116,7 +117,7 @@ export default function PictureBox(props) {
         alt={descriptionBoy}
         enter={movement === 'enter'}
         exit={movement === 'exit'}
-        finishedHomePageLoad={finishedHomePageLoad}
+        homePageLoaded={homePageLoaded}
         loadLevelAll={setLoadLevels.sum().all}
         onLoad={onLoadForBoy}
         spellLevel={spellLevel}
@@ -124,10 +125,11 @@ export default function PictureBox(props) {
       />
       {(!inCity || (inCity && spellLevel > 0)) &&
         <Fragment>
+          {/* 'BlurredFantasyFallback' */}
           <BlurredFantasyBackground
             enter={movement === 'enter'}
             exit={movement === 'exit'}
-            finishedHomePageLoad={finishedHomePageLoad}
+            homePageLoaded={homePageLoaded}
             inCity={inCity}
             loadLevelAll={setLoadLevels.sum().all}
             loadLevelBlurs={setLoadLevels.sum().blurs}
@@ -139,7 +141,7 @@ export default function PictureBox(props) {
           />
           <FantasyBackground
             alt={descriptionFantasy}
-            finishedHomePageLoad={finishedHomePageLoad}
+            homePageLoaded={homePageLoaded}
             inCity={inCity}
             loadLevelAll={setLoadLevels.sum().all}
             onLoad={onLoadForFantasy}
@@ -152,6 +154,7 @@ export default function PictureBox(props) {
       }
       {(inCity || (!inCity && spellLevel > 0)) && 
         <Fragment>
+          {/* 'BlurredCityFallback' */}
           <BlurredCityBackground
             alt=""
             enter={movement === 'enter'}

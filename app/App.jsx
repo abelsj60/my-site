@@ -297,13 +297,13 @@ class App extends Component {
         location.caller !== 'i'
           ? location.caller
           : 'home',
-      finishedHomePageLoad: false, // Tracks status of home page images throughout App, loadLevels confined to Home
       heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
         firstHeartbeat ? 0 : 3,
       height: // Height for <main /> element
         pageHeight > this.minAllowedHeight
           ? pageHeight
           : this.defaultHeightWhenTooSmall,
+      homePageLoaded: false, // loadLevels confined to Home, this is for whole app
       illustrationDelay: false, // Control illustration loader on /chapter pages
       illustrationDirection: 'enter', // Properly interpret illustrationLevel 
       illustrationLevel: 0, // Control illustration transitions (header, main, and footer)
