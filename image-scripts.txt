@@ -97,10 +97,10 @@
 
 8. Projects
 
-  4x = 2500
-  3x = 1875
-  2x = 1250
-  1x = 625
+  4x = 2500, quality 50
+  3x = 1875, quality 50
+  2x = 1250, quality 70
+  1x = 625, quality 95
 
   convert alexa-gs-rules-of-funny-2500.png  -colorspace RGB   \
         \( +clone   -resize  2500   -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-2500-4x.jpg   +delete \) \
@@ -112,4 +112,4 @@
 
 9. Projects thumbnails
 
-  use XNConvert
+  use XNConvert (quality 90)

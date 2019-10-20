@@ -51,15 +51,9 @@ export default class ContentLoader extends Component {
       chapterIndex: state.getIndex('chapter'),
       headlineIndex: state.getIndex('article'),
       imageLoaded: // -1 = n/a, 0 = not loaded, 1 = loaded, ready for transition, 2 = done
-        location.caller === 'chapter'
-          ? props.appState.images[
-              `chapter-${state.getIndex('chapter') + 1}-blurred`
-            ].complete
-              ? 2
-              : 0
-          : location.caller === 'projects'
-            ? 0
-            : -1,
+        location.caller === 'chapter' || location.caller === 'projects'
+          ? 0
+          : -1,
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,
       projectIndex: state.getIndex('project'),

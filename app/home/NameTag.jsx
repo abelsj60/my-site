@@ -1,4 +1,5 @@
 import home from '../data/home/home.md';
+import dayjs from 'dayjs';
 import eventManagement from '../helpers/eventManagement.js';
 import FitText from '@kennethormandy/react-fittext';
 import Loader from '../shared/Loader.jsx';
@@ -160,6 +161,8 @@ export default function NameTag(props) {
   const onAnimationEndForHeartbeat = event => {
     eventManagement(event);
     boundHandleClickForApp('updateHeartbeat'); // --> 3
+    // Only runs if heartbeat = 0, no check is needed!
+    localStorage.lastHeartbeat = dayjs().format();
   };
   const onTransitionEndForInnerContainer = event => {
     eventManagement(event);

@@ -1,12 +1,36 @@
+import getImages from './getImages.js';
 import home from '../data/home/home.md';
 import stories from '../data/the-story/index.js';
 
 // On images: https://images.guide
 // WebP support: https://stackoverflow.com/a/54631141
+// Google's detection method: https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_for_webp
 
-export default function prelodBigImages() {
+export default function preloadBigImages() {
+  // 1. alpha webp or all webp ?
+  // 2. split up, one check for each ?
+  // 3. combine, one check for all (if alpha, must support lossy webp ?)
+
+  // const checkWebp = function checkWebp(feature, callback) {
+  //   var kTestImages = {
+  //       lossy: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
+  //       lossless: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
+  //       alpha: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="
+  //   };
+  //   var img = new Image();
+  //   img.onload = function () {
+  //       var result = (img.width > 0) && (img.height > 0);
+  //       console.log(callback(feature, result));
+  //   };
+  //   img.onerror = function () {
+  //       console.log(callback(feature, false));
+  //   };
+  //   img.src = "data:image/webp;base64," + kTestImages[feature];
+  // }
+
+  // checkWebp('alpha', getImages);
+
   const images = {};
-  images.alreadyLoaded = [];
 
   const deviceWidth = window.screen.width;
   const deviceHeight = window.screen.height; // use availHeight instead?
@@ -42,31 +66,27 @@ export default function prelodBigImages() {
     const imageA = new Image();
     const imageB = new Image();
     const illSource = `/chapter-${number}/chapter-${number}-imc-main-101419-q${
-      imageWidth < 2880
-        ? '90'
-        : '50'
+      imageWidth < 2880 ? '90' : '50'
     }-${imageWidth}.jpg`;
     const blurredSource = `/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
     imageA.src = illSource;
     imageB.src = blurredSource;
     images[`chapter-${number}-main`] = imageA;
     images[`chapter-${number}-blurred`] = imageB;
-
-    // localStorage.setItem(`chapter-${number}-main`, illSource);
-    // localStorage.setItem(`chapter-${number}-blurred`, blurredSource);
   });
 
   home.attributes.preloadUrls.forEach((path, idx) => {
     const image = new Image();
     const filePrefix = path.includes('boy')
-        ? 'boy'
-        : path.includes('forrest')
-          ? 'forrest'
-          : 'nyc';
+      ? 'boy'
+      : path.includes('forrest')
+        ? 'forrest'
+        : 'nyc';
     let source;
 
     if (path.includes('boy') && !path.includes('blur') && imageWidth >= 2880 && imageWidth <= 3000) {
       // Manually skip boy-...-2880.png b/c the next level seems to look a lot nicer on screen
+      // File size is roughly comparable, so only wasting compute cycles. I'm OK with that.
       source = `/${path}/${filePrefix}-imc-main-101419-3000.png`;
     } else {
       if (path.includes('blur')) {
@@ -82,20 +102,7 @@ export default function prelodBigImages() {
 
     image.src = source;
     images[home.attributes.imageNames[idx]] = image;
-
-    // localStorage.setItem(home.attributes.imageNames[idx], source);
-
-    // A poor man's test for cached images, works better than .complete (sometimes wrong)
-    if (image.width + image.height > 0) {
-      images.alreadyLoaded.push(1);
-    }
   });
-
-  // Note: Full-size image, should be converted and optimized at later date...
-  // /business-card/business-card-teen-imc-q91-656-4x.jpg
-  
-  // Note: Full-size image, should be converted and optimized at later date...
-  // /not-found/not-found-jinni-imc-q91-1240-4x.jpg
 
   [
     `/business-card/teen-fairy-img-q90-640-4x.jpg`,
@@ -108,8 +115,6 @@ export default function prelodBigImages() {
         ? 'businessCardImage' 
         : 'notFoundImage'
     ] = image;
-
-    // localStorage.setItem(idx < 1 ? 'businessCardImage' : 'notFoundImage', src);
   });
 
   return images;

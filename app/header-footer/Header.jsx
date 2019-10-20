@@ -180,6 +180,7 @@ const Icon = styled.img`
   cursor: pointer;
   padding: 5px;
   filter: ${p => !p.isReverie && p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) && css`drop-shadow(${iconShadow})`};
+  // ! This transition doesn't seem to be working on mobile Safari. Investigate in future.
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`filter .35s`};
   z-index: 1;
 

@@ -109,11 +109,11 @@ const BlurredFallback = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  // Theoretically, the <BlurredImage /> might not be in before someone clicks the story button.
-  // This means, that BlurredFallback would have to transition to and from the illustration.
-  // BUT, it's not able to do that at this time. May address in the future.
+  // imageLoaed maintained in ContentLoader.jsx. Starts
+  // at 0, set to 1 by onLoadForBlurredImage(). Set to
+  // 2 by onTransitionEndForBlurredFallbackImage().
   opacity: ${p => p.imageLoaded < 1 ? '1' : '0'};
-  transition: ${p => p.imageLoaded < 2 ? 'opacity .5s' : ''};
+  transition: opacity .5s;
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
@@ -272,18 +272,7 @@ export default function Story(props) {
           illustrationDirection={illustrationDirection}
           imageLoaded={imageLoaded}
         />
-        {imageLoaded < 2 && // refers to blurred image
-          <BlurredFallback 
-            alt="blurred fallback"
-            illustrationDirection={illustrationDirection}
-            illustrationLevel={illustrationLevel}
-            imageLoaded={imageLoaded}
-            onTransitionEnd={onTransitionEndForBlurredFallbackImage}
-            src={fallbackBlur}
-            tempContent={tempContent}
-          />
-        }
-        <BlurredImage 
+        <BlurredImage
           alt={description}
           imageLoaded={imageLoaded}
           illustrationDirection={illustrationDirection}
@@ -291,6 +280,15 @@ export default function Story(props) {
           onLoad={onLoadForBlurredImage}
           onTransitionEnd={onTransitionEndForBlurredImage}
           src={blurredImageSrc}
+          tempContent={tempContent}
+        />
+        <BlurredFallback // Always active when mounted, managed by opacity.
+          alt="blurred fallback"
+          illustrationDirection={illustrationDirection}
+          illustrationLevel={illustrationLevel}
+          imageLoaded={imageLoaded}
+          onTransitionEnd={onTransitionEndForBlurredFallbackImage}
+          src={fallbackBlur}
           tempContent={tempContent}
         />
         <Image

@@ -25,4 +25,4 @@ As a start-up founder, I told stories that pitched our software. As a staff repo
 
 Like I said — stories all the way down. 
 
-So what's yours?
+So. What's yours?

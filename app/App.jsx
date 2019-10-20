@@ -19,6 +19,7 @@ import styled, {
   createGlobalStyle,
   ThemeProvider
 } from 'styled-components';
+import dayjs from 'dayjs';
 import Footer from './header-footer/Footer.jsx';
 import Header from './header-footer/Header.jsx';
 import {
@@ -237,12 +238,23 @@ class App extends Component {
       );
       illustrationState = state.checkIllustrationState(images, true);
     }
-    // Prevent loading animation and transitions when using the same tab
-    // But, new tabs will always run the animation and transitions...
-    // This may be a problem with gh-pages, look into later...
-    const alreadyLoaded = images.alreadyLoaded.reduce(
-      (accum, currentVal) => accum + currentVal, 0
-    ) > 3;
+
+    // Show the heartbeat if the last date isn't located in storage
+    // If it is in storage, we'll check the time elapsed since it ran
+    let firstHeartbeat = typeof localStorage.lastHeartbeat === 'undefined';
+
+    if (!firstHeartbeat) {
+      const now = dayjs(); // now.add('3', 'week');
+      const lastHeartbeat = dayjs(localStorage.lastHeartbeat);
+      firstHeartbeat = now.diff(lastHeartbeat, 'week', true) > 2;
+
+      // Always update the date if < 2 weeks pass between user visits
+      // If > 2 weeks pass, onAnimationEnd() will do it after the next heartbeat
+      if (!firstHeartbeat) {
+        // Technically, not a last heartbeat...but a trackable event
+        localStorage.lastHeartbeat = dayjs().format();
+      }
+    }
 
     // Let's deal w/height.
     //  1. Check value based on device type.
@@ -285,11 +297,9 @@ class App extends Component {
         location.caller !== 'i'
           ? location.caller
           : 'home',
-      finishedHomePageLoad: false,
+      finishedHomePageLoad: false, // Tracks status of home page images throughout App, loadLevels confined to Home
       heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
-        alreadyLoaded
-          ? 3
-          : 0,
+        firstHeartbeat ? 0 : 3,
       height: // Height for <main /> element
         pageHeight > this.minAllowedHeight
           ? pageHeight
@@ -298,9 +308,7 @@ class App extends Component {
       illustrationDirection: 'enter', // Properly interpret illustrationLevel 
       illustrationLevel: 0, // Control illustration transitions (header, main, and footer)
       illustrationState: // 0 is n/a, + is loaded, and - is loading...
-        illustrationState
-          ? illustrationState
-          : 0,
+        illustrationState ? illustrationState : 0,
       images: images, // preloaded big images (minimize time to display b/c of loading)
       inCity: false, // false = fantasy, true = city
       isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie

@@ -4,7 +4,8 @@ const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
@@ -73,15 +74,8 @@ module.exports = (env, argv) => {
       ]
     },
     optimization: {
-      minimizer: [
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            sourceMap: true, // enable source maps to map errors (stack traces) to modules
-            output: {
-              comments: false // remove all comments
-            }
-          }
-        })
+      minimizer: [ 
+        new TerserPlugin() 
       ],
       splitChunks: {
         chunks: 'all'
