@@ -7,6 +7,7 @@ import CityBackground from './CityBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import FantasyBackground from './FantasyBackground.jsx';
 import React, { Fragment } from 'react';
+import { isMobile } from 'react-device-detect';
 import styled from 'styled-components';
 
 const PictureHolder = styled.div`
@@ -17,6 +18,18 @@ const PictureHolder = styled.div`
   width: 100%;
   overflow: hidden;
   z-index: 1;
+`;
+const WhiteSheet = styled.div`
+  ${p => !p.isMobile && 'display: none;'}
+  position: absolute;
+  background-color: ${p => p.theme.colors.white};
+  z-index: ${p => p.zIndex};
+  // May need to fill page:   
+  // https://stackoverflow.com/a/30794589
+  height: 100%;
+  width: 100%;
+  opacity: ${p => p.homePageLoaded && p.loadLevelFull <= 1 ? 1 : 0};
+  transition: opacity .25s ease-out;
 `;
 
 export default function PictureBox(props) {
@@ -52,6 +65,14 @@ export default function PictureBox(props) {
   const bigNycSrc = images[imageNames[4]].src;
   const blurredNycSrc = images[imageNames[5]].src;
 
+  const onLoadTwo = event => {
+    eventManagement(event);
+    setLoadLevels.two();
+  }
+  const onLoadSix = event => {
+    eventManagement(event);
+    setLoadLevels.six();
+  }
   const onLoadForBlurredBoy = event => {
     eventManagement(event);
     setLoadLevels.one();
@@ -61,18 +82,30 @@ export default function PictureBox(props) {
     setLoadLevels.five();
   };
   const onLoadForBlurredFantasy = event => {
-    eventManagement(event);
-    setLoadLevels.two();
+    if (spellLevel < 1) {
+      onLoadTwo(event);
+    }
   };
   const onLoadForFantasy = event => {
-    eventManagement(event);
-    setLoadLevels.six();
+    if (spellLevel < 1) {
+      onLoadSix(event);
+    }
   };
+  const onLoadForBlurredCity = event => {
+    if (spellLevel < 1) {
+      onLoadTwo(event);
+    }
+  }
+  const onLoadForCity = event => {
+    if (spellLevel < 1) {
+      onLoadSix(event);
+    }
+  }
   const onTransitionEndForBlurredBoy = event => {
     eventManagement(event);
     setLoadLevels.three();
     if (setLoadLevels.sum().all === 6) {
-      // Sets heartbeat = 1, homePageLoaded = true
+      // ClickHandling, set to 2 and homePageLoaded = true
       boundHandleClickForApp('updateHeartbeat');
     }
   };
@@ -100,7 +133,13 @@ export default function PictureBox(props) {
 
   return (
     <PictureHolder>
-      {/* 'BlurredBoyFallback' */}
+      <WhiteSheet
+        homePageLoaded={homePageLoaded}
+        isMobile={isMobile}
+        loadLevelFull={setLoadLevels.sum().full}
+        zIndex="4"
+        stay={true}
+      />
       <BlurredBoyForeground
         alt={descriptionBoy}
         enter={movement === 'enter'}
@@ -125,7 +164,6 @@ export default function PictureBox(props) {
       />
       {(!inCity || (inCity && spellLevel > 0)) &&
         <Fragment>
-          {/* 'BlurredFantasyFallback' */}
           <BlurredFantasyBackground
             enter={movement === 'enter'}
             exit={movement === 'exit'}
@@ -154,12 +192,12 @@ export default function PictureBox(props) {
       }
       {(inCity || (!inCity && spellLevel > 0)) && 
         <Fragment>
-          {/* 'BlurredCityFallback' */}
           <BlurredCityBackground
             alt=""
             enter={movement === 'enter'}
             exit={movement === 'exit'}
             inCity={inCity}
+            onLoad={onLoadForBlurredCity}
             onTransitionEnd={onTransitionEndForBlurredCity}
             spellLevel={spellLevel}
             src={blurredNycSrc}
@@ -167,6 +205,7 @@ export default function PictureBox(props) {
           <CityBackground
             alt={descriptionCity}
             inCity={inCity}
+            onLoad={onLoadForCity}
             // Trigger toggle after backgrounds are swapped
             onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, !inCity)}
             spellLevel={spellLevel}

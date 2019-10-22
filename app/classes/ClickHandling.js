@@ -70,7 +70,7 @@ export default class ClickHandling {
         }
 
         if (illustrationLevel === 0) {
-          // Already 'enter' (default/reset to 'enter' by 'updateApp')
+          // Already 'enter' (default or reset to 'enter' by 'updateApp')
           stateToUpdate.illustrationLevel = 1; // 0 --> 1
         } else {
           stateToUpdate.illustrationLevel = 2; // 3 --> 2
@@ -200,7 +200,7 @@ export default class ClickHandling {
           if (heartbeat < 1) {
             stateToUpdate.heartbeat = 1;
           } else {
-            stateToUpdate.heartbeat = 3;
+            stateToUpdate.heartbeat = 2;
           }
 
           category = 'App state';

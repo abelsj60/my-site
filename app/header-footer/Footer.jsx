@@ -43,7 +43,7 @@ const RestyledLink = styled(({
 `;
 const Graf = styled.p`
   cursor: pointer;
-  margin-right: ${p => !p.isLink && !p.marginRight && '20px'}; // marginRight default is undefined/falsy
+  margin-right: ${p => !p.isLink && p.marginRight !== 'none' && '20px'}; // marginRight default is undefined/falsy
   margin-bottom: 0px;
   color: ${p => (p.active ? (!p.home && !p.isStory && !p.isNotFound ? p.theme.colors.pink : p.theme.colors.yellow) : !p.home && !p.isStory && !p.isNotFound ? p.theme.colors.blue : p.theme.colors.white)};
   padding-top: 5px;
@@ -56,6 +56,7 @@ const Graf = styled.p`
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.one};
+    margin-right: ${p => p.marginRight !== 'never' ? '20px' : ''};
     padding-right: 5px;
   }
 `;
@@ -175,6 +176,7 @@ export default function FooterContainer(props) {
             isNotFound={isNotFound}
             isReverie={isReverie}
             isStory={isStory}
+            marginRight="never"
             tempContent={tempContent}
           >
             Reverie

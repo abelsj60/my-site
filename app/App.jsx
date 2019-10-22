@@ -117,7 +117,7 @@ const ZoomControl = styled.div`
 
     ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
   }
-  
+
   ${p => p.home && css`
     width: 100%;
     overflow: hidden;
@@ -249,7 +249,7 @@ class App extends Component {
       firstHeartbeat = now.diff(lastHeartbeat, 'week', true) > 2;
 
       // Always update the date if < 2 weeks pass between user visits
-      // If > 2 weeks pass, onAnimationEnd() will do it after the next heartbeat
+      // If > 2 weeks pass, onAnimationEnd() will do it after next heartbeat
       if (!firstHeartbeat) {
         // Technically, not a last heartbeat...but a trackable event
         localStorage.lastHeartbeat = dayjs().format();
@@ -297,18 +297,21 @@ class App extends Component {
         location.caller !== 'i'
           ? location.caller
           : 'home',
-      heartbeat: // 0 = not ready, 1 = ready, 2 = run w/delay (left early), 3 = nevermore (already ran)
-        firstHeartbeat ? 0 : 3,
-      height: // Height for <main /> element
+      // 0 = not ready, 1 = run, 2 = nevermore
+      heartbeat: firstHeartbeat ? 0 : 2,
+      height: // Height for <Main /> element
         pageHeight > this.minAllowedHeight
           ? pageHeight
           : this.defaultHeightWhenTooSmall,
       homePageLoaded: false, // loadLevels confined to Home, this is for whole app
       illustrationDelay: false, // Control illustration loader on /chapter pages
       illustrationDirection: 'enter', // Properly interpret illustrationLevel 
-      illustrationLevel: 0, // Control illustration transitions (header, main, and footer)
-      illustrationState: // 0 is n/a, + is loaded, and - is loading...
-        illustrationState ? illustrationState : 0,
+      // Used by header, main, and footer
+      // Enter: 0 = text on, 1 = fade out text and portal, 2 = fade out blurred image, 3 = done
+      // Exit: 3 = real image on, 2 = fade in blurred image and portal, 1 = fade in text, 0 = done
+      illustrationLevel: 0, 
+      // 0 is n/a, + is loaded, and - is loading
+      illustrationState: illustrationState ? illustrationState : 0,
       images: images, // preloaded big images (minimize time to display b/c of loading)
       inCity: false, // false = fantasy, true = city
       isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie
@@ -388,7 +391,7 @@ class App extends Component {
         }}
       >
         <Fragment
-          // Use Fragment b/c ThemeProvider only accepts one child.
+          // Used b/c ThemeProvider only accepts one child.
         >
           <GlobalStyle
             notFound={isNotFound}

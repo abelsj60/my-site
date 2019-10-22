@@ -23,11 +23,10 @@ export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
-    // DO NOT USE props.currentCaller or props.isMenu to avoid problems
+    // Note: DO NOT USE props.currentCaller or props.isMenu to avoid problems
     // w/BACK/FORWARD. Both are out-of-date b/c the eventListener for
     // BACK/FORWARD runs AFTER ContentLoader runs.
-    // const isMenu = window.location.pathname.split('/')
-    //   .indexOf('menu') === 2;
+
     const referrer = new Referrer(props);
     const location = new Location(referrer.pathToMatch, props);
     const state = new State(props, location);
@@ -39,18 +38,16 @@ export default class ContentLoader extends Component {
         ? React.createRef()
         : {};
 
-    // Don't need to store publication here.
-    // The Clip list is a single level, meaning that 
-    // we don't use publication to sort.
-    // Instead, publication will show the starting
-    // index item as a default when needed.
+    // Don't need to store publication. The Clip list is one dimensional, meaning that 
+    // we don't sort by publication. Instead, publication will show the first
+    // matching index item when needed as a default.
 
     this.state = {
       allContentData: allContentData,
       caller: location.caller,
       chapterIndex: state.getIndex('chapter'),
       headlineIndex: state.getIndex('article'),
-      imageLoaded: // -1 = n/a, 0 = not loaded, 1 = loaded, ready for transition, 2 = done
+      imageLoaded: // -1 = n/a, 0 = not loaded, 1 = loaded, now transition, 2 = done
         location.caller === 'chapter' || location.caller === 'projects' ? 0 : -1,
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,

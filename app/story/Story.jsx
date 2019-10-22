@@ -1,5 +1,9 @@
 import ChapterNav from './ChapterNav.jsx';
 import eventManagement from '../helpers/eventManagement.js';
+import fallbackBlurOne from '../../assets/images/convert-to-data-uri/chapter-1-ink-50x50-53.png';
+import fallbackBlurTwo from '../../assets/images/convert-to-data-uri/chapter-2-ink-50x50-53.png';
+import fallbackBlurThree from '../../assets/images/convert-to-data-uri/chapter-3-ink-50x50-53.png';
+import fallbackBlurFour from '../../assets/images/convert-to-data-uri/chapter-4-ink-50x50-53.png';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
@@ -8,10 +12,6 @@ import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
-import fallbackBlurOne from '../../assets/images/convert-to-data-uri/chapter-1-ink-50x50-53.png';
-import fallbackBlurTwo from '../../assets/images/convert-to-data-uri/chapter-2-ink-50x50-53.png';
-import fallbackBlurThree from '../../assets/images/convert-to-data-uri/chapter-3-ink-50x50-53.png';
-import fallbackBlurFour from '../../assets/images/convert-to-data-uri/chapter-4-ink-50x50-53.png';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
@@ -31,11 +31,12 @@ const Chapter = styled.h2`
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.nine};
   font-style: italic;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
+  text-decoration: underline;
 `;
 const BookTitle = styled.h1`
   font-family: 'Playfair Display',serif;
-  margin: 0px auto 35px;
+  margin: 0px auto 39px;
   font-size: 2rem;
   font-weight: 700;
   color: ${p => p.theme.colors.yellow};
@@ -58,7 +59,7 @@ const TagLine = styled.p`
   text-shadow: 1px 1px 3px rgba(0, 0, 0, .6);
   text-align: center;
   margin-top: -4px;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyViewTwo}) {
     font-size: ${p => p.theme.fontSizes.six};
@@ -82,7 +83,7 @@ const Portal = styled.div`
   width: 100%;
   z-index: 0;
   background-color: navy;
-  opacity: ${p => (p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 1) ? '0' : '.35'};
+  opacity: ${p => (p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 1) ? '0' : '.5'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
 `;
 const Image = styled.img`
@@ -109,7 +110,7 @@ const BlurredFallback = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  // imageLoaed maintained in ContentLoader.jsx. Starts
+  // imageLoad maintained in ContentLoader.jsx. Starts
   // at 0, set to 1 by onLoadForBlurredImage(). Set to
   // 2 by onTransitionEndForBlurredFallbackImage().
   opacity: ${p => p.imageLoaded < 1 ? '1' : '0'};
@@ -143,7 +144,7 @@ const StoryText = styled.section`
     color: ${p => p.theme.colors.white};
     margin-bottom: ${p => p.theme.bottomMargin.regular};
     // Gets cut off in chrome (add saveSerifs to ContentHolder).
-    margin-left: 2px; 
+    margin-left: 1px; 
 
     &:last-child {
       margin-bottom: 0px;
@@ -209,24 +210,19 @@ export default function Story(props) {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
   };
-  let chapterNumber;
   let fallbackBlur;
 
   switch (number) {
     case 1:
-      chapterNumber = 'one';
       fallbackBlur = fallbackBlurOne;
       break;
     case 2:
-      chapterNumber = 'two';
       fallbackBlur = fallbackBlurTwo;
       break;
     case 3:
-      chapterNumber = 'three';
       fallbackBlur = fallbackBlurThree;
       break;
     default:
-      chapterNumber = 'four';
       fallbackBlur = fallbackBlurFour;
       break;
   }
@@ -256,7 +252,7 @@ export default function Story(props) {
             {bookTitle}
           </BookTitle>
           <Chapter>
-            Chapter {chapterNumber}
+            Chapter {number}
           </Chapter>
           <ChapterTitle>
             {title}

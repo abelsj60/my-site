@@ -12,9 +12,6 @@ app.use(express.static(path.join(__dirname, '../build')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-console.log('in express', path.join(__dirname, '../public'));
-console.log('in express', path.join(__dirname, '../assets/images'));
-
 app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });

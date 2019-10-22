@@ -52,7 +52,7 @@ const OuterContainer = styled.div`
   // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
   // simultaneously — the second would overwrite the first.
-  ${p => p.heartbeat > 0 && p.heartbeat < 3 && css`animation: 1.15s .85s ease-in-out ${heartbeatKeyframes} 3 both`};
+  ${p => p.heartbeat > 0 && p.heartbeat < 2 && css`animation: 1.15s .85s ease-in-out ${heartbeatKeyframes} 3 both`};
   ${p => p.spellLevel === 5 && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
   transform: translate3d(1, 1, 1);
   pointer-events: ${p => p.spellLevel === 5 && 'none'};
@@ -141,7 +141,7 @@ export default function NameTag(props) {
   const onClickForHed = event => {
     eventManagement(event);
     // Heartbeat ends at 3, set in PictureBox.onTransitionEndForBlurredBoy
-    if (homePageLoaded && heartbeat > 2 && (spellLevel === 0 || spellLevel === 4)) {
+    if (homePageLoaded && heartbeat > 1 && (spellLevel === 0 || spellLevel === 4)) {
       if (eventType === 'touch') {
         boundHandleClickForHome('resetEventType');
         return false;
@@ -160,8 +160,9 @@ export default function NameTag(props) {
   };
   const onAnimationEndForHeartbeat = event => {
     eventManagement(event);
-    boundHandleClickForApp('updateHeartbeat'); // --> 3
-    // Only runs if heartbeat = 0, no check is needed!
+    // ClickHandling, set to 2
+    boundHandleClickForApp('updateHeartbeat');
+    // Only runs if heartbeat = 0, so no check is needed!
     localStorage.lastHeartbeat = dayjs().format();
   };
   const onTransitionEndForInnerContainer = event => {

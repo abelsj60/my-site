@@ -30,17 +30,23 @@ export default class Home extends Component {
     // a back-up). Otherwise, make a new one.
 
     const initialPattern = this.createSpellPattern();
+    // The h1 takes additonal space above its top, all of which is included in the onlick region
+    // This spacer lets us limit the height of the clickable region to the actual text area...
+    // Also occupies space in document flow, putting NameTag / Charms at intended position
     this.props.boundHandleClickForApp('updateSpacerHeight', this.props.appState.height);
 
     this.state = {
       activeCharm: initialPattern[0],
       eventType: 'click', // Type of event triggered Charm
       goal: 5,
-      loadLevel: [0, 0, 0, 0], // [bBoy, bFant., boy, fant.], [2, 2, 1, 1] for initial load, [1, 1, 1, 1] after traveling (disregarded)
-      movement: '', // 'enter' = Charms / 'exit' = NameTag
+      // [bBoy, bFant., boy, fant.], 
+      //  - [2, 2, 1, 1] for initial load
+      //  - [1, 1, 1, 1] after traveling
+      loadLevel: [0, 0, 0, 0], 
+      movement: '', // 'enter' = Goto Charms, 'exit' = Goto NameTag
       pattern: initialPattern, // arr
       score: 0, // Used to select an active Charm and cast spell
-      spellLevel: 0
+      spellLevel: 0 // Used to control transition, animation use
     };
 
     this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
@@ -62,7 +68,7 @@ export default class Home extends Component {
   render() {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
-    const setSpellLevels = {
+    const setSpellLevels = { // v = isValid, c = caller
       one: (v, c) => this.setSpellLevelOne(v, c),
       two: (v, c) => this.setSpellLevelTwo(v, c),
       three: (v, c) => this.setSpellLevelThree(v, c),
@@ -284,11 +290,9 @@ export default class Home extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // Let's add our eventHandler whenever cDU runs as a result of
-    // toggling NameTag (which causes refs to be added to our
-    // charmsRef array mounting Charms.
-
-    // See full explanation in handleTouchStart.
+    // Let's add our eventHandler whenever cDU runs as a result of toggling
+    // the NameTag. This causes refs to be added to our charms (an array)
+    // as they mount. See also handleTouchStart.
 
     if (this.charmRefs[0].current) {
       this.charmRefs.forEach(
