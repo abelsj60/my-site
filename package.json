@@ -37,6 +37,7 @@
     "react-router-dom": "^5.0.1",
     "styled-components": "^4.3.2",
     "volleyball": "^1.5.1",
+    "webpack-visualizer-plugin": "^0.1.11",
     "yaml-frontmatter-loader": "^0.1.0"
   },
   "devDependencies": {
