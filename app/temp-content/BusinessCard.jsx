@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import teenFairyImage from '../../assets/images/convert-to-data-uri/teen-fairy-img-q90-640-4x.jpg';
 
 const BoyImage = styled.img`
   position: absolute;
@@ -52,13 +53,11 @@ const Email = styled.p`
   }
 `;
 
-export default function BusinessCard(props) {
-  const src = props.appState.images.businessCardImage.src;
-
+export default function BusinessCard() {
   return (
     <Fragment>
       <BoyImage
-        src={src}
+        src={teenFairyImage}
       />
       <InfoContainer>
         <Name>

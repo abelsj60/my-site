@@ -1,4 +1,3 @@
-import getImages from './getImages.js';
 import home from '../data/home/home.md';
 import stories from '../data/the-story/index.js';
 
@@ -7,29 +6,6 @@ import stories from '../data/the-story/index.js';
 // Google's detection method: https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_for_webp
 
 export default function preloadBigImages() {
-  // 1. alpha webp or all webp ?
-  // 2. split up, one check for each ?
-  // 3. combine, one check for all (if alpha, must support lossy webp ?)
-
-  // const checkWebp = function checkWebp(feature, callback) {
-  //   var kTestImages = {
-  //       lossy: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
-  //       lossless: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
-  //       alpha: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="
-  //   };
-  //   var img = new Image();
-  //   img.onload = function () {
-  //       var result = (img.width > 0) && (img.height > 0);
-  //       console.log(callback(feature, result));
-  //   };
-  //   img.onerror = function () {
-  //       console.log(callback(feature, false));
-  //   };
-  //   img.src = "data:image/webp;base64," + kTestImages[feature];
-  // }
-
-  // checkWebp('alpha', getImages);
-
   const images = {};
 
   const deviceWidth = window.screen.width;
@@ -105,16 +81,11 @@ export default function preloadBigImages() {
   });
 
   [
-    `/business-card/teen-fairy-img-q90-640-4x.jpg`,
     `/not-found/jinni-img-q90-1240-4x.jpg`
   ].forEach((src, idx) => {
     const image = new Image();
     image.src = src;
-    images[
-      idx < 1
-        ? 'businessCardImage' 
-        : 'notFoundImage'
-    ] = image;
+    images['notFoundImage'] = image;
   });
 
   return images;
