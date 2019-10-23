@@ -9,7 +9,6 @@ import ProjectNav from './ProjectNav.jsx';
 import React, { Fragment } from 'react';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
-import urlPrefix from '../helpers/urlPrefix.js';
 
 const Type = styled.p`
   font-size: ${p => p.theme.fontSizes.three};

@@ -9,7 +9,6 @@ import ForrestBackground from './ForrestBackground.jsx';
 import React, { Fragment } from 'react';
 import { isMobile } from 'react-device-detect';
 import styled from 'styled-components';
-import urlPrefix from '../helpers/urlPrefix.js';
 
 const PictureHolder = styled.div`
   position: fixed;

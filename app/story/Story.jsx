@@ -12,7 +12,6 @@ import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
-import urlPrefix from '../helpers/urlPrefix.js';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};

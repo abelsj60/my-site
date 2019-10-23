@@ -2,7 +2,6 @@ import Main from '../primitives/Main.jsx';
 import React, { Component } from 'react';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
-import urlPrefix from '../helpers/urlPrefix.js';
 
 const RestyledContentHolder = styled(ContentHolder)`
   flex: 1;

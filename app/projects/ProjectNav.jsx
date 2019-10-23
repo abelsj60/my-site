@@ -5,7 +5,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
-import urlPrefix from '../helpers/urlPrefix.js';
 
 const Group = styled(UnorderedList)`
   flex: ${p => p.imageLoaded > 1 && !p.isMenu && '1'};
