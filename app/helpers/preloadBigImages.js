@@ -81,11 +81,12 @@ export default function preloadBigImages() {
   });
 
   [
+    `${urlPrefix}/business-card/teen-fairy-img-q90-640-4x.jpg`,
     `${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`
   ].forEach((src, idx) => {
     const image = new Image();
     image.src = src;
-    images['notFoundImage'] = image;
+    images[idx === 0 ? 'businessCardImage' : 'notFoundImage'] = image;
   });
 
   return images;

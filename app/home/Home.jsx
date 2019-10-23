@@ -24,12 +24,9 @@ export default class Home extends Component {
       React.createRef()
     ];
 
-    // Create an initial spell pattern. If we've gone
-    // to /reverie and come back, we'll use the last
-    // created spell pattern (stored on appState as
-    // a back-up). Otherwise, make a new one.
-
+    // Create an initial spell pattern.
     const initialPattern = this.createSpellPattern();
+
     // The h1 takes additonal space above its top, all of which is included in the onlick region
     // This spacer lets us limit the height of the clickable region to the actual text area...
     // Also occupies space in document flow, putting NameTag / Charms at intended position
@@ -39,9 +36,10 @@ export default class Home extends Component {
       activeCharm: initialPattern[0],
       eventType: 'click', // Type of event triggered Charm
       goal: 5,
-      // [blurredBoy, blurredForrest, boy, forrest]
-      //  - [2, 2, 1, 1] for initial load
-      //  - [1, 1, 1, 1] after traveling
+      // [blurredBoy, blurredForrest, boy, forrest] first
+      //  - [2, 2, 1, 1] for initial load (blurred versions 
+      // to give new viewers something interesting to see)
+      //  - [1, 1, 1, 1] after traveling (keep it quick)
       loadLevel: [0, 0, 0, 0], 
       movement: '', // 'enter' = Goto Charms, 'exit' = Goto NameTag
       pattern: initialPattern, // arr

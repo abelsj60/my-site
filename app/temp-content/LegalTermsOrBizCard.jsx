@@ -54,23 +54,25 @@ export default class LegalTermsOrBizCard extends Component {
       tempContent
     } = appState;
     const homeIsActive = currentCaller === 'home';
-    const stopOnClickPropagation = event => event.stopPropagation();
-    const onClickHandler = () => {
-      if (tempContent === 1) {
-        boundHandleClickForApp('toggleTempContent', 1);
-      } else {
-        boundHandleClickForApp('toggleTempContent', 2);
-      }
-    };
+
+    // REACTIVATE to allow temp content to be closed by clicking the page:
+    // const stopOnClickPropagation = event => event.stopPropagation();
+    // const onClickHandler = () => {
+    //   if (tempContent === 1) {
+    //     boundHandleClickForApp('toggleTempContent', 1);
+    //   } else {
+    //     boundHandleClickForApp('toggleTempContent', 2);
+    //   }
+    // };
     
     return (
       <Container
         homeIsActive={homeIsActive}
-        onClick={onClickHandler}
+        // onClick={onClickHandler} // See note, above
       >
         <CardHolder>
           <Card
-            onClick={stopOnClickPropagation}
+            // onClick={stopOnClickPropagation} // See note, above
             tempContent={tempContent}
           >
             {tempContent === 1 ? (
