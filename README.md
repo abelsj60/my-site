@@ -1,6 +1,9 @@
 # jamesabels.net
-Personal site/portfolio
 
-Running on port 3300
+Portfolio site
 
-Start from app/index.js
+Runs on port 3300
+
+Start: app/index.js
+
+©2019, James Abels LLC. All rights reserved.

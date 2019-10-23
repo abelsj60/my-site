@@ -39,7 +39,7 @@ export default class Home extends Component {
       activeCharm: initialPattern[0],
       eventType: 'click', // Type of event triggered Charm
       goal: 5,
-      // [bBoy, bFant., boy, fant.], 
+      // [blurredBoy, blurredFantasy, boy, fantasy]
       //  - [2, 2, 1, 1] for initial load
       //  - [1, 1, 1, 1] after traveling
       loadLevel: [0, 0, 0, 0], 
@@ -194,7 +194,7 @@ export default class Home extends Component {
 
   setSpellLevelOne(isValid, caller) {
     if (!isValid) return null;
-    if (caller === 'BlurredFantasy' || caller === 'BlurredCity') {
+    if (caller === 'BlurredForrest' || caller === 'BlurredNyc') {
       // onTransitionEnd
       this.setSpellLevel(1);
     }
@@ -210,7 +210,7 @@ export default class Home extends Component {
 
   setSpellLevelThree(isValid, caller) {
     if (!isValid) return null;
-    if (caller === 'BlurredFantasy' || caller === 'BlurredCity') {
+    if (caller === 'BlurredForrest' || caller === 'BlurredNyc') {
       // onTransitionEnd
       this.setSpellLevel(3);
     }
@@ -313,8 +313,8 @@ export default class Home extends Component {
 // 3. spellLevel 1 transitions NameTag Bio to 0 (previously 1)
 // 4. spellLevel 1 becomes 2 onTransitionEnd for Home/NameTag/InnerContainer (opacity)
 // 5. spellLevel 2 sets display: none for Home/NameTag/InnerContainer
-// 6. spellLevel 2 transitions opacity to 1 for BlurredFantasyImage
-// 7. spellLevel 2 becomes 3 onTransitionEnd for PictureBox/BlurredFantasyImage (opacity)
+// 6. spellLevel 2 transitions opacity to 1 for BlurredForrestImage
+// 7. spellLevel 2 becomes 3 onTransitionEnd for PictureBox/BlurredForrestImage (opacity)
 // 8. spellLevel 3 transitions opacity to 1 for Charms/OuterContainer (previously: 0)
 // 9. spellLevel 3 becomes 4 onTransitionEnd for Charms/OuterContainer (opacity)
 // --
@@ -322,8 +322,8 @@ export default class Home extends Component {
 // 11. spellLevel 3 transitions Charms to 0 (previously 1)
 // 12. spellLevel 3 becomes 2 onTransitionEnd for Charms/OuterContainer (opacity)
 // 13. spellLevel 2 sets display: block for Home/NameTag/InnerContainer
-// 14. spellLevel 2 transitions opacity to 0 for PictureBox/BlurredFantasyImage
-// 15. spellLevel 2 becomes 1 onTransitionEnd for PictureBox/BlurredFantasyImage (opacity)
+// 14. spellLevel 2 transitions opacity to 0 for PictureBox/BlurredForrestImage
+// 15. spellLevel 2 becomes 1 onTransitionEnd for PictureBox/BlurredForrestImage (opacity)
 // 16. spellLevel 1 transitions opacity to 1 for Home/NameTag/InnerContainer
 // 17. spellLevel becomes 0 onTransitionEnd for Home/NameTag/InnerContainer (opacity)
 // 18. Movement is reset to '' onTransitionEnd in PictureBox/FantasyImage or PictureBox/CityImage (opacity)
