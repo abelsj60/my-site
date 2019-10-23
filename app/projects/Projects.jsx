@@ -101,8 +101,6 @@ export default function Projects(props) {
     boundHandleClickForContentLoader('imageLoader', 2)
   };
 
-  console.log('1:', `${urlPrefix}${filePrefix}-q50-1250-2x.jpg 1250w`);
-
   return (
     <Main>
       <ContentHolder>
