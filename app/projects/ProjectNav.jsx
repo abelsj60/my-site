@@ -106,11 +106,11 @@ export default function ProjectNav(props) {
                   <Image
                     alt={`Thumbnail ${idx + 1}`}
                     isMenu={isMenu}
-                    src={`${urlPrefix}${thumb}-1x.jpg`}
+                    src={`${thumb}-1x.jpg`}
                     srcSet={
-                      `${urlPrefix}${thumb}-2x.jpg 2x`,
-                      `${urlPrefix}${thumb}-3x.jpg 3x`,
-                      `${urlPrefix}${thumb}-4x.jpg 4x`
+                      `${thumb}-2x.jpg 2x`,
+                      `${thumb}-3x.jpg 3x`,
+                      `${thumb}-4x.jpg 4x`
                     }
                   />
                 </RestyledLink>

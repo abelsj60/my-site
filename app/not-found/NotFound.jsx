@@ -35,7 +35,7 @@ export default class NotFound extends Component {
                 width: '100%'
               }}
               alt="404"
-              src={`${urlPrefix}${src}`}
+              src={src}
             />
             <Hed>
               Not found

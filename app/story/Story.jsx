@@ -277,7 +277,7 @@ export default function Story(props) {
           illustrationLevel={illustrationLevel}
           imageLoaded={imageLoaded}
           onTransitionEnd={onTransitionEndForBlurredFallbackImage}
-          src={`${urlPrefix}${fallbackBlur}`}
+          src={fallbackBlur}
           tempContent={tempContent}
         />
         <BlurredImage // z-index: -2
@@ -287,13 +287,13 @@ export default function Story(props) {
           illustrationLevel={illustrationLevel}
           onLoad={onLoadForBlurredImage}
           onTransitionEnd={onTransitionEndForBlurredImage}
-          src={`${urlPrefix}${blurredImageSrc}`}
+          src={blurredImageSrc}
           tempContent={tempContent}
         />
         <Image // z-index -3
           alt={description}
           onLoad={onLoadForMainImage}
-          src={`${urlPrefix}${bigImageSrc}`}
+          src={bigImageSrc}
         />
       </PictureHolder>
     </Main>

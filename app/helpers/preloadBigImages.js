@@ -8,6 +8,7 @@ import stories from '../data/the-story/index.js';
 export default function preloadBigImages() {
   const images = {};
 
+  const urlPrefix = process.env.NODE_ENV !== 'development' ? 'assets/images/' : '';
   const deviceWidth = window.screen.width;
   const deviceHeight = window.screen.height; // use availHeight instead?
   const imageWidth = [
@@ -41,10 +42,10 @@ export default function preloadBigImages() {
     const { number } = chapter.attributes;
     const imageA = new Image();
     const imageB = new Image();
-    const illSource = `/chapter-${number}/chapter-${number}-imc-main-101419-q${
+    const illSource = `/${urlPrefix}/chapter-${number}/chapter-${number}-imc-main-101419-q${
       imageWidth < 2880 ? '90' : '50'
     }-${imageWidth}.jpg`;
-    const blurredSource = `/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
+    const blurredSource = `/${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
     imageA.src = illSource;
     imageB.src = blurredSource;
     images[`chapter-${number}-main`] = imageA;
@@ -66,9 +67,9 @@ export default function preloadBigImages() {
       source = `/${path}/${filePrefix}-imc-main-101419-3000.png`;
     } else {
       if (path.includes('blur')) {
-        source = `/${path}/${filePrefix}-ink-blur-0x15-160.${path.includes('boy') ? 'png' : 'jpg'}`;
+        source = `/${urlPrefix}/${path}/${filePrefix}-ink-blur-0x15-160.${path.includes('boy') ? 'png' : 'jpg'}`;
       } else {
-        source = `/${path}/${filePrefix}-imc-main-101419-${
+        source = `/${urlPrefix}/${path}/${filePrefix}-imc-main-101419-${
           !path.includes('boy')
             ? imageWidth < 2880 ? 'q90-' : 'q50-'
             : ''
@@ -81,7 +82,7 @@ export default function preloadBigImages() {
   });
 
   [
-    `/not-found/jinni-img-q90-1240-4x.jpg`
+    `/${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`
   ].forEach((src, idx) => {
     const image = new Image();
     image.src = src;

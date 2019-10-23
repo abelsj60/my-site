@@ -162,11 +162,11 @@ export default function Projects(props) {
             <ImageHolder>
               <MainImage
                 alt="mainPic"
-                src={`${urlPrefix}${filePrefix}-q95-625-1x.jpg`}
+                src={`${filePrefix}-q95-625-1x.jpg`}
                 srcSet={
-                  `${urlPrefix}${filePrefix}-q50-1250-2x.jpg 1250w`,
-                  `${urlPrefix}${filePrefix}-q50-1875-3x.jpg 1875w`,
-                  `${urlPrefix}${filePrefix}-q50-2500-4x.jpg 2500w`
+                  `${filePrefix}-q50-1250-2x.jpg 1250w`,
+                  `${filePrefix}-q50-1875-3x.jpg 1875w`,
+                  `${filePrefix}-q50-2500-4x.jpg 2500w`
                 }
                 sizes="620px"
                 imageLoaded={imageLoaded}
