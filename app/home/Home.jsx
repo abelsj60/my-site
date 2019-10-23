@@ -306,28 +306,3 @@ export default class Home extends Component {
     }
   }
 }
-
-// SPELL PROCESS:
-// 1. Movement is '' on initial load
-// 2. Movement becomes 'enter' and spellLevel is 1 on first click
-// 3. spellLevel 1 transitions NameTag Bio to 0 (previously 1)
-// 4. spellLevel 1 becomes 2 onTransitionEnd for Home/NameTag/InnerContainer (opacity)
-// 5. spellLevel 2 sets display: none for Home/NameTag/InnerContainer
-// 6. spellLevel 2 transitions opacity to 1 for BlurredForrestImage
-// 7. spellLevel 2 becomes 3 onTransitionEnd for PictureBox/BlurredForrestImage (opacity)
-// 8. spellLevel 3 transitions opacity to 1 for Charms/OuterContainer (previously: 0)
-// 9. spellLevel 3 becomes 4 onTransitionEnd for Charms/OuterContainer (opacity)
-// --
-// 10. Movement becomes 'exit' and spellLevel 4 becomes 3 on click
-// 11. spellLevel 3 transitions Charms to 0 (previously 1)
-// 12. spellLevel 3 becomes 2 onTransitionEnd for Charms/OuterContainer (opacity)
-// 13. spellLevel 2 sets display: block for Home/NameTag/InnerContainer
-// 14. spellLevel 2 transitions opacity to 0 for PictureBox/BlurredForrestImage
-// 15. spellLevel 2 becomes 1 onTransitionEnd for PictureBox/BlurredForrestImage (opacity)
-// 16. spellLevel 1 transitions opacity to 1 for Home/NameTag/InnerContainer
-// 17. spellLevel becomes 0 onTransitionEnd for Home/NameTag/InnerContainer (opacity)
-// 18. Movement is reset to '' onTransitionEnd in PictureBox/FantasyImage or PictureBox/CityImage (opacity)
-// --
-// 18. spellLevel becomes 5 when the spell is cast
-// 19. spellLevel is reset to 0 onTransitionEnd in PictureBox/CityImage (transform)
-// 20. Movement is reset to '' onTransitionEnd in PictureBox/FantasyImage (transform)
