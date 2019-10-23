@@ -228,6 +228,8 @@ export default function Story(props) {
       break;
   }
 
+  console.log('ex link:', `${urlPrefix}${bigImageSrc}`);
+
   return (
     <Main>
       <RestyledContentHolder
