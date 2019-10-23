@@ -64,7 +64,7 @@ export default function preloadBigImages() {
     if (path.includes('boy') && !path.includes('blur') && imageWidth >= 2880 && imageWidth <= 3000) {
       // Manually skip boy-...-2880.png b/c the next level seems to look a lot nicer on screen
       // File size is roughly comparable, so only wasting compute cycles. I'm OK with that.
-      source = `/${path}/${filePrefix}-imc-main-101419-3000.png`;
+      source = `/${urlPrefix}/${path}/${filePrefix}-imc-main-101419-3000.png`;
     } else {
       if (path.includes('blur')) {
         source = `/${urlPrefix}/${path}/${filePrefix}-ink-blur-0x15-160.${path.includes('boy') ? 'png' : 'jpg'}`;
