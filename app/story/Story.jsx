@@ -12,6 +12,7 @@ import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
+import urlPrefix from '../helpers/urlPrefix.js';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
@@ -274,7 +275,7 @@ export default function Story(props) {
           illustrationLevel={illustrationLevel}
           imageLoaded={imageLoaded}
           onTransitionEnd={onTransitionEndForBlurredFallbackImage}
-          src={fallbackBlur}
+          src={`${urlPrefix}${fallbackBlur}`}
           tempContent={tempContent}
         />
         <BlurredImage // z-index: -2
@@ -284,13 +285,13 @@ export default function Story(props) {
           illustrationLevel={illustrationLevel}
           onLoad={onLoadForBlurredImage}
           onTransitionEnd={onTransitionEndForBlurredImage}
-          src={blurredImageSrc}
+          src={`${urlPrefix}${blurredImageSrc}`}
           tempContent={tempContent}
         />
         <Image // z-index -3
           alt={description}
           onLoad={onLoadForMainImage}
-          src={bigImageSrc}
+          src={`${urlPrefix}${bigImageSrc}`}
         />
       </PictureHolder>
     </Main>

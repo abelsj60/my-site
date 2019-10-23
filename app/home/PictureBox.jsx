@@ -1,14 +1,15 @@
 import bio from '../data/home/home.md';
-import BlurredCityBackground from './BlurredCityBackground.jsx';
+import BlurredNycBackground from './BlurredNycBackground.jsx'
 import BoyForeground from './BoyForeground.jsx';
 import BlurredBoyForeground from './BlurredBoyForeground.jsx';
-import BlurredFantasyBackground from './BlurredFantasyBackground.jsx';
-import CityBackground from './CityBackground.jsx';
+import BlurredForrestBackground from './BlurredForrestBackground.jsx';
+import NycBackground from './NycBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
-import FantasyBackground from './FantasyBackground.jsx';
+import ForrestBackground from './ForrestBackground.jsx';
 import React, { Fragment } from 'react';
 import { isMobile } from 'react-device-detect';
 import styled from 'styled-components';
+import urlPrefix from '../helpers/urlPrefix.js';
 
 const PictureHolder = styled.div`
   position: fixed;
@@ -81,7 +82,7 @@ export default function PictureBox(props) {
     eventManagement(event);
     setLoadLevels.five();
   };
-  const onLoadForBlurredFantasy = event => {
+  const onLoadForBlurredForrest = event => {
     if (spellLevel < 1) {
       onLoadTwo(event);
     }
@@ -91,7 +92,7 @@ export default function PictureBox(props) {
       onLoadSix(event);
     }
   };
-  const onLoadForBlurredCity = event => {
+  const onLoadForBlurredNyc = event => {
     if (spellLevel < 1) {
       onLoadTwo(event);
     }
@@ -109,16 +110,16 @@ export default function PictureBox(props) {
       boundHandleClickForApp('updateHeartbeat');
     }
   };
-  const onTransitionEndForBlurredFantasy = event => {
+  const onTransitionEndForBlurredForrest = event => {
     eventManagement(event);
     setLoadLevels.four();
-    setSpellLevels.three(movement === 'enter', 'BlurredFantasy');
-    setSpellLevels.one(movement === 'exit', 'BlurredFantasy');
+    setSpellLevels.three(movement === 'enter', 'BlurredForrest');
+    setSpellLevels.one(movement === 'exit', 'BlurredForrest');
   };
-  const onTransitionEndForBlurredCity = event => {
+  const onTransitionEndForBlurredNyc = event => {
     eventManagement(event);
-    setSpellLevels.three(movement === 'enter', 'BlurredCity');
-    setSpellLevels.one(movement === 'exit', 'BlurredCity');
+    setSpellLevels.three(movement === 'enter', 'BlurredNyc');
+    setSpellLevels.one(movement === 'exit', 'BlurredNyc');
   };
   // Trigger toggle after we swap backgrounds
   // Requires a closure to pass all params
@@ -150,7 +151,7 @@ export default function PictureBox(props) {
         onLoad={onLoadForBlurredBoy}
         onTransitionEnd={onTransitionEndForBlurredBoy}
         spellLevel={spellLevel}
-        src={blurredBoySrc}
+        src={`${urlPrefix}${blurredBoySrc}`}
       />
       <BoyForeground
         alt={descriptionBoy}
@@ -160,11 +161,11 @@ export default function PictureBox(props) {
         loadLevelAll={setLoadLevels.sum().all}
         onLoad={onLoadForBoy}
         spellLevel={spellLevel}
-        src={bigBoySrc}
+        src={`${urlPrefix}${bigBoySrc}`}
       />
       {(!inCity || (inCity && spellLevel > 0)) &&
         <Fragment>
-          <BlurredFantasyBackground
+          <BlurredForrestBackground
             enter={movement === 'enter'}
             exit={movement === 'exit'}
             homePageLoaded={homePageLoaded}
@@ -172,12 +173,12 @@ export default function PictureBox(props) {
             loadLevelAll={setLoadLevels.sum().all}
             loadLevelBlurs={setLoadLevels.sum().blurs}
             loadLevelFantasy={loadLevel[3] > 0}
-            onLoad={onLoadForBlurredFantasy}
-            onTransitionEnd={onTransitionEndForBlurredFantasy}
+            onLoad={onLoadForBlurredForrest}
+            onTransitionEnd={onTransitionEndForBlurredForrest}
             spellLevel={spellLevel}
-            src={blurredForrestSrc}
+            src={`${urlPrefix}${blurredForrestSrc}`}
           />
-          <FantasyBackground
+          <ForrestBackground
             alt={descriptionFantasy}
             homePageLoaded={homePageLoaded}
             inCity={inCity}
@@ -186,30 +187,30 @@ export default function PictureBox(props) {
             // Trigger toggle after backgrounds are swapped
             onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, inCity)}
             spellLevel={spellLevel}
-            src={bigForrestSrc}
+            src={`${urlPrefix}${bigForrestSrc}`}
           />
         </Fragment>
       }
       {(inCity || (!inCity && spellLevel > 0)) && 
         <Fragment>
-          <BlurredCityBackground
+          <BlurredNycBackground
             alt=""
             enter={movement === 'enter'}
             exit={movement === 'exit'}
             inCity={inCity}
-            onLoad={onLoadForBlurredCity}
-            onTransitionEnd={onTransitionEndForBlurredCity}
+            onLoad={onLoadForBlurredNyc}
+            onTransitionEnd={onTransitionEndForBlurredNyc}
             spellLevel={spellLevel}
-            src={blurredNycSrc}
+            src={`${urlPrefix}${blurredNycSrc}`}
           />
-          <CityBackground
+          <NycBackground
             alt={descriptionCity}
             inCity={inCity}
             onLoad={onLoadForCity}
             // Trigger toggle after backgrounds are swapped
             onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, !inCity)}
             spellLevel={spellLevel}
-            src={bigNycSrc}
+            src={`${urlPrefix}${bigNycSrc}`}
           />
         </Fragment>
       }

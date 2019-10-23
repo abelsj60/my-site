@@ -1,10 +1,11 @@
+import { isIE } from 'react-device-detect';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
-import { isIE } from 'react-device-detect';
+import urlPrefix from '../helpers/urlPrefix.js';
 
 const Group = styled(UnorderedList)`
   flex: ${p => p.imageLoaded > 1 && !p.isMenu && '1'};
@@ -105,11 +106,11 @@ export default function ProjectNav(props) {
                   <Image
                     alt={`Thumbnail ${idx + 1}`}
                     isMenu={isMenu}
-                    src={`${thumb}-1x.jpg`}
+                    src={`${urlPrefix}${thumb}-1x.jpg`}
                     srcSet={
-                      `${thumb}-2x.jpg 2x`,
-                      `${thumb}-3x.jpg 3x`,
-                      `${thumb}-4x.jpg 4x`
+                      `${urlPrefix}${thumb}-2x.jpg 2x`,
+                      `${urlPrefix}${thumb}-3x.jpg 3x`,
+                      `${urlPrefix}${thumb}-4x.jpg 4x`
                     }
                   />
                 </RestyledLink>
