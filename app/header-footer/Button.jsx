@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Structure = styled.button`
   display: ${p => !p.isStory ? 'none' : ''};
+  filter: ${p => p.theme.blurForTempContent && p.theme.blur};
   margin-left: 25px;
   width: 69px;
   padding: 7px 0px;
