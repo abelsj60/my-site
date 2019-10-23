@@ -39,7 +39,7 @@ export default class Home extends Component {
       activeCharm: initialPattern[0],
       eventType: 'click', // Type of event triggered Charm
       goal: 5,
-      // [blurredBoy, blurredFantasy, boy, fantasy]
+      // [blurredBoy, blurredForrest, boy, forrest]
       //  - [2, 2, 1, 1] for initial load
       //  - [1, 1, 1, 1] after traveling
       loadLevel: [0, 0, 0, 0], 
