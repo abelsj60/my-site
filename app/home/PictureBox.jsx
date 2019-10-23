@@ -9,6 +9,7 @@ import ForrestBackground from './ForrestBackground.jsx';
 import React, { Fragment } from 'react';
 import { isMobile } from 'react-device-detect';
 import styled from 'styled-components';
+import urlPrefix from '../helpers/urlPrefix.js';
 
 const PictureHolder = styled.div`
   position: fixed;
@@ -150,7 +151,7 @@ export default function PictureBox(props) {
         onLoad={onLoadForBlurredBoy}
         onTransitionEnd={onTransitionEndForBlurredBoy}
         spellLevel={spellLevel}
-        src={blurredBoySrc}
+        src={`${urlPrefix}${blurredBoySrc}`}
       />
       <BoyForeground
         alt={descriptionBoy}
@@ -160,7 +161,7 @@ export default function PictureBox(props) {
         loadLevelAll={setLoadLevels.sum().all}
         onLoad={onLoadForBoy}
         spellLevel={spellLevel}
-        src={bigBoySrc}
+        src={`${urlPrefix}${bigBoySrc}`}
       />
       {(!inCity || (inCity && spellLevel > 0)) &&
         <Fragment>
@@ -175,7 +176,7 @@ export default function PictureBox(props) {
             onLoad={onLoadForBlurredForrest}
             onTransitionEnd={onTransitionEndForBlurredForrest}
             spellLevel={spellLevel}
-            src={blurredForrestSrc}
+            src={`${urlPrefix}${blurredForrestSrc}`}
           />
           <ForrestBackground
             alt={descriptionFantasy}
@@ -186,7 +187,7 @@ export default function PictureBox(props) {
             // Trigger toggle after backgrounds are swapped
             onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, inCity)}
             spellLevel={spellLevel}
-            src={bigForrestSrc}
+            src={`${urlPrefix}${bigForrestSrc}`}
           />
         </Fragment>
       }
@@ -200,7 +201,7 @@ export default function PictureBox(props) {
             onLoad={onLoadForBlurredNyc}
             onTransitionEnd={onTransitionEndForBlurredNyc}
             spellLevel={spellLevel}
-            src={blurredNycSrc}
+            src={`${urlPrefix}${blurredNycSrc}`}
           />
           <NycBackground
             alt={descriptionCity}
@@ -209,7 +210,7 @@ export default function PictureBox(props) {
             // Trigger toggle after backgrounds are swapped
             onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, !inCity)}
             spellLevel={spellLevel}
-            src={bigNycSrc}
+            src={`${urlPrefix}${bigNycSrc}`}
           />
         </Fragment>
       }

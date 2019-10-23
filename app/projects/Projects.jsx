@@ -9,6 +9,7 @@ import ProjectNav from './ProjectNav.jsx';
 import React, { Fragment } from 'react';
 import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
+import urlPrefix from '../helpers/urlPrefix.js';
 
 const Type = styled.p`
   font-size: ${p => p.theme.fontSizes.three};
@@ -161,11 +162,11 @@ export default function Projects(props) {
             <ImageHolder>
               <MainImage
                 alt="mainPic"
-                src={`${filePrefix}-q95-625-1x.jpg`}
+                src={`${urlPrefix}${filePrefix}-q95-625-1x.jpg`}
                 srcSet={
-                  `${filePrefix}-q50-1250-2x.jpg 1250w`,
-                  `${filePrefix}-q50-1875-3x.jpg 1875w`,
-                  `${filePrefix}-q50-2500-4x.jpg 2500w`
+                  `${urlPrefix}${filePrefix}-q50-1250-2x.jpg 1250w`,
+                  `${urlPrefix}${filePrefix}-q50-1875-3x.jpg 1875w`,
+                  `${urlPrefix}${filePrefix}-q50-2500-4x.jpg 2500w`
                 }
                 sizes="620px"
                 imageLoaded={imageLoaded}
