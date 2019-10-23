@@ -1,1 +1,1 @@
-export default process.env.NODE_ENV !== 'development' ? '/assets/images/' : '';
+export default process.env.NODE_ENV !== 'development' ? '/assets/images' : '';
