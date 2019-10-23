@@ -7,7 +7,6 @@ import stories from '../data/the-story/index.js';
 
 export default function preloadBigImages() {
   const images = {};
-
   const urlPrefix = process.env.NODE_ENV !== 'development' ? 'assets/images/' : '';
   const deviceWidth = window.screen.width;
   const deviceHeight = window.screen.height; // use availHeight instead?
