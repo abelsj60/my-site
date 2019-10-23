@@ -261,9 +261,9 @@ class App extends Component {
     //  2. If the screen is landscape:
     //    a. Set property on initial load,
     //    b. Resize on orientation change via updateHeight(),
-    //    c. Keep resized height on subsequent orientation
-    //    changes by rejecting w/n updateHeight() when
-    //    this.minAllowedHeight > newHeight.
+    //    c.  Keep resized height on subsequent orientation
+    //        changes by rejecting w/n updateHeight() when
+    //        this.minAllowedHeight > newHeight.
     const pageHeight = isMobile && !isMobileSafari
       ? document.documentElement.clientHeight
       : window.innerHeight;
