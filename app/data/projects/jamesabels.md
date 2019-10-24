@@ -21,8 +21,8 @@ captions: [
 ]
 mainImages: [
   '/jea/ja-home-page-xnc',
-  '/jea/ja-chapter-1-xnc',
   '/jea/ja-journalism-xnc',
+  '/jea/ja-chapter-1-xnc',
   '/jea/ja-business-card-xnc'
 ]
 projectThumbnail: [
