@@ -20,14 +20,16 @@ captions: [
   "An article page featuring one of the clips that I wrote as a staff reporter at Forbes. The component that creates this page is shared with Reverie, the site's blog, to make site maintenance easier."
 ]
 mainImages: [
-  '/alexa/alexa-wsq-xnc',
-  '/alexa/alexa-gs-rules-of-funny-xnc',
-  '/alexa/alexa-take-on-g-xnc'
+  '/jea/ja-home-page-xnc',
+  '/jea/ja-chapter-1-xnc',
+  '/jea/ja-journalism-xnc',
+  '/jea/ja-business-card-xnc'
 ]
 projectThumbnail: [
-  '/alexa/thumbs/alexa-wsq-xnc-q90',
-  '/alexa/thumbs/alexa-gs-rules-of-funny-xnc-q90',
-  '/alexa/thumbs/alexa-take-on-g-xnc-q90'
+  '/jea/thumbs/ja-home-page-xnc-q90',
+  '/jea/thumbs/ja-journalism-xnc-q90',
+  '/jea/thumbs/ja-chapter-1-xnc-q90',
+  '/jea/thumbs/ja-business-card-xnc-q90'
 ]
 showTheseAttributes: [
   'story',

@@ -102,11 +102,11 @@
   2x = 1250, quality 70
   1x = 625, quality 95
 
-  convert alexa-gs-rules-of-funny-2500.png  -colorspace RGB   \
-        \( +clone   -resize  2500   -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-2500-4x.jpg   +delete \) \
-        \( +clone   -resize  1875   -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-1875-3x.jpg   +delete \) \
-        \( +clone   -resize  1250   -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-1250-2x.jpg   +delete \) \
-                    -resize  625    -colorspace  sRGB   -quality 70   +write  alexa-gs-rules-of-funny-q70-625-1x.jpg
+  convert ja-journalism.png  -colorspace RGB   \
+        \( +clone   -resize  2500   -colorspace  sRGB   -quality 70   +write  ja-journalism-q70-2500-4x.jpg   +delete \) \
+        \( +clone   -resize  1875   -colorspace  sRGB   -quality 70   +write  ja-journalism-q70-1875-3x.jpg   +delete \) \
+        \( +clone   -resize  1250   -colorspace  sRGB   -quality 70   +write  ja-journalism-q70-1250-2x.jpg   +delete \) \
+                    -resize  625    -colorspace  sRGB   -quality 70   +write  ja-journalism-q70-625-1x.jpg
 
   ...or use XNConvert
 
