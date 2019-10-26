@@ -99,7 +99,7 @@ const Image = styled.img`
   height: 100%;
   width: 100%;
 `;
-const BlurredFallback = styled.img`
+const FallbackBlur = styled.img`
   position: absolute;
   object-fit: cover;
   font-family: 'object-fit: cover;';
@@ -110,10 +110,13 @@ const BlurredFallback = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  // imageLoad maintained in ContentLoader.jsx. Starts
-  // at 0, set to 1 by onLoadForBlurredImage(). Set to
-  // 2 by onTransitionEndForBlurredFallbackImage().
-  opacity: ${p => p.imageLoaded < 1 ? '1' : '0'};
+  // imageLoaded (BlurredImage) comes from ContentLoader.jsx. Starts
+  // at 0, set to 1 by onLoadForBlurredImage(). Set to 2 by 
+  // onTransitionEndForFallbackBlur().
+  // Let's not remove the blurred fallback until we KNOW the main illustration is 
+  // in. Sometimes, it comes in before the BlurredImage, so is awkwardly visible.
+  // Here's the state: a) not loaded = < 0, b) loaded = > 0, c) n/a
+  opacity: ${p => p.imageLoaded < 1 && p.illustrationState < 0 ? '1' : '0'};
   transition: opacity .5s;
 `;
 const BlurredImage = styled.img`
@@ -128,7 +131,9 @@ const BlurredImage = styled.img`
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => p.imageLoaded < 1 || (p.tempContent < 1 && ((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'};
+  // Do not check for illustrationState on opacity b/c we always this to be visible beneath the FallbackBlur
+  opacity: ${p => (p.tempContent < 1 && ((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'};
+  // Transition runs if we're turning off the text. Otherwise, FallbackBlur handles the reveal
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s ease-in'};
 
   // The mediaQ ensures the blur goes away if the full-screen header menu is
@@ -199,7 +204,7 @@ export default function Story(props) {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 2 : 0);
   };
-  const onTransitionEndForBlurredFallbackImage = event => { // 1 --> 2
+  const onTransitionEndForFallbackBlur = event => { // 1 --> 2
     eventManagement(event);
     if (imageLoaded < 2) {
       // refers to BlurredImage, not the full illustration
@@ -268,12 +273,13 @@ export default function Story(props) {
           illustrationDirection={illustrationDirection}
           imageLoaded={imageLoaded}
         />
-        <BlurredFallback // z-index: -1
+        <FallbackBlur // z-index: -1
           alt="blurred fallback"
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           imageLoaded={imageLoaded}
-          onTransitionEnd={onTransitionEndForBlurredFallbackImage}
+          illustrationState={illustrationState}
+          onTransitionEnd={onTransitionEndForFallbackBlur}
           src={fallbackBlur}
           tempContent={tempContent}
         />

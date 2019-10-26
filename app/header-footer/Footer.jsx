@@ -93,11 +93,11 @@ export default function FooterContainer(props) {
 
   const onClickContactHandler = event => {
     eventManagement(event);
-    boundHandleClickForApp('toggleTempContent', 1);
+    boundHandleClickForApp('updateTempContent', 1);
   };
   const onClickLegalHandler = event => {
     eventManagement(event);
-    boundHandleClickForApp('toggleTempContent', 2);
+    boundHandleClickForApp('updateTempContent', 2);
   };
   const eventHandlerForStoryButton = event => {
     eventManagement(event);

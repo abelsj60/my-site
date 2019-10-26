@@ -93,7 +93,7 @@ export default class ErrorBoundary extends Component {
                     Like I said — stories all the way down. 
                   </p>
                   <p>
-                    That's mine. What's yours?
+                    So. What's yours?
                   </p>
                 </div>
               )}
