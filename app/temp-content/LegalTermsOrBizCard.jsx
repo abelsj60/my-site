@@ -1,7 +1,6 @@
 import BusinessCard from './BusinessCard.jsx';
 import LegalTerms from './LegalTerms.jsx';
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
 import styled, { css } from 'styled-components';
 
 const Container = styled.section`
@@ -59,9 +58,9 @@ export default class LegalTermsOrBizCard extends Component {
     // const stopOnClickPropagation = event => event.stopPropagation();
     // const onClickHandler = () => {
     //   if (tempContent === 1) {
-    //     boundHandleClickForApp('toggleTempContent', 1);
+    //     boundHandleClickForApp('updateTempContent', 1);
     //   } else {
-    //     boundHandleClickForApp('toggleTempContent', 2);
+    //     boundHandleClickForApp('updateTempContent', 2);
     //   }
     // };
     
@@ -88,35 +87,5 @@ export default class LegalTermsOrBizCard extends Component {
         </CardHolder>
       </Container>
     );
-  }
-
-  // Needed ? Or handled in clickHandling?
-  componentDidMount() {
-    const { tempContent } = this.props.appState;
-    const { pathname } = window.location;
-
-    if (process.env.NODE_ENV !== 'development') {
-      ReactGA.modalview(
-        `${pathname}${
-          tempContent === 1
-            ? 'Switch to business card'
-            : 'Switch to terms'
-        }`
-      );
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { tempContent } = this.props.appState;
-    const { lastTempContent } = prevProps.appState;
-    const { pathname } = window.location;
-
-    if (process.env.NODE_ENV !== 'development') {
-      if (tempContent === 1 && lastTempContent === 0) {
-        ReactGA.modalview(`${pathname}businesscard`);
-      } else if (tempContent === 2 && lastTempContent === 0) {
-        ReactGA.modalview(`${pathname}legalterms`);
-      }
-    }
   }
 }

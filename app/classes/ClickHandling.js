@@ -86,8 +86,8 @@ export default class ClickHandling {
       let label = '';
 
       switch (updateValue) {
-        case 'toggleTempContent':
-          if (tempContent > 0 && tempContent - valueOne === 0) {
+        case 'updateTempContent':
+          if (tempContent > 0 && (tempContent - valueOne) === 0) {
             stateToUpdate.tempContent = 0;
           } else {
             stateToUpdate.tempContent = valueOne;
@@ -106,8 +106,10 @@ export default class ClickHandling {
             clearTimeout(this.headerMenuTimeoutId);
             this.headerMenuTimeoutId = undefined;
           }
+          // Legal terms and business card are tracked in TempContent.cDU. Is his really needed here?
+          // What about header menu?
           category = 'App state';
-          action = tempContent - valueOne === 0
+          action = (tempContent - valueOne) === 0
             ? `Close ${
                 tempContent === 1
                   ? 'business card'
@@ -122,9 +124,9 @@ export default class ClickHandling {
                     ? 'legal terms'
                     : 'header menu'
                 }`;
-          label = tempContent - valueOne === 0
-            ? 'Temp content was toggled off'
-            : `Temp content was swapped from ${
+          label = (tempContent - valueOne) === 0
+            ? 'Toggled off'
+            : `Swapped from ${
               tempContent === 1
                 ? 'business card'
                 : tempContent === 2
@@ -275,13 +277,15 @@ export default class ClickHandling {
 
       if (updateValue !== 'updateApp') {
         if (process.env.NODE_ENV !== 'development') {
-          ReactGA.event({
-            category,
-            action,
-            label: label
-              ? label
-              : null
-          });
+          if (category && action) {
+            ReactGA.event({
+              category,
+              action,
+              label: label
+                ? label
+                : null
+            });
+          }
         }
       }
 

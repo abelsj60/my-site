@@ -150,8 +150,8 @@ export default function NameTag(props) {
       if (process.env.NODE_ENV !== 'development') {
         ReactGA.event({
           category: 'Home state',
-          action: 'Spell toggled.',
-          label: `The score was ${score}.`
+          action: `Spell toggled: ${spellLevel === 0 ? 'off' : 'on'}`,
+          value: score
         });
       }
 

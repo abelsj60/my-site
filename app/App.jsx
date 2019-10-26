@@ -518,8 +518,8 @@ class App extends Component {
       return false;
     }
 
-    // Reject 2: Don't resize while zooming (there's a lag
-    // between this.state.isZooming and this.state.pinchZoomed).
+    // Reject 2: Don't resize while zooming (there's a lag between
+    // this.state.isZooming and this.state.pinchZoomed).
 
     if (this.state.isZooming) {
       return false;
@@ -531,10 +531,7 @@ class App extends Component {
       return false;
     }
 
-    const {
-      pathname,
-      search
-    } = window.location;
+    const { pathname, search } = window.location;
 
     // iOS 12 introduced a strange new behavior. On orientation change, 
     // the screen collapsed in between the first and second setStates.
@@ -579,7 +576,7 @@ class App extends Component {
 
     // Prevent resize when user scrolls oversized page.
     if (window.pageYOffset > 0 && !this.isAfterTouchWhenScrollingPage) {
-      const scrollHandling = new ScrollHandling(location);
+      const scrollHandling = new ScrollHandling(this.state.currentCaller);
       scrollHandling.resetWindowTop();
     }
 
@@ -591,9 +588,9 @@ class App extends Component {
       if (process.env.NODE_ENV !== 'development') {
         ReactGA.event({
           category: 'App state',
-          action: `Resized w/o changing height. Current: ${this.state.height}, new ${newHeight}`,
+          action: `Resized w/o changing height. Currently: ${this.state.height}.`,
           value: newHeight,
-          label: `Page: ${pathname}${search}`
+          label: `Page: ${pathname}/${search}`
         });
       }
 
@@ -611,9 +608,9 @@ class App extends Component {
     if (process.env.NODE_ENV !== 'development') {
       ReactGA.event({
         category: 'App state',
-        action: 'Re-calculate height',
-        value: `newHeight: ${newHeight}, oldHeight: ${this.state.height}`,
-        label: `Page: ${pathname}${search}`
+        action: `Re-calculate height. Currently: ${this.state.height}.`,
+        value: newHeight,
+        label: `Page: ${pathname}/${search}`
       });
     }
 

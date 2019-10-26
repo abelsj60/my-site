@@ -16,7 +16,7 @@ export default class ScrollHandling {
           ReactGA.event({
             category: 'Scroll management',
             action: `Reset top for ${this._caller}`,
-            label: 'Swapping content'
+            label: 'Location is swapping content'
           });
         }
 
@@ -34,7 +34,7 @@ export default class ScrollHandling {
         ReactGA.event({
           category: 'Scroll management',
           action: `Reset window for ${this._caller}`,
-          label: 'Changing location'
+          label: 'Reject resize while scrolling oversized page (pinchZoomed / window.pageYOffset > 0'
         });
       }
 

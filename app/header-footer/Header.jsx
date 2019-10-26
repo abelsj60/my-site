@@ -210,7 +210,7 @@ export default class Header extends Component {
     const referrer = new Referrer(this.props);
     const onClickMenuHandler = event => {
       eventManagement(event);
-      boundHandleClickForApp('toggleTempContent', 3);
+      boundHandleClickForApp('updateTempContent', 3);
     };
 
     return (
