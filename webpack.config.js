@@ -85,7 +85,7 @@ module.exports = (env, argv) => {
       new CleanWebpackPlugin(),
       new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
       new HtmlWebpackPlugin({
-        filename: './index.html',
+        filename: '../index.html',
         template: './template.html',
         inject: 'head',
         publicFilePath: argv.mode === 'development'
@@ -95,13 +95,13 @@ module.exports = (env, argv) => {
       new ScriptExtHtmlWebpackPlugin({
         defer: /\.js$/
       }),
-      // new FileManagerPlugin({
-      //   onEnd: {
-      //     delete: [
-      //       './docs/index.html'
-      //     ]
-      //   }
-      // })
+      new FileManagerPlugin({
+        onEnd: {
+          delete: [
+            './docs/index.html'
+          ]
+        }
+      })
     ]
   };
 };
