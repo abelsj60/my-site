@@ -5,15 +5,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
 
-// Github pages gets production builds, local gets develpment builds. If you
-// need a development build on gh-pages, or a production build on local,
-// reset paths --> Local needs '/', GH needs '/build/' and '/public/'
+// Master/docs gets production builds, local gets develpment builds.
+// Relative paths: 
+//  -production = '/' 
+//  -development = '/build/' and '/public/'
 
 module.exports = (env, argv) => {
   return {
@@ -22,11 +21,11 @@ module.exports = (env, argv) => {
       './app/index.js'
     ],
     output: {
-      path: path.resolve(__dirname, 'build'),
+      path: path.resolve(__dirname, 'docs'),
       filename: '[name].[contenthash].js',
       publicPath: argv.mode === 'development'
         ? '/'
-        : '/build/'
+        : '/docs/'
     },
     devtool: argv.mode === 'development'
       ? 'source-map'
@@ -82,7 +81,7 @@ module.exports = (env, argv) => {
       }
     },
     plugins: [
-      // new BundleAnalyzerPlugin(),
+      // Deletes old files — ONLY use if building to sub-directory!
       new CleanWebpackPlugin(),
       new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
       new HtmlWebpackPlugin({
@@ -99,7 +98,7 @@ module.exports = (env, argv) => {
       new FileManagerPlugin({
         onEnd: {
           delete: [
-            './build/index.html'
+            './docs/index.html'
           ]
         }
       })
