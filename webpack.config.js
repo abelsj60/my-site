@@ -11,8 +11,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 // Master/docs gets production builds, local gets develpment builds.
 // Relative paths: 
-//  -production = '/' 
-//  -development = '/build/' and '/public/'
+//  - production = '/' 
+//  - development = '/build/' and '/public/'
 
 module.exports = (env, argv) => {
   return {
@@ -95,13 +95,13 @@ module.exports = (env, argv) => {
       new ScriptExtHtmlWebpackPlugin({
         defer: /\.js$/
       }),
-      new FileManagerPlugin({
-        onEnd: {
-          delete: [
-            './docs/index.html'
-          ]
-        }
-      })
+      // new FileManagerPlugin({
+      //   onEnd: {
+      //     delete: [
+      //       './docs/index.html'
+      //     ]
+      //   }
+      // })
     ]
   };
 };
