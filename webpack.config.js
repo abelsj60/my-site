@@ -9,11 +9,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 // https://survivejs.com/webpack/optimizing/adding-hashes-to-filenames/
 // https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758
 
-// Master/docs gets production builds, local gets develpment builds.
-// Relative paths: 
-//  - production = '/' 
-//  - development = '/build/' and '/public/'
-
 module.exports = (env, argv) => {
   return {
     entry: [
@@ -81,7 +76,6 @@ module.exports = (env, argv) => {
       }
     },
     plugins: [
-      // Deletes old files — ONLY use if building to sub-directory!
       new RemovePlugin({
         before: {
           include: ['docs/index.html', 'docs/dist']
