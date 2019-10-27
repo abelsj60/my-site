@@ -1,5 +1,5 @@
-import arrowUp from '../../assets/images/convert-to-data-uri/arrow-up-28-@4x.png';
-import arrowDown from '../../assets/images/convert-to-data-uri/arrow-down-28-@4x.png';
+import arrowUp from '../../docs/assets/images/convert-to-data-uri/arrow-up-28-@4x.png';
+import arrowDown from '../../docs/assets/images/convert-to-data-uri/arrow-down-28-@4x.png';
 import React from 'react';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';

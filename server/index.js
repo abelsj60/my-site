@@ -6,14 +6,14 @@ const path = require('path');
 const PORT = 3300;
 
 app.use(volleyball);
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.static(path.join(__dirname, '../assets/images')));
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '../docs/public')));
+app.use(express.static(path.join(__dirname, '../docs/assets/images')));
+app.use(express.static(path.join(__dirname, '../docs/dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
+  res.sendFile(path.join(__dirname, '../docs/index.html'));
 });
 
 app.use((err, req, res, next) => {

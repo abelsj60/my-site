@@ -1,8 +1,8 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const RemovePlugin = require('remove-files-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
@@ -21,11 +21,11 @@ module.exports = (env, argv) => {
       './app/index.js'
     ],
     output: {
-      path: path.resolve(__dirname, 'docs'),
+      path: path.resolve(__dirname, 'docs/dist'),
       filename: '[name].[contenthash].js',
       publicPath: argv.mode === 'development'
         ? '/'
-        : '/'
+        : '/dist/'
     },
     devtool: argv.mode === 'development'
       ? 'source-map'
@@ -82,7 +82,11 @@ module.exports = (env, argv) => {
     },
     plugins: [
       // Deletes old files — ONLY use if building to sub-directory!
-      new CleanWebpackPlugin(),
+      new RemovePlugin({
+        before: {
+          include: ['docs/index.html', 'docs/dist']
+        }
+      }),
       new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
       new HtmlWebpackPlugin({
         filename: '../index.html',
@@ -95,13 +99,13 @@ module.exports = (env, argv) => {
       new ScriptExtHtmlWebpackPlugin({
         defer: /\.js$/
       }),
-      // new FileManagerPlugin({
-      //   onEnd: {
-      //     delete: [
-      //       './docs/index.html'
-      //     ]
-      //   }
-      // })
+      new FileManagerPlugin({
+        onEnd: {
+          delete: [
+            './docs/dist/index.html'
+          ]
+        }
+      })
     ]
   };
 };
