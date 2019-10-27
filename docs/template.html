@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Abels | Coder ∙ Founder ∙ Storyteller</title>
+    <link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.publicFilePath %>favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= htmlWebpackPlugin.options.publicFilePath %>apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.options.publicFilePath %>favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.publicFilePath %>favicon-16x16.png">
+    <link rel="manifest" href="<%= htmlWebpackPlugin.options.publicFilePath %>site.webmanifest">
+    <link rel="mask-icon" href="<%= htmlWebpackPlugin.options.publicFilePath %>safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#9f00a7">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="author" description="James Abels">
+    <meta name="description" content="James Abels — I write code that tells clear & compelling stories. Let's talk about yours.">
+    <meta name="robot" content="noimageindex">
+    <meta name="robots" content="noindex">
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafrex/spa-github-pages
+      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+      // ----------------------------------------------------------------------
+      // This script checks to see if a redirect is present in the query string
+      // and converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function(l) {
+        if (l.search) {
+          var q = {};
+          l.search.slice(1).split('&').forEach(function(v) {
+            var a = v.split('=');
+            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+          });
+          if (q.p !== undefined) {
+            const newUrl = l.pathname.slice(0, -1) + (q.p || '') +
+              (q.q ? ('?' + q.q) : '') +
+              l.hash;
+            window.history.replaceState(null, null,
+              newUrl
+            );
+          }
+        }
+      }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+  </head>
+  <body >
+    <div id="app"></div>
+    <noscript>This site requires JavaScript.</noscript>
+  </body>
+</html>
+ 
