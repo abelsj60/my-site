@@ -29,11 +29,15 @@ const Text = styled.section`
   }
 
   li {
-    margin-bottom: 6px;
+    margin-bottom: 0px;
   }
 
   li p {
-    margin-bottom: 6px;
+    margin-bottom: 15px;
+  }
+
+  ul li {
+    margin-bottom: 15px;
   }
 
   p {
