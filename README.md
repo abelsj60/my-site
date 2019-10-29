@@ -1,6 +1,6 @@
-# jamesabels.net
+![cover image](cover-img.png)
 
-Portfolio site
+# Portfolio site
 
 Runs on port 3300
 
