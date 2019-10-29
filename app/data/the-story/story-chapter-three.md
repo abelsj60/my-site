@@ -15,9 +15,7 @@ The young man knelt to grab it.
 
 He was right to be giddy. 
 
-Reality began to glitch. Clear red rays shot between particles of dust, drawing a giant Jinn into view. 
-
-"You've forgotten my secret," it boomed. 
+Reality began to glitch. Clear red rays shot between particles of dust, drawing a giant Jinn into view. "You've forgotten my secret," it boomed. 
 
 Menace filled the room. Impulse pulled the young man toward bedsheets while pride kept him still. 
 
