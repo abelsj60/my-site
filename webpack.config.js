@@ -1,4 +1,3 @@
-const FileManagerPlugin = require('filemanager-webpack-plugin');
 const HashedModuleIdsPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
@@ -79,6 +78,9 @@ module.exports = (env, argv) => {
       new RemovePlugin({
         before: {
           include: ['docs/index.html', 'docs/dist']
+        },
+        after: {
+          include: ['docs/dist/index.html']
         }
       }),
       new HashedModuleIdsPlugin(), // So file hashes don't change unexpectedly
@@ -92,13 +94,6 @@ module.exports = (env, argv) => {
       }),
       new ScriptExtHtmlWebpackPlugin({
         defer: /\.js$/
-      }),
-      new FileManagerPlugin({
-        onEnd: {
-          delete: [
-            './docs/dist/index.html'
-          ]
-        }
       })
     ]
   };
