@@ -9,7 +9,6 @@
   "scripts": {
     "build": "webpack -p",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server/index.js",
     "start:dev": "webpack --env.NODE_ENV='dev' --mode development -w & nodemon ./server/index.js",
@@ -20,7 +19,6 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@kennethormandy/react-fittext": "^0.6.0",
-    "body-parser": "^1.19.0",
     "dayjs": "^1.8.16",
     "intrinsic-scale": "^3.0.4",
     "marked": "^0.7.0",
@@ -41,6 +39,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.10.6",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "file-loader": "^1.1.11",
     "filemanager-webpack-plugin": "^2.0.5",
