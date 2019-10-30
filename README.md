@@ -46,7 +46,7 @@ As a result, the animation only runs on initial load or if the user hasn't visit
 
 This site was built around the idea of "theatrical Web design."
 
-This means that timed animation sequences are used to add drama to the entry, exit, and use of major creative elements.  
+Timed animation sequences are used to add drama to the entry, exit, and use of major creative elements.  
 
 As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L295) is larger than expected so functionally unrelated sibling Components can track and participate in animation sequences. A future move to Redux or React Hooks might condense this code.
 
