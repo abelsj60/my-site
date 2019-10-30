@@ -46,7 +46,7 @@ This site was built around the idea of 'theatrical Web design.'
 
 This means that major creative elements rely on timed animation sequences to add drama to their entry, exit, and use. 
 
-As a result, the [App component](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx) state is larger than it might otherwise be so functionally unrelated sibling Components can track and participate in the animation sequence. A move to Redux or React Hooks may tighten this code.
+As a result, the [App component](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L295) state is larger than it might otherwise be so functionally unrelated sibling Components can track and participate in the animation sequence. A move to Redux or React Hooks may tighten this code.
 
 
 ---
