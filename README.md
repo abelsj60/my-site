@@ -16,7 +16,7 @@ This site does not use any blog templates, frameworks, or themes.
 
 It was made with ♥️ in N.Y.C. using React, React Router, and Styled Components. 
 
-The code's entry point is [index.js](https://github.com/abelsj60/jamesabels.net/blob/master/app/index.js). Control logic is split between [React components](https://github.com/abelsj60/jamesabels.net/tree/master/app) and traditional [classes](https://github.com/abelsj60/jamesabels.net/tree/master/app/classes), which determine location and handle many user events. Site data is in [/data](https://github.com/abelsj60/jamesabels.net/tree/master/app/data), media assets in [/docs](https://github.com/abelsj60/jamesabels.net/tree/master/docs), and a dev server in [/server](https://github.com/abelsj60/jamesabels.net/tree/master/server).
+The entry point is [index.js](https://github.com/abelsj60/jamesabels.net/blob/master/app/index.js). Control logic is split between [React components](https://github.com/abelsj60/jamesabels.net/tree/master/app) and traditional [classes](https://github.com/abelsj60/jamesabels.net/tree/master/app/classes), which determine location and handle many user events. Site data is in [/data](https://github.com/abelsj60/jamesabels.net/tree/master/app/data), media assets in [/docs](https://github.com/abelsj60/jamesabels.net/tree/master/docs), and a dev server in [/server](https://github.com/abelsj60/jamesabels.net/tree/master/server).
 
 Here are a few interesting points:
 
@@ -44,7 +44,7 @@ As a result, the animation only runs on initial load or if the user hasn't visit
 
 ##### d) App state v. Component state
 
-This site was built around the idea of 'theatrical Web design.'
+This site was built around the idea of "theatrical Web design."
 
 This means that major creative elements rely on timed animation sequences to add drama to their entry, exit, and use. 
 
