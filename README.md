@@ -50,6 +50,11 @@ This means that major creative elements rely on timed animation sequences to add
 
 As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L295) is larger than it might otherwise be so functionally unrelated sibling Components can track and participate in the animation sequences. A move to Redux or React Hooks might tighten this code.
 
+#### Special thanks
+
+This site wouldn't be possible without:
+
+...
 
 ---
 
