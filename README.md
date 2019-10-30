@@ -34,7 +34,7 @@ The transparent home-page image considers additional factors.
 
 ##### c) Home-page hearbeat
 
-My name and bio pulse on the site's initial load. 
+The name and bio on the home page pulse on the site's initial load. 
 
 While a nice, dramatic effect once, this animation grows tiresome over multiple loads. 
 
