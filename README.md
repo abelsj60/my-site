@@ -20,6 +20,7 @@ The entry point is [index.js](https://github.com/abelsj60/jamesabels.net/blob/ma
 
 Here are a few more interesting points:
 
+```
 ##### a) Data storage
 
 Data files are automatically grouped during build via code in each subdirectory's index.js. Each file mixes Markdown with front matter, which Webpack loads via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). This allows for clean, centrally located data.
@@ -49,6 +50,7 @@ This site was built around the idea of "theatrical Web design."
 This means that major creative elements rely on timed animation sequences to add drama to their entry, exit, and use. 
 
 As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L295) is larger than it might otherwise be so functionally unrelated sibling Components can track and participate in the animation sequences. A move to Redux or React Hooks might tighten this code.
+```
 
 ## Special thanks
 
