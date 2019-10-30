@@ -16,9 +16,9 @@ This site does not use any blog templates, frameworks, or themes.
 
 It was made with ♥️ in N.Y.C. using React, React Router, and Styled Components. 
 
-The code's entry point is [index.js](https://github.com/abelsj60/jamesabels.net/blob/master/app/index.js). Control logic lives in split between [React components](https://github.com/abelsj60/jamesabels.net/tree/master/app) and traditional [classes](https://github.com/abelsj60/jamesabels.net/tree/master/app/classes), which determine location and handle many user events. Site data is in [/data](https://github.com/abelsj60/jamesabels.net/tree/master/app/data), media assets in [/docs](https://github.com/abelsj60/jamesabels.net/tree/master/docs), and a dev server in [/server](https://github.com/abelsj60/jamesabels.net/tree/master/server).
+The code's entry point is [index.js](https://github.com/abelsj60/jamesabels.net/blob/master/app/index.js). Control logic is split between [React components](https://github.com/abelsj60/jamesabels.net/tree/master/app) and traditional [classes](https://github.com/abelsj60/jamesabels.net/tree/master/app/classes), which determine location and handle many user events. Site data is in [/data](https://github.com/abelsj60/jamesabels.net/tree/master/app/data), media assets in [/docs](https://github.com/abelsj60/jamesabels.net/tree/master/docs), and a dev server in [/server](https://github.com/abelsj60/jamesabels.net/tree/master/server).
 
-hello@jamesabels.net
+hello@jamesabels.net 
 
 ---
 
