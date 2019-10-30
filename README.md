@@ -22,13 +22,15 @@ Here are a few interesting points:
 
 ##### a) Data storage
 
-Data files are automatically grouped during build via each subdirectory's index.js. Each file mixes markdown with front matter, which Webpack loads via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). This allows for clean, centrally located data.
+Data files are automatically grouped during build via code in each subdirectory's index.js. Each file mixes Markdown with front matter, which Webpack loads via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). This allows for clean, centrally located data.
 
 ##### b) Compression stepping
 
 A preloader for big images can be found in [/helpers](https://github.com/abelsj60/jamesabels.net/blob/master/app/helpers/preloadBigImages.js). 
 
-It uses a custom algorithm to summon full-screen illustrations when the site loads. Images < 2880 px are compressed at a quality level of 90, the rest at quality level 50. The resulting file sizes increased at a roughly constant rate between image widths of 1360 px and 2880 px, so the algorithm selects an image >= 2880 px between these two points. 
+It uses a custom algorithm to summon full-screen illustrations when the site loads. Images < 2880 px in width are compressed at a quality level of 90, the rest are at a quality level of 50. Nevertheless, the more highly compressed images are of roughly the same quality as their less compressed siblings and the file sizes increase at a roughly constant rate for all of them. 
+
+As a result, the algorithm skips from 1360 px to >= 2880 px in width when selecting full-screen images. 
 
 The transparent home-page image considers additional factors.
 
@@ -38,7 +40,7 @@ The name and bio on the home page pulse on the site's initial load.
 
 While a nice, dramatic effect once, this animation grows tiresome over multiple loads. 
 
-As a result, the animation only runs on initial load or if the user hasn't visited for more than two weeks. This is achieved by storing a time stamp in the user's browser, i.e., in localStorage for my site's domain. The starting point as to how is [here](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L242).
+As a result, the animation only runs on initial load or if the user hasn't visited for more than two weeks. This is achieved by storing a time stamp in the user's browser, i.e., in localStorage for the site's domain. The starting point as to how is [here](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L242).
 
 ##### d) App state v. Component state
 
