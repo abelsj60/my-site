@@ -22,7 +22,7 @@ Here are a few interesting points:
 
 ##### a) Data storage
 
-Data files are automatically grouped during build via each subdirectory's index.js. Each file mixes markdown with front matter, which Webpack loads during the build process via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). This allows for clean, centrally located data.
+Data files are automatically grouped during build via each subdirectory's index.js. Each file mixes markdown with front matter, which Webpack loads during build via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). This allows for clean, centrally located data.
 
 ##### b) Compression stepping
 
