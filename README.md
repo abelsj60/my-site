@@ -10,7 +10,7 @@ It includes a few of my software projects, some of my writing, and a whole lot o
 
 Here's the full story behind it: [The Magic Leap that lead to a creative’s code](www.google.com).
 
-#### Technical details
+## Technical details
 
 This site does not use any blog templates, frameworks, or themes.
 
