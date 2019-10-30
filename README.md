@@ -22,4 +22,4 @@ hello@jamesabels.net
 
 ---
 
-©2019, James Abels LLC. All rights reserved.
+© 2019, James Abels LLC. All rights reserved.
