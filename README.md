@@ -28,7 +28,9 @@ Data files are automatically grouped during build via code in each subdirectory'
 
 A preloader for big images can be found in [/helpers](https://github.com/abelsj60/jamesabels.net/blob/master/app/helpers/preloadBigImages.js). 
 
-It uses a custom algorithm to summon full-screen illustrations when the site loads. Images < 2880 px in width are compressed at quality level 90, the rest at quality level 50. Nevertheless, the more highly compressed images are of roughly the same clarity as their less compressed siblings and file sizes increase at a roughly constant rate for all of them. 
+It uses a custom algorithm to summon full-screen illustrations when the site loads. 
+
+Images < 2880 px in width are compressed at quality level 90, the rest at quality level 50. Nevertheless, the more highly compressed images are of roughly the same clarity as their less compressed siblings and file sizes increase at a roughly constant rate for all of them. 
 
 As a result, the algorithm skips from 1360 px to >= 2880 px in width when selecting full-screen images. 
 
