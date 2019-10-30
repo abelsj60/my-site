@@ -34,7 +34,7 @@ Images < 2880 px in width are compressed at quality level 90, the rest at 50. Th
 
 The transparent home-page image considers additional factors.
 
-##### c) Home-page hearbeat
+##### c) Home-page heartbeat
 
 The name and bio on the home page pulse on the site's initial load. 
 
