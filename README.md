@@ -44,7 +44,7 @@ As a result, the animation only runs on initial load or if the user hasn't visit
 
 This site was built around the idea of 'theatrical Web design.'
 
-This means that major creative elements rely on timed animation sequences to add drama to their entry, exit, or use. 
+This means that major creative elements rely on timed animation sequences to add drama to their entry, exit, and use. 
 
 As a result, the [App component](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx) state is larger than it might otherwise be so functionally unrelated sibling Components can track and participate in the animation sequence. A move to Redux or React Hooks may tighten this code.
 
