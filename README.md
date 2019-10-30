@@ -30,7 +30,7 @@ A preloader for big images can be found in [/helpers](https://github.com/abelsj6
 
 It uses a custom algorithm to summon full-screen illustrations when the site loads. 
 
-Images < 2880 px in width are compressed at quality level 90, the rest at 50. Still, the more highly compressed images are of roughly the same clarity as their less compressed siblings and file sizes increase at a roughly constant across the whole group. Thus, the algorithm skips from 1360 px to >= 2880 px in width when selecting full-screen images. 
+Images < 2880 px in width are compressed at quality level 90, the rest at 50. Still, the more highly compressed images are of roughly the same clarity as their less compressed siblings and file sizes increase at a roughly constant rate across the whole group. As a result, the algorithm skips from 1360 px to >= 2880 px in width when selecting full-screen images. 
 
 The transparent home-page image considers additional factors.
 
