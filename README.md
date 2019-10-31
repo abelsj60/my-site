@@ -20,9 +20,13 @@ The entry point is [index.js](https://github.com/abelsj60/jamesabels.net/blob/ma
 
 Here are a few more interesting points:
 
-##### ∙ Data storage
+##### ∙ App state v. Component state
 
-Data files are automatically grouped during build via code in each subdirectory's index.js. Each file mixes Markdown with front matter, which Webpack loads via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). This allows for clean, centrally located data.
+This site was built around the idea of "theatrical Web design."
+
+Timed animation sequences are used to add drama to the entry, exit, and use of major creative elements.  
+
+As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L295) is larger than expected so functionally unrelated child Components (i.e., siblings) can track and participate in animation sequences. A future move to React Hooks or Redux might condense this code.
 
 ##### ∙ Compression stepping
 
@@ -34,6 +38,10 @@ Images < 2880 px in width are compressed at quality level 90, the rest at 50. Th
 
 The transparent home-page image considers additional factors.
 
+##### ∙ Data storage
+
+Data files are automatically grouped during build via code in each subdirectory's index.js. Each file mixes Markdown with front matter, which Webpack loads via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). This allows for clean, centrally located data.
+
 ##### ∙ Home-page heartbeat
 
 The name and bio on the home page pulse on the site's initial load. 
@@ -41,14 +49,6 @@ The name and bio on the home page pulse on the site's initial load.
 While a nice, dramatic effect once, this animation grows tiresome over multiple loads. 
 
 As a result, the animation only runs on initial load or if the user hasn't visited for more than two weeks. This is achieved by storing a time stamp in the user's browser, i.e., in localStorage for the site's domain. The starting point as to how is [here](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L242).
-
-##### ∙ App state v. Component state
-
-This site was built around the idea of "theatrical Web design."
-
-Timed animation sequences are used to add drama to the entry, exit, and use of major creative elements.  
-
-As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L295) is larger than expected so functionally unrelated child Components (i.e., siblings) can track and participate in animation sequences. A future move to React Hooks or Redux might condense this code.
 
 ---
 
