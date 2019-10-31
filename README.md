@@ -50,12 +50,6 @@ Timed animation sequences are used to add drama to the entry, exit, and use of m
 
 As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L295) is larger than expected so functionally unrelated child Components (i.e., siblings) can track and participate in animation sequences. A future move to React Hooks or Redux might condense this code.
 
-## Special thanks
-
-This site wouldn't be possible without:
-
-...
-
 ---
 
 Contact: hello@jamesabels.net ∙ © 2019, James Abels LLC. All rights reserved.
