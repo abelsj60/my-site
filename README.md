@@ -52,4 +52,4 @@ As a result, the animation only runs on initial load or if the user hasn't visit
 
 ---
 
-Contact: hello@jamesabels.net ∙ © 2019, James Abels LLC. All rights reserved.
+© 2019, James Abels LLC. All rights reserved. ∙ hello@jamesabels.net
