@@ -20,11 +20,11 @@ The entry point is [index.js](https://github.com/abelsj60/jamesabels.net/blob/ma
 
 Here are a few more interesting points:
 
-##### a) Data storage
+##### ∙ Data storage
 
 Data files are automatically grouped during build via code in each subdirectory's index.js. Each file mixes Markdown with front matter, which Webpack loads via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). This allows for clean, centrally located data.
 
-##### b) Compression stepping
+##### ∙ Compression stepping
 
 A preloader for big images can be found in [/helpers](https://github.com/abelsj60/jamesabels.net/blob/master/app/helpers/preloadBigImages.js). 
 
@@ -34,7 +34,7 @@ Images < 2880 px in width are compressed at quality level 90, the rest at 50. Th
 
 The transparent home-page image considers additional factors.
 
-##### c) Home-page heartbeat
+##### ∙ Home-page heartbeat
 
 The name and bio on the home page pulse on the site's initial load. 
 
@@ -42,7 +42,7 @@ While a nice, dramatic effect once, this animation grows tiresome over multiple 
 
 As a result, the animation only runs on initial load or if the user hasn't visited for more than two weeks. This is achieved by storing a time stamp in the user's browser, i.e., in localStorage for the site's domain. The starting point as to how is [here](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L242).
 
-##### d) App state v. Component state
+##### ∙ App state v. Component state
 
 This site was built around the idea of "theatrical Web design."
 
