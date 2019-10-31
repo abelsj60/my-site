@@ -40,7 +40,7 @@ The transparent home-page image considers additional factors.
 
 ##### ∙ Data storage
 
-Data is stored in files that mix Markdown with front matter. Each sub-directory's index.js automatically groups these files into an array during the build process. Webpack converts the front matter to JSON via the [yaml-frontmatter-loader](https://www.npmjs.com/package/yaml-frontmatter-loader). React handles the Markdown.
+Data is stored in files that mix Markdown with front matter. Each sub-directory's index.js automatically groups these files into an array during the build process. Webpack [converts the front matter](https://www.npmjs.com/package/yaml-frontmatter-loader) to JSON. React handles the Markdown.
 
 ##### ∙ Home-page heartbeat
 
