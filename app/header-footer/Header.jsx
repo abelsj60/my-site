@@ -45,8 +45,8 @@ const HeaderBackground = styled.div`
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity .35s`};
   z-index: -1;
 
-  // The mediaQ ensures the background goes away if the full-screen menu
-  // is turned on when the user increases the browser window's width
+  // This mediaQ ensures the background goes away if the full-screen menu
+  // is on when the user increases the browser window's width
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     opacity: ${p => p.illustrationLevel > 0 && p.theme.blurForTempContent && '0'};
   }

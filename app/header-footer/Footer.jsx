@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
+  filter: ${p => p.theme.blurForTempContent && p.theme.blur};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
@@ -16,6 +17,10 @@ const Container = styled.footer`
   position: relative;
   width: 100%;
   max-width: 70rem;
+
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    filter: unset;
+  }
 `;
 const Line = styled.div`
   display: ${p => p.home ? 'none' : ''};
