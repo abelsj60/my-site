@@ -18,8 +18,8 @@ export default function ReloadRoute(props) {
       number = number * -1;
     }
 
-    // Note: Duplicated by State.rebuildApp, but 
-    // it breaks here. Refactor at a later date.
+    // Note: Duplicated by State.rebuildApp, but breaks here w/o this. 
+    // Refactor at some point.
     boundHandleClickForApp('updateIllustrationState', number);
   }
 

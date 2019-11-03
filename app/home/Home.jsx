@@ -36,10 +36,10 @@ export default class Home extends Component {
       activeCharm: initialPattern[0],
       eventType: 'click', // Type of event triggered Charm
       goal: 5,
-      // [blurredBoy, blurredForrest, boy, forrest] first
+      // [blurredBoy, blurredForrest, boy, forrest]
       //  - [2, 2, 1, 1] for initial load (blurred versions 
       // to give new viewers something interesting to see)
-      //  - [1, 1, 1, 1] after traveling (keep it quick)
+      //  - [1, 1, 1, 1] after traveling (transitions are off, keep it quick!)
       loadLevel: [0, 0, 0, 0], 
       movement: '', // 'enter' = Goto Charms, 'exit' = Goto NameTag
       pattern: initialPattern, // arr
