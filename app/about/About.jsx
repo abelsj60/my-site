@@ -42,7 +42,7 @@ const Text = styled.section`
 
   p {
     margin-bottom: ${p => p.theme.bottomMargin.regular};
-    // Gets cut off in chrome (add saveSerifs to ContentHolder)
+    // Gets cut off in chrome
     margin-left: 2px; 
 
     &:last-child {

@@ -1,13 +1,13 @@
 ---
 type: reverie
 headline: Adventures in the resize event
-date: November 3, 2019
+date: November 4, 2019
 slug: Haphazard firings are just one browser annoyance
 ---
 
 Browsers break a lot. 
 
-I discovered this during early site development. I was working to make the site look like an app. I wanted the header, footer, and body to stay on screen at all times — a compact little package.
+I discovered this during early site development. I was working to make the Web site look like an app. I wanted the header, footer, and body to stay on screen at all times — a compact little package.
 
 It’s tremendously difficult. 
 
@@ -17,7 +17,7 @@ One problem is the menu bar in iOS Safari. It’s really hard to work with — i
 
 There were other problems, too. 
 
-I can’t remember half of them. Anyway, I ultimately decided to use JavaScript to explicitly set the height of the site's main body element. I grabbed hold of the browser’s resize event to help me and never looked back. 
+I can’t remember half of them. Anyway, I ultimately decided to use JavaScript to explicitly set the height of the site's main body element. I grabbed hold of the browser’s resize event to help me and never let go. 
 
 If only it had been that easy. The resize event is very pokey. 
 
