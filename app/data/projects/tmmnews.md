@@ -4,17 +4,17 @@ number:
 projectName: 
   'TMMnews'
 pitch: 
-  'Video news stories about media-tech'
+  'Internet video news about media-tech'
 type:
   'Founder'
 technologies: 
   'Cloud: WordPress ∙ Language: JavaScript, HTML, CSS'
 responsibility:
-  'As the founder of Three Minute Media, I oversaw corporate affairs and platform development, including budgets, our product lead, and investor outreach.'
+  'As the founder of Three Minute Media, I oversaw corporate affairs and platform development, including our lead developer, budget, and investor outreach.'
 story:
-  'TMMnews was a video news site. The goal was to sell video ads inside stories that were widely distributed by using online ad networks to buy lower-cost ad slots.'
+  'TMMnews was built to earn money from high-priced video ads by placing them in video news stores that would then run within lower cost IAB display ad boxes.'
 captions: [
-  "TMMnews was a dedicated home for video stories about media-tech. The site featured original videos, reporter's notes, and aggregated headlines from Daylife, a New York-based start-up.",
+  "The TMMnews Web site marketed the company's original video news stories. It featured news videos, reporter's notes, and aggregated headlines from Daylife, a New York-based start-up.",
   'Original news stories were anchored by James Erik Abels, a former media reporter from Forbes and Mergermarket. Over 100 stories were produced, ranging from exclusives to news analyses.',
   "In 2011, TMM was asked to contribute to New York City's FIRST Robotics Competition. A team of ten media professionals volunteered to run a three-hour live Internet broadcast of the event."
 ]

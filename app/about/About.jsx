@@ -33,11 +33,11 @@ const Text = styled.section`
   }
 
   li p {
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
   ul li {
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
   p {

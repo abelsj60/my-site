@@ -8,16 +8,16 @@ pitch:
 type:
   'Coding'
 technologies: 
-  'Cloud: Github Pages ∙ Language: Javascript, HTML, CSS ∙ Framework: React'
+  'Cloud: Github Pages | Language: Javascript, HTML, CSS | Framework: React'
 responsibility: 
   'Creator and developer'
 story: 
-  'My site is a Single Page Application masquerading as a Web site. It explores the intersection between storytelling and hand-crafted code. Built with ❤️ in N.Y.C.'
+  'This portfolio site explores what happens when a creative codes.'
 captions: [
-  "Floating text gives an overview about me, and a big, bold illustration teases the site's main story.",
-  'The story of my life, featuring magical creatures, custom illustrations, and wide-eyed enthusiasm.',
-  "A project page showcasing the software I oversaw as founder of Three Minute Media. A menu button and thumbnails are stored on the shelf above the content so they're easily accessible.",
-  "An article page featuring one of the clips that I wrote as a staff reporter at Forbes. The component that creates this page is shared with Reverie, the site's blog, to make site maintenance easier."
+  "Full-screen illustrations and a secret magic spell bring my imagination to life.",
+  "I came to N.Y.C. after law school to write professionally. Here are some of my stories.",
+  "This children's book for adults let me experiment with traditional storytelling methods online.",
+  "This digital business card tells you who I am and how you can contact me."
 ]
 mainImages: [
   '/jea/ja-home-page-xnc',

@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: The imperfections of browser testing, one
+headline: The imperfections of browser testing 1
 date: April 17, 2019
 slug: Virtual machines may lie, really
 ---

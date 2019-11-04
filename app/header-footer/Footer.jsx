@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`
-  filter: ${p => p.theme.blurForTempContent && p.theme.blur};
+  filter: ${p => p.tempContent === 3 && p.theme.blur};
   flex-shrink: 0;
   display: flex;
   justify-content: ${p => (!p.story ? 'flex-end' : 'space-between')};
@@ -125,6 +125,7 @@ export default function FooterContainer(props) {
   return (
     <Container
       story={isStory}
+      tempContent={tempContent}
     >
       <Line
         home={isHome}

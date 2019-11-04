@@ -77,6 +77,7 @@ export default function ArticleOrReverie(props) {
     position,
     publication
   } = allContentData[caller !== 'reverie' ? headlineIndex : reverieIndex].attributes;
+  const { body } = allContentData[caller !== 'reverie' ? headlineIndex : reverieIndex];
   const isReverie = caller === 'reverie';
   const publicationOrReverieTag = !isReverie ? publication : 'Reverie';
   const bylineOrDate = caller !== 'reverie' ? `by James Erik Abels | ${position}` : date;
@@ -104,9 +105,7 @@ export default function ArticleOrReverie(props) {
             {bylineOrDate}
           </BylineOrDate>
           <Text>
-            {ReactHtmlParser(marked(
-              allContentData[headlineIndex].body, { smartypants: true }
-            ))}
+            {ReactHtmlParser(marked(body, { smartypants: true }))}
           </Text>
         </Overflow>
       </ContentHolder>

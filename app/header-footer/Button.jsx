@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 const Structure = styled.button`
   display: ${p => !p.isStory ? 'none' : ''};
+  // Double check here, the footer container is blurred by headerMenu in Footer
+  // Here, we just need to handle the business card and legal terms
+  filter: ${p => p.theme.blurForTempContent && p.tempContent < 3 && p.theme.blur};
   margin-left: 25px;
   width: 69px;
   padding: 7px 0px;

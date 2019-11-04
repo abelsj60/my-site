@@ -149,7 +149,7 @@ const StoryText = styled.section`
     color: ${p => p.theme.colors.white};
     margin-bottom: ${p => p.theme.bottomMargin.regular};
     // Gets cut off in chrome (add saveSerifs to ContentHolder).
-    margin-left: 1px; 
+    margin-left: 2px; 
 
     &:last-child {
       margin-bottom: 0px;

@@ -4,21 +4,21 @@ number:
 projectName: 
   'Arrow'
 pitch: 
-  'Simply personalize interactive video'
+  'Personalizing interactive video at scale'
 type:
   'Founder'
 technologies: 
   'Cloud: AWS ∙ Language: PHP ∙ Transcoding: FFmpeg'
 responsibility: 
-  "As the founder of Three Minute Media, I oversaw corporate affairs and platform development, including budgets, our product lead, and investor outreach."
+  'As the founder of Three Minute Media, I oversaw corporate affairs and platform development, including our lead developer, budget, and investor outreach.'
 story: 
-  'Arrow was a self-serve platform that made it easy for editorial and sales teams to personalize and syndicate interactive video based on first- and third-party data.'
+  'Internet video has exploded. Arrow, our self-serve platform, made it easy to personalize its interactive features at scale with first- or third-party data.'
 captions: [
-  "The Editor was used to build video programming by adding videos to a Stack and configuring it with dynamically generated settings. Users could buy and sell their videos through syndication.",
-  "The Developer Module was used to extend Arrow with custom media formats, settings, and live controls. Arrow delivered any code-based media, including video players, widgets, and more.",
-  "The Encapsulated Presentation Module allowed Arrow's extensibility. It was a mixture of PubML, our proprietary domain-specific programming language, and a user's proprietary source code.",
-  "Stack Settings configured video and other programming. They were dynamically generated from instructions in an Encapsulated Presentation Module. Users could create or license their EPMs.",
-  "Live controls modified media after deployment. Like Settings, they were dynamically generated from an Encapsulated Presentation Module, making Arrow a true end-to-end publishing system."
+  'This is the Editor. It was used to prepare video for publication by adding them to a Stack, then selecting personalization criteria via dynamically generated settings. It syndicated video, too.',
+  'This is the Developer Module. It allowed Arrow to be extended for use with custom media formats, settings, and live control. Arrow could publish any code-based media package.',
+  'This is the Encapsulated Presentation Module ("EPM"). Developers used it to extend Arrow by mixing their source code with PubML, our proprietary domain-specific programming language.',
+  'These are Stack Settings. They were used by editors to add personalization criteria to their videos. These settings were dynamically generated from code found within each active EPM.',
+  'These are Live Controls. They were used by editors to modify media in real time, after publication. Like Settings, they were dynamically generated from code found within each active EPM.'
 ]
 mainImages: [
   '/arrow/arrow-editor-xnc',

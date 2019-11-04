@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: The imperfections of browser testing, two
+headline: The imperfections of browser testing 2
 date: April 18, 2019
 slug: React lies too sometimes
 ---
