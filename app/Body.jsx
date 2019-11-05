@@ -1,6 +1,7 @@
 import About from './about/About.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import ContentLoader from './shared/ContentLoader.jsx';
+import Debug from './Debug.jsx';
 import Home from './home/Home.jsx';
 import Location from './classes/Location';
 import NotFound from './not-found/NotFound.jsx';
@@ -96,6 +97,17 @@ export default class Body extends Component {
           exact
           path="/about"
           component={About}
+        />
+        <Route
+          exact
+          path="/debug"
+          render={
+            () => (
+              <Debug
+                {...this.props}
+              />
+            )
+          }
         />
         <Route
           render={
