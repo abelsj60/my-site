@@ -29,13 +29,16 @@ export default function preloadBigImages() {
     // 7680 // Huge files, currently unused
   ].find((imgWidth, idx, arr) => {
     if (idx < arr.length - 1) {
-      // Equation: (origHeight / origWidth) * imgWidth = imgHeight
+      // Equation: (originalHeight / originalWidth) * imgWidth = imgHeight
       const imgHeight = Math.ceil((2985 / 5116) * imgWidth);
       return imgWidth >= deviceWidth && imgHeight >= deviceHeight;
     }
 
-    return imgWidth; // default size when nothing fits (5120)
+    return true; // default size when nothing fits (5120)
   });
+
+  images.width = imageWidth;
+  images.height = Math.ceil((2985 / 5116) * imageWidth);
 
   stories.forEach(chapter => {
     const { number } = chapter.attributes;

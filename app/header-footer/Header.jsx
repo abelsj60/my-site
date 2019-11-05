@@ -200,13 +200,14 @@ export default class Header extends Component {
       height,
       illustrationDirection,
       illustrationLevel,
+      images,
       spacerHeight,
       tempContent
     } = appState;
     const isHome = currentCaller === 'home';
     const isReverie = currentCaller === 'reverie';
     const menuIcon = tempContent === 3 ? headerNavClose : headerNavOpen;
-    const coverVals = cover(window.innerWidth, height, 2131, 1244);
+    const coverVals = cover(window.innerWidth, height, images.width, images.height);
     const referrer = new Referrer(this.props);
     const onClickMenuHandler = event => {
       eventManagement(event);
@@ -247,7 +248,7 @@ export default class Header extends Component {
           {bio.attributes.motto}
         </Motto>
         <Nav
-          coverValY={coverVals.y < 0}
+          coverValY={coverVals.y < 0} // Add frost to text
           isHome={isHome}
           spacerHeight={spacerHeight < 20}
           tempContent={tempContent}

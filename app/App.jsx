@@ -267,7 +267,7 @@ class App extends Component {
     const pageHeight = isMobile && !isMobileSafari
       ? document.documentElement.clientHeight
       : window.innerHeight;
-    const coverVals = cover(window.innerWidth, pageHeight, 2131, 1244);
+    const coverVals = cover(window.innerWidth, pageHeight, images.width, images.height);
 
     // One way to block orientation change
     // https://css-tricks.com/snippets/css/orientation-lock/
@@ -510,24 +510,17 @@ class App extends Component {
       this.updateHeight();
     }, 50);
   }
-
+  
   updateHeight() {
-    // Reject 1: On desktops, only resize if height's changing
-
     if (!isMobile && this.state.height === window.innerHeight) {
+      // On desktops, only resize if height's changing
       return false;
-    }
-
-    // Reject 2: Don't resize while zooming (there's a lag between
-    // this.state.isZooming and this.state.pinchZoomed).
-
-    if (this.state.isZooming) {
+    } else if (this.state.isZooming) {
+      // Don't resize while zooming (there's a lag between
+      // this.state.isZooming and this.state.pinchZoomed).
       return false;
-    }
-
-    // Reject 3: Do not resize while pinchZoomed.
-
-    if (this.state.pinchZoomed) {
+    } else if (this.state.pinchZoomed) {
+      // Do not resize while pinchZoomed.
       return false;
     }
 
@@ -643,24 +636,21 @@ class App extends Component {
   }
 
   calculateSpacerHeight() {
-    const appHeight = this.state.height;
-    const objectFitCoverVals = cover(window.innerWidth, appHeight, 2131, 1244);
-    const yImageTop = objectFitCoverVals.y;
+    const { images } = this.state;
+    const windowHeight = window.innerHeight;
+    const coverVals = cover(window.innerWidth, windowHeight, images.width, images.height);
+    const yImageTop = coverVals.y;
     const makePositive = val => val * -1;
-
-    // 1. 14.9 & 15 are arbitrary values (trial-n-error)
+    // 1. 14.4 & 14.7 are arbitrary values (trial-n-error)
     // 2. 52px is the height of the header in pixels
+    const mathForSpacer = (windowHeight, percentage) => windowHeight * (percentage / 100) - 52;
+    let spacerHeight = Math.ceil(mathForSpacer(windowHeight, 14.5)); // Original: 14.2
 
-    const mathForSpacer = (heightVal, percentage) => heightVal * (percentage / 100) - 52;
-    let spacerHeight = Math.ceil(mathForSpacer(appHeight, 14.9)); // 14.2
-
-    // yImageTop < 0 when the image 'zooms' (the window's
-    // width has grown beyond the image's max width, so
-    // we cut off the top and bottom and zoom in.)
-
+    // yImageTop < 0 when thewindow's width is larger than the image's 
+    // width. If so, we cut off the image's top and bottom to zoom in.
     if (Math.floor(yImageTop) < 0) {
-      const newHeight = objectFitCoverVals.height - (makePositive(yImageTop));
-      const newSpacerHeight = mathForSpacer(newHeight, 15); // 14.6
+      const newHeight = coverVals.height - makePositive(yImageTop);
+      const newSpacerHeight = mathForSpacer(newHeight, 14.7); // Original: 14.6
       const spacerHeightDifference = newSpacerHeight - spacerHeight;
       const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
 
@@ -673,7 +663,8 @@ class App extends Component {
   }
 
   calculateNameTagWidth() {
-    const coverVals = cover(window.innerWidth, this.state.height, 2131, 1244);
+    const { images } = this.state;
+    const coverVals = cover(window.innerWidth, window.innerHeight, images.width, images.height);
     return Math.floor(.27 * coverVals.width);
   }
 

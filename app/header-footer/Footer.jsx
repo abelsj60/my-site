@@ -118,7 +118,6 @@ export default function FooterContainer(props) {
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
   const isNotFound = currentCaller === 'not-found';
-  const coverVals = cover(window.innerWidth, height, 2131, 1244);
   const reverieLink = isReverie ? `/${lastCaller !== 'home' ? lastCaller : ''}` // No text b/c 'home' is '/'
       : '/reverie';
 
@@ -174,7 +173,6 @@ export default function FooterContainer(props) {
         >
           <Graf
             active={isReverie}
-            coverValsY={coverVals.y}
             home={isHome}
             illustrationLevel={illustrationLevel}
             illustrationDirection={illustrationDirection}
@@ -190,7 +188,6 @@ export default function FooterContainer(props) {
         </RestyledLink>
         <Graf
           active={tempContent === 1}
-          coverValsY={coverVals.y}
           home={isHome}
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
@@ -204,7 +201,6 @@ export default function FooterContainer(props) {
         </Graf>
         <Graf
           active={tempContent === 2}
-          coverValsY={coverVals.y}
           home={isHome}
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
