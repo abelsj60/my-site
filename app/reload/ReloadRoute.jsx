@@ -1,4 +1,5 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 import { Redirect } from 'react-router-dom';
 import Reload from '../classes/Reload.js';
 
@@ -14,12 +15,11 @@ export default function ReloadRoute(props) {
   if (currentCaller === 'chapter') {
     let number = indexForChapterData + 1;
 
-    if (!props.appState.images[`chapter-${number}-main`].complete) {
+    if (isMobile || !props.appState.images[`chapter-${number}-main`].complete) {
       number = number * -1;
     }
 
-    // Note: Duplicated by State.rebuildApp, but breaks here w/o this. 
-    // Refactor at some point.
+    // Note: Duplicated by State.rebuildApp, but breaks here w/o this.
     boundHandleClickForApp('updateIllustrationState', number);
   }
 

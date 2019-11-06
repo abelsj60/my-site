@@ -336,10 +336,10 @@ export default class ClickHandling {
         case 'updateState':
           if (caller === 'chapter') {
             const blurredIllustrationState = this.props.appState.images[
-                `chapter-${valueOne + 1}-blurred`
-              ].complete
-                ? 2
-                : 0;
+              `chapter-${valueOne + 1}-blurred`
+            ].complete
+              ? 2
+              : 0;
             stateToUpdate.chapterIndex = valueOne;
             stateToUpdate.imageLoaded = blurredIllustrationState;
           }

@@ -8,7 +8,6 @@ import marked from 'marked';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
-import { isMobile } from 'react-device-detect';
 import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
@@ -120,13 +119,8 @@ const FallbackBlur = styled.img`
   //    a) < 0 --> not loaded
   //    b) > 0 --> loaded
   //    c) 0 --> n/a
-  // Show the fallback on load when illustrationState < 0.
-  // On mobile, in development, the blurred image may be in, but it isn't loaded immediately. 
-  // We compensate by showing the fallback on mobile when imageLoaded < 1, independent of
-  // the main illus being .complete. This doesn't seem to be an issue when deployed!
-  // We've compensated, but it's not clear that the illustrationState is updating properly
-  // at the moment. It it were, we wouldn't (?) need to use isMobile here. Maybe.
-  opacity: ${p => (p.imageLoaded < 1 && (p.isMobile || p.illustrationState < 0)) ? '1' : '0'};
+  // Always show when blurredImage isn't loaded or when mainImage isn't loaded.
+  opacity: ${p => (p.imageLoaded < 1 || p.illustrationState < 0) ? '1' : '0'};
   transition: opacity .5s;
 `;
 const BlurredImage = styled.img`
@@ -289,7 +283,6 @@ export default function Story(props) {
           illustrationLevel={illustrationLevel}
           illustrationState={illustrationState}
           imageLoaded={imageLoaded}
-          isMobile={isMobile}
           onTransitionEnd={onTransitionEndForFallbackBlur}
           src={fallbackBlur}
           tempContent={tempContent}

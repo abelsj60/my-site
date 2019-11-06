@@ -42,13 +42,27 @@ export default class ContentLoader extends Component {
     // we don't sort by publication. Instead, publication will show the first
     // matching index item when needed as a default.
 
+    let imageLoaded = -1;
+
+    if (location.caller === 'chapter' || location.caller === 'projects') {
+      if (location.caller === 'chapter') {
+        imageLoaded = this.props.appState.images[
+          `chapter-${state.getIndex('chapter') + 1}-blurred`
+        ].complete
+          ? 2
+          : 0;
+      } else {
+        imageLoaded = 0;
+      }
+    }
+
     this.state = {
       allContentData: allContentData,
       caller: location.caller,
       chapterIndex: state.getIndex('chapter'),
       headlineIndex: state.getIndex('article'),
-      imageLoaded: // -1 = n/a, 0 = not loaded, 1 = loaded, 2 = done
-        location.caller === 'chapter' || location.caller === 'projects' ? 0 : -1,
+      // -1 = n/a, 0 = not loaded, 1 = loaded, 2 = done
+      imageLoaded: imageLoaded,
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,
       projectIndex: state.getIndex('project'),
