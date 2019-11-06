@@ -2,6 +2,7 @@ import bio from '../data/about/about.md';
 import linkedInIcon from '../../docs/assets/images/convert-to-data-uri/linked-in-icon-80-@4x.png';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Main from '../primitives/Main.jsx';
+import me from '../../docs/assets/images/me/me-xnc-q90.jpg'
 import marked from 'marked';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
@@ -12,11 +13,16 @@ import styled from 'styled-components';
 
 const RestyledShelf = styled(Shelf)`
   justify-content: space-between;
+  margin-bottom: 10px;
 `;
 const Hed = styled.h1`
   margin-top: -8px;
   font-size: ${p => p.theme.fontSizes.sixteen};
   color: ${p => p.theme.colors.pink};
+`;
+const Me = styled.img`
+  width: 100%;
+  margin-bottom: 10px;
 `;
 const Text = styled.section`
   overflow: auto;
@@ -85,6 +91,10 @@ export default function About() {
           </IconContainer>
         </RestyledShelf>
         <Overflow>
+          <Me
+            alt=""
+            src={me}
+          />
           <Text>
             {ReactHtmlParser(marked(bio.body, { smartypants: true }))}
           </Text>
