@@ -121,11 +121,11 @@ const FallbackBlur = styled.img`
   //    b) > 0 --> loaded
   //    c) 0 --> n/a
   // Show the fallback on load when illustrationState < 0.
-  // Problem is: On mobile, the blurred image may be in, but it isn't loaded immediately. 
-  // We compensate by showing the fallback on mobile when imageLoaded < 1, independent
-  // of whether or not the main is in (it'll have the same problem as the blur).
-  // Note: This is a bit of a hack, we're not updating the illustrationState properly
-  // at the moment, if we were we wouldn't need the extra test on isMobile.
+  // On mobile, in development, the blurred image may be in, but it isn't loaded immediately. 
+  // We compensate by showing the fallback on mobile when imageLoaded < 1, independent of
+  // the main illus being .complete. This doesn't seem to be an issue when deployed!
+  // We've compensated, but it's not clear that the illustrationState is updating properly
+  // at the moment. It it were, we wouldn't (?) need to use isMobile here. Maybe.
   opacity: ${p => (p.imageLoaded < 1 && (p.isMobile || p.illustrationState < 0)) ? '1' : '0'};
   transition: opacity .5s;
 `;
