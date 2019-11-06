@@ -286,6 +286,7 @@ class App extends Component {
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
+    this.images = images; // Back-up object for this.calculateSpacerHeight() during load
 
     // Prevent resize when scrolling oversized page. Not using state b/c it causes
     // overflowing divs (w/content in them) to 'jump' when scrolling.
@@ -321,7 +322,7 @@ class App extends Component {
       nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
       password: '', // to be removed
       pinchZoomed: false, // Zoomed! (Or not.)
-      spacerHeight: 0, // Set by 'handleResize', so must live here. Used by Home/NameTag.
+      spacerHeight: this.calculateSpacerHeight(), // Set by 'handleResize', so must live here. Used by Home/NameTag.
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
       wrongPassword: '' // to be removed
     };
@@ -635,7 +636,9 @@ class App extends Component {
   }
 
   calculateSpacerHeight() {
-    const { images } = this.state;
+    // console.log(this);
+    // const { images } = this.state;
+    const { images } = this;
     const windowHeight = window.innerHeight;
     const coverVals = cover(window.innerWidth, windowHeight, images.width, images.height);
     const yImageTop = coverVals.y;
