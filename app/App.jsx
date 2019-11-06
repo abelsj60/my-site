@@ -82,9 +82,8 @@ const fontSizes = {
   twentyTwo: '1.13rem',
   twentyThree: '1.36rem',
   twentyFour: '2.75rem',
-  twentyFive: '1.14rem',
-  twentySix: '1.455rem',
-  twentySeven: '1.395rem'
+  twentyFive: '1rem',
+  twentySix: '1.455rem'
 };
 const mediaQueries = {
   tinyView: '390px',

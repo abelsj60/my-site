@@ -83,13 +83,10 @@ export default function preloadBigImages() {
     images[home.attributes.imageNames[idx]] = image;
   });
 
-  [
-    `${urlPrefix}/business-card/teen-fairy-img-q90-640-4x.jpg`,
-    `${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`
-  ].forEach((src, idx) => {
+  [`${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`].forEach((src, idx) => {
     const image = new Image();
     image.src = src;
-    images[idx === 0 ? 'businessCardImage' : 'notFoundImage'] = image;
+    images['notFoundImage'] = image;
   });
 
   return images;

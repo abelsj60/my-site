@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-// import teenFairyImage from '../../docs/assets/images/convert-to-data-uri/teen-fairy-img-q90-640-4x.jpg';
+import teenFairyImage from '../../docs/assets/images/convert-to-data-uri/teen-fairy-img-q90-640-4x.jpg';
 
 const BoyImage = styled.img`
   position: absolute;
@@ -47,19 +47,17 @@ const Email = styled.p`
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-bottom: 25px;
-    font-size: ${p => p.theme.fontSizes.twentySeven};
+    font-size: ${p => p.theme.fontSizes.six};
     font-weight: unset;
     right: 1.85rem;
   }
 `;
 
-export default function BusinessCard(props) {
-  const src = props.appState.images.businessCardImage.src;
-
+export default function BusinessCard() {
   return (
     <Fragment>
       <BoyImage
-        src={src}
+        src={teenFairyImage}
       />
       <InfoContainer>
         <Name>

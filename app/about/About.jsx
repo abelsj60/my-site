@@ -2,7 +2,7 @@ import bio from '../data/about/about.md';
 import linkedInIcon from '../../docs/assets/images/convert-to-data-uri/linked-in-icon-80-@4x.png';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Main from '../primitives/Main.jsx';
-import me from '../../docs/assets/images/me/me-xnc-q90.jpg'
+import me from '../../docs/assets/images/convert-to-data-uri/me-xnc-q90.jpg'
 import marked from 'marked';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
