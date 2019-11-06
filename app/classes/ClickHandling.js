@@ -51,11 +51,11 @@ export default class ClickHandling {
   _handleClickForApp() {
     return (updateValue, valueOne, valueTwo) => {
       const {
-        chapter,
         currentCaller,
         illustrationDelay,
         illustrationDirection,
         illustrationLevel,
+        illustrationState,
         heartbeat,
         showBusinessCard,
         showLegalTerms,
@@ -263,7 +263,7 @@ export default class ClickHandling {
               stateToUpdate.illustrationLevel = 0;
             }
 
-            if (chapter !== 0) {
+            if (illustrationState !== 0) {
               stateToUpdate.illustrationState = 0;
             }
           }

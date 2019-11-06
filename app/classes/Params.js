@@ -9,35 +9,26 @@ export default class Params {
     // (super's not called, so the {} is empty)
 
     this._type = type;
-    this._paramNames =
-      Array.isArray(paramNames)
-        ? paramNames
-        : [];
+    this._paramNames = Array.isArray(paramNames)
+      ? paramNames
+      : [];
     this._one = params[this._paramNames[0]];
     this._two = params[this._paramNames[1]];
     this._expectedNumber = this._paramNames.length;
-    this._validatedNumber =
-      this._paramNames.filter(
+    this._validatedNumber = this._paramNames.filter(
+      // Check this to assess their validity;
+      // invalid params come back false
+      p => this[p] !== false
+    ).length;
 
-        // Check this to assess their validity;
-        // invalid params come back false
-
-        p => this[p] !== false
-      ).length;
-
-    this.oneIsValid =
-      this[this._paramNames[0]] !== false;
-    this.twoIsValid =
-      this[this._paramNames[1]] !== false;
-    this.areUndefined =
-      this._paramNames.filter(
-
-        // Check params, not 'this' b/c this[param]
-        // is defined by matchPath(); we want to
-        // tet the real-true original URL.
-
-        p => params[p] === undefined
-      );
+    this.oneIsValid = this[this._paramNames[0]] !== false;
+    this.twoIsValid = this[this._paramNames[1]] !== false;
+    this.areUndefined = this._paramNames.filter(
+      // Check params, not 'this' b/c this[param]
+      // is defined by matchPath(); we want to
+      // tet the real-true original URL.
+      p => params[p] === undefined
+    );
     this.originalData = params;
   }
 

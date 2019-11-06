@@ -8,6 +8,7 @@ import marked from 'marked';
 import Main from '../primitives/Main.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
@@ -114,9 +115,18 @@ const FallbackBlur = styled.img`
   // at 0, set to 1 by onLoadForBlurredImage(). Set to 2 by 
   // onTransitionEndForFallbackBlur().
   // Let's not remove the blurred fallback until we KNOW the main illustration is 
-  // in. Sometimes, it comes in before the BlurredImage, so is awkwardly visible.
-  // Here's the state: a) not loaded = < 0, b) loaded = > 0, c) n/a
-  opacity: ${p => p.imageLoaded < 1 && p.illustrationState < 0 ? '1' : '0'};
+  // in. Sometimes, the main illustration comes in before the BlurredImage, so 
+  // is awkwardly visible. Here's the state: 
+  //    a) < 0 --> not loaded
+  //    b) > 0 --> loaded
+  //    c) 0 --> n/a
+  // Show the fallback on load when illustrationState < 0.
+  // Problem is: On mobile, the blurred image may be in, but it isn't loaded immediately. 
+  // We compensate by showing the fallback on mobile when imageLoaded < 1, independent
+  // of whether or not the main is in (it'll have the same problem as the blur).
+  // Note: This is a bit of a hack, we're not updating the illustrationState properly
+  // at the moment, if we were we wouldn't need the extra test on isMobile.
+  opacity: ${p => (p.imageLoaded < 1 && (p.isMobile || p.illustrationState < 0)) ? '1' : '0'};
   transition: opacity .5s;
 `;
 const BlurredImage = styled.img`
@@ -277,8 +287,9 @@ export default function Story(props) {
           alt="blurred fallback"
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
-          imageLoaded={imageLoaded}
           illustrationState={illustrationState}
+          imageLoaded={imageLoaded}
+          isMobile={isMobile}
           onTransitionEnd={onTransitionEndForFallbackBlur}
           src={fallbackBlur}
           tempContent={tempContent}

@@ -62,10 +62,9 @@ export default ({
   const { pathname } = window.location;
   const splitTheCaller = to.split('/');
   // Word length, array length, i.e., 'chapter'
-  const callerWillBe = splitTheCaller[1].length > 0 ? splitTheCaller[1] : 'home';
+  const callerWillBe = splitTheCaller[1].length > 0 ? splitTheCaller[1] : 'home'; // Checks length of string value, not array
   const isMenu = pathname.includes('menu') && pathname.split('/')[2] === 'menu'; // Ensures this is a /menu.
   const iSayNoMatch = window.location.pathname.includes(to) && !isMenu && to.length > 1;
-
   const onClickHandler = event => {
     event.stopPropagation();
 

@@ -82,21 +82,21 @@ export default class State {
   }
 
   _illustrationState(images) {
-    const titleIndex = this._convertParamsToIndices().one > -1
+    const chapterIndex = this._convertParamsToIndices().one > -1
       ? this._convertParamsToIndices().one
       : 0;
-    const state =
+    const isComplete =
       images[
-        `chapter-${titleIndex + 1}-main`
+        `chapter-${chapterIndex + 1}-main`
       ].complete;
 
-    return !state
-      ? (titleIndex + 1) * -1
-      : titleIndex + 1
+    return !isComplete
+      ? (chapterIndex + 1) * -1
+      : chapterIndex + 1
   }
 
-  checkIllustrationState(images, external) {
-    if (external) {
+  checkIllustrationState(images) {
+    if (!!images) {
       // Can only be called if /chapter...
       return this._illustrationState(images);
     } else {

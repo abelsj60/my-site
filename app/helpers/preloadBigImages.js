@@ -10,6 +10,8 @@ export default function preloadBigImages() {
   const images = {};
   const deviceWidth = window.screen.width;
   const deviceHeight = window.screen.height; // use availHeight instead?
+  // const deviceWidth = 5120;
+  // const deviceHeight = 2880; // use availHeight instead?
   const imageWidth = [
     640,
     768,

@@ -228,14 +228,14 @@ class App extends Component {
     let illustrationState;
 
     // Check status of illustration for appStateillustrationState
-    // Also updated in ReloadRoute (for section shifts)
-    // and in contentLoader.cDU for swapped content
+    // Also updated in ReloadRoute (for section shifts) and
+    // in contentLoader.cDU for swapped content
     if (location.caller === 'chapter') {
       const state = new State(
         { location: { pathname: pathname } }, 
         location
       );
-      illustrationState = state.checkIllustrationState(images, true);
+      illustrationState = state.checkIllustrationState(images);
     }
 
     // Show the heartbeat if the last date isn't located in storage

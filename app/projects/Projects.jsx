@@ -87,7 +87,6 @@ export default function Projects(props) {
     type
   } = allContentData[projectIndex].attributes;
   const caption = captions[thumbnailIndex];
-
   const filePrefix = mainImages[thumbnailIndex];
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]

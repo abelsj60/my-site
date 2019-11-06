@@ -1,4 +1,4 @@
-import { cover } from 'intrinsic-scale';
+import getIntrinsicScale, { cover } from 'intrinsic-scale';
 import Main from './primitives/Main.jsx';
 import React, { Component } from 'react';
 import ContentHolder from './primitives/ContentHolder.jsx';
@@ -18,6 +18,7 @@ const RestyledContentHolder = styled(ContentHolder)`
   // flex-direction: column;
   // justify-content: center;
   // align-items: center;
+  overflow: auto;
 `;
 const Hed = styled.h1`
   // color: ${p => p.theme.colors.white};
@@ -30,17 +31,35 @@ const Hed = styled.h1`
 
 export default class Debug extends Component {
   render() {
+    const { images } = this.props.appState;
+    const pageHeight = isMobile && !isMobileSafari
+      ? document.documentElement.clientHeight
+      : window.innerHeight;
+    const coverVals = cover(window.screen.width, window.screen.height, images.width, images.height);
+    // const coverVals = cover(window.screen.width, window.screen.height, 1080, 630);
+    // const scaleVals = getIntrinsicScale({width: window.screen.width, height: window.screen.height}, {width: 1080, height: 630}, true);
+    console.log(getIntrinsicScale);
+    const { width, height, x, y } = coverVals;
+
     return (
       <Main>
         <RestyledContentHolder>
           <Hed>
             Debug
           </Hed>
-          <p>window.screen.height: {window.screen.height}</p>
           <p>window.screen.width: {window.screen.width}</p>
-          <p>image height: {this.props.appState.images.height}</p>
+          <p>window.screen.height: {window.screen.height}</p>
+          {/*<p>coverVals.eq: cover({window.screen.width}, {window.screen.height}, {images.width}, {images.height})</p>
+          <p>coverVals.width: {width}</p>
+          <p>coverVals.height: {height}</p>
+          <p>coverVals.x: {x}</p>
+          <p>coverVals.y: {y}</p>*/}
           <p>image width: {this.props.appState.images.width}</p>
+          <p>image height: {this.props.appState.images.height}</p>
+          <p>---</p>
+          <p>window.screen.availHeight: {window.screen.availHeight}</p>
           <p>window.innerHeight: {window.innerHeight}</p>
+          <p>window.innerWidth: {window.innerWidth}</p>
           <p>appState.height: {this.props.appState.height}</p>
         </RestyledContentHolder>
       </Main>
