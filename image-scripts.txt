@@ -35,6 +35,7 @@
       \( +clone   -resize  1280   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1280.jpg   +delete \) \
       \( +clone   -resize  1200   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1200.jpg   +delete \) \
       \( +clone   -resize  1366   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1366.jpg   +delete \) \
+      \( +clone   -resize  1136   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1136.jpg   +delete \) \
       \( +clone   -resize  1080   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1080.jpg   +delete \) \
       \( +clone   -resize  1024   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1024.jpg   +delete \) \
       \( +clone   -resize  960    -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-960.jpg    +delete \) \
@@ -58,6 +59,7 @@
         \( +clone   -resize  1280   +write  boy-imc-main-101419-1280.png   +delete \) \
         \( +clone   -resize  1200   +write  boy-imc-main-101419-1200.png   +delete \) \
         \( +clone   -resize  1366   +write  boy-imc-main-101419-1366.png   +delete \) \
+        \( +clone   -resize  1136   +write  boy-imc-main-101419-1136.png   +delete \) \
         \( +clone   -resize  1080   +write  boy-imc-main-101419-1080.png   +delete \) \
         \( +clone   -resize  1024   +write  boy-imc-main-101419-1024.png   +delete \) \
         \( +clone   -resize  960    +write  boy-imc-main-101419-960.png    +delete \) \
