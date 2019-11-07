@@ -324,6 +324,7 @@ class App extends Component {
       pinchZoomed: false, // Zoomed! (Or not.)
       spacerHeight: this.calculateSpacerHeight(), // Set by 'handleResize', so must live here. Used by Home/NameTag.
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
+      type: isMobile ? 'mobile' : 'desktop',
       wrongPassword: '' // to be removed
     };
 
@@ -636,8 +637,6 @@ class App extends Component {
   }
 
   calculateSpacerHeight() {
-    // console.log(this);
-    // const { images } = this.state;
     const { images } = this;
     const windowHeight = window.innerHeight;
     const coverVals = cover(window.innerWidth, windowHeight, images.width, images.height);

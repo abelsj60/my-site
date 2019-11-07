@@ -7,7 +7,6 @@ import NycBackground from './NycBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import ForrestBackground from './ForrestBackground.jsx';
 import React, { Fragment } from 'react';
-import { isMobile } from 'react-device-detect';
 import styled from 'styled-components';
 
 const PictureHolder = styled.div`
@@ -50,7 +49,8 @@ export default function PictureBox(props) {
   const {
     homePageLoaded,
     images,
-    inCity
+    inCity,
+    type
   } = appState;
   const {
     spellLevel,
@@ -135,7 +135,7 @@ export default function PictureBox(props) {
     <PictureHolder>
       <WhiteSheet
         homePageLoaded={homePageLoaded}
-        isMobile={isMobile}
+        isMobile={type === 'mobile'}
         loadLevelFull={setLoadLevels.sum().full}
         zIndex="4"
         stay={true}

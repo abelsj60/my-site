@@ -1,5 +1,4 @@
 import React from 'react';
-import { isMobile } from 'react-device-detect';
 import { Redirect } from 'react-router-dom';
 import Reload from '../classes/Reload.js';
 
@@ -7,7 +6,7 @@ import Reload from '../classes/Reload.js';
 
 export default function ReloadRoute(props) {
   const { boundHandleClickForApp } = props;
-  const { currentCaller } = props.appState;
+  const { currentCaller, type } = props.appState;
   const { indexForChapterData } = props.bodyState;
   const reload = new Reload(props);
 
@@ -15,7 +14,7 @@ export default function ReloadRoute(props) {
   if (currentCaller === 'chapter') {
     let number = indexForChapterData + 1;
 
-    if (isMobile || !props.appState.images[`chapter-${number}-main`].complete) {
+    if (type === 'mobile' || !props.appState.images[`chapter-${number}-main`].complete) {
       number = number * -1;
     }
 
