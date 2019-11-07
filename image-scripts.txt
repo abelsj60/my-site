@@ -19,27 +19,27 @@
       -Why? -\o/- 
 
     convert chapter-2-gimp-cropped-q100-5116.jpg   -colorspace  RGB  \
-      \( +clone   -resize  7680   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-7680.jpg   +delete \) \
-      \( +clone   -resize  5120   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-5120.jpg   +delete \) \
-      \( +clone   -resize  4096   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-4096.jpg   +delete \) \
-      \( +clone   -resize  3840   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-3840.jpg   +delete \) \
-      \( +clone   -resize  3000   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-3000.jpg   +delete \) \
-                  -resize  2880   -colorspace  sRGB   -quality 50   +write  boy-imc-main-101419721-q50-2880.jpg
+      \( +clone   -resize  7680   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-7680.jpg   +delete \) \
+      \( +clone   -resize  5120   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-5120.jpg   +delete \) \
+      \( +clone   -resize  4096   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-4096.jpg   +delete \) \
+      \( +clone   -resize  3840   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-3840.jpg   +delete \) \
+      \( +clone   -resize  3000   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-3000.jpg   +delete \) \
+                  -resize  2880   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-2880.jpg
 
   d. Batch 2
 
     - See note above as to why the second batch.
 
     convert chapter-2-gimp-cropped-5116.tif   -colorspace  RGB  \
-      \( +clone   -resize  1334   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1334.jpg   +delete \) \
-      \( +clone   -resize  1280   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1280.jpg   +delete \) \
-      \( +clone   -resize  1200   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1200.jpg   +delete \) \
-      \( +clone   -resize  1366   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1366.jpg   +delete \) \
-      \( +clone   -resize  1080   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1080.jpg   +delete \) \
-      \( +clone   -resize  1024   -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-1024.jpg   +delete \) \
-      \( +clone   -resize  960    -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-960.jpg    +delete \) \
-      \( +clone   -resize  768    -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-768.jpg    +delete \) \
-                  -resize  640    -colorspace  sRGB   -quality 90   +write  boy-imc-main-101419721-q90-640.jpg
+      \( +clone   -resize  1334   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1334.jpg   +delete \) \
+      \( +clone   -resize  1280   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1280.jpg   +delete \) \
+      \( +clone   -resize  1200   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1200.jpg   +delete \) \
+      \( +clone   -resize  1366   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1366.jpg   +delete \) \
+      \( +clone   -resize  1080   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1080.jpg   +delete \) \
+      \( +clone   -resize  1024   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1024.jpg   +delete \) \
+      \( +clone   -resize  960    -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-960.jpg    +delete \) \
+      \( +clone   -resize  768    -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-768.jpg    +delete \) \
+                  -resize  640    -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-640.jpg
 
   c. Batch 3 (boy.png)
 
