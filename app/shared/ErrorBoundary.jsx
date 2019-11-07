@@ -18,8 +18,8 @@ export default class ErrorBoundary extends Component {
     const { hasError, initialLoad } = this.state;
     const { children } = this.props;
     const errorText = initialLoad
-      ? "Error. Please use Chrome, Firefox, or Safari."
-      : "Error. Something's wrong. Please try again.";
+      ? "browser problem. Please use Chrome, Firefox, or Safari"
+      : "really confusing error. You might want to try that again";
 
     if (hasError) {
       return (
@@ -31,80 +31,67 @@ export default class ErrorBoundary extends Component {
               maxWidth: '1078px'
             }}
           >
-            <header
-              style={{
-                backgroundColor: '#fd1172',
-                margin: '20px 25px',
-                padding: '15px 0px'
-              }}
-            >
-              <p
+            <header>
+              <h1
                 style={{
-                  color: 'white',
-                  margin: '0px 20px'
+                  marginBottom: '20px'
                 }}
               >
-                {errorText}
+                Hi! I'm James
+              </h1>
+              <p
+                style={{
+                  color: '#fd1172'
+                }}
+              >
+                So sorry! We've got a {errorText}. In the meantime, here's my 411.
               </p>
             </header>
-            {initialLoad
-              && (
-                <div
+            {initialLoad && (
+              <div
+                style={{
+                  paddingLeft: '25px',
+                  paddingRight: '25px'
+                }}
+              >
+                <img
+                  alt=""
                   style={{
-                    paddingLeft: '25px',
-                    paddingRight: '25px'
+                    width: '100%',
+                    marginBottom: '10px'
                   }}
-                >
-                  <h1
-                    style={{
-                      marginBottom: '20px'
-                    }}
-                  >
-                    About
-                  </h1>
-                  <p>
-                    I write code for Web sites and software. I tell stories, too. 
-                  </p>
-                  <p>
-                    That's important. Stories define everything. Consider this:
-                  </p>
-                  <p>
-                    1. Microsoft sells Word by telling people they can write things with it.
-                        That pitch is a story.
-                  </p>
-                  <p>
-                    2. People use Word to collect and organize their thoughts. 
-                        Those thoughts are a story.
-                  </p>
-                  <p>
-                    3. Word saves these thoughts to a 'document'. 
-                        That file name tells a story.
-                  </p>
-                  <p>
-                    It's all stories, all the way down. 
-                  </p>
-                  <p>
-                    That's where I come in. Rather than just mechanically coding sites and software, I try to figure out — and keep sight of — the stories that drive them. I always have.
-                  </p>
-                  <p>
-                    As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And as a lawyer, I crafted stories that made legal arguments. 
-                  </p>
-                  <p>
-                    Like I said — stories all the way down. 
-                  </p>
-                  <p>
-                    So. What's yours?
-                  </p>
-                </div>
-              )}
+                  src="/convert-to-data-uri/me-xnc-q90.jpg"
+                />
+                <p>
+                  I write code for Web sites and software. I tell stories, too.
+                </p>
+                <p>
+                  That's important. It means I don't just mechanically code software. I try to figure out — and keep sight of — the stories that drive it. I always have.
+                </p>
+                <p>
+                  As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And, as a lawyer, I crafted stories that made legal arguments.
+                </p>
+                <p>
+                  Like I said — all stories, all the time. 
+                </p>
+                <p>
+                  So. What's yours?
+                </p>
+                <p>
+                  -j
+                </p>
+              </div>
+            )}
             <footer
               style={{
-                marginTop: !initialLoad ? '25px' : '',
+                marginTop: '25px',
+                marginBottom: '25px',
                 paddingLeft: '25px',
-                paddingRight: '25px'
+                paddingRight: '25px',
+                color: 'slategrey'
               }}
             >
-              Say hello__@__jamesabels.net
+              Contact: hello@jamesabels.net
             </footer>
           </div>
         </Fragment>

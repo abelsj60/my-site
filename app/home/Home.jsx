@@ -246,16 +246,12 @@ export default class Home extends Component {
       if (eventType === 'click') {
         const hcCharm = new ClickHandling('charm', this);
         const boundHandleCharm = hcCharm.boundHandleClick;
-
         boundHandleCharm(activeCharm === num);
       } else if (eventType === 'touch') {
         // Resets event type to 'click' if a mouse suddenly works
         const hcHome = new ClickHandling('home', this);
         const boundHandleClick = hcHome.boundHandleClick;
-        const boundHandleCharm = hcCharm.boundHandleClick;
-
         boundHandleClick('resetEventType');
-        boundHandleCharm(activeCharm === num);
       }
     };
   }
@@ -267,7 +263,7 @@ export default class Home extends Component {
 
       // Update the eventType on State if the Charm was
       // touched. This allows our onMouseDown listener
-      // to reject its call due to even propagation.
+      // to reject its call due to event propagation.
 
       // There is a bug in React that prevents us from
       // simply calling event.stopPropagation() here.

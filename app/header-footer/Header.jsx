@@ -134,7 +134,7 @@ const Nav = styled.nav`
   display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '6px 12px'};
-  background-color: ${p => p.isHome && (p.coverValY || p.spacerHeight) && p.tempContent < 1 && 'rgba(0, 0, 0, .125)'};
+  background-color: ${p => p.isHome && p.tempContent < 1 && 'rgba(0, 0, 0, .125)'};
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
   position: relative;
@@ -201,7 +201,6 @@ export default class Header extends Component {
       illustrationDirection,
       illustrationLevel,
       images,
-      spacerHeight,
       tempContent
     } = appState;
     const isHome = currentCaller === 'home';
@@ -250,7 +249,6 @@ export default class Header extends Component {
         <Nav
           coverValY={coverVals.y < 0} // Add frost to text
           isHome={isHome}
-          spacerHeight={spacerHeight < 20}
           tempContent={tempContent}
         >
           <NavList

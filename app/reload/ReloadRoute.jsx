@@ -11,7 +11,7 @@ export default function ReloadRoute(props) {
   const { indexForChapterData } = props.bodyState;
   const reload = new Reload(props);
 
-  // Update appStateillustrationState when link points to /chapter
+  // Update appState.illustrationState when link points to /chapter
   if (currentCaller === 'chapter') {
     let number = indexForChapterData + 1;
 
@@ -19,7 +19,7 @@ export default function ReloadRoute(props) {
       number = number * -1;
     }
 
-    // Note: Duplicated by State.rebuildApp, but breaks here w/o this.
+    // Note: Duplicated by State.rebuildApp, but breaks w/o this.
     boundHandleClickForApp('updateIllustrationState', number);
   }
 

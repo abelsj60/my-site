@@ -36,7 +36,7 @@ export default class ContentLoader extends Component {
     this.overflowRef =
       location.caller === 'chapter'
         ? React.createRef()
-        : {};
+        : {}; // Prevents errors
 
     // Don't need to store publication. The Clip list is one dimensional, meaning that 
     // we don't sort by publication. Instead, publication will show the first

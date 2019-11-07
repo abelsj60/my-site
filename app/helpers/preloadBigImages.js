@@ -1,4 +1,5 @@
 import home from '../data/home/home.md';
+import { isIOS, isMobile } from 'react-device-detect';
 import stories from '../data/the-story/index.js';
 import urlPrefix from './urlPrefix';
 
@@ -8,10 +9,14 @@ import urlPrefix from './urlPrefix';
 
 export default function preloadBigImages() {
   const images = {};
-  const deviceWidth = window.screen.width;
-  const deviceHeight = window.screen.height; // use availHeight instead?
-  // const deviceWidth = 5120;
-  // const deviceHeight = 2880; // use availHeight instead?
+  const devicePixelRatio = isIOS ? Math.floor(window.devicePixelRatio) : window.devicePixelRatio;
+  const timesPixelRatio = dimension => Math.floor(devicePixelRatio * dimension);
+  // Desktops get it right, mobile may not— check if height is bigger than width
+  const widthType = isMobile && window.screen.height > window.screen.width ? 'widthIsHeight' : 'widthIsWidth';
+  const screenWidth = widthType === 'widthIsHeight' ? window.screen.height : window.screen.width;
+  const screenHeight = widthType === 'widthIsHeight' ? window.screen.width : window.screen.height;
+  const resWidth = timesPixelRatio(screenWidth);
+  const resHeight = timesPixelRatio(screenHeight);
   const imageWidth = [
     640,
     768,
@@ -33,7 +38,7 @@ export default function preloadBigImages() {
     if (idx < arr.length - 1) {
       // Equation: (originalHeight / originalWidth) * imgWidth = imgHeight
       const imgHeight = Math.ceil((2985 / 5116) * imgWidth);
-      return imgWidth >= deviceWidth && imgHeight >= deviceHeight;
+      return imgWidth >= resWidth && imgHeight >= resHeight;
     }
 
     return true; // default size when nothing fits (5120)
@@ -85,7 +90,7 @@ export default function preloadBigImages() {
     images[home.attributes.imageNames[idx]] = image;
   });
 
-  [`${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`].forEach((src, idx) => {
+  [`${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`].forEach(src => {
     const image = new Image();
     image.src = src;
     images['notFoundImage'] = image;

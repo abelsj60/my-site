@@ -688,6 +688,7 @@ class App extends Component {
 
   componentDidMount() {
     // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
+
     if (!this.hasStyle('flexbox')) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {
