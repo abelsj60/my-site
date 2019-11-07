@@ -72,7 +72,7 @@ export default class ErrorBoundary extends Component {
                   As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And, as a lawyer, I crafted stories that made legal arguments.
                 </p>
                 <p>
-                  Like I said — all stories, all the time. 
+                  See that — all stories, all the time.
                 </p>
                 <p>
                   So. What's yours?
