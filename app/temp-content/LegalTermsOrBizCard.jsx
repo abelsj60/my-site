@@ -8,7 +8,7 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 0px;
+  top: 52px;
   left: 0px;
   bottom: 0px;
   width: 100%;

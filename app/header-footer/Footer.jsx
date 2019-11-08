@@ -1,5 +1,4 @@
 import Button from './Button.jsx';
-import { cover } from 'intrinsic-scale';
 import eventManagement from '../helpers/eventManagement.js';
 import Loader from '../shared/Loader.jsx';
 import React from 'react';
@@ -17,10 +16,15 @@ const Container = styled.footer`
   position: relative;
   width: 100%;
   max-width: 70rem;
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: cover(safe-area-inset-bottom);
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     filter: unset;
   }
+`;
+const InnerContainer = styled.div`
+  position: relative;
 `;
 const Line = styled.div`
   display: ${p => p.home ? 'none' : ''};
@@ -87,7 +91,6 @@ export default function FooterContainer(props) {
   } = props;
   const {
     currentCaller,
-    height,
     illustrationDelay,
     illustrationDirection,
     illustrationLevel,

@@ -30,6 +30,8 @@ const Container = styled.header`
   align-items: center;
   width: 100%;
   max-width: 75rem;
+  margin-top: env(safe-area-inset-top);
+  margin-top: cover(safe-area-inset-top);
 `;
 const HeaderBackground = styled.div`
   position: absolute;
@@ -40,7 +42,7 @@ const HeaderBackground = styled.div`
   width: ${p => p.tempContent === 3 && '100%'};
   left: 0px;
   // No background on home, translucent if menu is open when the storyIllustration is shown, otherwise dark pink
-  background-color: ${p => p.isHome ? '' : p.tempContent === 3 && p.illustrationLevel === 3 ? 'rgba(175, 18, 90, .8)' : p.theme.colors.darkPink};
+  background-color: ${p => p.isHome || (p.tempContent === 3 && p.illustrationLevel === 3) ? '' : p.theme.colors.darkPink};
   opacity: ${p => p.tempContent === 3 || p.isReverie || ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity .35s`};
   z-index: -1;
@@ -134,6 +136,7 @@ const Nav = styled.nav`
   display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '6px 12px'};
+  // Don't show box when business card or legal terms are on
   background-color: ${p => p.isHome && p.tempContent < 1 && 'rgba(0, 0, 0, .125)'};
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
@@ -150,7 +153,9 @@ const Nav = styled.nav`
     ${p => p.tempContent === 3 && css`
       background-color:  rgba(175, 18, 90, .8);
       position: fixed;
-      top: 54px;
+      padding-top: 54px; // Bottom of header text
+      top: 0px;
+      left: 0px;
       bottom: 0px;
       width: 100%;
       display: flex;
@@ -161,8 +166,7 @@ const Nav = styled.nav`
 const NavList = styled(UnorderedList)`
   display: flex;
   justify-content: center;
-  margin: ${p => p.tempContent !== 3 ? css`${!p.isHome && 'auto'} 0px ${!p.isHome && 'auto'} 0px}` : ''}; // ! was !p.menu
-  justify-content: ${p => p.tempContent === 3&& 'space-evenly'};
+  margin: ${p => p.tempContent !== 3 ? css`${!p.isHome && 'auto'} 0px ${!p.isHome && 'auto'} 0px}` : ''};
 
   // Control nav items when menu is open, up to the break point
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
@@ -170,6 +174,11 @@ const NavList = styled(UnorderedList)`
       flex-direction: column;
       margin-bottom: 55px;
     `};
+  }
+`;
+const NavItem = styled.li`
+  @media (min-height: 500px) {
+    margin: 20px 0px;
   }
 `;
 const Icon = styled.img`
@@ -262,7 +271,7 @@ export default class Header extends Component {
                   const isActive = link.path.includes(referrer.location);
 
                   return (
-                    <li
+                    <NavItem
                       key={idx}
                     >
                       <RestyledLink
@@ -278,7 +287,7 @@ export default class Header extends Component {
                       >
                         {link.name}
                       </RestyledLink>
-                    </li>
+                    </NavItem>
                   );
                 }
               }
