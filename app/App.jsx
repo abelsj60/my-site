@@ -339,16 +339,11 @@ class App extends Component {
   }
 
   handlePasswordSubmit(event) {
-    const { password } = this.state;
+    const password = this.state.password.toLowerCase();
     event.preventDefault();
 
     if (
-      password === 'enter'
-        || password === 'Enter'
-        || password === 'illustrator'
-        || password === 'Illustrator'
-        || password === 'boom!'
-        || password === 'Boom!'
+      password === 'enter' || password === 'illustrator' || password === 'boom!'
     ) {
       this.setState({ isValidUser: true });
     } else {

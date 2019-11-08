@@ -2,7 +2,7 @@ import Button from './Button.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import Loader from '../shared/Loader.jsx';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
 const Container = styled.footer`

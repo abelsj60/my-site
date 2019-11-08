@@ -178,7 +178,9 @@ const NavList = styled(UnorderedList)`
 `;
 const NavItem = styled.li`
   @media (min-height: 500px) {
-    margin: 20px 0px;
+    ${p => p.tempContent === 3 && css`
+      margin: 20px 0px;
+    `};
   }
 `;
 const Icon = styled.img`
@@ -273,6 +275,7 @@ export default class Header extends Component {
                   return (
                     <NavItem
                       key={idx}
+                      tempContent={tempContent}
                     >
                       <RestyledLink
                         boundHandleClickForApp={boundHandleClickForApp}
