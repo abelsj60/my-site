@@ -18,10 +18,11 @@ const Hed = styled.h1`
 export default class Debug extends Component {
   render() {
     const type = isIOS ? 'true' : 'false';
-    const devicePixelRatio = isIOS ? Math.floor(window.devicePixelRatio) : window.devicePixelRatio;
+    const devicePixelRatio = window.devicePixelRatio;
+    const devicePixelRatio2 = isIOS ? Math.floor(window.devicePixelRatio) : window.devicePixelRatio;
     const timesPixelRatio = dimension => Math.floor(devicePixelRatio * dimension);
     // Desktops get it right, mobile may not— check if height is bigger than width
-    const widthType = isMobile && window.screen.height > window.screen.width ? 'widthIsHeight' : 'widthIsWidth';
+    const widthType = window.screen.height > window.screen.width ? 'widthIsHeight' : 'widthIsWidth';
     const screenWidth = widthType === 'widthIsHeight' ? window.screen.height : window.screen.width;
     const screenHeight = widthType === 'widthIsHeight' ? window.screen.width : window.screen.height;
     const resWidth = timesPixelRatio(screenWidth);
@@ -42,8 +43,8 @@ export default class Debug extends Component {
           <p>height (my algorithm): {screenHeight}</p>
           <p>---</p>
           <p>iOS: {type}</p>
-          <p>window.devicePixelRatio: {window.devicePixelRatio}</p>
-          <p>my pixelRatio: {devicePixelRatio}</p>
+          <p>window.devicePixelRatio: {devicePixelRatio}</p>
+          <p>my pixelRatio: {devicePixelRatio2}</p>
           <p>-</p>
           <p>resolution width: {resWidth}</p>
           <p>resolution height: {resHeight}</p>

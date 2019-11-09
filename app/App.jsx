@@ -14,6 +14,7 @@ import PlayfairDisplay900Woff2 from '../docs/assets/fonts/playfair-display-v15-l
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
+// import customMobileTest from './customMobileTest.js';
 import styled, {
   css,
   createGlobalStyle,
@@ -264,6 +265,9 @@ class App extends Component {
     //    c.  Keep resized height on subsequent orientation
     //        changes by rejecting w/n updateHeight() when
     //        this.minAllowedHeight > newHeight.
+    // Note, 11/9/19: iPadOS uses a desktop user agent. This test doesn't catch it.
+    // However, the values it selects seem to remain accurate in terms of height.
+    // Therefore, we're not applying the customMobileTest.js here.
     const pageHeight = isMobile && !isMobileSafari
       ? document.documentElement.clientHeight
       : window.innerHeight;
@@ -325,7 +329,8 @@ class App extends Component {
       pinchZoomed: false, // Zoomed! (Or not.)
       spacerHeight: this.calculateSpacerHeight(), // Set by 'handleResize', so must live here. Used by Home/NameTag.
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
-      type: isMobile ? 'mobile' : 'desktop',
+      // Won't catch iPadOS w/o customMobileTest. Search for 11/9/19 notes as to necessity.
+      type: isMobile ? 'mobile' : 'desktop', 
       wrongPassword: '' // to be removed
     };
 
@@ -340,7 +345,7 @@ class App extends Component {
   }
 
   handlePasswordSubmit(event) {
-    const password = this.state.password.toLowerCase();
+    const password = this.state.password.toLowerCase().trim();
     event.preventDefault();
 
     if (
@@ -526,9 +531,13 @@ class App extends Component {
     // iOS 12 introduced a strange new behavior. On orientation change, 
     // the screen collapsed in between the first and second setStates.
     // Remember, in iOS, resize fires on orientation change, then AGAIN
-    // afer the bottom menu bar is added to screen. This on/off function 
-    // ensures that the app's height will occupy the entire screen during 
-    // the update phase. Trust me, it works.
+    // afer the bottom menu bar is added to screen. 
+    
+    // This on/off function ensures that the app's height will occupy the 
+    // entire screen during the update phase. Trust me, it works.
+
+    // Note, 11/9/19: This won't catch iPadOS as it doesn't report
+    // itself as mobile — 'tis OK, I've observed good behavior...
 
     const toggleHtmlElementHeight = mode => {
       if (isMobileSafari && parseInt(osVersion) >= 12) {
@@ -556,8 +565,9 @@ class App extends Component {
 
     //  a. clientHeight. Mobile Chrome or after touchMove everywhere
     //  b. innerHeight. Mobile Safari
-    // Some Android browsers allow the address bar to shrink in landscape, some don't.
-    // If Android device, further check for the larger of our two possible values.
+
+    // If Android, further check for the larger of our two possible values b/c some
+    // devices let the address bar shrink in landscape, some don't, per BS testing.
 
     const newHeight = isMobile && (!isMobileSafari || this.state.isAfterTouch)
       ? document.documentElement.clientHeight > window.innerHeight

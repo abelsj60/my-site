@@ -20,6 +20,8 @@ const PictureHolder = styled.div`
   z-index: 1;
 `;
 const WhiteSheet = styled.div`
+  // Note, 11/9/19: This won't catch iPadOS, but the behvior that
+  // requires the white sheet may not be present, either. So...
   ${p => !p.isMobile && 'display: none;'}
   position: absolute;
   background-color: ${p => p.theme.colors.white};
@@ -137,7 +139,7 @@ export default function PictureBox(props) {
     <PictureHolder>
       <WhiteSheet
         homePageLoaded={homePageLoaded}
-        isMobile={type === 'mobile'}
+        isMobile={type === 'mobile'} // See above note
         loadLevelFull={setLoadLevels.sum().full}
         zIndex="4"
         stay={true}
