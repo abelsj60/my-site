@@ -556,9 +556,13 @@ class App extends Component {
 
     //  a. clientHeight. Mobile Chrome or after touchMove everywhere
     //  b. innerHeight. Mobile Safari
+    // Some Android browsers allow the address bar to shrink in landscape, some don't.
+    // If Android device, further check for the larger of our two possible values.
 
     const newHeight = isMobile && (!isMobileSafari || this.state.isAfterTouch)
-      ? document.documentElement.clientHeight
+      ? document.documentElement.clientHeight > window.innerHeight
+        ? document.documentElement.clientHeight
+        : window.innerHeight
       : window.innerHeight;
 
     // Ensure the window top is at zero after resize change.

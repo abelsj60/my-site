@@ -74,6 +74,7 @@ const Hed = styled.h1`
   line-height: 1;
   margin-top: -9px;
   margin-bottom: 10px;
+  margin-left: 0px;
   cursor: pointer;
   user-select: none;
   // We rely on !p.homePageLoaded to ensure the associated test only runs on initialLoad. It should not be considered thereafter.

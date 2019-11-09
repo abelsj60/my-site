@@ -29,7 +29,7 @@ const WhiteSheet = styled.div`
   height: 100%;
   width: 100%;
   opacity: ${p => p.homePageLoaded && p.loadLevelFull <= 1 ? 1 : 0};
-  transition: opacity .25s ease-out;
+  transition: opacity .15s ease-out;
 `;
 
 export default function PictureBox(props) {
