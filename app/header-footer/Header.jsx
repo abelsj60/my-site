@@ -160,7 +160,7 @@ const Nav = styled.nav`
       width: 100%;
       display: flex;
       justify-content: center;
-  `};
+    `};
   }
 `;
 const NavList = styled(UnorderedList)`
@@ -177,10 +177,14 @@ const NavList = styled(UnorderedList)`
   }
 `;
 const NavItem = styled.li`
-  @media (min-height: 500px) {
-    ${p => p.tempContent === 3 && css`
-      margin: 20px 0px;
-    `};
+  // Control nav items when menu is open, up to the break point
+  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    // Let the NavItems collapse when there's no space on screen (landscape)
+    @media (min-height: ${p => p.theme.mediaQueries.tinyView}) {
+      ${p => p.tempContent === 3 && css`
+        margin: 20px 0px;
+      `};
+    }
   }
 `;
 const Icon = styled.img`
