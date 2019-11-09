@@ -7,7 +7,7 @@ slug: Breaking pixel ratios in mobile
 
 Like I said, browsers break a lot.
 
-Here's an example from last night. I was jiggering the [algorithm](https://github.com/abelsj60/jamesabels.net/blob/master/app/helpers/preloadBigImages.js#L13) that preloads images. It wasn't working. 
+Here's an example from last night. I was jiggering with the [algorithm](https://github.com/abelsj60/jamesabels.net/blob/master/app/helpers/preloadBigImages.js#L13) that preloads images. It wasn't working. 
 
 For instance, it selected an image with width 2880px on a 5k monitor. It should have selected the image with width of 5120px. 
 
@@ -26,7 +26,9 @@ Come again? Hold onto your hats, kids.
 
 If you hold an iPhone upright ("portrait" mode), window.screen.width refers to the longest edge, which is currently the device's height. Now, hold an Android phone upright, and window.screen.width will refer to its actual width. OK, rotate them. On iOS, width is still the longest edge, but Android swaps the values.
 
-Great— ready for the "new hotness"? iPadOS. That's the OS  Apple just split off from iOS. Guess what, it's different. iPadOS acts like Android. It reports the device's actual width, and it swaps the values when you switch orientation. 
+Great— ready for the "new hotness"? 
+
+iPadOS. That's the OS  Apple just split off from iOS. Guess what, it's different. iPadOS acts like Android. It reports the device's actual width, and it swaps the values when you switch orientation. 
 
 Neat, huh? Yeah, I didn't really think so either.
 
