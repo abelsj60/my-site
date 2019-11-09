@@ -69,7 +69,8 @@ const InnerContainer = styled.div`
     margin-left: 1.6em;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.huge}) {
+  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 1120px)  {
+    margin-top: 25px;
     width: 330px;
   }
 
@@ -102,7 +103,7 @@ const Charm = styled.div`
     height: 50px;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.huge}) {
+  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 1120px) {
     width: 75px;
     height: 75px;
   }
@@ -132,7 +133,7 @@ const Eye = styled.div`
     width: 6px;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.huge}) {
+  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 1120px) {
     height: 35px;
     width: 8px;
   }
@@ -153,6 +154,10 @@ const Dashboard = styled.div`
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 32px;
+  }
+
+  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 1120px)  {
+    margin-top: 40px;
   }
 `;
 const Score = styled.p`
@@ -239,7 +244,7 @@ export default function Charms(props) {
         compressor={2.3}
       >
         <SubHed
-          marginLeft="1.1em"
+          marginLeft="1.05em"
         >
           {
             !inCity

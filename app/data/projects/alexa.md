@@ -33,4 +33,9 @@ showTheseAttributes: [
   'responsibility',
   'technologies'
 ]
+imageHolderHeight: [
+  '465',
+  '465',
+  '465'
+]
 ---

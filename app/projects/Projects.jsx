@@ -56,7 +56,7 @@ const Caption = styled.figcaption`
 `;
 const ImageHolder = styled.div`
   padding: 15px;
-  min-height: 155px;
+  min-height: ${p => p.holderHeight}px;
   background-color: ${p => p.theme.colors.reverieBlue};
 `;
 const MainImage = styled.img`
@@ -80,6 +80,7 @@ export default function Projects(props) {
   } = contentState;
   const {
     captions,
+    imageHolderHeight,
     mainImages,
     pitch,
     projectName,
@@ -88,6 +89,7 @@ export default function Projects(props) {
   } = allContentData[projectIndex].attributes;
   const caption = captions[thumbnailIndex];
   const filePrefix = mainImages[thumbnailIndex];
+  const holderHeight = imageHolderHeight[thumbnailIndex];
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
@@ -158,7 +160,9 @@ export default function Projects(props) {
             <Caption>
               {caption}
             </Caption>
-            <ImageHolder>
+            <ImageHolder
+              holderHeight={holderHeight}
+            >
               <MainImage
                 alt="mainPic"
                 src={`${urlPrefix}${filePrefix}-q95-625-1x.jpg`}
