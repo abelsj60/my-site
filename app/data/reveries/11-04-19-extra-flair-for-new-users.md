@@ -37,7 +37,7 @@ The problem with my heartbeat is that it’s great to see once, not twice. So I 
 
 My current solution is to add a timestamp to localStorage named “lastHeartbeat.” It’s updated whenever the user hits the site, no matter the section. The heartbeat runs for new users or if the site finds a two-week gap between a user's visits.
 
-I really like this feature because it’s unusual. It shouldn’t be, but it is. 
+I really like [this feature](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L243) because it’s unusual. It shouldn’t be, but it is. 
 
 Now about that cupcake...
 

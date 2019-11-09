@@ -17,7 +17,7 @@ So I came up with an alternate approach. My users navigate the site via React Ro
 
 I took advantage of this. 
 
-I modified the Link component to accept an update function via props. It's added to the Link’s onClick handler. The end result is that App state stays in sync as users surf the site. 
+I [modified](https://github.com/abelsj60/jamesabels.net/blob/master/app/shared/CustomLink.jsx#L68) the Link component to accept an update function via props. It's added to the Link’s onClick handler. The end result is that App state stays in sync as users surf the site. 
 
 There isn’t too much more to say about this. I think it’s a fairly clean idea, although, it took some work at the outset to debug some bizarre behavior. I can’t even remember what it was. 
 

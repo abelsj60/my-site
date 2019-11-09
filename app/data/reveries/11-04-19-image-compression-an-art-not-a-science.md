@@ -5,7 +5,7 @@ date: November 4, 2019
 slug: Recompressing a compressed image
 ---
 
-Image compression is maddening. 
+[Image compression](https://github.com/abelsj60/jamesabels.net/blob/master/image-scripts.txt) is maddening. 
 
 The problem is this — the only way to really understand compression is to sit around staring at the renditions that your settings produce. Every variation, or rendition, has to be compared to every other variation in the set, as well as the original. And, as it turns out, there’s really no single answer. Your settings may be stellar for image A, but less than stellar for image B.
 

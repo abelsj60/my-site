@@ -17,7 +17,7 @@ One problem is the menu bar in iOS Safari. It’s really hard to work with — i
 
 There were other problems, too. 
 
-I can’t remember half of them. Anyway, I ultimately decided to use JavaScript to explicitly set the height of the site's main body element. I grabbed hold of the browser’s resize event to help me and never let go. 
+I can’t remember half of them. Anyway, I ultimately decided to use JavaScript to explicitly set the height of the site's main body element. I grabbed hold of the browser’s resize event to [help me](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L516) and never let go. 
 
 If only it had been that easy. The resize event is very pokey. 
 

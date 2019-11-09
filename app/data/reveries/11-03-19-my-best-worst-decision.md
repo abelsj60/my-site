@@ -17,7 +17,7 @@ Site sections that contain dynamic content, such as journalism, projects, and th
 
 It decodes the content the user wants by breaking down his url and looking through its parameters. Great. Thing is, if the url is short, meaning the user is requesting a section without specifying parameters, then the ContentLoader will set a property on its local state called needsRedirect. 
 
-When this property is true, the ContentLoader activates a Redirect component. This component  sends users to a fictitious route called /i, which invokes the ReloadRoute component. It looks at the Body component’s local state (it sits between the Header and Footer) in order to build a new URL with parameters before redirecting the user back to ContentLoader. 
+When this property is true, the ContentLoader activates a Redirect component. This component sends users to a fictitious route called /i, which invokes the ReloadRoute component. It looks at the Body component’s local state (it sits between the Header and Footer) in order to build a new URL with parameters before redirecting the user back to ContentLoader. 
 
 Catch that? Two Redirects, one after the other. 
 
