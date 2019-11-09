@@ -2,7 +2,7 @@ import Main from './primitives/Main.jsx';
 import React, { Component } from 'react';
 import ContentHolder from './primitives/ContentHolder.jsx';
 import styled from 'styled-components';
-import { isIOS } from 'react-device-detect';
+import { isIOS, isMobile } from 'react-device-detect';
 
 const RestyledContentHolder = styled(ContentHolder)`
   width: 100%;
@@ -17,10 +17,15 @@ const Hed = styled.h1`
 
 export default class Debug extends Component {
   render() {
-    const resWidth = isIOS ? window.screen.height : window.screen.width;
-    const resHeight = isIOS ? window.screen.width : window.screen.height;
-    const timesPixelRatio = dim => Math.floor(Math.floor(window.devicePixelRatio) * dim);
     const type = isIOS ? 'true' : 'false';
+    const devicePixelRatio = isIOS ? Math.floor(window.devicePixelRatio) : window.devicePixelRatio;
+    const timesPixelRatio = dimension => Math.floor(devicePixelRatio * dimension);
+    // Desktops get it right, mobile may not— check if height is bigger than width
+    const widthType = isMobile && window.screen.height > window.screen.width ? 'widthIsHeight' : 'widthIsWidth';
+    const screenWidth = widthType === 'widthIsHeight' ? window.screen.height : window.screen.width;
+    const screenHeight = widthType === 'widthIsHeight' ? window.screen.width : window.screen.height;
+    const resWidth = timesPixelRatio(screenWidth);
+    const resHeight = timesPixelRatio(screenHeight);
 
     return (
       <Main>
@@ -28,21 +33,24 @@ export default class Debug extends Component {
           <Hed>
             Debug
           </Hed>
-          <p>window.screen.width: {resWidth}</p>
-          <p>window.screen.height: {resHeight}</p>
+          <p>window.screen.width: {window.screen.width}</p>
+          <p>window.screen.height: {window.screen.height}</p>
+          <p>-</p>
+          <p>widthType: {widthType}</p>
+          <p>-</p>
+          <p>width (my algorithm): {screenWidth}</p>
+          <p>height (my algorithm): {screenHeight}</p>
           <p>---</p>
           <p>iOS: {type}</p>
-          <p>devicePixelRatio: {isIOS ? Math.floor(window.devicePixelRatio) : window.devicePixelRatio}</p>
+          <p>window.devicePixelRatio: {window.devicePixelRatio}</p>
+          <p>my pixelRatio: {devicePixelRatio}</p>
           <p>-</p>
-          <p>width * devicePixelRatio: {timesPixelRatio(resWidth)}</p>
-          <p>height * devicePixelRatio: {timesPixelRatio(resHeight)}</p>
+          <p>resolution width: {resWidth}</p>
+          <p>resolution height: {resHeight}</p>
           <p>---</p>
           <p>image width: {this.props.appState.images.width}</p>
           <p>image height: {this.props.appState.images.height}</p>
           <p>---</p>
-          <p>window.screen.availHeight: {window.screen.availHeight}</p>
-          <p>window.innerHeight: {window.innerHeight}</p>
-          <p>window.innerWidth: {window.innerWidth}</p>
           <p>appState.height: {this.props.appState.height}</p>
         </RestyledContentHolder>
       </Main>

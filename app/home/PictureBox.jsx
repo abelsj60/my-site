@@ -80,7 +80,8 @@ export default function PictureBox(props) {
   };
   const onLoadForBoy = event => {
     eventManagement(event);
-    setLoadLevels.five();
+    // Delay ensures (?!) full paint-to-screen ???
+    setTimeout(() => setLoadLevels.five(), 500);
   };
   const onLoadForBlurredForrest = event => {
     if (spellLevel < 1) {
