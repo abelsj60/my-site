@@ -1,52 +1,59 @@
-1. Convert png, resize, and write multiple times: https://www.imagemagick.org/Usage/files/#write
+1. Convert .tif / .png, resize, and write multiple times: https://www.imagemagick.org/Usage/files/#write
 
   a. Export cropped .tif from Gimp (5116 x 2985)
+      - Use crop tool, double click it in menu to open settings
+      - Enter above dimensions, remember the dimensions will be disregarded if you hit the edges
+        -Start at top left
+      - Add guides --> Image/Guides/New Guide (by percent) and snap crop window to them
+      - Click once to crop
+
   b. Convert cropped .tif to jpg at q100
 
-    - JPGs
-      -convert chapter-2-gimp-cropped-5116.tif -colorspace RGB -quality 100 -colorspace sRGB chapter-2-gimp-cropped-q100-5116.jpg
-    
-    - Boy.png
+    i. Use -colorspace to prevent the color from washing out. Graininess may appear w/o it, too.
+
+        -Resizing with Colorspace Correction: https://www.imagemagick.org/Usage/resize/
+
+      - See also discussion in Image Magick docs about needing to convert sRGB colorspace to RGB when resizing .jpg.
+      - Prep large and small images separately b/c the detail is better at large sizes when starting w/q100 .jpg.
+        -Why? -\o/- 
+
+    ii. JPGs
+      -convert ch-<number>-gimp-cropped-5116.tif -colorspace RGB -quality 100 -colorspace sRGB chapter-<number>-gimp-cropped-q100-5116.jpg
+
+    iii. Boy.png
       -No need to convert. Use batch 3 command to produce properly sized pngs.
 
   c. Batch 1
 
-    - Why is the -colorspace setting used? The color washes out without it. Graininess may appear w/o it, too.
-      -Resizing with Colorspace Correction: https://www.imagemagick.org/Usage/resize/
-
-    - See also discussion in Image Magick docs about needing to convert sRGB colorspace to RGB when resizing .jpg.
-    - Prep large and small images separately b/c the detail is better at large sizes when starting w/q100 .jpg.
-      -Why? -\o/- 
-
-    convert chapter-2-gimp-cropped-q100-5116.jpg   -colorspace  RGB  \
-      \( +clone   -resize  7680   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-7680.jpg   +delete \) \
-      \( +clone   -resize  5120   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-5120.jpg   +delete \) \
-      \( +clone   -resize  4096   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-4096.jpg   +delete \) \
-      \( +clone   -resize  3840   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-3840.jpg   +delete \) \
-      \( +clone   -resize  3000   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-3000.jpg   +delete \) \
-                  -resize  2880   -colorspace  sRGB   -quality 50   +write  chapter-2-imc-main-101419721-q50-2880.jpg
+    convert chapter-<number>-gimp-cropped-q100-5116.jpg   -colorspace  RGB  \
+      \( +clone   -resize  7680   -colorspace  sRGB   -quality 50   +write  chapter-<number>-imc-main-101419721-q50-7680.jpg   +delete \) \
+      \( +clone   -resize  5120   -colorspace  sRGB   -quality 50   +write  chapter-<number>-imc-main-101419721-q50-5120.jpg   +delete \) \
+      \( +clone   -resize  4096   -colorspace  sRGB   -quality 50   +write  chapter-<number>-imc-main-101419721-q50-4096.jpg   +delete \) \
+      \( +clone   -resize  3840   -colorspace  sRGB   -quality 50   +write  chapter-<number>-imc-main-101419721-q50-3840.jpg   +delete \) \
+      \( +clone   -resize  3000   -colorspace  sRGB   -quality 50   +write  chapter-<number>-imc-main-101419721-q50-3000.jpg   +delete \) \
+                  -resize  2880   -colorspace  sRGB   -quality 50   +write  chapter-<number>-imc-main-101419721-q50-2880.jpg
 
   d. Batch 2
 
     - See note above as to why the second batch.
 
-    convert chapter-2-gimp-cropped-5116.tif   -colorspace  RGB  \
-      \( +clone   -resize  1334   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1334.jpg   +delete \) \
-      \( +clone   -resize  1280   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1280.jpg   +delete \) \
-      \( +clone   -resize  1200   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1200.jpg   +delete \) \
-      \( +clone   -resize  1366   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1366.jpg   +delete \) \
-      \( +clone   -resize  1136   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1136.jpg   +delete \) \
-      \( +clone   -resize  1080   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1080.jpg   +delete \) \
-      \( +clone   -resize  1024   -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-1024.jpg   +delete \) \
-      \( +clone   -resize  960    -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-960.jpg    +delete \) \
-      \( +clone   -resize  768    -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-768.jpg    +delete \) \
-                  -resize  640    -colorspace  sRGB   -quality 90   +write  chapter-2-imc-main-101419721-q90-640.jpg
+    convert ch-<number>-gimp-cropped-5116.tif   -colorspace  RGB  \
+      \( +clone   -resize  1334   -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-1334.jpg   +delete \) \
+      \( +clone   -resize  1280   -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-1280.jpg   +delete \) \
+      \( +clone   -resize  1200   -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-1200.jpg   +delete \) \
+      \( +clone   -resize  1366   -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-1366.jpg   +delete \) \
+      \( +clone   -resize  1136   -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-1136.jpg   +delete \) \
+      \( +clone   -resize  1080   -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-1080.jpg   +delete \) \
+      \( +clone   -resize  1024   -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-1024.jpg   +delete \) \
+      \( +clone   -resize  960    -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-960.jpg    +delete \) \
+      \( +clone   -resize  768    -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-768.jpg    +delete \) \
+                  -resize  640    -colorspace  sRGB   -quality 90   +write  chapter-<number>-imc-main-101419721-q90-640.jpg
 
   c. Batch 3 (boy.png)
 
     - Do not convert colorspaces with this .png. It darkens image colors in an unpleasant way. 
     - Dither 2880+ w/pngquant or ImageOptim API to shrink file: https://imageoptim.com/online 
-    - Substitute 3000 for 2880. There seems to be a significant upgrade as to looks w/3000.
+    - Substitute 3000 for 2880. There seems to be a significant upgrade as to look w/3000.
 
     convert boy-gimp-cropped-5116.png   \
         \( +clone   -resize  7680   +write  boy-imc-main-101419-7680.png   +delete \) \
@@ -75,25 +82,25 @@
 3. Blurs 
 
   a. Export from Inkscape at dpi of 3 pixels (160 x 93) w/blur 15x15 via blur filter (color profile?)
-    -Color profile seems off, but images produced have less banding and better quality than coming out of GIMP. 
+    -Color profile seems off, but images produced have less banding and better quality than the ones from GIMP. 
       -Why? -\o/-
 
-  b. Blur every image in directory, can pair with conversion and maybe mogrify: https://www.imagemagick.org/Usage/blur/
+  b. Need to blur all images in dir? Pair with conversion and maybe mogrify: https://www.imagemagick.org/Usage/blur/
 
     - mogrify -path blurred -blur 0x100 *.jpg
 
 4. Fallbacks
 
   Export from Inkscape at dpi 2 pixels (53 x 31) w/blur 50x50 via blur filter 
-    - Color profile seems off, but images produced have less banding and better quality than coming out of GIMP. Why? -\o/-
+    - Color profile seems off, but images produced have less banding and better quality than from GIMP. Why? -\o/-
 
-5. Use an image CDN? Contact: kornel@imageoptim.com
+5. Use an image CDN? Image Optim API (?)
 
 6. Business card
 
   convert  teen-fairy-ink-640.png  -colorspace RGB  -quality 90  -colorspace sRGB  teen-fairy-img-q90-640-4x.jpg
 
-7. Legal terms
+7. Not found
 
   convert  jinni-ink-1240.png  -colorspace RGB  -quality 90  -colorspace sRGB  jinni-img-q90-1240-4x.jpg
 
@@ -115,3 +122,7 @@
 9. Projects thumbnails
 
   use XNConvert (quality 90)
+
+10. About
+
+  ???
