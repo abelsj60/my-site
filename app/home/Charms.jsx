@@ -72,6 +72,10 @@ const InnerContainer = styled.div`
   @media (min-width: ${p => p.theme.mediaQueries.huge}) {
     width: 330px;
   }
+
+  @media (orientation: landscape) and (max-height: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    margin-left: 1em;
+  }
 `;
 const CharmBox = styled.div`
   display: flex;
