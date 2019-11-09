@@ -32,20 +32,6 @@ const pinkPulse = keyframes`
     box-shadow: 0 0 0 0 rgba(253, 17, 114, 0);
   }
 `;
-// const bigYellowPulse = keyframes`
-//   0% {
-//     box-shadow: 0 0 0 0 rgba(255, 231, 76, 1);
-//   }
-
-//   75% {
-//     box-shadow: 0 0 0 15px rgba(255, 231, 76, 0);
-//   }
-
-//   100% {
-//     transform: rotate(1turn);
-//     box-shadow: 0 0 0 0 rgba(255, 231, 76, 0);
-//   }
-// `;
 const yellowPulse = keyframes`
   0% {
     box-shadow: 0 0 0 0 rgba(255, 231, 76, 1);
@@ -236,7 +222,7 @@ export default function Charms(props) {
         compressor={2.3}
       >
         <SubHed
-          marginLeft="1.17em"
+          marginLeft="1.1em"
         >
           {
             !inCity

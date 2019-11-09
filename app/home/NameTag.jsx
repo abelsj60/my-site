@@ -44,7 +44,6 @@ const heartbeatKeyframes = keyframes`
     animation-timing-function: ease-out;
   }
 `;
-
 const OuterContainer = styled.div`
   display: ${p => p.tempContent > 0 ? 'none' : 'block'};
   will-change: ${p => p.heartbeat < 3 ? 'transform' : p.spellLevel === 5 ? 'filter, opacity' : ''};
@@ -97,7 +96,7 @@ const Pitch = styled.section`
   
   p {
     font-weight: 500;
-    margin-left: 1.7em;
+    margin-left: 1.8em;
     margin-bottom: 0px;
     color: ${p => p.theme.colors.black};
     text-shadow: 1.5px 1px 2px white;
@@ -208,7 +207,7 @@ export default function NameTag(props) {
             compressor={2.3}
           >
             <SubHed
-              marginLeft=".9em"
+              marginLeft="1em"
             >
               {motto}
             </SubHed>

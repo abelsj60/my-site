@@ -27,9 +27,11 @@ const Legal = styled.h1`
 `;
 const MyCopyright = styled.span`
   display: block;
+  margin-top: 20%;
   margin-bottom: 6px;
   font-size: ${p => p.theme.fontSizes.one};
   font-weight: 400;
+  text-align: center;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-bottom: 12px;
@@ -38,7 +40,9 @@ const MyCopyright = styled.span`
   }
 `;
 const ClipCopyright = styled.span`
+  display: block;
   font-size: ${p => p.theme.fontSizes.zero};
+  text-align: center;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: ${p => p.theme.fontSizes.one};;
@@ -72,10 +76,6 @@ export default function LegalTerms(props) {
           style={{
             position: 'absolute',
             color: 'white',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
             height: '100%',
             width: '100%',
             paddingLeft: '2.25rem',

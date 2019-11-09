@@ -186,9 +186,10 @@ export default class ClickHandling {
             : 'Enter fantasy';
           break;
         case 'updateSpacerHeight':
-          stateToUpdate.spacerHeight = this.calculateSpacerHeight(valueOne);
+          stateToUpdate.spacerHeight = this.calculateSpacerHeight();
           category = 'App state';
           action = 'Updated spacer height for /home';
+          break;
         case 'toggleMenu':
           stateToUpdate.isMenu = !isMenu;
           category = 'App state';

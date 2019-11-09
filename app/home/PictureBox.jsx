@@ -16,6 +16,7 @@ const PictureHolder = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
+  filter: ${p => p.theme.blurForTempContent && p.theme.blur};
   z-index: 1;
 `;
 const WhiteSheet = styled.div`
@@ -95,12 +96,12 @@ export default function PictureBox(props) {
     if (spellLevel < 1) {
       onLoadTwo(event);
     }
-  }
+  };
   const onLoadForCity = event => {
     if (spellLevel < 1) {
       onLoadSix(event);
     }
-  }
+  };
   const onTransitionEndForBlurredBoy = event => {
     eventManagement(event);
     setLoadLevels.three();

@@ -1,18 +1,18 @@
 import BusinessCard from './BusinessCard.jsx';
 import LegalTerms from './LegalTerms.jsx';
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 52px;
+  top: ${p => p.homeIsActive || p.illustrationLevel > 2 ? '0px' : '52px'};
   left: 0px;
   bottom: 0px;
   width: 100%;
-  background-color: ${css`rgba(115, 192, 232, ${p => !p.homeIsActive ? '.7' : '.2'})}`};
+  background-color: rgba(115, 192, 232, .7);
   z-index: 1;
 `;
 const CardHolder = styled.div`
@@ -24,6 +24,13 @@ const CardHolder = styled.div`
   top: 0px; 
   left: 0px;
   bottom: 55px;
+  ${p => p.illustrationLevel > 2 && 'margin-top: 52px;'}
+
+  @media (orientation: landscape) and (max-height: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    // Opacity is 1 on short screens when the charms and fairy overlap.
+    // Transition triggered by above styling rules so orientation changes benefit from it.
+    margin-top: ${p => p.homeIsActive && '52px'};
+  }
 `;
 const Card = styled.section`
   height: 160px;
@@ -46,32 +53,24 @@ export default class LegalTermsOrBizCard extends Component {
 
     const {
       appState,
-      boundHandleClickForApp
     } = this.props;
     const {
       currentCaller,
+      illustrationLevel,
       tempContent
     } = appState;
     const homeIsActive = currentCaller === 'home';
-
-    // REACTIVATE to allow temp content to be closed by clicking the page:
-    // const stopOnClickPropagation = event => event.stopPropagation();
-    // const onClickHandler = () => {
-    //   if (tempContent === 1) {
-    //     boundHandleClickForApp('updateTempContent', 1);
-    //   } else {
-    //     boundHandleClickForApp('updateTempContent', 2);
-    //   }
-    // };
     
     return (
       <Container
         homeIsActive={homeIsActive}
-        // onClick={onClickHandler} // See note, above
+        illustrationLevel={illustrationLevel}
       >
-        <CardHolder>
+        <CardHolder
+          homeIsActive={homeIsActive}
+          illustrationLevel={illustrationLevel}
+        >
           <Card
-            // onClick={stopOnClickPropagation} // See note, above
             tempContent={tempContent}
           >
             {tempContent === 1 ? (

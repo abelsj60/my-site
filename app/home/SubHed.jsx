@@ -9,6 +9,7 @@ export default styled.h2`
   font-weight: 700;
   margin-left: ${p => p.marginLeft};
   margin-bottom: 5px;
+  text-align: center;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView} and min-height: 640px) {
     margin-bottom: 17px;

@@ -30,7 +30,7 @@ export default class Home extends Component {
     // The h1 takes additonal space above its top, all of which is included in the onlick region
     // This spacer lets us limit the height of the clickable region to the actual text area...
     // Also occupies space in document flow, putting NameTag / Charms at intended position
-    this.props.boundHandleClickForApp('updateSpacerHeight', this.props.appState.height);
+    this.props.boundHandleClickForApp('updateSpacerHeight');
 
     this.state = {
       activeCharm: initialPattern[0],
