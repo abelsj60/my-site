@@ -27,7 +27,7 @@ const Legal = styled.h1`
 `;
 const MyCopyright = styled.span`
   display: block;
-  margin-top: 20%;
+  margin-top: 18%;
   margin-bottom: 6px;
   font-size: ${p => p.theme.fontSizes.one};
   font-weight: 400;

@@ -160,12 +160,21 @@ const Score = styled.p`
   font-weight: 400;
   color: ${p => p.theme.colors.black};
   margin-bottom: 5px;
+
+  @media (orientation: landscape) and (max-height: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    color: ${p => p.theme.colors.white};
+    text-shadow: 1px 1px 0px ${p => p.theme.colors.black};
+  }
 `;
 const OuterBar = styled.div`
   height: 1px;
   width: 100%;
   align-self: center;
   background-color: ${p => p.theme.colors.white};
+
+  @media (orientation: landscape) and (max-height: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    background-color: ${p => p.theme.colors.black};
+  }
 `;
 const InnerBar = styled.div`
   width: ${p => p.barWidth}%;
@@ -174,6 +183,10 @@ const InnerBar = styled.div`
   // No onTransitionEnd handler in which to cancel propagation
   // Filtering event out of OuterContainer w/event.propertyName check
   transition: width .5s ease-out;
+
+  @media (orientation: landscape) and (max-height: ${p => p.theme.mediaQueries.narrowBreakOne}) {
+    background-color: ${p => p.theme.colors.white};
+  }
 `;
 
 export default function Charms(props) {

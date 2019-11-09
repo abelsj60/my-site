@@ -190,6 +190,12 @@ export default class ClickHandling {
           category = 'App state';
           action = 'Updated spacer height for /home';
           break;
+        case 'updateNameTagWidth':
+          console.log('updateNameTagWidth');
+          stateToUpdate.nameTagWidth = this.calculateNameTagWidth();
+          category = 'App state';
+          action = 'Updated name tag width for /home';
+          break;
         case 'toggleMenu':
           stateToUpdate.isMenu = !isMenu;
           category = 'App state';
