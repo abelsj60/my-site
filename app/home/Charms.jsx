@@ -59,9 +59,14 @@ const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  width: 200px;
+  width: 190px;
   align-self: center;
   margin-left: 1.17em;
+
+  // Arbitrarily chosen width for a 'lil extra styling
+  @media (min-width: 335px) {
+    width: 200px;
+  }
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 17px;
