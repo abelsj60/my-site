@@ -229,7 +229,7 @@ export default class Home extends Component {
       // Only called when exiting the spell early. The spell
       // should typically be reset when the spell's cast.
       const newPattern = this.createSpellPattern();
-      this.props.boundHandleClickForApp('updateNameTagWidth');
+      this.props.handleResize();
       this.setState({
         activeCharm: newPattern[0],
         movement: '',

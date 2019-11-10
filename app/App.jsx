@@ -416,6 +416,7 @@ class App extends Component {
               {...this.props}
               appState={this.state}
               boundHandleClickForApp={boundHandleClickForApp}
+              handleResize={this.handleResize}
             />
             <LegalTermsOrBizCard
               {...this.props}
