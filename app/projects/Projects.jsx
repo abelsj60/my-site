@@ -1,7 +1,7 @@
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import Loader from '../shared/Loader.jsx';
 import Main from '../primitives/Main.jsx';
-import ContentHolder from '../primitives/ContentHolder.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
@@ -56,7 +56,6 @@ const Caption = styled.figcaption`
 `;
 const ImageHolder = styled.div`
   padding: 15px;
-  min-height: ${p => p.holderHeight}px;
   background-color: ${p => p.theme.colors.reverieBlue};
 `;
 const MainImage = styled.img`
@@ -65,6 +64,7 @@ const MainImage = styled.img`
   height: auto;
   vertical-align: top;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, .3);
+  ${p => p.imageLoaded > 0 && 'transition: opacity .25s ease-in;'}
 `;
 
 export default function Projects(props) {
@@ -89,7 +89,8 @@ export default function Projects(props) {
   } = allContentData[projectIndex].attributes;
   const caption = captions[thumbnailIndex];
   const filePrefix = mainImages[thumbnailIndex];
-  const holderHeight = imageHolderHeight[thumbnailIndex];
+  const holderHeight = imageHolderHeight[thumbnailIndex].split(' ');
+  const ratio = (100 / (holderHeight[0] / holderHeight[1]));
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
@@ -113,12 +114,12 @@ export default function Projects(props) {
             {...props}
           />
           <Loader
-            spinner={true}
-            marginLeft="auto"
-            smallMarginLeft="auto"
-            show={imageLoaded < 1}
             done={imageLoaded > 1}
             forTransition={onTransitionEndForLoader}
+            marginLeft="auto"
+            show={imageLoaded < 1}
+            smallMarginLeft="auto"
+            spinner={true}
           />
           <ProjectNav
             {...props}
@@ -160,21 +161,28 @@ export default function Projects(props) {
             <Caption>
               {caption}
             </Caption>
-            <ImageHolder
-              holderHeight={holderHeight}
-            >
-              <MainImage
-                alt="mainPic"
-                src={`${urlPrefix}${filePrefix}-q95-625-1x.jpg`}
-                srcSet={
-                  `${urlPrefix}${filePrefix}-q50-1250-2x.jpg 1250w`,
-                  `${urlPrefix}${filePrefix}-q50-1875-3x.jpg 1875w`,
-                  `${urlPrefix}${filePrefix}-q50-2500-4x.jpg 2500w`
-                }
-                sizes="620px"
-                imageLoaded={imageLoaded}
-                onLoad={onLoadMainImage}
-              />
+            <ImageHolder>
+              <div
+                // Take up space for image before it loads
+                // https://stackoverflow.com/a/51485719
+                style={{
+                  paddingBottom: `${ratio}%`,
+                  height: '0px'
+                }}
+              >
+                <MainImage
+                  alt="mainPic"
+                  imageLoaded={imageLoaded}
+                  onLoad={onLoadMainImage}
+                  sizes="620px"
+                  src={`${urlPrefix}${filePrefix}-q95-625-1x.jpg`}
+                  srcSet={
+                    `${urlPrefix}${filePrefix}-q50-1250-2x.jpg 1250w`,
+                    `${urlPrefix}${filePrefix}-q50-1875-3x.jpg 1875w`,
+                    `${urlPrefix}${filePrefix}-q50-2500-4x.jpg 2500w`
+                  }
+                />
+              </div>
             </ImageHolder>
           </Figure>
         </Overflow>

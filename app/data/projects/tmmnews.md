@@ -34,8 +34,8 @@ showTheseAttributes: [
   'technologies'
 ]
 imageHolderHeight: [
-  '465',
-  '348.922',
-  '348.922'
+  '2500 1875',
+  '2500 1406',
+  '2500 1406'
 ]
 ---

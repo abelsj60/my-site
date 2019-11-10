@@ -17,83 +17,84 @@ export default class ErrorBoundary extends Component {
   render() {
     const { hasError, initialLoad } = this.state;
     const { children } = this.props;
+    const errorHed = initialLoad ? "Hi! I'm James" : 'Oh no, it broke!'
     const errorText = initialLoad
-      ? "browser problem. Please use Chrome, Firefox, or Safari"
-      : "really confusing error. You might want to try that again";
+      ? "We've got a browser problem. Please use Chrome, Firefox, or Safari. In the meantime, here's my 411."
+      : "There's been a really confusing error. You might want to try that again. In the meantime, contact me here.";
 
     if (hasError) {
       return (
         <Fragment>
-          <div
-            style={{
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              maxWidth: '1078px'
-            }}
-          >
-            <header>
-              <h1
-                style={{
-                  marginBottom: '20px'
-                }}
-              >
-                Hi! I'm James
-              </h1>
-              <p
-                style={{
-                  color: '#fd1172'
-                }}
-              >
-                So sorry! We've got a {errorText}. In the meantime, here's my 411.
-              </p>
-            </header>
-            {initialLoad && (
+          <header>
+            <h1
+              style={{
+                marginTop: '0px',
+                marginBottom: '20px'
+              }}
+            >
+              {errorHed}
+            </h1>
+            <p
+              style={{
+                color: '#fd1172'
+              }}
+            >
+              So sorry! {errorText}
+            </p>
+          </header>
+          {initialLoad && (
+            <div
+              style={{
+                paddingLeft: '25px',
+                paddingRight: '25px'
+              }}
+            >
               <div
                 style={{
-                  paddingLeft: '25px',
-                  paddingRight: '25px'
+                  height: '0px',
+                  marginBottom: '10px',
+                  paddingBottom: '39%'
                 }}
               >
                 <img
                   alt=""
                   style={{
-                    width: '100%',
-                    marginBottom: '10px'
+                    width: '100%'
                   }}
                   src="/convert-to-data-uri/me-xnc-q90.jpg"
                 />
-                <p>
-                  I write code for Web sites and software. I tell stories, too.
-                </p>
-                <p>
-                  That's important. It means I don't just mechanically code software. I try to figure out — and keep sight of — the stories that drive it. I always have.
-                </p>
-                <p>
-                  As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And, as a lawyer, I crafted stories that made legal arguments.
-                </p>
-                <p>
-                  See that — all stories, all the time.
-                </p>
-                <p>
-                  So. What's yours?
-                </p>
-                <p>
-                  -j
-                </p>
               </div>
-            )}
-            <footer
-              style={{
-                marginTop: '25px',
-                marginBottom: '25px',
-                paddingLeft: '25px',
-                paddingRight: '25px',
-                color: 'slategrey'
-              }}
-            >
-              Contact: hello@jamesabels.net
-            </footer>
-          </div>
+              <p>
+                I write code for Web sites and software. I tell stories, too.
+              </p>
+              <p>
+                That's important. It means I don't just mechanically code software. I try to figure out — and keep sight of — the stories that drive it. I always have.
+              </p>
+              <p>
+                As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And, as a lawyer, I crafted stories that made legal arguments.
+              </p>
+              <p>
+                See that — all stories, all the time.
+              </p>
+              <p>
+                So. What's yours?
+              </p>
+              <p>
+                -j
+              </p>
+            </div>
+          )}
+          <footer
+            style={{
+              marginTop: '25px',
+              marginBottom: '25px',
+              paddingLeft: '25px',
+              paddingRight: '25px',
+              color: 'slategrey'
+            }}
+          >
+            Contact: hello@jamesabels.net
+          </footer>
         </Fragment>
       );
     }
@@ -110,6 +111,14 @@ export default class ErrorBoundary extends Component {
       errorInfo: errorInfo,
       hasError: true
     });
+
+    // We set body margin to 0 in App.GlobalStyle. That can effect 
+    // the errorBoundary, so we'll check and set it to 8px here.
+
+    const body = document.getElementsByTagName('body');
+    if (body[0].style.margin === '') {
+      body[0].style.margin = '8px';
+    };
 
     if (process.env.NODE_ENV !== 'development') {
       ReactGA.exception({

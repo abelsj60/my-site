@@ -105,6 +105,7 @@ export default class ContentLoader extends Component {
                       />
                     );
                   }
+                  // Components must be Capitalized!, so use variable...
                   const MenuContent = this.getMenuContent(caller);
                   return (
                     <Menu

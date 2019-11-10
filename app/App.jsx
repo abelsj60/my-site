@@ -330,7 +330,7 @@ class App extends Component {
       spacerHeight: this.calculateSpacerHeight(), // Set by 'handleResize', so must live here. Used by Home/NameTag.
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
       // Won't catch iPadOS w/o customMobileTest. Search for 11/9/19 notes as to necessity.
-      type: isMobile ? 'mobile' : 'desktop', 
+      type: isMobile ? 'mobile' : 'desktop',
       wrongPassword: '' // to be removed
     };
 
@@ -697,7 +697,6 @@ class App extends Component {
 
   componentDidMount() {
     // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
-
     if (!this.hasStyle('flexbox')) {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {

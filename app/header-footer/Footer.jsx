@@ -159,7 +159,7 @@ export default function FooterContainer(props) {
           marginBottom="2"
           marginLeft="20"
           maxWidth="33"
-          smallMarginLeft="10"
+          smallMarginLeft="12"
           smallMarginRight="17"
           show={illustrationDelay}
           smallFont={true}

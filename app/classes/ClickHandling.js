@@ -238,7 +238,7 @@ export default class ClickHandling {
 
           // 1. If any link is clicked, other than a MenuButton,
           // we'll rebuild the state and toggle the menu
-          // (this will turn it off it it's on, i.e., a header
+          // (this will turn it off if it's on, i.e., a header
           // link was clicked instead of the MenuButton).
 
           // 2. If the back or forward button is clicked,
