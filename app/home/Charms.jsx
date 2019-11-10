@@ -59,7 +59,7 @@ const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  width: 190px;
+  width: 193px;
   align-self: center;
   margin-left: 1.17em;
 

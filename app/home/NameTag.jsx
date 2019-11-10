@@ -80,15 +80,18 @@ const Hed = styled.h1`
   // We rely on !p.homePageLoaded to ensure the associated test only runs on initialLoad. It should not be considered thereafter.
   opacity: ${p => !p.homePageLoaded && p.loadLevelBlurs < 2 ? '0' : '1'};
   transition: ${p => p.loadLevelAll < 6 && 'opacity 1s ease-in'};
-  
+
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: -17px;
   }
 `;
 const InnerContainer = styled.div`
-  display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
-  transition: opacity ${p => p.loadLevelAll < 6 ? '.55s' : p.enter ? '.45s' : '.65s'} ease-in;
+  // display css works, but results in wrong size motto when you come out of the spell after changing orientation
+  // display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
+  position: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) && 'absolute'};
+  ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
   opacity: ${p => (!p.homePageLoaded && p.loadLevelAll < 6) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
+  transition: opacity ${p => p.loadLevelAll < 6 ? '.55s' : p.enter ? '.45s' : '.65s'} ease-in;
 `;
 const Pitch = styled.section`
   overflow: auto;
@@ -167,8 +170,12 @@ export default function NameTag(props) {
   };
   const onTransitionEndForInnerContainer = event => {
     eventManagement(event);
-    setSpellLevels.two(movement === 'enter', 'InnerContainer');
-    setSpellLevels.reset(movement === 'exit', 'InnerContainer');
+    // Use conditional if InnerContainer set to position: absolute
+    // Don't need it when dispaly: none is used instead.
+    if (spellLevel === 1) { 
+      setSpellLevels.two(movement === 'enter', 'InnerContainer');
+      setSpellLevels.reset(movement === 'exit', 'InnerContainer');
+    }
   };
 
   return (
@@ -201,6 +208,7 @@ export default function NameTag(props) {
           exit={movement === 'exit'}
           homePageLoaded={homePageLoaded}
           loadLevelAll={setLoadLevels.sum().all}
+          nameTagWidth={nameTagWidth}
           onTransitionEnd={onTransitionEndForInnerContainer}
           spellLevel={spellLevel}
         >
