@@ -1,20 +1,6 @@
-import ArefRuqaaLatin700Woff from '../docs/assets/fonts/aref-ruqaa-v8-latin/aref-ruqaa-v8-latin-700.woff';
-import ArefRuqaaLatin700Woff2 from '../docs/assets/fonts/aref-ruqaa-v8-latin/aref-ruqaa-v8-latin-700.woff2';
-import Montserrat300Woff from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-300.woff';
-import Montserrat300Woff2 from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-300.woff';
-import MontserratRegularWoff from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-regular.woff';
-import MontserratRegularWoff2 from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-regular.woff';
-import Montserrat500Woff from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-500.woff';
-import Montserrat500Woff2 from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-500.woff';
-import PlayfairDisplay700Woff from '../docs/assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-700.woff';
-import PlayfairDisplay700Woff2 from '../docs/assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-700.woff2';
-import PlayfairDisplay900Woff from '../docs/assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-900.woff';
-import PlayfairDisplay900Woff2 from '../docs/assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-900.woff2';
-
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
-// import customMobileTest from './customMobileTest.js';
 import styled, {
   css,
   createGlobalStyle,
@@ -43,6 +29,20 @@ import Referrer from './classes/Referrer.js';
 import ScrollHandling from './classes/ScrollHandling.js';
 import State from './classes/State.js';
 import { withRouter } from 'react-router';
+
+// Fonts!
+import ArefRuqaaLatin700Woff from '../docs/assets/fonts/aref-ruqaa-v8-latin/aref-ruqaa-v8-latin-700.woff';
+import ArefRuqaaLatin700Woff2 from '../docs/assets/fonts/aref-ruqaa-v8-latin/aref-ruqaa-v8-latin-700.woff2';
+import Montserrat300Woff from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-300.woff';
+import Montserrat300Woff2 from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-300.woff';
+import MontserratRegularWoff from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-regular.woff';
+import MontserratRegularWoff2 from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-regular.woff';
+import Montserrat500Woff from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-500.woff';
+import Montserrat500Woff2 from '../docs/assets/fonts/montserrat-v14-latin/montserrat-v14-latin-500.woff';
+import PlayfairDisplay700Woff from '../docs/assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-700.woff';
+import PlayfairDisplay700Woff2 from '../docs/assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-700.woff2';
+import PlayfairDisplay900Woff from '../docs/assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-900.woff';
+import PlayfairDisplay900Woff2 from '../docs/assets/fonts/playfair-display-v15-latin/playfair-display-v15-latin-900.woff2';
 
 const colors = {
   black: 'black',
@@ -245,7 +245,7 @@ class App extends Component {
     let firstHeartbeat = typeof localStorage.lastHeartbeat === 'undefined';
 
     if (!firstHeartbeat) {
-      const now = dayjs(); // now.add('3', 'week');
+      const now = dayjs(); // For debugging: now.add('3', 'week');
       const lastHeartbeat = dayjs(localStorage.lastHeartbeat);
       firstHeartbeat = now.diff(lastHeartbeat, 'week', true) > 2;
 
@@ -273,7 +273,7 @@ class App extends Component {
       : window.innerHeight;
     const coverVals = cover(window.innerWidth, pageHeight, images.width, images.height);
 
-    // One way to block orientation change
+    // Want to block orientation changes? Try this:
     // https://css-tricks.com/snippets/css/orientation-lock/
 
     if (process.env.NODE_ENV !== 'development') {
@@ -680,6 +680,7 @@ class App extends Component {
   }
 
   updateSpacerHeight() {
+    // Note: Really a faceplate now...see NameTag notes.
     const spacerHeight = this.calculateSpacerHeight();
 
     if (spacerHeight !== this.state.spacerHeight) {

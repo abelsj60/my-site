@@ -1,6 +1,5 @@
-// import customMobileTest from './customMobileTest.js';
 import home from '../data/home/home.md';
-import { isIOS, isMobile } from 'react-device-detect';
+import { isIOS } from 'react-device-detect';
 import stories from '../data/the-story/index.js';
 import urlPrefix from './urlPrefix';
 
@@ -12,10 +11,9 @@ export default function preloadBigImages() {
   const images = {};
   const devicePixelRatio = isIOS ? Math.floor(window.devicePixelRatio) : window.devicePixelRatio;
   const timesPixelRatio = dimension => Math.floor(devicePixelRatio * dimension);
-  // Desktops get it right, mobile may not— check if height is bigger than width
+  // Desktops get it right, mobile may not — check if height is bigger than width
   // Note, 11/9/19: We need the customMobileTest to catch the new iPadOS. Remember, we need
   // to know the widest possible width in order to select an image that always looks great.
-  // const widthType = (isMobile || customMobileTest) && window.screen.height > window.screen.width ? 'widthIsHeight' : 'widthIsWidth';
   const widthType = window.screen.height > window.screen.width ? 'widthIsHeight' : 'widthIsWidth';
   const screenWidth = widthType === 'widthIsHeight' ? window.screen.height : window.screen.width;
   const screenHeight = widthType === 'widthIsHeight' ? window.screen.width : window.screen.height;
