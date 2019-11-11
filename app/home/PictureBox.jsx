@@ -6,9 +6,11 @@ import BlurredForrestBackground from './BlurredForrestBackground.jsx';
 import NycBackground from './NycBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import ForrestBackground from './ForrestBackground.jsx';
+import ForrestFallback from '../../docs/assets/images/convert-to-data-uri/forrest-ink-50x50-53.png';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
+const mobileTransitionValues = 'opacity .15s ease-out';
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -19,19 +21,34 @@ const PictureHolder = styled.div`
   filter: ${p => p.theme.blurForTempContent && p.theme.blur};
   z-index: 1;
 `;
-const WhiteSheet = styled.div`
+const Portal = styled.div`
   // Note, 11/9/19: This won't catch iPadOS, but the behvior that
   // requires the white sheet may not be present, either. So...
   ${p => !p.isMobile && 'display: none;'}
   position: absolute;
-  background-color: ${p => p.theme.colors.white};
+  background-color: rgba(115, 192, 232, .2);
   z-index: ${p => p.zIndex};
   // May need to fill page:   
   // https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
   opacity: ${p => p.homePageLoaded && p.loadLevelFull <= 1 ? 1 : 0};
-  transition: opacity .15s ease-out;
+  transition: ${mobileTransitionValues};
+`;
+const FallbackImage = styled.img`
+  // Note, 11/9/19: This won't catch iPadOS, but the behvior that
+  // requires the white sheet may not be present, either. So...
+  ${p => !p.isMobile && 'display: none;'}
+  position: absolute;
+  object-fit: cover;
+  font-family: 'object-fit: cover;';
+  z-index: ${p => p.zIndex};
+  // May need to fill page:   
+  // https://stackoverflow.com/a/30794589
+  height: 100%;
+  width: 100%;
+  opacity: ${p => p.homePageLoaded && p.loadLevelFull <= 1 ? 1 : 0};
+  transition: ${mobileTransitionValues};
 `;
 
 export default function PictureBox(props) {
@@ -137,12 +154,20 @@ export default function PictureBox(props) {
 
   return (
     <PictureHolder>
-      <WhiteSheet
+      <Portal 
+        alt=""
+        homePageLoaded={homePageLoaded}
+        isMobile={type === 'mobile'} // See above note
+        loadLevelFull={setLoadLevels.sum().full}
+        zIndex="5"
+      />
+      <FallbackImage 
+        alt=""
+        src={ForrestFallback}
         homePageLoaded={homePageLoaded}
         isMobile={type === 'mobile'} // See above note
         loadLevelFull={setLoadLevels.sum().full}
         zIndex="4"
-        stay={true}
       />
       <BlurredBoyForeground
         alt={descriptionBoy}

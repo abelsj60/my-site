@@ -46,7 +46,7 @@ const Graf = styled.p`
 const Figure = styled.figure`
   margin: 0px;
   padding-top: 15px;
-  border-top: 1px solid ${p => p.theme.colors.blueTwo};
+  border-top: 1px solid lightgrey;
 `;
 const Caption = styled.figcaption`
   margin-bottom: 10px;
