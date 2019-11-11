@@ -74,7 +74,7 @@ const InnerContainer = styled.div`
     margin-left: 1.6em;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 1000px)  {
+  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 950px)  {
     margin-top: 25px;
     width: 330px;
   }
@@ -108,7 +108,7 @@ const Charm = styled.div`
     height: 50px;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 1000px) {
+  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 950px) {
     width: 75px;
     height: 75px;
   }
@@ -138,7 +138,7 @@ const Eye = styled.div`
     width: 6px;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 1000px) {
+  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 950px) {
     height: 35px;
     width: 8px;
   }
@@ -161,7 +161,7 @@ const Dashboard = styled.div`
     margin-top: 32px;
   }
 
-  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 1000px)  {
+  @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 950px)  {
     margin-top: 40px;
   }
 `;

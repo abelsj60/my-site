@@ -508,18 +508,18 @@ class App extends Component {
   }
 
   rejectResizing() {
-    if (this.state) { // Self-determine if we're in Constructor
-      if (!isMobile && this.state.height === window.innerHeight) {
-        // On desktops, only resize if height's changing
-        return { result: true, reason: "width hasn't changed" };
-      } else if (this.state.isZooming) {
-        // Don't resize while isZooming (there's a lag between
-        // this.state.isZooming and this.state.pinchZoomed).
-        return { result: true, reason: 'isZooming' };
-      } else if (this.state.pinchZoomed) {
-        // Do not resize while pinchZoomed.
-        return { result: true, reason: 'pinchZoomed' };
-      }
+    const { height, isZooming, pinchZoomed } = this.state;
+
+    if (!isMobile && height === window.innerHeight) {
+      // On desktops, only resize if height's changing
+      return { result: true, reason: "width hasn't changed" };
+    } else if (isZooming) {
+      // Don't resize while isZooming (there's a lag between
+      // isZooming and pinchZoomed).
+      return { result: true, reason: 'isZooming' };
+    } else if (pinchZoomed) {
+      // Do not resize while pinchZoomed.
+      return { result: true, reason: 'pinchZoomed' };
     }
 
     return { result: false, reason: '' };
