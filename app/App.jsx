@@ -457,6 +457,7 @@ class App extends Component {
     // We're probably zooming if two fingers are down.
 
     if (event.touches.length === 2) {
+      const { isZooming, pinchZoomed } = this.state;
       const stateToUpdate = {
         isAfterTouch: true,
         isZooming: true
@@ -466,15 +467,15 @@ class App extends Component {
       // This is a more effective check than trying to
       // add points as coordinates or height/width.
 
-      if (window.pageXOffset > 0 && window.pageYOffset > 0) {
+      if (!pinchZoomed && window.pageXOffset > 0 && window.pageYOffset > 0) {
         stateToUpdate.pinchZoomed = true; // Set zoom state
         this.setState(stateToUpdate);
-      } else if (window.pageXOffset <= 0 && window.pageYOffset <= 0) {
+      } else if (pinchZoomed && window.pageXOffset <= 0 && window.pageYOffset <= 0) {
         // Hard to hit 0 on the nose, so we look for negatives.
         stateToUpdate.pinchZoomed = false; // Set zoom state
         this.setState(stateToUpdate);
       }
-    } else if (event.touches.length === 1 && this.state.pinchZoomed) {
+    } else if (event.touches.length === 1 && pinchZoomed) {
       // Note, 11/11/19: Should investigate whether this logic is still necessary
       // Let's prevent a resize when an oversized page is being scrolled.
 
@@ -487,12 +488,15 @@ class App extends Component {
       // We prevent this by setting afterTouch in order to tell
       // updateHeight not to reset the scrollTop).
 
-      clearTimeout(this.resizeTimeoutId2); // Debounce!
+      if (this.resizeTimeoutId2 > 0) {
+        clearTimeout(this.resizeTimeoutId2); // Debounce!
+      }
+
       this.isAfterTouchWhenScrollingPage = true;
       this.resizeTimeoutId2 = setTimeout(() => {
         this.isAfterTouchWhenScrollingPage = false;
       }, 500);
-    } else if (event.touches.length === 1 && !this.state.pinchZoomed && this.state.isZooming) {
+    } else if (event.touches.length === 1 && !pinchZoomed && isZooming) {
       // Try to catch browsers that have multi-touch onTouchMove, but no onToucheEnd.
       this.setState({ isZooming: false });
     }
@@ -531,14 +535,17 @@ class App extends Component {
       return false;
     }
 
-    clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout (aka, debounce)
+    if (this.resizeTimeoutId > 0) {
+      clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout (aka, debounce)
+    }
+
     this.resizeTimeoutId = setTimeout(() => {
       this.updateSpacerHeight();
       this.updateNameTagWidth();
       this.updateHeight();
     }, 50);
   }
-  
+
   updateHeight() {
     const { pathname, search } = window.location;
 
