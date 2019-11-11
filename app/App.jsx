@@ -474,7 +474,8 @@ class App extends Component {
         stateToUpdate.pinchZoomed = false; // Set zoom state
         this.setState(stateToUpdate);
       }
-    } else {
+    } else if (event.touches.length === 1 && this.state.pinchZoomed) {
+      // Note, 11/11/19: Should investigate whether this logic is still necessary
       // Let's prevent a resize when an oversized page is being scrolled.
 
       // This happens when the current screenHeight is too narrow. In
@@ -491,12 +492,15 @@ class App extends Component {
       this.resizeTimeoutId2 = setTimeout(() => {
         this.isAfterTouchWhenScrollingPage = false;
       }, 500);
+    } else if (event.touches.length === 1 && !this.state.pinchZoomed && this.state.isZooming) {
+      // Try to catch browsers that have multi-touch onTouchMove, but no onToucheEnd.
+      this.setState({ isZooming: false });
     }
   }
 
   handleTouchEnd() {
-    // Touch is over, have we been zooming?
-
+    // Touch is over, have we been zooming? But note, caniuse says onTouchEnd is often
+    // unavailable, so we have similar logic in onTouchMove to be sure to reset it.
     if (this.state.isZooming) {
       // Let's set intermediate values for resizing.
       this.setState({ isZooming: false });
@@ -509,7 +513,7 @@ class App extends Component {
         // On desktops, only resize if height's changing
         return { result: true, reason: "width hasn't changed" };
       } else if (this.state.isZooming) {
-        // Don't resize while zooming (there's a lag between
+        // Don't resize while isZooming (there's a lag between
         // this.state.isZooming and this.state.pinchZoomed).
         return { result: true, reason: 'isZooming' };
       } else if (this.state.pinchZoomed) {
