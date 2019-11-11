@@ -324,7 +324,7 @@ class App extends Component {
       isValidUser: false, // to be removed
       isZooming: false, // True when usere is pinch zooming
       lastCaller: '',
-      nameTagWidth: Math.floor(.27 * coverVals.width), // Orig. dimensions: 1349 / 5115
+      nameTagWidth: this.calculateNameTagWidth(images), // Orig. dimensions: 1349 / 5115
       password: '', // to be removed
       pinchZoomed: false, // Zoomed! (Or not.)
       spacerHeight: this.calculateSpacerHeight(), // Set by 'handleResize', so must live here. Used by Home/NameTag.
@@ -503,8 +503,30 @@ class App extends Component {
     }
   }
 
+  rejectResizing() {
+    if (this.state) { // Self-determine if we're in Constructor
+      if (!isMobile && this.state.height === window.innerHeight) {
+        // On desktops, only resize if height's changing
+        return { result: true, reason: "width hasn't changed" };
+      } else if (this.state.isZooming) {
+        // Don't resize while zooming (there's a lag between
+        // this.state.isZooming and this.state.pinchZoomed).
+        return { result: true, reason: 'isZooming' };
+      } else if (this.state.pinchZoomed) {
+        // Do not resize while pinchZoomed.
+        return { result: true, reason: 'pinchZoomed' };
+      }
+    }
+
+    return { result: false, reason: '' };
+  }
+
   handleResize() {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
+    if (this.rejectResizing().result) {
+      return false;
+    }
+
     clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout (aka, debounce)
     this.resizeTimeoutId = setTimeout(() => {
       this.updateSpacerHeight();
@@ -514,18 +536,6 @@ class App extends Component {
   }
   
   updateHeight() {
-    if (!isMobile && this.state.height === window.innerHeight) {
-      // On desktops, only resize if height's changing
-      return false;
-    } else if (this.state.isZooming) {
-      // Don't resize while zooming (there's a lag between
-      // this.state.isZooming and this.state.pinchZoomed).
-      return false;
-    } else if (this.state.pinchZoomed) {
-      // Do not resize while pinchZoomed.
-      return false;
-    }
-
     const { pathname, search } = window.location;
 
     // iOS 12 introduced a strange new behavior. On orientation change, 
@@ -673,8 +683,8 @@ class App extends Component {
       : 15;
   }
 
-  calculateNameTagWidth() {
-    const { images } = this.state;
+  calculateNameTagWidth(topImages) {
+    const images = topImages || this.state.images;
     const coverVals = cover(window.innerWidth, window.innerHeight, images.width, images.height);
     return Math.floor(.27 * coverVals.width);
   }
