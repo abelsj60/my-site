@@ -57,10 +57,17 @@ const OuterContainer = styled.div`
   pointer-events: ${p => p.spellLevel === 5 && 'none'};
   text-align: center;
   z-index: 2;
+  // Set margin-top with spacer height to avoid a weird "jumping bug" when using spacer alone. While spacer says it's always on screen,
+  // when in landscape, the browser thinks it's removed as it exits the spell. This caused my name to jump up and get cut off. 
+  // We get the right result by positioning the element w/margin-top, and setting spacer to position: absolute (to cover the h1's excess space).
+  margin-top: ${p => p.spacerHeight}px;
   ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
 `;
 const Spacer = styled.div`
-  height: ${p => p.spacerHeight + 'px'};
+  // This really isn't a spacer any more. It's position: absolute, so more of a coverPlate. It minimizes accidental clicks/touches above my 
+  // name, which is an active onClick zone b/c the h1 has unintentional space above it. The OuterContainer positions itself w/margin-top.
+  position: absolute;
+  height: ${p => p.spacerHeight}px;
   width: 100%;
   z-index: 3;
 `;
@@ -188,6 +195,7 @@ export default function NameTag(props) {
         nameTagWidth={nameTagWidth}
         loadLevelAll={setLoadLevels.sum().all}
         onAnimationEnd={onAnimationEndForHeartbeat}
+        spacerHeight={spacerHeight}
         spellLevel={spellLevel}
         tempContent={tempContent}
       >
