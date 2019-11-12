@@ -272,6 +272,11 @@ class App extends Component {
       ? document.documentElement.clientHeight
       : window.innerHeight;
     const coverVals = cover(window.innerWidth, pageHeight, images.width, images.height);
+    // Let's remember the coverVals.y offset so we can resize on desktops when it changes .
+    // Also, not updating this value after it's set because it doesn't matter once set.
+    // The value is a benchmark. It's valid as long as we see a change when comparing
+    // it to the current coverVal.y in the resize event.
+    this.homeImageYOffsets = coverVals.y;
 
     // Want to block orientation changes? Try this:
     // https://css-tricks.com/snippets/css/orientation-lock/
@@ -284,9 +289,7 @@ class App extends Component {
     // Lower limit for resizing — (iPhone/SE form
     // factor uses default height, wider phones
     // use their true height).
-    this.defaultHeightWhenTooSmall = isMobile && !isMobileSafari
-      ? document.documentElement.clientHeight
-      : window.innerHeight; // Arbitrary (iPhone SE height)
+    this.defaultHeightWhenTooSmall = pageHeight; // Arbitrary (iPhone SE height)
     this.headerMenuTimeoutId = undefined;
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
@@ -522,12 +525,25 @@ class App extends Component {
     }
   }
 
-  rejectResizing() {
-    const { height, isZooming, pinchZoomed } = this.state;
+  pageHeightAfterLoad() {
+    return isMobile && (!isMobileSafari || this.state.isAfterTouch)
+      ? document.documentElement.clientHeight > window.innerHeight
+        ? document.documentElement.clientHeight
+        : window.innerHeight
+      : window.innerHeight;
+  }
 
-    if (!isMobile && height === window.innerHeight) {
-      // On desktops, only resize if height's changing
-      return { result: true, reason: "width hasn't changed" };
+  rejectResizing() {
+    const { images, isZooming, pinchZoomed } = this.state;
+    const coverVals = cover(window.innerWidth, this.pageHeightAfterLoad(), images.width, images.height);
+
+    // Note: If testing on desktop in Chrome, remember that isMobile will test false if
+    // you emulate mobile via Chrome devTools AFTER loading the site on a regular
+    // desktop. You must reload it in devTools after shifting to mobile 
+    // emulation for isMobile to register correctly...!
+
+    if (!isMobile && coverVals.y === this.homeImageYOffsets) {
+      return { result: true, reason: 'On desktop, no change to homeImageYOffset' };
     } else if (isZooming) {
       // Don't resize while isZooming (there's a lag between
       // isZooming and pinchZoomed).
@@ -605,11 +621,7 @@ class App extends Component {
     // If Android, further check for the larger of our two possible values b/c some
     // devices let the address bar shrink in landscape, some don't, per BS testing.
 
-    const newHeight = isMobile && (!isMobileSafari || this.state.isAfterTouch)
-      ? document.documentElement.clientHeight > window.innerHeight
-        ? document.documentElement.clientHeight
-        : window.innerHeight
-      : window.innerHeight;
+    const newHeight = this.pageHeightAfterLoad();
 
     // Ensure the window top is at zero after resize change.
     // (This trigers another resize if height changes.)
