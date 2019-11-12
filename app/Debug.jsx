@@ -27,7 +27,6 @@ export default class Debug extends Component {
     const screenHeight = widthType === 'widthIsHeight' ? window.screen.width : window.screen.height;
     const resWidth = timesPixelRatio(screenWidth);
     const resHeight = timesPixelRatio(screenHeight);
-
     const bodyEl = document.getElementsByTagName('body')[0];
     const bodyRect = bodyEl.getBoundingClientRect();
 

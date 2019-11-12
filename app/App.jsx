@@ -267,10 +267,9 @@ class App extends Component {
     //        this.minAllowedHeight > newHeight.
     // Note, 11/9/19: iPadOS uses a desktop user agent. This test doesn't catch it.
     // However, the values it selects seem to remain accurate in terms of height.
-    // Therefore, we're not applying the customMobileTest.js here.
-    const pageHeight = isMobile && !isMobileSafari
-      ? document.documentElement.clientHeight
-      : window.innerHeight;
+    // Thus, this.calculatePageHeight() doesn't use the customMobileTest.js.
+
+    const pageHeight = this.calculatePageHeight();
     const coverVals = cover(window.innerWidth, pageHeight, images.width, images.height);
     // Let's remember the coverVals.y offset so we can resize on desktops when it changes .
     // Also, not updating this value after it's set because it doesn't matter once set.
@@ -459,7 +458,7 @@ class App extends Component {
   handleTouchMove(event) {
     // We're probably zooming if two fingers are down.
 
-      const { isZooming, pinchZoomed } = this.state;
+    const { isZooming, pinchZoomed } = this.state;
 
     if (event.touches.length === 2) {
       const stateToUpdate = {
@@ -487,7 +486,9 @@ class App extends Component {
         // on intermediate elements, which have the wrong dimensions. This
         // typically resulted in an oversized NameTag and a height that 
         // stretches below Safari's bottom menu bar.
-        setTimeout(() => this.handleResize('afterPinchZoom'), 500);
+        if (this.state.height !== window.innerHeight) {
+          setTimeout(() => this.handleResize('afterPinchZoom'), 500);
+        }
       }
     } else if (event.touches.length === 1 && pinchZoomed) {
       // Note, 11/11/19: Should investigate whether this logic is still necessary
@@ -525,8 +526,8 @@ class App extends Component {
     }
   }
 
-  pageHeightAfterLoad() {
-    return isMobile && (!isMobileSafari || this.state.isAfterTouch)
+  calculatePageHeight() {
+    return isMobile && (!isMobileSafari || (this.state && this.state.isAfterTouch))
       ? document.documentElement.clientHeight > window.innerHeight
         ? document.documentElement.clientHeight
         : window.innerHeight
@@ -535,7 +536,7 @@ class App extends Component {
 
   rejectResizing() {
     const { images, isZooming, pinchZoomed } = this.state;
-    const coverVals = cover(window.innerWidth, this.pageHeightAfterLoad(), images.width, images.height);
+    const coverVals = cover(window.innerWidth, this.calculatePageHeight(), images.width, images.height);
 
     // Note: If testing on desktop in Chrome, remember that isMobile will test false if
     // you emulate mobile via Chrome devTools AFTER loading the site on a regular
@@ -621,7 +622,7 @@ class App extends Component {
     // If Android, further check for the larger of our two possible values b/c some
     // devices let the address bar shrink in landscape, some don't, per BS testing.
 
-    const newHeight = this.pageHeightAfterLoad();
+    const newHeight = this.calculatePageHeight();
 
     // Ensure the window top is at zero after resize change.
     // (This trigers another resize if height changes.)
