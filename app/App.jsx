@@ -456,8 +456,9 @@ class App extends Component {
   handleTouchMove(event) {
     // We're probably zooming if two fingers are down.
 
-    if (event.touches.length === 2) {
       const { isZooming, pinchZoomed } = this.state;
+
+    if (event.touches.length === 2) {
       const stateToUpdate = {
         isAfterTouch: true,
         isZooming: true
@@ -474,6 +475,16 @@ class App extends Component {
         // Hard to hit 0 on the nose, so we look for negatives.
         stateToUpdate.pinchZoomed = false; // Set zoom state
         this.setState(stateToUpdate);
+        // handleResize should come last so React has a chance to run setState.
+        // setTimeout gives React time to reconcile the next elements w/the 
+        // ones on screen so they'll have the correct dimensions. 
+        // Also, 50 is added to 500 milliseconds b/c handleResize has a 
+        // setTimeout inside it, too. This timing is stable. I experimented 
+        // w/shorter times. There were not stable. We might get a resize 
+        // on intermediate elements, which have the wrong dimensions. This
+        // typically resulted in an oversized NameTag and a height that 
+        // stretches below Safari's bottom menu bar.
+        setTimeout(() => this.handleResize('afterPinchZoom'), 500);
       }
     } else if (event.touches.length === 1 && pinchZoomed) {
       // Note, 11/11/19: Should investigate whether this logic is still necessary
@@ -529,10 +540,14 @@ class App extends Component {
     return { result: false, reason: '' };
   }
 
-  handleResize() {
+  handleResize(str) {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
-    if (this.rejectResizing().result) {
-      return false;
+    const afterPinchZoom = str === 'afterPinchZoom';
+
+    if (!afterPinchZoom) {
+      if (this.rejectResizing().result) {
+        return false;
+      }
     }
 
     if (this.resizeTimeoutId > 0) {
@@ -697,6 +712,7 @@ class App extends Component {
   calculateNameTagWidth(topImages) {
     const images = topImages || this.state.images;
     const coverVals = cover(window.innerWidth, window.innerHeight, images.width, images.height);
+
     return Math.floor(.27 * coverVals.width);
   }
 

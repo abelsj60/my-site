@@ -7,6 +7,7 @@ import NycBackground from './NycBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import ForrestBackground from './ForrestBackground.jsx';
 import ForrestFallback from '../../docs/assets/images/convert-to-data-uri/forrest-ink-50x50-53.png';
+import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50x50-53.png';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
@@ -84,6 +85,7 @@ export default function PictureBox(props) {
   const blurredForrestSrc = images[imageNames[3]].src;
   const bigNycSrc = images[imageNames[4]].src;
   const blurredNycSrc = images[imageNames[5]].src;
+  const fallbackSource = !inCity ? ForrestFallback : NycFallback; 
 
   const onLoadTwo = event => {
     eventManagement(event);
@@ -163,7 +165,7 @@ export default function PictureBox(props) {
       />
       <FallbackImage 
         alt=""
-        src={ForrestFallback}
+        src={fallbackSource}
         homePageLoaded={homePageLoaded}
         isMobile={type === 'mobile'} // See above note
         loadLevelFull={setLoadLevels.sum().full}

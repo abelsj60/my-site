@@ -1,5 +1,5 @@
 import eventManagement from '../helpers/eventManagement.js';
-import FitText from '@kennethormandy/react-fittext';
+import getFontSize from '../helpers/getFontSize.js';
 import React from 'react';
 import Mapper from '../shared/Mapper.jsx';
 import styled, { css, keyframes } from 'styled-components';
@@ -245,19 +245,16 @@ export default function Charms(props) {
       spellLevel={spellLevel}
       tempContent={tempContent}
     >
-      <FitText
-        compressor={2.3}
+      <SubHed
+        marginLeft="1.05em"
+        setFontSize={getFontSize(nameTagWidth, 3.05)}
       >
-        <SubHed
-          marginLeft="1.05em"
-        >
-          {
-            !inCity
-              ? "Tap the pulses to travel home"
-              : "Tap the pulses for adventure"
-          }
-        </SubHed>
-      </FitText>
+        {
+          !inCity
+            ? "Tap the pulses to travel home"
+            : "Tap the pulses for adventure"
+        }
+      </SubHed>
       <InnerContainer>
         <CharmBox>
           <Mapper

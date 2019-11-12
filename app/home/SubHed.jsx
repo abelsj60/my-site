@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export default styled.h2`
   font-family: 'Aref Ruqaa', serif;
+  font-size: ${p => p.setFontSize}px;
   text-shadow: 1.5px 1px 2px white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

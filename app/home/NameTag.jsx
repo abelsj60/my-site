@@ -1,7 +1,7 @@
 import home from '../data/home/home.md';
 import dayjs from 'dayjs';
 import eventManagement from '../helpers/eventManagement.js';
-import FitText from '@kennethormandy/react-fittext';
+import getFontSize from '../helpers/getFontSize.js';
 import Loader from '../shared/Loader.jsx';
 import marked from 'marked';
 import React, { Fragment } from 'react';
@@ -73,6 +73,7 @@ const Spacer = styled.div`
 `;
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
+  font-size: ${p => p.setFontSize}px;
   text-shadow: 2px 1.5px 5px black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -93,10 +94,10 @@ const Hed = styled.h1`
   }
 `;
 const InnerContainer = styled.div`
-  // display css works, but results in wrong size motto when you come out of the spell after changing orientation
-  // display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
-  position: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) && 'absolute'};
+  display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
   ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
+  // Remember, opacity brings the component into view IF display: block runs one spellLevel sooner. The element must 'exist' in DOM to transition.
+  // This technique is used in multiple locations, watch for it...
   opacity: ${p => (!p.homePageLoaded && p.loadLevelAll < 6) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
   transition: opacity ${p => p.loadLevelAll < 6 ? '.55s' : p.enter ? '.45s' : '.65s'} ease-in;
 `;
@@ -104,8 +105,9 @@ const Pitch = styled.section`
   overflow: auto;
   margin: 10px 0px;
   z-index: 2;
-  
+
   p {
+    font-size: ${p => p.setFontSize}px;
     font-weight: 500;
     margin-left: 1.8em;
     margin-bottom: 0px;
@@ -199,18 +201,15 @@ export default function NameTag(props) {
         spellLevel={spellLevel}
         tempContent={tempContent}
       >
-        <FitText
-          compressor={1.154}
+        <Hed
+          setFontSize={getFontSize(nameTagWidth, 1.154)}
+          homePageLoaded={homePageLoaded}
+          loadLevelBlurs={setLoadLevels.sum().blurs}
+          loadLevelAll={setLoadLevels.sum().all}
+          onClick={onClickForHed}
         >
-          <Hed
-            homePageLoaded={homePageLoaded}
-            loadLevelBlurs={setLoadLevels.sum().blurs}
-            loadLevelAll={setLoadLevels.sum().all}
-            onClick={onClickForHed}
-          >
-            {name}
-          </Hed>
-        </FitText>
+          {name}
+        </Hed>
         <InnerContainer
           enter={movement === 'enter'}
           exit={movement === 'exit'}
@@ -220,25 +219,20 @@ export default function NameTag(props) {
           onTransitionEnd={onTransitionEndForInnerContainer}
           spellLevel={spellLevel}
         >
-          <FitText
-            compressor={2.3}
+          <SubHed
+            marginLeft="1em"
+            setFontSize={getFontSize(nameTagWidth, 3.15)}
           >
-            <SubHed
-              marginLeft="1em"
-            >
-              {motto}
-            </SubHed>
-          </FitText>
-          <Pitch>
-            <FitText
-             compressor={2.5}
-            >
-              <Fragment>
-                {ReactHtmlParser(marked(
-                  body, { smartypants: true }
-                ))}
-              </Fragment>
-            </FitText>
+            {motto}
+          </SubHed>
+          <Pitch
+            setFontSize={getFontSize(nameTagWidth, 5)}
+          >
+            <Fragment>
+              {ReactHtmlParser(marked(
+                body, { smartypants: true }
+              ))}
+            </Fragment>
           </Pitch>
         </InnerContainer>
         <Loader

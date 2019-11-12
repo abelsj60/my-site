@@ -17,7 +17,6 @@
   "license": "© 2019, James Abels LLC. All rights reserved.",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "@kennethormandy/react-fittext": "^0.6.0",
     "dayjs": "^1.8.16",
     "intrinsic-scale": "^3.0.4",
     "marked": "^0.7.0",

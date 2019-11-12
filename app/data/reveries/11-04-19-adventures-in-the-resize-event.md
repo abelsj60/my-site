@@ -25,11 +25,11 @@ It fires randomly and inconsistently. It can fire when you change orientation, s
 
 There's no rhyme or reason here. I hope to never think about any of it again.
 
-But I did. The site can now calculate and re-calculate height on load, orientation change, and changes to window size. I block the calculation when the the site is pinch-zoomed, and I added an extra little bit of CSS for a few milliseconds when the user changes orientation in iOS Safari because of some mobile nuttiness.
+But I did. The site can now calculate and re-calculate height on load, orientation change, and changes to window size. I block the calculation when the site is pinch-zoomed, and I added an extra little bit of CSS for a few milliseconds when the user changes orientation in iOS Safari because of some mobile nuttiness.
 
 Also, turns out that height is just as maddening as the resize event. 
 
-Different browsers and devices implement height values differently, seemingly at random — window.innerHeight, document.documentElement.clientHeight, test it all and hope you get it right! Who new height would give you such grief...?
+Different browsers and devices implement height values differently, seemingly at random — window.innerHeight, document.documentElement.clientHeight, test it all and hope you get it right! Who knew height would give you such grief...?
 
 Anyway, my algorithm almost always seems to work. 
 
