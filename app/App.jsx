@@ -78,7 +78,7 @@ const fontSizes = {
   seventeen: '6.5rem',
   eighteen: '2.5rem',
   nineteen: '1.745rem',
-  twenty: '4rem',
+  twenty: '2.5rem',
   twentyOne: '1rem',
   twentyTwo: '1.13rem',
   twentyThree: '1.36rem',

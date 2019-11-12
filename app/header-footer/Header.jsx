@@ -150,6 +150,7 @@ const Nav = styled.nav`
   }
 
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    // Header menu
     ${p => p.tempContent === 3 && css`
       background-color:  rgba(175, 18, 90, .8);
       position: fixed;
@@ -168,8 +169,9 @@ const NavList = styled(UnorderedList)`
   justify-content: center;
   margin: ${p => p.tempContent !== 3 ? css`${!p.isHome && 'auto'} 0px ${!p.isHome && 'auto'} 0px}` : ''};
 
-  // Control nav items when menu is open, up to the break point
+  // Control nav items when it's open, up to the break point
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    // Header menu
     ${p => p.tempContent === 3 && css`
       flex-direction: column;
       margin-bottom: 55px;
@@ -177,12 +179,17 @@ const NavList = styled(UnorderedList)`
   }
 `;
 const NavItem = styled.li`
-  // Control nav items when menu is open, up to the break point
-  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
-    // Let the NavItems collapse when there's no space on screen (landscape)
-    @media (min-height: ${p => p.theme.mediaQueries.tinyView}) {
-      ${p => p.tempContent === 3 && css`
+  // Margin for nav items when menu is open, up to header menu break point.
+  @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) { 
+    // Header menu
+    ${p => p.tempContent === 3 && css`
         margin: 20px 0px;
+    `};
+    // Smaller margins for landscape view when it's height is very narrow.
+    @media (max-height: ${p => p.theme.mediaQueries.tinyView}) {
+      // Header menu
+      ${p => p.tempContent === 3 && css`
+        margin: 5px 0px;
       `};
     }
   }

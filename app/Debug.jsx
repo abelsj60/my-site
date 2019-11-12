@@ -28,6 +28,9 @@ export default class Debug extends Component {
     const resWidth = timesPixelRatio(screenWidth);
     const resHeight = timesPixelRatio(screenHeight);
 
+    const bodyEl = document.getElementsByTagName('body')[0];
+    const bodyRect = bodyEl.getBoundingClientRect();
+
     return (
       <Main>
         <RestyledContentHolder>
@@ -52,7 +55,11 @@ export default class Debug extends Component {
           <p>image width: {this.props.appState.images.width}</p>
           <p>image height: {this.props.appState.images.height}</p>
           <p>---</p>
+          <p>window.pageYOffset: {window.pageYOffset}</p>
           <p>appState.height: {this.props.appState.height}</p>
+          <p>app height: {this.props.appState.height + 55 + 52}</p>
+          <p>bodyRect.y: {bodyRect.y}</p>
+          <p>window.availHeight: {window.screen.availHeight}</p>
         </RestyledContentHolder>
       </Main>
     );
