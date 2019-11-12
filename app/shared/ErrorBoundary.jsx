@@ -17,29 +17,20 @@ export default class ErrorBoundary extends Component {
   render() {
     const { hasError, initialLoad } = this.state;
     const { children } = this.props;
-    const errorHed = initialLoad ? "Hi! I'm James" : 'Oh no, it broke!'
     const errorText = initialLoad
-      ? "We've got a browser problem. Please use Chrome, Firefox, or Safari. In the meantime, here's my 411."
-      : "There's been a really confusing error. You might want to try that again. In the meantime, contact me here.";
+      ? "We may have a browser problem. Please use Chrome, Firefox, or Safari. In the meantime, here's my 411."
+      : "There's been a really confusing error. You might want to reload and try that again. In the meantime, contact me here:";
 
     if (hasError) {
       return (
         <Fragment>
           <header>
-            <h1
-              style={{
-                marginTop: '0px',
-                marginBottom: '20px'
-              }}
-            >
-              {errorHed}
-            </h1>
             <p
               style={{
                 color: '#fd1172'
               }}
             >
-              So sorry! {errorText}
+              Uh-oh! {errorText}
             </p>
           </header>
           {initialLoad && (
@@ -49,6 +40,12 @@ export default class ErrorBoundary extends Component {
                 paddingRight: '25px'
               }}
             >
+              <h1
+                style={{
+                  marginTop: '0px',
+                  marginBottom: '20px'
+                }}
+              >Hi! I'm James</h1>
               <div
                 style={{
                   height: '0px',

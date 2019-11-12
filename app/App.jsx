@@ -48,14 +48,14 @@ const colors = {
   black: 'black',
   blue: '#008dd5',
   blueTwo: '#b9dff3',
+  darkPink: '#af125a',
+  darkPinkTwo: '#bd3d78',
+  frostedBlue: '#4286f4',
   lightBlack: '#455057',
   pink: '#fd1172',
   reverieBlue: '#d2e7ff',
   white: 'white',
-  yellow: '#ffe74c',
-  darkPink: '#af125a',
-  darkPinkTwo: '#bd3d78',
-  frostedBlue: '#4286f4'
+  yellow: '#ffe74c'
 };
 const fontSizes = {
   zero: '.9rem',
@@ -306,10 +306,11 @@ class App extends Component {
           : 'home',
       // 0 = not ready, 1 = run, 2 = nevermore
       heartbeat: firstHeartbeat ? 0 : 2,
-      height: // Height for <Main /> element
-        pageHeight > this.minAllowedHeight
-          ? pageHeight
-          : this.defaultHeightWhenTooSmall,
+      // height: // Height for <Main /> element
+      //   pageHeight > this.minAllowedHeight
+      //     ? pageHeight
+      //     : this.defaultHeightWhenTooSmall,
+      height: pageHeight,
       homePageLoaded: false, // loadLevels confined to Home, this is for whole app
       illustrationDelay: false, // Control illustration loader on /chapter pages
       illustrationDirection: 'enter', // Properly interpret illustrationLevel 
@@ -344,26 +345,6 @@ class App extends Component {
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
-  }
-
-  handlePasswordSubmit(event) {
-    const password = this.state.password.toLowerCase().trim();
-    event.preventDefault();
-
-    if (
-      password === 'enter' || password === 'illustrator' || password === 'boom!'
-    ) {
-      this.setState({ isValidUser: true });
-    } else {
-      this.setState({ 
-        password: '',
-        wrongPassword: 'Incorrect'
-      });
-    }
-  }
-
-  handlePasswordEntry(event) {
-    this.setState({ password: event.target.value });
   }
 
   render() {
@@ -434,25 +415,89 @@ class App extends Component {
       </ThemeProvider>;
   }
 
-  hasStyle(type) {
-    // https://johanronsse.be/2016/01/03/simple-flexbox-check/
-    const documentStyle = window.document.body
-      ? window.document.body.style
-      : window.document.documentElement.style;
+  calculatePageHeight() {
+    return isMobile && (!isMobileSafari || (this.state && this.state.isAfterTouch))
+      ? document.documentElement.clientHeight > window.innerHeight
+        ? document.documentElement.clientHeight
+        : window.innerHeight
+      : window.innerHeight;
+  }
 
-    if (type === 'flexbox') {
-      if (documentStyle.webkitFlexWrap === '' || documentStyle.msFlexWrap === '' || documentStyle.flexWrap === '') {
-        return true;
+  calculateNameTagWidth(topImages) {
+    const images = topImages || this.state.images;
+    const coverVals = cover(window.innerWidth, window.innerHeight, images.width, images.height);
+
+    return Math.floor(.27 * coverVals.width);
+  }
+
+  calculateSpacerHeight() {
+    const { images } = this;
+    const windowHeight = window.innerHeight;
+    const coverVals = cover(window.innerWidth, windowHeight, images.width, images.height);
+    const yImageTop = coverVals.y;
+    const makePositive = val => val * -1;
+    // 1. 14.4 & 14.7 are arbitrary values (trial-n-error)
+    // 2. 52px is the height of the header in pixels
+    const mathForSpacer = (windowHeight, percentage) => windowHeight * (percentage / 100) - 52;
+    let spacerHeight = Math.ceil(mathForSpacer(windowHeight, 14.5)); // Original: 14.2
+
+    // yImageTop < 0 when thewindow's width is larger than the image's 
+    // width. If so, we cut off the image's top and bottom to zoom in.
+    if (Math.floor(yImageTop) < 0) {
+      const newHeight = coverVals.height - makePositive(yImageTop);
+      const newSpacerHeight = mathForSpacer(newHeight, 14.7); // Original: 14.6
+      const spacerHeightDifference = newSpacerHeight - spacerHeight;
+      const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
+
+      spacerHeight = Math.ceil(spacerHeight - changedPosition);
       }
+
+    return spacerHeight >= 15
+      ? spacerHeight
+      : 15;
     }
 
-    if (type === 'object-fit') {
-      if (documentStyle.objectFit === '') {
-        return true;
+  handleBackAndForth() {
+    const location = new Location('/', this.props);
+    const hcForApp = new ClickHandling('app', this);
+    const boundHandleClickForApp = hcForApp.boundHandleClick;
+
+    // Always the caller.
+    // Update isMenu if it isn't synced w/window.location.pathname.
+
+    const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
+    const updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
+
+    boundHandleClickForApp('updateApp', location.caller, updateMenuForBackAndForthButton);
+  }
+
+  handlePasswordSubmit(event) {
+    const password = this.state.password.toLowerCase().trim();
+    event.preventDefault();
+
+    if (
+      password === 'enter' || password === 'illustrator' || password === 'boom!'
+    ) {
+      this.setState({ isValidUser: true });
+    } else {
+      this.setState({ 
+        password: '',
+        wrongPassword: 'Incorrect'
+      });
+    }
       }
+
+  handlePasswordEntry(event) {
+    this.setState({ password: event.target.value });
     }
 
-    return false;
+  handleTouchEnd() {
+    // Touch is over, have we been zooming? But note, caniuse says onTouchEnd is often
+    // unavailable, so we have similar logic in onTouchMove to be sure to reset it.
+    if (this.state.isZooming) {
+      // Let's set intermediate values for resizing.
+      this.setState({ isZooming: false });
+    }
   }
 
   handleTouchMove(event) {
@@ -517,21 +562,46 @@ class App extends Component {
     }
   }
 
-  handleTouchEnd() {
-    // Touch is over, have we been zooming? But note, caniuse says onTouchEnd is often
-    // unavailable, so we have similar logic in onTouchMove to be sure to reset it.
-    if (this.state.isZooming) {
-      // Let's set intermediate values for resizing.
-      this.setState({ isZooming: false });
+  handleResize(str) {
+    // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
+    const afterPinchZoom = str === 'afterPinchZoom';
+
+    if (!afterPinchZoom) {
+      if (this.rejectResizing().result) {
+        return false;
+      }
+    }
+
+    if (this.resizeTimeoutId > 0) {
+      clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout (aka, debounce)
+    }
+
+    this.resizeTimeoutId = setTimeout(() => {
+      this.updateSpacerHeight();
+      this.updateNameTagWidth();
+      this.updateHeight();
+    }, 50);
+  }
+
+  hasStyle(type) {
+    // https://johanronsse.be/2016/01/03/simple-flexbox-check/
+    const documentStyle = window.document.body
+      ? window.document.body.style
+      : window.document.documentElement.style;
+
+    if (type === 'flexbox') {
+      if (documentStyle.webkitFlexWrap === '' || documentStyle.msFlexWrap === '' || documentStyle.flexWrap === '') {
+        return true;
+      }
+    }
+
+    if (type === 'object-fit') {
+      if (documentStyle.objectFit === '') {
+        return true;
     }
   }
 
-  calculatePageHeight() {
-    return isMobile && (!isMobileSafari || (this.state && this.state.isAfterTouch))
-      ? document.documentElement.clientHeight > window.innerHeight
-        ? document.documentElement.clientHeight
-        : window.innerHeight
-      : window.innerHeight;
+    return false;
   }
 
   rejectResizing() {
@@ -555,27 +625,6 @@ class App extends Component {
     }
 
     return { result: false, reason: '' };
-  }
-
-  handleResize(str) {
-    // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
-    const afterPinchZoom = str === 'afterPinchZoom';
-
-    if (!afterPinchZoom) {
-      if (this.rejectResizing().result) {
-        return false;
-      }
-    }
-
-    if (this.resizeTimeoutId > 0) {
-      clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout (aka, debounce)
-    }
-
-    this.resizeTimeoutId = setTimeout(() => {
-      this.updateSpacerHeight();
-      this.updateNameTagWidth();
-      this.updateHeight();
-    }, 50);
   }
 
   updateHeight() {
@@ -681,52 +730,12 @@ class App extends Component {
     }));
   }
 
-  handleBackAndForth() {
-    const location = new Location('/', this.props);
-    const hcForApp = new ClickHandling('app', this);
-    const boundHandleClickForApp = hcForApp.boundHandleClick;
+  updateNameTagWidth() {
+    const nameTagWidth = this.calculateNameTagWidth();
 
-    // Always the caller.
-    // Update isMenu if it isn't synced w/window.location.pathname.
-
-    const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
-    const updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
-
-    boundHandleClickForApp('updateApp', location.caller, updateMenuForBackAndForthButton);
+    if (nameTagWidth !== this.state.nameTagWidth) {
+      this.setState({ nameTagWidth })
   }
-
-  calculateSpacerHeight() {
-    const { images } = this;
-    const windowHeight = window.innerHeight;
-    const coverVals = cover(window.innerWidth, windowHeight, images.width, images.height);
-    const yImageTop = coverVals.y;
-    const makePositive = val => val * -1;
-    // 1. 14.4 & 14.7 are arbitrary values (trial-n-error)
-    // 2. 52px is the height of the header in pixels
-    const mathForSpacer = (windowHeight, percentage) => windowHeight * (percentage / 100) - 52;
-    let spacerHeight = Math.ceil(mathForSpacer(windowHeight, 14.5)); // Original: 14.2
-
-    // yImageTop < 0 when thewindow's width is larger than the image's 
-    // width. If so, we cut off the image's top and bottom to zoom in.
-    if (Math.floor(yImageTop) < 0) {
-      const newHeight = coverVals.height - makePositive(yImageTop);
-      const newSpacerHeight = mathForSpacer(newHeight, 14.7); // Original: 14.6
-      const spacerHeightDifference = newSpacerHeight - spacerHeight;
-      const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
-
-      spacerHeight = Math.ceil(spacerHeight - changedPosition);
-    }
-
-    return spacerHeight >= 15
-      ? spacerHeight
-      : 15;
-  }
-
-  calculateNameTagWidth(topImages) {
-    const images = topImages || this.state.images;
-    const coverVals = cover(window.innerWidth, window.innerHeight, images.width, images.height);
-
-    return Math.floor(.27 * coverVals.width);
   }
 
   updateSpacerHeight() {
@@ -735,14 +744,6 @@ class App extends Component {
 
     if (spacerHeight !== this.state.spacerHeight) {
       this.setState({ spacerHeight });
-    }
-  }
-
-  updateNameTagWidth() {
-    const nameTagWidth = this.calculateNameTagWidth();
-
-    if (nameTagWidth !== this.state.nameTagWidth) {
-      this.setState({ nameTagWidth })
     }
   }
 
