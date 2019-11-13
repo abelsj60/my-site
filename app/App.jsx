@@ -107,6 +107,7 @@ const ZoomControl = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  // ! Overall app height!
   height: ${p => p.theme.pageHeight}px;
   overflow: hidden;
   position: relative;
@@ -294,6 +295,7 @@ class App extends Component {
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
     this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
+    this.timeoutToResizeAfterZoom = undefined;
     this.images = images; // Back-up object for this.calculateSpacerHeight() during load
 
     // Prevent resize when scrolling oversized page. Not using state b/c it causes
@@ -344,6 +346,7 @@ class App extends Component {
     this.handleResize = this.handleResize.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.handleTouchStart = this.handleTouchStart.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
   }
@@ -388,8 +391,9 @@ class App extends Component {
             // events to React (alt is to add them to the Window)
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
             home={homeIsActive}
-            onTouchMove={this.handleTouchMove}
             onTouchEnd={this.handleTouchEnd}
+            onTouchMove={this.handleTouchMove}
+            onTouchStart={this.handleTouchStart}
           >
             <Header
               {...this.props}
@@ -406,6 +410,19 @@ class App extends Component {
               appState={this.state}
               boundHandleClickForApp={boundHandleClickForApp}
             />
+            {this.state.pinchZoomed && (
+              <div
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, .7)',
+                  color: 'white',
+                  left: '0px',
+                  padding: '10px',
+                  position: 'fixed',
+                  top: '55px',
+                  zIndex: '5'
+                }}
+              >Zoom on!</div>
+            )}
             <Footer
               {...this.props}
               appState={this.state}
@@ -417,6 +434,17 @@ class App extends Component {
   }
 
   calculatePageHeight() {
+    // On mobile, we must account for browser differences: 
+    //  -Mobile Safari updates innerHeight on resize and UI changes but mobile Chrome does not. 
+    //  -Also, after touchMove, Safari doesn't update innerHeight correctly, so we'll use/
+    //  the .isAfterTouch property to shift to document.documentElement.clientHeight.
+    //    a. clientHeight. Mobile Chrome or after touchMove everywhere
+    //    b. innerHeight. Mobile Safari
+    // -If Android, further check for the larger of our two possible values b/c some devices
+    //  let the address bar shrink in landscape, some don't (BrowserStack testing).
+
+    // Note: This may be causing problems on iPadOS! MUST REVIEW!
+
     return isMobile && (!isMobileSafari || (this.state && this.state.isAfterTouch))
       ? document.documentElement.clientHeight > window.innerHeight
         ? document.documentElement.clientHeight
@@ -492,74 +520,119 @@ class App extends Component {
     this.setState({ password: event.target.value });
     }
 
-  handleTouchEnd() {
-    // Touch is over, have we been zooming? But note, caniuse says onTouchEnd is often
-    // unavailable, so we have similar logic in onTouchMove to be sure to reset it.
-    if (this.state.isZooming) {
-      // Let's set intermediate values for resizing.
-      this.setState({ isZooming: false });
+  handleTouchEnd(event) {
+    /* Must reads onTouch:
+        1. https://stackoverflow.com/a/4165641
+        2. https://m14i.wordpress.com/2009/10/25/javascript-touch-and-gesture-events-iphone-and-android/
+        3. https://www.sitepen.com/blog/touching-and-gesturing-on-iphone-android-and-more/
+    */
+
+    // Touch is over when length is 0. Let's remember:
+    //  -event.touches refers to all on-screen touches
+    //  -event.targetTouches refers to touches w/n target element
+    //  -We've added the touch events to zoom control, an empty div that
+    //    sits above all others, except <html>, <body>, and <div id="app">
+    //  -Bizarrely, the targetTouches element will adopt the element in which
+    //    a finger is first sensed, so we're not using targetTouches here.
+    //  -Regarding the timeout, it's 'undefined' the first time the user zooms.
+    //    -It's made 'undefined' every time thereafter at the conclusion of the
+    //      user's zoom session, as defined by handleTouchMove.
+
+    if (event.touches.length === 0) {
+      if (
+        !this.state.pinchZoomed
+          && !this.state.isZooming // Doublecheck needed?
+          && (typeof this.timeoutToResizeAfterZoom === 'undefined') // Always reset by onTouchMove
+      ) {
+        // Remember, 250 milliseconds is added to 50 milliseconds b/c handleResize 
+        // has a setTimeout inside it, too. This timing is stable. I experimented 
+        // w/shorter times. They were not stable. We might get a resize on the 
+        // intermediate elements that are on screen before the final, stable 
+        // paint. These elements will have the wrong dimensions, which
+        // typically results in an extra-wide NameTag and a height 
+        // that stretches below Safari's bottom menu bar.
+        // If anyting, add more time to 250...
+
+        this.timeoutToResizeAfterZoom = setTimeout(() => this.handleResize('afterPinchZoom'), 250);
+      }
     }
   }
 
   handleTouchMove(event) {
-    // We're probably zooming if two fingers are down.
+    const { pinchZoomed } = this.state;
+    
+    // We'll check to see if we're zooming if more than finger's down.
+    if (event.touches.length > 1) {
+      // Let's prep an object for the state update.
+      const stateToUpdate = {};
 
-    const { isZooming, pinchZoomed } = this.state;
+      // Notes on detecting zoom:
+      //  -We only need to turn pinchZoom on once, we only need to turn if off once.
+      //  -Pinch zoom almost always moves the X, Y offsets. It's very hard not to move at least one of them.
+      //    -This is a more effective check than trying to create coordinates by adding points to screen 
+      //    -or to measure and compare some element's dimensions, or at least this has been my exp.
+      //  -It's not entirely enough to simply check the offsets, when setting pinchZoomed, we should also
+      //    check if the offsets are increasing. We do so by checking a set of values that were cached 
+      //    when THIS touch interaction began, via the onTouchMove event. If at least one is growing,
+      //    we're probably zooming, which means that we should set pinchZoomed to true.
+      //  -We can turn ff pinchZoomed when both offsets are less than 0. It's very hard not to move 
+      //    both values belwo 0 when unzooming. We can add a visual element to screen to help users
+      //    understand what's happening, and that they may have failed to move far enough when 
+      //    trying to unzoom.
+      //  -When we unzoom, we'll also set this.timeoutToResizeAfterZoom to 'undefined' as a hook.
+      //    -It'll tell handleTouchEnd that it set a timer to resize the app now that the user's 
+      //      done pinchZooming. The timeout will be cleared by handleTouchStart if a new zoom
+      //      session is begun before the timeout has a chance to run.
 
-    if (event.touches.length === 2) {
-      const stateToUpdate = {
-        isAfterTouch: true,
-        isZooming: true
-      };
-
-      // Pinch zoom almost always moves the X, Y offset.
-      // This is a more effective check than trying to
-      // add points as coordinates or height/width.
-
-      if (!pinchZoomed && window.pageXOffset > 0 && window.pageYOffset > 0) {
-        stateToUpdate.pinchZoomed = true; // Set zoom state
+      if (
+        !pinchZoomed 
+          && (window.pageXOffset >= 0 || window.pageYOffset >= 0)
+          && (window.pageXOffset > this.cachedXOffsetForZoom || window.pageYOffset > this.cachedYOffsetForZoom)
+      ) {
+        console.log('pZ ON');
+        stateToUpdate.isZooming = true;
+        stateToUpdate.pinchZoomed = true;
         this.setState(stateToUpdate);
-      } else if (pinchZoomed && window.pageXOffset <= 0 && window.pageYOffset <= 0) {
-        // Hard to hit 0 on the nose, so we look for negatives.
+      } else if (
+        pinchZoomed 
+          && (window.pageXOffset < 0 && window.pageYOffset < 0)
+      ) {
+        console.log('pZ OFF');
+        stateToUpdate.isZooming = false;
         stateToUpdate.pinchZoomed = false; // Set zoom state
-        this.setState(stateToUpdate);
-        // handleResize should come last so React has a chance to run setState.
-        // setTimeout gives React time to reconcile the next elements w/the 
-        // ones on screen so they'll have the correct dimensions. 
-        // Also, 50 is added to 500 milliseconds b/c handleResize has a 
-        // setTimeout inside it, too. This timing is stable. I experimented 
-        // w/shorter times. There were not stable. We might get a resize 
-        // on intermediate elements, which have the wrong dimensions. This
-        // typically resulted in an oversized NameTag and a height that 
-        // stretches below Safari's bottom menu bar.
-        if (this.state.height !== window.innerHeight) {
-          setTimeout(() => this.handleResize('afterPinchZoom'), 500);
+
+        if (typeof this.timeoutToResizeAfterZoom !== 'undefined') {
+          this.timeoutToResizeAfterZoom = undefined;
         }
+
+        this.setState(stateToUpdate);
       }
-    } else if (event.touches.length === 1 && pinchZoomed) {
-      // Note, 11/11/19: Should investigate whether this logic is still necessary
-      // Let's prevent a resize when an oversized page is being scrolled.
+    }
+  }
 
-      // This happens when the current screenHeight is too narrow. In
-      // this case, we'll use the default height. When a user scrolls
-      // in default height, a resize event might fire when the user
-      // reaches the top or bottom of the page. This can cause
-      // an undesired 'jump' up when scrolling downward.
+  handleTouchStart(event) {
+    // This event is used to begin our zoom session. We'll prepare to test for pinchZoom by:
+    //  -Clearing any exiting timeouts
+    //  -Caching the page's X, Y offsets so we can see if they're growing in onTouchMove.
+    //    -This will tell us whether or not we should turn on isZooming pinchZoom.
+    //  -While we could techincally set isZooming in here, this choice seems fraught.
+    //    -We'll have to remember to turn it off in onTouchMove.
+    //    -We may also run afoul of confusing scenarios, like are we actualy zooming or 
+    //      just making the window small as we zoom away from a properly sized viewport.
+    //    -Bottom line: It gets funky fast. Explicit tracking in onTouchMove seems
+    //      clearest over time.
 
-      // We prevent this by setting afterTouch in order to tell
-      // updateHeight not to reset the scrollTop).
+    if (event.touches.length > 1) {
+      // I believe this will clear the timeout should it be running in the fraction
+      // of a second between release and adding two fingers back to screen.
+      // I can't imagine any other reason to add two to screen...
 
-      if (this.resizeTimeoutId2 > 0) {
-        clearTimeout(this.resizeTimeoutId2); // Debounce!
+      if (typeof this.timeoutToResizeAfterZoom !== 'undefined') {
+        clearTimeout(this.timeoutToResizeAfterZoom);
       }
 
-      this.isAfterTouchWhenScrollingPage = true;
-      this.resizeTimeoutId2 = setTimeout(() => {
-        this.isAfterTouchWhenScrollingPage = false;
-      }, 500);
-    } else if (event.touches.length === 1 && !pinchZoomed && isZooming) {
-      // Try to catch browsers that have multi-touch onTouchMove, but no onToucheEnd.
-      this.setState({ isZooming: false });
+      this.cachedXOffsetForZoom = window.pageXOffset;
+      this.cachedYOffsetForZoom = window.pageYOffset;
     }
   }
 
@@ -655,31 +728,10 @@ class App extends Component {
 
     toggleHtmlElementHeight('on');
 
-    // Orientation change: https://stackoverflow.com/a/37493832
-
-    // On mobile, we must account for browser differences.
-    // Mobile Safari updates innerHeight on resize and
-    // UI changes but mobile Chrome does not. Also,
-    // after touchMove, Safari doesn't update
-    // innerHeight correctly, so we'll use/
-    // clientHeight 'isAfterTouch':
-
-    //  a. clientHeight. Mobile Chrome or after touchMove everywhere
-    //  b. innerHeight. Mobile Safari
-
-    // If Android, further check for the larger of our two possible values b/c some
-    // devices let the address bar shrink in landscape, some don't, per BS testing.
+    // Another approach to determining orientation change: 
+    // https://stackoverflow.com/a/37493832
 
     const newHeight = this.calculatePageHeight();
-
-    // Ensure the window top is at zero after resize change.
-    // (This trigers another resize if height changes.)
-
-    // Prevent resize when user scrolls oversized page.
-    if (window.pageYOffset > 0 && !this.isAfterTouchWhenScrollingPage) {
-      const scrollHandling = new ScrollHandling(this.state.currentCaller);
-      scrollHandling.resetWindowTop();
-    }
 
     // Resize if height changes and newHeight > this.minAllowedHeight.
     // Note, mobile Brave slips through this test on /home. The image
