@@ -358,7 +358,7 @@ class App extends Component {
       && isMobileSafari
       && osVersion[0] === '7';
 
-    return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
+    return process.env.NODE_ENV === 'development' && !this.state.isValidUser
       ? <PasswordLogin
         appState={this.state}
         handlePasswordEntry={this.handlePasswordEntry}

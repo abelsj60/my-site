@@ -13,6 +13,14 @@ const RestyledMain = styled(Main)`
   flex-direction: column;
   position: relative;
 `;
+const Debug = styled.div`
+  position: absolute;
+  top: ${p => p.top}px;
+  background-color: rgba(0, 0, 0, .5);
+  color: white;
+  padding: 10px;
+  z-index: 5;
+`;
 
 export default class Home extends Component {
   constructor(props) {
@@ -110,42 +118,21 @@ export default class Home extends Component {
           setLoadLevels={setLoadLevels}
           setSpellLevels={setSpellLevels}
         />
-        <div
-          style={{
-            position: 'absolute',
-            top: '275px',
-            backgroundColor: 'rgba(0, 0, 0, .5)',
-            color: 'white',
-            padding: '10px',
-            zIndex: '5'
-          }}
+        <Debug
+          top="275"
         >
-        homePageLoaded: {this.props.appState.homePageLoaded.toString()}
-        </div>
-        <div
-          style={{
-            position: 'absolute',
-            top: '325px',
-            backgroundColor: 'rgba(0, 0, 0, .5)',
-            color: 'white',
-            padding: '10px',
-            zIndex: '5'
-          }}
+          homePageLoaded: {this.props.appState.homePageLoaded.toString()}
+        </Debug>
+        <Debug
+          top="325"
         >
-        setLoadLevels.sum().blurs: {setLoadLevels.sum().blurs}
-        </div>
-        <div
-          style={{
-            position: 'absolute',
-            top: '375px',
-            backgroundColor: 'rgba(0, 0, 0, .5)',
-            color: 'white',
-            padding: '10px',
-            zIndex: '5'
-          }}
+          setLoadLevels.sum().blurs: {setLoadLevels.sum().blurs}
+        </Debug>
+        <Debug
+          top="375"
         >
-        [ {this.state.loadLevel.toString()} ]
-        </div>
+          [ {this.state.loadLevel.toString()} ]
+        </Debug>
       </RestyledMain>
     );
   }
