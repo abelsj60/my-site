@@ -83,6 +83,8 @@ export default class Home extends Component {
       sum: () => this.sumLoadLevels()
     };
 
+    console.log('loadLevel:', this.state.loadLevel);
+
     return (
       <RestyledMain 
         home={true}
