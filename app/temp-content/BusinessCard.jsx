@@ -54,9 +54,12 @@ const Email = styled.p`
 `;
 
 export default function BusinessCard() {
+  const altImageText = "A young teenage boy with big brown eyes and left hand on hip grins from the vibrant pink business card. He's wearing a mint-green sweatshirt. Dark circles ring the upper part of each arm. A magical fairy floats by his left shoulder, fairy dust sparkling around her."
+
   return (
     <Fragment>
       <BoyImage
+        alt={altImageText}
         src={teenFairyImage}
       />
       <InfoContainer>

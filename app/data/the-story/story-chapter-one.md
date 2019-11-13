@@ -1,6 +1,5 @@
 ---
 title: 'A magic quest'
-rootImageUrl: 'assets/images'
 description: 'xyz 1'
 number: 1
 ---

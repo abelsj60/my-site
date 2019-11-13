@@ -7,6 +7,7 @@ import styled, {
   ThemeProvider
 } from 'styled-components';
 import dayjs from 'dayjs';
+import eventManagement from './helpers/eventManagement.js';
 import Footer from './header-footer/Footer.jsx';
 import Header from './header-footer/Header.jsx';
 import {
@@ -608,16 +609,14 @@ class App extends Component {
     const { images, isZooming, pinchZoomed } = this.state;
     const coverVals = cover(window.innerWidth, this.calculatePageHeight(), images.width, images.height);
 
-    // Note: If testing on desktop in Chrome, remember that isMobile will test false if
-    // you emulate mobile via Chrome devTools AFTER loading the site on a regular
-    // desktop. You must reload it in devTools after shifting to mobile 
-    // emulation for isMobile to register correctly...!
+    // Note for desktop Chrome. isMobile will be false if you emulate mobile via devTools 
+    // AFTER loading the site. You must reload the site from within the mobile emulator 
+    // in devTools for isMobile to test correctly.
 
     if (!isMobile && coverVals.y === this.homeImageYOffsets) {
       return { result: true, reason: 'On desktop, no change to homeImageYOffset' };
     } else if (isZooming) {
-      // Don't resize while isZooming (there's a lag between
-      // isZooming and pinchZoomed).
+      // Don't resize while isZooming, even if pinchZoomed hasn't been set yet.
       return { result: true, reason: 'isZooming' };
     } else if (pinchZoomed) {
       // Do not resize while pinchZoomed.
@@ -630,16 +629,16 @@ class App extends Component {
   updateHeight() {
     const { pathname, search } = window.location;
 
-    // iOS 12 introduced a strange new behavior. On orientation change, 
-    // the screen collapsed in between the first and second setStates.
-    // Remember, in iOS, resize fires on orientation change, then AGAIN
-    // afer the bottom menu bar is added to screen. 
+    // Early versions of iOS 12 have strange behavior. On orientation change, the
+    // screen can collapse between the first and second setStates. Remember, in 
+    // iOS, resize fires on orientation change, then AGAIN afer the bottom 
+    // menu bar is added to screen. 
     
     // This on/off function ensures that the app's height will occupy the 
     // entire screen during the update phase. Trust me, it works.
 
     // Note, 11/9/19: This won't catch iPadOS as it doesn't report
-    // itself as mobile — 'tis OK, I've observed good behavior...
+    // itself as mobile — 'tis OK, I've observed good behavior.
 
     const toggleHtmlElementHeight = mode => {
       if (isMobileSafari && parseInt(osVersion) >= 12) {

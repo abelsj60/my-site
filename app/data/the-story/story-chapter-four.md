@@ -1,6 +1,5 @@
 ---
 title: 'Practical magic'
-rootImageUrl: 'assets/images'
 description: 'xyz 4'
 number: 4
 ---

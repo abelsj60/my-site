@@ -1,6 +1,5 @@
 ---
 title: 'The reality glitch'
-rootImageUrl: 'assets/images'
 description: 'xyz 3'
 number: 3
 ---

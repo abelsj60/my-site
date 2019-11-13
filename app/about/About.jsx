@@ -92,7 +92,7 @@ export default function About() {
         </RestyledShelf>
         <Overflow>
           <Me
-            alt=""
+            alt={bio.attributes.altImageText}
             src={me}
           />
           <Text>

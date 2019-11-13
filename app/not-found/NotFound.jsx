@@ -14,11 +14,11 @@ const Hed = styled.h1`
   font-size: ${p => p.theme.fontSizes.twenty};
   margin-top: 5px;
   margin-right: 20px; // Centers text on hat sanati
-  // text-shadow: 3px 2px 2.5px rgba(0, 0, 0, .4);
 `;
 const Jinn = styled.img`
   pointer-events: none;
 `;
+const altImageText = "Uh-oh, page not found. A Jinni, drawn in shades of blue, blocks your way. He floats atop a vibrant pink background, conjuring mystery with an all-knowing smile and an otherworldly goatee — three balls of light-blue light. The Jinni floats in mid air, fading downward into streaks of Arabic calligraphy, oft-called Hat Sanati."
 
 export default class NotFound extends Component {
   render() {
@@ -27,13 +27,12 @@ export default class NotFound extends Component {
       <Main>
         <RestyledContentHolder>
             <Jinn
-              // Inline styles used to allocate img space on load
+              alt={altImageText}
               style={{
                 height: 'auto',
                 maxWidth: '310px',
                 width: '100%'
               }}
-              alt="404"
               src={src}
             />
             <Hed>

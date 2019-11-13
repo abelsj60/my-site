@@ -54,9 +54,14 @@ const FallbackImage = styled.img`
 
 export default function PictureBox(props) {
   const {
-    descriptionBoy,
-    descriptionFantasy,
-    descriptionCity,
+    altTextBoy,
+    altTextBoyBlurred,
+    altTextForrestFallback,
+    altTextForrest,
+    altTextForrestBlurred,
+    altTextNyc,
+    altTextNycBlurred,
+    altTextNycFallback,
     imageNames
   } = bio.attributes;
   const {
@@ -86,6 +91,7 @@ export default function PictureBox(props) {
   const bigNycSrc = images[imageNames[4]].src;
   const blurredNycSrc = images[imageNames[5]].src;
   const fallbackSource = !inCity ? ForrestFallback : NycFallback; 
+  const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback; 
 
   const onLoadTwo = event => {
     eventManagement(event);
@@ -164,7 +170,7 @@ export default function PictureBox(props) {
         zIndex="5"
       />
       <FallbackImage 
-        alt=""
+        alt={altTextForFallback}
         src={fallbackSource}
         homePageLoaded={homePageLoaded}
         isMobile={type === 'mobile'} // See above note
@@ -172,7 +178,7 @@ export default function PictureBox(props) {
         zIndex="4"
       />
       <BlurredBoyForeground
-        alt={descriptionBoy}
+        alt={altTextBoyBlurred}
         enter={movement === 'enter'}
         exit={movement === 'exit'}
         homePageLoaded={homePageLoaded}
@@ -184,7 +190,7 @@ export default function PictureBox(props) {
         src={blurredBoySrc}
       />
       <BoyForeground
-        alt={descriptionBoy}
+        alt={altTextBoy}
         enter={movement === 'enter'}
         exit={movement === 'exit'}
         homePageLoaded={homePageLoaded}
@@ -196,6 +202,7 @@ export default function PictureBox(props) {
       {(!inCity || (inCity && spellLevel > 0)) &&
         <Fragment>
           <BlurredForrestBackground
+            alt={altTextForrestBlurred}
             enter={movement === 'enter'}
             exit={movement === 'exit'}
             homePageLoaded={homePageLoaded}
@@ -209,7 +216,7 @@ export default function PictureBox(props) {
             src={blurredForrestSrc}
           />
           <ForrestBackground
-            alt={descriptionFantasy}
+            alt={altTextForrest}
             homePageLoaded={homePageLoaded}
             inCity={inCity}
             loadLevelAll={setLoadLevels.sum().all}
@@ -224,7 +231,7 @@ export default function PictureBox(props) {
       {(inCity || (!inCity && spellLevel > 0)) && 
         <Fragment>
           <BlurredNycBackground
-            alt=""
+            alt={altTextNycBlurred}
             enter={movement === 'enter'}
             exit={movement === 'exit'}
             inCity={inCity}
@@ -234,7 +241,7 @@ export default function PictureBox(props) {
             src={blurredNycSrc}
           />
           <NycBackground
-            alt={descriptionCity}
+            alt={altTextNyc}
             inCity={inCity}
             onLoad={onLoadForCity}
             // Trigger toggle after backgrounds are swapped

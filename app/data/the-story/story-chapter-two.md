@@ -1,6 +1,5 @@
 ---
 title: 'True adventure'
-rootImageUrl: 'assets/images'
 description: 'xyz 2'
 number: 2
 ---
