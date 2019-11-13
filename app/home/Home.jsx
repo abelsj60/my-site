@@ -112,6 +112,18 @@ export default class Home extends Component {
         <div
           style={{
             position: 'absolute',
+            top: '250px',
+            backgroundColor: 'rgba(0, 0, 0, .5)',
+            color: 'white',
+            padding: '10px',
+            zIndex: '5'
+          }}
+        >
+        setLoadLevels.sum().blurs: {setLoadLevels.sum().blurs}
+        </div>
+        <div
+          style={{
+            position: 'absolute',
             top: '300px',
             backgroundColor: 'rgba(0, 0, 0, .5)',
             color: 'white',
@@ -119,7 +131,7 @@ export default class Home extends Component {
             zIndex: '5'
           }}
         >
-        [ {this.state.loadLevel.toString() }]
+        [ {this.state.loadLevel.toString()} ]
         </div>
       </RestyledMain>
     );
