@@ -84,6 +84,7 @@ export default class Home extends Component {
     };
 
     console.log('loadLevel:', this.state.loadLevel);
+    console.log('homePageLoaded:', this.props.appState.homePageLoaded);
 
     return (
       <RestyledMain 
@@ -112,7 +113,19 @@ export default class Home extends Component {
         <div
           style={{
             position: 'absolute',
-            top: '250px',
+            top: '275px',
+            backgroundColor: 'rgba(0, 0, 0, .5)',
+            color: 'white',
+            padding: '10px',
+            zIndex: '5'
+          }}
+        >
+        homePageLoaded: {this.props.appState.homePageLoaded.toString()}
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            top: '325px',
             backgroundColor: 'rgba(0, 0, 0, .5)',
             color: 'white',
             padding: '10px',
@@ -124,7 +137,7 @@ export default class Home extends Component {
         <div
           style={{
             position: 'absolute',
-            top: '300px',
+            top: '375px',
             backgroundColor: 'rgba(0, 0, 0, .5)',
             color: 'white',
             padding: '10px',
