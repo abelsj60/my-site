@@ -291,6 +291,7 @@ class App extends Component {
     // factor uses default height, wider phones
     // use their true height).
     this.defaultHeightWhenTooSmall = pageHeight; // Arbitrary (iPhone SE height)
+    this.isZooming = false; // Synchronous property that avoids fear of setState race condition 
     this.headerMenuTimeoutId = undefined;
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
     this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
@@ -328,7 +329,7 @@ class App extends Component {
       isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie
       isAfterTouch: false, // Resize using clientHeight when true
       isValidUser: false, // to be removed
-      isZooming: false, // True when usere is pinch zooming
+      // isZooming: false, // True when usere is pinch zooming
       lastCaller: '',
       nameTagWidth: this.calculateNameTagWidth(images), // Orig. dimensions: 1349 / 5115
       password: '', // to be removed
@@ -410,15 +411,17 @@ class App extends Component {
               appState={this.state}
               boundHandleClickForApp={boundHandleClickForApp}
             />
-            {this.state.pinchZoomed && (
+            {(
               <div
                 style={{
                   backgroundColor: 'rgba(0, 0, 0, .7)',
                   color: 'white',
-                  left: '0px',
+                  left: `${this.state.pinchZoomed ? '0px' : '-200px'}`,
+                  opacity: `${this.state.pinchZoomed ? '1' : '0'}`,
                   padding: '10px',
                   position: 'fixed',
-                  top: '55px',
+                  top: '205px',
+                  transition: 'left .2s ease-in-out, opacity .2s ease-in',
                   zIndex: '5'
                 }}
               >Zoom on!</div>
@@ -538,12 +541,29 @@ class App extends Component {
     //    -It's made 'undefined' every time thereafter at the conclusion of the
     //      user's zoom session, as defined by handleTouchMove.
 
+    eventManagement(event);
+
     if (event.touches.length === 0) {
+      // Let's reset the offset cache
+
+      if (typeof this.cachedXOffsetForZoom !== 'undefined') {
+        this.cachedXOffsetForZoom = undefined;
+      }
+
+      if (typeof this.cachedYOffsetForZoom !== 'undefined') {
+        this.cachedYOffsetForZoom = undefined
+      }
+
       if (
-        !this.state.pinchZoomed
-          && !this.state.isZooming // Doublecheck needed?
+          !this.isZooming
           && (typeof this.timeoutToResizeAfterZoom === 'undefined') // Always reset by onTouchMove
       ) {
+        // Let's add a failsafe, just in case pinchZoomed doesn't get shut off (may happen...?)
+
+        if (this.state.pinchZoomed) {
+          this.setState({ pinchZoomed: false });
+        }
+
         // Remember, 250 milliseconds is added to 50 milliseconds b/c handleResize 
         // has a setTimeout inside it, too. This timing is stable. I experimented 
         // w/shorter times. They were not stable. We might get a resize on the 
@@ -559,6 +579,8 @@ class App extends Component {
   }
 
   handleTouchMove(event) {
+    eventManagement(event);
+
     const { pinchZoomed } = this.state;
     
     // We'll check to see if we're zooming if more than finger's down.
@@ -575,7 +597,7 @@ class App extends Component {
       //    check if the offsets are increasing. We do so by checking a set of values that were cached 
       //    when THIS touch interaction began, via the onTouchMove event. If at least one is growing,
       //    we're probably zooming, which means that we should set pinchZoomed to true.
-      //  -We can turn ff pinchZoomed when both offsets are less than 0. It's very hard not to move 
+      //  -We can turn off pinchZoomed when both offsets are less than 0. It's very hard not to move 
       //    both values belwo 0 when unzooming. We can add a visual element to screen to help users
       //    understand what's happening, and that they may have failed to move far enough when 
       //    trying to unzoom.
@@ -583,6 +605,11 @@ class App extends Component {
       //    -It'll tell handleTouchEnd that it set a timer to resize the app now that the user's 
       //      done pinchZooming. The timeout will be cleared by handleTouchStart if a new zoom
       //      session is begun before the timeout has a chance to run.
+      //  -We're actually using the isZooming property on this to track the zoom state. Why? We don't 
+      //    have to worry about race conditions and async returns from React's setState property.
+      //    -We're using the pinchZoomed property on state to control when the user is notified 
+      //      that zoom is on. Why? Calls to setState will cause a re-render so we can remove
+      //      the notice seamlessly, without worrying about any lags on actual detection. 
 
       if (
         !pinchZoomed 
@@ -590,21 +617,16 @@ class App extends Component {
           && (window.pageXOffset > this.cachedXOffsetForZoom || window.pageYOffset > this.cachedYOffsetForZoom)
       ) {
         console.log('pZ ON');
-        stateToUpdate.isZooming = true;
-        stateToUpdate.pinchZoomed = true;
+        this.isZooming = true; // zoom detection (on)
+        stateToUpdate.pinchZoomed = true; // give notice
         this.setState(stateToUpdate);
       } else if (
         pinchZoomed 
           && (window.pageXOffset < 0 && window.pageYOffset < 0)
       ) {
         console.log('pZ OFF');
-        stateToUpdate.isZooming = false;
-        stateToUpdate.pinchZoomed = false; // Set zoom state
-
-        if (typeof this.timeoutToResizeAfterZoom !== 'undefined') {
-          this.timeoutToResizeAfterZoom = undefined;
-        }
-
+        this.isZooming = false; // zoom detection (off)
+        stateToUpdate.pinchZoomed = false; // remove notice
         this.setState(stateToUpdate);
       }
     }
@@ -622,13 +644,16 @@ class App extends Component {
     //    -Bottom line: It gets funky fast. Explicit tracking in onTouchMove seems
     //      clearest over time.
 
-    if (event.touches.length > 1) {
-      // I believe this will clear the timeout should it be running in the fraction
-      // of a second between release and adding two fingers back to screen.
-      // I can't imagine any other reason to add two to screen...
+    eventManagement(event);
 
+    if (event.touches.length > 1) {
       if (typeof this.timeoutToResizeAfterZoom !== 'undefined') {
+        // I believe this will clear the timeout should it be running in the fraction
+        // of a second between release and adding two fingers back to screen.
+        // I can't imagine any other reason to add two to screen...
+
         clearTimeout(this.timeoutToResizeAfterZoom);
+        this.timeoutToResizeAfterZoom = undefined;
       }
 
       this.cachedXOffsetForZoom = window.pageXOffset;
@@ -638,6 +663,7 @@ class App extends Component {
 
   handleResize(str) {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
+
     const afterPinchZoom = str === 'afterPinchZoom';
 
     if (!afterPinchZoom) {
@@ -679,7 +705,7 @@ class App extends Component {
   }
 
   rejectResizing() {
-    const { images, isZooming, pinchZoomed } = this.state;
+    const { images, pinchZoomed } = this.state;
     const coverVals = cover(window.innerWidth, this.calculatePageHeight(), images.width, images.height);
 
     // Note for desktop Chrome. isMobile will be false if you emulate mobile via devTools 
@@ -688,7 +714,7 @@ class App extends Component {
 
     if (!isMobile && coverVals.y === this.homeImageYOffsets) {
       return { result: true, reason: 'On desktop, no change to homeImageYOffset' };
-    } else if (isZooming) {
+    } else if (this.isZooming) {
       // Don't resize while isZooming, even if pinchZoomed hasn't been set yet.
       return { result: true, reason: 'isZooming' };
     } else if (pinchZoomed) {
