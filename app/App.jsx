@@ -444,31 +444,29 @@ class App extends Component {
   handleResize(event) {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
 
-    this.cachedHeightFromStateForResize = this.state.height;
+    const currentHeight = this.state.height;
+    this.cachedHeightFromStateForResize = currentHeight;
 
-    if (this.state.height !== this.pageHeight) {
+    if (currentHeight !== this.pageHeight) {
 
-      /* Mobile wonkiness
-        Going from landscape to portrait after the initial rotation? Better set an interval and check 
-        to be sure the top is the top. If you don't fix it, it'll be ugly AND multiple rotation changes 
-        will push the page out of view, leaving a blank white screen, which isn't great. This problem 
-        appeared after removing this.toggleHtmlElementHeight(), which was weird, but did prevent the 
-        ugly double render. 
+      /* Orientation changes:
+        Switching orienations on mobile? Better set an interval and check to be sure the top is the top. 
+        If you don't fix it, it'll be ugly AND multiple rotation changes will push the page out of view, 
+        leaving a blank white screen, which isn't great. This problem appeared after removing 
+        this.toggleHtmlElementHeight(), which was weird, but did prevent the ugly double render. 
         
         Using setInterval (for speed) is very delicate here; it'll set the top to 0 as soon as possible,
-        but it won't know when the operation's complete because it start running BEFORE the browser 
-        and/or React paint app's new state to screen. In effect, setInterval keeps trying to set scrollY 
-        to 0 every fraction of a second until the app's updated, which means the new state should be 
-        what we want. 
+        but we won't know when the operation's complete because the interval will start running BEFORE 
+        the browser and/or React get a chance to paint the app's new state to screen.
 
-        How to determine:
-          1. Resize runs before the orientation changes (in mobile Safari, at least)
-            -The cache now holds the current value from this.state.height
+        How we do it:
+          1. Resize runs before the orientation changes (in mobile Safari, at least).
+            -The height cache now holds the current value from this.state.height.
           2. setInterval starts running and running and running.
           3. Resize runs again after the orientation changes.
-            -It updates the cache (object property/pass by reference).
-            -setInterval now knows that the app is update to date with the pageHeight/window.
-            -Its internal for an end point test will passes and we shut it off.
+            -It updates the cache (pass by reference ensures that all accessors see the new value).
+            -setInterval now knows the on-screen app is up-to-date, so scrollTop must've run.
+            -setInterval's internal else if test will now pass and we can shut it down.
           4. Done! 
       */
 
