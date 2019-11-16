@@ -451,19 +451,22 @@ class App extends Component {
 
       /* Orientation changes:
         Switching orienations on mobile? Better set an interval and check to be sure the top is the top. 
-        If you don't fix it, it'll be ugly AND multiple rotation changes will push the page out of view, 
+        If you don't fix it, it'll be ugly AND multiple rotation changes can push the page out of view, 
         leaving a blank white screen, which isn't great. This problem appeared after removing 
-        this.toggleHtmlElementHeight(), which was weird, but did prevent the ugly double render. 
-        
+        this.toggleHtmlElementHeight(), which resulted in an ugly double render. 
+
         Using setInterval (for speed) is very delicate here; it'll set the top to 0 as soon as possible,
         but we won't know when the operation's complete because the interval will start running BEFORE 
-        the browser and/or React get a chance to paint the app's new state to screen.
+        the device has a change to fully update all values (it's in a black hole of some sort that 
+        leads to many infinite loops.
 
         How we do it:
-          1. Resize runs before the orientation changes (in mobile Safari, at least).
+          1. Resize runs at the start of an orientation change (in mobile Safari, at least).
+            -It actually runs after my eye sees the screen switch directions, at the start.
             -The height cache now holds the current value from this.state.height.
           2. setInterval starts running and running and running.
-          3. Resize runs again after the orientation changes.
+          3. Resize runs again after the orientation change.
+            -It actually runs after the cycle is complete, at the end, but my eye has already seen the change.
             -It updates the cache (pass by reference ensures that all accessors see the new value).
             -setInterval now knows the on-screen app is up-to-date, so scrollTop must've run.
             -setInterval's internal else if test will now pass and we can shut it down.
