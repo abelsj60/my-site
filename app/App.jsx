@@ -238,9 +238,7 @@ class App extends Component {
         2. Update on orientation change via handleResize
         3. Note: iPadOS uses a desktop user agent!
     */
-    this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
-    // Let's cache coverVals.y so we can reject resize on desktops when it doesn't change.
-    this.cacheImageOffsetY = this.coverVals(this.images).y;
+    this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are >= 325px
     this.cachedHeightFromStateForResize = undefined; // Used by handleResize
     this.headerMenuTimeoutId = undefined;
     this.scrollTopTimer = undefined // Used by handleResize
@@ -511,26 +509,20 @@ class App extends Component {
     return false;
   }
 
-  /* Note:
-    On desktop/laptop Chrome, isMobile will be false if you emulate mobile via devTools 
-    AFTER the site loads. You must reload the site from within the mobile emulator after
-    entering devTools if you want the isMobile value to be correct. 
-  */
-
   rejectResizing() {
-    const resultObj = { result: false, reason: '' };
-    const coverValY = this.coverVals(this.state.images).y;
+    /* Development note:
+      On desktop/laptop Chrome, isMobile will be false if you emulate mobile via devTools 
+      AFTER the site loads. You must reload the site from within the mobile emulator after
+      entering devTools if you want the isMobile value to be correct. 
+    */
 
-    if (!isMobile && coverValY === this.cacheImageOffsetY) {
-      resultObj.result = true;
-      resultObj.reason = 'On desktop, no change to cacheImageOffsetY';
-    } else if (isMobile && this.state.height === this.pageHeight) {
+    const resultObj = { result: false, reason: '' };
+    
+    if (isMobile && this.state.height === this.pageHeight) {
       resultObj.result = true;
       resultObj.reason = 'On mobile, no change to height'
     }
 
-    // Update the cache before we go.
-    this.cacheImageOffsetY = coverValY
     return resultObj;
   }
 
