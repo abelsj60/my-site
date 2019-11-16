@@ -25,7 +25,7 @@ export default class ScrollHandling {
     }
   }
 
-  resetWindowTop() {  // Not currently used
+  resetWindowTop() {
     // Using pageYOffset instead of scrollY for cross-browser support, per MDN
     if (window.pageYOffset > 0) {
       if (process.env.NODE_ENV !== 'development') {
