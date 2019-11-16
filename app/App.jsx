@@ -449,7 +449,7 @@ class App extends Component {
 
     if (currentHeight !== this.pageHeight) {
 
-      /* Switching orienations on mobile?
+      /* Switching orientations on mobile?
 
         Better set an interval and check to be sure the top is the top. If you don't fix it, it'll be ugly 
         AND multiple rotation changes can push the page out of view, leaving a blank white screen, which 
@@ -462,7 +462,7 @@ class App extends Component {
         leads to many infinite loops.
 
         How we do it, including my best understanding as to why:
-          1. On mobile Safari, resize runs as soon as an orienation change is complete. 
+          1. On mobile Safari, resize runs as soon as an orientation change is complete. 
             -This happens before React finishes updating the app's state.
             -At this time, we add this.state.height to the height cache.
           2. setInterval starts running and running and running.
