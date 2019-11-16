@@ -233,10 +233,12 @@ class App extends Component {
     const referrer = new Referrer(props);
     const location = new Location(referrer.pathToMatch, { location: { pathname } });
     /* Rules for height:
-      Check document.documentElement.clientHeight (accurate on resize for Android & iOS)
-        1. Set property on initial load
-        2. Update on orientation change via handleResize
-        3. Note: iPadOS uses a desktop user agent!
+
+      1. Set property on initial load
+      2. Update on orientation change via handleResize
+      3. Remember! iPadOS uses a desktop user agent, so it won't respond to mobile testing.
+      
+      Note: Check document.documentElement.clientHeight b/c it's accurate at resize for both Android & iOS.
     */
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are >= 325px
     this.cachedHeightFromStateForResize = undefined; // Used by handleResize
@@ -447,27 +449,31 @@ class App extends Component {
 
     if (currentHeight !== this.pageHeight) {
 
-      /* Orientation changes:
-        Switching orienations on mobile? Better set an interval and check to be sure the top is the top. 
-        If you don't fix it, it'll be ugly AND multiple rotation changes can push the page out of view, 
-        leaving a blank white screen, which isn't great. This problem appeared after removing 
-        this.toggleHtmlElementHeight(), which resulted in an ugly double render. 
+      /* Switching orienations on mobile?
+
+        Better set an interval and check to be sure the top is the top. If you don't fix it, it'll be ugly 
+        AND multiple rotation changes can push the page out of view, leaving a blank white screen, which 
+        isn't great. This problem appeared after removing this.toggleHtmlElementHeight() (which 
+        resulted in an ugly double render anyway).
 
         Using setInterval (for speed) is very delicate here; it'll set the top to 0 as soon as possible,
         but we won't know when the operation's complete because the interval will start running BEFORE 
         the device has a change to fully update all values (it's in a black hole of some sort that 
         leads to many infinite loops.
 
-        How we do it:
-          1. Resize runs at the start of an orientation change (in mobile Safari, at least).
-            -It actually runs after my eye sees the screen switch directions, at the start.
-            -The height cache now holds the current value from this.state.height.
+        How we do it, including my best understanding as to why:
+          1. On mobile Safari, resize runs as soon as an orienation change is complete. 
+            -This happens before React finishes updating the app's state.
+            -At this time, we add this.state.height to the height cache.
           2. setInterval starts running and running and running.
-          3. Resize runs again after the orientation change.
-            -It actually runs after the cycle is complete, at the end, but my eye has already seen the change.
-            -It updates the cache (pass by reference ensures that all accessors see the new value).
-            -setInterval now knows the on-screen app is up-to-date, so scrollTop must've run.
-            -setInterval's internal else if test will now pass and we can shut it down.
+          3. On mobile Safari, resize runs again milliseconds later, probably due to the addition of browser Chrome.
+            -I believe something is changing w/regard to the bottom menu. I can't put my finger on it, but have
+              extensively tested these issues, and believe that Safari has multiple paints before and after 
+              adding its menu bars (or at lest the bottom bar).
+            -The new call to handleResize will update the height cache, and JavaScript's funky pass by reference 
+              feature will ensure that all accessors see the updated value.
+            -setInterval now knows the app's state is up-to-date, which means resetScrollTop() must've run.
+            -setInterval's internal (else if) test will now pass, and we can shut it all down.
           4. Done! 
       */
 
@@ -511,6 +517,7 @@ class App extends Component {
 
   rejectResizing() {
     /* Development note:
+
       On desktop/laptop Chrome, isMobile will be false if you emulate mobile via devTools 
       AFTER the site loads. You must reload the site from within the mobile emulator after
       entering devTools if you want the isMobile value to be correct. 
@@ -537,6 +544,7 @@ class App extends Component {
   }
 
   /* Update height:
+
       1. Mobile: On orientation change
       2. Desktop/laptop: height changes > 324px
     Another approach to determining orientation change: https://stackoverflow.com/a/37493832
