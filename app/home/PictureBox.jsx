@@ -221,7 +221,7 @@ export default function PictureBox(props) {
             loadLevelAll={setLoadLevels.sum().all}
             onLoad={onLoadForFantasy}
             // Trigger toggle after backgrounds are swapped
-            onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, inCity)}
+            onTransitionEnd={onTransitionEndForForrestAndNycBackgroundImages(spellLevel > 4, inCity)}
             spellLevel={spellLevel}
             src={bigForrestSrc}
           />
@@ -244,7 +244,7 @@ export default function PictureBox(props) {
             inCity={inCity}
             onLoad={onLoadForCity}
             // Trigger toggle after backgrounds are swapped
-            onTransitionEnd={onTransitionEndForBackgroundImages(spellLevel > 4, !inCity)}
+            onTransitionEnd={onTransitionEndForForrestAndNycBackgroundImages(spellLevel > 4, !inCity)}
             spellLevel={spellLevel}
             src={bigNycSrc}
           />

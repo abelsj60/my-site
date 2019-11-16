@@ -13,6 +13,14 @@ const RestyledMain = styled(Main)`
   flex-direction: column;
   position: relative;
 `;
+const Debug = styled.div`
+  position: absolute;
+  top: ${p => p.top}px;
+  background-color: rgba(0, 0, 0, .5);
+  color: white;
+  padding: 10px;
+  z-index: 5;
+`;
 
 export default class Home extends Component {
   constructor(props) {
@@ -83,6 +91,9 @@ export default class Home extends Component {
       sum: () => this.sumLoadLevels()
     };
 
+    console.log('loadLevel:', this.state.loadLevel);
+    console.log('homePageLoaded:', this.props.appState.homePageLoaded);
+
     return (
       <RestyledMain 
         home={true}
@@ -107,6 +118,21 @@ export default class Home extends Component {
           setLoadLevels={setLoadLevels}
           setSpellLevels={setSpellLevels}
         />
+        <Debug
+          top="275"
+        >
+          homePageLoaded: {this.props.appState.homePageLoaded.toString()}
+        </Debug>
+        <Debug
+          top="325"
+        >
+          setLoadLevels.sum().blurs: {setLoadLevels.sum().blurs}
+        </Debug>
+        <Debug
+          top="375"
+        >
+          [ {this.state.loadLevel.toString()} ]
+        </Debug>
       </RestyledMain>
     );
   }
