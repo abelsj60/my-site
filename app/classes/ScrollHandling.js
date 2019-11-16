@@ -25,10 +25,8 @@ export default class ScrollHandling {
     }
   }
 
-  resetWindowTop() {
-    // Useing pageYOffset instead of scrollY
-    // for cross-browser support, per MDN
-
+  resetWindowTop() {  // Not currently used
+    // Using pageYOffset instead of scrollY for cross-browser support, per MDN
     if (window.pageYOffset > 0) {
       if (process.env.NODE_ENV !== 'development') {
         ReactGA.event({
@@ -38,10 +36,7 @@ export default class ScrollHandling {
         });
       }
 
-      window.scroll({
-        top: 0,
-        behavior: 'smooth'
-      });
+      window.scroll({ top: 0, behavior: 'smooth' });
     }
   }
 }

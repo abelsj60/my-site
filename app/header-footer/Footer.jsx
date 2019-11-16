@@ -23,9 +23,6 @@ const Container = styled.footer`
     filter: unset;
   }
 `;
-const InnerContainer = styled.div`
-  position: relative;
-`;
 const Line = styled.div`
   display: ${p => p.home ? 'none' : ''};
   position: absolute;

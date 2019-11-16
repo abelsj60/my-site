@@ -1,7 +1,7 @@
 import Body from './Body.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
-import styled, {
+import {
   css,
   createGlobalStyle,
   ThemeProvider
@@ -103,29 +103,6 @@ const blurControl = {
   regular: 'blur(4px)',
   home: 'blur(1px)'
 };
-const ZoomControl = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  // ! Overall app height!
-  height: ${p => p.theme.pageHeight}px;
-  overflow: hidden;
-  position: relative;
-  
-  @media(orientation: landscape) {
-    // Fix esoteric iOS 7 iPad bug:
-    // https://stackoverflow.com/a/19449123
-    // https://stackoverflow.com/q/19012135
-    // https://krpano.com/ios/bugs/ios7-ipad-landscape/
-
-    ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
-  }
-
-  ${p => p.home && css`
-    width: 100%;
-    overflow: hidden;
-  `};
-`;
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Aref Ruqaa';
@@ -135,6 +112,7 @@ const GlobalStyle = createGlobalStyle`
       url('${ArefRuqaaLatin700Woff2}') format('woff2'),
       url('${ArefRuqaaLatin700Woff}') format('woff');
   }
+
   @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -143,6 +121,7 @@ const GlobalStyle = createGlobalStyle`
       url('${Montserrat300Woff2}') format('woff2'),
       url('${Montserrat300Woff}') format('woff');
   }
+
   @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -151,6 +130,7 @@ const GlobalStyle = createGlobalStyle`
       url('${MontserratRegularWoff2}') format('woff2'),
       url('${MontserratRegularWoff}') format('woff');
   }
+
   @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -159,6 +139,7 @@ const GlobalStyle = createGlobalStyle`
       url('${Montserrat500Woff2}') format('woff2'),
       url('${Montserrat500Woff}') format('woff');
   }
+
   @font-face {
     font-family: 'Playfair Display';
     font-style: normal;
@@ -167,6 +148,7 @@ const GlobalStyle = createGlobalStyle`
       url('${PlayfairDisplay700Woff2}') format('woff2'),
       url('${PlayfairDisplay700Woff}') format('woff');
   }
+
   @font-face {
     font-family: 'Playfair Display';
     font-style: normal;
@@ -216,105 +198,82 @@ const GlobalStyle = createGlobalStyle`
       line-height: 1.6;
     }
   }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // ! Overall app height!
+    height: ${p => p.theme.pageHeight}px;
+    overflow: hidden;
+    position: relative;
+    
+    @media(orientation: landscape) {
+      // Fix esoteric iOS 7 iPad bug:
+      // https://stackoverflow.com/a/19449123
+      // https://stackoverflow.com/q/19012135
+      // https://krpano.com/ios/bugs/ios7-ipad-landscape/
+
+      ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
+    }
+
+    ${p => p.home && css`
+      width: 100%;
+      overflow: hidden;
+    `};
+  }
 `;
 
 class App extends Component {
   constructor(props) {
     super(props);
 
+    this.images = preloadBigImages();
     const { pathname, search } = window.location;
-    const images = preloadBigImages();
     const referrer = new Referrer(props);
-    const location = new Location(
-      referrer.pathToMatch, 
-      { location: { pathname: pathname } }
-    );
-    let illustrationState;
-
-    // Check status of illustration for appStateillustrationState
-    // Also updated in ReloadRoute (for section shifts) and
-    // in contentLoader.cDU for swapped content
-    if (location.caller === 'chapter') {
-      const state = new State(
-        { location: { pathname: pathname } }, 
-        location
-      );
-      illustrationState = state.checkIllustrationState(images);
-    }
-
+    const location = new Location(referrer.pathToMatch, { location: { pathname } });
+    // Rules for height:
+    //  -Check document.documentElement.clientHeight (accurate on resize for Android & iOS)
+    //    -Set property on initial load
+    //    -Update on orientation change via handleResize
+    //    -Note, 11/9/19: iPadOS uses a desktop user agent!
+    this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
+    // Let's cache coverVals.y so we can reject resize on desktops when it doesn't change.
+    this.cacheImageOffsetY = this.coverVals(this.images).y;
+    this.headerMenuTimeoutId = undefined;
     // Show the heartbeat if the last date isn't located in storage
     // If it is in storage, we'll check the time elapsed since it ran
     let firstHeartbeat = typeof localStorage.lastHeartbeat === 'undefined';
+    let state;
+
+    // Define state if site loads on /chapter.
+    if (location.caller === 'chapter') {
+      state = new State({ location: { pathname } }, location);
+    }
 
     if (!firstHeartbeat) {
-      const now = dayjs(); // For debugging: now.add('3', 'week');
+      const now = dayjs(); // For debugging --> now.add('3', 'week');
       const lastHeartbeat = dayjs(localStorage.lastHeartbeat);
       firstHeartbeat = now.diff(lastHeartbeat, 'week', true) > 2;
 
       // Always update the date if < 2 weeks pass between user visits
-      // If > 2 weeks pass, onAnimationEnd() will do it after next heartbeat
+      // If > 2 weeks pass, onAnimationEnd() will update the date after the next full heartbeat
       if (!firstHeartbeat) {
-        // Technically, not a last heartbeat...but a trackable event
+        // Technically, any trackable event, not the last 'heartbeat'. But the name's so good...
         localStorage.lastHeartbeat = dayjs().format();
       }
     }
-
-    // Let's deal w/height.
-    //  1. Check value based on device type.
-    //  2. If the screen is landscape:
-    //    a. Set property on initial load,
-    //    b. Resize on orientation change via updateHeight(),
-    //    c.  Keep resized height on subsequent orientation
-    //        changes by rejecting w/n updateHeight() when
-    //        this.minAllowedHeight > newHeight.
-    // Note, 11/9/19: iPadOS uses a desktop user agent. This test doesn't catch it.
-    // However, the values it selects seem to remain accurate in terms of height.
-    // Thus, this.calculatePageHeight() doesn't use the customMobileTest.js.
-
-    const pageHeight = this.calculatePageHeight();
-    const coverVals = cover(window.innerWidth, pageHeight, images.width, images.height);
-    // Let's remember the coverVals.y offset so we can resize on desktops when it changes .
-    // Also, not updating this value after it's set because it doesn't matter once set.
-    // The value is a benchmark. It's valid as long as we see a change when comparing
-    // it to the current coverVal.y in the resize event.
-    this.homeImageYOffsets = coverVals.y;
-
-    // Want to block orientation changes? Try this:
-    // https://css-tricks.com/snippets/css/orientation-lock/
 
     if (process.env.NODE_ENV !== 'development') {
       ReactGA.initialize('UA-137902767-1');
       ReactGA.pageview(pathname + search); // Tallies initial request
     }
 
-    // Lower limit for resizing — (iPhone/SE form
-    // factor uses default height, wider phones
-    // use their true height).
-    this.defaultHeightWhenTooSmall = pageHeight; // Arbitrary (iPhone SE height)
-    this.isZooming = false; // Synchronous property that avoids fear of setState race condition 
-    this.headerMenuTimeoutId = undefined;
-    this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are ~325px
-    this.resizeTimeoutId = undefined; // Let's debounce 'resize'!
-    this.resizeTimeoutId2 = undefined; // Let's debounce 'resize'!
-    this.timeoutToResizeAfterZoom = undefined;
-    this.images = images; // Back-up object for this.calculateSpacerHeight() during load
-
-    // Prevent resize when scrolling oversized page. Not using state b/c it causes
-    // overflowing divs (w/content in them) to 'jump' when scrolling.
-    this.isAfterTouchWhenScrollingPage = false;
-
     this.state = {
-      currentCaller:
-        location.caller !== 'i'
-          ? location.caller
-          : 'home',
+      currentCaller: location.caller !== 'i' ? location.caller : 'home',
       // 0 = not ready, 1 = run, 2 = nevermore
       heartbeat: firstHeartbeat ? 0 : 2,
-      // height: // Height for <Main /> element
-      //   pageHeight > this.minAllowedHeight
-      //     ? pageHeight
-      //     : this.defaultHeightWhenTooSmall,
-      height: pageHeight,
+      height: this.pageHeight,
       homePageLoaded: false, // loadLevels confined to Home, this is for whole app
       illustrationDelay: false, // Control illustration loader on /chapter pages
       illustrationDirection: 'enter', // Properly interpret illustrationLevel 
@@ -323,18 +282,16 @@ class App extends Component {
       // Exit: 3 = real image on, 2 = fade in blurred image and portal, 1 = fade in text, 0 = done
       illustrationLevel: 0, 
       // 0 is n/a, + is loaded, and - is loading
-      illustrationState: illustrationState ? illustrationState : 0,
-      images: images, // preloaded big images (minimize time to display b/c of loading)
+      // Typically updated by <ReloadRoute />
+      illustrationState: state ? state.checkIllustrationState(this.images) : 0,
+      images: this.images, // preloaded big images (minimize time to display b/c of loading)
       inCity: false, // false = fantasy, true = city
       isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie
-      isAfterTouch: false, // Resize using clientHeight when true
       isValidUser: false, // to be removed
-      // isZooming: false, // True when usere is pinch zooming
       lastCaller: '',
-      nameTagWidth: this.calculateNameTagWidth(images), // Orig. dimensions: 1349 / 5115
+      nameTagWidth: this.calculateNameTagWidth(this.images), // Orig. dimensions: 1349 / 5115
       password: '', // to be removed
-      pinchZoomed: false, // Zoomed! (Or not.)
-      spacerHeight: this.calculateSpacerHeight(), // Set by 'handleResize', so must live here. Used by Home/NameTag.
+      spacerHeight: this.calculateSpacerHeight(this.images), // Set by 'handleResize', so must live here. Used by Home/NameTag.
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
       // Won't catch iPadOS w/o customMobileTest. Search for 11/9/19 notes as to necessity.
       type: isMobile ? 'mobile' : 'desktop',
@@ -345,9 +302,6 @@ class App extends Component {
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
     this.handleResize = this.handleResize.bind(this);
-    this.handleTouchEnd = this.handleTouchEnd.bind(this);
-    this.handleTouchMove = this.handleTouchMove.bind(this);
-    this.handleTouchStart = this.handleTouchStart.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
   }
@@ -358,9 +312,7 @@ class App extends Component {
     const homeIsActive = this.state.currentCaller === 'home';
     const reverieIsActive = this.state.currentCaller === 'reverie';
     const isNotFound = this.state.currentCaller === 'not-found';
-    const fixMobileSafariBugOn7 = isTablet
-      && isMobileSafari
-      && osVersion[0] === '7';
+    const fixMobileSafariBugOn7 = isTablet && isMobileSafari && osVersion[0] === '7';
 
     return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
       ? <PasswordLogin
@@ -384,88 +336,56 @@ class App extends Component {
           // Used b/c ThemeProvider only accepts one child.
         >
           <GlobalStyle
+            fixMobileSafariBugOn7={fixMobileSafariBugOn7}
+            home={homeIsActive}
             notFound={isNotFound}
             reverie={reverieIsActive}
           />
-          <ZoomControl
-            // Though an extra <div>, ZoomControl lets us add 'touch'
-            // events to React (alt is to add them to the Window)
-            fixMobileSafariBugOn7={fixMobileSafariBugOn7}
-            home={homeIsActive}
-            onTouchEnd={this.handleTouchEnd}
-            onTouchMove={this.handleTouchMove}
-            onTouchStart={this.handleTouchStart}
-          >
-            <Header
-              {...this.props}
-              appState={this.state}
-              boundHandleClickForApp={boundHandleClickForApp}
-            />
-            <Body
-              {...this.props}
-              appState={this.state}
-              boundHandleClickForApp={boundHandleClickForApp}
-            />
-            <LegalTermsOrBizCard
-              {...this.props}
-              appState={this.state}
-              boundHandleClickForApp={boundHandleClickForApp}
-            />
-            {(
-              <div
-                style={{
-                  backgroundColor: 'rgba(0, 0, 0, .7)',
-                  color: 'white',
-                  left: `${this.state.pinchZoomed ? '0px' : '-200px'}`,
-                  opacity: `${this.state.pinchZoomed ? '1' : '0'}`,
-                  padding: '10px',
-                  position: 'fixed',
-                  top: '205px',
-                  transition: 'left .2s ease-in-out, opacity .2s ease-in',
-                  zIndex: '5'
-                }}
-              >Zoom on!</div>
-            )}
-            <Footer
-              {...this.props}
-              appState={this.state}
-              boundHandleClickForApp={boundHandleClickForApp}
-            />
-          </ZoomControl>
+          <Header
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
+          <Body
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
+          <LegalTermsOrBizCard
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
+          <Footer
+            {...this.props}
+            appState={this.state}
+            boundHandleClickForApp={boundHandleClickForApp}
+          />
         </Fragment>
       </ThemeProvider>;
   }
 
-  calculatePageHeight() {
-    // On mobile, we must account for browser differences: 
-    //  -Mobile Safari updates innerHeight on resize and UI changes but mobile Chrome does not. 
-    //  -Also, after touchMove, Safari doesn't update innerHeight correctly, so we'll use/
-    //  the .isAfterTouch property to shift to document.documentElement.clientHeight.
-    //    a. clientHeight. Mobile Chrome or after touchMove everywhere
-    //    b. innerHeight. Mobile Safari
-    // -If Android, further check for the larger of our two possible values b/c some devices
-    //  let the address bar shrink in landscape, some don't (BrowserStack testing).
+  get pageHeight() {
+    return this.minAllowedHeight < document.documentElement.clientHeight
+      ? document.documentElement.clientHeight
+      : this.minAllowedHeight;
+  }
 
-    // Note: This may be causing problems on iPadOS! MUST REVIEW!
-
-    return isMobile && (!isMobileSafari || (this.state && this.state.isAfterTouch))
-      ? document.documentElement.clientHeight > window.innerHeight
-        ? document.documentElement.clientHeight
-        : window.innerHeight
-      : window.innerHeight;
+  get pageWidth() {
+    return document.documentElement.clientWidth;
   }
 
   calculateNameTagWidth(topImages) {
     const images = topImages || this.state.images;
-    const coverVals = cover(window.innerWidth, window.innerHeight, images.width, images.height);
+    const coverVals = this.coverVals(images);
 
     return Math.floor(.27 * coverVals.width);
   }
 
-  calculateSpacerHeight() {
-    const { images } = this;
-    const windowHeight = window.innerHeight;
-    const coverVals = cover(window.innerWidth, windowHeight, images.width, images.height);
+  calculateSpacerHeight(topImages) {
+    const images = topImages || this.state.images;
+    const windowHeight = this.pageHeight;
+    const coverVals = this.coverVals(images);
     const yImageTop = coverVals.y;
     const makePositive = val => val * -1;
     // 1. 14.4 & 14.7 are arbitrary values (trial-n-error)
@@ -473,8 +393,8 @@ class App extends Component {
     const mathForSpacer = (windowHeight, percentage) => windowHeight * (percentage / 100) - 52;
     let spacerHeight = Math.ceil(mathForSpacer(windowHeight, 14.5)); // Original: 14.2
 
-    // yImageTop < 0 when thewindow's width is larger than the image's 
-    // width. If so, we cut off the image's top and bottom to zoom in.
+    // yImageTop < 0 when the window's width is larger than the image's with, meaning
+    // we zoom into the image's top and bottom.
     if (Math.floor(yImageTop) < 0) {
       const newHeight = coverVals.height - makePositive(yImageTop);
       const newSpacerHeight = mathForSpacer(newHeight, 14.7); // Original: 14.6
@@ -482,21 +402,21 @@ class App extends Component {
       const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
 
       spacerHeight = Math.ceil(spacerHeight - changedPosition);
-      }
-
-    return spacerHeight >= 15
-      ? spacerHeight
-      : 15;
     }
+
+    return spacerHeight >= 15 ? spacerHeight : 15;
+  }
+
+  coverVals(images) {
+    const { height, width } = images;
+    return cover(this.pageWidth, this.pageHeight, width, height);
+  }
 
   handleBackAndForth() {
     const location = new Location('/', this.props);
     const hcForApp = new ClickHandling('app', this);
     const boundHandleClickForApp = hcForApp.boundHandleClick;
-
-    // Always the caller.
-    // Update isMenu if it isn't synced w/window.location.pathname.
-
+    // Update isMenu if it doesn't match window.location.pathname.
     const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
     const updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
 
@@ -504,187 +424,51 @@ class App extends Component {
   }
 
   handlePasswordSubmit(event) {
-    const password = this.state.password.toLowerCase().trim();
     event.preventDefault();
+    const password = this.state.password.toLowerCase().trim();
 
-    if (
-      password === 'enter' || password === 'illustrator' || password === 'boom!'
-    ) {
+    if (password === 'enter' || password === 'illustrator' || password === 'boom!') {
       this.setState({ isValidUser: true });
     } else {
-      this.setState({ 
-        password: '',
-        wrongPassword: 'Incorrect'
-      });
+      this.setState({ password: '', wrongPassword: 'Incorrect' });
     }
-      }
+  }
 
   handlePasswordEntry(event) {
     this.setState({ password: event.target.value });
-    }
-
-  handleTouchEnd(event) {
-    /* Must reads onTouch:
-        1. https://stackoverflow.com/a/4165641
-        2. https://m14i.wordpress.com/2009/10/25/javascript-touch-and-gesture-events-iphone-and-android/
-        3. https://www.sitepen.com/blog/touching-and-gesturing-on-iphone-android-and-more/
-    */
-
-    // Touch is over when length is 0. Let's remember:
-    //  -event.touches refers to all on-screen touches
-    //  -event.targetTouches refers to touches w/n target element
-    //  -We've added the touch events to zoom control, an empty div that
-    //    sits above all others, except <html>, <body>, and <div id="app">
-    //  -Bizarrely, the targetTouches element will adopt the element in which
-    //    a finger is first sensed, so we're not using targetTouches here.
-    //  -Regarding the timeout, it's 'undefined' the first time the user zooms.
-    //    -It's made 'undefined' every time thereafter at the conclusion of the
-    //      user's zoom session, as defined by handleTouchMove.
-
-    eventManagement(event);
-
-    if (event.touches.length === 0) {
-      // Let's reset the offset cache
-
-      if (typeof this.cachedXOffsetForZoom !== 'undefined') {
-        this.cachedXOffsetForZoom = undefined;
-      }
-
-      if (typeof this.cachedYOffsetForZoom !== 'undefined') {
-        this.cachedYOffsetForZoom = undefined
-      }
-
-      if (
-          !this.isZooming
-          && (typeof this.timeoutToResizeAfterZoom === 'undefined') // Always reset by onTouchMove
-      ) {
-        // Let's add a failsafe, just in case pinchZoomed doesn't get shut off (may happen...?)
-
-        if (this.state.pinchZoomed) {
-          this.setState({ pinchZoomed: false });
-        }
-
-        // Remember, 250 milliseconds is added to 50 milliseconds b/c handleResize 
-        // has a setTimeout inside it, too. This timing is stable. I experimented 
-        // w/shorter times. They were not stable. We might get a resize on the 
-        // intermediate elements that are on screen before the final, stable 
-        // paint. These elements will have the wrong dimensions, which
-        // typically results in an extra-wide NameTag and a height 
-        // that stretches below Safari's bottom menu bar.
-        // If anyting, add more time to 250...
-
-        this.timeoutToResizeAfterZoom = setTimeout(() => this.handleResize('afterPinchZoom'), 250);
-      }
-    }
   }
 
-  handleTouchMove(event) {
-    eventManagement(event);
-
-    const { pinchZoomed } = this.state;
-    
-    // We'll check to see if we're zooming if more than finger's down.
-    if (event.touches.length > 1) {
-      // Let's prep an object for the state update.
-      const stateToUpdate = {};
-
-      // Notes on detecting zoom:
-      //  -We only need to turn pinchZoom on once, we only need to turn if off once.
-      //  -Pinch zoom almost always moves the X, Y offsets. It's very hard not to move at least one of them.
-      //    -This is a more effective check than trying to create coordinates by adding points to screen 
-      //    -or to measure and compare some element's dimensions, or at least this has been my exp.
-      //  -It's not entirely enough to simply check the offsets, when setting pinchZoomed, we should also
-      //    check if the offsets are increasing. We do so by checking a set of values that were cached 
-      //    when THIS touch interaction began, via the onTouchMove event. If at least one is growing,
-      //    we're probably zooming, which means that we should set pinchZoomed to true.
-      //  -We can turn off pinchZoomed when both offsets are less than 0. It's very hard not to move 
-      //    both values belwo 0 when unzooming. We can add a visual element to screen to help users
-      //    understand what's happening, and that they may have failed to move far enough when 
-      //    trying to unzoom.
-      //  -When we unzoom, we'll also set this.timeoutToResizeAfterZoom to 'undefined' as a hook.
-      //    -It'll tell handleTouchEnd that it set a timer to resize the app now that the user's 
-      //      done pinchZooming. The timeout will be cleared by handleTouchStart if a new zoom
-      //      session is begun before the timeout has a chance to run.
-      //  -We're actually using the isZooming property on this to track the zoom state. Why? We don't 
-      //    have to worry about race conditions and async returns from React's setState property.
-      //    -We're using the pinchZoomed property on state to control when the user is notified 
-      //      that zoom is on. Why? Calls to setState will cause a re-render so we can remove
-      //      the notice seamlessly, without worrying about any lags on actual detection. 
-
-      if (
-        !pinchZoomed 
-          && (window.pageXOffset >= 0 || window.pageYOffset >= 0)
-          && (window.pageXOffset > this.cachedXOffsetForZoom || window.pageYOffset > this.cachedYOffsetForZoom)
-      ) {
-        console.log('pZ ON');
-        this.isZooming = true; // zoom detection (on)
-        stateToUpdate.pinchZoomed = true; // give notice
-        this.setState(stateToUpdate);
-      } else if (
-        pinchZoomed 
-          && (window.pageXOffset < 0 && window.pageYOffset < 0)
-      ) {
-        console.log('pZ OFF');
-        this.isZooming = false; // zoom detection (off)
-        stateToUpdate.pinchZoomed = false; // remove notice
-        this.setState(stateToUpdate);
-      }
-    }
-  }
-
-  handleTouchStart(event) {
-    // This event is used to begin our zoom session. We'll prepare to test for pinchZoom by:
-    //  -Clearing any exiting timeouts
-    //  -Caching the page's X, Y offsets so we can see if they're growing in onTouchMove.
-    //    -This will tell us whether or not we should turn on isZooming pinchZoom.
-    //  -While we could techincally set isZooming in here, this choice seems fraught.
-    //    -We'll have to remember to turn it off in onTouchMove.
-    //    -We may also run afoul of confusing scenarios, like are we actualy zooming or 
-    //      just making the window small as we zoom away from a properly sized viewport.
-    //    -Bottom line: It gets funky fast. Explicit tracking in onTouchMove seems
-    //      clearest over time.
-
-    eventManagement(event);
-
-    if (event.touches.length > 1) {
-      if (typeof this.timeoutToResizeAfterZoom !== 'undefined') {
-        // I believe this will clear the timeout should it be running in the fraction
-        // of a second between release and adding two fingers back to screen.
-        // I can't imagine any other reason to add two to screen...
-
-        clearTimeout(this.timeoutToResizeAfterZoom);
-        this.timeoutToResizeAfterZoom = undefined;
-      }
-
-      this.cachedXOffsetForZoom = window.pageXOffset;
-      this.cachedYOffsetForZoom = window.pageYOffset;
-    }
-  }
-
-  handleResize(str) {
+  handleResize(event) {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
 
-    const afterPinchZoom = str === 'afterPinchZoom';
+    eventManagement(event)
 
-    if (!afterPinchZoom) {
-      if (this.rejectResizing().result) {
-        return false;
+    if (this.rejectResizing().result) {
+      return false;
+    }
+
+    this.updateSpacerHeight();
+    this.updateNameTagWidth();
+    this.updateHeight();
+
+    // Going from landscape to portrait after the initial rotation? Better 
+    // set a timeout and check to be sure the top is the top. If you don't 
+    // fix it, multiple rotation changes will push the page out of view, 
+    // leaving a blank white screen, which isn't great. This problem 
+    // appeared after removing this.toggleHtmlElementHeight(), which,
+    // positively speaking, prevented the ugly two-step render.
+
+    setTimeout(() => {
+      if (window.scrollY > 0) {
+        const scrollHandling = new ScrollHandling(this.state.currentCaller);
+        scrollHandling.resetWindowTop();
       }
-    }
-
-    if (this.resizeTimeoutId > 0) {
-      clearTimeout(this.resizeTimeoutId); // Still moving, kill timeout (aka, debounce)
-    }
-
-    this.resizeTimeoutId = setTimeout(() => {
-      this.updateSpacerHeight();
-      this.updateNameTagWidth();
-      this.updateHeight();
-    }, 50);
+    }, 35);
   }
 
   hasStyle(type) {
     // https://johanronsse.be/2016/01/03/simple-flexbox-check/
+
     const documentStyle = window.document.body
       ? window.document.body.style
       : window.document.documentElement.style;
@@ -698,91 +482,62 @@ class App extends Component {
     if (type === 'object-fit') {
       if (documentStyle.objectFit === '') {
         return true;
+      }
     }
-  }
 
     return false;
   }
 
+  // Note: On desktop/laptop Chrome, isMobile will be false if you emulate mobile via devTools 
+  // AFTER the site loads. You must reload the site from within the mobile emulator after
+  // entering devTools if you want the isMobile value to be correct.
   rejectResizing() {
-    const { images, pinchZoomed } = this.state;
-    const coverVals = cover(window.innerWidth, this.calculatePageHeight(), images.width, images.height);
+    const resultObj = { result: false, reason: '' };
+    const coverValY = this.coverVals(this.state.images).y;
 
-    // Note for desktop Chrome. isMobile will be false if you emulate mobile via devTools 
-    // AFTER loading the site. You must reload the site from within the mobile emulator 
-    // in devTools for isMobile to test correctly.
-
-    if (!isMobile && coverVals.y === this.homeImageYOffsets) {
-      return { result: true, reason: 'On desktop, no change to homeImageYOffset' };
-    } else if (this.isZooming) {
-      // Don't resize while isZooming, even if pinchZoomed hasn't been set yet.
-      return { result: true, reason: 'isZooming' };
-    } else if (pinchZoomed) {
-      // Do not resize while pinchZoomed.
-      return { result: true, reason: 'pinchZoomed' };
+    if (!isMobile && coverValY === this.cacheImageOffsetY) {
+      resultObj.result = true;
+      resultObj.reason = 'On desktop, no change to cacheImageOffsetY';
+    } else if (isMobile && this.state.height === this.pageHeight) {
+      resultObj.result = true;
+      resultObj.reason = 'On mobile, no change to height'
     }
 
-    return { result: false, reason: '' };
+    this.cacheImageOffsetY = coverValY
+    return resultObj;
   }
 
+  // Early versions of iOS 12 have strange behavior. On orientation change, the
+  // screen can collapse between the first and second setStates. Remember, in 
+  // iOS, resize fires on orientation change, then AGAIN afer the bottom 
+  // menu bar is added to screen. 
+  
+  // This on/off function ensures that the app's height will occupy the 
+  // entire screen during the update phase. Trust me, it works.
+
+  // Note, 11/9/19: This won't catch iPadOS as it doesn't report
+  // itself as mobile — 'tis OK, I've observed good behavior.
+  // toggleHtmlElementHeight(mode) {
+  //   if (isMobileSafari && parseInt(osVersion) >= 12) {
+  //     if (mode === 'on') {
+  //       document.getElementsByTagName('html')[0].style.height = '100vh';
+  //     } else if (mode === 'off') {
+  //       // setTimeout ensures that elementHeight has time to do its work
+  //       setTimeout(() => {
+  //         document.getElementsByTagName('html')[0].style.height = '';
+  //       }, 250);
+  //     }
+  //   }
+  // }
+
+  // Another approach to determining orientation change: https://stackoverflow.com/a/37493832
+  // Update page height when:
+  //  -Mobile: On orientation change
+  //  -Desktop/laptop: height changes > 324px
   updateHeight() {
     const { pathname, search } = window.location;
-
-    // Early versions of iOS 12 have strange behavior. On orientation change, the
-    // screen can collapse between the first and second setStates. Remember, in 
-    // iOS, resize fires on orientation change, then AGAIN afer the bottom 
-    // menu bar is added to screen. 
-    
-    // This on/off function ensures that the app's height will occupy the 
-    // entire screen during the update phase. Trust me, it works.
-
-    // Note, 11/9/19: This won't catch iPadOS as it doesn't report
-    // itself as mobile — 'tis OK, I've observed good behavior.
-
-    const toggleHtmlElementHeight = mode => {
-      if (isMobileSafari && parseInt(osVersion) >= 12) {
-        if (mode === 'on') {
-          document.getElementsByTagName('html')[0].style.height = '100vh';
-        } else if (mode === 'off') {
-          // setTimeout ensures that elementHeight has time to do its work
-          setTimeout(() => {
-            document.getElementsByTagName('html')[0].style.height = '';
-          }, 250);
-        }
-      }
-    };
-
-    toggleHtmlElementHeight('on');
-
-    // Another approach to determining orientation change: 
-    // https://stackoverflow.com/a/37493832
-
-    const newHeight = this.calculatePageHeight();
-
-    // Resize if height changes and newHeight > this.minAllowedHeight.
-    // Note, mobile Brave slips through this test on /home. The image
-    // resizes and Brave then resizes. No fix for now.
-
-    if (newHeight === this.state.height) {
-      if (process.env.NODE_ENV !== 'development') {
-        ReactGA.event({
-          category: 'App state',
-          action: `Resized w/o changing height. Currently: ${this.state.height}.`,
-          value: newHeight,
-          label: `Page: ${pathname}/${search}`
-        });
-      }
-
-      // On orientation change, covers every section but /chapter
-      // (at least on iPhone)
-      toggleHtmlElementHeight('off');
-      return false;
-    }
-
-    // Update page height when these factors are true:
-    //  a. mobile device
-    //  b. orientation change AND pinchZoom is off
-    //  c. height changes (we've already discarded newHeight <= 350)
+    const newHeight = this.pageHeight;
+    // this.toggleHtmlElementHeight('on');
 
     if (process.env.NODE_ENV !== 'development') {
       ReactGA.event({
@@ -793,52 +548,41 @@ class App extends Component {
       });
     }
 
-    // On orientation change, covers /chapter b/c of hidden image
-    // (at least on iPhone)
-
-    toggleHtmlElementHeight('off');
-
-    this.setState(() => ({
-      height: this.minAllowedHeight < newHeight
-        ? newHeight
-        : this.minAllowedHeight,
-      // Reset (true until handleMove says otherwise)
-      isAfterTouch: this.state.isAfterTouch && false
-    }));
+    // this.toggleHtmlElementHeight('off');
+    this.setState({ height: newHeight });
   }
 
+  // Only called by handleResize, which rejects if newHeight === height.
   updateNameTagWidth() {
     const nameTagWidth = this.calculateNameTagWidth();
-
     if (nameTagWidth !== this.state.nameTagWidth) {
       this.setState({ nameTagWidth })
-  }
+    }
   }
 
+  // Only called by handleResize, which rejects if newHeight === height.
   updateSpacerHeight() {
-    // Note: Really a faceplate now...see NameTag notes.
     const spacerHeight = this.calculateSpacerHeight();
-
     if (spacerHeight !== this.state.spacerHeight) {
       this.setState({ spacerHeight });
     }
   }
 
   componentDidMount() {
-    // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
     if (!this.hasStyle('flexbox')) {
+      // A note on Flexbox compatibility: https://stackoverflow.com/a/35137869
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {
+      // I should support Opera, but I can't get it to play nicely w/Flexbox, so...
       throw new Error("Uh oh. I don't currently support Opera or IE if it's less than 11.");
     }
 
-    if (!this.hasStyle('object-fit')) {
+    // Polyfill...
+    if (!this.hasStyle('object-fit')) { 
       objectFitImages();
     }
 
-    // Heard after all React handlers run
-    // https://fortes.com/2018/react-and-dom-events/
-
+    // Runs after React's handlers: https://fortes.com/2018/react-and-dom-events/\
     window.addEventListener('resize', this.handleResize);
     window.addEventListener('popstate', this.handleBackAndForth);
   }
@@ -848,17 +592,14 @@ class App extends Component {
       const location = new Location('/', this.props, prevProps);
 
       if (location.recordPageview) {
-        const {
-          pathname,
-          search
-        } = window.location;
+        const { pathname, search } = window.location;
         ReactGA.pageview(pathname + search);
       }
     }
   }
 
   componentWillUnmount() {
-    // This will never be called, here as good practice.
+    // This should never be called, here as good practice.
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('popstate', this.handleBackAndForth);
   }
