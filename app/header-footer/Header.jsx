@@ -30,6 +30,10 @@ const Container = styled.header`
   align-items: center;
   width: 100%;
   max-width: 75rem;
+  // Doesn't seem to be an issue when the app jumps down due to a touch, the user gets it. 
+  // These values seem to be ignored on iPhones, which may be a function of my own CSS? 
+  // Anyway, it seems like some iPhones become more resistant to taps at the top of
+  // the screen with these values. May be true, may be false, but no penalty...
   margin-top: env(safe-area-inset-top);
   margin-top: cover(safe-area-inset-top);
 `;
