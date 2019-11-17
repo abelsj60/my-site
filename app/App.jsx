@@ -330,8 +330,7 @@ class App extends Component {
             mediaQueries,
             blur: this.state.currentCaller === 'home' ? blurControl.home : blurControl.regular,
             blurForTempContent: this.state.tempContent > 0,
-            isHeaderMenu: this.state.tempContent === 3,
-            // pageHeight: this.state.height.toString()
+            isHeaderMenu: this.state.tempContent === 3
           }}
         >
         <Fragment
@@ -600,7 +599,6 @@ class App extends Component {
 
   componentWillUnmount() {
     // This should never be called, here as good practice.
-    console.log('unmount listeners');
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('popstate', this.handleBackAndForth);
   }
