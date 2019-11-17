@@ -16,8 +16,8 @@ const Container = styled.footer`
   position: relative;
   width: 100%;
   max-width: 70rem;
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-bottom: cover(safe-area-inset-bottom);
+  // padding-bottom: env(safe-area-inset-bottom);
+  // padding-bottom: cover(safe-area-inset-bottom);
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     filter: unset;

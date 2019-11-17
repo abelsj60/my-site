@@ -204,7 +204,8 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     align-items: center;
     // ! Overall app height!
-    height: ${p => p.theme.pageHeight}px;
+    // height: ${p => p.theme.pageHeight}px;
+    height: ${p => p.pageHeight}px;
     overflow: hidden;
     position: relative;
     
@@ -305,6 +306,7 @@ class App extends Component {
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.resetScrollTop = this.resetScrollTop.bind(this);
+    this.toggleHtmlElementHeight = this.toggleHtmlElementHeight.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
   }
@@ -332,7 +334,7 @@ class App extends Component {
             blur: this.state.currentCaller === 'home' ? blurControl.home : blurControl.regular,
             blurForTempContent: this.state.tempContent > 0,
             isHeaderMenu: this.state.tempContent === 3,
-            pageHeight: this.state.height.toString()
+            // pageHeight: this.state.height.toString()
           }}
         >
         <Fragment
@@ -342,6 +344,7 @@ class App extends Component {
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
             home={homeIsActive}
             notFound={isNotFound}
+            pageHeight={this.state.height}
             reverie={reverieIsActive}
           />
           <Header
@@ -441,13 +444,31 @@ class App extends Component {
     this.setState({ password: event.target.value });
   }
 
+  toggleHtmlElementHeight(mode) {
+    if (isMobileSafari && parseInt(osVersion) >= 12) {
+      if (mode === 'on') {
+        document.getElementsByTagName('html')[0].style.height = '100vh';
+      } else if (mode === 'off') {
+        // setTimeout ensures that elementHeight has time to do its work
+        setTimeout(() => {
+          document.getElementsByTagName('html')[0].style.height = '';
+        }, 250);
+      }
+    }
+  }
+
   handleResize(event) {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
+
+    this.toggleHtmlElementHeight('on');
+    console.log('handleResize', this.pageHeight, window.innerHeight);
 
     const currentHeight = this.state.height;
     this.cachedHeightFromStateForResize = currentHeight;
 
     if (currentHeight !== this.pageHeight) {
+
+      console.log('Enter scrollTop');
 
       /* Switching orientations on mobile?
 
@@ -478,19 +499,21 @@ class App extends Component {
       */
 
       this.scrollTopTimer = setInterval(() => { // Runs before reject b/c...speed.
-        this.resetScrollTop();
+        // this.resetScrollTop();
       }, 5);
     }
 
     eventManagement(event);
 
     if (this.rejectResizing().result) {
+      this.toggleHtmlElementHeight('off');
       return false;
     }
 
     this.updateSpacerHeight();
     this.updateNameTagWidth();
     this.updateHeight();
+    this.toggleHtmlElementHeight('off');
   }
 
   hasStyle(type) {
@@ -616,6 +639,7 @@ class App extends Component {
 
   componentWillUnmount() {
     // This should never be called, here as good practice.
+    console.log('unmount listeners');
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('popstate', this.handleBackAndForth);
   }
