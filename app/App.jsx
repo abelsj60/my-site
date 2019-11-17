@@ -12,6 +12,7 @@ import Footer from './header-footer/Footer.jsx';
 import Header from './header-footer/Header.jsx';
 import {
   browserVersion,
+  isAndroid,
   isIE,
   isMobile,
   isMobileSafari,
@@ -204,10 +205,10 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     align-items: center;
     // ! Overall app height!
-    height: ${p => p.theme.pageHeight}px;
+    height: ${p => p.pageHeight}px;
     overflow: hidden;
     position: relative;
-    
+
     @media(orientation: landscape) {
       // Fix esoteric iOS 7 iPad bug:
       // https://stackoverflow.com/a/19449123
@@ -241,9 +242,7 @@ class App extends Component {
       Note: Check document.documentElement.clientHeight b/c it's accurate at resize for both Android & iOS.
     */
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are >= 325px
-    this.cachedHeightFromStateForResize = undefined; // Used by handleResize
     this.headerMenuTimeoutId = undefined;
-    this.scrollTopTimer = undefined // Used by handleResize
     // Show the heartbeat if the last date isn't located in storage
     // If it is in storage, we'll check the time elapsed since it ran
     let firstHeartbeat = typeof localStorage.lastHeartbeat === 'undefined';
@@ -304,7 +303,7 @@ class App extends Component {
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
     this.handleResize = this.handleResize.bind(this);
-    this.resetScrollTop = this.resetScrollTop.bind(this);
+    this.toggleHtmlElementHeight = this.toggleHtmlElementHeight.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
   }
@@ -331,8 +330,7 @@ class App extends Component {
             mediaQueries,
             blur: this.state.currentCaller === 'home' ? blurControl.home : blurControl.regular,
             blurForTempContent: this.state.tempContent > 0,
-            isHeaderMenu: this.state.tempContent === 3,
-            pageHeight: this.state.height.toString()
+            isHeaderMenu: this.state.tempContent === 3
           }}
         >
         <Fragment
@@ -342,6 +340,7 @@ class App extends Component {
             fixMobileSafariBugOn7={fixMobileSafariBugOn7}
             home={homeIsActive}
             notFound={isNotFound}
+            pageHeight={this.state.height}
             reverie={reverieIsActive}
           />
           <Header
@@ -369,8 +368,22 @@ class App extends Component {
   }
 
   get pageHeight() {
-    return this.minAllowedHeight < document.documentElement.clientHeight
-      ? document.documentElement.clientHeight
+    /* On height: 
+      
+      1. iOS: document.documentElement.clientHeight
+        -This value doesn't change on zoom, most other height values do
+        -This value includes browser chrome, ensuring a consistent size
+      2. Android: window.innerHeight
+        -Android doesn't update dimensional measurements on zoom.
+        -This value includes changes to browser chrome in a predictable way.
+          -When a user scrolls up on landscape, hiding the address bar, then swaps
+            orienation, this value will ensure the new height measurement includes
+            the extra space. Sadly, document.documentElement.clientHeight does not.
+      3. We only care about the minAllowedHeight on mobile devices, desktops get a pass.
+    */
+
+    return !isMobile || this.minAllowedHeight < document.documentElement.clientHeight
+      ? !isAndroid ? document.documentElement.clientHeight : window.innerHeight
       : this.minAllowedHeight;
   }
 
@@ -441,56 +454,35 @@ class App extends Component {
     this.setState({ password: event.target.value });
   }
 
+  toggleHtmlElementHeight(mode) {
+    if (isMobileSafari && parseInt(osVersion) >= 12) {
+      if (mode === 'on') {
+        document.getElementsByTagName('html')[0].style.height = '100vh';
+      } else if (mode === 'off') {
+        // setTimeout ensures that elementHeight has time to do its work
+        setTimeout(() => {
+          document.getElementsByTagName('html')[0].style.height = '';
+        }, 250);
+      }
+    }
+  }
+
   handleResize(event) {
     // https://alvarotrigo.com/blog/firing-resize-event-only-once-when-resizing-is-finished/
 
-    const currentHeight = this.state.height;
-    this.cachedHeightFromStateForResize = currentHeight;
-
-    if (currentHeight !== this.pageHeight) {
-
-      /* Switching orientations on mobile?
-
-        Better set an interval and check to be sure the top is the top. If you don't fix it, it'll be ugly 
-        AND multiple rotation changes can push the page out of view, leaving a blank white screen, which 
-        isn't great. This problem appeared after removing this.toggleHtmlElementHeight() (which 
-        resulted in an ugly double render anyway).
-
-        Using setInterval (for speed) is very delicate here; it'll set the top to 0 as soon as possible,
-        but we won't know when the operation's complete because the interval will start running BEFORE 
-        the device has a change to fully update all values (it's in a black hole of some sort that 
-        leads to many infinite loops.
-
-        How we do it, including my best understanding as to why:
-          1. On mobile Safari, resize runs as soon as an orientation change is complete. 
-            -This happens before React finishes updating the app's state.
-            -At this time, we add this.state.height to the height cache.
-          2. setInterval starts running and running and running.
-          3. On mobile Safari, resize runs again milliseconds later, probably due to the addition of browser Chrome.
-            -I believe something is changing w/regard to the bottom menu. I can't put my finger on it, but have
-              extensively tested these issues, and believe that Safari has multiple paints before and after 
-              adding its menu bars (or at lest the bottom bar).
-            -The new call to handleResize will update the height cache, and JavaScript's funky pass by reference 
-              feature will ensure that all accessors see the updated value.
-            -setInterval now knows the app's state is up-to-date, which means resetScrollTop() must've run.
-            -setInterval's internal (else if) test will now pass, and we can shut it all down.
-          4. Done! 
-      */
-
-      this.scrollTopTimer = setInterval(() => { // Runs before reject b/c...speed.
-        this.resetScrollTop();
-      }, 5);
-    }
+    this.toggleHtmlElementHeight('on');
 
     eventManagement(event);
 
     if (this.rejectResizing().result) {
+      this.toggleHtmlElementHeight('off');
       return false;
     }
 
     this.updateSpacerHeight();
     this.updateNameTagWidth();
     this.updateHeight();
+    this.toggleHtmlElementHeight('off');
   }
 
   hasStyle(type) {
@@ -533,21 +525,12 @@ class App extends Component {
     return resultObj;
   }
 
-  resetScrollTop() {
-    if (window.scrollY > 0) {
-      const scrollHandling = new ScrollHandling(this.state.currentCaller);
-      scrollHandling.resetWindowTop();
-    } else if (this.cachedHeightFromStateForResize === this.pageHeight) {
-      clearTimeout(this.scrollTopTimer);
-      this.scrollTopTimer = undefined;
-    }
-  }
-
   /* Update height:
 
       1. Mobile: On orientation change
       2. Desktop/laptop: height changes > 324px
     Another approach to determining orientation change: https://stackoverflow.com/a/37493832
+    And another: http://pioul.fr/cross-device-cross-browser-portrait-landscape-detection
   */
 
   updateHeight() {

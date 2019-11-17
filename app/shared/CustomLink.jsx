@@ -57,6 +57,7 @@ export default ({
   isCalledByMenu,
   replace,
   to,
+  useAref,
   ...props
 }) => {
   const { pathname } = window.location;

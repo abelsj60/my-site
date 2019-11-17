@@ -16,8 +16,11 @@ const Container = styled.footer`
   position: relative;
   width: 100%;
   max-width: 70rem;
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-bottom: cover(safe-area-inset-bottom);
+  // May use in future, but on iPhones w/homebar, the bottom of the Footer cooperates
+  // On iPhones w/o the homebar, the screen will leap up, but we don't push it down
+  // w/a call to window.scrollTo, so...who cares?  
+  // padding-bottom: env(safe-area-inset-bottom);
+  // padding-bottom: cover(safe-area-inset-bottom);
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     filter: unset;

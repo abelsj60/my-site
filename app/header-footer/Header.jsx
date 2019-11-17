@@ -30,6 +30,10 @@ const Container = styled.header`
   align-items: center;
   width: 100%;
   max-width: 75rem;
+  // Doesn't seem to be an issue when the app jumps down due to a touch, the user gets it. 
+  // These values seem to be ignored on iPhones, which may be a function of my own CSS? 
+  // Anyway, it seems like some iPhones become more resistant to taps at the top of
+  // the screen with these values. May be true, may be false, but no penalty...
   margin-top: env(safe-area-inset-top);
   margin-top: cover(safe-area-inset-top);
 `;
@@ -85,13 +89,18 @@ const RestyledLink = styled(
     font-size: ${p => p.isHome ? p.theme.fontSizes.three : p.theme.fontSizes.three};
   }
 
-  // Control nav items when menu is open, up to the break point
+  // Control nav items when menu is open, up to the break point, 1
   @media (min-width: 0px) and (max-width: ${p => p.theme.mediaQueries.tinyView}) {
+    color: ${p => p.useAref && p.theme.colors.yellow};
+    font-family: ${p => p.useAref && "'Aref Ruqaa', serif"};
     font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.eighteen};
     margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
   }
 
+  // Control nav items when menu is open, up to the break point, 2
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) and (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    color: ${p => p.useAref && p.theme.colors.yellow};
+    font-family: ${p => p.useAref && "'Aref Ruqaa', serif"};
     font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.twenty};
     margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
   }
@@ -289,6 +298,7 @@ export default class Header extends Component {
                       tempContent={tempContent}
                     >
                       <RestyledLink
+                        useAref={true}
                         boundHandleClickForApp={boundHandleClickForApp}
                         illustrationDirection={illustrationDirection}
                         illustrationLevel={illustrationLevel}

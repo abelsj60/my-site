@@ -91,8 +91,8 @@ export default class Home extends Component {
       sum: () => this.sumLoadLevels()
     };
 
-    console.log('loadLevel:', this.state.loadLevel);
-    console.log('homePageLoaded:', this.props.appState.homePageLoaded);
+    // console.log('loadLevel:', this.state.loadLevel);
+    // console.log('homePageLoaded:', this.props.appState.homePageLoaded);
 
     return (
       <RestyledMain 
@@ -118,7 +118,7 @@ export default class Home extends Component {
           setLoadLevels={setLoadLevels}
           setSpellLevels={setSpellLevels}
         />
-        <Debug
+        {/* <Debug
           top="275"
         >
           homePageLoaded: {this.props.appState.homePageLoaded.toString()}
@@ -132,7 +132,7 @@ export default class Home extends Component {
           top="375"
         >
           [ {this.state.loadLevel.toString()} ]
-        </Debug>
+        </Debug> */}
       </RestyledMain>
     );
   }
