@@ -6,7 +6,7 @@ import { cover } from 'intrinsic-scale';
 import Mapper from '../shared/Mapper.jsx';
 import React, { Component } from 'react';
 import Referrer from '../classes/Referrer.js';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 import UnorderedList from '../primitives/UnorderedList.jsx';
 
@@ -175,7 +175,9 @@ const Nav = styled.nav`
       bottom: 0px;
       width: 100%;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      // justify-content: center;
     `};
   }
 `;
@@ -190,6 +192,7 @@ const NavList = styled(UnorderedList)`
     ${p => p.tempContent === 3 && css`
       flex-direction: column;
       margin-bottom: 55px;
+      height: 100%;
     `};
   }
 `;
@@ -224,6 +227,32 @@ const Icon = styled.img`
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwoB}) {
     display: none;
   }
+`;
+
+// On-screen timer for open header menu
+const timerKeyframes = keyframes`
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(-1);
+  }
+`;
+const TimingBar = styled.div`
+  display: ${p => p.tempContent === 3 ? 'block' : 'none'};
+  position: relative;
+  height: 5px;
+  background-color: ${p => p.theme.colors.white};
+  width: 100%;
+`;
+const Timer = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  background-color: ${p => p.theme.colors.pink};
+  animation: ${css`12s ${timerKeyframes} 1`};
 `;
 
 export default class Header extends Component {
@@ -323,6 +352,11 @@ export default class Header extends Component {
               }
             />
           </NavList>
+          <TimingBar 
+            tempContent={tempContent}
+          >
+            <Timer />
+          </TimingBar>
         </Nav>
         <Icon
           illustrationDirection={illustrationDirection}

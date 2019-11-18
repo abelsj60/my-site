@@ -49,7 +49,7 @@ const LoadingBar = styled.div`
 const ProgressBar = styled.div`
   position: absolute;
   width: 100%;
-  height: 1px;
+  height: 100%;
   will-change: transform;
   background-color: ${p => !p.white ? p.theme.colors.black : p.theme.colors.white};
   animation: ${p => p.show && css`1.25s ${loaderKeyframes} infinite`}; 
