@@ -424,8 +424,7 @@ class App extends Component {
   }
 
   coverVals(images) {
-    const { height, width } = images;
-    return cover(this.pageWidth, this.pageHeight, width, height);
+    return cover(this.pageWidth, this.pageHeight, images.width, images.height);
   }
 
   handleBackAndForth() {

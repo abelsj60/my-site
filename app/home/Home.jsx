@@ -327,7 +327,7 @@ export default class Home extends Component {
   }
 }
 
-/* SPELL PROCESS
+/* Spell process
 
   1. Movement is '' on initial load
   2. Movement becomes 'enter' and spellLevel is 1 on first click
@@ -356,5 +356,4 @@ export default class Home extends Component {
   19. spellLevel becomes 5 when the spell is cast
   20. spellLevel is reset to 0 onTransitionEnd in PictureBox/CityImage (transform)
   21. Movement is reset to '' onTransitionEnd in PictureBox/FantasyImage (transform)
-
 */

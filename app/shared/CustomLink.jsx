@@ -57,7 +57,7 @@ export default ({
   isCalledByMenu,
   replace,
   to,
-  useAref,
+  fullScreenMenu,
   ...props
 }) => {
   const { pathname } = window.location;

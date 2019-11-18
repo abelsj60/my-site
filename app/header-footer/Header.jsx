@@ -93,8 +93,8 @@ const RestyledLink = styled(
   @media (min-width: 0px) and (max-width: ${p => p.theme.mediaQueries.tinyView}) {
     // Header menu
     ${p => p.tempContent === 3 && css`
-      color: ${p => p.useAref && p.theme.colors.yellow};
-      font-family: ${p => p.useAref && "'Aref Ruqaa', serif"};
+      color: ${p => p.fullScreenMenu && p.theme.colors.yellow};
+      font-family: ${p => p.fullScreenMenu && "'Aref Ruqaa', serif"};
       font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.eighteen};
       margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
     `};
@@ -104,8 +104,8 @@ const RestyledLink = styled(
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) and (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     // Header menu
     ${p => p.tempContent === 3 && css`
-      color: ${p => p.useAref && p.theme.colors.yellow};
-      font-family: ${p => p.useAref && "'Aref Ruqaa', serif"};
+      color: ${p => p.fullScreenMenu && p.theme.colors.yellow};
+      font-family: ${p => p.fullScreenMenu && "'Aref Ruqaa', serif"};
       font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.twenty};
       margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
     `};
@@ -243,7 +243,7 @@ const TimingBar = styled.div`
   // Timer stays accurate if it runs outside of media query (parent query handles visibility)
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
   position: relative;
-  height: 5px;
+  height: 3px;
   background-color: ${p => p.theme.colors.white};
   width: 100%;
 `;
@@ -335,7 +335,7 @@ export default class Header extends Component {
                       tempContent={tempContent}
                     >
                       <RestyledLink
-                        useAref={true}
+                        fullScreenMenu={true}
                         boundHandleClickForApp={boundHandleClickForApp}
                         illustrationDirection={illustrationDirection}
                         illustrationLevel={illustrationLevel}
@@ -354,7 +354,7 @@ export default class Header extends Component {
               }
             />
           </NavList>
-          <TimingBar 
+          <TimingBar
             tempContent={tempContent}
           >
             <Timer />
