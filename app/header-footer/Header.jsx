@@ -240,6 +240,7 @@ const timerKeyframes = keyframes`
   }
 `;
 const TimingBar = styled.div`
+  // Timer stays accurate if it runs outside of media query (parent query handles visibility)
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
   position: relative;
   height: 5px;
@@ -247,6 +248,7 @@ const TimingBar = styled.div`
   width: 100%;
 `;
 const Timer = styled.div`
+  // Timer stays accurate if it runs outside of media query (parent query handles visibility)
   position: absolute;
   width: 100%;
   height: 100%;
