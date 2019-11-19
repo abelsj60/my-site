@@ -152,12 +152,12 @@ export default function PictureBox(props) {
   // Trigger toggle after we swap backgrounds
   // Requires a closure to pass all params
   const onTransitionEndForForrestAndNycBackgroundImages = (penultimateSpellLevel, activeBackground) => event => {
-      eventManagement(event);
+    eventManagement(event);
 
-      if (penultimateSpellLevel && activeBackground && event.propertyName === 'transform') {
-        boundHandleClickForHome('toggleSpell', event.propertyName);
-      }
-    };
+    if (penultimateSpellLevel && activeBackground && event.propertyName === 'transform') {
+      boundHandleClickForHome('toggleSpell', event.propertyName);
+    }
+  };
 
   return (
     <PictureHolder>

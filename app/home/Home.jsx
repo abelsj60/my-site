@@ -55,8 +55,8 @@ export default class Home extends Component {
       spellLevel: 0 // Used to control transition, animation use
     };
 
-    this.eventHandlerForMouseDown = this.eventHandlerForMouseDown.bind(this);
-    this.eventHandlerForTouchStart = this.eventHandlerForTouchStart.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleTouchStart = this.handleTouchStart.bind(this);
     this.setLoadLevelOne = this.setLoadLevelOne.bind(this);
     this.setLoadLevelTwo = this.setLoadLevelTwo.bind(this);
     this.setLoadLevelThree = this.setLoadLevelThree.bind(this);
@@ -265,7 +265,7 @@ export default class Home extends Component {
     }
   }
 
-  eventHandlerForMouseDown(num) {
+  handleMouseDown(num) {
     return () => {
       const { activeCharm, eventType } = this.state;
   
@@ -282,7 +282,7 @@ export default class Home extends Component {
     };
   }
 
-  eventHandlerForTouchStart(num) {
+  handleTouchStart(num) {
     return () => {
       const hcCharm = new ClickHandling('charm', this);
       const boundHandleCharm = hcCharm.boundHandleClick;
@@ -318,8 +318,8 @@ export default class Home extends Component {
       this.charmRefs.forEach(
         (ref, idx) => {
           if (!ref.current.onclick) {
-            ref.current.onmousedown = this.eventHandlerForMouseDown(idx + 1);
-            ref.current.ontouchstart = this.eventHandlerForTouchStart(idx + 1);
+            ref.current.onmousedown = this.handleMouseDown(idx + 1);
+            ref.current.ontouchstart = this.handleTouchStart(idx + 1);
           }
         }
       );
