@@ -208,7 +208,7 @@ export default function Charms(props) {
     appState,
     charmRefs,
     homeState,
-    setSpellLevels
+    setSpellLevel
   } = props;
   const {
     inCity,
@@ -228,8 +228,8 @@ export default function Charms(props) {
 
     // Filter, it's also called by 'width'.
     if (event.propertyName === 'opacity') { 
-      setSpellLevels.two(movement === 'exit', 'OuterContainer');
-      setSpellLevels.four(movement === 'enter', 'OuterContainer');
+      setSpellLevel.two(movement === 'exit', 'OuterContainer');
+      setSpellLevel.four(movement === 'enter', 'OuterContainer');
     }
   };
   // Let's set up a progress bar.

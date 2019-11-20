@@ -2,7 +2,7 @@ import Charms from './Charms.jsx';
 import ClickHandling from '../classes/ClickHandling.js';
 import Main from '../primitives/Main.jsx';
 import NameTag from './NameTag.jsx';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PictureBox from './PictureBox.jsx';
 import styled from 'styled-components';
 
@@ -48,21 +48,20 @@ export default class Home extends Component {
       //  - [2, 2, 1, 1] for initial load (blurred versions 
       // to give new viewers something interesting to see)
       //  - [1, 1, 1, 1] after traveling (transitions are off, keep it quick!)
-      loadLevel: [0, 0, 0, 0], 
+      // loadLevel: [0, 0, 0, 0], 
+      // New:
+      // [fallback, blur 1, blur 2, blur 3, boy, forrest, city]
+      loadLevel: [0, 0, 0, 0, 0, 0, 0],
       movement: '', // 'enter' = Goto Charms, 'exit' = Goto NameTag
       pattern: initialPattern, // arr
       score: 0, // Used to select an active Charm and cast spell
       spellLevel: 0 // Used to control transition, animation use
     };
 
+    // this.countLoadLevel = this.countLoadLevel.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
-    this.setLoadLevelOne = this.setLoadLevelOne.bind(this);
-    this.setLoadLevelTwo = this.setLoadLevelTwo.bind(this);
-    this.setLoadLevelThree = this.setLoadLevelThree.bind(this);
-    this.setLoadLevelFour = this.setLoadLevelFour.bind(this);
-    this.setLoadLevelFive = this.setLoadLevelFive.bind(this);
-    this.setLoadLevelSix = this.setLoadLevelSix.bind(this);
+    this.setLoadLevel = this.setLoadLevel.bind(this);
     this.sumLoadLevels = this.sumLoadLevels.bind(this);
     this.setSpellLevelOne = this.setSpellLevelOne.bind(this);
     this.setSpellLevelTwo = this.setSpellLevelTwo.bind(this);
@@ -74,25 +73,18 @@ export default class Home extends Component {
   render() {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
-    const setSpellLevels = { // v = isValid, c = caller
-      one: (v, c) => this.setSpellLevelOne(v, c),
-      two: (v, c) => this.setSpellLevelTwo(v, c),
-      three: (v, c) => this.setSpellLevelThree(v, c),
-      four: (v, c) => this.setSpellLevelFour(v, c),
-      reset: (v, c) => this.resetSpell(v, c)
-    };
-    const setLoadLevels = {
-      one: () => this.setLoadLevelOne(),
-      two: () => this.setLoadLevelTwo(),
-      three: () => this.setLoadLevelThree(),
-      four: () => this.setLoadLevelFour(),
-      five: () => this.setLoadLevelFive(),
-      six: () => this.setLoadLevelSix(),
-      sum: () => this.sumLoadLevels()
+    const setSpellLevel = { // v = isValid, c = caller
+      one: (isValid, caller) => this.setSpellLevelOne(isValid, caller),
+      two: (isValid, caller) => this.setSpellLevelTwo(isValid, caller),
+      three: (isValid, caller) => this.setSpellLevelThree(isValid, caller),
+      four: (isValid, caller) => this.setSpellLevelFour(isValid, caller),
+      reset: (isValid, caller) => this.resetSpell(isValid, caller)
     };
 
-    // console.log('loadLevel:', this.state.loadLevel);
-    // console.log('homePageLoaded:', this.props.appState.homePageLoaded);
+    const loadLevel = {
+      set: idx => this.setLoadLevel(idx),
+      sum: type => this.sumLoadLevels(type)
+    };
 
     return (
       <RestyledMain 
@@ -102,37 +94,41 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          setLoadLevels={setLoadLevels}
-          setSpellLevels={setSpellLevels}
+          loadLevel={loadLevel}
+          setSpellLevel={setSpellLevel}
         />
         <Charms
           {...this.props}
           charmRefs={this.charmRefs}
           homeState={this.state}
-          setSpellLevels={setSpellLevels}
+          setSpellLevel={setSpellLevel}
         />
         <PictureBox
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          setLoadLevels={setLoadLevels}
-          setSpellLevels={setSpellLevels}
+          loadLevel={loadLevel}
+          setSpellLevel={setSpellLevel}
         />
-        {/* <Debug
-          top="275"
-        >
-          homePageLoaded: {this.props.appState.homePageLoaded.toString()}
-        </Debug>
-        <Debug
-          top="325"
-        >
-          setLoadLevels.sum().blurs: {setLoadLevels.sum().blurs}
-        </Debug>
-        <Debug
-          top="375"
-        >
-          [ {this.state.loadLevel.toString()} ]
-        </Debug> */}
+        {
+          <Fragment>
+            <Debug
+              top="275"
+            >
+              homePageLoaded: {this.props.appState.homePageLoaded.toString()}
+            </Debug>
+            <Debug
+              top="325"
+            >
+              loadLevel.sum('all'): {loadLevel.sum('all')}
+            </Debug>
+            <Debug
+              top="375"
+            >
+              [ {this.state.loadLevel.toString()} ]
+            </Debug>
+          </Fragment>
+        }
       </RestyledMain>
     );
   }
@@ -169,44 +165,47 @@ export default class Home extends Component {
     }
   }
 
-  setLoadLevelOne() {
-    // onLoad/blurredBoy
-    this.setLoadLevel(0);
+  countLoadLevel(imageSet, currentIdx) {
+    return imageSet.find(img => img === currentIdx) ? true : false;
   }
 
-  setLoadLevelTwo() {
-    // onLoad/blurredFantasy
-    this.setLoadLevel(1);
+  sumImageSet(imageSet) {
+    return this.state.loadLevel.reduce((acc, cur, idx) => {
+      if (this.countLoadLevel(imageSet, idx)) {
+        return acc + cur;
+      }
+      return acc + 0;
+    }, 0);
   }
 
-  setLoadLevelThree() {
-    // onTransitionEnd/blurredBoy
-    this.setLoadLevel(0);
+  sumAll() {
+    return this.state.loadLevel.reduce((acc, cur) => acc + cur);
   }
 
-  setLoadLevelFour() {
-    // onTransitionEnd/blurredFantasy
-    this.setLoadLevel(1);
+  sumBlurs() {
+    // blurredBoy, blurredForres, blurredNyc
+    const blurredImages = [1, 2, 3];
+    return this.sumImageSet(blurredImages);
   }
 
-  setLoadLevelFive() {
-    // onLoad/boy
-    this.setLoadLevel(2);
+  sumOnScreen() {
+    // boy + forrest OR NYC
+    const onScreenImages = [4, !this.props.appState.inCity ? 5 : 6];
+    return this.sumImageSet(onScreenImages);
   }
 
-  setLoadLevelSix() {
-    // onLoad/fantasy
-    this.setLoadLevel(3);
-  }
-
-  sumLoadLevels() {
-    const blurs = this.state.loadLevel[0] + this.state.loadLevel[1];
-    const full = this.state.loadLevel[2] + this.state.loadLevel[3];
-
-    return {
-      all: blurs + full,
-      blurs,
-      full
+  sumLoadLevels(type) {
+    switch(type) {
+      case 'all':
+        return this.sumAll();
+      case 'blurs':
+        return this.sumBlurs();
+      case 'fallback':
+        return this.state.loadLevel[0];
+      case 'onScreen':
+        return this.sumOnScreen();
+      default:
+        return 'Error! Please add a case to caller!'
     }
   }
 
@@ -309,7 +308,7 @@ export default class Home extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     // Let's add our eventHandler whenever cDU runs as a result of toggling
     // the NameTag. This causes refs to be added to our charms (an array)
     // as they mount. See also handleTouchStart.
@@ -323,6 +322,13 @@ export default class Home extends Component {
           }
         }
       );
+    }
+
+    if (!this.props.appState.homePageLoaded) {
+      if (this.sumLoadLevels('all') > 5) {
+        // ClickHandling: set to 2 and homePageLoaded = true
+        this.props.boundHandleClickForApp('updateHeartbeat');
+      }
     }
   }
 }
