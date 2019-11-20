@@ -58,7 +58,6 @@ export default class Home extends Component {
       spellLevel: 0 // Used to control transition, animation use
     };
 
-    // this.countLoadLevel = this.countLoadLevel.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
     this.setLoadLevel = this.setLoadLevel.bind(this);
@@ -81,7 +80,7 @@ export default class Home extends Component {
       reset: (isValid, caller) => this.resetSpell(isValid, caller)
     };
 
-    const loadLevel = {
+    const loadLevels = {
       set: idx => this.setLoadLevel(idx),
       sum: type => this.sumLoadLevels(type)
     };
@@ -94,7 +93,7 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          loadLevel={loadLevel}
+          loadLevels={loadLevels}
           setSpellLevel={setSpellLevel}
         />
         <Charms
@@ -107,7 +106,7 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          loadLevel={loadLevel}
+          loadLevels={loadLevels}
           setSpellLevel={setSpellLevel}
         />
         {
@@ -120,7 +119,7 @@ export default class Home extends Component {
             <Debug
               top="325"
             >
-              loadLevel.sum('all'): {loadLevel.sum('all')}
+              loadLevels.sum('all'): {loadLevels.sum('all')}
             </Debug>
             <Debug
               top="375"
@@ -157,7 +156,7 @@ export default class Home extends Component {
     // Doesn't need to be bound in constructor b/c the
     // calling values are bound (creating a closure)
 
-    if (this.state.loadLevel[idx] < 2) {
+    if (this.state.loadLevel[idx] < 3) {
       const newArr = [].concat(this.state.loadLevel);
       const lastValue = newArr[idx];
       newArr[idx] = lastValue + 1;
@@ -165,47 +164,48 @@ export default class Home extends Component {
     }
   }
 
-  countLoadLevel(imageSet, currentIdx) {
-    return imageSet.find(img => img === currentIdx) ? true : false;
-  }
-
   sumImageSet(imageSet) {
-    return this.state.loadLevel.reduce((acc, cur, idx) => {
-      if (this.countLoadLevel(imageSet, idx)) {
-        return acc + cur;
-      }
-      return acc + 0;
-    }, 0);
+    return imageSet.reduce((acc, cur) => acc + this.state.loadLevel[cur], 0);
   }
 
   sumAll() {
-    return this.state.loadLevel.reduce((acc, cur) => acc + cur);
+    const allImages = [0, 1, 2, 3, 4, 5, 6];
+    return this.sumImageSet(allImages);
   }
 
-  sumBlurs() {
-    // blurredBoy, blurredForres, blurredNyc
-    const blurredImages = [1, 2, 3];
+  sumBlurs(inCity) {
+    // blurredBoy, blurredForrest OR blurredNyc
+    const blurredImages = [1, !inCity ? 2 : 3];
     return this.sumImageSet(blurredImages);
   }
 
-  sumOnScreen() {
+  sumInitialSet(inCity) {
+    // blurredBoy, blurredForrest OR blurredNyc
+    const initialImages = [0, 1, 2, 4, 5];
+    return this.sumImageSet(initialImages);
+  }
+
+  sumOnScreen(inCity) {
     // boy + forrest OR NYC
-    const onScreenImages = [4, !this.props.appState.inCity ? 5 : 6];
+    const onScreenImages = [4, !inCity ? 5 : 6];
     return this.sumImageSet(onScreenImages);
   }
 
   sumLoadLevels(type) {
+    const { inCity } = this.props.appState;
     switch(type) {
       case 'all':
         return this.sumAll();
       case 'blurs':
-        return this.sumBlurs();
+        return this.sumBlurs(inCity);
       case 'fallback':
         return this.state.loadLevel[0];
+      case 'initialSet':
+        return this.sumInitialSet();
       case 'onScreen':
-        return this.sumOnScreen();
+        return this.sumOnScreen(inCity);
       default:
-        return 'Error! Please add a case to caller!'
+        return 'Error! Caller needs a case!'
     }
   }
 
@@ -327,7 +327,8 @@ export default class Home extends Component {
     if (!this.props.appState.homePageLoaded) {
       if (this.sumLoadLevels('all') > 5) {
         // ClickHandling: set to 2 and homePageLoaded = true
-        this.props.boundHandleClickForApp('updateHeartbeat');
+        // console.log('update heartbeat');
+        // this.props.boundHandleClickForApp('updateHeartbeat');
       }
     }
   }
