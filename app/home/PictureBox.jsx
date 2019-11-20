@@ -27,7 +27,7 @@ const Portal = styled.div`
   // requires the white sheet may not be present, either. So...
   ${p => !p.isMobile && 'display: none;'}
   position: absolute;
-  background-color: rgba(115, 192, 232, .2);
+  background-color: rgba(115, 192, 232, .3);
   z-index: ${p => p.zIndex};
   // May need to fill page:   
   // https://stackoverflow.com/a/30794589
@@ -83,7 +83,6 @@ export default function PictureBox(props) {
     loadLevel,
     movement
   } = homeState;
-
   const bigBoySrc = images[imageNames[0]].src;
   const blurredBoySrc = images[imageNames[1]].src;
   const bigForrestSrc = images[imageNames[2]].src;
@@ -91,71 +90,61 @@ export default function PictureBox(props) {
   const bigNycSrc = images[imageNames[4]].src;
   const blurredNycSrc = images[imageNames[5]].src;
   const fallbackSource = !inCity ? ForrestFallback : NycFallback; 
-  const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback; 
-
-  const onLoadTwo = event => {
+  const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback;
+  const handleLoadForBlurredBoy = event => {
     eventManagement(event);
-    setLoadLevels.two();
-  }
-  const onLoadSix = event => {
-    eventManagement(event);
-    setLoadLevels.six();
-  }
-  const onLoadForBlurredBoy = event => {
-    eventManagement(event);
-    setLoadLevels.one();
+    setLoadLevels.set(0); // idx 0
   };
-  const onLoadForBoy = event => {
+  const handleLoadForBlurredForrest = event => {
     eventManagement(event);
-    // Delay ensures (?!) full paint-to-screen ???
-    setTimeout(() => setLoadLevels.five(), 500);
-  };
-  const onLoadForBlurredForrest = event => {
     if (spellLevel < 1) {
-      onLoadTwo(event);
+      setLoadLevels.set(1); // ...!inCity idx 1
     }
   };
-  const onLoadForFantasy = event => {
-    if (spellLevel < 1) {
-      onLoadSix(event);
-    }
-  };
-  const onLoadForBlurredNyc = event => {
-    if (spellLevel < 1) {
-      onLoadTwo(event);
-    }
-  };
-  const onLoadForCity = event => {
-    if (spellLevel < 1) {
-      onLoadSix(event);
-    }
-  };
-  const onTransitionEndForBlurredBoy = event => {
+  const handleLoadForBlurredNyc = event => {
     eventManagement(event);
-    setLoadLevels.three();
-    if (setLoadLevels.sum().all === 6) {
-      // ClickHandling, set to 2 and homePageLoaded = true
-      boundHandleClickForApp('updateHeartbeat');
+    if (spellLevel < 1) {
+      setLoadLevels.set(1); // inCity idx 1
     }
   };
-  const onTransitionEndForBlurredForrest = event => {
+  const handleLoadForBoy = event => {
     eventManagement(event);
-    setLoadLevels.four();
+    setLoadLevels.set(2); // idx 2
+  };
+  const handleLoadForForrest = event => {
+    eventManagement(event);
+    if (spellLevel < 1) {
+      setLoadLevels.set(3); // idx 3
+    }
+  };
+  const handleLoadForNyc = event => {
+    eventManagement(event);
+    if (spellLevel < 1) {
+      setLoadLevels.set(3);  // idx 3
+    }
+  };
+  const handleTransitionEndForBlurredBoy = event => {
+    eventManagement(event);
+    setLoadLevels.set(0); // idx 0
+  };
+  const handleTransitionEndForBlurredForrest = event => {
+    eventManagement(event);
+    setLoadLevels.set(1); // ...!inCity idx 0
     setSpellLevels.three(movement === 'enter', 'BlurredForrest');
     setSpellLevels.one(movement === 'exit', 'BlurredForrest');
   };
-  const onTransitionEndForBlurredNyc = event => {
+  const handleTransitionEndForBlurredNyc = event => {
     eventManagement(event);
     setSpellLevels.three(movement === 'enter', 'BlurredNyc');
     setSpellLevels.one(movement === 'exit', 'BlurredNyc');
   };
-  // Trigger toggle after we swap backgrounds
-  // Requires a closure to pass all params
-  const onTransitionEndForForrestAndNycBackgroundImages = (penultimateSpellLevel, activeBackground) => event => {
+  // Toggles spell after background swap, adds params to handler via closure...
+  const handleTransitionEndForForrestOrNyc = (penultimateSpell, isActive) => event => {
     eventManagement(event);
-
-    if (penultimateSpellLevel && activeBackground && event.propertyName === 'transform') {
-      boundHandleClickForHome('toggleSpell', event.propertyName);
+    if (event.propertyName === 'transform') {
+      if (penultimateSpell && isActive) {
+        boundHandleClickForHome('toggleSpell', event.propertyName);
+      }
     }
   };
 
@@ -164,16 +153,16 @@ export default function PictureBox(props) {
       <Portal 
         alt=""
         homePageLoaded={homePageLoaded}
-        isMobile={type === 'mobile'} // See above note
-        loadLevelFull={setLoadLevels.sum().full}
+        isMobile={type === 'mobile'}
+        loadLevelFull={setLoadLevels.sum('full')}
         zIndex="5"
       />
       <FallbackImage 
         alt={altTextForFallback}
         src={fallbackSource}
         homePageLoaded={homePageLoaded}
-        isMobile={type === 'mobile'} // See above note
-        loadLevelFull={setLoadLevels.sum().full}
+        isMobile={type === 'mobile'}
+        loadLevelFull={setLoadLevels.sum('full')}
         zIndex="4"
       />
       <BlurredBoyForeground
@@ -181,10 +170,10 @@ export default function PictureBox(props) {
         enter={movement === 'enter'}
         exit={movement === 'exit'}
         homePageLoaded={homePageLoaded}
-        loadLevelBlurs={setLoadLevels.sum().blurs}
-        loadLevelAll={setLoadLevels.sum().all}
-        onLoad={onLoadForBlurredBoy}
-        onTransitionEnd={onTransitionEndForBlurredBoy}
+        loadLevelBlurs={setLoadLevels.sum('blurs')}
+        loadLevelAll={setLoadLevels.sum('all')}
+        onLoad={handleLoadForBlurredBoy}
+        onTransitionEnd={handleTransitionEndForBlurredBoy}
         spellLevel={spellLevel}
         src={blurredBoySrc}
       />
@@ -193,8 +182,8 @@ export default function PictureBox(props) {
         enter={movement === 'enter'}
         exit={movement === 'exit'}
         homePageLoaded={homePageLoaded}
-        loadLevelAll={setLoadLevels.sum().all}
-        onLoad={onLoadForBoy}
+        loadLevelAll={setLoadLevels.sum('all')}
+        onLoad={handleLoadForBoy}
         spellLevel={spellLevel}
         src={bigBoySrc}
       />
@@ -206,11 +195,11 @@ export default function PictureBox(props) {
             exit={movement === 'exit'}
             homePageLoaded={homePageLoaded}
             inCity={inCity}
-            loadLevelAll={setLoadLevels.sum().all}
-            loadLevelBlurs={setLoadLevels.sum().blurs}
+            loadLevelAll={setLoadLevels.sum('all')}
+            loadLevelBlurs={setLoadLevels.sum('blurs')}
             loadLevelFantasy={loadLevel[3] > 0}
-            onLoad={onLoadForBlurredForrest}
-            onTransitionEnd={onTransitionEndForBlurredForrest}
+            onLoad={handleLoadForBlurredForrest}
+            onTransitionEnd={handleTransitionEndForBlurredForrest}
             spellLevel={spellLevel}
             src={blurredForrestSrc}
           />
@@ -218,10 +207,10 @@ export default function PictureBox(props) {
             alt={altTextForrest}
             homePageLoaded={homePageLoaded}
             inCity={inCity}
-            loadLevelAll={setLoadLevels.sum().all}
-            onLoad={onLoadForFantasy}
-            // Trigger toggle after backgrounds are swapped
-            onTransitionEnd={onTransitionEndForForrestAndNycBackgroundImages(spellLevel > 4, inCity)}
+            loadLevelAll={setLoadLevels.sum('all')}
+            onLoad={handleLoadForForrest}
+            // Toggle after backgrounds are swapped
+            onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, inCity)}
             spellLevel={spellLevel}
             src={bigForrestSrc}
           />
@@ -234,17 +223,17 @@ export default function PictureBox(props) {
             enter={movement === 'enter'}
             exit={movement === 'exit'}
             inCity={inCity}
-            onLoad={onLoadForBlurredNyc}
-            onTransitionEnd={onTransitionEndForBlurredNyc}
+            onLoad={handleLoadForBlurredNyc}
+            onTransitionEnd={handleTransitionEndForBlurredNyc}
             spellLevel={spellLevel}
             src={blurredNycSrc}
           />
           <NycBackground
             alt={altTextNyc}
             inCity={inCity}
-            onLoad={onLoadForCity}
-            // Trigger toggle after backgrounds are swapped
-            onTransitionEnd={onTransitionEndForForrestAndNycBackgroundImages(spellLevel > 4, !inCity)}
+            onLoad={handleLoadForNyc}
+            // Toggle after backgrounds are swapped
+            onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, !inCity)}
             spellLevel={spellLevel}
             src={bigNycSrc}
           />

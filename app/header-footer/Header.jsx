@@ -243,9 +243,9 @@ const TimingBar = styled.div`
   // Timer stays accurate if it runs outside of media query (parent query handles visibility)
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
   position: relative;
-  height: 3px;
-  background-color: ${p => p.theme.colors.white};
-  width: 100%;
+  height: 2px;
+  background-color: ${p => p.theme.colors.yellow};
+  width: 95%;
 `;
 const Timer = styled.div`
   // Timer stays accurate if it runs outside of media query (parent query handles visibility)
@@ -254,7 +254,7 @@ const Timer = styled.div`
   height: 100%;
   will-change: transform;
   background-color: ${p => p.theme.colors.pink};
-  animation: ${css`12s ${timerKeyframes} 1`};
+  animation: ${css`8s ${timerKeyframes} 1`};
 `;
 
 export default class Header extends Component {

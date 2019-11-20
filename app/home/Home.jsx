@@ -44,7 +44,7 @@ export default class Home extends Component {
       activeCharm: initialPattern[0],
       eventType: 'click', // Type of event triggered Charm
       goal: 5,
-      // [blurredBoy, blurredForrest, boy, forrest]
+      // [blurredBoy, blurredForrest || blurredNyc, boy, forrest]
       //  - [2, 2, 1, 1] for initial load (blurred versions 
       // to give new viewers something interesting to see)
       //  - [1, 1, 1, 1] after traveling (transitions are off, keep it quick!)
@@ -57,42 +57,22 @@ export default class Home extends Component {
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
-    this.setLoadLevelOne = this.setLoadLevelOne.bind(this);
-    this.setLoadLevelTwo = this.setLoadLevelTwo.bind(this);
-    this.setLoadLevelThree = this.setLoadLevelThree.bind(this);
-    this.setLoadLevelFour = this.setLoadLevelFour.bind(this);
-    this.setLoadLevelFive = this.setLoadLevelFive.bind(this);
-    this.setLoadLevelSix = this.setLoadLevelSix.bind(this);
-    this.sumLoadLevels = this.sumLoadLevels.bind(this);
-    this.setSpellLevelOne = this.setSpellLevelOne.bind(this);
-    this.setSpellLevelTwo = this.setSpellLevelTwo.bind(this);
-    this.setSpellLevelThree = this.setSpellLevelThree.bind(this);
-    this.setSpellLevelFour = this.setSpellLevelFour.bind(this);
-    this.resetSpell = this.resetSpell.bind(this);
   }
 
   render() {
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
-    const setSpellLevels = { // v = isValid, c = caller
-      one: (v, c) => this.setSpellLevelOne(v, c),
-      two: (v, c) => this.setSpellLevelTwo(v, c),
-      three: (v, c) => this.setSpellLevelThree(v, c),
-      four: (v, c) => this.setSpellLevelFour(v, c),
-      reset: (v, c) => this.resetSpell(v, c)
+    const setSpellLevels = {
+      one: (isValid, caller) => this.setSpellLevelOne(isValid, caller),
+      two: (isValid, caller) => this.setSpellLevelTwo(isValid, caller),
+      three: (isValid, caller) => this.setSpellLevelThree(isValid, caller),
+      four: (isValid, caller) => this.setSpellLevelFour(isValid, caller),
+      reset: (isValid, caller) => this.resetSpell(isValid, caller)
     };
     const setLoadLevels = {
-      one: () => this.setLoadLevelOne(),
-      two: () => this.setLoadLevelTwo(),
-      three: () => this.setLoadLevelThree(),
-      four: () => this.setLoadLevelFour(),
-      five: () => this.setLoadLevelFive(),
-      six: () => this.setLoadLevelSix(),
-      sum: () => this.sumLoadLevels()
+      set: idx => this.setLoadLevel(idx),
+      sum: type => this.sumLoadLevels(type)
     };
-
-    // console.log('loadLevel:', this.state.loadLevel);
-    // console.log('homePageLoaded:', this.props.appState.homePageLoaded);
 
     return (
       <RestyledMain 
@@ -169,44 +149,16 @@ export default class Home extends Component {
     }
   }
 
-  setLoadLevelOne() {
-    // onLoad/blurredBoy
-    this.setLoadLevel(0);
-  }
+  sumLoadLevels(type) {
+    const { loadLevel } = this.state;
 
-  setLoadLevelTwo() {
-    // onLoad/blurredFantasy
-    this.setLoadLevel(1);
-  }
-
-  setLoadLevelThree() {
-    // onTransitionEnd/blurredBoy
-    this.setLoadLevel(0);
-  }
-
-  setLoadLevelFour() {
-    // onTransitionEnd/blurredFantasy
-    this.setLoadLevel(1);
-  }
-
-  setLoadLevelFive() {
-    // onLoad/boy
-    this.setLoadLevel(2);
-  }
-
-  setLoadLevelSix() {
-    // onLoad/fantasy
-    this.setLoadLevel(3);
-  }
-
-  sumLoadLevels() {
-    const blurs = this.state.loadLevel[0] + this.state.loadLevel[1];
-    const full = this.state.loadLevel[2] + this.state.loadLevel[3];
-
-    return {
-      all: blurs + full,
-      blurs,
-      full
+    switch(type) {
+      case 'all':
+        return loadLevel.reduce((acc, cur) => acc + cur, 0);
+      case 'blurs':
+        return loadLevel[0] + loadLevel[1];
+      case 'full':
+        return loadLevel[2] + loadLevel[3];
     }
   }
 
@@ -252,8 +204,7 @@ export default class Home extends Component {
     if (!isValid) return null;
     if (caller === 'InnerContainer') {
       // NameTag --> onTransitionEnd
-      // Only called when exiting the spell early. The spell
-      // should typically be reset when the spell's cast.
+      // Only called when exiting the spell early. The spell should typically be reset when the spell's cast.
       const newPattern = this.createSpellPattern();
       this.setState({
         activeCharm: newPattern[0],
@@ -309,7 +260,9 @@ export default class Home extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
+    const { appState, boundHandleClickForApp } = this.props;
+
     // Let's add our eventHandler whenever cDU runs as a result of toggling
     // the NameTag. This causes refs to be added to our charms (an array)
     // as they mount. See also handleTouchStart.
@@ -323,6 +276,10 @@ export default class Home extends Component {
           }
         }
       );
+    }
+
+    if (!appState.homePageLoaded && this.sumLoadLevels('all') === 6) {
+      setTimeout(() => boundHandleClickForApp('updateHeartbeat'), 1000);
     }
   }
 }

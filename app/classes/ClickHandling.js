@@ -100,7 +100,7 @@ export default class ClickHandling {
                   // Reset timeout after timeout successfully runs
                   this.headerMenuTimeoutId = undefined;
                 });
-            }, 12000);
+            }, 8000);
           } else {
             // Clear timeout if closing via the icon (img))
             clearTimeout(this.headerMenuTimeoutId);

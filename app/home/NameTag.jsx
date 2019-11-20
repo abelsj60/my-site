@@ -195,7 +195,7 @@ export default function NameTag(props) {
       <OuterContainer
         heartbeat={heartbeat}
         nameTagWidth={nameTagWidth}
-        loadLevelAll={setLoadLevels.sum().all}
+        loadLevelAll={setLoadLevels.sum('all')}
         onAnimationEnd={onAnimationEndForHeartbeat}
         spacerHeight={spacerHeight}
         spellLevel={spellLevel}
@@ -204,8 +204,8 @@ export default function NameTag(props) {
         <Hed
           setFontSize={getFontSize(nameTagWidth, 1.154)}
           homePageLoaded={homePageLoaded}
-          loadLevelBlurs={setLoadLevels.sum().blurs}
-          loadLevelAll={setLoadLevels.sum().all}
+          loadLevelBlurs={setLoadLevels.sum('blurs')}
+          loadLevelAll={setLoadLevels.sum('all')}
           onClick={onClickForHed}
         >
           {name}
@@ -214,7 +214,7 @@ export default function NameTag(props) {
           enter={movement === 'enter'}
           exit={movement === 'exit'}
           homePageLoaded={homePageLoaded}
-          loadLevelAll={setLoadLevels.sum().all}
+          loadLevelAll={setLoadLevels.sum('all')}
           nameTagWidth={nameTagWidth}
           onTransitionEnd={onTransitionEndForInnerContainer}
           spellLevel={spellLevel}
@@ -238,7 +238,7 @@ export default function NameTag(props) {
         <Loader
           done={homePageLoaded}
           marginBottom="7"
-          show={setLoadLevels.sum().all < 6}
+          show={setLoadLevels.sum('all') < 6}
         />
       </OuterContainer>
     </Fragment>
