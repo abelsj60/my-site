@@ -2,7 +2,7 @@ import Charms from './Charms.jsx';
 import ClickHandling from '../classes/ClickHandling.js';
 import Main from '../primitives/Main.jsx';
 import NameTag from './NameTag.jsx';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PictureBox from './PictureBox.jsx';
 import styled from 'styled-components';
 
@@ -39,16 +39,21 @@ export default class Home extends Component {
     // This spacer lets us limit the height of the clickable region to the actual text area...
     // Also occupies space in document flow, putting NameTag / Charms at intended position
     this.props.boundHandleClickForApp('updateSpacerHeight');
+    // Key: [blurredBoy, blurredForrest || blurredNyc, boy, forrest]
+    //  a. Initial load — [3, 3, 1, 1]
+    //  b. Internal nav — [1, 1, 1, 1]
+    // The array tracks onLoad and onTransitionEnd for '/' images. It's separated from
+    // loadLevel so we don't run setState() in the middle of a transition. This was 
+    // supposed to address a bug that sometimes turns off blurred images without running 
+    // the transition on screen. While the bug still seems to be present, this method's
+    // still easier to understand on balance.
+    this.loadLevels = [0, 0, 0, 0];
 
     this.state = {
       activeCharm: initialPattern[0],
       eventType: 'click', // Type of event triggered Charm
       goal: 5,
-      // [blurredBoy, blurredForrest || blurredNyc, boy, forrest]
-      //  - [2, 2, 1, 1] for initial load (blurred versions 
-      // to give new viewers something interesting to see)
-      //  - [1, 1, 1, 1] after traveling (transitions are off, keep it quick!)
-      loadLevel: [0, 0, 0, 0], 
+      loadLevel: 0, // Triggers transitions after setState({ loadLevels: X })
       movement: '', // 'enter' = Goto Charms, 'exit' = Goto NameTag
       pattern: initialPattern, // arr
       score: 0, // Used to select an active Charm and cast spell
@@ -57,6 +62,7 @@ export default class Home extends Component {
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
+    this.setLoadLevels = this.setLoadLevels.bind(this);
   }
 
   render() {
@@ -69,10 +75,6 @@ export default class Home extends Component {
       four: (isValid, caller) => this.setSpellLevelFour(isValid, caller),
       reset: (isValid, caller) => this.resetSpell(isValid, caller)
     };
-    const setLoadLevels = {
-      set: idx => this.setLoadLevel(idx),
-      sum: type => this.sumLoadLevels(type)
-    };
 
     return (
       <RestyledMain 
@@ -82,7 +84,6 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          setLoadLevels={setLoadLevels}
           setSpellLevels={setSpellLevels}
         />
         <Charms
@@ -95,24 +96,28 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          setLoadLevels={setLoadLevels}
+          setLoadLevels={this.setLoadLevels}
           setSpellLevels={setSpellLevels}
         />
-        {/* <Debug
-          top="275"
-        >
-          homePageLoaded: {this.props.appState.homePageLoaded.toString()}
-        </Debug>
-        <Debug
-          top="325"
-        >
-          setLoadLevels.sum().blurs: {setLoadLevels.sum().blurs}
-        </Debug>
-        <Debug
-          top="375"
-        >
-          [ {this.state.loadLevel.toString()} ]
-        </Debug> */}
+        {
+          <Fragment>
+            <Debug
+              top="275"
+            >
+              homePageLoaded: {this.props.appState.homePageLoaded.toString()}
+            </Debug>
+            <Debug
+              top="325"
+            >
+              loadLevels: [ {this.loadLevels.toString()} ]
+            </Debug> 
+            <Debug
+              top="375"
+            >
+              loadLevel: {this.state.loadLevel.toString()}
+            </Debug> 
+        </Fragment>
+      }
       </RestyledMain>
     );
   }
@@ -135,85 +140,6 @@ export default class Home extends Component {
     }
 
     return pattern;
-  }
-
-  setLoadLevel(idx) {
-    // Doesn't need to be bound in constructor b/c the
-    // calling values are bound (creating a closure)
-
-    if (this.state.loadLevel[idx] < 2) {
-      const newArr = [].concat(this.state.loadLevel);
-      const lastValue = newArr[idx];
-      newArr[idx] = lastValue + 1;
-      this.setState({ loadLevel: newArr });
-    }
-  }
-
-  sumLoadLevels(type) {
-    const { loadLevel } = this.state;
-
-    switch(type) {
-      case 'all':
-        return loadLevel.reduce((acc, cur) => acc + cur, 0);
-      case 'blurs':
-        return loadLevel[0] + loadLevel[1];
-      case 'full':
-        return loadLevel[2] + loadLevel[3];
-    }
-  }
-
-  setSpellLevel(val) {
-    // Doesn't need to be bound in constructor b/c the
-    // calling values are bound (creating a closure)
-    this.setState({ spellLevel: val });
-  }
-
-  setSpellLevelOne(isValid, caller) {
-    if (!isValid) return null;
-    if (caller === 'BlurredForrest' || caller === 'BlurredNyc') {
-      // onTransitionEnd
-      this.setSpellLevel(1);
-    }
-  }
-
-  setSpellLevelTwo(isValid, caller) {
-    if (!isValid) return null;
-    if (caller === 'OuterContainer' || caller === 'InnerContainer') {
-      // a. Charms/OuterContainer, b. NameTag/InnerContainer --> onTransitionEnd
-      this.setSpellLevel(2);
-    };
-  }
-
-  setSpellLevelThree(isValid, caller) {
-    if (!isValid) return null;
-    if (caller === 'BlurredForrest' || caller === 'BlurredNyc') {
-      // onTransitionEnd
-      this.setSpellLevel(3);
-    }
-  }
-
-  setSpellLevelFour(isValid, caller) {
-    if (!isValid) return null;
-    if (caller === 'OuterContainer') {
-      // Charms --> onTransitionEnd
-      this.setSpellLevel(4);
-    }
-  }
-
-  resetSpell(isValid, caller) {
-    if (!isValid) return null;
-    if (caller === 'InnerContainer') {
-      // NameTag --> onTransitionEnd
-      // Only called when exiting the spell early. The spell should typically be reset when the spell's cast.
-      const newPattern = this.createSpellPattern();
-      this.setState({
-        activeCharm: newPattern[0],
-        movement: '',
-        pattern: newPattern,
-        score: 0,
-        spellLevel: 0
-      });
-    }
   }
 
   handleMouseDown(num) {
@@ -260,9 +186,122 @@ export default class Home extends Component {
     };
   }
 
-  componentDidUpdate() {
-    const { appState, boundHandleClickForApp } = this.props;
+  resetSpell(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'InnerContainer') {
+      // NameTag --> onTransitionEnd
+      // Only called when exiting the spell early. The spell should typically be reset when the spell's cast.
+      const newPattern = this.createSpellPattern();
+      this.setState({
+        activeCharm: newPattern[0],
+        movement: '',
+        pattern: newPattern,
+        score: 0,
+        spellLevel: 0
+      });
+    }
+  }
 
+  setLoadLevel(type, target) {
+    const { loadLevel } = this.state;
+
+    if (this.sumLoadLevels(type) === target) {
+      this.setState({ loadLevel: loadLevel + 1 });
+    }
+  }
+
+  setLoadLevels(idx) {
+    if (this.loadLevels[idx] < 3) { // Cap it!
+      const newArr = [].concat(this.loadLevels);
+      const currentValue = newArr[idx];
+      newArr[idx] = currentValue + 1;
+      this.loadLevels = newArr;
+    }
+
+    this.updateLoadLevel();
+  }
+
+  setSpellLevel(val) {
+    // Doesn't need to be bound in constructor b/c the
+    // calling values are bound (creating a closure)
+    this.setState({ spellLevel: val });
+  }
+
+  setSpellLevelOne(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'BlurredForrest' || caller === 'BlurredNyc') {
+      // onTransitionEnd
+      this.setSpellLevel(1);
+    }
+  }
+
+  setSpellLevelTwo(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'OuterContainer' || caller === 'InnerContainer') {
+      // a. Charms/OuterContainer, b. NameTag/InnerContainer --> onTransitionEnd
+      this.setSpellLevel(2);
+    };
+  }
+
+  setSpellLevelThree(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'BlurredForrest' || caller === 'BlurredNyc') {
+      // onTransitionEnd
+      this.setSpellLevel(3);
+    }
+  }
+
+  setSpellLevelFour(isValid, caller) {
+    if (!isValid) return null;
+    if (caller === 'OuterContainer') {
+      // Charms --> onTransitionEnd
+      this.setSpellLevel(4);
+    }
+  }
+
+  sumLoadLevels(type) {
+    const { loadLevels } = this;
+
+    switch(type) {
+      case 'all':
+        return loadLevels.reduce((acc, cur) => acc + cur, 0);
+      case 'blurs':
+        return loadLevels[0] + loadLevels[1];
+      case 'full':
+        return loadLevels[2] + loadLevels[3];
+    }
+  }
+
+  updateLoadLevel() {
+    const { homePageLoaded } = this.props.appState;
+    const { loadLevel } = this.state;
+
+    if (!homePageLoaded) {
+      switch (loadLevel) {
+        case 0:
+          console.log('update');
+          this.setLoadLevel('blurs', 2);
+          break;
+        case 1: 
+          this.setLoadLevel('all', 6);
+          break;
+        case 2:
+          this.setLoadLevel('all', 8);
+          break;
+      }
+    } else if (homePageLoaded) {
+      switch (loadLevel) {
+        case 0:
+          this.setLoadLevel('blurs', 2);
+          break;
+        case 1:
+          this.setLoadLevel('all', 4);
+          break;
+      }
+    }
+  }
+
+  componentDidUpdate() {
     // Let's add our eventHandler whenever cDU runs as a result of toggling
     // the NameTag. This causes refs to be added to our charms (an array)
     // as they mount. See also handleTouchStart.
@@ -278,8 +317,10 @@ export default class Home extends Component {
       );
     }
 
-    if (!appState.homePageLoaded && this.sumLoadLevels('all') === 6) {
-      setTimeout(() => boundHandleClickForApp('updateHeartbeat'), 1000);
+    if (!this.props.appState.homePageLoaded) {
+      if (this.state.loadLevel === 3) {
+        this.props.boundHandleClickForApp('updateHeartbeat');
+      }
     }
   }
 }
