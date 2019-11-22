@@ -11,8 +11,9 @@ export default styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: ${p => (p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2) || p.theme.blurForTempContent ? '1' : '0'};
-  transition: ${p => p.spellLevel > 0 ? 'opacity .55s ease-in' : ''};
+  opacity: ${p => p.theme.blurForTempContent || (p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2) ? '1' : '0'};
+  // Transition settings should match blurred boy for use on narrow landscape screens.
+  transition: ${p => p.spellLevel > 0 && 'opacity .65s ease-in-out'};
   z-index: ${p => !p.inCity && p.spellLevel < 5  ? '-1' : '1'};
   ${p => (p.spellLevel === 5  || !p.inCity) && 'display: none;'}
 `;

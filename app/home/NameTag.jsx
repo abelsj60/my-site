@@ -85,12 +85,9 @@ const Hed = styled.h1`
   margin-left: 0px;
   cursor: pointer;
   user-select: none;
-  // We use !p.homePageLoaded to set opacity to 1 after initialLoad.
-  opacity: ${p => !p.homePageLoaded && p.loadLevelBlurs < 2 ? '0' : '1'};
-  // No transitioning after initialLoad!
-  // transition: ${p => p.loadLevelInitialSet < 6 && 'opacity 1s ease-out'};
-  transition: opacity 1s ease-out;
-  ${p => !p.homePageLoaded && 'z-index: 6;'}
+  // Use !p.homePageLoaded to limit opacity change to load sequence.
+  opacity: ${p => !p.homePageLoaded && p.loadLevel < 1 ? '0' : '1'};
+  transition: ${p => p.loadLevel < 2 && 'opacity .605s .095s ease-in-out'};
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: -17px;
@@ -98,12 +95,13 @@ const Hed = styled.h1`
 `;
 const InnerContainer = styled.div`
   display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
-  // CAN'T THIS JUST BE 100% ?
-  ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
+  width: 100%;
   // Remember, opacity brings the component into view IF display: block is set one spellLevel sooner. 
   // Why? The element must exist in DOM to transition. This technique is used several times...
-  opacity: ${p => (!p.homePageLoaded && p.loadLevelInitialSet < 6) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
-  transition: opacity ${p => p.loadLevelAll < 6 ? '.55s' : p.enter ? '.45s' : '.65s'} ease-in;
+  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 2) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
+  // Compared to <Hed />, this element's initial fade-in looks best when it starts later, runs faster, and uses a different bezier curve.
+  // Transition settings for the spell should match NameTag/InnerContainer's transition property.
+  transition: opacity ${p => p.loadLevel < 3 ? '.605s .095s ease-in-out' : p.enter ? '.45s ease-in-out' : '.65s ease-in-out'};
 `;
 const Pitch = styled.section`
   overflow: auto;
@@ -129,7 +127,6 @@ export default function NameTag(props) {
     boundHandleClickForApp,
     boundHandleClickForHome,
     homeState,
-    loadLevels,
     setSpellLevel
   } = props;
   const {
@@ -141,6 +138,7 @@ export default function NameTag(props) {
   } = appState;
   const {
     eventType,
+    loadLevel,
     movement,
     score,
     spellLevel
@@ -154,7 +152,7 @@ export default function NameTag(props) {
     name
   } = attributes;
 
-  const onClickForHed = event => {
+  const handleClickForHed = event => {
     eventManagement(event);
     // Heartbeat ends at 3, set in PictureBox.onTransitionEndForBlurredBoy
     if (homePageLoaded && heartbeat > 1 && (spellLevel === 0 || spellLevel === 4)) {
@@ -174,14 +172,14 @@ export default function NameTag(props) {
       boundHandleClickForHome('toggleSpell');
     }
   };
-  const onAnimationEndForHeartbeat = event => {
+  const handleAnimationEndForHeartbeat = event => {
     eventManagement(event);
     // ClickHandling, set to 2
     boundHandleClickForApp('updateHeartbeat');
     // Only runs if heartbeat = 0, so no check is needed!
     localStorage.lastHeartbeat = dayjs().format();
   };
-  const onTransitionEndForInnerContainer = event => {
+  const handleTransitionEndForInnerContainer = event => {
     eventManagement(event);
     // Use conditional if InnerContainer set to position: absolute
     // Don't need it when dispaly: none is used instead.
@@ -199,7 +197,7 @@ export default function NameTag(props) {
       <OuterContainer
         heartbeat={heartbeat}
         nameTagWidth={nameTagWidth}
-        onAnimationEnd={onAnimationEndForHeartbeat}
+        onAnimationEnd={handleAnimationEndForHeartbeat}
         spacerHeight={spacerHeight}
         spellLevel={spellLevel}
         tempContent={tempContent}
@@ -207,9 +205,8 @@ export default function NameTag(props) {
         <Hed
           setFontSize={getFontSize(nameTagWidth, 1.154)}
           homePageLoaded={homePageLoaded}
-          loadLevelBlurs={loadLevels.sum('blurs')}
-          loadLevelInitialSet={loadLevels.sum('initialSet')}
-          onClick={onClickForHed}
+          loadLevel={loadLevel}
+          onClick={handleClickForHed}
         >
           {name}
         </Hed>
@@ -217,9 +214,8 @@ export default function NameTag(props) {
           enter={movement === 'enter'}
           exit={movement === 'exit'}
           homePageLoaded={homePageLoaded}
-          loadLevelInitialSet={loadLevels.sum('initialSet')}
-          nameTagWidth={nameTagWidth}
-          onTransitionEnd={onTransitionEndForInnerContainer}
+          loadLevel={loadLevel}
+          onTransitionEnd={handleTransitionEndForInnerContainer}
           spellLevel={spellLevel}
         >
           <SubHed
@@ -241,7 +237,7 @@ export default function NameTag(props) {
         <Loader
           done={homePageLoaded}
           marginBottom="7"
-          show={loadLevels.sum('all') < 6}
+          show={loadLevel < 2}
         />
       </OuterContainer>
     </Fragment>

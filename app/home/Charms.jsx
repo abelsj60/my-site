@@ -52,8 +52,9 @@ const OuterContainer = styled.div`
   justify-content: space-between;
   z-index: 2;
   opacity: ${p => (p.enter && p.spellLevel >= 3 )|| (p.exit && p.spellLevel > 3) ? '1' : '0'};
-  transition: opacity ${p => p.enter ? '.65s' : '.45s'} ease-in;
-  ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
+  // Transition settings for the spell should match NameTag/InnerContainer's transition property.
+  transition: opacity ${p => p.enter ? '.65s' : '.45s'} ease-in-out;
+  width: 100%;
 `;
 const InnerContainer = styled.div`
   display: flex;
@@ -63,7 +64,7 @@ const InnerContainer = styled.div`
   align-self: center;
   margin-left: 1.17em;
 
-  // Arbitrarily chosen width for a 'lil extra styling
+  // Arbitrarily chosen widths for 'lil extra styling
   @media (min-width: 335px) {
     width: 200px;
   }
@@ -190,8 +191,8 @@ const InnerBar = styled.div`
   width: ${p => p.barWidth}%;
   height: 100%;
   background-color: ${p => p.theme.colors.black};
-  // No onTransitionEnd handler in which to cancel propagation
-  // Filtering event out of OuterContainer w/event.propertyName check
+  // No onTransitionEnd handler in which to cancel propagation.
+  // Stop in OuterContainer (event.propertyName === 'opacity').
   transition: width .5s ease-out;
 
   @media (orientation: landscape) and (max-height: ${p => p.theme.mediaQueries.narrowBreakOne}) {
@@ -223,7 +224,7 @@ export default function Charms(props) {
     spellLevel
   } = homeState;
 
-  const onTransitionEndForOuterContainer = event => {
+  const handleTransitionEndForOuterContainer = event => {
     eventManagement(event);
 
     // Filter, it's also called by 'width'.
@@ -240,8 +241,7 @@ export default function Charms(props) {
     <OuterContainer
       enter={movement === 'enter'}
       exit={movement === 'exit'}
-      nameTagWidth={nameTagWidth}
-      onTransitionEnd={onTransitionEndForOuterContainer}
+      onTransitionEnd={handleTransitionEndForOuterContainer}
       spellLevel={spellLevel}
       tempContent={tempContent}
     >

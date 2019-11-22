@@ -11,7 +11,6 @@ import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
-const mobileTransitionValues = `opacity .15s ease-out`;
 const PictureHolder = styled.div`
   position: fixed;
   top: 0px;
@@ -23,38 +22,31 @@ const PictureHolder = styled.div`
   z-index: 1;
 `;
 const Portal = styled.div`
-  // Note, 11/9/19: This won't catch iPadOS, but the behvior that
-  // requires the white sheet may not be present, either. So...
-  ${p => !p.isMobile && 'display: none;'}
+  // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
+  ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
   position: absolute;
   background-color: rgba(115, 192, 232, .2);
-  z-index: ${p => p.zIndex};
-  // May need to fill page:   
-  // https://stackoverflow.com/a/30794589
+  // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => (!p.homePageLoaded && p.loadLevelBlurs < 2 && p.loadLevelInitialSet < 6) ? '0' : '1'};
-  // transition: opacity ${p => !p.homePageLoaded ? '1s ease-out' : '.15s ease-out'};
-  transition: opacity 1s ease-out;
+  will-change: opacity;
+  opacity: ${p => (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
+  transition: opacity ${p => !p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'};
+  z-index: 5;
 `;
 const FallbackImage = styled.img`
-  // Note, 11/9/19: This won't catch iPadOS, but the behvior that
-  // requires the white sheet may not be present, either. So...
-
-  // Need imagesLoaded property!!!
-
-  // ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
+  // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
+  ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
   position: absolute;
   object-fit: cover;
   font-family: 'object-fit: cover;';
-  z-index: ${p => p.zIndex};
-  // May need to fill page:   
-  // https://stackoverflow.com/a/30794589
+  // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  opacity: ${p => (!p.homePageLoaded && (p.loadLevelBlurs < 2 || p.loadLevelInitialSet > 5)) ? '0' : '1'};
-  // transition: opacity ${p => !p.homePageLoaded ? '1s ease-in' : '.15s ease-out'};
-  transition: opacity 1s ease-out;
+  will-change: opacity;
+  opacity: ${p => (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
+  transition: opacity ${p => !p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'};
+  z-index: 4;
 `;
 
 export default function PictureBox(props) {
@@ -71,10 +63,9 @@ export default function PictureBox(props) {
   } = bio.attributes;
   const {
     appState,
-    boundHandleClickForApp,
     boundHandleClickForHome,
     homeState,
-    loadLevels,
+    setLoadLevels,
     setSpellLevel
   } = props;
   const {
@@ -98,92 +89,71 @@ export default function PictureBox(props) {
   const fallbackSource = !inCity ? ForrestFallback : NycFallback; 
   const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback; 
 
-  const handleLoadForFallback = event => {
-    eventManagement(event);
-    console.log('oL fallback', loadLevel[0]);
-    loadLevels.set(0);
-  }
-  const handleLoadForBlurredBoy = event => {
-    eventManagement(event);
-    loadLevels.set(1)
-  };
-  const handleLoadForBlurredForrest = event => {
-    eventManagement(event);
-    if (spellLevel < 1) {
-      loadLevels.set(2);
-    }
-  };
-  const handleLoadForBlurredNyc = event => {
-    eventManagement(event);
-    if (spellLevel < 1) {
-      loadLevels.set(3);
-    }
-  };
-  const handleLoadForBoy = event => {
-    eventManagement(event);
-    loadLevels.set(4);
-  };
-  const handleLoadForForrest = event => {
-    if (spellLevel < 1) {
+  const setLoadLevelsNow = (event, idx) => {
+    if (event !== null) {
       eventManagement(event);
-      loadLevels.set(5);
     }
-  };
-  const handleLoadForNyc = event => {
-    eventManagement(event);
+
     if (spellLevel < 1) {
-      loadLevels.set(6);
+      setLoadLevels(idx);
     }
   };
+  const setSpellLevelNow = (event, type) => {
+    eventManagement(event);
+
+    if (spellLevel > 0) {
+      setSpellLevel.three(movement === 'enter', type);
+      setSpellLevel.one(movement === 'exit', type);
+    }
+  };
+  const handleLoadForFallback = event => setLoadLevelsNow(event, 0);
+  const handleLoadForBlurredBoy = event => setLoadLevelsNow(event, 1);
+  const handleLoadForBlurredForrest = event => setLoadLevelsNow(event, 2);
+  const handleLoadForBlurredNyc = event => setLoadLevelsNow(event, 3);
+  const handleLoadForBoy = event => setLoadLevelsNow(event, 4);
+  const handleLoadForForrest = event => setLoadLevelsNow(event, 5);
+  const handleLoadForNyc = event => setLoadLevelsNow(event, 6);
   const handleTransitionEndForFallback = event => {
     eventManagement(event);
-    console.log('hTE fallback', loadLevel[0]);
-    loadLevels.set(0);
-    if (loadLevels.sum('initialLoad') > 6) {
-      console.log('update heartbeat');
-      boundHandleClickForApp('updateHeartbeat');
-    }
-  }
-  // Toggle spell after background swap, add params to handler via closure...
-  const handleTransitionEndForForrestOrNyc = (penultimateSpell, isActive, background) => event => {
-    eventManagement(event);
-    if (penultimateSpell && isActive && event.propertyName === 'transform') {
-      boundHandleClickForHome('toggleSpell', event.propertyName);
-    }
+    /* Bug:
+
+      setTimeout used to fix what I *believe* to be a weird Webkit bug. It seems that
+      the ontransitionEnd event fires a little too fast somewhere along the way. The end
+      result is that for every ten - 20 loads, the Fallback doesn't visibly transition, 
+      rather it's unceremoniously dropped off screen. A delay of ~200 milliseconds 
+      seems to fix the problem.
+    */
+    setTimeout(() => setLoadLevelsNow(null, 0), 200);
   };
-  const handleTransitionEndForBlurredForrest = event => {
+  const handleTransitionEndForBlurredForrest = event => setSpellLevelNow(event, 'BlurredForrest');
+  const handleTransitionEndForBlurredNyc = event => setSpellLevelNow(event, 'BlurredNyc');
+  // Toggles spell after background swap, needs extra params --> use closure...
+  const handleTransitionEndForForrestOrNyc = (penultimateLevel, isActive) => event => {
+    const { propertyName } = event;
+
     eventManagement(event);
-    setSpellLevel.three(movement === 'enter', 'BlurredForrest');
-    setSpellLevel.one(movement === 'exit', 'BlurredForrest');
-  };
-  const handleTransitionEndForBlurredNyc = event => {
-    eventManagement(event);
-    setSpellLevel.three(movement === 'enter', 'BlurredNyc');
-    setSpellLevel.one(movement === 'exit', 'BlurredNyc');
+    if (propertyName === 'transform') {
+      if (penultimateLevel && isActive) {
+        boundHandleClickForHome('toggleSpell', propertyName);
+      }
+    }
   };
 
   return (
     <PictureHolder>
-      <Portal 
-        alt=""
+      <Portal
         homePageLoaded={homePageLoaded}
-        isMobile={type === 'mobile'} // See above note
-        loadLevelAll={loadLevels.sum('all')}
-        loadLevelBlurs={loadLevels.sum('blurs')}
-        loadLevelInitialSet={loadLevels.sum('initialSet')}
-        zIndex="5"
+        isMobile={type === 'mobile'} // See Styled Component note
+        loadLevel={loadLevel}
       />
       <FallbackImage 
         alt={altTextForFallback}
         src={fallbackSource}
         homePageLoaded={homePageLoaded}
-        isMobile={type === 'mobile'} // See above note
-        loadLevelAll={loadLevels.sum('all')}
-        loadLevelBlurs={loadLevels.sum('blurs')}
-        loadLevelInitialSet={loadLevels.sum('initialSet')}
-        onLoad={handleLoadForFallback} // Sets to 1
-        onTransitionEnd={handleTransitionEndForFallback} // Sets to 2
-        zIndex="4"
+        isMobile={type === 'mobile'} // See Styled Component note
+        loadLevel={loadLevel}
+        onLoad={handleLoadForFallback}
+        onTransitionEnd={handleTransitionEndForFallback}
       />
       <BlurredBoyForeground
         alt={altTextBoyBlurred}
@@ -198,10 +168,8 @@ export default function PictureBox(props) {
         enter={movement === 'enter'}
         exit={movement === 'exit'}
         homePageLoaded={homePageLoaded}
-        loadLevelAll={loadLevels.sum('all')}
-        loadLevelFallback={loadLevels.sum('fallback')}
+        loadLevel={loadLevel}
         onLoad={handleLoadForBoy}
-        // onTransitionEnd={handleTransitionEndForBoy}
         spellLevel={spellLevel}
         src={bigBoySrc}
       />
@@ -221,10 +189,9 @@ export default function PictureBox(props) {
             alt={altTextForrest}
             homePageLoaded={homePageLoaded}
             inCity={inCity}
-            loadLevelAll={loadLevels.sum('all')}
-            loadLevelFallback={loadLevels.sum('fallback')}
+            loadLevel={loadLevel}
             onLoad={handleLoadForForrest}
-            // Trigger toggle after backgrounds are swapped
+            // Toggle state of spell after swapping backgrounds
             onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, inCity, 'forrest')}
             spellLevel={spellLevel}
             src={bigForrestSrc}
@@ -248,7 +215,7 @@ export default function PictureBox(props) {
             homePageLoaded={homePageLoaded}
             inCity={inCity}
             onLoad={handleLoadForNyc}
-            // Trigger toggle after backgrounds are swapped
+            // Toggle state of spell after swapping backgrounds
             onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, !inCity, 'city')}
             spellLevel={spellLevel}
             src={bigNycSrc}
