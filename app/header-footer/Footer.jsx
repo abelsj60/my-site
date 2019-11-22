@@ -100,15 +100,15 @@ export default function FooterContainer(props) {
     tempContent
   } = appState;
 
-  const onClickContactHandler = event => {
+  const handleClickForContactLink = event => {
     eventManagement(event);
     boundHandleClickForApp('updateTempContent', 1);
   };
-  const onClickLegalHandler = event => {
+  const handleClickForLegalLink = event => {
     eventManagement(event);
     boundHandleClickForApp('updateTempContent', 2);
   };
-  const eventHandlerForStoryButton = event => {
+  const handleClickForStoryButton = event => {
     eventManagement(event);
 
     if (illustrationState < 0) {
@@ -139,7 +139,7 @@ export default function FooterContainer(props) {
         isReverie={isReverie}
       />
       <Button
-        clickFunction={eventHandlerForStoryButton}
+        clickFunction={handleClickForStoryButton}
         illustrationDirection={illustrationDirection}
         illustrationLevel={illustrationLevel}
         isReverie={isReverie}
@@ -198,7 +198,7 @@ export default function FooterContainer(props) {
           isNotFound={isNotFound}
           isReverie={isReverie}
           isStory={isStory}
-          onClick={onClickContactHandler}
+          onClick={handleClickForContactLink}
           tempContent={tempContent}
         >
           Contact
@@ -212,7 +212,7 @@ export default function FooterContainer(props) {
           isStory={isStory}
           isNotFound={isNotFound}
           marginRight="none"
-          onClick={onClickLegalHandler}
+          onClick={handleClickForLegalLink}
           tempContent={tempContent}
         >
           Legal

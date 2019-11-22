@@ -78,13 +78,15 @@ export default class Location {
   }
 
   get pathIsValid() {
-    // Return statement:
-    // 1. The path is a menu and the length is exactly 3
-    // 2. The path is of the right caller (e.g. /chapter)
-    // 3. The path isn't too long (isExact doesn't check)
-    // 4. The path has the proper number of params after
-    // eliminating invalid entries (isExact can't know,
-    // it only checks for fulfilled values)
+    /* Return statement:
+
+      1. The path is a menu and the length is exactly 3
+      2. The path is of the right caller (e.g. /chapter)
+      3. The path isn't too long (isExact doesn't check)
+      4. The path has the proper number of params after
+        eliminating invalid entries (isExact can't know,
+        it only checks for fulfilled values) 
+    */
 
     return this.params.isMenu
       ? this._actualLengthOfPath === 3
@@ -96,10 +98,12 @@ export default class Location {
   get needsRedirect() {
     if (this.pathIsValid) return false;
 
-    // Return statement:
-    // 1. The first param is literally undefined
-    // 2. Two first param is validated but the
-    // second param is literally undefined
+    /* Return statement:
+
+      1. The first param is literally undefined
+      2. Two first param is validated but the
+        second param is literally undefined 
+    */
 
     const paramOneIsUndefined =
       this.params.areUndefined.includes(

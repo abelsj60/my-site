@@ -526,8 +526,9 @@ class App extends Component {
 
   /* Update height:
 
-      1. Mobile: On orientation change
-      2. Desktop/laptop: height changes > 324px
+    1. Mobile: On orientation change
+    2. Desktop/laptop: height changes > 324px
+
     Another approach to determining orientation change: https://stackoverflow.com/a/37493832
     And another: http://pioul.fr/cross-device-cross-browser-portrait-landscape-detection
   */

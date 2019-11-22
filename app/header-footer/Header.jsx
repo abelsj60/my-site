@@ -167,7 +167,7 @@ const Nav = styled.nav`
   @media (max-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     // Header menu
     ${p => p.tempContent === 3 && css`
-      background-color:  rgba(175, 18, 90, .8);
+      background-color: rgba(175, 18, 90, .8);
       position: fixed;
       padding-top: 54px; // Bottom of header text
       top: 0px;
@@ -177,7 +177,6 @@ const Nav = styled.nav`
       display: flex;
       flex-direction: column;
       align-items: center;
-      // justify-content: center;
     `};
   }
 `;
@@ -276,7 +275,7 @@ export default class Header extends Component {
     const menuIcon = tempContent === 3 ? headerNavClose : headerNavOpen;
     const coverVals = cover(window.innerWidth, height, images.width, images.height);
     const referrer = new Referrer(this.props);
-    const onClickMenuHandler = event => {
+    const handleClickForMenuLink = event => {
       eventManagement(event);
       boundHandleClickForApp('updateTempContent', 3);
     };
@@ -365,7 +364,7 @@ export default class Header extends Component {
           illustrationLevel={illustrationLevel}
           isHome={isHome}
           src={menuIcon}
-          onClick={onClickMenuHandler}
+          onClick={handleClickForMenuLink}
           tempContent={tempContent}
         />
       </Container>

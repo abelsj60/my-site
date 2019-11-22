@@ -94,14 +94,12 @@ export default function Projects(props) {
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
-  const onLoadMainImage = event => {
+  const handleProjectEvent = (event, state) => {
     eventManagement(event);
-    boundHandleClickForContentLoader('imageLoader', 1)
-  };
-  const onTransitionEndForLoader = event => {
-    eventManagement(event);
-    boundHandleClickForContentLoader('imageLoader', 2)
-  };
+    boundHandleClickForContentLoader('imageLoader', state);
+  }
+  const handleLoadForMainImage = event => handleProjectEvent(event, 1);
+  const handleTransitionEndForLoader = event => handleProjectEvent(event, 2);
 
   return (
     <Main>
@@ -115,7 +113,7 @@ export default function Projects(props) {
           />
           <Loader
             done={imageLoaded > 1}
-            forTransition={onTransitionEndForLoader}
+            forTransition={handleTransitionEndForLoader}
             marginLeft="auto"
             show={imageLoaded < 1}
             smallMarginLeft="auto"
@@ -173,7 +171,7 @@ export default function Projects(props) {
                 <MainImage
                   alt="mainPic"
                   imageLoaded={imageLoaded}
-                  onLoad={onLoadMainImage}
+                  onLoad={handleLoadForMainImage}
                   sizes="620px"
                   src={`${urlPrefix}${filePrefix}-q95-625-1x.jpg`}
                   srcSet={

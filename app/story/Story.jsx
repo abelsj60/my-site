@@ -109,8 +109,8 @@ const FallbackBlur = styled.img`
   height: 100%;
   width: 100%;
   // imageLoaded (BlurredImage) comes from ContentLoader.jsx. Starts
-  // at 0, set to 1 by onLoadForBlurredImage(). Set to 2 by 
-  // onTransitionEndForFallbackBlur().
+  // at 0, set to 1 by handleLoadForBlurredImage(). Set to 2 by 
+  // handleTransitionEndForFallbackBlur().
   // Let's not remove the blurred fallback until we KNOW the main illustration is 
   // in. Sometimes, the main illustration comes in before the BlurredImage, so 
   // is awkwardly visible. Here's the state: 
@@ -188,31 +188,31 @@ export default function Story(props) {
   const dek = 'An experiment in digital + traditional storytelling';
   const bigImageSrc = images[`chapter-${number}-main`].src;
   const blurredImageSrc = images[`chapter-${number}-blurred`].src;
-  const onLoadForBlurredImage = event => { // 0 --> 1
+  const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
     if (imageLoaded < 1) {
       // refers to BlurredImage, not the full illustration
       boundHandleClickForContentLoader('imageLoader', 1)
     }
   };
-  const onLoadForMainImage = event => {
+  const handleLoadForMainImage = event => {
     eventManagement(event);
     if (illustrationState < 0) {
       boundHandleClickForApp('updateIllustrationState', number, illustrationDelay);
     }
   };
-  const onTransitionEndForRestyledContentHolder = event => {
+  const handleTransitionEndForRestyledContentHolder = event => {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 2 : 0);
   };
-  const onTransitionEndForFallbackBlur = event => { // 1 --> 2
+  const handleTransitionEndForFallbackBlur = event => { // 1 --> 2
     eventManagement(event);
     if (imageLoaded < 2) {
       // refers to BlurredImage, not the full illustration
       boundHandleClickForContentLoader('imageLoader', 2)
     }
   };
-  const onTransitionEndForBlurredImage = event => {
+  const handleTransitionEndForBlurredImage = event => {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
   };
@@ -239,7 +239,7 @@ export default function Story(props) {
         illustrationDirection={illustrationDirection}
         illustrationLevel={illustrationLevel}
         saveSerifs={true}
-        onTransitionEnd={onTransitionEndForRestyledContentHolder}
+        onTransitionEnd={handleTransitionEndForRestyledContentHolder}
       >
         <RestyledShelf
           height="18px"
@@ -280,7 +280,7 @@ export default function Story(props) {
           illustrationLevel={illustrationLevel}
           illustrationState={illustrationState}
           imageLoaded={imageLoaded}
-          onTransitionEnd={onTransitionEndForFallbackBlur}
+          onTransitionEnd={handleTransitionEndForFallbackBlur}
           src={fallbackBlur}
           tempContent={tempContent}
         />
@@ -289,14 +289,14 @@ export default function Story(props) {
           imageLoaded={imageLoaded}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
-          onLoad={onLoadForBlurredImage}
-          onTransitionEnd={onTransitionEndForBlurredImage}
+          onLoad={handleLoadForBlurredImage}
+          onTransitionEnd={handleTransitionEndForBlurredImage}
           src={blurredImageSrc}
           tempContent={tempContent}
         />
         <Image // z-index -3
           alt={description}
-          onLoad={onLoadForMainImage}
+          onLoad={handleLoadForMainImage}
           src={bigImageSrc}
         />
       </PictureHolder>

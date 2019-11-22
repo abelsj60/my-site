@@ -19,7 +19,7 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
 
-    // Charm array — refs added via cDU. 
+    // Charm array — eventHandlers added to refs via cDU. 
     this.charmRefs = [
       React.createRef(),
       React.createRef(),
@@ -171,17 +171,6 @@ export default class Home extends Component {
 
     // Now that we've updated the loadLevels, let's check to see if we should
     // update state for a re-render 
-    this.updateLoadLevel();
-  }
-
-  setLoadLevels(idx) {
-    if (this.loadLevels[idx] < 3) { // Cap it!
-      const newArr = [].concat(this.loadLevels);
-      const currentValue = newArr[idx];
-      newArr[idx] = currentValue + 1;
-      this.loadLevels = newArr;
-    }
-
     this.updateLoadLevel();
   }
 

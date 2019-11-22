@@ -106,8 +106,6 @@ export default class ClickHandling {
             clearTimeout(this.headerMenuTimeoutId);
             this.headerMenuTimeoutId = undefined;
           }
-          // Legal terms and business card are tracked in TempContent.cDU. Is his really needed here?
-          // What about header menu?
           category = 'App state';
           action = (tempContent - valueOne) === 0
             ? `Close ${
@@ -236,15 +234,18 @@ export default class ClickHandling {
             stateToUpdate.heartbeat = 2;
           }
 
-          // 1. If any link is clicked, other than a MenuButton,
-          // we'll rebuild the state and toggle the menu
-          // (this will turn it off if it's on, i.e., a header
-          // link was clicked instead of the MenuButton).
+          /* Menu status:
 
-          // 2. If the back or forward button is clicked,
-          // we'll rebuild the state and toggle the menu
-          // (this will turn it on/off based on the
-          // window.location).
+            1. If any link is clicked, other than a MenuButton,
+              we'll rebuild the state and toggle the menu
+              (this will turn it off if it's on, i.e., a header
+              link was clicked instead of the MenuButton).
+
+            2. If the back or forward button is clicked,
+              we'll rebuild the state and toggle the menu
+              (this will turn it on/off based on the
+              window.location). 
+          */
 
           if (isMenu || valueTwo) {
             stateToUpdate.isMenu = !isMenu;

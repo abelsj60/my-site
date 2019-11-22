@@ -23,9 +23,12 @@ export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
-    // Note: DO NOT USE props.currentCaller or props.isMenu to avoid problems
-    // w/BACK/FORWARD. Both are out-of-date b/c the eventListener for
-    // BACK/FORWARD runs AFTER ContentLoader runs.
+    /* isMenu v. isMenu
+
+      DO NOT USE props.currentCaller or props.isMenu to avoid problems
+      w/BACK/FORWARD. Both are out-of-date b/c the eventListener for
+      BACK/FORWARD runs AFTER ContentLoader runs. 
+    */
 
     const referrer = new Referrer(props);
     const location = new Location(referrer.pathToMatch, props);
@@ -38,9 +41,9 @@ export default class ContentLoader extends Component {
         ? React.createRef()
         : {}; // Prevents errors
 
-    // Don't need to store publication. The Clip list is one dimensional, meaning that 
-    // we don't sort by publication. Instead, publication will show the first
-    // matching index item when needed as a default.
+    // The clip list is one dimensional, so we don't sort by publication. 
+    // Instead, publication will show the first matching index item when 
+    // needed as a default. 
 
     let imageLoaded = -1;
 
@@ -191,13 +194,14 @@ export default class ContentLoader extends Component {
       state.resetIllustrationState(boundHandleClickForApp);
       state.rebuildContentLoader(boundHandleClickForContentLoader);
 
-      // The scrollTop reset is not currently applied to
-      // the /projects, and /journalism routes b/c
-      // they can only be changed via /menu.
-      // If you want to expand this to include the
-      // /projects and /journalism, remember to 
-      // filter /menu paths, as they don't have an
-      // overflowRef, and so will kick an error.
+      /* Reset scroll top in /chapter
+
+        The scrollTop reset is not currently applied to the /projects, and 
+        /journalism routes b/c they can only be changed via /menu. If you 
+        want to expand this to include the /projects and /journalism, remember 
+        to filter /menu paths, as they don't have an overflowRef, and so will 
+        kick an error. 
+      */
 
       if (location.caller === 'chapter') {
         const { currentCaller } = appState;

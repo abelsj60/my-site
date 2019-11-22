@@ -1,7 +1,7 @@
 import About from './about/About.jsx';
 import ClickHandling from './classes/ClickHandling.js';
 import ContentLoader from './shared/ContentLoader.jsx';
-import Debug from './Debug.jsx';
+import Debug from './debug/Debug.jsx';
 import Home from './home/Home.jsx';
 import Location from './classes/Location';
 import NotFound from './not-found/NotFound.jsx';
@@ -18,12 +18,14 @@ export default class Body extends Component {
   constructor(props) {
     super(props);
 
-    /** Build initial bodyState.
-     *
-     * Renders are defined by path params. State is used
-     * to return to current location when user moves
-     * between sections, e.g., returns from a menu.
-     */
+    /* Initial bodyState:
+     
+      Renders are defined by path params. State is used
+      to return to current location when user moves
+      between sections, e.g., returns from a menu.
+
+      Optional params: https://stackoverflow.com/a/35604855
+    */
 
     const referrer = new Referrer(props);
     const location = new Location(referrer.pathToMatch, props);
@@ -43,21 +45,16 @@ export default class Body extends Component {
     const clickHandling = new ClickHandling('body', this);
     const boundHandleClickForBody = clickHandling.boundHandleClick;
 
-    // Optional params in React:
-    // https://stackoverflow.com/a/35604855
-
     return (
       <Switch>
         <Route
           exact
           path="/"
-          render={
-            () => (
-              <Home
-                {...this.props}
-              />
-            )
-          }
+          render={() => (
+            <Home
+              {...this.props}
+            />
+          )}
         />
         {[
           '/chapter/:title?',
@@ -69,29 +66,25 @@ export default class Body extends Component {
             <Route
               key={idx}
               path={path}
-              render={
-                ({ match }) => (
-                  <ContentLoader
-                    {...this.props}
-                    bodyState={this.state}
-                    boundHandleClickForBody={boundHandleClickForBody}
-                    match={match}
-                  />
-                )
-              }
+              render={({ match }) => (
+                <ContentLoader
+                  {...this.props}
+                  bodyState={this.state}
+                  boundHandleClickForBody={boundHandleClickForBody}
+                  match={match}
+                />
+              )}
             />
           ))}
         <Route
           exact
           path="/i"
-          render={
-            () => (
-              <ReloadRoute
-                {...this.props}
-                bodyState={this.state}
-              />
-            )
-          }
+          render={() => (
+            <ReloadRoute
+              {...this.props}
+              bodyState={this.state}
+            />
+          )}
         />
         <Route
           exact
@@ -101,22 +94,18 @@ export default class Body extends Component {
         <Route
           exact
           path="/debug"
-          render={
-            () => (
-              <Debug
-                {...this.props}
-              />
-            )
-          }
+          render={() => (
+            <Debug
+              {...this.props}
+            />
+          )}
         />
         <Route
-          render={
-            () => (
-              <NotFound 
-                {...this.props}
-              />
-            )
-          }
+          render={() => (
+            <NotFound 
+              {...this.props}
+            />
+          )}
         />
       </Switch>
     );

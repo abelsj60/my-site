@@ -1,8 +1,8 @@
-import Main from './primitives/Main.jsx';
+import Main from '../primitives/Main.jsx';
 import React, { Component } from 'react';
-import ContentHolder from './primitives/ContentHolder.jsx';
+import ContentHolder from '../primitives/ContentHolder.jsx';
 import styled from 'styled-components';
-import { isIOS, isMobile } from 'react-device-detect';
+import { isIOS } from 'react-device-detect';
 
 const RestyledContentHolder = styled(ContentHolder)`
   width: 100%;
