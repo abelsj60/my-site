@@ -94,8 +94,7 @@ const Image = styled.img`
   top: 0px;
   left: 0px;
   z-index: -3;
-  // May need to fill page:   
-  // https://stackoverflow.com/a/30794589
+  // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
 `;
@@ -106,8 +105,7 @@ const FallbackBlur = styled.img`
   top: 0px;
   left: 0px;
   z-index: -1;
-  // May need to fill page:   
-  // https://stackoverflow.com/a/30794589
+  // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
   // imageLoaded (BlurredImage) comes from ContentLoader.jsx. Starts
@@ -131,8 +129,7 @@ const BlurredImage = styled.img`
   top: 0px;
   left: 0px;
   z-index: -2;
-  // May need to fill page:
-  // https://stackoverflow.com/a/30794589
+  // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
   // Do not check for illustrationState on opacity b/c we always this to be visible beneath the FallbackBlur

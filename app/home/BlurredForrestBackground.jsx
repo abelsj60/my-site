@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export default styled.img`
   position: absolute;
@@ -11,10 +11,9 @@ export default styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  will-change: opacity;
-  // We use !p.homePageLoaded to limit this fade to initialLoad, it shouldn't be used for internal navigation.
-  opacity: ${p => (!p.homePageLoaded && p.loadLevel === 1) || p.theme.blurForTempContent || (p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2) ? '1' : '0'};
-  transition: ${p => !p.homePageLoaded || p.spellLevel > 0 ? css`opacity ${p.spellLevel > 0 ? '.65s' : '1s'} ease-in` : ''};
+  opacity: ${p => p.theme.blurForTempContent || (p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2) ? '1' : '0'};
+  // Transition settings should match blurred boy for use on narrow landscape screens.
+  transition: ${p => p.spellLevel > 0 && 'opacity .65s ease-in-out'};
   z-index: ${p => !p.inCity && p.spellLevel < 5 ? '1' : '-1'};
   ${p => (p.spellLevel === 5 || p.inCity) && 'display: none'};
 `;
