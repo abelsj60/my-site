@@ -19,6 +19,7 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
 
+    // Charm array — refs added via cDU. 
     this.charmRefs = [
       React.createRef(),
       React.createRef(),
