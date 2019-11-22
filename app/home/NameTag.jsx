@@ -101,7 +101,7 @@ const InnerContainer = styled.div`
   opacity: ${p => (!p.homePageLoaded && p.loadLevel < 2) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
   // Compared to <Hed />, this element's initial fade-in looks best when it starts later, runs faster, and uses a different bezier curve.
   // Transition settings for the spell should match NameTag/InnerContainer's transition property.
-  transition: opacity ${p => p.loadLevel < 3 ? '.605s .095s ease-in-out' : p.enter ? '.45s ease-in-out' : '.65s ease-in-out'};
+  transition: opacity ${p => p.loadLevel < 3 ? '.605s .095s' : p.enter ? '.45s' : '.65s'} ease-in-out;
 `;
 const Pitch = styled.section`
   overflow: auto;

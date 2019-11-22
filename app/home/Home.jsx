@@ -67,7 +67,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const debugMe = true;
+    const debugMe = false;
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
     const setSpellLevel = {
@@ -315,25 +315,6 @@ export default class Home extends Component {
           break;
       }
     }
-  }
-
-  updateLoadLevel() {
-    const { homePageLoaded } = this.props.appState;
-    const { loadLevel } = this.state;
-
-    if (!homePageLoaded) {
-      switch (loadLevel) {
-        case 0:
-          this.setLoadLevel('blurs', 2);
-          break;
-        case 1: 
-          this.setLoadLevel('all', 6);
-          break;
-        case 2:
-          this.setLoadLevel('all', 8);
-          break;
-      }
-    };
   }
 
   handleMouseDown(num) {
