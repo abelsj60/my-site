@@ -67,7 +67,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const debugMe = false;
+    const debugMe = true;
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
     const setSpellLevel = {
@@ -324,7 +324,6 @@ export default class Home extends Component {
     if (!homePageLoaded) {
       switch (loadLevel) {
         case 0:
-          console.log('update');
           this.setLoadLevel('blurs', 2);
           break;
         case 1: 
@@ -333,6 +332,23 @@ export default class Home extends Component {
         case 2:
           this.setLoadLevel('all', 8);
           break;
+      }
+    };
+  }
+
+  handleMouseDown(num) {
+    return () => {
+      const { activeCharm, eventType } = this.state;
+  
+      if (eventType === 'click') {
+        const hcCharm = new ClickHandling('charm', this);
+        const boundHandleCharm = hcCharm.boundHandleClick;
+        boundHandleCharm(activeCharm === num);
+      } else if (eventType === 'touch') {
+        // Resets event type to 'click' if a mouse suddenly works
+        const hcHome = new ClickHandling('home', this);
+        const boundHandleClick = hcHome.boundHandleClick;
+        boundHandleClick('resetEventType');
       }
     };
   }
