@@ -1,6 +1,6 @@
 ---
 page: about
-altImageText: "A young teenage boy with big brown eyes stands in front of a textured yellow background. His left hand on hip, the young man wears a mint-green sweatshirt with dark circles ringing the upper part of each arm, dark blue jeans, and light green 3/4-top Converse sneakers. A magical fairy floats by his left shoulder, fairy dust sparkling around her."
+altImageText: "A young teenage boy with big brown eyes stands in front of a textured yellow background. Left hand on hip, he wears a loose fitting mint-green sweatshirt with dark circles ringing each bicep, dark blue jeans, and light green 3/4-top Converse sneakers. A magic fairy floats above his left shoulder, fairy dust glittering around her."
 updated: 11-11-18
 ---
 

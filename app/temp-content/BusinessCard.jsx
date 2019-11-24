@@ -54,7 +54,7 @@ const Email = styled.p`
 `;
 
 export default function BusinessCard() {
-  const altImageText = "A young teenage boy with big brown eyes and left hand on hip grins from the vibrant pink business card. He's wearing a mint-green sweatshirt. Dark circles ring the upper part of each arm. A magical fairy floats by his left shoulder, fairy dust sparkling around her."
+  const altImageText = "A young teenage boy with big brown eyes and left hand on hip grins from the vibrant pink business card. Left hand on hip, he wears a loose fitting mint-green sweatshirt with dark circles ringing each bicep, dark blue jeans, and light green 3/4-top Converse sneakers. A magic fairy floats above his left shoulder, fairy dust glittering around her."
 
   return (
     <Fragment>

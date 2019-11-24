@@ -104,7 +104,7 @@ export default function ProjectNav(props) {
                   boundHandleClickForApp={boundHandleClickForApp}
                 >
                   <Image
-                    alt={`Thumbnail ${idx + 1}`}
+                    alt={`Thumbnail for ${projectName}, image ${idx + 1}.`}
                     isMenu={isMenu}
                     src={`${urlPrefix}${thumb}-1x.jpg`}
                     srcSet={

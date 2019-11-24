@@ -80,6 +80,7 @@ export default function Projects(props) {
   } = contentState;
   const {
     captions,
+    description,
     imageHolderHeight,
     mainImages,
     pitch,
@@ -88,6 +89,7 @@ export default function Projects(props) {
     type
   } = allContentData[projectIndex].attributes;
   const caption = captions[thumbnailIndex];
+  const altText = description[thumbnailIndex];
   const filePrefix = mainImages[thumbnailIndex];
   const holderHeight = imageHolderHeight[thumbnailIndex].split(' ');
   const ratio = (100 / (holderHeight[0] / holderHeight[1]));
@@ -169,7 +171,7 @@ export default function Projects(props) {
                 }}
               >
                 <MainImage
-                  alt="mainPic"
+                  alt={altText}
                   imageLoaded={imageLoaded}
                   onLoad={handleLoadForMainImage}
                   sizes="620px"

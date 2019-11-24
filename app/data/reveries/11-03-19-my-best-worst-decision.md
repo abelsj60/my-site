@@ -5,30 +5,28 @@ date: November 3, 2019
 slug: Two Redirects in a row...
 ---
 
-I officially did something with code that I’m sure is bad. 
+I officially did something with code that is bad. 
 
-Or, at least, not great. And I don’t care. I may change it some day. But it works, it’s easy to understand, it’s predictable, and it’s so integral to the site that changing it will be a pain. 
+I don’t care. I may change it some day. But it works, it’s easy to understand, it’s predictable, and it’s so integral that changing it would be a pain. 
 
-Some people will call this technical debt, but that’s kind of judgmental. Me? 
+Some people call this last issue 'technical debt.' Seems a little judgmental.  
 
-I'll call it personality. Here it is:
+Let's call it 'personality.' 
 
-Site sections that contain dynamic content, such as journalism, projects, and the story, are loaded through a component named ContentLoader. 
+Here's the issue: Dynamic content, such as for the journalism or projects sections, is loaded through a component named ContentLoader. 
 
-It decodes the content the user wants by breaking down his url and looking through its parameters. Great. Thing is, if the url is short, meaning the user is requesting a section without specifying parameters, then the ContentLoader will set a property on its local state called needsRedirect. 
+It builds a page for the user by breaking down each url. If the url's short, such as by being just '/chapter' or '/projects,' (meaning it has no parameters, like chapter title) the ContentLoader will make make the needsRedirect property on its internal state true. 
 
-When this property is true, the ContentLoader activates a Redirect component. This component sends users to a fictitious route called /i, which invokes the ReloadRoute component. It looks at the Body component’s local state (it sits between the Header and Footer) in order to build a new URL with parameters before redirecting the user back to ContentLoader. 
+This triggers a Redirect component. It sends the user to a fictitious route called /i, which invokes the ReloadRoute component. The ReloadRoute component looks at the Body's local state (Body sits between the Header and Footer) and build a new URL with parameters reflecting the last known location. Then it redirects users back to ContentLoader.
 
-Catch that? Two Redirects, one after the other. 
+Catch that? Two Redirects, one after the other! 
 
-They’re used when a user loads the site via a naked url, i.e., www.jamesabels.net/chapter, or when the user clicks on certain links in the Header and Footer. Both rely on this feature. 
+The good: The App component doesn’t have to track this content and the Header and Footer can make use of 'naked links' for navigation (e.g., www.jamesabels.net/chapter). 
 
-The good: This means the App component doesn’t have to track this content and the Header and Footer use naked links for navigation (e.g., www.jamesabels.net/chapter). 
+The bad: It’s harder to think about what React is doing at any given time. The fictitous '/i' route can make things hard-to-understand because of all the re-rendering.
 
-The bad: This means that it’s harder to think about what React is doing at any given time. The reason is that the user may be going to-or-fro /i. That’s a lot of hard-to-understand re-rendering.
+This may not be the best way to control React — there may be a better way with keys — but, this is in place and fully functional.
 
-I dealt with it by watching the results in the console and debugging the problems by hand. I know this isn’t the best way to control React, but it’s in place and fully functional. I now think there may be a better way to do it with keys — food for thought another day.
-
-Bottom line, personality. 
+Like I said, personality... 
 
  -j

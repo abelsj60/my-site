@@ -25,6 +25,10 @@ const Hed = styled.h1`
 const Text = styled.section`
   overflow: auto;
 
+  h1 {
+    margin-bottom: 8px;
+  }
+
   p {
     &:last-child {
       margin-bottom: 0px;

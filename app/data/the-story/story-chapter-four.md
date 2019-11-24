@@ -1,6 +1,6 @@
 ---
 title: 'Practical magic'
-description: 'xyz 4'
+description: "This illustration depicts chapter four. The fairy, her back angled to the audience, leans forward into the center of the image, looking up into the dream above her. Chin on hand, she smiles at the adventure unfolding there. A yellow glow lights up the corner of her right eye. Fairy dust sparkles around her, mixing with the moonlight that lights the sky above her. The Jinni from chapter three, now grinning broadly flies up-and-back through the air, arms outstretched, ringed by small glowing fairies. They shine in many colors as they dance mid-air, lighting the scene with tones of emerald green, sky blue, light pink, and pale yellow. Stars hang around them, mixing with multi-colored orbs of light. A mysterious Moroccan castle stands off to the top left of the image. It sits amidst sand dunes that are darkened by mysterious purple light. The moon hangs in haze at the image's other corner. This dream is rising from the young man as he lies sleeps at that image's bottom right corner. He's facing the audience, away from the fantasy, smiling, one hand tucked beneath his face, and the other stretched out before him. His little gold lamp sits on the bedside table to his right, bursting with its impossible magical light."
 number: 4
 ---
 

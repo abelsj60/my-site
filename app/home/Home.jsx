@@ -156,7 +156,15 @@ export default class Home extends Component {
     const { loadLevel } = this.state;
 
     if (this.sumLoadLevels(type) === target) {
-      this.setState({ loadLevel: loadLevel + 1 });
+      this.setState({ loadLevel: loadLevel + 1 }, () => {
+        // Update Apps state so the header can fade in the background-color
+        // Add it here, after setState, so timing will be consistent when 
+        // starting at home, and when navigating to it from w/n site.
+
+        if (this.state.loadLevel === 2) {
+          this.props.boundHandleClickForApp('startDramaAtHome');
+        }
+      });
     }
   }
 
@@ -279,7 +287,7 @@ export default class Home extends Component {
   }
 
   updateLoadLevel() {
-    const { homePageLoaded, type } = this.props.appState;
+    const { homePageLoaded, lastCaller, type } = this.props.appState;
     const { loadLevel } = this.state;
 
     if (!homePageLoaded) {
@@ -287,7 +295,7 @@ export default class Home extends Component {
         case 0:
           this.setLoadLevel('blurs', 2);
           break;
-        case 1: 
+        case 1:
           this.setLoadLevel('initialSet', 6);
           break;
         case 2:

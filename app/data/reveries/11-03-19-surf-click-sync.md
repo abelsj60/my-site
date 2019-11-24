@@ -7,18 +7,22 @@ slug: Updating state with internal links
 
 How do you keep state in sync in React?
 
-Bit of a trick question, right? After all, you often split state between many components. This can be nice, as it’s often easier to understand what’s going on when you only have to think of a few things at a time. But, there’s inevitably some app-wide state that needs to be tracked.
+Trick question, right? State's often split between several components. 
 
-It’s often handled in React’s componentDidUpdate lifestyle hook. Nothing wrong with that, that’s what it’s there for. Still, for my purposes (this site) I found it to be a bit of a drag. 
+This can be nice. It’s often easier to understand what's up when you only have to remember a couple things at a time. But, I find some app-wide state's usually kicking around, too.
 
-Avoiding infinite loops in componentDidMount by constantly adding conditionals to it eventually became confusing.
+It’s often updated in componentDidUpdate(), where infinite loops loom. The fix? Block updates after the first. So, if 1 is added to 1, stop the updates when 1 hits 2. I did this initially to keep the app state in sync as users navigate. 
 
-So I came up with an alternate approach. My users navigate the site via React Router’s Link component. (It’s actually a custom version of it, but let’s leave that for another day.)
+But it was confusing. So I did something else. 
 
-I took advantage of this. 
+Visitors navigate the site via links. So I said, "self" — because a friend says I should say "self" when recounting personal adventures — why can't we use the link to trigger resets?
 
-I [modified](https://github.com/abelsj60/jamesabels.net/blob/master/app/shared/CustomLink.jsx#L68) the Link component to accept an update function via props. It's added to the Link’s onClick handler. The end result is that App state stays in sync as users surf the site. 
+Great idea, I responded. Here goes:
 
-There isn’t too much more to say about this. I think it’s a fairly clean idea, although, it took some work at the outset to debug some bizarre behavior. I can’t even remember what it was. 
+I [modified](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/shared/CustomLink.jsx#L74) the Link component to accept an update function via props. It's added to the Link’s onClick handler. If the ufunction exists when the Link component gets called, the app state resets itself. 
+
+No componentDidUpdate(), no parent-child supervision, just one smooth update.
+
+It took some fancy footwork at the start to debug weirdness, I don't even remember what it was. But it works and I like it because I can forget it.
 
 -j

@@ -216,7 +216,11 @@ export default class ClickHandling {
             ? 'Finished home page load'
             : 'Finished heartbeat';
           break;
+        case 'startDramaAtHome':
+          // Not logging to Google Analytics
+          stateToUpdate.startDramaAtHome = true;
         case 'updateApp':
+          // Not logging to Google Analytics
           if (valueOne !== undefined) {
             stateToUpdate.currentCaller = valueOne;
             stateToUpdate.lastCaller = currentCaller;
@@ -283,7 +287,10 @@ export default class ClickHandling {
           break;
       }
 
-      if (updateValue !== 'updateApp') {
+      if (
+        updateValue !== 'updateApp'
+          || updateValue !== 'startDramaAtHome'
+      ) {
         if (process.env.NODE_ENV !== 'development') {
           if (category && action) {
             ReactGA.event({
@@ -297,7 +304,7 @@ export default class ClickHandling {
         }
       }
 
-      return this.setState(() => stateToUpdate);
+      return this.setState(stateToUpdate);
     };
   }
 

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import ReactGA from 'react-ga';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
@@ -27,14 +28,14 @@ const Legal = styled.h1`
 `;
 const MyCopyright = styled.span`
   display: block;
-  margin-top: 18%;
+  margin-top: 14%;
   margin-bottom: 6px;
   font-size: ${p => p.theme.fontSizes.one};
   font-weight: 400;
   text-align: center;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-weight: 500;
     font-size: ${p => p.theme.fontSizes.eight};
   }
@@ -43,9 +44,22 @@ const ClipCopyright = styled.span`
   display: block;
   font-size: ${p => p.theme.fontSizes.zero};
   text-align: center;
+  margin-bottom: 6px;
   
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    font-size: ${p => p.theme.fontSizes.one};;
+    font-size: ${p => p.theme.fontSizes.one};
+    margin-bottom: 13px;
+  }
+`;
+const PixsyNotice = styled.span`
+  display: block;
+  font-size: ${p => p.theme.fontSizes.zero};
+  text-align: center;
+  margin-bottom: 6px;
+  
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    font-size: ${p => p.theme.fontSizes.one};
+    margin-bottom: 12px;
   }
 `;
 
@@ -63,9 +77,22 @@ export default function LegalTerms(props) {
           }}
           to="/journalism"
         >
-          clips
+          Clips
         </StyledLink>
       ) : 'clips';
+    const linkForPixsy = (
+      <ReactGA.OutboundLink
+        eventLabel="To Pixsy"
+        style={{
+          color: 'white',
+          textDecoration: 'underline'
+        }}
+        target="_blank"
+        to="https://www.pixsy.com/protected-by-pixsy/warning/"
+      >
+        Pixsy
+      </ReactGA.OutboundLink>
+    );
 
     // The following HTML is span, not a <p>, b/c it's nested in
     // a <p> (React doesn't allow <p> nesting, kicks a warning).
@@ -86,8 +113,11 @@ export default function LegalTerms(props) {
             © {new Date().getFullYear()}, James Abels. All rights reserved.
           </MyCopyright>
           <ClipCopyright>
-            All {linkOrTextForClips} owned by their respective publisher.
+            {linkOrTextForClips} owned by their respective publisher.
           </ClipCopyright>
+          <PixsyNotice>
+            Illustrations protected by {linkForPixsy}.
+          </PixsyNotice>
         </span>
       );
 

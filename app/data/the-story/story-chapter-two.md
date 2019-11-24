@@ -1,6 +1,6 @@
 ---
 title: 'True adventure'
-description: 'xyz 2'
+description: "This illustration depicts chapter two. A young boy, slightly older than in chapter one, is waking one bright morning. His white t-shirt is gleaming, lit by the sunlight that streams in the window behind him. It's draped by bright yellow curtains. A bookshelf hangs off the wall, just above his brown headboard. A poster with the moon hangs on the right side of the headboard. Two fluffy white pillows lean against it, and the boy's red blanket covers his lower body. He's leaning up, resting on his left elbow, cheeks flush with excitement and a giant grin lighting up his big brown eyes. His right hand is reaching out to touch the squat gold lamp that the fairy gave him in chapter one. Bathed in purplish light, fairy dust still magically glittering around it, the gold lamp boldly fills the majority of the image's foreground. Its top and sides are ringed by mysterious runes, and the fantastic hovers all around it."
 number: 2
 ---
 

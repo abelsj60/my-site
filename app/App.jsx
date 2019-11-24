@@ -293,6 +293,7 @@ class App extends Component {
       nameTagWidth: this.calculateNameTagWidth(this.images), // Orig. dimensions: 1349 / 5115
       password: '', // to be removed
       spacerHeight: this.calculateSpacerHeight(this.images), // Set by 'handleResize', so must live here. Used by Home/NameTag.
+      startDramaAtHome: false, // Allows us to coordinate <Header /> w/home-page theatrics
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
       // Won't catch iPadOS w/o customMobileTest. Search for 11/9/19 notes as to necessity.
       type: isMobile ? 'mobile' : 'desktop',

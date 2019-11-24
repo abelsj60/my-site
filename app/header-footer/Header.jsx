@@ -152,7 +152,9 @@ const Nav = styled.nav`
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '6px 12px'};
   // Don't show box when business card or legal terms are on
-  background-color: ${p => p.isHome && p.tempContent < 1 && 'rgba(0, 0, 0, .125)'};
+  background-color: ${p => (p.isHome && p.startDramaAtHome && p.tempContent < 1) ? 'rgba(0, 0, 0, .125)' : ''};
+  ${p => !p.homePageLoaded && 'will-change: background-color;'}
+  ${p => !p.homePageLoaded && 'transition: background-color .7s ease-in-out;'}
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
   position: relative;
@@ -169,11 +171,9 @@ const Nav = styled.nav`
     ${p => p.tempContent === 3 && css`
       background-color: rgba(175, 18, 90, .8);
       position: fixed;
-      padding-top: 54px; // Bottom of header text
-      top: 0px;
-      left: 0px;
       bottom: 0px;
       width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -190,6 +190,7 @@ const NavList = styled(UnorderedList)`
     // Header menu
     ${p => p.tempContent === 3 && css`
       flex-direction: column;
+      margin-top: 53px;
       margin-bottom: 55px;
       height: 100%;
     `};
@@ -231,20 +232,21 @@ const Icon = styled.img`
 // On-screen timer for open header menu
 const timerKeyframes = keyframes`
   0% {
-    transform: scaleX(0);
+    transform: scaleX(-1);
   }
 
   100% {
-    transform: scaleX(-1);
+    transform: scaleX(0);
   }
 `;
 const TimingBar = styled.div`
   // Timer stays accurate if it runs outside of media query (parent query handles visibility)
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
-  position: relative;
-  height: 2px;
-  background-color: ${p => p.theme.colors.yellow};
-  width: 95%;
+  position: fixed;
+  top: 52px;
+  left: 0px;
+  height: 1px;
+  width: 100%;
 `;
 const Timer = styled.div`
   // Timer stays accurate if it runs outside of media query (parent query handles visibility)
@@ -252,8 +254,9 @@ const Timer = styled.div`
   width: 100%;
   height: 100%;
   will-change: transform;
-  background-color: ${p => p.theme.colors.pink};
-  animation: ${css`8s ${timerKeyframes} 1`};
+  background-color: ${p => p.theme.colors.yellow};
+  // Give it two/tenths of a second more to keep pace with setTimeout (see ClickHandling)
+  animation: ${css`8.2s ${timerKeyframes} 1`};
 `;
 
 export default class Header extends Component {
@@ -265,9 +268,11 @@ export default class Header extends Component {
     const {
       currentCaller,
       height,
+      homePageLoaded,
       illustrationDirection,
       illustrationLevel,
       images,
+      startDramaAtHome,
       tempContent
     } = appState;
     const isHome = currentCaller === 'home';
@@ -315,7 +320,9 @@ export default class Header extends Component {
         </Motto>
         <Nav
           coverValY={coverVals.y < 0} // Add frost to text
+          homePageLoaded={homePageLoaded}
           isHome={isHome}
+          startDramaAtHome={startDramaAtHome}
           tempContent={tempContent}
         >
           <NavList

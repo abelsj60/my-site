@@ -5,35 +5,27 @@ date: November 4, 2019
 slug: Loading home-page illustrations
 ---
 
-Remember what I said, software is like a magic trick. 
+The home page has a magical portal on it. 
 
-You’ve got to get users to look over here while you’re doing something over there. I’ve already explained how I did that with the story illustrations. Now I’ll talk a little about the home-page illustrations.
+The top-level image is of me, a fairy, and a lot of computer monitors. They're transparent, showing the world I'm creating beneath them. This world can be swapped with another by tapping a sequence of five active Charms in a row. This "spell" is simple, but neat (says me...).
 
-The home page loads with two major illustrations in view: the boy foreground and forrest background.
+Here's how I distract users while the images load. It's a doozy.
 
-Like all high-quality, full-page illustrations, they can take a little while to load. So I needed to do something to hide that fact. Whatever I did had to look good and hold interest for, say, a minute.
+I start out with a white screen. A loading animation sits at center. As soon as the blurred versions of the foreground boy and forrest background load, the forrest fallback image fades into view. When the un-blurred versions load (beneath it), the fallback fades out of view, leaving the full versions on screen in all their glory. 
 
-My current solution is to allow the site to load with a white screen. A loading animation sits center stage. As soon as blurred versions of the foreground boy and forrest background load, I fade them into place by transitioning opacity from 0 to 1. When the un-blurred versions load, I transition opacity back to 0, leaving the full versions on screen in all their glory. 
+Here’s how it works. 
 
-The drama of going from white screen to blurred image (which is fast) should hold user attention. Now that we have blurred images, users should be willing to wait a little to see whatps up. 
+I added a property to the Home component’s "this" value named loadLevel. It holds an array, length seven. Each index stands for a different illustration: 
 
-Here’s how I did it. 
+    [fallback, blurredBoy, blurredForrest, blurredNyc, boy, forrest, nyc]. 
 
-I added a local property to the Home component’s state named loadLevel. This property holds an array, length four. Each index stands for a different illustration: [blurredBoy, blurredForrest, boy, forrest]. 
+Indices start at 0. [They're incremented](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/home/Home.jsx#L163) as they load, and in some cases, when their opacity finishes transitioning (via onTransitionEnd). 
 
-Indices start at 0. The first two indices are incremented by one when each blurred image loads. When their sum is 2, I fade them into view. These indices are then incremented to 2 when the fade’s done. 
+I added the array to 'this', not state, because I didn't want to change the on-screen state of the app every time an individual image loads or transitions. I've found that running setState during CSS transitions can be problematic. Sometimes it breaks things (event in React 16+ w/Fibre), so I wanted to minimize this.
 
-Meanwhile, indices three and four will increment to 1 as soon as the boy and forrest illustrations are loaded. When all four indices add up to 6, I fade the main illustrations into view.
+Now here's the magic. 
 
-Bonus points:
-
-I noticed that, after the initial load on mobile browsers, I would see an unpleasant white screen when navigating back to the home page from another section. Why? The images weren’t instantly loaded. 
-
-Desktop and laptop browsers don’t do this. Something weird about mobile browsers again. 
-
-But, as it turns out, the Home component’s onLoad image handlers run every time a user navigates back to the home page. So I created a white sheet that covers the screen when users navigate home on mobile devices (after the initial load). And I transition it off as soon as the sum of the array elements hit the magic number (4). It works well, especially as I didn’t want to repeat the initial loading sequence.
-
-There may be a sleeker, cooler way to distract users while the home-page illustrations load. But I think what I’ve got works nicely, it’s quick and easy to maintain, and it isn’t outright boring or ugly. 
+Each time an element of the array changes, I run an [updateLoadLevel](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/home/Home.jsx#L281) function. It sums different sets of values within the array to decide where we are in the loading process. As certain milestones are hit, the loadLevel on state is incremented from 0 to 1 to 2 to 3 (on initial load). The changes to loadLevel are managed on state because they trigger on-screen changes in the app.
 
 Abracadabra...
 

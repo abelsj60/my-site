@@ -9,30 +9,30 @@ Browsers break a lot.
 
 I discovered this during early site development. I was working to make the Web site look like an app. I wanted the header, footer, and body to stay on screen at all times — a compact little package.
 
-It’s tremendously difficult. 
+It’s really hard. 
 
-One problem is the menu bar in iOS Safari. It’s really hard to work with — if your site stretches to the bottom of the screen and the user touches this area, the menu bar will jump into view and stay there, throwing everything off. 
+One problem is the menu bar in iOS Safari. If your site stretches to the bottom of the screen and the user touches this area, the menu bar will jump up into view and stay there, throwing everything off. 
 
-(You may see this behavior if you use the site in landscape mode.)
+(You'll see this behavior if you use the site in landscape mode on a narrow screen.)
 
 There were other problems, too. 
 
-I can’t remember half of them. Anyway, I ultimately decided to use JavaScript to explicitly set the height of the site's main body element. I grabbed hold of the browser’s resize event to [help me](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L516) and never let go. 
+I can’t remember half of them. Anyway, I ultimately decided to use JavaScript to explicitly set the app's full height. I grabbed hold of the browser’s [resize event](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/App.jsx#L469) and never let go. 
 
-If only it had been that easy. The resize event is very pokey. 
+If only it were that easy. The resize event's very pokey. 
 
-It fires randomly and inconsistently. It can fire when you change orientation, scroll fast to the top or bottom of the page, or pinch, zoom, and drag the site. There are "hidden fires," too. In iOS Safari, resize fires after the page loads because it paints the screen without the menu bar, then repaints it with the menu bar. 
+It fires randomly and inconsistently. It'll fire when you change orientation, scroll up and down the screen really fast, pinch, zoom, and drag the site, or breathe. There are "hidden fires," too. In iOS Safari, resize seems to fire twice during page load (I think), perhaps because the browser first paints the screen without the menu bar, then repaints it with the menu bar. Hard to say.
 
-There's no rhyme or reason here. I hope to never think about any of it again.
+It's completely stupid, even if necessary. 
 
-But I did. The site can now calculate and re-calculate height on load, orientation change, and changes to window size. I block the calculation when the site is pinch-zoomed, and I added an extra little bit of CSS for a few milliseconds when the user changes orientation in iOS Safari because of some mobile nuttiness.
+Anyway, I forced my way through the thicket. The site can calculate and re-calculate height on load, orientation change, and changes to window size (on desktops and laptops). I even add an extra bit of CSS for iOS 12+ for just a beat so the browser's height measurements will reflect the full height of the page, sans address and menu bars. 
 
-Also, turns out that height is just as maddening as the resize event. 
+This last part was another maddening discovery. 
 
-Different browsers and devices implement height values differently, seemingly at random — window.innerHeight, document.documentElement.clientHeight, test it all and hope you get it right! Who knew height would give you such grief...?
+Bottom line:
 
-Anyway, my algorithm almost always seems to work. 
+Different browsers and operating systems implement height values differently — window.innerHeight, document.documentElement.clientHeight, window.screen.height, it's all different in different places.
 
-All’s well that ends well...
+Well, all’s well that ends well...
 
 -j

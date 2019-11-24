@@ -19,7 +19,6 @@ const NavigationHed = styled.p`
   color: ${p => (!p.link ? p.theme.colors.black : p.theme.colors.blue)};
   font-size: ${p => p.theme.fontSizes.fifteen};
   margin-top: -2px;
-  margin-left: 2px;
   margin-bottom: 15px;
   font-weight: 400;
 
