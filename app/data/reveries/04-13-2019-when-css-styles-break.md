@@ -9,7 +9,6 @@ Lost four hours last night.
 
 For some reason, I stopped being able to modify the site's CSS. I was fixing some overflowing header text on my iPhone SE. I practically screamed in public, banged some keys, and felt marginally better. 
 
-
 Thing was, I was almost done. I was tweaking design and getting production and development 'builds' in order. Basically, this means telling Webpack to generate different types of code based on the build type. Webpack 'bundles' javascript files together so a user's machine can run them.
 
 Anyway, in the middle of all this, my CSS stopped working. Or at least my ability to edit it on the fly did. Chrome just greyed out all the rules. Googling the problem was heartbreaking. Most commentary called it a stylesheet error. There's a workaround, but it's a hack. And, anyway, a portfolio site can't be broken.
@@ -18,7 +17,7 @@ So I started futzing about. First I created a bunch of new branches from old cod
 
 Didn't. 
 
-So then I disabled most of my code and threw a plain box of text on screen. That worked, sorta, so I got suspicous of Styled Components.
+So then I disabled most of my code and threw a plain box of text on screen. That worked, sorta, so I got suspicious of Styled Components.
 
 Styled Components is an open-source javascript project. It lets me write CSS rules directly inside my javascript, as opposed to putting them in a separate stylesheet. I started the site with one of these stylesheets. I spent half my time maintaining it — debugging it, making stuff work, getting lost inside it at some later date.
 

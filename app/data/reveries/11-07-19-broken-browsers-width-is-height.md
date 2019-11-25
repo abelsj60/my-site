@@ -28,7 +28,7 @@ OK, rotate them. On iOS, width is still the longest edge, but Android swaps valu
 
 Now, ready for the "new hotness"? 
 
-iPadOS. That's the OS Apple just split off from iOS. It works differently. iPadOS acts like Android. It reports the device's actual width, and it swaps the values when you switch orientation. (Technically, it's working like OSX, Apple's desktop OS.)
+iPadOS. That's the OS Apple just split off from iOS. It works differently. iPadOS acts like Android. It reports the device's actual width, and it swaps the values when you switch orientation. (Technically, it's working like OS X, Apple's desktop OS.)
 
 Neat, huh? Yeah, I didn't really think so either.
 

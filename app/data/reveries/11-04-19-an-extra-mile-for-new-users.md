@@ -19,9 +19,9 @@ It's cute.
 
 I got the idea from Google. 
 
-Of all its marketing programs, the only thing Google does that actually impresses me as a true cut above is the Google Doodle. All the rest plays like the usual overmarketed hype companies put out.
+Of all its marketing programs, the only thing Google does that actually impresses me as a true cut above is the Google Doodle. All the rest plays like the usual over-marketed hype companies put out.
 
-But the Google Doogle is so unnecessary and fun that it really works.
+But the Google Doodle is so unnecessary and fun that it really works.
 
 Now, the problem with my heartbeat is that it’s great to see once, not twice. 
 

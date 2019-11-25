@@ -1,10 +1,10 @@
 ---
 number: 
-  4
+  3
 projectName: 
   'Slingshot'
 pitch: 
-  'Directing global software demos'
+  'Direct global software demos'
 type:
   'Founder'
 technologies: 

@@ -1,5 +1,5 @@
 ---
-3ype: reverie
+type: reverie
 headline: A groan about Web image formats
 date: March 30, 2019
 slug: Randomly choosing Web images
@@ -24,7 +24,7 @@ I went with PNG, obviously.
 
 So, firstly, knowing what's best upfront may be clearer with more knowledge and experience. 
 
-Secondly, look at the SVG. It uses plain English to describe how images should look (like HTML does for Web pages). Its two kilobytes no matter the image's size. If it got bigger, this format would be great becuse the file would still be two kilobytes. In this case, the image is fixed at eight pixels, so I don't think it matters. 
+Secondly, look at the SVG. It uses plain English to describe how images should look (like HTML does for Web pages). Its two kilobytes no matter the image's size. If it got bigger, this format would be great because the file would still be two kilobytes. In this case, the image is fixed at eight pixels, so I don't think it matters. 
 
 Anyway, point is that it all basically came down to guessing. Who needs the article?
 

@@ -30,13 +30,13 @@ After seeing the hidden scrollbar on a whole bunch of virtual machines running M
 
 Sure enough, the hidden scrollbar appeared.
 
-Except— my real-life computer is a Macbook Air running OS X High Sierra and Chrome 73. There's no hidden scrollbar on it.
+Except— my real-life computer is a MacBook Air running OS X High Sierra and Chrome 73. There's no hidden scrollbar on it.
 
 NONE. ZERO. ZILCH!
 
-Methinks the virtual machine doth protest too much. Hard to tell because I can't buy all these machines to test them. Still, the world's funny: I had the original Macbook Air and I read once that Apple built a special version of OS X for it. This version had its own quirks (sadly — it was a lousy machine).
+Methinks the virtual machine doth protest too much. Hard to tell because I can't buy all these machines to test them. Still, the world's funny: I had the original MacBook Air and I read once that Apple built a special version of OS X for it. This version had its own quirks (sadly — it was a lousy machine).
 
-Maybe I'm confronting the same situation here, my 13'ers little quirk.
+Maybe I'm confronting the same situation here, my 13"ers little quirk.
 
 But...I've a feeling it's a nonexistent problem.
 

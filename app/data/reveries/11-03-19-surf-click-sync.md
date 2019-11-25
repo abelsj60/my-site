@@ -19,7 +19,7 @@ Visitors navigate the site via links. So I said, "self" — because a friend say
 
 Great idea, I responded. Here goes:
 
-I [modified](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/shared/CustomLink.jsx#L74) the Link component to accept an update function via props. It's added to the Link’s onClick handler. If the ufunction exists when the Link component gets called, the app state resets itself. 
+I [modified](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/shared/CustomLink.jsx#L74) the Link component to accept an update function via props. It's added to the Link’s onClick handler. If the function exists when the Link component gets called, the app state resets itself. 
 
 No componentDidUpdate(), no parent-child supervision, just one smooth update.
 

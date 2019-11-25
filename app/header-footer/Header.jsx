@@ -243,7 +243,8 @@ const TimingBar = styled.div`
   // Timer stays accurate if it runs outside of media query (parent query handles visibility)
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
   position: fixed;
-  top: 52px;
+  // Not testing for p.isStory. Shouldn't matter...
+  top: ${p => p.illustrationLevel === 3 ? '0px' : '52px'};
   left: 0px;
   height: 1px;
   width: 100%;
@@ -361,6 +362,7 @@ export default class Header extends Component {
             />
           </NavList>
           <TimingBar
+            illustrationLevel={illustrationLevel}
             tempContent={tempContent}
           >
             <Timer />

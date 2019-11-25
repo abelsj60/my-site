@@ -13,9 +13,9 @@ Basically, I wanted to make some of my code's methods and properties "private," 
 
 But not for everyone. 
 
-I recently [ran into a discussion](https://www.crockford.com/code.html) that said JavaScript developers shouldn't use the underscore because it looks amateurish. The reason is that it doesn't work. Not really. JavaScript doesn't care if I break the promise and use "_path" outside the Location class. Apparently, some langauges do.
+I recently [ran into a discussion](https://www.crockford.com/code.html) that said JavaScript developers shouldn't use the underscore because it looks amateurish. The reason is that it doesn't work. Not really. JavaScript doesn't care if I break the promise and use "_path" outside the Location class. Apparently, some languages do.
 
-To be clear, JavaScript's loosy goosy nature doesn't really bother me.
+To be clear, JavaScript's loosey-goosey nature doesn't really bother me.
 
 But, what if most developers are underscore haters? 
 
@@ -23,7 +23,7 @@ I figured I should check myself before I wreck my site fixing something that isn
 
 >The Web site you sent me [about "underscore prefixing" doesn't seem](https://www.crockford.com/code.html) to be talking about ES5 JavaScript....
 
->Anyways, I think that using closures instead of prefixed underscores is a viable option in some circumstances, but classes in particular (e.g. a "private" class methods) don’t really lend themself to such a solution, including ES5 classses. I mean you can, but it either doesn’t [involve prototype methods at all](https://stackoverflow.com/a/55637), [looks kinda yucky](https://modernweb.com/private-variables-in-javascript-with-es6-weakmaps/), or is [not-yet-fully-agreed-upon](https://github.com/tc39/proposal-private-methods)....
+>Anyways, I think that using closures instead of prefixed underscores is a viable option in some circumstances, but classes in particular (e.g. a "private" class methods) don’t really lend themself to such a solution, including ES5 classes. I mean you can, but it either doesn’t [involve prototype methods at all](https://stackoverflow.com/a/55637), [looks kinda yucky](https://modernweb.com/private-variables-in-javascript-with-es6-weakmaps/), or is [not-yet-fully-agreed-upon](https://github.com/tc39/proposal-private-methods)....
 
 >My feeling is that "underscore prefixing" is a reasonable convention for class methods. And if you’re going to break the "no-underscore prefixing" rule for classes, my feeling is you might as well not have the rule at all. That being said, a "better" (in my opinion) version of underscore prefixing is to [use symbols for private methods](http://2ality.com/2016/01/private-data-classes.html) (number four). It’s technically not private, but is difficult to accidentally access outside the class definition....
 

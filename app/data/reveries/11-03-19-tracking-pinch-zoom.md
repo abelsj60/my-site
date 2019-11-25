@@ -33,7 +33,7 @@ Zoom off
 
 iOS and Android do things differently, which causes trouble. 
 
-In this case, iOS updates window.pageXOffset and window.pageYOffset (conventionally known as the top left corner of hte screen) as users zoom (). But Android doesn't, (or at least, this is what I found while using BrowserStack for testing). If you glance at the code, you'll see I need them to decide about zoom. 
+In this case, iOS updates window.pageXOffset and window.pageYOffset (conventionally known as the top left corner of the screen) as users zoom (). But Android doesn't, (or at least, this is what I found while using BrowserStack for testing). If you glance at the code, you'll see I need them to decide about zoom. 
 
 The best I can say is that Apple and Google are big companies with really smart people, which means it's impossible to say either approach is right or wrong. 
 

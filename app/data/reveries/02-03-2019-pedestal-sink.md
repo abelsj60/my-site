@@ -18,5 +18,3 @@ It's got a wide, flat bottom. I'm sure I thought these things looked great in pi
 I know these things look great on Instagram, but they make lousy roommates.
 
 -j
-
-<!-- <iframe width="480" height="270" src="https://www.youtube.com/embed/XSpw22HPdHU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->

@@ -1,10 +1,10 @@
 ---
 number: 
-  3
+  2
 projectName: 
   'Arrow'
 pitch: 
-  'Personalizing interactive video at scale'
+  'Personalize interactive video at scale'
 type:
   'Founder'
 technologies: 

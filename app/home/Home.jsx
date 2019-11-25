@@ -157,9 +157,9 @@ export default class Home extends Component {
 
     if (this.sumLoadLevels(type) === target) {
       this.setState({ loadLevel: loadLevel + 1 }, () => {
-        // Update Apps state so the header can fade in the background-color
-        // Add it here, after setState, so timing will be consistent when 
-        // starting at home, and when navigating to it from w/n site.
+        // Update App's state so the Header can fade the Nav's background-color 
+        // into view. Do it here, after setState, so the timing is the same 
+        // when starting on home and navigating to it from w/n the site.
 
         if (this.state.loadLevel === 2) {
           this.props.boundHandleClickForApp('startDramaAtHome');
