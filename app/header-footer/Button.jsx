@@ -16,7 +16,7 @@ const Structure = styled.button`
   border: 1px rgba(255, 255, 255, .6) solid;
   box-shadow: ${p => p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) && '2px 2px 2.5px rgba(0, 0, 0, .3)'};
   // Note: Transitition timing is faster than its siblings w/hardware acceleration (.25s) and slower w/o it (.5s)
-  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'box-shadow .25s' : ''};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'box-shadow .23s' : ''};
   user-select: none;
   z-index: 0;
 
@@ -27,7 +27,7 @@ const Structure = styled.button`
 const Cover = styled.div`
   background-color: ${p => p.theme.colors.black};
   opacity: ${p => p.illustrationLevel >= 2 ? '.2' : '.125'}; // Multi-value?
-  transition: ${p => p.illustrationLevel > 0 && 'opacity .35s'};
+  transition: ${p => p.illustrationLevel > 0 && 'opacity .23s'};
   position: absolute;
   height: 100%;
   width: 100%;
@@ -63,6 +63,7 @@ export default function Button(props) {
       tempContent={tempContent}
     >
       <Cover
+        className={className}
         illustrationLevel={illustrationLevel}
       />
       <Text>

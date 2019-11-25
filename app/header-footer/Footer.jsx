@@ -38,7 +38,7 @@ const Line = styled.div`
   height: 1px;
   background-color: ${p => !p.isNotFound ? p.theme.colors.pink : p.theme.colors.white};
   opacity: ${p => p.isReverie || (p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1) ? '1' : '0'};
-  transition: ${p => p.illustrationLevel > 0  && p.illustrationLevel < 3 && 'opacity .35s'};
+  transition: ${p => p.illustrationLevel > 0  && p.illustrationLevel < 3 && 'opacity .3s'};
   
   @media (min-width: ${p => p.theme.mediaQueries.desktop}) {
     left: 5px;

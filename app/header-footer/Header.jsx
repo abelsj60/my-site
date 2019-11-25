@@ -48,7 +48,7 @@ const HeaderBackground = styled.div`
   // No background on home, translucent if menu is open when the storyIllustration is shown, otherwise dark pink
   background-color: ${p => p.isHome || (p.tempContent === 3 && p.illustrationLevel === 3) ? '' : p.theme.colors.darkPink};
   opacity: ${p => p.tempContent === 3 || p.isReverie || ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
-  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity .35s`};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity .33s`};
   z-index: -1;
 
   // This mediaQ ensures the background goes away if the full-screen menu
