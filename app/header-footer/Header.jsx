@@ -278,6 +278,7 @@ export default class Header extends Component {
     } = appState;
     const isHome = currentCaller === 'home';
     const isReverie = currentCaller === 'reverie';
+    const isStory = currentCaller === 'chapter'
     const menuIcon = tempContent === 3 ? headerNavClose : headerNavOpen;
     const coverVals = cover(window.innerWidth, height, images.width, images.height);
     const referrer = new Referrer(this.props);
@@ -299,6 +300,8 @@ export default class Header extends Component {
         />
         <NameAsLink
           boundHandleClickForApp={boundHandleClickForApp}
+          // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
+          className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           isHome={isHome}
@@ -342,8 +345,10 @@ export default class Header extends Component {
                       tempContent={tempContent}
                     >
                       <RestyledLink
-                        fullScreenMenu={true}
                         boundHandleClickForApp={boundHandleClickForApp}
+                        // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
+                        className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
+                        fullScreenMenu={true}
                         illustrationDirection={illustrationDirection}
                         illustrationLevel={illustrationLevel}
                         isActive={isActive}
@@ -369,6 +374,8 @@ export default class Header extends Component {
           </TimingBar>
         </Nav>
         <Icon
+          // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
+          className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           isHome={isHome}

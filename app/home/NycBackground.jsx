@@ -13,6 +13,7 @@ export default styled.img`
   pointer-events: none;
   opacity: ${p => p.inCity ? '1' : '0'};
   transform: ${p => p.inCity ? 'scale(1)' : 'scale(1.35)'};
+  transform-origin: 50% -5%;
   // Transition used for background swap. Opacity bezier curve should match that used by ForrestBackground.
   transition: transform 1.75s, opacity 1.35s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: ${p => !p.inCity && p.spellLevel < 5 ? '-2' : '0'};

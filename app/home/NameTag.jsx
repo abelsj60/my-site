@@ -195,6 +195,8 @@ export default function NameTag(props) {
         spacerHeight={spacerHeight}
       />
       <OuterContainer
+        // Works better w/o: ' hardware-accelerate-w-transform'
+        className={'hardware-accelerate'}
         heartbeat={heartbeat}
         nameTagWidth={nameTagWidth}
         onAnimationEnd={handleAnimationEndForHeartbeat}

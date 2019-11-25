@@ -198,6 +198,19 @@ const GlobalStyle = createGlobalStyle`
       margin-bottom: ${p => p.theme.bottomMargin.regular};
       line-height: 1.6;
     }
+
+    // Try to run animations on a separate thread, strategy warrants more investigation
+    // Don't add a transform to base class b/c some elements use transforms
+    .hardware-accelerate {
+      backface-visibility: hidden;
+      perspective: 1000;
+    }
+
+    // Try to run animations on a separate thread, strategy warrants more investigation
+    // Add a transform where the element doesn't alrady use one
+    .hardware-accelerate-w-transform {
+      transform: translateZ(0);
+    }
   }
 
   #app {

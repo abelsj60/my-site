@@ -139,6 +139,8 @@ export default function FooterContainer(props) {
         isReverie={isReverie}
       />
       <Button
+        // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
+        className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
         clickFunction={handleClickForStoryButton}
         illustrationDirection={illustrationDirection}
         illustrationLevel={illustrationLevel}
@@ -177,6 +179,8 @@ export default function FooterContainer(props) {
         >
           <Graf
             active={isReverie}
+              // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
+            className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
             home={isHome}
             illustrationLevel={illustrationLevel}
             illustrationDirection={illustrationDirection}
@@ -192,6 +196,8 @@ export default function FooterContainer(props) {
         </RestyledLink>
         <Graf
           active={tempContent === 1}
+            // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
+          className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
           home={isHome}
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
@@ -205,6 +211,8 @@ export default function FooterContainer(props) {
         </Graf>
         <Graf
           active={tempContent === 2}
+            // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
+          className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
           home={isHome}
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
