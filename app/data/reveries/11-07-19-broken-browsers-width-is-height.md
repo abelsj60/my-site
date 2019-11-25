@@ -5,7 +5,7 @@ date: November 7, 2019
 slug: Breaking pixel ratios in mobile
 ---
 
-Browsers [break a lot](https://www.jamesabels.net/reverie/adventures-in-the-resize-event).
+Like I've said, browsers break a lot.
 
 Here's an example from last night. I was rejiggering the [algorithm](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/helpers/preloadBigImages.js#L12) that preloads images. It wasn't working. 
 

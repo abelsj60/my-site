@@ -21,7 +21,7 @@ This triggers a Redirect component. It sends the user to a fictitious route call
 
 Catch that? Two Redirects, one after the other! 
 
-The good: The App component doesn’t have to track this content and the Header and Footer can make use of 'naked links' for navigation (e.g., www.jamesabels.net/chapter). 
+The good: The App component doesn’t have to track this content and the Header and Footer can make use of 'naked links' for navigation (e.g., /chapter as opposed to /chapter/a-magic-quest). 
 
 The bad: It’s harder to think about what React is doing at any given time. The fictitious '/i' route can make things hard-to-understand because of all the re-rendering.
 

@@ -1,5 +1,5 @@
 import Main from '../primitives/Main.jsx';
-import marked from 'marked';
+import myMarkedRenderer from '../helpers/myMarkedRenderer.js';
 import MenuButton from '../shared/MenuButton.jsx';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
@@ -109,7 +109,7 @@ export default function ArticleOrReverie(props) {
             {bylineOrDate}
           </BylineOrDate>
           <Text>
-            {ReactHtmlParser(marked(body, { smartypants: true }))}
+            {ReactHtmlParser(myMarkedRenderer(body, { smartypants: true }))}
           </Text>
         </Overflow>
       </ContentHolder>
