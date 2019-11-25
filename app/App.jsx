@@ -201,6 +201,7 @@ const GlobalStyle = createGlobalStyle`
 
     // Try to run animations on a separate thread, strategy warrants more investigation
     // Don't add a transform to base class b/c some elements use transforms
+    // https://blog.teamtreehouse.com/increase-your-sites-performance-with-hardware-accelerated-css
     .hardware-accelerate {
       backface-visibility: hidden;
       perspective: 1000;

@@ -112,14 +112,17 @@ const FallbackBlur = styled.img`
   // at 0, set to 1 by handleLoadForBlurredImage(). Set to 2 by 
   // handleTransitionEndForFallbackBlur().
   // Let's not remove the blurred fallback until we KNOW the main illustration is 
-  // in. Sometimes, the main illustration comes in before the BlurredImage, so 
-  // is awkwardly visible. Here's the state: 
+  // in. Here's the state: 
   //    a) < 0 --> not loaded
   //    b) > 0 --> loaded
   //    c) 0 --> n/a
-  // Always show when blurredImage isn't loaded or when mainImage isn't loaded.
+  // Always show when blurredImage isn't loaded, mainImage isn't loaded, or the network is lost.
+  // Note: Parenthetical required based on visual observation!
   opacity: ${p => (p.imageLoaded < 1 || p.illustrationState < 0) ? '1' : '0'};
-  transition: opacity .5s;
+  // This next is very persnickety! We only want the transition to run when the main images
+  // are ready. So, don't transition on p.imageLoaded < 0 or p.illustrationState < 0!
+  // Note: Parenthetical required based on visual observation!
+  transition: ${p => (p.imageLoaded > 0 || p.illustrationState > 0) && 'opacity .5s'};
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
@@ -188,6 +191,8 @@ export default function Story(props) {
   const dek = 'An experiment in digital + traditional storytelling';
   const bigImageSrc = images[`chapter-${number}-main`].src;
   const blurredImageSrc = images[`chapter-${number}-blurred`].src;
+  const blurredImageDescription = "This illustration depicts a blurred version of this chapter's full-page illustration, which lives one layer below it. This image obscures the main image so people can easily read this chapter's text."
+  const fallbackImageDescription = "Fallback version of the blurred depiction of this chapter's full-page illustration, which lives one layer below it. This image obscures the blurred and main illustrations when they aren't loaded."
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
     if (imageLoaded < 1) {
@@ -275,7 +280,7 @@ export default function Story(props) {
           imageLoaded={imageLoaded}
         />
         <FallbackBlur // z-index: -1
-          alt="blurred fallback"
+          alt={fallbackImageDescription}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           illustrationState={illustrationState}
@@ -285,7 +290,7 @@ export default function Story(props) {
           tempContent={tempContent}
         />
         <BlurredImage // z-index: -2
-          alt={description}
+          alt={blurredImageDescription}
           imageLoaded={imageLoaded}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}

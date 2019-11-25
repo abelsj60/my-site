@@ -189,7 +189,6 @@ export default class ClickHandling {
           action = 'Updated spacer height for /home';
           break;
         case 'updateNameTagWidth':
-          console.log('updateNameTagWidth');
           stateToUpdate.nameTagWidth = this.calculateNameTagWidth();
           category = 'App state';
           action = 'Updated name tag width for /home';
@@ -350,13 +349,16 @@ export default class ClickHandling {
           break;
         case 'updateState':
           if (caller === 'chapter') {
-            const blurredIllustrationState = this.props.appState.images[
+            const isComplete = this.props.appState.images[
               `chapter-${valueOne + 1}-blurred`
-            ].complete
-              ? 2
-              : 0;
+            ].complete;
             stateToUpdate.chapterIndex = valueOne;
-            stateToUpdate.imageLoaded = blurredIllustrationState;
+            // navigator.onLine catches offline status in most, not all, browsers
+            // https://caniuse.com/#search=navigator.online
+            // May replace by using 'offline' event to add a property to appState
+            // or by moving to service workers... Food for thought.
+            // See also use in State.
+            stateToUpdate.imageLoaded = isComplete && navigator.onLine ? 2 : 0;
           }
 
           if (caller === 'projects') {

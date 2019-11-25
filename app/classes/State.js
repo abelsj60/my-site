@@ -90,7 +90,14 @@ export default class State {
         `chapter-${chapterIndex + 1}-main`
       ].complete;
 
-    return !isComplete
+    // console.log('isComplete:', isComplete, 'and online?', navigator.onLine);
+
+    // navigator.onLine catches offline status in most, not all, browsers
+    // https://caniuse.com/#search=navigator.online
+    // May replace by using 'offline' event to add a property to appState
+    // or by moving to service workers... Food for thought.
+    // See also use in ClickHandling.
+    return (!isComplete || !navigator.onLine)
       ? (chapterIndex + 1) * -1
       : chapterIndex + 1
   }
@@ -98,8 +105,10 @@ export default class State {
   checkIllustrationState(images) {
     if (!!images) {
       // Can only be called if /chapter...
+      // Runs when initial loads includes /chapter
       return this._illustrationState(images);
     } else {
+      // Runs when swapping content w/n chapter
       const { currentCaller, images } = this._props.appState;
 
       if (currentCaller === 'chapter') {
