@@ -28,7 +28,6 @@ import preloadBigImages from './helpers/preloadBigImages';
 import React, { Fragment, Component } from 'react';
 import ReactGA from 'react-ga';
 import Referrer from './classes/Referrer.js';
-import ScrollHandling from './classes/ScrollHandling.js';
 import State from './classes/State.js';
 import { withRouter } from 'react-router';
 

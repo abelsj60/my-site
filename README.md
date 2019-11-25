@@ -1,6 +1,6 @@
 # jamesabels.net
 
-![cover image](cover-img.png)
+![cover image](https://repository-images.githubusercontent.com/130377112/2ac81e80-0fa5-11ea-8dab-10ed42a26db4)
 
 ## About
 
