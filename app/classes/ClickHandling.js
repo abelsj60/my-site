@@ -55,7 +55,6 @@ export default class ClickHandling {
         illustrationDelay,
         illustrationDirection,
         illustrationLevel,
-        illustrationState,
         heartbeat,
         showBusinessCard,
         showLegalTerms,
@@ -91,20 +90,6 @@ export default class ClickHandling {
             stateToUpdate.tempContent = 0;
           } else {
             stateToUpdate.tempContent = valueOne;
-          }
-          if (tempContent < 3 && valueOne === 3) {
-            // Disable setTimeout to suspend auto-close
-            this.headerMenuTimeoutId = setTimeout(() => {
-              this.setState({ tempContent: 0 },
-                () => {
-                  // Reset timeout after timeout successfully runs
-                  this.headerMenuTimeoutId = undefined;
-                });
-            }, 8000);
-          } else {
-            // Clear timeout if closing via the icon (img))
-            clearTimeout(this.headerMenuTimeoutId);
-            this.headerMenuTimeoutId = undefined;
           }
           category = 'App state';
           action = (tempContent - valueOne) === 0
@@ -354,12 +339,7 @@ export default class ClickHandling {
               `chapter-${valueOne + 1}-blurred`
             ].complete;
             stateToUpdate.chapterIndex = valueOne;
-            // navigator.onLine catches offline status in most, not all, browsers
-            // https://caniuse.com/#search=navigator.online
-            // May replace by using 'offline' event to add a property to appState
-            // or by moving to service workers... Food for thought.
-            // See also use in State.
-            stateToUpdate.imageLoaded = isComplete && navigator.onLine ? 2 : 0;
+            stateToUpdate.imageLoaded = isComplete && this.props.appState.offline ? 2 : 0;
           }
 
           if (caller === 'projects') {

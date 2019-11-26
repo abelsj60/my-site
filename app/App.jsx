@@ -23,6 +23,7 @@ import {
 import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import objectFitImages from 'object-fit-images';
+import OfflineWarning from './shared/OfflineWarning.jsx';
 import PasswordLogin from './shared/PasswordLogin.jsx';
 import preloadBigImages from './helpers/preloadBigImages';
 import React, { Fragment, Component } from 'react';
@@ -255,7 +256,6 @@ class App extends Component {
       Note: Check document.documentElement.clientHeight b/c it's accurate at resize for both Android & iOS.
     */
     this.minAllowedHeight = 324; // Narrow iPhones are 320px in width, larger ones are >= 325px
-    this.headerMenuTimeoutId = undefined;
     // Show the heartbeat if the last date isn't located in storage
     // If it is in storage, we'll check the time elapsed since it ran
     let firstHeartbeat = typeof localStorage.lastHeartbeat === 'undefined';
@@ -304,6 +304,7 @@ class App extends Component {
       isValidUser: false, // to be removed
       lastCaller: '',
       nameTagWidth: this.calculateNameTagWidth(this.images), // Orig. dimensions: 1349 / 5115
+      offline: false,
       password: '', // to be removed
       spacerHeight: this.calculateSpacerHeight(this.images), // Set by 'handleResize', so must live here. Used by Home/NameTag.
       startDramaAtHome: false, // Allows us to coordinate <Header /> w/home-page theatrics
@@ -317,6 +318,7 @@ class App extends Component {
     this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
     this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
     this.handleResize = this.handleResize.bind(this);
+    this.updateNetworkStatus = this.updateNetworkStatus.bind(this);
     this.toggleHtmlElementHeight = this.toggleHtmlElementHeight.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
@@ -371,6 +373,10 @@ class App extends Component {
             {...this.props}
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
+          />
+          <OfflineWarning 
+            {...this.props}
+            appState={this.state}
           />
           <Footer
             {...this.props}
@@ -572,6 +578,10 @@ class App extends Component {
     }
   }
 
+  updateNetworkStatus() {
+    this.setState({ offline: !this.state.offline })
+  }
+
   // Only called by handleResize, which rejects if newHeight === height.
 
   updateSpacerHeight() {
@@ -596,6 +606,8 @@ class App extends Component {
     }
 
     // Runs after React's handlers: https://fortes.com/2018/react-and-dom-events/\
+    window.addEventListener('offline', this.updateNetworkStatus);
+    window.addEventListener('online', this.updateNetworkStatus);
     window.addEventListener('resize', this.handleResize);
     window.addEventListener('popstate', this.handleBackAndForth);
   }
@@ -613,6 +625,8 @@ class App extends Component {
 
   componentWillUnmount() {
     // This should never be called, here as good practice.
+    window.removeEventListener('offline', this.updateNetworkStatus);
+    window.removeEventListener('online', this.updateNetworkStatus);
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('popstate', this.handleBackAndForth);
   }

@@ -44,7 +44,7 @@ export default class ContentLoader extends Component {
           props.appState.type === 'mobile' 
             // Is < 0 if !.complete, or if we're offline. This allows the mobile device
             // to reveal it after onLoad fires via handleLoadForMainImage().
-            || (!props.appState.images[`chapter-${number}-main`].complete || !navigator.onLine)
+            || (!props.appState.images[`chapter-${number}-main`].complete || props.appState.offline)
         ) ? number * -1 : number
       );
     } else if (location.caller === 'projects') {

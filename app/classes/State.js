@@ -86,16 +86,9 @@ export default class State {
   _illustrationState(images) {
     const chapterIndex = this._convertParamsToIndices().one;
     const chapterNumber = chapterIndex + 1;
-    const isComplete = images[
-      `chapter-${chapterNumber}-main`
-    ].complete;
+    const isComplete = images[`chapter-${chapterNumber}-main`].complete;
 
-    // navigator.onLine catches offline status in most, not all, browsers
-    // https://caniuse.com/#search=navigator.online
-    // May replace by using 'offline' event to add a property to appState
-    // or by moving to service workers... Food for thought.
-    // See also use in ClickHandling.
-    return (!isComplete || !navigator.onLine)
+    return (!isComplete || this._props.appState.offline)
       ? chapterNumber * -1
       : chapterNumber
   }

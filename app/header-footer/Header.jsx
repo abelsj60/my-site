@@ -152,7 +152,7 @@ const Nav = styled.nav`
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '6px 12px'};
   // Don't show background-color box when business card or legal terms are on, but do show it immediately if we're offline!
-  background-color: ${p => (p.isHome && p.tempContent < 1 && !navigator.onLine) || (p.isHome && p.startDramaAtHome && p.tempContent < 1) ? 'rgba(0, 0, 0, .125)' : ''};
+  background-color: ${p => (p.isHome && p.tempContent < 1 && p.offline) || (p.isHome && p.startDramaAtHome && p.tempContent < 1) ? 'rgba(0, 0, 0, .125)' : ''};
   ${p => !p.homePageLoaded && 'will-change: background-color;'}
   ${p => !p.homePageLoaded && 'transition: background-color .7s ease-in-out;'}
   // Prevent occasional over-expansion
@@ -232,19 +232,19 @@ const Icon = styled.img`
 // On-screen timer for open header menu
 const timerKeyframes = keyframes`
   0% {
-    transform: scaleX(-1);
+    transform: scaleX(1);
   }
 
   100% {
-    transform: scaleX(0);
+    transform: scaleX(-1);
   }
 `;
 const TimingBar = styled.div`
   // Timer stays accurate if it runs outside of media query (parent query handles visibility)
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
   position: fixed;
-  // Not testing for p.isStory. Shouldn't matter...
-  top: ${p => p.illustrationLevel === 3 ? '0px' : '52px'};
+  background-color: ${p => p.theme.colors.yellow};
+  top: 52px;
   left: 0px;
   height: 1px;
   width: 100%;
@@ -255,9 +255,8 @@ const Timer = styled.div`
   width: 100%;
   height: 100%;
   will-change: transform;
-  background-color: ${p => p.theme.colors.yellow};
-  // Give it two/tenths of a second more to keep pace with setTimeout (see ClickHandling)
-  animation: ${css`8.2s ${timerKeyframes} 1`};
+  background-color: ${p => p.theme.colors.pink};
+  animation: ${css`5s ${timerKeyframes} 1`};
 `;
 
 export default class Header extends Component {
@@ -273,6 +272,7 @@ export default class Header extends Component {
       illustrationDirection,
       illustrationLevel,
       images,
+      offline,
       startDramaAtHome,
       tempContent
     } = appState;
@@ -282,10 +282,12 @@ export default class Header extends Component {
     const menuIcon = tempContent === 3 ? headerNavClose : headerNavOpen;
     const coverVals = cover(window.innerWidth, height, images.width, images.height);
     const referrer = new Referrer(this.props);
-    const handleClickForMenuLink = event => {
+    const handleHeaderMenu = event => {
       eventManagement(event);
       boundHandleClickForApp('updateTempContent', 3);
     };
+    const handleClickForMenuLink = event => handleHeaderMenu(event);
+    const handleAnimationEndForTimer = event => handleHeaderMenu(event);
 
     return (
       <Container
@@ -326,6 +328,7 @@ export default class Header extends Component {
           coverValY={coverVals.y < 0} // Add frost to text
           homePageLoaded={homePageLoaded}
           isHome={isHome}
+          offline={offline}
           startDramaAtHome={startDramaAtHome}
           tempContent={tempContent}
         >
@@ -368,7 +371,9 @@ export default class Header extends Component {
             illustrationLevel={illustrationLevel}
             tempContent={tempContent}
           >
-            <Timer />
+            <Timer
+              onAnimationEnd={handleAnimationEndForTimer}
+            />
           </TimingBar>
         </Nav>
         <Icon

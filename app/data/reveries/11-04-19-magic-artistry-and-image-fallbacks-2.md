@@ -27,7 +27,7 @@ Now here's the magic.
 
 Each time an element of the array changes, I run an [updateLoadLevel](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/home/Home.jsx#L281) function. It sums different sets of values within the array to decide where we are in the loading process. As certain milestones are hit, the loadLevel on state is incremented from 0 to 1 to 2 to 3 (on initial load). The changes to loadLevel are managed on state because they trigger on-screen changes in the app.
 
-Bonus points: I use navigator.onLine in the Fallback to check for a network connection. If it's false, I show the Fallback, no matter the load level.
+Bonus points: I use the browser's online/offline events to check for a network connection. The value's stored on App state. If 'offline' is false, I show the Fallback, no matter the load level.
 
 Abracadabra...
 

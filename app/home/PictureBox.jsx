@@ -30,7 +30,7 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   will-change: opacity;
-  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && !navigator.onLine) || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
+  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && p.offline) || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   transition: opacity ${p => !p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'};
   z-index: 5;
 `;
@@ -44,7 +44,7 @@ const FallbackImage = styled.img`
   height: 100%;
   width: 100%;
   will-change: opacity;
-  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && !navigator.onLine) || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
+  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && p.offline) || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   transition: opacity ${p => !p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'};
   z-index: 4;
 `;
@@ -72,6 +72,7 @@ export default function PictureBox(props) {
     homePageLoaded,
     images,
     inCity,
+    offline,
     type
   } = appState;
   const {
@@ -144,6 +145,7 @@ export default function PictureBox(props) {
         homePageLoaded={homePageLoaded}
         isMobile={type === 'mobile'} // See Styled Component note
         loadLevel={loadLevel}
+        offline={offline}
       />
       <FallbackImage 
         alt={altTextForFallback}
@@ -151,6 +153,7 @@ export default function PictureBox(props) {
         homePageLoaded={homePageLoaded}
         isMobile={type === 'mobile'} // See Styled Component note
         loadLevel={loadLevel}
+        offline={offline}
         onLoad={handleLoadForFallback}
         onTransitionEnd={handleTransitionEndForFallback}
       />
