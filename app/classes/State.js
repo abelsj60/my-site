@@ -63,34 +63,32 @@ export default class State {
     return indices.one !== -1 && indices.two !== -1;
   }
 
-  rebuildBody(setState) {
+  rebuildBody(updateReactState) {
     const indices = this._convertParamsToIndices();
 
     // Only -1 if explicitly set by a params method
     if (this._indicesAreGreaterThanOrEqualToZero(indices)) {
-      setState(indices.one, indices.two);
+      updateReactState(indices.one, indices.two);
     }
   }
 
-  rebuildContentLoader(setState) {
+  rebuildContentLoader(updateReactState) {
     const indices = this._convertParamsToIndices();
 
     // Only -1 if explicitly set by a params method
     if (this._indicesAreGreaterThanOrEqualToZero(indices)) {
-      setState('updateState', indices.one, indices.two);
+      updateReactState('updateState', indices.one, indices.two);
     }
   }
 
+  // Should ONLY be called when page is /chapter. If anything else calls it,
+  // we'll get an error on this._convertParamsToIndices().one...
   _illustrationState(images) {
-    const chapterIndex = this._convertParamsToIndices().one > -1
-      ? this._convertParamsToIndices().one
-      : 0;
-    const isComplete =
-      images[
-        `chapter-${chapterIndex + 1}-main`
-      ].complete;
-
-    // console.log('isComplete:', isComplete, 'and online?', navigator.onLine);
+    const chapterIndex = this._convertParamsToIndices().one;
+    const chapterNumber = chapterIndex + 1;
+    const isComplete = images[
+      `chapter-${chapterNumber}-main`
+    ].complete;
 
     // navigator.onLine catches offline status in most, not all, browsers
     // https://caniuse.com/#search=navigator.online
@@ -98,29 +96,25 @@ export default class State {
     // or by moving to service workers... Food for thought.
     // See also use in ClickHandling.
     return (!isComplete || !navigator.onLine)
-      ? (chapterIndex + 1) * -1
-      : chapterIndex + 1
+      ? chapterNumber * -1
+      : chapterNumber
   }
 
   checkIllustrationState(images) {
     if (!!images) {
-      // Can only be called if /chapter...
-      // Runs when initial loads includes /chapter
+      // Only runs when we're loading the site on a /chapter page.
+      // Passes images b/c we're calling from App's constructor.
       return this._illustrationState(images);
     } else {
-      // Runs when swapping content w/n chapter
-      const { currentCaller, images } = this._props.appState;
-
-      if (currentCaller === 'chapter') {
-        return this._illustrationState(images);
+      if (this._props.appState.currentCaller === 'chapter') {
+        // Runs when swapping content w/n chapter via ContentLoader
+        return this._illustrationState(this._props.appState.images);
       }
-
-      return 0;
     }
   }
 
-  resetIllustrationState(setState) {
-    setState('updateIllustrationState', this.checkIllustrationState());
+  resetIllustrationState(updateReactState) {
+    updateReactState('updateIllustrationState', this.checkIllustrationState());
   }
 
   // Returns: { one: val, two: val }

@@ -109,6 +109,36 @@ export default function FooterContainer(props) {
     boundHandleClickForApp('updateTempContent', 2);
   };
   const handleClickForStoryButton = event => {
+    /* Alternate approach:
+
+      The button currently reacts to App's existing illustrationState. 
+        -Location swaps are updated by ReloadRoute
+          -Via boundHandleClickForApp('updateIllustrationState')
+        -Location swaps are also handled by ClickHandling
+          Via 'updateApp' calls on CustomLink
+        -Content swaps are updated by ContentLoader.cDU
+          -Via boundHandleClickForApp('updateIllustrationState')
+        -And boundHandleClickForApp('updateApp')
+
+      See the problem? We're updating illustrationState twice in a row. Once
+      via 'updateApp' and once via ReloadRoute. It's not pretty...
+
+      Future alternatives:
+        1. Consolidate into updateApp b/c ReloadRoute really shouldn't be
+          doing state updates...
+          -What's complicated here is sorting out the different calls:
+            a. /chapter --> /reverie
+            b. /reverie --> /chapter
+            c. everything else...
+        2. Check the illustrations state here in the button, update it via
+          setState, then calling 'toggleStoryText' by using setState's
+          callback (param two).
+            -One benefit to the second approach is checking status closer
+            to the action, which might do a better job of accounting for
+            a lost network (as long was we use navigator.onLine rather
+            than a 'offline' event.
+    */
+
     eventManagement(event);
 
     if (illustrationState < 0) {

@@ -159,8 +159,12 @@ export default class ClickHandling {
             : 'enter';
           break;
         case 'updateIllustrationState':
-          stateToUpdate.illustrationState = valueOne;
+          if (typeof valueOne !== 'undefined') {
+            stateToUpdate.illustrationState = valueOne;
+          }
 
+          // valueTwo is positive when we automatically toggle text b/c
+          // the illustrationDelay is on...
           if (valueTwo) {
             toggleStoryTextSequence();
           }
@@ -259,28 +263,31 @@ export default class ClickHandling {
             stateToUpdate.illustrationDelay = !illustrationDelay;
           }
 
-          // We'll always hide the illustration when switching sections,
-          // but not if going to, leaving, or changing the /reverie.
+          /* If not going between /chapter and /reverie:
+
+            If we're going ANYWHERE from /chapter other than /reverie, or if 
+            we're going ANYWHERE from /reverie other than /chapter, we need
+            to reset our illustration properties on App state.
+
+              1. We should ALWAYS update the illustrationState to 0 so we can assess 
+                what's going on next time we navigate to chapter.
+              2. We should reset the illustrationLevel to 0.
+              3. We don't need to reset illustrationDirection to 'enter' b/c it isn't
+                updated until the user clikcs the 'Text on' button (this may be a 
+                design flaw, but it is what it is right now...).
+          */
 
           if (
-            (currentCaller === 'chapter' && valueOne !== 'reverie')
+            (currentCaller === 'chapter' && valueOne !== 'reverie') 
               || (currentCaller === 'reverie' && (valueOne !== 'chapter' && valueOne !== undefined))
           ) {
+            stateToUpdate.illustrationState = 0;
+
             if (illustrationLevel > 0) {
-              if (illustrationDirection !== 'enter') {
-                stateToUpdate.illustrationDirection = 'enter';
-              }
-
               stateToUpdate.illustrationLevel = 0;
-            }
-
-            if (illustrationState !== 0) {
-              stateToUpdate.illustrationState = 0;
             }
           }
 
-          category = 'App state';
-          action = 'Reset app';
           break;
         default:
           break;
