@@ -23,29 +23,16 @@ export default class ContentLoader extends Component {
   constructor(props) {
     super(props);
 
-    /* isMenu v. isMenu
-
-      DO NOT USE props.currentCaller or props.isMenu to avoid problems
-      w/BACK/FORWARD. Both are out-of-date b/c the eventListener for
-      BACK/FORWARD runs AFTER ContentLoader runs. 
-    */
-
     const referrer = new Referrer(props);
     const location = new Location(referrer.pathToMatch, props);
     const state = new State(props, location);
     const content = new Content(location.caller);
     const allContentData = content.getContentData();
-
-    this.overflowRef =
-      location.caller === 'chapter'
-        ? React.createRef()
-        : {}; // Prevents errors
-
-    // The clip list is one-dimensional, so we don't sort by publication. 
-    // Instead, publication will show the first matching index item when 
-    // needed as a default. 
-
     let imageLoaded = -1;
+
+    this.overflowRef = location.caller === 'chapter'
+      ? React.createRef()
+      : {}; // Prevents errors
 
     if (location.caller === 'chapter') {
       const number = state.getIndex('chapter') + 1;
