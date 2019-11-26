@@ -26,7 +26,7 @@ This site was built around the idea of "theatrical Web design."
 
 Timed animation sequences are used to add drama to the entry, exit, and use of major creative elements.  
 
-As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L295) is larger than expected so functionally unrelated child Components (i.e., siblings) can track and participate in animation sequences. A future move to React Hooks or Redux might condense this code.
+As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/c53a0c70ec6a084ec9727f4df0301fa825c8e28e/app/App.jsx#L286) is larger than expected so functionally unrelated child Components (i.e., siblings) can track and participate in animation sequences. A future move to React Hooks or Redux might condense this code.
 
 ##### ∙ Compression stepping
 
@@ -48,7 +48,7 @@ The name and bio on the home page pulse on the site's initial load.
 
 While a nice, dramatic effect once, this animation grows tiresome over multiple loads. 
 
-As a result, the animation only runs on initial load or if the user hasn't visited for more than two weeks. This is achieved by storing a time stamp in the user's browser, i.e., in localStorage for the site's domain. The starting point as to how is [here](https://github.com/abelsj60/jamesabels.net/blob/master/app/App.jsx#L242).
+As a result, the animation only runs on initial load or if the user hasn't visited for more than two weeks. This is achieved by storing a time stamp in the user's browser, i.e., in localStorage for the site's domain. The starting point as to how is [here](https://github.com/abelsj60/jamesabels.net/blob/c53a0c70ec6a084ec9727f4df0301fa825c8e28e/app/App.jsx#L268).
 
 ---
 
