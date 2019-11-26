@@ -335,35 +335,33 @@ export default class Header extends Component {
           >
             <Mapper
               mapData={headerLinks}
-              render={
-                (link, idx) => {
-                  const isActive = link.path.includes(referrer.location);
+              render={(link, idx) => {
+                const isActive = link.path.includes(referrer.location);
 
-                  return (
-                    <NavItem
-                      key={idx}
+                return (
+                  <NavItem
+                    key={idx}
+                    tempContent={tempContent}
+                  >
+                    <RestyledLink
+                      boundHandleClickForApp={boundHandleClickForApp}
+                      // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
+                      className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
+                      fullScreenMenu={true}
+                      illustrationDirection={illustrationDirection}
+                      illustrationLevel={illustrationLevel}
+                      isActive={isActive}
+                      isHome={isHome}
+                      isReverie={isReverie}
+                      num={idx}
                       tempContent={tempContent}
+                      to={link.path}
                     >
-                      <RestyledLink
-                        boundHandleClickForApp={boundHandleClickForApp}
-                        // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
-                        className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
-                        fullScreenMenu={true}
-                        illustrationDirection={illustrationDirection}
-                        illustrationLevel={illustrationLevel}
-                        isActive={isActive}
-                        isHome={isHome}
-                        isReverie={isReverie}
-                        num={idx}
-                        tempContent={tempContent}
-                        to={link.path}
-                      >
-                        {link.name}
-                      </RestyledLink>
-                    </NavItem>
-                  );
-                }
-              }
+                      {link.name}
+                    </RestyledLink>
+                  </NavItem>
+                );
+              }}
             />
           </NavList>
           <TimingBar

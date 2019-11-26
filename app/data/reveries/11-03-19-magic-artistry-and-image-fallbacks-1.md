@@ -24,9 +24,11 @@ Each chapter contains three separate images (bottom to top):
 2. Middle layer: A blurred version of the main illustration
 3. Top layer: A more highly blurred version of the main illustration
 
-This is how it works — pages that require a lot of data, such as Story, are loaded by the ContentLoader. It tracks the state of an image via its own state. This allows me to keep watch over the status of the blurredImage. If it isn’t loaded, the fallback image — which lives inside the site as a Data URI — is shown. 
+This is how it works — pages that require a lot of data, such as Story, are loaded by the ContentLoader. It tracks the state of an image via its own state. This allows me to keep watch over the status of the blurredImage. If it isn’t loaded, the Fallback image — which lives inside the site as a Data URI — is shown. 
 
-Fun fact: The fallback is almost always shown when switching site sections on mobile devices, but almost never shown when switching between them on desktops and laptops. Mobile’s weird.
+Fun fact: The Fallback is always shown when navigating internally on mobile devices, but almost never when  navigating on desktops and laptops. 
+
+Why? I can't get the browser to acknowledge that the illustration is already loaded when internally navigating on iOS. So, I cut bait and always show the Fallback first. 
 
 *2. Story illustrations when the main illustration hasn’t loaded yet.*
 

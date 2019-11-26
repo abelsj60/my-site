@@ -21,11 +21,13 @@ I added a property to the Home component’s "this" value named loadLevel. It ho
 
 Indices start at 0. [They're incremented](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/home/Home.jsx#L163) as they load, and in some cases, when thier opacity finishes transitioning (via onTransitionEnd). 
 
-I added the array to 'this', not state, because I didn't want to change the on-screen state of the app every time an individual image loads or transitions. I've found that running setState during CSS transitions can be problematic. Sometimes it breaks things (event in React 16+ w/Fibre), so I wanted to minimize this.
+I added the array to "this", not state, because I didn't want to change the on-screen state of the app every time an individual image loads or transitions. I've found that running setState during CSS transitions can be problematic. Sometimes it breaks things (event in React 16+ w/Fibre), so I wanted to minimize this.
 
 Now here's the magic. 
 
 Each time an element of the array changes, I run an [updateLoadLevel](https://github.com/abelsj60/jamesabels.net/blob/54f0b67ad19c3c36da105a58775b79cab209e41e/app/home/Home.jsx#L281) function. It sums different sets of values within the array to decide where we are in the loading process. As certain milestones are hit, the loadLevel on state is incremented from 0 to 1 to 2 to 3 (on initial load). The changes to loadLevel are managed on state because they trigger on-screen changes in the app.
+
+Bonus points: I use navigator.onLine in the Fallback to check for a network connection. If it's false, I show the Fallback, no matter the load level.
 
 Abracadabra...
 

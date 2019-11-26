@@ -380,7 +380,9 @@ export default class Home extends Component {
       );
     }
 
-    // Start the heartbeat and update homePageLoaded
+    // Start the heartbeat and update homePageLoaded.
+    // Future idea: homePageLoaded should really be updated via its own property before
+    // the heartbeat starts, but implementing this is a real hassle right now.
     if (!this.props.appState.homePageLoaded) {
       if (this.state.loadLevel === 3) {
         this.props.boundHandleClickForApp('updateHeartbeat');

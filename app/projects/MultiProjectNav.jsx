@@ -28,33 +28,31 @@ export default function DesktopProjectNav(props) {
     <RestyledList>
       <Mapper
         mapData={allContentData}
-        render={
-          (mappedProject, idx) => {
-            const {
-              pitch,
-              projectName,
-              type
-            } = mappedProject.attributes;
+        render={(mappedProject, idx) => {
+          const {
+            pitch,
+            projectName,
+            type
+          } = mappedProject.attributes;
 
-            return (
-              <li
-                key={idx}
-              >
-                <Type>
-                  {type}
-                </Type>
-                <Graf>
-                  {`${projectName} | ${pitch}`}
-                </Graf>
-                <ProjectNav
-                  {...props}
-                  mappedProject={mappedProject}
-                  mappedProjectIndex={idx}
-                />
-              </li>
-            );
-          }
-        }
+          return (
+            <li
+              key={idx}
+            >
+              <Type>
+                {type}
+              </Type>
+              <Graf>
+                {`${projectName} | ${pitch}`}
+              </Graf>
+              <ProjectNav
+                {...props}
+                mappedProject={mappedProject}
+                mappedProjectIndex={idx}
+              />
+            </li>
+          );
+        }}
       />
     </RestyledList>
   );

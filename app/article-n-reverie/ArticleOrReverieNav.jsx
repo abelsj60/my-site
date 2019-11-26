@@ -47,45 +47,43 @@ export default function ArticleOrReverieNav(props) {
     <UnorderedList>
       <Mapper
         mapData={allContentData}
-        render={
-          (articleOrReverie, idx) => {
-            const {
-              date,
-              headline,
-              publication
-            } = articleOrReverie.attributes;
-            const hedFromItem = normalize(headline);
-            const dateOrPublicationFromItem = !isReverie ? publication : date;
-            const linkIsActive = currentHed === hedFromItem;
-            const articleLink = isReverie
-                ? `/reverie/${hedFromItem}`
-                : `/journalism/${normalize(
-                    dateOrPublicationFromItem
-                  )}/${hedFromItem}`;
+        render={(articleOrReverie, idx) => {
+          const {
+            date,
+            headline,
+            publication
+          } = articleOrReverie.attributes;
+          const hedFromItem = normalize(headline);
+          const dateOrPublicationFromItem = !isReverie ? publication : date;
+          const linkIsActive = currentHed === hedFromItem;
+          const articleLink = isReverie
+              ? `/reverie/${hedFromItem}`
+              : `/journalism/${normalize(
+                  dateOrPublicationFromItem
+                )}/${hedFromItem}`;
 
-            return (
-              <li
-                key={idx}
+          return (
+            <li
+              key={idx}
+            >
+              <StyledLink
+                boundHandleClickForApp={boundHandleClickForApp}
+                to={articleLink}
               >
-                <StyledLink
-                  boundHandleClickForApp={boundHandleClickForApp}
-                  to={articleLink}
+                <NavigationDek
+                  link={linkIsActive}
                 >
-                  <NavigationDek
-                    link={linkIsActive}
-                  >
-                    {dateOrPublicationFromItem}
-                  </NavigationDek>
-                  <NavigationHed
-                    link={linkIsActive}
-                  >
-                    {headline}
-                  </NavigationHed>
-                </StyledLink>
-              </li>
-            );
-          }
-        }
+                  {dateOrPublicationFromItem}
+                </NavigationDek>
+                <NavigationHed
+                  link={linkIsActive}
+                >
+                  {headline}
+                </NavigationHed>
+              </StyledLink>
+            </li>
+          );
+        }}
       />
     </UnorderedList>
   );

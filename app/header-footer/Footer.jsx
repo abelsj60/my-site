@@ -119,10 +119,9 @@ export default function FooterContainer(props) {
 
       Future alternatives:
         Check the illustration's state here, call setState to update it, 
-        then call 'toggleStoryText' by via its callback (param two).
-          -One benefit is that we'd be checking the status closer to the
-          action, which would let us better account for a lost network
-          (if we use navigator.onLine, not an 'offline' event).
+        then call 'toggleStoryText' via its callback (param two).
+          -One detriment is that we'd stop updating the state of illustrationLevel
+            when internally navigating.
     */
 
     eventManagement(event);

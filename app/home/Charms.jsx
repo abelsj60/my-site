@@ -259,44 +259,43 @@ export default function Charms(props) {
         <CharmBox>
           <Mapper
             mapData={['one', 'two', 'three']}
-            render={
-              (_, idx) => {
-                const isActive = activeCharm === idx + 1;
-                return (
-                  <Charm
+            render={(_, idx) => {
+              const isActive = activeCharm === idx + 1;
+              return (
+                <Charm
+                  // ' hardware-accelerate-w-transform' breaks functionality
+                  className={'hardware-accelerate'}
+                  enter={movement === 'enter'}
+                  exit={movement === 'exit'}
+                  isActive={isActive}
+                  isReady={isReady}
+                  key={idx}
+                  ref={charmRefs[idx]} // Add a ref to each Charm when mounted
+                  spellLevel={spellLevel}
+                >
+                  <CharmShadow
+                    isActive={isActive}
+                    isReady={isReady}
+                    spellLevel={spellLevel}
+                  />
+                  <Eye
                     // ' hardware-accelerate-w-transform' breaks functionality
                     className={'hardware-accelerate'}
                     enter={movement === 'enter'}
                     exit={movement === 'exit'}
                     isActive={isActive}
                     isReady={isReady}
-                    key={idx}
-                    ref={charmRefs[idx]} // Add a ref to each Charm when mounted
                     spellLevel={spellLevel}
                   >
-                    <CharmShadow
+                    <EyeShadow
                       isActive={isActive}
                       isReady={isReady}
                       spellLevel={spellLevel}
                     />
-                    <Eye
-                      // ' hardware-accelerate-w-transform' breaks functionality
-                      className={'hardware-accelerate'}
-                      enter={movement === 'enter'}
-                      exit={movement === 'exit'}
-                      isActive={isActive}
-                      isReady={isReady}
-                      spellLevel={spellLevel}
-                    >
-                      <EyeShadow
-                        isActive={isActive}
-                        isReady={isReady}
-                        spellLevel={spellLevel}
-                      />
-                    </Eye>
-                  </Charm>
-                );
-              }}
+                  </Eye>
+                </Charm>
+              );
+            }}
           />
         </CharmBox>
         <Dashboard>

@@ -138,24 +138,22 @@ export default function Projects(props) {
           </Dek>
           <Mapper
             mapData={attributeArray}
-            render={
-              (text, idx) => {
-                return (
-                  <Fragment key={idx}>
-                    <Hed>
-                      {
-                        showTheseAttributes[idx][0]
-                          .toUpperCase() + showTheseAttributes[idx]
-                          .slice(1)
-                      }
-                    </Hed>
-                    <Graf>
-                      {text}
-                    </Graf>
-                  </Fragment>
-                );
-              }
-            }
+            render={(text, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <Hed>
+                    {
+                      showTheseAttributes[idx][0]
+                        .toUpperCase() + showTheseAttributes[idx]
+                        .slice(1)
+                    }
+                  </Hed>
+                  <Graf>
+                    {text}
+                  </Graf>
+                </Fragment>
+              );
+            }}
           />
           <Figure>
             <Caption>

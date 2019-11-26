@@ -55,32 +55,31 @@ export default function ChapterNav(props) {
       <StyledList>
         <Mapper
           mapData={allContentData}
-          render={
-            (_chapter, idx) => {
-              const normalizedTitle = normalize(allContentData[idx].attributes.title);
-              const dotType =
-                chapterIndex === idx
-                  ? dotFull
-                  : dotEmpty;
+          render={(_chapter, idx) => {
+            const normalizedTitle = normalize(allContentData[idx].attributes.title);
+            const dotType =
+              chapterIndex === idx
+                ? dotFull
+                : dotEmpty;
 
-              return (
-                <ListItem
-                  key={idx}
+            return (
+              <ListItem
+                key={idx}
+              >
+                <StyledLink
+                  boundHandleClickForApp={boundHandleClickForApp}
+                  to={`/chapter/${normalizedTitle}`}
                 >
-                  <StyledLink
-                    boundHandleClickForApp={boundHandleClickForApp}
-                    to={`/chapter/${normalizedTitle}`}
-                  >
-                    <SelectorContainer>
-                      <Selector
-                        image={dotType}
-                        num={idx}
-                      />
-                    </SelectorContainer>
-                  </StyledLink>
-                </ListItem>
-              );
-            }}
+                  <SelectorContainer>
+                    <Selector
+                      image={dotType}
+                      num={idx}
+                    />
+                  </SelectorContainer>
+                </StyledLink>
+              </ListItem>
+            );
+          }}
         />
       </StyledList>
     </Nav>

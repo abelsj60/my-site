@@ -84,40 +84,38 @@ export default function ProjectNav(props) {
     >
       <Mapper
         mapData={useThisData}
-        render={
-          (thumb, idx) => {
-            const isActive = isMenu && projectName === mappedProject.attributes.projectName;
-            const highlightThis = (!isMenu && thumbnailIndex === idx) || (isActive && thumbnailIndex === idx);
+        render={(thumb, idx) => {
+          const isActive = isMenu && projectName === mappedProject.attributes.projectName;
+          const highlightThis = (!isMenu && thumbnailIndex === idx) || (isActive && thumbnailIndex === idx);
 
-            return (
-              <ListItem
-                finalThumbnail={idx === useThisData.length - 1}
+          return (
+            <ListItem
+              finalThumbnail={idx === useThisData.length - 1}
+              isMenu={isMenu}
+              key={idx}
+            >
+              <RestyledLink
+                highlightThis={highlightThis}
                 isMenu={isMenu}
-                key={idx}
+                to={`/projects/${normalize(
+                  !isMenu ? projectName : mappedProject.attributes.projectName
+                )}/${idx + 1}`}
+                boundHandleClickForApp={boundHandleClickForApp}
               >
-                <RestyledLink
-                  highlightThis={highlightThis}
+                <Image
+                  alt={`Thumbnail for ${projectName}, image ${idx + 1}.`}
                   isMenu={isMenu}
-                  to={`/projects/${normalize(
-                    !isMenu ? projectName : mappedProject.attributes.projectName
-                  )}/${idx + 1}`}
-                  boundHandleClickForApp={boundHandleClickForApp}
-                >
-                  <Image
-                    alt={`Thumbnail for ${projectName}, image ${idx + 1}.`}
-                    isMenu={isMenu}
-                    src={`${urlPrefix}${thumb}-1x.jpg`}
-                    srcSet={
-                      `${urlPrefix}${thumb}-2x.jpg 2x`,
-                      `${urlPrefix}${thumb}-3x.jpg 3x`,
-                      `${urlPrefix}${thumb}-4x.jpg 4x`
-                    }
-                  />
-                </RestyledLink>
-              </ListItem>
-            );
-          }
-        }
+                  src={`${urlPrefix}${thumb}-1x.jpg`}
+                  srcSet={
+                    `${urlPrefix}${thumb}-2x.jpg 2x`,
+                    `${urlPrefix}${thumb}-3x.jpg 3x`,
+                    `${urlPrefix}${thumb}-4x.jpg 4x`
+                  }
+                />
+              </RestyledLink>
+            </ListItem>
+          );
+        }}
       />
     </Group>
   );
