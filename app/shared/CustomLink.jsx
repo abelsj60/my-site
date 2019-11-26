@@ -68,22 +68,27 @@ export default ({
   // Word length, array length, i.e., 'chapter'
   // Checks length of string value, not array
   const callerWillBe = splitTheCaller[1].length > 0 ? splitTheCaller[1] : 'home';
-  // Ensures this is a /menu.
+  // Ensures isMenu is a /menu.
   const isMenu = pathname.includes('menu') && pathname.split('/')[2] === 'menu';
-  const iSayNoMatch = window.location.pathname.includes(to) && !isMenu && to.length > 1;
+  const noMatch = window.location.pathname.includes(to) && !isMenu && to.length > 1;
   const handleClickForLink = event => {
     event.stopPropagation();
-
-    if (!boundHandleClickForApp) {
-      return null;
-    }
 
     if (isCalledByMenu) {
       boundHandleClickForApp('toggleMenu');
     } else {
-      // This will identify a section change, as opposed to a content swap.
-      // Only section changes need 'valueOne' b/c callers aren't changing.
-      boundHandleClickForApp('updateApp', splitTheCaller.length === 2 ? callerWillBe : undefined); // Array length, i.e., ["", "chapter"]
+      /* Why filter the array:
+
+        We only want to update App state when we're doing a loation swap. When we do we'll use 
+        valueOne, AKA param two, to tell setState where we're going. Why don't we need it for 
+        content swaps? B/c we aren't changing currentCaller or lastCaller. 
+
+          a. array.length === 1 --> [""]
+          b. array.length === 2 --> ["", "chapter"]
+          c. array.length > 2 --> ["", "chapter", "a-magic-quest"]
+      */
+
+      boundHandleClickForApp('updateApp', splitTheCaller.length === 2 ? callerWillBe : undefined); 
     }
   };
 
@@ -92,18 +97,16 @@ export default ({
       exact
       path={typeof to === 'string' ? to : createPath(to)}
     >
-      {
-        ({ match }) => {
-          return (
-            <ReactRouterLink
-              {...props}
-              onClick={handleClickForLink}
-              replace={iSayNoMatch || replace || !!match}
-              to={to}
-            />
-          );
-        }
-      }
+      {({ match }) => {
+        return (
+          <ReactRouterLink
+            {...props}
+            onClick={boundHandleClickForApp && handleClickForLink}
+            replace={noMatch || replace || !!match}
+            to={to}
+          />
+        );
+      }}
     </Route>
   );
 };

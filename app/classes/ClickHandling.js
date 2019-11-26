@@ -258,32 +258,23 @@ export default class ClickHandling {
             stateToUpdate.isMenu = !isMenu;
           }
 
-          // Reset illustrationDelay when leaving /chapter
-          if (illustrationDelay && valueOne !== 'chapter') {
-            stateToUpdate.illustrationDelay = !illustrationDelay;
-          }
-
-          /* If not going between /chapter and /reverie:
-
-            If we're going ANYWHERE from /chapter other than /reverie, or if 
-            we're going ANYWHERE from /reverie other than /chapter, we need
-            to reset our illustration properties on App state.
-
-              1. We should ALWAYS update the illustrationState to 0 so we can assess 
-                what's going on next time we navigate to chapter.
-              2. We should reset the illustrationLevel to 0.
-              3. We don't need to reset illustrationDirection to 'enter' b/c it isn't
-                updated until the user clikcs the 'Text on' button (this may be a 
-                design flaw, but it is what it is right now...).
-          */
-
-          if (
-            (currentCaller === 'chapter' && valueOne !== 'reverie') 
-              || (currentCaller === 'reverie' && (valueOne !== 'chapter' && valueOne !== undefined))
-          ) {
+          if (valueOne !== 'chapter') {
+            // Always update illustrationState to 0 so we can assess what's going on 
+            // next time we navigate to /chapter.
             stateToUpdate.illustrationState = 0;
 
-            if (illustrationLevel > 0) {
+            // Always turn illustrationDelay off when navigating away from /chapter.
+            if (illustrationDelay) {
+              stateToUpdate.illustrationDelay = false;
+            }
+
+            // Reset illustrationLevel if we're going anywhere from /chapter other than /reverie, 
+            // or if we're going anywhere from /reverie other than /chapter. Note also that
+            // valueOne will be undefined when switching between reveries.
+            if (
+              currentCaller === 'chapter' && valueOne !== 'reverie' 
+              || (currentCaller === 'reverie' && (valueOne !== 'chapter' && valueOne !== undefined))
+            ) {
               stateToUpdate.illustrationLevel = 0;
             }
           }

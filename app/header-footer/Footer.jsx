@@ -111,32 +111,18 @@ export default function FooterContainer(props) {
   const handleClickForStoryButton = event => {
     /* Alternate approach:
 
-      The button currently reacts to App's existing illustrationState. 
-        -Location swaps are updated by ReloadRoute
+      The button currently reacts to App's existing illustrationState.
+        -Location swaps are handled by the Constructor in ContentLoader
           -Via boundHandleClickForApp('updateIllustrationState')
-        -Location swaps are also handled by ClickHandling
-          Via 'updateApp' calls on CustomLink
         -Content swaps are updated by ContentLoader.cDU
           -Via boundHandleClickForApp('updateIllustrationState')
-        -And boundHandleClickForApp('updateApp')
-
-      See the problem? We're updating illustrationState twice in a row. Once
-      via 'updateApp' and once via ReloadRoute. It's not pretty...
 
       Future alternatives:
-        1. Consolidate into updateApp b/c ReloadRoute really shouldn't be
-          doing state updates...
-          -What's complicated here is sorting out the different calls:
-            a. /chapter --> /reverie
-            b. /reverie --> /chapter
-            c. everything else...
-        2. Check the illustrations state here in the button, update it via
-          setState, then calling 'toggleStoryText' by using setState's
-          callback (param two).
-            -One benefit to the second approach is checking status closer
-            to the action, which might do a better job of accounting for
-            a lost network (as long was we use navigator.onLine rather
-            than a 'offline' event.
+        Check the illustration's state here, call setState to update it, 
+        then call 'toggleStoryText' by via its callback (param two).
+          -One benefit is that we'd be checking the status closer to the
+          action, which would let us better account for a lost network
+          (if we use navigator.onLine, not an 'offline' event).
     */
 
     eventManagement(event);
@@ -152,8 +138,8 @@ export default function FooterContainer(props) {
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
   const isNotFound = currentCaller === 'not-found';
-  const reverieLink = isReverie ? `/${lastCaller !== 'home' ? lastCaller : ''}` // No text b/c 'home' is '/'
-      : '/reverie';
+  // No text b/c 'home' is '/'
+  const reverieLink = isReverie ? `/${lastCaller !== 'home' ? lastCaller : ''}` : '/reverie';
 
   return (
     <Container

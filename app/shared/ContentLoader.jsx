@@ -41,22 +41,26 @@ export default class ContentLoader extends Component {
         ? React.createRef()
         : {}; // Prevents errors
 
-    // The clip list is one dimensional, so we don't sort by publication. 
+    // The clip list is one-dimensional, so we don't sort by publication. 
     // Instead, publication will show the first matching index item when 
     // needed as a default. 
 
     let imageLoaded = -1;
 
-    if (location.caller === 'chapter' || location.caller === 'projects') {
-      if (location.caller === 'chapter') {
-        imageLoaded = this.props.appState.images[
-          `chapter-${state.getIndex('chapter') + 1}-blurred`
-        ].complete
-          ? 2
-          : 0;
-      } else {
-        imageLoaded = 0;
-      }
+    if (location.caller === 'chapter') {
+      const number = state.getIndex('chapter') + 1;
+      imageLoaded = props.appState.images[
+        `chapter-${number}-blurred`
+      ].complete ? 2 : 0;
+
+      props.boundHandleClickForApp(
+        'updateIllustrationState',
+        (props.appState.type === 'mobile' || !props.appState.images[`chapter-${number}-main`].complete)
+          ? number * -1
+          : number
+      );
+    } else if (location.caller === 'projects') {
+      imageLoaded = 0;
     }
 
     this.state = {
