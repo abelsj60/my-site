@@ -36,15 +36,16 @@ export default class ContentLoader extends Component {
 
     if (location.caller === 'chapter') {
       const number = state.getIndex('chapter') + 1;
-      imageLoaded = props.appState.images[
-        `chapter-${number}-blurred`
-      ].complete ? 2 : 0;
+      imageLoaded = props.appState.images[`chapter-${number}-blurred`].complete ? 2 : 0;
 
       props.boundHandleClickForApp(
         'updateIllustrationState',
-        (props.appState.type === 'mobile' || !props.appState.images[`chapter-${number}-main`].complete)
-          ? number * -1
-          : number
+        ( // Is always < 0 on mobile to prevent weird flashes.
+          props.appState.type === 'mobile' 
+            // Is < 0 if !.complete, or if we're offline. This allows the mobile device
+            // to reveal it after onLoad fires via handleLoadForMainImage().
+            || (!props.appState.images[`chapter-${number}-main`].complete || !navigator.onLine)
+        ) ? number * -1 : number
       );
     } else if (location.caller === 'projects') {
       imageLoaded = 0;
@@ -87,55 +88,49 @@ export default class ContentLoader extends Component {
           <Switch>
             <Route
               exact
-              path={`/${
-                caller
-              }/menu`}
-              render={
-                () => {
-                  if (caller === 'chapter') {
-                    return (
-                      <Redirect
-                        to="/not-found"
-                      />
-                    );
-                  }
-                  // Components must be Capitalized!, so use variable...
-                  const MenuContent = this.getMenuContent(caller);
+              path={`/${caller}/menu`}
+              render={() => {
+                if (caller === 'chapter') {
                   return (
-                    <Menu
-                      {...this.props}
-                    >
-                      <MenuContent
-                        {...this.props}
-                        contentState={this.state}
-                      />
-                    </Menu>
-                  );
-                }
-              }
-            />
-            <Route
-              path={referrer.finalPath}
-              render={
-                () => {
-                  const PageContent = this.getPage(caller);
-                  let boundHandleClickForContentLoader;
-
-                  if (caller === 'projects' || caller === 'chapter') {
-                    const clickHandling = new ClickHandling('contentLoader', this);
-                    boundHandleClickForContentLoader = clickHandling.boundHandleClick;
-                  }
-
-                  return (
-                    <PageContent
-                      {...this.props}
-                      boundHandleClickForContentLoader={boundHandleClickForContentLoader}
-                      contentState={this.state}
-                      overflowRef={this.overflowRef}
+                    <Redirect
+                      to="/not-found"
                     />
                   );
                 }
-              }
+                // Variable b/c components must be Capitalized!
+                const MenuContent = this.getMenuContent(caller);
+                return (
+                  <Menu
+                    {...this.props}
+                  >
+                    <MenuContent
+                      {...this.props}
+                      contentState={this.state}
+                    />
+                  </Menu>
+                );
+              }}
+            />
+            <Route
+              path={referrer.finalPath}
+              render={() => {
+                const PageContent = this.getPage(caller);
+                let boundHandleClickForContentLoader;
+
+                if (caller === 'projects' || caller === 'chapter') {
+                  const clickHandling = new ClickHandling('contentLoader', this);
+                  boundHandleClickForContentLoader = clickHandling.boundHandleClick;
+                }
+
+                return (
+                  <PageContent
+                    {...this.props}
+                    boundHandleClickForContentLoader={boundHandleClickForContentLoader}
+                    contentState={this.state}
+                    overflowRef={this.overflowRef}
+                  />
+                );
+              }}
             />
           </Switch>
         );

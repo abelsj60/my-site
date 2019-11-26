@@ -222,6 +222,7 @@ export default class ClickHandling {
         case 'startDramaAtHome':
           // Not logging to Google Analytics
           stateToUpdate.startDramaAtHome = true;
+          break;
         case 'updateApp':
           // Not logging to Google Analytics
           if (valueOne !== undefined) {
@@ -270,7 +271,9 @@ export default class ClickHandling {
 
             // Reset illustrationLevel if we're going anywhere from /chapter other than /reverie, 
             // or if we're going anywhere from /reverie other than /chapter. Note also that
-            // valueOne will be undefined when switching between reveries.
+            // valueOne will be undefined when switching between reveries. 
+            
+            // This is a Reset, not a check. The checks are in ContentLoader (constructor + cDU).
             if (
               currentCaller === 'chapter' && valueOne !== 'reverie' 
               || (currentCaller === 'reverie' && (valueOne !== 'chapter' && valueOne !== undefined))

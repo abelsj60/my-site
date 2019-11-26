@@ -30,7 +30,7 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   will-change: opacity;
-  opacity: ${p => (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
+  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && !navigator.onLine) || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   transition: opacity ${p => !p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'};
   z-index: 5;
 `;
@@ -44,7 +44,7 @@ const FallbackImage = styled.img`
   height: 100%;
   width: 100%;
   will-change: opacity;
-  opacity: ${p => (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
+  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && !navigator.onLine) || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   transition: opacity ${p => !p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'};
   z-index: 4;
 `;

@@ -151,8 +151,8 @@ const Nav = styled.nav`
   display: ${p => (!p.isHome && 'none')};
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '6px 12px'};
-  // Don't show box when business card or legal terms are on
-  background-color: ${p => (p.isHome && p.startDramaAtHome && p.tempContent < 1) ? 'rgba(0, 0, 0, .125)' : ''};
+  // Don't show background-color box when business card or legal terms are on, but do show it immediately if we're offline!
+  background-color: ${p => (p.isHome && p.tempContent < 1 && !navigator.onLine) || (p.isHome && p.startDramaAtHome && p.tempContent < 1) ? 'rgba(0, 0, 0, .125)' : ''};
   ${p => !p.homePageLoaded && 'will-change: background-color;'}
   ${p => !p.homePageLoaded && 'transition: background-color .7s ease-in-out;'}
   // Prevent occasional over-expansion
