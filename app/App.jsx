@@ -529,7 +529,7 @@ class App extends Component {
     */
 
     const resultObj = { result: false, reason: '' };
-    
+
     if (isMobile && this.state.height === this.pageHeight) {
       resultObj.result = true;
       resultObj.reason = 'On mobile, no change to height'
