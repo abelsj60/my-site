@@ -122,7 +122,8 @@ const FallbackBlur = styled.img`
   // This next is very persnickety! We only want the transition to run when the main images
   // are ready. So, don't transition on p.imageLoaded < 0 or p.illustrationState < 0!
   // Note: Parenthetical required based on visual observation!
-  transition: ${p => !p.offline && (p.imageLoaded > 0 || p.illustrationState > 0) && 'opacity .5s'};
+  transition: ${p => (p.imageLoaded > 0 || p.illustrationState > 0) && 'opacity .5s'};
+  // transition: ${p => !p.offline && (p.imageLoaded > 0 || p.illustrationState > 0) && 'opacity .5s'};
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
