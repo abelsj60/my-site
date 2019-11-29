@@ -64,6 +64,9 @@ export default class ContentLoader extends Component {
       needsRedirect: location.needsRedirect,
       projectIndex: state.getIndex('project'),
       reverieIndex: state.getIndex('reverie'),
+      // Patch to handle offline state when on /projects/menu.
+      // See note in cDU.
+      secondaryOfflineForMenu: referrer.isMenu(props),
       thumbnailIndex: state.getIndex('projectPics')
     };
   }
@@ -90,14 +93,7 @@ export default class ContentLoader extends Component {
           exact
           path={`/${caller}/menu`}
           render={() => {
-            if (caller === 'chapter') {
-              return (
-                <Redirect
-                  to="/not-found"
-                />
-              );
-            }
-            // Variable b/c components must be Capitalized!
+            // Use variable b/c components must be Capitalized!
             const MenuContent = this.getMenuContent(caller);
 
             return (
@@ -194,6 +190,30 @@ export default class ContentLoader extends Component {
         const { currentCaller } = appState;
         const scrollHandler = new ScrollHandling(currentCaller);
         scrollHandler.resetElementTop(this.overflowRef, prevProps);
+      }
+    } else {
+      /* Patch to handle offline state when on /projects/menu:
+
+        1. imageLoaded is not used on the /projects/menu
+          -Thus, we don't know whether it's open and images are loaded when we go offline.
+        2. Let's patch it...
+          a. If we're on /projects/menu, the app's online, and !secondaryOfflineForMenu:
+            -We'll tell React that the menu is open and the images are (probably) loaded
+          b. Now we have to reset the value:
+            i. If we click a thumbnail, we'll reset to false via ClickHandling
+              -See: _handleClickForContentLoader()
+            ii. If we click the MenuButton, the ContentLoader will RELOAD
+              -On reload, it'll reset to false
+      */
+
+      if (location.caller === 'projects') {
+        if (referrer.isMenu(this.props)) {
+          if (!this.props.appState.offline) {
+            if (!this.state.secondaryOfflineForMenu) {
+              this.setState({ secondaryOfflineForMenu: true });
+            }
+          }
+        }
       }
     }
   }

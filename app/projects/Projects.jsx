@@ -64,7 +64,7 @@ const ImageHolder = styled.div`
   background-color: ${p => p.theme.colors.reverieBlue};
 `;
 const MainImage = styled.img`
-  opacity: ${p => p.imageLoaded > 1 ? '1' : '0'};
+  opacity: ${p => p.imageLoaded > 1 || p.offline ? '1' : '0'};
   width: 100%;
   height: auto;
   vertical-align: top;

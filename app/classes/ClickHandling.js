@@ -331,7 +331,7 @@ export default class ClickHandling {
   _handleClickForContentLoader() {
     return (type, valueOne, valueTwo) => {
       const stateToUpdate = {};
-      const { caller } = this.state;
+      const { caller, secondaryOfflineForMenu } = this.state;
 
       switch(type) {
         case 'imageLoader':
@@ -339,6 +339,13 @@ export default class ClickHandling {
           break;
         case 'updateState':
           const { appState } = this.props;
+
+          // Patch to handle offline state when on /projects/menu.
+          // See note in ContentLoaer.cDU.
+          if (secondaryOfflineForMenu) {
+            stateToUpdate.secondaryOfflineForMenu = false;
+          }
+
           if (caller === 'chapter') {
             const isComplete = appState.images[
               `chapter-${valueOne + 1}-blurred`

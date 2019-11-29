@@ -593,7 +593,7 @@ class App extends Component {
     // No Header/Nav transition when the we're coming back online
     // b/c the Header/Nav background-color is already in place.
     if (offline) {
-      if(currentCaller === 'home') {
+      if (currentCaller === 'home') {
         if (!homePageLoaded) {
           stateToUpdate.startDramaAtHome = 'never';
         }

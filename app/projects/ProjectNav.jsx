@@ -74,6 +74,7 @@ export default function ProjectNav(props) {
   const {
     allContentData,
     projectIndex,
+    secondaryOfflineForMenu,
     thumbnailIndex
   } = contentState;
   const {
@@ -82,7 +83,11 @@ export default function ProjectNav(props) {
   } = allContentData[projectIndex].attributes;
   const finalGroup = isMenu && mappedProjectIndex === allContentData.length - 1;
   const useThisData = !isMenu ? projectThumbnail : mappedProject.attributes.projectThumbnail;
-  const isOffline = !isMenu ? imageLoaded < 2 && offline : offline;
+  // Note: secondaryOfflineForMenu is used as a poor man's proof that the menu is loaded w/images
+  // when we go offline. This keeps them on-screen. Otherwise, they get pulled off instantly...
+  // What isn't quite right here is that some of the images may not be loaded... 
+  // Food for thought.
+  const isOffline = !isMenu ? (imageLoaded < 2 && offline) : (offline && !secondaryOfflineForMenu);
 
   return (
     <Group
