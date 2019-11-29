@@ -266,7 +266,7 @@ export default function Charms(props) {
               const isActive = activeCharm === idx + 1;
               return (
                 <Charm
-                  // ' hardware-accelerate-w-transform' breaks functionality
+                  // 'hardware-accelerate-w-transform' breaks functionality
                   className={'hardware-accelerate'}
                   enter={movement === 'enter'}
                   exit={movement === 'exit'}
@@ -282,7 +282,7 @@ export default function Charms(props) {
                     spellLevel={spellLevel}
                   />
                   <Eye
-                    // ' hardware-accelerate-w-transform' breaks functionality
+                    // 'hardware-accelerate-w-transform' breaks functionality
                     className={'hardware-accelerate'}
                     enter={movement === 'enter'}
                     exit={movement === 'exit'}

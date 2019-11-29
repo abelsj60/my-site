@@ -307,7 +307,11 @@ class App extends Component {
       offline: false,
       password: '', // to be removed
       spacerHeight: this.calculateSpacerHeight(this.images), // Set by 'handleResize', so must live here. Used by Home/NameTag.
-      startDramaAtHome: false, // Allows us to coordinate <Header /> w/home-page theatrics
+      // Coordinate <Header /> w/home-page theatrics:
+      // -'no' (start, set here) 
+      // -'yes' (run, set in setLoadLevels + ClickHandling) 
+      // -'never' (bypass, set in updateNetworkStatus)
+      startDramaAtHome: 'no', 
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
       // Won't catch iPadOS w/o customMobileTest. Search for 11/9/19 notes as to necessity.
       type: isMobile ? 'mobile' : 'desktop',
@@ -583,7 +587,20 @@ class App extends Component {
   }
 
   updateNetworkStatus() {
-    this.setState({ offline: !this.state.offline })
+    const { currentCaller, homePageLoaded, offline } = this.state;
+    const stateToUpdate = { offline: !offline };
+
+    // No Header/Nav transition when the we're coming back online
+    // b/c the Header/Nav background-color is already in place.
+    if (offline) {
+      if(currentCaller === 'home') {
+        if (!homePageLoaded) {
+          stateToUpdate.startDramaAtHome = 'never';
+        }
+      }
+    }
+
+    this.setState(stateToUpdate)
   }
 
   // Only called by handleResize, which rejects if newHeight === height.

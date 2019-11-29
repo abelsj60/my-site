@@ -58,6 +58,7 @@ export default class ClickHandling {
         heartbeat,
         showBusinessCard,
         showLegalTerms,
+        startDramaAtHome,
         tempContent,
         inCity,
         isMenu
@@ -206,7 +207,10 @@ export default class ClickHandling {
           break;
         case 'startDramaAtHome':
           // Not logging to Google Analytics
-          stateToUpdate.startDramaAtHome = true;
+          // Don't trigger b/c the HeaderNav's already in place...!
+          if (startDramaAtHome !== 'never') {
+            stateToUpdate.startDramaAtHome = 'yes';
+          }
           break;
         case 'updateApp':
           // Not logging to Google Analytics

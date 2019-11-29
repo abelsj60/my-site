@@ -81,11 +81,7 @@ export default function MenuButton(props) {
         </IconContainer>
         <Line
           menu={isMenu}
-          reverie={
-            isReverie
-              ? 'active'
-              : ''
-          }
+          reverie={isReverie ? 'active' : ''}
         />
       </RestyledLink>
     </Container>
