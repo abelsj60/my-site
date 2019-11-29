@@ -97,6 +97,7 @@ const RestyledLink = styled(
       font-family: ${p => p.fullScreenMenu && "'Aref Ruqaa', serif"};
       font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.eighteen};
       margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
+      text-shadow: 2px 2px 2.5px rgba(0, 0, 0, .1);
     `};
   }
 
@@ -108,6 +109,7 @@ const RestyledLink = styled(
       font-family: ${p => p.fullScreenMenu && "'Aref Ruqaa', serif"};
       font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.twenty};
       margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
+      text-shadow: 2px 2px 2.5px rgba(0, 0, 0, .1);
     `};
   }
 `;
@@ -244,7 +246,7 @@ const TimingBar = styled.div`
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
   position: fixed;
   background-color: ${p => p.theme.colors.yellow};
-  top: 52px;
+  top: ${p => p.offline ? '54px' : '52px'};
   left: 0px;
   height: 1px;
   width: 100%;
@@ -369,6 +371,7 @@ export default class Header extends Component {
           </NavList>
           <TimingBar
             illustrationLevel={illustrationLevel}
+            offline={offline}
             tempContent={tempContent}
           >
             <Timer

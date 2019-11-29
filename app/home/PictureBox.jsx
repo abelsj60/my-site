@@ -3,11 +3,12 @@ import BlurredNycBackground from './BlurredNycBackground.jsx'
 import BoyForeground from './BoyForeground.jsx';
 import BlurredBoyForeground from './BlurredBoyForeground.jsx';
 import BlurredForrestBackground from './BlurredForrestBackground.jsx';
-import NycBackground from './NycBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import ForrestBackground from './ForrestBackground.jsx';
 import ForrestFallback from '../../docs/assets/images/convert-to-data-uri/forrest-ink-50x50-53.png';
+import NycBackground from './NycBackground.jsx';
 import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50x50-53.png';
+import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
@@ -30,8 +31,8 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   will-change: opacity;
-  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && p.offline) || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
-  transition: opacity ${p => !p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'};
+  opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
+  transition: ${p => p.offline ? '' : `opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
   z-index: 5;
 `;
 const FallbackImage = styled.img`
@@ -44,8 +45,8 @@ const FallbackImage = styled.img`
   height: 100%;
   width: 100%;
   will-change: opacity;
-  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && p.offline) || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
-  transition: opacity ${p => !p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'};
+  opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
+  transition: ${p => p.offline ? '' : `opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
   z-index: 4;
 `;
 
@@ -66,7 +67,8 @@ export default function PictureBox(props) {
     boundHandleClickForHome,
     homeState,
     setLoadLevels,
-    setSpellLevel
+    setSpellLevel,
+    sumLoadLevels
   } = props;
   const {
     homePageLoaded,
@@ -80,12 +82,14 @@ export default function PictureBox(props) {
     spellLevel,
     movement
   } = homeState;
-  const bigBoySrc = images[imageNames[0]].src;
-  const blurredBoySrc = images[imageNames[1]].src;
-  const bigForrestSrc = images[imageNames[2]].src;
-  const blurredForrestSrc = images[imageNames[3]].src;
-  const bigNycSrc = images[imageNames[4]].src;
-  const blurredNycSrc = images[imageNames[5]].src;
+  const offlineTarget = type === 'mobile' ? 6 : 5;
+  const isOffline = !homePageLoaded ? offline : offline && sumLoadLevels('all') < offlineTarget;
+  const bigBoySrc = offlineImageToggle(isOffline, images[imageNames[0]].src);
+  const blurredBoySrc = offlineImageToggle(isOffline, images[imageNames[1]].src);
+  const bigForrestSrc = offlineImageToggle(isOffline, images[imageNames[2]].src);
+  const blurredForrestSrc = offlineImageToggle(isOffline, images[imageNames[3]].src);
+  const bigNycSrc = offlineImageToggle(isOffline, images[imageNames[4]].src);
+  const blurredNycSrc = offlineImageToggle(isOffline, images[imageNames[5]].src);
   const fallbackSource = !inCity ? ForrestFallback : NycFallback; 
   const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback; 
 
@@ -145,7 +149,7 @@ export default function PictureBox(props) {
         homePageLoaded={homePageLoaded}
         isMobile={type === 'mobile'} // See Styled Component note
         loadLevel={loadLevel}
-        offline={offline}
+        offline={isOffline}
       />
       <FallbackImage 
         alt={altTextForFallback}
@@ -153,7 +157,7 @@ export default function PictureBox(props) {
         homePageLoaded={homePageLoaded}
         isMobile={type === 'mobile'} // See Styled Component note
         loadLevel={loadLevel}
-        offline={offline}
+        offline={isOffline}
         onLoad={handleLoadForFallback}
         onTransitionEnd={handleTransitionEndForFallback}
       />

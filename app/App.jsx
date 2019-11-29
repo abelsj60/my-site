@@ -333,12 +333,15 @@ class App extends Component {
     const fixMobileSafariBugOn7 = isTablet && isMobileSafari && osVersion[0] === '7';
 
     return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
-      ? <PasswordLogin
-        appState={this.state}
-        handlePasswordEntry={this.handlePasswordEntry}
-        handlePasswordSubmit={this.handlePasswordSubmit}
-      />
-      : <ThemeProvider
+      ? (
+        <PasswordLogin
+          appState={this.state}
+          handlePasswordEntry={this.handlePasswordEntry}
+          handlePasswordSubmit={this.handlePasswordSubmit}
+        />
+      )
+      : (
+        <ThemeProvider
           theme={{
             bottomMargin,
             colors,
@@ -384,7 +387,8 @@ class App extends Component {
             boundHandleClickForApp={boundHandleClickForApp}
           />
         </Fragment>
-      </ThemeProvider>;
+      </ThemeProvider>
+    );
   }
 
   get pageHeight() {

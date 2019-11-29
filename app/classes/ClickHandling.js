@@ -334,12 +334,13 @@ export default class ClickHandling {
           stateToUpdate.imageLoaded = valueOne;
           break;
         case 'updateState':
+          const { appState } = this.props;
           if (caller === 'chapter') {
-            const isComplete = this.props.appState.images[
+            const isComplete = appState.images[
               `chapter-${valueOne + 1}-blurred`
             ].complete;
             stateToUpdate.chapterIndex = valueOne;
-            stateToUpdate.imageLoaded = isComplete && this.props.appState.offline ? 2 : 0;
+            stateToUpdate.imageLoaded = isComplete && !appState.offline ? 2 : 0;
           }
 
           if (caller === 'projects') {
@@ -433,55 +434,44 @@ export default class ClickHandling {
       const { goal, score } = this.state;
       const abracadabra = score + 1 === goal; // Magic!
       const { boundHandleClickForApp } = this.props;
+      const hcForHome = new ClickHandling('home', this);
+      const boundHandleClickForHome = hcForHome.boundHandleClick;
 
-      // Either the Charm's inactive, or it's time for magic.
-
-      if (!isActive || isActive && abracadabra) {
-        // We can invoke ClickHandling with the proper 'this' b/c
-        // we invoked it w/Home's 'this' value via .call()
-
-        const hcForHome = new ClickHandling('home', this);
-        const boundHandleClickForHome = hcForHome.boundHandleClick;
-
-        if (isActive && abracadabra) {
-          // We store the background value in App so it's remembered
-          // as the user travels through the site.
-
-          if (process.env.NODE_ENV !== 'development') {
-            ReactGA.event({
-              category: 'Home state',
-              action: 'Spell successful.'
-            });
-          }
-
-          boundHandleClickForHome('cast');
-          boundHandleClickForApp('swapBackground');
-        } else {
-          if (process.env.NODE_ENV !== 'development') {
-            ReactGA.event({
-              category: 'Home state',
-              action: 'Wrong Charm clicked.',
-              label: `The score was ${score}.`
-            });
-          }
-
-          boundHandleClickForHome('toggleSpell');
+      if (!isActive) { // The Charm's inactive (not pulsing).
+        if (process.env.NODE_ENV !== 'development') {
+          ReactGA.event({
+            category: 'Home state',
+            action: 'Wrong Charm clicked.',
+            label: `The score was ${score}.`
+          });
         }
 
-        return null;
-      }
+        boundHandleClickForHome('toggleSpell');
+      } else if (isActive && abracadabra) { // It's time for magic! (Maybe.)
+        const { offline } = this.props.appState;
 
-      //  The Charm is active, and the user isn't done yet.
+        if (process.env.NODE_ENV !== 'development') {
+          ReactGA.event({
+            category: 'Home state',
+            action: !offline ? 'Spell successful.' : 'Spell successful, but offline!'
+          });
+        }
 
-      this.setState(
-        state => {
+        if (offline) { // Offline? No magic so we don't have to deal with image loads.
+          boundHandleClickForHome('toggleSpell');
+        } else { // Online? Magic!
+          boundHandleClickForHome('cast');
+          boundHandleClickForApp('swapBackground');
+        }
+      } else { // We've hit an active Charm, increment the score.
+        this.setState(state => {
           const newScore = state.score += 1;
           return {
             score: newScore,
             activeCharm: state.pattern[newScore]
           };
-        }
-      );
-    };
+        });
+      }
+    }
   }
 }

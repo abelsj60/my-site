@@ -6,6 +6,7 @@ import fallbackBlurThree from '../../docs/assets/images/convert-to-data-uri/chap
 import fallbackBlurFour from '../../docs/assets/images/convert-to-data-uri/chapter-4-ink-50x50-53.png';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
+import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import Overflow from '../primitives/Overflow.jsx';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
@@ -108,7 +109,7 @@ const FallbackBlur = styled.img`
   // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  // imageLoaded (BlurredImage) comes from ContentLoader.jsx. Starts
+  // imageLoaded (BlurredImage) comes from ContentLoader.jsx. Starts 
   // at 0, set to 1 by handleLoadForBlurredImage(). Set to 2 by 
   // handleTransitionEndForFallbackBlur().
   // Let's not remove the blurred fallback until we KNOW the main illustration is 
@@ -116,14 +117,16 @@ const FallbackBlur = styled.img`
   //    a) < 0 --> not loaded
   //    b) > 0 --> loaded
   //    c) 0 --> n/a
-  // Always show when blurredImage isn't loaded, mainImage isn't loaded, or the network is lost.
-  // Note: Parenthetical required based on visual observation!
+  // Always show when blurredImage isn't loaded, mainImage isn't loaded or the network is lost. 
+  // Note: We don't need to check p.offline b/c imageLoaded is set to 0 when the network is
+  // lost via ClickHandling. This ensures the Fallback's seen and the transition's off. 
+  // REMEMBER --> ilustrationState = MainImage load state!
   opacity: ${p => (p.imageLoaded < 1 || p.illustrationState < 0) ? '1' : '0'};
-  // This next is very persnickety! We only want the transition to run when the main images
-  // are ready. So, don't transition on p.imageLoaded < 0 or p.illustrationState < 0!
-  // Note: Parenthetical required based on visual observation!
+  // This is very persnickety! We only want the transition to run when the main images are ready.
+  // So, don't transition on p.imageLoaded < 0 or p.illustrationState < 0 or the net's lost.
+  // We don't need to check p.offline b/c imageLoaded is set to 0 when the net's lost. 
+  // REMEMBER --> ilustrationState = MainImage load state! 
   transition: ${p => (p.imageLoaded > 0 || p.illustrationState > 0) && 'opacity .5s'};
-  // transition: ${p => !p.offline && (p.imageLoaded > 0 || p.illustrationState > 0) && 'opacity .5s'};
 `;
 const BlurredImage = styled.img`
   // Ensure img top is TOP
@@ -191,15 +194,16 @@ export default function Story(props) {
   } = allContentData[chapterIndex].attributes;
   const bookTitle = 'The Magical, Semi-Fictional Biography of a Real Boy';
   const dek = 'An experiment in digital + traditional storytelling';
-  const bigImageSrc = images[`chapter-${number}-main`].src;
-  const blurredImageSrc = images[`chapter-${number}-blurred`].src;
-  const blurredImageDescription = "This illustration depicts a blurred version of this chapter's full-page illustration, which lives one layer below it. This image obscures the main image so people can easily read this chapter's text."
-  const fallbackImageDescription = "Fallback version of the blurred depiction of this chapter's full-page illustration, which lives one layer below it. This image obscures the blurred and main illustrations when they aren't loaded."
+  const isOffline = offline && imageLoaded < 2;
+  const bigImageSrc = offlineImageToggle(isOffline, images[`chapter-${number}-main`].src);
+  const blurredImageSrc = offlineImageToggle(isOffline, images[`chapter-${number}-blurred`].src);
+  const blurredImageDescription = "This illustration depicts a blurred version of this chapter's full-page illustration, which lives one layer below it. This image obscures the main image so people can easily read this chapter's text.";
+  const fallbackImageDescription = "Fallback version of the blurred depiction of this chapter's full-page illustration, which lives one layer below it. This image obscures the blurred and main illustrations when they aren't loaded.";
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
     if (imageLoaded < 1) {
       // refers to BlurredImage, not the full illustration
-      boundHandleClickForContentLoader('imageLoader', 1)
+      boundHandleClickForContentLoader('imageLoader', 1);
     }
   };
   const handleLoadForMainImage = event => {
@@ -216,7 +220,7 @@ export default function Story(props) {
     eventManagement(event);
     if (imageLoaded < 2) {
       // refers to BlurredImage, not the full illustration
-      boundHandleClickForContentLoader('imageLoader', 2)
+      boundHandleClickForContentLoader('imageLoader', 2);
     }
   };
   const handleTransitionEndForBlurredImage = event => {
@@ -287,7 +291,7 @@ export default function Story(props) {
           illustrationLevel={illustrationLevel}
           illustrationState={illustrationState}
           imageLoaded={imageLoaded}
-          offline={offline}
+          offline={isOffline}
           onTransitionEnd={handleTransitionEndForFallbackBlur}
           src={fallbackBlur}
           tempContent={tempContent}

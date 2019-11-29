@@ -64,6 +64,7 @@ export default class Home extends Component {
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
     this.setLoadLevels = this.setLoadLevels.bind(this);
+    this.sumLoadLevels = this.sumLoadLevels.bind(this);
   }
 
   render() {
@@ -100,6 +101,7 @@ export default class Home extends Component {
           homeState={this.state}
           setLoadLevels={this.setLoadLevels}
           setSpellLevel={setSpellLevel}
+          sumLoadLevels={this.sumLoadLevels}
         />
         {debugMe && (
           <DebugHome
@@ -134,7 +136,7 @@ export default class Home extends Component {
 
   resetSpell(isValid, caller) {
     if (!isValid) return null;
-    if (caller === 'InnerContainer') {
+    if (caller === 'InnerContainer' || caller === 'offlineEscapeHatch') {
       /* NameTag --> onTransitionEnd
 
         Only called when exiting the spell early. The spell
@@ -243,6 +245,7 @@ export default class Home extends Component {
 
   setSpellLevelFour(isValid, caller) {
     if (!isValid) return null;
+
     if (caller === 'OuterContainer') {
       // Charms --> onTransitionEnd
       this.setSpellLevel(4);
