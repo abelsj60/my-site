@@ -197,7 +197,7 @@ export default class ContentLoader extends Component {
         scrollHandler.resetElementTop(this.overflowRef, prevProps);
       }
     } else if (!prevProps.appState.isMenu) {
-      /* Reset thumbnailCount when entering /menu from /projects:
+      /* Reset thumbnailCount when entering /menu from /projects (via MenuButton):
 
         1. thumbnailCount is used to track the state of thumbnails on cL-loaded pages.
         2. Every thumbnail fires an onLoad event to increment thumbnailCount.
@@ -210,13 +210,14 @@ export default class ContentLoader extends Component {
               (b/c /projects and /projects/menu are handled by cL w/o a reload)
         5. We don't need a reset when closing the /menu via the MenuButton b/c the entire
           cL will reload in this case, which sets the count to 0 via the constructor.
+
+        Note: We shouldn't have to worry further about an infinite loop b/c the prevState
+          will only be isMenu once. We won't get here after the initial switch.
       */
 
-      if (location.caller === 'projects') {
-        if (referrer.isMenu(this.props)) {
-          if (this.state.thumbnailCount > 0) {
-            this.setState({ thumbnailCount: 0 });
-          }
+      if (referrer.isMenu(this.props)) {
+        if (location.caller === 'projects') {
+          this.setState({ thumbnailCount: 0 });
         }
       }
     }
