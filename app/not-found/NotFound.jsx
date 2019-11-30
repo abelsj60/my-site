@@ -1,6 +1,7 @@
-import Main from '../primitives/Main.jsx';
-import React, { Component } from 'react';
 import ContentHolder from '../primitives/ContentHolder.jsx';
+import Main from '../primitives/Main.jsx';
+import offlineImageToggle from '../helpers/offlineImageToggle.js';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
@@ -18,11 +19,12 @@ const Hed = styled.h1`
 const Jinn = styled.img`
   pointer-events: none;
 `;
-const altImageText = "Uh-oh, page not found. A Jinni, drawn in shades of blue, blocks your way. He floats atop a vibrant pink background, conjuring mystery with an all-knowing smile and an otherworldly goatee — three balls of light-blue light. The Jinni floats in mid air, fading downward into streaks of Arabic calligraphy, oft-called Hat Sanati."
+const altImageText = "Uh-oh! A Jinni, drawn in shades of blue, blocks your way. He floats atop a vibrant pink background, conjuring mystery with an all-knowing smile and a strange goatee — three balls of light-blue light. Page not found."
 
 export default class NotFound extends Component {
   render() {
-    const src = this.props.appState.images.notFoundImage.src;
+    const { appState } = this.props;
+    const src = offlineImageToggle(appState.offline, appState.images.notFoundImage.src);
     return (
       <Main>
         <RestyledContentHolder>

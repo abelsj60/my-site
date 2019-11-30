@@ -97,6 +97,7 @@ const RestyledLink = styled(
       font-family: ${p => p.fullScreenMenu && "'Aref Ruqaa', serif"};
       font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.eighteen};
       margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
+      text-shadow: 2px 2px 2.5px rgba(0, 0, 0, .1);
     `};
   }
 
@@ -108,6 +109,7 @@ const RestyledLink = styled(
       font-family: ${p => p.fullScreenMenu && "'Aref Ruqaa', serif"};
       font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.twenty};
       margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
+      text-shadow: 2px 2px 2.5px rgba(0, 0, 0, .1);
     `};
   }
 `;
@@ -152,9 +154,9 @@ const Nav = styled.nav`
   margin-top: -2px; // Make name, motto, and link text flush
   padding: ${p => p.isHome && '6px 12px'};
   // Don't show background-color box when business card or legal terms are on, but do show it immediately if we're offline!
-  background-color: ${p => (p.isHome && p.tempContent < 1 && p.offline) || (p.isHome && p.startDramaAtHome && p.tempContent < 1) ? 'rgba(0, 0, 0, .125)' : ''};
+  background-color: ${p => (p.offline && p.isHome && p.tempContent < 1) || (p.isHome && p.startDramaAtHome && p.tempContent < 1) ? 'rgba(0, 0, 0, .125)' : ''};
   ${p => !p.homePageLoaded && 'will-change: background-color;'}
-  ${p => !p.homePageLoaded && 'transition: background-color .7s ease-in-out;'}
+  ${p => !p.homePageLoaded && p.startDramaAtHome !== 'never' && 'transition: background-color .7s ease-in-out;'}
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
   position: relative;
@@ -244,7 +246,7 @@ const TimingBar = styled.div`
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
   position: fixed;
   background-color: ${p => p.theme.colors.yellow};
-  top: 52px;
+  top: ${p => p.offline ? '54px' : '52px'};
   left: 0px;
   height: 1px;
   width: 100%;
@@ -369,6 +371,7 @@ export default class Header extends Component {
           </NavList>
           <TimingBar
             illustrationLevel={illustrationLevel}
+            offline={offline}
             tempContent={tempContent}
           >
             <Timer

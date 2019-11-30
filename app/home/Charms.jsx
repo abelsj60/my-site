@@ -214,6 +214,7 @@ export default function Charms(props) {
   const {
     inCity,
     nameTagWidth,
+    offline,
     tempContent
   } = appState;
   const {
@@ -250,9 +251,11 @@ export default function Charms(props) {
         setFontSize={getFontSize(nameTagWidth, 3.05)}
       >
         {
-          !inCity
-            ? "Tap the pulses to travel home"
-            : "Tap the pulses for adventure"
+          !offline 
+            ? !inCity
+              ? "Tap the pulses to travel home"
+              : "Tap the pulses for adventure"
+            : "The spell won't cast offline!"
         }
       </SubHed>
       <InnerContainer>
@@ -263,7 +266,7 @@ export default function Charms(props) {
               const isActive = activeCharm === idx + 1;
               return (
                 <Charm
-                  // ' hardware-accelerate-w-transform' breaks functionality
+                  // 'hardware-accelerate-w-transform' breaks functionality
                   className={'hardware-accelerate'}
                   enter={movement === 'enter'}
                   exit={movement === 'exit'}
@@ -279,7 +282,7 @@ export default function Charms(props) {
                     spellLevel={spellLevel}
                   />
                   <Eye
-                    // ' hardware-accelerate-w-transform' breaks functionality
+                    // 'hardware-accelerate-w-transform' breaks functionality
                     className={'hardware-accelerate'}
                     enter={movement === 'enter'}
                     exit={movement === 'exit'}

@@ -63,21 +63,21 @@ export default class State {
     return indices.one !== -1 && indices.two !== -1;
   }
 
-  rebuildBody(updateReactState) {
+  rebuildBody(updater) {
     const indices = this._convertParamsToIndices();
 
     // Only -1 if explicitly set by a params method
     if (this._indicesAreGreaterThanOrEqualToZero(indices)) {
-      updateReactState(indices.one, indices.two);
+      updater(indices.one, indices.two);
     }
   }
 
-  rebuildContentLoader(updateReactState) {
+  rebuildContentLoader(updater) {
     const indices = this._convertParamsToIndices();
 
     // Only -1 if explicitly set by a params method
     if (this._indicesAreGreaterThanOrEqualToZero(indices)) {
-      updateReactState('updateState', indices.one, indices.two);
+      updater('updateState', indices.one, indices.two);
     }
   }
 
@@ -106,8 +106,8 @@ export default class State {
     }
   }
 
-  resetIllustrationState(updateReactState) {
-    updateReactState('updateIllustrationState', this.checkIllustrationState());
+  resetIllustrationState(updater) {
+    updater('updateIllustrationState', this.checkIllustrationState());
   }
 
   // Returns: { one: val, two: val }

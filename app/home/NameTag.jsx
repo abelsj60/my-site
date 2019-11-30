@@ -154,6 +154,7 @@ export default function NameTag(props) {
 
   const handleClickForHed = event => {
     eventManagement(event);
+
     // Heartbeat ends at 3, set in PictureBox.onTransitionEndForBlurredBoy
     if (homePageLoaded && heartbeat > 1 && (spellLevel === 0 || spellLevel === 4)) {
       if (eventType === 'touch') {

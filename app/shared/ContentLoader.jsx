@@ -35,16 +35,18 @@ export default class ContentLoader extends Component {
       : {}; // Prevents errors
 
     if (location.caller === 'chapter') {
+      const { images, offline, type } = this.props.appState;
       const number = state.getIndex('chapter') + 1;
-      imageLoaded = props.appState.images[`chapter-${number}-blurred`].complete ? 2 : 0;
+      imageLoaded = images[`chapter-${number}-blurred`].complete && !offline ? 2 : 0;
 
       props.boundHandleClickForApp(
         'updateIllustrationState',
-        ( // Is always < 0 on mobile to prevent weird flashes.
-          props.appState.type === 'mobile' 
-            // Is < 0 if !.complete, or if we're offline. This allows the mobile device
-            // to reveal it after onLoad fires via handleLoadForMainImage().
-            || (!props.appState.images[`chapter-${number}-main`].complete || props.appState.offline)
+        ( 
+          // illState is < 0 if mobile (to prevent weird flashes), !.complete, or if we're offline. This 
+          // allows the mobile device to reveal the illustration after onLoad fires in the MainImage.
+          type === 'mobile' 
+            || !images[`chapter-${number}-main`].complete 
+            || offline
         ) ? number * -1 : number
       );
     } else if (location.caller === 'projects') {
@@ -62,6 +64,9 @@ export default class ContentLoader extends Component {
       needsRedirect: location.needsRedirect,
       projectIndex: state.getIndex('project'),
       reverieIndex: state.getIndex('reverie'),
+      // Patch to handle offline state when on /projects/menu.
+      // See note in cDU.
+      secondaryOfflineForMenu: referrer.isMenu(props),
       thumbnailIndex: state.getIndex('projectPics')
     };
   }
@@ -74,66 +79,58 @@ export default class ContentLoader extends Component {
     } = this.state;
     const referrer = new Referrer(this.props);
 
-    return needsRedirect
-      ? (
-        <Redirect
-          to="/i"
+    return needsRedirect ? (
+      <Redirect
+        to="/i"
+      />
+    ) : isNotFound ? (
+      <Redirect
+        to="/not-found"
+      />
+    ) : (
+      <Switch>
+        <Route
+          exact
+          path={`/${caller}/menu`}
+          render={() => {
+            // Use variable b/c components must be Capitalized!
+            const MenuContent = this.getMenuContent(caller);
+
+            return (
+              <Menu
+                {...this.props}
+              >
+                <MenuContent
+                  {...this.props}
+                  contentState={this.state}
+                />
+              </Menu>
+            );
+          }}
         />
-      ) : isNotFound
-        ? (
-          <Redirect
-            to="/not-found"
-          />
-        ) : (
-          <Switch>
-            <Route
-              exact
-              path={`/${caller}/menu`}
-              render={() => {
-                if (caller === 'chapter') {
-                  return (
-                    <Redirect
-                      to="/not-found"
-                    />
-                  );
-                }
-                // Variable b/c components must be Capitalized!
-                const MenuContent = this.getMenuContent(caller);
-                return (
-                  <Menu
-                    {...this.props}
-                  >
-                    <MenuContent
-                      {...this.props}
-                      contentState={this.state}
-                    />
-                  </Menu>
-                );
-              }}
-            />
-            <Route
-              path={referrer.finalPath}
-              render={() => {
-                const PageContent = this.getPage(caller);
-                let boundHandleClickForContentLoader;
+        <Route
+          path={referrer.finalPath}
+          render={() => {
+            const PageContent = this.getPage(caller);
+            let boundHandleClickForContentLoader;
 
-                if (caller === 'projects' || caller === 'chapter') {
-                  const clickHandling = new ClickHandling('contentLoader', this);
-                  boundHandleClickForContentLoader = clickHandling.boundHandleClick;
-                }
+            if (caller === 'projects' || caller === 'chapter') {
+              const clickHandling = new ClickHandling('contentLoader', this);
+              boundHandleClickForContentLoader = clickHandling.boundHandleClick;
+            }
 
-                return (
-                  <PageContent
-                    {...this.props}
-                    boundHandleClickForContentLoader={boundHandleClickForContentLoader}
-                    contentState={this.state}
-                    overflowRef={this.overflowRef}
-                  />
-                );
-              }}
-            />
-          </Switch>
-        );
+            return (
+              <PageContent
+                {...this.props}
+                boundHandleClickForContentLoader={boundHandleClickForContentLoader}
+                contentState={this.state}
+                overflowRef={this.overflowRef}
+              />
+            );
+          }}
+        />
+      </Switch>
+    );
   }
 
   getMenuContent(caller) {
@@ -193,6 +190,30 @@ export default class ContentLoader extends Component {
         const { currentCaller } = appState;
         const scrollHandler = new ScrollHandling(currentCaller);
         scrollHandler.resetElementTop(this.overflowRef, prevProps);
+      }
+    } else {
+      /* Patch to handle offline state when on /projects/menu:
+
+        1. imageLoaded is not used on the /projects/menu
+          -Thus, we don't know whether it's open and images are loaded when we go offline.
+        2. Let's patch it...
+          a. If we're on /projects/menu, the app's online, and !secondaryOfflineForMenu:
+            -We'll tell React that the menu is open and the images are (probably) loaded
+          b. Now we have to reset the value:
+            i. If we click a thumbnail, we'll reset to false via ClickHandling
+              -See: _handleClickForContentLoader()
+            ii. If we click the MenuButton, the ContentLoader will RELOAD
+              -On reload, it'll reset to false
+      */
+
+      if (location.caller === 'projects') {
+        if (referrer.isMenu(this.props)) {
+          if (!this.props.appState.offline) {
+            if (!this.state.secondaryOfflineForMenu) {
+              this.setState({ secondaryOfflineForMenu: true });
+            }
+          }
+        }
       }
     }
   }

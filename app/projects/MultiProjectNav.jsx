@@ -20,7 +20,7 @@ const Graf = styled.p`
   font-weight: 400;
 `;
 
-export default function DesktopProjectNav(props) {
+export default function MultiProjectNav(props) {
   const { contentState } = props;
   const { allContentData } = contentState;
 

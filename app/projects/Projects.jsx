@@ -4,6 +4,7 @@ import Loader from '../shared/Loader.jsx';
 import Main from '../primitives/Main.jsx';
 import Mapper from '../shared/Mapper.jsx';
 import MenuButton from '../shared/MenuButton.jsx';
+import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import Overflow from '../primitives/Overflow.jsx';
 import ProjectNav from './ProjectNav.jsx';
 import React, { Fragment } from 'react';
@@ -11,6 +12,10 @@ import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 import urlPrefix from '../helpers/urlPrefix';
 
+const OfflineSpacer = styled.div`
+  ${p => !p.offline && 'display: none;'}
+  flex: 1;
+`;
 const Type = styled.p`
   font-size: ${p => p.theme.fontSizes.three};
   color:${p => p.theme.colors.lightBlack};
@@ -59,19 +64,22 @@ const ImageHolder = styled.div`
   background-color: ${p => p.theme.colors.reverieBlue};
 `;
 const MainImage = styled.img`
-  opacity: ${p => p.imageLoaded ? '1' : '0'};
+  opacity: ${p => p.imageLoaded > 1 || p.offline ? '1' : '0'};
   width: 100%;
   height: auto;
   vertical-align: top;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, .3);
   ${p => p.imageLoaded > 0 && 'transition: opacity .25s ease-in;'}
+  ${p => p.offline && 'font-size: .8rem;'}
 `;
 
 export default function Projects(props) {
   const {
+    appState,
     boundHandleClickForContentLoader,
     contentState
   } = props;
+  const { offline } = appState;
   const {
     allContentData,
     imageLoaded,
@@ -93,6 +101,7 @@ export default function Projects(props) {
   const filePrefix = mainImages[thumbnailIndex];
   const holderHeight = imageHolderHeight[thumbnailIndex].split(' ');
   const ratio = (100 / (holderHeight[0] / holderHeight[1]));
+  const isOffline = imageLoaded < 2 && offline;
   const attributeArray = showTheseAttributes.map(
     name => allContentData[projectIndex].attributes[name]
   );
@@ -113,8 +122,11 @@ export default function Projects(props) {
           <MenuButton
             {...props}
           />
+          <OfflineSpacer
+            offline={isOffline}
+          />
           <Loader
-            done={imageLoaded > 1}
+            done={offline || imageLoaded > 1}
             forTransition={handleTransitionEndForLoader}
             marginLeft="auto"
             show={imageLoaded < 1}
@@ -123,6 +135,7 @@ export default function Projects(props) {
           />
           <ProjectNav
             {...props}
+            // ProjectNav tests specific image values
             imageLoaded={imageLoaded}
           />
         </Shelf>
@@ -171,13 +184,14 @@ export default function Projects(props) {
                 <MainImage
                   alt={altText}
                   imageLoaded={imageLoaded}
+                  offline={isOffline}
                   onLoad={handleLoadForMainImage}
                   sizes="620px"
-                  src={`${urlPrefix}${filePrefix}-q95-625-1x.jpg`}
+                  src={offlineImageToggle(isOffline, `${urlPrefix}${filePrefix}-q95-625-1x.jpg`)}
                   srcSet={
-                    `${urlPrefix}${filePrefix}-q50-1250-2x.jpg 1250w`,
-                    `${urlPrefix}${filePrefix}-q50-1875-3x.jpg 1875w`,
-                    `${urlPrefix}${filePrefix}-q50-2500-4x.jpg 2500w`
+                    offlineImageToggle(isOffline, `${urlPrefix}${filePrefix}-q50-1250-2x.jpg 1250w`),
+                    offlineImageToggle(isOffline, `${urlPrefix}${filePrefix}-q50-1875-3x.jpg 1875w`),
+                    offlineImageToggle(isOffline, `${urlPrefix}${filePrefix}-q50-2500-4x.jpg 2500w`)
                   }
                 />
               </div>

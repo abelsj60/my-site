@@ -1,6 +1,7 @@
 import { isIE } from 'react-device-detect';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
+import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -38,7 +39,7 @@ const ListItem = styled.li`
 const RestyledLink = styled(
   // Filter out highlightThis, isMenu from StyledLink
   // eslint-disable-next-line
-  ({ highlightThis, isMenu, ...rest }) => <StyledLink {...rest} />
+  ({ highlightThis, isMenu, offline, ...rest }) => <StyledLink {...rest} />
 )`
   display: flex;
   height: ${p => !p.isMenu && '15px'};
@@ -53,28 +54,40 @@ const Image = styled.img`
   vertical-align: top;
   height: ${p => !p.isMenu && '100%'}; // Proper height on project page
   width: ${p => p.isMenu && '100%'}; // Proper width in /menu
+  ${p => p.offline && 'font-size: 0rem;'}
+  ${p => p.offline && 'color: white;'}
 `;
 
 export default function ProjectNav(props) {
   const {
+    appState,
     boundHandleClickForApp,
     contentState,
     imageLoaded,
     mappedProject,
     mappedProjectIndex
   } = props;
+  const { 
+    isMenu,
+    offline 
+  } = appState;
   const {
     allContentData,
     projectIndex,
+    secondaryOfflineForMenu,
     thumbnailIndex
   } = contentState;
   const {
     projectThumbnail,
     projectName
   } = allContentData[projectIndex].attributes;
-  const isMenu = mappedProjectIndex !== undefined;
   const finalGroup = isMenu && mappedProjectIndex === allContentData.length - 1;
   const useThisData = !isMenu ? projectThumbnail : mappedProject.attributes.projectThumbnail;
+  // Note: secondaryOfflineForMenu is used as a poor man's proof that the menu is loaded w/images
+  // when we go offline. This keeps them on-screen. Otherwise, they get pulled off instantly...
+  // What isn't quite right here is that some of the images may not be loaded... 
+  // Food for thought.
+  const isOffline = !isMenu ? (imageLoaded < 2 && offline) : (offline && !secondaryOfflineForMenu);
 
   return (
     <Group
@@ -105,11 +118,12 @@ export default function ProjectNav(props) {
                 <Image
                   alt={`Thumbnail for ${projectName}, image ${idx + 1}.`}
                   isMenu={isMenu}
-                  src={`${urlPrefix}${thumb}-1x.jpg`}
+                  offline={isOffline}
+                  src={offlineImageToggle(isOffline, `${urlPrefix}${thumb}-1x.jpg`)}
                   srcSet={
-                    `${urlPrefix}${thumb}-2x.jpg 2x`,
-                    `${urlPrefix}${thumb}-3x.jpg 3x`,
-                    `${urlPrefix}${thumb}-4x.jpg 4x`
+                    offlineImageToggle(isOffline, `${urlPrefix}${thumb}-2x.jpg 2x`),
+                    offlineImageToggle(isOffline, `${urlPrefix}${thumb}-3x.jpg 3x`),
+                    offlineImageToggle(isOffline, `${urlPrefix}${thumb}-4x.jpg 4x`)
                   }
                 />
               </RestyledLink>
