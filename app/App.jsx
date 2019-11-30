@@ -600,6 +600,13 @@ class App extends Component {
       }
     }
 
+    if (process.env.NODE_ENV !== 'development') {
+      ReactGA.event({
+        category: 'App state',
+        action: `Toggle network status: ${stateToUpdate}.`
+      });
+    }
+
     this.setState(stateToUpdate)
   }
 
