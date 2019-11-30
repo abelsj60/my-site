@@ -64,9 +64,7 @@ export default class ContentLoader extends Component {
       needsRedirect: location.needsRedirect,
       projectIndex: state.getIndex('project'),
       reverieIndex: state.getIndex('reverie'),
-      // Patch to handle offline state when on /projects/menu.
-      // See note in cDU.
-      secondaryOfflineForMenu: referrer.isMenu(props),
+      thumbnailCount: 0, // Track thumbnail loads
       thumbnailIndex: state.getIndex('projectPics')
     };
   }
@@ -95,6 +93,12 @@ export default class ContentLoader extends Component {
           render={() => {
             // Use variable b/c components must be Capitalized!
             const MenuContent = this.getMenuContent(caller);
+            let boundHandleClickForContentLoader;
+
+            if (caller === 'projects' || caller === 'chapter') {
+              const clickHandling = new ClickHandling('contentLoader', this);
+              boundHandleClickForContentLoader = clickHandling.boundHandleClick;
+            }
 
             return (
               <Menu
@@ -103,6 +107,7 @@ export default class ContentLoader extends Component {
                 <MenuContent
                   {...this.props}
                   contentState={this.state}
+                  boundHandleClickForContentLoader={boundHandleClickForContentLoader}
                 />
               </Menu>
             );
@@ -191,27 +196,26 @@ export default class ContentLoader extends Component {
         const scrollHandler = new ScrollHandling(currentCaller);
         scrollHandler.resetElementTop(this.overflowRef, prevProps);
       }
-    } else {
-      /* Patch to handle offline state when on /projects/menu:
+    } else if (!prevProps.appState.isMenu) {
+      /* Reset thumbnailCount when entering /menu from /projects:
 
-        1. imageLoaded is not used on the /projects/menu
-          -Thus, we don't know whether it's open and images are loaded when we go offline.
-        2. Let's patch it...
-          a. If we're on /projects/menu, the app's online, and !secondaryOfflineForMenu:
-            -We'll tell React that the menu is open and the images are (probably) loaded
-          b. Now we have to reset the value:
-            i. If we click a thumbnail, we'll reset to false via ClickHandling
-              -See: _handleClickForContentLoader()
-            ii. If we click the MenuButton, the ContentLoader will RELOAD
-              -On reload, it'll reset to false
+        1. thumbnailCount is used to track the state of thumbnails on cL-loaded pages.
+        2. Every thumbnail fires an onLoad event to increment thumbnailCount.
+        3. Once the thumbnailCount hits the total exected thumbnails, they're all loaded.
+          -See ProjectNav for logic as to thumbnailCount totals. 
+            -One is for MultiProjectNav (hard coded) the other for ProjectNav on its own. 
+        4. This is a reset, it runs whenever the MenuButton is clicked.
+          -This ensures that the starting count is 0 on the /menu page.
+            -W/o this, the thumbnailCount will stay at the total for the non /menu page
+              (b/c /projects and /projects/menu are handled by cL w/o a reload)
+        5. We don't need a reset when closing the /menu via the MenuButton b/c the entire
+          cL will reload in this case, which sets the count to 0 via the constructor.
       */
 
       if (location.caller === 'projects') {
         if (referrer.isMenu(this.props)) {
-          if (!this.props.appState.offline) {
-            if (!this.state.secondaryOfflineForMenu) {
-              this.setState({ secondaryOfflineForMenu: true });
-            }
+          if (this.state.thumbnailCount > 0) {
+            this.setState({ thumbnailCount: 0 });
           }
         }
       }

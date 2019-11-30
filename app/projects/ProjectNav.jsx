@@ -1,3 +1,4 @@
+import eventManagement from '../helpers/eventManagement.js';
 import { isIE } from 'react-device-detect';
 import Mapper from '../shared/Mapper.jsx';
 import normalize from '../helpers/normalize.js';
@@ -62,10 +63,12 @@ export default function ProjectNav(props) {
   const {
     appState,
     boundHandleClickForApp,
+    boundHandleClickForContentLoader,
     contentState,
     imageLoaded,
     mappedProject,
-    mappedProjectIndex
+    mappedProjectIndex,
+    totalThumbnailCount
   } = props;
   const { 
     isMenu,
@@ -74,7 +77,7 @@ export default function ProjectNav(props) {
   const {
     allContentData,
     projectIndex,
-    secondaryOfflineForMenu,
+    thumbnailCount,
     thumbnailIndex
   } = contentState;
   const {
@@ -83,11 +86,15 @@ export default function ProjectNav(props) {
   } = allContentData[projectIndex].attributes;
   const finalGroup = isMenu && mappedProjectIndex === allContentData.length - 1;
   const useThisData = !isMenu ? projectThumbnail : mappedProject.attributes.projectThumbnail;
-  // Note: secondaryOfflineForMenu is used as a poor man's proof that the menu is loaded w/images
-  // when we go offline. This keeps them on-screen. Otherwise, they get pulled off instantly...
-  // What isn't quite right here is that some of the images may not be loaded... 
-  // Food for thought.
-  const isOffline = !isMenu ? (imageLoaded < 2 && offline) : (offline && !secondaryOfflineForMenu);
+  // Let's see if the thumbnails are fully loaded while on the /menu page. Thumbnail count will be the same length
+  // as useThisData on /projects pages, and the length of totalThumbnailCount on /menu pages (MultiProjecNav).
+  // Note: We don't consider this value when assessing the offlineState on /projects pages.
+  const fullyLoaded = !isMenu ? thumbnailCount === useThisData.length : thumbnailCount === totalThumbnailCount ;
+  const isOffline = !isMenu ? (imageLoaded < 2 && offline) : (offline && !fullyLoaded);
+  const handleThumbnailLoads = event => {
+    eventManagement(event);
+    boundHandleClickForContentLoader('trackThumbnailCount')
+  }
 
   return (
     <Group
@@ -119,6 +126,7 @@ export default function ProjectNav(props) {
                   alt={`Thumbnail for ${projectName}, image ${idx + 1}.`}
                   isMenu={isMenu}
                   offline={isOffline}
+                  onLoad={handleThumbnailLoads}
                   src={offlineImageToggle(isOffline, `${urlPrefix}${thumb}-1x.jpg`)}
                   srcSet={
                     offlineImageToggle(isOffline, `${urlPrefix}${thumb}-2x.jpg 2x`),
