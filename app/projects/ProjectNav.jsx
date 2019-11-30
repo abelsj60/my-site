@@ -88,9 +88,9 @@ export default function ProjectNav(props) {
   const useThisData = !isMenu ? projectThumbnail : mappedProject.attributes.projectThumbnail;
   // Let's see if the thumbnails are fully loaded while on the /menu page. Thumbnail count will be the same length
   // as useThisData on /projects pages, and the length of totalThumbnailCount on /menu pages (MultiProjecNav).
-  // Note: We don't consider this value when assessing the offlineState on /projects pages.
+  // Note: Projects.jsx has its own isOffline value, meaning /projects image handling can bifurcate...
   const fullyLoaded = !isMenu ? thumbnailCount === useThisData.length : thumbnailCount === totalThumbnailCount ;
-  const isOffline = !isMenu ? (imageLoaded < 2 && offline) : (offline && !fullyLoaded);
+  const isOffline = offline && !fullyLoaded;
   const handleThumbnailLoads = event => {
     eventManagement(event);
     boundHandleClickForContentLoader('trackThumbnailCount')
