@@ -37,7 +37,7 @@ export default class ContentLoader extends Component {
     if (location.caller === 'chapter') {
       const { images, offline, type } = this.props.appState;
       const number = state.getIndex('chapter') + 1;
-      imageLoaded = images[`chapter-${number}-blurred`].complete && !offline? 2 : 0;
+      imageLoaded = images[`chapter-${number}-blurred`].complete && !offline ? 2 : 0;
 
       props.boundHandleClickForApp(
         'updateIllustrationState',

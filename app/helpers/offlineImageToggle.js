@@ -1,3 +1,3 @@
-export default function imageToggle(internet, realSrc) {
+export default function offlineImageToggle(internet, realSrc) {
   return !internet ? realSrc : '';
 }
