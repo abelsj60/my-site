@@ -23,6 +23,7 @@ const Graf = styled.p`
 export default function MultiProjectNav(props) {
   const { contentState } = props;
   const { allContentData } = contentState;
+  let totalThumbnailCount = 0;
 
   return (
     <RestyledList>
@@ -32,8 +33,11 @@ export default function MultiProjectNav(props) {
           const {
             pitch,
             projectName,
+            projectThumbnail,
             type
           } = mappedProject.attributes;
+          // Track totalThumbnail count
+          totalThumbnailCount = totalThumbnailCount + projectThumbnail.length;
 
           return (
             <li
@@ -49,6 +53,7 @@ export default function MultiProjectNav(props) {
                 {...props}
                 mappedProject={mappedProject}
                 mappedProjectIndex={idx}
+                totalThumbnailCount={totalThumbnailCount}
               />
             </li>
           );
