@@ -435,13 +435,13 @@ class App extends Component {
     // 1. 14.4 & 14.7 are arbitrary values (trial-n-error)
     // 2. 52px is the height of the header in pixels
     const mathForSpacer = (windowHeight, percentage) => windowHeight * (percentage / 100) - 52;
-    let spacerHeight = Math.ceil(mathForSpacer(windowHeight, 14.5)); // Original: 14.2
+    let spacerHeight = Math.ceil(mathForSpacer(windowHeight, 14.6));
 
-    // yImageTop < 0 when the window's width is larger than the image's with, meaning
+    // yImageTop < 0 when the window's width is larger than the image's width, meaning
     // we zoom into the image's top and bottom.
     if (Math.floor(yImageTop) < 0) {
       const newHeight = coverVals.height - makePositive(yImageTop);
-      const newSpacerHeight = mathForSpacer(newHeight, 14.7); // Original: 14.6
+      const newSpacerHeight = mathForSpacer(newHeight, 14.9);
       const spacerHeightDifference = newSpacerHeight - spacerHeight;
       const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
 

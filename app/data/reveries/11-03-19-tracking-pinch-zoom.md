@@ -27,7 +27,7 @@ Zoom off
 
 # The code
 
-[The code](https://gist.github.com/abelsj60/36a27f22dd75426aade2ed42bbcc4190). It worked in my testing. 
+[The code](https://gist.github.com/abelsj60/d3b5fac857c3378a7f93f4614302572d). It worked in my testing. 
 
 # The rant 
 
