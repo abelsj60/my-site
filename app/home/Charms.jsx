@@ -54,7 +54,7 @@ const OuterContainer = styled.div`
   opacity: ${p => (p.enter && p.spellLevel >= 3 )|| (p.exit && p.spellLevel > 3) ? '1' : '0'};
   // Transition settings for the spell should match NameTag/InnerContainer's transition property.
   transition: opacity ${p => p.enter ? '.65s' : '.45s'} ease-in-out;
-  width: 100%;
+  margin-top: -7px;
 `;
 const InnerContainer = styled.div`
   display: flex;
@@ -64,7 +64,7 @@ const InnerContainer = styled.div`
   align-self: center;
   margin-left: 1.17em;
 
-  // Arbitrarily chosen widths for 'lil extra styling
+  // Arbitrarily chosen widths for a little extra styling.
   @media (min-width: 335px) {
     width: 200px;
   }
@@ -247,6 +247,7 @@ export default function Charms(props) {
       tempContent={tempContent}
     >
       <SubHed
+        extraMarginTop={true}
         marginLeft="1.05em"
         setFontSize={getFontSize(nameTagWidth, 3.05)}
       >

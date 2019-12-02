@@ -410,7 +410,7 @@ class App extends Component {
       3. We only care about the minAllowedHeight on mobile devices, desktops get a pass.
     */
 
-    return !isMobile || this.minAllowedHeight < document.documentElement.clientHeight
+    return document.documentElement.clientHeight > this.minAllowedHeight
       ? !isAndroid ? document.documentElement.clientHeight : window.innerHeight
       : this.minAllowedHeight;
   }
@@ -421,38 +421,37 @@ class App extends Component {
 
   calculateNameTagWidth(topImages) {
     const images = topImages || this.state.images;
-    const coverVals = this.coverVals(images);
-
-    return Math.floor(.27 * coverVals.width);
+    return Math.floor(.27 * this.coverVals(images).width);
   }
 
   calculateSpacerHeight(topImages) {
     const images = topImages || this.state.images;
-    const windowHeight = this.pageHeight;
     const coverVals = this.coverVals(images);
-    const yImageTop = coverVals.y;
+    const offScreenImageTop = coverVals.y;
     const makePositive = val => val * -1;
-    // 1. 14.4 & 14.7 are arbitrary values (trial-n-error)
-    // 2. 52px is the height of the header in pixels
-    const mathForSpacer = (windowHeight, percentage) => windowHeight * (percentage / 100) - 52;
-    let spacerHeight = Math.ceil(mathForSpacer(windowHeight, 14.6));
+    /* Equation --> (imageHeight * percentageOfImageWhereContentStarts) - (headerHeight + offScreenImageTop):
 
-    // yImageTop < 0 when the window's width is larger than the image's width, meaning
-    // we zoom into the image's top and bottom.
-    if (Math.floor(yImageTop) < 0) {
-      const newHeight = coverVals.height - makePositive(yImageTop);
-      const newSpacerHeight = mathForSpacer(newHeight, 14.9);
-      const spacerHeightDifference = newSpacerHeight - spacerHeight;
-      const changedPosition = (makePositive(yImageTop)) - spacerHeightDifference;
-
-      spacerHeight = Math.ceil(spacerHeight - changedPosition);
-    }
+      1. Figure out the point at which content should start on the image.
+        -It starts right below the double backslash.
+      2. Deduct pixels for the headerHeight (always 52px) + the amount of pixels already off screen.
+        -Offscreen pixels = coverVals.y. It will either be 0 or a negative value.
+        -If negative, the image starts above the window.screenTop.
+          -We should deduct this value from our point calculation because the pixels above Y have
+            already been passed, i.e., we need to offset them. 
+          -Note: There's no scaling here b/c we're using object-position: cover.
+    */
+    const spacerHeight = Math.ceil(
+      (coverVals.height * (14.5 / 100)) - (52 + makePositive(offScreenImageTop))
+    ); // Original was 14.2
 
     return spacerHeight >= 15 ? spacerHeight : 15;
   }
 
   coverVals(images) {
-    return cover(this.pageWidth, this.pageHeight, images.width, images.height);
+    const { width, height } = images;
+    const { pageWidth, pageHeight } = this;
+
+    return cover(pageWidth, pageHeight, width, height);
   }
 
   handleBackAndForth() {

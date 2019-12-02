@@ -79,19 +79,21 @@ const Hed = styled.h1`
   -moz-osx-font-smoothing: grayscale;
   color: ${p => p.theme.colors.yellow};
   font-weight: 700;
-  line-height: 1;
-  margin-top: -9px;
-  margin-bottom: 10px;
   margin-left: 0px;
   cursor: pointer;
   user-select: none;
   // Use !p.homePageLoaded to limit opacity change to load sequence.
   opacity: ${p => !p.homePageLoaded && p.loadLevel < 1 ? '0' : '1'};
   transition: ${p => p.loadLevel < 2 && 'opacity .605s .095s ease-in-out'};
-
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    margin-top: -17px;
-  }
+  // Let's set height in a consistent way. HTML text often has wonky CapHeights and Baselines (space above 
+  // and below the glyphs). One solution: 
+  // https://medium.com/eightshapes-llc/cropping-away-negative-impacts-of-line-height-84d744e016ce
+  // It didn't work well for me. So, I did the following:
+  //  1. Founda line-height that tightened the space around the text to what I expected/wanted.
+  //  2. Explicitly set the element's height to match the font-size (in px) so nothing gets cut off.
+  // Note: This worked great here, but may not work as well with multiple lines of text...
+  line-height: .45;
+  height: ${p => p.hedHeight}px;
 `;
 const InnerContainer = styled.div`
   display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
@@ -152,6 +154,7 @@ export default function NameTag(props) {
     name
   } = attributes;
 
+  const fontSizeForHed = getFontSize(nameTagWidth, 1.154);
   const handleClickForHed = event => {
     eventManagement(event);
 
@@ -205,14 +208,15 @@ export default function NameTag(props) {
         spellLevel={spellLevel}
         tempContent={tempContent}
       >
-        <Hed
-          setFontSize={getFontSize(nameTagWidth, 1.154)}
-          homePageLoaded={homePageLoaded}
-          loadLevel={loadLevel}
-          onClick={handleClickForHed}
-        >
-          {name}
-        </Hed>
+          <Hed
+            hedHeight={fontSizeForHed}
+            setFontSize={fontSizeForHed}
+            homePageLoaded={homePageLoaded}
+            loadLevel={loadLevel}
+            onClick={handleClickForHed}
+          >
+            {name}
+          </Hed>
         <InnerContainer
           enter={movement === 'enter'}
           exit={movement === 'exit'}
