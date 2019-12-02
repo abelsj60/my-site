@@ -441,7 +441,7 @@ class App extends Component {
           -Note: There's no scaling here b/c we're using object-position: cover.
     */
     const spacerHeight = Math.ceil(
-      (coverVals.height * (14.5 / 100)) - (52 + makePositive(offScreenImageTop))
+      (coverVals.height * (14.65 / 100)) - (52 + makePositive(offScreenImageTop))
     ); // Original was 14.2
 
     return spacerHeight >= 15 ? spacerHeight : 15;
