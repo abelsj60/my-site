@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default styled.h2`
   font-family: 'Aref Ruqaa', serif;
-  font-size: ${p => p.setFontSize}px;
+  font-size: ${p => p.fontSize}px;
   text-shadow: 1.5px 1px 2px white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,7 +19,7 @@ export default styled.h2`
   //  2. Explicitly set the element's height to match the font-size (in px) so nothing gets cut off.
   // Note: This worked great here, but may not work as well with multiple lines of text...
   line-height: .5;
-  height: ${p => p.setFontSize}px;
+  height: ${p => p.fontSize}px;
   // We can rely on margin-top b/c we've used the above css to reset the line-height.
   margin-top: ${p => p.extraMarginTop ? '12px' : '6px'};
 

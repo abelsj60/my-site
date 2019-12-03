@@ -307,8 +307,6 @@ export default class Header extends Component {
         />
         <NameAsLink
           boundHandleClickForApp={boundHandleClickForApp}
-          // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
-          className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           isHome={isHome}
@@ -353,8 +351,6 @@ export default class Header extends Component {
                   >
                     <RestyledLink
                       boundHandleClickForApp={boundHandleClickForApp}
-                      // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
-                      className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
                       fullScreenMenu={true}
                       illustrationDirection={illustrationDirection}
                       illustrationLevel={illustrationLevel}
@@ -383,8 +379,6 @@ export default class Header extends Component {
           </TimingBar>
         </Nav>
         <Icon
-          // Can use ' hardware-accelerate-w-transform' b/c no other transform applied
-          className={isStory ? 'hardware-accelerate hardware-accelerate-w-transform' : ''}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           isHome={isHome}

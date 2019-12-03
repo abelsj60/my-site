@@ -72,7 +72,7 @@ const Spacer = styled.div`
 `;
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
-  font-size: ${p => p.setFontSize}px;
+  font-size: ${p => p.fontSize}px;
   text-shadow: 2px 1.5px 5px black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,7 +92,7 @@ const Hed = styled.h1`
   //  2. Explicitly set the element's height to match the font-size (in px) so nothing gets cut off.
   // Note: This worked great here, but may not work as well with multiple lines of text...
   line-height: .45;
-  height: ${p => p.hedHeight}px;
+  height: ${p => p.fontSize}px;
 `;
 const InnerContainer = styled.div`
   display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
@@ -110,7 +110,7 @@ const Pitch = styled.section`
   z-index: 2;
 
   p {
-    font-size: ${p => p.setFontSize}px;
+    font-size: ${p => p.fontSize}px;
     font-weight: 500;
     margin-left: 1.8em;
     margin-bottom: 0px;
@@ -153,7 +153,6 @@ export default function NameTag(props) {
     name
   } = attributes;
 
-  const fontSizeForHed = getFontSize(nameTagWidth, 1.154);
   const handleClickForHed = event => {
     eventManagement(event);
 
@@ -198,8 +197,6 @@ export default function NameTag(props) {
         spacerHeight={spacerHeight}
       />
       <OuterContainer
-        // Works better w/o: ' hardware-accelerate-w-transform'
-        className={'hardware-accelerate'}
         heartbeat={heartbeat}
         nameTagWidth={nameTagWidth}
         onAnimationEnd={handleAnimationEndForHeartbeat}
@@ -208,8 +205,7 @@ export default function NameTag(props) {
         tempContent={tempContent}
       >
           <Hed
-            hedHeight={fontSizeForHed}
-            setFontSize={fontSizeForHed}
+            fontSize={getFontSize(nameTagWidth, 1.154)}
             homePageLoaded={homePageLoaded}
             loadLevel={loadLevel}
             onClick={handleClickForHed}
@@ -226,12 +222,12 @@ export default function NameTag(props) {
         >
           <SubHed
             marginLeft="1em"
-            setFontSize={getFontSize(nameTagWidth, 3.15)}
+            fontSize={getFontSize(nameTagWidth, 3.15)}
           >
             {motto}
           </SubHed>
           <Pitch
-            setFontSize={getFontSize(nameTagWidth, 5)}
+            fontSize={getFontSize(nameTagWidth, 5)}
           >
             <Fragment>
               {ReactHtmlParser(marked(
