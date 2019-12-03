@@ -204,14 +204,14 @@ export default function NameTag(props) {
         spellLevel={spellLevel}
         tempContent={tempContent}
       >
-          <Hed
-            fontSize={getFontSize(nameTagWidth, 1.154)}
-            homePageLoaded={homePageLoaded}
-            loadLevel={loadLevel}
-            onClick={handleClickForHed}
-          >
-            {name}
-          </Hed>
+        <Hed
+          fontSize={getFontSize(nameTagWidth, 1.154)}
+          homePageLoaded={homePageLoaded}
+          loadLevel={loadLevel}
+          onClick={handleClickForHed}
+        >
+          {name}
+        </Hed>
         <InnerContainer
           enter={movement === 'enter'}
           exit={movement === 'exit'}
