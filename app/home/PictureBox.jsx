@@ -49,6 +49,11 @@ const FallbackImage = styled.img`
   transition: ${p => p.offline ? '' : `opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
   z-index: 4;
 `;
+const FallbackBackground = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${p => p.homePageLoaded ? p.theme.colors.darkPinkTwo : ''};
+`;
 
 export default function PictureBox(props) {
   const {
@@ -227,6 +232,9 @@ export default function PictureBox(props) {
           />
         </Fragment>
       }
+      <FallbackBackground
+        homePageLoaded={homePageLoaded}
+      />
     </PictureHolder>
   );
 }
