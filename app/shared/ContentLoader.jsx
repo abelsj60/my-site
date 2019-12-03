@@ -61,6 +61,7 @@ export default class ContentLoader extends Component {
       imageLoaded: imageLoaded,
       isNotFound: !location.pathIsValid,
       needsRedirect: location.needsRedirect,
+      // obtrusiveScrollbar: false,
       projectIndex: state.getIndex('project'),
       reverieIndex: state.getIndex('reverie'),
       thumbnailCount: 0, // Track thumbnail loads
@@ -220,5 +221,14 @@ export default class ContentLoader extends Component {
         }
       }
     }
+
+    // if (!this.state.obtrusiveScrollbar) {
+    //   const obtrusiveScrollbar = this.overflowRef.current.offsetWidth > this.overflowRef.current.clientWidth;
+    //   console.log('obtrusiveScrollbar:', obtrusiveScrollbar);
+  
+    //   if (obtrusiveScrollbar) {
+    //     this.setState({ obtrusiveScrollbar: true });
+    //   }
+    // }
   }
 }

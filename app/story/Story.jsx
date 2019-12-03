@@ -188,7 +188,8 @@ export default function Story(props) {
   const {
     allContentData,
     chapterIndex,
-    imageLoaded
+    imageLoaded,
+    // obtrusiveScrollbar
   } = contentState;
   const {
     description,
@@ -247,6 +248,8 @@ export default function Story(props) {
       break;
   }
 
+  // console.log('obtrusiveScrollbar:', obtrusiveScrollbar);
+
   return (
     <Main>
       <RestyledContentHolder
@@ -265,6 +268,7 @@ export default function Story(props) {
         </RestyledShelf>
         <Overflow
           ref={overflowRef}
+          // obtrusiveScrollbar={obtrusiveScrollbar}
         >
           <TagLine>
             {dek}

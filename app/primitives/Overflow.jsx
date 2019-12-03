@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // On scrollbars: 
 //  1. https://stackoverflow.com/a/25561646
@@ -18,28 +18,54 @@ export default styled.div`
   // Webkit (chrome, safari, Chromium-Edge):
   -webkit-overflow-scrolling: touch;
 
+  // &::-webkit-scrollbar {
+  //   height: .2rem;
+  //   width: .2rem;
+  // }
+
+  // &::-webkit-scrollbar-track {
+  //   background-color: transparent;
+  // }
+
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: rgba(0, 0, 0, .2);
+  //   /* Add :hover, :active as needed */
+  // }
+
+  // &::-webkit-scrollbar-thumb:vertical {
+  //   min-height: 1.5rem;
+  // }
+
+  // &::-webkit-scrollbar-thumb:horizontal {
+  //   min-width: 1.5rem;
+  // }
+
   // Check Chromium Edge, check EdgeHMTL on native machine?
-  // Detect when always on scrollbar?
+  // ${p => p.obtrusiveScrollbar ? (css`
+  //   ${console.log('inside')}
 
-  &::-webkit-scrollbar {
-    height: .2rem;
-    width: .2rem;
-  }
+  //   &::-webkit-scrollbar {
+  //     height: .2rem;
+  //     width: .2rem;
+  //   }
 
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
+  //   &::-webkit-scrollbar-track {
+  //     // background-color: ${p.theme.colors.reverieBlue};
+  //     background-color: navy;
+  //     opacity: .5;
+  //   }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, .2);
-    /* Add :hover, :active as needed */
-  }
+  //   &::-webkit-scrollbar-thumb {
+  //     background-color: rgba(0, 0, 0, .2);
+  //     /* Add :hover, :active as needed */
+  //   }
 
-  &::-webkit-scrollbar-thumb:vertical {
-    min-height: 1.5rem;
-  }
+  //   &::-webkit-scrollbar-thumb:vertical {
+  //     min-height: 1.5rem;
+  //   }
 
-  &::-webkit-scrollbar-thumb:horizontal {
-    min-width: 1.5rem;
-  }
+  //   &::-webkit-scrollbar-thumb:horizontal {
+  //     min-width: 1.5rem;
+  //   }
+  // `) : ''}
 `;
