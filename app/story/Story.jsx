@@ -4,6 +4,7 @@ import fallbackBlurOne from '../../docs/assets/images/convert-to-data-uri/chapte
 import fallbackBlurTwo from '../../docs/assets/images/convert-to-data-uri/chapter-2-ink-50x50-53.png';
 import fallbackBlurThree from '../../docs/assets/images/convert-to-data-uri/chapter-3-ink-50x50-53.png';
 import fallbackBlurFour from '../../docs/assets/images/convert-to-data-uri/chapter-4-ink-50x50-53.png';
+import { isIE } from 'react-device-detect';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
 import offlineImageToggle from '../helpers/offlineImageToggle.js';
@@ -19,6 +20,8 @@ const RestyledContentHolder = styled(ContentHolder)`
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
   pointer-events: ${p => p.illustrationLevel >  0 && 'none'};
   flex-direction: column;
+  // Added z-index for weird behavior on IE 11, per BrowserStack testing:
+  ${p => p.isIE && 'z-index: 1;'}
 `;
 const RestyledShelf = styled(Shelf)`
   flex-direction: column;
@@ -249,6 +252,7 @@ export default function Story(props) {
       <RestyledContentHolder
         illustrationDirection={illustrationDirection}
         illustrationLevel={illustrationLevel}
+        isIE={isIE}
         saveSerifs={true}
         onTransitionEnd={handleTransitionEndForRestyledContentHolder}
       >

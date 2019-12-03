@@ -46,7 +46,6 @@ const heartbeatKeyframes = keyframes`
 `;
 const OuterContainer = styled.div`
   display: ${p => p.tempContent > 0 ? 'none' : 'block'};
-  will-change: ${p => p.heartbeat < 3 ? 'transform' : p.spellLevel === 5 ? 'filter, opacity' : ''};
   // The double animation prop works b/c heartbeat runs three times on load, then stops. It then
   // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 

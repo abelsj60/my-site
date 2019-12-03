@@ -21,7 +21,7 @@ const Feedback = styled.p`
 const ExplanationContainer = styled.div`
   max-height: 300px;
   max-width: 200px;
-  overflow: scroll;
+  overflow: auto;
   margin-bottom: 25px;
 
   @media (min-width: 425px) {

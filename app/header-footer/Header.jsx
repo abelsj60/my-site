@@ -1,4 +1,5 @@
 import bio from '../data/home/home.md';
+import { isIE } from 'react-device-detect';
 import eventManagement from '../helpers/eventManagement';
 import headerNavClose from '../../docs/assets/images/convert-to-data-uri/header-nav-open-88-@4x.png';
 import headerNavOpen from '../../docs/assets/images/convert-to-data-uri/header-nav-closed-88-@4x.png';
@@ -49,7 +50,8 @@ const HeaderBackground = styled.div`
   background-color: ${p => p.isHome || (p.tempContent === 3 && p.illustrationLevel === 3) ? '' : p.theme.colors.darkPink};
   opacity: ${p => p.tempContent === 3 || p.isReverie || ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity .35s`};
-  z-index: -1;
+  // Added z-index for weird behavior on IE 11, per BrowserStack testing:
+  z-index: ${p => !p.isIE ? '-1' : '1'};
 
   // This mediaQ ensures the background goes away if the full-screen menu
   // is on when the user increases the browser window's width
@@ -155,7 +157,7 @@ const Nav = styled.nav`
   padding: ${p => p.isHome && '6px 12px'};
   // Don't show background-color box when business card or legal terms are on, but do show it immediately if we're offline!
   // This means showing it when p.startDramaAtHome is either 'yes' or 'never', which sounds a little weird, no?
-  background-color: ${p => (p.offline && p.isHome && p.tempContent < 1) || (p.isHome && (p.startDramaAtHome === 'yes' || p.startDramaAtHome === 'never') && p.tempContent < 1) ? 'rgba(0, 0, 0, .125)' : ''};
+  background-color: ${p => (p.offline && p.isHome && p.tempContent < 1) || (p.isHome && (p.startDramaAtHome === 'yes' || p.startDramaAtHome === 'never') && p.tempContent < 1) ? 'rgba(0, 0, 0, .145)' : ''};
   ${p => !p.homePageLoaded && 'will-change: background-color;'}
   ${p => !p.homePageLoaded && p.startDramaAtHome !== 'never' && 'transition: background-color .7s ease-in-out;'}
   // Prevent occasional over-expansion
@@ -247,7 +249,7 @@ const TimingBar = styled.div`
   display: ${p => p.tempContent === 3 ? 'block' : 'none'};
   position: fixed;
   background-color: ${p => p.theme.colors.yellow};
-  top: ${p => p.offline ? '54px' : '52px'};
+  top: ${p => p.offline ? '54px' : '51px'};
   left: 0px;
   height: 1px;
   width: 100%;
@@ -257,9 +259,8 @@ const Timer = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  will-change: transform;
   background-color: ${p => p.theme.colors.pink};
-  animation: ${css`5s ${timerKeyframes} 1`};
+  animation: ${css`6s ${timerKeyframes} 1`};
 `;
 
 export default class Header extends Component {
@@ -298,6 +299,7 @@ export default class Header extends Component {
       >
         <HeaderBackground
           isHome={isHome}
+          isIE={isIE}
           isReverie={isReverie}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}

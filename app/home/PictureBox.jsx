@@ -142,7 +142,6 @@ export default function PictureBox(props) {
       }
     }
   };
-
   return (
     <PictureHolder>
       <Portal
@@ -193,8 +192,6 @@ export default function PictureBox(props) {
           />
           <ForrestBackground
             alt={altTextForrest}
-            // ' hardware-accelerate-w-transform' breaks functionality
-            className={'hardware-accelerate'}
             homePageLoaded={homePageLoaded}
             inCity={inCity}
             loadLevel={loadLevel}
@@ -220,8 +217,6 @@ export default function PictureBox(props) {
           />
           <NycBackground
             alt={altTextNyc}
-            // ' hardware-accelerate-w-transform' breaks functionality
-            className={'hardware-accelerate'}
             homePageLoaded={homePageLoaded}
             inCity={inCity}
             onLoad={handleLoadForNyc}

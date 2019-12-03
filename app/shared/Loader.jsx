@@ -30,7 +30,7 @@ const ImgContainer = styled.div`
   height: 16px;
   width: 16px;
 `;
-const ImgLoader = styled.div`
+const Img = styled.div`
   width: 100%;
   height: 100%;
   background-image: url(${p => p.spinner});
@@ -41,7 +41,7 @@ const Text = styled.p`
   margin-bottom: ${p => p.marginBottom + 'px'};
   font-size: ${p => p.smallFont ? p.theme.fontSizes.zero : p.theme.fontSizes.six };
 `;
-const LoadingBar = styled.div`
+const LoadingTrack = styled.div`
   position: relative;
   height: 1px;
   background-color: ${p => !p.white ? p.theme.colors.white : p.theme.colors.black };
@@ -50,7 +50,6 @@ const ProgressBar = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  will-change: transform;
   background-color: ${p => !p.white ? p.theme.colors.black : p.theme.colors.white};
   animation: ${p => p.show && css`1.25s ${loaderKeyframes} infinite`}; 
 `;
@@ -73,7 +72,7 @@ export default function Loader(props) {
       {
         props.spinner ? (
           <ImgContainer>
-            <ImgLoader 
+            <Img 
               spinner={spinner}
             />
           </ImgContainer>
@@ -86,14 +85,14 @@ export default function Loader(props) {
             >
               Loading...
             </Text>
-            <LoadingBar
+            <LoadingTrack
               white={props.white}
             >
               <ProgressBar 
                 show={props.show}
                 white={props.white}
               />
-            </LoadingBar>
+            </LoadingTrack>
           </div>
         )
       }

@@ -198,29 +198,15 @@ const GlobalStyle = createGlobalStyle`
       margin-bottom: ${p => p.theme.bottomMargin.regular};
       line-height: 1.6;
     }
-
-    // Try to run animations on a separate thread, strategy warrants more investigation
-    // Don't add a transform to base class b/c some elements use transforms
-    // https://blog.teamtreehouse.com/increase-your-sites-performance-with-hardware-accelerated-css
-    .hardware-accelerate {
-      backface-visibility: hidden;
-      perspective: 1000;
-    }
-
-    // Try to run animations on a separate thread, strategy warrants more investigation
-    // Add a transform where the element doesn't alrady use one
-    .hardware-accelerate-w-transform {
-      transform: translateZ(0);
-    }
   }
 
   #app {
     display: flex;
     flex-direction: column;
     align-items: center;
-    // ! Overall app height!
+    // Overall app height! Use px, rather than 100vh to limit
+    // the height to area between the top and bottom menus.
     height: ${p => p.pageHeight}px;
-    overflow: hidden;
     position: relative;
 
     @media(orientation: landscape) {
@@ -232,9 +218,11 @@ const GlobalStyle = createGlobalStyle`
       ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
     }
 
+    // Probably for IE...? Review.
     ${p => p.home && css`
       width: 100%;
-      overflow: hidden;
+      // Should hide scrollbars on home page.
+      // overflow: hidden;
     `};
   }
 `;

@@ -12,6 +12,8 @@ const Nav = styled.nav`
   display: flex;
   flex-shrink: 0;
   position: relative;
+  // Added width b/c otherwise collapsed on IE 11, per BrowserStack testing:
+  width: 100%;
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     max-width: 225px;
