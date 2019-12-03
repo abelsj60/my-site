@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 //  1. https://stackoverflow.com/a/25561646
 //  2. https://stackoverflow.com/a/23771140
 //  3. https://www.filamentgroup.com/lab/scrollbars/
+//  4. cross browser scrollbar detection...
+//    -Problem is really with Edge — Chromium Edge, edgeHTML?
 
 export default styled.div`
   overflow: auto;

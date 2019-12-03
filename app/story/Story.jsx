@@ -90,18 +90,6 @@ const Portal = styled.div`
   opacity: ${p => (p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 1) ? '0' : '.5'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
 `;
-const Image = styled.img`
-  // Ensure img top is TOP
-  position: absolute;
-  object-fit: cover;
-  font-family: 'object-fit: cover;';
-  top: 0px;
-  left: 0px;
-  z-index: -3;
-  // May need to fill page: https://stackoverflow.com/a/30794589
-  height: 100%;
-  width: 100%;
-`;
 const FallbackBlur = styled.img`
   position: absolute;
   object-fit: cover;
@@ -123,8 +111,10 @@ const FallbackBlur = styled.img`
   // Always show when blurredImage isn't loaded, mainImage isn't loaded or the network is lost. 
   // Note: We don't need to check p.offline b/c imageLoaded is set to 0 when the network is
   // lost via ClickHandling. This ensures the Fallback's seen and the transition's off. 
-  // REMEMBER --> ilustrationState = MainImage load state!
-  opacity: ${p => (p.imageLoaded < 1 || p.illustrationState < 0) ? '1' : '0'};
+  // REMEMBER --> ilustrationState is the load state of the main illustration!
+  // Testing if opacity should be 1 when illustrationState is 0, may be the cause of occasional 
+  // hiccups when swapping location (often seen in mobile Brave) --> Est. 12/3/19.
+  opacity: ${p => (p.imageLoaded < 1 || p.illustrationState <= 0) ? '1' : '0'};
   // This is very persnickety! We only want the transition to run when the main images are ready.
   // So, don't transition on p.imageLoaded < 0 or p.illustrationState < 0 or the net's lost.
   // We don't need to check p.offline b/c imageLoaded is set to 0 when the net's lost. 
@@ -152,6 +142,18 @@ const BlurredImage = styled.img`
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     opacity: ${p => p.illustrationLevel > 0 && p.theme.blurForTempContent && p.tempContent === 3 ? '0' : ''};
   }
+`;
+const Image = styled.img`
+  // Ensure img top is TOP
+  position: absolute;
+  object-fit: cover;
+  font-family: 'object-fit: cover;';
+  top: 0px;
+  left: 0px;
+  z-index: -3;
+  // May need to fill page: https://stackoverflow.com/a/30794589
+  height: 100%;
+  width: 100%;
 `;
 const StoryText = styled.section`
   font-size: ${p => p.theme.fontSizes.twelve};
