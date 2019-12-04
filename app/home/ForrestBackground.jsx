@@ -18,15 +18,14 @@ export default styled.img`
   // With luck, will-change will transform image to bitmap for smoother transforms.
   // Takes a beat, so may not be done in practice before first transition...
   // Added anyway.
-  ${p => p.spellLevel > 0 && 'will-change: transform'};
+  ${p => p.spellLevel > 0 && 'will-change: transform, opacity'};
   // Only hidden during the initial stages of the load. It's always visible thereafter. 
   // Only transition when casting spells (initial entrance hidden by fallback image).
   opacity: ${p => (!p.homePageLoaded && p.loadLevel < 2) || (p.homePageLoaded && p.inCity) ? '0' : '1'};
-  transform: ${p => p.inCity ? 'scale(1.48)' : 'scale(1)'}  translateZ(0px);
+  transform: ${p => p.inCity ? 'scale(1.48)' : 'scale(1)'} translate3d(0, 0, 0);
   transform-origin: 50% ${p => p.inCity ? '-3%' : '-6%'};
   // Transition used for background swap. Opacity bezier curve should match that used by NycBackground.
   // Added a slight delay to both transitions to give the browser a second to breathe.
   // Also, mental note --> The cubic-bezier curve is the best. I tested extensively.
-  transition: ${p => p.spellLevel > 0 && 'transform 1.75s .05s, opacity 1.35s .05s cubic-bezier(0.77, 0, 0.175, 1)'};
-  z-index: ${p => !p.inCity && p.spellLevel < 5 ? '0' : '-2'};
+  transition: ${p => p.spellLevel > 0 && 'transform 2s, opacity 1.35s cubic-bezier(0.77, 0, 0.175, 1)'};
 `;
