@@ -267,6 +267,9 @@ export default function Charms(props) {
                 <Charm
                   enter={movement === 'enter'}
                   exit={movement === 'exit'}
+                  // Added explicit keys to try to help IE 11 along. It doesn't
+                  // stop animation after each update, but the CSS changes!
+                  key={idx}
                   isActive={isActive}
                   isReady={isReady}
                   key={idx}

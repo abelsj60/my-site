@@ -1,7 +1,8 @@
-import home from '../data/home/home.md';
+import callReactGa from '../helpers/callReactGa.js';
 import dayjs from 'dayjs';
 import eventManagement from '../helpers/eventManagement.js';
 import getFontSize from '../helpers/getFontSize.js';
+import home from '../data/home/home.md';
 import Loader from '../shared/Loader.jsx';
 import marked from 'marked';
 import React, { Fragment } from 'react';
@@ -170,7 +171,7 @@ export default function NameTag(props) {
         return false;
       }
   
-      if (process.env.NODE_ENV !== 'development') {
+      if (callReactGa()) {
         ReactGA.event({
           category: 'Home state',
           action: `Spell toggled: ${spellLevel === 0 ? 'off' : 'on'}`,

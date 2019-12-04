@@ -1,4 +1,5 @@
 import Body from './Body.jsx';
+import callReactGa from './helpers/callReactGa.js';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
 import {
@@ -266,7 +267,7 @@ class App extends Component {
       }
     }
 
-    if (process.env.NODE_ENV !== 'development') {
+    if (callReactGa()) {
       ReactGA.initialize('UA-137902767-1');
       ReactGA.pageview(pathname + search); // Tallies initial request
     }
@@ -552,7 +553,7 @@ class App extends Component {
     const { pathname, search } = window.location;
     const newHeight = this.pageHeight;
 
-    if (process.env.NODE_ENV !== 'development') {
+    if (callReactGa()) {
       ReactGA.event({
         category: 'App state',
         action: `Re-calculate height. Currently: ${this.state.height}.`,
@@ -587,7 +588,7 @@ class App extends Component {
       }
     }
 
-    if (process.env.NODE_ENV !== 'development') {
+    if (callReactGa()) {
       ReactGA.event({
         category: 'App state',
         action: `Toggle network status: ${stateToUpdate}.`
@@ -628,7 +629,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (process.env.NODE_ENV !== 'development') {
+    if (callReactGa()) {
       const location = new Location('/', this.props, prevProps);
 
       if (location.recordPageview) {

@@ -1,3 +1,4 @@
+import callReactGa from '../helpers/callReactGa.js';
 import Referrer from './Referrer';
 import ReactGA from 'react-ga';
 
@@ -280,7 +281,7 @@ export default class ClickHandling {
         updateValue !== 'updateApp'
           || updateValue !== 'startDramaAtHome'
       ) {
-        if (process.env.NODE_ENV !== 'development') {
+        if (callReactGa()) {
           if (category && action) {
             ReactGA.event({
               category,
@@ -449,7 +450,7 @@ export default class ClickHandling {
       const boundHandleClickForHome = hcForHome.boundHandleClick;
 
       if (!isActive) { // The Charm's inactive (not pulsing).
-        if (process.env.NODE_ENV !== 'development') {
+        if (callReactGa()) {
           ReactGA.event({
             category: 'Home state',
             action: 'Wrong Charm clicked.',
@@ -461,7 +462,7 @@ export default class ClickHandling {
       } else if (isActive && abracadabra) { // It's time for magic! (Maybe.)
         const { offline } = this.props.appState;
 
-        if (process.env.NODE_ENV !== 'development') {
+        if (callReactGa()) {
           ReactGA.event({
             category: 'Home state',
             action: !offline ? 'Spell successful.' : 'Spell successful, but offline!'

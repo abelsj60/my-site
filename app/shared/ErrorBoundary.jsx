@@ -1,3 +1,4 @@
+import callReactGa from '../helpers/callReactGa.js';
 import React, { Component, Fragment } from 'react';
 import ReactGA from 'react-ga';
 
@@ -117,7 +118,7 @@ export default class ErrorBoundary extends Component {
       body[0].style.margin = '8px';
     };
 
-    if (process.env.NODE_ENV !== 'development') {
+    if (callReactGa()) {
       ReactGA.exception({
         description: `${error}. Initial load: ${initialLoad}. Info: ${JSON.stringify(errorInfo)}.`
       });
