@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // Try to run animations on a separate thread, strategy warrants more investigation:
 // https://blog.teamtreehouse.com/increase-your-sites-performance-with-hardware-accelerated-css
@@ -19,11 +19,16 @@ export default styled.img`
   // Takes a beat, so may not be done in practice before first transition...
   // Added anyway.
   ${p => p.spellLevel > 0 && 'will-change: transform, opacity'};
+  // Note: below is currently abandoned attempt to add a blur filter to the mix, it looks great, but: 
+  //  a. It's hard to implement in an aesthetically pleasant way, and
+  //  b. More important, it results in a currently unacceptable performance hit...
+  //  -Will need to add to will-change and transition when adding it back.
+  // ${p => !p.inCity && p.spellLevel > 0 && css`filter: blur(${p => p.spellLevel < 4 ? '1px' : '25px'})`};
   opacity: ${p => p.inCity ? '1' : '0'};
   transform: ${p => p.inCity ? 'scale(1)' : 'scale(1.48)'} translate3d(0, 0, 0);
   transform-origin: 50% ${p => p.inCity ? '-3%' : '-6%'};
   // Transition used for background swap. Opacity bezier curve should match that used by ForrestBackground.
   // Added a slight delay to both transitions to give the browser a second to breathe.
   // Also, mental note --> The cubic-bezier curve is the best. I tested extensively.
-  transition: transform 2s, opacity 1.35s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1.75s, opacity 1.31s cubic-bezier(0.77, 0, 0.175, 1);
 `;
