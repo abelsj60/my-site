@@ -27,19 +27,23 @@ const heartbeatKeyframes = keyframes`
     transform-origin: center center;
     animation-timing-function: ease-out;
   }
-  20% {
-    transform: scale(1.04);
+
+  16% {
+    transform: scale(1.03);
     animation-timing-function: ease-in;
   }
-  29% {
+
+  25% {
     transform: scale(0.97);
     animation-timing-function: ease-out;
   }
-  45% {
+
+  41% {
     transform: scale(1.05);
     animation-timing-function: ease-in;
   }
-  55% {
+
+  51% {
     transform: scale(1);
     animation-timing-function: ease-out;
   }
