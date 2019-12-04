@@ -126,9 +126,9 @@ const CharmShadow = styled.div`
   width: 100%;
 `;
 const Eye = styled.div`
-  // Can be a heavy transition, trying will-change + fallback. 
-  ${p => p.spellLevel > 0 && 'transform: translate3d(0, 0, 0);'}
-  ${p => p.spellLevel > 0 && 'will-change: box-shadow;'}
+  // // Can be a heavy transition, trying will-change + fallback. 
+  // ${p => p.spellLevel > 0 && 'transform: translate3d(0, 0, 0);'}
+  // ${p => p.spellLevel > 0 && 'will-change: box-shadow;'}
   // Separate p.enter and p.exit checks so the animation starts on spellLevel 4 and runs through the onExit fadeOut (otherwise, it ends onExit. Awkward).
   animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${p.isReady ? pinkPulse : yellowPulse} infinite`)};
   background-color: ${p => p.isReady && p.isActive ? p.theme.colors.pink : p.theme.colors.yellow};
