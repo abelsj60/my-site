@@ -14,9 +14,6 @@ const Structure = styled.button`
   position: relative;
   background-color: transparent; // otherwise, button grey
   border: 1px rgba(255, 255, 255, .6) solid;
-  // // Can be a heavy transition, trying will-change + fallback.
-  // ${p => p.illustrationLevel > 0 && 'will-change: box-shadow;'}
-  // ${p => p.illustrationLevel > 0 && 'transform: translate3d(0, 0, 0);'}
   box-shadow: ${p => p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) && '2px 2px 2.5px rgba(0, 0, 0, .3)'};
   // Note: Transitition timing is faster than its siblings w/hardware acceleration (.25s) and slower w/o it (.5s)
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'box-shadow .23s' : ''};

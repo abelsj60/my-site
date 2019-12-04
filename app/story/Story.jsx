@@ -16,9 +16,6 @@ import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
-  // // Can be a heavy transition, trying will-change + fallback.
-  // ${p => p.illustrationLevel > 0 && 'will-change: opacity;'}
-  // ${p => p.illustrationLevel > 0 && 'transform: translate3d(0, 0, 0);'}
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
   pointer-events: ${p => p.illustrationLevel >  0 && 'none'};
@@ -90,9 +87,6 @@ const Portal = styled.div`
   width: 100%;
   z-index: 0;
   background-color: navy;
-  // // Can be a heavy transition, trying will-change + fallback.
-  // ${p => p.illustrationLevel > 0 && 'will-change: opacity;'}
-  // ${p => p.illustrationLevel > 0 && 'transform: translate3d(0, 0, 0);'}
   opacity: ${p => (p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 1) ? '0' : '.5'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
 `;
@@ -143,9 +137,6 @@ const BlurredImage = styled.img`
   // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
-  // // Can be a heavy transition, trying will-change + fallback.
-  // ${p => p.illustrationLevel > 0 && 'will-change: opacity;'}
-  // ${p => p.illustrationLevel > 0 && 'transform: translate3d(0, 0, 0);'}
   // Do not check for illustrationState on opacity b/c we always this to be visible beneath the FallbackBlur
   opacity: ${p => (p.tempContent < 1 && ((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'};
   // Transition runs if we're turning off the text. Otherwise, FallbackBlur handles the reveal
