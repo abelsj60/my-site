@@ -16,6 +16,9 @@ import Shelf from '../shared/Shelf.jsx';
 import styled from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
+  // Can be a heavy transition, trying will-change + fallback.
+  ${p => p.illustrationLevel > 0 && 'will-change: opacity;'}
+  ${p => p.illustrationLevel > 0 && 'transform: translate3d(0, 0, 0);'}
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
   pointer-events: ${p => p.illustrationLevel >  0 && 'none'};
@@ -87,6 +90,9 @@ const Portal = styled.div`
   width: 100%;
   z-index: 0;
   background-color: navy;
+  // Can be a heavy transition, trying will-change + fallback.
+  ${p => p.illustrationLevel > 0 && 'will-change: opacity;'}
+  ${p => p.illustrationLevel > 0 && 'transform: translate3d(0, 0, 0);'}
   opacity: ${p => (p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 1) ? '0' : '.5'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
 `;
@@ -132,6 +138,9 @@ const BlurredImage = styled.img`
   // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
+  // Can be a heavy transition, trying will-change + fallback.
+  ${p => p.illustrationLevel > 0 && 'will-change: opacity;'}
+  ${p => p.illustrationLevel > 0 && 'transform: translate3d(0, 0, 0);'}
   // Do not check for illustrationState on opacity b/c we always this to be visible beneath the FallbackBlur
   opacity: ${p => (p.tempContent < 1 && ((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'};
   // Transition runs if we're turning off the text. Otherwise, FallbackBlur handles the reveal
@@ -233,21 +242,35 @@ export default function Story(props) {
     boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
   };
   let fallbackBlur;
+  let fallbackKey;
 
   switch (number) {
     case 1:
       fallbackBlur = fallbackBlurOne;
+      fallbackKey = `${number}-dj8z-39d`;
       break;
     case 2:
       fallbackBlur = fallbackBlurTwo;
+      fallbackKey = `${number}-eow2-91a`;
       break;
     case 3:
       fallbackBlur = fallbackBlurThree;
+      fallbackKey = `${number}-cx2v-56e`;
       break;
     default:
       fallbackBlur = fallbackBlurFour;
+      fallbackKey = `${number}-pql6-gh0`;
       break;
   }
+
+  /* Image keys:
+
+    1. I've manually added keys to each image element b/c the PictureFill fallback doesn't 
+      update the image sources otherwise (they just freeze). 
+    2. The keys force the image elements to update src (set via background-image properties). 
+    3. I've also created my own fallback keys b/c the fallback urls are data-uris, which is
+      too long to use as a key. I randomly generated them by hand!
+  */
 
   return (
     <Main>
@@ -293,6 +316,7 @@ export default function Story(props) {
         />
         <FallbackBlur // z-index: -1
           alt={fallbackImageDescription}
+          key={fallbackKey}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           illustrationState={illustrationState}
@@ -304,6 +328,7 @@ export default function Story(props) {
         />
         <BlurredImage // z-index: -2
           alt={blurredImageDescription}
+          key={blurredImageSrc}
           imageLoaded={imageLoaded}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
@@ -314,6 +339,7 @@ export default function Story(props) {
         />
         <Image // z-index -3
           alt={description}
+          key={bigImageSrc}
           onLoad={handleLoadForMainImage}
           src={bigImageSrc}
         />

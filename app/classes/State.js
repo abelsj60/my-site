@@ -88,7 +88,9 @@ export default class State {
     const chapterNumber = chapterIndex + 1;
     const isComplete = images[`chapter-${chapterNumber}-main`].complete;
 
-    return (!isComplete || this._props.appState.offline)
+    // Added short circuit bc of weird error in IE 10, per BrowserStack.
+    // The appState wasn't defined and so threw an error. This fixed...
+    return (!isComplete || (this._props.appState && this._props.appState.offline))
       ? chapterNumber * -1
       : chapterNumber
   }
