@@ -19,6 +19,15 @@ const bigPinkPulse = keyframes`
     box-shadow: 0 0 0 0 rgba(253, 17, 114, 0);
   }
 `;
+const stopBigPinkSpinOnIE = keyframes`
+  0% {
+    transform: rotate(0turn);
+  }
+
+  100% {
+    transform: rotate(0turn);
+  }
+`;
 const pinkPulse = keyframes`
   0% {
     box-shadow: 0 0 0 0 rgba(253, 17, 114, 1);
@@ -92,7 +101,10 @@ const Charm = styled.div`
   // Can be a heavy transition, adding will-change (no fallbacks b/c they both break the spin). 
   ${p => p.spellLevel > 0 && 'will-change: transform, box-shadow;'}
   // Separate p.enter and p.exit checks so the animation starts on spellLevel 4 and runs through the onExit fadeOut (otherwise, it ends onExit. Awkward).
-  animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${p.isReady ? bigPinkPulse : bigPinkPulse} infinite`)};
+  animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${bigPinkPulse} infinite`)};
+  // The next animation is designed to help stop the animation when on IE or Edge. It seems to cause no harm. It forces the broswer
+  // to stop spinning the charm when it's inactive.
+  ${p => !p.isActive && css`animation: 0s ${stopBigPinkSpinOnIE} infinite;`}
   border: 2px dotted ${p => p.theme.colors.pink};
   width: 45px;
   height: 45px;

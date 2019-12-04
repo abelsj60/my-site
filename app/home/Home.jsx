@@ -295,7 +295,7 @@ export default class Home extends Component {
   }
 
   updateLoadLevel() {
-    const { homePageLoaded, lastCaller, type } = this.props.appState;
+    const { homePageLoaded, type } = this.props.appState;
     const { loadLevel } = this.state;
 
     if (!homePageLoaded) {
