@@ -187,7 +187,7 @@ export default function Projects(props) {
                   offline={isOffline}
                   onLoad={handleLoadForMainImage}
                   sizes="620px"
-                  src={offlineImageToggle(isOffline, `${urlPrefix}${filePrefix}-q95-625-1x.jpg`)}
+                  src={offlineImageToggle(isOffline, `${urlPrefix}${filePrefix}-q95-620-1x.jpg`)}
                   srcSet={
                     offlineImageToggle(isOffline, `${urlPrefix}${filePrefix}-q50-1250-2x.jpg 1250w`),
                     offlineImageToggle(isOffline, `${urlPrefix}${filePrefix}-q50-1875-3x.jpg 1875w`),
