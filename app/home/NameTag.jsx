@@ -86,13 +86,15 @@ const Hed = styled.h1`
   cursor: pointer;
   user-select: none;
   // Use !p.homePageLoaded to limit opacity change to load sequence.
-  opacity: ${p => !p.homePageLoaded && p.loadLevel < 1 ? '0' : '1'};
-  transition: ${p => p.loadLevel < 2 && 'opacity .605s .095s ease-in-out'};
+  // Use p.offline to change how the hed's shown when surfing online/offline.
+  opacity: ${p => !p.homePageLoaded && p.loadLevel < 1 && !p.offline ? '0' : '1'};
+  // Match transition values to FallbackImage in PictureBox, not InnerContainer.
+  transition: ${p => p.loadLevel < 2 && `opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
   // Let's set height in a consistent way. HTML text often has wonky CapHeights and Baselines (space above 
   // and below the glyphs). One solution: 
   // https://medium.com/eightshapes-llc/cropping-away-negative-impacts-of-line-height-84d744e016ce
   // It didn't work well for me. So, I did the following:
-  //  1. Founda line-height that tightened the space around the text to what I expected/wanted.
+  //  1. Found a line-height that tightened the space around the text to what I expected/wanted.
   //  2. Explicitly set the element's height to match the font-size (in px) so nothing gets cut off.
   // Note: This worked great here, but may not work as well with multiple lines of text...
   line-height: .45;
@@ -138,6 +140,7 @@ export default function NameTag(props) {
     homePageLoaded,
     heartbeat,
     nameTagWidth,
+    offline,
     spacerHeight,
     tempContent
   } = appState;
@@ -212,6 +215,7 @@ export default function NameTag(props) {
           fontSize={getFontSize(nameTagWidth, 1.154)}
           homePageLoaded={homePageLoaded}
           loadLevel={loadLevel}
+          offline={offline}
           onClick={handleClickForHed}
         >
           {name}

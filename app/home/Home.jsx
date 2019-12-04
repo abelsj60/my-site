@@ -49,6 +49,10 @@ export default class Home extends Component {
       over time. 
     */
     this.loadLevels =  [0, 0, 0, 0, 0, 0, 0];
+    // Set in object so I can use pass-by-reference and cacel the timeout when the
+    // user navigates before the laoding sequence is complete (b/c there's a 
+    // setTimeout in PictureBox. This is canceled in cWU() below.
+    this.timeoutIdForFallbackTransitionEnd = { id: 0 }; 
 
     this.state = {
       activeCharm: initialPattern[0],
@@ -102,6 +106,7 @@ export default class Home extends Component {
           setLoadLevels={this.setLoadLevels}
           setSpellLevel={setSpellLevel}
           sumLoadLevels={this.sumLoadLevels}
+          timeoutIdForFallbackTransitionEnd={this.timeoutIdForFallbackTransitionEnd}
         />
         {debugMe && (
           <DebugHome
@@ -391,5 +396,9 @@ export default class Home extends Component {
         this.props.boundHandleClickForApp('updateHeartbeat');
       }
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeoutIdForFallbackTransitionEnd.id);
   }
 }

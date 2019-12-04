@@ -68,7 +68,8 @@ export default function PictureBox(props) {
     homeState,
     setLoadLevels,
     setSpellLevel,
-    sumLoadLevels
+    sumLoadLevels,
+    timeoutIdForFallbackTransitionEnd
   } = props;
   const {
     homePageLoaded,
@@ -127,7 +128,9 @@ export default function PictureBox(props) {
       rather it's unceremoniously dropped off screen. A delay of ~200 milliseconds 
       seems to fix the problem.
     */
-    setTimeout(() => setLoadLevelsNow(null, 0), 200);
+
+    // timeoutIdForFallbackTransitionEnd.id used to cancel update when swapping locations early.
+    timeoutIdForFallbackTransitionEnd.id = setTimeout(() => setLoadLevelsNow(null, 0), 200);
   };
   const handleTransitionEndForBlurredForrest = event => setSpellLevelNow(event, 'BlurredForrest');
   const handleTransitionEndForBlurredNyc = event => setSpellLevelNow(event, 'BlurredNyc');

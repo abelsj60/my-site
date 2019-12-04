@@ -120,7 +120,12 @@ const FallbackBlur = styled.img`
   // REMEMBER --> ilustrationState is the load state of the main illustration!
   // Testing if opacity should be 1 when illustrationState is 0, may be the cause of occasional 
   // hiccups when swapping location (often seen in mobile Brave) --> Est. 12/3/19.
-  opacity: ${p => (p.imageLoaded < 1 || p.illustrationState <= 0) ? '1' : '0'};
+  // Testing didn't work, still loaded main illustration before fallback. New experiment: I 
+  // changed the opacity assessment. Maybe it's evaluating to false before true, meaning we
+  // get 'opacity: 0', then 'opacity: 1', when we really want 'opacity: 1'. I've changed 
+  // the evaluation to default to 1, then to shift to 0 after all loads are detected.
+  opacity: ${p => (p.imageLoaded > 1 || p.illustrationState > 0) ? '0' : '1'};
+  // opacity: ${p => (p.imageLoaded < 1 || p.illustrationState <= 0) ? '1' : '0'}; // In testing
   // This is very persnickety! We only want the transition to run when the main images are ready.
   // So, don't transition on p.imageLoaded < 0 or p.illustrationState < 0 or the net's lost.
   // We don't need to check p.offline b/c imageLoaded is set to 0 when the net's lost. 
