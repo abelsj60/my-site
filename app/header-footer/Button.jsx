@@ -12,7 +12,7 @@ const Structure = styled.button`
   text-align: center;
   cursor: pointer;
   position: relative;
-  background-color: unset; // otherwise, button grey
+  background-color: transparent; // otherwise, button grey
   border: 1px rgba(255, 255, 255, .6) solid;
   // Can be a heavy transition, trying will-change + fallback.
   ${p => p.illustrationLevel > 0 && 'will-change: box-shadow;'}
