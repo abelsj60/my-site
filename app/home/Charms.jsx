@@ -154,13 +154,6 @@ const Eye = styled.div`
     width: 8px;
   }
 `;
-const EyeShadow = styled.div`
-  border-radius: 50%;
-  box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,.15);
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-`;
 const Dashboard = styled.div`
   margin-top: 18px;
   display: flex;
@@ -299,13 +292,7 @@ export default function Charms(props) {
                     isActive={isActive}
                     isReady={isReady}
                     spellLevel={spellLevel}
-                  >
-                    <EyeShadow
-                      isActive={isActive}
-                      isReady={isReady}
-                      spellLevel={spellLevel}
-                    />
-                  </Eye>
+                  />
                 </Charm>
               );
             }}
