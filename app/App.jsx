@@ -325,7 +325,8 @@ class App extends Component {
     const isNotFound = this.state.currentCaller === 'not-found';
     const fixMobileSafariBugOn7 = isTablet && isMobileSafari && osVersion[0] === '7';
 
-    return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
+    // return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
+    return false
       ? (
         <PasswordLogin
           appState={this.state}

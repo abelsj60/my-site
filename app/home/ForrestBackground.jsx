@@ -33,4 +33,5 @@ export default styled.img`
   // Added a slight delay to both transitions to give the browser a second to breathe.
   // Also, mental note --> The cubic-bezier curve is the best. I tested extensively.
   transition: ${p => p.spellLevel > 0 && 'transform 1.75s, opacity 1.31s cubic-bezier(0.77, 0, 0.175, 1)'};
+  z-index: ${p => !p.inCity && p.spellLevel <= 5 ? '0' : '-2'};
 `;
