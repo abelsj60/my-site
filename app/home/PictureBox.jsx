@@ -140,6 +140,7 @@ export default function PictureBox(props) {
     const { propertyName } = event;
 
     eventManagement(event);
+
     if (propertyName === 'transform') {
       if (penultimateLevel && isActive) {
         boundHandleClickForHome('toggleSpell', propertyName);

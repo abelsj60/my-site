@@ -27,7 +27,7 @@ export default styled.img`
   //  -Will need to add to will-change and transition when adding it back.
   // ${p => !p.inCity && p.spellLevel > 0 && css`filter: blur(${p => p.spellLevel < 4 ? '40px' : '5px'})`};
   opacity: ${p => (!p.homePageLoaded && p.loadLevel < 2) || (p.homePageLoaded && p.inCity) ? '0' : '1'}};
-  transform: ${p => p.inCity ? 'scale(1.48)' : 'scale(1)'} translate3d(0, 0, 0);
+  transform: ${p => p.inCity ? 'scale(1.49)' : 'scale(1)'} translate3d(0, 0, 0);
   transform-origin: 50% ${p => p.inCity ? '-3%' : '-6%'};
   // Transition used for background swap. Opacity bezier curve should match that used by NycBackground.
   // Added a slight delay to both transitions to give the browser a second to breathe.
