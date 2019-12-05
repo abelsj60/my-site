@@ -150,8 +150,8 @@ const Eye = styled.div`
   z-index: 1;
 
   @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 950px) {
-    height: 35px;
-    width: 8px;
+    height: 38px;
+    width: 7px;
   }
 `;
 const Dashboard = styled.div`
