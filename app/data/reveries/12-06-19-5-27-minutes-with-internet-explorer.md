@@ -25,8 +25,8 @@ So I checked my code. Seems to be working fine. It's updating and telling the br
 
 So, I futzed about on Google for awhile and some guy on Stack Overflow files an answer with a solution at the bottom of a very long page. 
 
-When his animation is done, he forces Internet Explorer to stop by going beyond merely removing the animating class. He actually adds a class with a "motionless animation" in it. Internet Explorer then forgets the old animation and runs the new one, which has no motion in it! Great idea — I think it'll work. 
+When his animation is done, he forces Internet Explorer to stop by going beyond merely removing the animating class. He actually adds a class with a "motionless animation" in it. Internet Explorer then forgets the old animation and runs the new one, which has no motion! Great idea!
 
-This man deserves a medal.
+This guy deserves a medal.
 
 -j
