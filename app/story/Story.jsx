@@ -13,7 +13,7 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
@@ -132,7 +132,7 @@ const BlurredImage = styled.img`
   // Do not check for illustrationState on opacity b/c we always this to be visible beneath the FallbackBlur
   opacity: ${p => (p.tempContent < 1 && ((p.illustrationDirection === 'exit' && p.illustrationLevel > 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2))) ? '0' : '1'};
   // Transition runs if we're turning off the text. Otherwise, FallbackBlur handles the reveal
-  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s ease-in'};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity ${p.illustrationDirection === 'enter' ? '.5s' : '.35s'} ease-in-out`};
 
   // The mediaQ ensures the blur goes away if the full-screen header menu is
   // turned on when the user increases the browser window's width
@@ -218,11 +218,15 @@ export default function Story(props) {
   };
   const handleTransitionEndForRestyledContentHolder = event => {
     eventManagement(event);
-    // Let it breathe...
+
+    // Let it breathe...to ensure visual artifacts have a chance to leave the mind's eye. 
+    // Use different timings to enter and exit b/c the two sequences are different. 
+
     const isEntering = illustrationDirection === 'enter';
+
     setTimeout(
       () => boundHandleClickForApp('updateIllustrationLevel', isEntering ? 2 : 0),
-      isEntering ? 5 : 17
+      isEntering ? 1 : 6
     );
   };
   const handleTransitionEndForFallbackBlur = event => { // 1 --> 2
