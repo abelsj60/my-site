@@ -103,7 +103,6 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          loadLevels={this.loadLevels}
           setLoadLevels={this.setLoadLevels}
           setSpellLevel={setSpellLevel}
           sumLoadLevels={this.sumLoadLevels}
@@ -118,6 +117,53 @@ export default class Home extends Component {
          )}
       </RestyledMain>
     );
+  }
+
+  handleMouseDown(num) {
+    return () => {
+      const { activeCharm, eventType } = this.state;
+  
+      if (eventType === 'click') {
+        const hcCharm = new ClickHandling('charm', this);
+        const boundHandleCharm = hcCharm.boundHandleClick;
+        boundHandleCharm(activeCharm === num);
+      } else if (eventType === 'touch') {
+        // Resets event type to 'click' if a mouse suddenly works
+        const hcHome = new ClickHandling('home', this);
+        const boundHandleClick = hcHome.boundHandleClick;
+        boundHandleClick('resetEventType');
+      }
+    };
+  }
+
+  handleTouchStart(num) {
+    return () => {
+      const hcCharm = new ClickHandling('charm', this);
+      const boundHandleCharm = hcCharm.boundHandleClick;
+
+      /* Touch v. click handling
+      
+        Update the eventType on State if the Charm was
+        touched. This allows our onMouseDown listener
+        to reject its call due to event propagation.
+
+        There is a bug in React that prevents us from
+        simply calling event.stopPropagation() here.
+
+        Dan Abramov offers a solution, however, it
+        does not seem to work cleanly here. I've
+        come up w/my own hybridized approach.
+
+        I add handlers as he suggests so as to avoid
+        React's own propagation, then use State to
+        reject calls to mouseDown handler touch.
+
+        https://github.com/facebook/react/issues/9809#issuecomment-413978405 
+      */
+
+      this.setState({ eventType: 'touch' });
+      boundHandleCharm(this.state.activeCharm === num);
+    };
   }
 
   createSpellPattern() {
@@ -321,53 +367,6 @@ export default class Home extends Component {
           break;
       }
     }
-  }
-
-  handleMouseDown(num) {
-    return () => {
-      const { activeCharm, eventType } = this.state;
-  
-      if (eventType === 'click') {
-        const hcCharm = new ClickHandling('charm', this);
-        const boundHandleCharm = hcCharm.boundHandleClick;
-        boundHandleCharm(activeCharm === num);
-      } else if (eventType === 'touch') {
-        // Resets event type to 'click' if a mouse suddenly works
-        const hcHome = new ClickHandling('home', this);
-        const boundHandleClick = hcHome.boundHandleClick;
-        boundHandleClick('resetEventType');
-      }
-    };
-  }
-
-  handleTouchStart(num) {
-    return () => {
-      const hcCharm = new ClickHandling('charm', this);
-      const boundHandleCharm = hcCharm.boundHandleClick;
-
-      /* Touch v. click handling
-      
-        Update the eventType on State if the Charm was
-        touched. This allows our onMouseDown listener
-        to reject its call due to event propagation.
-
-        There is a bug in React that prevents us from
-        simply calling event.stopPropagation() here.
-
-        Dan Abramov offers a solution, however, it
-        does not seem to work cleanly here. I've
-        come up w/my own hybridized approach.
-
-        I add handlers as he suggests so as to avoid
-        React's own propagation, then use State to
-        reject calls to mouseDown handler touch.
-
-        https://github.com/facebook/react/issues/9809#issuecomment-413978405 
-      */
-
-      this.setState({ eventType: 'touch' });
-      boundHandleCharm(this.state.activeCharm === num);
-    };
   }
 
   componentDidUpdate() {
