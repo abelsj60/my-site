@@ -67,7 +67,6 @@ export default function PictureBox(props) {
     appState,
     boundHandleClickForHome,
     homeState,
-    loadLevels,
     setLoadLevels,
     setSpellLevel,
     sumLoadLevels,
@@ -105,7 +104,7 @@ export default function PictureBox(props) {
       setLoadLevels(idx);
     }
   };
-  console.log('lL:', props.homeState.loadLevel, props.loadLevels);
+  console.log('lL:', props.homeState.loadLevel, props.loadLevels, props.appState.homePageLoaded);
   const setSpellLevelNow = (event, type) => {
     eventManagement(event);
 
