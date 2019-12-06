@@ -218,7 +218,12 @@ export default function Story(props) {
   };
   const handleTransitionEndForRestyledContentHolder = event => {
     eventManagement(event);
-    boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 2 : 0);
+    // Let it breathe...
+    const isEntering = illustrationDirection === 'enter';
+    setTimeout(
+      () => boundHandleClickForApp('updateIllustrationLevel', isEntering ? 2 : 0),
+      isEntering ? 6 : 17
+    );
   };
   const handleTransitionEndForFallbackBlur = event => { // 1 --> 2
     eventManagement(event);
