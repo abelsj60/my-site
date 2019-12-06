@@ -226,7 +226,7 @@ export default function Story(props) {
 
     setTimeout(
       () => boundHandleClickForApp('updateIllustrationLevel', isEntering ? 2 : 0),
-      isEntering ? 1 : 6
+      isEntering ? 1 : 5
     );
   };
   const handleTransitionEndForFallbackBlur = event => { // 1 --> 2
