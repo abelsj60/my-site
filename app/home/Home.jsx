@@ -84,8 +84,8 @@ export default class Home extends Component {
     };
 
     // console.log('props.appState.homePageLoaded:', this.props.appState.homePageLoaded);
-    // console.log('state.loadLevel:', this.state.loadLevel);
-    // console.log('this.loadLevels:', this.loadLevels);
+    console.log('--> in render, state.loadLevel:', this.state.loadLevel);
+    console.log('--> in render, this.loadLevels:', this.loadLevels);
 
     return (
       <RestyledMain 
