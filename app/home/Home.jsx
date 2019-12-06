@@ -83,9 +83,9 @@ export default class Home extends Component {
       reset: (isValid, caller) => this.resetSpell(isValid, caller)
     };
 
-    console.log('props.appState.homePageLoaded:', this.props.appState.homePageLoaded);
-    console.log('state.loadLevel:', this.state.loadLevel);
-    console.log('this.loadLevels:', this.loadLevels);
+    // console.log('props.appState.homePageLoaded:', this.props.appState.homePageLoaded);
+    // console.log('state.loadLevel:', this.state.loadLevel);
+    // console.log('this.loadLevels:', this.loadLevels);
 
     return (
       <RestyledMain 
