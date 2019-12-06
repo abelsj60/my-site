@@ -17,7 +17,7 @@ Then I sat down with Internet Explorer at a FedEx Kinko's to test it live. It wo
 
 Anyway, I'm digressing. 
 
-So...I fire up IE 11, load the site, and find that while active the Charm animates, the newly inactive Charm won't stop spinning. Pretty soon, you've got one active spinner, and two phantom spinners. (And sometimes you don't.)
+So...I fire up IE 11, load the site, and find that while the active Charm animates, the newly inactive Charm won't stop spinning. Pretty soon, you've got one active spinner, and two phantom spinners. (And sometimes you don't.)
 
 It literally looks broken. 
 
