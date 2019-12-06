@@ -102,8 +102,8 @@ export default function PictureBox(props) {
     }
 
     if (spellLevel < 1) {
-      console.log('loading...', idx, ' | ', loadLevels, ' | ', loadLevel);
       setLoadLevels(idx);
+      console.log('loading...', idx, ' | ', loadLevels, ' | ', loadLevel);
     }
   };
   const setSpellLevelNow = (event, type) => {
