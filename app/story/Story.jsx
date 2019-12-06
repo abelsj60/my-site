@@ -222,7 +222,7 @@ export default function Story(props) {
     const isEntering = illustrationDirection === 'enter';
     setTimeout(
       () => boundHandleClickForApp('updateIllustrationLevel', isEntering ? 2 : 0),
-      isEntering ? 6 : 17
+      isEntering ? 5 : 17
     );
   };
   const handleTransitionEndForFallbackBlur = event => { // 1 --> 2
