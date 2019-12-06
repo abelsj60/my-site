@@ -38,16 +38,6 @@ export default class ContentLoader extends Component {
       const { images, type } = this.props.appState;
       const number = state.getIndex('chapter') + 1;
       imageLoaded = type !== 'mobile' && images[`chapter-${number}-blurred`].complete ? 2 : 0;
-
-      props.boundHandleClickForApp(
-        'updateIllustrationState',
-        ( 
-          // illState is < 0 if mobile (to prevent weird flashes), !.complete, or if we're offline. This 
-          // allows the mobile device to reveal the illustration after onLoad fires in the MainImage.
-          type === 'mobile' 
-            || !images[`chapter-${number}-main`].complete 
-        ) ? number * -1 : number
-      );
     } else if (location.caller === 'projects') {
       imageLoaded = 0;
     }

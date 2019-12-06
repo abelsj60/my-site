@@ -75,7 +75,7 @@ export default class State {
   rebuildContentLoader(updater) {
     const indices = this._convertParamsToIndices();
 
-    // Only -1 if explicitly set by a params method
+    // Only -1 if explicitly set by a method from a Params class
     if (this._indicesAreGreaterThanOrEqualToZero(indices)) {
       updater('updateState', indices.one, indices.two);
     }

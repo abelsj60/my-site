@@ -110,16 +110,8 @@ const FallbackBlur = styled.img`
   //    c) 0 --> n/a
   // Always show when blurredImage isn't loaded, mainImage isn't loaded or the network is lost. 
   // Note: We don't need to check p.offline b/c imageLoaded is set to 0 when the network is
-  // lost via ClickHandling. This ensures the Fallback's seen and the transition's off. 
-  // REMEMBER --> ilustrationState is the load state of the main illustration!
-  // Testing if opacity should be 1 when illustrationState is 0, may be the cause of occasional 
-  // hiccups when swapping location (often seen in mobile Brave) --> Est. 12/3/19.
-  // Testing didn't work, still loaded main illustration before fallback. New experiment: I 
-  // changed the opacity assessment. Maybe it's evaluating to false before true, meaning we
-  // get 'opacity: 0', then 'opacity: 1', when we really want 'opacity: 1'. I've changed 
-  // the evaluation to default to 1, then to shift to 0 after all loads are detected.
-  opacity: ${p => (p.imageLoaded > 1 || p.illustrationState > 0) ? '0' : '1'};
-  // opacity: ${p => (p.imageLoaded < 1 || p.illustrationState <= 0) ? '1' : '0'}; // In testing
+  // lost via ClickHandling. This ensures the Fallback's seen and the transition's off.
+  opacity: ${p => p.imageLoaded > 0 ? '0' : '1'};
   // This is very persnickety! We only want the transition to run when the main images are ready.
   // So, don't transition on p.imageLoaded < 0 or p.illustrationState < 0 or the net's lost.
   // We don't need to check p.offline b/c imageLoaded is set to 0 when the net's lost. 
@@ -211,6 +203,7 @@ export default function Story(props) {
   const fallbackImageDescription = "Fallback version of the blurred depiction of this chapter's full-page illustration, which lives one layer below it. This image obscures the blurred and main illustrations when they aren't loaded.";
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
+
     if (imageLoaded < 1) {
       // refers to BlurredImage, not the full illustration
       boundHandleClickForContentLoader('imageLoader', 1);
@@ -218,6 +211,7 @@ export default function Story(props) {
   };
   const handleLoadForMainImage = event => {
     eventManagement(event);
+
     if (illustrationState < 0) {
       boundHandleClickForApp('updateIllustrationState', number, illustrationDelay);
     }
@@ -228,6 +222,7 @@ export default function Story(props) {
   };
   const handleTransitionEndForFallbackBlur = event => { // 1 --> 2
     eventManagement(event);
+
     if (imageLoaded < 2) {
       // refers to BlurredImage, not the full illustration
       boundHandleClickForContentLoader('imageLoader', 2);
@@ -237,25 +232,34 @@ export default function Story(props) {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
   };
-  let fallbackBlur;
-  let fallbackKey;
+  // Why explicitly set keys? To force IE 10 — whitch activates the PictureFill polyfill to change images 
+  // when swapping content, of course. Otherwise they won't change.
+  let fallbackBlur, fallbackKey, blurredKey, mainKey;
 
   switch (number) {
     case 1:
       fallbackBlur = fallbackBlurOne;
       fallbackKey = `${number}-dj8z-39d`;
+      blurredKey = `${number}-dk8z-39d`;
+      mainKey = `${number}-dl8z-39d`;
       break;
     case 2:
       fallbackBlur = fallbackBlurTwo;
       fallbackKey = `${number}-eow2-91a`;
+      blurredKey = `${number}-epw2-91a`;
+      mainKey = `${number}-eqw2-91a`;
       break;
     case 3:
       fallbackBlur = fallbackBlurThree;
       fallbackKey = `${number}-cx2v-56e`;
+      blurredKey = `${number}-cy2v-56e`;
+      mainKey = `${number}-cz2v-56e`;
       break;
     default:
       fallbackBlur = fallbackBlurFour;
       fallbackKey = `${number}-pql6-gh0`;
+      blurredKey = `${number}-prl6-gh0`;
+      mainKey = `${number}-psl6-gh0`;
       break;
   }
 
@@ -324,7 +328,7 @@ export default function Story(props) {
         />
         <BlurredImage // z-index: -2
           alt={blurredImageDescription}
-          key={blurredImageSrc}
+          key={blurredKey}
           imageLoaded={imageLoaded}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
@@ -335,7 +339,7 @@ export default function Story(props) {
         />
         <Image // z-index -3
           alt={description}
-          key={bigImageSrc}
+          key={mainKey}
           onLoad={handleLoadForMainImage}
           src={bigImageSrc}
         />

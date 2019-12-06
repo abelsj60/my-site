@@ -277,10 +277,7 @@ export default class ClickHandling {
           break;
       }
 
-      if (
-        updateValue !== 'updateApp'
-          || updateValue !== 'startDramaAtHome'
-      ) {
+      if (updateValue !== 'updateApp' || updateValue !== 'startDramaAtHome') {
         if (callReactGa()) {
           if (category && action) {
             ReactGA.event({
@@ -348,11 +345,9 @@ export default class ClickHandling {
           const { appState } = this.props;
 
           if (caller === 'chapter') {
-            const isComplete = appState.images[
-              `chapter-${valueOne + 1}-blurred`
-            ].complete;
+            const isComplete = appState.images[`chapter-${valueOne + 1}-blurred`].complete;
             stateToUpdate.chapterIndex = valueOne;
-            stateToUpdate.imageLoaded = isComplete && !appState.offline ? 2 : 0;
+            stateToUpdate.imageLoaded = appState.type !== 'mobile' && isComplete && !appState.offline ? 2 : 0;
           }
 
           if (caller === 'projects') {
@@ -369,7 +364,7 @@ export default class ClickHandling {
             stateToUpdate.reverieIndex = valueOne;
           }
 
-          break;
+        break;
       }
 
       this.setState(stateToUpdate);
@@ -392,10 +387,9 @@ export default class ClickHandling {
           // Note: We toggleSpell after the spell
           // is cast in order to reset its state.
 
-          stateToUpdate.movement =
-            movement === 'enter'
-              ? 'exit'
-              : 'enter';
+          stateToUpdate.movement = movement === 'enter'
+            ? 'exit'
+            : 'enter';
 
           if(spellLevel < 1) { // i.e., 0
             stateToUpdate.spellLevel = 1;
@@ -413,17 +407,15 @@ export default class ClickHandling {
 
           break;
         case 'cast':
-          // Note, the score never equals the goal 
-          // b/c we cast at score + 1.
+          // Note, the score never equals the goal b/c we cast at score + 1.
 
           stateToUpdate.spellLevel = 5;
           stateToUpdate.pattern = this.createSpellPattern();
           stateToUpdate.activeCharm = stateToUpdate.pattern[0];
           stateToUpdate.score = 0;
 
-          // Reset the eventType to 'click' if it was
-          // 'touch'-ed. This prevents unexpected
-          // and unwanted propagation.
+          // Reset the eventType to 'click' if it was 'touch'-ed. This prevents 
+          // unexpected and unwanted propagation.
 
           if (eventType === 'touch') {
             stateToUpdate.eventType = 'click';

@@ -234,7 +234,6 @@ const Icon = styled.img`
     display: none;
   }
 `;
-
 // On-screen timer for open header menu
 const timerKeyframes = keyframes`
   0% {
@@ -383,6 +382,7 @@ export default class Header extends Component {
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
           isHome={isHome}
+          isReverie={isReverie}
           src={menuIcon}
           onClick={handleClickForMenuLink}
           tempContent={tempContent}
