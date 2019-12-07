@@ -149,30 +149,36 @@ export default function PictureBox(props) {
   };
   return (
     <PictureHolder>
-      <Portal
-        homePageLoaded={homePageLoaded}
-        isMobile={type === 'mobile'} // See Styled Component note
-        loadLevel={loadLevel}
-        offline={isOffline}
-      />
-      <FallbackImage 
-        alt={altTextForFallback}
-        src={fallbackSource}
-        homePageLoaded={homePageLoaded}
-        isMobile={type === 'mobile'} // See Styled Component note
-        loadLevel={loadLevel}
-        offline={isOffline}
-        onLoad={handleLoadForFallback}
-        onTransitionEnd={handleTransitionEndForFallback}
-      />
-      <BlurredBoyForeground
-        alt={altTextBoyBlurred}
-        enter={movement === 'enter'}
-        exit={movement === 'exit'}
-        onLoad={handleLoadForBlurredBoy}
-        spellLevel={spellLevel}
-        src={blurredBoySrc}
-      />
+      {((!homePageLoaded && loadLevel <= 2) || (homePageLoaded && loadLevel < 2)) && (
+        <Fragment>
+          <Portal
+            homePageLoaded={homePageLoaded}
+            isMobile={type === 'mobile'} // See Styled Component note
+            loadLevel={loadLevel}
+            offline={isOffline}
+          />
+          <FallbackImage 
+            alt={altTextForFallback}
+            src={fallbackSource}
+            homePageLoaded={homePageLoaded}
+            isMobile={type === 'mobile'} // See Styled Component note
+            loadLevel={loadLevel}
+            offline={isOffline}
+            onLoad={handleLoadForFallback}
+            onTransitionEnd={handleTransitionEndForFallback}
+          />
+        </Fragment>
+      )}
+      {spellLevel > 0 && spellLevel < 5 && type === 'mobile' && (
+        <BlurredBoyForeground
+          alt={altTextBoyBlurred}
+          enter={movement === 'enter'}
+          exit={movement === 'exit'}
+          onLoad={handleLoadForBlurredBoy}
+          spellLevel={spellLevel}
+          src={blurredBoySrc}
+        />
+      )}
       <BoyForeground
         alt={altTextBoy}
         enter={movement === 'enter'}
@@ -183,18 +189,20 @@ export default function PictureBox(props) {
         spellLevel={spellLevel}
         src={bigBoySrc}
       />
-      {(!inCity || (inCity && spellLevel > 0)) &&
+      {(!inCity || (inCity && spellLevel > 0)) && (
         <Fragment>
-          <BlurredForrestBackground
-            alt={altTextForrestBlurred}
-            enter={movement === 'enter'}
-            exit={movement === 'exit'}
-            inCity={inCity}
-            onLoad={handleLoadForBlurredForrest}
-            onTransitionEnd={handleTransitionEndForBlurredForrest}
-            spellLevel={spellLevel}
-            src={blurredForrestSrc}
-          />
+          {spellLevel > 0  && spellLevel < 5 && !inCity && (
+            <BlurredForrestBackground
+              alt={altTextForrestBlurred}
+              enter={movement === 'enter'}
+              exit={movement === 'exit'}
+              inCity={inCity}
+              onLoad={handleLoadForBlurredForrest}
+              onTransitionEnd={handleTransitionEndForBlurredForrest}
+              spellLevel={spellLevel}
+              src={blurredForrestSrc}
+            />
+          )}
           <ForrestBackground
             alt={altTextForrest}
             homePageLoaded={homePageLoaded}
@@ -207,19 +215,21 @@ export default function PictureBox(props) {
             src={bigForrestSrc}
           />
         </Fragment>
-      }
+      )}
       {(inCity || (!inCity && spellLevel > 0)) && 
         <Fragment>
-          <BlurredNycBackground
-            alt={altTextNycBlurred}
-            enter={movement === 'enter'}
-            exit={movement === 'exit'}
-            inCity={inCity}
-            onLoad={handleLoadForBlurredNyc}
-            onTransitionEnd={handleTransitionEndForBlurredNyc}
-            spellLevel={spellLevel}
-            src={blurredNycSrc}
-          />
+          {spellLevel > 0  && spellLevel < 5 && inCity && (
+            <BlurredNycBackground
+              alt={altTextNycBlurred}
+              enter={movement === 'enter'}
+              exit={movement === 'exit'}
+              inCity={inCity}
+              onLoad={handleLoadForBlurredNyc}
+              onTransitionEnd={handleTransitionEndForBlurredNyc}
+              spellLevel={spellLevel}
+              src={blurredNycSrc}
+            />
+          )}
           <NycBackground
             alt={altTextNyc}
             homePageLoaded={homePageLoaded}

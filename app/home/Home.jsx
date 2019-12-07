@@ -315,13 +315,17 @@ export default class Home extends Component {
     return this.sumImageSet(blurredImages);
   }
 
+  sumFallback() {
+    return this.sumImageSet([0]);
+  }
+
   sumImageSet(imageSet) {
     return imageSet.reduce((acc, cur) => acc + this.loadLevels[cur], 0);
   }
 
   sumInitialSet() {
-    // blurredBoy, blurredForrest OR blurredNyc
-    const initialImages = [0, 1, 2, 4, 5];
+    // fallback, boyForeground, forrestBackground
+    const initialImages = [0, 4, 5];
     return this.sumImageSet(initialImages);
   }
 
@@ -333,7 +337,7 @@ export default class Home extends Component {
       case 'blurs':
         return this.sumBlurs(inCity);
       case 'fallback':
-        return this.state.loadLevel[0];
+        return this.sumFallback();
       case 'initialSet':
         return this.sumInitialSet();
       default:
@@ -348,22 +352,21 @@ export default class Home extends Component {
     if (!homePageLoaded) {
       switch (loadLevel) {
         case 0:
-          this.setLoadLevel('blurs', 2);
+          this.setLoadLevel('fallback', 1);
           break;
         case 1:
-          this.setLoadLevel('initialSet', 6);
+          this.setLoadLevel('initialSet', 4);
           break;
         case 2:
-          this.setLoadLevel('initialSet', 7);
-          break;
+          this.setLoadLevel('initialSet', 5);
       }
     } else if (homePageLoaded) {
       switch (loadLevel) {
         case 0:
-          this.setLoadLevel('blurs', 2);
+          this.setLoadLevel('all', 3);
           break;
         case 1:
-          this.setLoadLevel('all', type === 'mobile' ? 6 : 5);
+          this.setLoadLevel('all', 4);
           break;
       }
     }
