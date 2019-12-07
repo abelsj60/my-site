@@ -14,6 +14,7 @@ import ReactHtmlParser from 'react-html-parser';
 import ContentHolder from '../primitives/ContentHolder.jsx';
 import Shelf from '../shared/Shelf.jsx';
 import styled, { css } from 'styled-components';
+import urlPrefix from '../helpers/urlPrefix';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
@@ -197,10 +198,17 @@ export default function Story(props) {
   const bookTitle = 'The Magical, Semi-Fictional Biography of a Real Boy';
   const dek = 'An experiment in digital + traditional storytelling';
   const isOffline = offline && imageLoaded < 2;
-  const bigImageSrc = offlineImageToggle(isOffline, images[`chapter-${number}-main`].src);
-  const blurredImageSrc = offlineImageToggle(isOffline, images[`chapter-${number}-blurred`].src);
   const blurredImageDescription = "This illustration depicts a blurred version of this chapter's full-page illustration, which lives one layer below it. This image obscures the main image so people can easily read this chapter's text.";
   const fallbackImageDescription = "Fallback version of the blurred depiction of this chapter's full-page illustration, which lives one layer below it. This image obscures the blurred and main illustrations when they aren't loaded.";
+
+  let bigImageSrc = `${urlPrefix}/chapter-${number}/chapter-${number}-imc-main-101419-q${
+    images.width < 2880 ? '90' : '50'
+  }-${images.width}.jpg`;
+  let blurredImageSrc = `${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
+
+  bigImageSrc = offlineImageToggle(isOffline, bigImageSrc);
+  blurredImageSrc = offlineImageToggle(isOffline, blurredImageSrc);
+  
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
 

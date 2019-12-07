@@ -5,9 +5,9 @@ date: December 6, 2019
 slug: Internet Explorer won't stop animating my Charms!
 ---
 
-5.27 minutes is all it takes to crash into Internet Explorer. 
+5.27 minutes is all it takes to crash into Internet Explorer while coding. 
 
-That's when you'll read a Stack Overflow post complaining about it. Why? I'll give you an example. 
+That's about when you'll read a Stack Overflow post complaining about it. Why? I'll give you an example. 
 
 The magic spell on the home page (revealed by clicking my name) leads to three Charms. The active Charm is animated. It pulses and spins. Tap it, it'll stop, and the next active Charm'll take over. It's dumb fun. And it works great on every browser I've used, up to my cutoffs.
 

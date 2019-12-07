@@ -11,6 +11,7 @@ import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50
 import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import urlPrefix from '../helpers/urlPrefix';
 
 const PictureHolder = styled.div`
   position: fixed;
@@ -84,17 +85,45 @@ export default function PictureBox(props) {
     spellLevel,
     movement
   } = homeState;
+  const imageArray = [];
+
+  bio.attributes.preloadUrls.forEach(imgPath => {
+    const filePrefix = imgPath.includes('boy')
+      ? 'boy'
+      : imgPath.includes('forrest')
+        ? 'forrest'
+        : 'nyc';
+
+    if (imgPath.includes('boy') && !imgPath.includes('blur') && images.width >= 2880 && images.width <= 3000) {
+      // Manually skip boy-...-2880.png b/c the next level seems to look a lot nicer on screen
+      // File size is roughly comparable, so only wasting compute cycles. I'm OK with that.
+      let src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-3000.png`;
+      imageArray.push(src);
+    } else {
+      if (imgPath.includes('blur')) {
+        let src = `${urlPrefix}/${imgPath}/${filePrefix}-ink-blur-0x15-160.${imgPath.includes('boy') ? 'png' : 'jpg'}`;
+        imageArray.push(src);
+      } else {
+        let src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-${
+          !imgPath.includes('boy')
+            ? images.width < 2880 ? 'q90-' : 'q50-'
+            : ''
+        }${images.width}.${imgPath.includes('boy') ? 'png' : 'jpg'}`;
+        imageArray.push(src);
+      }
+    }
+  });
+
   const offlineTarget = type === 'mobile' ? 6 : 5;
   const isOffline = !homePageLoaded ? offline : offline && sumLoadLevels('all') < offlineTarget;
-  const bigBoySrc = offlineImageToggle(isOffline, images[imageNames[0]].src);
-  const blurredBoySrc = offlineImageToggle(isOffline, images[imageNames[1]].src);
-  const bigForrestSrc = offlineImageToggle(isOffline, images[imageNames[2]].src);
-  const blurredForrestSrc = offlineImageToggle(isOffline, images[imageNames[3]].src);
-  const bigNycSrc = offlineImageToggle(isOffline, images[imageNames[4]].src);
-  const blurredNycSrc = offlineImageToggle(isOffline, images[imageNames[5]].src);
-  const fallbackSource = !inCity ? ForrestFallback : NycFallback; 
-  const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback; 
-
+  const fallbackSource = !inCity ? ForrestFallback : NycFallback;
+  const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback;
+  const bigBoySrc = offlineImageToggle(isOffline, imageArray[0]);
+  const blurredBoySrc = offlineImageToggle(isOffline, imageArray[1]);
+  const bigForrestSrc = offlineImageToggle(isOffline, imageArray[2]);
+  const blurredForrestSrc = offlineImageToggle(isOffline, imageArray[3]);
+  const bigNycSrc = offlineImageToggle(isOffline, imageArray[4]);
+  const blurredNycSrc = offlineImageToggle(isOffline, imageArray[5]);
   const setLoadLevelsNow = (event, idx) => {
     if (event !== null) {
       eventManagement(event);
@@ -147,6 +176,7 @@ export default function PictureBox(props) {
       }
     }
   };
+
   return (
     <PictureHolder>
       {((!homePageLoaded && loadLevel <= 2) || (homePageLoaded && loadLevel < 2)) && (
@@ -167,6 +197,16 @@ export default function PictureBox(props) {
             onLoad={handleLoadForFallback}
             onTransitionEnd={handleTransitionEndForFallback}
           />
+          {(!homePageLoaded && loadLevel < 2) && (
+            <div
+              style={{
+                height: '100%',
+                width: '100%',
+                backgroundColor: 'white'
+              }}
+            >
+            </div>
+          )}
         </Fragment>
       )}
       {spellLevel > 0 && spellLevel < 5 && type === 'mobile' && (
