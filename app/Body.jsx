@@ -3,6 +3,7 @@ import ClickHandling from './classes/ClickHandling.js';
 import ContentLoader from './shared/ContentLoader.jsx';
 import Debug from './debug/Debug.jsx';
 import Home from './home/Home.jsx';
+import ImgTest from './ImgTest.jsx';
 import Location from './classes/Location';
 import NotFound from './not-found/NotFound.jsx';
 import React, { Component } from 'react';
@@ -52,6 +53,15 @@ export default class Body extends Component {
           path="/"
           render={() => (
             <Home
+              {...this.props}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/img"
+          render={() => (
+            <ImgTest
               {...this.props}
             />
           )}

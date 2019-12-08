@@ -72,7 +72,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const debugMe = false;
+    const debugMe = true;
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
     const setSpellLevel = {
@@ -103,6 +103,7 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
+          loadLevels={this.loadLevels}
           setLoadLevels={this.setLoadLevels}
           setSpellLevel={setSpellLevel}
           sumLoadLevels={this.sumLoadLevels}

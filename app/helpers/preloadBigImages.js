@@ -1,4 +1,4 @@
-import { isIOS } from 'react-device-detect';
+// import { isIOS } from 'react-device-detect';
 
 // On images: https://images.guide
 // WebP support: https://stackoverflow.com/a/54631141
@@ -6,8 +6,7 @@ import { isIOS } from 'react-device-detect';
 
 export default function preloadBigImages() {
   const images = {};
-  const devicePixelRatio = isIOS ? Math.floor(window.devicePixelRatio) : window.devicePixelRatio;
-  const timesPixelRatio = dimension => Math.floor(devicePixelRatio * dimension);
+  const timesPixelRatio = dimension => Math.floor(window.devicePixelRatio * dimension);
   // Desktops get it right, mobile may not — check if height is bigger than width
   // Note, 11/9/19: We need the customMobileTest to catch the new iPadOS. Remember, we need
   // to know the widest possible width in order to select an image that always looks great.

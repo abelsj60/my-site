@@ -378,15 +378,17 @@ export default class Header extends Component {
             />
           </TimingBar>
         </Nav>
-        <Icon
-          illustrationDirection={illustrationDirection}
-          illustrationLevel={illustrationLevel}
-          isHome={isHome}
-          isReverie={isReverie}
-          src={menuIcon}
-          onClick={handleClickForMenuLink}
-          tempContent={tempContent}
-        />
+        {!isHome && (
+          <Icon
+            illustrationDirection={illustrationDirection}
+            illustrationLevel={illustrationLevel}
+            isHome={isHome}
+            isReverie={isReverie}
+            src={menuIcon}
+            onClick={handleClickForMenuLink}
+            tempContent={tempContent}
+          />
+        )}
       </Container>
     );
   }
