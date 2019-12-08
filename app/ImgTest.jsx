@@ -39,7 +39,7 @@ const ForrestBackground = styled.img`
   pointer-events: none;
 `;
 
-export default function(props) {
+export default function() {
   const boyWidth = '3000';
   const forrestWidth = '2880';
   const boySrc = `${urlPrefix}/home-boy/boy-imc-main-101419-${boyWidth}.png`;

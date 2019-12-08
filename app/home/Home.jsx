@@ -224,7 +224,7 @@ export default class Home extends Component {
   }
 
   setLoadLevels(idx) {
-    // Let's update the loadLevel (onLoad and onTransitionEnd)
+    // Let's update the loadLevels (via onLoad and onTransitionEnd)
     if (this.loadLevels[idx] < 3) {
       const newArr = [].concat(this.loadLevels);
       const currentValue = newArr[idx];
@@ -234,7 +234,7 @@ export default class Home extends Component {
 
     // Now that we've updated the loadLevels, let's check to see if we should
     // update state for a re-render 
-    this.updateLoadLevel();
+    this.updateLoadLevel(); // --> setTimeout to fix glitch, which wasn't fixed by this.loadLevels = 'this' on its own...
   }
 
   setSpellLevel(val) {

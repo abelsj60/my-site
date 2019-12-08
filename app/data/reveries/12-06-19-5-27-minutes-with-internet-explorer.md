@@ -19,7 +19,7 @@ It just looks broken.
 
 So I checked my code. Seems to be updating and telling the browser to stop the spinning. Internet Explorer's just ignoring the instruction because it's a pain in the neck. 
 
-So, I futzed about on Google for awhile and some guy on Stack Overflow files an answer with a solution at the very bottom of a long page. 
+So, I futzed about on Google for awhile and some guy on Stack Overflow files an answer with a solution at the bottom of a very long page. 
 
 When his animation is done, he forces Internet Explorer to stop by going beyond merely removing the animating class. He actually adds a class with a "motionless animation" in it. Internet Explorer then forgets the old animation and runs the new one, which has no motion! Great idea! It works!
 
