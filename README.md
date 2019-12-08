@@ -26,7 +26,7 @@ This site was built around the idea of "theatrical Web design."
 
 Timed animation sequences tell a story about the entry, exit, and use of major creative elements.  
 
-This has caused the [App component state](https://github.com/abelsj60/jamesabels.net/blob/c53a0c70ec6a084ec9727f4df0301fa825c8e28e/app/App.jsx#L286) to be larger than expected, as functionally unrelated child Components (i.e., siblings) needed to track animation sequences in order to join them. A move to React Hooks or Redux might condense this code.
+This has caused the [App component state](https://github.com/abelsj60/jamesabels.net/blob/c53a0c70ec6a084ec9727f4df0301fa825c8e28e/app/App.jsx#L286) to be larger than expected, as functionally unrelated child Components (i.e., siblings) need to track animation sequences to join them. A move to React Hooks or Redux might condense this code.
 
 ##### ∙ Compression stepping
 
