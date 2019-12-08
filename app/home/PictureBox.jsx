@@ -147,7 +147,7 @@ export default function PictureBox(props) {
       // Manually skip boy-...-2880.png b/c the next level seems to look a lot nicer on screen
       // File size is roughly comparable, so only wasting compute cycles. I'm OK with that.
       // src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-3000.png`; // original special boy img
-      src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-q90-640.jpg`;
+      src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-q50-2880.jpg`;
     } else {
       if (imgPath.includes('blur')) {
         src = `${urlPrefix}/${imgPath}/${filePrefix}-ink-blur-0x15-160.${imgPath.includes('boy') ? 'png' : 'jpg'}`;
