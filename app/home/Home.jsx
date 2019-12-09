@@ -3,7 +3,7 @@ import ClickHandling from '../classes/ClickHandling.js';
 import DebugHome from './DebugHome.jsx';
 import Main from '../primitives/Main.jsx';
 import NameTag from './NameTag.jsx';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PictureBox from './PictureBox.jsx';
 import styled from 'styled-components';
 
@@ -72,7 +72,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const debugMe = true;
+    const debugMe = false;
     const hcForHome = new ClickHandling('home', this);
     const boundHandleClickForHome = hcForHome.boundHandleClick;
     const setSpellLevel = {
@@ -234,7 +234,7 @@ export default class Home extends Component {
 
     // Now that we've updated the loadLevels, let's check to see if we should
     // update state for a re-render 
-    this.updateLoadLevel(); // --> setTimeout to fix glitch, which wasn't fixed by this.loadLevels = 'this' on its own...
+    this.updateLoadLevel();
   }
 
   setSpellLevel(val) {
@@ -347,7 +347,7 @@ export default class Home extends Component {
   }
 
   updateLoadLevel() {
-    const { homePageLoaded, type } = this.props.appState;
+    const { homePageLoaded } = this.props.appState;
     const { loadLevel } = this.state;
 
     if (!homePageLoaded) {
@@ -360,6 +360,7 @@ export default class Home extends Component {
           break;
         case 2:
           this.setLoadLevel('initialSet', 5);
+          break;
       }
     } else if (homePageLoaded) {
       switch (loadLevel) {

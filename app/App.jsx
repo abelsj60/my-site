@@ -371,7 +371,7 @@ class App extends Component {
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
           />
-          <OfflineWarning 
+          <OfflineWarning
             {...this.props}
             appState={this.state}
           />

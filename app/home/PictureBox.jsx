@@ -10,7 +10,7 @@ import NycBackground from './NycBackground.jsx';
 import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50x50-53.png';
 import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import React, { Fragment } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import urlPrefix from '../helpers/urlPrefix';
 
 const BoyForeground = styled.img`
@@ -24,7 +24,7 @@ const BoyForeground = styled.img`
   pointer-events: none;
   // Only hidden during the initial stages of the load. It's always visible thereafter. 
   // Never transition it in, its entrance is hidden by the fallback image.
-  // opacity: ${p => !p.homePageLoaded && p.loadLevel < 2 ? '0' : '1'};
+  opacity: ${p => !p.homePageLoaded && p.loadLevel < 2 ? '0' : '1'};
   z-index: 2;
 `;
 const ForrestBackground = styled.img`
@@ -40,7 +40,7 @@ const ForrestBackground = styled.img`
   // With luck, will-change will transform image to bitmap for smoother transforms.
   // Takes a beat, so may not be done in practice before first transition...
   // Added anyway.
-  ${p => p.spellLevel > 0 && 'will-change: transform, opacity'};
+  ${p => p.spellLevel > 0 && 'will-change: transform, opacity;'}
   // Only hidden during the initial stages of the load. It's always visible thereafter. 
   // Only transition when casting spells (initial entrance hidden by fallback image).
   // Note: below is currently abandoned attempt to add a blur filter to the mix, it looks great, but: 
@@ -48,14 +48,13 @@ const ForrestBackground = styled.img`
   //  b. More important, it results in a currently unacceptable performance hit...
   //  -Will need to add to will-change and transition when adding it back.
   // ${p => !p.inCity && p.spellLevel > 0 && css`filter: blur(${p => p.spellLevel < 4 ? '40px' : '5px'})`};
-  // opacity: ${p => ((!p.homePageLoaded && p.loadLevel < 2) || (p.homePageLoaded && p.inCity)) ? '0' : '1'}};
-  opacity: ${p => ((p.homePageLoaded && p.inCity)) ? '0' : '1'}};
-  transform: ${p => p.inCity ? 'scale(1.49)' : 'scale(1)'} translate3d(0, 0, 0);
-  transform-origin: 50% ${p => p.inCity ? '-3%' : '-6%'};
+  opacity: ${p => ((!p.homePageLoaded && p.loadLevel < 2) || (p.homePageLoaded && p.inCity)) ? '0' : '1'}};
+  ${p => p.spellLevel > 0 && css`transform: ${p.inCity ? 'scale(1.49)' : 'scale(1)'} translate3d(0, 0, 0);`}
+  ${p => p.spellLevel > 0 && css`transform-origin: 50% ${p.inCity ? '-3%' : '-6%'};`}
   // Transition used for background swap. Opacity bezier curve should match that used by NycBackground.
   // Added a slight delay to both transitions to give the browser a second to breathe.
   // Also, mental note --> The cubic-bezier curve is the best. I tested extensively.
-  transition: ${p => p.spellLevel > 0 && 'transform 1.75s, opacity 1.31s cubic-bezier(0.77, 0, 0.175, 1)'};
+  ${p => p.spellLevel > 0 && css`transition: transform 1.75s, opacity 1.31s cubic-bezier(0.77, 0, 0.175, 1);`}
   z-index: ${p => !p.inCity && p.spellLevel <= 5 ? '0' : '-2'};
 `;
 
@@ -78,8 +77,7 @@ const Portal = styled.div`
   height: 100%;
   width: 100%;
   will-change: opacity;
-  // opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
-  opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '.1' : '0'};
+  opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   transition: ${p => p.offline ? '' : `opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
   z-index: 5;
 `;
@@ -93,8 +91,7 @@ const FallbackImage = styled.img`
   height: 100%;
   width: 100%;
   will-change: opacity;
-  // opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
-  opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '.1' : '0'};
+  opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   // Transition settings need to be matched (in total) by NameTag/InnerContainer and Header/Nav.
   transition: ${p => p.offline ? '' : `opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
   z-index: 4;
@@ -109,8 +106,7 @@ export default function PictureBox(props) {
     altTextForrestBlurred,
     altTextNyc,
     altTextNycBlurred,
-    altTextNycFallback,
-    // imageNames
+    altTextNycFallback
   } = bio.attributes;
   const {
     appState,
@@ -178,16 +174,7 @@ export default function PictureBox(props) {
       eventManagement(event);
     }
 
-    console.log('setLoadLevelsNow:', idx);
-
     if (spellLevel < 1) {
-      // if (!homePageLoaded && idx === 4) {
-      //   console.log('setLoadLevelsNow: 0, 0, 4');
-      //   setLoadLevels(4);
-      //   setLoadLevels(0);
-      //   setLoadLevels(0);
-      // }
-
       setLoadLevels(idx);
     }
   };
@@ -235,9 +222,6 @@ export default function PictureBox(props) {
     }
   };
 
-  // console.log('loadLevels:', props.loadLevels);
-  // console.log('loadLevel:', props.homeState.loadLevel);
-
   return (
     <PictureHolder>
       {((!homePageLoaded && loadLevel <= 2) || (homePageLoaded && loadLevel < 2)) && (
@@ -258,16 +242,6 @@ export default function PictureBox(props) {
             onLoad={handleLoadForFallback}
             onTransitionEnd={handleTransitionEndForFallback}
           />
-          {/*(!homePageLoaded && loadLevel < 1) && (
-            <div
-              style={{
-                height: '100%',
-                width: '100%',
-                backgroundColor: 'white'
-              }}
-            >
-            </div>
-            )*/}
         </Fragment>
       )}
       {spellLevel > 0 && spellLevel < 5 && type === 'mobile' && (
@@ -286,10 +260,8 @@ export default function PictureBox(props) {
         exit={movement === 'exit'}
         homePageLoaded={homePageLoaded}
         loadLevel={loadLevel}
-        onError={() => consle.log('error in BoyForeground')}
         onLoad={handleLoadForBoy}
         spellLevel={spellLevel}
-        // src={bigBoySrc}
         src={bigBoySrc}
       />
       {(!inCity || (inCity && spellLevel > 0)) && (
@@ -311,13 +283,11 @@ export default function PictureBox(props) {
             homePageLoaded={homePageLoaded}
             inCity={inCity}
             loadLevel={loadLevel}
-            onError={() => consle.log('error in ForrestBackground')}
             onLoad={handleLoadForForrest}
             // Toggle state of spell after swapping backgrounds
             onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, inCity, 'forrest')}
             spellLevel={spellLevel}
             src={bigForrestSrc}
-            // src={blurredForrestSrc}
           />
         </Fragment>
       )}
@@ -333,7 +303,6 @@ export default function PictureBox(props) {
               onTransitionEnd={handleTransitionEndForBlurredNyc}
               spellLevel={spellLevel}
               src={blurredNycSrc}
-              // src={bigForrestSrc}
             />
           )}
           <NycBackground
