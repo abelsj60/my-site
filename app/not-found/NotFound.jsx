@@ -3,6 +3,7 @@ import Main from '../primitives/Main.jsx';
 import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import urlPrefix from '../helpers/urlPrefix';
 
 const RestyledContentHolder = styled(ContentHolder)`
   flex: 1;
@@ -24,7 +25,7 @@ const altImageText = "Uh-oh! A Jinni, drawn in shades of blue, blocks your way. 
 export default class NotFound extends Component {
   render() {
     const { appState } = this.props;
-    const src = offlineImageToggle(appState.offline, appState.images.notFoundImage.src);
+    const src = offlineImageToggle(appState.offline, `${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`);
     return (
       <Main>
         <RestyledContentHolder>

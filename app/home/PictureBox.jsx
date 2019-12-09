@@ -10,7 +10,7 @@ import NycBackground from './NycBackground.jsx';
 import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50x50-53.png';
 import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import React, { Fragment } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const PictureHolder = styled.div`
   position: fixed;
@@ -24,7 +24,7 @@ const PictureHolder = styled.div`
 `;
 const Portal = styled.div`
   // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
-  ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
+  // ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
   position: absolute;
   background-color: rgba(115, 192, 232, .2);
   // May need to fill page: https://stackoverflow.com/a/30794589
@@ -32,12 +32,12 @@ const Portal = styled.div`
   width: 100%;
   will-change: opacity;
   opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
-  transition: ${p => p.offline ? '' : `opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
+  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`}};
   z-index: 5;
 `;
 const FallbackImage = styled.img`
   // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
-  ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
+  // ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
   position: absolute;
   object-fit: cover;
   font-family: 'object-fit: cover;';
@@ -47,7 +47,7 @@ const FallbackImage = styled.img`
   will-change: opacity;
   opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   // Transition settings need to be matched (in total) by NameTag/InnerContainer and Header/Nav.
-  transition: ${p => p.offline ? '' : `opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
+  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
   z-index: 4;
 `;
 
@@ -94,7 +94,6 @@ export default function PictureBox(props) {
   const blurredNycSrc = offlineImageToggle(isOffline, images[imageNames[5]].src);
   const fallbackSource = !inCity ? ForrestFallback : NycFallback; 
   const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback; 
-
   const setLoadLevelsNow = (event, idx) => {
     if (event !== null) {
       eventManagement(event);
@@ -149,27 +148,25 @@ export default function PictureBox(props) {
   };
   return (
     <PictureHolder>
-      {((!homePageLoaded && loadLevel <= 2) || (homePageLoaded && loadLevel < 2)) && (
-        <Fragment>
-          <Portal
-            homePageLoaded={homePageLoaded}
-            isMobile={type === 'mobile'} // See Styled Component note
-            loadLevel={loadLevel}
-            offline={isOffline}
-          />
-          <FallbackImage 
-            alt={altTextForFallback}
-            src={fallbackSource}
-            homePageLoaded={homePageLoaded}
-            isMobile={type === 'mobile'} // See Styled Component note
-            loadLevel={loadLevel}
-            offline={isOffline}
-            onLoad={handleLoadForFallback}
-            onTransitionEnd={handleTransitionEndForFallback}
-          />
-        </Fragment>
-      )}
-      {spellLevel > 0 && spellLevel < 5 && type === 'mobile' && (
+      <Fragment>
+        <Portal
+          homePageLoaded={homePageLoaded}
+          isMobile={type === 'mobile'} // See Styled Component note
+          loadLevel={loadLevel}
+          offline={isOffline}
+        />
+        <FallbackImage 
+          alt={altTextForFallback}
+          src={fallbackSource}
+          homePageLoaded={homePageLoaded}
+          isMobile={type === 'mobile'} // See Styled Component note
+          loadLevel={loadLevel}
+          offline={isOffline}
+          onLoad={handleLoadForFallback}
+          onTransitionEnd={handleTransitionEndForFallback}
+        />
+      </Fragment>
+      {type === 'mobile' && spellLevel > 0 && spellLevel < 5 && (
         <BlurredBoyForeground
           alt={altTextBoyBlurred}
           enter={movement === 'enter'}
@@ -189,59 +186,55 @@ export default function PictureBox(props) {
         spellLevel={spellLevel}
         src={bigBoySrc}
       />
-      {(!inCity || (inCity && spellLevel > 0)) && (
-        <Fragment>
-          {spellLevel > 0  && spellLevel < 5 && !inCity && (
-            <BlurredForrestBackground
-              alt={altTextForrestBlurred}
-              enter={movement === 'enter'}
-              exit={movement === 'exit'}
-              inCity={inCity}
-              onLoad={handleLoadForBlurredForrest}
-              onTransitionEnd={handleTransitionEndForBlurredForrest}
-              spellLevel={spellLevel}
-              src={blurredForrestSrc}
-            />
-          )}
-          <ForrestBackground
-            alt={altTextForrest}
-            homePageLoaded={homePageLoaded}
-            inCity={inCity}
-            loadLevel={loadLevel}
-            onLoad={handleLoadForForrest}
-            // Toggle state of spell after swapping backgrounds
-            onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, inCity, 'forrest')}
-            spellLevel={spellLevel}
-            src={bigForrestSrc}
-          />
-        </Fragment>
+      {spellLevel > 0  && spellLevel < 5 && !inCity && (
+        <BlurredForrestBackground
+          alt={altTextForrestBlurred}
+          enter={movement === 'enter'}
+          exit={movement === 'exit'}
+          inCity={inCity}
+          onLoad={handleLoadForBlurredForrest}
+          onTransitionEnd={handleTransitionEndForBlurredForrest}
+          spellLevel={spellLevel}
+          src={blurredForrestSrc}
+        />
       )}
-      {(inCity || (!inCity && spellLevel > 0)) && 
-        <Fragment>
-          {spellLevel > 0  && spellLevel < 5 && inCity && (
-            <BlurredNycBackground
-              alt={altTextNycBlurred}
-              enter={movement === 'enter'}
-              exit={movement === 'exit'}
-              inCity={inCity}
-              onLoad={handleLoadForBlurredNyc}
-              onTransitionEnd={handleTransitionEndForBlurredNyc}
-              spellLevel={spellLevel}
-              src={blurredNycSrc}
-            />
-          )}
-          <NycBackground
-            alt={altTextNyc}
-            homePageLoaded={homePageLoaded}
-            inCity={inCity}
-            onLoad={handleLoadForNyc}
-            // Toggle state of spell after swapping backgrounds
-            onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, !inCity, 'city')}
-            spellLevel={spellLevel}
-            src={bigNycSrc}
-          />
-        </Fragment>
-      }
+      {(!inCity || (inCity && spellLevel > 0)) && (
+        <ForrestBackground
+          alt={altTextForrest}
+          homePageLoaded={homePageLoaded}
+          inCity={inCity}
+          loadLevel={loadLevel}
+          onLoad={handleLoadForForrest}
+          // Toggle state of spell after swapping backgrounds (uses closure, so invocation OK)
+          onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, inCity, 'forrest')}
+          spellLevel={spellLevel}
+          src={bigForrestSrc}
+        />
+      )}
+      {spellLevel > 0  && spellLevel < 5 && inCity && (
+        <BlurredNycBackground
+          alt={altTextNycBlurred}
+          enter={movement === 'enter'}
+          exit={movement === 'exit'}
+          inCity={inCity}
+          onLoad={handleLoadForBlurredNyc}
+          onTransitionEnd={handleTransitionEndForBlurredNyc}
+          spellLevel={spellLevel}
+          src={blurredNycSrc}
+        />
+      )}
+      {(inCity || (!inCity && spellLevel > 0)) && (
+        <NycBackground
+          alt={altTextNyc}
+          homePageLoaded={homePageLoaded}
+          inCity={inCity}
+          onLoad={handleLoadForNyc}
+          // Toggle state of spell after swapping backgrounds (uses closure, so invocation OK)
+          onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, !inCity, 'city')}
+          spellLevel={spellLevel}
+          src={bigNycSrc}
+        />
+      )}
     </PictureHolder>
   );
 }

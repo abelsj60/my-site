@@ -28,24 +28,24 @@ export default class ContentLoader extends Component {
     const state = new State(props, location);
     const content = new Content(location.caller);
     const allContentData = content.getContentData();
+    const { caller } = location;
     let imageLoaded = -1;
 
-    this.overflowRef = location.caller === 'chapter'
+    this.overflowRef = caller === 'chapter'
       ? React.createRef()
       : {}; // Prevents errors
 
-    if (location.caller === 'chapter') {
-      // const { images, type } = this.props.appState;
-      // const number = state.getIndex('chapter') + 1;
-      // imageLoaded = type !== 'mobile' && images[`chapter-${number}-blurred`].complete ? 2 : 0;
-      imageLoaded = 0;
-    } else if (location.caller === 'projects') {
+    if (caller === 'chapter') {
+      const { images, type } = this.props.appState;
+      const number = state.getIndex('chapter') + 1;
+      imageLoaded = type !== 'mobile' && images[`chapter-${number}-blurred`].complete ? 2 : 0;
+    } else if (caller === 'projects') {
       imageLoaded = 0;
     }
 
     this.state = {
+      caller,
       allContentData: allContentData,
-      caller: location.caller,
       chapterIndex: state.getIndex('chapter'),
       headlineIndex: state.getIndex('article'),
       // -1 = n/a, 0 = not loaded, 1 = loaded, 2 = done
@@ -170,6 +170,7 @@ export default class ContentLoader extends Component {
 
       state.rebuildBody(boundHandleClickForBody);
       state.resetIllustrationState(boundHandleClickForApp);
+      // Checks .complete for main img (click handling for blur). 
       state.rebuildContentLoader(boundHandleClickForContentLoader);
 
       /* Reset scroll top in /chapter

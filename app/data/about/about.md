@@ -10,7 +10,7 @@ That's important. It means I don't just mechanically code software. I try to fig
 
 As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And, as a lawyer, I crafted stories that made legal arguments. 
 
-See that — all stories, all the time. 
+All stories, all the way down. 
 
 So. What's yours?
 

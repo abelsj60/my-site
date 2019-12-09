@@ -220,10 +220,10 @@ export default function Story(props) {
     eventManagement(event);
 
     // Let it breathe...to ensure visual artifacts have a chance to leave the mind's eye. 
-    // Use different timings to enter and exit b/c the two sequences are different. 
-
+    // Use different timings to enter and exit b/c the two sequences are different. But,
+    // ...setTimeout throws a lot of violations, probably b/c it's so short. It runs
+    // from ~58ms to ~103ms. Lengthen the time to play along...?
     const isEntering = illustrationDirection === 'enter';
-
     setTimeout(
       () => boundHandleClickForApp('updateIllustrationLevel', isEntering ? 2 : 0),
       isEntering ? 1 : 5
@@ -241,9 +241,16 @@ export default function Story(props) {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
   };
-  // Why explicitly set keys? To force IE 10 — whitch activates the PictureFill polyfill to change images 
-  // when swapping content, of course. Otherwise they won't change.
-  let fallbackBlur, fallbackKey, blurredKey, mainKey;
+  let blurredKey, fallbackBlur, fallbackKey, mainKey;
+
+  /* Image keys:
+
+    1. We're manually creating keys for each image b/c the PictureFill fallback won't 
+        update the image sources otherwise (they just freeze, at least on IE). 
+    2. These keys force the image elements to update src (set via background-image properties). 
+    3. I've also created my own fallback keys b/c the fallback urls are data-uris, which is
+        too long to use as a key.
+  */
 
   switch (number) {
     case 1:
@@ -271,15 +278,6 @@ export default function Story(props) {
       mainKey = `${number}-psl6-gh0`;
       break;
   }
-
-  /* Image keys:
-
-    1. I've manually added keys to each image element b/c the PictureFill fallback doesn't 
-      update the image sources otherwise (they just freeze). 
-    2. The keys force the image elements to update src (set via background-image properties). 
-    3. I've also created my own fallback keys b/c the fallback urls are data-uris, which is
-      too long to use as a key. I randomly generated them by hand!
-  */
 
   return (
     <Main>

@@ -1,5 +1,6 @@
 import eventManagement from '../helpers/eventManagement.js';
 import getFontSize from '../helpers/getFontSize.js';
+import { isIE } from 'react-device-detect';
 import React from 'react';
 import Mapper from '../shared/Mapper.jsx';
 import styled, { css, keyframes } from 'styled-components';
@@ -104,7 +105,7 @@ const Charm = styled.div`
   animation: ${p => (((p.enter && p.spellLevel > 3) || (p.exit && p.spellLevel >= 3)) && p.isActive && css`1.5s -.15s ${bigPinkPulse} infinite`)};
   // The next animation is designed to help stop the animation when on IE or Edge. It seems to cause no harm. It forces the broswer
   // to stop spinning the charm when it's inactive.
-  ${p => !p.isActive && css`animation: 0s ${stopBigPinkSpinOnIE} infinite;`}
+  ${p => p.isIE && !p.isActive && css`animation: 0s ${stopBigPinkSpinOnIE} infinite;`}
   border: 2px dotted ${p => p.theme.colors.pink};
   width: 45px;
   height: 45px;
@@ -272,10 +273,8 @@ export default function Charms(props) {
                 <Charm
                   enter={movement === 'enter'}
                   exit={movement === 'exit'}
-                  // Added explicit keys to try to help IE 11 along. It doesn't
-                  // stop animation after each update, but the CSS changes!
-                  key={idx}
                   isActive={isActive}
+                  isIE={isIE}
                   isReady={isReady}
                   key={idx}
                   ref={charmRefs[idx]} // Add a ref to each Charm when mounted

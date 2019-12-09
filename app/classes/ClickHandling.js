@@ -277,15 +277,16 @@ export default class ClickHandling {
           break;
       }
 
-      if (updateValue !== 'updateApp' || updateValue !== 'startDramaAtHome') {
+      if (
+        updateValue !== 'updateApp' || updateValue !== 'startDramaAtHome'
+          || updateValue !== 'updateNameTagWidth' || updateValue !== 'updateSpacerHeight'
+      ) {
         if (callReactGa()) {
           if (category && action) {
             ReactGA.event({
               category,
               action,
-              label: label
-                ? label
-                : null
+              label: label ? label : null
             });
           }
         }
@@ -345,8 +346,7 @@ export default class ClickHandling {
           const { appState } = this.props;
 
           if (caller === 'chapter') {
-            // const isComplete = appState.images[`chapter-${valueOne + 1}-blurred`].complete;
-            const isComplete = false;
+            const isComplete = appState.images[`chapter-${valueOne + 1}-blurred`].complete;
             stateToUpdate.chapterIndex = valueOne;
             stateToUpdate.imageLoaded = appState.type !== 'mobile' && isComplete && !appState.offline ? 2 : 0;
           }
