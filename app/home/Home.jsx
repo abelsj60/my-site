@@ -3,7 +3,7 @@ import ClickHandling from '../classes/ClickHandling.js';
 import DebugHome from './DebugHome.jsx';
 import Main from '../primitives/Main.jsx';
 import NameTag from './NameTag.jsx';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PictureBox from './PictureBox.jsx';
 import styled from 'styled-components';
 
@@ -103,6 +103,7 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
+          loadLevels={this.loadLevels}
           setLoadLevels={this.setLoadLevels}
           setSpellLevel={setSpellLevel}
           sumLoadLevels={this.sumLoadLevels}
@@ -223,7 +224,7 @@ export default class Home extends Component {
   }
 
   setLoadLevels(idx) {
-    // Let's update the loadLevel (onLoad and onTransitionEnd)
+    // Let's update the loadLevels (via onLoad and onTransitionEnd)
     if (this.loadLevels[idx] < 3) {
       const newArr = [].concat(this.loadLevels);
       const currentValue = newArr[idx];
@@ -346,7 +347,7 @@ export default class Home extends Component {
   }
 
   updateLoadLevel() {
-    const { homePageLoaded, type } = this.props.appState;
+    const { homePageLoaded } = this.props.appState;
     const { loadLevel } = this.state;
 
     if (!homePageLoaded) {
@@ -359,6 +360,7 @@ export default class Home extends Component {
           break;
         case 2:
           this.setLoadLevel('initialSet', 5);
+          break;
       }
     } else if (homePageLoaded) {
       switch (loadLevel) {

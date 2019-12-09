@@ -24,9 +24,9 @@ Here are a few more interesting points:
 
 This site was built around the idea of "theatrical Web design."
 
-Timed animation sequences are used to add drama to the entry, exit, and use of major creative elements.  
+Timed animation sequences tell a story about the entry, exit, and use of major creative elements.  
 
-As a result, the [App component state](https://github.com/abelsj60/jamesabels.net/blob/c53a0c70ec6a084ec9727f4df0301fa825c8e28e/app/App.jsx#L286) is larger than expected so functionally unrelated child Components (i.e., siblings) can track and participate in animation sequences. A future move to React Hooks or Redux might condense this code.
+This caused the [component state in App.jsx](https://github.com/abelsj60/jamesabels.net/blob/c53a0c70ec6a084ec9727f4df0301fa825c8e28e/app/App.jsx#L286) to be larger than expected, as functionally unrelated children (i.e., siblings) have to track animation sequences in order to join them. A move to React Hooks or Redux might condense this code.
 
 ##### ∙ Compression stepping
 

@@ -1,10 +1,10 @@
 import bio from '../data/home/home.md';
 import BlurredNycBackground from './BlurredNycBackground.jsx'
-import BoyForeground from './BoyForeground.jsx';
+// import BoyForeground from './BoyForeground.jsx';
 import BlurredBoyForeground from './BlurredBoyForeground.jsx';
 import BlurredForrestBackground from './BlurredForrestBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
-import ForrestBackground from './ForrestBackground.jsx';
+// import ForrestBackground from './ForrestBackground.jsx';
 import ForrestFallback from '../../docs/assets/images/convert-to-data-uri/forrest-ink-50x50-53.png';
 import NycBackground from './NycBackground.jsx';
 import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50x50-53.png';
@@ -60,8 +60,7 @@ export default function PictureBox(props) {
     altTextForrestBlurred,
     altTextNyc,
     altTextNycBlurred,
-    altTextNycFallback,
-    imageNames
+    altTextNycFallback
   } = bio.attributes;
   const {
     appState,
@@ -84,6 +83,36 @@ export default function PictureBox(props) {
     spellLevel,
     movement
   } = homeState;
+  const imageArray = [];
+
+  bio.attributes.preloadUrls.forEach(imgPath => {
+    const filePrefix = imgPath.includes('boy')
+      ? 'boy'
+      : imgPath.includes('forrest')
+        ? 'forrest'
+        : 'nyc';
+    let src;
+
+    if (imgPath.includes('forrest') && !imgPath.includes('blur') && images.width >= 2880 && images.width <= 3000) {
+      // Manually skip boy-...-2880.png b/c the next level seems to look a lot nicer on screen
+      // File size is roughly comparable, so only wasting compute cycles. I'm OK with that.
+      // src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-3000.png`; // original special boy img
+      src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-q50-2880.jpg`;
+    } else {
+      if (imgPath.includes('blur')) {
+        src = `${urlPrefix}/${imgPath}/${filePrefix}-ink-blur-0x15-160.${imgPath.includes('boy') ? 'png' : 'jpg'}`;
+      } else {
+        src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-${
+          !imgPath.includes('boy')
+            ? images.width < 2880 ? 'q90-' : 'q50-'
+            : ''
+        }${images.width}.${imgPath.includes('boy') ? 'png' : 'jpg'}`;
+      }
+    }
+
+    imageArray.push(src);
+  });
+
   const offlineTarget = type === 'mobile' ? 6 : 5;
   const isOffline = !homePageLoaded ? offline : offline && sumLoadLevels('all') < offlineTarget;
   const bigBoySrc = offlineImageToggle(isOffline, images[imageNames[0]].src);
@@ -146,6 +175,7 @@ export default function PictureBox(props) {
       }
     }
   };
+
   return (
     <PictureHolder>
       <Fragment>

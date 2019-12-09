@@ -12,6 +12,6 @@ export default styled.img`
   pointer-events: none;
   // Only hidden during the initial stages of the load. It's always visible thereafter. 
   // Never transition it in, its entrance is hidden by the fallback image.
-  opacity: ${p => !p.homePageLoaded && p.loadLevel < 2 ? '0' : '1'};
+  // opacity: ${p => !p.homePageLoaded && p.loadLevel < 2 ? '0' : '1'};
   z-index: 2;
 `;

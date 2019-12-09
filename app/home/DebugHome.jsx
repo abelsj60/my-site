@@ -21,6 +21,9 @@ export default function DebugHome(props) {
       <Debug>
         loadLevels: [ {props.loadLevels.toString()} ]
       </Debug>
+      <Debug>
+        width x height: {props.appState.images.width.toString()} x {props.appState.images.height.toString()}
+      </Debug>
     </Fragment>
   );
 }

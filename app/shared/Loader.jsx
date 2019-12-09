@@ -16,7 +16,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   margin-left: ${p => p.smallMarginLeft && css`${p.smallMarginLeft.includes('auto') ?  p.smallMarginLeft : p.smallMarginLeft + 'px'}`};
-  margin-right: ${p => p.smallMarginRight && css`${p.smallMarginRight.includes('auto') ?  p.smallMarginRight : p.smallMarginRight + 'px'}`};
+  margin-right: ${p => p.smallMarginRight && css`${p.smallMarginRight.includes('auto') ? p.smallMarginRight : p.smallMarginRight + 'px'}`};
   opacity: ${p => p.show ? '1' : '0'};
   transition: opacity .2s;
   width: ${p => p.cWidth && css`${p.cWidth}px`};
