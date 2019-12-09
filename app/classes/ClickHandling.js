@@ -346,8 +346,7 @@ export default class ClickHandling {
           const { appState } = this.props;
 
           if (caller === 'chapter') {
-            // const isComplete = appState.images[`chapter-${valueOne + 1}-blurred`].complete;
-            const isComplete = false;
+            const isComplete = appState.images[`chapter-${valueOne + 1}-blurred`].complete;
             stateToUpdate.chapterIndex = valueOne;
             stateToUpdate.imageLoaded = appState.type !== 'mobile' && isComplete && !appState.offline ? 2 : 0;
           }

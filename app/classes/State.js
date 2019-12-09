@@ -85,8 +85,7 @@ export default class State {
   _illustrationState(images) {
     const chapterIndex = this._convertParamsToIndices().one;
     const chapterNumber = chapterIndex + 1;
-    // const isComplete = images[`chapter-${chapterNumber}-main`].complete;
-    const isComplete = false;
+    const isComplete = images[`chapter-${chapterNumber}-main`].complete;
 
     // Added short circuit bc of weird error in IE 10, per BrowserStack.
     // The appState wasn't defined and so threw an error. This fixed...
