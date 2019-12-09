@@ -35,9 +35,10 @@ export default class ContentLoader extends Component {
       : {}; // Prevents errors
 
     if (location.caller === 'chapter') {
-      const { images, type } = this.props.appState;
-      const number = state.getIndex('chapter') + 1;
-      imageLoaded = type !== 'mobile' && images[`chapter-${number}-blurred`].complete ? 2 : 0;
+      // const { images, type } = this.props.appState;
+      // const number = state.getIndex('chapter') + 1;
+      // imageLoaded = type !== 'mobile' && images[`chapter-${number}-blurred`].complete ? 2 : 0;
+      imageLoaded = 0;
     } else if (location.caller === 'projects') {
       imageLoaded = 0;
     }

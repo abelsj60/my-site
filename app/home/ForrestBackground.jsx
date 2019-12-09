@@ -22,16 +22,16 @@ export default styled.img`
   // Only hidden during the initial stages of the load. It's always visible thereafter. 
   // Only transition when casting spells (initial entrance hidden by fallback image).
   // Note: below is currently abandoned attempt to add a blur filter to the mix, it looks great, but: 
-  //  a. It's hard to implement in an aesthetically pleasant way, and
+  //  a. It's hard to implement in an aesthetically pleasing way, and
   //  b. More important, it results in a currently unacceptable performance hit...
   //  -Will need to add to will-change and transition when adding it back.
   // ${p => !p.inCity && p.spellLevel > 0 && css`filter: blur(${p => p.spellLevel < 4 ? '40px' : '5px'})`};
   opacity: ${p => (!p.homePageLoaded && p.loadLevel < 2) || (p.homePageLoaded && p.inCity) ? '0' : '1'}};
-  transform: ${p => p.inCity ? 'scale(1.49)' : 'scale(1)'} translate3d(0, 0, 0);
-  transform-origin: 50% ${p => p.inCity ? '-3%' : '-6%'};
+  ${p => p.spellLevel > 0 && css`transform: ${p.inCity ? 'scale(1.49)' : 'scale(1)'} translate3d(0, 0, 0);`}
+  ${p => p.spellLevel > 0 && css`transform-origin: 50% ${p.inCity ? '-3%' : '-6%'};`}
   // Transition used for background swap. Opacity bezier curve should match that used by NycBackground.
   // Added a slight delay to both transitions to give the browser a second to breathe.
   // Also, mental note --> The cubic-bezier curve is the best. I tested extensively.
-  transition: ${p => p.spellLevel > 0 && 'transform 1.75s, opacity 1.31s cubic-bezier(0.77, 0, 0.175, 1)'};
+  ${p => p.spellLevel > 0 && css`transition: transform 1.75s, opacity 1.31s cubic-bezier(0.77, 0, 0.175, 1);`}
   z-index: ${p => !p.inCity && p.spellLevel <= 5 ? '0' : '-2'};
 `;
