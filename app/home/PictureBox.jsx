@@ -25,7 +25,7 @@ const PictureHolder = styled.div`
 `;
 const Portal = styled.div`
   // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
-  // ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
+  ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
   position: absolute;
   background-color: rgba(115, 192, 232, .2);
   // May need to fill page: https://stackoverflow.com/a/30794589
@@ -38,7 +38,7 @@ const Portal = styled.div`
 `;
 const FallbackImage = styled.img`
   // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
-  // ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
+  ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
   position: absolute;
   object-fit: cover;
   font-family: 'object-fit: cover;';
