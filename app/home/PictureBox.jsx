@@ -1,16 +1,17 @@
 import bio from '../data/home/home.md';
 import BlurredNycBackground from './BlurredNycBackground.jsx'
-// import BoyForeground from './BoyForeground.jsx';
+import BoyForeground from './BoyForeground.jsx';
 import BlurredBoyForeground from './BlurredBoyForeground.jsx';
 import BlurredForrestBackground from './BlurredForrestBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
-// import ForrestBackground from './ForrestBackground.jsx';
+import ForrestBackground from './ForrestBackground.jsx';
 import ForrestFallback from '../../docs/assets/images/convert-to-data-uri/forrest-ink-50x50-53.png';
 import NycBackground from './NycBackground.jsx';
 import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50x50-53.png';
 import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import React, { Fragment } from 'react';
 import styled, { css } from 'styled-components';
+import urlPrefix from '../helpers/urlPrefix';
 
 const PictureHolder = styled.div`
   position: fixed;
@@ -60,7 +61,8 @@ export default function PictureBox(props) {
     altTextForrestBlurred,
     altTextNyc,
     altTextNycBlurred,
-    altTextNycFallback
+    altTextNycFallback,
+    imageNames
   } = bio.attributes;
   const {
     appState,
