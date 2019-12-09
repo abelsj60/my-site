@@ -236,6 +236,7 @@ class App extends Component {
     const { pathname, search } = window.location;
     const referrer = new Referrer(props);
     const location = new Location(referrer.pathToMatch, { location: { pathname } });
+    const { caller } = location;
     /* Rules for height:
 
       1. Set property on initial load
@@ -250,7 +251,7 @@ class App extends Component {
     let firstHeartbeat = typeof localStorage.lastHeartbeat === 'undefined';
     let state; // Defined if site loads on /chapter.
 
-    if (location.caller === 'chapter') {
+    if (caller === 'chapter') {
       state = new State({ location: { pathname } }, location);
     }
 
@@ -273,7 +274,7 @@ class App extends Component {
     }
 
     this.state = {
-      currentCaller: location.caller !== 'i' ? location.caller : 'home',
+      currentCaller: caller !== 'i' ? caller : 'home',
       // 0 = not ready, 1 = run, 2 = nevermore
       heartbeat: firstHeartbeat ? 0 : 2,
       height: this.pageHeight,

@@ -90,7 +90,7 @@ const Hed = styled.h1`
   // Use p.offline to change how the hed's shown when surfing online/offline.
   opacity: ${p => !p.homePageLoaded && p.loadLevel < 1 && !p.offline ? '0' : '1'};
   // Match transition values to FallbackImage in PictureBox, not InnerContainer.
-  transition: ${p => p.loadLevel < 2 && `opacity ${!p.homePageLoaded ? '.55s .15s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
+  transition: ${p => p.loadLevel < 2 && css`opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
   // Let's set height in a consistent way. HTML text often has wonky CapHeights and Baselines (space above 
   // and below the glyphs). One solution: 
   // https://medium.com/eightshapes-llc/cropping-away-negative-impacts-of-line-height-84d744e016ce
@@ -109,7 +109,7 @@ const InnerContainer = styled.div`
   opacity: ${p => (!p.homePageLoaded && p.loadLevel < 2) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
   // Compared to <Hed />, this element's initial fade-in looks best when it starts later, runs faster, and uses a different bezier curve.
   // Transition settings for the spell should match (in total) PictureBox/Fallbacks's transition property.
-  transition: opacity ${p => p.loadLevel < 3 ? '.605s .095s' : p.enter ? '.45s' : '.65s'} ease-in-out;
+  transition: opacity ${p => p.loadLevel < 3 ? '.7s' : p.enter ? '.45s' : '.65s'} ease-in-out;
 `;
 const Pitch = styled.section`
   overflow: auto;
@@ -143,7 +143,8 @@ export default function NameTag(props) {
     nameTagWidth,
     offline,
     spacerHeight,
-    tempContent
+    tempContent,
+    type
   } = appState;
   const {
     eventType,
@@ -218,6 +219,7 @@ export default function NameTag(props) {
           loadLevel={loadLevel}
           offline={offline}
           onClick={handleClickForHed}
+          type={type}
         >
           {name}
         </Hed>
@@ -228,6 +230,7 @@ export default function NameTag(props) {
           loadLevel={loadLevel}
           onTransitionEnd={handleTransitionEndForInnerContainer}
           spellLevel={spellLevel}
+          type={type}
         >
           <SubHed
             marginLeft="1em"

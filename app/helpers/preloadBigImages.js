@@ -1,8 +1,31 @@
-// import { isIOS } from 'react-device-detect';
+import home from '../data/home/home.md';
+import stories from '../data/the-story/index.js';
+import urlPrefix from './urlPrefix';
 
-// On images: https://images.guide
-// WebP support: https://stackoverflow.com/a/54631141
-// Google's detection method: https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_for_webp
+/* Notes on image use: 
+
+  A guide: https://images.guide
+  WebP support: https://stackoverflow.com/a/54631141
+  Google's detection method: https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_for_webp
+
+  Also: Megapixel limits may exist in iOS. They did in the past, but current status is currently unknown. Megapixel 
+  is (the decoded size of the image, not its file size). This doesn't seem to be a direct problem as to displaying 
+  images, but it may be a hindrance in terms of image use and animations on lower-end devices... 
+
+  See:
+    https://stackoverflow.com/questions/22039534/ios-browser-crashes-due-to-low-memory?rq=1
+    https://sealedabstract.com/rants/why-mobile-web-apps-are-slow/
+
+  Usage:
+    This preloader sets image elements to an object and put it on appState. This allows us to use .complete later
+    w/o problem. I've tried just adding the .src to an array, however, have found that I do not get an accurate
+    response when appending it to a new Image and checking its .complete property. There's probably an async
+    issue. However, I don't think this significant for my purposes b/c these images have been called.
+
+    Therefore, if I test the original image, I should get a true response as to availability by reference 
+    regardless of whether or not the downstream Image element is the same as this one (I don't think it 
+    is), particulalry as the .complete tests are only run on desktop browsers, which seem more robust.
+*/
 
 export default function preloadBigImages() {
   const images = {};
@@ -39,7 +62,51 @@ export default function preloadBigImages() {
       return imgWidth >= resWidth && imgHeight >= resHeight;
     }
 
-    return true; // default size when nothing fits (5120)
+    return true; // default size when there's nothing smaller (5120)
+  });
+
+  stories.forEach(chapter => {
+    const { number } = chapter.attributes;
+    const imageA = new Image();
+    const imageB = new Image();
+    const illSource = `${urlPrefix}/chapter-${number}/chapter-${number}-imc-main-101419-q${
+      imageWidth < 2880 ? '90' : '50'
+    }-${imageWidth}.jpg`;
+    const blurredSource = `${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
+    imageA.src = illSource;
+    imageB.src = blurredSource;
+    images[`chapter-${number}-main`] = imageA;
+    images[`chapter-${number}-blurred`] = imageB;
+  });
+
+  home.attributes.preloadUrls.forEach((imagePath, idx) => {
+    const image = new Image();
+    const isBoy = imagePath.includes('boy');
+    const isBlur = imagePath.includes('blur');
+    const filePrefix = isBoy
+      ? 'boy'
+      : imagePath.includes('forrest')
+        ? 'forrest'
+        : 'nyc';
+    let source;
+
+    if (isBlur) {
+      source = `${urlPrefix}/${imagePath}/${filePrefix}-ink-blur-0x15-160.${isBoy ? 'png' : 'jpg'}`;
+    } else {
+      // Manually skip boy-...-2880.png b/c the next level seems to look a lot nicer on screen
+      // File size is roughly comparable, so only wasting compute cycles. I'm OK with that.
+
+      source = `${urlPrefix}/${imagePath}/${filePrefix}-imc-main-101419-${
+          !isBoy ? imageWidth < 2880 ? 'q90-' : 'q50-' : ''
+        }${
+          isBoy && imageWidth >= 2880 && imageWidth <= 3000 ? '3000' : imageWidth
+        }.${
+          isBoy ? 'png' : 'jpg'
+      }`;
+    }
+
+    image.src = source;
+    images[home.attributes.imageNames[idx]] = image;
   });
 
   images.width = imageWidth;

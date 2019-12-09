@@ -14,7 +14,6 @@ export default class State {
   getIndex(type) {
     const params = this._params;
     const referrer = this._referrer.location;
-
     let index;
 
     switch (type) {

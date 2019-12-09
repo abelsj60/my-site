@@ -25,8 +25,7 @@ const altImageText = "Uh-oh! A Jinni, drawn in shades of blue, blocks your way. 
 export default class NotFound extends Component {
   render() {
     const { appState } = this.props;
-    let src = `${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`;
-    src = offlineImageToggle(appState.offline, src);
+    const src = offlineImageToggle(appState.offline, `${urlPrefix}/not-found/jinni-img-q90-1240-4x.jpg`);
     return (
       <Main>
         <RestyledContentHolder>
