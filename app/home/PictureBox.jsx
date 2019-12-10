@@ -11,7 +11,6 @@ import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50
 import offlineImageToggle from '../helpers/offlineImageToggle.js';
 import React, { Fragment } from 'react';
 import styled, { css } from 'styled-components';
-import urlPrefix from '../helpers/urlPrefix';
 
 const PictureHolder = styled.div`
   position: fixed;
@@ -25,7 +24,7 @@ const PictureHolder = styled.div`
 `;
 const Portal = styled.div`
   // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
-  ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
+  ${p => p.homePageLoaded && !p.isMobile && !p.offline && 'display: none;'}
   position: absolute;
   background-color: rgba(115, 192, 232, .2);
   // May need to fill page: https://stackoverflow.com/a/30794589
@@ -33,12 +32,12 @@ const Portal = styled.div`
   width: 100%;
   will-change: opacity;
   opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
-  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`}};
+  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.5s'} ease-in-out`}};
   z-index: 5;
 `;
 const FallbackImage = styled.img`
   // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
-  ${p => p.homePageLoaded && !p.isMobile && 'display: none;'}
+  ${p => p.homePageLoaded && !p.isMobile && !p.offline && 'display: none;'}
   position: absolute;
   object-fit: cover;
   font-family: 'object-fit: cover;';
@@ -48,7 +47,7 @@ const FallbackImage = styled.img`
   will-change: opacity;
   opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   // Transition settings need to be matched (in total) by NameTag/InnerContainer and Header/Nav.
-  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
+  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.5s'} ease-in-out`};
   z-index: 4;
 `;
 
@@ -85,37 +84,8 @@ export default function PictureBox(props) {
     spellLevel,
     movement
   } = homeState;
-  const imageArray = [];
 
-  bio.attributes.preloadUrls.forEach(imgPath => {
-    const filePrefix = imgPath.includes('boy')
-      ? 'boy'
-      : imgPath.includes('forrest')
-        ? 'forrest'
-        : 'nyc';
-    let src;
-
-    if (imgPath.includes('forrest') && !imgPath.includes('blur') && images.width >= 2880 && images.width <= 3000) {
-      // Manually skip boy-...-2880.png b/c the next level seems to look a lot nicer on screen
-      // File size is roughly comparable, so only wasting compute cycles. I'm OK with that.
-      // src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-3000.png`; // original special boy img
-      src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-q50-2880.jpg`;
-    } else {
-      if (imgPath.includes('blur')) {
-        src = `${urlPrefix}/${imgPath}/${filePrefix}-ink-blur-0x15-160.${imgPath.includes('boy') ? 'png' : 'jpg'}`;
-      } else {
-        src = `${urlPrefix}/${imgPath}/${filePrefix}-imc-main-101419-${
-          !imgPath.includes('boy')
-            ? images.width < 2880 ? 'q90-' : 'q50-'
-            : ''
-        }${images.width}.${imgPath.includes('boy') ? 'png' : 'jpg'}`;
-      }
-    }
-
-    imageArray.push(src);
-  });
-
-  const offlineTarget = type === 'mobile' ? 6 : 5;
+  const offlineTarget = type === 'mobile' ? 5 : 4; // Always update if updating Home.updateLoadLevel()!
   const isOffline = !homePageLoaded ? offline : offline && sumLoadLevels('all') < offlineTarget;
   const bigBoySrc = offlineImageToggle(isOffline, images[imageNames[0]].src);
   const blurredBoySrc = offlineImageToggle(isOffline, images[imageNames[1]].src);
@@ -167,13 +137,11 @@ export default function PictureBox(props) {
   const handleTransitionEndForBlurredNyc = event => setSpellLevelNow(event, 'BlurredNyc');
   // Toggles spell after background swap, needs extra params --> use closure...
   const handleTransitionEndForForrestOrNyc = (penultimateLevel, isActive) => event => {
-    const { propertyName } = event;
-
     eventManagement(event);
 
-    if (propertyName === 'transform') {
+    if (event.propertyName === 'transform') {
       if (penultimateLevel && isActive) {
-        boundHandleClickForHome('toggleSpell', propertyName);
+        boundHandleClickForHome('toggleSpell', event.propertyName);
       }
     }
   };

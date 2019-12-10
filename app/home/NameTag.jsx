@@ -88,11 +88,10 @@ const Hed = styled.h1`
   user-select: none;
   // Use !p.homePageLoaded to limit opacity change to load sequence.
   // Use p.offline to change how the hed's shown when surfing online/offline.
-  opacity: ${p => !p.homePageLoaded && p.loadLevel < 1 && !p.offline ? '0' : '1'};
+  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && !p.offline) ? '0' : '1'};
   // Match transition values to FallbackImage in PictureBox, not InnerContainer.
-  transition: ${p => p.loadLevel < 2 && css`opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ${!p.homePageLoaded ? 'ease-in-out' : 'ease-out'}`};
-  // Let's set height in a consistent way. HTML text often has wonky CapHeights and Baselines (space above 
-  // and below the glyphs). One solution: 
+  transition: ${p => p.loadLevel < 2 && css`opacity ${!p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'}`};
+  // Let's set height in a consistent way. HTML text often has wonky CapHeights and Baselines. One solution: 
   // https://medium.com/eightshapes-llc/cropping-away-negative-impacts-of-line-height-84d744e016ce
   // It didn't work well for me. So, I did the following:
   //  1. Found a line-height that tightened the space around the text to what I expected/wanted.
@@ -109,7 +108,7 @@ const InnerContainer = styled.div`
   opacity: ${p => (!p.homePageLoaded && p.loadLevel < 2) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
   // Compared to <Hed />, this element's initial fade-in looks best when it starts later, runs faster, and uses a different bezier curve.
   // Transition settings for the spell should match (in total) PictureBox/Fallbacks's transition property.
-  transition: opacity ${p => p.loadLevel < 3 ? '.7s' : p.enter ? '.45s' : '.65s'} ease-in-out;
+  transition: opacity ${p => (!p.homePageLoaded && p.loadLevel < 3) ? '.7s' : p.enter ? '.45s' : '.65s'} ease-in-out;
 `;
 const Pitch = styled.section`
   overflow: auto;
@@ -161,27 +160,33 @@ export default function NameTag(props) {
     motto,
     name
   } = attributes;
-
   const handleClickForHed = event => {
     eventManagement(event);
 
-    // Heartbeat ends at 3, set in PictureBox.onTransitionEndForBlurredBoy
-    if (homePageLoaded && heartbeat > 1 && (spellLevel === 0 || spellLevel === 4)) {
-      if (eventType === 'touch') {
-        boundHandleClickForHome('resetEventType');
-        return false;
-      }
-  
-      if (callReactGa()) {
-        ReactGA.event({
-          category: 'Home state',
-          action: `Spell toggled: ${spellLevel === 0 ? 'off' : 'on'}`,
-          value: score
-        });
-      }
+    // 1. If online always!
+    // 2. If not online, only when already in the spell.
+    //  -The blurred image isn't loaded yet! Don't just transition alt text!
 
-      boundHandleClickForHome('toggleSpell');
+    if (!offline || (offline && spellLevel > 0)) {
+      // Heartbeat ends at 3, set in PictureBox.onTransitionEndForBlurredBoy
+      if (homePageLoaded && heartbeat > 1 && (spellLevel === 0 || spellLevel === 4)) {
+        if (eventType === 'touch') {
+          boundHandleClickForHome('resetEventType');
+          return false;
+        }
+    
+        if (callReactGa()) {
+          ReactGA.event({
+            category: 'Home state',
+            action: `Spell toggled: ${spellLevel === 0 ? 'off' : 'on'}`,
+            value: score
+          });
+        }
+  
+        boundHandleClickForHome('toggleSpell');
+      }
     }
+
   };
   const handleAnimationEndForHeartbeat = event => {
     eventManagement(event);
@@ -249,9 +254,12 @@ export default function NameTag(props) {
           </Pitch>
         </InnerContainer>
         <Loader
+          // Remember, 'done' keeps it off even when navigating 
+          // internally back to home after homePageLoaded...
           done={homePageLoaded}
           marginBottom="7"
           show={loadLevel === 1}
+          text={'Loading art...'}
         />
       </OuterContainer>
     </Fragment>

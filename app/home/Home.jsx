@@ -53,6 +53,7 @@ export default class Home extends Component {
     // user navigates before the laoding sequence is complete (b/c there's a 
     // setTimeout in PictureBox. This is canceled in cWU() below.
     this.timeoutIdForFallbackTransitionEnd = { id: 0 }; 
+    this.timeoutIdForUpdateLoadLevel = 0; 
 
     this.state = {
       activeCharm: initialPattern[0],
@@ -232,13 +233,19 @@ export default class Home extends Component {
       this.loadLevels = newArr;
     }
 
-    // Now that we've updated the loadLevels, let's check to see if we should
-    // update state for a re-render 
-    this.updateLoadLevel();
+    /* Now that we've updated the loadLevels: 
+    
+      1. Let's check to see if we should update state for a re-render. 
+      2. Use the timeout to be sure all preceeding animations had a chance to run.
+        On mobile, we sometimes loose the Hed's fadein b/c the setState runs
+        before it can finish. This timeout should ensure it can finish. 
+    */
+  
+   this.timeoutIdForUpdateLoadLevel = setTimeout(() => this.updateLoadLevel(), 200);
   }
 
   setSpellLevel(val) {
-    /* Casting spells
+    /* Casting spells:
 
       1. Movement is '' on initial load
       2. Movement becomes 'enter' and spellLevel is 1 on first click
@@ -404,6 +411,9 @@ export default class Home extends Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.timeoutIdForUpdateLoadLevel);
+    // This timeout is in an object b/c it runs in an event handler.
+    // Placing it in a handler makes it easier to clear via p-b-r.
     clearTimeout(this.timeoutIdForFallbackTransitionEnd.id);
   }
 }

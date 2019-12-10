@@ -4,7 +4,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 const loaderKeyframes = keyframes`
   0% {
-    transform: scaleX(0);
+    transform: scaleX(1);
   }
 
   100% {
@@ -44,6 +44,10 @@ const Text = styled.p`
 const LoadingTrack = styled.div`
   position: relative;
   height: 1px;
+  ${p => p.setWidth && 'width: 50px;'}
+  margin-top: 13px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: ${p => !p.white ? p.theme.colors.white : p.theme.colors.black };
 `;
 const ProgressBar = styled.div`
@@ -83,9 +87,10 @@ export default function Loader(props) {
               smallFont={props.smallFont}
               white={props.white}
             >
-              Loading...
+              {props.text ? props.text : 'Loading...'}
             </Text>
             <LoadingTrack
+              setWidth={props.text} // Truthy!
               white={props.white}
             >
               <ProgressBar 

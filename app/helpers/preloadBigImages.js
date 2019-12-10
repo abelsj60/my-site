@@ -8,9 +8,10 @@ import urlPrefix from './urlPrefix';
   WebP support: https://stackoverflow.com/a/54631141
   Google's detection method: https://developers.google.com/speed/webp/faq#how_can_i_detect_browser_support_for_webp
 
-  Also: Megapixel limits may exist in iOS. They did in the past, but current status is currently unknown. Megapixel 
-  is (the decoded size of the image, not its file size). This doesn't seem to be a direct problem as to displaying 
-  images, but it may be a hindrance in terms of image use and animations on lower-end devices... 
+  Also: 
+    Megapixel limits may exist in iOS. They did in the past, but current status is currently unknown. Megapixel 
+    is (the decoded size of the image, not its file size). This doesn't seem to be a direct problem as to displaying 
+    images, but it may be a hindrance in terms of image use and animations on lower-end devices... 
 
   See:
     https://stackoverflow.com/questions/22039534/ios-browser-crashes-due-to-low-memory?rq=1
