@@ -1,9 +1,5 @@
 import ChapterNav from './ChapterNav.jsx';
 import eventManagement from '../helpers/eventManagement.js';
-import fallbackBlurOne from '../../docs/assets/images/convert-to-data-uri/chapter-1-ink-50x50-53.png';
-import fallbackBlurTwo from '../../docs/assets/images/convert-to-data-uri/chapter-2-ink-50x50-53.png';
-import fallbackBlurThree from '../../docs/assets/images/convert-to-data-uri/chapter-3-ink-50x50-53.png';
-import fallbackBlurFour from '../../docs/assets/images/convert-to-data-uri/chapter-4-ink-50x50-53.png';
 import { isIE } from 'react-device-detect';
 import marked from 'marked';
 import Main from '../primitives/Main.jsx';
@@ -253,34 +249,34 @@ export default function Story(props) {
 
   /* Image keys:
 
-    1. We're manually creating keys for each image b/c the PictureFill fallback won't 
-        update the image sources otherwise (they just freeze, at least on IE). 
+    1. We're manually creating keys for each image b/c the PictureFill fallback won't update the 
+      image sources otherwise (they just freeze, at least on IE). 
     2. These keys force the image elements to update src (set via background-image properties). 
     3. I've also created my own fallback keys b/c the fallback urls are data-uris, which is
-        too long to use as a key.
+      too long to use as a key.
   */
 
   switch (number) {
     case 1:
-      fallbackBlur = fallbackBlurOne;
+      fallbackBlur = images['chFallbackImg-1'].src;
       fallbackKey = `${number}-dj8z-39d`;
       blurredKey = `${number}-dk8z-39d`;
       mainKey = `${number}-dl8z-39d`;
       break;
     case 2:
-      fallbackBlur = fallbackBlurTwo;
+      fallbackBlur = images['chFallbackImg-2'].src;
       fallbackKey = `${number}-eow2-91a`;
       blurredKey = `${number}-epw2-91a`;
       mainKey = `${number}-eqw2-91a`;
       break;
     case 3:
-      fallbackBlur = fallbackBlurThree;
+      fallbackBlur = images['chFallbackImg-3'].src;
       fallbackKey = `${number}-cx2v-56e`;
       blurredKey = `${number}-cy2v-56e`;
       mainKey = `${number}-cz2v-56e`;
       break;
     default:
-      fallbackBlur = fallbackBlurFour;
+      fallbackBlur = images['chFallbackImg-4'].src;
       fallbackKey = `${number}-pql6-gh0`;
       blurredKey = `${number}-prl6-gh0`;
       mainKey = `${number}-psl6-gh0`;

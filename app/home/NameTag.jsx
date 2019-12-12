@@ -55,7 +55,7 @@ const OuterContainer = styled.div`
   // effectively 'goes away' because p.heartbeat is false. The blur in keyframes is then used when 
   // a background change is triggered. This wouldn't work if the two were set to run 
   // simultaneously — the second would overwrite the first.
-  ${p => p.heartbeat > 0 && p.heartbeat < 2 && css`animation: 1.15s .85s ease-in-out ${heartbeatKeyframes} 3 both`};
+  ${p => p.heartbeat > 0 && p.heartbeat < 2 && css`animation: 1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
   ${p => p.spellLevel === 5 && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
   transform: translate3d(1, 1, 1);
   pointer-events: ${p => p.spellLevel === 5 && 'none'};
@@ -88,9 +88,9 @@ const Hed = styled.h1`
   user-select: none;
   // Use !p.homePageLoaded to limit opacity change to load sequence.
   // Use p.offline to change how the hed's shown when surfing online/offline.
-  opacity: ${p => (!p.homePageLoaded && p.loadLevel < 1 && !p.offline) ? '0' : '1'};
-  // Match transition values to FallbackImage in PictureBox, not InnerContainer.
-  transition: ${p => p.loadLevel < 2 && css`opacity ${!p.homePageLoaded ? '.7s ease-in-out' : '.25s ease-out'}`};
+  ${p => !p.homePageLoaded && !p.offline && css`opacity: ${p.loadLevel < 1 ? '0' : '1'}`};
+  // Match transition values to FallbackImage in PictureBox.
+  ${p => p.loadLevel < 2 && css`transition: opacity .69s .01s ease-in-out;`}
   // Let's set height in a consistent way. HTML text often has wonky CapHeights and Baselines. One solution: 
   // https://medium.com/eightshapes-llc/cropping-away-negative-impacts-of-line-height-84d744e016ce
   // It didn't work well for me. So, I did the following:
@@ -108,7 +108,7 @@ const InnerContainer = styled.div`
   opacity: ${p => (!p.homePageLoaded && p.loadLevel < 2) || (p.spellLevel < 5 && (p.enter && p.spellLevel >= 1) || (p.exit && p.spellLevel > 1)) ? '0' : '1'};
   // Compared to <Hed />, this element's initial fade-in looks best when it starts later, runs faster, and uses a different bezier curve.
   // Transition settings for the spell should match (in total) PictureBox/Fallbacks's transition property.
-  transition: opacity ${p => (!p.homePageLoaded && p.loadLevel < 3) ? '.7s' : p.enter ? '.45s' : '.65s'} ease-in-out;
+  transition: opacity ${p => (!p.homePageLoaded && p.loadLevel < 2) ? '.695s .005s' : p.enter ? '.45s' : '.65s'} ease-in-out;
 `;
 const Pitch = styled.section`
   overflow: auto;

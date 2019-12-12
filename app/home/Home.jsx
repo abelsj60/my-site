@@ -28,7 +28,6 @@ export default class Home extends Component {
 
     // Create an initial spell pattern.
     const initialPattern = this.createSpellPattern();
-
     /* Spacer height:
     
       The h1 takes additonal space above its top, all of which is included in the onlick region
@@ -48,12 +47,15 @@ export default class Home extends Component {
       firing too quickly on the initial load. Still, this logic is easy to follow
       over time. 
     */
-    this.loadLevels =  [0, 0, 0, 0, 0, 0, 0];
-    // Set in object so I can use pass-by-reference and cacel the timeout when the
-    // user navigates before the laoding sequence is complete (b/c there's a 
-    // setTimeout in PictureBox. This is canceled in cWU() below.
-    this.timeoutIdForFallbackTransitionEnd = { id: 0 }; 
+    this.loadLevels = [0, 0, 0, 0, 0, 0, 0];
+    // loadLevelsCacheForIE needed for object-fit polyfill (see notes in PictureBox).
+    this.loadLevelsCacheForIE = [0, 0, 0, 0, 0, 0, 0]; 
+    // These setTimeouts are turned off in cWU below.
     this.timeoutIdForUpdateLoadLevel = 0; 
+    this.timeoutIdForSetSpellLevel = 0;
+    // The offlineStateCache is used to run the loading sequence when the net's restored.
+    // It changes the expected loadLevel sums. See updateLoadingLevels() for more.
+    this.offlineStateCache = props.appState.offline;
 
     this.state = {
       activeCharm: initialPattern[0],
@@ -104,11 +106,10 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          loadLevels={this.loadLevels}
+          loadLevelsCacheForIE={this.loadLevelsCacheForIE}
           setLoadLevels={this.setLoadLevels}
           setSpellLevel={setSpellLevel}
           sumLoadLevels={this.sumLoadLevels}
-          timeoutIdForFallbackTransitionEnd={this.timeoutIdForFallbackTransitionEnd}
         />
         {debugMe && (
           <DebugHome
@@ -276,7 +277,10 @@ export default class Home extends Component {
       21. Movement is reset to '' onTransitionEnd in PictureBox/FantasyImage (transform)
     */
 
-    this.setState({ spellLevel: val });
+    // Use the timeout to give animations a chance to run. They didn't always 'feel'
+    // right before this, but they seemed to 'feel' better after it — ya knows?
+
+    this.timeoutIdForSetSpellLevel = setTimeout(() => this.setState({ spellLevel: val }), 100);
   }
 
   setSpellLevelOne(isValid, caller) {
@@ -305,7 +309,6 @@ export default class Home extends Component {
 
   setSpellLevelFour(isValid, caller) {
     if (!isValid) return null;
-
     if (caller === 'OuterContainer') {
       // Charms --> onTransitionEnd
       this.setSpellLevel(4);
@@ -363,10 +366,10 @@ export default class Home extends Component {
           this.setLoadLevel('fallback', 1);
           break;
         case 1:
-          this.setLoadLevel('initialSet', 4);
+          this.setLoadLevel('initialSet', !this.offlineStateCache ? 4 : 3);
           break;
         case 2:
-          this.setLoadLevel('initialSet', 5);
+          this.setLoadLevel('initialSet', !this.offlineStateCache ? 5 : 4);
           break;
       }
     } else if (homePageLoaded) {
@@ -411,9 +414,7 @@ export default class Home extends Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.timeoutIdForSetSpellLevel);
     clearTimeout(this.timeoutIdForUpdateLoadLevel);
-    // This timeout is in an object b/c it runs in an event handler.
-    // Placing it in a handler makes it easier to clear via p-b-r.
-    clearTimeout(this.timeoutIdForFallbackTransitionEnd.id);
   }
 }

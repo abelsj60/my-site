@@ -6,6 +6,7 @@ import BlurredForrestBackground from './BlurredForrestBackground.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import ForrestBackground from './ForrestBackground.jsx';
 import ForrestFallback from '../../docs/assets/images/convert-to-data-uri/forrest-ink-50x50-53.png';
+import { isSafari } from 'react-device-detect';
 import NycBackground from './NycBackground.jsx';
 import NycFallback from '../../docs/assets/images/convert-to-data-uri/nyc-ink-50x50-53.png';
 import offlineImageToggle from '../helpers/offlineImageToggle.js';
@@ -26,13 +27,13 @@ const Portal = styled.div`
   // Don't show on desktop once homePageLoaded. Note: This won't catch iPadOS.
   ${p => p.homePageLoaded && !p.isMobile && !p.offline && 'display: none;'}
   position: absolute;
-  background-color: rgba(115, 192, 232, .2);
+  background-color: rgba(115, 192, 232);
   // May need to fill page: https://stackoverflow.com/a/30794589
   height: 100%;
   width: 100%;
   will-change: opacity;
-  opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
-  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.5s'} ease-in-out`}};
+  opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '.2' : '0'};
+  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ease-in-out`}};
   z-index: 5;
 `;
 const FallbackImage = styled.img`
@@ -47,7 +48,7 @@ const FallbackImage = styled.img`
   will-change: opacity;
   opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   // Transition settings need to be matched (in total) by NameTag/InnerContainer and Header/Nav.
-  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.5s'} ease-in-out`};
+  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ease-in-out`};
   z-index: 4;
 `;
 
@@ -67,10 +68,10 @@ export default function PictureBox(props) {
     appState,
     boundHandleClickForHome,
     homeState,
+    loadLevelsCacheForIE,
     setLoadLevels,
     setSpellLevel,
-    sumLoadLevels,
-    timeoutIdForFallbackTransitionEnd
+    sumLoadLevels
   } = props;
   const {
     homePageLoaded,
@@ -93,23 +94,60 @@ export default function PictureBox(props) {
   const blurredForrestSrc = offlineImageToggle(isOffline, images[imageNames[3]].src);
   const bigNycSrc = offlineImageToggle(isOffline, images[imageNames[4]].src);
   const blurredNycSrc = offlineImageToggle(isOffline, images[imageNames[5]].src);
-  const fallbackSource = !inCity ? ForrestFallback : NycFallback; 
-  const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback; 
+  const fallbackSource = !inCity ? ForrestFallback : NycFallback;
+  const altTextForFallback = !inCity ? altTextForrestFallback : altTextNycFallback;
   const setLoadLevelsNow = (event, idx) => {
-    if (event !== null) {
-      eventManagement(event);
-    }
+    eventManagement(event);
 
     if (spellLevel < 1) {
+      const documentStyle = window.document.body ? window.document.body.style : window.document.documentElement.style;
+      const hasObjectFit = documentStyle.objectFit === '';
+
+      if (
+        !hasObjectFit &&
+          (!event.propertyName && loadLevelsCacheForIE[idx] > 0) // onLoad has no propertyName
+            || (event.propertyName && loadLevelsCacheForIE === 1) // onTransitionEnd has propertyName
+      ) {
+        /* The object-fit polyfill:
+  
+          The object-fit polyfill invokes the same listeners as our image element, immediately afterwards. 
+          This throws the load process into disarray. So we use the loadLevelsCacheForIE to ensure we only 
+          increment our values once per event listener. So, we'll first check the cache, then, after 
+          calling setState, increment it (otherwise, we'll be testing too soon). This allows us to reject 
+          the handler on the next pass (yes, we're accepting the first eventListener, which is probably 
+          the Image element, not the background image that's used by our polyfill). 
+
+          Remember: We need to increment our cache once for onLoad and once for onTransitionEnd. We do 
+          this by checking for event.propertyName, which only onTransitionEnd will have...
+
+          Note: The cache is stored on 'this' in Home, so it can reset whenever the user travels home! 
+        */
+
+        return false; // Already gotcha!
+      }
+
       setLoadLevels(idx);
+
+      if (!hasObjectFit && loadLevelsCacheForIE[idx] < 1) {
+        /* Let's talk about our cache values:
+
+          1. We set the cache to one from zero onLoad. Great. But...
+          2. We really ought to increment it to 2 after onTransitionEnd, but as it stands,
+            we're ok b/c we don't allow the loadLevels to exceed three in, Home and b/c 
+            nothing happens when incrementing over two anyway.
+              -Truly, though, this is less than ideal. Kinda misleading. 
+        */
+
+        loadLevelsCacheForIE[idx] = 1; // Set it, then forget it!
+      }
     }
   };
-  const setSpellLevelNow = (event, type) => {
+  const setSpellLevelNow = (event, component) => {
     eventManagement(event);
 
     if (spellLevel > 0) {
-      setSpellLevel.three(movement === 'enter', type);
-      setSpellLevel.one(movement === 'exit', type);
+      setSpellLevel.three(movement === 'enter', component);
+      setSpellLevel.one(movement === 'exit', component);
     }
   };
   const handleLoadForFallback = event => setLoadLevelsNow(event, 0);
@@ -119,24 +157,11 @@ export default function PictureBox(props) {
   const handleLoadForBoy = event => setLoadLevelsNow(event, 4);
   const handleLoadForForrest = event => setLoadLevelsNow(event, 5);
   const handleLoadForNyc = event => setLoadLevelsNow(event, 6);
-  const handleTransitionEndForFallback = event => {
-    eventManagement(event);
-    /* Bug:
-
-      setTimeout used to fix what I *believe* to be a weird Webkit bug. It seems that
-      the ontransitionEnd event fires a little too fast somewhere along the way. The end
-      result is that for every ten - 20 loads, the Fallback doesn't visibly transition, 
-      rather it's unceremoniously dropped off screen. A delay of ~200 milliseconds 
-      seems to fix the problem.
-    */
-
-    // timeoutIdForFallbackTransitionEnd.id used to cancel update when swapping locations early.
-    timeoutIdForFallbackTransitionEnd.id = setTimeout(() => setLoadLevelsNow(null, 0), 200);
-  };
-  const handleTransitionEndForBlurredForrest = event => setSpellLevelNow(event, 'BlurredForrest');
-  const handleTransitionEndForBlurredNyc = event => setSpellLevelNow(event, 'BlurredNyc');
-  // Toggles spell after background swap, needs extra params --> use closure...
-  const handleTransitionEndForForrestOrNyc = (penultimateLevel, isActive) => event => {
+  const handleTransitionEndForFallback = event => setLoadLevelsNow(event, 0);
+  // Uses closure for extra params...
+  const handleTransitionEndForBlurredForrestAndNyc = component => event => setSpellLevelNow(event, component);
+  // Toggles spell after transform transition, uses closure for extra params...
+  const handleTransitionEndForForrestAndNyc = (penultimateLevel, isActive) => event => {
     eventManagement(event);
 
     if (event.propertyName === 'transform') {
@@ -178,12 +203,11 @@ export default function PictureBox(props) {
       )}
       <BoyForeground
         alt={altTextBoy}
-        enter={movement === 'enter'}
-        exit={movement === 'exit'}
         homePageLoaded={homePageLoaded}
+        isMobile={type === 'mobile'}
+        isSafari={isSafari}
         loadLevel={loadLevel}
         onLoad={handleLoadForBoy}
-        spellLevel={spellLevel}
         src={bigBoySrc}
       />
       {spellLevel > 0  && spellLevel < 5 && !inCity && (
@@ -193,7 +217,7 @@ export default function PictureBox(props) {
           exit={movement === 'exit'}
           inCity={inCity}
           onLoad={handleLoadForBlurredForrest}
-          onTransitionEnd={handleTransitionEndForBlurredForrest}
+          onTransitionEnd={handleTransitionEndForBlurredForrestAndNyc('BlurredForrest')}
           spellLevel={spellLevel}
           src={blurredForrestSrc}
         />
@@ -206,7 +230,7 @@ export default function PictureBox(props) {
           loadLevel={loadLevel}
           onLoad={handleLoadForForrest}
           // Toggle state of spell after swapping backgrounds (uses closure, so invocation OK)
-          onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, inCity, 'forrest')}
+          onTransitionEnd={handleTransitionEndForForrestAndNyc(spellLevel > 4, inCity)}
           spellLevel={spellLevel}
           src={bigForrestSrc}
         />
@@ -218,7 +242,7 @@ export default function PictureBox(props) {
           exit={movement === 'exit'}
           inCity={inCity}
           onLoad={handleLoadForBlurredNyc}
-          onTransitionEnd={handleTransitionEndForBlurredNyc}
+          onTransitionEnd={handleTransitionEndForBlurredForrestAndNyc('BlurredNyc')}
           spellLevel={spellLevel}
           src={blurredNycSrc}
         />
@@ -230,7 +254,7 @@ export default function PictureBox(props) {
           inCity={inCity}
           onLoad={handleLoadForNyc}
           // Toggle state of spell after swapping backgrounds (uses closure, so invocation OK)
-          onTransitionEnd={handleTransitionEndForForrestOrNyc(spellLevel > 4, !inCity, 'city')}
+          onTransitionEnd={handleTransitionEndForForrestAndNyc(spellLevel > 4, !inCity)}
           spellLevel={spellLevel}
           src={bigNycSrc}
         />

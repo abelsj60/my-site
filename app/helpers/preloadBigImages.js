@@ -1,6 +1,10 @@
 import home from '../data/home/home.md';
 import stories from '../data/the-story/index.js';
 import urlPrefix from './urlPrefix';
+import fallbackBlurOne from '../../docs/assets/images/convert-to-data-uri/chapter-1-ink-50x50-53.png';
+import fallbackBlurTwo from '../../docs/assets/images/convert-to-data-uri/chapter-2-ink-50x50-53.png';
+import fallbackBlurThree from '../../docs/assets/images/convert-to-data-uri/chapter-3-ink-50x50-53.png';
+import fallbackBlurFour from '../../docs/assets/images/convert-to-data-uri/chapter-4-ink-50x50-53.png';
 
 /* Notes on image use: 
 
@@ -108,6 +112,17 @@ export default function preloadBigImages() {
 
     image.src = source;
     images[home.attributes.imageNames[idx]] = image;
+  });
+
+  [
+    fallbackBlurOne,
+    fallbackBlurTwo,
+    fallbackBlurThree,
+    fallbackBlurFour
+  ].forEach((img, idx) => {
+    const image = new Image();
+    image.src = img;
+    images[`chFallbackImg-${idx + 1}`] = image;
   });
 
   images.width = imageWidth;
