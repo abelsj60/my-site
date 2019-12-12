@@ -160,7 +160,7 @@ const Nav = styled.nav`
   background-color: ${p => (p.offline && p.isHome && p.tempContent < 1) || (p.isHome && (p.startDramaAtHome === 'yes' || p.startDramaAtHome === 'never') && p.tempContent < 1) ? 'rgba(0, 0, 0, .2)' : ''};
   ${p => !p.homePageLoaded && 'will-change: background-color;'}
   // Transition settings for the spell should match (in total) PictureBox/Fallbacks's transition property.
-  ${p => !p.homePageLoaded && p.startDramaAtHome !== 'never' && 'transition: background-color .7s ease-in-out;'}
+  ${p => !p.homePageLoaded && p.startDramaAtHome !== 'never' && 'transition: background-color .69s .01s ease-in-out;'}
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
   position: relative;

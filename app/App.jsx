@@ -217,13 +217,6 @@ const GlobalStyle = createGlobalStyle`
 
       ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
     }
-
-    // Probably for IE...? Review.
-    ${p => p.home && css`
-      width: 100%;
-      // Should hide scrollbars on home page.
-      // overflow: hidden;
-    `};
   }
 `;
 
