@@ -3,7 +3,6 @@ import callReactGa from './helpers/callReactGa.js';
 import ClickHandling from './classes/ClickHandling.js';
 import { cover } from 'intrinsic-scale';
 import {
-  css,
   createGlobalStyle,
   ThemeProvider
 } from 'styled-components';
