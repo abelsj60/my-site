@@ -12,7 +12,7 @@ technologies:
 responsibility:
   'As the founder of Three Minute Media, I oversaw corporate affairs and platform development, including our lead developer, budget, and investor outreach.'
 story:
-  'TMMnews was built to earn money from high-priced video ads by placing them in video news stores that would then run within lower cost IAB display ad boxes.'
+  "I set out to produce original video news stories, sell high-priced video ads within it, then deliver the combined package to big audiences by buying up lower cost IAB ad boxes. This plan gave way to software development (see Arrow and Slingshot)."
 captions: [
   "The TMMnews Web site marketed the company's original video news stories. It featured news videos, reporter's notes, and aggregated headlines from Daylife, a New York-based start-up.",
   'Original news stories were anchored by James Erik Abels, a former media reporter from Forbes and Mergermarket. Over 100 stories were produced, ranging from exclusives to news analyses.',

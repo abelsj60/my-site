@@ -12,7 +12,7 @@ technologies:
 responsibility: 
   'Creator and developer'
 story: 
-  'This portfolio site explores what happens when a creative codes.'
+  'My portfolio site explores what happens when a creative codes.'
 captions: [
   "Full-screen illustrations and a secret magic spell bring my imagination to life.",
   "I came to N.Y.C. after law school to write professionally. Here are some of my stories.",

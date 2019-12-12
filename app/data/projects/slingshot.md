@@ -12,7 +12,7 @@ technologies:
 responsibility:
   'As the founder of Three Minute Media, I oversaw corporate affairs and platform development, including our lead developer, budget, and investor outreach.'
 story:
-  "Live software demos are hard. Slingshot made them much easier by offering simple tools to remotely choregraph what viewers saw on their own screens."
+  "Slingshot made it easy to coordinate global software demos for live audiences."
 captions: [
   "This is the Remote. It offered hands-free control over slides and software. Presenters could use it to run global software demos or to wander the room during in-person meetings.",
   "The Remote controlled interactivity. A presenter could use it to refresh a viewer's screen, to start and stop a live video, and more. In this case, it was used to add a live YouTube video to screen.",
