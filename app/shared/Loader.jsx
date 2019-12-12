@@ -4,7 +4,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 const loaderKeyframes = keyframes`
   0% {
-    transform: scaleX(1);
+    transform: scaleX(0);
   }
 
   100% {
