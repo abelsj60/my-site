@@ -23,6 +23,7 @@ const Container = styled.footer`
   // padding-bottom: env(safe-area-inset-bottom);
   // padding-bottom: cover(safe-area-inset-bottom);
 
+  // Don't blur content when header menu is hidden due to expanding screen
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     filter: unset;
   }
