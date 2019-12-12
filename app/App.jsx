@@ -25,7 +25,6 @@ import LegalTermsOrBizCard from './temp-content/LegalTermsOrBizCard.jsx';
 import Location from './classes/Location.js';
 import objectFitImages from 'object-fit-images';
 import OfflineWarning from './shared/OfflineWarning.jsx';
-import PasswordLogin from './shared/PasswordLogin.jsx';
 import preloadBigImages from './helpers/preloadBigImages';
 import React, { Fragment, Component } from 'react';
 import ReactGA from 'react-ga';
@@ -295,7 +294,6 @@ class App extends Component {
       lastCaller: '',
       nameTagWidth: this.calculateNameTagWidth(this.images), // Orig. dimensions: 1349 / 5115
       offline: false,
-      password: '', // to be removed
       spacerHeight: this.calculateSpacerHeight(this.images), // Set by 'handleResize', so must live here. Used by Home/NameTag.
       // Coordinate <Header /> w/home-page theatrics:
       // -'no' (start, set here) 
@@ -304,18 +302,15 @@ class App extends Component {
       startDramaAtHome: 'no', 
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
       // Won't catch iPadOS w/o customMobileTest. Search for 11/9/19 notes as to necessity.
-      type: isMobile ? 'mobile' : 'desktop',
-      wrongPassword: '' // to be removed
+      type: isMobile ? 'mobile' : 'desktop'
     };
 
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
-    this.handlePasswordEntry = this.handlePasswordEntry.bind(this);
-    this.handlePasswordSubmit = this.handlePasswordSubmit.bind(this);
     this.handleResize = this.handleResize.bind(this);
-    this.updateNetworkStatus = this.updateNetworkStatus.bind(this);
     this.toggleHtmlElementHeight = this.toggleHtmlElementHeight.bind(this);
-    this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
+    this.updateNetworkStatus = this.updateNetworkStatus.bind(this);
+    this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
   }
 
   render() {
@@ -325,28 +320,19 @@ class App extends Component {
     const reverieIsActive = this.state.currentCaller === 'reverie';
     const isNotFound = this.state.currentCaller === 'not-found';
     const fixMobileSafariBugOn7 = isTablet && isMobileSafari && osVersion[0] === '7';
-
-    // return process.env.NODE_ENV !== 'development' && !this.state.isValidUser
-    return false
-      ? (
-        <PasswordLogin
-          appState={this.state}
-          handlePasswordEntry={this.handlePasswordEntry}
-          handlePasswordSubmit={this.handlePasswordSubmit}
-        />
-      )
-      : (
-        <ThemeProvider
-          theme={{
-            bottomMargin,
-            colors,
-            fontSizes,
-            mediaQueries,
-            blur: this.state.currentCaller === 'home' ? blurControl.home : blurControl.regular,
-            blurForTempContent: this.state.tempContent > 0,
-            isHeaderMenu: this.state.tempContent === 3
-          }}
-        >
+    
+    return (
+      <ThemeProvider
+        theme={{
+          bottomMargin,
+          colors,
+          fontSizes,
+          mediaQueries,
+          blur: this.state.currentCaller === 'home' ? blurControl.home : blurControl.regular,
+          blurForTempContent: this.state.tempContent > 0,
+          isHeaderMenu: this.state.tempContent === 3
+        }}
+      >
         <Fragment
           // Used b/c ThemeProvider only accepts one child.
         >
@@ -456,21 +442,6 @@ class App extends Component {
     boundHandleClickForApp('updateApp', location.caller, updateMenuForBackAndForthButton);
   }
 
-  handlePasswordSubmit(event) {
-    event.preventDefault();
-    const password = this.state.password.toLowerCase().trim();
-
-    if (password === 'enter' || password === 'illustrator' || password === 'boom!') {
-      this.setState({ isValidUser: true });
-    } else {
-      this.setState({ password: '', wrongPassword: 'Incorrect' });
-    }
-  }
-
-  handlePasswordEntry(event) {
-    this.setState({ password: event.target.value });
-  }
-
   toggleHtmlElementHeight(mode) {
     if (isMobileSafari && parseInt(osVersion) >= 12) {
       if (mode === 'on') {
@@ -510,7 +481,9 @@ class App extends Component {
       : window.document.documentElement.style;
 
     if (type === 'flexbox') {
-      if (documentStyle.webkitFlexWrap === '' || documentStyle.msFlexWrap === '' || documentStyle.flexWrap === '') {
+      if (
+        documentStyle.webkitFlexWrap === '' || documentStyle.msFlexWrap === '' || documentStyle.flexWrap === ''
+      ) {
         return true;
       }
     }
