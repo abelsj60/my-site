@@ -28,18 +28,18 @@ import { Route, Link as ReactRouterLink } from 'react-router-dom';
   by checking the length of 'to' --> iSayNoMatch if > 1 in
   the context of multiple checks (see code).
 
-  *** ASIDE ***
+    *** ASIDE ***
 
-    When the user clicks a link:
+      When the user clicks a link:
 
-      a. window.location.pathname updates instantly, meaning it will show
-        the new location, not the one we were on when it was clicked
-      b. props.to will carry the actual current location, the one we
-        want to ADD to the history stack (one time, not multiple).
+        a. window.location.pathname updates instantly, meaning it will show
+          the new location, not the one we were on when it was clicked
+        b. props.to will carry the actual current location, the one we
+          want to ADD to the history stack (one time, not multiple).
 
-    Yes. This use of 'to' (or its name) is confusing.
+      Yes. This use of 'to' (or its name) is confusing.
 
-  *** END ASIDE ***
+    *** END ASIDE ***
 
   This component updates all of appState when navigating between
   sections. Here's a rundown of how this works:
@@ -68,6 +68,7 @@ export default ({
   // Word length, array length, i.e., 'chapter'
   // Checks length of string value, not array
   const callerWillBe = splitTheCaller[1].length > 0 ? splitTheCaller[1] : 'home';
+  const updateCaller = splitTheCaller.length === 2 ? callerWillBe : undefined;
   // Ensures isMenu is a /menu.
   const isMenu = pathname.includes('menu') && pathname.split('/')[2] === 'menu';
   const noMatch = window.location.pathname.includes(to) && !isMenu && to.length > 1;
@@ -82,13 +83,12 @@ export default ({
         We only want to update App state when we're doing a loation swap. When we do we'll use 
         valueOne, AKA param two, to tell setState where we're going. Why don't we need it for 
         content swaps? B/c we aren't changing currentCaller or lastCaller. 
-
           a. array.length === 1 --> [""]
           b. array.length === 2 --> ["", "chapter"]
           c. array.length > 2 --> ["", "chapter", "a-magic-quest"]
       */
 
-      boundHandleClickForApp('updateApp', splitTheCaller.length === 2 ? callerWillBe : undefined); 
+      boundHandleClickForApp('updateApp', updateCaller); 
     }
   };
 
