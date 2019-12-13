@@ -428,6 +428,9 @@ class App extends Component {
     const hcForApp = new ClickHandling('app', this);
     const boundHandleClickForApp = hcForApp.boundHandleClick;
     // Update isMenu if it doesn't match window.location.pathname.
+    // Note: This may get called AFTER, say, ProjectNav is called when 
+    // going back-and-forth between a /project and /projects/menu. So, 
+    // I'm doing a local menu check in ProjectNav to prevent a crash!
     const isMenu = window.location.pathname.split('/').indexOf('menu') === 2;
     const updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
 
@@ -580,7 +583,7 @@ class App extends Component {
       throw new Error("Browser doesn't support Flexbox");
     } else if (isOpera || (isIE && browserVersion <= 10)) {
       // I should support Opera, but I can't get it to play nicely w/Flexbox, so...
-      throw new Error("Uh oh. I don't currently support Opera or IE if it's less than 11.");
+      throw new Error("Uh oh. I don't currently support Opera or IE less than 11.");
     }
 
     // Polyfill...

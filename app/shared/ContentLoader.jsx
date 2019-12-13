@@ -187,7 +187,7 @@ export default class ContentLoader extends Component {
         const scrollHandler = new ScrollHandling(currentCaller);
         scrollHandler.resetElementTop(this.overflowRef, prevProps);
       }
-    } else if (!prevProps.appState.isMenu) {
+    } else if (referrer.isMenu(this.props) && !prevProps.appState.isMenu ) {
       /* Reset thumbnailCount when entering /menu from /projects (via MenuButton):
 
         1. thumbnailCount is used to track the state of thumbnails on cL-loaded pages.
@@ -206,10 +206,8 @@ export default class ContentLoader extends Component {
           will only be isMenu once. We won't get here after the initial switch.
       */
 
-      if (referrer.isMenu(this.props)) {
-        if (location.caller === 'projects') {
-          this.setState({ thumbnailCount: 0 });
-        }
+      if (location.caller === 'projects' && this.state.thumbnailCount > 0) {
+        this.setState({ thumbnailCount: 0 });
       }
     }
   }

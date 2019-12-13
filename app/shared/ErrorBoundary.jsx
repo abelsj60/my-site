@@ -19,8 +19,8 @@ export default class ErrorBoundary extends Component {
     const { hasError, initialLoad } = this.state;
     const { children } = this.props;
     const errorText = initialLoad
-      ? "We may have a browser problem. Please use Chrome, Firefox, or Safari. In the meantime, here's my 411."
-      : "There's been a really confusing error. You might want to reload and try that again. In the meantime, contact me here:";
+      ? "We may have a browser problem. Please use Chrome, Firefox, or Safari. Until then, here's my 411."
+      : "You might want to reload and try that again. You can also contact me here:";
 
     if (hasError) {
       return (
