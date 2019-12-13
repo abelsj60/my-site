@@ -271,7 +271,6 @@ export default class ClickHandling {
               stateToUpdate.illustrationLevel = 0;
             }
           }
-
           break;
         default:
           break;

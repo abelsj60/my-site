@@ -238,7 +238,7 @@ export default class Home extends Component {
     
       1. Let's check to see if we should update state for a re-render. 
       2. Use the timeout to be sure all preceeding animations had a chance to run.
-        On mobile, we sometimes loose the Hed's fadein b/c the setState runs
+        On mobile, we sometimes loose the Hed's fade-in b/c the setState runs
         before it can finish. This timeout should ensure it can finish. 
     */
   

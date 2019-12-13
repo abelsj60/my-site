@@ -282,7 +282,6 @@ export default class Header extends Component {
     } = appState;
     const isHome = currentCaller === 'home';
     const isReverie = currentCaller === 'reverie';
-    const isStory = currentCaller === 'chapter'
     const menuIcon = tempContent === 3 ? headerNavClose : headerNavOpen;
     const coverVals = cover(window.innerWidth, height, images.width, images.height);
     const referrer = new Referrer(this.props);

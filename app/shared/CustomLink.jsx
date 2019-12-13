@@ -68,6 +68,12 @@ export default ({
   // Word length, array length, i.e., 'chapter'
   // Checks length of string value, not array
   const callerWillBe = splitTheCaller[1].length > 0 ? splitTheCaller[1] : 'home';
+  //  We only want to update App state when we're doing a loation swap. When we do we'll use 
+  //  valueOne, AKA param two, to tell setState where we're going. Why don't we need it for 
+  //  content swaps? B/c we aren't changing currentCaller or lastCaller. 
+  //    a. array.length === 1 --> [""]
+  //    b. array.length === 2 --> ["", "chapter"]
+  //    c. array.length > 2 --> ["", "chapter", "a-magic-quest"]
   const updateCaller = splitTheCaller.length === 2 ? callerWillBe : undefined;
   // Ensures isMenu is a /menu.
   const isMenu = pathname.includes('menu') && pathname.split('/')[2] === 'menu';
@@ -75,19 +81,13 @@ export default ({
   const handleClickForLink = event => {
     event.stopPropagation();
 
+    if (!boundHandleClickForApp) {
+      return false;
+    }
+
     if (isCalledByMenu) {
       boundHandleClickForApp('toggleMenu');
     } else {
-      /* Why filter the array:
-
-        We only want to update App state when we're doing a loation swap. When we do we'll use 
-        valueOne, AKA param two, to tell setState where we're going. Why don't we need it for 
-        content swaps? B/c we aren't changing currentCaller or lastCaller. 
-          a. array.length === 1 --> [""]
-          b. array.length === 2 --> ["", "chapter"]
-          c. array.length > 2 --> ["", "chapter", "a-magic-quest"]
-      */
-
       boundHandleClickForApp('updateApp', updateCaller); 
     }
   };
@@ -101,7 +101,7 @@ export default ({
         return (
           <ReactRouterLink
             {...props}
-            onClick={boundHandleClickForApp && handleClickForLink}
+            onClick={handleClickForLink}
             replace={noMatch || replace || !!match}
             to={to}
           />
