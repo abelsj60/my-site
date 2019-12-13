@@ -177,6 +177,7 @@ const Nav = styled.nav`
     ${p => p.tempContent === 3 && css`
       background-color: rgba(175, 18, 90, .8);
       position: fixed;
+      left: 0px;
       bottom: 0px;
       width: 100%;
       height: 100%;
