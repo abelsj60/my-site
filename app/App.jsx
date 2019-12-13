@@ -203,8 +203,8 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     align-items: center;
-    // Overall app height! Use px, rather than 100vh to limit
-    // the height to area between the top and bottom menus.
+    // Overall app height! Use px rather than 100vh to limit
+    // the height to area between the header and footer.
     height: ${p => p.pageHeight}px;
     position: relative;
 
