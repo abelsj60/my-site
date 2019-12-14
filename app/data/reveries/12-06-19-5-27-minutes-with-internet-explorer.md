@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: '5.27 minutes with Internet Explorer'
+headline: 5.27 minutes with Internet Explorer
 date: December 6, 2019
 slug: Internet Explorer won't stop animating my Charms!
 ---
