@@ -37,7 +37,7 @@ export default class Home extends Component {
     this.props.boundHandleClickForApp('updateSpacerHeight');
     /* Load levels:
     
-      Key: [fallback, blurredBoy, blurredForrest, blurredNyc, boy, forrest, city]
+      Key: [fallback, blurredBoy, blurredForrest, blurredNyc, boy, forrest, city, hed]
         a. Initial load — [ 3, 1, 1, 0, 1, 1, 0]
         b. Internal nav — [ 3, 1, 1, 0, 1, 1, 0 ]
       The array tracks onLoad and onTransitionEnd for '/' images. It's separated from
@@ -47,9 +47,9 @@ export default class Home extends Component {
       firing too quickly on the initial load. Still, this logic is easy to follow
       over time. 
     */
-    this.loadLevels = [0, 0, 0, 0, 0, 0, 0];
+    this.loadLevels = [0, 0, 0, 0, 0, 0, 0, 0]; // 8 elements
     // loadLevelsCacheForIE needed for object-fit polyfill (see notes in PictureBox).
-    this.loadLevelsCacheForIE = [0, 0, 0, 0, 0, 0, 0]; 
+    this.loadLevelsCacheForIE = [0, 0, 0, 0, 0, 0, 0]; // Don't need cache for NameTage/Hed
     // These setTimeouts are turned off in cWU below.
     this.timeoutIdForUpdateLoadLevel = 0; 
     this.timeoutIdForSetSpellLevel = 0;
@@ -94,6 +94,7 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
+          setLoadLevels={this.setLoadLevels}
           setSpellLevel={setSpellLevel}
         />
         <Charms
@@ -316,7 +317,7 @@ export default class Home extends Component {
   }
 
   sumAll() {
-    const allImages = [0, 1, 2, 3, 4, 5, 6];
+    const allImages = [0, 1, 2, 3, 4, 5, 6, 7];
     return this.sumImageSet(allImages);
   }
 
@@ -336,7 +337,7 @@ export default class Home extends Component {
 
   sumInitialSet() {
     // fallback, boyForeground, forrestBackground
-    const initialImages = [0, 4, 5];
+    const initialImages = [0, 4, 5, 7];
     return this.sumImageSet(initialImages);
   }
 
@@ -361,24 +362,24 @@ export default class Home extends Component {
     const { loadLevel } = this.state;
 
     if (!homePageLoaded) {
-      switch (loadLevel) {
+      switch (loadLevel) { // Used by all devices for initial load
         case 0:
           this.setLoadLevel('fallback', 1);
           break;
         case 1:
-          this.setLoadLevel('initialSet', !this.offlineStateCache ? 4 : 3);
+          this.setLoadLevel('initialSet', !this.offlineStateCache ? 5 : 4);
           break;
         case 2:
-          this.setLoadLevel('initialSet', !this.offlineStateCache ? 5 : 4);
+          this.setLoadLevel('initialSet', !this.offlineStateCache ? 6 : 5);
           break;
       }
     } else if (homePageLoaded) {
-      switch (loadLevel) {
+      switch (loadLevel) { // Used by mobile to control fallback image
         case 0:
-          this.setLoadLevel('all', 3);
+          this.setLoadLevel('all', 4);
           break;
         case 1:
-          this.setLoadLevel('all', 4);
+          this.setLoadLevel('all', 5);
           break;
       }
     }

@@ -134,6 +134,7 @@ export default function NameTag(props) {
     boundHandleClickForApp,
     boundHandleClickForHome,
     homeState,
+    setLoadLevels,
     setSpellLevel
   } = props;
   const {
@@ -195,6 +196,13 @@ export default function NameTag(props) {
     // Only runs if heartbeat = 0, so no check is needed!
     localStorage.lastHeartbeat = dayjs().format();
   };
+  const handleTransitionEndForHed = event => {
+    eventManagement(event);
+
+    if (spellLevel < 1) {
+      setLoadLevels(7);
+    }
+  };
   const handleTransitionEndForInnerContainer = event => {
     eventManagement(event);
     // Use conditional if InnerContainer set to position: absolute
@@ -224,6 +232,7 @@ export default function NameTag(props) {
           loadLevel={loadLevel}
           offline={offline}
           onClick={handleClickForHed}
+          onTransitionEnd={handleTransitionEndForHed}
           type={type}
         >
           {name}
