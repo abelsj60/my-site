@@ -89,7 +89,9 @@ const TextBox = styled.div`
 export default function FooterContainer(props) {
   const {
     appState,
-    boundHandleClickForApp
+    boundHandleClickForApp,
+    illustrationLevels,
+    setIllustrationLevels
   } = props;
   const {
     currentCaller,
@@ -134,6 +136,11 @@ export default function FooterContainer(props) {
     }
   };
 
+  const handleOnTranstionEnd = event => {
+    eventManagement(event);
+    setIllustrationLevels(2);
+  };
+
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
   const isHome = currentCaller === 'home';
@@ -153,6 +160,7 @@ export default function FooterContainer(props) {
         illustrationDirection={illustrationDirection}
         isNotFound={isNotFound}
         isReverie={isReverie}
+        onTransitionEnd={handleOnTranstionEnd}
       />
       <Button
         clickFunction={handleClickForStoryButton}
@@ -160,6 +168,7 @@ export default function FooterContainer(props) {
         illustrationLevel={illustrationLevel}
         isReverie={isReverie}
         isStory={isStory}
+        handleTransitionEnd={handleOnTranstionEnd}
         tempContent={tempContent}
         text={
           illustrationDelay
@@ -201,6 +210,7 @@ export default function FooterContainer(props) {
             isReverie={isReverie}
             isStory={isStory}
             marginRight="never"
+            onTransitionEnd={handleOnTranstionEnd}
             tempContent={tempContent}
           >
             Reverie
@@ -215,6 +225,7 @@ export default function FooterContainer(props) {
           isReverie={isReverie}
           isStory={isStory}
           onClick={handleClickForContactLink}
+          onTransitionEnd={handleOnTranstionEnd}
           tempContent={tempContent}
         >
           Contact
@@ -229,6 +240,7 @@ export default function FooterContainer(props) {
           isNotFound={isNotFound}
           marginRight="none"
           onClick={handleClickForLegalLink}
+          onTransitionEnd={handleOnTranstionEnd}
           tempContent={tempContent}
         >
           Legal

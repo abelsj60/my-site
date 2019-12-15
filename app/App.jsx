@@ -264,6 +264,9 @@ class App extends Component {
       ReactGA.pageview(pathname + search); // Tallies initial request
     }
 
+    // [header, story, footer]
+    // Totals: header = 7, story = 1, footer = 3
+    this.illustrationLevels = [0, 0, 0, 0, 0, 0]; // [header text, header background, story portal, story blur, footer text + button, footer line]
     this.state = {
       currentCaller: caller !== 'i' ? caller : 'home',
       // 0 = not ready, 1 = run, 2 = nevermore
@@ -303,6 +306,14 @@ class App extends Component {
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
     this.updateNetworkStatus = this.updateNetworkStatus.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
+
+    this.setIllustrationLevels = this.setIllustrationLevels.bind(this);
+  }
+
+  setIllustrationLevels(idx) {
+    const newArr = [].concat(this.illustrationLevels);
+    newArr[idx] = this.state.illustrationDirection === 'enter' ? newArr[idx] + 1 : newArr[idx] - 1;
+    this.illustrationLevels = newArr;
   }
 
   render() {
@@ -339,11 +350,15 @@ class App extends Component {
             {...this.props}
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
+            illustrationLevels={this.illustrationLevels}
+            setIllustrationLevels={this.setIllustrationLevels}
           />
           <Body
             {...this.props}
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
+            illustrationLevels={this.illustrationLevels}
+            setIllustrationLevels={this.setIllustrationLevels}
           />
           <LegalTermsOrBizCard
             {...this.props}
@@ -358,6 +373,8 @@ class App extends Component {
             {...this.props}
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
+            illustrationLevels={this.illustrationLevels}
+            setIllustrationLevels={this.setIllustrationLevels}
           />
         </Fragment>
       </ThemeProvider>

@@ -1,6 +1,6 @@
 ---
 type: reverie
-headline: At Santa Con, a new certainty on code
+headline: At SantaCon, a new certainty on code
 date: December 14, 2019
 slug: Good design is a five-minute fix
 ---
@@ -17,7 +17,7 @@ Inconsistency. Sometimes the home-page headline faded into place, as it should, 
 
 Oh boy. 
 
-So I headed to Perk, a little coffee shop in Murray Hill, darting between throngs of elves — who were out, tripping to Santa Con's light fantastic — so I could debug. 
+So I headed to Perk, a little coffee shop in Murray Hill, darting between throngs of elves — who were out, tripping to SantaCon's light fantastic — so I could debug. 
 
 I soon realized my problem. 
 

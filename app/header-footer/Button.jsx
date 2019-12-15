@@ -46,6 +46,7 @@ export default function Button(props) {
   const {
     className,
     clickFunction,
+    handleTransitionEnd,
     illustrationDirection,
     illustrationLevel,
     isStory,
@@ -60,6 +61,7 @@ export default function Button(props) {
       illustrationLevel={illustrationLevel}
       isStory={isStory}
       onClick={clickFunction}
+      onTransitionEnd={handleTransitionEnd}
       tempContent={tempContent}
     >
       <Cover

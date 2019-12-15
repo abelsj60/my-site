@@ -170,6 +170,8 @@ export default function Story(props) {
     boundHandleClickForApp,
     boundHandleClickForContentLoader,
     contentState,
+    illustrationLevels,
+    setIllustrationLevels,
     overflowRef
   } = props;
   const {
@@ -232,6 +234,7 @@ export default function Story(props) {
       () => boundHandleClickForApp('updateIllustrationLevel', isEntering ? 2 : 0),
       isEntering ? 1 : 5
     );
+    setIllustrationLevels(1);
   };
   const handleTransitionEndForFallbackBlur = event => { // 1 --> 2
     eventManagement(event);
@@ -244,8 +247,13 @@ export default function Story(props) {
   const handleTransitionEndForBlurredImage = event => {
     eventManagement(event);
     boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
+    setIllustrationLevels(1);
   };
   let blurredKey, fallbackBlur, fallbackKey, mainKey;
+  const handleOnTranstionEndForPortal = event => {
+    eventManagement(event);
+    setIllustrationLevels(1);
+  };
 
   /* Image keys:
 
@@ -324,6 +332,7 @@ export default function Story(props) {
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
           imageLoaded={imageLoaded}
+          onTransitionEnd={handleOnTranstionEndForPortal}
         />
         <FallbackBlur // z-index: -1
           alt={fallbackImageDescription}

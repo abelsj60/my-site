@@ -268,7 +268,9 @@ export default class Header extends Component {
   render() {
     const {
       appState,
-      boundHandleClickForApp
+      boundHandleClickForApp,
+      illustrationLevels,
+      setIllustrationLevels
     } = this.props;
     const {
       currentCaller,
@@ -293,6 +295,13 @@ export default class Header extends Component {
     const handleClickForMenuLink = event => handleHeaderMenu(event);
     const handleAnimationEndForTimer = event => handleHeaderMenu(event);
 
+    const handleOnTranstionEnd = event => {
+      eventManagement(event);
+      setIllustrationLevels(0);
+    };
+
+    console.log('illustrationLevels:', illustrationLevels);
+
     return (
       <Container
         isHome={isHome}
@@ -303,6 +312,7 @@ export default class Header extends Component {
           isReverie={isReverie}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
+          onTransitionEnd={handleOnTranstionEnd}
           tempContent={tempContent}
         />
         <NameAsLink
@@ -312,6 +322,7 @@ export default class Header extends Component {
           isHome={isHome}
           isReverie={isReverie}
           nameAsLink={true}
+          onTransitionEnd={handleOnTranstionEnd}
           tempContent={tempContent}
           to={'/'}
         >
@@ -323,6 +334,7 @@ export default class Header extends Component {
           illustrationLevel={illustrationLevel}
           isHome={isHome}
           isReverie={isReverie}
+          onTransitionEnd={handleOnTranstionEnd}
           tempContent={tempContent}
         >
           {bio.attributes.motto}
@@ -358,6 +370,7 @@ export default class Header extends Component {
                       isHome={isHome}
                       isReverie={isReverie}
                       num={idx}
+                      onTransitionEnd={handleOnTranstionEnd}
                       tempContent={tempContent}
                       to={link.path}
                     >
