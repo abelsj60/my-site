@@ -81,16 +81,15 @@ export default ({
   const handleClickForLink = event => {
     event.stopPropagation();
 
-    if (!boundHandleClickForApp) {
-      return false;
-    }
-
     if (isCalledByMenu) {
       boundHandleClickForApp('toggleMenu');
     } else {
       boundHandleClickForApp('updateApp', updateCaller); 
     }
   };
+  const toggleHandleClick = boundHandleClickExists => (
+    !boundHandleClickExists ? undefined : handleClickForLink
+  );
 
   return (
     <Route
@@ -101,7 +100,7 @@ export default ({
         return (
           <ReactRouterLink
             {...props}
-            onClick={handleClickForLink}
+            onClick={toggleHandleClick(boundHandleClickForApp)}
             replace={noMatch || replace || !!match}
             to={to}
           />

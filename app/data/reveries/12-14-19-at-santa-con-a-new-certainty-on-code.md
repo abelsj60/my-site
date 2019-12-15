@@ -31,6 +31,6 @@ I added a new element to the loadLevels array, factored it into the equation tha
 
 It took all of five minutes. I felt a new certainty about code as I rejoined all the Santas on the street — good design is easy to debug. Bad design is not. 
 
-A very Merry Christmas indeed.
+A very merry Christmas indeed.
 
 -j
