@@ -234,15 +234,7 @@ export default class Home extends Component {
       this.loadLevels = newArr;
     }
 
-    /* Now that we've updated the loadLevels: 
-    
-      1. Let's check to see if we should update state for a re-render. 
-      2. Use the timeout to be sure all preceeding animations had a chance to run.
-        On mobile, we sometimes loose the Hed's fade-in b/c the setState runs
-        before it can finish. This timeout should ensure it can finish. 
-    */
-  
-   this.timeoutIdForUpdateLoadLevel = setTimeout(() => this.updateLoadLevel(), 200); // ! REMOVE setTimeout? NEW TRACKER SHOULD ENSURE THIS NEVER HAPPENS!
+   this.updateLoadLevel(); // Should we setState() for re-render?
   }
 
   setSpellLevel(val) {
