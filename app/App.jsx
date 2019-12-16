@@ -440,7 +440,7 @@ class App extends Component {
     return cover(pageWidth, pageHeight, width, height);
   }
 
-  getIllustrationLevelsTarget(a, b) {
+  selectIllustrationLevelsTarget(a, b) {
     return this.state.illustrationDirection === 'enter' ? a : b;
   }
 
@@ -632,10 +632,10 @@ class App extends Component {
     switch (this.state.illustrationLevel) {
       // The initial level one / two is set in the Footer/Button onClick.
       case 1:
-        this.setIllustrationLevel('level two', this.getIllustrationLevelsTarget(4, 0));
+        this.setIllustrationLevel('level two', this.selectIllustrationLevelsTarget(4, 0));
         break;
       case 2:
-        this.setIllustrationLevel('level three', this.getIllustrationLevelsTarget(!isNarrow ? 12 : 8, 0));
+        this.setIllustrationLevel('level three', this.selectIllustrationLevelsTarget(!isNarrow ? 12 : 8, 0));
         break;
       default:
         return 'Error!';

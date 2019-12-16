@@ -48,7 +48,7 @@ const FallbackImage = styled.img`
   will-change: opacity;
   opacity: ${p => p.offline || (!p.homePageLoaded && p.loadLevel === 1) || (p.homePageLoaded && p.loadLevel < 1) ? '1' : '0'};
   // Transition settings need to be matched (in total) by NameTag/InnerContainer and Header/Nav.
-  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.2s'} ease-in-out`};
+  ${p => !p.offline && css`transition: opacity ${!p.homePageLoaded ? '.7s' : '.25s'} ease-in-out`};
   z-index: 4;
 `;
 

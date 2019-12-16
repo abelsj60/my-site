@@ -38,18 +38,18 @@ export default class Home extends Component {
     /* Load levels:
     
       Key: [fallback, blurredBoy, blurredForrest, blurredNyc, boy, forrest, city, hed]
-        a. Initial load — [ 3, 1, 1, 0, 1, 1, 0]
-        b. Internal nav — [ 3, 1, 1, 0, 1, 1, 0 ]
-      The array tracks onLoad and onTransitionEnd for '/' images. It's separated from
-      loadLevel so we don't run setState() in the middle of a transition. This was 
-      supposed to address a bug that sometimes turns off blurred images without running 
-      the transition on screen. I now believe the bug has to do with onTranstionEnd 
-      firing too quickly on the initial load. Still, this logic is easy to follow
-      over time. 
+        a. Initial load — [ 3, 1, 1, 0, 1, 1, 0, 1 ]
+        b. Internal nav — [ 3, 1, 1, 0, 1, 1, 0, 1 ]
+
+      The array tracks onLoad and onTransitionEnd for '/' images and hed. It was separated
+      from loadLevel to try to address a bug wherein some picture elements broke during
+      painting to screen. In retrospect, the correlation may have been coincidental,
+      however, this pattern is currently used for loading and chapter illustration
+      animations... A future refactor should look at returning it to this.state. 
     */
     this.loadLevels = [0, 0, 0, 0, 0, 0, 0, 0]; // 8 elements
     // loadLevelsCacheForIE needed for object-fit polyfill (see notes in PictureBox).
-    this.loadLevelsCacheForIE = [0, 0, 0, 0, 0, 0, 0]; // Don't need cache for NameTage/Hed
+    this.loadLevelsCacheForIE = [0, 0, 0, 0, 0, 0, 0]; // 7 elements — don't need cache for NameTag/Hed b/c it never ticks twice
     // These setTimeouts are turned off in cWU below.
     this.timeoutIdForUpdateLoadLevel = 0; 
     this.timeoutIdForSetSpellLevel = 0;
@@ -210,6 +210,10 @@ export default class Home extends Component {
     }
   }
 
+  selectLoadLevelsTarget(a, b) {
+    return !this.offlineStateCache ? a : b;
+  }
+
   setLoadLevel(type, target) {
     const { loadLevel } = this.state;
 
@@ -327,7 +331,7 @@ export default class Home extends Component {
   }
 
   sumInitialSet() {
-    // fallback, boyForeground, forrestBackground
+    // fallback, boyForeground, forrestBackground, hed
     const initialImages = [0, 4, 5, 7];
     return this.sumImageSet(initialImages);
   }
@@ -358,10 +362,10 @@ export default class Home extends Component {
           this.setLoadLevel('fallback', 1);
           break;
         case 1:
-          this.setLoadLevel('initialSet', !this.offlineStateCache ? 5 : 4);
+          this.setLoadLevel('initialSet', this.selectLoadLevelsTarget(5, 4));
           break;
         case 2:
-          this.setLoadLevel('initialSet', !this.offlineStateCache ? 6 : 5);
+          this.setLoadLevel('initialSet', this.selectLoadLevelsTarget(6, 5));
           break;
         default:
           return 'Error!';

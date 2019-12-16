@@ -57,7 +57,7 @@ const OuterContainer = styled.div`
   // simultaneously — the second would overwrite the first.
   ${p => p.heartbeat > 0 && p.heartbeat < 2 && css`animation: 1.15s ease-in-out ${heartbeatKeyframes} 3 both`};
   ${p => p.spellLevel === 5 && css`animation: ${blurInKeyframes} ${!p.inCity ? '1.52s' : '1.5s'} cubic-bezier(0.550, 0.085, 0.680, 0.530) both`};
-  transform: translate3d(1, 1, 1);
+  // transform: translate3d(1, 1, 1);
   pointer-events: ${p => p.spellLevel === 5 && 'none'};
   text-align: center;
   z-index: 2;

@@ -17,17 +17,17 @@ Inconsistency. Sometimes the home-page headline faded into place, as it should, 
 
 Oh boy. 
 
-So I headed to Perk, a little coffee shop in Murray Hill, darting between throngs of elves — who were out, tripping to SantaCon's light fantastic — so I could debug. 
+So I headed to Perk, a little coffee shop in Murray Hill, darting between throngs of elves — out tripping to SantaCon's light fantastic — so I could debug. 
 
 I soon realized my problem. 
 
-The home-page loading sequence doesn't explicitly wait for the headline to finish fading in. It assumes the fade'll be done by the time the cover image disappears. 
+The home-page loading sequence didn't explicitly wait for the headline to finish fading. It thought the fade would be done by the time the cover image disappeared. 
 
-Theoretically, yes. Practically, no. Sometimes the cover animation runs slow. 
+Theoretically, yes. Practically, no. Sometimes the cover animation ran slow. 
 
 So, I decided to explicitly track the headline's fade-in state. 
 
-I added a new element to the loadLevels array, factored it into the equation that pushes the loadLevel from one to two to three, and created an onTransitionEnd handler that sets the new element to one after the headline fades into place. 
+I added a new element to the loadLevels array, factored it into the algorithm that pushes the loadLevel from one to two to three, and created an onTransitionEnd handler that sets the new element to one after the headline fades into place. 
 
 It took all of five minutes. I felt a new certainty about code as I rejoined all the Santas on the street — good design is easy to debug. Bad design is not. 
 
