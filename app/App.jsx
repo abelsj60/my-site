@@ -92,7 +92,6 @@ const mediaQueries = {
   tinyViewTwo: '425px',
   narrowBreakOne: '500px',
   narrowBreakTwo: '690px',
-  narrowBreakTwoB: '691px',
   desktop: '848px',
   huge: '1920px'
 };
@@ -264,24 +263,33 @@ class App extends Component {
       ReactGA.pageview(pathname + search); // Tallies initial request
     }
 
-    // [header, story, footer]
-    // Totals: header = 7, story = 1, footer = 3
-    this.illustrationLevels = [0, 0, 0, 0, 0, 0]; // [header text, header background, story portal, story blur, footer text + button, footer line]
+    /* Map of illustrationLevels array:
+      
+      [
+        Header text = (2 || 6), 
+        Header background = 1, 
+        Story container = 1, 
+        Story portal = 1, 
+        Story blur = 1, 
+        Footer text + button = 5 (button ticks twice b/c box-shadow & the button cover's opacity transition), 
+        Footer line = 1
+      ]
+    */
+    this.illustrationLevels = [0, 0, 0, 0, 0, 0, 0];
     this.state = {
       currentCaller: caller !== 'i' ? caller : 'home',
       // 0 = not ready, 1 = run, 2 = nevermore
       heartbeat: firstHeartbeat ? 0 : 2,
       height: this.pageHeight,
       homePageLoaded: false, // loadLevels confined to Home, this is for whole app
-      illustrationDelay: false, // Control illustration loader on /chapter pages
-      illustrationDirection: 'enter', // Properly interpret illustrationLevel 
+      illustrationDelay: false, // Controls illustration loader on /chapter pages
+      illustrationDirection: '', // Properly interpret illustrationLevel (in/out)
       // Used by header, main, and footer
       // Enter: 0 = text on, 1 = fade out text and portal, 2 = fade out blurred image, 3 = done
       // Exit: 3 = real image on, 2 = fade in blurred image and portal, 1 = fade in text, 0 = done
-      illustrationLevel: 0, 
+      illustrationLevel: 0, // Controlled by the state of this.illustrationLevels
       // 0 is n/a, + is loaded, and - is loading
-      // Typically updated by <ReloadRoute />
-      illustrationState: state ? state.checkIllustrationState(this.images) : 0,
+      illustrationState: state ? state.checkIllustrationState(this.images) : 0, 
       images: this.images, // preloaded big images (minimize time to display b/c of loading)
       inCity: false, // false = fantasy, true = city
       isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie
@@ -302,18 +310,11 @@ class App extends Component {
 
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
     this.handleResize = this.handleResize.bind(this);
+    this.setIllustrationLevels = this.setIllustrationLevels.bind(this);
     this.toggleHtmlElementHeight = this.toggleHtmlElementHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
     this.updateNetworkStatus = this.updateNetworkStatus.bind(this);
     this.updateSpacerHeight = this.updateSpacerHeight.bind(this);
-
-    this.setIllustrationLevels = this.setIllustrationLevels.bind(this);
-  }
-
-  setIllustrationLevels(idx) {
-    const newArr = [].concat(this.illustrationLevels);
-    newArr[idx] = this.state.illustrationDirection === 'enter' ? newArr[idx] + 1 : newArr[idx] - 1;
-    this.illustrationLevels = newArr;
   }
 
   render() {
@@ -350,14 +351,12 @@ class App extends Component {
             {...this.props}
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
-            illustrationLevels={this.illustrationLevels}
             setIllustrationLevels={this.setIllustrationLevels}
           />
           <Body
             {...this.props}
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
-            illustrationLevels={this.illustrationLevels}
             setIllustrationLevels={this.setIllustrationLevels}
           />
           <LegalTermsOrBizCard
@@ -373,6 +372,7 @@ class App extends Component {
             {...this.props}
             appState={this.state}
             boundHandleClickForApp={boundHandleClickForApp}
+            // Used to reset illustrationLevels when width changes
             illustrationLevels={this.illustrationLevels}
             setIllustrationLevels={this.setIllustrationLevels}
           />
@@ -440,6 +440,10 @@ class App extends Component {
     return cover(pageWidth, pageHeight, width, height);
   }
 
+  getIllustrationLevelsTarget(a, b) {
+    return this.state.illustrationDirection === 'enter' ? a : b;
+  }
+
   handleBackAndForth() {
     const location = new Location('/', this.props);
     const hcForApp = new ClickHandling('app', this);
@@ -452,19 +456,6 @@ class App extends Component {
     const updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
 
     boundHandleClickForApp('updateApp', location.caller, updateMenuForBackAndForthButton);
-  }
-
-  toggleHtmlElementHeight(mode) {
-    if (isMobileSafari && parseInt(osVersion) >= 12) {
-      if (mode === 'on') {
-        document.getElementsByTagName('html')[0].style.height = '100vh';
-      } else if (mode === 'off') {
-        // setTimeout ensures that elementHeight has time to do its work
-        setTimeout(() => {
-          document.getElementsByTagName('html')[0].style.height = '';
-        }, 250);
-      }
-    }
   }
 
   handleResize(event) {
@@ -527,6 +518,89 @@ class App extends Component {
     return resultObj;
   }
 
+  setIllustrationLevel(type, target) {
+    const { illustrationLevel, illustrationDirection } = this.state;
+    const newIllustrationLevel = illustrationDirection === 'enter' ? illustrationLevel + 1 : illustrationLevel - 1;
+
+    if (this.sumIllustrationLevels(type) === target) {
+      this.setState({ illustrationLevel: newIllustrationLevel }, () => {
+        if (this.state.illustrationDirection === 'exit' && newIllustrationLevel === 0) {
+          this.setState({ illustrationDirection: '' });
+        }
+      });
+    }
+  }
+
+  setIllustrationLevels(idx) {
+    const newArr = [].concat(this.illustrationLevels);
+    newArr[idx] = this.state.illustrationDirection === 'enter' ? newArr[idx] + 1 : newArr[idx] - 1;
+    this.illustrationLevels = newArr;
+    this.updateIllustrationLevel();
+  }
+
+  sumAll() {
+    const allImages = [0, 1, 2, 3, 4, 5, 6];
+    return this.sumIllustrationSet(allImages);
+  }
+
+  sumLevelTwo() {
+    // Portal, ContentHolder, Header Background, Line (no drop shadows)
+    const portalIllustrationCoversAndLine = [1, 2, 3, 6]; // illustrationDirection === 'enter'
+    return this.sumIllustrationSet(portalIllustrationCoversAndLine);
+  }
+
+  sumLevelThree() {
+    // Remember, level three is the final resting place for the animation. If it doesn't get
+    // set, then we can't go on a return trip...
+    // Header text, Blurred image, Footer text and button (drop shadows and blur)
+    const textBlurredImageAndButton = [0, 4, 5]; // illustrationDirection === 'enter'
+    return this.sumIllustrationSet(textBlurredImageAndButton);
+  }
+
+  startIllustrationAnimation() {
+    if (this.state.illustrationDirection === '') {
+      this.setState({ 
+        illustrationDirection: 'enter',
+        illustrationLevel: 1
+      });
+    } else if (this.state.illustrationDirection === 'enter') {
+      this.setState({ 
+        illustrationDirection: 'exit',
+        illustrationLevel: 2
+      });
+    }
+  }
+
+  sumIllustrationLevels(type) {
+    switch(type) {
+      case 'all':
+        return this.sumAll();
+      case 'level two':
+        return this.sumLevelTwo();
+      case 'level three':
+        return this.sumLevelThree();
+      default:
+        return 'Error! Caller needs a type!';
+    }
+  }
+
+  sumIllustrationSet(illustrationSet) {
+    return illustrationSet.reduce((acc, cur) => acc + this.illustrationLevels[cur], 0);
+  }
+
+  toggleHtmlElementHeight(mode) {
+    if (isMobileSafari && parseInt(osVersion) >= 12) {
+      if (mode === 'on') {
+        document.getElementsByTagName('html')[0].style.height = '100vh';
+      } else if (mode === 'off') {
+        // setTimeout ensures that elementHeight has time to do its work
+        setTimeout(() => {
+          document.getElementsByTagName('html')[0].style.height = '';
+        }, 250);
+      }
+    }
+  }
+
   /* Update height:
 
     1. Mobile: On orientation change
@@ -550,6 +624,22 @@ class App extends Component {
     }
 
     this.setState({ height: newHeight });
+  }
+
+  updateIllustrationLevel() {
+    const isNarrow = this.pageWidth < 690;
+
+    switch (this.state.illustrationLevel) {
+      // The initial level one /two is set in the Footer/Button onClick.
+      case 1:
+        this.setIllustrationLevel('level two', this.getIllustrationLevelsTarget(4, 0));
+        break;
+      case 2:
+        this.setIllustrationLevel('level three', this.getIllustrationLevelsTarget(!isNarrow ? 12 : 8, 0));
+        break;
+      default:
+        return 'Error!';
+    }
   }
 
   // Only called by handleResize, which rejects if newHeight === height.

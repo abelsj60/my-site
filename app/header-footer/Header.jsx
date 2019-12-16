@@ -48,7 +48,7 @@ const HeaderBackground = styled.div`
   left: 0px;
   // No background on home, translucent if menu is open when the storyIllustration is shown, otherwise dark pink
   background-color: ${p => p.isHome || (p.tempContent === 3 && p.illustrationLevel === 3) ? '' : p.theme.colors.darkPink};
-  opacity: ${p => p.tempContent === 3 || p.isReverie || ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
+  opacity: ${p => p.tempContent === 3 || p.isReverie || !p.illustrationDirection || ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity .35s`};
   // Added z-index for weird behavior on IE 11, per BrowserStack testing:
   z-index: ${p => !p.isIE ? '-1' : '1'};
@@ -231,7 +231,7 @@ const Icon = styled.img`
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`filter .35s`};
   z-index: 1;
 
-  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwoB}) {
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: none;
   }
 `;
@@ -269,7 +269,6 @@ export default class Header extends Component {
     const {
       appState,
       boundHandleClickForApp,
-      illustrationLevels,
       setIllustrationLevels
     } = this.props;
     const {
@@ -295,12 +294,12 @@ export default class Header extends Component {
     const handleClickForMenuLink = event => handleHeaderMenu(event);
     const handleAnimationEndForTimer = event => handleHeaderMenu(event);
 
-    const handleOnTranstionEnd = event => {
+    const handleTranstionEnd = (event, idx) => {
       eventManagement(event);
-      setIllustrationLevels(0);
+      setIllustrationLevels(idx);
     };
-
-    console.log('illustrationLevels:', illustrationLevels);
+    const handleTransitionEndForText = event => handleTranstionEnd(event, 0);
+    const handleTransitionEndForBackground = event => handleTranstionEnd(event, 1);
 
     return (
       <Container
@@ -312,7 +311,7 @@ export default class Header extends Component {
           isReverie={isReverie}
           illustrationDirection={illustrationDirection}
           illustrationLevel={illustrationLevel}
-          onTransitionEnd={handleOnTranstionEnd}
+          onTransitionEnd={handleTransitionEndForBackground}
           tempContent={tempContent}
         />
         <NameAsLink
@@ -322,7 +321,7 @@ export default class Header extends Component {
           isHome={isHome}
           isReverie={isReverie}
           nameAsLink={true}
-          onTransitionEnd={handleOnTranstionEnd}
+          onTransitionEnd={handleTransitionEndForText}
           tempContent={tempContent}
           to={'/'}
         >
@@ -334,7 +333,7 @@ export default class Header extends Component {
           illustrationLevel={illustrationLevel}
           isHome={isHome}
           isReverie={isReverie}
-          onTransitionEnd={handleOnTranstionEnd}
+          onTransitionEnd={handleTransitionEndForText}
           tempContent={tempContent}
         >
           {bio.attributes.motto}
@@ -370,7 +369,7 @@ export default class Header extends Component {
                       isHome={isHome}
                       isReverie={isReverie}
                       num={idx}
-                      onTransitionEnd={handleOnTranstionEnd}
+                      onTransitionEnd={handleTransitionEndForText}
                       tempContent={tempContent}
                       to={link.path}
                     >

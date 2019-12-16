@@ -70,17 +70,11 @@ export default class ClickHandling {
           stateToUpdate.illustrationDelay = !illustrationDelay;
         }
 
-        if (illustrationLevel === 0) {
-          // Already 'enter' (default or reset to 'enter' by 'updateApp')
-          stateToUpdate.illustrationLevel = 1; // 0 --> 1
-        } else {
-          stateToUpdate.illustrationLevel = 2; // 3 --> 2
-          stateToUpdate.illustrationDirection = 'exit'
-        }
-
         if (tempContent > 0) {
           stateToUpdate.tempContent = 0;
         }
+
+        this.startIllustrationAnimation();
       };
       let category = '';
       let action = '';

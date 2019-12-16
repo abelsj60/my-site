@@ -13,7 +13,7 @@ import styled, { css } from 'styled-components';
 import urlPrefix from '../helpers/urlPrefix';
 
 const RestyledContentHolder = styled(ContentHolder)`
-  opacity: ${p => p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1)) ? '1' : '0'};
+  opacity: ${p => !p.illustrationDirection || (p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1))) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
   pointer-events: ${p => p.illustrationLevel >  0 && 'none'};
   flex-direction: column;
@@ -170,7 +170,6 @@ export default function Story(props) {
     boundHandleClickForApp,
     boundHandleClickForContentLoader,
     contentState,
-    illustrationLevels,
     setIllustrationLevels,
     overflowRef
   } = props;
@@ -206,7 +205,7 @@ export default function Story(props) {
 
   bigImageSrc = offlineImageToggle(isOffline, bigImageSrc);
   blurredImageSrc = offlineImageToggle(isOffline, blurredImageSrc);
-  
+
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
 
@@ -222,38 +221,22 @@ export default function Story(props) {
       boundHandleClickForApp('updateIllustrationState', number, illustrationDelay);
     }
   };
-  const handleTransitionEndForRestyledContentHolder = event => {
-    eventManagement(event);
-
-    // Let it breathe...to ensure visual artifacts have a chance to leave the mind's eye. 
-    // Use different timings to enter and exit b/c the two sequences are different. But,
-    // ...setTimeout throws a lot of violations, probably b/c it's so short. It runs
-    // from ~58ms to ~103ms. Lengthen the time to play along...?
-    const isEntering = illustrationDirection === 'enter';
-    setTimeout(
-      () => boundHandleClickForApp('updateIllustrationLevel', isEntering ? 2 : 0),
-      isEntering ? 1 : 5
-    );
-    setIllustrationLevels(1);
-  };
   const handleTransitionEndForFallbackBlur = event => { // 1 --> 2
     eventManagement(event);
-
+    
     if (imageLoaded < 2) {
       // refers to BlurredImage, not the full illustration
       boundHandleClickForContentLoader('imageLoader', 2);
     }
   };
-  const handleTransitionEndForBlurredImage = event => {
+  const setIllustrationLevelsNow = (event, idx) => {
     eventManagement(event);
-    boundHandleClickForApp('updateIllustrationLevel', illustrationDirection === 'enter' ? 3 : 1);
-    setIllustrationLevels(1);
-  };
+    setIllustrationLevels(idx);
+  }
+  const handleTransitionEndForBlurredImage = event => setIllustrationLevelsNow(event, 4);
+  const handleOnTranstionEndForPortal = event => setIllustrationLevelsNow(event, 3);
+  const handleTransitionEndForRestyledContentHolder = event => setIllustrationLevelsNow(event, 2);
   let blurredKey, fallbackBlur, fallbackKey, mainKey;
-  const handleOnTranstionEndForPortal = event => {
-    eventManagement(event);
-    setIllustrationLevels(1);
-  };
 
   /* Image keys:
 
