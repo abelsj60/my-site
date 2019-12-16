@@ -191,9 +191,8 @@ export default function NameTag(props) {
   };
   const handleAnimationEndForHeartbeat = event => {
     eventManagement(event);
-    // ClickHandling, set to 2
-    boundHandleClickForApp('updateHeartbeat');
-    // Only runs if heartbeat = 0, so no check is needed!
+    boundHandleClickForApp('updateHeartbeat'); // Sets to 2
+    // Animation only runs if heartbeat = 0, so no check needed!
     localStorage.lastHeartbeat = dayjs().format();
   };
   const handleTransitionEndForHed = event => {
