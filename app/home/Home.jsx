@@ -230,8 +230,7 @@ export default class Home extends Component {
     // Let's update the loadLevels (via onLoad and onTransitionEnd)
     if (this.loadLevels[idx] < 3) {
       const newArr = [].concat(this.loadLevels);
-      const currentValue = newArr[idx];
-      newArr[idx] = currentValue + 1;
+      newArr[idx] = newArr[idx] + 1;
       this.loadLevels = newArr;
     }
 
@@ -243,7 +242,7 @@ export default class Home extends Component {
         before it can finish. This timeout should ensure it can finish. 
     */
   
-   this.timeoutIdForUpdateLoadLevel = setTimeout(() => this.updateLoadLevel(), 200);
+   this.timeoutIdForUpdateLoadLevel = setTimeout(() => this.updateLoadLevel(), 200); // ! REMOVE setTimeout? NEW TRACKER SHOULD ENSURE THIS NEVER HAPPENS!
   }
 
   setSpellLevel(val) {
@@ -281,7 +280,7 @@ export default class Home extends Component {
     // Use the timeout to give animations a chance to run. They didn't always 'feel'
     // right before this, but they seemed to 'feel' better after it — ya knows?
 
-    this.timeoutIdForSetSpellLevel = setTimeout(() => this.setState({ spellLevel: val }), 100);
+    this.timeoutIdForSetSpellLevel = setTimeout(() => this.setState({ spellLevel: val }), 100); // ! Need this?
   }
 
   setSpellLevelOne(isValid, caller) {
@@ -353,7 +352,7 @@ export default class Home extends Component {
       case 'initialSet':
         return this.sumInitialSet();
       default:
-        return 'Error! Caller needs a case!'
+        return 'Error! Caller needs a type!'
     }
   }
 
@@ -372,6 +371,8 @@ export default class Home extends Component {
         case 2:
           this.setLoadLevel('initialSet', !this.offlineStateCache ? 6 : 5);
           break;
+        default:
+          return 'Error!';
       }
     } else if (homePageLoaded) {
       switch (loadLevel) { // Used by mobile to control fallback image
@@ -381,6 +382,8 @@ export default class Home extends Component {
         case 1:
           this.setLoadLevel('all', 5);
           break;
+        default:
+          return 'Error!';
       }
     }
   }

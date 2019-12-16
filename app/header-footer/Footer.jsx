@@ -1,4 +1,3 @@
-import Button from './Button.jsx';
 import eventManagement from '../helpers/eventManagement.js';
 import Loader from '../shared/Loader.jsx';
 import React from 'react';
@@ -38,7 +37,7 @@ const Line = styled.div`
   margin: 0px;
   height: 1px;
   background-color: ${p => !p.isNotFound ? p.theme.colors.pink : p.theme.colors.white};
-  opacity: ${p => p.isReverie || (p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1) ? '1' : '0'};
+  opacity: ${p => p.isReverie || !p.illustrationDirection || (p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1) ? '1' : '0'};
   transition: ${p => p.illustrationLevel > 0  && p.illustrationLevel < 3 && 'opacity .35s'};
   
   @media (min-width: ${p => p.theme.mediaQueries.desktop}) {
@@ -85,11 +84,52 @@ const TextBox = styled.div`
     margin-right: 0px;
   }
 `;
+const ButtonStructure = styled.button`
+  display: ${p => !p.isStory ? 'none' : ''};
+  // Double check here, the footer container is blurred by headerMenu in Footer
+  // Here, we just need to handle the business card and legal terms
+  filter: ${p => p.theme.blurForTempContent && p.tempContent < 3 && p.theme.blur};
+  margin-left: 25px;
+  width: 69px;
+  padding: 7px 0px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  background-color: transparent; // otherwise, button grey
+  border: 1px rgba(255, 255, 255, .6) solid;
+  box-shadow: ${p => p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) && '2px 2px 2.5px rgba(0, 0, 0, .3)'};
+  // Note: Transitition timing is faster than its siblings w/hardware acceleration (.25s) and slower w/o it (.5s)
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 ? 'box-shadow .23s' : ''};
+  user-select: none;
+  z-index: 0;
+
+  :focus {
+    outline: 0;
+  }
+`;
+const ButtonCover = styled.div`
+  background-color: ${p => p.theme.colors.black};
+  opacity: ${p => (p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2) ? '.2' : '.125'}; // Multi-value?
+  transition: ${p => p.illustrationLevel > 0 && 'opacity .23s'};
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+`;
+const ButtonText = styled.p`
+  color: ${p => p.theme.colors.white};
+  font-size: ${p => p.theme.fontSizes.one};
+  font-weight: 400;
+  margin-bottom: 0px;
+`;
 
 export default function FooterContainer(props) {
   const {
     appState,
-    boundHandleClickForApp
+    boundHandleClickForApp,
+    setIllustrationLevels
   } = props;
   const {
     currentCaller,
@@ -130,9 +170,34 @@ export default function FooterContainer(props) {
     if (illustrationState < 0) {
       boundHandleClickForApp('toggleIllustrationDelay');
     } else if (illustrationLevel === 0 || illustrationLevel === 3) {
+      /* Reset illustrationLevels: 
+
+        We need to reset the headerText value in illustrationLevels if the browser is narrowed
+        or widened after revealing the illustration b/c the number of header elements will 
+        change. This, they won't properly decrement illustrationLevels[0]. We need to 
+        make the adjustment at the top of the animation so our math stays true!
+
+        Note: We're relying on pass-by-reference, so must access via props.
+      */
+      const isNarrow = document.documentElement.clientWidth < 690;
+
+      if (!isNarrow && props.illustrationLevels[0] === 2) {
+        props.illustrationLevels[0] = 6;
+      } else if (isNarrow && props.illustrationLevels[0] === 6) {
+        props.illustrationLevels[0] = 2;
+      }
+
       boundHandleClickForApp('toggleStoryText');
     }
   };
+
+  const handleTranstionEnd = (event, idx) => {
+    // Remember, the button has two transitions, so adds two to total...
+    eventManagement(event);
+    setIllustrationLevels(idx);
+  };
+  const handleTransitionEndForTextAndButton = event => handleTranstionEnd(event, 5);
+  const handleTransitionEndForLine = event => handleTranstionEnd(event, 6);
 
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';
@@ -153,22 +218,28 @@ export default function FooterContainer(props) {
         illustrationDirection={illustrationDirection}
         isNotFound={isNotFound}
         isReverie={isReverie}
+        onTransitionEnd={handleTransitionEndForLine}
       />
-      <Button
-        clickFunction={handleClickForStoryButton}
+      <ButtonStructure
         illustrationDirection={illustrationDirection}
         illustrationLevel={illustrationLevel}
-        isReverie={isReverie}
         isStory={isStory}
+        onClick={handleClickForStoryButton}
+        onTransitionEnd={handleTransitionEndForTextAndButton}
         tempContent={tempContent}
-        text={
-          illustrationDelay
+      >
+        <ButtonCover
+          illustrationDirection={illustrationDirection}
+          illustrationLevel={illustrationLevel}
+        />
+        <ButtonText>
+          {illustrationDelay
             ? 'Cancel'
             : illustrationDirection === 'enter' && illustrationLevel > 0
               ? 'Text on'
-              : 'Text off'
-        }
-      />
+              : 'Text off'}
+        </ButtonText>
+      </ButtonStructure>
       {isStory && (
         <Loader
           // done={!illustrationDelay} // Snappier when disabled...
@@ -201,6 +272,7 @@ export default function FooterContainer(props) {
             isReverie={isReverie}
             isStory={isStory}
             marginRight="never"
+            onTransitionEnd={handleTransitionEndForTextAndButton}
             tempContent={tempContent}
           >
             Reverie
@@ -215,6 +287,7 @@ export default function FooterContainer(props) {
           isReverie={isReverie}
           isStory={isStory}
           onClick={handleClickForContactLink}
+          onTransitionEnd={handleTransitionEndForTextAndButton}
           tempContent={tempContent}
         >
           Contact
@@ -229,6 +302,7 @@ export default function FooterContainer(props) {
           isNotFound={isNotFound}
           marginRight="none"
           onClick={handleClickForLegalLink}
+          onTransitionEnd={handleTransitionEndForTextAndButton}
           tempContent={tempContent}
         >
           Legal
