@@ -630,7 +630,7 @@ class App extends Component {
     const isNarrow = this.pageWidth < 690;
 
     switch (this.state.illustrationLevel) {
-      // The initial level one /two is set in the Footer/Button onClick.
+      // The initial level one / two is set in the Footer/Button onClick.
       case 1:
         this.setIllustrationLevel('level two', this.getIllustrationLevelsTarget(4, 0));
         break;
