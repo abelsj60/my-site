@@ -250,7 +250,7 @@ export default function Story(props) {
     eventManagement(event);
     if (illustrationDirection === 'enter') {
       // Delay a beat when revealing the illustration. Timing tested extensively!
-      setTimeout(() => setIllustrationLevelsNow(null, 2), 30);
+      setTimeout(() => setIllustrationLevelsNow(null, 2), 10);
     } else {
       setIllustrationLevelsNow(event, 2);
     }
