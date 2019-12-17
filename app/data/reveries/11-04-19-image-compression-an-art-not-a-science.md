@@ -27,7 +27,7 @@ The .png format, a generally lossless format, didn’t work either — too big!
 
 So I threw a Hail Mary. 
 
-I compressed the original .tiff to a .jpg of the same dimensions at a quality level of 100 (I did 90 and 95 too, and these findings were true for all of them). Then I resized the big .jpg and compressed it to, say 2880px, at a quality level of 50. 
+I compressed the original .tiff to a .jpg of the same dimensions at a quality level of 100 (I did 90 and 95 too, and these findings were true for all of them). Then I resized and compressed the new image to, say 2880px, at a quality level of 50. 
 
 The result was inexplicable. 
 

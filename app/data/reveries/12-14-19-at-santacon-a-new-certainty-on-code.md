@@ -21,7 +21,7 @@ So I headed to Perk, a little coffee shop in Murray Hill, darting between throng
 
 I soon realized my problem. 
 
-The home-page loading sequence didn't explicitly wait for the headline to finish fading. It thought the fade would be done by the time the cover image disappeared. 
+The home-page loading sequence didn't explicitly wait for the headline to finish fading. It just assumed the fade would be done by the time the cover image disappeared. 
 
 Theoretically, yes. Practically, no. Sometimes the cover animation ran slow. 
 

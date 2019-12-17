@@ -13,22 +13,20 @@ No matter what I did, I found it nothing but annoying.
 
 Maybe I used it wrong. 
 
-Most of the examples I found came from adding an item to a list of items, like a to-do list or grocery list. This generally entails animating the child of a parent component. For instance, an < Item > is animated in and out of the < List >. 
+Most of the examples I found came from adding an item to a list of items, like a to-do list or grocery list. This generally entails animating the child of a parent component. For instance, an Item is animated in and out of the List. 
 
 Easy peasy, right? 
 
-Maybe. But I needed to animate elements that were in siblings. For instance, I had to animate elements of the < Header >, < Footer > and < Body >. 
+Maybe. But I needed to animate elements that were "unrelated siblings." For instance, the Header, Footer, and Body contained elements that had to be animated simultaneously.
 
-Should be as easy as the examples, right? I'm still triggering the animation via the state of a shared parent component. 
+Try as I might, I couldn't get React Transition Group to do it. 
 
-Right. I never got it to work. 
+Now, in my defense, I wouldn't call the React Transition Group docs complete. And I don't personally think it's that intuitive, but dem's de breaks. 
 
-Now, I wouldn't call the docs complete. And I'm not sure the components are as intuitive as everyone says, but, them's the breaks. 
+So I did it myself. 
 
-I came up with an alternative. I did it myself. 
+I passed state to my Styled Components, then used transitions and keyframes to animate them. You can see the results when you reveal the chapter illustrations. 
 
-I used Styled Components and passed the relevant state to the animating elements via props. You can see the results in the story when you turn its text on and off. The background animates, as does the text shadow on header and footer elements. 
-
-Done.
+You know what they say. All's well that...
 
 -j

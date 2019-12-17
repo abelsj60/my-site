@@ -255,14 +255,19 @@ export default class ClickHandling {
 
             // Reset illustrationLevel if we're going anywhere from /chapter other than /reverie, 
             // or if we're going anywhere from /reverie other than /chapter. Note also that
-            // valueOne will be undefined when switching between reveries. 
-            
-            // This is a Reset, not a check. The checks are in ContentLoader (constructor + cDU).
-            if (
-              currentCaller === 'chapter' && valueOne !== 'reverie' 
-              || (currentCaller === 'reverie' && (valueOne !== 'chapter' && valueOne !== undefined))
-            ) {
-              stateToUpdate.illustrationLevel = 0;
+            // valueOne is undefined when switching between reveries, so we filter it. 
+            // See also: ContentLoader (constructor + cDU) for checks.
+
+            if (this.illustrationDirection !== '') {
+              if (
+                currentCaller === 'chapter' && valueOne !== 'reverie' 
+                || (currentCaller === 'reverie' && (valueOne !== 'chapter' && valueOne !== undefined))
+              ) {
+                delete this.illustrationLevels;
+                this.illustrationLevels = [0, 0, 0, 0, 0, 0, 0];
+                stateToUpdate.illustrationLevel = 0;
+                stateToUpdate.illustrationDirection = '';
+              }
             }
           }
           break;

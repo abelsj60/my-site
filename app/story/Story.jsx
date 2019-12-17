@@ -197,15 +197,12 @@ export default function Story(props) {
   const isOffline = offline && imageLoaded < 2;
   const blurredImageDescription = "This illustration depicts a blurred version of this chapter's full-page illustration, which lives one layer below it. This image obscures the main image so people can easily read this chapter's text.";
   const fallbackImageDescription = "Fallback version of the blurred depiction of this chapter's full-page illustration, which lives one layer below it. This image obscures the blurred and main illustrations when they aren't loaded.";
-
-  let bigImageSrc = `${urlPrefix}/chapter-${number}/chapter-${number}-imc-main-101419-q${
+  const bigImgSrc = `${urlPrefix}/chapter-${number}/chapter-${number}-imc-main-101419-q${
     images.width < 2880 ? '90' : '50'
   }-${images.width}.jpg`;
-  let blurredImageSrc = `${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
-
-  bigImageSrc = offlineImageToggle(isOffline, bigImageSrc);
-  blurredImageSrc = offlineImageToggle(isOffline, blurredImageSrc);
-
+  const blrdImgSrc = `${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
+  const bigImageSrc = offlineImageToggle(isOffline, bigImgSrc);
+  const blurredImageSrc = offlineImageToggle(isOffline, blrdImgSrc);
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
 
@@ -230,12 +227,34 @@ export default function Story(props) {
     }
   };
   const setIllustrationLevelsNow = (event, idx) => {
-    eventManagement(event);
+    if (event !== null) { 
+      // The synthetic event's gone by the time setTimeout gets to it. 
+      // We'll prevent a problem by filitering it out in this case.
+
+      eventManagement(event);
+    }
+
     setIllustrationLevels(idx);
-  }
+  };
   const handleTransitionEndForBlurredImage = event => setIllustrationLevelsNow(event, 4);
-  const handleOnTranstionEndForPortal = event => setIllustrationLevelsNow(event, 3);
-  const handleTransitionEndForRestyledContentHolder = event => setIllustrationLevelsNow(event, 2);
+  const handleOnTranstionEndForPortal = event => {
+    eventManagement(event);
+    if (illustrationDirection === 'exit') {
+      // Delay a beat when leaving the illustration. Timing tested extensively!
+      setTimeout(() => setIllustrationLevelsNow(null, 3), 110);
+    } else {
+      setIllustrationLevelsNow(event, 3)
+    }
+  };
+  const handleTransitionEndForRestyledContentHolder = event => {
+    eventManagement(event);
+    if (illustrationDirection === 'enter') {
+      // Delay a beat when revealing the illustration. Timing tested extensively!
+      setTimeout(() => setIllustrationLevelsNow(null, 2), 30);
+    } else {
+      setIllustrationLevelsNow(event, 2);
+    }
+  };
   let blurredKey, fallbackBlur, fallbackKey, mainKey;
 
   /* Image keys:
