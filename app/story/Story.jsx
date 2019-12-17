@@ -14,7 +14,7 @@ import urlPrefix from '../helpers/urlPrefix';
 
 const RestyledContentHolder = styled(ContentHolder)`
   opacity: ${p => !p.illustrationDirection || (p.tempContent !== 3 && ((p.illustrationDirection === 'exit' && p.illustrationLevel < 2) || (p.illustrationDirection === 'enter' && p.illustrationLevel < 1))) ? '1' : '0'};
-  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`opacity ${p.illustrationDirection === 'enter' ? '.26s' : '.35s'}`};
   pointer-events: ${p => p.illustrationLevel >  0 && 'none'};
   flex-direction: column;
   // Added z-index for weird behavior on IE 11, per BrowserStack testing:
@@ -241,7 +241,7 @@ export default function Story(props) {
     eventManagement(event);
     if (illustrationDirection === 'exit') {
       // Delay a beat when leaving the illustration. Timing tested extensively!
-      setTimeout(() => setIllustrationLevelsNow(null, 3), 110);
+      setTimeout(() => setIllustrationLevelsNow(null, 3), 80);
     } else {
       setIllustrationLevelsNow(event, 3)
     }

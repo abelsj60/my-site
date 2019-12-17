@@ -266,13 +266,13 @@ class App extends Component {
     /* Map of illustrationLevels array:
       
       [
-        Header text = (2 || 6), 
-        Header background = 1, 
-        Story container = 1, 
-        Story portal = 1, 
-        Story blur = 1, 
-        Footer text + button = 5 (button ticks twice b/c box-shadow & the button cover's opacity transition), 
-        Footer line = 1
+        0 | Header text = (2 || 6), 
+        1 | Header background = 1, 
+        2 | Story container = 1, 
+        3 | Story portal = 1, 
+        4 | Story blur = 1, 
+        5 | Footer text + button = 5 (button ticks twice b/c box-shadow & the button cover's opacity transition), 
+        6 | Footer line = 1
       ]
     */
     this.illustrationLevels = [0, 0, 0, 0, 0, 0, 0];
@@ -545,15 +545,15 @@ class App extends Component {
 
   sumLevelTwo() {
     // Portal, ContentHolder, Header Background, Line (no drop shadows)
-    const portalIllustrationCoversAndLine = [1, 2, 3, 6]; // illustrationDirection === 'enter'
+    const portalIllustrationCoversAndLine = [1, 2, 3, 6];
     return this.sumIllustrationSet(portalIllustrationCoversAndLine);
   }
 
   sumLevelThree() {
     // Remember, level three is the final resting place for the animation. If it doesn't get
-    // set, then we can't go on a return trip...
+    // set, then we take a return trip...
     // Header text, Blurred image, Footer text and button (drop shadows and blur)
-    const textBlurredImageAndButton = [0, 4, 5]; // illustrationDirection === 'enter'
+    const textBlurredImageAndButton = [0, 4, 5];
     return this.sumIllustrationSet(textBlurredImageAndButton);
   }
 
