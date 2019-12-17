@@ -219,7 +219,8 @@ export default function Charms(props) {
     inCity,
     nameTagWidth,
     offline,
-    tempContent
+    tempContent,
+    type
   } = appState;
   const {
     activeCharm,
@@ -241,6 +242,8 @@ export default function Charms(props) {
   // Let's set up a progress bar.
   const barWidth = score * (100 / (goal - 1));
   const isReady = score === goal - 1;
+  const interactionType = type === 'mobile' ? 'Tap' : 'Click';
+  const compressor = type === 'mobile' ? 3.03 : 3.15;
 
   return (
     <OuterContainer
@@ -253,13 +256,13 @@ export default function Charms(props) {
       <SubHed
         extraMarginTop={true}
         marginLeft="1em"
-        fontSize={getFontSize(nameTagWidth, 3.05)}
+        fontSize={getFontSize(nameTagWidth, compressor)}
       >
         {
           !offline 
             ? !inCity
-              ? "Tap the pulses to travel home"
-              : "Tap the pulses for adventure"
+              ? `${interactionType} the pulses to travel home`
+              : `${interactionType} the pulses for adventure`
             : "The spell won't cast offline!"
         }
       </SubHed>
