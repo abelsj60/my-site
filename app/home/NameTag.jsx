@@ -118,7 +118,7 @@ const Pitch = styled.section`
   p {
     font-size: ${p => p.fontSize}px;
     font-weight: 500;
-    margin-left: 1.8em;
+    margin-left: ${p => p.marginLeft};
     margin-bottom: 0px;
     color: ${p => p.theme.colors.black};
     text-shadow: 1.5px 1px 2px white;
@@ -161,6 +161,7 @@ export default function NameTag(props) {
     motto,
     name
   } = attributes;
+  const leftMargin = nameTagWidth * .06;
   const handleClickForHed = event => {
     eventManagement(event);
 
@@ -246,13 +247,14 @@ export default function NameTag(props) {
           type={type}
         >
           <SubHed
-            marginLeft="1em"
             fontSize={getFontSize(nameTagWidth, 3.15)}
+            marginLeft={`${leftMargin}px`}
           >
             {motto}
           </SubHed>
           <Pitch
             fontSize={getFontSize(nameTagWidth, 5)}
+            marginLeft={`${leftMargin}px`}
           >
             <Fragment>
               {ReactHtmlParser(marked(

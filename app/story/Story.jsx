@@ -29,6 +29,7 @@ const PictureHolder = styled.section`
 `;
 const Chapter = styled.h2`
   color: #fff7c9;
+  font-family: 'Aref Ruqaa', serif;
   font-weight: 400;
   font-size: ${p => p.theme.fontSizes.nine};
   font-style: italic;
@@ -37,7 +38,8 @@ const Chapter = styled.h2`
 `;
 const BookTitle = styled.h1`
   font-family: 'Playfair Display',serif;
-  margin: 0px auto 39px;
+  margin-left: 0px;
+  margin-bottom: 20px;
   font-size: 2rem;
   font-weight: 700;
   color: ${p => p.theme.colors.yellow};
@@ -203,6 +205,9 @@ export default function Story(props) {
   const blrdImgSrc = `${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
   const bigImageSrc = offlineImageToggle(isOffline, bigImgSrc);
   const blurredImageSrc = offlineImageToggle(isOffline, blrdImgSrc);
+  // Reduced by 4 for next element's margin-top overspacing
+  const pageWidth = document.documentElement.clientWidth
+  const shelfHeight = pageWidth <= 390 ? 111 : pageWidth <= 500 ? 123 : 147;
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
 
@@ -241,7 +246,7 @@ export default function Story(props) {
     eventManagement(event);
     if (illustrationDirection === 'exit') {
       // Delay a beat when leaving the illustration. Timing tested extensively!
-      setTimeout(() => setIllustrationLevelsNow(null, 3), 80);
+      setTimeout(() => setIllustrationLevelsNow(null, 3), 85);
     } else {
       setIllustrationLevelsNow(event, 3)
     }
@@ -303,14 +308,7 @@ export default function Story(props) {
         onTransitionEnd={handleTransitionEndForRestyledContentHolder}
       >
         <RestyledShelf
-          height="18px"
-        >
-          <ChapterNav
-            {...props}
-          />
-        </RestyledShelf>
-        <Overflow
-          ref={overflowRef}
+          height={`${shelfHeight}px`}
         >
           <TagLine>
             {dek}
@@ -318,6 +316,13 @@ export default function Story(props) {
           <BookTitle>
             {bookTitle}
           </BookTitle>
+          <ChapterNav
+            {...props}
+          />
+        </RestyledShelf>
+        <Overflow
+          ref={overflowRef}
+        >
           <Chapter>
             Chapter {number}
           </Chapter>
