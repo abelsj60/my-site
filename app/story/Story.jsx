@@ -39,7 +39,7 @@ const Chapter = styled.h2`
 const BookTitle = styled.h1`
   font-family: 'Playfair Display',serif;
   margin-left: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   font-size: 2rem;
   font-weight: 700;
   color: ${p => p.theme.colors.yellow};
@@ -49,6 +49,7 @@ const BookTitle = styled.h1`
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: 2.5rem;
+    margin-bottom: 20px;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
@@ -207,7 +208,7 @@ export default function Story(props) {
   const blurredImageSrc = offlineImageToggle(isOffline, blrdImgSrc);
   // Reduced by 4 for next element's margin-top overspacing
   const pageWidth = document.documentElement.clientWidth
-  const shelfHeight = pageWidth <= 390 ? 111 : pageWidth <= 500 ? 123 : 147;
+  const shelfHeight = pageWidth <= 390 ? 105 : pageWidth <= 500 ? 123 : 147;
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
 

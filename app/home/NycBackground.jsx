@@ -23,7 +23,7 @@ export default styled.img`
   //  a. It's hard to implement in an aesthetically pleasing way, and
   //  b. More important, it results in a currently unacceptable performance hit...
   //  -Will need to add to will-change and transition when adding it back.
-  // ${p => !p.inCity && p.spellLevel > 0 && css`filter: blur(${p => p.spellLevel < 4 ? '1px' : '25px'})`};
+  // ${p => p.spellLevel > 4 && !p.inCity && 'filter: blur(40px);'}
   opacity: ${p => p.inCity ? '1' : '0'};
   ${p => p.spellLevel > 0 && css`transform: ${p.inCity ? 'scale(1)' : 'scale(1.78)'};`}
   // Transition used for background swap. Opacity bezier curve should match that used by ForrestBackground.
