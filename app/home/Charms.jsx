@@ -244,6 +244,7 @@ export default function Charms(props) {
   const isReady = score === goal - 1;
   const interactionType = type === 'mobile' ? 'Tap' : 'Click';
   const compressor = type === 'mobile' ? 3.03 : 3.15;
+  const leftMargin = nameTagWidth * .06;
 
   return (
     <OuterContainer
@@ -255,7 +256,7 @@ export default function Charms(props) {
     >
       <SubHed
         extraMarginTop={true}
-        marginLeft="1em"
+        marginLeft={`${leftMargin}px`}
         fontSize={getFontSize(nameTagWidth, compressor)}
       >
         {

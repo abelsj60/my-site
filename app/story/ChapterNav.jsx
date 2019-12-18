@@ -38,8 +38,12 @@ const SelectorContainer = styled.div`
 `;
 const Selector = styled.div`
   height: 7px;
-  background: ${p => `url(${p.image})`} center no-repeat;
+  background: ${p => `url(${p.image}) center no-repeat`};
   background-size: contain; // Must come after background rule
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    height: 8px;
+  }
 `;
 
 export default function ChapterNav(props) {
