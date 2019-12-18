@@ -74,9 +74,7 @@ export default function About() {
       <ContentHolder
         saveSerifs={true}
       >
-        <RestyledShelf
-          height="32px"
-        >
+        <RestyledShelf>
           <Hed>
             Hi! I'm James
           </Hed>

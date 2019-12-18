@@ -115,10 +115,7 @@ export default function Projects(props) {
   return (
     <Main>
       <ContentHolder>
-        <Shelf
-          height="32px"
-          tinyHeight="20px"
-        >
+        <Shelf>
           <MenuButton
             {...props}
           />

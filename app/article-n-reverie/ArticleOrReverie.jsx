@@ -91,9 +91,7 @@ export default function ArticleOrReverie(props) {
       reverie={isReverie}
     >
       <ContentHolder>
-        <Shelf
-          height="20px"
-        >
+        <Shelf>
           <MenuButton
             {...props}
           />

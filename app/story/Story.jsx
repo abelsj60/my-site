@@ -39,7 +39,7 @@ const Chapter = styled.h2`
 const BookTitle = styled.h1`
   font-family: 'Playfair Display',serif;
   margin-left: 0px;
-  margin-bottom: 14px;
+  margin-bottom: 24px;
   font-size: 2rem;
   font-weight: 700;
   color: ${p => p.theme.colors.yellow};
@@ -49,7 +49,6 @@ const BookTitle = styled.h1`
 
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     font-size: 2.5rem;
-    margin-bottom: 20px;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakOne}) {
@@ -308,9 +307,7 @@ export default function Story(props) {
         saveSerifs={true}
         onTransitionEnd={handleTransitionEndForRestyledContentHolder}
       >
-        <RestyledShelf
-          height={`${shelfHeight}px`}
-        >
+        <RestyledShelf>
           <TagLine>
             {dek}
           </TagLine>

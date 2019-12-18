@@ -25,16 +25,16 @@ const Nav = styled.nav`
 `;
 const StyledList = styled(UnorderedList)`
   width: 250px;
-  height: 25px;
+  height: 7px;
   display: flex;
   flex: 1;
+
+  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
+    height: 8px;
+  }
 `;
 const ListItem = styled.li`
   flex: 1;
-`;
-const SelectorContainer = styled.div`
-  padding-top: 8px;
-  padding-bottom: 8px;
 `;
 const Selector = styled.div`
   height: 7px;
@@ -76,12 +76,10 @@ export default function ChapterNav(props) {
                   boundHandleClickForApp={boundHandleClickForApp}
                   to={`/chapter/${normalizedTitle}`}
                 >
-                  <SelectorContainer>
-                    <Selector
-                      image={dotType}
-                      num={idx}
-                    />
-                  </SelectorContainer>
+                  <Selector
+                    image={dotType}
+                    num={idx}
+                  />
                 </StyledLink>
               </ListItem>
             );
