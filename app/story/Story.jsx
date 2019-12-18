@@ -205,9 +205,6 @@ export default function Story(props) {
   const blrdImgSrc = `${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
   const bigImageSrc = offlineImageToggle(isOffline, bigImgSrc);
   const blurredImageSrc = offlineImageToggle(isOffline, blrdImgSrc);
-  // Reduced by 4 for next element's margin-top overspacing
-  const pageWidth = document.documentElement.clientWidth
-  const shelfHeight = pageWidth <= 390 ? 105 : pageWidth <= 500 ? 123 : 147;
   const handleLoadForBlurredImage = event => { // 0 --> 1
     eventManagement(event);
 
