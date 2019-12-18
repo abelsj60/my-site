@@ -161,6 +161,8 @@ export default function NameTag(props) {
     motto,
     name
   } = attributes;
+  // Shift Subhed and Pitch elements left so they start after the 'J' in my name.
+  // The fontSize algorithm excludes margins, so the new size will be true... 
   const leftMargin = nameTagWidth * .06;
   const handleClickForHed = event => {
     eventManagement(event);

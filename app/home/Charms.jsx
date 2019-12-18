@@ -244,6 +244,8 @@ export default function Charms(props) {
   const isReady = score === goal - 1;
   const interactionType = type === 'mobile' ? 'Tap' : 'Click';
   const compressor = type === 'mobile' ? 3.03 : 3.15;
+  // Shift Subhed and Pitch elements left so they start after the 'J' in my name.
+  // The fontSize algorithm excludes margins, so the new size will be true...
   const leftMargin = nameTagWidth * .06;
 
   return (
