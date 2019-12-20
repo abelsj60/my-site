@@ -4,14 +4,12 @@ altImageText: "A young teenage boy with big brown eyes stands in front of a text
 updated: 11-11-18
 ---
 
-I write code for Web sites and software. I tell stories, too.
+I write code for websites and software. I tell stories, too.
 
-That's important. It means I don't just mechanically code software. I figure out — and keep sight of — the stories that drive it. I always have.
+That's important. I don't just mechanically code software. I figure out, and keep sight of, the stories that drive it. Stories have always been a touchstone for me.
 
-As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And, as a lawyer, I crafted stories that made legal arguments. 
+As a start-up founder, I pitched our software through stories. As a staff reporter for Forbes and Mergermarket, I explored the connection between media, technology, and venture capital through stories. And, as a lawyer, I made legal arguments for clients through stories. It really is all about stories for me, from start to finish. 
 
-All stories, all the way down. 
-
-So. What's yours?
+So tell me, what's yours?
 
 -j
