@@ -373,8 +373,9 @@ export default class ClickHandling {
   // Handles onClicks on Home (spell, part one).
 
   _handleClickForHome() {
-    return (updateValue, propName) => {
+    return (updateValue, propertyName) => {
       const {
+        badChoice,
         eventType,
         movement,
         spellLevel
@@ -382,6 +383,9 @@ export default class ClickHandling {
       const stateToUpdate = {};
 
       switch (updateValue) {
+        case 'badChoiceWarning':
+          stateToUpdate.badChoice = true;
+          break;
         case 'toggleSpell':
           // Note: We toggleSpell after the spell
           // is cast in order to reset its state.
@@ -392,34 +396,36 @@ export default class ClickHandling {
 
           if(spellLevel < 1) { // i.e., 0
             stateToUpdate.spellLevel = 1;
+
+            // Reset when opening the spell if true (not when closing
+            // the spell b/c it's jarring).
+
+            if (badChoice) {
+              stateToUpdate.badChoice = false;
+            }
           } else { // i.e., 4
             stateToUpdate.spellLevel = 3;
           }
 
-          // Reset spell after it's cast (background = 'transform')
-
-          if (propName === 'transform') {
+          // Reset spell after it's cast (meaning the background's changed)
+          if (propertyName === 'transform') {
             stateToUpdate.score = 0;
             stateToUpdate.movement = '';
             stateToUpdate.spellLevel = 0;
+            stateToUpdate.pattern = this.createSpellPattern();
+            stateToUpdate.activeCharm = stateToUpdate.pattern[0];
+
+            // Reset the eventType to 'click' if it was 'touch'-ed. This prevents 
+            // unexpected and unwanted propagation.
+
+            if (eventType === 'touch') {
+              stateToUpdate.eventType = 'click';
+            }
           }
 
           break;
         case 'cast':
-          // Note, the score never equals the goal b/c we cast at score + 1.
-
           stateToUpdate.spellLevel = 5;
-          stateToUpdate.pattern = this.createSpellPattern();
-          stateToUpdate.activeCharm = stateToUpdate.pattern[0];
-          stateToUpdate.score = 0;
-
-          // Reset the eventType to 'click' if it was 'touch'-ed. This prevents 
-          // unexpected and unwanted propagation.
-
-          if (eventType === 'touch') {
-            stateToUpdate.eventType = 'click';
-          }
-
           break;
         case 'resetEventType':
           stateToUpdate.eventType = 'click';
@@ -449,7 +455,7 @@ export default class ClickHandling {
           });
         }
 
-        boundHandleClickForHome('toggleSpell');
+        boundHandleClickForHome('badChoiceWarning');
       } else if (isActive && abracadabra) { // It's time for magic! (Maybe.)
         const { offline } = this.props.appState;
 
@@ -468,10 +474,10 @@ export default class ClickHandling {
         }
       } else { // We've hit an active Charm, increment the score.
         this.setState(state => {
-          const newScore = state.score += 1;
           return {
-            score: newScore,
-            activeCharm: state.pattern[newScore]
+            activeCharm: state.pattern[state.score + 1],
+            badChoice: false,
+            score: state.score + 1
           };
         });
       }

@@ -224,12 +224,12 @@ export default function Charms(props) {
   } = appState;
   const {
     activeCharm,
+    badChoice,
     goal,
     movement,
     score,
     spellLevel
   } = homeState;
-
   const handleTransitionEndForOuterContainer = event => {
     eventManagement(event);
 
@@ -247,6 +247,17 @@ export default function Charms(props) {
   // Shift Subhed and Pitch elements left so they start after the 'J' in my name.
   // The fontSize algorithm excludes margins, so the new size will be true...
   const leftMargin = nameTagWidth * .06;
+  let spellBook = !inCity
+    ? `${interactionType} the pulses to travel home`
+    : `${interactionType} the pulses for adventure`;
+
+  if (badChoice) {
+    spellBook = "That's got no pulse! Try again.";
+  }
+
+  if (offline) {
+    spellBook = "The spell won't cast offline!";
+  }
 
   return (
     <OuterContainer
@@ -261,13 +272,7 @@ export default function Charms(props) {
         marginLeft={`${leftMargin}px`}
         fontSize={getFontSize(nameTagWidth, compressor)}
       >
-        {
-          !offline 
-            ? !inCity
-              ? `${interactionType} the pulses to travel home`
-              : `${interactionType} the pulses for adventure`
-            : "The spell won't cast offline!"
-        }
+        {spellBook}
       </SubHed>
       <InnerContainer>
         <CharmBox>

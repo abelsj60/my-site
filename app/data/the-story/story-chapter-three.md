@@ -6,34 +6,42 @@ number: 3
 
 The young man's room twinkled one morning.
 
-Dust, scattered high by a broom, was catching the sun's pale winter light. The quiet was soon pierced by the hollow ring of the broom brushing metal. 
+Dust, scattered high by a broom, was catching the sun's pale winter light. The quiet was soon pierced by the hollow ring of the broom as it brushed metal. 
 
 The young man knelt to grab it.
 
-"I forgot about you," he said, twice tracing the lamp's dusty etchings with a finger. Something about the motion made him feel light and excited.
+"I forgot about you," he said, twice tracing its dusty etchings with a finger. 
 
-He was right to be giddy. 
+The motion made him feel strangely giddy.
 
-Reality began to glitch. Clear red rays shot between particles of dust, drawing a giant Jinn into view. "You've forgotten my secret," it boomed. 
+His instinct was true.  
 
-Menace filled the room. Impulse pulled the young man toward bedsheets while pride kept him still. 
+Reality glitched. Clear blue rays began shooting between particles of dust, drawing a giant Jinni into view. 
 
-"I have not," he said, memory stirring. "I've rubbed you twice, I've released your might!" 
+"You've forgotten me," it boomed. 
 
-The logic seemed sound, but the Jinn was unmoved. Blue sparks began dancing around the mysterious creature. So the young man raised his fists, ready for a fight he couldn't win, but wouldn't duck.
+"I have not," the young man shot back, holding his wits together just long enough to remember something. "I've rubbed your lamp twice, I've released your might!" 
 
-All seemed lost. And then— 
+The Jinni smiled terribly. 
 
-A little fairy blurred to an unexpected stop between them.
+Menace filled the room as blue sparks danced around the monstrous creature. 
 
-She yelled at the Jinn, banging its nose with a tiny fist. The Jinn, at first amazed, roared with laughter. The young man stared slack jawed at the impossible sight. 
+All seemed lost. 
 
-A strong purple glow suddenly lit the lamp, which lay forgotton on the floor. 
+The young man tensed for an unwinnable fight.
 
-It charged the room with possibility, filling the young man with hopes and dreams of anything and everything. This was magic.
+And then, a small blur raced through the air between them. The little sprite's flight ended with a magical punch to the Jinni's nose. 
 
-The Jinn drank it in — slaking an almost unquenchable thirst — then struck hands together. Sleep came to the young man as time shattered and crashed to the floor. He was startled awake hours later by the rumble of thunder. 
+Its face tightened and scrunched. 
 
-A coding school Web site glowed on the computer beside him. 
+The young man — who'd watched with slack-jawed amazement — expected the Jinni's anger to slither through the room. But, it roared with laughter instead, delighted by the little fairy who hovered eye level to scream at it. 
 
-Fate, ever changing, was sealed anew.
+The young man was suddenly filled with good cheer. 
+
+It warmed him, and a strong purple glow burst forth from the gold lamp that lay forgotten on the floor. The colorful light drenched the world in magic.
+
+The Jinni drank of it deeply, then struck massive hands together. Time shattered and crashed to the floor, pulling the young man down to sleep beside it. Hours later, he was awakened by the tumultuous rumble of thunder. 
+
+The Web site for a coding school glowed on the laptop beside him.
+
+Fate — never truly frozen — had knocked.

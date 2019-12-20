@@ -6,30 +6,40 @@ number: 1
 
 The cardboard fort crumbled.
 
-A small fairy destroyed it after zipping through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She looked the boy up and down, then nodded.
+A small fairy destroyed it after zipping through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She twice looked the boy up and down, then nodded.
 
 "Want to find a magic lamp," she asked, floating eye-level. 
 
-The boy burst with delight.
+The boy absolutely burst with delight.
 
-"Of course," he shrieked. "What do I do?"
+"YES," he shrieked! "What do I do?"
 
-A coy grin spread across the fairy's bright face, filling the room with magic. 
+A quick grin spread across the fairy's bright face, filling the room with magic. 
 
-It worked wonders. The boy began to float. The sprite then raced to grab his hand before he could settle back to the floor. Out the window they went, flying high over the moon toward her home — a magical land of grand adventure. 
+The boy began to float, and the sprite zipped downwards, racing to grab his hand before he could settle back to earth. Out the window they went, flying high over the moon toward her home — a magical land of grand adventure. 
 
-By day, they searched for the magic lamp, soaring over pirate ships and chasing Jinns across sun-drenched sands. By night, they told amazing stories about the day's big adventures, each competing to tell taller tales. It was wonderful.
+By day, they searched for the magic lamp, soaring over pirate ships and chasing Jinn across sun-drenched sands. By night, they told amazing stories about each day's big adventures, competing always to tell taller tales. 
 
-Then, one night, when it was already late, the fairy sighed. 
+It was wonderful.
 
-"You're growing up," she said. "Time to go back." 
+Then, one night, the fairy sighed. 
+
+"You're growing up," she said. "Time to take you home." 
 
 The boy began to sniffle.
 
-She smiled kindly, then knocked twice on the floor between them. A secret door opened. She dove in, disappearing for what seemed like hours. The boy's eyes were heavy when she flew out, clutching the very thing they'd sought — a glowing gold lamp that was etched by purple incantations. 
+The fairy smiled kindly, then knocked on the floor. 
 
-"The adventure," she said, "matters most." 
+A secret door opened behind them, stars sparkling in reach on the other side.
 
-She gazed fondly at her young friend, then read one aloud. "In bright day or black night, through tall tale and purple light, rub me twice and release my might, if..." 
+The little sprite darted through. It was hours before she wooshed back, something squat and gold floating before her. The boy's eyes, now quite heavy, popped wide at the sight of the thing they'd always sought — a magic lamp etched round by runes that glowed brightly purple. 
 
-Too late. He was out.
+"You had it the whole time," he exclaimed, beating back a ferocious yawn.
+
+She smiled as she set upon the ground to talk.
+
+"The adventures," she said, "matter most." 
+
+The wee creature gazed fondly at her young friend. Then she began to explain the lamp's great secrets. "In bright day or black night, through tall tale and purple light, rub it twice and release its might, if..." 
+
+But the boy heard no more. He was out.

@@ -59,6 +59,7 @@ export default class Home extends Component {
 
     this.state = {
       activeCharm: initialPattern[0],
+      badChoice: false, // Warn user of inActive Charm
       eventType: 'click', // Type of event triggered Charm
       goal: 5,
       loadLevel: 0, // Triggers transitions after setState({ loadLevels: X })
