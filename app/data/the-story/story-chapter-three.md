@@ -30,9 +30,9 @@ The young man tensed for an unwinnable fight.
 
 And then the air between them blurred. A fairy was flying at breakneck speed, fist extended, ready to deliver a magical punch. It landed with an explosion of light. 
 
-The Jinni's face tightened, then scrunched with annoyance. 
+The Jinni's face betrayed surprise, then scrunched with annoyance. 
 
-The young man — who'd watched with slack-jawed amazement — expected the Jinni's anger to slither through the room. But, it roared with laughter instead, delighted by the little fairy who now hovered eye level to scream at it. 
+The young man — who'd watched in slack-jawed amazement — expected the Jinni's anger to slither through the room. But, it roared with laughter instead, delighted by the little fairy who now hovered eye level to scream at it. 
 
 The young man was filled with good cheer. 
 
