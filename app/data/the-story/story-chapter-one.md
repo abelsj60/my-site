@@ -30,7 +30,7 @@ The boy began to sniffle.
 
 The fairy smiled kindly, then knocked on the floor. 
 
-A secret door opened behind them, stars just within reach on the other side.
+A secret door opened behind them, stars within reach on the other side.
 
 The little sprite darted through. It was hours before she wooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd always sought — a magic lamp etched round with runes that glowed brightly purple. 
 
