@@ -22,7 +22,7 @@ const Hed = styled.h1`
 `;
 const Me = styled.img`
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 `;
 const Text = styled.section`
   overflow: auto;

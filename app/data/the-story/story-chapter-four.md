@@ -6,7 +6,7 @@ number: 4
 
 The Six train sped through darkness.
 
-The young man climbed out at Wall Street. Financial magicians thronged the way as he snaked through back alleys toward Hanover Square. 
+The young man climbed out at Wall Street. Financial magicians thronged the way as he snaked his way through back alleys toward Hanover Square. 
 
 A white tower soared skyward. 
 
@@ -24,8 +24,10 @@ When he looked up, he stared out at a city drenched in warm autumn light. A smal
 
 Memories of impractical magic washed over him as code filled his screen. 
 
-Time melted away. Hours later, as the young man slept, the fairy hung over her old friend. She peeked into his dreams and spied far-off lands. There was a Jinni, and fairies, and desert sands — all within reach of eager hands.
+Time melted away. 
 
-Delighted, she flit to the gold lamp beside him. It bathed the room in purple light. "Yoo-hoo," she sang inside, a pleased smile spreading across her face.
+Hours later, as the young man slept, a familiar figure hung over her old friend. The fairy peeked into his dreams and spied far-off lands. There was a Jinni, and fairies, and warm desert sands — all within reach of his eager hands.
+
+Delighted, she flit over to the gold lamp beside him. It bathed the room in purple light. "Yoo-hoo," she sang inside, a very pleased smile spreading across her face.
 
 Time again for adventure.

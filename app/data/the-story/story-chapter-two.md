@@ -30,4 +30,4 @@ But neither took, and he slowly grew tired of the tale.
 
 As he did, the gold lamp's purple glow grew dim. 
 
-One night, as the boy tossed and turned, he knocked it to the floor. The lamp rolled beneath its table, dark and forgotten.
+One night, as the boy tossed and turned, he knocked the lamp to the floor. It rolled beneath its table, dark and forgotten.

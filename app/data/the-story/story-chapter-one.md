@@ -30,15 +30,15 @@ The boy began to sniffle.
 
 The fairy smiled kindly, then knocked on the floor. 
 
-A secret door opened behind them, stars sparkling in reach on the other side.
+A secret door opened behind them, stars just within reach on the other side.
 
-The little sprite darted through. It was hours before she wooshed back, something squat and gold floating before her. The boy's eyes, now quite heavy, popped wide at the sight of the thing they'd always sought — a magic lamp etched round by runes that glowed brightly purple. 
+The little sprite darted through. It was hours before she wooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd always sought — a magic lamp etched round with runes that glowed brightly purple. 
 
 "You had it the whole time," he exclaimed, beating back a ferocious yawn.
 
 She smiled as she set upon the ground to talk.
 
-"The adventures," she said, "matter most." 
+"The adventures matter most," she said. 
 
 The wee creature gazed fondly at her young friend. Then she began to explain the lamp's great secrets. "In bright day or black night, through tall tale and purple light, rub it twice and release its might, if..." 
 
