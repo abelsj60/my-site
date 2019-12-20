@@ -20,14 +20,14 @@ The lamp never answered. It was, after all, just a lamp.
 
 That was fine. The mystery of its glow promised adventure. 
 
-And the boy loved adventure. 
+And the boy, now a young man, loved adventure. 
 
 So it's no surprise that he founded a start-up the day he befriended a software developer. The two soon built their own software platforms. One personalized interactive video, the other ran silky smooth global software demos. 
 
-The boy pitched them tirelessly and in many different ways. 
+The young man pitched them tirelessly and in many different ways. 
 
 But neither took, and he slowly grew tired of the tale. 
 
 As he did, the gold lamp's purple glow grew dim. 
 
-One night, as the boy tossed and turned, he knocked the lamp to the floor. It rolled beneath its table, dark and forgotten.
+One night, as the young man tossed and turned, he knocked the lamp to the floor. It rolled beneath its table, dark and forgotten.

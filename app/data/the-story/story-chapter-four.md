@@ -18,7 +18,9 @@ Computer code covered screens across the floor. It was smart and austere, but la
 
 "Purpose," he said, leaning toward the logic on screen.
 
-When he looked up, he stared out at a city drenched in warm autumn light. A small blur zipped across the horizon, neon trailing behind it. The young man smiled to himself. 
+When he looked up, he stared out at a city drenched in warm autumn light. A small blur zipped across the horizon, neon trailing behind it. 
+
+The young man smiled to himself. 
 
 "Software is a story," he said. "Code the way to tell it."
 

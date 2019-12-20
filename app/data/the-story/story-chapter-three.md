@@ -6,7 +6,7 @@ number: 3
 
 The young man's room twinkled one morning.
 
-Dust, scattered high by a broom, was catching the sun's pale winter light. The quiet was soon pierced by the hollow ring of the broom as it brushed metal. 
+Dust, scattered high by a broom, had caught the sun's pale winter light. The quiet was soon pierced by the hollow ring of the broom as it brushed metal. 
 
 The young man knelt to grab it.
 
@@ -32,11 +32,11 @@ And then the air between them blurred. A fairy was flying at breakneck speed, fi
 
 The Jinni's face tightened, then scrunched with annoyance. 
 
-The young man — who'd watched in slack-jawed amazement — expected the Jinni's anger to slither through the room. But, it roared with laughter instead, delighted by the little fairy who now hovered — eye level — to scream at it. 
+The young man — who'd watched with slack-jawed amazement — expected the Jinni's anger to slither through the room. But, it roared with laughter instead, delighted by the little fairy who now hovered eye level to scream at it. 
 
-The young man was filled by good cheer. 
+The young man was filled with good cheer. 
 
-It warmed him, and a strong purple glow burst forth from the little gold lamp that lay forgotten on the floor. The colorful light seemed to drench the world in magic.
+It warmed him, and a strong purple glow burst forth from the gold lamp that now lay forgotten on the floor. The colorful light seemed to drench the world in magic.
 
 The Jinni drank of it, deeply, then struck massive hands together. Time shattered and crashed to the floor, pulling the young man down to sleep beside it. Hours later, he was awakened by the sound and fury of lightning and thunder. 
 
