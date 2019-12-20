@@ -34,7 +34,7 @@ The Jinni's face tightened, then scrunched with annoyance.
 
 The young man — who'd watched in slack-jawed amazement — expected the Jinni's anger to slither through the room. But, it roared with laughter instead, delighted by the little fairy who now hovered — eye level — to scream at it. 
 
-The young man was suddenly filled by good cheer. 
+The young man was filled by good cheer. 
 
 It warmed him, and a strong purple glow burst forth from the little gold lamp that lay forgotten on the floor. The colorful light seemed to drench the world in magic.
 
