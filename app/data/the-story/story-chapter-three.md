@@ -28,7 +28,7 @@ Menace filled the room as blue sparks danced around the monstrous being.
 
 The young man tensed for an unwinnable fight.
 
-And then the air between them blurred. A fairy was flying at breakneck speed, fist extended, ready to deliver a magical punch. It landed in an explosion of light. 
+And then the air between them blurred. A fairy was flying at breakneck speed, fist extended, ready to deliver a magical punch. It landed with an explosion of light. 
 
 The Jinni's face tightened, then scrunched with annoyance. 
 
