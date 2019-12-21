@@ -18,7 +18,7 @@ A wide grin spread across the sprite's bright face, filling the room with magic.
 
 She darted downward as the boy began to float, racing to grab his hand before he could settle back to earth. Out the window they went, into warm night air, flying high over the moon toward her home — a magical land of grand adventure. 
 
-By day, they searched for the magic lamp, soaring over pirate ships, chasing Jinn across sun-drenched sands. And by night, they told amazing stories about each day's big adventures, competing always to tell taller tales. 
+By day, they searched for the magic lamp, soaring over pirate ships, chasing Jinn across sun-drenched sands. By night, they told amazing stories about the day's big adventures, competing always to tell taller tales. 
 
 It was wonderful.
 
