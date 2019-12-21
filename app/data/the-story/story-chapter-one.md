@@ -10,7 +10,7 @@ She zipped through his window, plowing into his cardboard fort with all the forc
 
 "Want to find a magic lamp," she asked, ignoring the destruction.
 
-The boy was far, far too delighted to care about his ruined fort.
+The boy was much too delighted to care about his ruined fort.
 
 "YES," he shrieked, bouncing up and down. "What do I do?"
 
