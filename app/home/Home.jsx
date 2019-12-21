@@ -374,10 +374,10 @@ export default class Home extends Component {
     } else if (homePageLoaded) {
       switch (loadLevel) { // Used by mobile to control fallback image
         case 0:
-          this.setLoadLevel('all', 4);
+          this.setLoadLevel('all', 3);
           break;
         case 1:
-          this.setLoadLevel('all', 5);
+          this.setLoadLevel('all', 4);
           break;
         default:
           return 'Error!';
