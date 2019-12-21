@@ -6,7 +6,7 @@ number: 1
 
 The stylish little fairy was too much for the wide-eyed boy. 
 
-She zipped through his window and plowed into his cardboard fort with the force of a cannonball. A neon streak still twinkled behind her as she dusted herself off, looked him up and down, and nodded. Apparently satisfied, she flew close.
+She zipped through his window, plowing into his cardboard fort with all the force of a cannonball. A neon streak still twinkled behind her as she dusted herself off, looking him up and down and nodding. Apparently satisfied, she flew close.
 
 "Want to find a magic lamp," she asked, ignoring the destruction.
 
