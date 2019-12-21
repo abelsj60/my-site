@@ -1,38 +1,38 @@
 ---
 title: 'A magic quest'
-description: "This illustration depicts chapter one. A fairy is floating just off center, hands outstretched, fingers pointing downward. A golden lamp, etched with runes, floats before her. It's glowing, and hovers just beyond a young boy's fingertips. He looks upon it, jaw agape, in wonder. The fairy has dark black hair, with a single streak of white, and eyes that glow a light metallic blue. She's beaming and is dressed in a simple white top and purple leggings. The calves and feet are seem to glow with white strips of electricity. Her four wings — two long, two short — feature long, sharp, glowing blue veins. They follow the wing's angular contours with sharp turns and end in small open circles. Glowing white-yellow fairy dust twinkles all around her. The boy, who's mouth hangs open, is wearing a mint green hooded sweatshirt. It has yellow and white stripes on it. The two are inside a cozy wooden treehouse. A sky full of stars is spied through a magical door that's opened just the pair. The room is warm and friendly and full of mystery. To thier left hangs a yellow and purple paper lantern. A squat, two-shelf bookcase stands beneath it and a big, upholstered brown chair stands in front of it. It's draped by a blue blanket. A blue rug stretches under the chair, an open book upon it. To the pair's right hang two bookshelves. They're full of books, a wild green plant, bottles, and a thick well-worn white candle that's dripping with wax. A boat's steering wheel is leaning against the wall beneath them."
+description: "This illustration depicts chapter one. A fairy is floating just off center, hands outstretched, fingers pointing downward. A golden lamp, etched with runes, floats before her. It's glowing, and hovers just beyond a young boy's fingertips. He looks upon it, jaw agape, in wonder. The fairy has dark black hair, with a single streak of white, and eyes that glow a light metallic blue. She's beaming and is dressed in a simple white top and purple leggings. The calves and feet are seem to glow with white strips of electricity. Her four wings — two long, two short — feature long, sharp, glowing blue veins. They follow the wing's angular contours with sharp turns and end in small open circles. Glowing white-yellow fairy dust twinkles all around her. The boy, who's mouth hangs open, is wearing a mint green hooded sweatshirt. It has yellow and white stripes on it. The two are inside a cozy wooden treehouse. A sky full of stars is spied through a magical door that's opened just behind the pair. The room is warm and friendly and full of mystery. To their left hangs a yellow and purple paper lantern. A squat, two-shelf bookcase stands beneath it and a big, upholstered brown chair stands in front of it. It's draped by a blue blanket. A blue rug stretches under the chair, an open book upon it. To the pair's right hang two bookshelves. They're full of books, a wild green plant, bottles, and a thick well-worn white candle that's dripping with wax. A boat's steering wheel is leaning against the wall beneath them."
 number: 1
 ---
 
-This was unbelievable. 
+The stylish little fairy was too much for the wide-eyed boy. 
 
-The wide-eyed boy's cardboard fort fell victim to a small fairy. She plowed into it with all the force of a cannonball after zipping uninvited through his window. Then she laughed, twice looked him up and down, and nodded.
+She zipped through his window and plowed into his cardboard fort with the force of a cannonball. A neon streak still twinkled behind her as she dusted herself off, looked him up and down, and nodded. Apparently satisfied, she flew close.
 
-"Want to find a magic lamp," she asked, floating eye-level. 
+"Want to find a magic lamp," she asked, ignoring the destruction.
 
-The boy absolutely burst with delight.
+The boy was far, far too delighted to care about his ruined fort.
 
-"YES," he shrieked! "What do I do?"
+"YES," he shrieked, bouncing up and down. "What do I do?"
 
-A quick grin spread across the fairy's bright face, filling the room with magic. 
+A wide grin spread across the sprite's bright face, filling the room with magic. 
 
-The boy began to float, and the sprite zipped downwards, racing to grab his hand before he could settle back to earth. Out the window they went, flying high over the moon toward her home — a magical land of grand adventure. 
+She zipped downward as the boy began to float, racing to grab his hand before he could settle back to earth. Out the window they went, into warm night air, flying high over the moon toward her home — a magical land of grand adventure. 
 
-By day, they searched for the lamp, soaring over pirate ships, chasing Jinn across sun-drenched sands. By night, they told amazing stories about each day's big adventures, competing always to tell taller tales. 
+By day, they searched for the magic lamp, soaring over pirate ships, chasing Jinn across sun-drenched sands. And by night, they told amazing stories about each day's big adventures, competing always to tell taller tales. 
 
 It was wonderful.
 
-Then, one night, the fairy sighed. 
+Then, one evening, the fairy sighed. 
 
 "You're growing up," she said. "Time to take you home." 
 
 The boy began to sniffle.
 
-The fairy smiled kindly, then knocked on the floor. 
+She smiled kindly, then knocked on the floor. 
 
 A secret door opened behind them, stars within reach on the other side.
 
-The little sprite darted through. It was hours before she wooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd always sought — a magic lamp etched round with runes that glowed brightly purple. 
+The little sprite darted through. It was hours before she whooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd always sought — a magic lamp etched round with runes that glowed brightly purple. 
 
 "You had it the whole time," he exclaimed, beating back a ferocious yawn.
 
