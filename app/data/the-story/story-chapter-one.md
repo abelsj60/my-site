@@ -32,7 +32,7 @@ She smiled kindly, then knocked on the floor.
 
 A secret door opened behind them, stars within reach on the other side.
 
-The little sprite darted through. It was hours before she whooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd always sought — a magic lamp etched round with runes that glowed brightly purple. 
+The little sprite darted through. Hours later, she whooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd sought — a magic lamp etched round with runes that glowed brightly purple. 
 
 "You had it the whole time," he exclaimed, beating back a ferocious yawn.
 
