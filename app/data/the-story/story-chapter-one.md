@@ -4,9 +4,9 @@ description: "This illustration depicts chapter one. A fairy is floating just of
 number: 1
 ---
 
-The cardboard fort crumbled.
+This was unbelievable. 
 
-A small fairy destroyed it after zipping through the wide-eyed boy's window with all the force of a cannonball. A neon streak twinkled behind her as she hovered amidst the mess. She twice looked the boy up and down, then nodded.
+The wide-eyed boy's cardboard fort fell victim to a small fairy. She plowed into it with all the force of a cannonball after zipping uninvited through his window. Then she laughed, twice looked him up and down, and nodded.
 
 "Want to find a magic lamp," she asked, floating eye-level. 
 
