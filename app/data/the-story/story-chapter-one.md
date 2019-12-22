@@ -4,9 +4,9 @@ description: "This illustration depicts chapter one. A fairy is floating just of
 number: 1
 ---
 
-The stylish little fairy was too much for the wide-eyed boy. 
+The stylish little fairy proved too much for the wide-eyed boy's cardboard fort. 
 
-She zipped through his window and plowed into his cardboard fort with the force of a cannonball. A neon streak still twinkled behind her as she dusted herself off and looked him up and down. Then — apparently satisfied — she flew close.
+She zipped through his second-floor window and plowed into it with the force of a cannonball. It fell. A neon streak still twinkled behind her as she dusted herself off and looked the boy up and down. Then — apparently satisfied — she flew close.
 
 "Want to find a magic lamp," she asked, ignoring the destruction.
 
@@ -16,7 +16,7 @@ The boy was so delighted that he instantly forgot about his fort.
 
 A wide grin spread across the sprite's bright face, filling the room with magic. 
 
-She darted downward as the boy began to float, racing to grab his hand before he could settle back to earth. Out the window they went, into warm night air, flying high over the moon toward her home — a magical land of grand adventure. 
+As the boy floated up, she darted down, racing to grab his hand before he could settle back to earth. Out the window they went, into warm night air, flying high over the moon toward her home — a magical land of grand adventure. 
 
 By day, they searched for the magic lamp, soaring over pirate ships, chasing Jinn across sun-drenched sands. And by night, they told amazing stories about the day's big adventures, competing always to tell taller tales. 
 

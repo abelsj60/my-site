@@ -28,7 +28,7 @@ Memories of impractical magic washed over him as code filled his screen.
 
 Time melted away. 
 
-Hours later, as the young man slept, a familiar figure hung over her old friend. The fairy peeked into his dreams and spied far-off lands. There was a Jinni, and fairies, and warm desert sands — all within reach of his eager hands.
+Hours later, as the young man slept, a familiar figure hung over her old friend. The fairy peeked into his dreams and spied far-off lands. There was a Jinni, and fairies, and warm desert sands, just within reach of his eager hands.
 
 Delighted, she flit over to the gold lamp beside him. It bathed the room in purple light. "Yoo-hoo," she sang inside, a very pleased smile spreading across her face.
 
