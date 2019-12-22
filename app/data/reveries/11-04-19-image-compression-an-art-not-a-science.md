@@ -39,6 +39,6 @@ My conclusion is that compression is analogous to Rembrandt mixing paint. It's j
 
 And why not? Every image is different.
 
-Bottom line, don't let anyone tell you compression is a science, not even the people who write the algorithms. A lot of people design cars, but they don’t race them. If you care about your images, you’ll just have to use your peepers and stare at renditions all day to figure out what works best. 
+Don't let anyone tell you compression is a science, not even the people who write the algorithms. A lot of people design cars, but they don’t race them. If you care about your images, you’ll just have to use your peepers and stare at renditions all day to figure out what works best. 
 
 -j

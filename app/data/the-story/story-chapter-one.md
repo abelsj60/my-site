@@ -6,7 +6,7 @@ number: 1
 
 The stylish little fairy was too much for the wide-eyed boy. 
 
-She zipped through his window, plowing into his cardboard fort with all the force of a cannonball. A neon streak still twinkled behind her as she dusted herself off, looking him up and down, nodding. Apparently satisfied, she flew close.
+She zipped through his window, plowing into his cardboard fort with all the force of a cannonball. A neon streak still twinkled behind her as she dusted herself off, looked him up and down, and nodded. Apparently satisfied, she flew close.
 
 "Want to find a magic lamp," she asked, ignoring the destruction.
 
@@ -32,7 +32,7 @@ She smiled kindly, then knocked on the floor.
 
 A secret door opened behind them, stars within reach on the other side.
 
-The little sprite darted through. Hours later, she whooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd sought — a magic lamp etched round with runes that glowed brightly purple. 
+The sprite dashed through. Hours later, she whooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd sought — a magic lamp etched round with runes that glowed brightly purple. 
 
 "You had it the whole time," he exclaimed, beating back a ferocious yawn.
 

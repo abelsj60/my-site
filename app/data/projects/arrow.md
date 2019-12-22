@@ -12,7 +12,7 @@ technologies:
 responsibility: 
   'As the founder of Three Minute Media, I oversaw corporate affairs and platform development, including our lead developer, budget, and investor outreach.'
 story: 
-  "Over 200 million people watch Internet video in the US every year. Arrow, our self-serve platform, made it easy for any publisher to personalize their video at scale."
+  "Over 200 million people watch Internet video in the US every year. Arrow, our self-serve platform, made it easy for any publisher to personalize its video at scale."
 captions: [
   'This is the Editor. It was used to prepare video for publication by adding them to a Stack, then selecting personalization criteria via dynamically generated settings. It syndicated video, too.',
   'This is the Developer Module. It allowed Arrow to be extended for use with custom media formats, settings, and live control. Arrow could publish any code-based media package.',
