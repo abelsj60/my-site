@@ -40,6 +40,6 @@ She smiled as she set upon the ground to talk.
 
 "The adventures matter most," she said. 
 
-The wee creature gazed fondly at her young friend. Then she began to explain the lamp's great secrets. "In bright day or black night, through tall tale and purple light, rub it twice and release its might, if..." 
+The wee creature gazed fondly at her young friend. Then she began to explain the lamp's great secret. "Through tall tale and purple light, whether bright day or black night, rub it twice and release its might, if..." 
 
 But the boy heard no more. He was out.
