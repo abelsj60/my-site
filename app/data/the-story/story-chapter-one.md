@@ -16,7 +16,7 @@ The boy was so delighted that he instantly forgot about his fort.
 
 A wide grin spread across the sprite's bright face, filling the room with magic. 
 
-As the boy floated up, she darted down, racing to grab his hand before he could settle back to earth. Out the window they went, into warm night air, flying high over the moon toward her home — a magical land of grand adventure. 
+As the boy floated up, she darted down, racing to grab his hand before he could settle back to earth. Out the window they went, into the warm night air, flying high over the moon toward her home, a magical land of grand adventure. 
 
 By day, they searched for the magic lamp, soaring over pirate ships, chasing Jinn across sun-drenched sands. And by night, they told amazing stories about the day's big adventures, competing always to tell taller tales. 
 
