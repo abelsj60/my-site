@@ -170,21 +170,35 @@ export default function FooterContainer(props) {
     if (illustrationState < 0) {
       boundHandleClickForApp('toggleIllustrationDelay');
     } else if (illustrationLevel === 0 || illustrationLevel === 3) {
+      const isNarrow = document.documentElement.clientWidth < 690;
+      const checkIllustrationLevels = idx => props.illustrationLevels[idx];
+
       /* Reset illustrationLevels: 
 
         We need to reset the headerText value in illustrationLevels if the browser is narrowed
         or widened after revealing the illustration b/c the number of header elements will 
-        change. This, they won't properly decrement illustrationLevels[0]. We need to 
-        make the adjustment at the top of the animation so our math stays true!
+        change. Thus, they won't properly decrement illustrationLevels[0]. We need to 
+        make the adjustment at the top of the animation so our math stays true.
 
         Note: We're relying on pass-by-reference, so must access via props.
       */
-      const isNarrow = document.documentElement.clientWidth < 690;
 
-      if (!isNarrow && props.illustrationLevels[0] === 2) {
-        props.illustrationLevels[0] = 6;
-      } else if (isNarrow && props.illustrationLevels[0] === 6) {
-        props.illustrationLevels[0] = 2;
+      if (!isNarrow && checkIllustrationLevels(0) === 2) {
+        if (checkIllustrationLevels(0) < 6) {
+          props.illustrationLevels[0] = 6;
+        }
+
+        if (checkIllustrationLevels(1) > 0) {
+          props.illustrationLevels[1] = 0;
+        }
+      } else if (isNarrow && checkIllustrationLevels(0) === 6) {
+        if (checkIllustrationLevels(0) > 2) {
+          props.illustrationLevels[0] = 2;
+        }
+
+        if (checkIllustrationLevels(1) < 1) {
+          props.illustrationLevels[1] = 1;
+        }
       }
 
       boundHandleClickForApp('toggleStoryText');
@@ -196,8 +210,8 @@ export default function FooterContainer(props) {
     eventManagement(event);
     setIllustrationLevels(idx);
   };
-  const handleTransitionEndForTextAndButton = event => handleTranstionEnd(event, 5);
-  const handleTransitionEndForLine = event => handleTranstionEnd(event, 6);
+  const handleTransitionEndForTextAndButton = event => handleTranstionEnd(event, 6);
+  const handleTransitionEndForLine = event => handleTranstionEnd(event, 7);
 
   const isReverie = currentCaller === 'reverie';
   const isStory = currentCaller === 'chapter';

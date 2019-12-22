@@ -238,23 +238,23 @@ export default function Story(props) {
 
     setIllustrationLevels(idx);
   };
-  const handleTransitionEndForBlurredImage = event => setIllustrationLevelsNow(event, 4);
+  const handleTransitionEndForBlurredImage = event => setIllustrationLevelsNow(event, 5);
   const handleOnTranstionEndForPortal = event => {
     eventManagement(event);
     if (illustrationDirection === 'exit') {
       // Delay a beat when leaving the illustration. Timing tested extensively!
-      setTimeout(() => setIllustrationLevelsNow(null, 3), 85);
+      setTimeout(() => setIllustrationLevelsNow(null, 4), 85);
     } else {
-      setIllustrationLevelsNow(event, 3)
+      setIllustrationLevelsNow(event, 4)
     }
   };
   const handleTransitionEndForRestyledContentHolder = event => {
     eventManagement(event);
     if (illustrationDirection === 'enter') {
       // Delay a beat when revealing the illustration. Timing tested extensively!
-      setTimeout(() => setIllustrationLevelsNow(null, 2), 10);
+      setTimeout(() => setIllustrationLevelsNow(null, 3), 10);
     } else {
-      setIllustrationLevelsNow(event, 2);
+      setIllustrationLevelsNow(event, 3);
     }
   };
   let blurredKey, fallbackBlur, fallbackKey, mainKey;

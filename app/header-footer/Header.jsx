@@ -3,6 +3,7 @@ import { isIE } from 'react-device-detect';
 import eventManagement from '../helpers/eventManagement';
 import headerNavClose from '../../docs/assets/images/convert-to-data-uri/header-nav-open-88-@4x.png';
 import headerNavOpen from '../../docs/assets/images/convert-to-data-uri/header-nav-closed-88-@4x.png';
+import headerNavOpenShadow from '../../docs/assets/images/convert-to-data-uri/header-nav-open-shadow-88-@4x.png';
 import { cover } from 'intrinsic-scale';
 import Mapper from '../shared/Mapper.jsx';
 import React, { Component } from 'react';
@@ -219,21 +220,35 @@ const NavItem = styled.li`
     }
   }
 `;
-const Icon = styled.img`
-  display: ${p => (p.isHome && 'none')};
+const IconHolder = styled.div`
+  position: relative;
   height: 22px;
+  width: 22px;
+  padding: 3px;
   margin-left: auto;
   margin-right: 10px;
-  cursor: pointer;
-  padding: 5px;
-  filter: ${p => !p.isReverie && p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) && css`drop-shadow(${iconShadow})`};
-  // ! This transition doesn't seem to be working on mobile Safari. Investigate in future.
-  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && css`filter .35s`};
   z-index: 1;
+`;
+const Icon = styled.img`
+  display: ${p => (p.isHome && 'none')};
+  position: absolute;
+  height: 22px;
+  cursor: pointer;
+  transform: translateZ(0); // Prevent pixel shifts during transition
+  z-index: 2;
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: none;
   }
+`;
+const IconShadow = styled(Icon)`
+  // Inkscape settings: blur (6), horizontal offset (6), vertical offset (3), opacity value (60)
+  display: ${p => (!p.isStory && 'none')};
+  padding-top: 1px;
+  padding-left: 1px;
+  opacity: ${p => !p.isReverie && p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) ? '1' : '0'};
+  transition: ${p => p.illustrationLevel > 0 && p.illustrationLevel < 3 && 'opacity .35s'};
+  z-index: 1;
 `;
 // On-screen timer for open header menu
 const timerKeyframes = keyframes`
@@ -283,6 +298,7 @@ export default class Header extends Component {
       tempContent
     } = appState;
     const isHome = currentCaller === 'home';
+    const isStory = currentCaller === 'chapter';
     const isReverie = currentCaller === 'reverie';
     const menuIcon = tempContent === 3 ? headerNavClose : headerNavOpen;
     const coverVals = cover(window.innerWidth, height, images.width, images.height);
@@ -299,7 +315,8 @@ export default class Header extends Component {
       setIllustrationLevels(idx);
     };
     const handleTransitionEndForText = event => handleTranstionEnd(event, 0);
-    const handleTransitionEndForBackground = event => handleTranstionEnd(event, 1);
+    const handleTransitionEndForIconShadow = event => handleTranstionEnd(event, 1);
+    const handleTransitionEndForBackground = event => handleTranstionEnd(event, 2);
 
     return (
       <Container
@@ -391,15 +408,26 @@ export default class Header extends Component {
           </TimingBar>
         </Nav>
         {!isHome && (
-          <Icon
-            illustrationDirection={illustrationDirection}
-            illustrationLevel={illustrationLevel}
-            isHome={isHome}
-            isReverie={isReverie}
-            src={menuIcon}
-            onClick={handleClickForMenuLink}
-            tempContent={tempContent}
-          />
+          <IconHolder>
+            <Icon
+              illustrationDirection={illustrationDirection}
+              illustrationLevel={illustrationLevel}
+              isHome={isHome}
+              isReverie={isReverie}
+              src={menuIcon}
+              onClick={handleClickForMenuLink}
+              tempContent={tempContent}
+            />
+            <IconShadow 
+              illustrationDirection={illustrationDirection}
+              illustrationLevel={illustrationLevel}
+              isStory={isStory}
+              isReverie={isReverie}
+              onTransitionEnd={handleTransitionEndForIconShadow}
+              src={headerNavOpenShadow}
+              tempContent={tempContent}
+            />
+          </IconHolder>
         )}
       </Container>
     );

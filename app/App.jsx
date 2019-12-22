@@ -267,15 +267,16 @@ class App extends Component {
       
       [
         0 | Header text = (2 || 6), 
-        1 | Header background = 1, 
-        2 | Story container = 1, 
-        3 | Story portal = 1, 
-        4 | Story blur = 1, 
-        5 | Footer text + button = 5 (button ticks twice b/c box-shadow & the button cover's opacity transition), 
-        6 | Footer line = 1
+        1 | Header icon = 1 
+        2 | Header background = 1,
+        3 | Story container = 1, 
+        4 | Story portal = 1, 
+        5 | Story blur = 1, 
+        6 | Footer text + button = 5 (button ticks twice b/c box-shadow & the button cover's opacity transition), 
+        7 | Footer line = 1
       ]
     */
-    this.illustrationLevels = [0, 0, 0, 0, 0, 0, 0];
+    this.illustrationLevels = [0, 0, 0, 0, 0, 0, 0, 0]; // length is 8
     this.state = {
       currentCaller: caller !== 'i' ? caller : 'home',
       // 0 = not ready, 1 = run, 2 = nevermore
@@ -539,21 +540,21 @@ class App extends Component {
   }
 
   sumAll() {
-    const allImages = [0, 1, 2, 3, 4, 5, 6];
-    return this.sumIllustrationSet(allImages);
+    const allElements = [0, 1, 2, 3, 4, 5, 6, 7];
+    return this.sumIllustrationSet(allElements);
   }
 
   sumLevelTwo() {
-    // Portal, ContentHolder, Header Background, Line (no drop shadows)
-    const portalIllustrationCoversAndLine = [1, 2, 3, 6];
+    // Header background, ContentHolder, Portal, Line (no drop shadows)
+    const portalIllustrationCoversAndLine = [2, 3, 4, 7];
     return this.sumIllustrationSet(portalIllustrationCoversAndLine);
   }
 
   sumLevelThree() {
     // Remember, level three is the final resting place for the animation. If it doesn't get
     // set, then we take a return trip...
-    // Header text, Blurred image, Footer text and button (drop shadows and blur)
-    const textBlurredImageAndButton = [0, 4, 5];
+    // Header text, Header icon, Blurred image, Footer text and button (drop shadows and blur)
+    const textBlurredImageAndButton = [0, 1, 5, 6];
     return this.sumIllustrationSet(textBlurredImageAndButton);
   }
 
@@ -635,7 +636,7 @@ class App extends Component {
         this.setIllustrationLevel('level two', this.selectIllustrationLevelsTarget(4, 0));
         break;
       case 2:
-        this.setIllustrationLevel('level three', this.selectIllustrationLevelsTarget(!isNarrow ? 12 : 8, 0));
+        this.setIllustrationLevel('level three', this.selectIllustrationLevelsTarget(!isNarrow ? 12 : 9, 0));
         break;
       default:
         return 'Error!';

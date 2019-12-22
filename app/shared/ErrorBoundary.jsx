@@ -84,11 +84,10 @@ export default class ErrorBoundary extends Component {
           )}
           <footer
             style={{
-              marginTop: '25px',
-              marginBottom: '25px',
-              paddingLeft: '25px',
-              paddingRight: '25px',
-              color: 'slategrey'
+              alignSelf: 'flex-start',
+              marginTop: '5px',
+              marginLeft: '25px',
+              color: '#455057'
             }}
           >
             Contact: hello@jamesabels.net

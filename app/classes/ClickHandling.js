@@ -264,7 +264,7 @@ export default class ClickHandling {
                 || (currentCaller === 'reverie' && (valueOne !== 'chapter' && valueOne !== undefined))
               ) {
                 delete this.illustrationLevels;
-                this.illustrationLevels = [0, 0, 0, 0, 0, 0, 0];
+                this.illustrationLevels = [0, 0, 0, 0, 0, 0, 0, 0];
                 stateToUpdate.illustrationLevel = 0;
                 stateToUpdate.illustrationDirection = '';
               }
