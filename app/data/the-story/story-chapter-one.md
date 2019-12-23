@@ -16,7 +16,7 @@ The boy was so delighted that he instantly forgot about his fort.
 
 A wide grin spread across the sprite's bright face, filling the room with magic. 
 
-As the boy floated up, she darted down, racing to grab his hand before he could settle back to earth. Out the window they went, into the warm night air, flying high over the moon toward her home, a magical land of grand adventure. 
+As the boy floated up, she darted down, racing to grab his hand before he could settle back to earth. Out the window they went, into warm night air, flying high over the moon toward her home — a magical land of grand adventure. 
 
 By day, they searched for the magic lamp, soaring over pirate ships, chasing Jinn across sun-drenched sands. And by night, they told amazing stories about the day's big adventures, competing always to tell taller tales. 
 
@@ -30,9 +30,9 @@ The boy began to sniffle.
 
 She smiled kindly, then knocked on the floor. 
 
-A secret door opened behind them, stars within reach on the other side.
+A secret door opened behind them, stars in reach on the other side.
 
-The sprite dashed through. Hours later, she whooshed back, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd sought — a magic lamp etched round with runes that glowed brightly purple. 
+The sprite dashed through. She whooshed back some time later, something squat and gold floating before her. The boy's eyes, now heavy, popped wide at the sight of the very thing they'd sought — a magic lamp etched round with runes that glowed brightly purple. 
 
 "You had it the whole time," he exclaimed, beating back a ferocious yawn.
 
@@ -40,6 +40,6 @@ She smiled as she set upon the ground to talk.
 
 "The adventures matter most," she said. 
 
-The wee creature gazed fondly at her young friend. Then she began to explain the lamp's great secret. "Through tall tale and purple light, whether bright day or black night, rub it twice and release its might, if..." 
+The wee creature gazed fondly at her young friend. Then she began to explain the lamp's great secrets. "With tall tale and purple light, in bright day and black night, rub it twice to release its might, if — and only if — you're ready..." 
 
 But the boy heard no more. He was out.

@@ -45,7 +45,7 @@ const LoadingTrack = styled.div`
   position: relative;
   height: 1px;
   ${p => p.setWidth && 'width: 50px;'}
-  margin-top: 13px;
+  margin-top: ${p => p.marginTop ? css`${p.marginTop}px` : '13px'};
   margin-left: auto;
   margin-right: auto;
   background-color: ${p => !p.white ? p.theme.colors.white : p.theme.colors.black };
@@ -92,6 +92,7 @@ export default function Loader(props) {
             <LoadingTrack
               setWidth={props.text} // Truthy!
               white={props.white}
+              marginTop={props.marginTop}
             >
               <ProgressBar 
                 show={props.show}

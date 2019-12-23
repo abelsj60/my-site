@@ -32,7 +32,7 @@ And then the air between them blurred. A fairy was flying at breakneck speed, fi
 
 The Jinni's face tightened, then scrunched with annoyance. 
 
-The young man — who'd watched with slack-jawed amazement — expected the Jinni's anger to slither through the room. But, it roared with laughter instead, delighted by the little fairy who now hovered eye level to scream at it. 
+The young man — who'd watched with slack-jawed amazement — expected the Jinni's anger to slither through the room. But, the creature roared with laughter instead, delighted by the little fairy who now hovered eye level to scream at it. 
 
 The young man was filled with good cheer. 
 

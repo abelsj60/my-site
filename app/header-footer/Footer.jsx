@@ -260,6 +260,7 @@ export default function FooterContainer(props) {
           fontSize="small"
           marginBottom="2"
           marginLeft="20"
+          marginTop="5"
           maxWidth="33"
           smallMarginLeft="12"
           smallMarginRight="17"

@@ -383,6 +383,8 @@ class App extends Component {
   }
 
   get pageHeight() {
+    const docHeight = document.documentElement.clientHeight;
+
     /* On height: 
       
       1. iOS: document.documentElement.clientHeight
@@ -397,8 +399,8 @@ class App extends Component {
       3. We only care about the minAllowedHeight on mobile devices, desktops get a pass.
     */
 
-    return document.documentElement.clientHeight > this.minAllowedHeight
-      ? !isAndroid ? document.documentElement.clientHeight : window.innerHeight
+    return !isMobile || docHeight > this.minAllowedHeight
+      ? !isAndroid ? docHeight : window.innerHeight
       : this.minAllowedHeight;
   }
 
