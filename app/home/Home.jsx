@@ -48,8 +48,6 @@ export default class Home extends Component {
       animations... A future refactor should look at returning it to this.state. 
     */
     this.loadLevels = [0, 0, 0, 0, 0, 0, 0, 0]; // 8 elements
-    // loadLevelsCacheForIE needed for object-fit polyfill (see notes in PictureBox).
-    this.loadLevelsCacheForIE = [0, 0, 0, 0, 0, 0, 0]; // 7 elements — don't need cache for NameTag/Hed b/c it never ticks twice
     // These setTimeouts are turned off in cWU below.
     this.timeoutIdForUpdateLoadLevel = 0; 
     this.timeoutIdForSetSpellLevel = 0;
@@ -108,7 +106,6 @@ export default class Home extends Component {
           {...this.props}
           boundHandleClickForHome={boundHandleClickForHome}
           homeState={this.state}
-          loadLevelsCacheForIE={this.loadLevelsCacheForIE}
           setLoadLevels={this.setLoadLevels}
           setSpellLevel={setSpellLevel}
           sumLoadLevels={this.sumLoadLevels}
@@ -354,11 +351,12 @@ export default class Home extends Component {
   }
 
   updateLoadLevel() {
-    const { homePageLoaded } = this.props.appState;
+    const { homePageLoaded, type } = this.props.appState;
     const { loadLevel } = this.state;
 
     if (!homePageLoaded) {
-      switch (loadLevel) { // Used by all devices for initial load
+      // Used by all devices for initial load
+      switch (loadLevel) {
         case 0:
           this.setLoadLevel('fallback', 1);
           break;
@@ -372,15 +370,21 @@ export default class Home extends Component {
           return 'Error!';
       }
     } else if (homePageLoaded) {
-      switch (loadLevel) { // Used by mobile to control fallback image
-        case 0:
-          this.setLoadLevel('all', 3);
-          break;
-        case 1:
-          this.setLoadLevel('all', 4);
-          break;
-        default:
-          return 'Error!';
+      // Used by mobile only, tracks fallback image
+      if (type === 'mobile') {
+        switch (loadLevel) {
+          case 0:
+            this.setLoadLevel('all', 3);
+            break;
+          case 1:
+            this.setLoadLevel('all', type === 'mobile' ? 4 : 3);
+            break;
+          default:
+            return 'Error!';
+        }
+      } else {
+        // Used by laptops / desktops, fallback image not used
+        this.setLoadLevel('all', 3);
       }
     }
   }

@@ -68,7 +68,6 @@ export default function PictureBox(props) {
     appState,
     boundHandleClickForHome,
     homeState,
-    loadLevelsCacheForIE,
     setLoadLevels,
     setSpellLevel,
     sumLoadLevels
@@ -100,46 +99,7 @@ export default function PictureBox(props) {
     eventManagement(event);
 
     if (spellLevel < 1) {
-      const documentStyle = window.document.body ? window.document.body.style : window.document.documentElement.style;
-      const hasObjectFit = documentStyle.objectFit === '';
-
-      if (
-        !hasObjectFit &&
-          (!event.propertyName && loadLevelsCacheForIE[idx] > 0) // onLoad has no propertyName
-            || (event.propertyName && loadLevelsCacheForIE === 1) // onTransitionEnd has propertyName
-      ) {
-        /* The object-fit polyfill:
-  
-          The object-fit polyfill invokes the same listeners as our image element, immediately afterwards. 
-          This throws the load process into disarray. So we use the loadLevelsCacheForIE to ensure we only 
-          increment our values once per event listener. So, we'll first check the cache, then, after 
-          calling setState, increment it (otherwise, we'll be testing too soon). This allows us to reject 
-          the handler on the next pass (yes, we're accepting the first eventListener, which is probably 
-          the Image element, not the background image that's used by our polyfill). 
-
-          Remember: We need to increment our cache once for onLoad and once for onTransitionEnd. We do 
-          this by checking for event.propertyName, which only onTransitionEnd will have...
-
-          Note: The cache is stored on 'this' in Home, so it can reset whenever the user travels home! 
-        */
-
-        return false; // Already gotcha!
-      }
-
       setLoadLevels(idx);
-
-      if (!hasObjectFit && loadLevelsCacheForIE[idx] < 1) {
-        /* Let's talk about our cache values:
-
-          1. We set the cache to one from zero onLoad. Great. But...
-          2. We really ought to increment it to 2 after onTransitionEnd, but as it stands,
-            we're ok b/c we don't allow the loadLevels to exceed three in, Home and b/c 
-            nothing happens when incrementing over two anyway.
-              -Truly, though, this is less than ideal. Kinda misleading. 
-        */
-
-        loadLevelsCacheForIE[idx] = 1; // Set it, then forget it!
-      }
     }
   };
   const setSpellLevelNow = (event, component) => {
