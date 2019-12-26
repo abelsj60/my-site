@@ -67,19 +67,16 @@ export default class ErrorBoundary extends Component {
                 />
               </div>
               <p>
-                I write code for Web sites and software. I tell stories, too.
+                I write code for websites and software. I tell stories, too.
               </p>
               <p>
-                That's important. It means I don't just mechanically code software. I try to figure out — and keep sight of — the stories that drive it. I always have.
+                That's important. I don't just mechanically code software. I figure out, and keep sight of, the stories that drive it. Stories have always been a touchstone for me.
               </p>
               <p>
-                As a start-up founder, I told stories that pitched our software. As a staff reporter for Forbes and Mergermarket, I wrote stories that gave insight into technology and venture capital. And, as a lawyer, I crafted stories that made legal arguments.
+                As a start-up founder, I pitched our software through stories. As a staff reporter for Forbes.com and Mergermarket, I explored new connections between technology, media, and venture capital through stories. As a lawyer, I made legal arguments for clients through stories. It's all about stories for me, from start to finish.
               </p>
               <p>
-                See that — all stories, all the time.
-              </p>
-              <p>
-                So. What's yours?
+                So tell me, what's yours?
               </p>
               <p>
                 -j
