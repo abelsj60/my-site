@@ -25,7 +25,11 @@ export default class ErrorBoundary extends Component {
     if (hasError) {
       return (
         <Fragment>
-          <header>
+          <header
+            style={{
+              alignSelf: 'flex-start'
+            }}
+          >
             <p
               style={{
                 color: '#fd1172'
@@ -113,6 +117,7 @@ export default class ErrorBoundary extends Component {
     // the errorBoundary, so we'll check and set it to 8px here.
 
     const body = document.getElementsByTagName('body');
+
     if (body[0].style.margin === '') {
       body[0].style.margin = '8px';
     };

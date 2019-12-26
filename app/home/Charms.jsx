@@ -246,7 +246,7 @@ export default function Charms(props) {
   const compressor = type === 'mobile' ? 3.03 : 3.15;
   // Shift Subhed and Pitch elements left so they start after the 'J' in my name.
   // The fontSize algorithm excludes margins, so the new size will be true...
-  const leftMargin = nameTagWidth * .06;
+  const leftMargin = !badChoice ? nameTagWidth * .06 : (nameTagWidth * .06) + 3;
   let spellBook = !inCity
     ? `${interactionType} the pulses to travel home`
     : `${interactionType} the pulses for adventure`;

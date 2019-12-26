@@ -71,20 +71,6 @@ export default function preloadBigImages() {
     return true; // default size when there's nothing smaller (5120)
   });
 
-  stories.forEach(chapter => {
-    const { number } = chapter.attributes;
-    const imageA = new Image();
-    const imageB = new Image();
-    const illSource = `${urlPrefix}/chapter-${number}/chapter-${number}-imc-main-101419-q${
-      imageWidth < 2880 ? '90' : '50'
-    }-${imageWidth}.jpg`;
-    const blurredSource = `${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
-    imageA.src = illSource;
-    imageB.src = blurredSource;
-    images[`chapter-${number}-main`] = imageA;
-    images[`chapter-${number}-blurred`] = imageB;
-  });
-
   home.attributes.preloadUrls.forEach((imagePath, idx) => {
     const image = new Image();
     const isBoy = imagePath.includes('boy');
@@ -113,6 +99,20 @@ export default function preloadBigImages() {
 
     image.src = source;
     images[home.attributes.imageNames[idx]] = image;
+  });
+
+  stories.forEach(chapter => {
+    const { number } = chapter.attributes;
+    const imageA = new Image();
+    const imageB = new Image();
+    const illSource = `${urlPrefix}/chapter-${number}/chapter-${number}-imc-main-101419-q${
+      imageWidth < 2880 ? '90' : '50'
+    }-${imageWidth}.jpg`;
+    const blurredSource = `${urlPrefix}/chapter-${number}/blurred/chapter-${number}-ink-blur-0x15-160.jpg`;
+    imageA.src = illSource;
+    imageB.src = blurredSource;
+    images[`chapter-${number}-main`] = imageA;
+    images[`chapter-${number}-blurred`] = imageB;
   });
 
   [
