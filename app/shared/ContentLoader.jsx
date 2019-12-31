@@ -211,8 +211,13 @@ export default class ContentLoader extends Component {
       }
     }
 
-    // Preserve the accessibility outline when using the MenuLink
-    if (location.caller !== 'chapter') {
+    // Preserve the accessibility outline when using the MenuLink, as long as
+    // we're not entering or exiting tempContent...
+    if (
+      location.caller !== 'chapter' 
+        && this.props.appState.tempContent < 1 
+        && prevProps.appState.tempContent < 1
+    ) {
       if (this.props.appState.menuButtonHasFocus) {
         setTimeout(() => document.getElementById('menuButton').focus(), 0);
       }

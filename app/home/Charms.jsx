@@ -212,9 +212,6 @@ export default function Charms(props) {
   const {
     appState,
     charmRefs,
-    handleClick,
-    handleMouseDown,
-    handleTouchStart,
     homeState,
     setSpellLevel
   } = props;

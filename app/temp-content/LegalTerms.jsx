@@ -73,7 +73,7 @@ const PixsyNotice = styled.span`
 const RestyledLink = styled(({ tabbed, ...rest }) => <StyledLink {...rest} />)`
   &:focus {
     // Special outline color when headerMenu is open on narrow screens!
-    ${p => p.tabbed && 'outline: white dashed 3px;'}
+    ${p => p.tabbed && 'outline: white dashed 6px;'}
   }
 `;
 

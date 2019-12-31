@@ -120,7 +120,7 @@ const RestyledLink = styled(
 
       &:focus {
         // Special outline color when headerMenu is open on narrow screens!
-        ${p => p.tabbed && 'outline: white dashed 3px;'}
+        ${p => p.tabbed && 'outline: white dashed 6px;'}
       }
     `};
   }

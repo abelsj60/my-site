@@ -199,7 +199,7 @@ const GlobalStyle = createGlobalStyle`
 
     a {
       &:focus {
-        ${p => p.tabbed && 'outline: #fd1172 dashed 3px;'}
+        ${p => p.tabbed && 'outline: #fd1172 dashed 6px;'}
       }
     }
 
@@ -209,7 +209,7 @@ const GlobalStyle = createGlobalStyle`
         // easily modify its pseudo-properties, so I've given it an id
         // and am targeting it here. It's companion link is targeted
         // w/n the LegalTerms component.
-        ${p => p.tabbed && 'outline: white dashed 3px;'}
+        ${p => p.tabbed && 'outline: white dashed 6px;'}
       }
     }
   }
