@@ -19,7 +19,15 @@ const HorizontalLine = styled.div`
   left: 0px;
   background-color: ${p => p.theme.colors.yellow};
 `;
-const Legal = styled.h1`
+const Content = styled.span`
+  position: absolute;
+  color: white;
+  height: 100%;
+  width: 100%;
+  padding-left: 2.25rem;
+  box-sizing: border-box;
+`;
+const LegalHed = styled.h1`
   position: absolute;
   right: 2rem;
   bottom: 1rem;
@@ -62,91 +70,86 @@ const PixsyNotice = styled.span`
     margin-bottom: 12px;
   }
 `;
+const RestyledLink = styled(({ tabbed, ...rest }) => <StyledLink {...rest} />)`
+  &:focus {
+    // Special outline color when headerMenu is open on narrow screens!
+    ${p => p.tabbed && 'outline: white dashed 3px;'}
+  }
+`;
 
 export default function LegalTerms(props) {
-    // Styled as attribute for simplicity,
-    // breaking it out above's a headache
-
-    const linkOrTextForClips = props.appState.currentCaller !== 'journalism'
-      ? (
-        <StyledLink
-          boundHandleClickForApp={props.boundHandleClickForApp}
-          style={{
-            color: 'white',
-            textDecoration: 'underline'
-          }}
-          to="/journalism"
-        >
-          Clips
-        </StyledLink>
-      ) : 'clips';
-    const linkForPixsy = (
-      <ReactGA.OutboundLink
-        eventLabel="To Pixsy"
+  const tabbed = props.appState.tabbed;
+  // Styled as attribute for simplicity, doing it above's a headache
+  const linkTextForClipCopyright = props.appState.currentCaller !== 'journalism'
+    ? (
+      <RestyledLink
+        boundHandleClickForApp={props.boundHandleClickForApp}
         style={{
           color: 'white',
           textDecoration: 'underline'
         }}
-        target="_blank"
-        to="https://www.pixsy.com/protected-by-pixsy/warning/"
+        tabbed={tabbed}
+        to="/journalism"
       >
-        Pixsy
-      </ReactGA.OutboundLink>
-    );
+        Clips
+      </RestyledLink>
+    ) : 'Clips';
+  const linkToPixsy = (
+    <ReactGA.OutboundLink
+      eventLabel="To Pixsy"
+      // Used to set focus color in App Component
+      id='pixsyLink'
+      style={{
+        color: 'white',
+        textDecoration: 'underline'
+      }}
+      target="_blank"
+      to="https://www.pixsy.com/protected-by-pixsy/warning/"
+    >
+      Pixsy
+    </ReactGA.OutboundLink>
+  );
 
-    // The following HTML is span, not a <p>, b/c it's nested in
-    // a <p> (React doesn't allow <p> nesting, kicks a warning).
-
-    const legalNotice =
-      (
-        <span
-          style={{
-            position: 'absolute',
-            color: 'white',
-            height: '100%',
-            width: '100%',
-            paddingLeft: '2.25rem',
-            boxSizing: 'border-box'
-          }}
+  return (
+    <Fragment>
+      <VerticleLine
+        left="1.25rem"
+        width="1px"
+      />
+      <VerticleLine
+        left="1.75rem"
+        width="1px"
+      />
+      <VerticleLine
+        left="2.25rem"
+        width="1px"
+      />
+      <HorizontalLine 
+        bottom="5.5rem"
+        height="1px"
+      />
+      <HorizontalLine 
+        bottom="4.85rem"
+        height="1px"
+      />
+      <Content>
+        <MyCopyright
+          tabbed={tabbed}
         >
-          <MyCopyright>
-            © {new Date().getFullYear()}, James Abels LLC. All rights reserved.
-          </MyCopyright>
-          <ClipCopyright>
-            {linkOrTextForClips} owned by their respective publisher.
-          </ClipCopyright>
-          <PixsyNotice>
-            Illustrations protected by {linkForPixsy}.
-          </PixsyNotice>
-        </span>
-      );
-
-    return (
-      <Fragment>
-        <VerticleLine
-          left="1.25rem"
-          width="1px"
-        />
-        <VerticleLine
-          left="1.75rem"
-          width="1px"
-        />
-        <VerticleLine
-          left="2.25rem"
-          width="1px"
-        />
-        <HorizontalLine 
-          bottom="5.5rem"
-          height="1px"
-        />
-        <HorizontalLine 
-          bottom="4.85rem"
-          height="1px"
-        />
-        <Legal>
-          Legal
-        </Legal>
-        {legalNotice}
-      </Fragment>
-    )
+          © {new Date().getFullYear()}, James Abels LLC. All rights reserved.
+        </MyCopyright>
+        <ClipCopyright
+          tabbed={tabbed}
+        >
+          {linkTextForClipCopyright} owned by their respective publisher.
+        </ClipCopyright>
+        <PixsyNotice>
+          Illustrations protected by {linkToPixsy}.
+        </PixsyNotice>
+      </Content>
+      <LegalHed>
+        Legal
+      </LegalHed>
+    </Fragment>
+  )
 }

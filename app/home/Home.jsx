@@ -1,9 +1,14 @@
 import Charms from './Charms.jsx';
 import ClickHandling from '../classes/ClickHandling.js';
 import DebugHome from './DebugHome.jsx';
+import eventManagement from '../helpers/eventManagement';
 import Main from '../primitives/Main.jsx';
 import NameTag from './NameTag.jsx';
 import React, { Component } from 'react';
+import {
+  isIOS,
+  osVersion
+} from 'react-device-detect';
 import PictureBox from './PictureBox.jsx';
 import styled from 'styled-components';
 
@@ -37,9 +42,19 @@ export default class Home extends Component {
     this.props.boundHandleClickForApp('updateSpacerHeight');
     /* Load levels:
     
-      Key: [fallback, blurredBoy, blurredForrest, blurredNyc, boy, forrest, city, hed]
-        a. Initial load — [ 3, 1, 1, 0, 1, 1, 0, 1 ]
-        b. Internal nav — [ 3, 1, 1, 0, 1, 1, 0, 1 ]
+      [
+        0 | fallback, 
+        1 | blurredBoy, 
+        2 | blurredForrest, 
+        3 | blurredNyc, 
+        4 | boy, 
+        5 | forrest, 
+        6 | city, 
+        7 | hed
+      ]
+
+      a. Initial load — [ 3, 1, 1, 0, 1, 1, 0, 1 ]
+      b. Internal nav — [ 3, 1, 1, 0, 1, 1, 0, 1 ]
 
       The array tracks onLoad and onTransitionEnd for '/' images and hed. It was separated
       from loadLevel to try to address a bug wherein some picture elements broke during
@@ -48,25 +63,31 @@ export default class Home extends Component {
       animations... A future refactor should look at returning it to this.state. 
     */
     this.loadLevels = [0, 0, 0, 0, 0, 0, 0, 0]; // 8 elements
-    // These setTimeouts are turned off in cWU below.
-    this.timeoutIdForUpdateLoadLevel = 0; 
+    // This setTimeout is turned off in cWU below.
     this.timeoutIdForSetSpellLevel = 0;
-    // The offlineStateCache is used to run the loading sequence when the net's restored.
+    // The cacheOfflineState is used to run the loading sequence when the net's restored.
     // It changes the expected loadLevel sums. See updateLoadingLevels() for more.
-    this.offlineStateCache = props.appState.offline;
+    this.cacheOfflineState = props.appState.offline;
 
     this.state = {
       activeCharm: initialPattern[0],
       badChoice: false, // Warn user of inActive Charm
-      eventType: 'click', // Type of event triggered Charm
+      eventType: 'mousedown', // Type of event triggered Charm
       goal: 5,
-      loadLevel: 0, // Triggers transitions after setState({ loadLevels: X })
+      // Triggers transitions after setState({ loadLevels: X })
+      // We'll bypass the loading sequence on iOS <= 7 b/c, according to
+      // BrowserStack, it doesn't work. As a result, on iOS 7, we:
+      //  1. Set loadLevel to 3 for all navigations (Home)
+      //  2. Block spell casting on these devices (NameTag)
+      //  3. Always add the background-color to the Nav bar (Header)
+      loadLevel: isIOS && parseInt(osVersion) <= 7 ? 3 : 0, 
       movement: '', // 'enter' = Goto Charms, 'exit' = Goto NameTag
       pattern: initialPattern, // arr
       score: 0, // Used to select an active Charm and cast spell
       spellLevel: 0 // Used to control transition, animation use
     };
 
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleTouchStart = this.handleTouchStart.bind(this);
     this.setLoadLevels = this.setLoadLevels.bind(this);
@@ -121,33 +142,47 @@ export default class Home extends Component {
     );
   }
 
+  handleKeyDown(num) {
+    return event => {
+      if (event.keyCode === 13) {
+        eventManagement(event);
+        const hcCharm = new ClickHandling('charm', this);
+        const boundHandleCharm = hcCharm.boundHandleClick;
+        boundHandleCharm(this.state.activeCharm === num);
+        this.setState({ eventType: 'keyboard' });
+      }
+    }
+  }
+
   handleMouseDown(num) {
     return () => {
+      // Why no eventManagement(event) here? So our window.onmousedown handler
+      // can reset the tab state when this function is activated on a Charm!
       const { activeCharm, eventType } = this.state;
-  
-      if (eventType === 'click') {
+
+      if (eventType === 'mousedown' || eventType === 'keyboard') {
         const hcCharm = new ClickHandling('charm', this);
         const boundHandleCharm = hcCharm.boundHandleClick;
         boundHandleCharm(activeCharm === num);
-      } else if (eventType === 'touch') {
-        // Resets event type to 'click' if a mouse suddenly works
-        const hcHome = new ClickHandling('home', this);
-        const boundHandleClick = hcHome.boundHandleClick;
-        boundHandleClick('resetEventType');
-      }
+      };
+
+      if (eventType === 'keyboard' || eventType === 'touch') {
+        this.setState({ eventType: 'mousedown' });
+      };
     };
   }
 
   handleTouchStart(num) {
-    return () => {
+    return event => {
+      eventManagement(event);
       const hcCharm = new ClickHandling('charm', this);
       const boundHandleCharm = hcCharm.boundHandleClick;
 
-      /* Touch v. click handling
-      
+      /* Touch v. mousedown handling:
+
         Update the eventType on State if the Charm was
         touched. This allows our onMouseDown listener
-        to reject its call due to event propagation.
+        to reject its call after event propagation.
 
         There is a bug in React that prevents us from
         simply calling event.stopPropagation() here.
@@ -158,12 +193,13 @@ export default class Home extends Component {
 
         I add handlers as he suggests so as to avoid
         React's own propagation, then use State to
-        reject calls to mouseDown handler touch.
+        reject calls to handleMouseDown handler.
 
         https://github.com/facebook/react/issues/9809#issuecomment-413978405 
       */
 
-      this.setState({ eventType: 'touch' });
+      // Stops handleMouseDown from hitting the wrong Charm.
+      this.setState({ eventType: 'touch' }); 
       boundHandleCharm(this.state.activeCharm === num);
     };
   }
@@ -209,7 +245,7 @@ export default class Home extends Component {
   }
 
   selectLoadLevelsTarget(a, b) {
-    return !this.offlineStateCache ? a : b;
+    return !this.cacheOfflineState ? a : b;
   }
 
   setLoadLevel(type, target) {
@@ -229,14 +265,11 @@ export default class Home extends Component {
   }
 
   setLoadLevels(idx) {
-    // Let's update the loadLevels (via onLoad and onTransitionEnd)
-    if (this.loadLevels[idx] < 3) {
-      const newArr = [].concat(this.loadLevels);
-      newArr[idx] = newArr[idx] + 1;
-      this.loadLevels = newArr;
-    }
-
-   this.updateLoadLevel(); // Should we setState() for re-render?
+    // 1. Let's update the loadLevels (via onLoad and onTransitionEnd)
+    // 2. This top filter is needed for iOS when objectFitImages is active
+    
+    this.loadLevels[idx] = this.loadLevels[idx] + 1;
+    this.updateLoadLevel(); // Should we setState() for re-render?
   }
 
   setSpellLevel(val) {
@@ -390,7 +423,7 @@ export default class Home extends Component {
   }
 
   componentDidUpdate() {
-    /* Charm refs
+    /* Charm refs:
 
       Add eventHandlers when cDU runs as a result of clicking/tapping the 
       Hed in NameTag. We do this by adding refs to our Charm array as they 
@@ -398,14 +431,41 @@ export default class Home extends Component {
     */
 
     if (this.charmRefs[0].current) {
-      this.charmRefs.forEach(
-        (ref, idx) => {
-          if (!ref.current.onclick) {
-            ref.current.onmousedown = this.handleMouseDown(idx + 1);
-            ref.current.ontouchstart = this.handleTouchStart(idx + 1);
+      // The events haven't been added yet. Add them now.
+      if (!this.charmRefs[0].current.onmousedown) { 
+        this.charmRefs.forEach(
+          (ref, idx) => {
+            const charmNumber = idx + 1;
+            ref.current.onmousedown = this.handleMouseDown(charmNumber);
+            ref.current.ontouchstart = this.handleTouchStart(charmNumber);
+            ref.current.onkeydown = this.handleKeyDown(charmNumber);
           }
+        );
+      } else if (this.props.appState.tabbed) {
+        /* If the user's tabbing through:
+
+          We'll update the spell in the following circs:
+            1. When in the spell, not exiting it. The Hed would lose focus otherwise.
+            2. If the home.state.eventType is keyboard, not 'mousedown' or 'touch'.
+              -We want to blur out the focus when the user stops tabbing.
+              -We need special handling for this b/c we normally use a clickEvent to stop the blur.
+                This event doesn't run here b/c we're using onMouseDown and onTouchStart!
+            3. If the score is > 0 or a badChoice has been made.
+              -If the score is 0, we want to let the focus stay on the Hed so the user 
+                has a choice.
+              -If the user makes a badChoice, we'll jump to the correct Charm as a hint.
+                We want to do this even at 0 so the behavior's consistent at all times.
+        */
+        if (
+          this.state.movement === 'enter'
+            && this.state.eventType === 'keyboard' 
+            && (this.state.score > 0 || this.state.badChoice)
+        ) {
+          // On setTimeout(..., 0) --> https://stackoverflow.com/a/33963453
+          const charmEl = document.getElementById(`${this.state.activeCharm - 1}`);
+          setTimeout(() => charmEl.focus(), 0);
         }
-      );
+      }
     }
 
     // Start the heartbeat and update homePageLoaded.
@@ -420,6 +480,5 @@ export default class Home extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.timeoutIdForSetSpellLevel);
-    clearTimeout(this.timeoutIdForUpdateLoadLevel);
   }
 }

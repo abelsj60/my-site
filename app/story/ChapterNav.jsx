@@ -1,3 +1,4 @@
+import adjustTabIndex from '../helpers/adjustTabIndex.js';
 import dotFull from '../../docs/assets/images/convert-to-data-uri/dot-full-32-@4x.png';
 import dotEmpty from '../../docs/assets/images/convert-to-data-uri/dot-empty-32-@4x.png';
 import Mapper from '../shared/Mapper.jsx';
@@ -25,19 +26,19 @@ const Nav = styled.nav`
 `;
 const StyledList = styled(UnorderedList)`
   width: 250px;
-  height: 7px;
   display: flex;
   flex: 1;
-
-  @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
-    height: 8px;
-  }
 `;
 const ListItem = styled.li`
   flex: 1;
 `;
+const RestyledLink = styled(StyledLink)`
+  display: flex;
+  padding: 5px 0px;
+`;
 const Selector = styled.div`
   height: 7px;
+  width: 100%;
   background: ${p => `url(${p.image}) center no-repeat`};
   background-size: contain; // Must come after background rule
 
@@ -48,6 +49,7 @@ const Selector = styled.div`
 
 export default function ChapterNav(props) {
   const {
+    appState,
     boundHandleClickForApp,
     contentState
   } = props;
@@ -55,6 +57,8 @@ export default function ChapterNav(props) {
     allContentData,
     chapterIndex
   } = contentState;
+  const { illustrationLevel, tempContent } = appState;
+  const tabIndex = adjustTabIndex(tempContent, false, illustrationLevel);
 
   return (
     <Nav>
@@ -72,7 +76,8 @@ export default function ChapterNav(props) {
               <ListItem
                 key={idx}
               >
-                <StyledLink
+                <RestyledLink
+                  tabIndex={tabIndex}
                   boundHandleClickForApp={boundHandleClickForApp}
                   to={`/chapter/${normalizedTitle}`}
                 >
@@ -80,7 +85,7 @@ export default function ChapterNav(props) {
                     image={dotType}
                     num={idx}
                   />
-                </StyledLink>
+                </RestyledLink>
               </ListItem>
             );
           }}

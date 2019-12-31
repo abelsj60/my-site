@@ -6,6 +6,10 @@ import home from '../data/home/home.md';
 import Loader from '../shared/Loader.jsx';
 import marked from 'marked';
 import React, { Fragment } from 'react';
+import {
+  isIOS,
+  osVersion
+} from 'react-device-detect';
 import ReactHtmlParser from 'react-html-parser';
 import ReactGA from 'react-ga';
 import styled, { css, keyframes } from 'styled-components';
@@ -74,6 +78,11 @@ const Spacer = styled.div`
   width: 100%;
   z-index: 3;
 `;
+const HedLink = styled.a`
+  display: flex;
+  text-decoration: none;
+  margin-left: 1px;
+`;
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
   font-size: ${p => p.fontSize}px;
@@ -82,7 +91,6 @@ const Hed = styled.h1`
   -moz-osx-font-smoothing: grayscale;
   color: ${p => p.theme.colors.yellow};
   font-weight: 700;
-  margin-left: 0px;
   cursor: pointer;
   user-select: none;
   // Use !p.homePageLoaded to limit opacity change to load sequence.
@@ -98,6 +106,7 @@ const Hed = styled.h1`
   // Note: This worked great here, but may not work as well with multiple lines of text...
   line-height: .45;
   height: ${p => p.fontSize}px;
+  margin-left: 0px;
 `;
 const InnerContainer = styled.div`
   display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
@@ -111,7 +120,7 @@ const InnerContainer = styled.div`
 `;
 const Pitch = styled.section`
   overflow: auto;
-  margin: 10px 0px;
+  margin-top: 10px;
   z-index: 2;
 
   p {
@@ -166,18 +175,21 @@ export default function NameTag(props) {
   const handleClickForHed = event => {
     eventManagement(event);
 
-    // 1. If online always!
-    // 2. If not online, only when already in the spell.
-    //  -The blurred image isn't loaded yet! Don't just transition alt text!
+    // 1. No spell if iOS <= 7!
+    // 2. Otherwise, if online, always cast a spell.
+    // 3. If not online, allow one more click to exit spell.
 
-    if (!offline || (offline && spellLevel > 0)) {
+    if (
+      (!isIOS || (isIOS && parseInt(osVersion) > 7))
+        && (!offline || (offline && spellLevel > 0))
+    ) {
       // Heartbeat ends at 3, set in PictureBox.onTransitionEndForBlurredBoy
       if (homePageLoaded && heartbeat > 1 && (spellLevel === 0 || spellLevel === 4)) {
         if (eventType === 'touch') {
           boundHandleClickForHome('resetEventType');
           return false;
         }
-    
+
         if (callReactGa()) {
           ReactGA.event({
             category: 'Home state',
@@ -189,7 +201,6 @@ export default function NameTag(props) {
         boundHandleClickForHome('toggleSpell');
       }
     }
-
   };
   const handleAnimationEndForHeartbeat = event => {
     eventManagement(event);
@@ -227,17 +238,21 @@ export default function NameTag(props) {
         spellLevel={spellLevel}
         tempContent={tempContent}
       >
-        <Hed
-          fontSize={getFontSize(nameTagWidth, 1.154)}
-          homePageLoaded={homePageLoaded}
-          loadLevel={loadLevel}
-          offline={offline}
+        <HedLink
+          href=''
           onClick={handleClickForHed}
-          onTransitionEnd={handleTransitionEndForHed}
-          type={type}
         >
-          {name}
-        </Hed>
+          <Hed
+            fontSize={getFontSize(nameTagWidth, 1.154)}
+            homePageLoaded={homePageLoaded}
+            loadLevel={loadLevel}
+            offline={offline}
+            onTransitionEnd={handleTransitionEndForHed}
+            type={type}
+          >
+            {name}
+          </Hed>
+        </HedLink>
         <InnerContainer
           enter={movement === 'enter'}
           exit={movement === 'exit'}
@@ -265,10 +280,10 @@ export default function NameTag(props) {
           </Pitch>
         </InnerContainer>
         <Loader
-          // Remember, 'done' keeps it off even when navigating 
-          // internally back to home after homePageLoaded...
+          // Remember, 'done' keeps it off when navigating 
+          // home after homePageLoaded is true...
           done={homePageLoaded}
-          marginBottom="7"
+          marginBottom="13"
           show={loadLevel === 1}
           text={'Loading art...'}
         />

@@ -7,6 +7,9 @@ import UnorderedList from '../primitives/UnorderedList.jsx';
 const RestyledList = styled(UnorderedList)`
   height: 100%;
 `;
+const ProjectGrouping = styled.li`
+  margin-left: 5px;
+`;
 const Type = styled.p`
   font-size: ${p => p.theme.fontSizes.three};
   color: ${p => p.theme.colors.pink};
@@ -40,7 +43,7 @@ export default function MultiProjectNav(props) {
           totalThumbnailCount = totalThumbnailCount + projectThumbnail.length;
 
           return (
-            <li
+            <ProjectGrouping
               key={idx}
             >
               <Type>
@@ -55,7 +58,7 @@ export default function MultiProjectNav(props) {
                 mappedProjectIndex={idx}
                 totalThumbnailCount={totalThumbnailCount}
               />
-            </li>
+            </ProjectGrouping>
           );
         }}
       />

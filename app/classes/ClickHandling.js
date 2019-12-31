@@ -60,6 +60,7 @@ export default class ClickHandling {
         showBusinessCard,
         showLegalTerms,
         startDramaAtHome,
+        tabbed,
         tempContent,
         inCity,
         isMenu
@@ -180,6 +181,9 @@ export default class ClickHandling {
           break;
         case 'toggleMenu':
           stateToUpdate.isMenu = !isMenu;
+          if (tabbed) { // Keep accessability oultine when toggling menuButton!
+            stateToUpdate.menuButtonHasFocus = true;
+          }
           category = 'App state';
           action = !isMenu
             ? `Enter: ${currentCaller} menu`
@@ -206,6 +210,11 @@ export default class ClickHandling {
           if (startDramaAtHome !== 'never') {
             stateToUpdate.startDramaAtHome = 'yes';
           }
+          break;
+        case 'toggleTabbed':
+          stateToUpdate.tabbed = !tabbed;
+          category = 'App state';
+          action = 'Toggled tabbed state';
           break;
         case 'updateApp':
           // Not logging to Google Analytics
@@ -276,8 +285,10 @@ export default class ClickHandling {
       }
 
       if (
-        updateValue !== 'updateApp' || updateValue !== 'startDramaAtHome'
-          || updateValue !== 'updateNameTagWidth' || updateValue !== 'updateSpacerHeight'
+        updateValue !== 'updateApp'
+          || updateValue !== 'startDramaAtHome'
+          || updateValue !== 'updateNameTagWidth'
+          || updateValue !== 'updateSpacerHeight'
       ) {
         if (callReactGa()) {
           if (category && action) {
@@ -415,20 +426,22 @@ export default class ClickHandling {
             stateToUpdate.pattern = this.createSpellPattern();
             stateToUpdate.activeCharm = stateToUpdate.pattern[0];
 
-            // Reset the eventType to 'click' if it was 'touch'-ed. This prevents 
-            // unexpected and unwanted propagation.
+            // Reset the eventType to 'mousedown' if it was 'touch'-ed. This 
+            // prevents unexpected and unwanted propagation.
 
             if (eventType === 'touch') {
-              stateToUpdate.eventType = 'click';
+              stateToUpdate.eventType = 'mousedown';
             }
           }
-
           break;
         case 'cast':
           stateToUpdate.spellLevel = 5;
           break;
         case 'resetEventType':
-          stateToUpdate.eventType = 'click';
+          stateToUpdate.eventType = 'mousedown';
+          break;
+        case 'updateEventType':
+          stateToUpdate.eventType = valueOne;
           break;
       }
 
@@ -472,7 +485,8 @@ export default class ClickHandling {
           boundHandleClickForHome('cast');
           boundHandleClickForApp('swapBackground');
         }
-      } else { // We've hit an active Charm, increment the score.
+      } else { 
+        // We've hit an active Charm, increment the score.
         this.setState(state => {
           return {
             activeCharm: state.pattern[state.score + 1],

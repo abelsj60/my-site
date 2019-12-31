@@ -1,3 +1,4 @@
+import adjustTabIndex from '../helpers/adjustTabIndex.js';
 import arrowUp from '../../docs/assets/images/convert-to-data-uri/arrow-up-28-@4x.png';
 import arrowDown from '../../docs/assets/images/convert-to-data-uri/arrow-down-28-@4x.png';
 import React from 'react';
@@ -8,7 +9,7 @@ const Container = styled.div`
   min-width: 50px;
   width: 50px;
 `;
-const RestyledLink = styled(StyledLink)`
+const RestyledLink = styled(({ tabbed, ...rest }) => <StyledLink {...rest} />)`
   display: flex;
   flex-shrink: 0;
   margin-right: auto;
@@ -47,11 +48,13 @@ const Line = styled.div`
 `;
 
 export default function MenuButton(props) {
-  const { boundHandleClickForApp } = props;
+  const { appState, boundHandleClickForApp } = props;
   const {
+    currentCaller,
     isMenu,
-    currentCaller
-  } = props.appState;
+    tabbed,
+    tempContent
+  } = appState;
   const isReverie = currentCaller === 'reverie';
   const link = isReverie && isMenu
     ? '/reverie'
@@ -61,6 +64,7 @@ export default function MenuButton(props) {
   const arrowIcon = !isMenu ? arrowDown : arrowUp;
   const menuIsActive = isMenu && 'active';
   const text = !isMenu ? 'See all' : 'Close';
+  const tabIndex = adjustTabIndex(tempContent);
 
   return (
     <Container
@@ -68,7 +72,10 @@ export default function MenuButton(props) {
     >
       <RestyledLink
         boundHandleClickForApp={boundHandleClickForApp}
+        id='menuButton'
         isCalledByMenu="menu"
+        tabbed={tabbed}
+        tabIndex={tabIndex}
         to={link}
       >
         <Label>

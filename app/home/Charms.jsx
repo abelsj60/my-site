@@ -98,7 +98,7 @@ const CharmBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const Charm = styled.div`
+const Charm = styled.a`
   // Can be a heavy transition, adding will-change (no fallbacks b/c they both break the spin). 
   ${p => p.spellLevel > 0 && 'will-change: transform, box-shadow;'}
   // Separate p.enter and p.exit checks so the animation starts on spellLevel 4 and runs through the onExit fadeOut (otherwise, it ends onExit. Awkward).
@@ -212,6 +212,9 @@ export default function Charms(props) {
   const {
     appState,
     charmRefs,
+    handleClick,
+    handleMouseDown,
+    handleTouchStart,
     homeState,
     setSpellLevel
   } = props;
@@ -219,6 +222,7 @@ export default function Charms(props) {
     inCity,
     nameTagWidth,
     offline,
+    tabbed,
     tempContent,
     type
   } = appState;
@@ -279,17 +283,23 @@ export default function Charms(props) {
           <Mapper
             mapData={['one', 'two', 'three']}
             render={(_, idx) => {
-              const isActive = activeCharm === idx + 1;
+              const charmNumber = idx + 1;
+              const isActive = activeCharm === charmNumber;
+
               return (
                 <Charm
                   enter={movement === 'enter'}
                   exit={movement === 'exit'}
+                  href=''
+                  id={idx}
                   isActive={isActive}
                   isIE={isIE}
                   isReady={isReady}
                   key={idx}
                   ref={charmRefs[idx]} // Add a ref to each Charm when mounted
+                  onClick={event => eventManagement(event)}
                   spellLevel={spellLevel}
+                  tabbed={tabbed}
                 >
                   <CharmShadow
                     isActive={isActive}

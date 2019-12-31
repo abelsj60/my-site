@@ -15,5 +15,5 @@ export default styled.img`
   // Transition settings should match blurred boy for use on narrow landscape screens.
   transition: ${p => p.spellLevel > 0 && 'opacity .65s ease-in-out'};
   z-index: ${p => !p.inCity && p.spellLevel < 5 ? '1' : '-1'};
-  ${p => (p.spellLevel === 5 || p.inCity) && 'display: none'};
+  ${p => (p.spellLevel === 5 || p.inCity) && 'display: none;'}
 `;

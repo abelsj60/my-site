@@ -1,3 +1,4 @@
+import adjustTabIndex from '../helpers/adjustTabIndex.js';
 import eventManagement from '../helpers/eventManagement.js';
 import { isIE } from 'react-device-detect';
 import Mapper from '../shared/Mapper.jsx';
@@ -18,8 +19,8 @@ const Group = styled(UnorderedList)`
   ${isIE && 'flex-shrink: 0;'} 
 
   ${p => p.isMenu && css`
-    margin-bottom: ${!p.finalGroup && '30px'};
-    // Prevent popping out of container if images are larger (hi dpi)
+    margin-bottom: ${!p.finalGroup ? '30px' : '5px'};
+    // Prevent popping out of container if hi-dpi images are used
     max-width: 100%; 
   `};
 `;
@@ -71,7 +72,8 @@ export default function ProjectNav(props) {
     totalThumbnailCount
   } = props;
   const {
-    offline 
+    offline,
+    tempContent
   } = appState;
   const {
     allContentData,
@@ -105,6 +107,7 @@ export default function ProjectNav(props) {
   // Note: Projects.jsx has its own isOffline value, meaning /projects image handling can bifurcate...
   const fullyLoaded = !isMenuLocally ? thumbnailCount === useThisData.length : thumbnailCount === totalThumbnailCount;
   const isOffline = offline && !fullyLoaded;
+  const tabIndex = adjustTabIndex(tempContent);
   const handleThumbnailLoads = event => {
     eventManagement(event);
     boundHandleClickForContentLoader('trackThumbnailCount')
@@ -131,6 +134,7 @@ export default function ProjectNav(props) {
               <RestyledLink
                 highlightThis={highlightThis}
                 isMenu={isMenuLocally}
+                tabIndex={tabIndex}
                 to={`/projects/${normalize(
                   !isMenuLocally ? projectName : mappedProject.attributes.projectName
                 )}/${idx + 1}`}

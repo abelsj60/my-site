@@ -7,6 +7,10 @@ import headerNavOpenShadow from '../../docs/assets/images/convert-to-data-uri/he
 import { cover } from 'intrinsic-scale';
 import Mapper from '../shared/Mapper.jsx';
 import React, { Component } from 'react';
+import {
+  isIOS,
+  osVersion
+} from 'react-device-detect';
 import Referrer from '../classes/Referrer.js';
 import styled, { css, keyframes } from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
@@ -19,9 +23,7 @@ const headerLinks = [
   { name: 'A not-so-true story', path: '/chapter' }
 ];
 const fontWeight = '500';
-const initialShadow = '2px 2px 2.5px';
-const textShadow = initialShadow + ' rgba(0, 0, 0, .4)';
-const iconShadow = initialShadow + ' rgba(0, 0, 0, .9)';
+const textShadow = '2px 2px 2.5px rgba(0, 0, 0, .4)';
 const Container = styled.header`
   color: ${p => p.theme.colors.white};
   flex-shrink: 0;
@@ -70,7 +72,9 @@ const RestyledLink = styled(
     isActive,
     isReverie,
     menu,
+    num,
     nameAsLink,
+    tabbed,
     tempContent,
     textShadow,
     ...rest
@@ -113,6 +117,11 @@ const RestyledLink = styled(
       font-size: ${p => !p.nameAsLink && p.tempContent === 3 && p.theme.fontSizes.twenty};
       margin-left: ${p => !p.nameAsLink && p.tempContent === 3 && '0px'};
       text-shadow: 2px 2px 2.5px rgba(0, 0, 0, .1);
+
+      &:focus {
+        // Special outline color when headerMenu is open on narrow screens!
+        ${p => p.tabbed && 'outline: white dashed 3px;'}
+      }
     `};
   }
 `;
@@ -158,9 +167,9 @@ const Nav = styled.nav`
   padding: ${p => p.isHome && '6px 12px'};
   // Don't show background-color box when business card or legal terms are on, but do show it immediately if we're offline!
   // This means showing it when p.startDramaAtHome is either 'yes' or 'never', which sounds a little weird, no?
-  background-color: ${p => (p.offline && p.isHome && p.tempContent < 1) || (p.isHome && (p.startDramaAtHome === 'yes' || p.startDramaAtHome === 'never') && p.tempContent < 1) ? 'rgba(0, 0, 0, .2)' : ''};
+  background-color: ${p => (p.offline && p.isHome && p.tempContent < 1) || (p.isHome && (p.startDramaAtHome === 'yes' || p.startDramaAtHome === 'never') && p.tempContent < 1) || (p.isIOS && p.osVersion <= 7) ? 'rgba(0, 0, 0, .2)' : ''};
   ${p => !p.homePageLoaded && 'will-change: background-color;'}
-  // Transition settings for the spell should match (in total) PictureBox/Fallbacks's transition property.
+  // Transition settings for the spell should match (in total) the Fallbacks's transition settings.
   ${p => !p.homePageLoaded && p.startDramaAtHome !== 'never' && 'transition: background-color .69s .01s ease-in-out;'}
   // Prevent occasional over-expansion
   max-width: ${p => p.isHome && '350px'}; 
@@ -185,6 +194,7 @@ const Nav = styled.nav`
       display: flex;
       flex-direction: column;
       align-items: center;
+      transition: unset; // No transition when headerMenu is open!
     `};
   }
 `;
@@ -211,6 +221,7 @@ const NavItem = styled.li`
     ${p => p.tempContent === 3 && css`
         margin: 20px 0px;
     `};
+
     // Smaller margins for landscape view when it's height is very narrow.
     @media (max-height: ${p => p.theme.mediaQueries.tinyView}) {
       // Header menu
@@ -220,7 +231,9 @@ const NavItem = styled.li`
     }
   }
 `;
-const IconHolder = styled.div`
+const MenuLink = styled.a`
+  display: ${p => p.isHome && 'none'};
+  text-decoration: none;
   position: relative;
   height: 22px;
   width: 22px;
@@ -228,22 +241,22 @@ const IconHolder = styled.div`
   margin-left: auto;
   margin-right: 10px;
   z-index: 1;
-`;
-const Icon = styled.img`
-  display: ${p => (p.isHome && 'none')};
-  position: absolute;
-  height: 22px;
-  cursor: pointer;
-  transform: translateZ(0); // Prevent pixel shifts during transition
-  z-index: 2;
 
   @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
     display: none;
   }
 `;
+const Icon = styled.img`
+  position: absolute;
+  height: 22px;
+  cursor: pointer;
+  transform: translateZ(0); // Prevent pixel shifts during transition
+  z-index: 2;
+`;
 const IconShadow = styled(Icon)`
   // Inkscape settings: blur (6), horizontal offset (6), vertical offset (3), opacity value (60)
-  display: ${p => (!p.isStory && 'none')};
+  // Why bother with it outside story:
+  display: ${p => (!p.isStory && 'none')}; 
   padding-top: 1px;
   padding-left: 1px;
   opacity: ${p => !p.isReverie && p.tempContent < 1 && ((p.illustrationDirection === 'enter' && p.illustrationLevel >= 2) || (p.illustrationDirection === 'exit' && p.illustrationLevel > 2)) ? '1' : '0'};
@@ -269,6 +282,10 @@ const TimingBar = styled.div`
   left: 0px;
   height: 1px;
   width: 100%;
+
+  @media (min-width: ${p => p.theme.mediaQueries.narrowBreakTwo}) {
+    display: none;
+  }
 `;
 const Timer = styled.div`
   // Timer stays accurate if it runs outside of media query (parent query handles visibility)
@@ -295,6 +312,7 @@ export default class Header extends Component {
       images,
       offline,
       startDramaAtHome,
+      tabbed,
       tempContent
     } = appState;
     const isHome = currentCaller === 'home';
@@ -309,7 +327,6 @@ export default class Header extends Component {
     };
     const handleClickForMenuLink = event => handleHeaderMenu(event);
     const handleAnimationEndForTimer = event => handleHeaderMenu(event);
-
     const handleTranstionEnd = (event, idx) => {
       eventManagement(event);
       setIllustrationLevels(idx);
@@ -355,11 +372,33 @@ export default class Header extends Component {
         >
           {bio.attributes.motto}
         </Motto>
+        {!isHome && (
+          <MenuLink
+            href=''
+            isHome={isHome}
+            onClick={handleClickForMenuLink}
+          >
+            <Icon
+              src={menuIcon}
+            />
+            <IconShadow 
+              illustrationDirection={illustrationDirection}
+              illustrationLevel={illustrationLevel}
+              isStory={isStory}
+              isReverie={isReverie}
+              onTransitionEnd={handleTransitionEndForIconShadow}
+              src={headerNavOpenShadow}
+              tempContent={tempContent}
+            />
+          </MenuLink>
+        )}
         <Nav
           coverValY={coverVals.y < 0} // Add frost to text
           homePageLoaded={homePageLoaded}
           isHome={isHome}
+          isIOS={isIOS}
           offline={offline}
+          osVersion={parseInt(osVersion)}
           startDramaAtHome={startDramaAtHome}
           tempContent={tempContent}
         >
@@ -387,6 +426,7 @@ export default class Header extends Component {
                       isReverie={isReverie}
                       num={idx}
                       onTransitionEnd={handleTransitionEndForText}
+                      tabbed={tabbed}
                       tempContent={tempContent}
                       to={link.path}
                     >
@@ -407,28 +447,6 @@ export default class Header extends Component {
             />
           </TimingBar>
         </Nav>
-        {!isHome && (
-          <IconHolder>
-            <Icon
-              illustrationDirection={illustrationDirection}
-              illustrationLevel={illustrationLevel}
-              isHome={isHome}
-              isReverie={isReverie}
-              src={menuIcon}
-              onClick={handleClickForMenuLink}
-              tempContent={tempContent}
-            />
-            <IconShadow 
-              illustrationDirection={illustrationDirection}
-              illustrationLevel={illustrationLevel}
-              isStory={isStory}
-              isReverie={isReverie}
-              onTransitionEnd={handleTransitionEndForIconShadow}
-              src={headerNavOpenShadow}
-              tempContent={tempContent}
-            />
-          </IconHolder>
-        )}
       </Container>
     );
   }

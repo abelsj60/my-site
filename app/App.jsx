@@ -196,6 +196,22 @@ const GlobalStyle = createGlobalStyle`
       margin-bottom: ${p => p.theme.bottomMargin.regular};
       line-height: 1.6;
     }
+
+    a {
+      &:focus {
+        ${p => p.tabbed && 'outline: #fd1172 dashed 3px;'}
+      }
+    }
+
+    #pixsyLink {
+      &:focus {
+        // This link uses the <ReactGA.OutBoundLink> element. We can't
+        // easily modify its pseudo-properties, so I've given it an id
+        // and am targeting it here. It's companion link is targeted
+        // w/n the LegalTerms component.
+        ${p => p.tabbed && 'outline: white dashed 3px;'}
+      }
+    }
   }
 
   #app {
@@ -296,6 +312,7 @@ class App extends Component {
       isMenu: referrer.isMenu(props), // /projects, /journalism, /reverie
       isValidUser: false, // to be removed
       lastCaller: '',
+      menuButtonHasFocus: false,
       nameTagWidth: this.calculateNameTagWidth(this.images), // Orig. dimensions: 1349 / 5115
       offline: false,
       spacerHeight: this.calculateSpacerHeight(this.images), // Set by 'handleResize', so must live here. Used by Home/NameTag.
@@ -303,14 +320,18 @@ class App extends Component {
       // -'no' (start, set here) 
       // -'yes' (run, set in setLoadLevels + ClickHandling) 
       // -'never' (bypass, set in updateNetworkStatus)
-      startDramaAtHome: 'no', 
+      startDramaAtHome: 'no',
+      tabbed: false, // Track tabbing to add/subract accessibility outline
       tempContent: 0, // 0 = off; 1 = businessCard; 2 = legalTerms; 3 = headerMenu
       // Won't catch iPadOS w/o customMobileTest. Search for 11/9/19 notes as to necessity.
       type: isMobile ? 'mobile' : 'desktop'
     };
 
     this.handleBackAndForth = this.handleBackAndForth.bind(this);
+    this.handleKeydown = this.handleKeydown.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleResize = this.handleResize.bind(this);
+    this.handleTouchStart = this.handleTouchStart.bind(this);
     this.setIllustrationLevels = this.setIllustrationLevels.bind(this);
     this.toggleHtmlElementHeight = this.toggleHtmlElementHeight.bind(this);
     this.updateNameTagWidth = this.updateNameTagWidth.bind(this);
@@ -329,13 +350,13 @@ class App extends Component {
     return (
       <ThemeProvider
         theme={{
-          bottomMargin,
-          colors,
-          fontSizes,
-          mediaQueries,
           blur: this.state.currentCaller === 'home' ? blurControl.home : blurControl.regular,
           blurForTempContent: this.state.tempContent > 0,
-          isHeaderMenu: this.state.tempContent === 3
+          colors,
+          bottomMargin,
+          fontSizes,
+          isHeaderMenu: this.state.tempContent === 3,
+          mediaQueries
         }}
       >
         <Fragment
@@ -347,6 +368,7 @@ class App extends Component {
             notFound={isNotFound}
             pageHeight={this.state.height}
             reverie={reverieIsActive}
+            tabbed={this.state.tabbed}
           />
           <Header
             {...this.props}
@@ -436,6 +458,14 @@ class App extends Component {
     return spacerHeight >= 15 ? spacerHeight : 15;
   }
 
+  cancelTabbedState() {
+    // Turn off accessibility outline.
+    if (this.state.tabbed) {
+      document.activeElement.blur();
+      this.setState({ tabbed: false, menuButtonHasFocus: false });
+    }
+  } 
+
   coverVals(images) {
     const { width, height } = images;
     const { pageWidth, pageHeight } = this;
@@ -459,6 +489,31 @@ class App extends Component {
     const updateMenuForBackAndForthButton = isMenu !== this.state.isMenu;
 
     boundHandleClickForApp('updateApp', location.caller, updateMenuForBackAndForthButton);
+  }
+
+  /* Accessbility:
+    
+    1. The tabbed property on state tells the app to show a custom outline around
+      the active link (all interactive elements are links in this app).
+      -The property is turned on when the tab key's pressed.
+    2. The tabbed property is set to false when we sense a mousedown event.
+      -The activeElement is also blurred so the existing outline goes away as expected.
+    3. We may need to add a touchstart handler to also turn off the tabbed state when the 
+        user is using a touch-enabled device, such as a Surface tablet...?
+        -If you do so, you'll need to remove eventManagement from the mousedown handler in Home.
+  */
+
+  handleKeydown(event) {
+    // Turn on accessibility outline.
+    if(event.keyCode == '9' ) { // keyCode 9 = tab key!
+      if (!this.state.tabbed) {
+        this.setState({ tabbed: true });
+      }
+    }
+  }
+
+  handleMouseDown() {
+    this.cancelTabbedState();
   }
 
   handleResize(event) {
@@ -501,6 +556,10 @@ class App extends Component {
     }
 
     return false;
+  }
+
+  handleTouchStart() {
+    this.cancelTabbedState();
   }
 
   rejectResizing() {
@@ -702,10 +761,13 @@ class App extends Component {
     }
 
     // Runs after React's handlers: https://fortes.com/2018/react-and-dom-events/\
+    window.addEventListener('keydown', this.handleKeydown);
+    window.addEventListener('mousedown', this.handleMouseDown);
     window.addEventListener('offline', this.updateNetworkStatus);
     window.addEventListener('online', this.updateNetworkStatus);
-    window.addEventListener('resize', this.handleResize);
     window.addEventListener('popstate', this.handleBackAndForth);
+    window.addEventListener('resize', this.handleResize);
+    window.addEventListener('touchstart', this.handleTouchStart);
   }
 
   componentDidUpdate(prevProps) {
@@ -721,10 +783,13 @@ class App extends Component {
 
   componentWillUnmount() {
     // This should never be called, here as good practice.
+    window.removeEventListener('keydown', this.handleKeydown);
+    window.removeEventListener('mousedown', this.handleMouseDown);
     window.removeEventListener('offline', this.updateNetworkStatus);
     window.removeEventListener('online', this.updateNetworkStatus);
-    window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('popstate', this.handleBackAndForth);
+    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('touchstart', this.handleTouchStart);
   }
 }
 

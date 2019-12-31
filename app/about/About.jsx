@@ -1,3 +1,4 @@
+import adjustTabIndex from '../helpers/adjustTabIndex.js';
 import bio from '../data/about/about.md';
 import linkedInIcon from '../../docs/assets/images/convert-to-data-uri/linked-in-icon-80-@4x.png';
 import ContentHolder from '../primitives/ContentHolder.jsx';
@@ -68,7 +69,9 @@ const IconContainer = styled.div`
   margin-top: 6px;
 `;
 
-export default function About() {
+export default function About(props) {
+  const tabIndex = adjustTabIndex(props.appState.tempContent);
+
   return (
     <Main>
       <ContentHolder
@@ -81,6 +84,11 @@ export default function About() {
           <IconContainer>
             <ReactGA.OutboundLink
               eventLabel="To LinkedIn"
+              style={{
+                // Ensures the element doesn't collapse in devTools!
+                display: 'flex'
+              }}
+              tabIndex={tabIndex}
               target="_blank"
               to="https://www.linkedin.com/in/jameserikabels"
             >

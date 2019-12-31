@@ -210,5 +210,12 @@ export default class ContentLoader extends Component {
         this.setState({ thumbnailCount: 0 });
       }
     }
+
+    // Preserve the accessibility outline when using the MenuLink
+    if (location.caller !== 'chapter') {
+      if (this.props.appState.menuButtonHasFocus) {
+        setTimeout(() => document.getElementById('menuButton').focus(), 0);
+      }
+    }
   }
 }
