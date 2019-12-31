@@ -2,6 +2,7 @@ import adjustTabIndex from '../helpers/adjustTabIndex.js';
 import eventManagement from '../helpers/eventManagement.js';
 import Loader from '../shared/Loader.jsx';
 import React from 'react';
+import { isIE } from 'react-device-detect';
 import styled from 'styled-components';
 import StyledLink from '../primitives/StyledLink.jsx';
 
@@ -64,6 +65,7 @@ const RestyledLink = styled(({
   home,
   illustrationLevel,
   illustrationDirection,
+  isIE,
   isLink,
   isNotFound,
   isReverie,
@@ -72,7 +74,8 @@ const RestyledLink = styled(({
   tempContent,
   ...rest
 }) => <StyledLink {...rest} />)`
-  flex: 1;
+  ${p => p.isIE && 'flex-shrink: 0;'}
+  ${p => !p.isIE && 'flex: 1;'}
   text-align: center;
   cursor: pointer;
   margin-right: 20px;
@@ -89,7 +92,8 @@ const RestyledLink = styled(({
   }
 `;
 const PlainLink = styled.a`
-  flex: 1;
+  ${p => p.isIE && 'flex-shrink: 0;'}
+  ${p => !p.isIE && 'flex: 1;'}
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -287,6 +291,7 @@ export default function FooterContainer(props) {
           home={isHome}
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
+          isIE={isIE}
           isLink={true}
           isNotFound={isNotFound}
           isReverie={isReverie}
@@ -305,6 +310,7 @@ export default function FooterContainer(props) {
           href=''
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
+          isIE={isIE}
           isNotFound={isNotFound}
           isReverie={isReverie}
           isStory={isStory}
@@ -322,6 +328,7 @@ export default function FooterContainer(props) {
           href=''
           illustrationLevel={illustrationLevel}
           illustrationDirection={illustrationDirection}
+          isIE={isIE}
           isReverie={isReverie}
           isStory={isStory}
           isNotFound={isNotFound}

@@ -496,11 +496,8 @@ class App extends Component {
     1. The tabbed property on state tells the app to show a custom outline around
       the active link (all interactive elements are links in this app).
       -The property is turned on when the tab key's pressed.
-    2. The tabbed property is set to false when we sense a mousedown event.
+    2. The tabbed property is set to false when we sense a mousedown or touchstart event.
       -The activeElement is also blurred so the existing outline goes away as expected.
-    3. We may need to add a touchstart handler to also turn off the tabbed state when the 
-        user is using a touch-enabled device, such as a Surface tablet...?
-        -If you do so, you'll need to remove eventManagement from the mousedown handler in Home.
   */
 
   handleKeydown(event) {

@@ -173,8 +173,7 @@ export default class Home extends Component {
   }
 
   handleTouchStart(num) {
-    return event => {
-      eventManagement(event);
+    return () => {
       const hcCharm = new ClickHandling('charm', this);
       const boundHandleCharm = hcCharm.boundHandleClick;
 
@@ -446,15 +445,13 @@ export default class Home extends Component {
 
           We'll update the spell in the following circs:
             1. When in the spell, not exiting it. The Hed would lose focus otherwise.
-            2. If the home.state.eventType is keyboard, not 'mousedown' or 'touch'.
+            2. If the home.state.eventType is 'keyboard', not 'mousedown' or 'touch'.
               -We want to blur out the focus when the user stops tabbing.
-              -We need special handling for this b/c we normally use a clickEvent to stop the blur.
-                This event doesn't run here b/c we're using onMouseDown and onTouchStart!
             3. If the score is > 0 or a badChoice has been made.
               -If the score is 0, we want to let the focus stay on the Hed so the user 
-                has a choice.
+                can easily exit it.
               -If the user makes a badChoice, we'll jump to the correct Charm as a hint.
-                We want to do this even at 0 so the behavior's consistent at all times.
+                We want to do this starting w/0 so the behavior's always consistent.
         */
         if (
           this.state.movement === 'enter'
