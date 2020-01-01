@@ -211,11 +211,13 @@ export default class ContentLoader extends Component {
       }
     }
 
-    // Preserve the accessibility outline when using the MenuLink, as long as
-    // we're not entering or exiting tempContent...
+    // Preserve the accessibility outline when using the MenuLink, as long 
+    // as we're not entering or exiting tempContent. It's turned on in 
+    // ClickHandling.toggleMenu and off in ClickHandling.updateApp.
+    // It's also turned off when tabbed is turned off in App.
     if (
-      location.caller !== 'chapter' 
-        && this.props.appState.tempContent < 1 
+      location.caller !== 'chapter'
+        && this.props.appState.tempContent < 1
         && prevProps.appState.tempContent < 1
     ) {
       if (this.props.appState.menuButtonHasFocus) {

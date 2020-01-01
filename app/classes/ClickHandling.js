@@ -57,6 +57,7 @@ export default class ClickHandling {
         illustrationDirection,
         illustrationLevel,
         heartbeat,
+        menuButtonHasFocus,
         showBusinessCard,
         showLegalTerms,
         startDramaAtHome,
@@ -250,6 +251,10 @@ export default class ClickHandling {
 
           if (isMenu || valueTwo) {
             stateToUpdate.isMenu = !isMenu;
+          }
+
+          if (menuButtonHasFocus) {
+            stateToUpdate.menuButtonHasFocus = false;
           }
 
           if (valueOne !== 'chapter') {
