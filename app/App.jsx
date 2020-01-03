@@ -673,7 +673,9 @@ class App extends Component {
     const { pathname, search } = window.location;
     const newHeight = this.pageHeight;
 
-    if (callReactGa()) {
+    // Call ReactGA after the App is fully loaded
+    // (I believe this should work...)
+    if (callReactGa() && this.state.currentCaller > 0) {
       ReactGA.event({
         category: 'App state',
         action: `Re-calculate height. Currently: ${this.state.height}.`,
@@ -724,7 +726,9 @@ class App extends Component {
       }
     }
 
-    if (callReactGa()) {
+    // Call ReactGA after the App is fully loaded
+    // (I believe this should work...)
+    if (callReactGa() && this.state.currentCaller > 0) {
       ReactGA.event({
         category: 'App state',
         action: `Toggle network status: ${stateToUpdate}.`
