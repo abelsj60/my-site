@@ -675,7 +675,7 @@ class App extends Component {
 
     // Call ReactGA after the App is fully loaded
     // (I believe this should work...)
-    if (callReactGa() && this.state.currentCaller > 0) {
+    if (callReactGa() && this.state && !!this.state.currentCaller) {
       ReactGA.event({
         category: 'App state',
         action: `Re-calculate height. Currently: ${this.state.height}.`,
@@ -728,7 +728,7 @@ class App extends Component {
 
     // Call ReactGA after the App is fully loaded
     // (I believe this should work...)
-    if (callReactGa() && this.state.currentCaller > 0) {
+    if (callReactGa() && this.state && !!this.state.currentCaller) {
       ReactGA.event({
         category: 'App state',
         action: `Toggle network status: ${stateToUpdate}.`
