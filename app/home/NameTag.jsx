@@ -171,7 +171,7 @@ export default function NameTag(props) {
   } = attributes;
   // Shift Subhed and Pitch elements left so they start after the 'J' in my name.
   // The fontSize algorithm excludes margins, so the new size will be true... 
-  const leftMargin = nameTagWidth * .06;
+  const leftMargin = nameTagWidth * .052;
   const handleClickForHed = event => {
     eventManagement(event);
 
@@ -243,7 +243,7 @@ export default function NameTag(props) {
           onClick={handleClickForHed}
         >
           <Hed
-            fontSize={getFontSize(nameTagWidth, 1.154)}
+            fontSize={getFontSize(nameTagWidth, 1.155)}
             homePageLoaded={homePageLoaded}
             loadLevel={loadLevel}
             offline={offline}

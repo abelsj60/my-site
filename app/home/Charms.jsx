@@ -1,6 +1,6 @@
 import eventManagement from '../helpers/eventManagement.js';
 import getFontSize from '../helpers/getFontSize.js';
-import { isIE } from 'react-device-detect';
+import { isIE, isIPad13 } from 'react-device-detect';
 import React from 'react';
 import Mapper from '../shared/Mapper.jsx';
 import styled, { css, keyframes } from 'styled-components';
@@ -65,6 +65,7 @@ const OuterContainer = styled.div`
   // Transition settings for the spell should match NameTag/InnerContainer's transition property.
   transition: opacity ${p => p.enter ? '.65s' : '.45s'} ease-in-out;
   margin-top: -7px;
+  ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
 `;
 const InnerContainer = styled.div`
   display: flex;
@@ -243,11 +244,11 @@ export default function Charms(props) {
   // Let's set up a progress bar.
   const barWidth = score * (100 / (goal - 1));
   const isReady = score === goal - 1;
-  const interactionType = type === 'mobile' ? 'Tap' : 'Click';
-  const compressor = type === 'mobile' ? 3.03 : 3.15;
+  const interactionType = type === 'mobile' || isIPad13 ? 'Tap' : 'Click';
+  const compressor = type === 'mobile' ? 3.03 : !badChoice ? 3.15 : 3.155;
   // Shift Subhed and Pitch elements left so they start after the 'J' in my name.
   // The fontSize algorithm excludes margins, so the new size will be true...
-  const leftMargin = !badChoice ? nameTagWidth * .06 : (nameTagWidth * .06) + 3;
+  const leftMargin = !badChoice ? nameTagWidth * .052 : (nameTagWidth * .06) + 2;
   let spellBook = !inCity
     ? `${interactionType} the pulses to travel home`
     : `${interactionType} the pulses for adventure`;
@@ -264,6 +265,7 @@ export default function Charms(props) {
     <OuterContainer
       enter={movement === 'enter'}
       exit={movement === 'exit'}
+      nameTagWidth={nameTagWidth}
       onTransitionEnd={handleTransitionEndForOuterContainer}
       spellLevel={spellLevel}
       tempContent={tempContent}
