@@ -65,6 +65,8 @@ const OuterContainer = styled.div`
   // Transition settings for the spell should match NameTag/InnerContainer's transition property.
   transition: opacity ${p => p.enter ? '.65s' : '.45s'} ease-in-out;
   margin-top: -7px;
+  // Why add the extra two px? B/c my eyes keep telling me to...
+  margin-left: ${p => p.deviceType !== 'mobile' ? p.marginLeft : p.marginLeft + 2}px;
   ${p => p.nameTagWidth && `width: ${p.nameTagWidth}px`};
 `;
 const InnerContainer = styled.div`
@@ -73,7 +75,6 @@ const InnerContainer = styled.div`
   margin-top: 10px;
   width: 194px;
   align-self: center;
-  margin-left: 1.17em;
 
   // Arbitrarily chosen widths for a little extra styling.
   @media (min-width: 335px) {
@@ -83,7 +84,6 @@ const InnerContainer = styled.div`
   @media (min-width: ${p => p.theme.mediaQueries.tinyView}) {
     margin-top: 17px;
     width: 240px;
-    margin-left: 1.6em;
   }
 
   @media (min-width: ${p => p.theme.mediaQueries.huge}), (min-height: 950px)  {
@@ -246,9 +246,7 @@ export default function Charms(props) {
   const isReady = score === goal - 1;
   const interactionType = type === 'mobile' || isIPad13 ? 'Tap' : 'Click';
   const compressor = type === 'mobile' ? 3.03 : !badChoice ? 3.15 : 3.155;
-  // Shift Subhed and Pitch elements left so they start after the 'J' in my name.
-  // The fontSize algorithm excludes margins, so the new size will be true...
-  const leftMargin = !badChoice ? nameTagWidth * .052 : (nameTagWidth * .06) + 2;
+  const leftMargin = nameTagWidth * .052;
   let spellBook = !inCity
     ? `${interactionType} the pulses to travel home`
     : `${interactionType} the pulses for adventure`;
@@ -265,14 +263,15 @@ export default function Charms(props) {
     <OuterContainer
       enter={movement === 'enter'}
       exit={movement === 'exit'}
+      marginLeft={leftMargin}
       nameTagWidth={nameTagWidth}
       onTransitionEnd={handleTransitionEndForOuterContainer}
       spellLevel={spellLevel}
       tempContent={tempContent}
+      deviceType={type}
     >
       <SubHed
         extraMarginTop={true}
-        marginLeft={`${leftMargin}px`}
         fontSize={getFontSize(nameTagWidth, compressor)}
       >
         {spellBook}

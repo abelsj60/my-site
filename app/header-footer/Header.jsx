@@ -167,7 +167,7 @@ const Nav = styled.nav`
   padding: ${p => p.isHome && '6px 12px'};
   // Don't show background-color box when business card or legal terms are on, but do show it immediately if we're offline!
   // This means showing it when p.startDramaAtHome is either 'yes' or 'never', which sounds a little weird, no?
-  background-color: ${p => (p.offline && p.isHome && p.tempContent < 1) || (p.isHome && (p.startDramaAtHome === 'yes' || p.startDramaAtHome === 'never') && p.tempContent < 1) || (p.isIOS && p.osVersion <= 7) ? 'rgba(0, 0, 0, .2)' : ''};
+  background-color: ${p => (p.offline && p.isHome && p.tempContent < 1) || (p.isHome && (p.startDramaAtHome === 'yes' || p.startDramaAtHome === 'never') && p.tempContent < 1) || (p.isIOS && p.isHome && p.tempContent < 1 && p.osVersion <= 7) ? 'rgba(0, 0, 0, .2)' : ''};
   ${p => !p.homePageLoaded && 'will-change: background-color;'}
   // Transition settings for the spell should match (in total) the Fallbacks's transition settings.
   ${p => !p.homePageLoaded && p.startDramaAtHome !== 'never' && 'transition: background-color .69s .01s ease-in-out;'}

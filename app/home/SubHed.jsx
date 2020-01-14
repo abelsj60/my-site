@@ -8,7 +8,6 @@ export default styled.h2`
   -moz-osx-font-smoothing: grayscale;
   color: ${p => p.theme.colors.black};
   font-weight: 700;
-  margin-left: ${p => p.marginLeft};
   margin-bottom: 7px;
   text-align: center;
   // Let's set height in a consistent way. HTML text often has wonky CapHeights and Baselines (space above 

@@ -81,7 +81,7 @@ const Spacer = styled.div`
 const HedLink = styled.a`
   display: flex;
   text-decoration: none;
-  margin-left: 1px;
+  margin-left: 2px; // Here instead of Hed / H1...no penalty.
 `;
 const Hed = styled.h1`
   font-family: 'Aref Ruqaa', serif;
@@ -107,6 +107,7 @@ const Hed = styled.h1`
   line-height: .45;
   height: ${p => p.fontSize}px;
   margin-left: 0px;
+  width: 100%;
 `;
 const InnerContainer = styled.div`
   display: ${p => p.spellLevel < 5 && ((p.enter && p.spellLevel >= 2) || (p.exit && p.spellLevel > 2)) ? 'none' : 'block'};
@@ -117,17 +118,24 @@ const InnerContainer = styled.div`
   // Compared to <Hed />, this element's initial fade-in looks best when it starts later, runs faster, and uses a different bezier curve.
   // Transition settings for the spell should match (in total) PictureBox/Fallbacks's transition property.
   transition: opacity ${p => (!p.homePageLoaded && p.loadLevel < 2) ? '.695s .005s' : p.enter ? '.45s' : '.65s'} ease-in-out;
+  // Properly set full width by going to source, less the "j" in the Hed.
+  width: ${p => p.finalWidth};
+  // Properly offset container by the width of the "j" in the Hed.
+  // Note: On mobile, the start on the left may be further right than expected.
+  margin-left: ${p => p.marginLeft};
 `;
 const Pitch = styled.section`
   overflow: auto;
   margin-top: 10px;
   z-index: 2;
-
+  // Ensure full width
+  width: 100%; 
+  
   p {
     font-size: ${p => p.fontSize}px;
     font-weight: 500;
-    margin-left: ${p => p.marginLeft};
     margin-bottom: 0px;
+    margin-left: 2px; // Place in <p> so the width doesn't extend past containing <section> 
     color: ${p => p.theme.colors.black};
     text-shadow: 1.5px 1px 2px white;
     text-align: center;
@@ -243,12 +251,11 @@ export default function NameTag(props) {
           onClick={handleClickForHed}
         >
           <Hed
-            fontSize={getFontSize(nameTagWidth, 1.155)}
+            fontSize={getFontSize(nameTagWidth, 1.17)}
             homePageLoaded={homePageLoaded}
             loadLevel={loadLevel}
             offline={offline}
             onTransitionEnd={handleTransitionEndForHed}
-            type={type}
           >
             {name}
           </Hed>
@@ -256,21 +263,22 @@ export default function NameTag(props) {
         <InnerContainer
           enter={movement === 'enter'}
           exit={movement === 'exit'}
+          // Full nameTagWidth - width of 'J' + the two px offset.
+          finalWidth={`${nameTagWidth - leftMargin + 2}px`}
           homePageLoaded={homePageLoaded}
           loadLevel={loadLevel}
+          marginLeft={`${leftMargin}px`}
           onTransitionEnd={handleTransitionEndForInnerContainer}
           spellLevel={spellLevel}
-          type={type}
         >
           <SubHed
-            fontSize={getFontSize(nameTagWidth, 3.15)}
-            marginLeft={`${leftMargin}px`}
+            // Has to be tuned on mobile devices? Why? Who knows.
+            fontSize={getFontSize(nameTagWidth, type !== 'mobile' ? 3.15 : 2.9)}
           >
             {motto}
           </SubHed>
           <Pitch
             fontSize={getFontSize(nameTagWidth, 5)}
-            marginLeft={`${leftMargin}px`}
           >
             <Fragment>
               {ReactHtmlParser(marked(

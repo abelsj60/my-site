@@ -229,7 +229,7 @@ const GlobalStyle = createGlobalStyle`
       // https://stackoverflow.com/q/19012135
       // https://krpano.com/ios/bugs/ios7-ipad-landscape/
 
-      ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0;'}
+      ${p => p.fixMobileSafariBugOn7 && 'position: fixed; bottom: 0px; width: 100%; height: 100%;'}
     }
   }
 `;
