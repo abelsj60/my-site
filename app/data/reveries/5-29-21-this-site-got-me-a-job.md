@@ -33,7 +33,7 @@ I thought I'd get there by building this website.
 
 One day, I was on the phone with Jared Klee, the founder of Triple Point Liquidity. 
 
-We had just agreed that I didn't have enough experience to work on his front end. Then I followed up with a question about the website I'd built. "But, who else would build something like this?"
+We had just agreed that I didn't have enough experience to work on his start-up's webapp. Then I followed up with a question about the website I'd built. "But, who else would build something like this?"
 
 "Exx-xactly," he said.
 
